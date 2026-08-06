@@ -44,6 +44,40 @@ jobs:
             --branch=main \
             --commit-message="${{ github.sha }}"
 
+  # ── engine × course-packs: build+test matrix (no deploy) ───
+  # «Движок обновился → все курсы пересобрались» как CI-факт: каждый
+  # coming-soon pack собирается и прогоняет тесты под своим COURSE_PACK.
+  # Новый pack? Добавь его slug в matrix.pack ниже.
+  # (tochka-sborki уже собирается в deploy-web — сюда идут остальные.)
+  build-packs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        pack: ['living-practice']
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: LMS/tochka-sborki/web/package-lock.json
+      - name: Install
+        working-directory: LMS/tochka-sborki/web
+        run: npm ci
+      - name: Build (pack)
+        working-directory: LMS/tochka-sborki/web
+        env:
+          COURSE_PACK: ${{ matrix.pack }}
+        run: npm run build
+      - name: Test (pack)
+        working-directory: LMS/tochka-sborki/web
+        env:
+          COURSE_PACK: ${{ matrix.pack }}
+        run: npx vitest run
+
   # ── academy.synergify.com (S.A.S.H.A academy) ──────────────
   deploy-academy:
     runs-on: ubuntu-latest

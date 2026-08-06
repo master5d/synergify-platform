@@ -51,6 +51,11 @@ CLI валидирует outline (форма слагов `NN-kebab` / `uN-kebab
 
 1. Для каждого юнита вставь напечатанный research-промпт в своего агента,
    ответ сохрани в `notes/<module>__<unit>.txt` (размеченный формат `CONCEPTS:/HOOK:/...`).
+   Альтернатива: `research-prompt` / `draft-lesson` / `author-course` принимают
+   `--outline <path.json>` (CourseOutline). Твой модуль — это курс из одного модуля:
+   оберни свой ModuleOutline JSON как `{ "name": {…имя курса…}, "modules": [{ …твой модуль,
+   "level": 1 }] }` (мост `moduleOutlineToCourseOutline` в `lib/authoring/outline-io.ts`) —
+   и все три CLI работают поверх твоего модуля напрямую.
 2. Пиши прозу юнита в 4-фазном ритме (activation → reflection → concept → practice)
    поверх стаба. Опора — AUTHORING.md (общий конвейер курса).
 3. Проверка каждого файла:
