@@ -16,3 +16,6 @@ node_modules/
 # Личные заметки владельца под академию-манифест (репо PUBLIC — заметки не для VCS)
 academy/_notes/*
 !academy/_notes/README.md
+
+# вложенный ПРИВАТНЫЙ репо заметок — не gitlink, не сабмодуль
+academy/_notes
