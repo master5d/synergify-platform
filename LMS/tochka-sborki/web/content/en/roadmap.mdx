@@ -1,0 +1,266 @@
+---
+title: "Roadmap: Vibe Coder / AI Generalist"
+description: "A path from non-coder to AI generalist — 8 elective topics"
+order: 99
+duration: ""
+level: 0
+---
+# 🗺️ Roadmap: Vibe Coder / AI Generalist
+
+> **A path from non-coder to AI generalist.** 8 elective topics — take them in any order.
+
+---
+
+## 🎯 Overview
+
+**AI Generalist** — a full-stack problem solver who solves problems with AI.
+
+They have:
+- A deep understanding of AI models and what they can do
+- Knowledge of which model to use where, and how
+- The ability to assemble solutions to complex problems from ready blocks
+
+### Who this path is for
+
+- **Entrepreneur** — launching a startup or business and want to move faster
+- **Freelancer / consultant** — selling expertise, scaling your output
+- **Hustler** — looking for new ways to earn
+- **Employee** — want to grow faster and become indispensable
+
+In an "AI First" world, becoming an AI generalist isn't optional anymore — it's basic literacy.
+
+### 🐎 Pick your horse
+
+The course is **agent-agnostic**: it teaches the rider's craft, not one horse. Under the hood it's Claude Code, Codex, OpenCode, Cline, or your sovereign stack. Pick the horse that fits your budget and constraints (that's the "Stack selection" topic) — the skills carry across all of them. Swap horses and your seat stays yours.
+
+---
+
+## 🪜 Course topics
+
+Each topic is broken into 3–5 cognitive units following Kolb's cycle: **Activation → Reflection → Concept → Practice**.
+
+| Topic | Focus | Time |
+| :--- | :--- | :--- |
+| [**Kickstart**](/en/lessons/00-kickstart/) | Orienting in the AI world | 20–30 min |
+| [**Introduction**](/en/lessons/01-introduction/) | Software 3.0 and four shifts | 30 min |
+| [**Setup**](/en/lessons/02-setup-guide/) | Workspace and tools | 2–3 h |
+| [**Stack Selection**](/en/lessons/03-stack-selection/) | Which agentic stack fits your constraints | 60 min |
+| [**Prompt Engineering**](/en/lessons/04-prompt-engineering/) | Writing the spec | 1–2 h |
+| [**Context & Memory**](/en/lessons/05-context-memory/) | Agent memory | 1 h |
+| [**Automation Pipeline**](/en/lessons/06-audio-pipeline/) | Chains of actions | 2–3 h |
+| [**Tools & Extensions**](/en/lessons/07-tools/) | MCP, Skills, Hooks, Superpowers | 2–3 h |
+| [**Agent Engineering**](/en/lessons/08-agent-engineering/) | Orchestration, prod infra, ENERV/SOVERN | 90 min |
+
+### 🔭 On the radar
+
+Topics in consideration — a direction, not a final list. Want one sooner? [Tell us via feedback](/en/feedback/) — it moves the priority.
+
+- **NotebookLM** — working with your own notes as grounded context
+- **Meta-notes** — a note-making playbook that feeds the agent
+- **Telegram management** — agentic channel and bot management
+- **Media Production** — creating content (audio/video/visual) with AI
+
+---
+
+## Kickstart
+
+For people brand-new to AI coding who want to lower the cognitive load at the start.
+
+**Units:** Map of AI tools · Your new role · First steps
+
+**Concepts:**
+- What vibe coding is, in plain words
+- Minimal vocabulary (LLM, token, API, deployment, MCP, agent)
+- The map of AI tools: 4 quadrants (zero-code builders, AI dev platforms, design-to-code, AI coding assistants)
+- Your new role: PM + QA + DevOps
+
+**Result:**
+- Your own mental model of AI tools and your place in them
+- First open-form question to Claude
+
+---
+
+## Introduction
+
+The mindset foundation — without it, every other topic falls flat.
+
+**Units:** Your experience with AI · Four shifts · Five clones · Your first prompt
+
+**Concepts:**
+- Software 3.0 and why it's a different world
+- Four shifts: commands → delegation, results → experiments, actions → specifications, "do it all yourself" → managing attention
+- Five types of clone agents (Communication, Meeting Intelligence, Video, Learning, Automation)
+- The Capture → Build → Test → Refine cycle
+
+**Tools:** Claude, ChatGPT, Gemini — as a thought experiment before installing Claude Code
+
+**Projects:**
+- Rewrite your last prompt through the four shifts (`experiment-1-shift.md`)
+- Pick the one clone type where you lose the most time
+
+---
+
+## Setup
+
+The workspace you live in with the agent every day.
+
+**Units:** Environment check · Installing the tools · Your first project
+
+**Concepts:**
+- Terminal as the main interface (Warp, Wave)
+- Claude Code CLI and its permission modes
+- Git basics for agentic workflows
+- Project structure: CLAUDE.md, TODO.md, AGENTS.md, `my-experiments/`, `my-templates/`
+- Nerd Font, status bar, Chrome Extension
+
+**Tools:** Warp, Claude Code CLI, GitHub, Node.js, Marp
+
+**Projects:**
+- Configured workspace with Claude Code, Git, Marp
+- First project with CLAUDE.md + my-experiments/ structure
+- Working status line with token tracking
+
+---
+
+## Prompt Engineering
+
+Writing the spec — the core skill for a vibe coder.
+
+**Units:** Activation · The spec formula · Magic words · Seven sins · Practice
+
+**Concepts:**
+- Simple starting formula: Context + Task + Instructions + Data
+- Full structure: Role / Task / Input / Output / Constraints
+- The Open Claw philosophy and an experimental approach
+- Meta-prompting (a prompt that improves prompts)
+- Common mistakes and how to avoid them
+
+**Tools:** Claude Code, any LLM for A/B prompt comparison
+
+**Projects:**
+- 3 prompts: from bad to good with reflection
+- Your own prompt template in `my-templates/`
+- The start of a library of working patterns
+
+---
+
+## Context & Memory
+
+How the agent holds information — and why without it, it forgets everything in 5 minutes.
+
+**Units:** Activation · Context vs Prompt · Memory systems · Practice
+
+**Concepts:**
+- Context problems: Context Rot, Lost in the Middle
+- CLAUDE.md, TODO.md, AGENTS.md — three memory files
+- Memory hierarchy: session / project / global
+- Context compaction, `/compact`, `/context`
+- Claude Code's built-in agents
+- Parallel agents (sub-agents)
+
+**Tools:** Claude Code memory system, `.claude/` folder, hooks for auto-memory
+
+**Projects:**
+- Memory system for a real project (CLAUDE.md + TODO.md)
+- Filled-in `PERSONAL-CONTEXT.md`
+- A parallel-agents exercise
+
+---
+
+## Automation Pipeline
+
+From a manual prompt to an automated chain of actions.
+
+**Units:** Activation · Pipeline theory · Build · Reflection
+
+**Concepts:**
+- Pipeline thinking: URL → scrape → analyze → insights
+- Firecrawl and web scraping
+- Prompt chaining — linking prompts into a chain
+- Sources-first approach: data first, then analysis
+- Generating ideas.md and research-topics.md
+
+**Tools:** Firecrawl, Claude Code, Obsidian CLI *(optional)*, web sources
+
+**Projects:**
+- Pipeline for a chosen URL from start to output
+- Saved `ideas.md` and `research-topics.md` in `my-experiments/`
+- First automated workflow that saves 2–5 hours a week
+
+---
+
+## Tools & Extensions
+
+From Claude Code user to architect of your own system.
+
+**Units:** What's missing · MCP · Hooks · Skills · Plug it in and test
+
+**Concepts:**
+- MCP (Model Context Protocol): three primitives — Tools, Resources, Prompts
+- Tool Search: 85% token savings on tools
+- Agent Skills — modular capabilities without token cost
+- Hooks — event automation: PreToolUse / PostToolUse / Stop
+- Superpowers workflow: Brainstorm → Plan → Execute → Verify
+
+**Tools:** MCP servers (github, stitch, chrome-devtools, vercel), Skills repo, hooks config
+
+**Projects:**
+- A connected MCP server with a real use case
+- An installed or self-built Skill
+- At least one Hook configured for a real workflow
+
+---
+
+## Agent Engineering
+
+From vibe coding to system orchestration — where prompts stop working.
+
+**Units:** When prompts stop working · Jagged Intelligence · Orchestration (ENERV case) · Prototype → Production · Design your clone
+
+**Concepts:**
+- Vibe coding vs Agent engineering — borders and transitions
+- Three eras of programming (Karpathy: Software 1.0 / 2.0 / 3.0)
+- Jagged Intelligence — what AI nails, where it fails
+- Multi-agent pipeline architecture (ENERV case)
+- Production stack: Hetzner + Cloudflare Tunnel + Docker + n8n + Langfuse (SOVERN)
+- 5 production blocks: Execution / Observability / Reliability / Cost / Security
+- 5-fallback LLM routing via LiteLLM
+
+**Tools:** n8n, Langfuse, Cloudflare Tunnel, Docker, LiteLLM, Hetzner CX22
+
+**Projects:**
+- Decomposing a real task into AI/Tool/Code nodes
+- Multi-agent pipeline blueprint
+- Production readiness checklist
+- Implementation-ready agent specification
+
+---
+
+## 🌐 The Bigger Picture
+
+Connecting all the topics into your **"army of clone agents"** — 5 clones that take the routine off your plate, freeing you up for strategic decisions.
+
+Five clone candidates (see [Introduction](/en/lessons/01-introduction/)):
+1. **Communication Clone** — writes emails and messages in your voice
+2. **Meeting Intelligence Clone** — summarizes meetings, extracts tasks
+3. **Video / Content Clone** — generates posts, clips, captions
+4. **Learning Clone** — teaches you new things on a schedule
+5. **Automation Clone** — routine pipelines (URL → summary, data → report)
+
+Building one clone is applying multiple topics at once:
+- *Introduction* sets the mindset — delegate, don't command
+- *Setup* and *Prompts* configure the environment and write the spec
+- *Context* gives the clone memory
+- *Pipeline* gives it a workflow
+- *Tools* extends its reach via MCP and Skills
+
+---
+
+## ⚡ Summary of Superpowers
+
+After mastering the topics, you get four powers:
+
+- **Power to Think with AI** — write specs, not commands; think in spec terms
+- **Power to Build with AI** — assemble pipelines and tools for your tasks
+- **Power to Automate with AI** — claw back 5–15 hours a week from routine
+- **Power to Network with AI** — share patterns with the community and amplify each other

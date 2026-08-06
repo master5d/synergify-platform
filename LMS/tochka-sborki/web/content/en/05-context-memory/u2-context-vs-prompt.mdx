@@ -1,0 +1,95 @@
+---
+title: "Context vs Prompt"
+unit: 2
+module: 5
+duration: "8 min"
+---
+
+<Phase type="activation">
+
+Hold one of your typical prompts in mind — the kind you send to an agent again and again.
+
+Don't look at it as a "message" — picture it as **a full case folder in an investigator's hands**: the entire dossier — timeline, testimonies, evidence — versus a single question tossed at a departing witness. One delivers understanding; the other delivers only a moment.
+
+Notice your prompt: what in there is the permanent case file, and what is the on-the-fly question? Do they live in one block of text, still tangled together?
+
+</Phase>
+
+<Phase type="reflection">
+
+Context = stable background. Assignment = a specific instruction for this moment.
+
+Don't picture this as onboarding — picture yourself as a **film editor**: the raw footage is enormous, but only what genuinely serves this scene makes the final cut. Everything else stays on the shelf, out of frame.
+
+Run it through your head: if your prompts were a rough cut, what would you trim in the final edit? What could sit on the shelf and be pulled only when it's actually needed?
+
+</Phase>
+
+<Phase type="concept">
+
+## Separating context and prompt
+
+```
+Context = information about the world (goals, roles, rules, data, history)
+Prompt  = a specific instruction for this request
+
+"Write an email" = PROMPT (task)
+
+"I'm a startup founder writing to an investor, style is concise and confident,
+goal: lock in a meeting Wednesday evening" = CONTEXT
+```
+
+### How to separate them explicitly
+
+```markdown
+## CONTEXT
+[Role, goal, constraints, data — the stable stuff]
+
+## TASK
+[The specific instruction for this request]
+```
+
+Or via XML tags:
+
+```xml
+<context>
+You are a code review specialist. The project uses Python 3.11.
+</context>
+
+<task>
+Check this code for security issues.
+</task>
+
+<code>
+[code here]
+</code>
+```
+
+### Where to store stable context
+
+| What | Where to store |
+|-----|-------------|
+| Project rules, stack | CLAUDE.md in the project folder |
+| Personal preferences | ~/.claude/CLAUDE.md |
+| Current tasks | TODO.md |
+| Agent instructions | AGENTS.md |
+
+</Phase>
+
+<Phase type="practice">
+
+Take any task from your work. Split it into two blocks:
+
+```markdown
+## CONTEXT
+[Who you are, what the project is, stack, constraints]
+
+## TASK
+[Only the specific instruction]
+```
+
+Compare the result with how you usually write prompts.
+
+Save to `my-experiments/u2-context-vs-prompt.md`
+
+</Phase>

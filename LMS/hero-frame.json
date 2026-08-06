@@ -1,0 +1,48 @@
+{
+  "origin": {
+    "source": "Owner hero-header synthesis (fb_3c88df79)",
+    "note": "Три рамки главного экрана + слой возражений; грани зашиплены по fb_85c12d9a / fb_b1bf63a0+fb_2fbf86ac / fb_39f6ccee+fb_8423715c / fb_a6c79aa2. Здесь — выбор и синтез одного заголовка."
+  },
+  "frames": [
+    {
+      "id": "chat-vs-system",
+      "label": { "ru": "Чат против системы", "en": "Chat vs a system" },
+      "ru": "Что ты получаешь сверх своего чата: не разговор, а собранную под тебя систему — она держит контекст твоего дела и работает, а не отвечает на реплику.",
+      "en": "What you get beyond your chat: not a conversation but a system assembled for you — it holds the context of your work and runs, instead of just replying to a prompt."
+    },
+    {
+      "id": "dream-together",
+      "label": { "ru": "О чём можно помечтать", "en": "What you can dream about" },
+      "ru": "Приглашение увидеть, что станет для тебя возможным — витрина реального, а не обещание. Смотри и выбирай, что соберёшь первым.",
+      "en": "An invitation to see what becomes possible for you — a gallery of the real, not a promise. Look, and choose what you will build first."
+    },
+    {
+      "id": "what-changes",
+      "label": { "ru": "Что изменится", "en": "What changes" },
+      "ru": "Честный исход в терминах «ты сможешь делать X сам» — то, что останется с тобой после курса, а не цифры и не громкие обещания.",
+      "en": "An honest outcome in terms of \"you'll be able to do X yourself\" — what stays with you after the course, not numbers and not loud promises."
+    }
+  ],
+  "objections": [
+    {
+      "id": "freelancer",
+      "objection": { "ru": "Проще заказать у фрилансера.", "en": "Easier to just hire a freelancer." },
+      "reframe": { "ru": "Фрилансер делает это один раз; ты учишься собирать сам — и дальше делаешь без него.", "en": "A freelancer does it once; you learn to assemble it yourself — and go on without them." }
+    },
+    {
+      "id": "chat-remembers",
+      "objection": { "ru": "Мой чат и так всё помнит.", "en": "My chat already remembers everything." },
+      "reframe": { "ru": "Память — не система: важен контекст, который ведёт дело, а не тред, который теряется.", "en": "Memory is not a system: what matters is context that carries the work, not a thread that gets lost." }
+    },
+    {
+      "id": "automation-fear",
+      "objection": { "ru": "Боюсь автоматизировать общение с людьми.", "en": "I'm afraid to automate talking to people." },
+      "reframe": { "ru": "ИИ снимает рутину, а живой контакт и суждение остаются за тобой — ты решаешь, что доверить, а что оставить себе.", "en": "AI takes the routine off your plate, while live contact and judgment stay with you — you decide what to delegate and what to keep." }
+    }
+  ],
+  "placements": [
+    "hero-header (короткий — главный экран)",
+    "подзаголовок-раскрытие (medium — под заголовком)",
+    "FAQ «чем это лучше моего чата» (короткий — рядом с рамкой)"
+  ]
+}

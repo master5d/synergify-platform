@@ -1,0 +1,10 @@
+{
+  "module": 1,
+  "title": "TODO: Module title",
+  "description": "TODO: one sentence — what this module is about",
+  "duration": "20 min",
+  "level": 1,
+  "units": [
+    { "slug": "u1-intro", "title": "TODO: Unit title" }
+  ]
+}

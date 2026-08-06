@@ -1,0 +1,83 @@
+---
+title: "Matrix of 4 stacks"
+unit: 2
+module: 3
+duration: "12 min"
+---
+
+<Phase type="activation">
+
+Four stacks — not a "good and bad" list, but **four candidates for a long road together** 🧭.
+
+Don't picture this as a feature comparison sheet. Picture choosing not a tool but a travelling companion: one is reliable and predictable but demands resources; another is free and cheap but leaves everything resting on you; a third is the one who's there when the others are out of reach. You're not after "the best in general" — you're after the one who fits your temperament, your budget, your plans.
+
+Catch that feeling in your head: who are you walking with right now? — then click the matching card below.
+
+<StackMatrix />
+
+> 💡 Your selection is stored in `localStorage.stack`. In later units, command and hands-on sections will be filtered to match (via `<AgentBlock>` wrappers). You can change it anytime — click another card or use AgentToggle.
+
+</Phase>
+
+<Phase type="concept">
+
+## Honest trade-offs
+
+No stack is "best" — each has its angle:
+
+| Aspect | Claude Code | Sovereign | Cloud-OSS | Behind-GFW |
+|---|---|---|---|---|
+| **Out-of-box quality** | 9/10 | 7/10 | 7/10 | 6/10 |
+| **Setup time** | 5 min | half a day | 30 min | 1 hour |
+| **Price/month** | $20+ | $0 + hw | $0–5 | $0 |
+| **Privacy** | low | maximum | medium | medium |
+| **Speed** | medium | high (local) | variable | very high (Cerebras) |
+| **Vendor lock-in** | Anthropic | none | OpenRouter/provider | Cerebras/Google |
+| **China access** | needs VPN | works | variable | works |
+
+## Decision tree (if still unsure)
+
+```
+Are you in China without VPN?
+├── YES → Behind-GFW
+└── NO
+    │
+    Budget $20+/mo and privacy not critical?
+    ├── YES → Claude Code
+    └── NO
+        │
+        Have a GPU or Mac M2+?
+        ├── YES + autonomy matters → Sovereign
+        └── NO → Cloud-OSS
+```
+
+</Phase>
+
+<Phase type="reflection">
+
+Picture an orchestra with no conductor 🎻. Each musician is brilliant — but without coordination, you get noise, not a symphony.
+
+Notice: that's exactly what happens when stacks aren't coordinated. Many SOVERN practitioners blend several instruments into one sound:
+- Claude Code as **primary** for nuanced tasks
+- Local llama-server as **floor** when offline
+- Cerebras as **fast-path** for boilerplate (free, 1000+ TPS)
+
+LiteLLM gateway is the **conductor** — seamless to the agent, a full fallback score underneath.
+
+Run it in your head: in this orchestra, is your stack the soloist or the section?
+
+</Phase>
+
+<Phase type="practice">
+
+1. If you haven't chosen yet — go back to the "Activation" step and click one of the 4 cards (your choice is saved)
+2. If you chose **Behind-GFW** — continue to u3
+3. If you chose **Sovereign** — skip u3, go to u4
+4. If you chose **Claude Code** or **Cloud-OSS** — read both (u3 and u4) for context, then u5
+
+In `my-experiments/u2-my-stack.md` write:
+- Which stack you picked
+- Why this one (1–2 lines)
+- What concerns you about it / what to watch
+
+</Phase>

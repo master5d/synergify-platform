@@ -1,0 +1,705 @@
+{
+  "skin": "soviet-heroic",
+  "zoneNames": {
+    "00-kickstart": {
+      "ru": "Учебка",
+      "en": "The Training Ground"
+    },
+    "01-introduction": {
+      "ru": "Агитпункт",
+      "en": "Agitation Point"
+    },
+    "02-setup-guide": {
+      "ru": "Конструкторское бюро",
+      "en": "Design Bureau"
+    },
+    "03-stack-selection": {
+      "ru": "Арсенал",
+      "en": "The Arsenal"
+    },
+    "04-prompt-engineering": {
+      "ru": "Штабная комната",
+      "en": "The HQ Room"
+    },
+    "05-context-memory": {
+      "ru": "Партийный архив",
+      "en": "The Party Archive"
+    },
+    "06-audio-pipeline": {
+      "ru": "Производственный конвейер",
+      "en": "Production Conveyor"
+    },
+    "07-tools": {
+      "ru": "Секретный НИИ",
+      "en": "Secret Research Institute"
+    },
+    "08-agent-engineering": {
+      "ru": "Генштаб",
+      "en": "The General Staff"
+    },
+    "09-ai-notebook": {
+      "ru": "Бюро Источников",
+      "en": "Bureau of Sources"
+    }
+  },
+  "questTitles": {
+    "00-kickstart": {
+      "ru": "Ориентирование на местности",
+      "en": "Terrain Orientation"
+    },
+    "01-introduction": {
+      "ru": "Светлое будущее: Software 3.0",
+      "en": "The Bright Future: Software 3.0"
+    },
+    "02-setup-guide": {
+      "ru": "Получить допуск к станку",
+      "en": "Get Clearance for the Machine Tool"
+    },
+    "03-stack-selection": {
+      "ru": "Подобрать снаряжение по задаче",
+      "en": "Select Equipment for the Mission"
+    },
+    "04-prompt-engineering": {
+      "ru": "Составить директиву для agent'а",
+      "en": "Draft a Directive for the Agent"
+    },
+    "05-context-memory": {
+      "ru": "Завести личное дело на agent'а",
+      "en": "Create a Personal File for the Agent"
+    },
+    "06-audio-pipeline": {
+      "ru": "Наладить workflow по-стахановски",
+      "en": "Set Up the Workflow, Stakhanovite-Style"
+    },
+    "07-tools": {
+      "ru": "Освоить сверхспособности советского инженера",
+      "en": "Master the Superpowers of a Soviet Engineer"
+    },
+    "08-agent-engineering": {
+      "ru": "Оркестровать бригаду agent'ов",
+      "en": "Orchestrate a Brigade of Agents"
+    },
+    "09-ai-notebook": {
+      "ru": "Организовать тетрадь доказательств",
+      "en": "Organize the evidence notebook"
+    }
+  },
+  "units": {
+    "00-kickstart/u1-map": {
+      "intro": {
+        "ru": "Идея без плана — призрак, бродящий по цеху. Наша задача — загнать его в рамки конкретного проекта и поставить к станку.",
+        "en": "An idea without a plan is a ghost wandering the factory floor. Our task is to capture this spirit and put it to work on the assembly line."
+      },
+      "mentorHint": {
+        "ru": "Товарищ, самая гениальная мысль без чертежа — просто колебание воздуха.",
+        "en": "Comrade, the most brilliant idea without a blueprint is just wasted breath."
+      },
+      "outro": {
+        "ru": "Отлично, призрак обрёл плоть в виде схемы. Теперь подберём для него правильные рычаги и шестерёнки.",
+        "en": "Excellent, the ghost has been given substance as a diagram. Now, we shall select the proper levers and gears for it."
+      }
+    },
+    "00-kickstart/u2-tools": {
+      "intro": {
+        "ru": "Перед нами склад достижений народного хозяйства: API, промпты, агенты. Разберёмся, какой инструмент для какой гайки.",
+        "en": "Before us lies the warehouse of the People's achievements: APIs, prompts, agents. We will now determine which wrench fits which bolt."
+      },
+      "mentorHint": {
+        "ru": "Хороший слесарь знает свой станок. Изучи инвентарь, чтобы не бить молотком по MCP.",
+        "en": "A good mechanic knows his machine. Study the inventory, lest you use a hammer on the MCP."
+      },
+      "outro": {
+        "ru": "Инвентаризация завершена, каждый инструмент на своём месте. Пора засучить рукава и запустить первый механизм.",
+        "en": "Inventory is complete, every tool is in its place. It is time to roll up our sleeves and start the first mechanism."
+      }
+    },
+    "00-kickstart/u3-first-steps": {
+      "intro": {
+        "ru": "Теория — это хорошо, но план выполняется в цеху. Оставим разговоры и сделаем первый запрос к машине.",
+        "en": "Theory is fine, but the Plan is fulfilled on the factory floor. Enough talk; we will make our first request to the machine."
+      },
+      "mentorHint": {
+        "ru": "Даже запуск «Союза» начинается с одного нажатия кнопки. Не бойся, жми.",
+        "en": "Even the launch of a Soyuz rocket begins with a single button press. Do not hesitate. Press it."
+      },
+      "outro": {
+        "ru": "Первый сигнал отправлен, система откликнулась. Машина в строю, товарищ, и ждёт дальнейших указаний для выполнения пятилетки.",
+        "en": "The first signal is sent; the system has responded. The machine is operational, comrade, and awaits further orders to fulfill the Five-Year Plan."
+      }
+    },
+    "01-introduction/u1-activation": {
+      "intro": {
+        "ru": "Товарищ, перед нами стоит задача освоения новой технологии. Начнем с инвентаризации имеющихся ресурсов: твоего личного опыта с AI.",
+        "en": "Comrade, the task of mastering new technology is before us. Let's begin with an inventory of available resources: your personal experience with AI."
+      },
+      "mentorHint": {
+        "ru": "Даже скромный опыт — это фундамент для будущих свершений.",
+        "en": "Even modest experience is the foundation for future accomplishments."
+      },
+      "outro": {
+        "ru": "Инвентаризация завершена, ресурсы учтены. Теперь перейдем к изучению теоретической базы, товарищ.",
+        "en": "Inventory complete, resources accounted for. Now we proceed to the theoretical basis, comrade."
+      }
+    },
+    "01-introduction/u2-four-shifts": {
+      "intro": {
+        "ru": "Партия и правительство наметили четыре генеральных сдвига в развитии. Твоя задача — изучить и усвоить их, чтобы не отставать от прогресса.",
+        "en": "The Party and government have outlined four general shifts in development. Your task is to study and internalize them, so as not to fall behind progress."
+      },
+      "mentorHint": {
+        "ru": "Понимание сдвигов — это компас в руках строителя нового мира.",
+        "en": "Understanding the shifts is a compass in the hands of a new world's builder."
+      },
+      "outro": {
+        "ru": "Теория усвоена. Теперь посмотрим, какие инструменты нам предоставила передовая наука для выполнения плана.",
+        "en": "The theory is assimilated. Now, let's see what tools advanced science has given us to fulfill the plan."
+      }
+    },
+    "01-introduction/u3-clones": {
+      "intro": {
+        "ru": "На вооружении нашего НИИ находятся пять стандартных моделей-клонов. Изучи их тактико-технические характеристики для эффективного применения на практике.",
+        "en": "Our research institute is armed with five standard clone models. Study their tactical and technical specifications for effective practical application."
+      },
+      "mentorHint": {
+        "ru": "Знай свой инструмент, как фрезеровщик знает свой станок.",
+        "en": "Know your tool as a machinist knows his lathe."
+      },
+      "outro": {
+        "ru": "Классификация изучена, инструмент готов к работе. Пришло время дать первый 'prompt' и запустить механизм.",
+        "en": "Classification studied, tool is ready for work. It is time to give the first 'prompt' and start the mechanism."
+      }
+    },
+    "01-introduction/u4-practice": {
+      "intro": {
+        "ru": "Теория без практики мертва. Вот твой станок, вот заготовка — твой первый 'prompt' должен быть точным и выверенным, как команда диспетчера.",
+        "en": "Theory without practice is dead. Here is your machine tool, here is the blank—your first 'prompt' must be precise and calculated, like a dispatcher's command."
+      },
+      "mentorHint": {
+        "ru": "Смелость и смекалка — вот ключ к успешному 'prompt'.",
+        "en": "Boldness and ingenuity are the key to a successful 'prompt'."
+      },
+      "outro": {
+        "ru": "Первый 'prompt' отправлен, механизм запущен. Это маленький шаг для тебя, но большой — для выполнения пятилетнего плана по внедрению AI.",
+        "en": "First 'prompt' sent, the mechanism is engaged. A small step for you, but a great one for the fulfillment of the five-year AI implementation plan."
+      }
+    },
+    "02-setup-guide/u1-env-check": {
+      "intro": {
+        "ru": "Партия сказала 'надо'. Но прежде чем выполнять план, проверим инвентарь. Начинаем сверку оборудования.",
+        "en": "The Central Committee has issued the directive. Before we begin production, a mandatory inventory check. Let's verify our tools."
+      },
+      "mentorHint": {
+        "ru": "Доверяй, но проверяй зависимости. Товарищ, внимание к деталям.",
+        "en": "A good shock worker checks their tools twice before starting the shift."
+      },
+      "outro": {
+        "ru": "Инвентаризация завершена. Оборудование к труду готово. Следующий этап – монтаж.",
+        "en": "The manifest is confirmed. All equipment is accounted for and operational. Proceed to the assembly phase."
+      }
+    },
+    "02-setup-guide/u2-install": {
+      "intro": {
+        "ru": "Хватит совещаний. Засучиваем рукава и монтируем производственные мощности на ваш MCP. План ждать не будет.",
+        "en": "The time for talk is over. Roll up your sleeves and install the necessary machinery onto your MCP. The quota must be met."
+      },
+      "mentorHint": {
+        "ru": "Терпение и труд даже `pip install` перетрут.",
+        "en": "Follow the schematic precisely. There is no room for improvisation when building the tools of production."
+      },
+      "outro": {
+        "ru": "Станки на месте, гудят и готовы к работе. Вы укрепили нашу общую мощь. Теперь – запуск первого конвейера.",
+        "en": "The machinery is installed and humming. A valuable contribution to the collective effort. Time to start the first production line."
+      }
+    },
+    "02-setup-guide/u3-first-project": {
+      "intro": {
+        "ru": "Теория без практики мертва. Запускаем конвейер и выпускаем наш первый, пусть и неказистый, образец.",
+        "en": "A blueprint is not a product. We begin assembly of the first prototype. It will be functional, not decorative."
+      },
+      "mentorHint": {
+        "ru": "Первый `prompt` – это не страшно. Главное начать.",
+        "en": "Function over form, comrade. Our first model must work, not win awards."
+      },
+      "outro": {
+        "ru": "С почином! Первый agent сошел с конвейера. Он наш, рабочий. Впереди – новые трудовые свершения.",
+        "en": "The first unit is complete. It serves its purpose. This is a victory for the collective. Prepare for the next production cycle."
+      }
+    },
+    "03-stack-selection/u1-activation": {
+      "intro": {
+        "ru": "Партия поставила задачу. Прежде чем бросаться на амбразуру, трезво оценим имеющиеся ресурсы и директивы сверху.",
+        "en": "The Party has set the task. Before you charge the machine-gun nest, soberly assess your available resources and directives from above."
+      },
+      "mentorHint": {
+        "ru": "Семь раз отмерь, один раз сдай в эксплуатацию, товарищ.",
+        "en": "Measure seven times, commission into service once, comrade."
+      },
+      "outro": {
+        "ru": "Отлично, план по самоанализу выполнен. Теперь, когда мы знаем наши цепи, можно ковать победу.",
+        "en": "Excellent, the self-assessment plan is fulfilled. Now that we know our limitations, we can forge victory."
+      }
+    },
+    "03-stack-selection/u2-stack-matrix": {
+      "intro": {
+        "ru": "Наш конструкторский коллектив рассматривает чертежи. Выбор правильного технологического стека определит успех всей пятилетки.",
+        "en": "Our design bureau is reviewing the blueprints. Selecting the correct technological stack will determine the success of the entire five-year plan."
+      },
+      "mentorHint": {
+        "ru": "Нам нужен не звёздный крейсер, а надёжный трактор для целины. Выбирай с умом.",
+        "en": "We don't need a star cruiser; we need a reliable tractor for the virgin lands. Choose wisely."
+      },
+      "outro": {
+        "ru": "Стратегическое решение принято. Теперь засучиваем рукава и строим наш цифровой коммунизм, кирпичик за кирпичиком.",
+        "en": "The strategic decision has been made. Now, roll up your sleeves and let's build our digital communism, brick by brick."
+      }
+    },
+    "03-stack-selection/u3-behind-gfw": {
+      "intro": {
+        "ru": "Враг возвёл информационные барьеры. Но советский инженер найдёт обходной путь, даже если придётся передавать данные по водопроводным трубам.",
+        "en": "The enemy has erected information barriers. But a Soviet engineer will find a workaround, even if it means sending data through the plumbing."
+      },
+      "mentorHint": {
+        "ru": "Голь на выдумки хитра. Покажи им нашу смекалку.",
+        "en": "Necessity is the mother of invention. Show them our 'smekalka'."
+      },
+      "outro": {
+        "ru": "Блокада прорвана! Этот опыт доказывает: для нашего MCP нет непреодолимых преград, есть только интересные инженерные задачи.",
+        "en": "The blockade is broken! This proves that for our MCP, there are no insurmountable obstacles, only interesting engineering challenges."
+      }
+    },
+    "03-stack-selection/u4-hermes-sovereign": {
+      "intro": {
+        "ru": "Полагаться на заморские API — это оппортунизм. Мы построим свой, полностью суверенный стек, который будет работать даже в условиях полной изоляции.",
+        "en": "Relying on overseas APIs is opportunism. We will build our own, fully sovereign stack that will work even in complete isolation."
+      },
+      "mentorHint": {
+        "ru": "Наше — значит надёжное. Контролируй каждый винтик в системе.",
+        "en": "If it's ours, it's reliable. Control every single bolt in the system."
+      },
+      "outro": {
+        "ru": "Собственный стек запущен. Теперь мы хозяева своей цифровой судьбы, а не просители у капиталистических корпораций.",
+        "en": "Our own stack has been launched. We are now the masters of our digital destiny, not supplicants to capitalist corporations."
+      }
+    },
+    "03-stack-selection/u5-migrate": {
+      "intro": {
+        "ru": "Переезд нашего цифрового цеха на новые рельсы — операция ответственная. Нам нужен чёткий план, чтобы не сорвать производственные показатели.",
+        "en": "Moving our digital workshop onto a new track is a critical operation. We need a clear plan to avoid disrupting production quotas."
+      },
+      "mentorHint": {
+        "ru": "Планомерное развитие — залог успеха. Действуй по графику, товарищ.",
+        "en": "Systematic development is the key to success. Stick to the schedule, comrade."
+      },
+      "outro": {
+        "ru": "Миграция прошла успешно, как запуск первого спутника. Старый мир разрушен до основанья, а затем... мы наш, мы новый мир построим!",
+        "en": "The migration was as successful as the first Sputnik launch. The old world has been razed to the ground, and now... we shall build our new world!"
+      }
+    },
+    "04-prompt-engineering/u1-activation": {
+      "intro": {
+        "ru": "Товарищ, каждый великий план начинается с первого, часто корявого, наброска. Давайте разберем, почему наш первый prompt для нейросети вышел комом, и сделаем выводы.",
+        "en": "Comrade, every great plan begins with a first, often clumsy, draft. Let's analyze why our first prompt for the neural network was a failure and draw the necessary conclusions."
+      },
+      "mentorHint": {
+        "ru": "Ошибки — это не брак, а ценный производственный опыт.",
+        "en": "Mistakes are not defects, but valuable production experience."
+      },
+      "outro": {
+        "ru": "Анализ завершен, выводы сделаны. Теперь, вооружившись знанием, мы готовы к созданию инструкций, достойных передовика производства.",
+        "en": "The analysis is complete, conclusions are drawn. Now, armed with knowledge, we are ready to create instructions worthy of a shock worker."
+      }
+    },
+    "04-prompt-engineering/u2-spec-formula": {
+      "intro": {
+        "ru": "Хватит кустарщины. Настоящий инженер пользуется чертежами и формулами, а не гадает на кофейной гуще. Изучаем стандартный протокол для составления эффективных prompt'ов.",
+        "en": "Enough with the artisanal methods. A real engineer uses blueprints and formulas, not guesswork. We will now study the standard protocol for composing effective prompts."
+      },
+      "mentorHint": {
+        "ru": "Четкое ТЗ — половина успеха. Машина любит точность.",
+        "en": "A clear technical specification is half the battle. The machine loves precision."
+      },
+      "outro": {
+        "ru": "Формула освоена, стандарт внедрен. Теперь наш производственный процесс станет предсказуемым и надежным, как часы 'Ракета'.",
+        "en": "The formula is mastered, the standard is implemented. Now our production process will be as predictable and reliable as a 'Raketa' watch."
+      }
+    },
+    "04-prompt-engineering/u3-magic-words": {
+      "intro": {
+        "ru": "Некоторые утверждают, что это магия, но мы-то знаем — это чистая инженерия и смекалка. Разберем ключевые слова и операторы, которые действуют на нейросеть как рычаг на станке.",
+        "en": "Some claim it's magic, but we know it's pure engineering and ingenuity. Let's break down the keywords and operators that affect the neural network like a lever on a machine tool."
+      },
+      "mentorHint": {
+        "ru": "Знай свои инструменты, и любой механизм тебе покорится.",
+        "en": "Know your tools, and any mechanism will submit to you."
+      },
+      "outro": {
+        "ru": "Теперь в нашем арсенале есть не только стандарт, но и спецключи. Пора научиться не допускать ошибок, которые саботируют даже самый лучший план.",
+        "en": "Now in our arsenal, we have not only the standard but also special tools. It's time to learn how to avoid mistakes that sabotage even the best-laid plan."
+      }
+    },
+    "04-prompt-engineering/u4-sins": {
+      "intro": {
+        "ru": "Производственный брак и нарушение техники безопасности недопустимы. Изучим типичные ошибки в prompt'ах, чтобы искоренить их как класс и не срывать пятилетний план по генерации контента.",
+        "en": "Production defects and safety violations are unacceptable. We will study the typical mistakes in prompts to eradicate them as a class and not disrupt the five-year plan for content generation."
+      },
+      "mentorHint": {
+        "ru": "Бдительность и дисциплина — залог выполнения плана.",
+        "en": "Vigilance and discipline are the key to fulfilling the plan."
+      },
+      "outro": {
+        "ru": "Враг распознан и обезврежен. Теперь, когда мы знаем, как не надо, пора закрепить знания на практике и стать настоящим мастером.",
+        "en": "The enemy is identified and neutralized. Now that we know what not to do, it's time to consolidate this knowledge in practice and become a true master."
+      }
+    },
+    "04-prompt-engineering/u5-practice": {
+      "intro": {
+        "ru": "Теория без практики мертва. Пришло время сдать норму и показать, как наши знания превращаются в результат, превосходящий все ожидания. Засучиваем рукава.",
+        "en": "Theory without practice is dead. The time has come to meet the quota and show how our knowledge transforms into a result that exceeds all expectations. Let's roll up our sleeves."
+      },
+      "mentorHint": {
+        "ru": "От слов — к делу. Покажи класс, товарищ.",
+        "en": "From words to deeds. Show your mastery, comrade."
+      },
+      "outro": {
+        "ru": "План по освоению prompt-инженерии выполнен и перевыполнен! Теперь вы — ценный специалист, готовый к решению задач любой сложности на благо общего дела.",
+        "en": "The plan for mastering prompt engineering has been fulfilled and over-fulfilled! You are now a valuable specialist, ready to solve tasks of any complexity for the benefit of the common cause."
+      }
+    },
+    "05-context-memory/u1-activation": {
+      "intro": {
+        "ru": "Товарищ, наш цифровой соратник, agent, не всегда с полуслова понимает приказ. Это не саботаж, а вопрос правильной постановки задачи.",
+        "en": "Comrade, our digital associate, the agent, does not always understand the order at a word. This is not sabotage, but a matter of correct task formulation."
+      },
+      "mentorHint": {
+        "ru": "Чёткий `prompt` — половина успеха, товарищ.",
+        "en": "A clear `prompt` is half the battle, comrade."
+      },
+      "outro": {
+        "ru": "Отлично, основы активации пройдены. Теперь, когда agent в строю, перейдем к более сложным директивам.",
+        "en": "Excellent, the basics of activation are covered. Now that the agent is in line, let's move on to more complex directives."
+      }
+    },
+    "05-context-memory/u2-context-vs-prompt": {
+      "intro": {
+        "ru": "Agent, как и сознательный работник, рьяно выполняет `prompt`. Но без `context` его труд может оказаться не на общее благо.",
+        "en": "An agent, like a conscious worker, zealously executes the `prompt`. But without `context`, its labor may not serve the common good."
+      },
+      "mentorHint": {
+        "ru": "Смотри не на кирпич, а на завод, который строишь.",
+        "en": "See not just the brick, but the factory you are building."
+      },
+      "outro": {
+        "ru": "Хорошая работа, вы усвоили стратегическую важность `context`. Посмотрим теперь, как agent запоминает этот великий план.",
+        "en": "Good work, you have grasped the strategic importance of `context`. Now let's see how the agent remembers this grand plan."
+      }
+    },
+    "05-context-memory/u3-memory": {
+      "intro": {
+        "ru": "Каждый трудовой подвиг должен быть зафиксирован для истории и планирования. Изучим личное дело нашего agent — его систему памяти.",
+        "en": "Every labor achievement must be recorded for history and planning. Let's study our agent's personal file – its memory system."
+      },
+      "mentorHint": {
+        "ru": "Память — это инструмент, а не роскошь.",
+        "en": "Memory is a tool, not a luxury."
+      },
+      "outro": {
+        "ru": "Превосходно, вы овладели архивами разума agent. Пора применить эти знания на практике.",
+        "en": "Excellent, you have mastered the archives of the agent's mind. It is time to apply this knowledge in practice."
+      }
+    },
+    "05-context-memory/u4-practice": {
+      "intro": {
+        "ru": "Теория — хорошо, но пятилетка не ждет. Пора засучить рукава и настроить память agent через `MCP` для максимальной производительности.",
+        "en": "Theory is good, but the five-year plan does not wait. It is time to roll up our sleeves and configure the agent's memory via `MCP` for maximum productivity."
+      },
+      "mentorHint": {
+        "ru": "Точно настроенный механизм — двойная норма.",
+        "en": "A well-tuned machine means double the output quota."
+      },
+      "outro": {
+        "ru": "Товарищ, теперь ваш agent — ударник труда, его память остра, а цель ясна. Вы готовы вести его к новым производственным победам!",
+        "en": "Comrade, your agent is now a shock worker, its memory sharp and its purpose clear. You are ready to lead it to new production victories!"
+      }
+    },
+    "06-audio-pipeline/u1-activation": {
+      "intro": {
+        "ru": "Товарищ, учёт и контроль — основа порядка. Но пока ты вручную перекладываешь аудиофайлы, план пятилетки сам себя не выполнит.",
+        "en": "Comrade, accounting and control are the foundation of order. But while you manually move audio files, the five-year plan will not fulfill itself."
+      },
+      "mentorHint": {
+        "ru": "Рутина закаляет, но смекалка экономит силы для рывка.",
+        "en": "Routine builds character, but ingenuity saves strength for the final push."
+      },
+      "outro": {
+        "ru": "Отлично, слабое звено в цепи производства выявлено. Теперь вооружимся теорией, чтобы его укрепить.",
+        "en": "Excellent, the weak link in the production chain is identified. Now, we arm ourselves with theory to strengthen it."
+      }
+    },
+    "06-audio-pipeline/u2-pipeline-theory": {
+      "intro": {
+        "ru": "Каждый винтик в механизме важен, но только когда он знает своё место и время. Изучим простую, как удар молота, модель «Trigger → Action».",
+        "en": "Every cog in the machine is important, but only when it knows its place and time. Let us study the 'Trigger → Action' model, as simple as a hammer strike."
+      },
+      "mentorHint": {
+        "ru": "Сигнал получен — задача выполнена. Ничего лишнего.",
+        "en": "Signal received—task executed. Nothing superfluous."
+      },
+      "outro": {
+        "ru": "Теория без практики мертва. Ты получил чертежи, теперь пора к станку — собирать свой первый pipeline.",
+        "en": "Theory without practice is dead. You have the blueprints; now it's time for the assembly line—to build your first pipeline."
+      }
+    },
+    "06-audio-pipeline/u3-build": {
+      "intro": {
+        "ru": "Хватит разговоров, пора засучить рукава. Перед тобой — цифровой конвейер, который ждёт твоей инженерной мысли.",
+        "en": "Enough talk, time to roll up your sleeves. Before you lies a digital assembly line, awaiting your engineering mind."
+      },
+      "mentorHint": {
+        "ru": "Семь раз отмерь, один раз API вызови.",
+        "en": "Measure seven times, call the API once."
+      },
+      "outro": {
+        "ru": "Заработало! Твой pipeline — скромный, но важный вклад в общее дело автоматизации. Но не время почивать на лаврах.",
+        "en": "It works! Your pipeline is a modest but important contribution to the common cause of automation. But this is no time to rest on your laurels."
+      }
+    },
+    "06-audio-pipeline/u4-reflect": {
+      "intro": {
+        "ru": "Первый успех — это лишь начало большого пути. Оглянись вокруг: сколько ещё ручного труда ждёт своего рационализатора?",
+        "en": "The first success is just the beginning of a long road. Look around: how much more manual labor awaits its rationalizer?"
+      },
+      "mentorHint": {
+        "ru": "Хороший инженер видит не проблему, а возможность для нового pipeline.",
+        "en": "A good engineer sees not a problem, but an opportunity for a new pipeline."
+      },
+      "outro": {
+        "ru": "План намечен, задачи ясны. Теперь ты не просто исполнитель, а авангард трудового фронта автоматизации. За работу, товарищ!",
+        "en": "The plan is drafted, the objectives are clear. You are no longer just an operator, but the vanguard of the automation labor front. To work, comrade!"
+      }
+    },
+    "07-tools/u1-activation": {
+      "intro": {
+        "ru": "Товарищ, перед тобой — почти готовый agent. Он силён, но нем и бездействует, как трактор без зажигания. Наша задача — дать ему искру.",
+        "en": "Comrade, before you is an almost-finished agent. It is strong, but mute and idle, like a tractor without an ignition spark. Our task is to give it that spark."
+      },
+      "mentorHint": {
+        "ru": "Без чёткой команды и правильного сигнала даже самый умный механизм — просто груда металла.",
+        "en": "Without a clear command and the right signal, even the smartest mechanism is just a pile of metal."
+      },
+      "outro": {
+        "ru": "Первый этап выполнен: agent откликается на зов. Теперь предстоит научить его настоящему делу, а не просто ответам по уставу.",
+        "en": "The first stage is complete: the agent now responds to the call. Now we must teach it real work, not just regulation-book answers."
+      }
+    },
+    "07-tools/u2-mcp": {
+      "intro": {
+        "ru": "Один agent — хорошо, но без единого протокола это анархия, а не производственная мощь. MCP — это наш генплан, который превратит хаос в стройный порядок.",
+        "en": "One agent is good, but without a unified protocol, it is anarchy, not productive power. The MCP is our general plan that will turn chaos into structured order."
+      },
+      "mentorHint": {
+        "ru": "Порядок бьёт класс. Следуй протоколу, и система заработает как часы.",
+        "en": "Order beats class. Follow the protocol, and the system will work like clockwork."
+      },
+      "outro": {
+        "ru": "Отлично, товарищ. Теперь наш agent действует не по наитию, а по строгому и эффективному протоколу. Система готова к масштабированию.",
+        "en": "Excellent, comrade. Now our agent acts not on a whim, but according to a strict and effective protocol. The system is ready for scaling."
+      }
+    },
+    "07-tools/u3-hooks": {
+      "intro": {
+        "ru": "Хороший работник не ждёт приказа по каждому мелкому поводу. Научим наш agent реагировать на события автоматически, как часовой на посту.",
+        "en": "A good worker does not wait for an order for every little thing. We will teach our agent to react to events automatically, like a sentry at his post."
+      },
+      "mentorHint": {
+        "ru": "Зачем дёргать рубильник вручную, если можно поставить реле? Экономь силы для главного.",
+        "en": "Why pull the lever manually when you can install a relay? Save your strength for the main task."
+      },
+      "outro": {
+        "ru": "Задача выполнена. Agent теперь сам следит за порядком и запускает нужные процессы. Можно планировать следующую пятилетку.",
+        "en": "Task completed. The agent now monitors the order of things and launches the necessary processes by itself. We can now plan the next five-year plan."
+      }
+    },
+    "07-tools/u4-skills": {
+      "intro": {
+        "ru": "Наш agent — универсальный солдат, но для специальных заданий ему нужны инструменты. Сейчас мы вооружим его модульными «навыками», как слесаря — набором ключей.",
+        "en": "Our agent is a universal soldier, but for special assignments, it needs tools. We will now arm it with modular 'skills,' like a mechanic's set of wrenches."
+      },
+      "mentorHint": {
+        "ru": "Нельзя забивать микросхемы молотком. Каждой задаче — свой инструмент.",
+        "en": "You can't hammer a microchip. For every task, its own tool."
+      },
+      "outro": {
+        "ru": "Agent оснащён. С таким набором навыков он готов к выполнению широкого круга производственных задач. План будет перевыполнен!",
+        "en": "The agent is equipped. With this set of skills, it is ready to perform a wide range of production tasks. The plan will be over-fulfilled!"
+      }
+    },
+    "07-tools/u5-practice": {
+      "intro": {
+        "ru": "Теория без практики мертва, товарищ. Пора подключить всю нашу систему к производственной линии и провести полевые испытания.",
+        "en": "Theory without practice is dead, comrade. It's time to connect our entire system to the production line and conduct field tests."
+      },
+      "mentorHint": {
+        "ru": "Семь раз проверь, один раз включи. И держи огнетушитель под рукой.",
+        "en": "Check seven times, turn it on once. And keep a fire extinguisher handy."
+      },
+      "outro": {
+        "ru": "Система работает штатно, испытания пройдены. Этот инструмент готов служить на благо общего дела. Впереди новые рубежи!",
+        "en": "The system is operating nominally; tests are passed. This tool is ready to serve the common cause. New frontiers await!"
+      }
+    },
+    "08-agent-engineering/u1-activation": {
+      "intro": {
+        "ru": "Первоначальная пятилетка для нашего prompt'а выполнена досрочно, но результаты... неудовлетворительные. Теперь мы должны применить инженерную смекалку, ибо цели Партии не ждут идеальных условий.",
+        "en": "The initial five-year plan for our prompt has been fulfilled ahead of schedule, but the results are... unsatisfactory. We must now apply engineering ingenuity, for the Party's goals do not wait for ideal conditions."
+      },
+      "mentorHint": {
+        "ru": "Хороший инженер не жалуется на инструмент, он модифицирует инструмент. Или материал.",
+        "en": "A good engineer doesn't complain about the tool; he modifies the tool. Or the material."
+      },
+      "outro": {
+        "ru": "Отлично, товарищ. Prompt теперь работает с надёжностью автомата Калашникова. Теперь определим, какие задачи вообще достойны его внимания.",
+        "en": "Excellent, Comrade. The prompt now operates with the reliability of a Kalashnikov. Now, let's determine which tasks are even worthy of its attention."
+      }
+    },
+    "08-agent-engineering/u2-jagged-intelligence": {
+      "intro": {
+        "ru": "Наш AI — как мощный новый трактор: пашет глубоко, но не может аккуратно сажать семена. Мы должны научно определить разделение труда между человеком и машиной.",
+        "en": "Our AI is like a powerful new tractor: it plows deep, but it cannot plant the seeds with care. We must scientifically determine the division of labor between man and machine."
+      },
+      "mentorHint": {
+        "ru": "Не стоит использовать кувалду, чтобы расколоть орех. Если, конечно, орех не вражеский шпион.",
+        "en": "Don't use a sledgehammer to crack a nut. Unless, of course, the nut is an enemy spy."
+      },
+      "outro": {
+        "ru": "Мудрое распределение ресурсов. Вы отделили зёрна от плевел. Вперёд, к созданию сложных механизмов, которые объединят эти усилия.",
+        "en": "A wise allocation of resources. You have separated the grain from the chaff. Onward, to build the complex mechanisms that will unite these efforts."
+      }
+    },
+    "08-agent-engineering/u3-orchestration": {
+      "intro": {
+        "ru": "Отдельные шестерёнки просты, но вместе они приводят в движение великую индустриальную машину. Сегодня мы изучаем чертежи сложной системы, где множество agent'ов работают согласованно на общее благо.",
+        "en": "Individual cogs are simple, but together they power the great industrial machine. Today we study the blueprints of a complex system, where many agents work in concert for the common good."
+      },
+      "mentorHint": {
+        "ru": "Один agent — это курьёз. Сотня agent'ов, правильно оркестрованных — это производительная сила.",
+        "en": "One agent is a curiosity. A hundred agents, properly orchestrated, are a productive force."
+      },
+      "outro": {
+        "ru": "Принципы центрального планирования теперь ясны. Вы увидели, как строится сложная система agent'ов. Скоро вы перейдёте от теории к практике, от чертежа к заводскому цеху.",
+        "en": "The principles of central planning are now clear. You have seen how a complex agent system is built. Soon, you will move from theory to practice, from blueprint to factory floor."
+      }
+    },
+    "08-agent-engineering/u4-production-infra": {
+      "intro": {
+        "ru": "Прототип, собранный в лаборатории из подручных материалов и смекалки, доказал свою ценность. Теперь настоящее испытание: развёртывание для масс. Мы должны построить инфраструктуру для поддержки не одного, а тысячи таких agent'ов.",
+        "en": "The prototype, built with scrap and ingenuity in the lab, has proven its worth. Now comes the real test: deploying it to the masses. We must build the infrastructure to support not one, but a thousand such agents."
+      },
+      "mentorHint": {
+        "ru": "Прототип — это обещание. Production — это выполнение плана.",
+        "en": "A prototype is a promise. Production is the fulfillment of the plan."
+      },
+      "outro": {
+        "ru": "Сборочная линия спроектирована, инфраструктура спланирована. Вы больше не просто изобретатель, а архитектор производства. Осталось лишь построить главного agent'а.",
+        "en": "The assembly line is designed, the infrastructure is planned. You are no longer a mere inventor, but an architect of production. All that remains is to build the ultimate agent."
+      }
+    },
+    "08-agent-engineering/u5-practice": {
+      "intro": {
+        "ru": "Финальное задание — самое амбициозное. Вы спроектируете agent'а для выполнения ваших собственных обязанностей, освободив себя для более стратегических задач на благо Родины. Цифровой стахановец, который выполнит и перевыполнит ваши нормы.",
+        "en": "The final task is the most ambitious. You will design an agent to perform your own duties, freeing you for more strategic tasks for the Motherland. A digital Stakhanovite to fulfill your norms and over-fulfill them."
+      },
+      "mentorHint": {
+        "ru": "Создашь себе хорошую замену — получишь повышение. Создашь плохую... заменят тебя.",
+        "en": "If you build your replacement well, you will be promoted. If you build it poorly... you will be replaced."
+      },
+      "outro": {
+        "ru": "Великолепное достижение! Ваш цифровой двойник готов служить коллективу. Вы овладели искусством инженерии agent'ов и теперь являетесь настоящим Героем Труда в области AI.",
+        "en": "A magnificent achievement! Your digital double stands ready to serve the collective. You have mastered the art of agent engineering and are now a true Hero of AI Labor."
+      }
+    },
+    "00-kickstart/u4-sources": {
+      "intro": {
+        "ru": "Товарищ, любое изделие принимают по паспорту: кто изготовил, когда проверено, что разрешено. Знание — тоже изделие.",
+        "en": "Comrade, every article is accepted by its passport: who made it, when it was checked, what is permitted. Knowledge is an article too."
+      },
+      "mentorHint": {
+        "ru": "Нет клейма приёмки — нет доверия. Красивая упаковка в акт не вписывается.",
+        "en": "No inspection stamp, no trust. Fine packaging does not go into the report."
+      },
+      "outro": {
+        "ru": "Приёмка освоена. Теперь ты берёшь в работу только то, что не рассыплется, когда поставщик закроется.",
+        "en": "Inspection mastered. Now you take into work only what will not crumble when the supplier shuts down."
+      }
+    },
+    "09-ai-notebook/u1-first-notebook": {
+      "intro": {
+        "ru": "Товарищ, перед нами массив материалов. За 15 минут разворачиваем тетрадь, где каждый вывод проходит по документу.",
+        "en": "Comrade, we have a body of materials. In 15 minutes we deploy a notebook where every conclusion runs through a document."
+      },
+      "mentorHint": {
+        "ru": "Вывод без документа в работу не принимается.",
+        "en": "A conclusion without a document is not accepted into work."
+      },
+      "outro": {
+        "ru": "Тетрадь введена в строй. Переходим к устройству участка.",
+        "en": "The notebook is commissioned. We move to the section’s operating principle."
+      }
+    },
+    "09-ai-notebook/u2-how-it-works": {
+      "intro": {
+        "ru": "Устройство простое: источник разбит, промаркирован и возвращается в ответе как ссылка на место.",
+        "en": "The device is simple: the source is split, marked, and returned in the answer as a link to place."
+      },
+      "mentorHint": {
+        "ru": "Маркировка важнее бодрого доклада.",
+        "en": "Marking matters more than a brisk report."
+      },
+      "outro": {
+        "ru": "Схема освоена. Теперь проверим участок на брак.",
+        "en": "The scheme is mastered. Now we inspect the section for defects."
+      }
+    },
+    "09-ai-notebook/u3-where-it-lies": {
+      "intro": {
+        "ru": "Проверка качества: цитата должна вести к месту, число должно сходиться, отсутствующий факт не выдумывается.",
+        "en": "Quality control: the quote must lead to the place, the number must match, the absent fact must not be invented."
+      },
+      "mentorHint": {
+        "ru": "Нет отметки ОТК — нет доверия к изделию.",
+        "en": "No QA stamp, no trust in the article."
+      },
+      "outro": {
+        "ru": "Брак выявлен и отсечён. Тетрадь работает по нормативу.",
+        "en": "Defects identified and removed. The notebook works to standard."
+      }
+    },
+    "09-ai-notebook/u4-formats": {
+      "intro": {
+        "ru": "Формат выдачи выбирается под задачу: таблица для сравнения, карта для связей, аудио для обзора.",
+        "en": "Output format is chosen for the task: table for comparison, map for links, audio for overview."
+      },
+      "mentorHint": {
+        "ru": "Форма отчёта не отменяет ссылку на первичный документ.",
+        "en": "Report form does not cancel the reference to the primary document."
+      },
+      "outro": {
+        "ru": "Форматы распределены. Доклад можно передавать без потери доказательств.",
+        "en": "Formats assigned. The report can be handed over without losing evidence."
+      }
+    },
+    "09-ai-notebook/u5-practice": {
+      "intro": {
+        "ru": "Финальная практика: берём твою тему, комплектуем источники, выдаём результат с цитатами.",
+        "en": "Final practice: we take your topic, assemble sources, and produce a result with quotes."
+      },
+      "mentorHint": {
+        "ru": "Не трать смену на просмотр подряд. Работай вопросом и актом проверки.",
+        "en": "Do not spend the shift watching end to end. Work by question and inspection act."
+      },
+      "outro": {
+        "ru": "Задание выполнено. Часы просмотра превращены в проверяемую выжимку.",
+        "en": "Assignment complete. Hours of watching have become a verifiable extract."
+      }
+    }
+  }
+}

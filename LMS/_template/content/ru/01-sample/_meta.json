@@ -1,0 +1,17 @@
+{
+  "module": 1,
+  "title": "Пример модуля",
+  "description": "Как устроен модуль курса",
+  "duration": "TODO",
+  "level": 1,
+  "units": [
+    {
+      "slug": "u1-intro",
+      "title": "Знакомство"
+    },
+    {
+      "slug": "u2-practice",
+      "title": "Первый шаг"
+    }
+  ]
+}

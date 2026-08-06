@@ -1,0 +1,13 @@
+{
+  "module": 1,
+  "title": "Introduction",
+  "description": "Software 3.0 and why it changes everything",
+  "duration": "30 min",
+  "level": 1,
+  "units": [
+    { "slug": "u1-activation", "title": "Your experience with AI" },
+    { "slug": "u2-four-shifts", "title": "Four shifts" },
+    { "slug": "u3-clones", "title": "Five clones" },
+    { "slug": "u4-practice", "title": "Your first prompt" }
+  ]
+}

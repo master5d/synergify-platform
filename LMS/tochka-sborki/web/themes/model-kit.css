@@ -1,0 +1,54 @@
+:root {
+  /* Theme-agnostic: layout, type scale, radius, fonts — identical in both themes */
+  --font-mono: 'Geist Mono', monospace;
+  --radius: 4px;
+  --display-size: clamp(2.8rem, 7vw, 6.5rem);
+  --section-label-size: var(--text-xs);
+
+  /* Типографская лестница 12/14/16/20/24 — общая с hub, blog, mentor, academy.
+     До этого в живом рендере было 29 кеглей, включая 6.5px и 7px. */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --number-size: clamp(5rem, 14vw, 11rem);
+  --section-gap: 5rem;
+  --accent-line: 3px solid var(--text-accent);
+  --content-max: 1100px;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #111118;
+  --bg-surface: #16161f;
+  --text-primary: #f0f0f5;
+  --text-secondary: #8e8ea0;
+  --text-accent: #00d1ff;       /* Refined "Cyber Blue" for more expensive vibe */
+  --border-color: #242433;
+  --border-accent: #00d1ff30;
+  --text-on-accent: #000000;
+  --crit: #ff6b5b;
+  --phase-1: #00d1ff;           /* Unified with accent */
+  --phase-2: #5e5ce6;
+  --phase-3: #ff9900;
+  --phase-4: #ff44aa;
+}
+
+[data-theme="light"] {
+  /* Warm "model kit" paper — constructivist blueprint feel */
+  --bg-primary: #f4f1ea;
+  --bg-secondary: #eae6dc;
+  --bg-surface: #fbf9f4;
+  --text-primary: #15151a;
+  --text-secondary: #5a5a6a;
+  --text-accent: #0063ab;       /* AA на ВСЕХ фонах: #0070c0 давал 4.13 на bg-secondary */
+  --border-color: #d8d2c6;
+  --border-accent: #0063ab40;   /* держим в паре с --text-accent, иначе рамки тянут старый оттенок */
+  --text-on-accent: #ffffff;
+  --crit: #c42619;              /* darkened to clear AA for error text on paper */
+  --phase-1: #0077cc;
+  --phase-2: #4a48d1;
+  --phase-3: #8f5400;           /* amber darkened for AA on paper */
+  --phase-4: #b51d6e;
+}

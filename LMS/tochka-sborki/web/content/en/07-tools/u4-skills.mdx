@@ -1,0 +1,117 @@
+---
+title: "Skills: modular capabilities"
+unit: 4
+module: 7
+duration: "12 min"
+---
+
+<Phase type="activation">
+
+Picture the prompt you keep coming back to — code check, meeting summary, release notes.
+
+Don't picture it as "a piece of text." Picture a falconer's hawk: it doesn't think through the attack each time — it's trained to one command and strikes the instant it's called. Your repeating prompt is already almost that hawk. Run it in your head: what exactly does it strike for you?
+
+**How many times have you given it that command by hand?**
+
+</Phase>
+
+<Phase type="reflection">
+
+A good reusable prompt is already almost a Skill.
+
+Don't think of this as "saved text." Picture a locksmith who cut a key to fit one specific lock: it slides in without fumbling, on the first move — no trial and error, no friction. A Skill is that key for your task: `/skill-name`, and the agent opens exactly what's needed.
+
+Notice in your head: which lock in your work is still picked by trial and error every time?
+
+</Phase>
+
+<Phase type="concept">
+
+## What is a Skill
+
+A Skill is a Markdown file with instructions that Claude Code runs when you call `/name`.
+
+### Skill file structure
+
+```markdown
+---
+name: meeting-summary
+description: Summarizes a meeting from a transcript or notes
+---
+
+# Meeting Summary Skill
+
+## Goal
+Create a structured meeting recap.
+
+## Instruction
+You are a meeting assistant. Based on the provided data:
+
+1. Pull out the main decisions (3–5 bullets)
+2. Identify tasks with owners and deadlines
+3. Note open questions
+
+## Output format
+### Decisions
+- [list]
+
+### Tasks
+- [ ] [task] — [owner] — [deadline]
+
+### Open questions
+- [list]
+```
+
+### Where to store Skills
+
+- `~/.claude/skills/` — personal, work across all projects
+- `.claude/skills/` — project-scoped, in git
+
+### How to call
+
+```
+/meeting-summary [paste transcript or notes]
+```
+
+## Plugin vs Skill
+
+| | Plugin | Skill |
+|--|--------|-------|
+| What | Package with multiple skills | One specific action |
+| How to use | Install once | Call via `/name` |
+| Example | `firecrawl@local` | `/firecrawl:firecrawl-cli` |
+
+</Phase>
+
+<Phase type="practice">
+
+Create a skill for the task from Activation:
+
+<OsBlock os="mac">
+
+```bash
+mkdir -p ~/.claude/skills
+touch ~/.claude/skills/my-first-skill.md
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+New-Item -ItemType Directory "$HOME\.claude\skills" -Force
+ni "$HOME\.claude\skills\my-first-skill.md" -ItemType File
+```
+
+</OsBlock>
+
+Fill it out using the template above. Use a real prompt you already have.
+
+Test it:
+```
+/my-first-skill [give real data]
+```
+
+Save the skill file to `my-experiments/u4-my-skill.md`
+
+</Phase>

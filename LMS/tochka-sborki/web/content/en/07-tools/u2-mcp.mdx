@@ -1,0 +1,87 @@
+---
+title: "MCP: superpowers through a protocol"
+unit: 2
+module: 7
+duration: "15 min"
+---
+
+<Phase type="activation">
+
+Picture Claude Code as an embassy in a foreign city. Without the embassy, you can't officially speak to local authorities — there's a protocol barrier.
+
+Don't picture this as a technical question. Picture a silent cordon between nations: no ambassador, no interpreter — both sides stand watching each other without exchanging a word. Which external "neighbor" is silently standing at your cordon right now — GitHub, Notion, browser, Telegram?
+
+Hold it in your head: **which one breaks the silence first?**
+
+</Phase>
+
+<Phase type="reflection">
+
+MCP is the shared diplomatic language: the embassy already knows how to speak with any nation through a single protocol.
+
+Don't think of this as "connecting tools." Picture a telegraph cable between two distant stations: the radio operator on each end knows Morse — it doesn't matter who's on the other side, the signal goes through. One protocol instead of a thousand bilateral treaties.
+
+Run it in your head: if MCP is the shared code, what's the first "telegram" you'd send?
+
+</Phase>
+
+<Phase type="concept">
+
+## MCP: three primitives
+
+| Primitive | Controlled by | What it is |
+|----------|-------------|---------|
+| **Tools** | The model | Functions the agent calls: API requests, writing files |
+| **Resources** | The application | Data sources (like GET requests): files, DB records |
+| **Prompts** | The user | Templates for optimal usage |
+
+## How to connect an MCP server
+
+In `.claude/settings.json` add:
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "your-token"
+      }
+    }
+  }
+}
+```
+
+## Popular MCP servers
+
+| Server | What it gives you |
+|--------|---------|
+| `@modelcontextprotocol/server-github` | Issues, PRs, commits, repo files |
+| `@modelcontextprotocol/server-filesystem` | Extended file system access |
+| `@modelcontextprotocol/server-brave-search` | Web search via Brave |
+| Notion MCP | Read and write Notion pages |
+| Firecrawl | Web page scraping |
+
+## Common errors (~60% of issues)
+
+- `Server transport closed unexpectedly` — syntax error in the JSON config
+- Port conflicts — two servers trying to listen on the same port
+- Missing env var — token wasn't passed correctly
+
+Fix: check JSON syntax and tokens before digging deeper.
+
+</Phase>
+
+<Phase type="practice">
+
+Pick one MCP server from the table above (I recommend GitHub or Brave Search to start).
+
+1. Find its docs (search: `MCP server [name]`)
+2. Add the config to `.claude/settings.json`
+3. Restart Claude Code
+4. Verify the server connected: ask the agent "what MCP tools are available?"
+
+Save the config and the check result to `my-experiments/u2-mcp-setup.md`
+
+</Phase>

@@ -1,0 +1,13 @@
+{
+  "module": 6,
+  "title": "Pipeline автоматизации",
+  "description": "Строим первый практический workflow",
+  "duration": "60 мин",
+  "level": 6,
+  "units": [
+    { "slug": "u1-activation", "title": "Информация, которую ты обрабатываешь вручную" },
+    { "slug": "u2-pipeline-theory", "title": "Trigger → Action модель" },
+    { "slug": "u3-build", "title": "Собери свой pipeline" },
+    { "slug": "u4-reflect", "title": "Что автоматизировать дальше?" }
+  ]
+}

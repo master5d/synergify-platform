@@ -1,0 +1,142 @@
+---
+title: "Your first project"
+unit: 3
+module: 2
+duration: "12 min"
+---
+
+<Phase type="activation">
+
+You have an idea — a project, a task, something you've been meaning to start.
+
+Don't picture this as "creating a folder." Picture a bricklayer setting **the first brick in a wall**: no thought of the whole building yet — just this one brick, leveled perfectly, because everything else will follow from it.
+
+Run this in your head: what is your **first brick** right now? Not a plan. Not a list. One moment the movement starts from. **Hold it.**
+
+</Phase>
+
+<Phase type="reflection">
+
+Catch the feeling of giving something important a name — a project, a pet, a character in a game. The moment the name is spoken, it starts shaping the thing.
+
+Don't think of this as "I created CLAUDE.md." Picture it as **naming a newborn**: the name doesn't yet reflect anything that will come — but it already sets the character, sets the expectation, sets the direction.
+
+Run it in your head: what are you naming right now? **What name are you giving your project — and what does that name tell the agent about who you are and what you want?**
+
+</Phase>
+
+<Phase type="concept">
+
+## CLAUDE.md — the agent's project memory
+
+CLAUDE.md is a Markdown file that Claude Code reads automatically every time it launches in a folder.
+
+### Minimal template
+
+```markdown
+# Project Context
+
+## My role
+[Who I am, what I know, my experience]
+
+## Project
+[What this project is, why it exists]
+
+## Stack
+- Node.js 18
+- [other tech]
+
+## Folder structure
+- `/src` — main code
+- `/my-experiments` — experiments
+
+## How to run
+[Commands to start]
+
+## What to delegate to Claude
+- Writing code from specs
+- Tests
+- Documentation
+
+## What I decide myself
+- Architecture decisions
+- Final quality review
+```
+
+### Creating a project
+
+<OsToggle label="Commands for:" />
+
+<OsBlock os="mac">
+
+```bash
+mkdir -p ~/my-project
+cd ~/my-project
+git init
+touch CLAUDE.md
+mkdir -p src my-experiments
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+New-Item -ItemType Directory $HOME\my-project -Force
+cd $HOME\my-project
+git init
+ni CLAUDE.md -ItemType File
+New-Item -ItemType Directory src, my-experiments -Force
+```
+
+</OsBlock>
+
+### CLAUDE.md tips
+
+- Keep it under **200 lines** — longer drops the quality of instruction-following
+- Be specific: `"Use 2-space indent"` beats `"format properly"`
+- Update it when architecture or stack changes
+
+</Phase>
+
+<Phase type="practice">
+
+Create your first project:
+
+<OsBlock os="mac">
+
+```bash
+mkdir -p ~/my-ai-project
+cd ~/my-ai-project
+git init
+touch CLAUDE.md
+mkdir -p my-experiments
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+New-Item -ItemType Directory $HOME\my-ai-project -Force
+cd $HOME\my-ai-project
+git init
+ni CLAUDE.md -ItemType File
+New-Item -ItemType Directory my-experiments -Force
+```
+
+</OsBlock>
+
+Fill in CLAUDE.md using the template — write about a real project or task you want to work on.
+
+Then launch Claude Code in that folder:
+
+```bash
+claude
+```
+
+Ask the agent: `"Read CLAUDE.md and tell me what you now know about the project"`
+
+Save the result to `my-experiments/u3-claude-reads-context.md`
+
+</Phase>

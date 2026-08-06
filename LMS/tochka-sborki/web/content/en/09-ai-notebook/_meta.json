@@ -1,0 +1,14 @@
+{
+  "module": 9,
+  "title": "AI Notebook",
+  "description": "Source-grounded learning: a notebook that answers only from your sources — and how to check where it lies",
+  "duration": "38 min",
+  "level": 1,
+  "units": [
+    { "slug": "u1-first-notebook", "title": "A notebook in 15 minutes" },
+    { "slug": "u2-how-it-works", "title": "How it works" },
+    { "slug": "u3-where-it-lies", "title": "Where it lies" },
+    { "slug": "u4-formats", "title": "Output formats" },
+    { "slug": "u5-practice", "title": "Practice" }
+  ]
+}

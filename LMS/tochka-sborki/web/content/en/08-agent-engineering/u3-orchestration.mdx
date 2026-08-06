@@ -1,0 +1,115 @@
+---
+title: "Orchestration: ENERV Case Study"
+unit: 3
+module: 8
+duration: "25 min"
+---
+
+<Phase type="activation">
+
+Run through any real workflow you use every week — say, inbox processing.
+
+Don't picture it as "steps that need to get done" — picture it as a **puppeteer working several marionettes at once**: each string in a different hand, each figure doing its own thing. When one person holds all the strings, that's an art of coordination — not brute labor.
+
+Look at your workflow as that system: which marionettes are you pulling yourself right now — and which ones could move on their own if the string were rigged correctly?
+
+</Phase>
+
+<Phase type="reflection">
+
+The orchestration idea: instead of one big task on one agent — **many small tasks across multiple agents** (or across multiple steps of one agent).
+
+Advantages:
+- **Each step is simpler** → fewer chances for failure
+- **Each step is tested independently** → easier to debug
+- **Steps get reused** → one Gmail trigger powers 10 pipelines
+- **Recoverable** → if step 4 breaks, steps 1–3 aren't lost
+
+Don't picture this as an orchestra — picture it as a **loom**: each thread runs its own row, crosses with others at precisely the right moment, and weaves a pattern. One thread snapping isn't the end of the fabric: you see exactly where, you find the spot, you repair it. The fabric before and after that point stays whole.
+
+This is a **mindset shift**: you're no longer "writing a prompt." You're **designing the loom**.
+
+Catch the image: where in your pipeline do the threads cross — and at which point would a snap tear the whole fabric, not just a local row?
+
+</Phase>
+
+<Phase type="concept">
+
+**Real case: ENERV n8n pipeline**
+
+ENERV is my personal knowledge management system. Every email tagged in Gmail with `AI Ingest` is automatically parsed and lands in the correct folder of an Obsidian vault (1433 files at the moment).
+
+**Pipeline architecture:**
+
+```
+┌─────────────────────────────────────────────────────┐
+│  Gmail Trigger (polls every 1 min, label:AI Ingest) │
+└──────────────────────┬──────────────────────────────┘
+                       ↓
+┌─────────────────────────────────────────────────────┐
+│  Normalize Input  (JS code: standardize fields)     │
+└──────────────────────┬──────────────────────────────┘
+                       ↓
+┌─────────────────────────────────────────────────────┐
+│  Gemini Router  (LLM: classify into target folder)  │
+│  → returns: {folder, filename, tags}                │
+└──────────────────────┬──────────────────────────────┘
+                       ↓
+┌─────────────────────────────────────────────────────┐
+│  Parse Response  (JS code: validate JSON)           │
+└──────────────────────┬──────────────────────────────┘
+                       ↓
+┌─────────────────────────────────────────────────────┐
+│  ACL Transformer  (LLM: write structured .md)       │
+└──────────────────────┬──────────────────────────────┘
+                       ↓
+┌─────────────────────────────────────────────────────┐
+│  Source Check  (Code: avoid duplicates)             │
+└──────────────────────┬──────────────────────────────┘
+                       ↓
+┌─────────────────────────────────────────────────────┐
+│  Write to /home/node/obsidian/{folder}/{name}.md    │
+└──────────────────────┬──────────────────────────────┘
+                       ↓
+┌─────────────────────────────────────────────────────┐
+│  Mark Ingested  (Gmail: add Label_22)               │
+└──────────────────────┬──────────────────────────────┘
+                       ↓
+┌─────────────────────────────────────────────────────┐
+│  Remove Ingest Label  (Gmail: prevent re-process)   │
+└─────────────────────────────────────────────────────┘
+```
+
+**What to notice:**
+
+1. **AI only in 2 nodes out of 9** — Gemini Router (classification) and ACL Transformer (text writing). The rest is deterministic code or API calls. That's jagged intelligence applied.
+
+2. **Idempotency via labels** — after a successful run, the email gets `AI-Ingest-Done` and loses `AI Ingest`. If the pipeline crashes and restarts, processed emails won't be picked up again.
+
+3. **Trigger + Action are separated** — the Gmail trigger gets polled by n8n every minute independently. Any error in the action doesn't break the trigger.
+
+4. **The vault structure is part of the spec** — Gemini knows there are folders `Atlas/Notes/Sources`, `Efforts/On`, `Calendar/Logs`, `Facets`. That's a **constraint** baked into the system prompt.
+
+**This isn't "one big prompt." It's a designed architecture.**
+
+</Phase>
+
+<Phase type="practice">
+
+Take your workflow from the activation phase (Gmail inbox or whatever else). Draw it as a block diagram following the ENERV pattern. For each node, specify:
+
+- Type: `Trigger`, `Code`, `LLM`, `Tool`, `Write`
+- What the node receives as input
+- What it outputs
+- How it handles errors (retry / fail / human)
+
+Use ASCII blocks like in the concept section, or sketch it on paper and snap a photo.
+
+Save to `my-experiments/u3-orchestration-blueprint.md`.
+
+**Self-check:**
+- Is there an LLM node where plain code would do? (simplify)
+- Is there a node where code is trying to do what an LLM does better? (rewrite)
+- Is there a point where an error would lose data? (add idempotency)
+
+</Phase>

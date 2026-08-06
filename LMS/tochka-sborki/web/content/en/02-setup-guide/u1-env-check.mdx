@@ -1,0 +1,75 @@
+---
+title: "Environment check"
+unit: 1
+module: 2
+duration: "8 min"
+---
+
+<Phase type="activation">
+
+Your machine right now is **base camp before the climb**. Some gear is already in the pack; some isn't there yet.
+
+Don't picture this as "installed software." Picture a mountaineer crouched at the tent, pulling out carabiners, rope, crampons — checking each item in silence: present / missing / needs replacing.
+
+Run that image in your head: you're at the pack, lifting things out one by one. What's already there? What haven't you spotted yet? **What might fail you mid-route?**
+
+</Phase>
+
+<Phase type="reflection">
+
+Hold the moment when you arrived somewhere unfamiliar — a new city, a new job — and your first instinct was to scan the room: exits, landmarks, what's unclear.
+
+Don't frame this as "figuring out tools." Picture it as an **archaeological dig through an unknown layer**: the trowel goes in and you don't know yet whether you'll hit solid foundation or hollow ground.
+
+Run that layer by layer in your head — **what have you already uncovered, and what's still buried?** At the intersection of "unfamiliar ground" and "what I already know," the map appears: the gaps become visible before you feel them on the route.
+
+</Phase>
+
+<Phase type="concept">
+
+## What you need for agentic coding
+
+Think of it as **unboxing**. You've already picked your box — Mac or Windows (the 🍎/🪟 toggle at the top of the page). This unit opens it: we lay out the toolset and check each piece — what's already included, and what to install.
+
+The minimal stack for Claude Code:
+
+| Tool | Why | Check |
+|------------|-------|---------|
+| **Node.js 18+** | Runs JavaScript/TypeScript, required for the Claude Code CLI | `node --version` |
+| **Git** | Code versioning, commits, rolling back changes | `git --version` |
+| **Terminal** | Where everything happens | Working? |
+| **Claude Code** | The main agent — we install it in the next unit | — |
+
+### How to check your environment in one command
+
+```bash
+node --version && git --version && echo "Base environment ready ✓"
+```
+
+If there's an error — whichever tool isn't found is the one you need to install.
+
+### What to download if not installed
+
+- **Node.js:** nodejs.org → LTS button (Long Term Support)
+- **Git:** git-scm.com → download for your OS
+- **Warp (recommended terminal):** warp.dev — a modern terminal with AI hints
+
+> 💡 Warp is optional. VS Code's built-in terminal or your system terminal will also work.
+
+</Phase>
+
+<Phase type="practice">
+
+Run the check in your terminal:
+
+```bash
+node --version && git --version
+```
+
+If everything is installed — move on to the next unit.
+
+If something's missing — download from the official site and install it. After installing, check again.
+
+Save a screenshot of the working terminal to `my-experiments/u1-env-check.png`
+
+</Phase>

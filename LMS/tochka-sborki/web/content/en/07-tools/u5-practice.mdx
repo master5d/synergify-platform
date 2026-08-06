@@ -1,0 +1,91 @@
+---
+title: "Plug it in and test"
+unit: 5
+module: 7
+duration: "15 min"
+---
+
+<Phase type="activation">
+
+Run through the task list from u1 (my-experiments/u1-missing-tools.md) in your head.
+
+Don't see it as a wish list. Picture a surgeon before an operation: instruments laid out on the tray in strict order — scalpel, clamp, retractor — the right one at the right instant, no searching. You now have MCP, Hooks, Skills. Look at your list: which instrument goes onto the tray first?
+
+**Which task from the list now feels like an operation you're prepared for?**
+
+</Phase>
+
+<Phase type="reflection">
+
+You completed the whole course.
+
+Meeting 1: understood how to think about working with AI.
+Meeting 2: set up the tools.
+Meeting 3: learned to write prompts.
+Meeting 4: mastered context management.
+Meeting 5: built your first pipeline.
+Meeting 6: plugged in extensions.
+
+Don't think of this as "the finish line." Picture a chess grandmaster whose opening lines have sunk so deep into muscle memory that the first moves happen without thought — freeing the mind for the middlegame, where everything is decided. You've just drilled the opening into memory. Catch this in your head: what middlegame is waiting for you now?
+
+</Phase>
+
+<Phase type="concept">
+
+## Final architecture: an AI clone for a real task
+
+You can assemble a full specialized agent from:
+
+```
+CLAUDE.md          ← context: who you are and what you do
++ MCP server       ← access to needed tools (GitHub, Notion, browser)
++ Skill            ← reusable scenario for your task
++ Hook             ← automation after completion
+```
+
+### Example: Meeting Intelligence clone
+
+```
+CLAUDE.md: "You are a meeting assistant. Priority: structured outputs"
+MCP: Google Calendar (to fetch meetings)
+Skill: /meeting-summary (transcript → decisions + tasks)
+Hook: PostToolUse → send summary to Slack
+```
+
+### Example: Code Review clone
+
+```
+CLAUDE.md: "You are a senior developer. Focus: security and readability"
+MCP: GitHub (sees PRs and files)
+Skill: /code-review (analyze diff → find issues)
+Hook: Stop → auto-add a comment to the PR
+```
+
+## Next steps after the course
+
+1. **Build your first clone** — the one from meeting 1 you described in u3-my-clone.md
+2. **Share with coworkers** — export the skill and tell them how to install
+3. **Iterate** — improve one element each week
+
+</Phase>
+
+<Phase type="practice">
+
+Final course task:
+
+Pick one task from your list (u1-missing-tools.md or u3-my-clone.md from M1).
+
+Assemble a minimal clone for it:
+
+1. Update CLAUDE.md with context for this task
+2. Connect one MCP server (if needed)
+3. Create one Skill (reusable prompt)
+4. Optional: add a Hook for notifications
+
+Test it on a real task.
+
+Save the architecture to `my-experiments/u5-my-clone-v1.md`
+
+This is your first working AI clone. Congratulations.
+
+</Phase>

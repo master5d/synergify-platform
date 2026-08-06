@@ -1,0 +1,677 @@
+---
+title: "Cheatsheet"
+description: "Quick reference for Claude Code commands and patterns"
+order: 100
+duration: ""
+level: 0
+---
+# Claude Code Cheat Sheet
+
+A quick reference for working with Claude Code and prompt engineering.
+
+<OsToggle label="Commands for:" />
+
+> 💡 Your system is detected automatically — Mac- and Windows-specific commands are filtered to it. Switch above if you need the other.
+
+---
+
+## ⌨️ Hotkeys
+
+| Key | Action |
+| --- | --- |
+| `Ctrl+C` | Interrupt the current generation |
+| `Ctrl+D` | Exit Claude Code (EOF) |
+| `Ctrl+L` | Clear the screen (history kept) |
+| `Ctrl+O` | Open the multi-line editor |
+| `Ctrl+R` | Search prompt history |
+| `Ctrl+G` | Fuzzy-find files in the project (like fzf) |
+| `Ctrl+B` | Pick from changed git files |
+| `Ctrl+F` | Search the current conversation |
+| `Shift+Tab` | Toggle mode: Plan → Normal → Auto-accept |
+| `\+Enter` / `Ctrl+J` | New line without sending |
+| `Esc+Esc` | Cancel current input |
+| `/` at line start | Open slash-command autocomplete |
+| `!` at line start | Run a bash command from the prompt |
+| `@filename` | Add a file/folder to context |
+
+<OsBlock os="mac">
+
+**Mac-specific keys:**
+
+| Key | Action |
+| --- | --- |
+| `Option+P` | Quick-switch to Plan mode |
+| `Option+T` | Enable ultrathink (deep analysis) |
+| `Cmd+V` | Paste (supports images) |
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+**Windows-specific keys:**
+
+| Key | Action |
+| --- | --- |
+| `Alt+P` | Quick-switch to Plan mode |
+| `Alt+T` | Enable ultrathink (deep analysis) |
+| `Ctrl+V` | Paste (supports images) |
+
+</OsBlock>
+
+---
+
+## 🖥️ CLI: launch and flags
+
+```bash
+claude                          # Interactive mode
+claude "request"                # Launch with an initial request
+claude -p 'request'             # Pipe mode: response to stdout and exit
+claude -c                       # Resume the last session
+claude -r <id>                  # Resume session by ID
+claude update                   # Update Claude Code
+
+# Useful flags
+--model <model>                 # Specify model at launch
+--permission-mode plan          # Launch in read-only mode
+--worktree / -w                 # Isolated git worktree
+--no-auto-compact / -n          # Disable auto context compaction
+--add-dir <path>                # Add a folder to context
+--output-format json|text|stream-json
+--max-turns <N>                 # Turn limit in auto mode
+--max-budget-usd <N>            # Session budget in dollars
+--bare                          # Without CLAUDE.md and MCP (clean start)
+
+# Pipe mode — handy for scripts:
+cat error.log | claude -p 'explain the error'
+```
+
+---
+
+## 📋 Session management
+
+```bash
+/clear                  # Full context wipe
+/compact [topic]        # Compress context, keep the essentials
+/context                # Show context fill
+/resume                 # List recent sessions to resume
+/rename <name>          # Rename the session (handy for /resume)
+/branch                 # Create a session branch
+/cost                   # Current session cost ($, tokens)
+/diff                   # All file changes this session
+/copy                   # Copy the last response
+/export                 # Export the conversation to Markdown
+```
+
+**Decision tree /clear vs /compact:**
+
+| Situation | Command |
+| --- | --- |
+| Context &lt;70%, same task | `/compact` — compress, keep history |
+| Context &gt;85%, same task | `/compact` — time to compress |
+| New task, different topic | `/clear` — start fresh |
+| Claude is looping, getting confused | `/clear` — reset |
+| Context &gt;85% + new task | `/clear` — no question |
+
+> 💡 CLAUDE.md is **auto-reloaded** after /compact and auto-compact — instructions aren't lost.
+
+---
+
+## ⚙️ Settings
+
+```bash
+/config                         # Open settings.json in the editor
+/model <model>                  # Switch model in the session
+/fast                           # Switch to Haiku (fast/cheap)
+/effort low|medium|high         # Analysis depth (NEW)
+/permissions                    # View and configure permissions
+/vim                            # Enable vim editing mode
+/theme                          # Change color theme
+```
+
+**Permission modes:**
+
+| Mode | Behavior |
+| --- | --- |
+| `default` | Asks for files and bash |
+| `acceptEdits` | Auto-accepts file edits, asks for bash |
+| `plan` | Read-only, no changes |
+| `dontAsk` | Doesn't ask for allowed tools |
+| `bypassPermissions` | ⚠️ Full access without confirmation |
+
+---
+
+## 🔧 Tools and extensions
+
+```bash
+/init               # Create CLAUDE.md for the project
+/memory             # Open CLAUDE.md for editing
+/mcp                # Manage MCP servers
+/hooks              # Manage hooks
+/skills             # Manage skills
+/agents             # Manage agents
+/chrome             # Browser tools via MCP
+/reload-plugins     # Reload plugins without a restart
+```
+
+---
+
+## 🧩 Slash commands
+
+```bash
+/btw <text>         # Add context without interrupting work
+/plan               # Create a markdown task plan
+/loop               # Iterative loop until a condition is met
+/voice              # Voice input (Space = push-to-talk)
+/doctor             # Diagnostics: API keys, MCP, configs
+/rc                 # Open ~/.claude/rc.ts (launch settings)
+/remote-control     # Control via API (NEW)
+/pr-comments        # Load PR comments into context
+/stickers           # 🥚
+```
+
+---
+
+## 🧩 Plugins and skills
+
+```bash
+/plugin marketplace add <name>  # Install from the marketplace
+/plugin list                    # List installed
+/plugin enable/disable <name>   # Enable/disable a plugin
+/simplify                       # Simplify code
+/debug                          # Debug: error analysis
+/batch                          # Bulk file changes
+```
+
+**Skill locations:**
+- `.claude/skills/` — project skills
+- `~/.claude/skills/` — global skills
+- `.claude/agents/` — agents
+
+**Skill frontmatter:**
+```yaml
+---
+description: "What the skill does"
+allowed-tools: [Bash, Read, Write, mcp__github__*]
+model: claude-sonnet-4-20250514
+effort: medium          # low | medium | high (NEW)
+context: fork           # isolated context
+---
+# Skill body
+Task: $ARGUMENTS        # arguments are substituted here
+```
+
+---
+
+## 🤖 Agent parameters
+
+```yaml
+permissionMode: default|acceptEdits|plan|dontAsk|bypassPermissions
+isolation: none|worktree    # worktree = separate git worktree
+memory: path/to/MEMORY.md   # memory across runs
+background: true            # background run
+maxTurns: 10                # turn limit
+```
+
+**Which agent when:**
+
+| Agent | For what |
+| --- | --- |
+| `Explore` | Understand a codebase |
+| `Plan` | Complex task → plan first |
+| `General` | Delegate a subtask |
+| `Bash` | Shell scripts and CLI |
+
+---
+
+## 🌀 Ultrathink
+
+Activate deep thinking — trigger words in the prompt:
+
+```
+think → think hard → think harder → ultrathink
+```
+
+Or the `Alt+T` key. Useful for: architectural decisions, tough bugs, ambiguous specs.
+
+**Pattern Plan → Normal → Auto:**
+```
+1. Plan mode   → recon only, no changes
+2. Normal mode → implementation with confirmation
+3. Auto-accept → routine without confirmation (Shift+Tab)
+```
+
+---
+
+## 🔄 A typical day with Claude Code
+
+```
+9:00  [You] Thinking about strategy
+      └─→ 30 min of thinking, planning
+
+9:30  [Agent] Makes the first draft
+      └─→ Claude Code writes code/text
+
+10:00 [You] Reviewing the result
+      └─→ Review, feedback, clarifications
+
+10:15 [Agent] Refines based on feedback
+      └─→ Polished result
+
+10:30 [You] Publish/deploy
+      └─→ Final decision
+```
+
+---
+
+## 🏃 Quick start (5 minutes)
+
+<OsBlock os="mac">
+
+```bash
+# 1. Create and enter a project
+mkdir my-project && cd my-project
+
+# 2. Create context files
+touch CLAUDE.md TODO.md AGENTS.md
+
+# 3. Initialize CLAUDE.md
+claude
+/init       # ← inside Claude Code
+
+# 4. Or fill in manually:
+# Stack, how to run, agent instructions
+
+# 5. Give it the first task
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+# 1. Create and enter a project
+mkdir my-project; cd my-project
+
+# 2. Create context files (PowerShell)
+ni CLAUDE.md, TODO.md, AGENTS.md -ItemType File
+
+# 3. Initialize CLAUDE.md
+claude
+/init       # ← inside Claude Code
+
+# 4. Or fill in manually:
+# Stack, how to run, agent instructions
+
+# 5. Give it the first task
+```
+
+> 💡 Alternative via WSL/Git Bash: `mkdir my-project && cd my-project && touch CLAUDE.md TODO.md AGENTS.md`
+
+</OsBlock>
+
+---
+
+## 📝 Four shifts (Quick Ref)
+
+| Before | Now |
+| --- | --- |
+| ❌ "Install X" | ✅ "I need Y, the result is Z" |
+| ❌ First result is perfect | ✅ First result is a draft |
+| ❌ Commands | ✅ Specifications (briefs) |
+| ❌ I do everything | ✅ I manage attention |
+
+---
+
+## 📋 Structure of a good prompt
+
+<PromptAnatomy locale="en" />
+
+```markdown
+## Role
+You are — [description + expertise]
+
+## Task
+[Specific task]
+
+## Input
+[Input data]
+
+## Output
+[Expected result]
+
+## Constraints
+[Constraints]
+```
+
+---
+
+## 🎯 Delegation matrix
+
+### ✅ Delegate:
+- Routine operations (formatting, conversion)
+- First drafts (text, code)
+- Information lookup
+- Tests
+- Documentation
+
+### 🧠 Decide yourself:
+- Architecture
+- Final quality assessment
+- Strategic decisions
+- Ethical questions
+- Ambiguous tasks
+
+---
+
+## 📄 Required project files
+
+### CLAUDE.md
+
+**Quick start:**
+```bash
+/init  # Auto-generates CLAUDE.md from an existing project
+```
+
+**Where to put it:**
+- `./CLAUDE.md` — project (committed to git)
+- `~/.claude/CLAUDE.md` — personal (all projects)
+
+**Limit:** ~200 lines (important for context)
+
+**Minimal structure:**
+```markdown
+# Project Context
+## My role
+## Project
+## Stack
+## How to run
+## Instructions for Claude Code
+```
+
+### TODO.md
+```markdown
+# Tasks
+## 🔴 CRITICAL
+## 🟡 IMPORTANT
+## 🟢 LATER
+## ⏸️ BLOCKED
+## ✅ DONE
+```
+
+### AGENTS.md
+```markdown
+# Agent Instructions
+## For any work
+## For /explore
+## For /plan
+## For /code
+## What to avoid
+```
+
+---
+
+## ⚠️ Common mistakes
+
+| Mistake | Fix |
+| --- | --- |
+| Context overflowing | Only feed relevant files |
+| Agent asks everything | Add the info to CLAUDE.md |
+| Wrong result | Specify what exactly is off, iterate |
+| Distractors | Remove extra files from context |
+| "Lost in the Middle" | Important stuff at the start or end, not middle |
+
+---
+
+## 💡 Quick tips
+
+### What to use when
+
+**For analyzing a codebase:**
+```
+/explore --thoroughness medium
+```
+
+**For planning a big piece of work:**
+```
+/plan
+```
+
+**For quickly adding info:**
+```
+/btw Update the context: [info]
+```
+
+**For exploring a specific file:**
+```
+/explore --thoroughness quick
+"Which files are responsible for [X]?"
+```
+
+---
+
+## 🎯 Prompt quality check
+
+Before sending:
+
+- [ ] Role is clear?
+- [ ] Task is specific?
+- [ ] Data is complete?
+- [ ] Output is defined?
+- [ ] Constraints are clear?
+- [ ] No distractors?
+- [ ] Important stuff at the start/end?
+
+---
+
+## 🔢 Tokens
+
+```
+1 token ≈ 4 characters
+1000 tokens ≈ 750 words
+
+Cost:
+- Input token = cheaper
+- Output token = pricier (2–3×)
+
+Optimize:
+- Compress context
+- Strip the extra
+- Structure your data
+```
+
+### Advanced token tracking
+
+After Meeting 2 you can set up the **advanced status line** (see 02-setup-guide.md → "Advanced setup"):
+- Multi-line display with daily and weekly budget
+- Colored progress bars
+- Tracking new sessions vs continuation
+- Promotional discount support
+
+---
+
+## 🌍 Prompt examples
+
+### Backend request
+
+```markdown
+## Role
+You are a seasoned backend developer with 10 years of experience.
+You know Node.js, PostgreSQL, microservices.
+
+## Task
+Create a REST API endpoint for fetching the user list.
+
+## Input
+- Fields needed: id, name, email, created_at
+- Pagination support (page, limit)
+- Filtering by email
+
+## Output
+- Express route handler
+- TypeScript types
+- Example curl requests
+
+## Constraints
+- Use a PostgreSQL query builder (knex.js)
+- Max 50 lines of code
+- Add validation for query parameters
+```
+
+### Frontend request
+
+```markdown
+## Role
+You are a frontend developer, an accessibility specialist.
+
+## Task
+Create a React component for a product filter.
+
+## Input
+- Filters: category (checkbox), price (range), rating (radio)
+- Sample data in data.json
+
+## Output
+- React component Filter.tsx
+- Tailwind CSS styles
+- WCAG AA accessibility
+
+## Constraints
+- TypeScript
+- No UI libraries (pure CSS)
+- Keyboard navigation (Tab, Enter, Escape)
+```
+
+### Research request
+
+```markdown
+## Role
+You are a UX researcher experienced in user interviews.
+
+## Task
+Analyze interview.txt and find the main user pain points.
+
+## Input
+- File interview.txt with the interview recording
+
+## Output
+- Top 5 user problems
+- For each: description, quote, possible solution
+
+## Constraints
+- Max 1 page
+- Direct quotes from the interview only
+- Prioritize by frequency of mentions
+```
+
+---
+
+## 🔐 Git commands (quick)
+
+Same on both systems — Git is identical everywhere:
+
+```bash
+git status                          # Status
+git add .                           # Stage all files
+git commit -m "Description"         # Commit
+git push origin main                # Push
+git pull origin main                # Pull
+```
+
+---
+
+## 🖥️ Mac / Windows differences
+
+Where the commands actually diverge (everything else is identical):
+
+| Need | macOS / Linux | Windows (PowerShell) |
+| --- | --- | --- |
+| Create an empty file | `touch file.md` | `ni file.md -ItemType File` |
+| Create multiple | `touch a.md b.md c.md` | `ni a.md, b.md, c.md -ItemType File` |
+| Chain commands | `cmd1 && cmd2` | `cmd1; cmd2` (or `&&` on pwsh 7+) |
+| Pipe a file into Claude | `cat err.log \| claude -p ...` | `Get-Content err.log \| claude -p ...` |
+| Env variable | `export KEY=value` | `$env:KEY = "value"` |
+| Hotkey: Plan mode | `Option+P` | `Alt+P` |
+| Hotkey: ultrathink | `Option+T` | `Alt+T` |
+| Paste | `Cmd+V` | `Ctrl+V` |
+| Home `.claude` path | `~/.claude/` | `$env:USERPROFILE\.claude\` |
+
+<OsBlock os="windows">
+
+> 💡 **Tip for Windows devs:** install WSL2 + Git Bash so you can run bash commands from tutorials. PowerShell works too, but many AI blogs assume bash.
+
+</OsBlock>
+
+<OsBlock os="mac">
+
+> 💡 **Tip for Mac:** use iTerm2 or Warp instead of the stock Terminal — they pair better with Claude Code (patterns, colors, hotkeys).
+
+</OsBlock>
+
+---
+
+## 📊 Result check
+
+```markdown
+# Result is good if:
+- ✅ Code runs without fixes
+- ✅ Structure is clear
+- ✅ Usage examples included
+- ✅ Edge cases covered
+- ✅ Performance is acceptable
+
+# Result is bad if:
+- ❌ You have to finish by hand
+- ❌ Details from the prompt are lost
+- ❌ Hallucinations in the code
+- ❌ Lots of unnecessary code
+```
+
+---
+
+## 🎓 Going further
+
+```
+1. Run through all EXERCISES in EXERCISES.md
+2. Create your own prompt template
+3. Use it in real projects
+4. Record good prompts
+5. Share with your team
+```
+
+---
+
+## 📞 Quick help
+
+```bash
+claude --help       # All CLI flags
+/doctor             # Install diagnostics
+/context            # Context fill
+/cost               # Session cost
+/btw                # Add context without interrupting
+/plan               # Planning mode
+```
+
+---
+
+## 🔭 Where to look at real implementations
+
+When you need a working example rather than advice: two open catalogues of LLM apps, from simple bots to multi-agent systems. Both are in English, both alive (weekly commits), and the code is there to read and borrow.
+
+```
+awesome-llm-apps      github.com/Shubhamsaboo/awesome-llm-apps
+                      Apache-2.0 · RAG, AI agents, multi-agent teams, MCP, voice agents
+
+awesome-ai-apps       github.com/Arindam200/awesome-ai-apps
+                      MIT · hands-on examples, guides and recipes: from a chatbot to an agent
+```
+
+Look for structure, not snippets: where the agent's boundaries are, what got pushed into tools, how the result is measured.
+
+---
+
+**Last updated:** 2026-03-25
+
+> 💡 Interactive version with 141 cards + quiz mode: `tools/cheatsheet/index.html`
+
+*Use this cheatsheet for a quick start and quick reference.*
+

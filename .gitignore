@@ -1,0 +1,18 @@
+# Scratch / temp
+.tmp/
+.superpowers/
+
+# Diagnostic artifacts (Lighthouse runs, audit screenshots) — regenerated on demand
+docs/**/report.html
+docs/**/report.json
+docs/**/*.png
+
+# Архив исходников/référence-материалов курса (docx-опросники и т.п.) — не для VCS
+LMS/tochka-sborki/_archive/
+
+# Stray tool caches at repo root
+node_modules/
+
+# Личные заметки владельца под академию-манифест (репо PUBLIC — заметки не для VCS)
+academy/_notes/*
+!academy/_notes/README.md

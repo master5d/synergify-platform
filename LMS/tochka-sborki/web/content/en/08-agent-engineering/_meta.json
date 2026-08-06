@@ -1,0 +1,14 @@
+{
+  "module": 8,
+  "title": "Agent Engineering",
+  "description": "From vibe coding to orchestrating agent systems — where the prompt stops working",
+  "duration": "90 min",
+  "level": 8,
+  "units": [
+    { "slug": "u1-activation", "title": "When Prompts Stop Working" },
+    { "slug": "u2-jagged-intelligence", "title": "Jagged Intelligence: What to Delegate" },
+    { "slug": "u3-orchestration", "title": "Orchestration: ENERV Case Study" },
+    { "slug": "u4-production-infra", "title": "Prototype → Production" },
+    { "slug": "u5-practice", "title": "Design Your Clone" }
+  ]
+}

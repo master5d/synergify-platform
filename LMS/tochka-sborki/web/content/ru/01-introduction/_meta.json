@@ -1,0 +1,13 @@
+{
+  "module": 1,
+  "title": "Знакомство",
+  "description": "Software 3.0 и почему это меняет всё",
+  "duration": "30 мин",
+  "level": 1,
+  "units": [
+    { "slug": "u1-activation", "title": "Твой опыт с AI" },
+    { "slug": "u2-four-shifts", "title": "Четыре сдвига" },
+    { "slug": "u3-clones", "title": "Пять клонов" },
+    { "slug": "u4-practice", "title": "Первый промпт" }
+  ]
+}

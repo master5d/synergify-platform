@@ -1,0 +1,14 @@
+{
+  "module": 7,
+  "title": "Tools & Extensions",
+  "description": "MCP servers, Skills, Hooks and the Superpowers workflow",
+  "duration": "75 min",
+  "level": 7,
+  "units": [
+    { "slug": "u1-activation", "title": "What's Claude Code missing?" },
+    { "slug": "u2-mcp", "title": "MCP: superpowers through a protocol" },
+    { "slug": "u3-hooks", "title": "Hooks: event automation" },
+    { "slug": "u4-skills", "title": "Skills: modular capabilities" },
+    { "slug": "u5-practice", "title": "Plug it in and test" }
+  ]
+}

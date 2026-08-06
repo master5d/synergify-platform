@@ -1,0 +1,13 @@
+{
+  "module": 6,
+  "title": "Automation Pipeline",
+  "description": "Build your first practical workflow",
+  "duration": "60 min",
+  "level": 6,
+  "units": [
+    { "slug": "u1-activation", "title": "The info you process by hand" },
+    { "slug": "u2-pipeline-theory", "title": "Trigger → Action model" },
+    { "slug": "u3-build", "title": "Build your pipeline" },
+    { "slug": "u4-reflect", "title": "What to automate next?" }
+  ]
+}

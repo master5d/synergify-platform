@@ -1,0 +1,178 @@
+---
+title: "Установка инструментов"
+unit: 2
+module: 2
+duration: "15 мин"
+---
+
+<Phase type="activation">
+
+Окружение проверено. Теперь — **обустройство мастерской**.
+
+Не представляй это как «установку программы». Представь шеф-повара перед сменой: каждый нож — на своём месте, мизанплас собран, соусы подготовлены. Ничего лишнего. Всё — под руку.
+
+Прокрути в голове этот образ: ты стоишь у рабочего стола до того, как первый гость пришёл. **Что должно быть под рукой, чтобы не тормозить на полпути?** Удержи этот вопрос — он оживёт, когда инструменты встанут на место.
+
+</Phase>
+
+<Phase type="reflection">
+
+Прочувствуй, как ощущается инструмент, который настроен **именно под тебя**: гитара с нужным строем, велосипед с отрегулированным седлом.
+
+Не думай об этом как «я установил Claude Code». Представь это как **настройку инструмента перед концертом**: чуть выше, чуть ниже — и звук либо режет ухо, либо ложится точно.
+
+Прокрути в голове: твой Claude Code — он сейчас в каком строе? **Что нужно подтянуть, чтобы он звучал на твоей волне, а не на чужой?**
+
+</Phase>
+
+<Phase type="concept">
+
+<OsToggle />
+
+## ⚡ Быстрая установка (одной строкой)
+
+Хочешь сразу рабочую лабораторию — выполни одну команду в терминале. Она поставит Node.js, Git и Claude Code и проверит результат. Если что-то пойдёт не так — ниже есть пошаговый путь.
+
+<OsBlock os="mac">
+
+```bash
+curl -fsSL https://ai.synergify.com/install.sh | bash
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+irm https://ai.synergify.com/install.ps1 | iex
+```
+
+</OsBlock>
+
+> 💡 На Linux работает та же команда, что и для Mac (`curl … | bash`).
+
+После установки открой **новый** терминал и запусти `claude`. Дальше — ручной путь, если хочешь понять каждый шаг.
+
+## Установка Claude Code
+
+Claude Code — это CLI (command-line interface), агент который работает прямо в терминале.
+
+### Установка
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+> 💡 `npm install -g` одинаково работает в bash и в PowerShell.
+
+### Проверка
+
+```bash
+claude --version
+claude --help
+```
+
+### Первый запуск
+
+<OsBlock os="mac">
+
+```bash
+cd ~/Documents
+claude
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+cd $HOME\Documents
+claude
+```
+
+</OsBlock>
+
+Claude Code откроет интерактивную сессию. Первый раз попросит войти через браузер.
+
+### Git: базовая конфигурация
+
+Команды одинаковы на всех системах:
+
+```bash
+git config --global user.name "Твоё имя"
+git config --global user.email "твоя@почта.com"
+
+# Проверь:
+git config --global user.name
+```
+
+### Полезные настройки терминала
+
+<OsBlock os="mac">
+
+```bash
+# Добавь в ~/.bashrc или ~/.zshrc — полезные алиасы
+alias ll='ls -lah'
+alias gst='git status'
+alias gp='git push'
+```
+
+> 💡 После добавления алиасов: `source ~/.bashrc` (или перезапусти терминал).
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+PowerShell использует профиль вместо `.bashrc`. Открой файл профиля:
+
+```powershell
+# Создать, если ещё нет
+if (!(Test-Path $PROFILE)) { ni $PROFILE -ItemType File -Force }
+# Открыть в редакторе
+notepad $PROFILE
+```
+
+Добавь функции (PowerShell не любит алиасы с параметрами, поэтому используем функции):
+
+```powershell
+function gst { git status }
+function gp  { git push }
+function ll  { Get-ChildItem -Force }
+```
+
+> 💡 После сохранения: `. $PROFILE` (точка-пробел) или перезапусти PowerShell.
+
+</OsBlock>
+
+</Phase>
+
+<Phase type="practice">
+
+Выполни по порядку:
+
+1. Установи Claude Code: `npm install -g @anthropic-ai/claude-code`
+2. Проверь: `claude --version`
+3. Настрой Git: `git config --global user.name "Твоё имя"`
+4. Запусти Claude Code в любой папке:
+
+<OsBlock os="mac">
+
+```bash
+cd ~/Documents && claude
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+cd $HOME\Documents; claude
+```
+
+</OsBlock>
+
+Когда Claude Code откроется — задай ему вопрос: `«Что ты умеешь делать?»`
+
+Сохрани скриншот ответа в `my-experiments/u2-claude-first-run.png`
+
+</Phase>

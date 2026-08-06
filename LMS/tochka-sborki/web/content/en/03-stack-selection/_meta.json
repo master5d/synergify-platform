@@ -1,0 +1,14 @@
+{
+  "module": 3,
+  "title": "Stack selection",
+  "description": "Which agentic stack fits your context: Claude Code, Sovereign, Cloud-OSS or Behind-GFW",
+  "duration": "60 min",
+  "level": 3,
+  "units": [
+    { "slug": "u1-activation", "title": "What are your constraints?" },
+    { "slug": "u2-stack-matrix", "title": "Matrix of 4 stacks" },
+    { "slug": "u3-behind-gfw", "title": "Behind Great Firewall: no VPN" },
+    { "slug": "u4-hermes-sovereign", "title": "Hermes + local stack" },
+    { "slug": "u5-migrate", "title": "Migration plan for your workflow" }
+  ]
+}

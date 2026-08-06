@@ -1,0 +1,135 @@
+---
+title: "The memory system"
+unit: 3
+module: 5
+duration: "12 min"
+---
+
+> 💡 **Not just Claude Code.** `CLAUDE.md` is one implementation of the "persistent context file" pattern. In Aider it's `.aider.conf.yml` + `CONVENTIONS.md`, in Hermes — the DeepVista skill schema, in Cline — `.clinerules`. The concept is universal: context lives in a file, the agent reads it at session start.
+
+<Phase type="activation">
+
+When you start a new Claude Code session — what do you re-explain every time?
+
+Don't think of it as "instructions" — picture it as **a tree's growth rings**: every season leaves its mark directly in the wood — drought, growth, frost — all encoded into the structure, not stored in a separate archive. The tree doesn't "remember" last year; it's made of it.
+
+Run your work with the agent through your head: what from your experience has already grown into the project's structure? What hasn't taken root yet — still spoken aloud each time, as if for the first time?
+
+</Phase>
+
+<Phase type="reflection">
+
+Explaining the same thing every time burns time and tokens.
+
+But there's the opposite problem too: a CLAUDE.md with a thousand lines is worse than one with 100 lines. The longer it is, the worse the agent follows instructions.
+
+Don't picture this as a short summary — picture yourself as **a weaver at the loom**: the warp threads are pulled taut and precise — that tension is what holds the whole fabric. Add too many threads at once and the cloth sags, the loops tangle.
+
+Notice your memory system: where is the tension just right, and where is it already sagging under extra threads? What holds the shape, and what loosens the weave?
+
+</Phase>
+
+<Phase type="concept">
+
+## Three memory files
+
+### CLAUDE.md — project context (the main one)
+
+```markdown
+# Project Context
+
+## My role
+[Profile, expertise]
+
+## Project
+[What this is, why it exists]
+
+## Stack
+- Node.js 18, TypeScript, React
+
+## Structure
+- /src — code
+- /tests — tests
+
+## How to run
+npm install && npm run dev
+
+## What to delegate
+- Writing code, tests, docs
+
+## What I decide myself
+- Architecture, final review
+```
+
+**Limit: ~200 lines.** More than that and instruction-following degrades.
+
+### TODO.md — current tasks
+
+```markdown
+## 🔴 NOW
+- [ ] Task 1 (2 h)
+
+## 🟡 NEXT
+- [ ] Task 2
+
+## ✅ DONE
+- [x] Task 3
+```
+
+### AGENTS.md — instructions for the agent
+
+```markdown
+## For any task
+- Use TypeScript
+- Write tests alongside code
+
+## For /explore
+- Focus on architecture
+
+## What to avoid
+- Don't change architecture without sign-off
+```
+
+### MEMORY.md — Claude's auto-memory
+
+Unlike the three files above, Claude **writes MEMORY.md itself**.
+
+What it saves: patterns, fixes, project quirks.
+Where it lives: `~/.claude/projects/<hash>/memory/` — local only.
+Management: `/memory` — view and edit.
+
+</Phase>
+
+<Phase type="practice">
+
+Create your memory system:
+
+<OsBlock os="mac">
+
+```bash
+mkdir -p ~/my-ai-project
+cd ~/my-ai-project
+touch CLAUDE.md TODO.md AGENTS.md
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+New-Item -ItemType Directory $HOME\my-ai-project -Force
+cd $HOME\my-ai-project
+ni CLAUDE.md, TODO.md, AGENTS.md -ItemType File
+```
+
+</OsBlock>
+
+Fill in CLAUDE.md using the template above — use a real project or a task from your work.
+
+Add at least 3 tasks to TODO.md that you actually have right now.
+
+Launch Claude Code and ask: `"What do you know about my project?"`
+
+Save the answer to `my-experiments/u3-memory-test.md`
+
+</Phase>

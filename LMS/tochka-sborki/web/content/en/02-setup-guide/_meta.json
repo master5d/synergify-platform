@@ -1,0 +1,12 @@
+{
+  "module": 2,
+  "title": "Setup",
+  "description": "Setting up your workspace for agentic coding",
+  "duration": "45 min",
+  "level": 2,
+  "units": [
+    { "slug": "u1-env-check", "title": "Environment check" },
+    { "slug": "u2-install", "title": "Installing the tools" },
+    { "slug": "u3-first-project", "title": "Your first project" }
+  ]
+}

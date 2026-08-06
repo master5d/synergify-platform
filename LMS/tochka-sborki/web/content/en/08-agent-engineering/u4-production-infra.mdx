@@ -1,0 +1,127 @@
+---
+title: "Prototype → Production"
+unit: 4
+module: 8
+duration: "20 min"
+---
+
+<Phase type="activation">
+
+A prototype agent that runs on your laptop is **20% of the work**.
+
+Don't picture this as "code you still need to write" — picture it as **the city's grid under the asphalt**: the substation, the cables, the mains, the valves. A passerby sees only the sidewalk. But the lights in your apartment stay on because the invisible infrastructure beneath is doing its job — and it's precisely what keeps them from going dark while you sleep.
+
+Run it in your head: what in your agent keeps the lights on when you're not around — and what's the first thing that trips when the voltage dips?
+
+</Phase>
+
+<Phase type="reflection">
+
+Production infrastructure for agent systems has 5 building blocks:
+
+1. **Execution** — where and how it runs
+2. **Observability** — how you see what's happening
+3. **Reliability** — what to do when things break
+4. **Cost control** — how not to go broke
+5. **Security** — who has access
+
+The vibe coder usually thinks only about (1). The agent engineer thinks about all five.
+
+Don't picture this as "a list of settings" — picture it as a **hydroelectric dam**: all you see is the wall, but the real work lives in the floodgates, the water-level sensors, the emergency spillways nobody notices until a flood comes. Those are what keep the city dry.
+
+Each of the five blocks is one such gate. While everything is calm — it's invisible. What happens when the first gate on your agent fails?
+
+</Phase>
+
+<Phase type="concept">
+
+**SOVERN — production stack for agent pipelines**
+
+Configuration:
+- **Server:** Hetzner CX22 (Ubuntu, ~4GB RAM, ~€5/mo)
+- **Network edge:** Cloudflare Tunnel — public domains with no open ports
+- **Containers:** n8n (orchestration), Langfuse v2 (traces), Postgres, cloudflared
+- **Bridge network:** `sovern-net` — internal names `enerv-n8n`, `enerv-logs`
+
+**Rakes that cost me days of debugging** (save these, no need to step on them yourself):
+
+**Rake 1: Double cloudflared = 502 flapping**
+> I ran cloudflared both via systemd on the host and as a Docker container — with the same tunnel token. CF was load-balancing between them, the host-side one couldn't see Docker DNS (systemd-resolved doesn't know about the bridge), and I got random 502s.
+> **Rule:** one tunnel — one process. Keep cloudflared **inside** the same Docker network as the origins.
+
+**Rake 2: Public IP as tunnel origin**
+> I routed `n8n.synergify.com` → `91.99.62.63:5678`. That's a hairpin through the public network — extra hop, extra latency, potential timeouts.
+> **Rule:** in the tunnel config, origin = Docker hostname (`http://enerv-n8n:5678`) or `host.docker.internal`.
+
+**Rake 3: Langfuse v3 without ClickHouse**
+> Langfuse v3 requires ClickHouse + Redis (~2GB extra RAM). On a CX22 that's death. Pin the v2 tag explicitly.
+> **Rule:** read release notes for resource requirements **before** upgrading.
+
+**Rake 4: n8n API doesn't work from outside**
+> `curl https://n8n.synergify.com/api/v1` from the outside returns 200, but Python `urllib` gets 403 (apparently, CF challenge headers). Scripts that hit the n8n API have to run **on the server itself**, against `http://localhost:5678/api/v1`.
+> **Rule:** for management — SSH + local URL. The public URL is for the UI only.
+
+**Helper for long-running scripts:**
+
+```bash
+# /usr/local/bin/run_bg on the server
+run_bg /tmp/my-script.py
+# Runs via nohup, detaches from the SSH session
+# Logs: /root/sovern/logs/my-script_YYYYMMDD_HHMMSS.log
+# Returns the PID and log path
+```
+
+This solves "closed SSH — script died." Any script >30 seconds — through `run_bg`.
+
+**Pattern: 5-fallback LLM routing**
+
+In the LiteLLM config for my stack:
+
+```yaml
+model_list:
+  - anthropic/claude-sonnet      # primary
+  - openai/gpt-4o                # fallback 1
+  - google/gemini-flash          # fallback 2
+  - groq/llama-3-70b             # fallback 3 (fast/cheap)
+  - openai/router.huggingface.co # fallback 4 (free)
+```
+
+When the first provider goes down — the next one catches the call. This is **reliability** at the infra layer, not the prompt layer.
+
+**Observability via Langfuse:**
+
+Every LLM call from my agents automatically lands in Langfuse: input, output, cost, latency, which model worked, which one died. Two weeks later you can drop in and see **what exactly AI replied** for a specific email at 03:47 in the morning.
+
+Without that — you're a blind engineer.
+
+</Phase>
+
+<Phase type="practice">
+
+For your workflow from unit 3, answer:
+
+**Execution:**
+- Where does it run? (your laptop? server cron? n8n trigger?)
+- What if the run lands at a moment when the machine is off?
+
+**Observability:**
+- If step 4 failed 3 days ago — how do you find out?
+- How do you see what the LLM actually replied?
+
+**Reliability:**
+- What to do if the LLM provider returned a 500?
+- What if input arrived in an unexpected format (broken JSON, emoji in filename)?
+
+**Cost:**
+- How many LLM calls per day in the worst case?
+- What happens if the bill starts multiplying (e.g., a retry loop)?
+
+**Security:**
+- Where are the API keys stored?
+- What would another person see if they got access to the laptop/server?
+
+This is a **production readiness checklist**. Save your answers to `my-experiments/u4-readiness.md`.
+
+If you answered "no idea / didn't think about it" to every question — that's not a failure, that's **the time to think about it now**. Better on paper now than at 2 AM in a production incident.
+
+</Phase>

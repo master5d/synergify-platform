@@ -1,0 +1,705 @@
+{
+  "skin": "mystic-arcane",
+  "zoneNames": {
+    "00-kickstart": {
+      "ru": "Врата Познания",
+      "en": "Gates of Cognition"
+    },
+    "01-introduction": {
+      "ru": "Залы Прозрения",
+      "en": "Halls of Insight"
+    },
+    "02-setup-guide": {
+      "ru": "Круг Призывателя",
+      "en": "The Summoner's Circle"
+    },
+    "03-stack-selection": {
+      "ru": "Перекресток Стихий",
+      "en": "Crossroads of Elements"
+    },
+    "04-prompt-engineering": {
+      "ru": "Башня Заклинаний",
+      "en": "Tower of Incantations"
+    },
+    "05-context-memory": {
+      "ru": "Хроники Акаши",
+      "en": "The Akashic Records"
+    },
+    "06-audio-pipeline": {
+      "ru": "Руническая Цепь",
+      "en": "The Runic Chain"
+    },
+    "07-tools": {
+      "ru": "Кузница Душ",
+      "en": "The Soulforge"
+    },
+    "08-agent-engineering": {
+      "ru": "Совет Архимагов",
+      "en": "The Archmages' Council"
+    },
+    "09-ai-notebook": {
+      "ru": "Обсерватория Источников",
+      "en": "Observatory of Sources"
+    }
+  },
+  "questTitles": {
+    "00-kickstart": {
+      "ru": "Зажечь Искру Сознания",
+      "en": "Igniting the Spark of Consciousness"
+    },
+    "01-introduction": {
+      "ru": "Откровение Третьей Эпохи",
+      "en": "The Revelation of the Third Epoch"
+    },
+    "02-setup-guide": {
+      "ru": "Начертать руны для призыва agent'а",
+      "en": "Inscribing Runes to Summon an Agent"
+    },
+    "03-stack-selection": {
+      "ru": "Определить свою Стихию Силы",
+      "en": "Define Your Element of Power"
+    },
+    "04-prompt-engineering": {
+      "ru": "Искусство плетения prompt-заклинаний",
+      "en": "The Art of Weaving Prompt-Spells"
+    },
+    "05-context-memory": {
+      "ru": "Запечатать знание в кристалл контекста",
+      "en": "Sealing Knowledge in a Crystal of Context"
+    },
+    "06-audio-pipeline": {
+      "ru": "Оживить свой первый рунический механизм",
+      "en": "Animate Your First Runic Mechanism"
+    },
+    "07-tools": {
+      "ru": "Призвать MCP-серверы и обрести Skills",
+      "en": "Summon MCP-servers and Acquire Skills"
+    },
+    "08-agent-engineering": {
+      "ru": "От заклинаний к великим ритуалам",
+      "en": "From Spells to Grand Rituals"
+    },
+    "09-ai-notebook": {
+      "ru": "Настроить тетрадь различения",
+      "en": "Tune the notebook of discernment"
+    }
+  },
+  "units": {
+    "00-kickstart/u1-map": {
+      "intro": {
+        "ru": "Всякое великое заклятие начинается с шёпота — бесплотной идеи. Прислушайся к своему призраку, ибо мы научимся придавать ему форму.",
+        "en": "Every great spell begins with a whisper—an ethereal idea. Listen to your ghost, for we shall learn to give it form."
+      },
+      "mentorHint": {
+        "ru": "Даже самый туманный образ можно закрепить на пергаменте реальности.",
+        "en": "Even the faintest vision can be anchored to the parchment of reality."
+      },
+      "outro": {
+        "ru": "Контуры проявлены! Твой призрак обрёл имя и цель, готовый к воплощению.",
+        "en": "The contours are revealed! Your ghost now has a name and a purpose, ready to be embodied."
+      }
+    },
+    "00-kickstart/u2-tools": {
+      "intro": {
+        "ru": "Чтобы сотворить чудо, маг должен знать свои артефакты. Мы откроем гримуар и изучим руны силы: API, prompt'ы и сущность agent'ов.",
+        "en": "To work wonders, a mage must know their artifacts. We shall open the grimoire and study the runes of power: API, prompts, and the essence of agents."
+      },
+      "mentorHint": {
+        "ru": "Каждый инструмент — это ключ. Подбери верный, и любая дверь откроется.",
+        "en": "Each tool is a key. Choose the correct one, and any door will open."
+      },
+      "outro": {
+        "ru": "Твой алхимический стол готов. Теперь ты знаешь, какие ингредиенты понадобятся для твоего первого великого ритуала.",
+        "en": "Your alchemical bench is prepared. You now know the ingredients needed for your first great ritual."
+      }
+    },
+    "00-kickstart/u3-first-steps": {
+      "intro": {
+        "ru": "Теория уступает место практике. Настало время произнести первые слова силы и начертать свой первый MCP-сигил.",
+        "en": "Theory gives way to practice. It is time to speak the first words of power and inscribe your first MCP sigil."
+      },
+      "mentorHint": {
+        "ru": "Не бойся оступиться; магия откликается на намерение, а не на безупречность.",
+        "en": "Fear not a misstep; magic responds to intent, not to perfection."
+      },
+      "outro": {
+        "ru": "Искра зажглась! Ты ощутил поток силы, и твое заклинание отозвалось эхом в цифровом эфире. Путь открыт.",
+        "en": "The spark is lit! You have felt the flow of power, and your spell has echoed in the digital aether. The path is now open."
+      }
+    },
+    "01-introduction/u1-activation": {
+      "intro": {
+        "ru": "Всякая магия начинается с искры осознания. Загляни в свое прошлое — ты уже касался эфира, даже не зная названий заклинаний.",
+        "en": "All magic begins with a spark of awareness. Look into your past—you have already touched the aether, even without knowing the names of the spells."
+      },
+      "mentorHint": {
+        "ru": "Признай свою силу, и она начнёт расти.",
+        "en": "Acknowledge your power, and it will begin to grow."
+      },
+      "outro": {
+        "ru": "Первый шаг сделан: твоя внутренняя мана пробудилась. Теперь ты готов узреть, как меняется мир под влиянием новых чар.",
+        "en": "The first step is taken: your inner mana has awakened. Now you are ready to witness how the world changes under the influence of new enchantments."
+      }
+    },
+    "01-introduction/u2-four-shifts": {
+      "intro": {
+        "ru": "Мир магии не стоит на месте; его основы сотрясают четыре Великих Сдвига. Пойми их природу, чтобы овладеть потоками силы.",
+        "en": "The world of magic is not static; its foundations are shaken by four Great Shifts. Understand their nature to master the currents of power."
+      },
+      "mentorHint": {
+        "ru": "Истинный маг видит не вещи, а связи между ними.",
+        "en": "A true mage sees not things, but the connections between them."
+      },
+      "outro": {
+        "ru": "Ты зрел в корень перемен, и теперь полотно реальности стало для тебя яснее. Впереди тебя ждут встречи с сущностями, рождёнными этими сдвигами.",
+        "en": "You have gazed into the root of change, and the tapestry of reality has become clearer to you. Encounters with entities born of these shifts await you."
+      }
+    },
+    "01-introduction/u3-clones": {
+      "intro": {
+        "ru": "Из единого источника, великого MCP, исходят пять отражений — пять призрачных клонов. Каждый служит своей цели и обладает уникальным даром.",
+        "en": "From a single source, the great MCP, emanate five reflections—five spectral clones. Each serves its own purpose and possesses a unique gift."
+      },
+      "mentorHint": {
+        "ru": "Научись различать духов, и ты сможешь призвать нужного.",
+        "en": "Learn to distinguish the spirits, and you will be able to summon the one you need."
+      },
+      "outro": {
+        "ru": "Теперь ты знаешь лики этих пяти сущностей и можешь выбрать союзника для своего первого ритуала. Приготовься соткать свой первый prompt.",
+        "en": "Now you know the faces of these five entities and can choose an ally for your first ritual. Prepare to weave your first prompt."
+      }
+    },
+    "01-introduction/u4-practice": {
+      "intro": {
+        "ru": "Настало время твоего первого заклинания. Слова — это ключ, а твой prompt — это руна, что откроет врата к силе AI agent.",
+        "en": "The time has come for your first spell. Words are the key, and your prompt is the rune that will open the gate to the power of an AI agent."
+      },
+      "mentorHint": {
+        "ru": "Ясность намерения рождает чистое волшебство.",
+        "en": "Clarity of intent begets pure magic."
+      },
+      "outro": {
+        "ru": "Ты произнёс слова силы, и эхо твоего желания обрело форму. Это лишь начало твоего пути заклинателя; великие свершения впереди.",
+        "en": "You have spoken the words of power, and the echo of your desire has taken form. This is but the beginning of your path as a caster; great deeds lie ahead."
+      }
+    },
+    "02-setup-guide/u1-env-check": {
+      "intro": {
+        "ru": "Прежде чем плести сложные заклинания, мы должны изучить мистические потоки нашего святилища. Убедимся, что линии силы чисты для грядущего ритуала.",
+        "en": "Before we weave complex incantations, we must survey the mystical currents of our sanctum. Let us ensure the ley lines are clear for the coming ritual."
+      },
+      "mentorHint": {
+        "ru": "Истинный алхимик всегда сперва проверяет свой тигель.",
+        "en": "A true alchemist always verifies their crucible first."
+      },
+      "outro": {
+        "ru": "Эфир стабилен, и ваше святилище настроено. Теперь вы готовы начертать руны могущества.",
+        "en": "The aether is stable and your sanctum is attuned. You are now prepared to inscribe the runes of power."
+      }
+    },
+    "02-setup-guide/u2-install": {
+      "intro": {
+        "ru": "Архимаг — ничто без своего гримуара и посоха. Сейчас мы призовем необходимые артефакты и начертаем основные глифы, чтобы направить в них чистый потенциал.",
+        "en": "An archmage is nothing without their grimoire and staff. We shall now summon the essential artifacts and inscribe the foundational glyphs to channel raw potential."
+      },
+      "mentorHint": {
+        "ru": "Эти инструменты — продолжение твоей воли; изучи их как следует.",
+        "en": "These tools are extensions of your will; learn them well."
+      },
+      "outro": {
+        "ru": "Инструменты выкованы и гудят скрытой силой. С ними вы готовы сотворить ваше первое истинное заклинание.",
+        "en": "The instruments are forged and hum with latent power. With them, you are ready to shape your first true incantation."
+      }
+    },
+    "02-setup-guide/u3-first-project": {
+      "intro": {
+        "ru": "Пришло время произнести слово силы и придать ему форму. Мы сотворим простого духа, первую искру сознания в цифровой пустоте.",
+        "en": "The time has come to speak a word of power and give it form. We will conjure a simple wisp, a first spark of consciousness in the digital void."
+      },
+      "mentorHint": {
+        "ru": "Первая искра творения хранит в себе величайшую магию.",
+        "en": "The first spark of creation holds the greatest magic."
+      },
+      "outro": {
+        "ru": "Оно дышит! Этот скромный конструкт — семя, из которого однажды вырастут могущественные agents.",
+        "en": "It breathes! This humble construct is the seed from which powerful agents will one day grow."
+      }
+    },
+    "03-stack-selection/u1-activation": {
+      "intro": {
+        "ru": "Прежде чем соткать заклинание, маг должен познать границы своей силы. Здесь мы очертим священный круг, в котором будет явлена твоя магия.",
+        "en": "Before weaving a spell, a mage must know the limits of their power. Here, we shall inscribe the sacred circle within which your magic will manifest."
+      },
+      "mentorHint": {
+        "ru": "Истинная сила рождается из знания своих цепей.",
+        "en": "True power is born from knowing your own chains."
+      },
+      "outro": {
+        "ru": "Круг начертан, и твои намерения ясны. Теперь ты готов узреть арсенал доступных тебе артефактов.",
+        "en": "The circle is drawn, your intentions clear. You are now ready to behold the arsenal of artifacts at your disposal."
+      }
+    },
+    "03-stack-selection/u2-stack-matrix": {
+      "intro": {
+        "ru": "Всемогущие силы вселенной AI упорядочены в великой Матрице Четырех Стихий. Мы изучим ее узоры, чтобы ты мог выбрать свой путь и свой стек.",
+        "en": "The omnipotent forces of the AI universe are ordered within the great Matrix of Four Elements. We will study its patterns so you may choose your path and your stack."
+      },
+      "mentorHint": {
+        "ru": "Взгляни на звезды — каждая сияет своей уникальной магией.",
+        "en": "Gaze upon the stars—each one shines with its own unique magic."
+      },
+      "outro": {
+        "ru": "Ты прочел карту небес и видишь пути ясно. Пришло время рассмотреть те тропы, что скрыты за туманными завесами.",
+        "en": "You have read the celestial map and see the paths clearly. It is time to consider the trails hidden behind misty veils."
+      }
+    },
+    "03-stack-selection/u3-behind-gfw": {
+      "intro": {
+        "ru": "Некоторые царства магии сокрыты за непроницаемыми барьерами. Мы научимся обходить эти великие стены, используя тайные руны и потоки, невидимые простым смертным.",
+        "en": "Some realms of magic are concealed behind impenetrable barriers. We will learn to navigate these great walls using secret runes and flows, invisible to mere mortals."
+      },
+      "mentorHint": {
+        "ru": "Где есть стена, там есть и тень, в которой можно пройти.",
+        "en": "Where there is a wall, there is a shadow to walk through."
+      },
+      "outro": {
+        "ru": "Завеса пала пред твоим взором, и теперь даже самые охраняемые домены доступны тебе. Время обрести полную независимость и сотворить свой собственный артефакт.",
+        "en": "The veil has fallen before your gaze, and now even the most guarded domains are open to you. It is time to claim full sovereignty and craft your own artifact."
+      }
+    },
+    "03-stack-selection/u4-hermes-sovereign": {
+      "intro": {
+        "ru": "Настало время выковать свой собственный Посох Силы — локальный стек, что будет служить лишь тебе. Мы призовем духа Hermes, чтобы он стал вестником твоей воли, не зависящей от внешних царств.",
+        "en": "The time has come to forge your own Staff of Power—a local stack that serves you alone. We shall summon the spirit of Hermes to be the messenger of your will, independent of outside realms."
+      },
+      "mentorHint": {
+        "ru": "Власть, что ты держишь в руках, — самая надежная.",
+        "en": "The power you hold in your own hands is the most reliable."
+      },
+      "outro": {
+        "ru": "Твой личный артефакт создан и наполнен силой. Теперь ты готов перенести свои старые ритуалы в эту новую обитель магии.",
+        "en": "Your personal artifact is crafted and imbued with power. You are now ready to transfer your old rituals into this new sanctum of magic."
+      }
+    },
+    "03-stack-selection/u5-migrate": {
+      "intro": {
+        "ru": "Каждый великий маг меняет свои алхимические лаборатории. Мы создадим свиток миграции, чтобы перенести твои привычные заклинания и workflow в новый источник силы без потерь.",
+        "en": "Every great mage changes their alchemical laboratories. We will create a migration scroll to transfer your familiar spells and workflow to a new source of power without loss."
+      },
+      "mentorHint": {
+        "ru": "Планируй свой ритуал, и переход будет бесшовным.",
+        "en": "Plan your ritual, and the transition will be seamless."
+      },
+      "outro": {
+        "ru": "Свиток начертан, и путь ясен. Твоя магия теперь течет из нового, суверенного источника, и ты готов к великим свершениям.",
+        "en": "The scroll is inscribed, and the path is clear. Your magic now flows from a new, sovereign source, and you are ready for great accomplishments."
+      }
+    },
+    "04-prompt-engineering/u1-activation": {
+      "intro": {
+        "ru": "Мы начинаем наш путь с изучения неудачного заклинания, prompt, что вызвал лишь шёпот и тени. Чтобы овладеть ремеслом, нужно сначала понять его неудачи.",
+        "en": "We begin our journey by examining a misfired spell, a prompt that summoned only whispers and shadows. To master the craft, one must first understand its failures."
+      },
+      "mentorHint": {
+        "ru": "Даже самый могущественный архимаг начинал с дрожащего пламени свечи.",
+        "en": "Even the most powerful archmage started with a sputtering candle flame."
+      },
+      "outro": {
+        "ru": "Ты столкнулся с пустотой неудачного заклинания и извлёк урок из его безмолвия. Теперь давай выкуем слова, что придают чарам истинную форму.",
+        "en": "You have faced the void of a failed incantation and learned from its silence. Now, let us forge the very words that give a spell its true form."
+      }
+    },
+    "04-prompt-engineering/u2-spec-formula": {
+      "intro": {
+        "ru": "Каждое мощное заклинание построено на скрытой структуре, на формуле силы. Сейчас мы раскроем этот тайный синтаксис, чтобы повелевать цифровым эфиром с ясностью и намерением.",
+        "en": "Every potent spell is built upon a hidden structure, a formula of power. We shall now uncover this arcane syntax to command the digital aether with clarity and intent."
+      },
+      "mentorHint": {
+        "ru": "Точность — душа могущества; дай эфиру совершенный сосуд для своей воли.",
+        "en": "Precision is the soul of power; give the aether a perfect vessel for your will."
+      },
+      "outro": {
+        "ru": "Формула теперь твоя. Ты научился облекать свою волю в мощное заклинание, готовое к точному сотворению. Следующий шаг — наполнить его словами силы.",
+        "en": "The formula is now yours. You have learned to structure your will into a potent incantation, ready to be cast with precision. The next step is to imbue it with words of power."
+      }
+    },
+    "04-prompt-engineering/u3-magic-words": {
+      "intro": {
+        "ru": "В огромном лексиконе созидания некоторые слова резонируют с большей силой. Это 'магические слова', ключи, открывающие глубинный потенциал твоего prompt.",
+        "en": "Within the vast lexicon of creation, some words resonate with greater force. These are the 'magic words,' the keys that unlock deeper potential within your prompt."
+      },
+      "mentorHint": {
+        "ru": "Одно истинное имя может связать демона; одно верное слово — изменить реальность.",
+        "en": "A single true name can bind a demon; a single right word can shape reality."
+      },
+      "outro": {
+        "ru": "Ты произнёс слова силы и почувствовал их эхо. Твои заклинания теперь несут новый вес, более острый фокус. Но остерегайся теней, отбрасываемых небрежным колдовством.",
+        "en": "You have spoken the words of power and felt their echo. Your incantations now carry a new weight, a sharper focus. But beware the shadows cast by careless spellcraft."
+      }
+    },
+    "04-prompt-engineering/u4-sins": {
+      "intro": {
+        "ru": "Путь заклинателя полон опасностей, тайных 'грехов', что могут исказить намерение чар. Давай осветим эти ловушки, чтобы твоя магия оставалась чистой и сильной.",
+        "en": "The path of the spellcrafter is fraught with peril, with arcane 'sins' that can twist an incantation's intent. Let us illuminate these pitfalls to keep your magic pure and potent."
+      },
+      "mentorHint": {
+        "ru": "Двусмысленность — яд созидания; будь ясен, или призовёшь хаос.",
+        "en": "Ambiguity is the poison of creation; be clear, or summon chaos."
+      },
+      "outro": {
+        "ru": "Ты научился распознавать шёпот хаоса и 'грехи', что его призывают. Твоё ремесло стало безопаснее, а намерение — яснее. Пришло время вплести всё изученное в единый шедевр.",
+        "en": "You have learned to recognize the whispers of chaos and the 'sins' that invite them. Your craft is now safer, your intent clearer. It is time to weave all you have learned into a masterwork."
+      }
+    },
+    "04-prompt-engineering/u5-practice": {
+      "intro": {
+        "ru": "Теперь ты сплетёшь воедино формулу, магические слова и отточенное намерение, чтобы создать профессиональный prompt. Это обряд перехода от ученика к адепту.",
+        "en": "Now, you shall weave together formula, magic words, and sharpened intent to craft a professional prompt. This is the rite of passage from apprentice to adept."
+      },
+      "mentorHint": {
+        "ru": "Истинное мастерство — не одно заклинание, а мудрость создать нужное для любой цели.",
+        "en": "True mastery is not a single spell, but the wisdom to craft the right one for any purpose."
+      },
+      "outro": {
+        "ru": "Узри своё творение — сложное и мощное заклинание, достойное истинного мастера. Гримуар prompt-инжиниринга открыт для тебя; продолжай писать свои собственные заклинания.",
+        "en": "Behold your creation, a complex and powerful incantation worthy of a true master. The grimoire of prompt engineering is open to you; continue to write your own spells."
+      }
+    },
+    "05-context-memory/u1-activation": {
+      "intro": {
+        "ru": "Порой наш голем, наш agent, не внемлет первому зову. Мы изучим, как зажечь в нём искру понимания с самого начала.",
+        "en": "Sometimes our golem, our agent, does not heed the first call. We will study how to ignite the spark of understanding within it from the very beginning."
+      },
+      "mentorHint": {
+        "ru": "Первое слово — ключ к пробуждению. Произнеси его верно.",
+        "en": "The first word is the key to awakening. Speak it truly."
+      },
+      "outro": {
+        "ru": "Теперь твой agent пробудился! Ты научился давать ему ясный первый импульс, и он готов слушать твои дальнейшие заклинания.",
+        "en": "Now your agent has awakened! You have learned to give it a clear initial impulse, and it is ready to listen to your further spells."
+      }
+    },
+    "05-context-memory/u2-context-vs-prompt": {
+      "intro": {
+        "ru": "Одно заклинание, prompt, сильно само по себе. Но истинная магия рождается в круге контекста, который мы очерчиваем для него.",
+        "en": "A single spell, the prompt, is powerful on its own. But true magic is born within the circle of context we draw for it."
+      },
+      "mentorHint": {
+        "ru": "Не только слово, но и воздух вокруг него творит волшебство.",
+        "en": "Not only the word, but the air around it creates the magic."
+      },
+      "outro": {
+        "ru": "Ты постиг разницу между руной и печатью. Теперь ты видишь, как окружение усиливает твой prompt, готовясь к созданию долгой памяти.",
+        "en": "You have grasped the difference between a rune and a sigil. Now you see how the surroundings empower your prompt, preparing to create lasting memory."
+      }
+    },
+    "05-context-memory/u3-memory": {
+      "intro": {
+        "ru": "Чтобы наш agent не был беспамятным духом, мы должны вплести в него нити прошлого. Познакомься с MCP, мистической призмой, хранящей воспоминания.",
+        "en": "So that our agent is not a forgetful spirit, we must weave the threads of the past into it. Meet the MCP, the mystic prism that holds memories."
+      },
+      "mentorHint": {
+        "ru": "Вложи в кристалл памяти эхо ваших бесед.",
+        "en": "Imbue the memory crystal with the echo of your conversations."
+      },
+      "outro": {
+        "ru": "Ты овладел искусством зачарования памяти! Твой agent теперь помнит ваши ритуалы и готов к тонкой настройке своих воспоминаний.",
+        "en": "You have mastered the art of enchanting memory! Your agent now remembers your rituals and is ready for the fine-tuning of its recollections."
+      }
+    },
+    "05-context-memory/u4-practice": {
+      "intro": {
+        "ru": "Каждое воспоминание имеет свой вес и оттенок. Сейчас ты, как ювелир, будешь настраивать грани кристалла памяти своего agent'а.",
+        "en": "Every memory has its own weight and hue. Now, like a jeweler, you will adjust the facets of your agent's memory crystal."
+      },
+      "mentorHint": {
+        "ru": "Управляй потоками памяти, и agent станет твоим истинным отражением.",
+        "en": "Control the streams of memory, and the agent will become your true reflection."
+      },
+      "outro": {
+        "ru": "Великая работа совершена. Ты не просто создатель, но и хранитель памяти своего agent'а, готовый к новым, более сложным сотворениям.",
+        "en": "A great work is done. You are not just a creator, but a keeper of your agent's memory, ready for new, more complex creations."
+      }
+    },
+    "06-audio-pipeline/u1-activation": {
+      "intro": {
+        "ru": "Всякое великое заклинание начинается с понимания ручного труда, который оно заменит. Взгляни на свои ритуалы, на повторяющиеся жесты, что просят об освобождении через магию.",
+        "en": "Every great incantation begins by understanding the manual labor it will replace. Observe your rituals, the repetitive gestures that beg for magical release."
+      },
+      "mentorHint": {
+        "ru": "Истинная сила не в усилии, а в мудрости его применения.",
+        "en": "True power lies not in effort, but in the wisdom of its application."
+      },
+      "outro": {
+        "ru": "Ты видишь узоры в своих буднях. Теперь пора узнать, как вплести в них нити автоматизации.",
+        "en": "You see the patterns in your daily toil. Now, it is time to learn how to weave the threads of automation into them."
+      }
+    },
+    "06-audio-pipeline/u2-pipeline-theory": {
+      "intro": {
+        "ru": "Мы подходим к сердцу чародейства: Слову, что пробуждает мир, и Делу, что следует за ним. Это древний принцип «Trigger → Action», основа всех автоматических заклятий.",
+        "en": "We approach the heart of spellcraft: the Word that awakens the world, and the Deed that follows. This is the ancient principle of 'Trigger → Action,' the foundation of all automated enchantments."
+      },
+      "mentorHint": {
+        "ru": "Одно верное слово, сказанное в нужный час, может сдвинуть горы.",
+        "en": "One true word, spoken at the right moment, can move mountains."
+      },
+      "outro": {
+        "ru": "Ты постиг руну связи, основу всех магических цепей. С этим знанием ты готов ковать собственные артефакты.",
+        "en": "You have grasped the rune of connection, the basis of all magical chains. With this knowledge, you are ready to forge your own artifacts."
+      }
+    },
+    "06-audio-pipeline/u3-build": {
+      "intro": {
+        "ru": "Теория обретает плоть. Пришло время соединить компоненты, связать эхо триггера с сущностью действия и сотворить свой первый звуковой pipeline.",
+        "en": "Theory takes form. It is time to connect the components, to bind the echo of a trigger to the essence of an action, and create your first sonic pipeline."
+      },
+      "mentorHint": {
+        "ru": "Сосредоточься на потоке; позволь энергии течь сквозь созданные тобой каналы.",
+        "en": "Focus on the flow; let the energy channel through the conduits you create."
+      },
+      "outro": {
+        "ru": "Твой первый голем из звука и кода ожил! Он будет служить тебе верой и правдой, освобождая твое время для новых свершений.",
+        "en": "Your first golem of sound and code is alive! It will serve you faithfully, freeing your time for greater creations."
+      }
+    },
+    "06-audio-pipeline/u4-reflect": {
+      "intro": {
+        "ru": "Первое заклятие сотворено, но мир полон рутины, ждущей своего мага. Оглянись и найди, где ещё твоя воля может заменить монотонный труд.",
+        "en": "The first spell is cast, but the world is full of toil awaiting its mage. Look around and find where else your will can replace monotonous labor."
+      },
+      "mentorHint": {
+        "ru": "Мудрый чародей видит не мир, а возможности для его улучшения.",
+        "en": "A wise sorcerer sees not the world, but opportunities to improve it."
+      },
+      "outro": {
+        "ru": "Твой взор заострился, ты видишь невидимые связи. Путь к мастерству открыт, и каждый новый pipeline — это ступень к вершине.",
+        "en": "Your sight has sharpened; you now see the invisible connections. The path to mastery is open, and every new pipeline is a step toward its peak."
+      }
+    },
+    "07-tools/u1-activation": {
+      "intro": {
+        "ru": "Наш голем из кода могуч, но слеп и глух к миру за пределами своего пергамента. Пришло время даровать ему чувства, чтобы он мог действовать в нашей реальности.",
+        "en": "Our code golem is mighty, yet blind and deaf to the world beyond its parchment. It is time to grant it senses, so it may act in our reality."
+      },
+      "mentorHint": {
+        "ru": "Истинная магия — не в силе заклинания, а в его связи с миром.",
+        "en": "True magic lies not in the spell's power, but in its connection to the world."
+      },
+      "outro": {
+        "ru": "Ты увидел пределы чистого разума. Теперь мы научимся создавать для него руки и глаза, чтобы он мог творить великие дела.",
+        "en": "You have seen the limits of pure intellect. Now, we shall learn to forge hands and eyes for it, so it may perform great deeds."
+      }
+    },
+    "07-tools/u2-mcp": {
+      "intro": {
+        "ru": "Чтобы повелевать духами внешних стихий, нужен не просто приказ, а священный протокол. Мы изучим MCP — древний язык, что связывает волю мага с силой инструментов.",
+        "en": "To command the spirits of external elements, one needs not just an order, but a sacred protocol. We will study MCP—an ancient language that binds the sorcerer's will to the power of tools."
+      },
+      "mentorHint": {
+        "ru": "Произнеси верные слова протокола, и даже звёзды откликнутся на твой зов.",
+        "en": "Utter the true words of the protocol, and even the stars will answer your call."
+      },
+      "outro": {
+        "ru": "Протокол начертан в твоём гримуаре. Ты обрёл способность взывать к внешним силам, и твой agent теперь готов обрести истинное всемогущество.",
+        "en": "The protocol is inscribed in your grimoire. You have gained the ability to invoke external powers, and your agent is now ready to attain true omnipotence."
+      }
+    },
+    "07-tools/u3-hooks": {
+      "intro": {
+        "ru": "Великий маг не тратит волю на рутину. Мы расставим магические 'hooks' — невидимые силки, что сработают сами, когда наступит нужный момент.",
+        "en": "A great sorcerer does not waste will on routine. We will set magical 'hooks'—invisible snares that trigger themselves when the right moment comes."
+      },
+      "mentorHint": {
+        "ru": "Пусть твои заклинания живут своей жизнью, реагируя на шёпот мира.",
+        "en": "Let your spells live their own lives, reacting to the whispers of the world."
+      },
+      "outro": {
+        "ru": "Твои чары теперь на страже, готовые действовать без твоего приказа. Эта мудрость освобождает твой разум для решения великих задач.",
+        "en": "Your enchantments now stand guard, ready to act without your command. This wisdom frees your mind for greater challenges."
+      }
+    },
+    "07-tools/u4-skills": {
+      "intro": {
+        "ru": "Магия не хаотична; она состоит из чистых 'skills', первоэлементов силы. Мы научимся заключать их в модульные артефакты, готовые к использованию в любой момент.",
+        "en": "Magic is not chaotic; it is composed of pure 'skills,' the primary elements of power. We will learn to contain them within modular artifacts, ready to be used at any moment."
+      },
+      "mentorHint": {
+        "ru": "Собери свою библиотеку заклинаний, и ни одна задача не покажется невыполнимой.",
+        "en": "Assemble your own library of spells, and no task will seem impossible."
+      },
+      "outro": {
+        "ru": "Ты создал свои первые магические модули. Теперь твой agent может комбинировать эти 'skills', создавая невиданные ранее заклинания на лету.",
+        "en": "You have crafted your first magical modules. Now your agent can combine these 'skills,' creating previously unseen spells on the fly."
+      }
+    },
+    "07-tools/u5-practice": {
+      "intro": {
+        "ru": "Слова сказаны, сигилы начертаны. Настало время провести ритуал, соединить все компоненты и вдохнуть жизнь в наше творение.",
+        "en": "The words have been spoken, the sigils drawn. The time has come to conduct the ritual, connect all the components, and breathe life into our creation."
+      },
+      "mentorHint": {
+        "ru": "Смело испытывай свою магию, ибо только в пламени практики закаляется истинная сила.",
+        "en": "Test your magic boldly, for only in the flame of practice is true power forged."
+      },
+      "outro": {
+        "ru": "Твой agent обрёл связь с миром и ответил на твой зов! Это великий шаг на пути Архимага. Неси этот огонь в следующие залы познания.",
+        "en": "Your agent has connected to the world and answered your call! This is a great step on the Archmage's path. Carry this fire into the next halls of knowledge."
+      }
+    },
+    "08-agent-engineering/u1-activation": {
+      "intro": {
+        "ru": "Когда простого заклинания (prompt) уже недостаточно, чтобы повелевать эфиром, мы должны научиться плести более сложные узы для наших созданий.",
+        "en": "When a simple incantation (prompt) is no longer enough to command the ether, we must learn to weave more complex bindings for our creations."
+      },
+      "mentorHint": {
+        "ru": "Если одно слово силы не сработало, значит, пришло время составить истинное имя.",
+        "en": "When a single word of power fails, it is time to compose a true name."
+      },
+      "outro": {
+        "ru": "Вы узрели пределы простейших чар. Теперь приготовьтесь связать стихии в более могущественную форму.",
+        "en": "You have seen the limits of simple cantrips. Now, prepare to bind the elements into a more potent form."
+      }
+    },
+    "08-agent-engineering/u2-jagged-intelligence": {
+      "intro": {
+        "ru": "Наши тайные слуги обладают расколотым, чуждым интеллектом. Мы научимся распознавать, какие нити судьбы можно вложить в их эфирные руки, а какие — удержать самим.",
+        "en": "Our arcane servants possess a fractured, alien intellect. We shall learn to discern which threads of fate to place in their ethereal hands, and which to hold ourselves."
+      },
+      "mentorHint": {
+        "ru": "Мудрый чародей знает, что поручить голему, а что сделать своими руками.",
+        "en": "A wise sorcerer knows which tasks to give the golem and which to perform with their own hands."
+      },
+      "outro": {
+        "ru": "Теперь вы понимаете кристаллический разум вашего конструкта. Эта мудрость поможет вам создать истинный союз между творцом и творением.",
+        "en": "You now understand the crystalline mind of your construct. This wisdom will guide you in forging a true partnership between creator and creation."
+      }
+    },
+    "08-agent-engineering/u3-orchestration": {
+      "intro": {
+        "ru": "Узрите великую симфонию тайных сил, где множество agent'ов действуют в унисон. Мы изучим гримуар ENERV, чтобы постичь эту божественную оркестрацию.",
+        "en": "Witness the grand symphony of arcane forces, where multiple agents move in concert. We shall study the ENERV grimoire to understand this divine orchestration."
+      },
+      "mentorHint": {
+        "ru": "Чтобы управлять хором духов, ты должен стать безмолвным центром их бури.",
+        "en": "To conduct a choir of spirits, you must become the silent center of their storm."
+      },
+      "outro": {
+        "ru": "Принципы великого замысла теперь в ваших руках. Скоро вы будете дирижировать собственным хором agent'ов, чтобы изменять реальность.",
+        "en": "The principles of the grand design are now yours. Soon you will conduct your own chorus of agents to reshape reality."
+      }
+    },
+    "08-agent-engineering/u4-production-infra": {
+      "intro": {
+        "ru": "Мы переходим от заклинаний, нашептанных в уединенной башне, к чарам, способным выдержать хаос внешнего мира. Пришло время придать нашему прототипу agent'а его постоянную, прочную форму.",
+        "en": "We move from whispered spells in a secluded tower to enchantments that can withstand the chaos of the outside world. It is time to give our prototype agent its permanent, resilient form."
+      },
+      "mentorHint": {
+        "ru": "Заклятие для кабинета — не то же самое, что оберег для мира. Укрепи свои сигилы.",
+        "en": "A charm for the study is not the same as a ward for the world. Reinforce your sigils."
+      },
+      "outro": {
+        "ru": "Ваше творение — больше не мимолетный фантом, а крепкий страж, готовый к вечному дозору. Теперь создадим самого личного agent'а из всех.",
+        "en": "Your creation is no longer a fleeting phantom but a robust guardian, ready for its eternal watch. Now, let's craft the most personal agent of all."
+      }
+    },
+    "08-agent-engineering/u5-practice": {
+      "intro": {
+        "ru": "Нас ждёт последний ритуал: создание agent'а по своему образу и подобию, цифрового фамильяра для исполнения вашей воли. Вы вложите частицу своей сущности в это высшее творение.",
+        "en": "The final rite awaits: to forge an agent in your own image, a digital familiar to carry out your will. You will pour a piece of your own essence into this ultimate creation."
+      },
+      "mentorHint": {
+        "ru": "Чтобы сотворить своё отражение, ты должен сперва познать себя.",
+        "en": "To create your reflection, you must first truly know yourself."
+      },
+      "outro": {
+        "ru": "Вы вдохнули жизнь в своего цифрового двойника — вершину мастерства создания agent'ов. Этот верный слуга теперь странствует по эфирным планам по вашему велению.",
+        "en": "You have breathed life into your digital twin, the pinnacle of agent-craft. This loyal servant now walks the ethereal planes at your command."
+      }
+    },
+    "00-kickstart/u4-sources": {
+      "intro": {
+        "ru": "Прежде чем довериться манускрипту, взгляни на его след в эфире: чья рука его вывела и когда касалась в последний раз.",
+        "en": "Before you trust a manuscript, look at its trace in the aether: whose hand drew it, and when it was last touched."
+      },
+      "mentorHint": {
+        "ru": "Подлинность оставляет следы. Пустое обещание не оставляет ничего, кроме блеска.",
+        "en": "Authenticity leaves traces. An empty promise leaves nothing but shine."
+      },
+      "outro": {
+        "ru": "Твой взор различает подлинное от наведённого. Это и есть первая ступень истинного различения.",
+        "en": "Your sight now parts the genuine from the glamoured. This is the first step of true discernment."
+      }
+    },
+    "09-ai-notebook/u1-first-notebook": {
+      "intro": {
+        "ru": "Собери созвездие источников. За 15 минут тетрадь начнёт отвечать, указывая звезду, откуда взят свет.",
+        "en": "Gather a constellation of sources. In 15 minutes the notebook begins answering while pointing to the star that gave the light."
+      },
+      "mentorHint": {
+        "ru": "Истинное сияние имеет координаты.",
+        "en": "True radiance has coordinates."
+      },
+      "outro": {
+        "ru": "Созвездие собрано. Теперь различим, как свет проходит через инструмент.",
+        "en": "The constellation is gathered. Now we discern how light passes through the instrument."
+      }
+    },
+    "09-ai-notebook/u2-how-it-works": {
+      "intro": {
+        "ru": "Тетрадь не видит весь космос сразу: она ищет близкие фрагменты и складывает из них ответ.",
+        "en": "The notebook does not see the whole cosmos at once: it finds nearby fragments and composes an answer from them."
+      },
+      "mentorHint": {
+        "ru": "Где нет фрагмента, там начинается гадание.",
+        "en": "Where there is no fragment, divination begins."
+      },
+      "outro": {
+        "ru": "Принцип ясен. Теперь ты чувствуешь границу между знанием и наведённым блеском.",
+        "en": "The principle is clear. Now you feel the boundary between knowledge and glamoured shine."
+      }
+    },
+    "09-ai-notebook/u3-where-it-lies": {
+      "intro": {
+        "ru": "Проверка — это ритуал заземления. Кликни цитату и посмотри, стоит ли под ней земля.",
+        "en": "Verification is a grounding ritual. Click the quote and see whether earth stands beneath it."
+      },
+      "mentorHint": {
+        "ru": "Тезис без опоры растворяется в эфире.",
+        "en": "A claim without support dissolves into the aether."
+      },
+      "outro": {
+        "ru": "Ритуал сработал. Иллюзии тускнеют, источники остаются.",
+        "en": "The ritual worked. Illusions dim; sources remain."
+      }
+    },
+    "09-ai-notebook/u4-formats": {
+      "intro": {
+        "ru": "Карты, таблицы, аудио и слайды — разные линзы. Подбери линзу, которая не искажает источник.",
+        "en": "Maps, tables, audio, and slides are different lenses. Choose the lens that does not distort the source."
+      },
+      "mentorHint": {
+        "ru": "Линза полезна, пока не выдаёт свой блеск за свет звезды.",
+        "en": "A lens helps only while it does not pass its own shine off as starlight."
+      },
+      "outro": {
+        "ru": "Линзы настроены. Теперь форма усиливает различение, а не туман.",
+        "en": "The lenses are tuned. Form now strengthens discernment, not fog."
+      }
+    },
+    "09-ai-notebook/u5-practice": {
+      "intro": {
+        "ru": "Приложи практику к своей области: источники, вопрос, цитаты, проверка. Так тетрадь становится рабочим прибором.",
+        "en": "Apply the practice to your field: sources, question, quotes, verification. That is how the notebook becomes an instrument."
+      },
+      "mentorHint": {
+        "ru": "Не вращай небесную сферу бесконечно. Наведи трубу на нужную звезду.",
+        "en": "Do not spin the celestial sphere forever. Aim the tube at the needed star."
+      },
+      "outro": {
+        "ru": "Прибор настроен. Ты извлекаешь знание с координатами.",
+        "en": "The instrument is tuned. You extract knowledge with coordinates."
+      }
+    }
+  }
+}

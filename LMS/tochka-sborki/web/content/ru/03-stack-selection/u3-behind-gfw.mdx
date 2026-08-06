@@ -1,0 +1,219 @@
+---
+title: "Behind Great Firewall: без VPN"
+unit: 3
+module: 3
+duration: "20 мин"
+---
+
+<Phase type="activation">
+
+Вспомни ситуацию: между тобой и нужным инструментом — закрытая граница.
+
+Не описывай это как «список заблокированных сайтов». Представь это как **маршрут контрабандиста**: опытный человек не плачет у закрытых ворот — он знает, какие тропы открыты, где спрятан тайник, как перевезти груз легально через соседний пропускной пункт.
+
+Прокрути в голове: что именно у тебя «груз» (нужный AI-инструмент), где «граница» (GFW, корпоративный файрвол, отсутствие карты), и — **какие пути реально открыты**?
+
+Вот карта двух берегов:
+
+**Что у нас НЕ работает в Китае без VPN:**
+- `claude.ai`, `console.anthropic.com` — Anthropic
+- `chatgpt.com`, `platform.openai.com` — OpenAI
+- `cursor.com`, `gitcopilot.com` — большая часть AI-IDE
+- `huggingface.co` — модели и датасеты (заблокирован с 2023)
+- GitHub частично, npm registry (через зеркала)
+
+**Что РАБОТАЕТ из коробки:**
+- `cerebras.ai` — Cerebras Cloud Inference (US-based, но не в China-blocklist'е)
+- `aistudio.google.com` — Google Gemini Flash, бесплатный tier
+- `deepseek.com`, `qianwen.aliyun.com` — китайские провайдеры
+- `openrouter.ai` — частично, зависит от модели
+- Локальные модели (после скачивания) — навсегда
+
+</Phase>
+
+<Phase type="reflection">
+
+Представь травника 🌿, который живёт в деревне вдали от аптечной сети. У него нет таблеток с QR-кодом — зато он знает, какие корни в этом лесу снимают жар, где растёт нужная кора, как комбинировать местное так, что аптека и не снилась.
+
+Разгляди парадокс: **самые мощные открытые модели в 2026 году — китайские**. Qwen (Alibaba), DeepSeek-Coder, Yi (01.AI), GLM (Tsinghua) — все top-tier по бенчмаркам.
+
+Если ты в Китае — у тебя на самом деле **расширенный** доступ к OSS-моделям через локальных провайдеров (Qianwen, Volcengine, DeepSeek API). Платные барьеры через карты обычно меньше — `WeChat Pay` / `Alipay` интегрированы.
+
+Это unit не про обход — а про то, **как собрать полноценный agentic workflow из местных трав**. Без аптеки.
+
+</Phase>
+
+<Phase type="concept">
+
+## ⚡ Быстрая установка GFW-стека (одной строкой)
+
+Одна команда ставит LiteLLM-прокси и Aider и пишет готовый конфиг (Cerebras + Gemini Flash). Дальше останется вписать два ключа. Ниже — разбор по шагам, если хочешь понять, что происходит.
+
+<OsToggle />
+
+<OsBlock os="mac">
+
+```bash
+curl -fsSL https://ai.synergify.com/install-gfw.sh | bash
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+irm https://ai.synergify.com/install-gfw.ps1 | iex
+```
+
+</OsBlock>
+
+> 💡 На Linux работает та же команда, что и для Mac (`curl … | bash`).
+
+После установки: впиши ключи в `~/.config/litellm/.env`, запусти `start.sh`/`start.ps1`, наведи Aider на `http://localhost:4000`.
+
+## Архитектура «Behind-GFW»
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Frontend: Hermes / Aider / Cline / Continue.dev        │
+├─────────────────────────────────────────────────────────┤
+│  Router: LiteLLM (localhost:4000)                       │
+│  ┌────────────────────────────────────────────────────┐ │
+│  │ fast-path:  Cerebras Qwen-3-235B (1000 TPS)        │ │
+│  │ balanced:   Gemini 2.5 Flash (через AI Studio)     │ │
+│  │ chinese:    DeepSeek-Coder API / Qwen API          │ │
+│  │ floor:      local llama-server (Qwen3-Coder-30B)   │ │
+│  └────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────┘
+```
+
+## Шаг 1: Cerebras (главный free-tier)
+
+1. Зайди на [cerebras.ai/cloud-inference](https://cerebras.ai/cloud-inference) — работает без VPN
+2. Регистрация через email (не нужна банковская карта)
+3. Free tier: ~1M токенов/день, скорость 1000+ TPS на Qwen-3-235B
+4. Получи API key → сохрани в `~/.config/sovern/.env`:
+
+```bash
+# ~/.config/sovern/.env
+CEREBRAS_API_KEY=csk-xxxxx
+```
+
+## Шаг 2: Google Gemini Flash (backup для долгих задач)
+
+1. `aistudio.google.com` — работает из mainland через mainland Google домен
+2. Бесплатный tier: 15 RPM / 1500 RPD на Gemini 2.5 Flash
+3. Если AI Studio заблокирован — через Volcengine/Alibaba есть прокси-аналог
+
+## Шаг 3: LiteLLM gateway
+
+Это «один endpoint для всех провайдеров». Устанавливается локально:
+
+<OsToggle />
+
+<OsBlock os="mac">
+
+```bash
+pip install 'litellm[proxy]'
+mkdir -p ~/.config/litellm
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+pip install 'litellm[proxy]'
+New-Item -ItemType Directory $HOME\.config\litellm -Force
+```
+
+</OsBlock>
+
+Минимальный конфиг `~/.config/litellm/config.yaml`:
+
+```yaml
+model_list:
+  - model_name: fast-pool
+    litellm_params:
+      model: cerebras/qwen-3-235b-a22b
+      api_key: os.environ/CEREBRAS_API_KEY
+
+  - model_name: balanced
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GOOGLE_API_KEY
+
+  - model_name: local-floor
+    litellm_params:
+      model: openai/qwen-3-coder
+      api_base: http://localhost:8080/v1
+      api_key: not-needed
+
+router_settings:
+  routing_strategy: simple-shuffle
+  fallbacks:
+    - fast-pool: ["balanced", "local-floor"]
+    - balanced: ["local-floor"]
+```
+
+Запуск:
+
+```bash
+litellm --config ~/.config/litellm/config.yaml --port 4000
+```
+
+Теперь все агенты могут смотреть на `http://localhost:4000` как на «OpenAI-compatible API».
+
+## Шаг 4: Local fallback (llama-server)
+
+На случай если все клауды лягут одновременно (бывает):
+
+```bash
+# Качаем модель (через зеркало HuggingFace)
+# для Китая: https://hf-mirror.com заменяет huggingface.co
+wget https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf
+
+# Запускаем llama-server (нужен llama.cpp)
+llama-server -m Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf --port 8080
+```
+
+> 💡 На Mac M-series с 16GB RAM модель Q4_K_M идёт со скоростью ~30 t/s — терпимо. На 32GB+ — комфортно.
+
+## Шаг 5: Подключаем агента
+
+Любой OpenAI-compatible агент (Aider, Cline, Continue.dev, Hermes) подключается одинаково:
+
+```bash
+# Aider
+aider --model openai/fast-pool --openai-api-base http://localhost:4000
+
+# Cline (VS Code) — в настройках:
+# OpenAI Compatible: http://localhost:4000
+# Model: fast-pool
+```
+
+Готово. Полноценный agentic workflow без Anthropic, без OpenAI, без VPN.
+
+</Phase>
+
+<Phase type="practice">
+
+Минимум для зачёта unit'а:
+
+1. Зарегистрируйся в Cerebras, получи API key
+2. Установи LiteLLM локально и запусти proxy на `localhost:4000`
+3. Сделай тестовый запрос:
+
+```bash
+curl http://localhost:4000/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model": "fast-pool", "messages": [{"role":"user","content":"Привет, кто ты?"}]}'
+```
+
+4. Скриншот ответа сохрани в `my-experiments/u3-cerebras-via-litellm.png`
+
+**Опционально (на будущее, для практики Sovereign):**
+- Скачай Qwen3-Coder GGUF через `hf-mirror.com`
+- Запусти llama-server, добавь его в LiteLLM как fallback
+
+</Phase>

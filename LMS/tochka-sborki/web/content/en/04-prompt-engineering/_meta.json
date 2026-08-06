@@ -1,0 +1,14 @@
+{
+  "module": 4,
+  "title": "Prompt Engineering",
+  "description": "How to write prompts like a pro",
+  "duration": "60 min",
+  "level": 4,
+  "units": [
+    { "slug": "u1-activation", "title": "My worst prompt" },
+    { "slug": "u2-spec-formula", "title": "The spec formula" },
+    { "slug": "u3-magic-words", "title": "Magic words" },
+    { "slug": "u4-sins", "title": "The sins of prompting" },
+    { "slug": "u5-practice", "title": "A professional prompt" }
+  ]
+}

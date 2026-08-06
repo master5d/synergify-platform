@@ -1,0 +1,14 @@
+{
+  "module": 8,
+  "title": "Агентский инжиниринг",
+  "description": "От vibe coding к оркестрации систем агентов — где промпт перестаёт работать",
+  "duration": "90 мин",
+  "level": 8,
+  "units": [
+    { "slug": "u1-activation", "title": "Когда промпт перестаёт работать" },
+    { "slug": "u2-jagged-intelligence", "title": "Jagged Intelligence: что отдавать AI" },
+    { "slug": "u3-orchestration", "title": "Оркестрация: ENERV как кейс" },
+    { "slug": "u4-production-infra", "title": "Prototype → Production" },
+    { "slug": "u5-practice", "title": "Спроектируй своего клона" }
+  ]
+}

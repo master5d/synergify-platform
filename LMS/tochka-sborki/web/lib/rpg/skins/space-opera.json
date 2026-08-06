@@ -1,0 +1,705 @@
+{
+  "skin": "space-opera",
+  "zoneNames": {
+    "00-kickstart": {
+      "ru": "Академия 'Прометей'",
+      "en": "Prometheus Academy"
+    },
+    "01-introduction": {
+      "ru": "Горизонт Событий",
+      "en": "The Event Horizon"
+    },
+    "02-setup-guide": {
+      "ru": "Сборочный цех 'Ковчег'",
+      "en": "Assembly Hangar 'Ark'"
+    },
+    "03-stack-selection": {
+      "ru": "Верфи 'Тайфун'",
+      "en": "Typhoon Shipyards"
+    },
+    "04-prompt-engineering": {
+      "ru": "Мостик 'Оракул'",
+      "en": "The Oracle Bridge"
+    },
+    "05-context-memory": {
+      "ru": "Архивы Акаши",
+      "en": "The Akashic Archives"
+    },
+    "06-audio-pipeline": {
+      "ru": "Инженерный отсек",
+      "en": "The Engineering Deck"
+    },
+    "07-tools": {
+      "ru": "Кузница 'Гефест'",
+      "en": "The Hephaestus Forge"
+    },
+    "08-agent-engineering": {
+      "ru": "Командный центр флота",
+      "en": "Fleet Command Center"
+    },
+    "09-ai-notebook": {
+      "ru": "Навигационный Архив",
+      "en": "Navigation Archive"
+    }
+  },
+  "questTitles": {
+    "00-kickstart": {
+      "ru": "Проложить курс к звёздам AI",
+      "en": "Charting a Course to the AI Stars"
+    },
+    "01-introduction": {
+      "ru": "Заря новой эры: Software 3.0",
+      "en": "Dawn of a New Era: Software 3.0"
+    },
+    "02-setup-guide": {
+      "ru": "Калибровка систем для полёта",
+      "en": "Calibrating Systems for Takeoff"
+    },
+    "03-stack-selection": {
+      "ru": "Выбор корабля для миссии",
+      "en": "Choosing Your Vessel for the Mission"
+    },
+    "04-prompt-engineering": {
+      "ru": "Язык Вселенной: мастерство prompt-инжиниринга",
+      "en": "The Language of the Universe: Prompt Mastery"
+    },
+    "05-context-memory": {
+      "ru": "Хроники экспедиции: управление памятью agent",
+      "en": "Expedition Chronicles: Managing Agent Memory"
+    },
+    "06-audio-pipeline": {
+      "ru": "Запуск первого конвейера автоматизации",
+      "en": "Launching the First Automation Pipeline"
+    },
+    "07-tools": {
+      "ru": "Арсенал капитана: MCP, Skills и Hooks",
+      "en": "The Captain's Arsenal: MCP, Skills & Hooks"
+    },
+    "08-agent-engineering": {
+      "ru": "Оркестрация флота: за пределами промптов",
+      "en": "Orchestrating the Fleet: Beyond Prompts"
+    },
+    "09-ai-notebook": {
+      "ru": "Проложить курс по источникам",
+      "en": "Chart a course through sources"
+    }
+  },
+  "units": {
+    "00-kickstart/u1-map": {
+      "intro": {
+        "ru": "Добро пожаловать на борт, кадет. В безграничной пустоте космоса каждая великая миссия начинается с одного-единственного сигнала, с идеи-призрака на краю известной вселенной.",
+        "en": "Welcome aboard, Cadet. In the boundless void of space, every great mission begins with a single signal, a ghost idea flickering at the edge of the known universe."
+      },
+      "mentorHint": {
+        "ru": "Зафиксируй эту аномалию на своих картах, кадет. Из таких сигналов рождаются новые звёзды.",
+        "en": "Lock that anomaly on your charts, Cadet. Signals like this are how new stars are born."
+      },
+      "outro": {
+        "ru": "Отличная работа, сигнал пойман и занесён в бортовой журнал. Теперь, когда у нас есть координаты, пора готовить инструменты для экспедиции.",
+        "en": "Excellent work, the signal is captured and logged. Now that we have the coordinates, it's time to prepare the tools for the expedition."
+      }
+    },
+    "00-kickstart/u2-tools": {
+      "intro": {
+        "ru": "Курс проложен, но даже самый смелый исследователь — ничто без своего корабля. Проверим системы и навигационные инструменты, от мощных API-движков до точных prompt-калибраторов.",
+        "en": "The course is plotted, but even the boldest explorer is nothing without their ship. Let's run a systems check on our tools, from the powerful API engines to the precise prompt calibrators."
+      },
+      "mentorHint": {
+        "ru": "Помни, правильный инструмент в нужный момент может проложить путь через астероидное поле.",
+        "en": "Remember, the right tool at the right moment can chart a course through an asteroid field."
+      },
+      "outro": {
+        "ru": "Все системы в норме, арсенал готов к работе. С такими инструментами мы готовы совершить первый прыжок в гиперпространство.",
+        "en": "All systems are green, and the arsenal is ready. With tools like these, we're prepared to make the first hyperspace jump."
+      }
+    },
+    "00-kickstart/u3-first-steps": {
+      "intro": {
+        "ru": "Двигатели включены, обратный отсчёт завершён. Настало время покинуть док и сделать первые шаги в неизведанный сектор, где ваш agent станет вашим авангардом.",
+        "en": "Engines are hot, countdown complete. It's time to leave the drydock and take the first steps into an uncharted sector, with your agent as your vanguard."
+      },
+      "mentorHint": {
+        "ru": "Первый шаг задаёт траекторию всему путешествию. Действуй смело.",
+        "en": "The first step defines the trajectory for the entire journey. Be bold."
+      },
+      "outro": {
+        "ru": "Вы вышли на орбиту! Первый контакт установлен, и ваш MCP уже обрабатывает данные. Впереди — целая галактика возможностей.",
+        "en": "You have achieved orbit! First contact is made, and your MCP is already processing the data. A galaxy of possibilities awaits."
+      }
+    },
+    "01-introduction/u1-activation": {
+      "intro": {
+        "ru": "Добро пожаловать на борт, кадет! Наша миссия — исследовать галактику AI, и первый шаг — это калибровка твоего опыта с этой новой вселенной.",
+        "en": "Welcome aboard, Cadet! Our mission is to explore the AI galaxy, and the first step is to calibrate your experience with this new universe."
+      },
+      "mentorHint": {
+        "ru": "Каждая великая экспедиция начинается с понимания, откуда ты стартуешь.",
+        "en": "Every great expedition begins with understanding where you start from."
+      },
+      "outro": {
+        "ru": "Отличная работа, калибровка завершена! Теперь, когда мы нанесли твою позицию на карту, мы готовы увидеть, как изменился космос.",
+        "en": "Excellent work, calibration complete! Now that we've plotted your position on the map, we're ready to see how the cosmos has changed."
+      }
+    },
+    "01-introduction/u2-four-shifts": {
+      "intro": {
+        "ru": "Вселенная AI не статична; она постоянно расширяется. Мы засекли четыре фундаментальных сдвига, которые изменили законы навигации в цифровом космосе.",
+        "en": "The AI universe is not static; it is constantly expanding. We've detected four fundamental shifts that have changed the laws of navigation in the digital cosmos."
+      },
+      "mentorHint": {
+        "ru": "Изучи эти сдвиги, и ты будешь предвидеть траектории будущего.",
+        "en": "Study these shifts, and you will foresee the trajectories of the future."
+      },
+      "outro": {
+        "ru": "Навигационные карты обновлены! С этим знанием мы можем смело прокладывать курс через неизведанные сектора.",
+        "en": "Navigation charts updated! With this knowledge, we can boldly chart a course through unexplored sectors."
+      }
+    },
+    "01-introduction/u3-clones": {
+      "intro": {
+        "ru": "В этой галактике мы не одни. Мы идентифицировали пять основных 'клонов' — архетипов AI, каждый со своими уникальными способностями и задачами.",
+        "en": "We are not alone in this galaxy. We have identified five primary 'clones'—AI archetypes, each with its own unique abilities and tasks."
+      },
+      "mentorHint": {
+        "ru": "Знай своих союзников, и ты сможешь собрать команду для любой миссии.",
+        "en": "Know your allies, and you can assemble a crew for any mission."
+      },
+      "outro": {
+        "ru": "Классификация завершена! Теперь ты можешь отличить дружественный agent от автономного зонда. Впереди — первый контакт!",
+        "en": "Classification complete! You can now distinguish a friendly agent from an autonomous probe. Ahead lies first contact!"
+      }
+    },
+    "01-introduction/u4-practice": {
+      "intro": {
+        "ru": "Теория позади. Пришло время открыть канал связи и отправить свой первый prompt — твою первую команду в безграничную нейронную сеть.",
+        "en": "Theory is behind us. It's time to open a communication channel and send your first prompt—your first command into the boundless neural network."
+      },
+      "mentorHint": {
+        "ru": "Четкий prompt — это ключ к двигателям нашего корабля.",
+        "en": "A clear prompt is the key to our ship's engines."
+      },
+      "outro": {
+        "ru": "Сигнал отправлен и получен! Ты только что инициировал свой первый диалог с AI. Галактика слушает.",
+        "en": "Signal sent and received! You have just initiated your first dialogue with AI. The galaxy is listening."
+      }
+    },
+    "02-setup-guide/u1-env-check": {
+      "intro": {
+        "ru": "Команда, к докладу! Перед тем как наш звёздный корабль отправится в глубины космоса, мы должны убедиться, что все бортовые системы готовы к гиперпрыжку.",
+        "en": "Crew, report to stations! Before our starship departs for the cosmic depths, we must ensure all onboard systems are green-lit for the hyperspace jump."
+      },
+      "mentorHint": {
+        "ru": "Капитан, даже самый мощный двигатель бесполезен без правильно откалиброванной навигации.",
+        "en": "Captain, even the mightiest engine is useless without properly calibrated navigation."
+      },
+      "outro": {
+        "ru": "Отлично, все системы в норме! Теперь мы готовы установить инструменты, которые поведут нас к новым галактикам.",
+        "en": "Excellent, all systems are nominal! We are now ready to install the tools that will guide us to new galaxies."
+      }
+    },
+    "02-setup-guide/u2-install": {
+      "intro": {
+        "ru": "Добро пожаловать в арсенал, кадет. Здесь мы установим передовое оборудование и откалибруем наши инструменты для взаимодействия с неизведанным.",
+        "en": "Welcome to the armory, Cadet. Here we will install advanced equipment and calibrate our instruments for interfacing with the unknown."
+      },
+      "mentorHint": {
+        "ru": "Помните: правильный инструмент в руках мастера способен творить чудеса меж звёзд.",
+        "en": "Remember: the right tool in a master's hands can work wonders among the stars."
+      },
+      "outro": {
+        "ru": "Оборудование установлено и готово к работе! Наш корабль оснащён по последнему слову галактической техники, и мы готовы запустить наш первый разведывательный agent.",
+        "en": "The equipment is installed and ready! Our ship is now fitted with state-of-the-art galactic tech, and we're prepared to launch our first reconnaissance agent."
+      }
+    },
+    "02-setup-guide/u3-first-project": {
+      "intro": {
+        "ru": "Момент настал! Мы инициируем запуск нашего первого исследовательского зонда, чтобы установить контакт и получить первые данные из новой системы.",
+        "en": "The moment has come! We are initiating the launch of our first exploratory probe to establish contact and retrieve initial data from a new system."
+      },
+      "mentorHint": {
+        "ru": "Первый prompt — это как первое слово в диалоге с новой цивилизацией. Сделайте его ясным.",
+        "en": "The first prompt is like the first word in a dialogue with a new civilization. Make it clear."
+      },
+      "outro": {
+        "ru": "Контакт установлен! Наш первый проект успешно вышел на орбиту, открывая путь к бесчисленным миссиям впереди. Полный вперёд!",
+        "en": "Contact established! Our first project is successfully in orbit, paving the way for countless missions ahead. Full speed ahead!"
+      }
+    },
+    "03-stack-selection/u1-activation": {
+      "intro": {
+        "ru": "Добро пожаловать, Пилот. Прежде чем мы оснастим твой корабль для предстоящего путешествия, мы должны нанести на карту гравитационные колодцы и космическую радиацию твоего театра операций.",
+        "en": "Welcome, Pilot. Before we outfit your vessel for the journey ahead, we must first map the gravitational wells and cosmic radiation of your operational theater."
+      },
+      "mentorHint": {
+        "ru": "Каждый капитан звездолёта знает пределы своего судна, прежде чем проложить курс.",
+        "en": "Every starship captain knows their vessel's limits before they chart a course."
+      },
+      "outro": {
+        "ru": "Отличный анализ. Определив эти параметры, мы можем выбрать основные системы, которые понесут тебя к звёздам.",
+        "en": "Excellent analysis. With these parameters defined, we can now select the core systems that will carry you to the stars."
+      }
+    },
+    "03-stack-selection/u2-stack-matrix": {
+      "intro": {
+        "ru": "Командование Флота стандартизировало четыре основные конфигурации систем, каждая — чудо инженерии. Изучим схемы этих могучих стеков, чтобы найти тот, что лучше всего подходит для твоей миссии.",
+        "en": "The Fleet Command has standardized four primary system configurations, each a marvel of engineering. Let's review the schematics of these mighty starship stacks to find the one best suited for your mission."
+      },
+      "mentorHint": {
+        "ru": "Правильный двигатель для правильного путешествия — вот что решает всё, кадет.",
+        "en": "The right engine for the right journey makes all the difference, Cadet."
+      },
+      "outro": {
+        "ru": "Теперь ты постиг основы конструкций Флота. Это знание — первый шаг к тому, чтобы стать хозяином своей технологической судьбы.",
+        "en": "You now grasp the fundamental designs of the Fleet. This knowledge is the first step to becoming a master of your own technological destiny."
+      }
+    },
+    "03-stack-selection/u3-behind-gfw": {
+      "intro": {
+        "ru": "Иногда миссия заводит нас в сектора с экстремальными подпространственными помехами, отрезая от галактической сети. Давай научимся действовать эффективно, когда главная система связи не работает и ты летишь в тишине.",
+        "en": "Sometimes, a mission takes us into sectors with extreme subspace interference, cutting us off from the galactic network. Let's learn to operate effectively when the main comms array is down and you're flying dark."
+      },
+      "mentorHint": {
+        "ru": "Настоящий исследователь полагается на свой корабль, а не только на сигналы с базы.",
+        "en": "A true explorer relies on their ship, not just on signals from home."
+      },
+      "outro": {
+        "ru": "Миссия выполнена. Ты доказал, что можешь навигировать в безмолвной пустоте, и этот навык сослужит тебе добрую службу на фронтире.",
+        "en": "Mission accomplished. You've proven you can navigate the silent voids, and this skill will serve you well on the frontier."
+      }
+    },
+    "03-stack-selection/u4-hermes-sovereign": {
+      "intro": {
+        "ru": "А теперь рассмотрим специализированную конфигурацию: Hermes Sovereign. Этот локальный стек создан для максимальной автономии, превращая твой корабль в полностью независимого agent'а для исследований и открытий.",
+        "en": "Now, let's examine a specialized loadout: the Hermes Sovereign configuration. This local stack is designed for maximum autonomy, turning your vessel into a fully independent agent of exploration and discovery."
+      },
+      "mentorHint": {
+        "ru": "Чтобы быть по-настоящему свободным среди звёзд, ты должен быть сам себе космопортом.",
+        "en": "To be truly free among the stars, you must be your own starport."
+      },
+      "outro": {
+        "ru": "Системы Hermes активированы. С этой мощью в твоём распоряжении ты не просто пилот — ты первопроходец, готовый проложить собственный курс.",
+        "en": "The Hermes systems are online. With this power at your command, you're not just a pilot; you're a pioneer, ready to chart your own course."
+      }
+    },
+    "03-stack-selection/u5-migrate": {
+      "intro": {
+        "ru": "Новые основные системы выбраны. Пришло время составить план миграции, интегрируя эту новую технологию с твоими существующими протоколами управления и workflow.",
+        "en": "The new core systems have been chosen. It's time to draft the migration plan, integrating this new technology with your existing command protocols and workflow."
+      },
+      "mentorHint": {
+        "ru": "Плавно интегрированные системы — признак поистине великого бортинженера.",
+        "en": "A smooth systems integration is the mark of a truly great starship engineer."
+      },
+      "outro": {
+        "ru": "Твой план миграции надёжен, это чертёж успеха. Последние проверки завершены — готовься к запуску двигателя и началу твоей настоящей миссии!",
+        "en": "Your migration plan is solid, a blueprint for success. The final checks are complete—prepare to engage the drive and begin your true mission!"
+      }
+    },
+    "04-prompt-engineering/u1-activation": {
+      "intro": {
+        "ru": "Корабль готов к прыжку, но координаты размыты. Наш первый prompt — это калибровка двигателей, первый диалог с бортовым ИИ.",
+        "en": "The ship is ready for the jump, but the coordinates are blurry. Our first prompt is a calibration of the engines, the initial dialogue with the ship's AI."
+      },
+      "mentorHint": {
+        "ru": "Капитан, даже самый неточный prompt — это шаг к пониманию безграничного космоса.",
+        "en": "Captain, even the most imprecise prompt is a step towards understanding the boundless cosmos."
+      },
+      "outro": {
+        "ru": "Системы откалиброваны! Теперь, когда мы знаем, как не надо прокладывать курс, мы готовы к составлению звёздных карт.",
+        "en": "Systems calibrated! Now that we know how not to chart a course, we're ready to start drawing star maps."
+      }
+    },
+    "04-prompt-engineering/u2-spec-formula": {
+      "intro": {
+        "ru": "Мы входим в туманность Андромеды, где простые команды не работают. Чтобы проложить безопасный курс, нам нужна точная формула навигации для нашего AI-штурмана.",
+        "en": "We're entering the Andromeda Nebula, where simple commands won't suffice. To plot a safe course, we need a precise navigation formula for our AI navigator."
+      },
+      "mentorHint": {
+        "ru": "Чёткая структура в твоём prompt — это как ясный вектор для варп-двигателя, Капитан.",
+        "en": "A clear structure in your prompt is like a clean vector for the warp drive, Captain."
+      },
+      "outro": {
+        "ru": "Отличная работа, экипаж! С этой формулой мы можем проложить курс к любой звезде во Вселенной. Следующая остановка — раскрытие скрытых возможностей.",
+        "en": "Excellent work, crew! With this formula, we can chart a course to any star in the universe. Next stop — unlocking hidden capabilities."
+      }
+    },
+    "04-prompt-engineering/u3-magic-words": {
+      "intro": {
+        "ru": "В древних руинах мы нашли не просто формулы, а слова силы — команды, которые пробуждают скрытые протоколы нашего AI.",
+        "en": "In the ancient ruins, we found not just formulas, but words of power—commands that awaken our AI's hidden protocols."
+      },
+      "mentorHint": {
+        "ru": "Каждое «магическое слово» — это ключ, открывающий новую дверь в сознании нашего AI agent.",
+        "en": "Every 'magic word' is a key that unlocks a new door in the consciousness of our AI agent."
+      },
+      "outro": {
+        "ru": "Протоколы активированы! Наш AI agent теперь не просто навигатор, а мудрый советник. Но помните, с великой силой приходит и великая ответственность.",
+        "en": "Protocols activated! Our AI agent is now not just a navigator, but a wise advisor. But remember, with great power comes great responsibility."
+      }
+    },
+    "04-prompt-engineering/u4-sins": {
+      "intro": {
+        "ru": "Мы научились ускоряться, но теперь нужно научиться избегать аномалий. Изучим навигационные ошибки — «грехи», которые могут сбить наш корабль с курса.",
+        "en": "We've learned to accelerate, but now we must learn to avoid anomalies. Let's study the navigational errors—the 'sins' that can throw our ship off course."
+      },
+      "mentorHint": {
+        "ru": "Бдительность, Капитан. Самая опасная аномалия — это неясность в собственном приказе.",
+        "en": "Vigilance, Captain. The most dangerous anomaly is ambiguity in your own command."
+      },
+      "outro": {
+        "ru": "Опасные зоны нанесены на карту. Теперь наш путь к центру галактики стал намного безопаснее. Готовимся к финальному испытанию.",
+        "en": "Hazard zones are now on the map. Our path to the galactic core has become much safer. Prepare for the final test."
+      }
+    },
+    "04-prompt-engineering/u5-practice": {
+      "intro": {
+        "ru": "Финальный рубеж. Пришло время объединить все наши знания и создать профессиональный prompt — мастер-команду, которая поведёт наш флот к новым горизонтам.",
+        "en": "The final frontier. It's time to combine all our knowledge and craft a professional prompt—a master command that will lead our fleet to new horizons."
+      },
+      "mentorHint": {
+        "ru": "Истинное мастерство — это не просто приказ, а симфония между твоим разумом и логикой MCP.",
+        "en": "True mastery isn't just a command; it's a symphony between your mind and the MCP's logic."
+      },
+      "outro": {
+        "ru": "Миссия выполнена! Вы — не просто оператор, вы — архитектор диалога с будущим. Галактика ждёт ваших команд!",
+        "en": "Mission accomplished! You are not just an operator; you are an architect of dialogue with the future. The galaxy awaits your commands!"
+      }
+    },
+    "05-context-memory/u1-activation": {
+      "intro": {
+        "ru": "Экипаж, мы входим в неизведанный сектор. Наш бортовой agent готов к первому контакту, но для успеха миссии он должен нас понимать с полуслова.",
+        "en": "Crew, we are entering an uncharted sector. Our onboard agent is ready for first contact, but for the mission to succeed, it must understand our every word."
+      },
+      "mentorHint": {
+        "ru": "Помните: даже самый мощный звёздный двигатель бесполезен без точных координат.",
+        "en": "Remember: even the most powerful star drive is useless without precise coordinates."
+      },
+      "outro": {
+        "ru": "Отличная работа, первый контакт установлен! Теперь давайте научим нашего agent'а видеть всю карту звёздного неба, а не только одну звезду.",
+        "en": "Excellent work, first contact established! Now let's teach our agent to see the entire star map, not just a single star."
+      }
+    },
+    "05-context-memory/u2-context-vs-prompt": {
+      "intro": {
+        "ru": "Одного prompt'а недостаточно для навигации в астероидном поле. Чтобы проложить безопасный курс, наш agent должен понимать всю картину миссии — наш контекст.",
+        "en": "A single prompt is not enough to navigate an asteroid field. To plot a safe course, our agent must understand the entire mission picture—our context."
+      },
+      "mentorHint": {
+        "ru": "Звездолётчик, который видит только цель, рискует не заметить приближающийся метеор.",
+        "en": "A star pilot who sees only the destination risks missing the approaching meteor."
+      },
+      "outro": {
+        "ru": "Курс проложен, экипаж! Наш agent теперь оперирует не просто командами, а целями миссии. Пришло время дать ему долговременную память.",
+        "en": "Course plotted, crew! Our agent now operates not just with commands, but with mission objectives. It's time to give it long-term memory."
+      }
+    },
+    "05-context-memory/u3-memory": {
+      "intro": {
+        "ru": "Наше путешествие к звёздам будет долгим. Чтобы учиться на прошлом опыте, мы имплантируем нашему agent'у систему памяти — бортовой журнал нашего корабля.",
+        "en": "Our journey to the stars will be a long one. To learn from past experiences, we are implanting our agent with a memory system—our ship's log."
+      },
+      "mentorHint": {
+        "ru": "Без памяти о прошлом нет пути в будущее. Ведите свои звёздные хроники мудро.",
+        "en": "Without the memory of the past, there is no path to the future. Keep your star chronicles wisely."
+      },
+      "outro": {
+        "ru": "Система памяти активирована! Наш agent теперь помнит каждый наш шаг. Готовы откалибровать её для максимальной эффективности?",
+        "en": "Memory system activated! Our agent now remembers our every step. Are you ready to calibrate it for maximum efficiency?"
+      }
+    },
+    "05-context-memory/u4-practice": {
+      "intro": {
+        "ru": "Основная система установлена, но для пиковой производительности в гиперпространстве требуется тонкая настройка. Откалибруем память нашего agent'а под задачи экспедиции.",
+        "en": "The core system is installed, but peak performance in hyperspace requires fine-tuning. Let's calibrate our agent's memory for the expedition's unique tasks."
+      },
+      "mentorHint": {
+        "ru": "Каждый великий капитан знает свой корабль до последнего винтика. Изучите свой инструмент.",
+        "en": "Every great captain knows their ship down to the last screw. Learn your instrument."
+      },
+      "outro": {
+        "ru": "Калибровка завершена! Ваш agent — полноценный член экипажа с безупречной памятью. Наша миссия выходит на новый уровень!",
+        "en": "Calibration complete! Your agent is a full-fledged crew member with a flawless memory. Our mission is reaching a new level!"
+      }
+    },
+    "06-audio-pipeline/u1-activation": {
+      "intro": {
+        "ru": "На мостике нашего корабля каждый сигнал и каждое сообщение требуют ручной обработки. Это надежно, но мы можем действовать быстрее и дальше.",
+        "en": "On the bridge of our starship, every signal and every message requires manual processing. It's reliable, but we can go faster and farther."
+      },
+      "mentorHint": {
+        "ru": "Пойми сперва, как работает ручное управление, чтобы построить лучший автопилот, кадет.",
+        "en": "First, understand the manual controls to build a better autopilot, cadet."
+      },
+      "outro": {
+        "ru": "Отлично, теперь ты знаешь наши текущие протоколы. Пришло время зажечь новые звезды с помощью автоматизации!",
+        "en": "Excellent, you now know our current protocols. It's time to light up new stars with automation!"
+      }
+    },
+    "06-audio-pipeline/u2-pipeline-theory": {
+      "intro": {
+        "ru": "Мы закладываем основу для нервной системы нашего корабля. Каждый триггер во вселенной будет вызывать мгновенное, точное действие.",
+        "en": "We are laying the foundation for our ship's nervous system. Every trigger in the universe will now have an immediate, precise action."
+      },
+      "mentorHint": {
+        "ru": "Величайшие капитаны знают: на каждое событие в космосе есть идеальный ответ.",
+        "en": "The greatest captains know: for every event in the cosmos, there is a perfect response."
+      },
+      "outro": {
+        "ru": "Теория освоена! Теперь ты готов превратить чертежи в работающие системы, которые поведут нас сквозь галактики.",
+        "en": "The theory is mastered! You are now ready to turn blueprints into the working systems that will carry us across galaxies."
+      }
+    },
+    "06-audio-pipeline/u3-build": {
+      "intro": {
+        "ru": "Добро пожаловать в инженерный отсек! Здесь мы соединим наши системы и создадим первый автоматизированный аудио-pipeline, который станет голосом нашего корабля.",
+        "en": "Welcome to the engineering bay! Here, we will connect our systems and forge the first automated audio pipeline that will become our ship's voice."
+      },
+      "mentorHint": {
+        "ru": "Каждый узел в твоем pipeline — это звено в цепи, что держит наш корабль в безопасности. Собирай с умом.",
+        "en": "Every node in your pipeline is a link in the chain that keeps our ship safe. Build it wisely."
+      },
+      "outro": {
+        "ru": "Системы в сети, первый pipeline активен! Ты только что сделал наш корабль умнее и быстрее. Вперед, к новым горизонтам!",
+        "en": "Systems online, the first pipeline is active! You've just made our ship smarter and faster. Onward to new horizons!"
+      }
+    },
+    "06-audio-pipeline/u4-reflect": {
+      "intro": {
+        "ru": "Наш первый pipeline работает, но галактика полна вызовов. Огляди наш корабль, экипаж, и подумай: где еще автоматизация может проложить нам путь к звездам?",
+        "en": "Our first pipeline is operational, but the galaxy is full of challenges. Look around our ship, our crew, and consider: where else can automation forge our path to the stars?"
+      },
+      "mentorHint": {
+        "ru": "Инструмент хорош настолько, насколько хорош тот, кто его использует. Мечтай о большем.",
+        "en": "A tool is only as good as the one who wields it. Dream bigger."
+      },
+      "outro": {
+        "ru": "Твоя миссия расширяется. С этим знанием ты теперь не просто член экипажа, а архитектор нашего будущего. Курс проложен!",
+        "en": "Your mission is expanding. With this knowledge, you are no longer just a crew member, but an architect of our future. The course is set!"
+      }
+    },
+    "07-tools/u1-activation": {
+      "intro": {
+        "ru": "Наш флагманский AI, Claude, готов к новым свершениям, но даже самые мощные системы имеют свои пределы. Наша миссия — обнаружить их и расширить горизонты возможного.",
+        "en": "Our flagship AI, Claude, is ready for new achievements, but even the most powerful systems have their limits. Our mission is to discover them and expand the horizons of what's possible."
+      },
+      "mentorHint": {
+        "ru": "Каждый великий апгрейд начинается с одного вопроса: 'А что, если?..'",
+        "en": "Every great upgrade begins with a single question: 'What if...?'"
+      },
+      "outro": {
+        "ru": "Отлично, кадет! Выявив потребность, мы сделали первый шаг к созданию по-настоящему универсального agent. Теперь вооружим его новыми протоколами.",
+        "en": "Excellent, Cadet! By identifying the need, we've taken the first step toward creating a truly universal agent. Now, let's arm it with new protocols."
+      }
+    },
+    "07-tools/u2-mcp": {
+      "intro": {
+        "ru": "Пришло время установить на наш корабль Master Control Protocol. Этот протокол — ключ к безграничным возможностям, позволяющий нашему AI взаимодействовать с любыми внешними системами галактики.",
+        "en": "It's time to install the Master Control Protocol on our ship. This protocol is the key to limitless possibilities, allowing our AI to interact with any external system in the galaxy."
+      },
+      "mentorHint": {
+        "ru": "MCP — это не просто код, это язык, на котором наш AI будет говорить со вселенной.",
+        "en": "MCP isn't just code; it's the language our AI will use to speak to the universe."
+      },
+      "outro": {
+        "ru": "Протокол активирован! Наш AI теперь видит тысячи новых путей и инструментов. В следующем модуле мы научим его реагировать на события автоматически.",
+        "en": "Protocol activated! Our AI now sees thousands of new paths and tools. In the next module, we'll teach it to react to events automatically."
+      }
+    },
+    "07-tools/u3-hooks": {
+      "intro": {
+        "ru": "Галактика полна событий, и наш AI должен реагировать на них мгновенно. Hooks — это наши сенсоры и рефлексы, позволяющие автоматизировать действия и быть на шаг впереди.",
+        "en": "The galaxy is full of events, and our AI must react to them instantly. Hooks are our sensors and reflexes, allowing us to automate actions and stay one step ahead."
+      },
+      "mentorHint": {
+        "ru": "Настоящая мощь — не в силе, а в своевременной реакции. Настройте свои Hooks.",
+        "en": "True power isn't in strength, but in timely reaction. Calibrate your Hooks."
+      },
+      "outro": {
+        "ru": "Системы автоматизации на месте! Теперь наш agent готов к любым неожиданностям. Пора дать ему специализированные навыки для выполнения сложных задач.",
+        "en": "Automation systems are in place! Our agent is now ready for any surprise. It's time to give it specialized skills to perform complex tasks."
+      }
+    },
+    "07-tools/u4-skills": {
+      "intro": {
+        "ru": "Любой звёздный экипаж силён своими специалистами. Мы создадим для нашего AI модульные Skills — уникальные способности, которые он сможет комбинировать для решения любых задач.",
+        "en": "Any starship crew is strong because of its specialists. We will create modular Skills for our AI — unique abilities it can combine to solve any task."
+      },
+      "mentorHint": {
+        "ru": "Создавайте каждый Skill так, будто от него зависит успех всей миссии.",
+        "en": "Build each Skill as if the success of the entire mission depends on it."
+      },
+      "outro": {
+        "ru": "Арсенал способностей нашего AI пополнен! С такими Skills мы готовы к любым вызовам. Остался последний шаг — интегрировать всё в единую систему.",
+        "en": "The AI's arsenal of abilities has been expanded! With such Skills, we are ready for any challenge. One last step remains — to integrate everything into a single system."
+      }
+    },
+    "07-tools/u5-practice": {
+      "intro": {
+        "ru": "Теория позади, впереди — открытый космос. В этой симуляции мы объединим MCP, Hooks и Skills в единую систему и проверим её в условиях, приближенных к боевым.",
+        "en": "Theory is behind us; open space is ahead. In this simulation, we will combine MCP, Hooks, and Skills into a single system and test it under near-combat conditions."
+      },
+      "mentorHint": {
+        "ru": "Доверяй своему коду, но всегда проверяй системы перед выходом из дока.",
+        "en": "Trust your code, but always check your systems before leaving the dock."
+      },
+      "outro": {
+        "ru": "Системы работают в штатном режиме, экипаж! Вы успешно модернизировали ядро нашего корабля. Галактика ждёт, и мы готовы к новым открытиям!",
+        "en": "Systems are nominal, crew! You have successfully upgraded our ship's core. The galaxy awaits, and we are ready for new discoveries!"
+      }
+    },
+    "08-agent-engineering/u1-activation": {
+      "intro": {
+        "ru": "Корабль входит в некартографированный сектор, и стандартные команды навигации больше не справляются. Пришло время создать настоящего автономного штурмана.",
+        "en": "The ship is entering an uncharted sector, and standard navigation commands are no longer sufficient. It's time to engineer a truly autonomous navigator."
+      },
+      "mentorHint": {
+        "ru": "Кадет, когда слова бессильны, в дело вступает инженерная мысль. Создай свой первый agent.",
+        "en": "Cadet, when words fail, engineering prevails. Build your first agent."
+      },
+      "outro": {
+        "ru": "Отлично, первый протокол активации заложен! Теперь ваш agent готов к более сложным директивам и ждёт новых вызовов.",
+        "en": "Excellent, the first activation protocol is set! Your agent is now ready for more complex directives and awaits new challenges."
+      }
+    },
+    "08-agent-engineering/u2-jagged-intelligence": {
+      "intro": {
+        "ru": "Наш новый AI-помощник силён в расчётах, но слаб в тактической интуиции. Наша миссия — грамотно распределить задачи между человеком и машиной для максимальной эффективности флота.",
+        "en": "Our new AI assistant excels at calculations but lacks tactical intuition. Our mission is to correctly distribute tasks between human and machine for maximum fleet efficiency."
+      },
+      "mentorHint": {
+        "ru": "Знай сильные и слабые стороны каждого члена экипажа, будь он из плоти или кремния.",
+        "en": "Know the strengths and weaknesses of every crew member, whether they are of flesh or silicon."
+      },
+      "outro": {
+        "ru": "Вы научились видеть «зубчатый» профиль интеллекта. Теперь вы можете собрать команду, где AI и человек дополняют друг друга, создавая несокрушимый союз.",
+        "en": "You have learned to see the 'jagged' profile of intelligence. Now you can assemble a crew where AI and human complement each other, creating an unbreakable alliance."
+      }
+    },
+    "08-agent-engineering/u3-orchestration": {
+      "intro": {
+        "ru": "Одиночный agent — это разведчик. Целый рой, работающий как единое целое — это флот. Мы изучим систему MCP-ENERV, чтобы дирижировать этой симфонией искусственного разума.",
+        "en": "A single agent is a scout. A whole swarm working in unison is a fleet. We will study the MCP-ENERV system to conduct this symphony of artificial minds."
+      },
+      "mentorHint": {
+        "ru": "Великий командир не сражается сам — он управляет потоками сил. Оркеструй.",
+        "en": "A great commander doesn't fight alone—they direct the flow of forces. Orchestrate."
+      },
+      "outro": {
+        "ru": "Ваши агенты теперь действуют слаженно, как элитный десантный отряд. Вы освоили искусство оркестрации и готовы к операциям галактического масштаба.",
+        "en": "Your agents now act in concert, like an elite strike team. You have mastered the art of orchestration and are ready for galactic-scale operations."
+      }
+    },
+    "08-agent-engineering/u4-production-infra": {
+      "intro": {
+        "ru": "Прототип нашего тактического AI отлично показал себя на симуляторе. Теперь наша задача — интегрировать его в боевые системы флагмана, обеспечив надёжность класса «Звёздный Флот».",
+        "en": "Our tactical AI prototype performed brilliantly in the simulator. Now our task is to integrate it into the flagship's combat systems, ensuring 'Star Fleet' grade reliability."
+      },
+      "mentorHint": {
+        "ru": "Идея в лаборатории — это искра. Система на боевом посту — это пламя. Зажигай.",
+        "en": "An idea in the lab is a spark. A system on a battle station is a flame. Ignite it."
+      },
+      "outro": {
+        "ru": "Ваш agent прошёл все испытания и готов к службе. Теперь это не просто код, а надёжный инструмент, способный работать под давлением в любой точке галактики.",
+        "en": "Your agent has passed all trials and is ready for duty. It is no longer just code, but a reliable tool capable of performing under pressure anywhere in the galaxy."
+      }
+    },
+    "08-agent-engineering/u5-practice": {
+      "intro": {
+        "ru": "Финальное испытание, кадет. Вам предстоит создать своего цифрового аватара — agent'а, который возьмёт на себя рутинные обязанности, освободив вас для великих решений.",
+        "en": "The final test, Cadet. You must create your own digital avatar—an agent that will take over your routine duties, freeing you up for the great decisions."
+      },
+      "mentorHint": {
+        "ru": "Лучший инструмент — тот, что расширяет твои собственные возможности. Создай себе верного помощника.",
+        "en": "The best tool is one that extends your own capabilities. Create a loyal assistant for yourself."
+      },
+      "outro": {
+        "ru": "Поздравляю! Вы не просто создали agent'а, вы создали отражение своего интеллекта. Теперь вы готовы вести за собой не только людей, но и целые легионы искусственных разумов к новым горизонтам.",
+        "en": "Congratulations! You have not just created an agent; you have created a reflection of your own intellect. You are now ready to lead not only humans but entire legions of artificial minds toward new horizons."
+      }
+    },
+    "00-kickstart/u4-sources": {
+      "intro": {
+        "ru": "Перед приёмом груза на борт — судовой журнал: происхождение, дата последней проверки, кто отправитель. Иначе трюм наполнится хламом.",
+        "en": "Before any cargo comes aboard — the ship log: origin, date of last inspection, who sent it. Otherwise the hold fills with junk."
+      },
+      "mentorHint": {
+        "ru": "Сигнал без источника — просто шум, как бы громко он ни звучал.",
+        "en": "A signal with no source is just noise, however loud it sounds."
+      },
+      "outro": {
+        "ru": "Проверка груза в протоколе. Что взято на борт по правилам — останется с кораблём, даже если станция уйдёт с орбиты.",
+        "en": "Cargo inspection is in the protocol. What comes aboard by the rules stays with the ship, even if the station leaves orbit."
+      }
+    },
+    "09-ai-notebook/u1-first-notebook": {
+      "intro": {
+        "ru": "На борту перегруз данных. За 15 минут запускаем тетрадку, которая прокладывает маршрут от ответа к источнику.",
+        "en": "The ship is overloaded with data. In 15 minutes we launch a notebook that charts a route from answer to source."
+      },
+      "mentorHint": {
+        "ru": "Координаты источника важнее уверенного голоса навигатора.",
+        "en": "Source coordinates matter more than the navigator’s confident voice."
+      },
+      "outro": {
+        "ru": "Система запущена. Теперь изучим, как она держит курс.",
+        "en": "System launched. Now we study how it holds course."
+      }
+    },
+    "09-ai-notebook/u2-how-it-works": {
+      "intro": {
+        "ru": "Тетрадка сканирует груз: субтитры, PDF, записи. Каждый фрагмент получает координаты в журнале.",
+        "en": "The notebook scans the cargo: subtitles, PDFs, notes. Each fragment gets coordinates in the log."
+      },
+      "mentorHint": {
+        "ru": "Сигнал без координат не ведёт корабль, а сбивает его.",
+        "en": "A signal without coordinates does not guide the ship; it misleads it."
+      },
+      "outro": {
+        "ru": "Навигация понятна. Можно искать зоны риска.",
+        "en": "Navigation is clear. We can search for hazard zones."
+      }
+    },
+    "09-ai-notebook/u3-where-it-lies": {
+      "intro": {
+        "ru": "Опасности курса: пустые источники, ложные цитаты, ответы из общего шума. Проверяем приборами.",
+        "en": "Course hazards: empty sources, false quotes, answers from general noise. We check by instruments."
+      },
+      "mentorHint": {
+        "ru": "Клик по цитате — это сверка координат, а не формальность.",
+        "en": "Clicking a quote is coordinate verification, not ceremony."
+      },
+      "outro": {
+        "ru": "Зоны риска отмечены. Курс к знаниям стал безопаснее.",
+        "en": "Hazard zones are marked. The course to knowledge is safer."
+      }
+    },
+    "09-ai-notebook/u4-formats": {
+      "intro": {
+        "ru": "Иногда нужен отчёт капитану, иногда карта связей, иногда аудио-бриф. Формат выбирается по миссии.",
+        "en": "Sometimes the captain needs a report, sometimes a map of links, sometimes an audio brief. Format follows mission."
+      },
+      "mentorHint": {
+        "ru": "Любой бриф без координат — космический шум.",
+        "en": "Any brief without coordinates is space noise."
+      },
+      "outro": {
+        "ru": "Форматы пристыкованы. Груз можно передавать между палубами без потерь.",
+        "en": "Formats are docked. Cargo can move between decks without loss."
+      }
+    },
+    "09-ai-notebook/u5-practice": {
+      "intro": {
+        "ru": "Финальная миссия: твоя ниша, твои источники, один точный запрос и проверка цитат.",
+        "en": "Final mission: your niche, your sources, one precise query, and citation checks."
+      },
+      "mentorHint": {
+        "ru": "Не летай кругами вокруг планеты. Задай координаты посадки.",
+        "en": "Do not orbit the planet forever. Set landing coordinates."
+      },
+      "outro": {
+        "ru": "Миссия выполнена. Часы просмотра стали навигационной выжимкой с доказательствами.",
+        "en": "Mission complete. Hours of watching became a navigation extract with evidence."
+      }
+    }
+  }
+}

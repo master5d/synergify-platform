@@ -1,0 +1,39 @@
+{
+  "attribution": {
+    "source": "Anya Kamenetz",
+    "work": "DIYU: The Do-It-Yourself University",
+    "note": "Концепт адаптирован и атрибутирован, не цитируется дословно."
+  },
+  "thesis": [
+    {
+      "id": "cathedral",
+      "ru": "Классический университет — «собор рациональности», застывший с эпохи, когда книги были редки и дороги. Его форма отвечала на голод по знанию, которого больше нет.",
+      "en": "The classic university is a 'cathedral of rationality', frozen from an era when books were rare and costly. Its shape answered a hunger for knowledge that no longer holds."
+    },
+    {
+      "id": "info-abundant",
+      "ru": "Знание перестало быть редким: MIT OpenCourseWare, Khan Academy, Wikipedia, YouTube — оно лежит открыто. Ценность больше не в доставке контента.",
+      "en": "Knowledge is no longer rare: MIT OpenCourseWare, Khan Academy, Wikipedia, YouTube — it lies open. Value is no longer in delivering content."
+    },
+    {
+      "id": "ai-manuscript",
+      "ru": "AI — следующий сдвиг в этой истории, новая «манускриптная технология»: как печатный станок обрушил монополию на переписанное знание, так агенты меняют сам способ учиться и делать.",
+      "en": "AI is the next shift in this story, the new 'manuscript technology': as the printing press broke the monopoly on copied knowledge, agents change how we learn and make."
+    },
+    {
+      "id": "value-shift",
+      "ru": "Ценность смещается на три опоры: учись тому, что нужно сейчас; соединяйся с правильным сообществом; доказывай навык делом, а не дипломом.",
+      "en": "Value shifts onto three footings: learn what you need now; connect to the right community; demonstrate skill by doing, not by a diploma."
+    },
+    {
+      "id": "sovereign-diy",
+      "ru": "Точка Сборки и S.A.S.H.A — открытый, доступный, суверенный DIY-университет AI-эпохи: гильдия мастеров и учеников, независимая от церкви и государства. Открытый и в твоих руках.",
+      "en": "Tochka Sborki and S.A.S.H.A are the open, affordable, sovereign DIY-university for the AI age: a guild of masters and scholars independent of church and state. Open and in your hands."
+    }
+  ],
+  "placements": [
+    "hub academy.positioning (short — the landing framing)",
+    "a 'Горизонты' blog essay (long — the owner's manifesto in their voice)",
+    "the S.A.S.H.A manifesto"
+  ]
+}

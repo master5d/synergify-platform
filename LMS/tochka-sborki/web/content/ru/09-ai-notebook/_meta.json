@@ -1,0 +1,14 @@
+{
+  "module": 9,
+  "title": "AI-тетрадка",
+  "description": "Source-grounded учение: тетрадка, которая отвечает только по твоим источникам — и как проверять, где она врёт",
+  "duration": "38 мин",
+  "level": 1,
+  "units": [
+    { "slug": "u1-first-notebook", "title": "Тетрадка за 15 минут" },
+    { "slug": "u2-how-it-works", "title": "Как это устроено" },
+    { "slug": "u3-where-it-lies", "title": "Где оно врёт" },
+    { "slug": "u4-formats", "title": "Форматы вывода" },
+    { "slug": "u5-practice", "title": "Практика" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "module": 2,
+  "title": "Базовый сетап",
+  "description": "Настройка рабочей среды для агентного кодирования",
+  "duration": "45 мин",
+  "level": 2,
+  "units": [
+    { "slug": "u1-env-check", "title": "Проверка окружения" },
+    { "slug": "u2-install", "title": "Установка инструментов" },
+    { "slug": "u3-first-project", "title": "Первый проект" }
+  ]
+}

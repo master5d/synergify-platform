@@ -1,0 +1,86 @@
+---
+title: "The sins of prompting"
+unit: 4
+module: 4
+duration: "10 min"
+---
+
+<Phase type="activation">
+
+Picture a witness in a courtroom delivering a **confession**: "Yes, I gave too little context. Yes, I buried the critical instruction in the middle. Yes, I dropped three old file versions into the context window."
+
+Run it in your head: you're that witness right now. Picture a moment when Claude started forgetting early details mid-conversation, or answered confidently but wide of the mark. Which of the prompting sins are you ready to confess? Hold it — no self-judgment, just the facts of the case.
+
+</Phase>
+
+<Phase type="reflection">
+
+Now picture a different scene: you're a **ship's navigator** looking at a chart and seeing that the vessel has drifted off course.
+
+Hold that moment — where you are now versus where you should be. A navigator doesn't panic: they measure the drift, name it, and apply a correction. Which drift — context rot, lost-in-the-middle, distractors — knocked you off your heading? And what correction would you plot right now?
+
+</Phase>
+
+<Phase type="concept">
+
+## Five sins of prompting
+
+### 1. Context Rot
+
+The longer the conversation, the worse the model handles early information.
+
+**Fix:** structure information by priority, put the important stuff at the start and repeat it at the end.
+
+### 2. Lost in the Middle
+
+The model over-weights the beginning and end of the context. Critical stuff in the middle gets ignored.
+
+```
+❌ Bad:  [Intro] → [CRITICAL — in the middle] → [Conclusion]
+✅ Good: [CRITICAL — up front] → [Details] → [Repeat CRITICAL]
+```
+
+### 3. Distractors — extra stuff pulls attention
+
+Similar fragments in the context throw the model off the correct answer.
+
+```
+❌ Bad:  Drop 5 files, 2 of which are old versions
+✅ Good: Only relevant files + "Ignore old versions"
+```
+
+### 4. Mixing context and prompt
+
+Context (who you are, what's going on) and instruction (what to do specifically) are different things.
+
+```
+Context = background info (stable)
+Prompt  = the specific task (for this session)
+```
+
+Separate them explicitly — with Markdown headings or XML tags.
+
+### 5. Cursing kills quality
+
+This is a real effect: aggressive tone in the prompt makes results worse.
+
+```
+❌ "This is completely wrong! Redo it now!"
+✅ "That didn't work. Try without recursion."
+```
+
+</Phase>
+
+<Phase type="practice">
+
+Check your prompt from u2-spec-formula.md against the 5 sins:
+
+- [ ] No distractors (no extra info)?
+- [ ] Critical stuff up front, not in the middle?
+- [ ] Context separated from instruction?
+- [ ] Neutral tone, no aggression?
+- [ ] If it's a long conversation — do you summarize before each new task?
+
+Fix anything you find. Save the updated version to `my-experiments/u4-sins-fixed.md`.
+
+</Phase>

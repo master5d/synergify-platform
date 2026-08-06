@@ -1,0 +1,191 @@
+name: Deploy to Cloudflare
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'LMS/tochka-sborki/web/**'
+      - 'LMS/registry.json'
+      - 'hub/**'
+      - 'blog/**'
+      - 'mentor/**'
+      - 'academy/**'
+      - 'workers/**'
+      - '.github/workflows/deploy.yml'
+
+env:
+  CF_ACCOUNT: '252b28b0ef2e1866c532e2622060c809'
+
+jobs:
+  # ── ai.synergify.com (course) ──────────────────────────────
+  deploy-web:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: LMS/tochka-sborki/web/package-lock.json
+      - name: Install
+        working-directory: LMS/tochka-sborki/web
+        run: npm ci
+      - name: Build
+        working-directory: LMS/tochka-sborki/web
+        run: npm run build
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ env.CF_ACCOUNT }}
+        run: |
+          npx wrangler pages deploy LMS/tochka-sborki/web/out \
+            --project-name=tochka-sborki \
+            --branch=main \
+            --commit-message="${{ github.sha }}"
+
+  # ── mamaev.coach (landing hub + blog, merged build) ───────
+  deploy-hub:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: |
+            blog/package-lock.json
+            hub/package-lock.json
+      - name: Install blog
+        working-directory: blog
+        run: npm ci
+      - name: Build blog
+        working-directory: blog
+        run: npm run build
+        env:
+          # PUBLIC ingestion key (phc_…) — inlined into client JS by Next at build time.
+          # Empty ⇒ posthog stays dark-ship (blog/lib/analytics.ts no-op). Set via repo variable.
+          NEXT_PUBLIC_POSTHOG_KEY: ${{ vars.NEXT_PUBLIC_POSTHOG_KEY }}
+      - name: Install hub
+        working-directory: hub
+        run: npm ci
+      - name: Build hub
+        working-directory: hub
+        run: npm run build
+      - name: Merge blog into hub
+        run: node scripts/merge-blog.mjs
+      - name: Ensure project exists
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ env.CF_ACCOUNT }}
+        run: |
+          npx wrangler pages project create mamaev-coach-hub \
+            --production-branch=main || echo "Project already exists"
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ env.CF_ACCOUNT }}
+        run: |
+          npx wrangler pages deploy hub/out \
+            --project-name=mamaev-coach-hub \
+            --branch=main \
+            --commit-message="${{ github.sha }}"
+
+  # ── mentor.mamaev.coach (B2B one-pager) ───────────────────
+  deploy-mentor:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: mentor/package-lock.json
+      - name: Install
+        working-directory: mentor
+        run: npm ci
+      - name: Build
+        working-directory: mentor
+        run: npm run build
+      - name: Ensure project exists
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ env.CF_ACCOUNT }}
+        run: |
+          npx wrangler pages project create mamaev-coach-mentor \
+            --production-branch=main || echo "Project already exists"
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ env.CF_ACCOUNT }}
+        run: |
+          npx wrangler pages deploy mentor/out \
+            --project-name=mamaev-coach-mentor \
+            --branch=main \
+            --commit-message="${{ github.sha }}"
+
+  # ── academy.synergify.com (S.A.S.H.A academy) ──────────────
+  deploy-academy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: academy/package-lock.json
+      - name: Install
+        working-directory: academy
+        run: npm ci
+      - name: Build
+        working-directory: academy
+        run: npm run build
+      - name: Ensure project exists
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ env.CF_ACCOUNT }}
+        run: |
+          npx wrangler pages project create synergify-academy \
+            --production-branch=main || echo "Project already exists"
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ env.CF_ACCOUNT }}
+        run: |
+          npx wrangler pages deploy academy/out \
+            --project-name=synergify-academy \
+            --branch=main \
+            --commit-message="${{ github.sha }}"
+
+  # ── workers (auth API) ────────────────────────────────────
+  deploy-workers:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: workers/package-lock.json
+      - name: Install
+        working-directory: workers
+        run: npm ci
+      - name: Deploy
+        working-directory: workers
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ env.CF_ACCOUNT }}
+        run: npx wrangler deploy

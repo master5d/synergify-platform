@@ -1,0 +1,80 @@
+---
+title: "A professional prompt"
+unit: 5
+module: 4
+duration: "10 min"
+---
+
+<Phase type="activation">
+
+Picture a **genie** — and you're in the middle of negotiating the terms of a wish. The genie grants exactly what you say, nothing more, nothing less. It's a trickster: any loophole in the wording and it will find it.
+
+Run it in your head: surface the task that repeats every week for you — a report, meeting prep, analysis, content, replies. Hold it. Now picture bargaining with the genie over the exact wording of this wish. What do you need to nail down — so the genie can't wriggle out?
+
+</Phase>
+
+<Phase type="reflection">
+
+Now picture a different scene: you're a **theatre director** blocking a scene before the first rehearsal.
+
+Hold your recurring task in your head as that scene: who's in it, what their lines are, how the act ends. A director doesn't trust that actors will figure it out — they set the positions in advance.
+
+Notice: which "positions" in this task have you never set for AI? What stays in the wings if you don't put it on the page?
+
+</Phase>
+
+<Phase type="concept">
+
+## Meta-prompting: a prompt that writes prompts
+
+If you don't know where to start — ask Claude to write the prompt for you:
+
+```
+You are an expert at writing prompts for language models.
+
+Write a detailed prompt for an assistant that will [task description].
+
+Each of its responses must:
+- [criterion 1]
+- [criterion 2]
+- [criterion 3]
+
+Include all parameters important for quality.
+```
+
+### Template for a reusable assistant
+
+For repeating tasks (Claude Project, Gemini Gem, Claude Code Skill):
+
+```
+Role:         who this assistant is (expertise, style, boundaries)
+Objective:    the main goal — why it exists
+Context:      the situation it's used in
+Instructions: list of rules it operates by
+Notes:        reminders, edge cases, prohibitions
+```
+
+### Checklist before you hit send
+
+- [ ] Role is clear (who's answering, with what expertise)?
+- [ ] Task is specific (what exactly is needed)?
+- [ ] Output is defined (how do you know it's right)?
+- [ ] Constraints are clear (what not to do)?
+- [ ] No distractors (no extra text)?
+- [ ] Important stuff up front (not buried in the middle)?
+
+</Phase>
+
+<Phase type="practice">
+
+Final task for Meeting 3:
+
+Write a **reusable prompt** for your recurring task from Activation.
+
+Use the full CTID structure + magic words + check against the 5 sins.
+
+Save to `my-experiments/u5-reusable-prompt.md`
+
+This is your first professional reusable prompt — save it and use it every week.
+
+</Phase>

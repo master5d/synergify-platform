@@ -1,0 +1,70 @@
+---
+title: "Magic words"
+unit: 3
+module: 4
+duration: "8 min"
+---
+
+<Phase type="activation">
+
+Picture a mage reciting an **incantation** — but swapping one word. Not the meaning, just a single word in the right slot. And suddenly: the wrong potion brews, the door stays shut, the dragon doesn't sleep.
+
+Run it in your head: which AI answer frustrates you most — too generic, confident-but-wrong, correct-but-unexplained, or just watery? Hold it. Now picture it as a misfired incantation — where exactly in the prompt is the wrong word?
+
+</Phase>
+
+<Phase type="reflection">
+
+Now shift the frame. Picture a **piano tuner** with a tuning fork, listening to a string that rings just a hair off the true pitch.
+
+Hold that sound. At the collision of "incantation" and "instrument tuning" — what do you hear differently? Which note is AI missing — and what in the prompt needs to be turned until it rings true?
+
+</Phase>
+
+<Phase type="concept">
+
+## Phrases that consistently improve results
+
+| Problem | Phrase | Effect |
+|----------|-------|--------|
+| Generic answer | `Think step by step` | Activates a chain of reasoning — model shows its logic |
+| Too abstract | `Give a concrete example` | Validates the abstraction against a real case |
+| Hallucinations | `Only answer if you're sure` | Cuts down on inventing facts |
+| Unclear logic | `Explain your reasoning` | Shows the thinking — easy to spot mistakes |
+| Unstructured output | `Use the format: [table/list/JSON]` | Sets the response structure |
+| Vague task | `Be specific` | Reduces generalizations |
+
+### Example: with and without magic
+
+**Without phrases:**
+```
+Prompt: "What architecture is best for microservices?"
+Result: Generic answer, 50% useful info
+```
+
+**With phrases:**
+```
+Prompt: "What architecture is best for microservices?
+Think step by step, explain your reasoning.
+Give a concrete example for an e-commerce platform.
+Only answer if you're confident in the analysis."
+Result: Structured answer with logic, 95% useful info
+```
+
+### What does NOT work
+
+- `Please` / `Thank you` — politeness doesn't move quality
+- Threats (`this is important for my career`) — no impact
+- Repeating the prompt unchanged — you need to rephrase, not repeat
+
+</Phase>
+
+<Phase type="practice">
+
+Take the prompt from the previous unit (u2-spec-formula.md).
+
+Add 2–3 phrases from the table above that fix your main problem from Activation.
+
+Run both versions and compare. Save to `my-experiments/u3-magic-words.md`.
+
+</Phase>

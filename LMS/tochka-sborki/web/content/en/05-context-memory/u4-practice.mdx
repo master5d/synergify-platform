@@ -1,0 +1,88 @@
+---
+title: "Tune your memory"
+unit: 4
+module: 5
+duration: "10 min"
+---
+
+<Phase type="activation">
+
+You now have CLAUDE.md, TODO.md, AGENTS.md.
+
+Don't see these as "documentation" — picture them as **handing over the watch to a new lighthouse keeper**: the outgoing keeper leaves not just a manual, but everything needed to keep the light burning — the quirks of the mechanism, the rhythm of the waves in this bay, where the door creaks in a storm.
+
+Run it through your head: what in your files already passes on the "living knowledge" of the lighthouse? What are you still keeping only in your own head — knowledge that someday needs to be handed over?
+
+</Phase>
+
+<Phase type="reflection">
+
+A good memory system isn't a one-shot setup. It's a living system.
+
+Don't think of this as rules — picture a jazz musician **passing the head arrangement to a new band**: not notes on paper, but a living feel — how to hold a pause, where to improvise, where the structure has to stand firm.
+
+Catch the moment: the last time Claude played something in the wrong key — that was a signal. What would you add to the score so the next "musician" feels the right groove from the first bar?
+
+</Phase>
+
+<Phase type="concept">
+
+## When to update what
+
+| Event | Where to update |
+|---------|-------------|
+| Architecture changed | CLAUDE.md |
+| New stack added | CLAUDE.md |
+| Task completed | TODO.md |
+| Agent made a mistake you fixed | AGENTS.md |
+| Small mid-session clarification | `/btw New detail...` |
+
+## Techniques for long sessions
+
+### Context compression
+
+At the start of a new session or when context fills up:
+
+```
+Briefly summarize what's been done and the state of the project.
+Use format: ✅ Done / ❌ Left / ⚠️ Issues
+```
+
+### Prioritizing information
+
+```markdown
+## ⚠️ CRITICAL (always keep in focus)
+[The most important for the current task]
+
+## 📋 CONTEXT (good to know)
+[Additional details]
+```
+
+### Parallel agents for big tasks
+
+For independent subtasks, run several agents:
+
+```
+Agent 1: Find all bugs in the Auth module
+Agent 2: Write tests for the Payment module
+Agent 3: Update API docs
+
+Then merge the results.
+```
+
+</Phase>
+
+<Phase type="practice">
+
+Final task for Meeting 4:
+
+1. Launch Claude Code in your project: `claude`
+2. Give it a task from TODO.md
+3. Update CLAUDE.md if you learned something important about the project during work
+4. After the session: add one rule to AGENTS.md based on something Claude did wrong (if that happened)
+
+Send a `/btw` message with new info — see how the agent reacts.
+
+Save observations to `my-experiments/u4-memory-system.md`
+
+</Phase>

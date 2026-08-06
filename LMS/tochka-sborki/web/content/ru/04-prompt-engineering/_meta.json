@@ -1,0 +1,14 @@
+{
+  "module": 4,
+  "title": "Промпт-инжиниринг",
+  "description": "Как писать промпты как профессионал",
+  "duration": "60 мин",
+  "level": 4,
+  "units": [
+    { "slug": "u1-activation", "title": "Мой худший промпт" },
+    { "slug": "u2-spec-formula", "title": "Формула спецификации" },
+    { "slug": "u3-magic-words", "title": "Магические слова" },
+    { "slug": "u4-sins", "title": "Грехи промптинга" },
+    { "slug": "u5-practice", "title": "Профессиональный промпт" }
+  ]
+}

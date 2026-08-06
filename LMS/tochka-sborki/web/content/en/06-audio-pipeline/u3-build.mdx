@@ -1,0 +1,88 @@
+---
+title: "Build your pipeline"
+unit: 3
+module: 6
+duration: "20 min"
+---
+
+<Phase type="activation">
+
+You have your pipeline design from the last unit — a sketch of how the steps connect.
+
+Don't look at it as a diagram. **Picture it as plumbing:** every connection is a fitting the flow has to pass through. Where pipes meet tight, water runs clean. Where they're joined in a hurry — it drips.
+
+Run each joint of your design in your head: which one honestly looks like a temporary clamp held together with tape? That's the fitting to reinforce before you turn the water on.
+
+</Phase>
+
+<Phase type="reflection">
+
+Picture an editor at the cutting table: hundreds of clips in front of them, and the goal isn't to make a perfect film — it's to **assemble a first rough cut** so they can see where the story falls apart.
+
+No great edit starts from a first take. First comes the rough cut: everything in order, even if it's uneven. Then the director watches to see what grips and what sags.
+
+Your pipeline today is the rough cut. Notice the one spot that sagged on the first pass — that's exactly where the second version gets its upgrade.
+
+</Phase>
+
+<Phase type="concept">
+
+## Full pipeline: URL → Insights
+
+This is a working prompt you can use right now:
+
+```
+You are an analytical agent. Your job is to extract maximum value from content.
+
+URL to analyze: [paste link]
+
+Tasks:
+1. Read the page fully
+2. Pull out 5–7 actionable ideas (concrete, not generic phrases)
+3. Identify 5–7 topics for further research
+4. Find 2–3 best quotes or facts
+
+Output format:
+## Key ideas
+[list with explanations]
+
+## Topics to research
+[list with short context]
+
+## Worth remembering
+[quotes or facts]
+
+Save the result to a file ideas.md
+```
+
+## Extended pipeline: multiple sources
+
+You can analyze several URLs in parallel:
+
+```
+Analyze three articles on the topic [topic]:
+1. [URL 1]
+2. [URL 2]
+3. [URL 3]
+
+For each: 3 ideas + 1 best quote.
+Then: find what they have in common and where they contradict.
+Save to research-[topic].md
+```
+
+</Phase>
+
+<Phase type="practice">
+
+Run your pipeline right now:
+
+1. Take a URL from a real task (article, docs, post)
+2. Use the prompt from Concept above
+3. Get the result
+4. Rate it: what worked? what could be better?
+
+Save the result to `my-experiments/u3-pipeline-result.md`
+
+Save the prompt to `my-experiments/u3-pipeline-prompt.md` — this is your first reusable pipeline.
+
+</Phase>

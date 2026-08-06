@@ -1,0 +1,13 @@
+{
+  "module": 5,
+  "title": "Контекст и память",
+  "description": "Как агенты удерживают информацию и как этим управлять",
+  "duration": "45 мин",
+  "level": 5,
+  "units": [
+    { "slug": "u1-activation", "title": "Когда агент тебя не понял" },
+    { "slug": "u2-context-vs-prompt", "title": "Контекст vs Промпт" },
+    { "slug": "u3-memory", "title": "Система памяти" },
+    { "slug": "u4-practice", "title": "Настрой свою память" }
+  ]
+}

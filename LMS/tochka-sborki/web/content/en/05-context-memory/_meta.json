@@ -1,0 +1,13 @@
+{
+  "module": 5,
+  "title": "Context & Memory",
+  "description": "How agents hold information — and how to manage it",
+  "duration": "45 min",
+  "level": 5,
+  "units": [
+    { "slug": "u1-activation", "title": "When the agent didn't get you" },
+    { "slug": "u2-context-vs-prompt", "title": "Context vs Prompt" },
+    { "slug": "u3-memory", "title": "The memory system" },
+    { "slug": "u4-practice", "title": "Tune your memory" }
+  ]
+}

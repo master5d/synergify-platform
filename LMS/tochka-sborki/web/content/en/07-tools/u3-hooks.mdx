@@ -1,0 +1,107 @@
+---
+title: "Hooks: event automation"
+unit: 3
+module: 7
+duration: "15 min"
+---
+
+<Phase type="activation">
+
+Picture the routine you repeat after every agent response — or before every task you hand it.
+
+Don't picture this as a "manual step." Picture a clock's escapement: the anchor clicks — and the gear advances exactly one tooth, no more, no less. The click happens on its own — nobody pulled a lever. Run it in your head: what in your workflow still needs that manual click?
+
+**Which trigger would you automate first?**
+
+</Phase>
+
+<Phase type="reflection">
+
+If you do something after every agent action — that's a Hook.
+
+Don't think of this as a "script." Picture a domino chain: you push the first tile — and the whole row falls by itself, one after another, without you touching a single piece. An event in Claude Code is the first tile; the Hook is everything that follows.
+
+Notice in your head: how many "tiles" in your workflow still need you to push them one by one?
+
+</Phase>
+
+<Phase type="concept">
+
+## Events for Hooks
+
+| Event | When it fires |
+|---------|-----------------|
+| `PreToolUse` | Before the agent uses a tool |
+| `PostToolUse` | After the agent uses a tool |
+| `Notification` | When the agent wants to get your attention |
+| `Stop` | When the agent finishes |
+
+## Hook config
+
+In `.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'File written: ' && date >> ~/claude-log.txt"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+## Practical examples
+
+**Logging:** every time the agent writes a file — save to a log
+
+**Notifications:** when the agent finishes a task — send a message to Telegram
+
+**Validation:** before the agent runs a bash command — check it's safe
+
+**Formatting:** after the agent writes a TypeScript file — run prettier
+
+## Security
+
+A Hook can run any command. A few rules:
+- Don't run hooks from untrusted sources
+- Check what a hook does before adding it
+- For production systems, limit what the agent can do via PreToolUse
+
+</Phase>
+
+<Phase type="practice">
+
+Write your first Hook — a simple one that logs activity:
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"$(date): Claude finished a task\" >> ~/claude-activity.log"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Add to `.claude/settings.json`, launch Claude Code, give it any task.
+
+Check the log: `cat ~/claude-activity.log`
+
+Save the config to `my-experiments/u3-my-hook.md`
+
+</Phase>

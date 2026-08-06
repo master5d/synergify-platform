@@ -1,0 +1,705 @@
+{
+  "skin": "slavic-myth",
+  "zoneNames": {
+    "00-kickstart": {
+      "ru": "Родная Околица",
+      "en": "The Familiar Outskirts"
+    },
+    "01-introduction": {
+      "ru": "Тайная Поляна",
+      "en": "The Secret Glade"
+    },
+    "02-setup-guide": {
+      "ru": "Мастерская Домового",
+      "en": "The Domovoy's Workshop"
+    },
+    "03-stack-selection": {
+      "ru": "Камень на Распутье",
+      "en": "The Crossroads Stone"
+    },
+    "04-prompt-engineering": {
+      "ru": "Родник Живого Слова",
+      "en": "The Spring of Living Words"
+    },
+    "05-context-memory": {
+      "ru": "Волшебный Клубок",
+      "en": "The Magic Ball of Yarn"
+    },
+    "06-audio-pipeline": {
+      "ru": "Чудо-Мельница",
+      "en": "The Wonder-Mill"
+    },
+    "07-tools": {
+      "ru": "Кузня Сварога",
+      "en": "Svarog's Forge"
+    },
+    "08-agent-engineering": {
+      "ru": "Агентов Хоровод",
+      "en": "The Agents' Round Dance"
+    },
+    "09-ai-notebook": {
+      "ru": "Изба с Письменами",
+      "en": "The Hut of Writings"
+    }
+  },
+  "questTitles": {
+    "00-kickstart": {
+      "ru": "Зачин: Как в путь-дорожку собирались",
+      "en": "The Beginning: Preparing for the Road Ahead"
+    },
+    "01-introduction": {
+      "ru": "Сказ о диве дивном, Software 3.0",
+      "en": "A Tale of the Wondrous Software 3.0"
+    },
+    "02-setup-guide": {
+      "ru": "Наладить очаг для своих agent-помощников",
+      "en": "Setting up the Hearth for Your Agents"
+    },
+    "03-stack-selection": {
+      "ru": "Какой agentic-стек тебе по сердцу придётся",
+      "en": "Which Agentic-Stack Will Suit Your Path"
+    },
+    "04-prompt-engineering": {
+      "ru": "Сплести prompt, что дело любое спорит",
+      "en": "Weaving a Prompt to Master Any Task"
+    },
+    "05-context-memory": {
+      "ru": "Как agent помнит, куда нить ведёт",
+      "en": "How an Agent Remembers Where the Thread Leads"
+    },
+    "06-audio-pipeline": {
+      "ru": "Запустить workflow, что сам мелет муку",
+      "en": "Starting a Workflow that Grinds Its Own Flour"
+    },
+    "07-tools": {
+      "ru": "Оснастить MCP-серверы и прочие Skills-хитрости",
+      "en": "Equipping MCP-Servers and Other Cunning Skills"
+    },
+    "08-agent-engineering": {
+      "ru": "Как водить хоровод систем агентов мудро",
+      "en": "Wisely Leading the Round Dance of Agents"
+    },
+    "09-ai-notebook": {
+      "ru": "Вытянуть правду по следу",
+      "en": "Pull truth by the trail"
+    }
+  },
+  "units": {
+    "00-kickstart/u1-map": {
+      "intro": {
+        "ru": "Всякая добрая изба начинается с замысла, с духа-невидимки, что вьётся под потолком. Давай же приглядимся к твоему призраку-идее, разглядим его очертания.",
+        "en": "Every good izba begins with a design, an invisible spirit that weaves itself under the rafters. Let's take a closer look at your ghost-idea and make out its shape."
+      },
+      "mentorHint": {
+        "ru": "Чтобы дух обрёл плоть, сперва назови его по имени.",
+        "en": "For a spirit to take form, you must first speak its name."
+      },
+      "outro": {
+        "ru": "Вот и славно, теперь твой замысел не просто дымка, а путеводная звезда. Держи её свет в сердце, мы отправляемся за нужными снастями.",
+        "en": "Well done, your idea is no longer just a wisp of smoke, but a guiding star. Keep its light in your heart; we're now off to find the necessary tools."
+      }
+    },
+    "00-kickstart/u2-tools": {
+      "intro": {
+        "ru": "Всякому делу свой инструмент, будь то самопряха-прялка или волшебный клубок. Пойдём в мою кладовую, я покажу тебе, какие диковины помогут нам в пути – от API до MCP.",
+        "en": "For every craft, there is a tool, whether a self-spinning wheel or a magic ball of yarn. Come to my storeroom, and I will show you the curiosities that will aid our journey—from API to MCP."
+      },
+      "mentorHint": {
+        "ru": "Не бойся диковинных имён, главное – знать, для какой работы какая вещь годится.",
+        "en": "Do not be afraid of strange names; what matters is knowing which tool is fit for which task."
+      },
+      "outro": {
+        "ru": "Теперь твой сундучок не пуст, и ты знаешь, что к чему. С такими-то снастями и первые шаги делать не страшно.",
+        "en": "Now your chest is not empty, and you know what each tool is for. With such equipment, taking the first steps isn't so frightening."
+      }
+    },
+    "00-kickstart/u3-first-steps": {
+      "intro": {
+        "ru": "Ну что, хозяин, в руках у тебя и замысел, и снасти. Пора ступить за порог, вдохнуть полной грудью и сделать первый, самый важный шаг по тропинке.",
+        "en": "Well, master, you now have the plan and the tools in hand. It is time to step across the threshold, breathe in deeply, and take the first, most important step down the path."
+      },
+      "mentorHint": {
+        "ru": "Тропинку осилит идущий, а добрый prompt – верный спутник.",
+        "en": "The one who walks the path will master it, and a good prompt is a true companion."
+      },
+      "outro": {
+        "ru": "С почином! Первый шажок сделан, тропинка под ногами вьётся. Теперь ты знаешь, что дорога эта тебе по силам.",
+        "en": "A fine beginning! The first step is made, the path now winds before you. You now know this road is one you can travel."
+      }
+    },
+    "01-introduction/u1-activation": {
+      "intro": {
+        "ru": "Ну-ка, присаживайся у печи, добрый человек. Давай-ка вспомним, где ты уже встречал эту новую магию, этих невидимых помощников.",
+        "en": "Come, sit by the stove, good soul. Let us recall where you have already met this new magic, these invisible helpers."
+      },
+      "mentorHint": {
+        "ru": "Чтобы знать, куда идешь, сперва оглянись на тропку позади.",
+        "en": "To know where you are going, first look back at the path behind you."
+      },
+      "outro": {
+        "ru": "Вижу, тропка твоя уже не коротка. Теперь давай поглядим, какие узоры на ней вышиты.",
+        "en": "I see your path is not so short. Now let's look at the patterns embroidered upon it."
+      }
+    },
+    "01-introduction/u2-four-shifts": {
+      "intro": {
+        "ru": "Мир наш, он живой, всё в нём меняется, как времена года. И у этой новой магии есть свои четыре великих перемены, что мир по-новому крутят.",
+        "en": "Our world is alive; everything in it changes, like the seasons. And this new magic has its own four great shifts that turn the world in a new way."
+      },
+      "mentorHint": {
+        "ru": "Смотри не на нитку, а на весь узор, что ткётся.",
+        "en": "Look not at the thread, but at the whole pattern being woven."
+      },
+      "outro": {
+        "ru": "Вот ты и увидел, как ветер перемен дует. А теперь поглядим, в каких духов эта магия вселяется.",
+        "en": "So, you have seen how the winds of change are blowing. And now let's see what spirits this magic inhabits."
+      }
+    },
+    "01-introduction/u3-clones": {
+      "intro": {
+        "ru": "Духи, они разные бывают: есть лешие, есть водяные, а есть и мы, домовые. Так и у этой магии есть пять обличий, пять верных помощников-клонов.",
+        "en": "Spirits come in many forms: there are forest ones, water ones, and then there are us, the house spirits. This new magic also has five faces, five faithful helper 'clones'."
+      },
+      "mentorHint": {
+        "ru": "Знай, какого духа для какого дела кликать.",
+        "en": "Know which spirit to call for which task."
+      },
+      "outro": {
+        "ru": "Теперь ты знаком со всем семейством. Пора бы научиться с ними речи вести да прошения подавать.",
+        "en": "Now you are acquainted with the whole family. It is time to learn how to speak with them and make your requests."
+      }
+    },
+    "01-introduction/u4-practice": {
+      "intro": {
+        "ru": "Всякое дело с первого слова начинается. Сейчас мы с тобой составим первый 'prompt' — первое заветное слово для нашего нового помощника.",
+        "en": "Every task begins with the first word. Now, you and I will craft the first 'prompt'—the first magic word for our new helper."
+      },
+      "mentorHint": {
+        "ru": "Говори ясно да с добрым сердцем — и дух тебя услышит.",
+        "en": "Speak clearly and with a good heart—and the spirit will hear you."
+      },
+      "outro": {
+        "ru": "С почином! Первый разговор состоялся, дух тебе ответил. Теперь тропка открыта, ступай по ней смелее.",
+        "en": "A fine start! The first conversation has happened, the spirit has answered you. The path is now open, walk it more boldly."
+      }
+    },
+    "02-setup-guide/u1-env-check": {
+      "intro": {
+        "ru": "Прежде чем мастерить, добрый хозяин всегда свой двор оглядит, всё ли на месте. Давай и мы проверим наши хоромы цифровые, готовы ли они к волшебству.",
+        "en": "Before crafting, a good master always inspects his domain to see if all is in order. Let us too check our digital chambers and see if they are ready for magic."
+      },
+      "mentorHint": {
+        "ru": "Семь раз отмерь, один раз код напиши.",
+        "en": "Measure seven times, write the code once."
+      },
+      "outro": {
+        "ru": "Вот и славно, всё на своих местах, чисто да убрано. Теперь изба наша к чудесам готова.",
+        "en": "Wonderful, everything is in its place, neat and tidy. Now our hut is ready for wonders."
+      }
+    },
+    "02-setup-guide/u2-install": {
+      "intro": {
+        "ru": "Каждому мастеру свои инструменты нужны: кузнецу — молот, плотнику — топор. Мы же сейчас обзаведёмся своими, чтобы наш будущий помощник был скроен ладно да крепко.",
+        "en": "Every craftsman needs his tools: a smith his hammer, a carpenter his axe. We shall now acquire our own, so that our future helper is crafted skillfully and strong."
+      },
+      "mentorHint": {
+        "ru": "Хороший инструмент — половина дела.",
+        "en": "A good tool is half the work done."
+      },
+      "outro": {
+        "ru": "Ну вот, и молотки наточены, и долота блестят. Пора бы и первый камушек в основание нашего дела заложить.",
+        "en": "There we are, the hammers are sharp and the chisels gleam. It is time to lay the first stone in the foundation of our work."
+      }
+    },
+    "02-setup-guide/u3-first-project": {
+      "intro": {
+        "ru": "Пришло время вдохнуть жизнь в наше первое творение. Пусть оно будет пока маленьким, но сделаем мы его с душой, чтобы он откликался на наш первый prompt.",
+        "en": "The time has come to breathe life into our first creation. It may be small for now, but we will make it with soul, so it may answer our very first prompt."
+      },
+      "mentorHint": {
+        "ru": "Глаза боятся, а руки делают.",
+        "en": "The eyes fear, but the hands do."
+      },
+      "outro": {
+        "ru": "Смотри-ка, откликается! Первый шаг — он самый важный. Теперь, когда начало положено, перед нами открываются все дороги.",
+        "en": "Look at that, it responds! The first step is the most important one. Now that a beginning has been made, all roads are open to us."
+      }
+    },
+    "03-stack-selection/u1-activation": {
+      "intro": {
+        "ru": "Всякий домовой сперва обходит свои владения, чтобы знать каждый уголок. Так и мы, давай осмотримся и поймём, где пролегают границы наших чар.",
+        "en": "Every house-spirit first walks its domain to know every corner. Let us too look around and understand the boundaries of our magic."
+      },
+      "mentorHint": {
+        "ru": "Знай свой чертог, и твой agent обретёт истинную силу.",
+        "en": "Know your domain, and your agent will find its true power."
+      },
+      "outro": {
+        "ru": "Границы очерчены, владения ясны. Теперь, когда мы знаем правила, можно начинать творить настоящее волшебство.",
+        "en": "The borders are drawn, the domain is clear. Now that we know the rules, we can begin to create real magic."
+      }
+    },
+    "03-stack-selection/u2-stack-matrix": {
+      "intro": {
+        "ru": "Мы у камня на распутье, где четыре дороги ведут к разным чудесам. Давай прочтём руны и выберем тот стек, что подходит нашему сердцу.",
+        "en": "We stand at a crossroads stone where four paths lead to different wonders. Let's read the runes and choose the stack that speaks to our heart."
+      },
+      "mentorHint": {
+        "ru": "Каждому делу — свой инструмент, каждой задаче — свой prompt.",
+        "en": "For every task, its own tool; for every problem, its own prompt."
+      },
+      "outro": {
+        "ru": "Путь выбран, и какой славный! С таким подспорьем мы далеко пойдём, и сказка наша будет долгой.",
+        "en": "The path is chosen, and what a fine one it is! With such a tool at our side, we will go far, and our tale will be a long one."
+      }
+    },
+    "03-stack-selection/u3-behind-gfw": {
+      "intro": {
+        "ru": "Перед нами тёмный лес, заколдованный, чтобы не пускать чужаков. Но лесные духи знают тайные тропы, и мы их отыщем.",
+        "en": "Before us lies a dark forest, enchanted to keep strangers out. But the forest spirits know secret trails, and we shall find them."
+      },
+      "mentorHint": {
+        "ru": "Где прямой путь заказан, там смекалка проведёт твой API.",
+        "en": "Where the direct path is barred, cunning will guide your API through."
+      },
+      "outro": {
+        "ru": "Вот мы и миновали чащу! Теперь ни одна волшебная преграда не остановит полёт нашей мысли.",
+        "en": "We have passed through the thicket! Now no magical barrier can stop the flight of our thoughts."
+      }
+    },
+    "03-stack-selection/u4-hermes-sovereign": {
+      "intro": {
+        "ru": "Вместо того, чтобы взывать к далёким силам, давай научимся растить своего духа-помощника у домашнего очага. Это будет сила, подвластная лишь нам.",
+        "en": "Instead of calling on distant powers, let's learn to nurture our own helper-spirit by the hearth. This will be a power that is truly ours."
+      },
+      "mentorHint": {
+        "ru": "Свой локальный стек в хозяйстве — всему голова, он и есть твой MCP.",
+        "en": "Your own local stack in the household is the master of all; it is your MCP."
+      },
+      "outro": {
+        "ru": "Дух нашего очага пробудился и готов помогать! Это великая сила, суверенная магия, которой мы теперь владеем.",
+        "en": "The spirit of our hearth has awakened and is ready to help! This is a great power, a sovereign magic we now command."
+      }
+    },
+    "03-stack-selection/u5-migrate": {
+      "intro": {
+        "ru": "Мы выстроили новый, более уютный терем для нашего ремесла. Пора бережно переносить старые привычки и инструменты, чтобы ни один добрый дух не остался позади.",
+        "en": "We have built a new, cozier chamber for our craft. It is time to carefully move our old habits and tools, ensuring no good spirit is left behind."
+      },
+      "mentorHint": {
+        "ru": "Новый workflow ладь, да о старом добром не позабудь.",
+        "en": "Set up the new workflow, but don't forget the good old ways."
+      },
+      "outro": {
+        "ru": "Переезд завершён! Наш workflow обжился на новом месте, стал сильнее и удобнее. Посмотрим, какие новые сказки мы здесь сложим.",
+        "en": "The move is complete! Our workflow has settled into its new home, stronger and more comfortable. Let's see what new tales we will spin here."
+      }
+    },
+    "04-prompt-engineering/u1-activation": {
+      "intro": {
+        "ru": "Даже доброму духу, такому как я, порой дашь невнятное поручение — жди беды. Давай-ка разберёмся, как мы с тобой общаемся и почему иногда каша заваривается.",
+        "en": "Even a good spirit like me, if given a mumbled task, can bring trouble. Let's figure out how we talk to each other and why things sometimes turn into a mess."
+      },
+      "mentorHint": {
+        "ru": "Не бойся кривого слова, с него-то и начинается мастерство.",
+        "en": "Don't be afraid of a clumsy word; that's where mastery begins."
+      },
+      "outro": {
+        "ru": "Вот видишь, всякий зачин бывает комом. А теперь, когда мы посмеялись над нашими ошибками, давай научимся говорить ясно, чтобы дело спорилось.",
+        "en": "You see, every beginning can be a bit lumpy. Now that we've laughed at our mistakes, let's learn to speak clearly, so the work goes smoothly."
+      }
+    },
+    "04-prompt-engineering/u2-spec-formula": {
+      "intro": {
+        "ru": "Чтобы испечь хороший каравай, нужен точный рецепт, а не просто 'муки да воды'. Так и с нашими цифровыми помощниками: давай сложим для них чёткую формулу-заговор.",
+        "en": "To bake a good karavai, you need a precise recipe, not just 'some flour and water'. It's the same with our digital helpers: let's craft a clear formula-incantation for them."
+      },
+      "mentorHint": {
+        "ru": "Чем точнее просьба, тем щедрее дар.",
+        "en": "The more precise the request, the more generous the gift."
+      },
+      "outro": {
+        "ru": "Добротная основа у нас теперь есть, как печка в доме. Пора узнать про те самые словечки, что зажигают в ней огонь.",
+        "en": "We now have a solid foundation, like a stove in a house. It's time to learn about the special little words that light the fire within it."
+      }
+    },
+    "04-prompt-engineering/u3-magic-words": {
+      "intro": {
+        "ru": "В каждом заговоре есть слова силы, что меняют суть дела. В наших prompt'ах тоже есть такие — они как ключики к потайным комнатам.",
+        "en": "Every incantation has words of power that change the essence of things. Our prompts have them too — they are like keys to secret rooms."
+      },
+      "mentorHint": {
+        "ru": "Подбери верное слово, и даже глиняный горшок споёт.",
+        "en": "Choose the right word, and even a clay pot will sing."
+      },
+      "outro": {
+        "ru": "Теперь твой словесный узор стал богаче и ярче! Но знай, есть и такие слова и привычки, что могут всё дело сглазить — о них и поговорим.",
+        "en": "Now your verbal pattern has become richer and brighter! But be aware, there are also words and habits that can jinx the whole affair — let's talk about them."
+      }
+    },
+    "04-prompt-engineering/u4-sins": {
+      "intro": {
+        "ru": "Есть вещи, которые не стоит делать, если не хочешь рассердить домового или запутать своего цифрового духа. Давай заглянем в этот список 'грехов', чтобы их избегать.",
+        "en": "There are things you shouldn't do if you don't want to anger a domovoy or confuse your digital spirit. Let's look at this list of 'sins' so we can avoid them."
+      },
+      "mentorHint": {
+        "ru": "Мудрый не тот, кто не ошибается, а тот, кто знает, где грабли лежат.",
+        "en": "A wise person is not one who makes no mistakes, but one who knows where the rakes are."
+      },
+      "outro": {
+        "ru": "Теперь ты знаешь, каких тропинок лучше сторониться. С этим знанием ты готов соткать свой самый ладный и искусный prompt.",
+        "en": "Now you know which paths are best to avoid. With this knowledge, you are ready to weave your most harmonious and skillful prompt."
+      }
+    },
+    "04-prompt-engineering/u5-practice": {
+      "intro": {
+        "ru": "Мы с тобой прошли долгий путь: от неуклюжих просьб до тайных слов. Пришло время собрать все наши знания воедино и сотворить настоящий шедевр — prompt, достойный мастера.",
+        "en": "You and I have come a long way: from clumsy requests to secret words. It is time to gather all our knowledge and create a true masterpiece — a prompt worthy of a master."
+      },
+      "mentorHint": {
+        "ru": "Дело мастера боится. Берись смело!",
+        "en": "The work fears the master. Go on, be bold!"
+      },
+      "outro": {
+        "ru": "Поздравляю, друг! Теперь ты не просто просишь, а ведёшь разговор, ткёшь узоры из слов. Твой цифровой очаг будет гореть ярко!",
+        "en": "Congratulations, my friend! Now you don't just ask, you hold a conversation, you weave patterns from words. Your digital hearth will burn brightly!"
+      }
+    },
+    "05-context-memory/u1-activation": {
+      "intro": {
+        "ru": "Бывает, зовёшь духа-помощника, а он будто и не слышит. Давай разберёмся, как достучаться до нашего agent, чтобы он проснулся и слушать начал.",
+        "en": "Sometimes you call for your little helper-spirit, but it seems not to hear you at all. Let's figure out how to reach our agent, to wake it up and make it listen."
+      },
+      "mentorHint": {
+        "ru": "Чтобы слово дошло, сперва надо в нужную дверь постучаться.",
+        "en": "For your word to be heard, you must first knock on the right door."
+      },
+      "outro": {
+        "ru": "Вот видишь, теперь он ушки на макушке держит! А теперь научим его не просто слушать, а запоминать, о чём речь шла.",
+        "en": "There, you see, now its ears are perked up! Next, we'll teach it not just to listen, but to remember the context of your talk."
+      }
+    },
+    "05-context-memory/u2-context-vs-prompt": {
+      "intro": {
+        "ru": "Сказать 'принеси' — это одно. А вот чтобы дух понял, *что* принести и *зачем*, ему нужно всю беседу нашу помнить, весь узор разговора видеть.",
+        "en": "Saying 'fetch' is one thing. But for the spirit to understand *what* to fetch and *why*, it needs to remember our entire conversation, to see the whole pattern of the talk."
+      },
+      "mentorHint": {
+        "ru": "Одно слово — искра, а весь разговор — пламя очага.",
+        "en": "A single word is a spark, but the whole conversation is the flame in the hearth."
+      },
+      "outro": {
+        "ru": "Славно! Теперь наш agent понимает разницу между сиюминутным словом и долгой беседой. Пора дать ему свою кладовую для воспоминаний.",
+        "en": "Splendid! Our agent now knows the difference between a passing word and a long conversation. It's time to give it a pantry of its own for memories."
+      }
+    },
+    "05-context-memory/u3-memory": {
+      "intro": {
+        "ru": "У каждого домового есть свой укромный уголок, где он хранит важные вещицы и воспоминания. Давай и нашему agent такой же сундучок памяти смастерим.",
+        "en": "Every house-spirit has a secret nook for its important trinkets and memories. Let's build a similar memory chest for our agent."
+      },
+      "mentorHint": {
+        "ru": "Что в узелок завязано, то из головы не вылетит.",
+        "en": "What is tied in a knot will not fly out of the head."
+      },
+      "outro": {
+        "ru": "Отличная работа, теперь у нашего духа-помощника есть, куда складывать наши беседы. Осталось научить его этим богатством пользоваться по-умному.",
+        "en": "Excellent work! Now our helper-spirit has a place to store our conversations. All that remains is to teach it how to use this treasure wisely."
+      }
+    },
+    "05-context-memory/u4-practice": {
+      "intro": {
+        "ru": "Сундучок-то мы смастерили, но теперь нужно научить нашего духа, что в него класть, а что — нет. Не всякий сказ стоит помнить дословно.",
+        "en": "We've crafted the memory chest, but now we must teach our spirit what to put in it and what to leave out. Not every tale is worth remembering verbatim."
+      },
+      "mentorHint": {
+        "ru": "Хороший хозяин знает, что хранить, а что и отпустить.",
+        "en": "A good master knows what to keep and what to let go."
+      },
+      "outro": {
+        "ru": "Чудесно! Теперь твой agent не просто помнит, а помнит с умом, как настоящий хранитель очага. Твои беседы с ним станут теплее и мудрее.",
+        "en": "Wonderful! Now your agent doesn't just remember, it remembers wisely, like a true keeper of the hearth. Your conversations with it will grow warmer and wiser."
+      }
+    },
+    "06-audio-pipeline/u1-activation": {
+      "intro": {
+        "ru": "Давай-ка посмотрим, сколько дел мы делаем своими руками, день за днём. Словно воду в решете носим, много сил уходит на одно и то же.",
+        "en": "Let's take a look at all the chores we do by hand, day after day. It's like carrying water in a sieve; so much effort is spent on the same old things."
+      },
+      "mentorHint": {
+        "ru": "Добрый хозяин сперва каждый уголок в своей избе знает.",
+        "en": "A good master first knows every corner of their own house."
+      },
+      "outro": {
+        "ru": "Вот ты и сосчитал вёдра, да увидел, как долог путь до колодца. А что, коли работа сама себя делать станет?",
+        "en": "You've counted the buckets and seen the long road to the well. Now, what if the work could do itself?"
+      }
+    },
+    "06-audio-pipeline/u2-pipeline-theory": {
+      "intro": {
+        "ru": "В сказках одно волшебное слово — и печка пироги печёт. Вот и мы изучим такое колдовство: как только что-то случится (Trigger), так сразу другое дело делается (Action).",
+        "en": "In the old tales, a single magic word could make the oven bake pies. We will learn our own kind of magic: when something happens (a Trigger), another thing follows (an Action)."
+      },
+      "mentorHint": {
+        "ru": "Скажи верное слово — и сам лес перед тобой расступится.",
+        "en": "Say the right word, and even the forest will part for you."
+      },
+      "outro": {
+        "ru": "Теперь ты знаешь тайный заговор! Видишь, как от простого стука отворяется потайная дверь.",
+        "en": "Now you know the secret chant! You see how a simple knock can open a hidden door."
+      }
+    },
+    "06-audio-pipeline/u3-build": {
+      "intro": {
+        "ru": "Пришло время вдохнуть жизнь в нашего помощника, в нашего собственного домового. Покажем ему, к чему прислушиваться и какую работу справлять, когда он услышит зов.",
+        "en": "It is time to breathe life into our little helper, our very own house-spirit. We will show it what to listen for and what chores to do when it hears the call."
+      },
+      "mentorHint": {
+        "ru": "По хорошей тропинке и дорога легче.",
+        "en": "A well-laid path makes for an easy journey."
+      },
+      "outro": {
+        "ru": "Гляди-ка! Твой дух-помощник уже по углам прибирает, пока ты отдыхаешь. Доброе начало — половина дела.",
+        "en": "Look at that! Your little spirit is already tidying up the corners while you rest. A good beginning is half the battle won."
+      }
+    },
+    "06-audio-pipeline/u4-reflect": {
+      "intro": {
+        "ru": "Один домовой — хорошо, а в справном хозяйстве много невидимых рук трудится. Давай посидим у печи да поразмыслим, какие ещё скучные дела можно нашим помощникам поручить.",
+        "en": "One house-spirit is good, but a well-run household has many invisible hands at work. Let's sit by the stove and ponder what other tiresome chores we can hand over to our helpers."
+      },
+      "mentorHint": {
+        "ru": "Умный хозяин не тот, кто много работает, а тот, кто с умом работает.",
+        "en": "A clever master doesn't work hard, they work smart."
+      },
+      "outro": {
+        "ru": "С каждой твоей думкой хозяйство становится всё волшебнее и складнее. Ты теперь не просто работник, а мудрый хранитель умного дома.",
+        "en": "With every thought, your household becomes more magical and orderly. You are no longer just a worker, but the wise keeper of a clever home."
+      }
+    },
+    "07-tools/u1-activation": {
+      "intro": {
+        "ru": "Слепили мы с тобой гомункула, хорош собой, да молчит. Давай-ка подумаем, какого слова заветного, какого толчка ему для дела не хватает.",
+        "en": "We've sculpted a homunculus together, a handsome one, but it remains silent. Let's ponder what secret word, what gentle nudge it needs to start its work."
+      },
+      "mentorHint": {
+        "ru": "И самый ладный механизм без нужного слова — лишь груда железа.",
+        "en": "Even the finest mechanism is but a heap of iron without the right word."
+      },
+      "outro": {
+        "ru": "Вот и ожил наш помощник, зашевелился! Теперь пора научить его ремеслу посложнее, чтобы не просто был, а пользу приносил.",
+        "en": "And so, our little helper has come to life, it has started to stir! Now it's time to teach it a more complex craft, so it doesn't just exist, but brings real benefit."
+      }
+    },
+    "07-tools/u2-mcp": {
+      "intro": {
+        "ru": "Наш помощник теперь не безмолвный истукан, но пока неуклюж. Пора дать ему свод правил, особый протокол MCP, чтобы он мог с другими духами да инструментами общаться по-умному.",
+        "en": "Our helper is no longer a silent idol, but it's still clumsy. It's time to give it a set of rules, a special MCP protocol, so it can communicate intelligently with other spirits and tools."
+      },
+      "mentorHint": {
+        "ru": "Знай, единый язык открывает любые двери, даже в иные миры.",
+        "en": "Know this: a common language opens any door, even to other worlds."
+      },
+      "outro": {
+        "ru": "Смотри-ка, теперь наш агент не просто топчется на месте, а обрел настоящие суперсилы через MCP! Путь к великим делам открыт, пойдем дальше.",
+        "en": "Look at that, our agent is no longer just shuffling its feet; it has gained real superpowers through MCP! The path to great deeds is open, let's move on."
+      }
+    },
+    "07-tools/u3-hooks": {
+      "intro": {
+        "ru": "Хороший домовой не бегает по каждому пустяку сам. Он расставит по дому волшебные крючки-обереги, чтобы дела делались сами собой, когда час пробьет.",
+        "en": "A good domovoy doesn't run around for every little thing himself. He places magical hooks and charms around the house, so that tasks get done on their own when the time is right."
+      },
+      "mentorHint": {
+        "ru": "Мудрость не в том, чтобы вечно трудиться, а в том, чтобы один раз ладно всё настроить.",
+        "en": "Wisdom is not in toiling endlessly, but in setting everything up right just once."
+      },
+      "outro": {
+        "ru": "Теперь изба наша стала еще умнее, сама о себе заботится. Мы научили нашего агента слушать мир и откликаться без подсказок.",
+        "en": "Now our hut has become even smarter, it takes care of itself. We have taught our agent to listen to the world and respond without being prompted."
+      }
+    },
+    "07-tools/u4-skills": {
+      "intro": {
+        "ru": "На все руки мастер — хорошо, но давай научим нашего помощника отдельным ремеслам, чтобы каждое дело он делал ладно и на совесть. Сегодня выучим один skill, завтра — другой.",
+        "en": "A jack-of-all-trades is good, but let's teach our helper individual crafts, so it does each job skillfully and conscientiously. Today we'll learn one skill, tomorrow another."
+      },
+      "mentorHint": {
+        "ru": "Одно хорошо отточенное умение ценнее сотни начатых дел.",
+        "en": "One well-honed skill is more valuable than a hundred started tasks."
+      },
+      "outro": {
+        "ru": "Вот и новый skill в копилке нашего духа-помощника. С каждым таким умением он становится все более надежной опорой в нашем цифровом хозяйстве.",
+        "en": "And so, a new skill is in the toolbox of our spirit-helper. With each such ability, it becomes an even more reliable support in our digital household."
+      }
+    },
+    "07-tools/u5-practice": {
+      "intro": {
+        "ru": "Много мы нашего помощника учили, много сказок ему сказывали. А теперь пора отпустить его в сени, дать настоящее поручение и посмотреть, как он справится.",
+        "en": "We have taught our helper much, told it many tales. But now it's time to send it out to the porch, give it a real task, and see how it fares."
+      },
+      "mentorHint": {
+        "ru": "Лишь в настоящем деле видно, чего стоит твое учение.",
+        "en": "Only in a real task can you see what your teaching is worth."
+      },
+      "outro": {
+        "ru": "Справился, ух, справился! Теперь мы знаем, что наш агент готов к работе. Великие свершения ждут нас за порогом этого модуля.",
+        "en": "It did it, phew, it did it! Now we know our agent is ready for work. Great accomplishments await us beyond the threshold of this module."
+      }
+    },
+    "08-agent-engineering/u1-activation": {
+      "intro": {
+        "ru": "Бывает, попросишь домового помочь, а он будто не слышит. Так и с AI agent: старый prompt больше не работает, и нужно найти новые слова, чтобы договориться.",
+        "en": "Sometimes you ask the domovoy for help, but it's as if he can't hear you. It's the same with an AI agent: the old prompt no longer works, and you need to find new words to reach an understanding."
+      },
+      "mentorHint": {
+        "ru": "Всякое дело с заговора начинается. Подбери верные слова для своего духа-помощника.",
+        "en": "Every task begins with an incantation. Find the right words for your spirit-helper."
+      },
+      "outro": {
+        "ru": "Теперь ты знаешь, как задобрить духа, когда он капризничает. Пойдём дальше, посмотрим, какую работу ему можно доверить.",
+        "en": "Now you know how to appease the spirit when it's being whimsical. Let's move on and see what kind of work you can entrust to it."
+      }
+    },
+    "08-agent-engineering/u2-jagged-intelligence": {
+      "intro": {
+        "ru": "Наш домовой – мастер на все руки, да не на всякие. Разберёмся, где его сила, а где лучше и самим справиться, чтобы дров не наломал.",
+        "en": "Our domovoy is a jack-of-all-trades, but not for every trade. Let's figure out where its strength lies, and where it's better to do it ourselves, lest it makes a mess."
+      },
+      "mentorHint": {
+        "ru": "Мудрый хозяин знает, какую работу кому поручить.",
+        "en": "A wise master knows which task to assign to whom."
+      },
+      "outro": {
+        "ru": "Отлично, теперь ты видишь сильные и слабые стороны своего помощника. Пора научить его работать сообща с другими духами нашего дома.",
+        "en": "Excellent, now you see the strengths and weaknesses of your helper. It's time to teach it to work together with other spirits of our home."
+      }
+    },
+    "08-agent-engineering/u3-orchestration": {
+      "intro": {
+        "ru": "В большом хозяйстве одним домовым не обойтись. Посмотрим, как подружить разных духов-помощников, чтобы они действовали слаженно, как единый механизм.",
+        "en": "In a large household, one domovoy is not enough. Let's see how to befriend different spirit-helpers so they act in concert, like a single mechanism."
+      },
+      "mentorHint": {
+        "ru": "Когда духи в ладу живут, в доме порядок цветёт.",
+        "en": "When the spirits live in harmony, order blossoms in the house."
+      },
+      "outro": {
+        "ru": "Ты научился собирать духов в дружную артель! Теперь твой дом – полная чаша, но пора подумать, как сделать его крепкой крепостью.",
+        "en": "You've learned to gather the spirits into a friendly team! Your home is now a horn of plenty, but it's time to think about how to make it a strong fortress."
+      }
+    },
+    "08-agent-engineering/u4-production-infra": {
+      "intro": {
+        "ru": "Наш дух-помощник окреп и готов к большой работе. Пора переселить его из временного уголка в надёжное, постоянное жилище, чтобы он служил верой и правдой.",
+        "en": "Our spirit-helper has grown strong and is ready for big work. It's time to move it from a temporary corner to a reliable, permanent dwelling, so it can serve faithfully."
+      },
+      "mentorHint": {
+        "ru": "Доброму духу – добрый дом.",
+        "en": "A good home for a good spirit."
+      },
+      "outro": {
+        "ru": "Теперь твой помощник надёжно устроен и готов к любым испытаниям. Остался последний шаг – научить его самому главному: быть похожим на тебя.",
+        "en": "Now your helper is securely settled and ready for any challenge. One last step remains – to teach it the most important thing: to be like you."
+      }
+    },
+    "08-agent-engineering/u5-practice": {
+      "intro": {
+        "ru": "Великое дело предстоит: создать себе двойника, духа-помощника, что будет знать твои мысли и привычки. Он станет твоим отражением в мире незримом.",
+        "en": "A great task lies ahead: to create a double for yourself, a spirit-helper that will know your thoughts and habits. It will become your reflection in the unseen world."
+      },
+      "mentorHint": {
+        "ru": "Взгляни в зеркало – кого ты там видишь? Научи этому своего духа.",
+        "en": "Look in the mirror – who do you see? Teach this to your spirit."
+      },
+      "outro": {
+        "ru": "Поздравляю, мастер! Ты не просто приручил духа, ты создал себе верного помощника по своему образу и подобию. Путь пройден достойно.",
+        "en": "Congratulations, master! You have not just tamed a spirit; you have created a faithful assistant in your own image and likeness. The path has been walked with dignity."
+      }
+    },
+    "00-kickstart/u4-sources": {
+      "intro": {
+        "ru": "На ярмарке товар щупают, а не на зазывалу глядят. Так и с наукой: смотри не на посулы, а на клеймо мастера.",
+        "en": "At a fair you handle the goods, you do not gawk at the barker. Same with learning: look for the maker mark, not the promises."
+      },
+      "mentorHint": {
+        "ru": "Доброе клеймо да свежая работа — вот и вся проверка, хозяин.",
+        "en": "A good maker mark and fresh work — that is the whole check, friend."
+      },
+      "outro": {
+        "ru": "Теперь тебя на базаре не проведёшь. Что своим трудом взял — то и останется, хоть весь торг разъедется.",
+        "en": "Now the market cannot fool you. What you took by your own labour stays yours, even after the traders scatter."
+      }
+    },
+    "09-ai-notebook/u1-first-notebook": {
+      "intro": {
+        "ru": "Принесли тебе мешок сказов да записей. За четверть часа заведём тетрадку: спросишь — она покажет, из какого листа ответ.",
+        "en": "You have a sack of tales and records. In a quarter hour we make a notebook: ask, and it shows which leaf the answer came from."
+      },
+      "mentorHint": {
+        "ru": "Сказ без следа — ветер над полем.",
+        "en": "A tale without a trail is wind over a field."
+      },
+      "outro": {
+        "ru": "Тетрадка заведена. Теперь поглядим, как она по следу ходит.",
+        "en": "The notebook is made. Now we see how it follows the trail."
+      }
+    },
+    "09-ai-notebook/u2-how-it-works": {
+      "intro": {
+        "ru": "Хитрость нехитрая: тетрадка режет источник на куски и помнит, где какой лежит.",
+        "en": "The trick is plain: the notebook cuts a source into pieces and remembers where each one lies."
+      },
+      "mentorHint": {
+        "ru": "Память без места — что клад без метки: ищи потом по всему лесу.",
+        "en": "Memory without a place is treasure without a mark: then you search the whole forest."
+      },
+      "outro": {
+        "ru": "Разобрался. Теперь байка от источника отделяется легко.",
+        "en": "You have it. Now a yarn separates from a source easily."
+      }
+    },
+    "09-ai-notebook/u3-where-it-lies": {
+      "intro": {
+        "ru": "Будем ловить, где врёт: говорит складно, а следа к листу нет. Тут и проверка нужна.",
+        "en": "We catch where it lies: it speaks smoothly, but there is no trail to the leaf. That is where checking matters."
+      },
+      "mentorHint": {
+        "ru": "Не верь гладкой речи. Попроси показать клеймо да строку.",
+        "en": "Do not trust smooth speech. Ask for the mark and the line."
+      },
+      "outro": {
+        "ru": "Теперь тебя красивым пересказом не проведёшь. Есть след — есть дело.",
+        "en": "Now a pretty retelling will not fool you. There is a trail, there is a case."
+      }
+    },
+    "09-ai-notebook/u4-formats": {
+      "intro": {
+        "ru": "Можно сделать таблицу, карту, разговор или слайды. Главное — чтоб след не потерялся по дороге.",
+        "en": "You can make a table, map, conversation, or slides. The main thing is not to lose the trail on the way."
+      },
+      "mentorHint": {
+        "ru": "Наряд хорош, пока под ним добротная работа.",
+        "en": "Finery is good only when sound work sits beneath it."
+      },
+      "outro": {
+        "ru": "Формы примерены. Теперь выбираешь не что краше, а что честнее.",
+        "en": "The forms are fitted. Now you choose not what is prettier, but what is more honest."
+      }
+    },
+    "09-ai-notebook/u5-practice": {
+      "intro": {
+        "ru": "Бери свою тему и свои источники. Не смотри до темноты: спроси по делу и требуй след.",
+        "en": "Take your topic and your sources. Do not watch until dark: ask the real question and demand the trail."
+      },
+      "mentorHint": {
+        "ru": "Умный хозяин не перерывает весь амбар, когда знает, что ищет.",
+        "en": "A wise keeper does not rummage through the whole barn when they know what they seek."
+      },
+      "outro": {
+        "ru": "Готово. Из долгого просмотра вышла добыча с уликами.",
+        "en": "Done. Long viewing turned into findings with evidence."
+      }
+    }
+  }
+}

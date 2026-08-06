@@ -1,0 +1,68 @@
+---
+title: "When the agent didn't get you"
+unit: 1
+module: 5
+duration: "5 min"
+---
+
+<Phase type="activation">
+
+Picture that session where Claude's answer was completely off — or it "forgot" a detail you'd already given.
+
+Don't frame this as a system failure — picture it as **a colleague back from holiday who remembers nothing of the project**: no agreements, no context, no sense of why things are the way they are. Present, willing to work — but starting from a blank slate.
+
+Run that session in your head: what exactly went on holiday along with their understanding? What would you need to explain to that colleague first?
+
+</Phase>
+
+<Phase type="reflection">
+
+Agents don't have memory the way humans do. Every message is everything they know right now.
+
+Don't picture this as a "memory failure" — picture it as **a theatre prompter whispering from the wings**: they hear only the line you slip them in this moment. Everything spoken in earlier acts is already beyond their earshot.
+
+Hold that image: if your past messages were lines from other scenes — what would the prompter have missed tonight? What do you end up delivering as if for the very first time, every time?
+
+</Phase>
+
+<Phase type="concept">
+
+## Three context problems
+
+### 1. Lost in the Middle
+Data in the middle of the context gets ignored. The model over-weights the start and the end.
+
+### 2. Context Rot
+The longer the conversation, the worse the answer quality. Hallucinations climb.
+
+### 3. Distractors
+Extra info throws the agent off. It picks a similar but wrong answer.
+
+## Fix: manage what's in "field of view"
+
+Context isn't the entire chat history. It's what you've given the agent right now.
+
+```
+Bad:   200 files in context + 2 hours of history
+Good:  3–5 relevant files + a clean prompt for the task
+```
+
+> 💡 At any one moment the agent knows only what's in its "field of view". The way you manage that field is the way it works.
+
+</Phase>
+
+<Phase type="practice">
+
+Open any long chat with Claude (or start a fresh session with a real task from your work).
+
+After the first 3–5 exchanges, write to the agent:
+
+```
+Briefly summarize what we've done so far and what's needed now.
+```
+
+See what it remembers and what it dropped. That gives you a feel for the "live" context window.
+
+Save observations to `my-experiments/u1-context-check.md`
+
+</Phase>

@@ -1,0 +1,21 @@
+{
+  "academy": {
+    "name": "S.A.S.H.A",
+    "fullName": {
+      "ru": "Synergema Authentica Starseed Holon Academy",
+      "en": "Synergema Authentica Starseed Holon Academy"
+    },
+    "url": "https://academy.synergify.com",
+    "org": { "name": "Synergify Institute for AI" }
+  },
+  "courses": [
+    {
+      "slug": "tochka-sborki",
+      "name": { "ru": "Точка Сборки", "en": "Tochka Sborki" },
+      "tagline": { "ru": "курс по vibe-кодингу", "en": "a course on vibe coding" },
+      "url": "https://ai.synergify.com",
+      "status": "live",
+      "locales": ["ru", "en"]
+    }
+  ]
+}

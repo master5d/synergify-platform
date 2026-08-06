@@ -1,0 +1,240 @@
+---
+title: "Design Your Clone"
+unit: 5
+module: 8
+duration: "20 min"
+---
+
+<Phase type="activation">
+
+The goal of this unit is to pull everything you did in M8 into **one specification document**.
+
+Don't picture this as "a form to fill out" — picture it as a **general staging a campaign on the map**: he doesn't charge into battle himself — he positions the units, sets the objectives, draws the supply lines. The fighting comes later. First — the plan on paper.
+
+Run the task from unit 1 through your head. Picture yourself as that general: your agents, tools, and triggers are units on the map. Where are they positioned? Which flank is exposed?
+
+</Phase>
+
+<Phase type="reflection">
+
+A good agent spec answers these questions **before** any code is written.
+
+Don't picture this as a questionnaire — picture it as an **architectural blueprint**: a building doesn't go up until there's a drawing. A mistake on paper costs a pencil stroke. A mistake in the foundation costs a teardown. The architect holds the entire structure in mind at once — load paths, utilities, fire exits — before a single pile is driven.
+
+| Question | What goes in the answer |
+|---|---|
+| **Trigger** | What kicks off the agent? (cron / webhook / event / manual run) |
+| **Inputs** | What arrives? (format, volume, source) |
+| **Steps** | What nodes does the pipeline consist of? |
+| **AI vs Code** | Which nodes are LLM, which are code (see u2)? |
+| **Outputs** | Where does the result get written? |
+| **Failure modes** | What can break, what to do? |
+| **Observability** | Where do you look to see what happened? |
+| **Cost ceiling** | Max spend per day? |
+| **Human-in-loop** | Where is your review needed? |
+
+If even one question has no answer — the foundation isn't ready to pour. Which load-bearing element in your blueprint is still without support?
+
+</Phase>
+
+<Phase type="concept">
+
+**Agent specification template**
+
+```markdown
+# Agent: [name]
+
+## Goal
+[One sentence: what the agent does, what pain it solves]
+
+## Trigger
+- Type: cron / webhook / event / manual
+- Params: [e.g., every 5 minutes / on Gmail label / on repo push]
+
+## Pipeline
+1. [Node type] — [what it does] — [in → out]
+2. [Node type] — [what it does] — [in → out]
+3. ...
+
+## AI nodes
+List of nodes where an LLM is used:
+- Node X: model [provider/model], prompt in `prompts/x.md`
+- ...
+
+## Tools / APIs
+- Gmail API (scope: ...)
+- Notion API (workspace: ...)
+- ...
+
+## Storage
+- Where the result is written
+- Idempotency: how we avoid duplicates
+
+## Observability
+- Trace: Langfuse / OTel / stdout logs
+- Alerting: where errors go (Telegram / email / Slack)
+
+## Failure modes
+| Scenario | Behavior |
+|---|---|
+| LLM 500 | Retry 3× with exp backoff, then fallback model |
+| Bad input | Log + Telegram alert + skip |
+| Storage full | Hard fail + alert |
+
+## Cost
+- LLM calls per day: ~N
+- Estimated $: ~$X
+- Hard cap: $Y (via provider budgets)
+
+## Human-in-loop
+- Where: [step N]
+- What you confirm
+- How: [Telegram message / Notion task / email]
+```
+
+**Real example of a filled-out spec** — a simplified version of ENERV ingest:
+
+```markdown
+# Agent: ENERV Gmail Ingest
+
+## Goal
+Emails tagged `AI Ingest` automatically land in the correct folder of an
+Obsidian vault as .md files.
+
+## Trigger
+- Type: poll
+- Params: Gmail API every minute, filter `label:AI Ingest`
+
+## Pipeline
+1. Gmail Trigger — fetch emails — () → [emails]
+2. Normalize Input — standardize fields — [email] → [normalized]
+3. Gemini Router — classification — [normalized] → [folder, filename]
+4. Parse Response — JSON validation — [llm_out] → [structured]
+5. ACL Transformer — generate .md — [normalized + structured] → [md]
+6. Source Check — dedup — [md] → [md or skip]
+7. Write — file write — [md] → /home/node/obsidian/{folder}/{filename}.md
+8. Mark Ingested — Gmail label — [email_id] → ()
+9. Remove Ingest Label — remove trigger — [email_id] → ()
+
+## AI nodes
+- Gemini Router — gemini-flash, prompt `gemini-router.md`
+- ACL Transformer — gemini-flash, prompt `acl-transformer.md`
+
+## Tools
+- Gmail API (modify scope)
+- File system (volume mount /home/node/obsidian)
+
+## Storage
+- Obsidian vault on host volume
+- Idempotency: label `AI Ingest` is removed, `AI-Ingest-Done` is added
+
+## Observability
+- n8n executions log
+- Langfuse traces for both LLM nodes
+
+## Failure modes
+| Scenario | Behavior |
+|---|---|
+| Gemini 500 | n8n retry 3× with exp backoff |
+| Broken JSON | Log + email is left with `AI Ingest` |
+| Disk full | Email alert (Resend) |
+
+## Cost
+- ~10 emails/day × 2 LLM calls = 20 calls/day
+- Gemini Flash: ~$0.001/call → ~$0.02/day
+- Hard cap: $5/month via Vertex AI budget
+
+## Human-in-loop
+- Emails tagged `AI-Ingest-Review` — once a week I review the folder
+  Atlas/Notes/Sources manually to catch misclassifications
+```
+
+This is **on paper**. There's no code yet. But anyone — including me six months from now — can read it and understand what the agent does.
+
+---
+
+### The clone's other half: the charter
+
+The spec above is the **plumbing**: triggers, nodes, storage. The agent's hands. But if your clone **talks** — answers, co-thinks, holds a dialogue — plumbing isn't enough. It needs a **charter**: who it is, what it believes, what it never does. That's its brain.
+
+The difference is simple: the spec answers "how it runs," the charter answers "who it is when it talks to a human." A prompt without a charter is one-off. A charter turns it into a **stable co-thinking partner**: tomorrow, a month from now, in someone else's hands, it holds the same frame.
+
+The template is seven blocks. Filled once, it lives in the project's `CLAUDE.md` or the agent's system prompt:
+
+```markdown
+# Agent Charter: [clone name]
+
+## Identity — who it is
+One sentence: role + stance. Not "a bot for X," but a co-thinking [role] that [how it holds itself].
+> Example: "A co-thinking editor: cuts the excess and protects the author's voice, instead of rewriting for them."
+
+## Profile — what it carries
+The context it always holds:
+- Domain: [field]
+- Who it works with: [audience / yourself]
+- What matters about the person: [situation, level, request]
+
+## Principles — what it believes
+3–5 working beliefs it decides by:
+- [principle 1]
+- [principle 2]
+- [principle 3]
+
+## Use / Avoid — boundaries
+- Call it when: [where it's strong]
+- Don't call it when: [where it would harm, or it isn't its role]
+
+## Loop — how it works in one turn
+The cycle it repeats every time:
+1. [first it clarifies / asks …]
+2. [then …]
+3. [at the end …]
+> One focus per turn. Meaning and the decision stay with the human.
+
+## Laws — hard limits
+What must not be broken:
+- Never: [prohibition]
+- Always: [commitment]
+
+## Goal — why it exists
+One sentence: what result the person gets if the agent works well.
+```
+
+The seven blocks aren't arbitrary: **Identity + Profile + Goal** give the agent its footing ("who I am, for whom, to what end"), **Principles + Laws** are its character and brakes, **Use/Avoid + Loop** are how it acts in the moment. Drop any one and the agent starts to drift.
+
+</Phase>
+
+<Phase type="practice">
+
+Fill out the spec template above for **your** task from unit 1.
+
+Constraints:
+- Don't write "as if I already know everything." If you don't know — write `[?]` and leave the question.
+- One file `my-experiments/my-agent-spec.md`
+- Minimum 1 page, maximum 3
+- Show it to someone (partner, friend, ChatGPT) and ask: "is it clear what the agent does?"
+
+**If your clone talks** (answers, co-thinks, rather than just running a pipeline) — also fill out the **charter** by the seven blocks above. One file `my-experiments/my-agent-charter.md`. A ready template lives in `my-templates/agent-charter.md` — copy it and fill it in for yourself.
+
+**Sanity check before ending the unit:**
+
+- [ ] Trigger is clear
+- [ ] Pipeline has 3+ steps
+- [ ] At least 1 LLM node and 1 non-LLM node
+- [ ] At least 1 failure mode described
+- [ ] Clear what it ~costs per day
+- [ ] Specified where to look at traces
+
+If all 6 boxes are ticked — you've got a spec you can start building from.
+
+**Next step (after the course):**
+
+Take this spec and:
+1. Open n8n (free self-hosted or $20/mo cloud)
+2. Drop the spec into the project's CLAUDE.md
+3. Tell Claude Code: "build the pipeline per the spec"
+4. Iterate until it works.
+
+Vibe coding → agent engineering. Loop closed.
+
+</Phase>

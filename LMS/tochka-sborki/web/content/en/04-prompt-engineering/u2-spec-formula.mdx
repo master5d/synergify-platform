@@ -1,0 +1,125 @@
+---
+title: "The spec formula"
+unit: 2
+module: 4
+duration: "12 min"
+---
+
+<Phase type="activation">
+
+Picture two conductors before a concert. One receives a **full score** — every note, tempo marking, dynamic, rest. The other hears only: "Play something beautiful."
+
+Run it in your head: both orchestras take the stage. What happens next?
+
+Now catch the parallel: was your last AI prompt a score — or a "something beautiful"?
+
+</Phase>
+
+<Phase type="reflection">
+
+Hold the image of an **architect at a drafting table**.
+
+On the desk: either a technical plan — dimensions, materials, load tolerances — or a note that says "make it look nice." Picture what each one actually enables the architect to build.
+
+Notice where in your prompts you had a blueprint, and where you had a wish. Which one steers the outcome — and which one hands it to chance?
+
+</Phase>
+
+<Phase type="concept">
+
+## A professional prompt structure: CTID
+
+### Quick mnemonic to get started
+
+```
+Context     = who you are and what's the situation
+Task        = what exactly needs to be done
+Instructions = how, in what tone, in what format
+Data        = examples, links, input information
+```
+
+### Full structure for reproducible results
+
+```markdown
+## Role
+You are — [expertise and specialization]
+
+## Task
+[Specific goal — one sentence]
+
+## Inputs
+[What you're providing: files, URLs, data, context]
+
+## Expected output
+[Format, structure, length, quality criteria]
+
+## Constraints
+- Don't do: [X]
+- Use only: [Y]
+- Max: [Z]
+```
+
+<PromptAnatomy locale="en" />
+
+### Example in action
+
+```markdown
+## Role
+You are a research agent specializing in analyzing
+technical docs and extracting key insights.
+
+## Task
+Analyze the API documentation and create a short reference
+with examples for intermediate Python developers.
+
+## Expected output
+A Markdown file with this structure:
+1. API description (2–3 sentences)
+2. Main endpoints (table)
+3. Authentication
+4. 3 practical code examples
+
+## Constraints
+- Examples must be complete (copy-paste runnable)
+- Length: max 500 lines
+- Use Python 3.10+
+```
+
+> The more precise the spec, the fewer iterations. Investing in the prompt saves time many times over.
+
+### The barrier isn't imagination
+
+We tend to think people are stopped by "no imagination." They aren't: almost everyone has the image of the result — hundreds of ideas that never reach the doing. What stops them is different — **the imagination isn't translated into a written task**. AI doesn't remove that skill; it *rewards* it. Hence three stages, and the order matters:
+
+1. **Imagination** — you have the image of the result. You always did.
+2. **Task** — you learn to *write* that image as a spec (CTID above) and execute it **together with the AI**, staying in the loop: you check, you fix, you ask again.
+3. **Automation** — and only once writing and verifying a task works reliably do you hand the loop to an agent.
+
+```
+  IMAGINATION  ──▶     TASK      ──▶    AUTOMATION
+  you have it     write + verify       hand the loop
+  (you always did)  hand in hand w/ AI    to an agent
+       └──────────  order matters  ──────────┘
+```
+
+> Jumping to automation before you can write and verify a task means automating your own confusion. First learn to carry a task to a result hand in hand with the AI; automation is the next horizon, not the first.
+
+</Phase>
+
+<Phase type="practice">
+
+Pick a task from your actual work (copy, code, analysis — anything).
+
+Write a prompt using the CTID structure:
+
+```markdown
+## Role
+## Task
+## Inputs
+## Expected output
+## Constraints
+```
+
+Save to `my-experiments/u2-spec-formula.md` and test in Claude.
+
+</Phase>

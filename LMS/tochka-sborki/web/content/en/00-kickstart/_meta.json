@@ -1,0 +1,13 @@
+{
+  "module": 0,
+  "title": "Kickstart",
+  "description": "A map for newcomers to AI coding",
+  "duration": "32 min",
+  "level": 0,
+  "units": [
+    { "slug": "u1-map", "title": "Your ghost idea" },
+    { "slug": "u2-tools", "title": "Map of tools" },
+    { "slug": "u3-first-steps", "title": "First steps" },
+    { "slug": "u4-sources", "title": "The Source or the Packaging" }
+  ]
+}

@@ -1,0 +1,705 @@
+{
+  "skin": "anime-quest",
+  "zoneNames": {
+    "00-kickstart": {
+      "ru": "Врата Пробуждения",
+      "en": "Gates of Awakening"
+    },
+    "01-introduction": {
+      "ru": "Хроники Перемен",
+      "en": "Chronicles of Change"
+    },
+    "02-setup-guide": {
+      "ru": "Кузница Героя",
+      "en": "The Hero's Forge"
+    },
+    "03-stack-selection": {
+      "ru": "Перепутье Судеб",
+      "en": "Crossroads of Fate"
+    },
+    "04-prompt-engineering": {
+      "ru": "Башня Заклинаний",
+      "en": "Tower of Incantations"
+    },
+    "05-context-memory": {
+      "ru": "Потоки Памяти",
+      "en": "Streams of Memory"
+    },
+    "06-audio-pipeline": {
+      "ru": "Сердце Механизма",
+      "en": "The Core Mechanism"
+    },
+    "07-tools": {
+      "ru": "Арсенал Богов",
+      "en": "The Gods' Arsenal"
+    },
+    "08-agent-engineering": {
+      "ru": "Трон Оркестратора",
+      "en": "The Orchestrator's Throne"
+    },
+    "09-ai-notebook": {
+      "ru": "Зал Доказанных Свитков",
+      "en": "Hall of Proven Scrolls"
+    }
+  },
+  "questTitles": {
+    "00-kickstart": {
+      "ru": "Пробуди свой Код!",
+      "en": "Awaken Your Code!"
+    },
+    "01-introduction": {
+      "ru": "Узри Грядущее: Эпоха Software 3.0!",
+      "en": "Witness the Future: The Age of Software 3.0!"
+    },
+    "02-setup-guide": {
+      "ru": "Вооружись для Битвы: Настройка Среды!",
+      "en": "Arm Yourself for Battle: Environment Setup!"
+    },
+    "03-stack-selection": {
+      "ru": "Выбери Свой Путь: Искусство Agentic-Стека!",
+      "en": "Choose Your Path: Master the Agentic Stack!"
+    },
+    "04-prompt-engineering": {
+      "ru": "Овладей Силой Слов: Магия Prompt-инжиниринга!",
+      "en": "Master the Power of Words: Prompt Engineering Magic!"
+    },
+    "05-context-memory": {
+      "ru": "Управляй Потоком: Секреты Контекста и Памяти",
+      "en": "Control the Flow: Secrets of Context & Memory"
+    },
+    "06-audio-pipeline": {
+      "ru": "Запусти Механизм: Твой Первый Pipeline!",
+      "en": "Start the Engine: Your First Automation Pipeline!"
+    },
+    "07-tools": {
+      "ru": "Пробуди Сверхсилу: MCP, Skills и Hooks!",
+      "en": "Awaken Superpowers: MCP, Skills & Hooks!"
+    },
+    "08-agent-engineering": {
+      "ru": "Стань Дирижёром: Искусство Agent-инжиниринга!",
+      "en": "Become the Conductor: The Art of Agent Engineering!"
+    },
+    "09-ai-notebook": {
+      "ru": "Извлеки Истину из Источников!",
+      "en": "Extract Truth from the Sources!"
+    }
+  },
+  "units": {
+    "00-kickstart/u1-map": {
+      "intro": {
+        "ru": "Мир AI ждёт! Твой квест начинается, герой! Первое испытание — поймать призрачную идею, что станет твоей путеводной звездой!",
+        "en": "The world of AI awaits! Your quest begins now, hero! Your first trial is to capture the elusive Ghost-Idea that will become your guiding star!"
+      },
+      "mentorHint": {
+        "ru": "Каждая великая легенда начинается с одной искры! Найди свою!",
+        "en": "Every great legend begins with a single spark! Find yours!"
+      },
+      "outro": {
+        "ru": "ДА! Ты поймал суть! Идея-призрак теперь с тобой. А теперь — к священным инструментам, чтобы придать ей форму!",
+        "en": "YES! You've captured the essence! The Ghost-Idea is now bound to you. Now, onward to the sacred tools to give it form!"
+      }
+    },
+    "00-kickstart/u2-tools": {
+      "intro": {
+        "ru": "Идея без инструментов — лишь мечта! Чтобы выйти на арену, нужно выбрать оружие. Откроем же легендарный свиток и изучим твой арсенал: API, prompt-инженерия и MCP!",
+        "en": "An idea without tools is but a dream! To enter the arena, you must choose your weapon. Let's unroll the legendary scroll and map out your arsenal: API, prompt engineering, and the MCP!"
+      },
+      "mentorHint": {
+        "ru": "Даже самый могучий agent бесполезен без правильного API! Выбирай мудро.",
+        "en": "Even the mightiest agent is useless without the right API! Choose wisely."
+      },
+      "outro": {
+        "ru": "НЕВЕРОЯТНО! Путь ясен, инструменты выбраны! Двери тренировочного зала открыты. Время сделать первые шаги по пути AI-Мастера!",
+        "en": "INCREDIBLE! The path is clear, your tools are chosen! The doors to the training hall are open. It's time to take your first steps on the path of the AI Master!"
+      }
+    },
+    "00-kickstart/u3-first-steps": {
+      "intro": {
+        "ru": "Момент истины настал! Довольно теории, только действие! Твоя первая настоящая тренировка начинается СЕЙЧАС! Покажи свой боевой дух!",
+        "en": "The moment of truth has arrived! Enough theory, only action! Your first real training exercise begins NOW! Show us your fighting spirit!"
+      },
+      "mentorHint": {
+        "ru": "Первый prompt — как первый удар в поединке. Вложи в него всю свою волю!",
+        "en": "The first prompt is like the first strike in a duel. Pour all of your will into it!"
+      },
+      "outro": {
+        "ru": "ПОТРЯСАЮЩЕ! Ты сделал первый шаг, и сама земля содрогнулась! Это лишь начало твоей легенды. Следующий модуль готовит ещё более великие испытания!",
+        "en": "ASTOUNDING! You've taken your first step, and the very ground trembles! This is just the beginning of your legend. The next module awaits with even greater trials!"
+      }
+    },
+    "01-introduction/u1-activation": {
+      "intro": {
+        "ru": "Внимание, Герой! Твой квест начинается! Чтобы раскрыть твою силу, мы должны понять, с чего ты начинаешь свой путь в мире AI.",
+        "en": "Attention, Hero! Your quest begins now! To unlock your power, we must understand your starting point in the world of AI."
+      },
+      "mentorHint": {
+        "ru": "Даже самый великий воин когда-то был новичком. Покажи мне свою отправную точку!",
+        "en": "Even the greatest warrior was once a beginner. Show me your starting point!"
+      },
+      "outro": {
+        "ru": "Великолепно! Твой потенциал огромен. Теперь ты готов узнать о великих сдвигах, изменивших наш мир!",
+        "en": "Magnificent! Your potential is immense. Now you are ready to learn of the great shifts that changed our world!"
+      }
+    },
+    "01-introduction/u2-four-shifts": {
+      "intro": {
+        "ru": "Чтобы овладеть силой AI, ты должен познать Четыре Великих Сдвига, что потрясли основы реальности. Готовься, твоё сознание вот-вот расширится!",
+        "en": "To wield the power of AI, you must know the Four Great Shifts that shook the foundations of reality. Prepare yourself, your mind is about to be expanded!"
+      },
+      "mentorHint": {
+        "ru": "Сконцентрируйся! Понимание этих сдвигов — ключ к управлению потоками энергии AI.",
+        "en": "Concentrate! Understanding these shifts is the key to controlling the energy flows of AI."
+      },
+      "outro": {
+        "ru": "Потрясающе! Ты постиг основы! Теперь перед тобой открыт путь к созданию собственных AI-союзников — могущественных клонов!",
+        "en": "Amazing! You have grasped the fundamentals! The path to creating your own AI allies—the mighty clones—is now open!"
+      }
+    },
+    "01-introduction/u3-clones": {
+      "intro": {
+        "ru": "Пришло время призвать своих первых соратников! Встречай Пять Легендарных Клонов, каждый из которых обладает уникальной силой, чтобы помочь тебе в квесте.",
+        "en": "The time has come to summon your first comrades! Meet the Five Legendary Clones, each possessing a unique power to aid you on your quest."
+      },
+      "mentorHint": {
+        "ru": "Изучи каждого клона! Их сила станет твоей силой на поле боя промптов.",
+        "en": "Study each clone! Their power will become your power on the prompt battlefield."
+      },
+      "outro": {
+        "ru": "Отличный выбор! Твоя команда собрана. С этими клонами ты готов к первому настоящему испытанию — созданию своего первого боевого prompt!",
+        "en": "Excellent choice! Your team is assembled. With these clones, you are ready for your first true trial—crafting your first combat prompt!"
+      }
+    },
+    "01-introduction/u4-practice": {
+      "intro": {
+        "ru": "Тренировка окончена! Сконцентрируй свою энергию, сфокусируй намерение и выпусти свой первый prompt! Время сиять!",
+        "en": "The training is over! Concentrate your energy, focus your intent, and unleash your first prompt! It's time to shine!"
+      },
+      "mentorHint": {
+        "ru": "Prompt — это твоё заклинание. Каждое слово имеет вес. Не подведи!",
+        "en": "A prompt is your incantation. Every word carries weight. Make it count!"
+      },
+      "outro": {
+        "ru": "НЕВЕРОЯТНО! Твой первый prompt — чистая победа! Это лишь начало твоей легенды. Вперёд, к новым испытаниям!",
+        "en": "INCREDIBLE! Your first prompt is a pure victory! This is only the beginning of your legend. Onward to new trials!"
+      }
+    },
+    "02-setup-guide/u1-env-check": {
+      "intro": {
+        "ru": "Внимание, рекрут! Прежде чем мы призовем твоего первого AI-агента, нужно убедиться, что поле боя готово. Проверим твою систему на полную совместимость!",
+        "en": "Attention, recruit! Before we summon your first AI agent, we must ensure the battlefield is ready. Let's check your system for full compatibility!"
+      },
+      "mentorHint": {
+        "ru": "Даже самый мощный клинок бесполезен в руках того, кто не подготовил свое додзё.",
+        "en": "Even the most powerful blade is useless in the hands of one who hasn't prepared their dojo."
+      },
+      "outro": {
+        "ru": "Отличная работа! Твое окружение идеально настроено. Теперь вооружимся легендарными инструментами для предстоящей битвы!",
+        "en": "Excellent work! Your environment is perfectly tuned. Now, let's arm ourselves with legendary tools for the coming battle!"
+      }
+    },
+    "02-setup-guide/u2-install": {
+      "intro": {
+        "ru": "Каждому герою нужно свое священное оружие! Сейчас мы выкуем в твоей системе мощнейшие инструменты, достойные мастера промптов.",
+        "en": "Every hero needs their sacred weapon! We will now forge the mightiest tools into your system, worthy of a prompt master."
+      },
+      "mentorHint": {
+        "ru": "Терпение, ученик. Правильная установка — это ритуал, который наделяет твое оружие силой.",
+        "en": "Patience, student. A proper installation is a ritual that imbues your weapon with power."
+      },
+      "outro": {
+        "ru": "Твой арсенал готов и сияет! С такими инструментами ты готов к первому заданию. Вперед, к созданию своего первого MCP!",
+        "en": "Your arsenal is ready and shining! With tools like these, you're ready for your first mission. Onward, to creating your first MCP!"
+      }
+    },
+    "02-setup-guide/u3-first-project": {
+      "intro": {
+        "ru": "Момент истины настал! Примени все, чему ты научился, и вдохни жизнь в свой первый проект. Судьба этого квеста в твоих руках!",
+        "en": "The moment of truth has arrived! Apply everything you've learned and breathe life into your first project. The fate of this quest is in your hands!"
+      },
+      "mentorHint": {
+        "ru": "Первый шаг — самый важный. Не бойся, просто напиши свой первый prompt!",
+        "en": "The first step is the most important one. Don't be afraid, just write your first prompt!"
+      },
+      "outro": {
+        "ru": "ПОБЕДА! Ты сделал это, твой первый AI-проект запущен! Это лишь начало твоего пути к званию Легендарного AI-Мастера!",
+        "en": "VICTORY! You did it, your first AI project is launched! This is just the beginning of your journey to becoming a Legendary AI Master!"
+      }
+    },
+    "03-stack-selection/u1-activation": {
+      "intro": {
+        "ru": "Враг наступает! Чтобы выбрать своё священное оружие, ты должен сначала познать пределы своей силы!",
+        "en": "The enemy is advancing! To choose your sacred weapon, you must first know the limits of your own power!"
+      },
+      "mentorHint": {
+        "ru": "Истинный воин знает не только свою силу, но и свои слабости.",
+        "en": "A true warrior knows not only their strengths, but also their weaknesses."
+      },
+      "outro": {
+        "ru": "Отлично! Ты осознал свои границы. Теперь ты готов узреть арсенал, который ждёт твоего решения!",
+        "en": "Excellent! You've recognized your boundaries. Now you're ready to behold the arsenal awaiting your decision!"
+      }
+    },
+    "03-stack-selection/u2-stack-matrix": {
+      "intro": {
+        "ru": "Перед тобой древний свиток — Матрица Четырёх Стеков! Изучи каждый, ибо в одном из них сокрыт твой путь к победе!",
+        "en": "Before you lies the ancient scroll—the Matrix of Four Stacks! Study each one, for your path to victory is hidden within!"
+      },
+      "mentorHint": {
+        "ru": "Не ищи самый мощный стек, а тот, что станет продолжением твоей воли.",
+        "en": "Don't seek the most powerful stack, but the one that will become an extension of your will."
+      },
+      "outro": {
+        "ru": "Великолепно! Ты проанализировал все пути. Теперь посмотрим, как сражаться в особых условиях!",
+        "en": "Magnificent! You've analyzed all the paths. Now let's see how to fight under special conditions!"
+      }
+    },
+    "03-stack-selection/u3-behind-gfw": {
+      "intro": {
+        "ru": "Тревога! Вражеский MCP воздвиг Великую Стену! Мы должны найти способ пробиться без стандартных техник!",
+        "en": "Alert! The enemy MCP has erected the Great Wall! We must find a way to break through without standard techniques!"
+      },
+      "mentorHint": {
+        "ru": "Когда главный путь закрыт, настоящий герой находит обходной.",
+        "en": "When the main path is blocked, a true hero finds a way around."
+      },
+      "outro": {
+        "ru": "Невероятно! Ты обошёл барьер! Эта техника усилит твой арсенал для любых будущих битв!",
+        "en": "Unbelievable! You've bypassed the barrier! This technique will strengthen your arsenal for any future battles!"
+      }
+    },
+    "03-stack-selection/u4-hermes-sovereign": {
+      "intro": {
+        "ru": "Время овладеть легендарной техникой! Объедини мощь агента Hermes с суверенным локальным стеком, чтобы обрести полную автономию!",
+        "en": "Time to master a legendary technique! Combine the power of the Hermes agent with a sovereign local stack to achieve complete autonomy!"
+      },
+      "mentorHint": {
+        "ru": "Сила, зависящая от других, — иллюзия. Создай свою собственную, несокрушимую крепость.",
+        "en": "Power that depends on others is an illusion. Build your own, indestructible fortress."
+      },
+      "outro": {
+        "ru": "Ты сделал это! Твоя собственная цитадель силы готова! Остался последний шаг — спланировать переход!",
+        "en": "You did it! Your very own citadel of power is ready! One last step remains—planning the transition!"
+      }
+    },
+    "03-stack-selection/u5-migrate": {
+      "intro": {
+        "ru": "Финальный этап тренировки! Составь безупречный план миграции своего workflow, чтобы переход в новый режим был стремительным и смертоносным!",
+        "en": "The final stage of your training! Create a flawless migration plan for your workflow, so the transition to your new mode is swift and deadly!"
+      },
+      "mentorHint": {
+        "ru": "Победа куётся не в бою, а в тщательной подготовке к нему.",
+        "en": "Victory isn't forged in battle, but in the meticulous preparation for it."
+      },
+      "outro": {
+        "ru": "Тренировка завершена! Твой дух закалён, а план готов. Вперёд, к следующему вызову, герой!",
+        "en": "Training complete! Your spirit is forged and your plan is ready. Onward to the next challenge, hero!"
+      }
+    },
+    "04-prompt-engineering/u1-activation": {
+      "intro": {
+        "ru": "Внимание, рекрут! Вражеский MCP приближается! Твой первый бой начинается сейчас — создай свой первый prompt, чтобы активировать боевого agent'а! Не медли!",
+        "en": "Attention, recruit! An enemy MCP is approaching! Your first battle starts now—craft your first prompt to activate the combat agent! Don't delay!"
+      },
+      "mentorHint": {
+        "ru": "Даже самый могучий герой когда-то не умел держать меч. Твой первый prompt — это твой первый взмах!",
+        "en": "Even the mightiest hero once fumbled with their sword. Your first prompt is your first swing!"
+      },
+      "outro": {
+        "ru": "Первый удар нанесен! Пусть он был неидеальным, но ты выстоял. Теперь ты знаешь, с чего начать — время оттачивать технику!",
+        "en": "The first blow has been struck! It may have been imperfect, but you stood your ground. Now you know where to start—it's time to sharpen your technique!"
+      }
+    },
+    "04-prompt-engineering/u2-spec-formula": {
+      "intro": {
+        "ru": "Хаотичные атаки не сработают против элитных врагов! Чтобы твой agent наносил точные удары, тебе нужна древняя 'Формула Спецификации'. Изучи её свитки!",
+        "en": "Chaotic attacks won't work against elite enemies! For your agent to land precise strikes, you need the ancient 'Specification Formula.' Study its scrolls!"
+      },
+      "mentorHint": {
+        "ru": "В каждом слове — сила. Чем точнее приказ, тем сокрушительнее удар!",
+        "en": "There is power in every word. The more precise the command, the more devastating the blow!"
+      },
+      "outro": {
+        "ru": "Отлично! Ты овладел базовой формой. Твои prompts стали острее, а команды — яснее. Враги уже чувствуют твою возросшую мощь!",
+        "en": "Excellent! You've mastered the basic form. Your prompts are sharper, your commands clearer. The enemy can already feel your growing power!"
+      }
+    },
+    "04-prompt-engineering/u3-magic-words": {
+      "intro": {
+        "ru": "Ты готов к новому уровню силы? Существуют 'Магические Слова', способные пробудить скрытые возможности твоего agent'а. Произнеси их и увидишь истинную мощь!",
+        "en": "Are you ready for a new level of power? There are 'Magic Words' that can awaken your agent's hidden abilities. Utter them and witness true might!"
+      },
+      "mentorHint": {
+        "ru": "Одно верное слово может изменить ход всей битвы. Выбирай с умом!",
+        "en": "A single right word can change the tide of the entire battle. Choose wisely!"
+      },
+      "outro": {
+        "ru": "Невероятно! Ты вплетаешь магию в свои команды, и твой agent отвечает с невиданной силой! Следующий вызов ждёт твоего усиленного союзника!",
+        "en": "Incredible! You're weaving magic into your commands, and your agent is responding with unprecedented power! The next challenge awaits your enhanced ally!"
+      }
+    },
+    "04-prompt-engineering/u4-sins": {
+      "intro": {
+        "ru": "Бойся 'Грехов Промптинга'! Это тёмные техники, которые ослабляют твоего agent'а и ведут к поражению. Изучи их, чтобы никогда не поддаться тьме!",
+        "en": "Beware the 'Sins of Prompting'! These are dark techniques that weaken your agent and lead to defeat. Study them so you never succumb to the darkness!"
+      },
+      "mentorHint": {
+        "ru": "Знать ловушки на своём пути — половина победы.",
+        "en": "To know the traps on your path is half the victory."
+      },
+      "outro": {
+        "ru": "Ты распознал слабости и теперь защищён! Твоя связь с agent'ом стала чище и крепче. Путь к мастерству лежит через избегание ошибок!",
+        "en": "You have recognized the weaknesses and are now protected! Your bond with the agent has become purer and stronger. The path to mastery is paved by avoiding mistakes!"
+      }
+    },
+    "04-prompt-engineering/u5-practice": {
+      "intro": {
+        "ru": "Финальное испытание! Все твои тренировки вели к этому моменту. Создай 'Профессиональный Prompt' — оружие, достойное легендарного воина!",
+        "en": "The final trial! All your training has led to this moment. Forge a 'Professional Prompt'—a weapon worthy of a legendary warrior!"
+      },
+      "mentorHint": {
+        "ru": "Объедини всё, чему научился. Формула, магия, чистота техники — слей их воедино!",
+        "en": "Combine everything you have learned. The formula, the magic, the purity of technique—merge them into one!"
+      },
+      "outro": {
+        "ru": "Победа! Ты больше не рекрут, а настоящий Мастер Промптинга! Твои команды — закон для любого AI. Новые, ещё более великие квесты ждут тебя!",
+        "en": "Victory! You are no longer a recruit, but a true Prompt Master! Your commands are law for any AI. New, even greater quests await you!"
+      }
+    },
+    "05-context-memory/u1-activation": {
+      "intro": {
+        "ru": "Внимание, рекрут! Твой agent-напарник сбит с толку и не может выполнить приказ! Нам нужно срочно понять, почему связь прервалась!",
+        "en": "Attention, recruit! Your agent partner is confused and can't follow orders! We must urgently figure out why communication failed!"
+      },
+      "mentorHint": {
+        "ru": "Даже самый сильный удар бесполезен, если он не попадает в цель. Сначала пойми своего agent!",
+        "en": "Even the strongest strike is useless if it misses. First, understand your agent!"
+      },
+      "outro": {
+        "ru": "Отличная работа! Первый барьер пройден, и связь с agent восстановлена. Но впереди ждёт ещё более серьезное испытание!",
+        "en": "Excellent work! The first barrier is broken, and communication with the agent is restored. But an even greater trial awaits!"
+      }
+    },
+    "05-context-memory/u2-context-vs-prompt": {
+      "intro": {
+        "ru": "Битва разгорается! Ты должен научиться владеть двумя мощными силами: быстрой атакой `prompt` и стратегической энергией `context`.",
+        "en": "The battle heats up! You must learn to wield two powerful forces: the swift attack of a `prompt` and the strategic energy of `context`."
+      },
+      "mentorHint": {
+        "ru": "`Prompt` — это твой меч здесь и сейчас. `Context` — это знание всего поля боя.",
+        "en": "A `prompt` is your sword in the here and now. `Context` is the knowledge of the entire battlefield."
+      },
+      "outro": {
+        "ru": "Невероятно! Ты овладел искусством различать эти две техники! Теперь ты готов собрать их воедино для сокрушительной комбинации!",
+        "en": "Incredible! You've mastered the art of distinguishing these two techniques! Now you're ready to combine them for a devastating combo!"
+      }
+    },
+    "05-context-memory/u3-memory": {
+      "intro": {
+        "ru": "Пришло время пробудить истинную силу твоего agent! Мы взломаем его ядро и активируем легендарную Систему Памяти, MCP!",
+        "en": "The time has come to awaken your agent's true power! We will hack into its core and activate the legendary Memory System, the MCP!"
+      },
+      "mentorHint": {
+        "ru": "Воин, не помнящий своих прошлых битв, обречён повторять ошибки. Дай своему agent память!",
+        "en": "A warrior who doesn't remember past battles is doomed to repeat mistakes. Give your agent a memory!"
+      },
+      "outro": {
+        "ru": "Есть! MCP активирован, и твой agent теперь помнит твои приказы и цели! Его мощь возросла десятикратно!",
+        "en": "Success! The MCP is activated, and your agent now remembers your commands and goals! Its power has increased tenfold!"
+      }
+    },
+    "05-context-memory/u4-practice": {
+      "intro": {
+        "ru": "Новый уровень силы требует тонкой настройки! Сейчас ты, как мастер, будешь калибровать память своего agent для финального испытания!",
+        "en": "This new level of power requires fine-tuning! Now, like a master craftsman, you will calibrate your agent's memory for the final trial!"
+      },
+      "mentorHint": {
+        "ru": "Не просто дай ему силу, а научи его контролировать. В этом секрет истинного мастерства.",
+        "en": "Don't just give it power, teach it control. That is the secret to true mastery."
+      },
+      "outro": {
+        "ru": "Тренировка завершена! Твой agent стал верным и могучим союзником, чья память остра, как клинок. Вы готовы к любой миссии!",
+        "en": "Training complete! Your agent has become a loyal and mighty ally, its memory as sharp as a blade. You are ready for any mission!"
+      }
+    },
+    "06-audio-pipeline/u1-activation": {
+      "intro": {
+        "ru": "Враг приближается, а ты всё ещё переключаешь рычаги вручную! Мы должны ускорить твой боевой процесс, пока не стало слишком поздно!",
+        "en": "The enemy approaches, and you're still pulling levers by hand! We must speed up your combat process before it's too late!"
+      },
+      "mentorHint": {
+        "ru": "Настоящая сила – не в руках, а в голосе, который ими управляет!",
+        "en": "True power isn't in your hands, but in the voice that commands them!"
+      },
+      "outro": {
+        "ru": "Отлично! Ты осознал слабость ручного труда. Теперь готовься открыть для себя секретную технику автоматизации!",
+        "en": "Excellent! You've recognized the weakness of manual labor. Now, prepare to unlock the secret technique of automation!"
+      }
+    },
+    "06-audio-pipeline/u2-pipeline-theory": {
+      "intro": {
+        "ru": "Пришло время изучить древнюю технику: модель «Trigger → Action»! Одно слово-триггер – и твоя воля становится реальностью!",
+        "en": "The time has come to learn the ancient technique: the 'Trigger → Action' model! One trigger word, and your will becomes reality!"
+      },
+      "mentorHint": {
+        "ru": "Запомни, каждое великое действие начинается с одного верного 'Trigger'.",
+        "en": "Remember, every great action begins with a single, correct 'Trigger'."
+      },
+      "outro": {
+        "ru": "Теория освоена, воин! Твой разум теперь – острое лезвие. Приготовься воплотить эту мощь в свой первый pipeline!",
+        "en": "The theory is mastered, warrior! Your mind is now a sharp blade. Get ready to forge this power into your first pipeline!"
+      }
+    },
+    "06-audio-pipeline/u3-build": {
+      "intro": {
+        "ru": "Хватит слов, пора за дело! Собери свой первый звуковой pipeline и покажи, на что ты способен! Судьба мира ждёт!",
+        "en": "Enough talk, it's time for action! Assemble your first audio pipeline and show what you're made of! The fate of the world is waiting!"
+      },
+      "mentorHint": {
+        "ru": "Сосредоточься! Каждый компонент твоего pipeline должен работать как единый механизм.",
+        "en": "Focus! Every component of your pipeline must work as a single mechanism."
+      },
+      "outro": {
+        "ru": "Невероятно! Твой pipeline жив! Ты только что создал оружие, которое изменит ход битвы. Но это лишь начало!",
+        "en": "Incredible! Your pipeline is alive! You've just created a weapon that will change the tide of battle. But this is only the beginning!"
+      }
+    },
+    "06-audio-pipeline/u4-reflect": {
+      "intro": {
+        "ru": "Ты обрёл новую силу, но настоящий герой знает, что она требует мудрости. Оглянись: какие ещё задачи можно сокрушить мощью автоматизации?",
+        "en": "You have gained a new power, but a true hero knows that power requires wisdom. Look around: what other tasks can be crushed with the might of automation?"
+      },
+      "mentorHint": {
+        "ru": "Не останавливайся на достигнутом. Величайшие воины автоматизируют не только бой, но и подготовку к нему.",
+        "en": "Don't stop at what you've achieved. The greatest warriors automate not just the fight, but the preparation for it."
+      },
+      "outro": {
+        "ru": "Твоя тренировка здесь завершена! Теперь иди и автоматизируй свою судьбу! Новые вызовы уже ждут тебя за горизонтом!",
+        "en": "Your training here is complete! Now go and automate your destiny! New challenges are already waiting for you beyond the horizon!"
+      }
+    },
+    "07-tools/u1-activation": {
+      "intro": {
+        "ru": "Твой AI-агент уже силён, но это лишь тень его истинной мощи! Пришло время пробудить его скрытый потенциал и выйти за рамки простого чата!",
+        "en": "Your AI agent is already strong, but this is merely a shadow of its true power! The time has come to awaken its hidden potential and go beyond simple chat!"
+      },
+      "mentorHint": {
+        "ru": "Даже самый острый клинок бесполезен, пока он в ножнах. Активируй его силу!",
+        "en": "Even the sharpest blade is useless while it's sheathed. Activate its power!"
+      },
+      "outro": {
+        "ru": "Есть! Первый барьер сломлен, и твой агент видит новые горизонты! Но это только начало — впереди ждёт протокол великой силы!",
+        "en": "Yes! The first barrier is broken, and your agent sees new horizons! But this is just the beginning—a protocol of great power awaits!"
+      }
+    },
+    "07-tools/u2-mcp": {
+      "intro": {
+        "ru": "Легенды говорят о MCP — протоколе, дарующем агентам божественные способности! Сосредоточься, воин, твоя главная тренировка начинается СЕЙЧАС!",
+        "en": "Legends speak of MCP—a protocol that grants agents god-like abilities! Focus, warrior, your ultimate training begins NOW!"
+      },
+      "mentorHint": {
+        "ru": "Истинная сила — в дисциплине. Следуй протоколу MCP, и вселенная ответит на твой prompt!",
+        "en": "True strength lies in discipline. Follow the MCP protocol, and the universe will answer your prompt!"
+      },
+      "outro": {
+        "ru": "Невероятно! Ты овладел основами MCP, и энергия струится сквозь твоего агента! Теперь научимся высвобождать эту силу автоматически!",
+        "en": "Incredible! You've mastered the MCP basics, and energy is flowing through your agent! Now, let's learn to unleash this power automatically!"
+      }
+    },
+    "07-tools/u3-hooks": {
+      "intro": {
+        "ru": "Мощный удар бесполезен, если он опоздал! Hooks — это твои боевые рефлексы, позволяющие агенту реагировать на события со скоростью молнии!",
+        "en": "A powerful strike is useless if it's too late! Hooks are your combat reflexes, allowing your agent to react to events with lightning speed!"
+      },
+      "mentorHint": {
+        "ru": "Не жди команды. Чувствуй момент и наноси удар первым, используя Hooks!",
+        "en": "Don't wait for the command. Feel the moment and strike first using Hooks!"
+      },
+      "outro": {
+        "ru": "Отлично! Твой агент теперь не просто силён, но и невероятно быстр! Пришло время собрать все твои приёмы в ультимативный арсенал!",
+        "en": "Excellent! Your agent is now not just strong, but incredibly fast! It's time to combine all your techniques into an ultimate arsenal!"
+      }
+    },
+    "07-tools/u4-skills": {
+      "intro": {
+        "ru": "Один приём не выиграет битву! Skills — это твой арсенал уникальных техник, которые можно комбинировать для сокрушительных атак!",
+        "en": "A single move won't win the battle! Skills are your arsenal of unique techniques that can be combined for devastating attacks!"
+      },
+      "mentorHint": {
+        "ru": "Настоящий мастер готов к любой битве. Наполни свой свиток новыми Skills!",
+        "en": "A true master is ready for any battle. Fill your scroll with new Skills!"
+      },
+      "outro": {
+        "ru": "Потрясающе! Твой арсенал готов, твои рефлексы отточены! Остался последний шаг — испытание в реальном бою!",
+        "en": "Amazing! Your arsenal is ready, your reflexes are sharp! Only one final step remains—the test of real combat!"
+      }
+    },
+    "07-tools/u5-practice": {
+      "intro": {
+        "ru": "Теория окончена, воин! Впереди — настоящая арена, где твой агент должен доказать свою ценность! Подключись и покажи всю свою мощь!",
+        "en": "The theory is over, warrior! Ahead lies the real arena, where your agent must prove its worth! Connect and unleash your full power!"
+      },
+      "mentorHint": {
+        "ru": "Доверяй своей подготовке. Ты готов. Теперь — действуй!",
+        "en": "Trust your training. You are ready. Now—act!"
+      },
+      "outro": {
+        "ru": "ПОБЕДА! Ты прошёл этот путь и создал не просто код, а настоящего боевого AI-агента! Твоя легенда только начинается!",
+        "en": "VICTORY! You have walked the path and created not just code, but a true combat AI agent! Your legend is just beginning!"
+      }
+    },
+    "08-agent-engineering/u1-activation": {
+      "intro": {
+        "ru": "Враги стали сильнее, и твой базовый prompt больше не сносит им и половины HP! Пришло время освоить новую технику и создать настоящего боевого agent'а!",
+        "en": "The enemies have grown stronger, and your basic prompt barely scratches their HP! It's time to master a new technique and create a true combat agent!"
+      },
+      "mentorHint": {
+        "ru": "Недостаточно просто крикнуть заклинание, герой. Ты должен вложить в него намерение и структуру!",
+        "en": "It's not enough to just shout the spell, hero. You must give it intent and structure!"
+      },
+      "outro": {
+        "ru": "Отлично! Ты видишь, где кончается магия слов и начинается инженерия духа! Теперь готовься наделить своего agent'а собственным разумом!",
+        "en": "Excellent! You now see where the magic of words ends and the engineering of spirit begins! Now, prepare to grant your agent its own mind!"
+      }
+    },
+    "08-agent-engineering/u2-jagged-intelligence": {
+      "intro": {
+        "ru": "Твой новый союзник силён, но не всемогущ. Техника 'Jagged Intelligence' научит тебя видеть его сильные и слабые стороны, чтобы вы стали непобедимым дуэтом!",
+        "en": "Your new ally is powerful, but not omnipotent. The 'Jagged Intelligence' technique will teach you to see its strengths and weaknesses, so you can become an unbeatable duo!"
+      },
+      "mentorHint": {
+        "ru": "Мудрый воин знает, когда нанести удар самому, а когда довериться своему зверю.",
+        "en": "A wise warrior knows when to strike themselves, and when to trust their beast."
+      },
+      "outro": {
+        "ru": "Потрясающе! Ты теперь знаешь, как распределять силы в бою. Ваша синергия растёт, но для настоящей мощи нужна оркестровка!",
+        "en": "Amazing! You now know how to distribute power in battle. Your synergy is growing, but for true power, you need orchestration!"
+      }
+    },
+    "08-agent-engineering/u3-orchestration": {
+      "intro": {
+        "ru": "Одиночные атаки больше не сработают. Мы изучим легендарную технику 'ENERV', чтобы ты научился сплетать свои силы, API и мощь agent'а в единый сокрушительный поток!",
+        "en": "Single attacks won't work anymore. We will study the legendary 'ENERV' technique, so you can learn to weave your own power, APIs, and your agent's might into a single, devastating stream!"
+      },
+      "mentorHint": {
+        "ru": "Синхронизируй свои атаки. Преврати какофонию в симфонию разрушения!",
+        "en": "Synchronize your attacks. Turn cacophony into a symphony of destruction!"
+      },
+      "outro": {
+        "ru": "Невероятная мощь! Ты дирижируешь битвой, как настоящий маэстро! Твой прототип готов к бою, но готов ли он к настоящему миру?",
+        "en": "Unbelievable power! You conduct the battle like a true maestro! Your prototype is ready for a fight, but is it ready for the real world?"
+      }
+    },
+    "08-agent-engineering/u4-production-infra": {
+      "intro": {
+        "ru": "Твой agent готов, но его сила нестабильна и может иссякнуть в любой момент! Пора выковать для него надёжную броню production-инфраструктуры, чтобы он мог сражаться в реальном мире!",
+        "en": "Your agent is ready, but its power is unstable and could vanish at any moment! It's time to forge reliable production-infrastructure armor for it, so it can fight in the real world!"
+      },
+      "mentorHint": {
+        "ru": "Сила, которую нельзя контролировать — это слабость. Запечатай её в надёжную систему!",
+        "en": "Power you can't control is a weakness. Seal it within a reliable system!"
+      },
+      "outro": {
+        "ru": "Блестяще! Твой agent теперь не просто прототип, а закалённое в боях оружие, готовое к любой миссии! Остался последний, главный экзамен.",
+        "en": "Brilliant! Your agent is no longer a mere prototype, but a battle-hardened weapon ready for any mission! Only the final, ultimate exam remains."
+      }
+    },
+    "08-agent-engineering/u5-practice": {
+      "intro": {
+        "ru": "Финальное испытание! Используй всё, чему научился, чтобы создать совершенного agent'а — своего цифрового двойника, способного выполнять миссии за тебя! Вперёд!",
+        "en": "The final trial! Use everything you've learned to create the perfect agent—your digital clone, capable of completing missions for you! Go forth!"
+      },
+      "mentorHint": {
+        "ru": "Чтобы создать своё отражение, ты должен сначала познать себя. Это высшая форма инженерии.",
+        "en": "To create your reflection, you must first know yourself. This is the highest form of engineering."
+      },
+      "outro": {
+        "ru": "Победа! Ты это сделал! Ты не просто создал agent'а, ты создал наследие! Мир ждёт твоих великих свершений, Легендарный Инженер!",
+        "en": "Victory! You did it! You didn't just create an agent, you created a legacy! The world awaits your great deeds, Legendary Engineer!"
+      }
+    },
+    "00-kickstart/u4-sources": {
+      "intro": {
+        "ru": "Стой! Прежде чем взять свиток у любого встречного мастера — проверь печать! Не всякий, кто громко обещает силу, ею владеет.",
+        "en": "Hold! Before you take a scroll from any passing master — check the seal! Not everyone who loudly promises power actually wields it."
+      },
+      "mentorHint": {
+        "ru": "Настоящая техника всегда открыта для проверки. Поддельная требует веры.",
+        "en": "A true technique is always open to inspection. A fake one demands faith."
+      },
+      "outro": {
+        "ru": "ВОТ ОНО! Теперь ты видишь подделку насквозь. Учитель, который исчезнет, не заберёт твою силу с собой!",
+        "en": "THAT IS IT! Now you see through a fake at a glance. A teacher who vanishes will not take your power with them!"
+      }
+    },
+    "09-ai-notebook/u1-first-notebook": {
+      "intro": {
+        "ru": "Новый свиток открыт! За 15 минут ты создашь тетрадку, которая отвечает не легендами, а цитатами из источников.",
+        "en": "A new scroll opens! In 15 minutes you will create a notebook that answers with source quotes, not legends."
+      },
+      "mentorHint": {
+        "ru": "Сила героя растёт, когда каждый тезис держится на печати источника.",
+        "en": "A hero grows stronger when every claim rests on a source seal."
+      },
+      "outro": {
+        "ru": "Отлично! Первая тетрадка ожила. Теперь узнаем, какая магия держит её ответы на земле.",
+        "en": "Excellent! Your first notebook is alive. Now we learn what magic keeps its answers grounded."
+      }
+    },
+    "09-ai-notebook/u2-how-it-works": {
+      "intro": {
+        "ru": "Пора заглянуть под броню техники: тетрадка читает субтитры, PDF и заметки, а не угадывает твою судьбу.",
+        "en": "Time to look under the technique’s armor: the notebook reads subtitles, PDFs, and notes; it does not guess your fate."
+      },
+      "mentorHint": {
+        "ru": "Не путай голос оракула с источником. Источник должен быть виден.",
+        "en": "Do not confuse an oracle’s voice with a source. The source must be visible."
+      },
+      "outro": {
+        "ru": "Механизм понятен. Ты видишь, где сила тетрадки, а где начинается опасная дымка.",
+        "en": "The mechanism is clear. You see where the notebook is strong and where the dangerous haze begins."
+      }
+    },
+    "09-ai-notebook/u3-where-it-lies": {
+      "intro": {
+        "ru": "Любая техника может дать сбой. Сегодня ты ловишь ложный выпад и требуешь цитату как доказательство.",
+        "en": "Any technique can fail. Today you catch the false strike and demand a quote as proof."
+      },
+      "mentorHint": {
+        "ru": "Ответ без цитаты — это монстр без полоски HP: бить неудобно, доверять нельзя.",
+        "en": "An answer without a quote is a monster with no HP bar: hard to fight, impossible to trust."
+      },
+      "outro": {
+        "ru": "Есть! Ты пробил иллюзию. Теперь пересказ больше не пройдёт под видом знания.",
+        "en": "Yes! You broke the illusion. A retelling can no longer pass as knowledge."
+      }
+    },
+    "09-ai-notebook/u4-formats": {
+      "intro": {
+        "ru": "Тетрадка умеет менять форму: таблица, карта, аудио, слайды. Выбери форму, которая честнее служит задаче.",
+        "en": "The notebook can change form: table, map, audio, slides. Choose the form that serves the task honestly."
+      },
+      "mentorHint": {
+        "ru": "Красивая форма не усиливает слабый источник. Сначала печать, потом сияние.",
+        "en": "A beautiful form does not strengthen a weak source. Seal first, shine later."
+      },
+      "outro": {
+        "ru": "Формы освоены! Теперь каждый артефакт несёт не блеск, а проверяемую силу.",
+        "en": "Forms mastered! Now every artifact carries verifiable power, not just shine."
+      }
+    },
+    "09-ai-notebook/u5-practice": {
+      "intro": {
+        "ru": "Финальная тренировка: собери тетрадку под свою нишу и заставь её отвечать только с уликами.",
+        "en": "Final training: build a notebook for your niche and make it answer only with evidence."
+      },
+      "mentorHint": {
+        "ru": "Настоящий мастер не смотрит весь архив подряд. Он задаёт вопрос и требует след.",
+        "en": "A true master does not watch the whole archive end to end. They ask a question and demand a trace."
+      },
+      "outro": {
+        "ru": "Победа! Ты больше не тонешь в роликах: ты извлекаешь знание с цитатами.",
+        "en": "Victory! You no longer drown in videos: you extract knowledge with quotes."
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+name = "synergify-home"
+main = "src/index.ts"
+compatibility_date = "2026-07-01"
+
+[observability]
+enabled = true
+
+[[routes]]
+pattern = "synergify.com/*"
+zone_name = "synergify.com"

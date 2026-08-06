@@ -1,0 +1,4 @@
+-- 0016_oauth_google.sql — Google OAuth identity column (fb_25d8fa04)
+-- Additive, nullable. Apply to prod D1 via cloudflare-api MCP /query (NOT wrangler) BEFORE push.
+ALTER TABLE users ADD COLUMN google_sub TEXT;
+CREATE UNIQUE INDEX IF NOT EXISTS idx_users_google_sub ON users(google_sub) WHERE google_sub IS NOT NULL;

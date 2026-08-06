@@ -1,0 +1,38 @@
+{
+  "origin": {
+    "source": "Наташа (feedback)",
+    "note": "Ключ №4 модели «почему курс бесплатный» (родитель fb_ed319653; ключ №1 — FAQ loss-leader — уже опубликован)."
+  },
+  "frame": [
+    {
+      "id": "commons",
+      "ru": "Курс — открытый commons: знание передаётся, а не продаётся. Бери, форкай, передавай дальше — оно остаётся общим.",
+      "en": "The course is an open commons: knowledge is passed on, not sold. Take it, fork it, pass it on — it stays shared."
+    },
+    {
+      "id": "peer-network",
+      "ru": "Выпускники образуют распределённую сеть практиков, а не список клиентов — их связывает общая практика, а не платформа.",
+      "en": "Graduates form a distributed network of practitioners, not a customer list — held together by shared practice, not a platform."
+    },
+    {
+      "id": "sovereign-practice",
+      "ru": "Каждый держит свои инструменты, своего агента и свой метод. Сеть суверенна: она не зависит от единого центра или провайдера.",
+      "en": "Each person keeps their own tools, their own agent, and their own method. The network is sovereign: it does not depend on a single center or provider."
+    },
+    {
+      "id": "collective-benefit",
+      "ru": "Работа сети складывается во благо общего — из множества малых суверенных практик, а не из движения, спущенного сверху.",
+      "en": "The network's work adds up to a shared benefit — from many small sovereign practices, not from a movement handed down from above."
+    },
+    {
+      "id": "free-is-the-point",
+      "ru": "Бесплатно — это суть, а не приманка: низкий порог даёт сети расти. Коучинг и работа с командами — отдельный честный шаг, а не скрытый замок.",
+      "en": "Free is the point, not the bait: a low barrier lets the network grow. Coaching and team work are a separate, honest step — not a hidden lock."
+    }
+  ],
+  "placements": [
+    "FAQ «почему бесплатно» expansion (short — beside the shipped answer)",
+    "a landing value-section (medium)",
+    "the why-free narrative (long — the owner's voice)"
+  ]
+}

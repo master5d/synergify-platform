@@ -1,0 +1,71 @@
+---
+title: "My worst prompt"
+unit: 1
+module: 4
+duration: "5 min"
+---
+
+<Phase type="activation">
+
+Picture a prompt you once fired at AI — and got back something useless.
+
+Now don't think of it as a chat message. Picture it as **ordering a bespoke suit from a tailor while mumbling under your breath**: "something dark… roughly my size…" The tailor nods politely and cuts blind.
+
+Run it in your head: what kind of "suit" came back? What went unsaid — what did the AI have to guess?
+
+</Phase>
+
+<Phase type="reflection">
+
+Now picture a **detective arriving at the scene** and examining that prompt as evidence.
+
+Hold the image: an empty room, no labels, no trail of intent. What clues are missing? What does the absence of a role, a criterion, a boundary tell an experienced investigator about the person who left it?
+
+Notice what the scene reveals — and catch what that means for every prompt you reach for next time.
+
+</Phase>
+
+<Phase type="concept">
+
+## Why bad prompts give bad results
+
+An LLM is a prediction machine. It continues your text the way a typical person would in that context.
+
+When you write `"Write an article about marketing"` — the model guesses:
+- For whom? (some random audience)
+- How long? (standard length)
+- What style? (neutral)
+- What focus? (general)
+
+**Formula for a bad prompt:**
+```
+Task without context = assumptions without criteria = lottery
+```
+
+**Formula for a good prompt:**
+```
+Role + Task + Inputs + Expected output + Constraints = reproducible result
+```
+
+| Bad prompt | Good prompt |
+|---------------|----------------|
+| 2–3 words | 5–15 sentences |
+| 5–7 iterations | 1–2 iterations |
+| 60% hit rate | 95% hit rate |
+| Different every time | Reproducible |
+
+</Phase>
+
+<Phase type="practice">
+
+Rewrite your bad prompt from Activation. Add:
+
+1. **Role:** who you are and who's answering
+2. **Task:** what exactly needs to be done
+3. **Output:** what should come out
+
+Save both versions to `my-experiments/u1-prompt-before-after.md`
+
+Run both in Claude and compare the results.
+
+</Phase>

@@ -1,0 +1,115 @@
+---
+title: "Jagged Intelligence: What to Delegate"
+unit: 2
+module: 8
+duration: "15 min"
+---
+
+<Phase type="activation">
+
+Well-known fact: Claude/GPT can refactor 100,000 lines of code — and **miscount the number of "r"s in "strawberry"**.
+
+Don't picture this as "AI with bugs" — picture it as a **savant**: someone who is uncannily brilliant in one dimension and utterly helpless at something a child handles in a second.
+
+Run two moments in your head: one when AI floored you with its capability — and one when AI floored you with its cluelessness. Both moments are about the same system. What could possibly make both true at once?
+
+</Phase>
+
+<Phase type="reflection">
+
+**Jagged Intelligence** = the model shines in some tasks and faceplants in others, and the "easy/hard" logic **doesn't match** human intuition.
+
+What AI does easily:
+- Rewrite a long text in a different style
+- Find patterns in logs
+- Generate boilerplate code
+- Summarize a meeting
+- Translate between languages
+
+What AI does poorly:
+- Precise counting (characters, numbers, array indices)
+- Event chronology ("what happened first — A or B")
+- Geometry and spatial reasoning
+- Access to fresh data without tools
+- Holding long contexts without loss
+
+This isn't a temporary issue. It's an **architectural** property of transformers.
+
+Don't picture this as "uneven AI" — picture it as a **circus juggler** keeping balls, rings, and clubs airborne at once. Each object has its own rhythm and release angle. The juggler doesn't "catch everything the same way" — they **know which object needs which treatment**.
+
+**Takeaway for agent engineering:** you don't "delegate a task to AI." You **break the task into objects**:
+- The ones AI keeps airborne easily → hand them over
+- The ones AI drops → give it a **tool** (calculator, DB, search)
+- The ones that are critical → **verify** with a second model or a human
+
+Notice: in your task — which object does the juggler carry confidently, and which one is dangerous to toss their way?
+
+</Phase>
+
+<Phase type="concept">
+
+**Delegation map** (Jagged Intelligence Literacy):
+
+```
+┌─────────────────────────────────────────────────┐
+│  AI nails it   │ AI with a tool    │ Human     │
+├─────────────────┼───────────────────┼───────────┤
+│ Text-to-text   │ Precise counting  │ Meaning   │
+│ Stylization    │ Fresh data        │ Taste     │
+│ Code templates │ Long memory       │ Ethics    │
+│ Summarization  │ Exact math        │ What &    │
+│ Translation    │ External APIs     │ why       │
+└─────────────────┴───────────────────┴───────────┘
+```
+
+**Taste rule for the agent engineer:**
+
+> *Delegate execution to AI. Keep direction and verification for yourself.*
+
+This means:
+- You choose — **what to build**
+- AI writes — **the code that does it**
+- You verify — **that the result matches the intent**
+- AI fixes — **what you flagged as wrong**
+
+**Real example: the ENERV pipeline**
+
+In ENERV (my semantic journal system), Gmail emails tagged `AI Ingest` are processed like this:
+
+```
+Gmail Trigger          ← tool, not AI
+  ↓
+Normalize Input        ← code, deterministic
+  ↓
+Gemini Router          ← AI decides: where to put it (Atlas? Calendar? Facets?)
+  ↓
+Parse Response         ← code, deterministic
+  ↓
+ACL Transformer        ← AI writes the .md into the right folder
+  ↓
+Mark Ingested          ← tool (Gmail API)
+```
+
+AI shows up in exactly **two spots** where it shines: classification + text-to-structure. Everything else is deterministic steps.
+
+That's what agent engineering is — a **designed** combination of AI nodes and non-AI nodes.
+
+</Phase>
+
+<Phase type="practice">
+
+Take your task from unit 1. Break it into steps. For each step, classify:
+
+| Step | Type | Who does it |
+|-----|-----|-----------|
+| Download emails | Tool | Gmail API |
+| Understand the topic | AI | LLM |
+| Write to file | Tool | File system |
+| Check for duplicates | Code | deterministic code |
+| Notify you | Tool | Telegram/Slack API |
+
+Save to `my-experiments/agent-decomposition.md` as a table.
+
+**Key question:** for which steps are you currently trying to use AI where **simple code or an API is enough**? That's the most common source of unreliability.
+
+</Phase>

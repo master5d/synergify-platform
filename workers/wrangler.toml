@@ -1,0 +1,33 @@
+name = "tochka-sborki-api"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+[vars]
+OWNER_EMAIL = "sasha@mamaev.coach"
+LISTMONK_URL = "https://listmonk.mamaev.coach"
+# listmonk CRM list «Точка Сборки CRM» (private, single opt-in) — создан на infra I4
+LISTMONK_CRM_LIST_ID = "7"
+
+# Логи воркера (SES статус отправки) — чтобы отлаживать доставку magic-link, а не вслепую
+[observability]
+enabled = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "tochka-sborki-db"
+database_id = "c904db4d-a900-4ff1-80ae-6056c150ca53"
+
+[[routes]]
+pattern = "ai.mamaev.coach/api/*"
+zone_name = "mamaev.coach"
+
+[[routes]]
+pattern = "mamaev.coach/api/*"
+zone_name = "mamaev.coach"
+
+[[routes]]
+pattern = "ai.synergify.com/api/*"
+zone_name = "synergify.com"
+
+[triggers]
+crons = ["0 16 * * *"]

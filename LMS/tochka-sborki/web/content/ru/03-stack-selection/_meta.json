@@ -1,0 +1,14 @@
+{
+  "module": 3,
+  "title": "Выбор стека",
+  "description": "Какой agentic-стек подходит твоей ситуации: Claude Code, Sovereign, Cloud-OSS или Behind-GFW",
+  "duration": "60 мин",
+  "level": 3,
+  "units": [
+    { "slug": "u1-activation", "title": "Какие у тебя ограничения?" },
+    { "slug": "u2-stack-matrix", "title": "Матрица 4 стеков" },
+    { "slug": "u3-behind-gfw", "title": "Behind Great Firewall: без VPN" },
+    { "slug": "u4-hermes-sovereign", "title": "Hermes + локальный стек" },
+    { "slug": "u5-migrate", "title": "План миграции твоего workflow" }
+  ]
+}

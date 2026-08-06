@@ -1,0 +1,78 @@
+---
+title: "What's Claude Code missing?"
+unit: 1
+module: 7
+duration: "5 min"
+---
+
+> 💡 **MCP is an open standard.** This module shows MCP/Hooks/Skills via Claude Code. **MCP servers are also supported** by Cline, Continue.dev, Goose, Cursor. Hooks and Skills are Claude-Code-specific, but each stack has equivalents (see module 03).
+
+<Phase type="activation">
+
+Picture a moment when Claude Code stalled mid-task — the right service was right there, but the agent couldn't reach it.
+
+Don't picture this as a bug or a limitation. Picture a craftsman at the workbench: tool belt buckled, but the right socket isn't in the pouch — hand reaches into an empty slot, work stops. Run it in your head: what exactly was in that empty pocket?
+
+**Which tool would you slide in there first?**
+
+</Phase>
+
+<Phase type="reflection">
+
+Claude Code out of the box is a navigator with precise star charts but no sextant: knows where to sail, just can't take a fix right here, right now.
+
+Don't think of this as "installing plugins." Picture the navigator finally getting the instrument: one measurement — and position is known. Three mechanisms hand the agent those instruments: **MCP** (connecting services), **Hooks** (event automation), **Skills** (reusable scenarios).
+
+Hold this in your head: which first "measurement" would unlock your work?
+
+</Phase>
+
+<Phase type="concept">
+
+## Taxonomy of Claude Code extensions
+
+| Mechanism | What it does | Analogy |
+|----------|-----------|---------|
+| **MCP Server** | Gives the agent new tools (GitHub, Notion, browser) | Installing an app |
+| **Hook** | Runs code on events (before/after an agent action) | An automatic trigger |
+| **Skill** | A reusable scenario called via `/skill-name` | A macro / script |
+
+## Agency levels
+
+| Level | Type | What it can do |
+|---------|-----|-----------|
+| 1 | Basic Responder | Answers questions |
+| 2 | Router | Routes a request to the right agent |
+| **3** | **Tool-Calling** | **Uses external tools — Claude Code with MCP** |
+| 4 | Multi-Agent | Several agents working together |
+| 5 | Autonomous | Acts without human involvement |
+
+Claude Code with MCP is level 3. With Skills and parallel agents — level 4.
+
+> A level isn't "how much AI replaced you" — it's **how much you deliberately delegate**. Even at level 5 you hold the frame, the goal, and the check: the tool executes — the role stays yours. You choose which level to climb to for each task.
+
+</Phase>
+
+<Phase type="practice">
+
+Describe three tasks where you were missing tools:
+
+```markdown
+# What I was missing
+
+## Task 1
+What I wanted: [description]
+What I needed: [which access/tool]
+
+## Task 2
+...
+
+## Task 3
+...
+```
+
+Save to `my-experiments/u1-missing-tools.md`
+
+We'll come back to this in u5-practice — and you'll wire up at least one of them.
+
+</Phase>

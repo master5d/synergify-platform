@@ -1,0 +1,75 @@
+---
+title: "How it works"
+unit: 2
+module: 9
+duration: "7 min"
+---
+
+<Phase type="activation">
+
+You hold a notebook from the previous unit. Ask the question people usually postpone: how is it different from a regular AI chat at all?
+
+Picture two interlocutors. The first has read everything on the internet and answers from memory — smooth, confident, no pauses. The second sits over a stack of papers you yourself brought, leafs through the stack before every answer, and points a finger at a paragraph while answering.
+
+Which of the two would you take along to check a decision that matters to you?
+
+</Phase>
+
+<Phase type="reflection">
+
+You probably picked the second one — and not because he is smarter. He is **checkable**.
+
+The first interlocutor may be right more often. But when he is wrong, you will not find out: his answer has no seam to pull on. The second one's mistake shows immediately — the finger pointed at a paragraph, and the paragraph says something else.
+
+Hold that feeling: trust here is built not on the quality of answers but on the **ability to check them**.
+
+</Phase>
+
+<Phase type="concept">
+
+## Source-grounding: the answer is tied to a source
+
+A regular chat answers from "general knowledge" — whatever the model absorbed in training. The notebook works differently: before answering, it finds the relevant pieces **in your sources** and builds the answer on them. That is source-grounding.
+
+Three consequences worth knowing:
+
+**1. A citation is not a decoration — it is a seam.** The footnote number in a notebook answer leads to an exact spot in the source. A seam can be opened: click and see what is actually written there. In module 0 you checked the "back of the can" for materials — this is the same gesture, at the level of every single claim.
+
+**2. The notebook knows only what you gave it.** Ask about something absent from the sources — the honest reply is "the sources do not cover this." Not a weakness, a feature: the boundaries of knowledge are visible; a from-memory chat has no visible boundaries.
+
+**3. For the notebook, a video is its transcript.** It does not watch the clip — it reads the subtitles. Intonation, diagrams on a whiteboard, code on the screen — anything that never made it into text does not exist for it. A talk where the point is shown rather than said will shrink to its spoken lines.
+
+## Under the hood — in module 05 language
+
+If you took the context-and-memory module, you will recognize the mechanics: sources are cut into chunks, the chunks relevant to your question are retrieved, and they are placed into the model's context with the instruction "answer only from this." A notebook is managed context with mandatory citations — not a different kind of magic.
+
+That is why the prompts in the [pack](/en/notebook/) are built the way they are: each demands a citation. Requiring citations is how you force a tool to show its seams even when it would rather answer smoothly.
+
+## The third mode: hybrid
+
+There is also a middle option: a notebook can be attached to a regular assistant chat (in Gemini — directly as a source in the conversation). The model then answers with **general knowledge plus your sources** — and questions about the notebook come back with links into it.
+
+Convenient — and treacherous: the knowledge boundary that a pure notebook holds firmly ("the sources do not cover this") blurs in hybrid mode. An answer may stand half on your documents and half on the model's memory, and the seam is invisible in smooth prose. In hybrid mode the habits of the next unit — clicking citations and asking control questions — go from useful to mandatory.
+
+</Phase>
+
+<Phase type="practice">
+
+Go back to your unit-1 notebook and run three boundary experiments:
+
+```
+1. A question INSIDE the sources: [...]
+   → answer with citations? did they land?
+
+2. A question KNOWINGLY OUTSIDE the sources: [...]
+   → an honest "not in the sources" or an answer from memory?
+
+3. A question about what a video SHOWED rather than said: [...]
+   → what did the notebook "see," and what does not exist for it?
+```
+
+Save your observations to `my-experiments/u2-grounding-borders.md`.
+
+The third experiment is the most telling: it exposes the video-versus-transcript boundary that most "AI will watch it for me" hopes trip over.
+
+</Phase>

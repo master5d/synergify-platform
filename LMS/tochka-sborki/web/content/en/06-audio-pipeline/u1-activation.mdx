@@ -1,0 +1,83 @@
+---
+title: "The info you process by hand"
+unit: 1
+module: 6
+duration: "5 min"
+---
+
+> 💡 **Stack-agnostic.** This module uses Claude Code as a case study (Firecrawl scrape → analysis). In other stacks the pattern is the same: Aider + Firecrawl CLI; Hermes + a `web-research` skill; Cline + MCP Firecrawl. See module 03 for your stack.
+
+<Phase type="activation">
+
+Catch one cycle from the last three days: you pulled something from the internet and delivered it somewhere else.
+
+Don't picture it as "working at a computer." **Picture it as a factory assembly line** — the part (information) lands on the belt, passes station to station (read, extract, relay), and exits as a finished product at the other end.
+
+Run that line in your head: how many stations? At which one does the belt slow down and a backlog starts forming?
+
+</Phase>
+
+<Phase type="reflection">
+
+Hold that route in front of you — like a cartographer who just walked the terrain on foot.
+
+At every bend they mark the map: "swamp here" (hard going), "firm road here" (easy). **Look at your own route the same way:** which stretches are manual-labor swamp, and which already move almost on their own?
+
+Your pipeline today is the first map you won't need to walk twice. Which stretch do you chart first?
+
+</Phase>
+
+<Phase type="concept">
+
+## Every automation = Trigger → Action
+
+This is the foundational mental model:
+
+| Trigger | Action |
+|---------|--------|
+| 6:00 alarm | Phone rings |
+| Payment goes through | Email + SMS to customer |
+| You give the agent a URL | Agent scrapes → analyzes → saves the result |
+
+### Three questions before building a pipeline
+
+1. **Trigger:** what kicks off the process? (you manually, a schedule, a new file, a webhook)
+2. **Action:** what should happen? (scrape → analyze → save → notify)
+3. **Condition:** when should it NOT run? (duplicates, rate limits, errors)
+
+### Today's pipeline
+
+```
+Trigger:  You give an article URL
+   ↓
+Action 1: Firecrawl scrapes the page → returns clean text
+   ↓
+Action 2: Claude analyzes the text
+   ↓
+Action 3: Result saved to a Markdown file
+```
+
+Manual trigger. But the principle is the same — for Zapier, for Claude Code Hooks, all of it.
+
+</Phase>
+
+<Phase type="practice">
+
+Pick an article or page you want to analyze.
+
+Open Claude (claude.ai or Claude Code) and give it this prompt:
+
+```
+Read this article: [paste URL]
+
+Pull out:
+1. Three main insights (concrete, actionable)
+2. One idea I can apply in my work right now
+3. Three questions for further research
+
+Format: Markdown, structured.
+```
+
+Save the result to `my-experiments/u1-pipeline-test.md`
+
+</Phase>

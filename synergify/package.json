@@ -1,0 +1,19 @@
+{
+  "name": "synergify-home",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240524.0",
+    "typescript": "^5.4.0",
+    "vitest": "^4.1.10",
+    "wrangler": "~4.107.0"
+  },
+  "overrides": {
+    "sharp": "^0.35.3"
+  }
+}

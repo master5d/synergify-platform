@@ -1,0 +1,789 @@
+---
+title: "Practical Exercises"
+description: "8 exercises to consolidate levels 1–4 + optional tracks: \"package your expertise\", \"automate your practice\", and \"research with AI\""
+order: 101
+duration: ""
+level: 0
+---
+# Practical Exercises
+
+> "Don't read prompts, write them. Don't look at examples, repeat them."
+
+All exercises should be done in your terminal. Save the results to the `my-experiments/` folder.
+
+---
+
+## 📝 Exercise 1: Rewrite a command into a delegation
+
+**Goal:** Learn to go from commands to describing the result.
+
+### Task:
+
+You have this "prompt" (a command):
+
+```
+Install npm
+Create package.json
+Install React
+Install Tailwind
+Create a src folder
+Create App.tsx
+```
+
+### What to do:
+
+1. Rewrite this as a **delegation** (describing the result)
+2. Save to `my-experiments/exercise-1-delegation.md`
+
+### Example result:
+
+```markdown
+# Exercise 1: Delegation
+
+## Input (WHAT WAS):
+Step-by-step commands...
+
+## Output (WHAT BECAME):
+I want to build a React app for [PURPOSE].
+
+Requirements:
+- TypeScript support
+- Tailwind CSS
+- Structure: components in src/
+
+Result: an app that runs on localhost:3000
+```
+
+### Check:
+
+- [ ] Rewrote "Install X" as "I need Y"?
+- [ ] Added goal and context?
+- [ ] Described how to know it's working?
+
+---
+
+## 🔄 Exercise 2: Experimenting with prompts
+
+**Goal:** Learn to iterate and compare results.
+
+### Task:
+
+Create a button component. But do it in 3 iterations:
+
+**Attempt 1:** Minimal prompt
+```
+Create a React button component.
+```
+
+**Attempt 2:** With details
+```
+Create a React button component.
+- Supports primary/secondary variants
+- Color changes on hover
+- Disabled state
+```
+
+**Attempt 3:** Full prompt
+```
+Create a React Button component for a design system.
+
+Requirements:
+- Variants: primary (blue), secondary (gray), danger (red)
+- Sizes: sm, md, lg
+- States: normal, hover, active, disabled
+- On hover: scale 1.05
+- Disabled: opacity 0.5
+- TypeScript, with prop typing
+
+Result: a Button.tsx file with usage examples
+```
+
+### What to do:
+
+1. Launch Claude Code in the folder `my-experiments/button-exercise`
+2. Try all 3 prompt variants
+3. Compare results
+4. Save to `exercise-2-iterations.md`
+
+### Save:
+
+```markdown
+# Exercise 2: Iterations
+
+## Attempt 1: Minimal prompt
+[Result from Claude Code]
+
+## Attempt 2: With details
+[Result from Claude Code]
+
+## Attempt 3: Full prompt
+[Result from Claude Code]
+
+## Analysis:
+- Which variant was the most effective?
+- How many follow-up iterations were needed?
+- Which details were the most important?
+```
+
+### Check:
+
+- [ ] Tried 3 variants?
+- [ ] Compared results?
+- [ ] Wrote down which variant was better and why?
+
+---
+
+## 📋 Exercise 3: Structuring context
+
+**Goal:** Learn to create good CLAUDE.md and TODO.md files.
+
+### Task:
+
+Take an existing project (anything on your disk). For it, create:
+
+1. **CLAUDE.md** — full project context
+2. **TODO.md** — current tasks
+3. **AGENTS.md** — instructions for Claude Code
+
+### CLAUDE.md structure:
+
+```markdown
+# Project Context
+
+## My role
+[Who I am for this project]
+
+## Project
+[What it is, why it exists]
+
+## Stack
+[Tech and versions]
+
+## Structure
+[Folders and their purpose]
+
+## How to run
+[Commands to start]
+
+## Current state
+[What works, what doesn't]
+
+## When to call Claude Code
+[For what tasks]
+```
+
+### What to do:
+
+```bash
+cd [your-project]
+touch CLAUDE.md TODO.md AGENTS.md
+
+# Fill in each file
+# Save results to git
+git add CLAUDE.md TODO.md AGENTS.md
+git commit -m "Add context files for Claude Code"
+```
+
+### Check:
+
+- [ ] CLAUDE.md has all the info needed?
+- [ ] TODO.md has priorities set?
+- [ ] AGENTS.md describes your work style?
+- [ ] Files added to git?
+
+---
+
+## 🎯 Exercise 4: Using Explore
+
+**Goal:** Learn to explore a codebase with Claude Code.
+
+### Task:
+
+Run `/explore` in an existing project with different parameters:
+
+```bash
+cd [your-project]
+claude-code .
+```
+
+Inside the session:
+
+```
+/explore --thoroughness quick
+# What did you learn in 30 seconds?
+
+/explore --thoroughness medium
+# What's the architecture?
+
+/explore --thoroughness very_thorough
+# How is everything connected?
+```
+
+### Questions for Explore:
+
+Try asking:
+- "Which files handle X?"
+- "How does process Y work?"
+- "Where is the logic for Z stored?"
+
+### What to do:
+
+Save the results to `exercise-4-explore.md`:
+
+```markdown
+# Exercise 4: Explore
+
+## Quick exploration
+[Results]
+
+## Medium exploration
+[Results]
+
+## Very thorough exploration
+[Results]
+
+## Questions and answers
+- "Which files handle auth?" → [Answer]
+- "How does..."
+```
+
+### Check:
+
+- [ ] Used all 3 thoroughness levels?
+- [ ] Asked several questions?
+- [ ] Saved the results?
+
+---
+
+## 🧪 Exercise 5: Meta-prompting
+
+**Goal:** Learn to create prompts that create prompts.
+
+### Task:
+
+Write a meta-prompt for your project. This is a prompt that tells Claude how to create prompts for YOUR project.
+
+### Example:
+
+```
+Create a prompt for analyzing code in my [PROJECT] project.
+
+The prompt should:
+1. Ask the agent to understand the architecture first
+2. Then analyze a specific file
+3. Suggest improvements with project context in mind
+4. Provide code examples
+
+Make sure the prompt is clear and uses info from CLAUDE.md
+```
+
+### What to do:
+
+1. Write the meta-prompt
+2. Give it to Claude Code
+3. Get the resulting prompt
+4. Use that prompt on real work
+5. Save to `exercise-5-meta-prompt.md`
+
+### Result:
+
+```markdown
+# Exercise 5: Meta-prompting
+
+## My meta-prompt:
+[What I asked to create]
+
+## Resulting prompt from Claude:
+[The prompt Claude generated]
+
+## How I used it:
+[What task I applied it to]
+
+## Result:
+[Did it work?]
+```
+
+---
+
+## 🚀 Exercise 6: Parallel agents
+
+**Goal:** Learn to run several tasks at once.
+
+### Task:
+
+Take a file with lots of info (for example, a list of user insights or a features backlog).
+
+Launch 3 Claude Code sessions in parallel (in different terminals or folders):
+
+**Session 1:** Analyzes the top 3 problems
+```
+From insights.md find and analyze the top 3 main user problems.
+For each:
+- Problem description
+- How many users are affected
+- A possible solution
+```
+
+**Session 2:** Finds the top 3 opportunities
+```
+From insights.md find the top 3 opportunities for new functionality.
+For each:
+- Opportunity description
+- Which problem it solves
+- Rough implementation difficulty
+```
+
+**Session 3:** Extracts the best quotes
+```
+From interview.md find the 5–7 most interesting user quotes.
+The ones that reflect real pain points or important insights.
+```
+
+### What to do:
+
+```bash
+# Terminal 1
+cd ~/my-Efforts/On/analysis-1
+touch insights.md
+claude-code .
+# [Give session 1 task]
+
+# Terminal 2
+cd ~/my-Efforts/On/analysis-2
+touch insights.md
+claude-code .
+# [Give session 2 task]
+
+# Terminal 3
+cd ~/my-Efforts/On/analysis-3
+touch interview.md
+claude-code .
+# [Give session 3 task]
+
+# Combine the results into one file
+```
+
+### Result:
+
+Create `presentation.md` — a Markdown presentation for a stakeholder meeting:
+
+```markdown
+# Product Analysis Presentation
+
+## 🔴 Top 3 User Problems
+
+### Problem 1
+[From session 1]
+
+### Problem 2
+[...]
+
+### Problem 3
+[...]
+
+## 🟢 Top 3 Product Opportunities
+
+### Opportunity 1
+[...]
+
+## 💬 Best quotes
+
+### Quote 1
+> "[Quote]"
+> — [Who said it]
+
+[...]
+
+## Recommendations
+[Your analysis, what to do with this information]
+```
+
+### Check:
+
+- [ ] Ran 3 sessions in parallel?
+- [ ] Got results in reasonable time?
+- [ ] Merged results into a single presentation?
+- [ ] Presentation looks professional?
+
+---
+
+## 📝 Exercise 7: Your own prompt template
+
+**Goal:** Create a template you'll use for all your tasks.
+
+### Task:
+
+Run through exercises 1–6, then create your **ideal prompt template** for your type of work.
+
+It'll look like:
+
+```markdown
+# My Perfect Prompt Template
+
+## For backend development:
+[Your template]
+
+## For frontend development:
+[Your template]
+
+## For analysis and research:
+[Your template]
+
+## For documentation:
+[Your template]
+```
+
+### What to do:
+
+1. Recall which prompts worked best
+2. Which details were important?
+3. In what order do you give information?
+4. Which instructions do you always include?
+
+### Result:
+
+Save to `exercise-7-my-template.md`
+
+```markdown
+# My Prompt Templates
+
+## Backend Development
+
+## Role
+You are a seasoned backend developer...
+
+## Task
+[Template for backend tasks]
+
+## Input
+[What info I provide]
+
+## Output
+[What I expect to receive]
+
+## Constraints
+[My constraints]
+```
+
+### Check:
+
+- [ ] Created templates for your main work types?
+- [ ] Template is based on your actual successes?
+- [ ] Easy to plug in concrete values?
+
+---
+
+## 📚 Exercise 8: Documenting your style
+
+**Goal:** Create a personal guide — exactly how you work with agents.
+
+### Task:
+
+After completing all the exercises, write:
+
+```markdown
+# My Working Style Guide
+
+## When I delegate
+[My criteria]
+
+## When I decide myself
+[My criteria]
+
+## My ideal prompt contains:
+[List of required elements]
+
+## Mistakes I made:
+[What didn't work and why]
+
+## What worked best:
+[Successful patterns]
+
+## My work process:
+[How I usually work with Claude Code]
+
+## Tools I use:
+[CLAUDE.md, TODO.md, AGENTS.md and others]
+
+## How I track progress:
+[How I know it's done right]
+```
+
+---
+
+## 🎁 Bonus exercise: Build one automation
+
+**Goal:** Go from a one-off prompt to a repeating pipeline.
+
+### Task
+
+Open [`my-templates/automation-recipes.md`](./my-templates/automation-recipes.md) and pick **one** recipe:
+
+1. Content Generation + Auto-Post to social media
+2. Auto-Reply Email (drafts in Drafts)
+3. Personalized Cold Email Outreach
+
+Build it in an evening. Doesn't have to be perfect — the point is it works end-to-end.
+
+### Check
+
+- [ ] Trigger is defined and fires
+- [ ] Action chain runs without manual steps
+- [ ] Result is saved somewhere (Sheet, Drafts, log)
+- [ ] After a week, measure: how many hours does it actually save?
+
+If >2 h/week — keep it and iterate. If not — delete without regret and try another.
+
+---
+
+---
+
+## 🎨 Exercise 9: Vibe Coding — MVP in an evening
+
+**Goal:** Run the full cycle from idea to working product using the AI stack.
+
+### What Vibe Coding is
+
+An approach where you focus on **product thinking**, not technical implementation. AI tools cover the code, you set the direction.
+
+### Stack: Perplexity → Grok → Lovable → Supabase
+
+| Tool | Role | What it does |
+| :--- | :--- | :--- |
+| **Perplexity** | Research | Market analysis, competitors, target audience |
+| **Grok** | Planning | Step-by-step instructions, prompt generation |
+| **Lovable / bolt.new** | Frontend | Full UI from a prompt (React + Tailwind) |
+| **Supabase** | Backend | Database, auth, API without code |
+
+### Task: Build a tool for yourself
+
+Pick a task from your own life (not abstract!). Examples:
+- A habit tracker
+- A dashboard for your project
+- A simple CRM for clients
+- A report generator
+
+### Steps:
+
+**Step 1: Research (Perplexity, 20 min)**
+```
+Query: "What already exists in the category [YOUR IDEA]?
+Top 5 competitors, their weaknesses, unmet audience needs."
+```
+
+**Step 2: Plan (Grok, 15 min)**
+```
+Query: "I want to build [IDEA]. Give me a step-by-step MVP plan.
+Compose a prompt for Lovable/bolt.new — exactly what to write to it."
+```
+
+**Step 3: Build Frontend (Lovable / bolt.new, 30 min)**
+```
+Paste the prompt from step 2. Iterate — talk in design language:
+"Make the button bigger", "Add a data table", "Add a sidebar menu"
+```
+
+**Step 4: Connect Backend (Supabase, 20 min)**
+- Create a project at supabase.com
+- Lovable can connect directly via `/integrate supabase`
+- Define tables — data is saved automatically
+
+### Result
+
+Save to `my-experiments/exercise-9-vibe-build.md`:
+
+```markdown
+# Exercise 9: Vibe Coding
+
+## Idea: [What I was building]
+
+## Research (Perplexity):
+[What I learned about the market]
+
+## Plan (Grok):
+[Prompt I used to build]
+
+## Frontend (Lovable / bolt.new):
+[Screenshot or UI description]
+
+## Backend (Supabase):
+[Tables, what's saved]
+
+## Outcome:
+- How long it took: X hours
+- Does it work end-to-end: yes / no
+- Main insight:
+```
+
+### Check:
+
+- [ ] Picked a real task, not abstract?
+- [ ] Ran through at least 3 of the 4 stack steps?
+- [ ] Frontend displays data?
+- [ ] At least one working user flow?
+- [ ] Saved reflection in exercise-9?
+
+---
+
+## ✅ Checklist: All exercises
+
+- [ ] Exercise 1: Rewrite commands as delegations
+- [ ] Exercise 2: Experimentation (3 iterations)
+- [ ] Exercise 3: Structuring context (CLAUDE.md, TODO.md, AGENTS.md)
+- [ ] Exercise 4: Using /explore
+- [ ] Exercise 5: Meta-prompting
+- [ ] Exercise 6: Parallel agents
+- [ ] Exercise 7: Your own prompt template
+- [ ] Exercise 8: Documenting your style
+- [ ] Exercise 9: Vibe Coding — MVP in an evening
+- [ ] Bonus: Build one automation
+
+---
+
+## 🎯 What's next?
+
+After all the exercises:
+
+1. **Practice daily** — use these approaches in real work
+2. **Record** — save good prompts to `my-templates/`
+3. **Share** — show these exercises to coworkers
+4. **Iterate** — refine your style as you learn
+
+---
+
+## 📊 Final feedback: Deep JTBD Interview
+
+After completing the exercises — fill in `my-experiments/feedback-final.md` (copy from [`my-templates/feedback-final-jtbd.md`](./my-templates/feedback-final-jtbd.md), 20–30 min).
+
+This is deep reflection on the whole course through the 4 JTBD forces (Push / Pull / Anxieties / Habits) + before/after + ranking edits. Your signal (optional, anonymous) goes to [`course-feedback/`](./course-feedback/) as a key input for the course's evolution.
+
+---
+
+**Quick reference:** [CHEATSHEET.md](./CHEATSHEET.md)
+
+---
+
+## 🎁 Track (optional): Package your expertise into a product
+
+> "Amplify your voice, don't replace it."
+
+This track is for coaches, experts, practitioners, healers — people who already have a gift and want it to reach more people. It is **not** a "money machine" or a funnel with fake deadlines. It's about gathering and sharing what you already do well — in your own voice, with AI handling the packaging, not the substitution. Take one step at a time and save your work to `my-experiments/`.
+
+### Step 1. Name your gift
+
+**Goal:** one paragraph, no sales copy.
+
+Answer honestly: what do you give people, who exactly, what shift happens for them. Not a "sales pitch" — plain truth. Save to `my-experiments/offer-1-gift.md`.
+
+### Step 2. Find the recurring ask
+
+**Goal:** find the core of your future product.
+
+What question or pain do people bring to you again and again? That recurring ask is what's worth packaging first. Write down three such asks and pick one. Save to `my-experiments/offer-2-core.md`.
+
+### Step 3. Design it with your AI partner
+
+**Goal:** structure where you lead.
+
+Take the skill from Module 4 (prompt engineering) and ask the agent to help break your answer to that ask into a clear structure — a program, a guide, or a mini-course. You hold the meaning and the voice; the agent does the formatting. If it starts writing "how to sell" for you — stop it: you need structure, not manipulation. Save the draft to `my-experiments/offer-3-design.md`.
+
+### Step 4. Build a first version
+
+**Goal:** a small, honest scope.
+
+Vibe-code a first working version — a landing page, a PDF guide, or a single page with your offer. Not "perfect" and not "the whole program" — just enough for a real person to receive it and try it. Save the link/file to `my-experiments/offer-4-build.md`.
+
+### Step 5. Share, don't push
+
+**Goal:** invite, don't pressure.
+
+Show it to a few people it genuinely helps. No scarcity, no countdowns, no "2 spots left". Just: "I put this together, I think it'll be useful to you." Gather honest feedback and return to Step 3 — this is a loop, not a finish line. Note what you learned in `my-experiments/offer-5-share.md`.
+
+> Done. You didn't build a "funnel" — you let your gift reach people while staying yourself.
+
+---
+
+## 🔧 Track (optional): Document and automate your practice
+
+> "Take the routine off your hands — so there's time left for the human part."
+
+This track is for anyone with a repeating practice: a coach, a maker, a freelancer, a small team. The goal is **not** to "replace yourself" or build a content mill — it's to lift the dull, repetitive part off you so you have time for what only you can do. AI takes the paperwork and the routine; the judgment and the human contact stay with you. Take one step at a time and save your work to `my-experiments/`.
+
+### Step 1. Pick one recurring task
+
+**Goal:** one task, not the whole business.
+
+Pick one thing from the menu that you do again and again:
+
+- onboarding a new client
+- a weekly report or summary
+- answering frequent questions
+- preparing and publishing a post
+- invoicing / payment reminders
+
+Take exactly one — the one you're most tired of. Note your choice in `my-experiments/sop-1-pick.md`.
+
+### Step 2. Say it out loud — build the SOP with AI
+
+**Goal:** turn "what's in your head" into clear steps.
+
+Describe to the agent how you do this task — in your own words, the way you'd tell a colleague. Ask it to lay this out as a simple SOP: steps, inputs, what counts as "done". You edit and hold the meaning; the agent does the formatting. Save the SOP to `my-experiments/sop-2-document.md`.
+
+### Step 3. Find what you can hand to the machine
+
+**Goal:** separate routine from judgment.
+
+Walk through the SOP and mark it: where is mechanical routine (formatting, copy-paste, templates), and where does it need your judgment or a human touch. Automate the routine — leave the human part to the human. Write down exactly what you're handing to the machine in `my-experiments/sop-3-automate.md`.
+
+### Step 4. Build one small automation
+
+**Goal:** one working piece, not the whole system.
+
+Vibe-code or prompt one automation from Step 3 — an email template, a script stub, a checklist generator. Not "the whole process", just one honest piece that actually saves time. Test it on a real task. Save it to `my-experiments/sop-4-build.md`.
+
+### Step 5. Keep it alive
+
+**Goal:** don't dump it in an archive.
+
+Use the SOP and the automation on your next real task and fix what didn't fit. It's not a "finished product" but a living tool that grows with your practice. Note what you improved in `my-experiments/sop-5-live.md`.
+
+> Done. You didn't replace yourself — you cleared the routine out of the way so you can do what you're actually called for.
+
+## 🔎 Track (optional): Research with AI
+
+> "Stop memorizing search operators — learn to research with AI."
+
+"Knowing how to search" used to mean remembering Google operators. Now it means running a research loop with AI and **verifying** what it gives back. AI speeds up the search but can be confidently wrong and invent sources — so the rule of this track is simple: **don’t trust the unsourced**. Take one step at a time and save your work to `my-experiments/`.
+
+### Step 1. Pick a real question
+
+**Goal:** a real question, not a "practice" one.
+
+Take a question you'd google this week anyway — work, life, anything real. Phrase it in one sentence, the way you'd ask a live expert. Write the question down in `my-experiments/research-1-question.md`.
+
+### Step 2. Ask an AI search engine and run a follow-up loop
+
+**Goal:** not the first answer, but a conversation.
+
+Ask your question to an AI search engine — Perplexity, ChatGPT search, or Gemini. Don't stop at the first answer: refine, re-ask, ask it to narrow down or dig deeper. Good research is a loop, not a single query. Save your follow-ups and the key answers to `my-experiments/research-2-loop.md`.
+
+### Step 3. Use deep-research mode
+
+**Goal:** depth where it matters.
+
+For a question that genuinely matters, switch on a deep-research mode (deep research in ChatGPT, Gemini, or Perplexity). Give it time to go wide and assemble a report. Save what it found — together with its source list — to `my-experiments/research-3-deep.md`.
+
+### Step 4. Ground it and VERIFY the sources
+
+**Goal:** separate truth from confident fiction.
+
+Open the actual sources the AI cites and check the claims against them. If a link doesn't open, a source doesn't back the claim, or there's no source at all — strike that piece out. This is the heart of the track: **don’t trust the unsourced**, even when it sounds convincing. Note what held up and what didn't in `my-experiments/research-4-verify.md`.
+
+### Step 5. Synthesis: web search × AI
+
+**Goal:** your own grounded answer, not someone's paraphrase.
+
+Combine classic web search with AI synthesis: sometimes it's faster to open a couple of live pages yourself, sometimes to let the AI assemble the picture. Build your own short answer to the original question out of what you verified, and note where the AI got it wrong. Save the result to `my-experiments/research-5-synthesis.md`.
+
+> Done. You're not recalling search operators anymore — you run a research loop with AI and keep the sources in hand.
+

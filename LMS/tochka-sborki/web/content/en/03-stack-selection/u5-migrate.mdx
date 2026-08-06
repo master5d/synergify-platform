@@ -1,0 +1,88 @@
+---
+title: "Migration plan for your workflow"
+unit: 5
+module: 3
+duration: "5 min"
+---
+
+<Phase type="activation">
+
+You've gone through 4 units and picked a stack. This last one is **your 7-day migration plan**.
+
+Before moving forward — don't picture this as "switching a tool." Picture it as **moving house**: no sane person throws out all their furniture before they've moved into the new place. You ferry the essentials first, live in both places for a week, then hand back the keys. Better yet — it's **changing horses mid-river**: you don't leap from one horse and swim to the other. You transfer your weight step by step, holding both, until the new one is solid under you.
+
+Hold in your head: what in your current workflow is "old furniture" (can follow later) — and what is "documents and laptop" (needs to be in the new place from day one)?
+
+</Phase>
+
+<Phase type="reflection">
+
+Picture a snake shedding its skin 🐍. It doesn't rip the old layer off in one go — the new one grows underneath, the old one peels away gradually, and for a while both exist at once. That's not weakness — it's the only way to stay covered.
+
+Catch the same idea here. Most common migration mistake: "I'll just uninstall Claude Code, install Aider, and be more efficient." Doesn't work — the new skin hasn't hardened yet.
+
+The realistic path is a **shed**:
+- **Days 1–2:** new skin growing under the old. New stack is a supplement, old one still runs.
+- **Days 3–4:** old skin starts to peel. One real task moves to the new stack — you notice where it's slower, where it's faster.
+- **Days 5–7:** decide — hybrid forever, or the old skin has already fallen away on its own.
+
+</Phase>
+
+<Phase type="concept">
+
+## Migration template
+
+```markdown
+# Migration to [your stack] — 7 days
+
+## Day 1: Setup
+- [ ] Install the frontend agent (Hermes / Aider / Cline / Claude Code)
+- [ ] Bring up LiteLLM gateway locally
+- [ ] Get API keys (Cerebras / Gemini / etc.)
+- [ ] Make a "hello world" call via curl
+
+## Day 2: Reproduce
+- [ ] Pick ONE task you did on the old stack in the past week
+- [ ] Redo it on the new stack
+- [ ] Note: where it's slower / where it's faster / where it breaks
+
+## Days 3–4: Real work
+- [ ] Do one real work task on the new stack
+- [ ] Keep the old stack as fallback
+- [ ] Don't talk yourself into "the new one is better" — record facts
+
+## Day 5: Customize
+- [ ] Set up 1–2 skills / hooks for your workflow
+- [ ] Add your CLAUDE.md / AGENTS.md for the new agent
+- [ ] LiteLLM: configure the fallback chain
+
+## Day 6: Honest comparison
+- [ ] Write down: what's better on the new stack, what's worse
+- [ ] Where hybrid makes sense (e.g., Claude Code for design + Aider for refactoring)
+
+## Day 7: Decision
+- [ ] Verdict: full migration / hybrid / rollback
+- [ ] If rollback — what would the new stack need to make you reconsider?
+- [ ] If migration — commit: remove the old stack from active memory
+```
+
+</Phase>
+
+<Phase type="practice">
+
+Create `my-experiments/u5-migration-plan.md` from the template above. Fill in concrete dates.
+
+Minimum:
+- [ ] Plan written for 7 days
+- [ ] Step 1 (Setup) — done today
+- [ ] Step 2 (Reproduce) — scheduled for a specific day
+
+> 💡 After completing the migration — come back to this file and add **lessons learned** at the end. That's the most valuable artifact of the whole module.
+
+## What's next
+
+The next module (04 — Prompt Engineering) is agent-agnostic. The concepts (spec formula, magic words, prompting sins) work the same in Claude Code, Aider, and Hermes. Only the command syntax differs — you'll see `<AgentBlock>` sections wherever it matters.
+
+By the end of the course you'll have a working stack of **your** choice. Not a mono-tool, but a flexible system.
+
+</Phase>

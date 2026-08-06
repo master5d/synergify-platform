@@ -1,0 +1,705 @@
+{
+  "skin": "cyber-noir",
+  "zoneNames": {
+    "00-kickstart": {
+      "ru": "Нулевой Квартал",
+      "en": "Sector Zero"
+    },
+    "01-introduction": {
+      "ru": "Инфо-притон 'Синтаксис'",
+      "en": "The Syntax Den"
+    },
+    "02-setup-guide": {
+      "ru": "Подпольная мастерская",
+      "en": "The Back-Alley Workshop"
+    },
+    "03-stack-selection": {
+      "ru": "Чёрный рынок кода",
+      "en": "The Code Blackmarket"
+    },
+    "04-prompt-engineering": {
+      "ru": "Допросная ячейка AI",
+      "en": "AI Interrogation Cell"
+    },
+    "05-context-memory": {
+      "ru": "Архивы 'Мнемозина'",
+      "en": "The Mnemosyne Archives"
+    },
+    "06-audio-pipeline": {
+      "ru": "Конвейер данных",
+      "en": "The Data Pipeline"
+    },
+    "07-tools": {
+      "ru": "Хром-мастерская 'Экзокортекс'",
+      "en": "The 'Exocortex' Chromeshop"
+    },
+    "08-agent-engineering": {
+      "ru": "Штаб Синдиката",
+      "en": "The Syndicate HQ"
+    },
+    "09-ai-notebook": {
+      "ru": "Архив Улик",
+      "en": "Evidence Archive"
+    }
+  },
+  "questTitles": {
+    "00-kickstart": {
+      "ru": "Протереть глаза и не задавать вопросов.",
+      "en": "Wipe your optics, ask no questions."
+    },
+    "01-introduction": {
+      "ru": "Услышать шёпот призрака в машине.",
+      "en": "Catch the ghost's whisper in the machine."
+    },
+    "02-setup-guide": {
+      "ru": "Собрать свой первый ржавый терминал.",
+      "en": "Assemble your first rust-bucket terminal."
+    },
+    "03-stack-selection": {
+      "ru": "Выбрать свой яд: Claude, Sovereign или OSS.",
+      "en": "Choose your poison: Claude, Sovereign, or OSS."
+    },
+    "04-prompt-engineering": {
+      "ru": "Заставить машину сказать то, что нужно.",
+      "en": "Make the machine say what you need."
+    },
+    "05-context-memory": {
+      "ru": "Подбросить agent'у пару ложных воспоминаний.",
+      "en": "Plant a few false memories in an agent."
+    },
+    "06-audio-pipeline": {
+      "ru": "Поставить корпоративный фид на прослушку.",
+      "en": "Automate the corporate surveillance feed."
+    },
+    "07-tools": {
+      "ru": "Прикрутить agent'у пару нелегальных Skills.",
+      "en": "Bolt a few illegal Skills onto your agent."
+    },
+    "08-agent-engineering": {
+      "ru": "Заставь своих agent'ов говорить друг с другом.",
+      "en": "Make your agents talk to each other."
+    },
+    "09-ai-notebook": {
+      "ru": "Вытащить факты из шума.",
+      "en": "Pull facts out of the noise."
+    }
+  },
+  "units": {
+    "00-kickstart/u1-map": {
+      "intro": {
+        "ru": "В этом городе из стекла и хрома каждая идея — призрак в сети, ждущий своего носителя. Сейчас мы поймаем твоего.",
+        "en": "In this city of glass and chrome, every idea is a ghost in the net, waiting for a host. Now, we catch yours."
+      },
+      "mentorHint": {
+        "ru": "Даже самый слабый сигнал может привести к источнику.",
+        "en": "Even the faintest signal can lead to the source."
+      },
+      "outro": {
+        "ru": "Призрак пойман и зафиксирован. Теперь нужны инструменты, чтобы придать ему форму.",
+        "en": "The ghost is caught and pinned. Now you need the tools to give it form."
+      }
+    },
+    "00-kickstart/u2-tools": {
+      "intro": {
+        "ru": "Одного замысла мало. Чтобы выжить в цифровых джунглях, тебе нужен правильный арсенал.",
+        "en": "A plan isn't enough. To survive the digital jungle, you need the right arsenal."
+      },
+      "mentorHint": {
+        "ru": "Не ствол делает стрелка, но без него ты — мишень. Выбирай с умом.",
+        "en": "The gun doesn't make the shooter, but without one, you're the target. Choose wisely."
+      },
+      "outro": {
+        "ru": "Инструменты в кейсе, терминал гудит. Пора оставить след в системе.",
+        "en": "Tools are in the case, the terminal is humming. Time to make a mark on the system."
+      }
+    },
+    "00-kickstart/u3-first-steps": {
+      "intro": {
+        "ru": "Теория мертва. Первый шаг в неоновых тенях отделяет дилетанта от оперативника.",
+        "en": "Theory is dead. The first step into the neon shadows separates the amateur from the operative."
+      },
+      "mentorHint": {
+        "ru": "Первый prompt — как первый выстрел в тишине. Целься точно.",
+        "en": "The first prompt is like the first shot in the silence. Aim true."
+      },
+      "outro": {
+        "ru": "Ты в игре. Система тебя заметила. Следующий модуль — погружение на глубину.",
+        "en": "You're in the game. The system has noticed you. The next module is a deep dive."
+      }
+    },
+    "01-introduction/u1-activation": {
+      "intro": {
+        "ru": "Город спит под неоновым дождем, но для нас работа только начинается. Первый файл в деле — твой собственный.",
+        "en": "The city sleeps under neon rain, but for us, the work is just beginning. The first file in the case is your own."
+      },
+      "mentorHint": {
+        "ru": "Каждый агент начинает с чистого листа. Не бойся оставить первый след.",
+        "en": "Every agent starts with a blank slate. Don't be afraid to make the first mark."
+      },
+      "outro": {
+        "ru": "Файл открыт, данные на столе. Теперь посмотрим на карту города и четыре главных сдвига в его структуре.",
+        "en": "The file is open, data on the table. Now let's look at the city map and the four major shifts in its structure."
+      }
+    },
+    "01-introduction/u2-four-shifts": {
+      "intro": {
+        "ru": "Этот город изменился. Чтобы ориентироваться в его цифровых тенях, нужно знать четыре тектонических сдвига, которые перекроили карту.",
+        "en": "This city has changed. To navigate its digital shadows, you need to know the four tectonic shifts that redrew the map."
+      },
+      "mentorHint": {
+        "ru": "Знай систему, и ты сможешь её взломать. Или хотя бы не стать её жертвой.",
+        "en": "Know the system, and you can hack it. Or at least not become its victim."
+      },
+      "outro": {
+        "ru": "Карта изучена. Ты видишь, как изменились правила. Время познакомиться с основными игроками на этой сцене — клонами MCP.",
+        "en": "The map is studied. You see how the rules have changed. Time to meet the main players on this stage – the MCP clones."
+      }
+    },
+    "01-introduction/u3-clones": {
+      "intro": {
+        "ru": "На улицах полно копий, но оригиналов мало. Мы выделили пять основных клонов — цифровых сущностей, с которыми тебе придётся иметь дело.",
+        "en": "The streets are full of copies, but originals are few. We've identified five primary clones – the digital entities you'll have to deal with."
+      },
+      "mentorHint": {
+        "ru": "Чтобы переиграть их, сначала научись их различать. У каждого свой почерк.",
+        "en": "To outplay them, first learn to tell them apart. Each has its own signature."
+      },
+      "outro": {
+        "ru": "Досье на каждого изучено. Теперь ты знаешь, с кем говоришь. Осталось одно — задать правильный вопрос.",
+        "en": "The dossier on each is studied. Now you know who you're talking to. Only one thing left – to ask the right question."
+      }
+    },
+    "01-introduction/u4-practice": {
+      "intro": {
+        "ru": "Хватит теории. Время для допроса. Твой первый prompt — это твой первый ход в партии против машины.",
+        "en": "Enough theory. Time for the interrogation. Your first prompt is your first move in the game against the machine."
+      },
+      "mentorHint": {
+        "ru": "Говори чётко. Машина не понимает намёков, только прямые приказы.",
+        "en": "Speak clearly. The machine doesn't understand hints, only direct orders."
+      },
+      "outro": {
+        "ru": "Первый контакт состоялся. Ты в игре. Дело официально открыто, и это только начало.",
+        "en": "First contact made. You're in the game. The case is officially open, and this is just the beginning."
+      }
+    },
+    "02-setup-guide/u1-env-check": {
+      "intro": {
+        "ru": "Город — сложная система. Прежде чем подключиться, проверь, выдержит ли сеть твой сигнал. Это базовая операционная безопасность.",
+        "en": "The city's a complex system. Before you jack in, check if the grid can handle your signal. That's basic op-sec."
+      },
+      "mentorHint": {
+        "ru": "Не высовывайся, пока не будешь уверен, что твои системы 'чисты'.",
+        "en": "Don't connect until you know your systems are clean."
+      },
+      "outro": {
+        "ru": "Сигналы в норме. Теперь пора обзавестись инструментами; голыми руками в этом городе много не сделаешь.",
+        "en": "Signals are nominal. Time to acquire the tools; you don't get far in this city bare-handed."
+      }
+    },
+    "02-setup-guide/u2-install": {
+      "intro": {
+        "ru": "Каждому оперативнику нужен свой набор отмычек. Этот софт достают с черного рынка, и он должен работать без сбоев.",
+        "en": "Every operator needs their kit. You get this software from the back channels, and it has to work flawlessly."
+      },
+      "mentorHint": {
+        "ru": "Правильный инструмент в правильных руках меняет расклад сил.",
+        "en": "The right tool in the right hands changes the entire game."
+      },
+      "outro": {
+        "ru": "Инструменты установлены и готовы к работе. Осталось проверить их на реальном деле.",
+        "en": "Tools are installed and hot. All that's left is to test them on a live case."
+      }
+    },
+    "02-setup-guide/u3-first-project": {
+      "intro": {
+        "ru": "Теория — для академиков. На этих улицах репутацию зарабатывают делом. Вот твой первый контракт.",
+        "en": "Theory is for academics. On these streets, you build a reputation with results. Here's your first contract."
+      },
+      "mentorHint": {
+        "ru": "Первый 'prompt' — как первый выстрел. Не промахнись.",
+        "en": "The first prompt is like the first shot. Make it count."
+      },
+      "outro": {
+        "ru": "Дело закрыто. Данные в кэше, ты в игре. Но это было лишь начало.",
+        "en": "Case closed. The data's cached, you're in the game. But this was just the beginning."
+      }
+    },
+    "03-stack-selection/u1-activation": {
+      "intro": {
+        "ru": "Город — это сеть ограничений, цифровых и мясных. Прежде чем сделать ход, знай свои лимиты.",
+        "en": "The city is a network of constraints, digital and meatspace. Know your limits before you make a move."
+      },
+      "mentorHint": {
+        "ru": "Каждая тюрьма имеет ключ. Найди свой.",
+        "en": "Every prison has a key. Find yours."
+      },
+      "outro": {
+        "ru": "Ты очертил свою клетку. Теперь посмотрим на инструменты, которыми вскрывают замки.",
+        "en": "You've mapped your cage. Now, let's look at the tools used to pick the locks."
+      }
+    },
+    "03-stack-selection/u2-stack-matrix": {
+      "intro": {
+        "ru": "В неоновом тумане скрываются четыре основных игрока, четыре способа вести дела. Правильный выбор — это разница между тем, чтобы быть призраком и стать им.",
+        "en": "The neon haze hides four main players, four ways to run your operation. The right choice is the difference between being a ghost and becoming one."
+      },
+      "mentorHint": {
+        "ru": "Не пытайся согнуть матрицу. Просто выбери нужный сектор.",
+        "en": "Don't try to bend the matrix. Just pick the right sector."
+      },
+      "outro": {
+        "ru": "Карта разложена. Ты видишь пути сквозь цифровой шум. Дальше — реальная проблема: Great Firewall.",
+        "en": "The map is laid out. You see the paths through the digital static. Next, a real-world problem: the Great Firewall."
+      }
+    },
+    "03-stack-selection/u3-behind-gfw": {
+      "intro": {
+        "ru": "Некоторые стены выше других. Работать за Great Firewall без VPN — не просто техническая задача, это заявление.",
+        "en": "Some walls are taller than others. Operating behind the Great Firewall without a VPN isn't just a technical challenge; it's a statement."
+      },
+      "mentorHint": {
+        "ru": "Тень — твой лучший союзник, когда свет под запретом.",
+        "en": "Shadow is your best ally when the light is forbidden."
+      },
+      "outro": {
+        "ru": "Ты научился двигаться там, где другие не могут. Это открывает суверенную территорию. Пора заявить на нее права.",
+        "en": "You've learned to move where others can't. This opens up sovereign territory. Let's claim it."
+      }
+    },
+    "03-stack-selection/u4-hermes-sovereign": {
+      "intro": {
+        "ru": "Полная независимость — миф, но локальный стек приближает к ней. Здесь ты — MCP. Ты устанавливаешь правила.",
+        "en": "Total independence is a myth, but a local stack gets you close. Here, you're the MCP. You set the rules."
+      },
+      "mentorHint": {
+        "ru": "Свой сервер надежнее любого союзника.",
+        "en": "Your own server is more reliable than any ally."
+      },
+      "outro": {
+        "ru": "Твоя частная сеть в онлайне. Последний шаг — перенести работу всей жизни в эту новую крепость.",
+        "en": "Your private network is online. The final step is to move your life's work into this new fortress."
+      }
+    },
+    "03-stack-selection/u5-migrate": {
+      "intro": {
+        "ru": "Сменить workflow — все равно что сменить лицо. Требуется план, точность и смелость отсечь то, что больше не служит.",
+        "en": "Changing your workflow is like changing your face. It requires a plan, precision, and the nerve to cut away what's no longer useful."
+      },
+      "mentorHint": {
+        "ru": "Хороший план — это 90% успеха. Остальные 10% — это когда план летит к чертям.",
+        "en": "A good plan is 90% of success. The other 10% is for when the plan goes to hell."
+      },
+      "outro": {
+        "ru": "Миграция завершена. Твоя новая операционная база в безопасности. Ты готов к следующему делу.",
+        "en": "The migration is complete. Your new operational base is secure. You're ready for the next job."
+      }
+    },
+    "04-prompt-engineering/u1-activation": {
+      "intro": {
+        "ru": "Город спит, но неон не гаснет. Первый допрос agent'a — всегда провал, но даже плохой prompt может выдать наводку.",
+        "en": "The city sleeps, but the neon never dies. The first interrogation of an agent is always a failure, but even a bad prompt can yield a lead."
+      },
+      "mentorHint": {
+        "ru": "Запомни, салага: мусор на входе — мусор на выходе.",
+        "en": "Remember, rookie: garbage in, garbage out."
+      },
+      "outro": {
+        "ru": "Первый труп в деле. Теперь ты знаешь, как делать не надо, и это уже полпути к успеху.",
+        "en": "The first body in the case. Now you know what not to do, and that's halfway to success."
+      }
+    },
+    "04-prompt-engineering/u2-spec-formula": {
+      "intro": {
+        "ru": "Хаос порождает ошибки. Нам нужен протокол, четкая формула, чтобы выбить из кремниевого ублюдка нужную информацию.",
+        "en": "Chaos breeds errors. We need a protocol, a clear formula to beat the required information out of the silicon bastard."
+      },
+      "mentorHint": {
+        "ru": "Конкретика — твой лучший ствол в этом переулке.",
+        "en": "Specificity is your best gun in this alley."
+      },
+      "outro": {
+        "ru": "Формула в твоей крови. Agent начинает говорить по делу, когда ты задаешь правильные вопросы.",
+        "en": "The formula is in your blood now. The agent starts talking sense when you ask the right questions."
+      }
+    },
+    "04-prompt-engineering/u3-magic-words": {
+      "intro": {
+        "ru": "Есть слова, которые вскрывают любой замок, даже цифровой. Это не магия, это знание психологии машины.",
+        "en": "There are words that open any lock, even a digital one. This isn't magic, it's understanding the machine's psychology."
+      },
+      "mentorHint": {
+        "ru": "Правильный ключ экономит патроны.",
+        "en": "The right key saves ammunition."
+      },
+      "outro": {
+        "ru": "Твой лексикон пополнился. Теперь ты можешь не только приказывать, но и убеждать.",
+        "en": "Your lexicon has expanded. Now you can not only command but also persuade."
+      }
+    },
+    "04-prompt-engineering/u4-sins": {
+      "intro": {
+        "ru": "В этом городе у каждого свои грехи. У инженеров prompt'ов они особенно дороги и ведут прямо в архив нераскрытых дел.",
+        "en": "In this city, everyone has their sins. For prompt engineers, they are particularly costly and lead straight to the cold case files."
+      },
+      "mentorHint": {
+        "ru": "Одна ошибка — и ты кормишь цифровых червей.",
+        "en": "One mistake, and you're feeding the digital worms."
+      },
+      "outro": {
+        "ru": "Ты видел ошибки других. Запомни их, чтобы не совершать свои. Улицы стали чуть безопаснее.",
+        "en": "You've seen the mistakes of others. Remember them so you don't make your own. The streets just got a little safer."
+      }
+    },
+    "04-prompt-engineering/u5-practice": {
+      "intro": {
+        "ru": "Теория мертва без практики. Время собрать все детали в один идеальный prompt и закрыть это дело.",
+        "en": "Theory is dead without practice. Time to assemble all the details into one perfect prompt and close this case."
+      },
+      "mentorHint": {
+        "ru": "Говори с ним так, будто от этого зависит твоя жизнь. Иногда так и есть.",
+        "en": "Talk to it like your life depends on it. Sometimes, it does."
+      },
+      "outro": {
+        "ru": "Дело закрыто. MCP выдал всю информацию. Теперь ты не просто пользователь — ты оперативник.",
+        "en": "Case closed. The MCP has given up all the information. You're not just a user anymore—you're an operative."
+      }
+    },
+    "05-context-memory/u1-activation": {
+      "intro": {
+        "ru": "Агент смотрит на тебя пустыми глазами. Неоновые вывески отражаются в его оптике, но он не понял приказ.",
+        "en": "The agent stares back with empty eyes. Neon signs reflect in its optics, but it didn't get the order."
+      },
+      "mentorHint": {
+        "ru": "Даже самый тупой информатор поймет, если дать ему верные зацепки.",
+        "en": "Even the dumbest informant gets it if you feed them the right clues."
+      },
+      "outro": {
+        "ru": "Теперь ты знаешь, почему он завис. Пора научить его думать, а не просто выполнять команды.",
+        "en": "Now you know why it froze. Time to teach it to think, not just follow commands."
+      }
+    },
+    "05-context-memory/u2-context-vs-prompt": {
+      "intro": {
+        "ru": "Твой prompt — это приказ в темноте. Контекст — это вся карта города, на которой ты отмечаешь цели.",
+        "en": "Your prompt is an order in the dark. The context is the entire city map where you mark the targets."
+      },
+      "mentorHint": {
+        "ru": "Не путай записку на салфетке с целым досье, парень.",
+        "en": "Don't confuse a note on a napkin with the whole damn file, kid."
+      },
+      "outro": {
+        "ru": "Разница ясна. Теперь заставим агента запомнить не только последний приказ, но и всё дело целиком.",
+        "en": "The difference is clear. Now let's make the agent remember not just the last order, but the entire case."
+      }
+    },
+    "05-context-memory/u3-memory": {
+      "intro": {
+        "ru": "У каждого фиксера есть своя записная книжка. У твоего агента будет своя система памяти, его цифровое досье.",
+        "en": "Every fixer has their little black book. Your agent will have its own memory system, its digital dossier."
+      },
+      "mentorHint": {
+        "ru": "Память — это рычаг. Знай, на что давить.",
+        "en": "Memory is leverage. Know where to apply pressure."
+      },
+      "outro": {
+        "ru": "Теория окончена. Теперь ты соберешь ему память своими руками, винтик за винтиком.",
+        "en": "Theory's over. Now you build its memory with your own hands, screw by screw."
+      }
+    },
+    "05-context-memory/u4-practice": {
+      "intro": {
+        "ru": "Терминал гудит. В тусклом свете ты открываешь MCP и начинаешь калибровку: короткая память, длинная, архив.",
+        "en": "The terminal hums. In the dim light, you open the MCP and begin calibration: short-term memory, long-term, archives."
+      },
+      "mentorHint": {
+        "ru": "Точная настройка отличает профессионала от дилетанта. Не торопись.",
+        "en": "Fine-tuning is what separates a pro from an amateur. Take your time."
+      },
+      "outro": {
+        "ru": "Агент в сети. Он помнит всё. Этот город теперь твой.",
+        "en": "The agent is online. It remembers everything. The city is now yours."
+      }
+    },
+    "06-audio-pipeline/u1-activation": {
+      "intro": {
+        "ru": "Город — это поток данных, и ты в нём тонешь. Каждый день одно и то же. Пора навести порядок.",
+        "en": "The city is a data stream, and you're drowning in it. Same manual grind, day after day. Time to impose some order."
+      },
+      "mentorHint": {
+        "ru": "Первый шаг — увидеть цепи. Только потом их можно будет сломать.",
+        "en": "First step is to see the chains. Only then can you break them."
+      },
+      "outro": {
+        "ru": "Ты опознал цели. Теперь нужно выбрать оружие.",
+        "en": "You've identified the targets. Now, to choose the weapon."
+      }
+    },
+    "06-audio-pipeline/u2-pipeline-theory": {
+      "intro": {
+        "ru": "В этом городе у каждого действия есть триггер. Пойми эту связь, и ты получишь контроль.",
+        "en": "Every action in this city has a trigger. Understand the connection, and you gain control."
+      },
+      "mentorHint": {
+        "ru": "Триггер — это домино. Твоя задача — просто его толкнуть.",
+        "en": "The trigger is a domino. Your job is just to push it."
+      },
+      "outro": {
+        "ru": "Теория — это карта. Теперь пора выйти на улицы и построить свой маршрут.",
+        "en": "Theory is the map. Now it's time to hit the streets and build your route."
+      }
+    },
+    "06-audio-pipeline/u3-build": {
+      "intro": {
+        "ru": "Хватит болтовни. Компоненты на столе, пора собирать машину.",
+        "en": "Enough talk. The components are on the table; it's time to build the machine."
+      },
+      "mentorHint": {
+        "ru": "Чистый код, чёткая логика. Ничего лишнего.",
+        "en": "Clean code, clear logic. No loose ends."
+      },
+      "outro": {
+        "ru": "Pipeline запущен. Теперь он работает на тебя, пока ты спишь.",
+        "en": "The pipeline is live. Now it works for you, even in your sleep."
+      }
+    },
+    "06-audio-pipeline/u4-reflect": {
+      "intro": {
+        "ru": "Одна проблема решена. Но город полон рутины. Что дальше?",
+        "en": "One problem solved. But the city is full of routines waiting to be broken. What's next?"
+      },
+      "mentorHint": {
+        "ru": "Автоматизация — не цель, а инструмент. Всегда ищи, где его применить.",
+        "en": "Automation isn't the goal, it's the tool. Always be looking for the next job for it."
+      },
+      "outro": {
+        "ru": "Ты получил новый навык. Теперь этот город — твоя песочница. Иди и работай.",
+        "en": "You've acquired a new skill. The city is your sandbox now. Get to work."
+      }
+    },
+    "07-tools/u1-activation": {
+      "intro": {
+        "ru": "Агент — чистый лист, призрак в машине, ждущий приказа. Сейчас мы дадим ему цель.",
+        "en": "The agent is a blank slate, a ghost in the machine waiting for orders. We're about to give it a purpose."
+      },
+      "mentorHint": {
+        "ru": "Даже лучшему хрому нужен источник питания, салага.",
+        "en": "Even the best chrome needs a power source, kid."
+      },
+      "outro": {
+        "ru": "Агент в сети, его глаза открыты. Теперь научим его видеть.",
+        "en": "The agent is online, its eyes are open. Now, to teach it how to see."
+      }
+    },
+    "07-tools/u2-mcp": {
+      "intro": {
+        "ru": "Протокол — это просто правила для грязной игры. MCP — наш свод правил, и он позволяет агенту играть по-крупному.",
+        "en": "A protocol is just a set of rules for a dirty game. MCP is our set of rules, and it lets the agent play in the big leagues."
+      },
+      "mentorHint": {
+        "ru": "MCP — не магия. Это просто ключ к очень многим запертым дверям.",
+        "en": "The MCP isn't magic. It's just a key to a lot of locked doors."
+      },
+      "outro": {
+        "ru": "Ты вручил агенту универсальный ключ. Дальше мы научим его, какие замки вскрывать автоматически.",
+        "en": "You've handed the agent a master key. Next, we'll teach it which locks to pick on its own."
+      }
+    },
+    "07-tools/u3-hooks": {
+      "intro": {
+        "ru": "В этом городе ты либо реагируешь, либо превращаешься в металлолом. Hooks — это рефлексы, которые мы вшиваем в позвоночник нашего агента.",
+        "en": "In this city, you either react or you become scrap metal. Hooks are the reflexes we're wiring into our agent's spine."
+      },
+      "mentorHint": {
+        "ru": "Хороший hook ждёт правильного сигнала, а не самого громкого.",
+        "en": "A good hook waits for the right signal, not the loudest one."
+      },
+      "outro": {
+        "ru": "Агент больше не ждет твоей команды, он предчувствует потоки данных. Становится автономным.",
+        "en": "The agent no longer waits for your command; it anticipates the data streams. It's becoming autonomous."
+      }
+    },
+    "07-tools/u4-skills": {
+      "intro": {
+        "ru": "Агент, который умеет лишь одно — это обуза. Мы создаем арсенал из skills, и каждый — отдельный вид оружия.",
+        "en": "An agent that can only do one thing is a liability. We're building an arsenal of skills, each a different kind of weapon."
+      },
+      "mentorHint": {
+        "ru": "Не создавай по молотку на каждую проблему. Создай набор инструментов.",
+        "en": "Don't build a hammer for every problem. Build a toolkit."
+      },
+      "outro": {
+        "ru": "Набор инструментов агента готов. Осталось проверить, сможет ли он им пользоваться, не спалив предохранители.",
+        "en": "The agent's toolkit is ready. The final step is to see if it can use it without blowing a fuse."
+      }
+    },
+    "07-tools/u5-practice": {
+      "intro": {
+        "ru": "Теория — дешёвая болтовня в дождливую ночь. Время подключить агента к реальному миру и посмотреть, утонет он или поплывёт.",
+        "en": "Theory is cheap talk on a rainy night. It's time to plug the agent into the real world and see if it swims or sinks."
+      },
+      "mentorHint": {
+        "ru": "Настоящий тест — не в лаборатории. Он на улице, когда данные летят в вентилятор.",
+        "en": "The real test isn't in the lab. It's on the street, when the data hits the fan."
+      },
+      "outro": {
+        "ru": "Ты его создал, вооружил и протестировал. Теперь агент — твой оперативник в цифровых тенях. Настоящая работа только начинается.",
+        "en": "You built it, you armed it, and you tested it. The agent is now your operative in the digital shadows. The real work begins."
+      }
+    },
+    "08-agent-engineering/u1-activation": {
+      "intro": {
+        "ru": "Одиночный prompt — как уличный информатор. Иногда он замолкает или врёт, и тогда нужен другой подход.",
+        "en": "A single prompt is like a street informant. Sometimes it goes silent or lies, and then you need another approach."
+      },
+      "mentorHint": {
+        "ru": "Не жди от отвёртки, что она будет забивать гвозди. Инструмент нужно подбирать под задачу.",
+        "en": "Don't expect a screwdriver to hammer nails. Pick the right tool for the job."
+      },
+      "outro": {
+        "ru": "Теперь ты знаешь, почему простые приказы не работают. Пора научиться собирать из агентов сеть.",
+        "en": "Now you know why simple commands fail. It's time to learn how to build a network of agents."
+      }
+    },
+    "08-agent-engineering/u2-jagged-intelligence": {
+      "intro": {
+        "ru": "Кремниевый мозг не всесилен. Знать его слепые зоны — твоё тактическое преимущество в этом городе.",
+        "en": "The silicon brain isn't omnipotent. Knowing its blind spots is your tactical advantage in this city."
+      },
+      "mentorHint": {
+        "ru": "Делегируй машине рутину. Стратегию оставь себе — для этого и нужен человек.",
+        "en": "Delegate the routine to the machine. Keep the strategy for yourself – that's what humans are for."
+      },
+      "outro": {
+        "ru": "Карта сильных и слабых сторон AI у тебя в руках. Дальше — научимся управлять командой таких специалистов.",
+        "en": "You now hold the map of the AI's strengths and weaknesses. Next, we'll learn to manage a team of such specialists."
+      }
+    },
+    "08-agent-engineering/u3-orchestration": {
+      "intro": {
+        "ru": "Одиночные агенты — фрилансеры. Для настоящей операции нужен дирижёр, свой MCP.",
+        "en": "Lone agents are freelancers. A real operation requires a conductor, your own MCP."
+      },
+      "mentorHint": {
+        "ru": "Хаосом нельзя управлять. Создай систему, и система будет работать на тебя.",
+        "en": "You can't manage chaos. Build a system, and the system will work for you."
+      },
+      "outro": {
+        "ru": "Ты видел, как профессионалы строят свои сети. Теперь пора собрать собственную инфраструктуру.",
+        "en": "You've seen how the pros build their networks. Now it's time to assemble your own infrastructure."
+      }
+    },
+    "08-agent-engineering/u4-production-infra": {
+      "intro": {
+        "ru": "Прототип в тёмной лаборатории — это одно. Система, работающая 24/7 под неоновым светом города, — совсем другое.",
+        "en": "A prototype in a dark lab is one thing. A system running 24/7 under the city's neon glare is something else entirely."
+      },
+      "mentorHint": {
+        "ru": "Идея ничего не стоит без надёжного исполнения. Сделай так, чтобы оно работало всегда.",
+        "en": "An idea is worthless without reliable execution. Make it work, always."
+      },
+      "outro": {
+        "ru": "Твоя машина готова к выходу на улицы. Остался последний тест — проверка твоего мастерства.",
+        "en": "Your machine is ready for the streets. One last thing remains: a final test of your skills."
+      }
+    },
+    "08-agent-engineering/u5-practice": {
+      "intro": {
+        "ru": "Финальный тест: создать цифрового призрака, агента, который думает как ты. Он станет твоим наследием в коде.",
+        "en": "The final test: create a digital ghost, an agent that thinks like you. It will become your legacy in the code."
+      },
+      "mentorHint": {
+        "ru": "Чтобы создать копию, сначала придётся досконально изучить оригинал. Начни с себя.",
+        "en": "To create a copy, you first have to thoroughly study the original. Start with yourself."
+      },
+      "outro": {
+        "ru": "Агент готов. Ты прошёл инициацию и стал архитектором синтетических разумов. Этот город — твой.",
+        "en": "The agent is built. You've passed the initiation and become an architect of synthetic minds. The city is yours."
+      }
+    },
+    "00-kickstart/u4-sources": {
+      "intro": {
+        "ru": "Каждый пакет данных в этом городе кем-то подписан. Вопрос всегда один: кем, когда и что тебе разрешено с ним делать.",
+        "en": "Every data packet in this city is signed by someone. The question is always the same: by whom, when, and what you are allowed to do with it."
+      },
+      "mentorHint": {
+        "ru": "Источник без лицензии — как документ без подписи. Красивый и бесполезный.",
+        "en": "A source with no licence is a document with no signature. Pretty and useless."
+      },
+      "outro": {
+        "ru": "Ты научился читать метаданные раньше рекламы. В этом городе это разница между оперативником и туристом.",
+        "en": "You have learned to read metadata before advertising. In this city that is the difference between an operative and a tourist."
+      }
+    },
+    "09-ai-notebook/u1-first-notebook": {
+      "intro": {
+        "ru": "Клиент принёс гору записей. За 15 минут поднимем тетрадку, где каждый ответ оставляет след в деле.",
+        "en": "A client brought a pile of records. In 15 minutes we raise a notebook where every answer leaves a trace in the case file."
+      },
+      "mentorHint": {
+        "ru": "Нет следа — нет факта. В этом городе иначе не выживают.",
+        "en": "No trace, no fact. That is how you survive in this city."
+      },
+      "outro": {
+        "ru": "Досье открыто. Теперь посмотрим, как машина привязывает слова к уликам.",
+        "en": "The dossier is open. Now we inspect how the machine ties words to evidence."
+      }
+    },
+    "09-ai-notebook/u2-how-it-works": {
+      "intro": {
+        "ru": "Под капотом всё прозаично: индексы, фрагменты, субтитры, ссылки. Никакой мистики, только цепочка хранения.",
+        "en": "Under the hood it is plain work: indexes, chunks, subtitles, links. No mysticism, just custody chain."
+      },
+      "mentorHint": {
+        "ru": "Спроси не «что она сказала», а «из какого пакета данных это пришло».",
+        "en": "Ask not “what did it say,” but “which data packet did this come from.”"
+      },
+      "outro": {
+        "ru": "Цепочка понятна. Значит, её можно проверять и ломать тестами.",
+        "en": "The chain is clear. That means you can verify it and break-test it."
+      }
+    },
+    "09-ai-notebook/u3-where-it-lies": {
+      "intro": {
+        "ru": "Теперь ловим ложь: уверенный тон, пустая ссылка, цитата не туда. Классика поддельных дел.",
+        "en": "Now we catch lies: confident tone, empty link, citation to the wrong place. Classic forged-case behavior."
+      },
+      "mentorHint": {
+        "ru": "Кликаешь цитату. Если она не приводит на место преступления, отчёт в корзину.",
+        "en": "Click the quote. If it does not lead to the scene, the report goes in the bin."
+      },
+      "outro": {
+        "ru": "Подделки вскрыты. Тетрадка остаётся инструментом, а не свидетелем без проверки.",
+        "en": "Forgeries exposed. The notebook stays a tool, not an unchecked witness."
+      }
+    },
+    "09-ai-notebook/u4-formats": {
+      "intro": {
+        "ru": "Отчёт, таблица, аудио, слайды — разные оболочки одного дела. Выбирай ту, где улика не теряется.",
+        "en": "Report, table, audio, slides: different wrappers for one case. Choose the one where evidence does not disappear."
+      },
+      "mentorHint": {
+        "ru": "Формат без ссылок — красивый постер на стене участка. Пользы мало.",
+        "en": "A format without links is a pretty poster on the precinct wall. Not much use."
+      },
+      "outro": {
+        "ru": "Форматы прошли проверку. Теперь дело можно отдавать дальше без потери следов.",
+        "en": "Formats passed inspection. Now the case can move on without losing traces."
+      }
+    },
+    "09-ai-notebook/u5-practice": {
+      "intro": {
+        "ru": "Берём твою нишу и собираем рабочее досье: вопрос, источники, цитаты, проверка.",
+        "en": "We take your niche and assemble a working dossier: question, sources, quotes, verification."
+      },
+      "mentorHint": {
+        "ru": "Не смотри камеры всю ночь. Поставь вопрос и вытащи нужные кадры.",
+        "en": "Do not watch footage all night. Ask the question and pull the frames you need."
+      },
+      "outro": {
+        "ru": "Дело закрыто: из часов просмотра получился короткий отчёт с уликами.",
+        "en": "Case closed: hours of viewing became a short report with evidence."
+      }
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "skin": "wanderer",
+  "zoneNames": {
+    "00-kickstart": {
+      "ru": "Развилка 0",
+      "en": "Crossroad 0"
+    },
+    "01-introduction": {
+      "ru": "Развилка 1",
+      "en": "Crossroad 1"
+    },
+    "02-setup-guide": {
+      "ru": "Развилка 2",
+      "en": "Crossroad 2"
+    },
+    "03-stack-selection": {
+      "ru": "Развилка 3",
+      "en": "Crossroad 3"
+    },
+    "04-prompt-engineering": {
+      "ru": "Развилка 4",
+      "en": "Crossroad 4"
+    },
+    "05-context-memory": {
+      "ru": "Развилка 5",
+      "en": "Crossroad 5"
+    },
+    "06-audio-pipeline": {
+      "ru": "Развилка 6",
+      "en": "Crossroad 6"
+    },
+    "07-tools": {
+      "ru": "Развилка 7",
+      "en": "Crossroad 7"
+    },
+    "08-agent-engineering": {
+      "ru": "Развилка 8",
+      "en": "Crossroad 8"
+    },
+    "09-ai-notebook": {
+      "ru": "Развилка 9",
+      "en": "Crossroad 9"
+    }
+  },
+  "questTitles": {
+    "00-kickstart": {
+      "ru": "Найти свою тропу",
+      "en": "Find your path"
+    },
+    "01-introduction": {
+      "ru": "Понять новый мир",
+      "en": "Understand the new world"
+    },
+    "02-setup-guide": {
+      "ru": "Собрать снаряжение",
+      "en": "Gather your gear"
+    },
+    "03-stack-selection": {
+      "ru": "Выбрать инструменты силы",
+      "en": "Choose your tools"
+    },
+    "04-prompt-engineering": {
+      "ru": "Освоить язык команд",
+      "en": "Master the language of commands"
+    },
+    "05-context-memory": {
+      "ru": "Удержать память",
+      "en": "Hold the memory"
+    },
+    "06-audio-pipeline": {
+      "ru": "Поток данных",
+      "en": "The data stream"
+    },
+    "07-tools": {
+      "ru": "Расширить арсенал",
+      "en": "Expand your arsenal"
+    },
+    "08-agent-engineering": {
+      "ru": "Собрать своих агентов",
+      "en": "Assemble your agents"
+    },
+    "09-ai-notebook": {
+      "ru": "Идти по следам источников",
+      "en": "Follow the source trail"
+    }
+  }
+}

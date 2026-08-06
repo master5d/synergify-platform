@@ -1,0 +1,13 @@
+{
+  "module": 0,
+  "title": "Kickstart",
+  "description": "Карта местности для тех, кто впервые в AI-coding",
+  "duration": "32 мин",
+  "level": 0,
+  "units": [
+    { "slug": "u1-map", "title": "Твоя идея-призрак" },
+    { "slug": "u2-tools", "title": "Карта инструментов" },
+    { "slug": "u3-first-steps", "title": "Первые шаги" },
+    { "slug": "u4-sources", "title": "Первоисточник или упаковка" }
+  ]
+}

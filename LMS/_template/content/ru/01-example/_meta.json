@@ -1,0 +1,10 @@
+{
+  "module": 1,
+  "title": "TODO: Название модуля",
+  "description": "TODO: одно предложение — о чём модуль",
+  "duration": "20 мин",
+  "level": 1,
+  "units": [
+    { "slug": "u1-intro", "title": "TODO: Название юнита" }
+  ]
+}

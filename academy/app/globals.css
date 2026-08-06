@@ -1,0 +1,18 @@
+@import '../themes/academy.css';
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font-display: Georgia, serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+html, body {
+  background: var(--bg-primary);
+  color: var(--text-body);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; }
+a:hover { opacity: 0.86; }

@@ -1,0 +1,95 @@
+---
+title: "Trigger → Action model"
+unit: 2
+module: 6
+duration: "12 min"
+---
+
+<Phase type="activation">
+
+Catch a recurring information flow you run every week — one that lives in you now almost like a reflex.
+
+Don't picture it as a routine chore. **Picture it as your circulatory system:** the heart (trigger) contracts and pumps blood in a loop; the lungs (processing) oxygenate it; the capillaries (delivery) carry the result all the way to every cell.
+
+Run that loop in your head: where is the heart of your flow — what makes it contract? And where does the blood finally land?
+
+</Phase>
+
+<Phase type="reflection">
+
+Picture a conductor opening a score and seeing it whole: first violins know their entry, brass knows theirs, percussion knows theirs. No one waits for a tap on the shoulder.
+
+**Look at your weekly flow the same way:** which "voices" in it already know their part — things you do without thinking — and which instrument still needs you standing there, baton raised, to bring it in on cue?
+
+That's the section where a pipeline belongs.
+
+</Phase>
+
+<Phase type="concept">
+
+## Three pipeline types
+
+### 1. Manual pipeline (today)
+You run it manually when needed. Ideal for irregular tasks.
+
+```
+You → [URL/file] → Claude → result
+```
+
+### 2. Scheduled pipeline
+Runs on a schedule. Good for regular tasks.
+
+```
+Every morning at 8:00 → collect RSS → analyze → report to Slack
+```
+
+Tools: n8n, Make.com, GitHub Actions, Claude Code Hooks.
+
+### 3. Event-driven pipeline
+Runs when something happens.
+
+```
+New file in a folder → auto-transcribe → summarize
+New email → classify → draft reply → for approval
+```
+
+## Tools for pipelines
+
+| Tool | Level | For what |
+|------------|---------|---------|
+| Claude (chat) | Beginner | One-off tasks, testing |
+| Claude Code | Intermediate | Working with files, projects |
+| Make.com / n8n | Advanced | No-code automation |
+| Claude Code Hooks | Expert | Event-driven automation |
+
+> 💡 Start with a manual pipeline. Once you've confirmed the algorithm works — automate the trigger.
+
+<Walkthrough slug="pipeline-en" title="How the pipeline assembles, step by step" minHeight={520} />
+
+</Phase>
+
+<Phase type="practice">
+
+Describe your pipeline from Activation in this format:
+
+```markdown
+# My pipeline: [name]
+
+## Trigger
+When: [what kicks it off]
+
+## Actions
+1. [step 1]
+2. [step 2]
+3. [step 3]
+
+## Result
+What I get: [format and where saved]
+
+## Frequency
+How often: [daily / weekly / on demand]
+```
+
+Save to `my-experiments/u2-my-pipeline-design.md`
+
+</Phase>

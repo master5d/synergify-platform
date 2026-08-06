@@ -1,0 +1,96 @@
+---
+title: "What are your constraints?"
+unit: 1
+module: 3
+duration: "8 min"
+---
+
+<Phase type="activation">
+
+Picture your AI situation right now — budget, hardware, country, corporate restrictions.
+
+Don't picture it as a "technical tool choice." Picture it as **a mountain with two routes: the cable car and the hiking trail** — and only you know what's in your pack, how much daylight is left, whether you need the summit today or just the panorama.
+
+Run it in your head: which route feels like yours? Where is your "cable car" (fast, paid, convenient) — and where is your "trail" (slower, autonomous, yours)?
+
+Hold that feeling — then work through the 5 questions below, in your head:
+
+1. **Budget:** how much are you actually willing to pay for AI tools per month?
+   - $0 / under $5 / under $20 / under $50 / no limit
+
+2. **Access:** where are you?
+   - Mainland China without VPN / GDPR country / US / other
+
+3. **Hardware:** what do you have?
+   - Laptop without GPU / Mac M-series / PC with discrete NVIDIA / remote server
+
+4. **Privacy:** how important is it that code never leaves your machine?
+   - Doesn't matter / preferred / critical (NDA, healthcare, infra)
+
+5. **Setup tolerance:** how many hours are you willing to spend on initial setup?
+   - 15 min / 1 hour / a whole evening / several days
+
+</Phase>
+
+<Phase type="reflection">
+
+Your five answers aren't a preferences table. They're a **tasting note** 🍷.
+
+Picture a sommelier lifting a glass — not by the label, but by the nose, the finish, the acidity — by what's actually in the glass. Do the same: notice what's really in your situation: money, hardware, geography, privacy paranoia.
+
+At the collision of "my answers" and "the stack map", one or two clear rows surface on their own:
+
+| If you have… | …you probably need |
+|---|---|
+| $20+ budget, no constraints, minimal setup | **Claude Code** — paid but convenient |
+| $0 budget, hardware on hand, autonomy matters | **Sovereign** (per SOVERN) — Hermes + local models |
+| $0–5 budget, no hardware, access exists | **Cloud-OSS** — Cline + free-tier clouds |
+| China, no VPN | **Behind-GFW** — Cerebras + Gemini Flash + local |
+
+No "right" answer — just the stack that fits **your actual glass**.
+
+</Phase>
+
+<Phase type="concept">
+
+## Why not "just Claude Code"
+
+This course was originally built around Claude Code — a strong, convenient tool. But it:
+
+- **Costs money** — minimum ~$20/mo on Sonnet
+- **Requires access** to `claude.ai` and the Anthropic API. In China without VPN — unavailable
+- **Vendor lock-in** — your prompts, MCP configs, hooks are tied to the Anthropic ecosystem
+- **Telemetry** — every request goes to Anthropic. Not all corp / gov environments allow that
+
+For most students that's fine. But if even one of the four bullets above applies to you, Claude Code is not your fit. And you're not "worse" — **agentic AI is no longer a single-tool field**, there are open alternatives.
+
+## What "stack" means here
+
+In this course, a **stack** = combination of three layers:
+
+```
+┌─────────────────────────────────────────────┐
+│  Frontend / Agent UI                        │  ← Claude Code, Cline, Aider, Hermes
+├─────────────────────────────────────────────┤
+│  Routing / Gateway                          │  ← LiteLLM, OpenRouter, direct API
+├─────────────────────────────────────────────┤
+│  Model provider (where intelligence lives)  │  ← Anthropic, Cerebras, Groq, local GGUF
+└─────────────────────────────────────────────┘
+```
+
+Every layer is swappable. For example:
+- **Claude Code → LiteLLM → Cerebras Qwen-3-235B** — Claude Code UI with an open model
+- **Aider → direct OpenRouter → DeepSeek-Coder** — classic OSS workflow
+- **Hermes → LiteLLM with fallback array** — SOVERN pattern
+
+This module teaches you to **think about the whole stack** rather than "knowing one tool".
+
+</Phase>
+
+<Phase type="practice">
+
+Write your answers to the 5 questions from Activation into `my-experiments/u1-constraints.md`. This becomes your "personal map" for the rest of the units.
+
+Then move to u2 — you'll see the matrix of 4 stacks and pick yours.
+
+</Phase>

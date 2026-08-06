@@ -1,0 +1,160 @@
+---
+title: "Hermes + local stack"
+unit: 4
+module: 3
+duration: "15 min"
+---
+
+<Phase type="activation">
+
+Think of a moment when one tool tried to do everything at once — and broke down halfway through.
+
+Don't picture it as a "context window problem." Picture it as **your own vegetable garden versus the market** 🌱: the gardener planted it, watered it, harvested it — and knows every plant. The market buyer gets ready produce fast, no fuss. Hermes is the gardener who **keeps the plan at home** and sends workers out for specific results, rather than trusting the whole harvest to a single stall.
+
+Notice in your head: which part of your AI-workflow suffers most because the agent **does everything in sequence** and loses the thread mid-task?
+
+</Phase>
+
+<Phase type="reflection">
+
+Picture a theatre director 🎭 at rehearsal. They don't play every part in turn — they hold **the whole production in their head** and give each actor exactly enough to play their scene. The actors don't need to know the ending — the director does.
+
+Catch that same logic here:
+
+> "I asked Claude Code to refactor the auth module. By the 5th file it started applying the backend style to the frontend, forgot my original plan, and burned 200K tokens to recover."
+
+That's **context-saturation**: the actor tried to play every role. Hermes holds **only the plan and state** — the director's role:
+1. Frames the subtask
+2. Launches a sub-agent (Aider in a worktree, or Claude Code) — "actor enters the scene"
+3. Receives the result, verifies
+4. Updates the plan, next entrance
+
+Hermes's context isn't eaten by implementation. Worker contexts are atomic and tightly scoped.
+
+</Phase>
+
+<Phase type="concept">
+
+## SOVERN stack architecture
+
+```
+┌──────────────────────────────────────────────────────────┐
+│  Hermes Agent (WSL2 Shell + Markdown plans)              │
+│  ┌────────────────────────────────────────────────────┐  │
+│  │ - Plan in Obsidian / Daily docs                    │  │
+│  │ - Cron schedules                                   │  │
+│  │ - Skill lifecycle (starts / stops)                 │  │
+│  │ - Boss-worker dispatch                             │  │
+│  └────────────────────────────────────────────────────┘  │
+│                       │                                  │
+│                       ▼ delegate                         │
+│  ┌────────────────────────────────────────────────────┐  │
+│  │ Worker agents (atomic tasks):                      │  │
+│  │  - Aider (refactoring, edit-mode)                  │  │
+│  │  - Cline (VS Code tasks)                           │  │
+│  │  - Claude Code (if available)                      │  │
+│  │  - Custom: your skill-based function               │  │
+│  └────────────────────────────────────────────────────┘  │
+│                       │                                  │
+│                       ▼ LLM calls                        │
+│  ┌────────────────────────────────────────────────────┐  │
+│  │ LiteLLM Gateway (localhost:4000)                   │  │
+│  │   → Free clouds first (Cerebras, Groq, Gemini)     │  │
+│  │   → Local GGUF floor (Qwen3-Coder-30B)             │  │
+│  │   → Paid clouds last (Anthropic/OpenAI)            │  │
+│  └────────────────────────────────────────────────────┘  │
+└──────────────────────────────────────────────────────────┘
+```
+
+## Installing Hermes (simplified)
+
+> 💡 The full SOVERN stack is a 1–2 week project of its own. This is the **minimal Hermes experience** to grasp the pattern.
+
+### Requirements
+- Linux/WSL2/macOS
+- Python 3.11+
+- LiteLLM gateway already running (see u3, steps 1–3)
+
+### Get Hermes
+
+Hermes is open-source, lives in the SOVERN repo:
+
+```bash
+git clone https://github.com/sovern-stack/hermes
+cd hermes
+pip install -e .
+```
+
+### Base config
+
+`~/.config/hermes/config.yaml`:
+
+```yaml
+boss:
+  llm: balanced              # alias from LiteLLM
+  plan_dir: ~/notes/plans/   # where plans live
+  effort: high               # boss always thinks high
+
+workers:
+  refactor:
+    type: aider
+    llm: fast-pool
+    isolation: worktree
+  research:
+    type: shell
+    command: claude -p
+    fallback: aider
+```
+
+### First run
+
+```bash
+hermes new-plan "Add authentication to project auth-demo"
+```
+
+Hermes will:
+1. Create a plan in `~/notes/plans/auth-demo-2026-05-18.md`
+2. Open it in your editor — you can adjust
+3. On `hermes execute` — start delegating to workers
+
+### Skill system (optional)
+
+Hermes uses the DeepVista Skill Schema — modular `.md` files with YAML frontmatter:
+
+```yaml
+---
+name: refactor-typescript
+type: stateful
+trigger: "refactor TypeScript"
+worker: refactor
+dry_run: true
+---
+# Refactor TypeScript
+
+When the skill triggers:
+1. Run a dry-run of all edits
+2. Show diff, ask for confirmation
+3. After approval — apply
+```
+
+This is the equivalent of `.claude/skills/`, but **portable across agents**.
+
+</Phase>
+
+<Phase type="practice">
+
+> ⚠️ This is an **optional practice** — full Hermes setup takes time. The minimum for completion is to read through the concept.
+
+**Minimum (15 min):**
+- Read `SOVRN-PRINCIPLES.md` (in the SOVERN project)
+- In `my-experiments/u4-hermes-mental-model.md` write:
+  - When you **don't** need Hermes (boss-worker is overkill for small tasks)
+  - When you do (long plans, multi-day work, cron tasks)
+
+**Full practice (2–3 hours, optional):**
+1. Clone Hermes, install
+2. Create the first plan with a real task from your work
+3. Run `hermes execute` with one worker (a fake echo-worker is fine for testing)
+4. Save a screenshot of plan + worker dispatch to `my-experiments/u4-hermes-run.png`
+
+</Phase>
