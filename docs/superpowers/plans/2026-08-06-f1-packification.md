@@ -26,7 +26,7 @@ re-export-стабы (32+ компонентов не трогаются), bound
 - Поправка: CHECKLIST называет `lib/rpg/niche-map.ts` — реальный путь был
   `lib/course/niche-map.ts` (теперь pack); CHECKLIST актуализировать при S4.
 
-## S3 — content/
+## S3 — content/ ✅ DONE
 - `content/{ru,en}` → pack; `lib/content.ts` читает через PACK_DIR; гварды
   (registry-integrity, links-integrity, reflection drift) параметризуются PACK_DIR.
 

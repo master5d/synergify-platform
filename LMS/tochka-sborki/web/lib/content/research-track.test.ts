@@ -1,10 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
+import { CONTENT_ROOT } from '../pack'
 import { fileURLToPath } from 'url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const CONTENT = join(HERE, '..', '..', 'content') // web/content
+const CONTENT = CONTENT_ROOT // S3: контент в course-pack
 const read = (loc: 'ru' | 'en') => readFileSync(join(CONTENT, loc, 'exercises.mdx'), 'utf8')
 
 const ANCHORS = [

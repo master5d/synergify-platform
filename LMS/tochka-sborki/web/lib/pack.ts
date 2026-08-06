@@ -7,3 +7,6 @@ export const PACK_SLUG = process.env.COURSE_PACK ?? 'tochka-sborki'
 
 /** Абсолютный путь каталога активного pack'а (от корня web-аппа). */
 export const PACK_DIR = join(process.cwd(), 'packs', PACK_SLUG)
+
+/** Корень MDX-контента активного pack'а. */
+export const CONTENT_ROOT = join(PACK_DIR, 'content')

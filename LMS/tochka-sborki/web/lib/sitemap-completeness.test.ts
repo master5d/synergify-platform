@@ -1,12 +1,13 @@
 import { describe, it, expect } from 'vitest'
 import { readdirSync, readFileSync, existsSync } from 'fs'
 import { dirname, join } from 'path'
+import { CONTENT_ROOT } from './pack'
 import { fileURLToPath } from 'url'
 import sitemap from '../app/sitemap'
 import { COURSE } from './course'
 
 const HERE = dirname(fileURLToPath(import.meta.url))      // web/lib
-const CONTENT = join(HERE, '..', 'content', 'ru')
+const CONTENT = join(CONTENT_ROOT, 'ru') // S3: контент в course-pack
 const APP = join(HERE, '..', 'app')
 
 const entries = sitemap()

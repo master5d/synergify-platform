@@ -1,10 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import { readdirSync, statSync, readFileSync, existsSync } from 'fs'
 import { dirname, join, sep, basename } from 'path'
+import { CONTENT_ROOT } from '../pack'
 import { fileURLToPath } from 'url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const CONTENT = join(HERE, '..', '..', 'content')
+const CONTENT = CONTENT_ROOT // S3: контент в course-pack
 const PUBLIC = join(HERE, '..', '..', 'public')
 
 function walk(dir: string): string[] {

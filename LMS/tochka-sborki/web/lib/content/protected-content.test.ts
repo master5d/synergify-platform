@@ -1,10 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync, existsSync } from 'fs'
 import { dirname, join } from 'path'
+import { CONTENT_ROOT } from '../pack'
 import { fileURLToPath } from 'url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const CONTENT = join(HERE, '..', '..', 'content') // web/content
+const CONTENT = CONTENT_ROOT // S3: контент в course-pack
 
 // Registry of content "wins" worth protecting from regression. Add an entry when a phrase
 // or framing is confirmed to work (student feedback) and must survive future content edits.

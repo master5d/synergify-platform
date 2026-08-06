@@ -1,9 +1,11 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { CONTENT_ROOT } from './pack'
 
 function contentDir(locale: string) {
-  return path.join(process.cwd(), 'content', locale)
+  // S3 pack-ификация: контент живёт в активном course-pack (lib/pack.ts)
+  return path.join(CONTENT_ROOT, locale)
 }
 
 export interface LessonMeta {
