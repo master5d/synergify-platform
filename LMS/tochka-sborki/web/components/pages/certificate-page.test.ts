@@ -5,7 +5,8 @@ import { fileURLToPath } from 'url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const src = readFileSync(join(HERE, 'certificate-page.tsx'), 'utf8')
-const certData = readFileSync(join(HERE, '..', '..', 'lib', 'course', 'certificate.ts'), 'utf8')
+// S2 pack-ификация: данные сертификата живут в pack'е (lib/course/certificate.ts — стаб)
+const certData = readFileSync(join(HERE, '..', '..', 'packs', 'tochka-sborki', 'course', 'certificate.ts'), 'utf8')
 
 describe('certificate page — academy admission wiring (S4)', () => {
   it('requests the admission fire-and-forget', () => {

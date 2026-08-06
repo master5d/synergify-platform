@@ -12,6 +12,10 @@ const STUB_WHITELIST = new Set([
   'lib/course.ts',
   'lib/dictionaries.ts',
   'lib/materials.ts',
+  // S2 — data-слой lib/course/*
+  ...['ai-doubles', 'certificate', 'dungeon-flavor', 'ecosystem', 'intake-questions',
+      'niche-map', 'notebook-pack', 'office-hours', 'showcase', 'skins', 'try-chains']
+    .map((n) => `lib/course/${n}.ts`),
 ])
 
 function walk(dir: string, out: string[] = []): string[] {

@@ -14,14 +14,17 @@ re-export-стабы (32+ компонентов не трогаются), bound
   белого списка стабов; (b) pack не импортит `components/`/`app/`; (c) обязательные
   файлы контракта присутствуют.
 
-## S2 — data-слой lib/course/* и skins
-- `lib/course/*` (showcase, certificate, ecosystem, office-hours, try-chains,
-  notebook-pack, ai-doubles, skins=SKINS_META…) → pack, стабы тем же паттерном.
+## S2 — data-слой lib/course/* ✅ DONE
+- 11 файлов `lib/course/*` (ai-doubles, certificate, dungeon-flavor, ecosystem,
+  intake-questions, niche-map, notebook-pack, office-hours, showcase, skins,
+  try-chains) → `packs/tochka-sborki/course/`, стабы тем же паттерном; 2 восходящих
+  import type поправлены; source-level тест certificate-page переведён на pack-путь;
+  boundary whitelist расширен.
 - `lib/rpg/skins/*.json` + `skins-meta.ts`: ЖДУТ S4 — динамические
   `import(\`@/lib/rpg/skins/\${skin}.json\`)` в unit-wizard/profile/dashboard
   требуют alias, не стаба. Гоча зафиксирована здесь, чтобы не споткнуться.
-- ⚠ CHECKLIST в LMS/_template называет `lib/rpg/niche-map.ts` — файла НЕТ
-  (устарел); актуализировать CHECKLIST при S2.
+- Поправка: CHECKLIST называет `lib/rpg/niche-map.ts` — реальный путь был
+  `lib/course/niche-map.ts` (теперь pack); CHECKLIST актуализировать при S4.
 
 ## S3 — content/
 - `content/{ru,en}` → pack; `lib/content.ts` читает через PACK_DIR; гварды
