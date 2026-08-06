@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import { resolveOfficeHours, getOfficeHours, OFFICE_HOURS } from './office-hours'
+import { PACK_SLUG } from '@/lib/pack'
+
+// Живая AMA-запись — политика Точки Сборки; у второго pack'а amaRegisterUrl пуст
+// (тёмный рендер) по замыслу. Для tochka-sborki проверки 1-в-1.
+const itDefault = it.runIf(PACK_SLUG === 'tochka-sborki')
 
 describe('office-hours', () => {
   for (const loc of ['ru', 'en'] as const) {
@@ -22,13 +27,13 @@ describe('office-hours', () => {
 
   // Зажжено 2026-08-02: регистрация живёт на своей странице /ama/, а не во внешнем
   // сервисе. Гвард сторожит не «темноту», а сам факт живой ссылки и её локализацию.
-  it('AMA ships live and points at our own registration page', () => {
+  itDefault('AMA ships live and points at our own registration page', () => {
     expect(OFFICE_HOURS.amaRegisterUrl).toBe('/ama/')
     expect(getOfficeHours('ru').ama.available).toBe(true)
     expect(getOfficeHours('ru').ama.registerUrl).toBe('/ama/')
   })
 
-  it('localises the internal path for EN', () => {
+  itDefault('localises the internal path for EN', () => {
     expect(getOfficeHours('en').ama.registerUrl).toBe('/en/ama/')
   })
 

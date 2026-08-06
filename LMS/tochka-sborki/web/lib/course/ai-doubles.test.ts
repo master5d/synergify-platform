@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { getAiDoubles, AI_DOUBLE_KEYS } from './ai-doubles'
+import { PACK_SLUG } from '@/lib/pack'
 
 describe('getAiDoubles', () => {
   it('returns exactly the five domains in order, both locales', () => {
@@ -8,7 +9,8 @@ describe('getAiDoubles', () => {
     }
   })
 
-  it('keys match the u3-clones lesson domains (drift-guard)', () => {
+  // Дрифт-гвард к уроку u3-clones Точки Сборки; у других pack'ов свои ключи.
+  it.runIf(PACK_SLUG === 'tochka-sborki')('keys match the u3-clones lesson domains (drift-guard)', () => {
     expect([...AI_DOUBLE_KEYS]).toEqual(['communication', 'meetings', 'content', 'learning', 'automation'])
   })
 

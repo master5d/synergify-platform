@@ -1,5 +1,6 @@
 // web/lib/rpg/quest-log.test.ts
 import { describe, it, expect } from 'vitest'
+import { PACK_SLUG } from '@/lib/pack'
 import { buildQuestLog } from './quest-log'
 import { getTransformation } from './transformations'
 import type { SkinPack } from './types'
@@ -30,7 +31,9 @@ describe('buildQuestLog', () => {
     expect(vm.zones.find(z => z.slug === '00-kickstart')!.questTitle).toBe('Зов тропы')
     expect(vm.zones.find(z => z.slug === '01-introduction')!.questTitle).toBe('Введение') // fallback
   })
-  it('flags the niche module', () => {
+  // NICHE_MODULE второго pack'а указывает в его собственный модуль, которого нет в
+  // фикстуре точки-сборки. Для tochka-sborki — 1-в-1.
+  it.runIf(PACK_SLUG === 'tochka-sborki')('flags the niche module', () => {
     const vm = buildQuestLog(profile, modules, [], () => 'none', pack, 'ru')
     expect(vm.zones.find(z => z.slug === '04-prompt-engineering')?.isNiche).toBe(true)
   })

@@ -1,0 +1,15 @@
+{
+  "module": 1,
+  "title": "Practice in Living Connection",
+  "description": "Six lessons on why an honest attention practice needs other people",
+  "duration": "60 min",
+  "level": 0,
+  "units": [
+    { "slug": "u1-slon-v-komnate", "title": "The elephant in the room" },
+    { "slug": "u2-anatomiya-myortvoy-praktiki", "title": "Anatomy of a dead practice" },
+    { "slug": "u3-svidetelstvovanie", "title": "Witnessing" },
+    { "slug": "u4-osoznannost-bez-zakuporki", "title": "Awareness without sealing over" },
+    { "slug": "u5-krug-praktiki", "title": "The practice circle" },
+    { "slug": "u6-kak-vybirat-shkolu", "title": "How to choose a school" }
+  ]
+}

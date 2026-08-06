@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync, existsSync } from 'fs'
 import { dirname, join } from 'path'
-import { CONTENT_ROOT } from '../pack'
+import { CONTENT_ROOT, PACK_SLUG } from '../pack'
 import { fileURLToPath } from 'url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -23,7 +23,9 @@ const PROTECTED: Protected[] = [
   { file: 'en/00-kickstart/u1-map.mdx', mustContain: 'recipe for a dish', why: 'fb_e557d202d89b cooking metaphor (EN)' },
 ]
 
-describe('protected content (regression guard for confirmed wins)', () => {
+// Реестр PROTECTED пинует файлы Точки Сборки; у другого pack'а свой реестр появится
+// вместе с первым подтверждённым win'ом.
+describe.runIf(PACK_SLUG === 'tochka-sborki')('protected content (regression guard for confirmed wins)', () => {
   for (const p of PROTECTED) {
     it(`keeps "${p.mustContain}" in ${p.file} — ${p.why}`, () => {
       const path = join(CONTENT, p.file)

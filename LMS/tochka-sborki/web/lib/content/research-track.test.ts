@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
-import { CONTENT_ROOT } from '../pack'
+import { CONTENT_ROOT, PACK_SLUG } from '../pack'
 import { fileURLToPath } from 'url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -13,7 +13,8 @@ const ANCHORS = [
   'research-4-verify.md', 'research-5-synthesis.md',
 ]
 
-describe('research-with-AI track', () => {
+// Трек живёт в exercises.mdx Точки Сборки; для других pack'ов его нет по замыслу.
+describe.runIf(PACK_SLUG === 'tochka-sborki')('research-with-AI track', () => {
   it('ru exercises.mdx contains the track heading and all five save-anchors', () => {
     const src = read('ru')
     expect(src).toContain('Поиск с ИИ')

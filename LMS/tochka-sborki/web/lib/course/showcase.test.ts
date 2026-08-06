@@ -1,8 +1,13 @@
 import { describe, it, expect } from 'vitest'
 import { getShowcase, videoEmbedUrl, resolveVideoSource, withAutoplay, filterByCategory, CATEGORY_KEYS, deepDiveUrl } from './showcase'
 import { lintDehustle } from '@/lib/authoring/dehustle'
+import { PACK_SLUG } from '@/lib/pack'
 
-describe('getShowcase', () => {
+// Витринные ДАННЫЕ (дримы/реальные кейсы/for-good) — копия Точки Сборки; у второго
+// pack'а витрина тёмная по замыслу. Хелперы видео проверяются для любого pack'а.
+const describeDefaultPack = describe.runIf(PACK_SLUG === 'tochka-sborki')
+
+describeDefaultPack('getShowcase', () => {
   for (const loc of ['ru', 'en'] as const) {
     it(`label/cta + >=4 dream cases with content (${loc})`, () => {
       const s = getShowcase(loc)
@@ -62,7 +67,7 @@ describe('withAutoplay', () => {
   it('existing query → appends &autoplay=1', () => expect(withAutoplay('https://player.vimeo.com/video/1?h=x')).toBe('https://player.vimeo.com/video/1?h=x&autoplay=1'))
 })
 
-describe('categories', () => {
+describeDefaultPack('categories', () => {
   it('every real+dream case has a valid category key', () => {
     const s = getShowcase('ru')
     for (const c of [...s.real.cases, ...s.dream.cases]) {
@@ -106,7 +111,7 @@ describe('filterByCategory', () => {
   it('unused key → empty', () => expect(filterByCategory(sample, 'knowledge')).toEqual([]))
 })
 
-describe('possibility-menu (dream cases)', () => {
+describeDefaultPack('possibility-menu (dream cases)', () => {
   const dream = getShowcase('ru').dream.cases
   const dreamEn = getShowcase('en').dream.cases
 
@@ -137,7 +142,7 @@ describe('possibility-menu (dream cases)', () => {
   })
 })
 
-describe('showcase deep-dive wiring', () => {
+describeDefaultPack('showcase deep-dive wiring', () => {
   const CONTRACT_SLUGS = ['echo', 'diagram-canvas', 'the-site-itself', 'second-brain']
 
   it('deepDiveUrl builds canonical ru/en blog URLs', () => {
@@ -163,7 +168,7 @@ describe('showcase deep-dive wiring', () => {
   })
 })
 
-describe('for-good dream cases (fb_650d16d2)', () => {
+describeDefaultPack('for-good dream cases (fb_650d16d2)', () => {
   for (const loc of ['ru', 'en'] as const) {
     it(`for-good tab appears in categories (${loc})`, () => {
       const s = getShowcase(loc)

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
-import { CONTENT_ROOT } from '../pack'
+import { CONTENT_ROOT, PACK_SLUG } from '../pack'
 import { fileURLToPath } from 'url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -13,7 +13,8 @@ const ANCHORS = [
   'offer-4-build.md', 'offer-5-share.md',
 ]
 
-describe('package-expertise track', () => {
+// Трек живёт в exercises.mdx Точки Сборки; для других pack'ов его нет по замыслу.
+describe.runIf(PACK_SLUG === 'tochka-sborki')('package-expertise track', () => {
   it('ru exercises.mdx contains the track heading and all five save-anchors', () => {
     const src = read('ru')
     expect(src).toContain('Упакуй свою экспертизу в продукт')

@@ -1,6 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import { buildDaily } from './build-daily'
 import type { DailyInput } from './types'
+import { PACK_SLUG } from '@/lib/pack'
+
+// Ретривал-квесты подписаны именем ментора скина из SKINS_META Точки Сборки; у второго
+// pack'а живёт один скин wanderer. Для tochka-sborki проверки 1-в-1.
+const itDefault = it.runIf(PACK_SLUG === 'tochka-sborki')
 
 const units = {
   '00-kickstart': [{ slug: 'u1', title: 'K1' }, { slug: 'u2', title: 'K2' }],
@@ -62,7 +67,7 @@ describe('buildDaily', () => {
     expect(practice!.body).not.toContain('{niche}')
   })
 
-  it('tier 3 with a completed module adds a retrieval quest prefixed by the mentor name', () => {
+  itDefault('tier 3 with a completed module adds a retrieval quest prefixed by the mentor name', () => {
     const set = buildDaily(base({ cogTier: 3, isUnitDone: (m) => m === '00-kickstart', completedModules: ['00-kickstart', '01-introduction'] }))
     const retrieval = set.quests.find(q => q.kind === 'retrieval')
     expect(retrieval).toBeTruthy()
@@ -85,7 +90,7 @@ describe('buildDaily', () => {
     expect(set.quests).toHaveLength(2)
   })
 
-  it('retrieval uses the EN mentor name for en locale', () => {
+  itDefault('retrieval uses the EN mentor name for en locale', () => {
     const set = buildDaily(base({ cogTier: 3, locale: 'en', isUnitDone: (m) => m === '00-kickstart', completedModules: ['00-kickstart', '01-introduction'] }))
     const retrieval = set.quests.find(q => q.kind === 'retrieval')
     expect(retrieval).toBeTruthy()

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { REGISTRY, validateRegistry, resolveCourses, resolveOtherCourses, type AcademyRegistry } from './registry'
 import { COURSE } from '@/lib/course'
 import { getDictionary } from '@/lib/dictionaries'
+import { PACK_SLUG } from '@/lib/pack'
 
 /** Fresh valid registry per test — mutate freely. */
 function sample(): AcademyRegistry {
@@ -147,7 +148,9 @@ describe('resolveCourses', () => {
 })
 
 describe('COURSE ↔ registry drift-guard', () => {
-  const entry = REGISTRY.courses.find((c) => c.slug === 'tochka-sborki')
+  // Параметризовано по активному pack'у (S5, второй жилец): для tochka-sborki
+  // проверка идентична прежней захардкоженной.
+  const entry = REGISTRY.courses.find((c) => c.slug === PACK_SLUG)
 
   it('this course is registered', () => {
     expect(entry).toBeDefined()
@@ -161,8 +164,12 @@ describe('COURSE ↔ registry drift-guard', () => {
 })
 
 describe('resolveOtherCourses', () => {
-  it('returns [] on the single-course REGISTRY (dark-ship)', () => {
-    expect(resolveOtherCourses('ru', COURSE.domain)).toEqual([])
+  it('returns exactly the live non-self courses of the committed REGISTRY', () => {
+    // Для tochka-sborki (единственный live-курс) это по-прежнему [] — dark-ship.
+    const expected = REGISTRY.courses
+      .filter((c) => c.status === 'live' && c.url !== COURSE.domain)
+      .map((c) => c.slug)
+    expect(resolveOtherCourses('ru', COURSE.domain).map((c) => c.slug)).toEqual(expected)
   })
 
   it('filters self by url', () => {

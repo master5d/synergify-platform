@@ -1,10 +1,16 @@
 import { describe, expect, it } from 'vitest'
 import { getDictionary } from './dictionaries'
+import { PACK_SLUG } from './pack'
 
 const ru = getDictionary('ru')
 const en = getDictionary('en')
 
-describe('value-clarity dictionary parity (fb_8423715c58e2)', () => {
+// Оба describe этого файла пиновали КОПИЮ словаря Точки Сборки (fb-строки, cloud-relay,
+// FAQ-возражения). Для других pack'ов эти строки не существуют по замыслу — гейт по
+// PACK_SLUG; для tochka-sborki проверки идут 1-в-1 как раньше.
+const describeDefaultPack = describe.runIf(PACK_SLUG === 'tochka-sborki')
+
+describeDefaultPack('value-clarity dictionary parity (fb_8423715c58e2)', () => {
   it('chatVsSystem has 4 rows in both locales', () => {
     expect(ru.chatVsSystem.rows).toHaveLength(4)
     expect(en.chatVsSystem.rows).toHaveLength(ru.chatVsSystem.rows.length)
@@ -46,7 +52,7 @@ describe('value-clarity dictionary parity (fb_8423715c58e2)', () => {
  * потому что в источнике нет ни автора, ни ссылки на само исследование, а
  * модуль 0 учит проверять источник по автору и дате.
  */
-describe('«Для кого» — стадии пути', () => {
+describeDefaultPack('«Для кого» — стадии пути', () => {
   for (const locale of ['ru', 'en'] as const) {
     const t = getDictionary(locale)
 

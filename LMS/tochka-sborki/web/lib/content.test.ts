@@ -1,4 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { PACK_SLUG } from './pack'
+
+// Фикстурные проверки ниже адресуют конкретные модули Точки Сборки; у другого pack'а
+// этих модулей нет по замыслу — гейт по PACK_SLUG, для tochka-sborki 1-в-1.
+const itDefault = it.runIf(PACK_SLUG === 'tochka-sborki')
 import {
   getAllLessons, getLessonBySlug, getPageContent,
   isModule, getModuleMeta, getNavigationItems, getUnitContent,
@@ -31,14 +36,14 @@ describe('getAllLessons', () => {
 })
 
 describe('getLessonBySlug', () => {
-  it('returns content and meta for 01-introduction unit', () => {
+  itDefault('returns content and meta for 01-introduction unit', () => {
     const result = getUnitContent('01-introduction', 'u1-activation')
     expect(result.content).toBeTruthy()
     expect(result.unitMeta.title).toBe('Твой опыт с AI')
     expect(result.unitMeta.unit).toBe(1)
   })
 
-  it('getModuleMeta returns correct data for 01-introduction', () => {
+  itDefault('getModuleMeta returns correct data for 01-introduction', () => {
     const meta = getModuleMeta('01-introduction')
     expect(meta.title).toBe('Знакомство')
     expect(meta.units).toHaveLength(4)
@@ -51,37 +56,37 @@ describe('getLessonBySlug', () => {
 })
 
 describe('getModuleMeta — all modules', () => {
-  it('00-kickstart has correct shape', () => {
+  itDefault('00-kickstart has correct shape', () => {
     const meta = getModuleMeta('00-kickstart')
     expect(meta.title).toBeTruthy()
     expect(meta.units.length).toBeGreaterThanOrEqual(1)
   })
 
-  it('02-setup-guide has correct shape', () => {
+  itDefault('02-setup-guide has correct shape', () => {
     const meta = getModuleMeta('02-setup-guide')
     expect(meta.title).toBeTruthy()
     expect(meta.units.length).toBeGreaterThanOrEqual(1)
   })
 
-  it('04-prompt-engineering has correct shape', () => {
+  itDefault('04-prompt-engineering has correct shape', () => {
     const meta = getModuleMeta('04-prompt-engineering')
     expect(meta.title).toBeTruthy()
     expect(meta.units.length).toBeGreaterThanOrEqual(1)
   })
 
-  it('05-context-memory has correct shape', () => {
+  itDefault('05-context-memory has correct shape', () => {
     const meta = getModuleMeta('05-context-memory')
     expect(meta.title).toBeTruthy()
     expect(meta.units.length).toBeGreaterThanOrEqual(1)
   })
 
-  it('06-audio-pipeline has correct shape', () => {
+  itDefault('06-audio-pipeline has correct shape', () => {
     const meta = getModuleMeta('06-audio-pipeline')
     expect(meta.title).toBeTruthy()
     expect(meta.units.length).toBeGreaterThanOrEqual(1)
   })
 
-  it('07-tools has correct shape', () => {
+  itDefault('07-tools has correct shape', () => {
     const meta = getModuleMeta('07-tools')
     expect(meta.title).toBeTruthy()
     expect(meta.units.length).toBeGreaterThanOrEqual(1)
@@ -110,7 +115,7 @@ describe('isModule', () => {
     expect(isModule('cheatsheet')).toBe(false)
   })
 
-  it('returns true for module slug', () => {
+  itDefault('returns true for module slug', () => {
     expect(isModule('01-introduction')).toBe(true)
   })
 })

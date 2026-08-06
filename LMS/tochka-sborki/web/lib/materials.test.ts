@@ -3,6 +3,7 @@ import { existsSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { COURSE_MATERIALS, isExternalHref } from './materials'
+import { PACK_SLUG } from './pack'
 
 const HERE = dirname(fileURLToPath(import.meta.url))   // web/lib
 
@@ -32,7 +33,9 @@ describe('COURSE_MATERIALS manifest', () => {
 
   it('marks tool items as external links', () => {
     const tools = COURSE_MATERIALS.flatMap(g => g.items).filter(i => i.kind === 'tool')
-    expect(tools.length).toBeGreaterThan(0)
+    // Инструментальные ссылки обязательны только в манифесте Точки Сборки (1-в-1);
+    // у курса практики инструментов нет по замыслу.
+    if (PACK_SLUG === 'tochka-sborki') expect(tools.length).toBeGreaterThan(0)
     for (const t of tools) expect(t.external).toBe(true)
   })
 

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { readdirSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
-import { CONTENT_ROOT, PACK_DIR } from '../pack'
+import { CONTENT_ROOT, PACK_DIR, PACK_SLUG } from '../pack'
 import { fileURLToPath } from 'node:url'
 import { MODULE_SLUGS as CORE, OPTIONAL_MODULE_SLUGS } from './modules'
 
@@ -21,8 +21,10 @@ function expectedKeys(): string[] {
   return keys
 }
 
-describe('skin pack unit-framing coverage', () => {
-  const keys = expectedKeys()
+// Канон MODULE_SLUGS — спайн Точки Сборки: у другого pack'а этих каталогов нет,
+// и обход контента по канону падал бы на сборе фикстур. Для tochka-sborki — 1-в-1.
+describe.runIf(PACK_SLUG === 'tochka-sborki')('skin pack unit-framing coverage', () => {
+  const keys = PACK_SLUG === 'tochka-sborki' ? expectedKeys() : []
   const files = readdirSync(skinsDir).filter(f => f.endsWith('.json'))
 
   it('discovers 44 unit keys', () => {

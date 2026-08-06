@@ -3,6 +3,11 @@ import { buildDungeon } from './build-dungeon'
 import type { DungeonInput } from './types'
 import { FLAVOR_BANK } from '@/lib/course/dungeon-flavor'
 import { NICHE_MODULE } from '@/lib/course/niche-map'
+import { PACK_SLUG } from '@/lib/pack'
+
+// Тесты ниже с itDefault пинуют флейвор-копию и applied-challenge-банк Точки Сборки;
+// у второго pack'а флейвор нейтральный, а банка вызовов нет. Для tochka-sborki — 1-в-1.
+const itDefault = it.runIf(PACK_SLUG === 'tochka-sborki')
 
 function base(over: Partial<DungeonInput> = {}): DungeonInput {
   return {
@@ -16,7 +21,7 @@ function base(over: Partial<DungeonInput> = {}): DungeonInput {
 }
 
 describe('buildDungeon', () => {
-  it('maps niche to its module and names from the flavor bank', () => {
+  itDefault('maps niche to its module and names from the flavor bank', () => {
     const v = buildDungeon(base())
     expect(v.niche).toBe('coach')
     expect(v.module).toBe('04-prompt-engineering')
@@ -24,7 +29,7 @@ describe('buildDungeon', () => {
     expect(v.boss.name).toBe('Эхо Сомнения')
   })
 
-  it('produces 3 stages at escalating tiers with cs 15', () => {
+  itDefault('produces 3 stages at escalating tiers with cs 15', () => {
     const v = buildDungeon(base())
     expect(v.stages.map(s => s.tier)).toEqual(['task', 'process', 'outcome'])
     expect(v.stages.map(s => s.id)).toEqual(['dungeon:coach:s1', 'dungeon:coach:s2', 'dungeon:coach:s3'])
@@ -46,7 +51,7 @@ describe('buildDungeon', () => {
     expect(buildDungeon(base({ isModuleCompleted: () => true })).locked).toBe(false)
   })
 
-  it('falls back to the "other" flavor for an unknown/null niche', () => {
+  itDefault('falls back to the "other" flavor for an unknown/null niche', () => {
     const v = buildDungeon(base({ niche: null }))
     expect(v.niche).toBe('other')
     expect(v.dungeonName).toBe('Безымянный Предел')
@@ -57,13 +62,13 @@ describe('buildDungeon', () => {
     expect(buildDungeon(base())).toEqual(buildDungeon(base()))
   })
 
-  it('renders flavor names in the EN locale', () => {
+  itDefault('renders flavor names in the EN locale', () => {
     const v = buildDungeon(base({ locale: 'en' }))
     expect(v.dungeonName).toBe('Hall of Resonance')
     expect(v.boss.name).toBe('The Echo of Doubt')
   })
 
-  it('fills the outcome-tier stage body with the learner outcome', () => {
+  itDefault('fills the outcome-tier stage body with the learner outcome', () => {
     const v = buildDungeon(base({ niche: 'coach', outcome: 'grow my practice' }))
     const outcomeStage = v.stages.find(s => s.tier === 'outcome')!
     expect(outcomeStage.body).toContain('grow my practice')

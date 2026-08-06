@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { readdirSync, statSync, readFileSync } from 'fs'
 import { dirname, join } from 'path'
-import { CONTENT_ROOT } from '../pack'
+import { CONTENT_ROOT, PACK_SLUG } from '../pack'
 import { fileURLToPath } from 'url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -19,7 +19,8 @@ const files = walk(CONTENT)
 
 describe('Kolb cycle coverage', () => {
   it('discovers unit mdx files', () => {
-    expect(files.length).toBeGreaterThan(30)
+    // Порог параметризован по pack'у: у Точки Сборки 30+ юнитов (1-в-1), у младших pack'ов — 1+.
+    expect(files.length).toBeGreaterThan(PACK_SLUG === 'tochka-sborki' ? 30 : 0)
   })
 
   it.each(files)('%s', (file) => {

@@ -1,10 +1,15 @@
 import { describe, it, expect } from 'vitest'
 import { getTryChains, ALL_CHAINS, HONEST_ITEMS, type TryChain } from './try-chains'
 import { lintDehustle } from '@/lib/authoring/dehustle'
+import { PACK_SLUG } from '@/lib/pack'
+
+// Цепочки — данные Точки Сборки; у курса практики CHAINS пуст по замыслу (страница /try
+// остаётся честной прозой). Де-hustle-проверка копии остаётся для любого pack'а.
+const describeDefaultPack = describe.runIf(PACK_SLUG === 'tochka-sborki')
 
 const LOCALES = ['ru', 'en'] as const
 
-describe('состав страницы', () => {
+describeDefaultPack('состав страницы', () => {
   it('шесть цепочек, поровну рабочих и личных', () => {
     expect(ALL_CHAINS).toHaveLength(6)
     expect(ALL_CHAINS.filter((c) => c.kind === 'work')).toHaveLength(3)
@@ -30,7 +35,7 @@ describe('состав страницы', () => {
  * переименовывать и перезаписывать его файлы. Поэтому порядок шагов и формулировки
  * здесь — вопрос сохранности чужих данных, а не стиля.
  */
-describe('безопасность копируемых инструкций', () => {
+describeDefaultPack('безопасность копируемых инструкций', () => {
   // Судим по свойству, объявленному данными. Цепочка про незнакомую тему файлов
   // не трогает вовсе — требовать от неё запрета «ничего не меняй» было бы
   // обрядом, а обряды в гвардах учат обходить гварды.
@@ -83,7 +88,7 @@ describe('безопасность копируемых инструкций', (
   })
 })
 
-describe('каждый шаг объясняет себя', () => {
+describeDefaultPack('каждый шаг объясняет себя', () => {
   for (const c of ALL_CHAINS) {
     it(`${c.id}: у всех шагов есть промпт и «зачем» на обоих языках`, () => {
       for (const s of c.steps) {
@@ -105,7 +110,7 @@ describe('честный раздел', () => {
     }
   })
 
-  it('называет вещи, которые невыгодно называть', () => {
+  it.runIf(PACK_SLUG === 'tochka-sborki')('называет вещи, которые невыгодно называть', () => {
     const ru = HONEST_ITEMS.map((i) => i.ru).join(' ').toLowerCase()
     expect(ru, 'нет оговорки про малый объём').toMatch(/быстрее руками|не окупается/)
     expect(ru, 'нет оговорки про уверенные ошибки').toMatch(/ошибается уверенно|уверенно/)
@@ -113,7 +118,7 @@ describe('честный раздел', () => {
   })
 })
 
-describe('обе локали', () => {
+describeDefaultPack('обе локали', () => {
   for (const locale of LOCALES) {
     it(`${locale}: страница собирается целиком`, () => {
       const vm = getTryChains(locale)

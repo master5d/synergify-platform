@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { INTRO, PACKS, PROMPT_KIT, VERIFY_CHECKLIST, resolveNotebookPack, resolvePromptKit, resolveChecklist } from './notebook-pack'
 import { lintDehustle } from '@/lib/authoring/dehustle'
+import { PACK_SLUG } from '@/lib/pack'
 
 const allBi = () => {
   const out: { ru: string; en: string }[] = []
@@ -26,8 +27,14 @@ describe('notebook-pack data', () => {
       expect(lintDehustle(b.en)).toEqual([])
     }
   })
-  it('три пака с ожидаемыми id', () => {
-    expect(PACKS.map(p => p.id)).toEqual(['youtube-playlist', 'lesson-sources', 'own-docs'])
+  it('паки с ожидаемыми id', () => {
+    // Для Точки Сборки состав пинован 1-в-1; для других pack'ов — непустой и без дублей.
+    if (PACK_SLUG === 'tochka-sborki') {
+      expect(PACKS.map(p => p.id)).toEqual(['youtube-playlist', 'lesson-sources', 'own-docs'])
+    } else {
+      expect(PACKS.length).toBeGreaterThan(0)
+      expect(new Set(PACKS.map(p => p.id)).size).toBe(PACKS.length)
+    }
   })
   it('каждый промпт требует цитату с точкой в источнике', () => {
     for (const pr of PROMPT_KIT) {
@@ -39,7 +46,7 @@ describe('notebook-pack data', () => {
     expect(VERIFY_CHECKLIST.length).toBeGreaterThanOrEqual(5)
   })
   it('resolver: локаль и fail-closed', () => {
-    const r = resolveNotebookPack('youtube-playlist', 'en')
+    const r = resolveNotebookPack(PACKS[0].id, 'en')
     expect(r?.title).toBeTruthy()
     expect(resolveNotebookPack('nope', 'ru')).toBeNull()
     expect(resolvePromptKit('ru').length).toBe(PROMPT_KIT.length)

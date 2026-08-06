@@ -1,12 +1,15 @@
 import { describe, it, expect } from 'vitest'
 import { buildBridgeContent } from './onboarding-bridge-content'
 import { skinDecoder } from '@/lib/rpg/skins-meta'
+import { PACK_SLUG } from '@/lib/pack'
 
 describe('buildBridgeContent', () => {
   it('возвращает decoder выбранного скина', () => {
     const c = buildBridgeContent('space-opera', 'ru')
     expect(c.decoder).toBe(skinDecoder('space-opera', 'ru'))
-    expect(c.decoder).toContain('кадет')
+    // Слово «кадет» живёт в decoder'е скина space-opera Точки Сборки; у второго pack'а
+    // скин один (wanderer), и space-opera уходит в честный generic-fallback.
+    if (PACK_SLUG === 'tochka-sborki') expect(c.decoder).toContain('кадет')
   })
   it('содержит ровно 5 терминов глоссария с непустыми desc', () => {
     const c = buildBridgeContent('wanderer', 'ru')

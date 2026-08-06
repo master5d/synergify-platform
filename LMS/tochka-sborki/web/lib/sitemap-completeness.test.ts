@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { readdirSync, readFileSync, existsSync } from 'fs'
 import { dirname, join } from 'path'
-import { CONTENT_ROOT } from './pack'
+import { CONTENT_ROOT, PACK_SLUG } from './pack'
 import { fileURLToPath } from 'url'
 import sitemap from '../app/sitemap'
 import { COURSE } from './course'
@@ -25,7 +25,8 @@ describe('карта сайта покрывает весь курс', () => {
     .map((e) => e.name)
 
   it('находит модули курса', () => {
-    expect(modules.length).toBeGreaterThan(5)
+    // Порог параметризован по pack'у: у Точки Сборки 6+ модулей (1-в-1), у младших — 1+.
+    expect(modules.length).toBeGreaterThan(PACK_SLUG === 'tochka-sborki' ? 5 : 0)
   })
 
   it.each(modules)('%s: модуль и все его юниты в карте', (mod) => {
