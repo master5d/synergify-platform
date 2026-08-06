@@ -7,7 +7,7 @@ import { buildQuestLog } from '@/lib/rpg/quest-log'
 import { SKINS_META } from '@/lib/rpg/skins-meta'
 import { CharacterStrip } from '@/components/rpg/character-strip'
 import { QuestFeed } from '@/components/rpg/quest-feed'
-import wandererPack from '@/lib/rpg/skins/wanderer.json'
+import wandererPack from '@pack/skins/wanderer.json'
 import type { SkinPack } from '@/lib/rpg/types'
 import type { Locale, WorldSkin } from '@/lib/intake/types'
 import { ShardBalance } from '@/components/cs/shard-balance'
@@ -43,7 +43,7 @@ export function DashboardClient({ modules, unitsByModule, locale }: Props) {
         if (!p || p.status !== 'completed') { router.replace(locale === 'en' ? '/en/quest-intake/' : '/quest-intake/'); return }
         setProfile(p)
         try {
-          const mod = await import(`@/lib/rpg/skins/${p.world_skin}.json`)
+          const mod = await import(`@pack/skins/${p.world_skin}.json`)
           setPack(mod.default as SkinPack)
         } catch { setPack(wandererPack as SkinPack) }
       })

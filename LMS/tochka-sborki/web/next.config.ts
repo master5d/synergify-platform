@@ -6,7 +6,11 @@ const config: NextConfig = {
   trailingSlash: true,
   images: { unoptimized: true },
   // Repo root, so Turbopack accepts the LMS/registry.json import from outside web/.
-  turbopack: { root: path.join(__dirname, '../../..') },
+  turbopack: {
+    root: path.join(__dirname, '../../..'),
+    // @pack = активный course-pack; переключается COURSE_PACK (Ф1 S4).
+    resolveAlias: { '@pack': `./packs/${process.env.COURSE_PACK ?? 'tochka-sborki'}` },
+  },
 }
 
 export default config

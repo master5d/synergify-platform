@@ -2,9 +2,10 @@
 import { describe, it, expect } from 'vitest'
 import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { PACK_DIR } from '../pack'
 import { MODULE_SLUGS, OPTIONAL_MODULE_SLUGS } from './modules'
 
-const dir = join(__dirname, 'skins')
+const dir = join(PACK_DIR, 'skins') // S4: skins в course-pack
 const SKIN_MODULE_SLUGS = [...MODULE_SLUGS, ...OPTIONAL_MODULE_SLUGS]
 
 describe('skin packs', () => {

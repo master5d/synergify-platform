@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest'
 import { readdirSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
-import { CONTENT_ROOT } from '../pack'
+import { CONTENT_ROOT, PACK_DIR } from '../pack'
 import { fileURLToPath } from 'node:url'
 import { MODULE_SLUGS as CORE, OPTIONAL_MODULE_SLUGS } from './modules'
 
 const here = dirname(fileURLToPath(import.meta.url))      // web/lib/rpg
 const contentDir = join(CONTENT_ROOT, 'ru') // S3: контент в course-pack
-const skinsDir = join(here, 'skins')                        // web/lib/rpg/skins
+const skinsDir = join(PACK_DIR, 'skins') // S4: skins в course-pack
 
 // core + optional из канона modules.ts — локальный список разъезжался бы молча
 const MODULE_SLUGS = [...CORE, ...OPTIONAL_MODULE_SLUGS]

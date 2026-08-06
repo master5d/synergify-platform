@@ -105,7 +105,7 @@ export function UnitWizard({
           setOutcome(typeof f3 === 'string' ? f3 : null)
         } catch { setOutcome(null) }
         try {
-          const mod = await import(`@/lib/rpg/skins/${p.world_skin}.json`)
+          const mod = await import(`@pack/skins/${p.world_skin}.json`)
           setPack(mod.default as SkinPack)
         } catch { setPack(null) }
       })

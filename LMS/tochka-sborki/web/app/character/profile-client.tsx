@@ -13,7 +13,7 @@ import { LearningPlanCard } from '@/components/intake/learning-plan-card'
 import { CompanionSetup } from '@/components/intake/companion-setup'
 import { OfficeHoursCard } from '@/components/office-hours-card'
 import { useNicheDungeonCleared } from '@/lib/dungeon/use-dungeon'
-import wandererPack from '@/lib/rpg/skins/wanderer.json'
+import wandererPack from '@pack/skins/wanderer.json'
 import type { SkinPack } from '@/lib/rpg/types'
 import type { Locale } from '@/lib/intake/types'
 
@@ -36,7 +36,7 @@ export function ProfileClient({ modules, locale }: Props) {
       .then(async p => {
         if (!p || p.status !== 'completed') { router.replace(locale === 'en' ? '/en/quest-intake/' : '/quest-intake/'); return }
         setProfile(p)
-        try { const mod = await import(`@/lib/rpg/skins/${p.world_skin}.json`); setPack(mod.default as SkinPack) }
+        try { const mod = await import(`@pack/skins/${p.world_skin}.json`); setPack(mod.default as SkinPack) }
         catch { setPack(wandererPack as SkinPack) }
       })
       .catch(() => router.replace(locale === 'en' ? '/en/quest-intake/' : '/quest-intake/'))

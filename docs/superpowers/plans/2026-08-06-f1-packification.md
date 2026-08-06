@@ -30,7 +30,9 @@ re-export-стабы (32+ компонентов не трогаются), bound
 - `content/{ru,en}` → pack; `lib/content.ts` читает через PACK_DIR; гварды
   (registry-integrity, links-integrity, reflection drift) параметризуются PACK_DIR.
 
-## S4 — COURSE_PACK переключалка + второй жилец
+## S4 — @pack-alias + skins ✅ DONE (alias в next/vitest/tsconfig; стабы на @pack; skins в pack, динамические импорты через alias; boundary v2: литеральные packs/ запрещены; CHECKLIST актуализирован)
+
+## S5 — второй жилец + packs на корень (остаток)
 - next.config: turbopack/webpack `resolveAlias['@pack'] = packs/$COURSE_PACK`;
   стабы переезжают на `@pack/*`; динамические skins-импорты → alias.
 - `packs/living-practice/` (курс академии из academy/lib/course/) — второй жилец

@@ -1,22 +1,22 @@
-// Boundary-гвард движок ↔ course-pack (Ф1 S1).
+// Boundary-гвард движок ↔ course-pack (Ф1 S1, ужесточён в S4 — эпоха @pack-alias).
 // Держит будущее расщепление дешёвым: сцепки ловятся здесь, а не при разрезе.
 import { describe, expect, it } from 'vitest'
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs'
 import { join, relative } from 'node:path'
+import { PACK_DIR } from './pack'
 
 const ROOT = process.cwd()
-const PACK = join(ROOT, 'packs', 'tochka-sborki')
 
-/** Единственные легитимные входы движка в pack до @pack-alias (S4). */
-const STUB_WHITELIST = new Set([
+/** Стабы-переходники (наследие S1-S2): старый путь → @pack. Только re-export. */
+const STUBS = [
   'lib/course.ts',
   'lib/dictionaries.ts',
   'lib/materials.ts',
-  // S2 — data-слой lib/course/*
+  'lib/rpg/skins-meta.ts',
   ...['ai-doubles', 'certificate', 'dungeon-flavor', 'ecosystem', 'intake-questions',
       'niche-map', 'notebook-pack', 'office-hours', 'showcase', 'skins', 'try-chains']
     .map((n) => `lib/course/${n}.ts`),
-])
+]
 
 function walk(dir: string, out: string[] = []): string[] {
   for (const name of readdirSync(dir)) {
@@ -32,41 +32,41 @@ const rel = (p: string) => relative(ROOT, p).replaceAll('\\', '/')
 
 describe('engine ↔ pack boundary', () => {
   it('pack contract files exist', () => {
-    for (const f of ['course.config.ts', 'dictionaries.ts', 'materials.ts', 'README.md']) {
-      expect(existsSync(join(PACK, f)), f).toBe(true)
+    for (const f of ['course.config.ts', 'dictionaries.ts', 'materials.ts', 'skins-meta.ts',
+                     'README.md', 'content', 'skins', 'course']) {
+      expect(existsSync(join(PACK_DIR, f)), f).toBe(true)
     }
   })
 
-  it('engine imports packs/ only through whitelisted stubs', () => {
-    const engineFiles = ['lib', 'components', 'app'].flatMap((d) => walk(join(ROOT, d)))
+  it('no literal packs/ imports anywhere — only the @pack alias', () => {
+    const files = [...['lib', 'components', 'app'].flatMap((d) => walk(join(ROOT, d))), ...walk(PACK_DIR)]
     const offenders: string[] = []
-    for (const f of engineFiles) {
-      const r = rel(f)
-      if (STUB_WHITELIST.has(r)) continue
+    for (const f of files) {
       const src = readFileSync(f, 'utf8')
       if (/from\s+['"][^'"]*packs\//.test(src) || /import\(\s*[`'"][^`'"]*packs\//.test(src)) {
-        offenders.push(r)
+        offenders.push(rel(f))
       }
     }
-    expect(offenders, `packs/ импортится мимо стабов: ${offenders.join(', ')}`).toEqual([])
+    expect(offenders, `литеральный путь в packs/ вместо @pack: ${offenders.join(', ')}`).toEqual([])
   })
 
-  it('pack does not import engine components/ or app/', () => {
+  it('pack does not import engine UI (components/, app/) and does not self-alias @pack', () => {
     const offenders: string[] = []
-    for (const f of walk(PACK)) {
+    for (const f of walk(PACK_DIR)) {
       const src = readFileSync(f, 'utf8')
-      if (/from\s+['"][^'"]*(components|app)\//.test(src)) offenders.push(rel(f))
+      if (/from\s+['"][^'"]*(components|app)\//.test(src)) offenders.push(`${rel(f)} → UI`)
+      if (/from\s+['"]@pack\//.test(src)) offenders.push(`${rel(f)} → @pack self`)
     }
-    expect(offenders, `pack тянет UI движка: ${offenders.join(', ')}`).toEqual([])
+    expect(offenders, offenders.join(', ')).toEqual([])
   })
 
-  it('stubs are thin re-exports (no logic creep)', () => {
-    for (const stub of STUB_WHITELIST) {
+  it('stubs are thin @pack re-exports (no logic creep)', () => {
+    for (const stub of STUBS) {
       const lines = readFileSync(join(ROOT, stub), 'utf8')
         .split('\n')
         .filter((l) => l.trim() && !l.trim().startsWith('//'))
       expect(lines, `${stub} должен остаться тонким re-export`).toHaveLength(1)
-      expect(lines[0]).toMatch(/^export \* from/)
+      expect(lines[0], stub).toMatch(/^export \* from '@pack\//)
     }
   })
 })
