@@ -10,8 +10,8 @@ export const COURSE = {
   name: 'Практика в живой связи',
   shortName: 'Практика в живой связи',
   fullName: {
-    ru: 'Практика в живой связи — курс академии S.A.S.H.A',
-    en: 'Practice in Living Connection — an S.A.S.H.A academy course',
+    ru: 'Практика в живой связи — курс школы синергемы',
+    en: 'Practice in Living Connection — a Synergema School course',
   } as Bi,
   // Single source of truth for SEO (sitemap/robots) and the PWA manifest. No trailing slash.
   domain: 'https://praktika.synergify.com',

@@ -4,7 +4,7 @@ import { getAcademy, getCourses } from './registry'
 describe('registry bridge', () => {
   it('reads academy info from LMS/registry.json', () => {
     const a = getAcademy()
-    expect(a.name).toBe('S.A.S.H.A')
+    expect(a.name).toBe('Synergema Authentica Starseed Holon Academy')
     expect(a.url).toBe('https://academy.synergify.com')
   })
 

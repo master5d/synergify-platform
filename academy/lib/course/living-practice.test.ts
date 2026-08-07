@@ -60,7 +60,7 @@ describe('living-practice course guard', () => {
       expect(c.heading).toBeTruthy()
       expect(c.intro.length).toBeGreaterThan(0)
       expect(c.lessons).toHaveLength(6)
-      expect(c.metaTitle).toContain('S.A.S.H.A')
+      expect(c.metaTitle).toContain('Synergema')
     }
   })
 

@@ -1,25 +1,19 @@
 import { getDictionary, type Locale } from '../lib/dictionaries'
 import { getCourses } from '../lib/registry'
 import { courseCard } from '../lib/course/living-practice'
+import { DragonOrnament } from './dragon-ornament'
 
 interface Props { locale: Locale }
 
 const GOLD = 'var(--accent)'
 
-// Лендинг v3: структурная грамматика ai.synergify.com (hero+stats+CTA →
-// сравнение 2 колонки → для-кого сеткой → внутри/не-внутри → курсы → правила →
-// основатель с фото → FAQ → футер), но идентичность академии: тьма, золото,
-// motion 1 — ни одной анимации, де-hustle, ноль обещаний.
+// Домашняя страница мистической школы (v4) — НЕ лендинг (identity.json: «закрытая
+// школа, а не лендинг»). Полное имя вместо акронима (решение владельца 2026-08-07),
+// белый дракон как несущий орнамент, motion 1 — ни одной анимации, де-hustle.
 
 const sectionLabel: React.CSSProperties = {
   fontFamily: 'var(--font-mono)', color: GOLD, textTransform: 'lowercase',
   letterSpacing: '0.12em', fontSize: 'var(--text-xs)', margin: '0 0 1.5rem',
-}
-
-const sectionHeading: React.CSSProperties = {
-  fontFamily: 'var(--font-display)', color: 'var(--text-primary)',
-  fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', letterSpacing: '0.03em',
-  lineHeight: 1.15, margin: '0 0 2rem', whiteSpace: 'pre-line',
 }
 
 const cardStyle: React.CSSProperties = {
@@ -30,7 +24,7 @@ const cardStyle: React.CSSProperties = {
 export function AcademyPage({ locale }: Props) {
   const t = getDictionary(locale).academy
   // living-practice живёт ЗДЕСЬ (внутренняя карточка ниже) — его registry-запись
-  // (coming-soon, контрактный домен) на лендинге академии не показываем, иначе дубль.
+  // (coming-soon, контрактный домен) на этой странице не показываем, иначе дубль.
   const courses = getCourses(locale).filter((c) => c.slug !== 'living-practice')
   const first = courseCard(locale)
   const trainersHref = locale === 'en' ? '/en/trenazhery/' : '/trenazhery/'
@@ -41,86 +35,52 @@ export function AcademyPage({ locale }: Props) {
       <style>{`
         @media (max-width: 720px) {
           .academy-hero { padding: 4rem 1.25rem 3rem !important; }
-          .academy-hero h1 { font-size: clamp(2.2rem, 11vw, 4.5rem) !important; }
+          .academy-hero h1 { font-size: clamp(1.5rem, 6.5vw, 2.2rem) !important; }
           .academy-section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
           .academy-grid2 { grid-template-columns: 1fr !important; }
-          .academy-stats { gap: 1.25rem !important; }
           .academy-founder { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
-      {/* 1 · HERO — wordmark, первый абзац манифеста, честные stats, две двери */}
-      <section className="academy-hero" style={{ padding: '6rem 2rem 4rem', textAlign: 'center' }}>
-        <p style={{ fontFamily: 'var(--font-mono)', color: GOLD, textTransform: 'lowercase', letterSpacing: '0.25em', fontSize: 'var(--text-xs)', margin: 0 }}>
-          {t.eyebrow}
+      {/* 1 · ИМЯ ШКОЛЫ — полное, без акронима; дракон-хранитель под именем */}
+      <section className="academy-hero" style={{ padding: '6rem 2rem 3rem', textAlign: 'center' }}>
+        <p style={{ fontFamily: 'var(--font-mono)', color: GOLD, textTransform: 'lowercase', letterSpacing: '0.25em', fontSize: 'var(--text-xs)', margin: '0 0 1.5rem' }}>
+          {t.subline}
         </p>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 7vw, 5rem)', letterSpacing: '0.05em', margin: '1rem 0 0.5rem', color: 'var(--text-primary)' }}>
-          {t.wordmark}
-        </h1>
-        <p style={{ color: GOLD, fontSize: 'var(--text-sm)', letterSpacing: '0.08em', margin: '0 0 2rem' }}>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 4.2vw, 3.2rem)', letterSpacing: '0.06em', lineHeight: 1.25, margin: '0 auto 2rem', color: 'var(--text-primary)', maxWidth: '46rem' }}>
           {t.fullName}
-        </p>
-        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: 'var(--text-base)', maxWidth: '38rem', margin: '0 auto 2.5rem' }}>
+        </h1>
+
+        <DragonOrnament width={560} opacity={0.65} />
+
+        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: 'var(--text-base)', maxWidth: '38rem', margin: '2rem auto 0', textAlign: 'left' }}>
           {t.positioning[0]}
         </p>
 
-        <div className="academy-stats" style={{ display: 'flex', justifyContent: 'center', gap: '2.5rem', flexWrap: 'wrap', margin: '0 0 2.5rem' }}>
-          {t.heroStats.map(([value, label]) => (
-            <div key={label}>
-              <div style={{ fontFamily: 'var(--font-display)', color: GOLD, fontSize: 'var(--text-xl)', lineHeight: 1 }}>{value}</div>
-              <div style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', fontSize: 'var(--text-xs)', letterSpacing: '0.08em', textTransform: 'lowercase', marginTop: '0.4rem' }}>{label}</div>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-          <a href="https://ai.synergify.com" style={{ border: '1px solid var(--accent)', borderRadius: 'var(--radius)', padding: '0.8rem 1.4rem', background: 'var(--accent-wash)', color: GOLD, fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)', letterSpacing: '0.06em', textTransform: 'lowercase', textDecoration: 'none' }}>
+        <div style={{ maxWidth: '38rem', margin: '2rem auto 0', border: '1px solid var(--accent)', borderRadius: 'var(--radius)', padding: '1.25rem', background: 'var(--accent-wash)', textAlign: 'left' }}>
+          <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, margin: '0 0 0.85rem' }}>{t.gate}</p>
+          <a href="https://ai.synergify.com" style={{ color: GOLD, fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.08em', textTransform: 'lowercase', textDecoration: 'none' }}>
             {t.gateCta}
           </a>
-          <a href={charterHref} style={{ border: '1px solid var(--border-soft)', borderRadius: 'var(--radius)', padding: '0.8rem 1.4rem', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)', letterSpacing: '0.06em', textTransform: 'lowercase', textDecoration: 'none' }}>
-            {t.charterLabel}
-          </a>
         </div>
-        <p style={{ color: 'var(--text-muted)', fontSize: 'var(--text-sm)', margin: '1.5rem 0 0' }}>{t.gate}</p>
       </section>
 
-      {/* 2 · ЗАПИСЬ vs КРУГ — двухколоночное сравнение (грамматика chat-vs-system) */}
-      <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '4rem 2rem 0' }}>
-        <h2 style={sectionLabel}>{t.compare.label}</h2>
-        <p style={sectionHeading}>{t.compare.heading}</p>
-        <div className="academy-grid2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 2rem' }}>
-          <div style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', fontSize: 'var(--text-xs)', letterSpacing: '0.12em', textTransform: 'lowercase', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-soft)' }}>{t.compare.leftCol}</div>
-          <div style={{ fontFamily: 'var(--font-mono)', color: GOLD, fontSize: 'var(--text-xs)', letterSpacing: '0.12em', textTransform: 'lowercase', paddingBottom: '0.75rem', borderBottom: '1px solid var(--accent-line)' }}>{t.compare.rightCol}</div>
-          {t.compare.rows.map((r) => (
-            [
-              <div key={r.left} style={{ color: 'var(--text-muted)', lineHeight: 1.6, fontSize: 'var(--text-base)', padding: '0.9rem 0', borderBottom: '1px solid var(--border-soft)' }}>{r.left}</div>,
-              <div key={r.right} style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontSize: 'var(--text-base)', padding: '0.9rem 0', borderBottom: '1px solid var(--border-soft)' }}>{r.right}</div>,
-            ]
+      {/* 2 · МАНИФЕСТ — голос владельца целиком */}
+      <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '3rem 2rem 0' }}>
+        <h2 style={sectionLabel}>{t.manifestLabel}</h2>
+        <div style={{ maxWidth: '38rem' }}>
+          {t.positioning.slice(1).map((p, i) => (
+            <p key={i} style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: 'var(--text-base)' }}>{p}</p>
           ))}
         </div>
       </section>
 
-      {/* 3 · ДЛЯ КОГО — сетка 2×2 карточек-стадий */}
-      <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 0' }}>
-        <h2 style={sectionLabel}>{t.forWhoLabel}</h2>
-        <div className="academy-grid2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-          {t.forWho.map((w) => (
-            <div key={w.title} style={{ border: '1px solid var(--border-soft)', borderRadius: 'var(--radius)', padding: '1.5rem', background: 'var(--bg-surface)' }}>
-              <h3 style={{ color: 'var(--text-primary)', fontSize: 'var(--text-base)', fontWeight: 600, margin: '0 0 0.5rem', lineHeight: 1.35 }}>
-                {w.title}
-              </h3>
-              <p style={{ color: 'var(--text-muted)', lineHeight: 1.6, fontSize: 'var(--text-sm)', margin: 0 }}>
-                {w.body}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 4 · ВНУТРИ / ЭТОГО ЗДЕСЬ НЕТ — грамматика venn in/out */}
+      {/* 3 · ВНУТРИ / ЭТОГО ЗДЕСЬ НЕТ — честность школы */}
       <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 0' }}>
         <h2 style={sectionLabel}>{t.inside.label}</h2>
-        <p style={sectionHeading}>{t.inside.heading}</p>
+        <p style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)', fontSize: 'clamp(1.5rem, 3.5vw, 2.1rem)', letterSpacing: '0.03em', lineHeight: 1.2, margin: '0 0 2rem' }}>
+          {t.inside.heading}
+        </p>
         <div className="academy-grid2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
           <div style={{ border: '1px solid var(--accent-line)', borderRadius: 'var(--radius)', padding: '1.5rem', background: 'var(--accent-wash)' }}>
             <div style={{ fontFamily: 'var(--font-mono)', color: GOLD, fontSize: 'var(--text-xs)', letterSpacing: '0.12em', textTransform: 'lowercase', marginBottom: '1rem' }}>{t.inside.inLabel}</div>
@@ -141,17 +101,30 @@ export function AcademyPage({ locale }: Props) {
         </div>
       </section>
 
-      {/* 5 · МАНИФЕСТ — голос владельца целиком (hero несёт только первый абзац) */}
+      {/* 4 · ДЛЯ КОГО — спокойный список стадий */}
       <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 0' }}>
-        <h2 style={sectionLabel}>{t.manifestLabel}</h2>
-        <div style={{ maxWidth: '38rem' }}>
-          {t.positioning.slice(1).map((p, i) => (
-            <p key={i} style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: 'var(--text-base)' }}>{p}</p>
+        <h2 style={sectionLabel}>{t.forWhoLabel}</h2>
+        <ol style={{ listStyle: 'none', padding: 0, margin: 0, maxWidth: '38rem' }}>
+          {t.forWho.map((w, i) => (
+            <li
+              key={w.title}
+              style={{
+                padding: '1.25rem 0',
+                borderTop: i === 0 ? '1px solid var(--accent-line)' : '1px solid var(--border-soft)',
+              }}
+            >
+              <h3 style={{ color: 'var(--text-primary)', fontSize: 'var(--text-base)', fontWeight: 600, margin: '0 0 0.4rem', lineHeight: 1.35 }}>
+                {w.title}
+              </h3>
+              <p style={{ color: 'var(--text-muted)', lineHeight: 1.6, fontSize: 'var(--text-base)', margin: 0 }}>
+                {w.body}
+              </p>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
 
-      {/* 6 · КУРСЫ — практика, registry, тренажёры */}
+      {/* 5 · КУРСЫ — двери школы */}
       <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 0' }}>
         <h2 style={sectionLabel}>{t.coursesLabel}</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
@@ -190,7 +163,7 @@ export function AcademyPage({ locale }: Props) {
         </div>
       </section>
 
-      {/* 7 · ПРАВИЛА ДОМА — мост к хартии */}
+      {/* 6 · ПРАВИЛА ДОМА — мост к хартии */}
       <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 0' }}>
         <h2 style={sectionLabel}>{t.charterSectionLabel}</h2>
         <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: 'var(--text-base)', maxWidth: '38rem', margin: '0 0 1rem' }}>
@@ -201,18 +174,18 @@ export function AcademyPage({ locale }: Props) {
         </a>
       </section>
 
-      {/* 8 · ОСНОВАТЕЛЬ — фото + крупное имя (грамматика автор-блока ТС) */}
+      {/* 7 · ОСНОВАТЕЛЬ */}
       <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 0' }}>
         <h2 style={sectionLabel}>{t.founderLabel}</h2>
-        <div className="academy-founder" style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: '2rem', alignItems: 'start' }}>
+        <div className="academy-founder" style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '2rem', alignItems: 'start' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/author.jpg"
             alt={t.founderName}
-            style={{ width: '100%', maxWidth: '220px', borderRadius: 'var(--radius)', border: '1px solid var(--border-soft)', display: 'block' }}
+            style={{ width: '100%', maxWidth: '200px', borderRadius: 'var(--radius)', border: '1px solid var(--border-soft)', display: 'block' }}
           />
           <div>
-            <p style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)', fontSize: 'clamp(1.4rem, 3.5vw, 2rem)', letterSpacing: '0.02em', margin: '0 0 1rem', lineHeight: 1.2 }}>
+            <p style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)', fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', letterSpacing: '0.02em', margin: '0 0 1rem', lineHeight: 1.2 }}>
               {t.founderName}
             </p>
             {t.founderBody.map((p, i) => (
@@ -225,10 +198,10 @@ export function AcademyPage({ locale }: Props) {
         </div>
       </section>
 
-      {/* 9 · FAQ — честные ответы, без аккордеонов (motion 1) */}
-      <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 5rem' }}>
+      {/* 8 · ВОПРОСЫ */}
+      <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 4rem' }}>
         <h2 style={sectionLabel}>{t.faqLabel}</h2>
-        <dl style={{ margin: 0 }}>
+        <dl style={{ margin: 0, maxWidth: '38rem' }}>
           {t.faq.map((item, i) => (
             <div
               key={item.q}
@@ -248,11 +221,14 @@ export function AcademyPage({ locale }: Props) {
         </dl>
       </section>
 
-      {/* 10 · ФУТЕР */}
+      {/* 9 · ДРАКОН-СТРАЖ у выхода + ФУТЕР */}
+      <div style={{ padding: '0 2rem 2rem' }}>
+        <DragonOrnament width={360} opacity={0.35} flip />
+      </div>
       <footer style={{ borderTop: '1px solid var(--border-soft)' }}>
         <div className="academy-section academy-grid2" style={{ maxWidth: '52rem', margin: '0 auto', padding: '3rem 2rem 1.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
           <div>
-            <div style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)', fontSize: 'var(--text-lg)', letterSpacing: '0.05em', marginBottom: '0.75rem' }}>{t.wordmark}</div>
+            <div style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)', fontSize: 'var(--text-base)', letterSpacing: '0.04em', lineHeight: 1.4, marginBottom: '0.75rem', maxWidth: '20rem' }}>{t.fullName}</div>
             <p style={{ color: 'var(--text-muted)', lineHeight: 1.6, fontSize: 'var(--text-sm)', margin: 0, maxWidth: '24rem' }}>{t.footer.tagline}</p>
           </div>
           <div>

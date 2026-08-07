@@ -339,7 +339,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     author: {
       label: 'Об авторе',
       name: 'Александр\nМамаев',
-      bio: 'Собираю академию S.A.S.H.A. Этот курс — публичная часть разбора одного онлайн-курса осознанности: карта различий, оплаченная собственным временем.',
+      bio: 'Собираю школу синергемы. Этот курс — публичная часть разбора одного онлайн-курса осознанности: карта различий, оплаченная собственным временем.',
       cta: 'Оставить фидбек →',
     },
     sidebar: {
@@ -602,7 +602,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     author: {
       label: 'About the author',
       name: 'Alexander\nMamaev',
-      bio: 'I am assembling the S.A.S.H.A academy. This course is the public part of a close reading of one online mindfulness course: a map of distinctions paid for with my own time.',
+      bio: 'I am assembling the Synergema School. This course is the public part of a close reading of one online mindfulness course: a map of distinctions paid for with my own time.',
       cta: 'Send feedback →',
     },
     sidebar: {

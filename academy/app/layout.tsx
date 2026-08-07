@@ -5,7 +5,7 @@ import './globals.css'
 // и канонизирует их в корень. hreflang-пары отдаём через sitemap.
 export const metadata: Metadata = {
   metadataBase: new URL('https://academy.synergify.com'),
-  title: 'S.A.S.H.A — школа синергемы',
+  title: 'Школа синергемы — Synergema Authentica Starseed Holon Academy',
   description:
     'Закрытая школа живых связей. Вход — через открытый курс «Точка Сборки». Способности куются, а не изучаются.',
 }

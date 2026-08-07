@@ -85,7 +85,7 @@ const RU: CharterCopy = {
     'Тридцать лет назад одно движение раздало последователям аудиокассеты с голосом учителя. Разлучить человека с общиной стало невозможно: община помещалась в кармане и звучала круглосуточно. Внешние границы перестали работать — не потому, что их сняли, а потому, что их стало нечему держать.',
     'Мы учим работать с ИИ, то есть с голосом, который всегда рядом и всегда отвечает. Поэтому цифровая автономия для нас — не тема лекции, а правило дома: инструмент, от которого нельзя отойти на день, мы считаем неисправным. Практика, требующая постоянного присутствия помощника, в школе не преподаётся.',
   ],
-  metaTitle: 'Правила дома — S.A.S.H.A',
+  metaTitle: 'Правила дома — школа синергемы',
   metaDescription: 'Двенадцать правил школы: чем мы отвечаем за то, что она останется школой, а не станет чем-то другим.',
   backLabel: '← к академии',
 }
@@ -152,7 +152,7 @@ const EN: CharterCopy = {
     'Thirty years ago a movement handed its followers audio cassettes with the teacher’s voice. Separating a person from the community became impossible: the community fit in a pocket and played around the clock. External boundaries stopped working — not because they were removed, but because there was nothing left for them to hold.',
     'We teach people to work with AI — a voice that is always near and always answers. So digital autonomy here is not a lecture topic but a house rule: a tool you cannot step away from for a day, we consider broken. A practice that requires the constant presence of an assistant is not taught in this school.',
   ],
-  metaTitle: 'House rules — S.A.S.H.A',
+  metaTitle: 'House rules — the Synergema School',
   metaDescription: 'Twelve rules of the school: what we answer for, so that it stays a school and does not become something else.',
   backLabel: '← back to the academy',
 }

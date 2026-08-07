@@ -37,7 +37,7 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
     items: [
       {
         kind: 'link',
-        title: { ru: 'Манифест академии S.A.S.H.A', en: 'The S.A.S.H.A academy manifesto' },
+        title: { ru: 'Манифест школы синергемы', en: 'The Synergema School manifesto' },
         description: {
           ru: 'Откуда этот курс и на каких правилах стоит академия',
           en: 'Where this course comes from and the rules the academy stands on',

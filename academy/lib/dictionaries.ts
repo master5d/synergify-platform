@@ -5,21 +5,14 @@ export type { Locale }
 export interface AcademyDictionary {
   academy: {
     eyebrow: string
-    wordmark: string
+    /** Полное имя школы — дисплей; акроним не выделяем нигде (решение владельца 2026-08-07) */
     fullName: string
+    /** Подпись под именем: «школа синергемы» */
+    subline: string
     positioning: string[]
-    /** Честный stats-ряд героя: [значение, подпись] */
-    heroStats: [string, string][]
     manifestLabel: string
     gate: string
     gateCta: string
-    compare: {
-      label: string
-      heading: string
-      leftCol: string
-      rightCol: string
-      rows: { left: string; right: string }[]
-    }
     inside: {
       label: string
       heading: string
@@ -57,8 +50,8 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
   ru: {
     academy: {
       eyebrow: 'академия',
-      wordmark: 'S.A.S.H.A',
       fullName: 'Synergema Authentica Starseed Holon Academy',
+      subline: 'школа синергемы',
       positioning: [
         'Мы строим школу, которую сами искали много лет — и, не находя, называли по-разному: гильдия, тёплое пространство, синергема. Семь лет одна и та же мысль искала имя: людям не хватает не знаний, а живых связей, в которых знание становится силой.',
         'Синергема — наше слово для такой связи: syn + ergon + ema, плод совместной работы. Мы устроены как кристалл: чем больше отражений с другими, тем больше правды о себе. Поэтому здесь не учатся в одиночку — здесь собираются.',
@@ -67,27 +60,9 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
         'Внутри — работа: практики внимания и состояний, групповые ритуалы инсайта, ремесло совместного мышления — с ИИ и без него. Способности здесь куются, а не изучаются. Мы не обещаем сверхспособностей и не продаём тайну. Каждый третий хотя бы раз переживал опыт, который некуда было отнести, — сюда можно.',
         'Школа удалась, когда перестала быть нужной: мы растим самостоятельных, не адептов. Курс бесплатный, вход заслуженный, дверь открыта столько, сколько тебе нужно.',
       ],
-      heroStats: [
-        ['2', 'курса'],
-        ['12', 'правил дома'],
-        ['1', 'дверь — Точка Сборки'],
-        ['0', 'обещаний'],
-      ],
       manifestLabel: 'манифест',
       gate: 'Вход в академию открывается после прохождения «Точки Сборки».',
       gateCta: 'Пройти Точку Сборки →',
-      compare: {
-        label: 'запись vs круг',
-        heading: 'Запись отвечает.\nКруг слышит.',
-        leftCol: 'курс-запись',
-        rightCol: 'живой круг',
-        rows: [
-          { left: 'Смотришь в одиночку', right: 'Тебя видят и слышат' },
-          { left: 'Вопрос уходит в пустоту', right: 'У вопроса есть адресат' },
-          { left: 'Чувствам некуда деться', right: 'У чувств есть свидетель' },
-          { left: 'Прогресс — процент просмотра', right: 'Прогресс — то, что можешь передать' },
-        ],
-      },
       inside: {
         label: 'что внутри',
         heading: 'Способности куются, а не изучаются',
@@ -150,7 +125,7 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
       founderName: 'Александр Мамаев',
       founderBody: [
         'Строит школу, которую сам искал много лет — и, не найдя, начал собирать.',
-        'Курс «Точка Сборки» — его открытая дверь: всё, чему здесь учат, сначала прожито самим.',
+        'Всё, чему здесь учат, сначала прожито самим.',
       ],
       founderLink: 'mamaev.coach →',
       faqLabel: 'вопросы',
@@ -176,15 +151,15 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
           a: 'Наше слово для живой связи: syn + ergon + ema — плод совместной работы. То, что рождается между людьми, когда они думают и практикуют вместе, и что больше любого из них.',
         },
       ],
-      metaTitle: 'S.A.S.H.A — школа синергемы',
+      metaTitle: 'Школа синергемы — Synergema Authentica Starseed Holon Academy',
       metaDescription: 'Закрытая школа живых связей. Вход — через открытый курс «Точка Сборки». Способности куются, а не изучаются.',
     },
   },
   en: {
     academy: {
       eyebrow: 'academy',
-      wordmark: 'S.A.S.H.A',
       fullName: 'Synergema Authentica Starseed Holon Academy',
+      subline: 'the synergema school',
       positioning: [
         'We are building the school we spent years looking for — and, never finding it, kept naming differently: a guild, a warm space, a synergema. For seven years one thought kept searching for its name: what people lack is not knowledge, but living connections in which knowledge becomes strength.',
         'Synergema is our word for such a connection: syn + ergon + ema — the fruit of working together. We are built like a crystal: the more reflections we share with others, the more truth we see about ourselves. So no one studies here alone — here, we assemble.',
@@ -193,27 +168,9 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
         'Inside is work: practices of attention and state, group insight rituals, the craft of thinking together — with AI and without it. Powers here are forged rather than studied. We promise no superpowers and sell no secrets. One person in three has lived through an experience they had nowhere to bring — here, you can bring it.',
         'The school has succeeded when it is no longer needed: we raise the independent, not adepts. The course is free, admission is earned, and the door stays open for as long as you need it.',
       ],
-      heroStats: [
-        ['2', 'courses'],
-        ['12', 'house rules'],
-        ['1', 'door — Tochka Sborki'],
-        ['0', 'promises'],
-      ],
       manifestLabel: 'manifesto',
       gate: 'Admission opens after completing Tochka Sborki.',
       gateCta: 'Take Tochka Sborki →',
-      compare: {
-        label: 'recording vs circle',
-        heading: 'A recording answers.\nA circle hears.',
-        leftCol: 'recorded course',
-        rightCol: 'living circle',
-        rows: [
-          { left: 'You watch alone', right: 'You are seen and heard' },
-          { left: 'Questions go into a void', right: 'A question has an addressee' },
-          { left: 'Feelings have nowhere to go', right: 'Feelings have a witness' },
-          { left: 'Progress is a watch percentage', right: 'Progress is what you can pass on' },
-        ],
-      },
       inside: {
         label: 'what is inside',
         heading: 'Powers are forged, not studied',
@@ -276,7 +233,7 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
       founderName: 'Alexander Mamaev',
       founderBody: [
         'Building the school he spent years looking for — and, never finding it, began to assemble.',
-        'The course Tochka Sborki is his open door: everything taught here was lived through first.',
+        'Everything taught here was lived through first.',
       ],
       founderLink: 'mamaev.coach →',
       faqLabel: 'questions',
@@ -302,7 +259,7 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
           a: 'Our word for a living connection: syn + ergon + ema — the fruit of working together. What arises between people who think and practise together, and what is larger than any one of them.',
         },
       ],
-      metaTitle: 'S.A.S.H.A — the synergema school',
+      metaTitle: 'The Synergema School — Synergema Authentica Starseed Holon Academy',
       metaDescription: 'A gated school of living connections. The way in is the open course Tochka Sborki. Powers are forged rather than studied.',
     },
   },

@@ -223,7 +223,7 @@ export function resolveCourse(locale: Locale): CourseCopy {
     intro: COURSE.intro[locale],
     lessonsLabel: ui.lessonsLabel,
     lessons: LESSONS.map((l) => ({ slug: l.slug, title: l.title[locale], summary: l.summary[locale] })),
-    metaTitle: `${COURSE.name[locale]} — S.A.S.H.A`,
+    metaTitle: `${COURSE.name[locale]} — Synergema Authentica Starseed Holon Academy`,
     metaDescription: COURSE.tagline[locale],
     backLabel: ui.backLabel,
     indexBackLabel: ui.indexBackLabel,

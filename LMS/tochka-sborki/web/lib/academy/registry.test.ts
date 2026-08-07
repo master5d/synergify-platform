@@ -8,7 +8,7 @@ import { PACK_SLUG } from '@/lib/pack'
 function sample(): AcademyRegistry {
   return structuredClone({
     academy: {
-      name: 'S.A.S.H.A',
+      name: 'Synergema Authentica Starseed Holon Academy',
       fullName: { ru: 'Академия', en: 'Academy' },
       url: null,
       org: { name: 'Synergify Institute for AI' },
