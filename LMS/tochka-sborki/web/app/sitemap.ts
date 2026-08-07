@@ -2,7 +2,6 @@ import type { MetadataRoute } from 'next'
 import { getAllModules } from '@/lib/content'
 import { buildSitemap } from '@/lib/sitemap'
 import { COURSE } from '@/lib/course'
-import { writtenSpeedreadingSlugs } from '@/lib/speedreading/lessons'
 import { writtenSpeechSlugs } from '@/lib/speech/lessons'
 
 export const dynamic = 'force-static'
@@ -23,17 +22,11 @@ const STATIC_PATHS = [
   '/notebook/',
   // Курс речи: проза написана → хаб индексируется.
   '/speech/',
-  // Тренажёры скорочтения: самодостаточны и работают без уроков — индексируются.
-  '/speedreading/',
-  '/speedreading/rsvp/',
-  '/speedreading/schulte/',
-  '/speedreading/test/',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [...STATIC_PATHS]
   // Уроки изолированных курсов индексируются только когда написаны.
-  for (const slug of writtenSpeedreadingSlugs()) paths.push(`/speedreading/${slug}/`)
   for (const slug of writtenSpeechSlugs()) paths.push(`/speech/${slug}/`)
   for (const m of getAllModules('ru')) {
     paths.push(`/lessons/${m.slug}/`)

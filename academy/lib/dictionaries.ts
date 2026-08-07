@@ -10,9 +10,20 @@ export interface AcademyDictionary {
     positioning: string[]
     gate: string
     gateCta: string
-    charterLabel: string
+    forWhoLabel: string
+    forWho: { title: string; body: string }[]
     coursesLabel: string
     comingSoon: string
+    trainersCard: { name: string; tagline: string }
+    charterSectionLabel: string
+    charterBridge: string
+    charterLabel: string
+    founderLabel: string
+    founderName: string
+    founderBody: string[]
+    founderLink: string
+    faqLabel: string
+    faq: { q: string; a: string }[]
     metaTitle: string
     metaDescription: string
   }
@@ -34,9 +45,64 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
       ],
       gate: 'Вход в академию открывается после прохождения «Точки Сборки».',
       gateCta: 'Пройти Точку Сборки →',
-      charterLabel: 'Правила дома — чем мы отвечаем →',
+      forWhoLabel: 'для кого',
+      forWho: [
+        {
+          title: 'Прошёл «Точку Сборки» и хочет глубже',
+          body: 'Курс закончился, а работа только началась. Дальше — не новые знания, а ежедневная практика в кругу тех, кто идёт тем же путём.',
+        },
+        {
+          title: 'Ищет живой круг, а не запись',
+          body: 'Курсов и записей вокруг достаточно. Не хватает людей, рядом с которыми думается яснее. Здесь собираются ради связи, а не контента.',
+        },
+        {
+          title: 'Несёт своё ремесло и хочет передавать',
+          body: 'Есть чем делиться — и хочется делать это не со сцены, а в кругу, где ученик со временем становится соавтором.',
+        },
+        {
+          title: 'Живёт с опытом, которому не нашлось места',
+          body: 'Пережил то, что некуда было отнести. Здесь такому опыту не ставят диагноз и не строят вокруг него культ — с ним работают.',
+        },
+      ],
       coursesLabel: 'Курсы',
       comingSoon: 'скоро',
+      trainersCard: {
+        name: 'Тренажёры',
+        tagline: 'Скорочтение: ритм, периферийное зрение, честный замер скорости. Открыто всем, без входа.',
+      },
+      charterSectionLabel: 'правила дома',
+      charterBridge: 'У дома есть правила — не устав, а то, чем мы отвечаем за это пространство: никакой изоляции, никакой зависимости от школы, уйти можно молча.',
+      charterLabel: 'Правила дома — чем мы отвечаем →',
+      founderLabel: 'основатель',
+      founderName: 'Александр Мамаев',
+      founderBody: [
+        'Строит школу, которую сам искал много лет — и, не найдя, начал собирать.',
+        'Курс «Точка Сборки» — его открытая дверь: всё, чему здесь учат, сначала прожито самим.',
+      ],
+      founderLink: 'mamaev.coach →',
+      faqLabel: 'вопросы',
+      faq: [
+        {
+          q: 'Можно ли записаться в академию?',
+          a: 'Нет. В академию не записываются — в неё входят, пройдя «Точку Сборки». Это не фильтр на лояльность, а общий язык: сначала собери свою точку, потом учись её двигать.',
+        },
+        {
+          q: 'Сколько это стоит?',
+          a: 'Курс бесплатный. Вход не покупается — он заслуживается пройденной работой. Денег на этой двери нет.',
+        },
+        {
+          q: 'Это религия или секта?',
+          a: 'Нет. Смотри правила дома: никакой изоляции, никакой зависимости от школы или наставника, уйти можно в любой момент — молча и без объяснений.',
+        },
+        {
+          q: 'Нужен ли опыт медитации?',
+          a: 'Нет. Нужна готовность работать с вниманием и честность к собственному опыту. Остальному учимся вместе.',
+        },
+        {
+          q: 'Что такое синергема?',
+          a: 'Наше слово для живой связи: syn + ergon + ema — плод совместной работы. То, что рождается между людьми, когда они думают и практикуют вместе, и что больше любого из них.',
+        },
+      ],
       metaTitle: 'S.A.S.H.A — школа синергемы',
       metaDescription: 'Закрытая школа живых связей. Вход — через открытый курс «Точка Сборки». Способности куются, а не изучаются.',
     },
@@ -56,9 +122,64 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
       ],
       gate: 'Admission opens after completing Tochka Sborki.',
       gateCta: 'Take Tochka Sborki →',
-      charterLabel: 'House rules — what we answer for →',
+      forWhoLabel: 'for whom',
+      forWho: [
+        {
+          title: 'Finished Tochka Sborki and wants to go deeper',
+          body: 'The course ended, but the work has only begun. What follows is not new knowledge — it is daily practice among people walking the same road.',
+        },
+        {
+          title: 'Looking for a living circle, not a recording',
+          body: 'There are plenty of courses and recordings around. What is missing is people you think more clearly next to. Here we gather for connection, not content.',
+        },
+        {
+          title: 'Carries a craft and wants to pass it on',
+          body: 'You have something to share — and want to do it not from a stage, but in a circle where a student becomes, in time, a co-author.',
+        },
+        {
+          title: 'Lives with an experience that had no place to go',
+          body: 'You have been through something there was nowhere to bring. Here such experience is neither diagnosed nor turned into a cult — it is worked with.',
+        },
+      ],
       coursesLabel: 'Courses',
       comingSoon: 'coming soon',
+      trainersCard: {
+        name: 'Trainers',
+        tagline: 'Speed reading: rhythm, side vision, an honest speed measure. Open to everyone, no admission needed.',
+      },
+      charterSectionLabel: 'house rules',
+      charterBridge: 'This house has rules — not a statute, but what we answer for in this space: no isolation, no dependence on the school, and you may leave in silence.',
+      charterLabel: 'House rules — what we answer for →',
+      founderLabel: 'founder',
+      founderName: 'Alexander Mamaev',
+      founderBody: [
+        'Building the school he spent years looking for — and, never finding it, began to assemble.',
+        'The course Tochka Sborki is his open door: everything taught here was lived through first.',
+      ],
+      founderLink: 'mamaev.coach →',
+      faqLabel: 'questions',
+      faq: [
+        {
+          q: 'Can I sign up for the academy?',
+          a: 'No. You do not sign up — you enter, by completing Tochka Sborki. Not a loyalty filter, but a shared language: first assemble your point of assembly, then learn to move it.',
+        },
+        {
+          q: 'How much does it cost?',
+          a: 'The course is free. Admission is not bought — it is earned by the work you have done. There is no money on this door.',
+        },
+        {
+          q: 'Is this a religion or a cult?',
+          a: 'No. See the house rules: no isolation, no dependence on the school or a teacher, and you may leave at any moment — in silence, with no explanations owed.',
+        },
+        {
+          q: 'Do I need meditation experience?',
+          a: 'No. What you need is a willingness to work with attention and honesty toward your own experience. The rest we learn together.',
+        },
+        {
+          q: 'What is a synergema?',
+          a: 'Our word for a living connection: syn + ergon + ema — the fruit of working together. What arises between people who think and practise together, and what is larger than any one of them.',
+        },
+      ],
       metaTitle: 'S.A.S.H.A — the synergema school',
       metaDescription: 'A gated school of living connections. The way in is the open course Tochka Sborki. Powers are forged rather than studied.',
     },

@@ -13,7 +13,6 @@ export type Dictionary = {
   nav: {
     brand: string
     syllabus: string
-    speedreading: string
     roadmap: string
     cheatsheet: string
     feedback: string
@@ -216,7 +215,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
     nav: {
       brand: 'Практика в живой связи',
       syllabus: 'Уроки',
-      speedreading: 'Тренажёры',
       roadmap: 'Карта курса',
       cheatsheet: 'Памятка',
       questLog: '⬡ Квест-лог',
@@ -480,7 +478,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
     nav: {
       brand: 'Practice in Living Connection',
       syllabus: 'Lessons',
-      speedreading: 'Trainers',
       roadmap: 'Course map',
       cheatsheet: 'Pocket list',
       questLog: '⬡ Quest Log',

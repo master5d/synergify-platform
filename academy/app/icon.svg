@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- S.A.S.H.A: золотая четырёхлучевая звезда на звёздном полотне (identity.json) -->
+  <rect width="64" height="64" rx="12" fill="#070810"/>
+  <path d="M32 8 L37 27 L56 32 L37 37 L32 56 L27 37 L8 32 L27 27 Z" fill="#d9a95c"/>
+  <circle cx="50" cy="13" r="1.6" fill="#9a9aa8"/>
+  <circle cx="14" cy="50" r="1.2" fill="#9a9aa8"/>
+  <circle cx="52" cy="49" r="1" fill="#9a9aa8"/>
+</svg>
