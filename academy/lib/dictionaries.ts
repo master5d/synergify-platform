@@ -8,8 +8,32 @@ export interface AcademyDictionary {
     wordmark: string
     fullName: string
     positioning: string[]
+    /** Честный stats-ряд героя: [значение, подпись] */
+    heroStats: [string, string][]
+    manifestLabel: string
     gate: string
     gateCta: string
+    compare: {
+      label: string
+      heading: string
+      leftCol: string
+      rightCol: string
+      rows: { left: string; right: string }[]
+    }
+    inside: {
+      label: string
+      heading: string
+      inLabel: string
+      outLabel: string
+      items: string[]
+      excluded: string[]
+    }
+    footer: {
+      tagline: string
+      linksLabel: string
+      links: { label: string; href: string }[]
+      rights: string
+    }
     forWhoLabel: string
     forWho: { title: string; body: string }[]
     coursesLabel: string
@@ -43,8 +67,57 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
         'Внутри — работа: практики внимания и состояний, групповые ритуалы инсайта, ремесло совместного мышления — с ИИ и без него. Способности здесь куются, а не изучаются. Мы не обещаем сверхспособностей и не продаём тайну. Каждый третий хотя бы раз переживал опыт, который некуда было отнести, — сюда можно.',
         'Школа удалась, когда перестала быть нужной: мы растим самостоятельных, не адептов. Курс бесплатный, вход заслуженный, дверь открыта столько, сколько тебе нужно.',
       ],
+      heroStats: [
+        ['2', 'курса'],
+        ['12', 'правил дома'],
+        ['1', 'дверь — Точка Сборки'],
+        ['0', 'обещаний'],
+      ],
+      manifestLabel: 'манифест',
       gate: 'Вход в академию открывается после прохождения «Точки Сборки».',
       gateCta: 'Пройти Точку Сборки →',
+      compare: {
+        label: 'запись vs круг',
+        heading: 'Запись отвечает.\nКруг слышит.',
+        leftCol: 'курс-запись',
+        rightCol: 'живой круг',
+        rows: [
+          { left: 'Смотришь в одиночку', right: 'Тебя видят и слышат' },
+          { left: 'Вопрос уходит в пустоту', right: 'У вопроса есть адресат' },
+          { left: 'Чувствам некуда деться', right: 'У чувств есть свидетель' },
+          { left: 'Прогресс — процент просмотра', right: 'Прогресс — то, что можешь передать' },
+        ],
+      },
+      inside: {
+        label: 'что внутри',
+        heading: 'Способности куются, а не изучаются',
+        inLabel: 'внутри',
+        outLabel: 'этого здесь нет',
+        items: [
+          'практики внимания и состояний',
+          'групповые ритуалы инсайта',
+          'ремесло совместного мышления — с ИИ и без него',
+          'передача ремесла в кругу',
+        ],
+        excluded: [
+          'обещаний результата',
+          'замены психотерапии',
+          'сверхспособностей и «уровней»',
+          'секретных техник за доплату',
+        ],
+      },
+      footer: {
+        tagline: 'Закрытая школа живых связей. Вход — через открытый курс «Точка Сборки».',
+        linksLabel: '// двери',
+        links: [
+          { label: 'Точка Сборки', href: 'https://ai.synergify.com' },
+          { label: 'Практика в живой связи', href: '/praktika/' },
+          { label: 'Тренажёры', href: '/trenazhery/' },
+          { label: 'Правила дома', href: '/pravila/' },
+          { label: 'mamaev.coach', href: 'https://mamaev.coach' },
+        ],
+        rights: '© 2026 · Synergify Institute for AI',
+      },
       forWhoLabel: 'для кого',
       forWho: [
         {
@@ -120,8 +193,57 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
         'Inside is work: practices of attention and state, group insight rituals, the craft of thinking together — with AI and without it. Powers here are forged rather than studied. We promise no superpowers and sell no secrets. One person in three has lived through an experience they had nowhere to bring — here, you can bring it.',
         'The school has succeeded when it is no longer needed: we raise the independent, not adepts. The course is free, admission is earned, and the door stays open for as long as you need it.',
       ],
+      heroStats: [
+        ['2', 'courses'],
+        ['12', 'house rules'],
+        ['1', 'door — Tochka Sborki'],
+        ['0', 'promises'],
+      ],
+      manifestLabel: 'manifesto',
       gate: 'Admission opens after completing Tochka Sborki.',
       gateCta: 'Take Tochka Sborki →',
+      compare: {
+        label: 'recording vs circle',
+        heading: 'A recording answers.\nA circle hears.',
+        leftCol: 'recorded course',
+        rightCol: 'living circle',
+        rows: [
+          { left: 'You watch alone', right: 'You are seen and heard' },
+          { left: 'Questions go into a void', right: 'A question has an addressee' },
+          { left: 'Feelings have nowhere to go', right: 'Feelings have a witness' },
+          { left: 'Progress is a watch percentage', right: 'Progress is what you can pass on' },
+        ],
+      },
+      inside: {
+        label: 'what is inside',
+        heading: 'Powers are forged, not studied',
+        inLabel: 'inside',
+        outLabel: 'not here',
+        items: [
+          'practices of attention and state',
+          'group insight rituals',
+          'the craft of thinking together — with AI and without it',
+          'passing the craft on, in a circle',
+        ],
+        excluded: [
+          'promises of results',
+          'a substitute for psychotherapy',
+          'superpowers and “levels”',
+          'secret techniques at extra cost',
+        ],
+      },
+      footer: {
+        tagline: 'A gated school of living connections. The way in is the open course Tochka Sborki.',
+        linksLabel: '// doors',
+        links: [
+          { label: 'Tochka Sborki', href: 'https://ai.synergify.com' },
+          { label: 'Practice in Living Connection', href: '/en/praktika/' },
+          { label: 'Trainers', href: '/en/trenazhery/' },
+          { label: 'House rules', href: '/en/pravila/' },
+          { label: 'mamaev.coach', href: 'https://mamaev.coach' },
+        ],
+        rights: '© 2026 · Synergify Institute for AI',
+      },
       forWhoLabel: 'for whom',
       forWho: [
         {
