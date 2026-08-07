@@ -12,7 +12,7 @@ function inline(text: string, keyBase: string): ReactNode[] {
   // Чётные сегменты — текст, нечётные — inline-код между backticks.
   return text.split('`').map((seg, i) =>
     i % 2 === 1
-      ? <code key={`${keyBase}-${i}`} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9em', color: 'var(--accent)' }}>{seg}</code>
+      ? <code key={`${keyBase}-${i}`} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9em', color: 'var(--accent-ink)' }}>{seg}</code>
       : <span key={`${keyBase}-${i}`}>{seg}</span>,
   )
 }
@@ -24,7 +24,7 @@ export function LessonProse({ body }: { body: string }) {
       {blocks.map((block, bi) => {
         if (block.startsWith('## ')) {
           return (
-            <h2 key={bi} style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)', fontSize: 'var(--text-lg)', letterSpacing: '0.02em', margin: '2.5rem 0 1rem' }}>
+            <h2 key={bi} style={{ fontFamily: 'var(--font-display)', fontWeight: 400, color: 'var(--text-primary)', fontSize: 'var(--text-lg)', letterSpacing: '0.02em', margin: '2.5rem 0 1rem' }}>
               {inline(block.slice(3), `h${bi}`)}
             </h2>
           )

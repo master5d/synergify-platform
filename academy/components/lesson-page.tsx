@@ -4,7 +4,8 @@ import { AdmissionGate } from './admission-gate'
 
 interface Props { locale: Locale; slug: string }
 
-const GOLD = 'var(--accent)'
+// Текст/ссылки на бумаге — бронза (золото на светлом = 1.7:1)
+const GOLD = 'var(--accent-ink)'
 
 export function LessonPage({ locale, slug }: Props) {
   const t = getLesson(slug, locale)
@@ -24,7 +25,7 @@ export function LessonPage({ locale, slug }: Props) {
         <p style={{ fontFamily: 'var(--font-mono)', color: GOLD, textTransform: 'lowercase', letterSpacing: '0.25em', fontSize: 'var(--text-xs)', margin: 0 }}>
           {t.eyebrow}
         </p>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4.5vw, 3rem)', letterSpacing: '0.03em', margin: '1rem 0 2rem', color: 'var(--text-primary)' }}>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 'clamp(2rem, 4.5vw, 3rem)', letterSpacing: '-0.02em', margin: '1rem 0 2rem', color: 'var(--text-primary)' }}>
           {t.title}
         </h1>
 

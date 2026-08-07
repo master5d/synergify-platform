@@ -41,7 +41,7 @@ const T = {
 }
 
 const label: React.CSSProperties = {
-  fontFamily: 'var(--font-mono)', color: 'var(--accent)', textTransform: 'lowercase',
+  fontFamily: 'var(--font-mono)', color: 'var(--accent-ink)', textTransform: 'lowercase',
   letterSpacing: '0.12em', fontSize: 'var(--text-xs)', margin: '0 0 1.25rem',
 }
 

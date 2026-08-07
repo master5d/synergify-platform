@@ -3,7 +3,8 @@ import type { Locale } from '../../lib/dictionaries'
 
 interface Props { locale: Locale; title: string; description: string; children: ReactNode }
 
-const GOLD = 'var(--accent)'
+// Текст/ссылки на бумаге — бронза (золото на светлом = 1.7:1)
+const GOLD = 'var(--accent-ink)'
 
 const UI = {
   ru: { eyebrow: 'тренажёры', backLabel: '← к тренажёрам' },
@@ -28,7 +29,7 @@ export function TrainerPage({ locale, title, description, children }: Props) {
         <p style={{ fontFamily: 'var(--font-mono)', color: GOLD, textTransform: 'lowercase', letterSpacing: '0.25em', fontSize: 'var(--text-xs)', margin: 0 }}>
           {t.eyebrow}
         </p>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4.5vw, 3rem)', letterSpacing: '0.03em', margin: '1rem 0 0.75rem', color: 'var(--text-primary)' }}>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 'clamp(2rem, 4.5vw, 3rem)', letterSpacing: '-0.02em', margin: '1rem 0 0.75rem', color: 'var(--text-primary)' }}>
           {title}
         </h1>
         <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: 'var(--text-base)', margin: '0 0 2.5rem' }}>

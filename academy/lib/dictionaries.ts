@@ -10,7 +10,13 @@ export interface AcademyDictionary {
     /** Подпись под именем: «школа синергемы» */
     subline: string
     positioning: string[]
+    /** Верхняя навигация домашней страницы (дизайн «weave») */
+    nav: { manifest: string; inside: string; courses: string; faq: string; cta: string }
     manifestLabel: string
+    /** Врезка-цитата рядом с манифестом */
+    manifestPull: string
+    /** Надлейблы карточек курсов */
+    courseEyebrows: { entry: string; practice: string; trainers: string }
     gate: string
     gateCta: string
     inside: {
@@ -60,7 +66,10 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
         'Внутри — работа: практики внимания и состояний, групповые ритуалы инсайта, ремесло совместного мышления — с ИИ и без него. Способности здесь куются, а не изучаются. Мы не обещаем сверхспособностей и не продаём тайну. Каждый третий хотя бы раз переживал опыт, который некуда было отнести, — сюда можно.',
         'Школа удалась, когда перестала быть нужной: мы растим самостоятельных, не адептов. Курс бесплатный, вход заслуженный, дверь открыта столько, сколько тебе нужно.',
       ],
+      nav: { manifest: 'манифест', inside: 'что внутри', courses: 'курсы', faq: 'вопросы', cta: 'Точка Сборки →' },
       manifestLabel: 'манифест',
+      manifestPull: 'Синергема ткётся, а не строится',
+      courseEyebrows: { entry: 'дверь входа', practice: 'шесть уроков', trainers: 'открыто всем' },
       gate: 'Вход в академию открывается после прохождения «Точки Сборки».',
       gateCta: 'Пройти Точку Сборки →',
       inside: {
@@ -168,7 +177,10 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
         'Inside is work: practices of attention and state, group insight rituals, the craft of thinking together — with AI and without it. Powers here are forged rather than studied. We promise no superpowers and sell no secrets. One person in three has lived through an experience they had nowhere to bring — here, you can bring it.',
         'The school has succeeded when it is no longer needed: we raise the independent, not adepts. The course is free, admission is earned, and the door stays open for as long as you need it.',
       ],
+      nav: { manifest: 'manifesto', inside: 'what is inside', courses: 'courses', faq: 'questions', cta: 'Tochka Sborki →' },
       manifestLabel: 'manifesto',
+      manifestPull: 'A synergema is woven, not built',
+      courseEyebrows: { entry: 'the door in', practice: 'six lessons', trainers: 'open to all' },
       gate: 'Admission opens after completing Tochka Sborki.',
       gateCta: 'Take Tochka Sborki →',
       inside: {

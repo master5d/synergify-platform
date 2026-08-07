@@ -3,7 +3,8 @@ import { resolveCourse } from '../lib/course/living-practice'
 
 interface Props { locale: Locale }
 
-const GOLD = 'var(--accent)'
+// Текст/ссылки на бумаге — бронза (золото на светлом = 1.7:1)
+const GOLD = 'var(--accent-ink)'
 
 export function CoursePage({ locale }: Props) {
   const t = resolveCourse(locale)
@@ -24,7 +25,7 @@ export function CoursePage({ locale }: Props) {
         <p style={{ fontFamily: 'var(--font-mono)', color: GOLD, textTransform: 'lowercase', letterSpacing: '0.25em', fontSize: 'var(--text-xs)', margin: 0 }}>
           {t.eyebrow}
         </p>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.2rem, 5vw, 3.4rem)', letterSpacing: '0.03em', margin: '1rem 0 0.75rem', color: 'var(--text-primary)' }}>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 'clamp(2.2rem, 5vw, 3.4rem)', letterSpacing: '-0.02em', margin: '1rem 0 0.75rem', color: 'var(--text-primary)' }}>
           {t.heading}
         </h1>
         <p style={{ color: GOLD, fontSize: 'var(--text-sm)', letterSpacing: '0.04em', margin: '0 0 1.75rem' }}>

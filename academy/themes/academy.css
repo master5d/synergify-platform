@@ -1,31 +1,53 @@
-/* Токен-слой академии.
+/* Токен-слой академии — «weave» (2026-08-07).
  *
- * Академия намеренно однотемная (тёмное «звёздное» полотно): это закрытая школа,
- * а не лендинг, и переключатель тем ей не нужен. Но однотемность — не повод
- * держать цвета литералами в компонентах: при первом аудите здесь нашлось
- * 17 хардкодов, потому что страница писалась быстрее, чем заводился слой.
+ * Смена ДНК: школа переехала с тёмного звёздного полотна на СВЕТЛУЮ БУМАГУ
+ * с тёмными полосами-врезками (манифест, футер). Источник — дизайн
+ * academy-weave.dc.html (Claude Design, проект ae72ee04), принят владельцем.
+ *
+ * Маппинг дизайн → токен (правило анти-дрифта: сначала таблица, потом код):
+ *   #F2EFE8 полотно-бумага      → --bg-primary
+ *   #FFFFFF карточка             → --bg-surface
+ *   #E7E2D8 полоса «правила»     → --bg-band
+ *   #14161A чернила / тёмный фон → --text-primary / --bg-invert
+ *   #F2EFE8 текст на тёмном      → --text-on-invert
+ *   #D9A95C золото               → --accent (акцент школы не менялся)
+ *   #7A5A18 бронза (ссылки)      → --accent-ink
+ *
+ * Однотемность сохранена: переключателя тем нет — это внутреннее пространство
+ * школы, а не витрина. Цвета живут ТОЛЬКО здесь: при первом аудите в компонентах
+ * нашлось 17 хардкодов, потому что страница писалась быстрее, чем заводился слой.
  */
 :root {
   /* Полотно */
-  --bg-primary: #070810;
-  --bg-surface: rgba(255, 255, 255, 0.03);
-  --bg-surface-muted: rgba(255, 255, 255, 0.02);
+  --bg-primary: #f2efe8;
+  --bg-surface: #ffffff;
+  --bg-surface-muted: #eeeae1;
+  --bg-band: #e7e2d8;
+  --bg-invert: #14161a;
 
-  /* Текст */
-  --text-primary: #ffffff;
-  --text-body: rgba(255, 255, 255, 0.92);
-  --text-secondary: rgba(255, 255, 255, 0.75);
-  --text-muted: rgba(255, 255, 255, 0.65);
-  --text-faint: rgba(255, 255, 255, 0.55);
+  /* Текст. Альфы выбраны по контрасту на бумаге:
+     0.78 = 6.9:1 · 0.66 = 5.3:1 · 0.62 = 4.85:1 (порог AA 4.5). */
+  --text-primary: #14161a;
+  --text-body: rgba(20, 22, 26, 0.78);
+  --text-secondary: rgba(20, 22, 26, 0.66);
+  --text-muted: rgba(20, 22, 26, 0.62);
+  --text-faint: rgba(20, 22, 26, 0.45); /* только декор: точки, рамки — НЕ текст */
+  --text-on-invert: #f2efe8;
+  --text-on-invert-soft: rgba(242, 239, 232, 0.68);
+  --text-on-invert-faint: rgba(242, 239, 232, 0.45);
 
-  /* Акцент — золото академии */
+  /* Акцент — золото школы и его «бумажный» вариант.
+     ⚠ Золото на бумаге даёт 1.7:1 → текстом на светлом НЕ ставить, только
+     декор (точки, ординалы). Для текста/ссылок на светлом — бронза. */
   --accent: #d9a95c;
-  --accent-line: rgba(217, 169, 92, 0.35);
-  --accent-wash: rgba(217, 169, 92, 0.08);
-  --border-color: rgba(255, 255, 255, 0.12);
-  --border-soft: rgba(255, 255, 255, 0.08);
+  --accent-ink: #7a5a18;
+  --accent-line: rgba(217, 169, 92, 0.45);
+  --accent-wash: rgba(217, 169, 92, 0.1);
+  --border-color: rgba(20, 22, 26, 0.14);
+  --border-soft: rgba(20, 22, 26, 0.08);
+  --border-invert: rgba(242, 239, 232, 0.12);
 
-  /* Alias для перенесённых тренажёров (LMS --crit): подсветка неверного ответа
+  /* Alias для перенесённых тренажёров: подсветка неверного ответа
      в тесте скорости. Единственный «не-золотой» сигнальный цвет академии. */
   --crit: #c0392b;
 
@@ -36,18 +58,28 @@
   --text-lg: 1.25rem;
   --text-xl: 1.5rem;
 
-  --radius: 10px;
+  --radius: 2px;
 }
 
-/* Звёздное поле героя: иллюстративная графика, а не UI-цвета — держим её
-   в CSS, а не литералами в разметке (там их ловил линт токенов). */
-.academy-hero {
-  background-image:
-    radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.8) 0, transparent 100%),
-    radial-gradient(1px 1px at 40% 70%, rgba(255, 255, 255, 0.6) 0, transparent 100%),
-    radial-gradient(1.5px 1.5px at 60% 20%, rgba(255, 255, 255, 0.9) 0, transparent 100%),
-    radial-gradient(1px 1px at 80% 50%, rgba(255, 255, 255, 0.5) 0, transparent 100%),
-    radial-gradient(1px 1px at 10% 80%, rgba(255, 255, 255, 0.7) 0, transparent 100%),
-    radial-gradient(1.5px 1.5px at 90% 85%, rgba(217, 169, 92, 0.8) 0, transparent 100%),
-    radial-gradient(1px 1px at 50% 45%, rgba(217, 169, 92, 0.6) 0, transparent 100%);
-}
+/* ── Ховеры. React-инлайн их не умеет, а дизайн на них держится ───────────── */
+
+.a-nav-link { color: var(--text-secondary); }
+.a-nav-link:hover { color: var(--text-primary); }
+
+.a-btn-dark { background: var(--bg-invert); color: var(--text-on-invert); }
+.a-btn-dark:hover { background: var(--accent-ink); color: var(--text-on-invert); }
+
+.a-card-dark { background: var(--bg-invert); color: var(--text-on-invert); }
+.a-card-dark:hover { background: var(--accent-ink); }
+
+.a-card-light { background: var(--bg-surface); border: 1px solid var(--border-soft); }
+.a-card-light:hover { border-color: var(--accent-ink); }
+
+.a-link { color: var(--accent-ink); border-bottom: 1px solid rgba(122, 90, 24, 0.5); padding-bottom: 3px; }
+.a-link:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+.a-footer-link { color: rgba(242, 239, 232, 0.8); }
+.a-footer-link:hover { color: var(--accent); }
+
+/* Ссылки внутри тёмных полос (манифест/футер) не должны краснеть глобальным a:hover */
+.a-invert a { color: var(--text-on-invert); }

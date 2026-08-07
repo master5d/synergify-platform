@@ -24,8 +24,8 @@ const T = {
 }
 
 const btn: React.CSSProperties = {
-  border: 'none', borderRadius: 8, padding: '.6rem 1.4rem', background: 'var(--accent)',
-  color: 'var(--bg-primary)', fontWeight: 600, cursor: 'pointer',
+  border: 'none', borderRadius: 'var(--radius)', padding: '.6rem 1.4rem', background: 'var(--bg-invert)',
+  color: 'var(--text-on-invert)', fontWeight: 600, cursor: 'pointer',
 }
 const card: React.CSSProperties = {
   border: '1px solid var(--border-color)', borderRadius: 10, padding: '1.25rem', background: 'var(--bg-surface)',
@@ -92,7 +92,7 @@ export function WpmTest({ locale }: { locale: Locale }) {
   if (step === 'reading') {
     return (
       <section style={card}>
-        <p style={{ fontSize: '.8rem', color: 'var(--accent)', margin: '0 0 .75rem' }}>{t.reading}</p>
+        <p style={{ fontSize: '.8rem', color: 'var(--accent-ink)', margin: '0 0 .75rem' }}>{t.reading}</p>
         <p style={{ color: 'var(--text-primary)', lineHeight: 1.7, fontSize: '1.05rem', margin: '0 0 1.5rem' }}>{passage.text}</p>
         <button style={btn} onClick={finishReading}>{t.done}</button>
       </section>
@@ -114,7 +114,7 @@ export function WpmTest({ locale }: { locale: Locale }) {
                     const isCorrect = ci === q.answer
                     const isPicked = ci === picks[qi]
                     const mark = answered && isCorrect ? ' ✓' : answered && isPicked ? ' ✗' : ''
-                    const borderColor = answered && isCorrect ? 'var(--accent)' : answered && isPicked ? 'var(--crit)' : 'var(--border-color)'
+                    const borderColor = answered && isCorrect ? 'var(--accent-ink)' : answered && isPicked ? 'var(--crit)' : 'var(--border-color)'
                     return (
                       <button key={ci} type="button" disabled={answered} aria-pressed={isPicked} onClick={() => pick(qi, ci)}
                         style={{
@@ -147,7 +147,7 @@ export function WpmTest({ locale }: { locale: Locale }) {
   return (
     <section style={{ ...card, textAlign: 'center' }}>
       <div style={{ fontSize: '.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-secondary)', marginBottom: '.4rem' }}>{t.effective}</div>
-      <div style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--accent)', lineHeight: 1 }}>{r.eff}</div>
+      <div style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--accent-ink)', lineHeight: 1 }}>{r.eff}</div>
       <div style={{ fontSize: '.8rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>{t.wpm}</div>
       <div style={{ fontSize: '.9rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
         {t.raw}: {r.wpm} {t.wpm} · {t.comprehension}: {Math.round(r.frac * 100)}% ({r.correct}/{r.total})

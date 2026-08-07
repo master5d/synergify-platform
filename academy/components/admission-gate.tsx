@@ -6,7 +6,8 @@ import { checkAdmission, gateCopy, type GateState } from '../lib/course/gate'
 
 interface Props { locale: Locale; children: React.ReactNode }
 
-const GOLD = 'var(--accent)'
+// Текст/ссылки на бумаге — бронза (золото на светлом = 1.7:1)
+const GOLD = 'var(--accent-ink)'
 
 /** Дверь урока: server-verified admission, fail-closed. Индекс курса открыт — гейт только тут. */
 export function AdmissionGate({ locale, children }: Props) {

@@ -5,247 +5,355 @@ import { DragonOrnament } from './dragon-ornament'
 
 interface Props { locale: Locale }
 
-const GOLD = 'var(--accent)'
+// Домашняя страница школы, дизайн «weave» (academy-weave.dc.html, Claude Design,
+// принят владельцем 2026-08-07). Светлая бумага + тёмные полосы-врезки; полное
+// имя школы вместо акронима; дракон — несущий орнамент; motion 1 (ни одной
+// анимации, только смена цвета на ховере — классы в themes/academy.css).
 
-// Домашняя страница мистической школы (v4) — НЕ лендинг (identity.json: «закрытая
-// школа, а не лендинг»). Полное имя вместо акронима (решение владельца 2026-08-07),
-// белый дракон как несущий орнамент, motion 1 — ни одной анимации, де-hustle.
-
-const sectionLabel: React.CSSProperties = {
-  fontFamily: 'var(--font-mono)', color: GOLD, textTransform: 'lowercase',
-  letterSpacing: '0.12em', fontSize: 'var(--text-xs)', margin: '0 0 1.5rem',
+const EYEBROW: React.CSSProperties = {
+  fontSize: '13px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--accent-ink)',
 }
+const EYEBROW_GOLD: React.CSSProperties = { ...EYEBROW, color: 'var(--accent)' }
+const DISPLAY: React.CSSProperties = {
+  fontFamily: 'var(--font-display), sans-serif', fontWeight: 200, letterSpacing: '-0.03em', margin: 0,
+}
+const SHELL: React.CSSProperties = { maxWidth: '1240px', margin: '0 auto' }
 
-const cardStyle: React.CSSProperties = {
-  border: '1px solid var(--accent-line)', borderRadius: 'var(--radius)',
-  padding: '1.5rem', textDecoration: 'none', background: 'var(--bg-surface)', display: 'block',
+function Dot({ gold = true }: { gold?: boolean }) {
+  return (
+    <span
+      aria-hidden="true"
+      style={{
+        width: '7px', height: '7px', borderRadius: '50%', display: 'block',
+        background: gold ? 'var(--accent)' : 'transparent',
+        border: gold ? undefined : '1px solid var(--text-faint)',
+      }}
+    />
+  )
 }
 
 export function AcademyPage({ locale }: Props) {
   const t = getDictionary(locale).academy
-  // living-practice живёт ЗДЕСЬ (внутренняя карточка ниже) — его registry-запись
+  // living-practice живёт ЗДЕСЬ (карточка ниже) — его registry-запись
   // (coming-soon, контрактный домен) на этой странице не показываем, иначе дубль.
   const courses = getCourses(locale).filter((c) => c.slug !== 'living-practice')
-  const first = courseCard(locale)
+  const practice = courseCard(locale)
   const trainersHref = locale === 'en' ? '/en/trenazhery/' : '/trenazhery/'
   const charterHref = locale === 'en' ? '/en/pravila/' : '/pravila/'
 
   return (
-    <main style={{ background: 'var(--bg-primary)', color: 'var(--text-body)', minHeight: '100vh' }}>
+    <div style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
       <style>{`
-        @media (max-width: 720px) {
-          .academy-hero { padding: 4rem 1.25rem 3rem !important; }
-          .academy-hero h1 { font-size: clamp(1.5rem, 6.5vw, 2.2rem) !important; }
-          .academy-section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
-          .academy-grid2 { grid-template-columns: 1fr !important; }
-          .academy-founder { grid-template-columns: 1fr !important; }
+        @media (max-width: 900px) {
+          .w-pad { padding-left: 22px !important; padding-right: 22px !important; }
+          .w-2col, .w-3col, .w-hero-grid, .w-founder, .w-faq { grid-template-columns: 1fr !important; }
+          .w-row { grid-template-columns: 48px 1fr !important; gap: 16px !important; }
+          .w-row p { grid-column: 2 !important; }
+          .w-rules { padding: 36px 26px 40px !important; gap: 24px !important; }
+          .w-nav { display: none !important; }
         }
       `}</style>
 
-      {/* 1 · ИМЯ ШКОЛЫ — полное, без акронима; дракон-хранитель под именем */}
-      <section className="academy-hero" style={{ padding: '6rem 2rem 3rem', textAlign: 'center' }}>
-        <p style={{ fontFamily: 'var(--font-mono)', color: GOLD, textTransform: 'lowercase', letterSpacing: '0.25em', fontSize: 'var(--text-xs)', margin: '0 0 1.5rem' }}>
-          {t.subline}
-        </p>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 4.2vw, 3.2rem)', letterSpacing: '0.06em', lineHeight: 1.25, margin: '0 auto 2rem', color: 'var(--text-primary)', maxWidth: '46rem' }}>
+      {/* ── ШАПКА: якоря + дверь входа ─────────────────────────────── */}
+      <header
+        className="w-pad"
+        style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '32px',
+          padding: '22px 40px', borderBottom: '1px solid var(--border-color)',
+          position: 'sticky', top: 0, background: 'var(--bg-primary)', zIndex: 20,
+        }}
+      >
+        <nav className="w-nav" style={{ display: 'flex', gap: '26px', fontSize: '14px' }}>
+          <a className="a-nav-link" href="#manifest">{t.nav.manifest}</a>
+          <a className="a-nav-link" href="#inside">{t.nav.inside}</a>
+          <a className="a-nav-link" href="#courses">{t.nav.courses}</a>
+          <a className="a-nav-link" href="#faq">{t.nav.faq}</a>
+        </nav>
+        <a className="a-btn-dark" href="https://ai.synergify.com" style={{ padding: '11px 22px', fontSize: '14px', borderRadius: 'var(--radius)' }}>
+          {t.nav.cta}
+        </a>
+      </header>
+
+      {/* ── ИМЯ ШКОЛЫ + ДРАКОН + ВХОД ──────────────────────────────── */}
+      <section className="w-pad" style={{ ...SHELL, padding: '104px 40px 96px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '40px' }}>
+          <Dot />
+          <span style={EYEBROW}>{t.subline}</span>
+        </div>
+        <h1 style={{
+          margin: 0, fontFamily: 'var(--font-wordmark), sans-serif', fontWeight: 700,
+          fontSize: 'clamp(34px, 4.7vw, 74px)', lineHeight: 1.1, letterSpacing: '-0.015em', maxWidth: '15ch',
+        }}>
           {t.fullName}
         </h1>
 
-        <DragonOrnament width={560} opacity={0.65} />
+        <DragonOrnament width={600} opacity={0.62} style={{ margin: '52px auto 0' }} />
 
-        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: 'var(--text-base)', maxWidth: '38rem', margin: '2rem auto 0', textAlign: 'left' }}>
-          {t.positioning[0]}
-        </p>
-
-        <div style={{ maxWidth: '38rem', margin: '2rem auto 0', border: '1px solid var(--accent)', borderRadius: 'var(--radius)', padding: '1.25rem', background: 'var(--accent-wash)', textAlign: 'left' }}>
-          <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, margin: '0 0 0.85rem' }}>{t.gate}</p>
-          <a href="https://ai.synergify.com" style={{ color: GOLD, fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.08em', textTransform: 'lowercase', textDecoration: 'none' }}>
-            {t.gateCta}
-          </a>
+        <div className="w-hero-grid" style={{
+          display: 'grid', gridTemplateColumns: 'minmax(0,1.15fr) minmax(0,0.85fr)',
+          gap: '72px', marginTop: '56px', alignItems: 'start',
+        }}>
+          <p style={{ margin: 0, fontSize: '21px', lineHeight: 1.62, color: 'var(--text-body)', textWrap: 'pretty' }}>
+            {t.positioning[0]}
+          </p>
+          <div style={{
+            borderLeft: '2px solid var(--accent)', paddingLeft: '28px',
+            display: 'flex', flexDirection: 'column', gap: '22px', alignItems: 'flex-start',
+          }}>
+            <p style={{ margin: 0, fontSize: '17px', lineHeight: 1.6, color: 'var(--text-secondary)' }}>{t.gate}</p>
+            <a className="a-btn-dark" href="https://ai.synergify.com" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '12px',
+              padding: '17px 30px', fontSize: '16px', borderRadius: 'var(--radius)',
+            }}>
+              {t.gateCta}
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* 2 · МАНИФЕСТ — голос владельца целиком */}
-      <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '3rem 2rem 0' }}>
-        <h2 style={sectionLabel}>{t.manifestLabel}</h2>
-        <div style={{ maxWidth: '38rem' }}>
-          {t.positioning.slice(1).map((p, i) => (
-            <p key={i} style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: 'var(--text-base)' }}>{p}</p>
-          ))}
+      {/* ── МАНИФЕСТ: тёмная врезка, голос владельца целиком ────────── */}
+      <section id="manifest" className="w-pad a-invert" style={{ background: 'var(--bg-invert)', color: 'var(--text-on-invert)', padding: '104px 40px' }}>
+        <div className="w-2col" style={{
+          ...SHELL, display: 'grid', gridTemplateColumns: 'minmax(0,0.72fr) minmax(0,1.28fr)',
+          gap: '80px', alignItems: 'start',
+        }}>
+          <div>
+            <div style={{ ...EYEBROW_GOLD, marginBottom: '24px' }}>{t.manifestLabel}</div>
+            <p style={{ ...DISPLAY, fontSize: 'clamp(26px, 2.6vw, 38px)', lineHeight: 1.24, letterSpacing: '-0.02em' }}>
+              {t.manifestPull}
+            </p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', maxWidth: '66ch' }}>
+            {t.positioning.slice(1).map((p, i) => (
+              <p key={i} style={{
+                margin: 0,
+                fontSize: i === 0 ? '22px' : '18px',
+                lineHeight: i === 0 ? 1.58 : 1.68,
+                color: i === 0 ? 'var(--text-on-invert)' : 'var(--text-on-invert-soft)',
+                textWrap: 'pretty',
+              }}>
+                {p}
+              </p>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* 3 · ВНУТРИ / ЭТОГО ЗДЕСЬ НЕТ — честность школы */}
-      <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 0' }}>
-        <h2 style={sectionLabel}>{t.inside.label}</h2>
-        <p style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)', fontSize: 'clamp(1.5rem, 3.5vw, 2.1rem)', letterSpacing: '0.03em', lineHeight: 1.2, margin: '0 0 2rem' }}>
+      {/* ── ЧТО ВНУТРИ / ЭТОГО ЗДЕСЬ НЕТ ───────────────────────────── */}
+      <section id="inside" className="w-pad" style={{ ...SHELL, padding: '104px 40px' }}>
+        <div style={{ ...EYEBROW, marginBottom: '22px' }}>{t.inside.label}</div>
+        <h2 style={{ ...DISPLAY, marginBottom: '60px', fontSize: 'clamp(28px, 3.4vw, 50px)', lineHeight: 1.16, maxWidth: '18ch' }}>
           {t.inside.heading}
-        </p>
-        <div className="academy-grid2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-          <div style={{ border: '1px solid var(--accent-line)', borderRadius: 'var(--radius)', padding: '1.5rem', background: 'var(--accent-wash)' }}>
-            <div style={{ fontFamily: 'var(--font-mono)', color: GOLD, fontSize: 'var(--text-xs)', letterSpacing: '0.12em', textTransform: 'lowercase', marginBottom: '1rem' }}>{t.inside.inLabel}</div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {t.inside.items.map((item) => (
-                <li key={item} style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontSize: 'var(--text-base)', padding: '0.35rem 0' }}>✦ {item}</li>
+        </h2>
+        <div className="w-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+          <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-color)', padding: '40px 40px 46px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '30px' }}>
+              <Dot />
+              <span style={{ ...EYEBROW, fontSize: '13px', letterSpacing: '0.18em' }}>{t.inside.inLabel}</span>
+            </div>
+            <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              {t.inside.items.map((item, i) => (
+                <li key={item} style={{
+                  fontSize: '19px', lineHeight: 1.5,
+                  paddingBottom: i === t.inside.items.length - 1 ? 0 : '20px',
+                  borderBottom: i === t.inside.items.length - 1 ? undefined : '1px solid var(--border-soft)',
+                }}>
+                  {item}
+                </li>
               ))}
             </ul>
           </div>
-          <div style={{ border: '1px solid var(--border-soft)', borderRadius: 'var(--radius)', padding: '1.5rem' }}>
-            <div style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', fontSize: 'var(--text-xs)', letterSpacing: '0.12em', textTransform: 'lowercase', marginBottom: '1rem' }}>{t.inside.outLabel}</div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {t.inside.excluded.map((item) => (
-                <li key={item} style={{ color: 'var(--text-muted)', lineHeight: 1.6, fontSize: 'var(--text-base)', padding: '0.35rem 0' }}>— {item}</li>
+          <div style={{ border: '1px dashed var(--text-faint)', padding: '40px 40px 46px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '30px' }}>
+              <Dot gold={false} />
+              <span style={{ ...EYEBROW, fontSize: '13px', letterSpacing: '0.18em', color: 'var(--text-muted)' }}>{t.inside.outLabel}</span>
+            </div>
+            <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '20px', color: 'var(--text-muted)' }}>
+              {t.inside.excluded.map((item, i) => (
+                <li key={item} style={{
+                  fontSize: '19px', lineHeight: 1.5,
+                  paddingBottom: i === t.inside.excluded.length - 1 ? 0 : '20px',
+                  borderBottom: i === t.inside.excluded.length - 1 ? undefined : '1px solid var(--border-soft)',
+                }}>
+                  {item}
+                </li>
               ))}
             </ul>
           </div>
         </div>
       </section>
 
-      {/* 4 · ДЛЯ КОГО — спокойный список стадий */}
-      <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 0' }}>
-        <h2 style={sectionLabel}>{t.forWhoLabel}</h2>
-        <ol style={{ listStyle: 'none', padding: 0, margin: 0, maxWidth: '38rem' }}>
+      {/* ── ДЛЯ КОГО: нумерованные строки ───────────────────────────── */}
+      <section id="who" className="w-pad" style={{ ...SHELL, padding: '0 40px 104px' }}>
+        <div style={{ ...EYEBROW, marginBottom: '40px' }}>{t.forWhoLabel}</div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
           {t.forWho.map((w, i) => (
-            <li
+            <div
               key={w.title}
+              className="w-row"
               style={{
-                padding: '1.25rem 0',
-                borderTop: i === 0 ? '1px solid var(--accent-line)' : '1px solid var(--border-soft)',
+                display: 'grid', gridTemplateColumns: '72px minmax(0,1fr) minmax(0,1.15fr)',
+                gap: '32px', padding: '34px 0', alignItems: 'start',
+                borderTop: '1px solid var(--border-color)',
+                borderBottom: i === t.forWho.length - 1 ? '1px solid var(--border-color)' : undefined,
               }}
             >
-              <h3 style={{ color: 'var(--text-primary)', fontSize: 'var(--text-base)', fontWeight: 600, margin: '0 0 0.4rem', lineHeight: 1.35 }}>
-                {w.title}
-              </h3>
-              <p style={{ color: 'var(--text-muted)', lineHeight: 1.6, fontSize: 'var(--text-base)', margin: 0 }}>
+              <span aria-hidden="true" style={{ ...DISPLAY, fontSize: '34px', color: 'var(--accent)', lineHeight: 1 }}>
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 style={{ margin: 0, fontSize: '24px', fontWeight: 400, lineHeight: 1.3 }}>{w.title}</h3>
+              <p style={{ margin: 0, fontSize: '18px', lineHeight: 1.62, color: 'var(--text-secondary)', textWrap: 'pretty' }}>
                 {w.body}
               </p>
-            </li>
+            </div>
           ))}
-        </ol>
+        </div>
       </section>
 
-      {/* 5 · КУРСЫ — двери школы */}
-      <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 0' }}>
-        <h2 style={sectionLabel}>{t.coursesLabel}</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
-          <a href={first.href} aria-label={first.name} style={cardStyle}>
-            <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.4rem' }}>{first.name}</div>
-            <div style={{ color: 'var(--text-muted)', fontSize: 'var(--text-sm)', lineHeight: 1.5 }}>{first.tagline}</div>
-          </a>
-          {courses.map((c) =>
+      {/* ── КУРСЫ: двери школы ─────────────────────────────────────── */}
+      <section id="courses" className="w-pad" style={{ ...SHELL, padding: '0 40px 104px' }}>
+        <div style={{ ...EYEBROW, marginBottom: '40px' }}>{t.coursesLabel}</div>
+        <div className="w-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0,1fr))', gap: '24px' }}>
+          {/* Точка Сборки и прочие live-курсы из registry — тёмной картой (дверь входа) */}
+          {courses.map((c) => (
             c.status === 'live' ? (
               <a
                 key={c.slug}
+                className="a-card-dark"
                 href={c.url}
-                aria-label={c.name}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={cardStyle}
+                style={{
+                  display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '44px',
+                  minHeight: '280px', padding: '36px 34px', borderRadius: 'var(--radius)',
+                }}
               >
-                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.4rem' }}>{c.name}</div>
-                <div style={{ color: 'var(--text-muted)', fontSize: 'var(--text-sm)', lineHeight: 1.5 }}>{c.tagline}</div>
+                <span style={EYEBROW_GOLD}>{t.courseEyebrows.entry}</span>
+                <span style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                  <span style={{ ...DISPLAY, fontWeight: 300, fontSize: '26px', lineHeight: 1.2 }}>{c.name}</span>
+                  <span style={{ fontSize: '17px', lineHeight: 1.55, color: 'var(--text-on-invert-soft)' }}>{c.tagline}</span>
+                </span>
               </a>
             ) : (
               <div
                 key={c.slug}
-                style={{ border: '1px solid var(--border-soft)', borderRadius: 'var(--radius)', padding: '1.5rem' }}
+                style={{
+                  display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '44px',
+                  minHeight: '280px', padding: '36px 34px', borderRadius: 'var(--radius)',
+                  border: '1px dashed var(--text-faint)',
+                }}
               >
-                <div style={{ color: 'var(--text-secondary)', fontWeight: 600, marginBottom: '0.4rem' }}>{c.name}</div>
-                <div style={{ color: 'var(--text-muted)', fontSize: 'var(--text-sm)', lineHeight: 1.5, marginBottom: '0.6rem' }}>{c.tagline}</div>
-                <span style={{ fontFamily: 'var(--font-mono)', color: GOLD, fontSize: 'var(--text-xs)', letterSpacing: '0.12em', textTransform: 'lowercase' }}>{t.comingSoon}</span>
+                <span style={{ ...EYEBROW, color: 'var(--text-muted)' }}>{t.comingSoon}</span>
+                <span style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                  <span style={{ ...DISPLAY, fontWeight: 300, fontSize: '26px', lineHeight: 1.2, color: 'var(--text-secondary)' }}>{c.name}</span>
+                  <span style={{ fontSize: '17px', lineHeight: 1.55, color: 'var(--text-muted)' }}>{c.tagline}</span>
+                </span>
               </div>
-            ),
-          )}
-          <a href={trainersHref} aria-label={t.trainersCard.name} style={cardStyle}>
-            <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.4rem' }}>{t.trainersCard.name}</div>
-            <div style={{ color: 'var(--text-muted)', fontSize: 'var(--text-sm)', lineHeight: 1.5 }}>{t.trainersCard.tagline}</div>
+            )
+          ))}
+
+          <a className="a-card-light" href={practice.href} style={{
+            display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '44px',
+            minHeight: '280px', padding: '36px 34px', borderRadius: 'var(--radius)', color: 'var(--text-primary)',
+          }}>
+            <span style={EYEBROW}>{t.courseEyebrows.practice}</span>
+            <span style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <span style={{ ...DISPLAY, fontWeight: 300, fontSize: '26px', lineHeight: 1.2 }}>{practice.name}</span>
+              <span style={{ fontSize: '17px', lineHeight: 1.55, color: 'var(--text-secondary)' }}>{practice.tagline}</span>
+            </span>
+          </a>
+
+          <a className="a-card-light" href={trainersHref} style={{
+            display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '44px',
+            minHeight: '280px', padding: '36px 34px', borderRadius: 'var(--radius)', color: 'var(--text-primary)',
+          }}>
+            <span style={EYEBROW}>{t.courseEyebrows.trainers}</span>
+            <span style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <span style={{ ...DISPLAY, fontWeight: 300, fontSize: '26px', lineHeight: 1.2 }}>{t.trainersCard.name}</span>
+              <span style={{ fontSize: '17px', lineHeight: 1.55, color: 'var(--text-secondary)' }}>{t.trainersCard.tagline}</span>
+            </span>
           </a>
         </div>
       </section>
 
-      {/* 6 · ПРАВИЛА ДОМА — мост к хартии */}
-      <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 0' }}>
-        <h2 style={sectionLabel}>{t.charterSectionLabel}</h2>
-        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: 'var(--text-base)', maxWidth: '38rem', margin: '0 0 1rem' }}>
-          {t.charterBridge}
-        </p>
-        <a href={charterHref} style={{ color: GOLD, fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)', letterSpacing: '0.06em', textDecoration: 'none' }}>
-          {t.charterLabel}
-        </a>
+      {/* ── ПРАВИЛА ДОМА: полоса ───────────────────────────────────── */}
+      <section id="rules" className="w-pad" style={{ ...SHELL, padding: '0 40px 104px' }}>
+        <div className="w-2col w-rules" style={{
+          background: 'var(--bg-band)', padding: '56px 56px 60px', display: 'grid',
+          gridTemplateColumns: 'minmax(0,0.72fr) minmax(0,1.28fr)', gap: '64px', alignItems: 'center',
+        }}>
+          <div style={EYEBROW}>{t.charterSectionLabel}</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '26px', alignItems: 'flex-start' }}>
+            <p style={{ margin: 0, fontSize: '24px', lineHeight: 1.5, textWrap: 'pretty', maxWidth: '58ch' }}>
+              {t.charterBridge}
+            </p>
+            <a className="a-link" href={charterHref} style={{ fontSize: '16px' }}>{t.charterLabel}</a>
+          </div>
+        </div>
       </section>
 
-      {/* 7 · ОСНОВАТЕЛЬ */}
-      <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 0' }}>
-        <h2 style={sectionLabel}>{t.founderLabel}</h2>
-        <div className="academy-founder" style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '2rem', alignItems: 'start' }}>
+      {/* ── ОСНОВАТЕЛЬ ─────────────────────────────────────────────── */}
+      <section id="founder" className="w-pad" style={{ ...SHELL, padding: '0 40px 104px' }}>
+        <div style={{ ...EYEBROW, marginBottom: '40px' }}>{t.founderLabel}</div>
+        <div className="w-founder" style={{ display: 'grid', gridTemplateColumns: '230px minmax(0,1fr)', gap: '56px', alignItems: 'start' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/author.jpg"
             alt={t.founderName}
-            style={{ width: '100%', maxWidth: '200px', borderRadius: 'var(--radius)', border: '1px solid var(--border-soft)', display: 'block' }}
+            style={{ width: '100%', maxWidth: '230px', height: 'auto', display: 'block', borderRadius: 'var(--radius)' }}
           />
-          <div>
-            <p style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)', fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', letterSpacing: '0.02em', margin: '0 0 1rem', lineHeight: 1.2 }}>
-              {t.founderName}
-            </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'flex-start', maxWidth: '54ch' }}>
+            <div style={{ ...DISPLAY, fontWeight: 300, fontSize: '28px' }}>{t.founderName}</div>
             {t.founderBody.map((p, i) => (
-              <p key={i} style={{ color: 'var(--text-muted)', lineHeight: 1.7, fontSize: 'var(--text-base)', margin: '0 0 0.6rem' }}>{p}</p>
+              <p key={i} style={{ margin: 0, fontSize: '19px', lineHeight: 1.62, color: 'var(--text-body)', textWrap: 'pretty' }}>{p}</p>
             ))}
-            <a href="https://mamaev.coach" target="_blank" rel="noopener noreferrer" style={{ color: GOLD, fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)', letterSpacing: '0.06em', textDecoration: 'none' }}>
+            <a className="a-link" href="https://mamaev.coach" target="_blank" rel="noopener noreferrer" style={{ fontSize: '16px' }}>
               {t.founderLink}
             </a>
           </div>
         </div>
       </section>
 
-      {/* 8 · ВОПРОСЫ */}
-      <section className="academy-section" style={{ maxWidth: '52rem', margin: '0 auto', padding: '5rem 2rem 4rem' }}>
-        <h2 style={sectionLabel}>{t.faqLabel}</h2>
-        <dl style={{ margin: 0, maxWidth: '38rem' }}>
-          {t.faq.map((item, i) => (
-            <div
-              key={item.q}
-              style={{
-                padding: '1.25rem 0',
-                borderTop: i === 0 ? '1px solid var(--accent-line)' : '1px solid var(--border-soft)',
-              }}
-            >
-              <dt style={{ color: 'var(--text-primary)', fontSize: 'var(--text-base)', fontWeight: 600, margin: '0 0 0.4rem', lineHeight: 1.35 }}>
-                {item.q}
-              </dt>
-              <dd style={{ color: 'var(--text-muted)', lineHeight: 1.6, fontSize: 'var(--text-base)', margin: 0 }}>
-                {item.a}
-              </dd>
+      {/* ── ВОПРОСЫ ────────────────────────────────────────────────── */}
+      <section id="faq" className="w-pad" style={{ ...SHELL, padding: '0 40px 104px' }}>
+        <div style={{ ...EYEBROW, marginBottom: '40px' }}>{t.faqLabel}</div>
+        <dl className="w-faq" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px 56px', margin: 0 }}>
+          {t.faq.map((item) => (
+            <div key={item.q} style={{ borderTop: '1px solid var(--border-color)', paddingTop: '24px' }}>
+              <dt style={{ margin: '0 0 12px', fontSize: '20px', fontWeight: 500, lineHeight: 1.3 }}>{item.q}</dt>
+              <dd style={{ margin: 0, fontSize: '17px', lineHeight: 1.65, color: 'var(--text-secondary)', textWrap: 'pretty' }}>{item.a}</dd>
             </div>
           ))}
         </dl>
       </section>
 
-      {/* 9 · ДРАКОН-СТРАЖ у выхода + ФУТЕР */}
-      <div style={{ padding: '0 2rem 2rem' }}>
-        <DragonOrnament width={360} opacity={0.35} flip />
+      {/* ── ДРАКОН-СТРАЖ У ВЫХОДА ──────────────────────────────────── */}
+      <div className="w-pad" style={{ ...SHELL, padding: '0 40px 64px' }}>
+        <DragonOrnament width={380} opacity={0.35} flip />
       </div>
-      <footer style={{ borderTop: '1px solid var(--border-soft)' }}>
-        <div className="academy-section academy-grid2" style={{ maxWidth: '52rem', margin: '0 auto', padding: '3rem 2rem 1.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
-          <div>
-            <div style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)', fontSize: 'var(--text-base)', letterSpacing: '0.04em', lineHeight: 1.4, marginBottom: '0.75rem', maxWidth: '20rem' }}>{t.fullName}</div>
-            <p style={{ color: 'var(--text-muted)', lineHeight: 1.6, fontSize: 'var(--text-sm)', margin: 0, maxWidth: '24rem' }}>{t.footer.tagline}</p>
+
+      {/* ── ФУТЕР ──────────────────────────────────────────────────── */}
+      <footer className="w-pad a-invert" style={{ background: 'var(--bg-invert)', color: 'var(--text-on-invert)', padding: '72px 40px 52px' }}>
+        <div className="w-2col" style={{ ...SHELL, display: 'grid', gridTemplateColumns: 'minmax(0,1.2fr) minmax(0,1fr)', gap: '64px', alignItems: 'start' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '44ch' }}>
+            <div style={{ fontFamily: 'var(--font-wordmark), sans-serif', fontWeight: 700, fontSize: '23px', lineHeight: 1.34, letterSpacing: '-0.01em' }}>
+              {t.fullName}
+            </div>
+            <p style={{ margin: 0, fontSize: '16px', lineHeight: 1.6, color: 'var(--text-on-invert-soft)' }}>{t.footer.tagline}</p>
           </div>
           <div>
-            <div style={{ fontFamily: 'var(--font-mono)', color: GOLD, fontSize: 'var(--text-xs)', letterSpacing: '0.12em', textTransform: 'lowercase', marginBottom: '0.75rem' }}>{t.footer.linksLabel}</div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            <div style={{ ...EYEBROW_GOLD, letterSpacing: '0.18em', textTransform: 'none', marginBottom: '22px' }}>{t.footer.linksLabel}</div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px 32px', fontSize: '16px' }}>
               {t.footer.links.map((l) => (
-                <li key={l.href} style={{ padding: '0.2rem 0' }}>
-                  <a href={l.href} style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', textDecoration: 'none' }}>{l.label}</a>
-                </li>
+                <a key={l.href} className="a-footer-link" href={l.href}>{l.label}</a>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
-        <div style={{ maxWidth: '52rem', margin: '0 auto', padding: '0 2rem 2rem' }}>
-          <p style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', fontSize: 'var(--text-xs)', letterSpacing: '0.06em', margin: 0 }}>{t.footer.rights}</p>
+        <div style={{ ...SHELL, marginTop: '52px', paddingTop: '24px', borderTop: '1px solid var(--border-invert)', fontSize: '13px', letterSpacing: '0.06em', color: 'var(--text-on-invert-faint)' }}>
+          {t.footer.rights}
         </div>
       </footer>
-    </main>
+    </div>
   )
 }

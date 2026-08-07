@@ -5,7 +5,8 @@ import { LessonProse } from './lesson-prose'
 
 interface Props { locale: Locale; slug: string }
 
-const GOLD = 'var(--accent)'
+// Текст/ссылки на бумаге — бронза (золото на светлом = 1.7:1)
+const GOLD = 'var(--accent-ink)'
 
 const UI = {
   ru: { eyebrow: 'тренажёры · урок', backLabel: '← к тренажёрам' },
@@ -36,7 +37,7 @@ export function SpeedreadingLessonPage({ locale, slug }: Props) {
         <p style={{ fontFamily: 'var(--font-mono)', color: GOLD, textTransform: 'lowercase', letterSpacing: '0.25em', fontSize: 'var(--text-xs)', margin: 0 }}>
           {t.eyebrow}
         </p>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4.5vw, 3rem)', letterSpacing: '0.03em', margin: '1rem 0 1rem', color: 'var(--text-primary)' }}>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 'clamp(2rem, 4.5vw, 3rem)', letterSpacing: '-0.02em', margin: '1rem 0 1rem', color: 'var(--text-primary)' }}>
           {lesson.title}
         </h1>
         <p style={{ color: 'var(--text-muted)', lineHeight: 1.6, fontSize: 'var(--text-base)', margin: '0 0 2.5rem', borderLeft: '2px solid var(--accent-line)', paddingLeft: '0.9rem' }}>

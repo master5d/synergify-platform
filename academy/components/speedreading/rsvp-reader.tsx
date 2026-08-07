@@ -63,11 +63,11 @@ export function RsvpReader({ locale }: { locale: Locale }) {
       {/* word display — ORP pivot fixed on the center axis (monospace, 1ch) */}
       <div style={{ position: 'relative', height: '3rem', marginBottom: '.35rem', fontFamily: 'var(--font-mono)', fontSize: '2rem', lineHeight: '3rem' }} aria-live="polite">
         <span style={{ position: 'absolute', top: 0, right: 'calc(50% + 0.5ch)', color: 'var(--text-primary)', whiteSpace: 'pre' }}>{orp.before}</span>
-        <span style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', color: 'var(--accent)', fontWeight: 700 }}>{orp.pivot}</span>
+        <span style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', color: 'var(--accent-ink)', fontWeight: 700 }}>{orp.pivot}</span>
         <span style={{ position: 'absolute', top: 0, left: 'calc(50% + 0.5ch)', color: 'var(--text-primary)', whiteSpace: 'pre' }}>{orp.after}</span>
       </div>
       {/* center focal tick */}
-      <div style={{ height: 8, borderLeft: '2px solid var(--accent)', width: 0, margin: '0 auto .75rem' }} aria-hidden="true" />
+      <div style={{ height: 8, borderLeft: '2px solid var(--accent-ink)', width: 0, margin: '0 auto .75rem' }} aria-hidden="true" />
 
       <div style={{ display: 'flex', gap: '.5rem', justifyContent: 'center' }}>
         <button style={btn} onClick={playing ? pause : start}>{playing ? t.pause : t.play}</button>

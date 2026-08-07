@@ -8,9 +8,11 @@ interface Props {
   opacity?: number
   /** Отзеркалить по горизонтали */
   flip?: boolean
+  /** Доп. стили обёртки (отступы) */
+  style?: React.CSSProperties
 }
 
-export function DragonOrnament({ width = 520, opacity = 0.6, flip = false }: Props) {
+export function DragonOrnament({ width = 520, opacity = 0.6, flip = false, style }: Props) {
   return (
     <svg
       viewBox="0 0 640 120"
@@ -23,6 +25,7 @@ export function DragonOrnament({ width = 520, opacity = 0.6, flip = false }: Pro
         margin: '0 auto',
         opacity,
         transform: flip ? 'scaleX(-1)' : undefined,
+        ...style,
       }}
     >
       <g fill="none" stroke="var(--text-primary)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
