@@ -48,16 +48,16 @@ const langScript =
 
 export const metadata: Metadata = {
   metadataBase: new URL(COURSE.domain),
-  title: 'Точка Сборки — курс по vibe-кодингу',
+  title: COURSE.fullName.ru,
   description: `Открытый курс по AI-разработке и агентному программированию. Presented by ${REGISTRY.academy.org.name}.`,
   publisher: REGISTRY.academy.org.name,
   authors: [{ name: 'Alexander Mamaev' }],
   manifest: '/manifest.webmanifest',
-  appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: 'Точка Сборки' },
+  appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: COURSE.shortName },
   // No global canonical/alternates here: a root-level canonical would leak to every page
   // (canonicalizing all routes to '/'). hreflang pairing is declared in the sitemap instead;
   // Google self-canonicalizes each URL by default.
-  openGraph: { locale: 'ru_RU', alternateLocale: ['en_US'], siteName: 'Точка Сборки' },
+  openGraph: { locale: 'ru_RU', alternateLocale: ['en_US'], siteName: COURSE.shortName },
 }
 
 export const viewport: Viewport = {

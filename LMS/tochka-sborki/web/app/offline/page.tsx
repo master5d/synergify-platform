@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
+import { COURSE } from '@/lib/course'
 
 export const metadata: Metadata = {
-  title: 'Офлайн — Точка Сборки',
+  title: `Офлайн — ${COURSE.shortName}`,
   robots: { index: false, follow: false },
 }
 

@@ -5,11 +5,30 @@
   "duration": "60 мин",
   "level": 0,
   "units": [
-    { "slug": "u1-slon-v-komnate", "title": "Слон в комнате" },
-    { "slug": "u2-anatomiya-myortvoy-praktiki", "title": "Анатомия мёртвой практики" },
-    { "slug": "u3-svidetelstvovanie", "title": "Свидетельствование" },
-    { "slug": "u4-osoznannost-bez-zakuporki", "title": "Осознанность без закупорки" },
-    { "slug": "u5-krug-praktiki", "title": "Круг практики" },
-    { "slug": "u6-kak-vybirat-shkolu", "title": "Как выбирать школу" }
-  ]
+    {
+      "slug": "u1-slon-v-komnate",
+      "title": "Слон в комнате"
+    },
+    {
+      "slug": "u2-anatomiya-myortvoy-praktiki",
+      "title": "Анатомия мёртвой практики"
+    },
+    {
+      "slug": "u3-svidetelstvovanie",
+      "title": "Свидетельствование"
+    },
+    {
+      "slug": "u4-osoznannost-bez-zakuporki",
+      "title": "Осознанность без закупорки"
+    },
+    {
+      "slug": "u5-krug-praktiki",
+      "title": "Круг практики"
+    },
+    {
+      "slug": "u6-kak-vybirat-shkolu",
+      "title": "Как выбирать школу"
+    }
+  ],
+  "layout": "prose"
 }

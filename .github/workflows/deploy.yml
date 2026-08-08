@@ -76,7 +76,17 @@ jobs:
         working-directory: LMS/tochka-sborki/web
         env:
           COURSE_PACK: ${{ matrix.pack }}
-        run: npx vitest run
+        run: npm test
+      # Кросс-проверка шва: сборка чужого pack'а не должна нести бренд «Точки
+      # Сборки». Ловит регресс резолвера @pack, который тесты не видят.
+      - name: Pack isolation (no default-course branding)
+        working-directory: LMS/tochka-sborki/web
+        run: |
+          if grep -rl "Точка Сборки — курс по vibe" out/ >/dev/null 2>&1; then
+            echo "::error::pack ${{ matrix.pack }} собрался с идентичностью tochka-sborki"
+            exit 1
+          fi
+          echo "pack isolation ok"
 
   # ── academy.synergify.com (S.A.S.H.A academy) ──────────────
   deploy-academy:

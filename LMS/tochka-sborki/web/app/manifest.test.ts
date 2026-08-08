@@ -1,11 +1,13 @@
 import { describe, it, expect } from 'vitest'
 import manifest from './manifest'
+import { COURSE } from '@/lib/course'
 
 describe('PWA manifest', () => {
   const m = manifest()
 
   it('declares a standalone installable app rooted at /', () => {
-    expect(m.name).toContain('Точка Сборки')
+    // Имя приходит из активного pack'а — манифест не знает конкретного курса.
+    expect(m.name).toContain(COURSE.shortName)
     expect(m.short_name).toBeTruthy()
     expect(m.display).toBe('standalone')
     expect(m.start_url).toBe('/')

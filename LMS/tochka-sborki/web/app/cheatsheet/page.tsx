@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { MdxPage } from '@/components/pages/mdx-page'
+import { COURSE } from '@/lib/course'
 
 export const metadata: Metadata = {
-  title: 'Шпаргалка — Точка Сборки',
+  title: `Шпаргалка — ${COURSE.shortName}`,
   description: 'Быстрая справка по командам и паттернам Claude Code',
 }
 

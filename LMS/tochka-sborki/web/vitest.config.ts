@@ -8,7 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '.'),
-      '@pack': path.resolve(__dirname, 'packs', process.env.COURSE_PACK ?? 'tochka-sborki'),
+      '@pack': path.resolve(__dirname, 'packs', '_active'),
     },
   },
 })

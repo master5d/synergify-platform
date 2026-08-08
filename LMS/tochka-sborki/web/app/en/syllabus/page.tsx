@@ -4,9 +4,10 @@ import { SyllabusTree } from '@/components/syllabus-tree'
 import { MaterialsSection } from '@/components/materials-section'
 import { getAllModules } from '@/lib/content'
 import { COURSE_MATERIALS } from '@/lib/materials'
+import { COURSE } from '@/lib/course'
 
 export const metadata: Metadata = {
-  title: 'Syllabus — Tochka Sborki',
+  title: `Syllabus — ${COURSE.shortName}`,
   description: 'The full course program: modules, units, and materials.',
 }
 

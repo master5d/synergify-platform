@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { AlumniClient } from '@/components/alumni-client'
+import { COURSE } from '@/lib/course'
 
 export const metadata: Metadata = {
-  title: 'Синергемы — Точка Сборки',
+  title: `Синергемы — ${COURSE.shortName}`,
   description: 'Opt-in кластеры соучеников по общему интересу и усилию.',
   robots: { index: false, follow: false },
 }

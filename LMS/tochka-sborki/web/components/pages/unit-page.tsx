@@ -4,11 +4,13 @@ import {
   getModuleMeta,
   getUnitContent,
   getNavigationItems,
+  unitLayout,
 } from '@/lib/content'
 import { Nav } from '@/components/nav'
 import { Footer } from '@/components/footer'
 import { Sidebar } from '@/components/sidebar'
 import { UnitWizard } from '@/components/unit-wizard'
+import { UnitProse } from '@/components/unit-prose'
 import { AuthGuard } from '@/components/auth-guard'
 import { IntakeGuard } from '@/components/intake-guard'
 import { MobileGate } from '@/components/mobile-gate'
@@ -25,6 +27,10 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
   const unitIndex = moduleMeta.units.findIndex(u => u.slug === unitSlug)
   const nextUnit = moduleMeta.units[unitIndex + 1] ?? null
 
+  // Разметка приходит из pack'а (_meta.json). Фазовый мастер и сплошная проза —
+  // две оболочки над ОДНИМ MDX: контент-контракт у курсов общий.
+  const Shell = unitLayout(moduleMeta) === 'prose' ? UnitProse : UnitWizard
+
   return (
     <AuthGuard locale={locale}>
       <IntakeGuard locale={locale}>
@@ -33,7 +39,7 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
       <div style={{ display: 'flex', minHeight: 'calc(100vh - 3rem)' }}>
         <Sidebar navItems={navItems} currentSlug={moduleSlug} currentUnit={unitSlug} locale={locale} />
         <main id="main-content" tabIndex={-1} style={{ flex: 1, padding: '2rem 3rem', maxWidth: '860px' }}>
-          <UnitWizard
+          <Shell
             moduleSlug={moduleSlug}
             unitSlug={unitSlug}
             nextUnitSlug={nextUnit?.slug ?? null}
@@ -47,7 +53,7 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
               components={mdxComponents}
               options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
             />
-          </UnitWizard>
+          </Shell>
         </main>
       </div>
       <Footer locale={locale} topics={navItems.filter(i => i.type === 'module').map(i => ({ slug: i.slug, title: i.title }))} />

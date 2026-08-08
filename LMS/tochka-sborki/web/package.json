@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prebuild": "node scripts/select-pack.mjs",
+    "pretest": "node scripts/select-pack.mjs",
+    "select-pack": "node scripts/select-pack.mjs"
   },
   "dependencies": {
     "@chenglou/pretext": "^0.0.7",

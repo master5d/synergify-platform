@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { Nav } from '@/components/nav'
 import { SpeechSyllabus } from '@/components/speech-syllabus'
+import { COURSE } from '@/lib/course'
 
 export const metadata: Metadata = {
-  title: 'The Art of Speaking — Tochka Sborki',
+  title: `The Art of Speaking — ${COURSE.shortName}`,
   description: 'A course on the art of speaking (in preparation).',
 }
 

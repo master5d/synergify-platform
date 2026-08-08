@@ -32,6 +32,11 @@ export interface UnitMeta {
   duration: string
 }
 
+/** Разметка юнита: пошаговый мастер по 4 фазам или сплошная проза.
+ *  Свойство КУРСА, а не движка: курсу про агентов органичны фазы, курсу про
+ *  практику внимания — проза. Отсутствие ключа = 'phases' (совместимость). */
+export type UnitLayout = 'phases' | 'prose'
+
 export interface ModuleMeta {
   slug: string
   module: number
@@ -40,6 +45,12 @@ export interface ModuleMeta {
   duration: string
   level: number
   units: { slug: string; title: string }[]
+  layout?: UnitLayout
+}
+
+/** Разметка модуля с дефолтом. Единственная точка решения — не считать по месту. */
+export function unitLayout(meta: Pick<ModuleMeta, 'layout'>): UnitLayout {
+  return meta.layout === 'prose' ? 'prose' : 'phases'
 }
 
 export interface NavigationItem {

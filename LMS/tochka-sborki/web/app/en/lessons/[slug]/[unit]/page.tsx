@@ -5,6 +5,7 @@ import {
   getUnitContent,
 } from '@/lib/content'
 import { UnitPage } from '@/components/pages/unit-page'
+import { COURSE } from '@/lib/course'
 
 interface Props { params: Promise<{ slug: string; unit: string }> }
 
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { unitMeta } = getUnitContent(slug, unit, 'en')
   const moduleMeta = getModuleMeta(slug, 'en')
   return {
-    title: `${unitMeta.title} — ${moduleMeta.title} — Tochka Sborki`,
+    title: `${unitMeta.title} — ${moduleMeta.title} — ${COURSE.shortName}`,
     description: moduleMeta.description,
   }
 }

@@ -27,7 +27,7 @@
         "./*"
       ],
       "@pack/*": [
-        "./packs/tochka-sborki/*"
+        "./packs/_active/*"
       ]
     }
   },

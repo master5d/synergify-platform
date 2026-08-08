@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import { CertificatePage } from '@/components/pages/certificate-page'
+import { COURSE } from '@/lib/course'
 
 export const metadata: Metadata = {
-  title: 'Сертификат — Точка Сборки',
+  title: `Сертификат — ${COURSE.shortName}`,
   description: 'Сертификат об окончании курса по vibe-кодингу',
   openGraph: {
-    title: 'Точка Сборки — Сертификат',
+    title: `${COURSE.shortName} — Сертификат`,
     description: 'Vibe coder — это новая базовая грамотность',
     type: 'website',
   },
