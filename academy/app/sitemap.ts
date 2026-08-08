@@ -10,7 +10,7 @@ const SITE = 'https://academy.synergify.com'
  *  Уроки /praktika/<slug>/ за admission-гейтом — в sitemap не попадают (noindex).
  *  Тренажёры и уроки скорочтения публичны (public-domain метод) — попадают. */
 const PATHS: string[] = [
-  '', 'pravila', 'praktika',
+  '', 'pravila',
   'trenazhery', 'trenazhery/rsvp', 'trenazhery/schulte', 'trenazhery/test',
   ...writtenSpeedreadingSlugs().map((slug) => `trenazhery/${slug}`),
 ]

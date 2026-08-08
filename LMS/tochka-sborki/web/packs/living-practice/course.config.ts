@@ -14,7 +14,7 @@ export const COURSE = {
     en: 'The Silence Where You Can Hear — a Synergema School course',
   } as Bi,
   // Single source of truth for SEO (sitemap/robots) and the PWA manifest. No trailing slash.
-  domain: 'https://praktika.synergify.com',
+  domain: 'https://academy.synergify.com/praktika',
   locales: ['ru', 'en'] as const,
   /** Какие слои движка включены у этого курса. Ядро гейтит поверхности по флагам,
    *  а не по имени pack'а: курс без RPG не должен носить чужой квест-обвес. */

@@ -9,6 +9,7 @@ on:
       - 'LMS/registry.json'
       - 'academy/**'
       - 'workers/**'
+      - 'scripts/merge-course.mjs'
       - '.github/workflows/deploy.yml'
 
 env:
@@ -101,12 +102,25 @@ jobs:
           node-version: '24'
           cache: 'npm'
           cache-dependency-path: academy/package-lock.json
-      - name: Install
+      - name: Install (shell)
         working-directory: academy
         run: npm ci
-      - name: Build
+      - name: Install (engine)
+        working-directory: LMS/tochka-sborki/web
+        run: npm ci
+      - name: Build shell
         working-directory: academy
         run: npm run build
+      # Курс школы собирается движком под подпутём и вкладывается в оболочку:
+      # один домен, один проект деплоя. Порядок важен — merge затирает praktika/.
+      - name: Build course (living-practice @ /praktika)
+        working-directory: LMS/tochka-sborki/web
+        env:
+          COURSE_PACK: living-practice
+          COURSE_BASE_PATH: /praktika
+        run: npm run build
+      - name: Merge course into shell
+        run: node scripts/merge-course.mjs living-practice praktika
       - name: Ensure project exists
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

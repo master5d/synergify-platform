@@ -6,27 +6,44 @@
       "en": "Synergema Authentica Starseed Holon Academy"
     },
     "url": "https://academy.synergify.com",
-    "org": { "name": "Synergify Institute for AI" }
+    "org": {
+      "name": "Synergify Institute for AI"
+    }
   },
   "courses": [
     {
       "slug": "tochka-sborki",
-      "name": { "ru": "Точка Сборки", "en": "Tochka Sborki" },
-      "tagline": { "ru": "курс по vibe-кодингу", "en": "a course on vibe coding" },
+      "name": {
+        "ru": "Точка Сборки",
+        "en": "Tochka Sborki"
+      },
+      "tagline": {
+        "ru": "курс по vibe-кодингу",
+        "en": "a course on vibe coding"
+      },
       "url": "https://ai.synergify.com",
       "status": "live",
-      "locales": ["ru", "en"]
+      "locales": [
+        "ru",
+        "en"
+      ]
     },
     {
       "slug": "living-practice",
-      "name": { "ru": "Тишина, в которой слышно", "en": "The Silence Where You Can Hear" },
+      "name": {
+        "ru": "Тишина, в которой слышно",
+        "en": "The Silence Where You Can Hear"
+      },
       "tagline": {
         "ru": "шесть уроков о том, почему честной практике внимания нужны другие люди",
         "en": "six lessons on why an honest attention practice needs other people"
       },
-      "url": "https://praktika.synergify.com",
-      "status": "coming-soon",
-      "locales": ["ru", "en"]
+      "url": "https://academy.synergify.com/praktika",
+      "status": "live",
+      "locales": [
+        "ru",
+        "en"
+      ]
     }
   ]
 }

@@ -37,6 +37,7 @@ export interface AcademyDictionary {
     forWho: { title: string; body: string }[]
     coursesLabel: string
     comingSoon: string
+    practiceCard: { name: string; tagline: string; href: string }
     trainersCard: { name: string; tagline: string }
     charterSectionLabel: string
     charterBridge: string
@@ -123,6 +124,11 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
       ],
       coursesLabel: 'Курсы',
       comingSoon: 'скоро',
+      practiceCard: {
+        name: 'Тишина, в которой слышно',
+        tagline: 'восемь шагов практики внимания: честно про пользу и риск, с собеседником между сессиями',
+        href: '/praktika/',
+      },
       trainersCard: {
         name: 'Тренажёры',
         tagline: 'Скорочтение: ритм, периферийное зрение, честный замер скорости. Открыто всем, без входа.',
@@ -206,7 +212,7 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
         linksLabel: '// doors',
         links: [
           { label: 'Tochka Sborki', href: 'https://ai.synergify.com' },
-          { label: 'The Silence Where You Can Hear', href: '/en/praktika/' },
+          { label: 'The Silence Where You Can Hear', href: '/praktika/en/' },
           { label: 'Trainers', href: '/en/trenazhery/' },
           { label: 'House rules', href: '/en/pravila/' },
           { label: 'mamaev.coach', href: 'https://mamaev.coach' },
@@ -234,6 +240,11 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
       ],
       coursesLabel: 'Courses',
       comingSoon: 'coming soon',
+      practiceCard: {
+        name: 'The Silence Where You Can Hear',
+        tagline: 'eight steps of attention practice: honest about benefit and risk, with a companion between sessions',
+        href: '/praktika/en/',
+      },
       trainersCard: {
         name: 'Trainers',
         tagline: 'Speed reading: rhythm, side vision, an honest speed measure. Open to everyone, no admission needed.',

@@ -1,6 +1,5 @@
 import { getDictionary, type Locale } from '../lib/dictionaries'
 import { getCourses } from '../lib/registry'
-import { courseCard } from '../lib/course/living-practice'
 import { DragonOrnament } from './dragon-ornament'
 
 interface Props { locale: Locale }
@@ -37,7 +36,7 @@ export function AcademyPage({ locale }: Props) {
   // living-practice живёт ЗДЕСЬ (карточка ниже) — его registry-запись
   // (coming-soon, контрактный домен) на этой странице не показываем, иначе дубль.
   const courses = getCourses(locale).filter((c) => c.slug !== 'living-practice')
-  const practice = courseCard(locale)
+  const practice = t.practiceCard
   const trainersHref = locale === 'en' ? '/en/trenazhery/' : '/trenazhery/'
   const charterHref = locale === 'en' ? '/en/pravila/' : '/pravila/'
 
