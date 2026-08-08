@@ -69,7 +69,7 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
       nav: { manifest: 'манифест', inside: 'что внутри', courses: 'курсы', faq: 'вопросы', cta: 'Точка Сборки →' },
       manifestLabel: 'манифест',
       manifestPull: 'Синергема ткётся, а не строится',
-      courseEyebrows: { entry: 'дверь входа', practice: 'шесть уроков', trainers: 'открыто всем' },
+      courseEyebrows: { entry: 'дверь входа', practice: 'восемь шагов', trainers: 'открыто всем' },
       gate: 'Вход в академию открывается после прохождения «Точки Сборки».',
       gateCta: 'Пройти Точку Сборки →',
       inside: {
@@ -95,7 +95,7 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
         linksLabel: '// двери',
         links: [
           { label: 'Точка Сборки', href: 'https://ai.synergify.com' },
-          { label: 'Практика в живой связи', href: '/praktika/' },
+          { label: 'Тишина, в которой слышно', href: '/praktika/' },
           { label: 'Тренажёры', href: '/trenazhery/' },
           { label: 'Правила дома', href: '/pravila/' },
           { label: 'mamaev.coach', href: 'https://mamaev.coach' },
@@ -180,7 +180,7 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
       nav: { manifest: 'manifesto', inside: 'what is inside', courses: 'courses', faq: 'questions', cta: 'Tochka Sborki →' },
       manifestLabel: 'manifesto',
       manifestPull: 'A synergema is woven, not built',
-      courseEyebrows: { entry: 'the door in', practice: 'six lessons', trainers: 'open to all' },
+      courseEyebrows: { entry: 'the door in', practice: 'eight steps', trainers: 'open to all' },
       gate: 'Admission opens after completing Tochka Sborki.',
       gateCta: 'Take Tochka Sborki →',
       inside: {
@@ -206,7 +206,7 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
         linksLabel: '// doors',
         links: [
           { label: 'Tochka Sborki', href: 'https://ai.synergify.com' },
-          { label: 'Practice in Living Connection', href: '/en/praktika/' },
+          { label: 'The Silence Where You Can Hear', href: '/en/praktika/' },
           { label: 'Trainers', href: '/en/trenazhery/' },
           { label: 'House rules', href: '/en/pravila/' },
           { label: 'mamaev.coach', href: 'https://mamaev.coach' },

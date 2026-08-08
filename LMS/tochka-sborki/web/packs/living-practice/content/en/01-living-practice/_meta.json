@@ -1,34 +1,42 @@
 {
   "module": 1,
-  "title": "Practice in Living Connection",
-  "description": "Six lessons on why an honest attention practice needs other people",
-  "duration": "60 min",
+  "title": "The Silence Where You Can Hear",
+  "description": "Eight steps of attention practice: honest about benefit and risk, with a companion between sessions and a living circle at the end",
+  "duration": "8 weeks",
   "level": 0,
   "units": [
     {
-      "slug": "u1-slon-v-komnate",
-      "title": "The elephant in the room"
+      "slug": "u1-dogovor",
+      "title": "The agreement: what is here and what is not"
     },
     {
-      "slug": "u2-anatomiya-myortvoy-praktiki",
-      "title": "Anatomy of a dead practice"
+      "slug": "u2-dyhanie",
+      "title": "Breath: the anchor you always carry"
     },
     {
-      "slug": "u3-svidetelstvovanie",
-      "title": "Witnessing"
+      "slug": "u3-telo",
+      "title": "Body: a scan with your eyes open"
     },
     {
-      "slug": "u4-osoznannost-bez-zakuporki",
+      "slug": "u4-imenovanie",
+      "title": "Thoughts: naming instead of fighting"
+    },
+    {
+      "slug": "u5-neudobnoe",
+      "title": "The uncomfortable: what to do when it surfaces"
+    },
+    {
+      "slug": "u6-bez-zakuporki",
       "title": "Awareness without sealing over"
     },
     {
-      "slug": "u5-krug-praktiki",
-      "title": "The practice circle"
+      "slug": "u7-razgovor-s-ii",
+      "title": "Talking with AI: an interlocutor, not a curator"
     },
     {
-      "slug": "u6-kak-vybirat-shkolu",
-      "title": "How to choose a school"
+      "slug": "u8-krug",
+      "title": "The circle: where all of this leads"
     }
   ],
-  "layout": "prose"
+  "layout": "phases"
 }

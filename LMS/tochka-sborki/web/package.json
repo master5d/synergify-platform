@@ -10,7 +10,8 @@
     "test:watch": "vitest",
     "prebuild": "node scripts/select-pack.mjs",
     "pretest": "node scripts/select-pack.mjs",
-    "select-pack": "node scripts/select-pack.mjs"
+    "select-pack": "node scripts/select-pack.mjs",
+    "postbuild": "node scripts/stamp-sw.mjs"
   },
   "dependencies": {
     "@chenglou/pretext": "^0.0.7",

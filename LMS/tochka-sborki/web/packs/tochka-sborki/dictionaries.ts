@@ -138,6 +138,15 @@ export type Dictionary = {
     submitting: string
     errorMessage: string
   }
+  admission: {
+    eyebrow: string
+    checking: string
+    heading: string
+    body: string[]
+    cta: string
+    ctaHref: string
+    returnHint: string
+  }
   wizard: {
     unit: (i: number, total: number) => string
     back: string
@@ -407,6 +416,15 @@ export const dictionaries: Record<Locale, Dictionary> = {
       dismissHint: 'Не показывать 7 дней',
       backToHome: '← На главную',
     },
+    admission: {
+      eyebrow: 'вход',
+      checking: 'проверяем допуск…',
+      heading: 'Этот курс открыт всем',
+      body: ['Если ты видишь это сообщение — что-то пошло не так: у «Точки Сборки» нет допуска.'],
+      cta: 'На главную →',
+      ctaHref: '/',
+      returnHint: '',
+    },
     wizard: {
       unit: (i: number, total: number) => `Unit ${i} из ${total}`,
       back: '← Назад',
@@ -673,6 +691,15 @@ export const dictionaries: Record<Locale, Dictionary> = {
       continueAction: 'Open on mobile anyway',
       dismissHint: 'Don’t show for 7 days',
       backToHome: '← Back to home',
+    },
+    admission: {
+      eyebrow: 'entrance',
+      checking: 'checking admission…',
+      heading: 'This course is open to everyone',
+      body: ['If you see this, something went wrong: Tochka Sborki has no admission gate.'],
+      cta: 'Home →',
+      ctaHref: '/',
+      returnHint: '',
     },
     wizard: {
       unit: (i: number, total: number) => `Unit ${i} of ${total}`,

@@ -1,6 +1,6 @@
 // packs/living-practice/dictionaries.ts
 // Полный интерфейс Dictionary эталона (32 компонента читают его через стаб lib/dictionaries.ts).
-// Значения — под курс «Практика в живой связи»: соборный тон, де-hustle, ноль обещаний
+// Значения — под курс «Тишина, в которой слышно»: соборный тон, де-hustle, ноль обещаний
 // результата; практика не заменяет терапию, и словарь говорит это вслух.
 // Pack может импортировать ПУБЛИЧНЫЕ модули движка (registry, типы); обратное — только стабы.
 import { REGISTRY } from '../../lib/academy/registry'
@@ -142,6 +142,15 @@ export type Dictionary = {
     submitting: string
     errorMessage: string
   }
+  admission: {
+    eyebrow: string
+    checking: string
+    heading: string
+    body: string[]
+    cta: string
+    ctaHref: string
+    returnHint: string
+  }
   wizard: {
     unit: (i: number, total: number) => string
     back: string
@@ -213,7 +222,7 @@ export type Dictionary = {
 export const dictionaries: Record<Locale, Dictionary> = {
   ru: {
     nav: {
-      brand: 'Практика в живой связи',
+      brand: 'Тишина, в которой слышно',
       syllabus: 'Уроки',
       roadmap: 'Карта курса',
       cheatsheet: 'Памятка',
@@ -236,10 +245,10 @@ export const dictionaries: Record<Locale, Dictionary> = {
       titleLine1: 'Практика',
       titleLine2: 'в живой связи',
       slogan: 'Внимание — свет. Рядом должны быть люди.',
-      subtitle: 'Практики внимания сегодня продаются как приложение: включил запись, подышал, закрыл вкладку. Этот курс — о несущей конструкции, которую такая упаковка убирает: о живом круге, где опыт можно произнести вслух и быть услышанным.',
+      subtitle: 'Практики внимания сегодня продаются как приложение: включил запись, подышал, закрыл вкладку. Здесь — восемь шагов настоящей практики: короткая теория с названными источниками, одна сидячая сессия и разговор о том, что в ней случилось — с ИИ-собеседником между занятиями и с живыми людьми в конце пути.',
       stats: [
-        ['6', 'уроков'],
-        ['~10', 'минут на урок'],
+        ['8', 'шагов'],
+        ['10–20', 'минут практики'],
         ['0', 'обещаний'],
         ['$0', 'стоимость'],
       ],
@@ -254,7 +263,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       { title: 'Практикуешь в одиночку — и что-то не так', body: 'Приложение отмечает дни подряд, дыхание послушное, а внутри тихо копится то, чему некуда деться. Это не твоя ошибка и не «недостаток дисциплины»: одиночному формату просто не хватает несущей детали — других людей.' },
       { title: 'Выбираешь курс или школу практики', body: 'Предложений много, упаковки красивые, и по описанию не отличить живой формат от мёртвого. Курс даёт короткий список вопросов, которые можно задать любой школе до того, как отдать ей своё время.' },
       { title: 'Обжёгся на «осознанности» из маркетплейса', body: 'Проходил программу, где вопросы уходили в пустоту, а всё трудное объявлялось твоей личной неисправностью. То, что тебе было там неуютно, — данные, а не диагноз. Здесь разобрано, как устроена такая упаковка.' },
-      { title: 'Ведёшь группы и хочешь сверить конструкцию', body: 'Ты сам собираешь круги, классы или встречи. Пять признаков живого формата из пятого урока — удобная линейка, чтобы проверить собственную практику на властную вертикаль и страх выхода.' },
+      { title: 'Ведёшь группы и хочешь сверить конструкцию', body: 'Ты сам собираешь круги, классы или встречи. Правила круга и семь признаков нечестного формата из восьмого шага — удобная линейка, чтобы проверить собственную практику на властную вертикаль и страх выхода.' },
     ],
     forWhoTagline: 'Курс никого не зовёт «в путь трансформации». Он предлагает различать — а решение всегда остаётся твоим.',
     chatVsSystem: {
@@ -295,20 +304,20 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ],
     },
     program: {
-      sectionLabel: 'Уроки курса · читаются подряд',
+      sectionLabel: 'Шаги курса · проходятся подряд',
     },
     venn: {
       label: '// программа',
       heading: 'О чём\nэтот курс',
       items: [
-        'Слепое пятно одиночной практики',
-        'MBSR и групповой процесс как метод',
-        'Чек-лист мёртвой практики: четыре органа',
-        'Свидетельствование и граница с терапией',
+        'Договор: польза и риск названы до практики',
+        'Дыхание как якорь и потолок по длительности',
+        'Тело: укороченный проход с открытыми глазами',
+        'Именование мыслей вместо борьбы с ними',
+        'Неудобное: окно толерантности и стоп-сигналы',
         'Осознанность против закупорки и «бумерита»',
-        'Пять правил живого круга',
-        'ИГИ — ритуал группового инсайта',
-        'Вопросы для выбора школы',
+        'Честные границы ИИ-собеседника',
+        'Круг, ИГИ и вопросы для выбора школы',
       ],
       excluded: [
         'обещаний результата',
@@ -328,18 +337,18 @@ export const dictionaries: Record<Locale, Dictionary> = {
     faq: {
       label: 'Вопросы',
       items: [
-        { q: 'Это курс медитации?', a: 'Нет. Техник здесь не преподают. Это карта различий: как отличить практику, которая встречает человека, от практики, которая его изолирует.' },
+        { q: 'Это курс медитации?', a: 'Это курс практики внимания: дыхание, короткий проход по телу, именование мыслей — светски и с названными источниками. Курс опирается на подходы, изученные в программах снижения стресса на основе осознанности, но не является ни одной из них и не носит их имени.' },
         { q: 'Заменяет ли это психотерапию?', a: 'Нет, и не пытается. Есть состояния, с которыми правильно идти к психотерапевту и врачу, — никакая практика этого похода не отменяет. Курс повторяет эту границу не раз.' },
-        { q: 'Сколько времени занимает курс?', a: 'Шесть уроков по ~10 минут чтения. Без дедлайнов, без дневников, без проверяющих.' },
-        { q: 'Что если мне не с кем собрать круг?', a: 'Это нормально и никуда не торопит. Курс читается и в одиночку — а пятый урок останется рядом до момента, когда трое-семеро живых людей найдутся.' },
-        { q: 'Нужен ли опыт практики?', a: 'Нет. Курс полезен и тому, кто ещё выбирает первую школу, и тому, кто много лет практикует один и хочет понять, чего не хватает.' },
+        { q: 'Сколько времени занимает курс?', a: 'Восемь шагов: короткая теория и одна сессия на 10–20 минут в каждом. Без дедлайнов и без проверяющих; пропущенный день — нормальное поведение, а не провал.' },
+        { q: 'Что если мне не с кем собрать круг?', a: 'Это нормально и никуда не торопит. Практика первых семи шагов работает и в одиночку — а восьмой шаг останется рядом до момента, когда трое-семеро живых людей найдутся.' },
+        { q: 'Нужен ли опыт практики?', a: 'Нет. Курс собран для начала с нуля — и полезен тому, кто много лет практикует один и хочет понять, чего не хватает.' },
         { q: 'Почему бесплатно? Где подвох?', a: 'Подвоха нет: курс бесплатный целиком, без «следующих уровней» и ступеней доступа. Честная школа строит свою ненужность — этот курс пробует делать то же самое.' },
       ],
     },
     author: {
       label: 'Об авторе',
       name: 'Александр\nМамаев',
-      bio: 'Собираю школу синергемы. Этот курс — публичная часть разбора одного онлайн-курса осознанности: карта различий, оплаченная собственным временем.',
+      bio: 'Собираю школу синергемы. Этот курс — ответ на разбор одного онлайн-курса осознанности: восемь шагов практики, где польза и риск названы до первой сессии.',
       cta: 'Оставить фидбек →',
     },
     sidebar: {
@@ -379,7 +388,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       submit: 'Отправить фидбек →',
       successMessage: '✓ Спасибо! Фидбек отправлен.',
       errorMessage: 'Что-то пошло не так, попробуй снова.',
-      pageTitle: 'Фидбек — Практика в живой связи',
+      pageTitle: 'Фидбек — Тишина, в которой слышно',
       pageDescription: 'Обратная связь по курсу',
       surveyHeading: 'Как прочитался урок?',
       surveySkipHint: 'Любой вопрос можно пропустить — по желанию.',
@@ -407,6 +416,18 @@ export const dictionaries: Record<Locale, Dictionary> = {
       dismissHint: 'Не показывать 7 дней',
       backToHome: '← На главную',
     },
+    admission: {
+      eyebrow: 'вход',
+      checking: 'дверь узнаёт тебя…',
+      heading: 'Курс открывается после «Точки Сборки»',
+      body: [
+        'В академию нельзя записаться — в неё можно только войти. Не потому, что мы любим закрытые двери: сначала собери свою точку — потом учись её двигать.',
+        'Программа курса открыта: восемь шагов и то, чего в них нет, видно до входа. Сами занятия ждут тех, кто прошёл «Точку Сборки» — открытый и бесплатный курс.',
+      ],
+      cta: 'Пройти Точку Сборки →',
+      ctaHref: 'https://ai.synergify.com',
+      returnHint: 'Уже прошёл? Войди на ai.synergify.com под своим входом и вернись — дверь узнает тебя.',
+    },
     wizard: {
       unit: (i: number, total: number) => `Урок ${i} из ${total}`,
       back: '← Назад',
@@ -424,8 +445,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       comingSoon: 'скоро',
     },
     footer: {
-      tagline: 'Шесть уроков о том, почему честной практике внимания нужны другие люди. Без обещаний результата; практика не заменяет терапию.',
-      topicsLabel: '// уроки',
+      tagline: 'Восемь шагов практики внимания: польза и риск названы до первой сессии, собеседник между занятиями, живой круг в конце. Без обещаний результата; практика не заменяет терапию.',
+      topicsLabel: '// шаги',
       resourcesLabel: '// материалы',
       authorLabel: '// автор',
       courseLabel: '// проект',
@@ -458,7 +479,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       defaultError: 'Что-то пошло не так. Попробуй снова.',
       networkError: 'Ошибка сети. Проверь подключение.',
       footnote: 'Без паролей. Получишь ссылку на почту — один клик и ты внутри.',
-      pageTitle: 'Вход — Практика в живой связи',
+      pageTitle: 'Вход — Тишина, в которой слышно',
       google: 'Войти через Google',
       or: 'или',
     },
@@ -476,7 +497,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
   },
   en: {
     nav: {
-      brand: 'Practice in Living Connection',
+      brand: 'The Silence Where You Can Hear',
       syllabus: 'Lessons',
       roadmap: 'Course map',
       cheatsheet: 'Pocket list',
@@ -499,10 +520,10 @@ export const dictionaries: Record<Locale, Dictionary> = {
       titleLine1: 'Practice in',
       titleLine2: 'Living Connection',
       slogan: 'Attention is light. People should be nearby.',
-      subtitle: 'Attention practices are sold like an app these days: play the recording, breathe, close the tab. This course is about the load-bearing structure that packaging strips away — a living circle where experience can be spoken out loud and heard.',
+      subtitle: 'Attention practices are sold like an app these days: play the recording, breathe, close the tab. Here are eight steps of real practice: short theory with its sources named, one sitting session, and a conversation about what happened in it — with an AI interlocutor between sessions and with living people at the end of the road.',
       stats: [
-        ['6', 'lessons'],
-        ['~10', 'minutes each'],
+        ['8', 'steps'],
+        ['10–20', 'minutes of practice'],
         ['0', 'promises'],
         ['$0', 'cost'],
       ],
@@ -517,7 +538,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       { title: 'You practice alone — and something is off', body: 'The app counts your streak, the breath is obedient, and yet something quietly piles up inside with nowhere to go. That is not your failure and not a "lack of discipline": the solitary format is simply missing a load-bearing part — other people.' },
       { title: 'You are choosing a course or a school', body: 'There are many offers, the packaging is beautiful, and from a description alone a living format is indistinguishable from a dead one. This course gives you a short list of questions to ask any school before giving it your time.' },
       { title: 'A marketplace "mindfulness" burned you once', body: 'You went through a program where questions fell into a void and everything difficult was declared your personal defect. That you felt uneasy there is data, not a diagnosis. Here the anatomy of that packaging is taken apart.' },
-      { title: 'You lead groups and want to check the structure', body: 'You assemble circles, classes, or meetings yourself. The five marks of a living format from lesson five are a handy ruler for checking your own practice for a vertical of power and a frightening exit.' },
+      { title: 'You lead groups and want to check the structure', body: 'You assemble circles, classes, or meetings yourself. The rules of a circle and the seven marks of a dishonest format from step eight are a handy ruler for checking your own practice for a vertical of power and a frightening exit.' },
     ],
     forWhoTagline: 'The course does not call anyone onto a "transformation journey". It offers distinctions — the decision always stays yours.',
     chatVsSystem: {
@@ -558,20 +579,20 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ],
     },
     program: {
-      sectionLabel: 'Course lessons · read in order',
+      sectionLabel: 'Course steps · take them in order',
     },
     venn: {
       label: '// program',
       heading: 'What this\ncourse is about',
       items: [
-        'The blind spot of solitary practice',
-        'MBSR and group process as the method',
-        'The dead-practice checklist: four organs',
-        'Witnessing and the boundary with therapy',
+        'The agreement: benefit and risk named before practice',
+        'Breath as an anchor, and a ceiling on duration',
+        'Body: a shortened pass with the eyes open',
+        'Naming thoughts instead of fighting them',
+        'The uncomfortable: window of tolerance and stop signals',
         'Awareness vs. sealing over and "Boomeritis"',
-        'Five rules of a living circle',
-        'IGI — the group-insight ritual',
-        'Questions for choosing a school',
+        'The honest limits of an AI interlocutor',
+        'The circle, GII, and questions for choosing a school',
       ],
       excluded: [
         'promises of outcomes',
@@ -591,18 +612,18 @@ export const dictionaries: Record<Locale, Dictionary> = {
     faq: {
       label: 'Questions',
       items: [
-        { q: 'Is this a meditation course?', a: 'No. No techniques are taught here. It is a map of distinctions: how to tell a practice that meets a person from a practice that isolates one.' },
+        { q: 'Is this a meditation course?', a: 'It is a course of attention practice: breath, a shortened body pass, naming thoughts — described in secular terms with their sources named. It draws on approaches studied in mindfulness-based stress reduction programmes, but it is not any of them and does not carry their name.' },
         { q: 'Does this replace psychotherapy?', a: 'No, and it does not try to. There are states with which the right move is to see a psychotherapist and a doctor — no practice cancels that visit. The course repeats this boundary more than once.' },
-        { q: 'How much time does it take?', a: 'Six lessons of about 10 minutes of reading each. No deadlines, no diaries, no reviewers.' },
-        { q: 'What if I have no one to form a circle with?', a: 'That is normal, and nothing hurries you. The course reads fine alone — and lesson five will stay right here until three to seven living people are found.' },
-        { q: 'Do I need practice experience?', a: 'No. The course is useful both to someone still choosing a first school and to someone who has practiced alone for years and wants to see what has been missing.' },
+        { q: 'How much time does it take?', a: 'Eight steps: short theory and one session of 10–20 minutes in each. No deadlines and no reviewers; a missed day is normal behaviour, not a failure.' },
+        { q: 'What if I have no one to form a circle with?', a: 'That is normal, and nothing hurries you. The practice of the first seven steps works alone — and step eight will stay right here until three to seven living people are found.' },
+        { q: 'Do I need practice experience?', a: 'No. The course is built to start from zero — and it is useful to someone who has practiced alone for years and wants to see what has been missing.' },
         { q: 'Why free? What’s the catch?', a: 'No catch: the course is fully free, with no "next levels" and no tiers of access. An honest school builds its own unnecessity — this course tries to do the same.' },
       ],
     },
     author: {
       label: 'About the author',
       name: 'Alexander\nMamaev',
-      bio: 'I am assembling the Synergema School. This course is the public part of a close reading of one online mindfulness course: a map of distinctions paid for with my own time.',
+      bio: 'I am assembling the Synergema School. This course is an answer to a close reading of one online mindfulness course: eight steps of practice where benefit and risk are named before the first session.',
       cta: 'Send feedback →',
     },
     sidebar: {
@@ -642,7 +663,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       submit: 'Send feedback →',
       successMessage: '✓ Thanks! Feedback sent.',
       errorMessage: 'Something went wrong, try again.',
-      pageTitle: 'Feedback — Practice in Living Connection',
+      pageTitle: 'Feedback — The Silence Where You Can Hear',
       pageDescription: 'Feedback on the course',
       surveyHeading: 'How did the lesson read?',
       surveySkipHint: "You can skip any question — it's optional.",
@@ -670,6 +691,18 @@ export const dictionaries: Record<Locale, Dictionary> = {
       dismissHint: 'Don’t show for 7 days',
       backToHome: '← Back to home',
     },
+    admission: {
+      eyebrow: 'entrance',
+      checking: 'the door is recognizing you…',
+      heading: 'This course opens after Tochka Sborki',
+      body: [
+        'You cannot sign up for the academy — you can only enter it. Not because we like closed doors: first assemble your point of assembly, then learn to move it.',
+        'The programme is open: the eight steps, and what is not in them, are visible before you enter. The sessions themselves wait for those who completed Tochka Sborki — an open and free course.',
+      ],
+      cta: 'Take Tochka Sborki →',
+      ctaHref: 'https://ai.synergify.com/en/',
+      returnHint: 'Already completed it? Sign in at ai.synergify.com and come back — the door will recognize you.',
+    },
     wizard: {
       unit: (i: number, total: number) => `Lesson ${i} of ${total}`,
       back: '← Back',
@@ -687,8 +720,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       comingSoon: 'coming soon',
     },
     footer: {
-      tagline: 'Six lessons on why an honest attention practice needs other people. No promised outcomes; practice does not replace therapy.',
-      topicsLabel: '// lessons',
+      tagline: 'Eight steps of attention practice: benefit and risk named before the first session, an interlocutor between sessions, a living circle at the end. No promised outcomes; practice does not replace therapy.',
+      topicsLabel: '// steps',
       resourcesLabel: '// resources',
       authorLabel: '// author',
       courseLabel: '// project',
@@ -721,7 +754,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       defaultError: 'Something went wrong. Try again.',
       networkError: 'Network error. Check your connection.',
       footnote: 'No passwords. You get a link in your inbox — one click and you are in.',
-      pageTitle: 'Sign in — Practice in Living Connection',
+      pageTitle: 'Sign in — The Silence Where You Can Hear',
       google: 'Continue with Google',
       or: 'or',
     },

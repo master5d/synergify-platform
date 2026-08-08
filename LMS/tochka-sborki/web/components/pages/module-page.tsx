@@ -11,8 +11,7 @@ import { ModuleRedirect } from '@/components/module-redirect'
 import { Nav } from '@/components/nav'
 import { Footer } from '@/components/footer'
 import { Sidebar } from '@/components/sidebar'
-import { AuthGuard } from '@/components/auth-guard'
-import { IntakeGuard } from '@/components/intake-guard'
+import { UnitGates } from '@/components/unit-gates'
 import { mdxComponents } from '@/components/mdx-components'
 import type { Locale } from '@/lib/dictionaries'
 
@@ -25,8 +24,7 @@ export function ModulePage({ slug, locale }: Props) {
   if (isModule(slug, locale)) {
     const moduleMeta = getModuleMeta(slug, locale)
     return (
-      <AuthGuard locale={locale}>
-        <IntakeGuard locale={locale}>
+      <UnitGates locale={locale}>
         <Nav locale={locale} />
         <div style={{ display: 'flex', minHeight: 'calc(100vh - 3rem)' }}>
           <Sidebar navItems={navItems} currentSlug={slug} locale={locale} />
@@ -35,8 +33,7 @@ export function ModulePage({ slug, locale }: Props) {
           </main>
         </div>
         <Footer locale={locale} topics={topics} />
-        </IntakeGuard>
-      </AuthGuard>
+        </UnitGates>
     )
   }
 

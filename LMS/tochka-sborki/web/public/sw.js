@@ -2,7 +2,10 @@
 // Strategy: network-first (so a frequently-updated course never serves stale pages),
 // falling back to cache, then to a cached offline shell. Bump CACHE on shell changes.
 const CACHE = 'ts-lms-v1'
-const SHELL = ['/', '/offline/']
+// Префикс подставляется на сборке (scripts/stamp-sw.mjs) — сервис-воркер
+// не читает env и обязан кешировать шелл своего курса, а не корня домена.
+const BASE = '__COURSE_BASE_PATH__'
+const SHELL = [`${BASE}/`, `${BASE}/offline/`]
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

@@ -29,9 +29,12 @@ import type { ResolvedBreak } from '@/lib/breaks/types'
 import { todayCount, currentStreak, recentDowngrade } from '@/lib/pacing/derive'
 import { REST_DAILY, REST_STREAK } from '@/lib/pacing/thresholds'
 import { localDate } from '@/lib/quests/daily-store'
+import { COURSE } from '@/lib/course'
 
 const PHASE_COLORS = ['var(--phase-1)', 'var(--phase-2)', 'var(--phase-3)', 'var(--phase-4)']
 const TOTAL_STEPS = 4
+/** Слой геймификации включает курс (course.config.features.rpg). */
+const RPG = COURSE.features.rpg
 
 interface Props {
   moduleSlug: string
@@ -203,9 +206,9 @@ export function UnitWizard({
         {moduleTitle} · {t.unit(unitIndex + 1, totalUnits)}
       </div>
 
-      <IntroCard page="unit" locale={locale} accent={accent} />
+      {RPG && <IntroCard page="unit" locale={locale} accent={accent} />}
 
-      {shardsReady && !done && !chosenMode && (
+      {RPG && shardsReady && !done && !chosenMode && (
         <ModeSelector
           locale={locale}
           accent={accent}
@@ -216,7 +219,7 @@ export function UnitWizard({
         />
       )}
 
-      {currentStep === 0 && framing?.intro && (
+      {RPG && currentStep === 0 && framing?.intro && (
         <div style={{
           borderLeft: '3px solid var(--text-accent)',
           background: 'var(--bg-surface)',
@@ -262,7 +265,7 @@ export function UnitWizard({
         {children}
         {currentStep === 3 && (
           <>
-            {appliedChallenge && (
+            {RPG && appliedChallenge && (
               <div style={{
                 marginTop: '1.5rem',
                 background: 'var(--bg-surface)',
@@ -276,7 +279,7 @@ export function UnitWizard({
                 <div style={{ fontSize: '0.92rem' }}>{appliedChallenge}</div>
               </div>
             )}
-            {hintVisible && framing?.mentorHint && mentor && (
+            {RPG && hintVisible && framing?.mentorHint && mentor && (
               <div style={{
                 display: 'flex',
                 gap: '0.6rem',
@@ -298,7 +301,7 @@ export function UnitWizard({
         )}
       </div>
 
-      {done && framing?.outro && (
+      {RPG && done && framing?.outro && (
         <div style={{
           borderLeft: '3px solid var(--text-accent)',
           background: 'var(--bg-surface)',
@@ -312,7 +315,7 @@ export function UnitWizard({
         </div>
       )}
 
-      {done && chosenMode && (
+      {RPG && done && chosenMode && (
         <CycleComplete
           mode={chosenMode}
           locale={locale}

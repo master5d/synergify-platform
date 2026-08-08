@@ -52,7 +52,7 @@ export const CERTIFICATE: CertificateData = {
   heading: { ru: 'Сертификат о прочтении', en: 'Certificate of Completion' },
   presentedTo: { ru: 'вручается', en: 'presented to' },
   forCompleting: { ru: 'за прочтение курса', en: 'for completing' },
-  courseName: { ru: '«Практика в живой связи»', en: 'Practice in Living Connection' },
+  courseName: { ru: '«Тишина, в которой слышно»', en: 'The Silence Where You Can Hear' },
   milestone: {
     ru: 'Карта различий — в руках.\nКруг собирается из живых людей.',
     en: 'The map of distinctions is in hand.\nA circle is made of living people.',

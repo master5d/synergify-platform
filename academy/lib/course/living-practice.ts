@@ -1,4 +1,4 @@
-// «Практика в живой связи» — первый курс академии. Engine + data: движок читает
+// «Тишина, в которой слышно» — первый курс академии. Engine + data: движок читает
 // данные, копи здесь. Источник — приватный разбор одного онлайн-курса
 // (academy/_notes, gitignored); публичный текст не называет ни курса, ни автора
 // разбора. Публичные книги и программы называются по правилу дома
@@ -29,10 +29,10 @@ export interface CourseCopy {
 }
 
 const COURSE: { name: Bi; tagline: Bi; intro: { ru: string[]; en: string[] } } = {
-  name: { ru: 'Практика в живой связи', en: 'Practice in Living Connection' },
+  name: { ru: 'Тишина, в которой слышно', en: 'The Silence Where You Can Hear' },
   tagline: {
-    ru: 'шесть уроков о том, почему честной практике внимания нужны другие люди',
-    en: 'six lessons on why an honest attention practice needs other people',
+    ru: 'восемь шагов практики внимания: честно про пользу и риск, с собеседником между сессиями',
+    en: 'eight steps of attention practice: honest about benefit and risk, with a companion between sessions',
   },
   intro: {
     ru: [

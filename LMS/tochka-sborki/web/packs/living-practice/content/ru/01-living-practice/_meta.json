@@ -1,34 +1,42 @@
 {
   "module": 1,
-  "title": "Практика в живой связи",
-  "description": "Шесть уроков о том, почему честной практике внимания нужны другие люди",
-  "duration": "60 мин",
+  "title": "Тишина, в которой слышно",
+  "description": "Восемь шагов практики внимания: честно про пользу и риск, с собеседником между сессиями и живым кругом в конце",
+  "duration": "8 недель",
   "level": 0,
   "units": [
     {
-      "slug": "u1-slon-v-komnate",
-      "title": "Слон в комнате"
+      "slug": "u1-dogovor",
+      "title": "Договор: что здесь есть и чего нет"
     },
     {
-      "slug": "u2-anatomiya-myortvoy-praktiki",
-      "title": "Анатомия мёртвой практики"
+      "slug": "u2-dyhanie",
+      "title": "Дыхание: якорь, который всегда с тобой"
     },
     {
-      "slug": "u3-svidetelstvovanie",
-      "title": "Свидетельствование"
+      "slug": "u3-telo",
+      "title": "Тело: сканирование с открытыми глазами"
     },
     {
-      "slug": "u4-osoznannost-bez-zakuporki",
+      "slug": "u4-imenovanie",
+      "title": "Мысли: именование вместо борьбы"
+    },
+    {
+      "slug": "u5-neudobnoe",
+      "title": "Неудобное: что делать, когда поднялось"
+    },
+    {
+      "slug": "u6-bez-zakuporki",
       "title": "Осознанность без закупорки"
     },
     {
-      "slug": "u5-krug-praktiki",
-      "title": "Круг практики"
+      "slug": "u7-razgovor-s-ii",
+      "title": "Разговор с ИИ: собеседник, а не куратор"
     },
     {
-      "slug": "u6-kak-vybirat-shkolu",
-      "title": "Как выбирать школу"
+      "slug": "u8-krug",
+      "title": "Круг: куда всё это ведёт"
     }
   ],
-  "layout": "prose"
+  "layout": "phases"
 }

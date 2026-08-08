@@ -9,6 +9,7 @@ import { activeEasterEgg, type EasterEgg } from '@/lib/easter-eggs'
 import { useRpgMode } from '@/lib/use-rpg-mode'
 import { SkipLink } from '@/components/skip-link'
 import { SettingsMenu } from '@/components/settings-menu'
+import { COURSE } from '@/lib/course'
 
 interface Props { locale?: Locale }
 
@@ -147,15 +148,15 @@ export function Nav({ locale: localeProp }: Props = {}) {
       </Link>
       <div style={{ display: 'flex', gap: '1rem', fontSize: '0.875rem', alignItems: 'center' }}>
         <div className="nav-secondary-links" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', minWidth: 0 }}>
-        {email && (() => { const h = `${locale === 'en' ? '/en' : ''}/dashboard/`; return <Link href={h} style={navLinkStyle(h)}>{plain('navQuestLog', t.nav.questLog)}</Link> })()}
-        {email && (() => { const h = `${locale === 'en' ? '/en' : ''}/character/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.profile}</Link> })()}
-        {email && (() => { const h = `${locale === 'en' ? '/en' : ''}/alumni/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.synergems}</Link> })()}
+        {COURSE.features.rpg && email && (() => { const h = `${locale === 'en' ? '/en' : ''}/dashboard/`; return <Link href={h} style={navLinkStyle(h)}>{plain('navQuestLog', t.nav.questLog)}</Link> })()}
+        {COURSE.features.rpg && email && (() => { const h = `${locale === 'en' ? '/en' : ''}/character/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.profile}</Link> })()}
+        {COURSE.features.rpg && email && (() => { const h = `${locale === 'en' ? '/en' : ''}/alumni/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.synergems}</Link> })()}
         {(() => { const h = `${locale === 'en' ? '/en' : ''}/syllabus/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.syllabus}</Link> })()}
         {(() => { const h = `${locale === 'en' ? '/en' : ''}/roadmap/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.roadmap}</Link> })()}
         {(() => { const h = `${locale === 'en' ? '/en' : ''}/cheatsheet/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.cheatsheet}</Link> })()}
         {(() => { const h = `${locale === 'en' ? '/en' : ''}/feedback/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.feedback}</Link> })()}
         {(() => { const h = `${locale === 'en' ? '/en' : ''}/support/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.support}</Link> })()}
-        {(() => { const h = `${locale === 'en' ? '/en' : ''}/certificate/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.certificate} <span aria-hidden="true">◆</span></Link> })()}
+        {COURSE.features.certificate && (() => { const h = `${locale === 'en' ? '/en' : ''}/certificate/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.certificate} <span aria-hidden="true">◆</span></Link> })()}
         </div>
 
         {/* Language switcher */}

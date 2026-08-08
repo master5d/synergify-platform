@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { COURSE } from '@/lib/course'
+import { BASE_PATH, assetPath } from '@/lib/base-path'
 
 // Static-exported to /manifest.webmanifest at build (output: 'export').
 // force-static is required for metadata routes under output: 'export'.
@@ -11,8 +12,8 @@ export default function manifest(): MetadataRoute.Manifest {
     name: COURSE.fullName.ru,
     short_name: COURSE.shortName,
     description: 'Открытый курс по AI-разработке и агентному программированию.',
-    start_url: '/',
-    scope: '/',
+    start_url: `${BASE_PATH}/`,
+    scope: `${BASE_PATH}/`,
     display: 'standalone',
     orientation: 'portrait',
     lang: 'ru',

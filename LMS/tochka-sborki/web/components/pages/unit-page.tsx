@@ -11,8 +11,7 @@ import { Footer } from '@/components/footer'
 import { Sidebar } from '@/components/sidebar'
 import { UnitWizard } from '@/components/unit-wizard'
 import { UnitProse } from '@/components/unit-prose'
-import { AuthGuard } from '@/components/auth-guard'
-import { IntakeGuard } from '@/components/intake-guard'
+import { UnitGates } from '@/components/unit-gates'
 import { MobileGate } from '@/components/mobile-gate'
 import { mdxComponents } from '@/components/mdx-components'
 import type { Locale } from '@/lib/dictionaries'
@@ -32,8 +31,7 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
   const Shell = unitLayout(moduleMeta) === 'prose' ? UnitProse : UnitWizard
 
   return (
-    <AuthGuard locale={locale}>
-      <IntakeGuard locale={locale}>
+    <UnitGates locale={locale}>
       <MobileGate locale={locale}>
       <Nav locale={locale} />
       <div style={{ display: 'flex', minHeight: 'calc(100vh - 3rem)' }}>
@@ -58,7 +56,6 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
       </div>
       <Footer locale={locale} topics={navItems.filter(i => i.type === 'module').map(i => ({ slug: i.slug, title: i.title }))} />
       </MobileGate>
-      </IntakeGuard>
-    </AuthGuard>
+      </UnitGates>
   )
 }
