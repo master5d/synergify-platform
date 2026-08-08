@@ -13,12 +13,22 @@ cutover 2026-08-06; mc_hub остался личным контуром mamaev.c
 - **`LMS/tochka-sborki/web/`** — LMS-движок (Next.js 16, static export). Собирает сайт
   активного pack'а: env `COURSE_PACK` → alias `@pack` → `packs/<slug>/` (`lib/pack.ts`).
 - **`…/web/packs/`** — course-pack'и (чистые данные, ноль кода движка):
-  - `tochka-sborki/` — «Точка Сборки» → ai.synergify.com (live);
-  - `living-practice/` — «Практика в живой связи» (coming-soon; курс также живёт на
-    academy.synergify.com/praktika до решения о домене).
-  Контракт pack'а: `course.config` · `dictionaries` · `materials` · `manifest`
-  (исполняемые правила тона курса) · `skins*` · `course/*` · `content/{ru,en}`.
-  Граница enforced: `lib/boundary.test.ts` + `lib/content/manifest-guard.test.ts`.
+  - `tochka-sborki/` — «Точка Сборки» → ai.synergify.com;
+  - `living-practice/` — «Тишина, в которой слышно» → academy.synergify.com/praktika.
+  Контракт pack'а: `course.config` (identity + `features` + `gates`) · `dictionaries` ·
+  `materials` · `manifest` (исполняемые правила тона) · `skins*` · `course/*` ·
+  `content/{ru,en}` (в `_meta.json` — `layout: phases | prose`).
+  Граница enforced: `lib/boundary.test.ts`, `lib/content/manifest-guard.test.ts`,
+  `lib/pack-resolution.test.ts`, `lib/course-features.test.ts`, `lib/base-path.test.ts`.
+
+  **Курс объявляет сам:** разметку урока (фазовый мастер или сплошная проза), слои
+  движка (`features.rpg`, `features.certificate`) и двери (`gates.auth/intake/admission`).
+  Ядро гейтит поверхности по флагам, а НЕ по имени pack'а.
+
+  ⚠ **Активный pack материализуется в `packs/_active`** (`scripts/select-pack.mjs`,
+  вызывается из `prebuild`/`pretest`). Подпути `@pack/...` резолвятся через tsconfig
+  `paths`, который статичен: до этого механизма `COURSE_PACK` подменял только контент,
+  а словари и конфиг молча приезжали от дефолтного курса.
 - **`LMS/registry.json`** — SoT курсов (slug/имя/домен/status); читается движком,
   академией и витриной.
 - **`workers/`** — platform-API, один на все курсы (auth/progress/admission/feedback/
@@ -38,17 +48,36 @@ cutover 2026-08-06; mc_hub остался личным контуром mamaev.c
   → research/draft/review CLI → PR; мерджит владелец после зелёного CI.
   SOP: `LMS/_template/AUTHORING-MODULE.md`.
 
+## Путевой роутинг и склейка домена
+
+Курс может жить не в корне домена, а в подпути школы: `COURSE_BASE_PATH=/praktika`
+проставляет префикс ссылкам, ассетам и PWA-манифесту, а сервис-воркеру — postbuild-шаг
+`scripts/stamp-sw.mjs` (он статический файл, `basePath` его не трогает). Вызовы `/api/*`
+остаются в корне домена: platform-API один на все курсы.
+
+`scripts/merge-course.mjs <pack> <sub-path>` вкладывает экспорт курса в экспорт оболочки
+(паттерн блог→хаб). ⚠ При `basePath` Next кладёт страницы в КОРЕНЬ `out/`, а префикс
+ставит только в ссылках — поэтому каталог целиком садится в подпуть. EN-локаль курса
+живёт ВНУТРИ его подпути (`/praktika/en/`), у курса своя маршрутизация.
+
 ## CI (`.github/workflows/deploy.yml`)
 
-push в main → deploy-web (ТС) · deploy-academy · deploy-workers + **build-packs** —
-матрица остальных pack'ов (build+vitest под их `COURSE_PACK`): апгрейд движка
-пересобирает все курсы. Новый pack = slug в matrix. Секрет: `CLOUDFLARE_API_TOKEN`.
+push в main → deploy-web (ТС) · deploy-academy (оболочка + курс + склейка) ·
+deploy-workers + **build-packs** — матрица остальных pack'ов (build+vitest под их
+`COURSE_PACK`) с кросс-проверкой изоляции бренда. Апгрейд движка пересобирает все курсы.
+Новый pack = slug в matrix. Секрет: `CLOUDFLARE_API_TOKEN`.
 
 ## Локальная проверка
 
 ```bash
 cd LMS/tochka-sborki/web
-npx vitest run                                # активный pack (дефолт tochka-sborki)
-COURSE_PACK=living-practice npx vitest run    # любой другой pack
+npm test                                      # активный pack (дефолт tochka-sborki)
+COURSE_PACK=living-practice npm test          # любой другой pack
 COURSE_PACK=living-practice npm run build
+
+# ⚠ Только через npm: pretest/prebuild материализуют packs/_active.
+# Голый `npx vitest run` возьмёт тот pack, что лежит в _active с прошлого раза —
+# гвард pack-resolution об этом скажет, но лучше не наступать.
+# ⚠ Windows/git-bash: COURSE_BASE_PATH=/praktika превращается в C:/Program Files/...
+# (MSYS переписывает путь) — префиксные сборки гонять из PowerShell.
 ```

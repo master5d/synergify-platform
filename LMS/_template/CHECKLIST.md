@@ -5,7 +5,15 @@ Everything a new course must provide. Engine code is reused unchanged; the items
 
 ## 1. Identity — `web/packs/<pack>/course.config.ts` (Ф1: было `lib/course.ts`)
 - [ ] `COURSE.name`, `fullName` (ru+en), `domain` (https, no trailing slash), `locales`, `publisher`.
-- [ ] Активный pack выбирается `COURSE_PACK` (alias `@pack`, `lib/pack.ts`); дефолт tochka-sborki.
+- [ ] Активный pack выбирается `COURSE_PACK`; он материализуется в `packs/_active`
+      (`scripts/select-pack.mjs` из `prebuild`/`pretest`) — туда смотрят tsconfig, vitest и next.
+- [ ] `COURSE.features` — какие слои движка включены (`rpg`, `certificate`). Курс без RPG
+      не получает квест-лог, режимы прохождения и шарды.
+- [ ] `COURSE.gates` — какие двери на уроках (`auth`, `intake`, `admission`). Курс школы:
+      `auth: true, intake: false, admission: true`.
+- [ ] `COURSE.domain` совпадает с `url` записи в `LMS/registry.json` (drift-guard).
+      Курс в подпути домена школы: домен вида `https://<школа>/<подпуть>` +
+      сборка с `COURSE_BASE_PATH=/<подпуть>` + склейка `scripts/merge-course.mjs`.
 - Single source for SEO (`sitemap.ts`/`robots.ts`) + PWA manifest. Start from `course.config.template.ts`.
 - [ ] Register the course in `LMS/registry.json` (slug / name / tagline / url / status / locales). Values must match `COURSE` — the engine's registry drift-guard test (`lib/academy/registry.test.ts`) enforces url, name.ru and locales.
 - [ ] Progress API: send your `course` slug in `/api/progress/*` bodies and namespace lesson slugs (e.g. `<course>/<lesson>`) — the `progress` PK is `(user_id, lesson_slug)` without course, so bare-slug collisions across courses are prevented by convention.
@@ -29,7 +37,9 @@ Everything a new course must provide. Engine code is reused unchanged; the items
 
 ## 6. Content — `web/packs/<pack>/content/{ru,en}/<NN-module>/`
 - [ ] One folder per module, numbered `NN-slug` (e.g. `01-intro`). See `content/{ru,en}/01-example/`.
-- [ ] `_meta.json` per module: `{ module, title, description, duration, level, units:[{slug,title}] }`.
+- [ ] `_meta.json` per module: `{ module, title, description, duration, level, units:[{slug,title}] }`
+      + `layout: "phases" | "prose"` — фазовый мастер (4 фазы, `<Phase>` в каждом юните)
+      или сплошная проза. Гвард сверяет заявленную разметку с телами уроков.
 - [ ] `uN-slug.mdx` per unit: frontmatter `{ title, unit, module, duration }` + body. Mirror ru→en.
 - [ ] Reflection phases (`<Phase type="activation|reflection">`) are bisociative/mental — no "write/type" verbs (a drift-guard test enforces this).
 
