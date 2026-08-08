@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import { Nav } from '@/components/nav'
 import { SupportForm } from '@/components/support/support-form'
 import { buildSupportContent } from '@/lib/checkout/support-content'
-import { COURSE } from '@/lib/course'
+import { pageTitle } from '@/lib/page-title'
 
-export const metadata: Metadata = { title: `Support — ${COURSE.shortName}`, description: 'Support the course creator.' }
+export const metadata: Metadata = { title: pageTitle('Support'), description: 'Support the course creator.' }
 
 export default function Page() {
   const c = buildSupportContent('en')

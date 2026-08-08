@@ -4,10 +4,10 @@ import { SyllabusTree } from '@/components/syllabus-tree'
 import { MaterialsSection } from '@/components/materials-section'
 import { getAllModules } from '@/lib/content'
 import { COURSE_MATERIALS } from '@/lib/materials'
-import { COURSE } from '@/lib/course'
+import { pageTitle } from '@/lib/page-title'
 
 export const metadata: Metadata = {
-  title: `Программа — ${COURSE.shortName}`,
+  title: pageTitle('Программа'),
   description: 'Полная программа курса: модули, юниты и материалы.',
 }
 

@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Nav } from '@/components/nav'
 import { buildSupportContent } from '@/lib/checkout/support-content'
-import { COURSE } from '@/lib/course'
+import { pageTitle } from '@/lib/page-title'
 
-export const metadata: Metadata = { title: `Спасибо — ${COURSE.shortName}` }
+export const metadata: Metadata = { title: pageTitle('Спасибо') }
 
 export default function Page() {
   const c = buildSupportContent('ru')

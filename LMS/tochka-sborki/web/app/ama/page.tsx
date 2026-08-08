@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import { Nav } from '@/components/nav'
 import { CaptureFormBlock } from '@/components/capture-form-block'
 import { getOfficeHours } from '@/lib/course/office-hours'
-import { COURSE } from '@/lib/course'
+import { pageTitle } from '@/lib/page-title'
 
 export const metadata: Metadata = {
-  title: `Открытый разбор (AMA) — ${COURSE.shortName}`,
+  title: pageTitle('Открытый разбор (AMA)'),
   description:
     'Живая групповая встреча: приноси вопросы по агентам, стеку и застрявшим проектам. Бесплатно, запись по почте.',
 }

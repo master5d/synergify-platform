@@ -7,7 +7,7 @@ import {
   isModule,
 } from '@/lib/content'
 import { ModulePage } from '@/components/pages/module-page'
-import { COURSE } from '@/lib/course'
+import { pageTitle } from '@/lib/page-title'
 
 interface Props { params: Promise<{ slug: string }> }
 
@@ -24,10 +24,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   if (isModule(slug, 'en')) {
     const meta = getModuleMeta(slug, 'en')
-    return { title: `${meta.title} — ${COURSE.shortName}`, description: meta.description }
+    return { title: pageTitle(`${meta.title}`), description: meta.description }
   }
   const { meta } = getLessonBySlug(slug, 'en')
-  return { title: `${meta.title} — ${COURSE.shortName}`, description: meta.description }
+  return { title: pageTitle(`${meta.title}`), description: meta.description }
 }
 
 export default async function Page({ params }: Props) {

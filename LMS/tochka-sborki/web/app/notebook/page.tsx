@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import { Nav } from '@/components/nav'
 import { NotebookPack } from '@/components/notebook-pack'
-import { COURSE } from '@/lib/course'
+import { pageTitle } from '@/lib/page-title'
 
 export const metadata: Metadata = {
-  title: `Пакет тетрадки — ${COURSE.shortName}`,
+  title: pageTitle('Пакет тетрадки'),
   description:
     'Открытый пакет для source-grounded тетрадки: что загрузить, какие промпты дать и как проверить ответы цитатами в источниках.',
 }

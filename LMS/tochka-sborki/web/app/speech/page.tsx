@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import { Nav } from '@/components/nav'
 import { SpeechSyllabus } from '@/components/speech-syllabus'
-import { COURSE } from '@/lib/course'
+import { pageTitle } from '@/lib/page-title'
 
 export const metadata: Metadata = {
-  title: `Ораторское мастерство — ${COURSE.shortName}`,
+  title: pageTitle('Ораторское мастерство'),
   description: 'Шесть уроков ораторского мастерства: подготовка, структура, приёмы, голос, запоминание, работа с залом. Служа, а не манипулируя.',
 }
 

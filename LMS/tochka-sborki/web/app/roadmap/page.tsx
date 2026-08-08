@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { MdxPage } from '@/components/pages/mdx-page'
-import { COURSE } from '@/lib/course'
+import { pageTitle } from '@/lib/page-title'
 
 export const metadata: Metadata = {
-  title: `Roadmap — ${COURSE.shortName}`,
+  title: pageTitle('Roadmap'),
   description: 'Карта пути от нонкодера до AI-generalist\'а — 7 элективных тем',
 }
 

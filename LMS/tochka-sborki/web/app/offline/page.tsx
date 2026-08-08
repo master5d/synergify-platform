@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { COURSE } from '@/lib/course'
+import { pageTitle } from '@/lib/page-title'
 
 export const metadata: Metadata = {
-  title: `Офлайн — ${COURSE.shortName}`,
+  title: pageTitle('Офлайн'),
   robots: { index: false, follow: false },
 }
 
