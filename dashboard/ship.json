@@ -1,0 +1,23 @@
+{
+  "name": "lms-engine",
+  "emoji": "🏫",
+  "title": "Synergify LMS",
+  "tab": {
+    "mode": "embed",
+    "url": "https://academy.synergify.com"
+  },
+  "links": [
+    {
+      "label": "academy",
+      "url": "https://academy.synergify.com"
+    },
+    {
+      "label": "ai",
+      "url": "https://ai.synergify.com"
+    },
+    {
+      "label": "synergify",
+      "url": "https://synergify.com"
+    }
+  ]
+}
