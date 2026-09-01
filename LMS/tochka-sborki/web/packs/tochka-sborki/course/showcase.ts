@@ -86,12 +86,17 @@ const OTHERS_NOTE: Bi = {
   en: 'Open-source projects built by other people — not our stories, not an endorsement. They are here so you have something to compare your own idea against: open one, look at how it is built, take the approach.',
 }
 const CTA: Bi = { ru: 'Начать свой путь →', en: 'Start your path →' }
-const VIDEO: { url: string | null; poster: string | null; caption: Bi; captions: string | null; transcript: Bi | null } = {
-  url: null,    // впиши YouTube/Vimeo watch-URL или путь к .mp4 — встроится автоматически
-  poster: null, // путь к постеру в /public, например '/showcase-poster.jpg'
-  caption: { ru: 'Короткий ролик о сути — скоро', en: 'A short film about the essence — coming soon' },
-  captions: null,   // путь к .vtt в /public для self-hosted .mp4 (для embed субтитры — на стороне платформы)
-  transcript: null, // { ru, en } полная расшифровка ролика — показывается раскрывающимся блоком
+// Витрина курса (video-fab, заказ mc_hub, 2026-09-01): EN-озвучка (Qwen3-TTS, Apache-2.0),
+// типографика на языке локали, субтитры/транскрипт из той же таблицы реплик. Синтетика — да.
+const VIDEO: { url: Bi | null; poster: Bi | null; caption: Bi; captions: Bi | null; transcript: Bi | null } = {
+  url: { ru: '/showcase/tochka-sborki-ru.mp4', en: '/showcase/tochka-sborki-en.mp4' },
+  poster: { ru: '/showcase/tochka-sborki-ru-poster.png', en: '/showcase/tochka-sborki-en-poster.png' },
+  caption: { ru: 'Короткий ролик о сути курса — 68 секунд', en: 'A short film about the essence of the course — 68 seconds' },
+  captions: { ru: '/captions/tochka-sborki-ru.vtt', en: '/captions/tochka-sborki-en.vtt' },
+  transcript: {
+    ru: "1. Ты просил AI помочь с проектом. И получил стену текста, из которой ничего не собирается.\n2. Дело не в модели. Дело в том, что мы командуем — а агенту нужно делегировать.\n3. Software один ноль — код писали руками. Два ноль — машины учились на данных.\n4. Три ноль — код пишет агент. Твоя работа: ставить задачу, держать контекст и проверять.\n5. Формулировка задачи — главный навык. Ему учат отдельной встречей.\n6. Контекст и память: без них агент забывает всё через пять минут.\n7. Рабочая среда, в которой ты живёшь с агентом каждый день.\n8. Инструменты расширения: от пользователя Claude Code — к архитектору своей системы.\n9. Восемь встреч. Не лекции — каждая заканчивается экспериментом у тебя на машине.\n10. Впервые в AI-кодинге? Есть kickstart — он снимает нагрузку на старте.\n11. Ты уходишь не с конспектом, а с собственной рабочей системой.\n12. Точка сборки. Начни с первого урока.",
+    en: "1. You asked AI to help with your project. You got a wall of text that builds into nothing.\n2. It is not the model. We give commands, when an agent needs delegation.\n3. Software one point oh — we wrote every line. Two point oh — machines learned from data.\n4. Three point oh — the agent writes the code. Your work is framing, context, and verification.\n5. Framing the task is the core skill. One meeting is devoted to it.\n6. Context and memory: without them the agent forgets everything in five minutes.\n7. The working environment you live in with your agent every day.\n8. Extension tools: from Claude Code user to architect of your own system.\n9. Eight meetings. Not lectures — each ends with an experiment on your own machine.\n10. New to AI coding? There is a kickstart that lowers the load at the start.\n11. You leave with a working system of your own, not with notes.\n12. Tochka sborki. Start with the first lesson.",
+  },
 }
 
 const DREAM_CASES: ShowcaseCase[] = [
@@ -267,9 +272,9 @@ export function getShowcase(locale: Locale): ShowcaseVM {
   return {
     label: LABEL[L],
     video: (() => {
-      const source = resolveVideoSource(VIDEO.url)
+      const source = resolveVideoSource(VIDEO.url?.[L] ?? null)
       return {
-        source, poster: VIDEO.poster, caption: VIDEO.caption[L],
+        source, poster: VIDEO.poster?.[L] ?? null, caption: VIDEO.caption[L],
         captionTrack: resolveCaptionTrack(source?.kind ?? 'embed', VIDEO.captions, L),
         transcript: resolveTranscript(VIDEO.transcript, L),
       }

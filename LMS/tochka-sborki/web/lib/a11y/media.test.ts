@@ -17,6 +17,16 @@ describe('resolveCaptionTrack', () => {
       src: '/captions/x-en.vtt', srclang: 'en', label: 'Captions',
     })
   })
+  // Дефект (аудит video-fab 2026-08-09): одна строка на оба языка отдавалась с srclang
+  // активной локали — англоязычный зритель получал русский VTT под видом английского.
+  it('picks the active-locale file from a bilingual vtt map', () => {
+    const vtt = { ru: '/captions/x-ru.vtt', en: '/captions/x-en.vtt' }
+    expect(resolveCaptionTrack('file', vtt, 'en')).toEqual({ src: '/captions/x-en.vtt', srclang: 'en', label: 'Captions' })
+    expect(resolveCaptionTrack('file', vtt, 'ru')).toEqual({ src: '/captions/x-ru.vtt', srclang: 'ru', label: 'Русские субтитры' })
+  })
+  it('a bilingual map missing the active locale yields null, not a mislabeled track', () => {
+    expect(resolveCaptionTrack('file', { ru: '/captions/x-ru.vtt', en: '' }, 'en')).toBeNull()
+  })
 })
 
 describe('resolveTranscript', () => {
