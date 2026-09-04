@@ -1,6 +1,6 @@
-// 2026-09-04 (аудит лабы): ключ уехал из query-строки в заголовок x-goog-api-key.
-// URL целиком попадает в логи, метрики и Referer — секрет там жить не может (SOVRN §11.5).
-// Заодно AbortSignal.timeout: сетевой вызов без потолка вешает воркер (§11.6).
+// 2026-09-04 (Task 9): generateSheetProse/classifyFilmSkin/buildProsePrompt переехали
+// в llm-service (прямые вызовы Gemini больше не живут в воркере). Здесь остаётся только
+// fallbackProse — шаблонная деградация на случай отказа сервиса, её знает воркер, не сервис.
 import { SKINS_META } from '../../../LMS/tochka-sborki/web/lib/rpg/skins-meta'
 import type { WorldSkin } from '../../../LMS/tochka-sborki/web/lib/rpg/types'
 
@@ -31,66 +31,5 @@ export function fallbackProse(i: ProseInput): Omit<Prose, 'source'> {
     firstQuest: ru ? 'Создай свой первый рабочий AI-инструмент.' : 'Build your first working AI tool.',
     finalBoss: ru ? 'Система, которая работает без твоего ежедневного участия.'
                   : 'A system that runs without your daily input.',
-  }
-}
-
-export async function generateSheetProse(
-  input: ProseInput, apiKey: string, fetchImpl: typeof fetch = fetch,
-): Promise<Prose> {
-  const model = 'gemini-2.5-pro'
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`
-  const prompt = buildProsePrompt(input)
-  try {
-    const res = await fetchImpl(url, {
-      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-      signal: AbortSignal.timeout(60_000),
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { responseMimeType: 'application/json', temperature: 0.8 },
-      }),
-    })
-    if (!res.ok) throw new Error(`gemini ${res.status}`)
-    const data = await res.json() as any
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text
-    const parsed = JSON.parse(text)
-    return {
-      legendaryTitle: parsed.legendaryTitle, backstory: parsed.backstory,
-      firstQuest: parsed.firstQuest, finalBoss: parsed.finalBoss, source: 'gemini',
-    }
-  } catch {
-    return { ...fallbackProse(input), source: 'template' }
-  }
-}
-
-function buildProsePrompt(i: ProseInput): string {
-  return [
-    `You write RPG character-sheet prose for a learning platform.`,
-    `Language: ${i.language}. Register: ${i.register ?? 'neutral'}. World skin: ${i.worldSkin}. Class: ${i.charClass}. Niche: ${i.niche ?? 'n/a'}.`,
-    `Learner aspirational figure (G11): ${i.aspirational ?? 'n/a'}.`,
-    `Desired first win: ${i.firstWin ?? 'n/a'}. Success definition: ${i.successDef ?? 'n/a'}.`,
-    `Return STRICT JSON: {"legendaryTitle","backstory","firstQuest","finalBoss"}.`,
-    `Tone must match the world skin. Backstory uses the aspirational figure. finalBoss frames the ultimate challenge.`,
-  ].join('\n')
-}
-
-export async function classifyFilmSkin(
-  film: string, apiKey: string, fetchImpl: typeof fetch = fetch,
-): Promise<string> {
-  const model = 'gemini-2.0-flash'
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`
-  const skins = 'slavic-myth|dark-fantasy|cyber-noir|space-opera|anime-quest|soviet-heroic|mystic-arcane|wanderer'
-  try {
-    const res = await fetchImpl(url, {
-      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-      signal: AbortSignal.timeout(60_000),
-      body: JSON.stringify({ contents: [{ parts: [{ text:
-        `Map this film/series to ONE world skin from [${skins}]. Reply with only the skin key. Film: "${film}"` }] }] }),
-    })
-    if (!res.ok) throw new Error(String(res.status))
-    const data = await res.json() as any
-    const out = (data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '').trim().toLowerCase()
-    return skins.split('|').includes(out) ? out : 'wanderer'
-  } catch {
-    return 'wanderer'
   }
 }

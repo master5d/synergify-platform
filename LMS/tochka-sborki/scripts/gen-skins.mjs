@@ -1,17 +1,42 @@
 // scripts/gen-skins.mjs
-// Dev-time only. Generates web/lib/rpg/skins/<skin>.json via Gemini.
-// Usage: GEMINI_API_KEY=... node scripts/gen-skins.mjs [skin1 skin2 ...]
-// 2026-09-04 (аудит лабы): ключ уехал из query-строки в заголовок x-goog-api-key.
-// URL целиком попадает в логи, метрики и Referer — секрет там жить не может (SOVRN §11.5).
-// Заодно AbortSignal.timeout: сетевой вызов без потолка вешает воркер (§11.6).
+// Dev-time only. Generates web/lib/rpg/skins/<skin>.json via the SOVERN LiteLLM gateway.
+// Usage: LITELLM_KEY=... node scripts/gen-skins.mjs [skin1 skin2 ...]
+// 2026-09-04 (Task 9): прямой вызов Gemini убран из lms-engine — теперь идём через
+// гейтвей (SOVRN LLM routing hard rule), как и весь остальной код лабы. Ключ и модель
+// больше не наши секреты/имена: пул задаётся алиасом, ключ — LITELLM_KEY, а не
+// провайдерский GEMINI_API_KEY.
 import { writeFileSync, readFileSync, readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
-const KEY = process.env.GEMINI_API_KEY
-if (!KEY) { console.error('Set GEMINI_API_KEY'); process.exit(1) }
+const KEY = process.env.LITELLM_KEY
+if (!KEY) { console.error('Set LITELLM_KEY'); process.exit(1) }
+const GATEWAY = process.env.LITELLM_URL || 'https://sovrn-mini.taile5b8dd.ts.net/v1'
+const POOL = process.env.SKINS_POOL || 'google/gemini-3-flash-preview'
+
+// Тот же приём, что в llm-service/src/gateway.ts: модель иногда оборачивает JSON
+// в ```json-забор — снимаем его перед парсингом, а не падаем на JSON.parse.
+function stripFence(text) {
+  const s = text.trim()
+  if (!s.startsWith('```')) return s
+  const withoutOpen = s.replace(/^```[a-zA-Z]*\r?\n?/, '')
+  return withoutOpen.replace(/\r?\n?```$/, '').trim()
+}
+
+async function callGateway(prompt, temperature) {
+  const res = await fetch(`${GATEWAY}/chat/completions`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${KEY}` },
+    signal: AbortSignal.timeout(90_000),
+    body: JSON.stringify({ model: POOL, messages: [{ role: 'user', content: prompt }],
+      temperature, max_tokens: 4000 }),
+  })
+  if (!res.ok) throw new Error(`gateway ${res.status}`)
+  const data = await res.json()
+  return JSON.parse(stripFence(data.choices[0].message.content))
+}
 
 const MODULE_SLUGS = [
   '00-kickstart','01-introduction','02-setup-guide','03-stack-selection',
@@ -47,13 +72,7 @@ async function gen(skin) {
     `Russian is primary; keep technical terms (API, prompt, agent, MCP) untranslated. Keep names short (zone ≤ 3 words, quest ≤ 7 words).`,
     `Return STRICT JSON: {"zoneNames":{"<slug>":{"ru","en"}},"questTitles":{"<slug>":{"ru","en"}}} covering all 9 slugs.`,
   ].join('\n')
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent`
-  const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': KEY },
-      signal: AbortSignal.timeout(60_000),
-    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: 'application/json', temperature: 0.85 } }) })
-  if (!res.ok) throw new Error(`${skin}: gemini ${res.status}`)
-  const data = await res.json()
-  const parsed = JSON.parse(data.candidates[0].content.parts[0].text)
+  const parsed = await callGateway(prompt, 0.85)
   const pack = { skin, zoneNames: parsed.zoneNames, questTitles: parsed.questTitles }
   // validate coverage
   for (const slug of MODULE_SLUGS) {
@@ -92,15 +111,7 @@ async function genUnitsForModule(skin, module) {
     `Russian is primary; keep technical terms (API, prompt, agent, MCP) untranslated. Keep each field concise.`,
     `Return STRICT JSON: {"<slug>":{"intro":{"ru","en"},"mentorHint":{"ru","en"},"outro":{"ru","en"}}} covering every unit slug.`,
   ].join('\n')
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent`
-  const res = await fetch(url, {
-    method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': KEY },
-      signal: AbortSignal.timeout(60_000),
-    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: 'application/json', temperature: 0.85 } }),
-  })
-  if (!res.ok) throw new Error(`${skin}/${module}: gemini ${res.status}`)
-  const data = await res.json()
-  const parsed = JSON.parse(data.candidates[0].content.parts[0].text)
+  const parsed = await callGateway(prompt, 0.85)
   const out = {}
   for (const u of units) {
     const f = parsed[u.slug]

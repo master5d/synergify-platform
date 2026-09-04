@@ -1,8 +1,10 @@
 import { scoreProfile } from '../../../LMS/tochka-sborki/web/lib/intake/scoring'
 import { scoreProfileV2 } from '../../../LMS/tochka-sborki/web/lib/intake/scoring-v2'
 import { requiredIds } from '../../../LMS/tochka-sborki/web/lib/intake/instrument'
-import { generateSheetProse, classifyFilmSkin } from '../lib/gemini'
+import { callLlm } from '../lib/llm-client'
+import { fallbackProse } from '../lib/gemini'
 import type { Answers, InstrumentVersion, Locale } from '../../../LMS/tochka-sborki/web/lib/intake/types'
+import type { LlmEnv } from '../lib/llm-client'
 
 export async function handleMe(db: D1Database, userId: string): Promise<Response> {
   const row = await db.prepare('SELECT * FROM intake_profiles WHERE user_id = ?').bind(userId).first()
@@ -30,7 +32,7 @@ export async function handleSubmit(
   db: D1Database,
   userId: string,
   body: { answers: Answers; locale?: Locale },
-  geminiKey: string,
+  llm: LlmEnv,
   fetchImpl: typeof fetch = fetch,
 ): Promise<Response> {
   const answers = body.answers ?? {}
@@ -43,16 +45,28 @@ export async function handleSubmit(
 
   const score = version === 2 ? scoreProfileV2(answers, locale) : scoreProfile(answers)
   if (score.worldSkinSource === 'g3' && typeof answers['G3'] === 'string') {
-    score.worldSkin = (await classifyFilmSkin(answers['G3'] as string, geminiKey, fetchImpl)) as any
+    // Отказ сервиса скин не должен ронять весь сабмит — скин остаётся тем, что дал скоринг.
+    try {
+      const r = await callLlm<{ skin: string }>('/skin', { film: answers['G3'] }, llm, fetchImpl)
+      score.worldSkin = r.skin as any
+    } catch { /* скин остаётся тем, что дал скоринг */ }
   }
-  const prose = await generateSheetProse({
+
+  const proseInput = {
     charClass: score.charClass, worldSkin: score.worldSkin, language: score.sheetLanguage,
     register: score.register, niche: score.niche,
     attributes: { int: score.int, wis: score.wis, con: score.con, dex: score.dex, cha: score.cha, str: score.str },
     aspirational: (answers['G11'] ?? answers['V_OUTCOME']) as string,
     firstWin: (answers['A2'] ?? answers['V_OUTCOME']) as string,
     successDef: (answers['A10'] ?? answers['V_OUTCOME']) as string,
-  }, geminiKey, fetchImpl)
+  }
+  let prose
+  try {
+    prose = { ...await callLlm<any>('/prose', proseInput, llm, fetchImpl), source: 'gemini' as const }
+  } catch {
+    // Сервис недоступен/отказал — анкета всё равно собирается, на шаблонной прозе.
+    prose = { ...fallbackProse(proseInput), source: 'template' as const }
+  }
 
   const now = Date.now()
   await db.prepare(
