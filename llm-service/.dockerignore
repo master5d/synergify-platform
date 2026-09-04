@@ -1,0 +1,25 @@
+# Предотвращает передачу мусора в build-context при docker build
+
+# Локальные зависимости (переустанавливаются в RUN npm ci)
+node_modules/
+
+# Тесты (не нужны в production)
+test/
+
+# Конфиги анализаторов
+.semgrep/
+
+# Версионные файлы
+.env
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
