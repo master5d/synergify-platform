@@ -2,7 +2,18 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync, existsSync } from 'node:fs'
 import { WORLD_SKINS } from '../src/types.js'
 
-const WORKER_SKIN_LINE = '../../workers/src/lib/gemini.ts'
+// Живой авторитет перечня скинов — union WorldSkin во фронте (LMS/tochka-sborki),
+// а не воркер: строку `const skins = '...'` задача 9 убрала из gemini.ts,
+// и переезд в сервис не был единственным источником правды — им остался фронт.
+const FRONT_SKIN_TYPES = '../../LMS/tochka-sborki/web/lib/intake/types.ts'
+
+/** Извлекает строковые литералы из объявления `export type WorldSkin = 'a' | 'b' | ...`. */
+function extractWorldSkinUnion(src: string): string[] | null {
+  const m = src.match(/export\s+type\s+WorldSkin\s*=([^\n]*(?:\n\s*\|[^\n]*)*)/)
+  if (!m) return null
+  const literals = [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1])
+  return literals.length > 0 ? literals : null
+}
 
 // Явный список ожидаемых полей для каждого интерфейса (из воркера)
 const EXPECTED: Record<string, string[]> = {
@@ -83,19 +94,19 @@ function findInterfaceSource(
 }
 
 describe('сверка с оригиналом в воркере', () => {
-  it('перечень скинов совпадает со списком в classifyFilmSkin', () => {
-    const p = new URL(WORKER_SKIN_LINE, import.meta.url)
-    const src = existsSync(p) ? readFileSync(p, 'utf8') : null
-    if (src === null) {
-      console.warn('SKIP: workers/src/lib/gemini.ts отсутствует — оригинал переехал в сервис')
+  it('перечень скинов совпадает с union WorldSkin во фронте (LMS/tochka-sborki)', () => {
+    const p = new URL(FRONT_SKIN_TYPES, import.meta.url)
+    if (!existsSync(p)) {
+      console.warn('SKIP: LMS/tochka-sborki/web/lib/intake/types.ts отсутствует — авторитет перечня скинов недоступен')
       return
     }
-    const m = src.match(/const skins = '([^']+)'/)
-    if (!m) {
-      console.warn('SKIP: строка `const skins` в gemini.ts не найдена — classifyFilmSkin переехал в сервис')
+    const src = readFileSync(p, 'utf8')
+    const literals = extractWorldSkinUnion(src)
+    if (!literals) {
+      console.warn('SKIP: union `export type WorldSkin = ...` не найден/не распарсен в types.ts')
       return
     }
-    expect(m[1].split('|').sort()).toEqual([...WORLD_SKINS].sort())
+    expect(literals.sort()).toEqual([...WORLD_SKINS].sort())
   })
 
   // Проверка интерфейсов

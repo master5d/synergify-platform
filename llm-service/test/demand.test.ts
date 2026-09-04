@@ -145,4 +145,26 @@ describe('draftBrief', () => {
     expect(e).toHaveProperty('code', 'bad_shape')
     expect(String(e.message)).toContain('1')
   })
+
+  // М-1 финального ревью: proposed_type валидируется через String(...).trim(), но
+  // наружу возвращался raw целиком — неочищенное значение уезжало в D1.
+  it('proposed_type с пробелами по краям возвращается нормализованным', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, proposed_type: ' unit ' })))
+    const out = await draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any)
+    expect(out.proposed_type).toBe('unit')
+  })
+
+  // М-1: unit_count_estimate проверялся Number.isFinite, пропуская 2.5 и -3 —
+  // промпт требует целое положительное число.
+  it('unit_count_estimate дробное (2.5) = bad_shape', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, unit_count_estimate: 2.5 })))
+    await expect(draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
+  })
+
+  it('unit_count_estimate отрицательное (-3) = bad_shape', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, unit_count_estimate: -3 })))
+    await expect(draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
+  })
 })

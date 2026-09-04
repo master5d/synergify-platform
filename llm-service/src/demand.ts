@@ -72,8 +72,11 @@ export async function draftBrief(
   }) as Record<string, unknown>
 
   // Валидируем каждое поле по типам.
+  // М-1: нормализованное значение — не raw.proposed_type — идёт и в проверку, и в возврат,
+  // иначе неочищенное " module " уезжало бы в D1 мимо валидации.
+  const proposedType = String(raw?.proposed_type ?? '').trim()
   const proposedTypes = ['module', 'unit']
-  if (!proposedTypes.includes(String(raw?.proposed_type ?? '').trim())) {
+  if (!proposedTypes.includes(proposedType)) {
     throw new LlmError('bad_shape', `proposed_type must be "module" or "unit", got "${raw?.proposed_type}"`)
   }
   if (!isNonEmptyBilingualLabel(raw?.title)) {
@@ -88,8 +91,9 @@ export async function draftBrief(
   if (!isNonEmptyString(raw?.agentic_approach)) {
     throw new LlmError('bad_shape', `agentic_approach must be non-empty string, got "${raw?.agentic_approach}"`)
   }
-  if (!Number.isFinite(raw?.unit_count_estimate)) {
-    throw new LlmError('bad_shape', `unit_count_estimate must be finite number, got ${typeof raw?.unit_count_estimate}`)
+  // М-1: Number.isFinite пропускал 2.5 и -3 — промпт требует целое положительное число.
+  if (!Number.isInteger(raw?.unit_count_estimate) || (raw!.unit_count_estimate as number) <= 0) {
+    throw new LlmError('bad_shape', `unit_count_estimate must be a positive integer, got ${raw?.unit_count_estimate}`)
   }
   if (!Array.isArray(raw?.source_quotes)) {
     throw new LlmError('bad_shape', `source_quotes must be array, got ${typeof raw?.source_quotes}`)
@@ -101,5 +105,6 @@ export async function draftBrief(
       throw new LlmError('bad_shape', `source_quotes[${i}] must be non-empty string, got ${typeof quote}`)
     }
   }
-  return raw as unknown as BriefProposal
+  // М-1: возвращаем нормализованное proposed_type, а не raw целиком.
+  return { ...(raw as unknown as BriefProposal), proposed_type: proposedType as BriefProposal['proposed_type'] }
 }

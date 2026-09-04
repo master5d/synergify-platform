@@ -76,15 +76,25 @@ describe('HTTP', () => {
     expect(res.status).toBe(401)
   })
 
-  it('собственный баг (не LlmError) отдаёт 500 с кодом internal, без секретов в теле', async () => {
+  // М-6 финального ревью: раньше отсутствие signals роняло сервис на 500 internal
+  // («наш баг»), хотя виноват вызывающий — теперь это 400 bad_request. Тест переписан
+  // под новое поведение (был закреплён нынешний 500, стал — новый 400), а не удалён.
+  it('/demand/classify без signals отдаёт 400 bad_request, а не 500', async () => {
     const app = createApp(env)
-    // signals отсутствует в теле — demand.ts упадёт на `signals.length` ДО похода в гейтвей:
-    // это баг вызова, а не сбой апстрима, и код ответа обязан это показывать.
     const res = await app.request('/demand/classify', { method: 'POST', body: JSON.stringify({ catalog: [] }),
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer srv-token' } })
-    expect(res.status).toBe(500)
+    expect(res.status).toBe(400)
     const json = await res.json() as any
-    expect(json.error.code).toBe('internal')
+    expect(json.error.code).toBe('bad_request')
     expect(JSON.stringify(json)).not.toContain('gk')
+  })
+
+  it('/demand/classify с signals не-массивом тоже отдаёт 400, а не падает на .length ниже', async () => {
+    const app = createApp(env)
+    const res = await app.request('/demand/classify', { method: 'POST',
+      body: JSON.stringify({ signals: 'not-an-array', catalog: [] }),
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer srv-token' } })
+    expect(res.status).toBe(400)
+    expect((await res.json() as any).error.code).toBe('bad_request')
   })
 })

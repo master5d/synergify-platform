@@ -23,7 +23,6 @@ export function stripFence(text: string): string {
 export function extractJsonFromText(text: string): string | null {
   let depth = 0
   let inString = false
-  let escapeNext = false
   let startPos = -1
 
   // Идём с конца текста к началу, считая скобки в обратном направлении
@@ -65,7 +64,10 @@ export function extractJsonFromText(text: string): string | null {
   // Теперь идём вперёд от startPos, считая скобки в нормальном направлении
   depth = 0
   inString = false
-  escapeNext = false
+  // М-3 финального ревью: escapeNext теперь объявляется только здесь (в обратном проходе
+  // выше он не читался вовсе) — к моменту проверки char === '"' ниже экранирование уже
+  // обработано веткой if (escapeNext), так что там было всегда истинно.
+  let escapeNext = false
 
   for (let i = startPos; i < text.length; i++) {
     const char = text[i]
@@ -80,7 +82,7 @@ export function extractJsonFromText(text: string): string | null {
       continue
     }
 
-    if (char === '"' && !escapeNext) {
+    if (char === '"') {
       inString = !inString
       continue
     }

@@ -17,12 +17,14 @@ export interface ProseInput {
   attributes?: Record<string, number>
   aspirational?: string; firstWin?: string; successDef?: string
 }
-export interface Prose {
+// М-2 финального ревью: Prose (с полем source) больше никем не импортировался — удалён.
+// ProseResult — форма реального ответа /prose (без source, его добавляет воркер) и
+// одновременно конкретный тип для callLlm<ProseResult> в intake.ts (И-1).
+export interface ProseResult {
   legendaryTitle: string; backstory: string; firstQuest: string; finalBoss: string
-  source: 'gemini' | 'template'
 }
 
-export function fallbackProse(i: ProseInput): Omit<Prose, 'source'> {
+export function fallbackProse(i: ProseInput): ProseResult {
   const ru = i.language !== 'en'
   return {
     legendaryTitle: ru ? `Герой пути «${skinName(i.worldSkin, true)}»` : `Hero of the ${skinName(i.worldSkin, false)} path`,

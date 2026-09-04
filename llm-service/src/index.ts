@@ -4,6 +4,9 @@ import { Hono } from 'hono'
 import { serve } from '@hono/node-server'
 import { loadEnv, type ServiceEnv } from './config.js'
 import { LlmError } from './errors.js'
+
+// М-6: ошибка вызывающего (не JSON-парсинг, а форма тела) — своя, узнаваемая run()'ом.
+class BadRequestError extends Error {}
 import { generateProse } from './prose.js'
 import { classifySkin } from './skin.js'
 import { classifyDemand, draftBrief } from './demand.js'
@@ -21,8 +24,15 @@ export function createApp(env: ServiceEnv): Hono {
 
   app.post('/prose', run(env, async (body) => generateProse(body, env, env.fetchImpl)))
   app.post('/skin', run(env, async (body) => ({ skin: await classifySkin(body.film, env, env.fetchImpl) })))
-  app.post('/demand/classify', run(env, async (body) =>
-    ({ items: await classifyDemand(body.signals, body.catalog, env, env.fetchImpl) })))
+  app.post('/demand/classify', run(env, async (body) => {
+    // М-6 финального ревью: раньше отсутствие signals роняло classifyDemand на
+    // `signals.length` и отдавало 500 internal — «баг сервиса», хотя виноват вызывающий.
+    // Механизм 400 уже был (см. bad_request выше для не-JSON тела), просто не применялся сюда.
+    if (!Array.isArray(body?.signals)) {
+      throw new BadRequestError('signals must be an array')
+    }
+    return { items: await classifyDemand(body.signals, body.catalog, env, env.fetchImpl) }
+  }))
   app.post('/demand/brief', run(env, async (body) =>
     draftBrief(body.topicLabel, body.quotes, body.catalog, env, env.fetchImpl)))
 
@@ -61,6 +71,9 @@ function run(env: ServiceEnv, fn: (body: any) => Promise<unknown>) {
     try {
       return c.json(await fn(body) as any)
     } catch (e) {
+      if (e instanceof BadRequestError) {
+        return c.json({ error: { code: 'bad_request', message: e.message } }, 400)
+      }
       if (e instanceof LlmError) {
         // Сбой апстрима (гейтвей/модель) — код и сообщение из контракта gateway.ts, секретов там нет.
         console.error(`[lms-llm] ${e.code}: ${e.message}`)
