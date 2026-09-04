@@ -78,4 +78,38 @@ describe('chatJson', () => {
     expect(e).toBeInstanceOf(LlmError)
     expect((e as any).code).toBe('gateway_error')
   })
+
+  it('проза с JSON в конце разбирается', async () => {
+    const reasoning = '**Reasoning**\n\n"Blade Runner 2049" is set in a dystopian...\nAmong options:\n- slavic-myth – not a fit\n{"skin":"cyber-noir"}'
+    const fetchImpl = vi.fn().mockResolvedValue(reply(reasoning))
+    await expect(chatJson({ pool: 'p', prompt: 'x', env: ENV, fetchImpl: fetchImpl as any }))
+      .resolves.toEqual({ skin: 'cyber-noir' })
+  })
+
+  it('вложенный JSON в конце прозы разбирается целиком', async () => {
+    const text = 'Analyzing items...\nResult: {"items":[{"id":1,"name":"a"},{"id":2,"name":"b"}]}'
+    const fetchImpl = vi.fn().mockResolvedValue(reply(text))
+    await expect(chatJson({ pool: 'p', prompt: 'x', env: ENV, fetchImpl: fetchImpl as any }))
+      .resolves.toEqual({ items: [{ id: 1, name: 'a' }, { id: 2, name: 'b' }] })
+  })
+
+  it('текст без JSON по-прежнему даёт unparsable', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue(reply('Just some text without any JSON at all'))
+    await expect(chatJson({ pool: 'p', prompt: 'x', env: ENV, fetchImpl: fetchImpl as any }))
+      .rejects.toMatchObject({ code: 'unparsable' })
+  })
+
+  it('строка с } внутри значения разбирается верно', async () => {
+    const text = 'Here is the result:\n{"note": "text with } bracket inside", "value": 42}'
+    const fetchImpl = vi.fn().mockResolvedValue(reply(text))
+    await expect(chatJson({ pool: 'p', prompt: 'x', env: ENV, fetchImpl: fetchImpl as any }))
+      .resolves.toEqual({ note: 'text with } bracket inside', value: 42 })
+  })
+
+  it('если два JSON-объекта, берётся ПОСЛЕДНИЙ', async () => {
+    const text = 'First attempt: {"wrong": true}\nFinal result: {"correct": true}'
+    const fetchImpl = vi.fn().mockResolvedValue(reply(text))
+    await expect(chatJson({ pool: 'p', prompt: 'x', env: ENV, fetchImpl: fetchImpl as any }))
+      .resolves.toEqual({ correct: true })
+  })
 })

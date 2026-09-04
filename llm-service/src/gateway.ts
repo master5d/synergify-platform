@@ -16,6 +16,90 @@ export function stripFence(text: string): string {
   return withoutOpen.replace(/\r?\n?```$/, '').trim()
 }
 
+/** Извлекает последнее сбалансированное JSON-значение из текста.
+ * Думающие модели сначала рассуждают прозой, а затем пишут JSON в конце.
+ * Ищет сбалансированное { или [ с конца текста, учитывая строки и экранирование.
+ * Возвращает найденное значение или null, если JSON нет. */
+export function extractJsonFromText(text: string): string | null {
+  let depth = 0
+  let inString = false
+  let escapeNext = false
+  let startPos = -1
+
+  // Идём с конца текста к началу, считая скобки в обратном направлении
+  for (let i = text.length - 1; i >= 0; i--) {
+    const char = text[i]
+
+    // Обработка экранирования (в обратном направлении нужно проверить предыдущий символ)
+    if (char === '"') {
+      // Проверим, экранирована ли эта кавычка
+      let escapeCount = 0
+      for (let j = i - 1; j >= 0 && text[j] === '\\'; j--) {
+        escapeCount++
+      }
+      // Если нечётное число бэкслешей перед кавычкой — она экранирована
+      if (escapeCount % 2 === 0) {
+        inString = !inString
+      }
+      continue
+    }
+
+    // Если внутри строки, пропускаем скобки
+    if (inString) continue
+
+    // Считаем скобки вне строк (в обратном направлении закрывающие становятся открывающими)
+    if (char === '}' || char === ']') {
+      depth++
+    } else if (char === '{' || char === '[') {
+      depth--
+      if (depth === 0) {
+        // Нашли открывающую скобку на уровне 0 — это начало JSON
+        startPos = i
+        break
+      }
+    }
+  }
+
+  if (startPos === -1) return null
+
+  // Теперь идём вперёд от startPos, считая скобки в нормальном направлении
+  depth = 0
+  inString = false
+  escapeNext = false
+
+  for (let i = startPos; i < text.length; i++) {
+    const char = text[i]
+
+    if (escapeNext) {
+      escapeNext = false
+      continue
+    }
+
+    if (char === '\\' && inString) {
+      escapeNext = true
+      continue
+    }
+
+    if (char === '"' && !escapeNext) {
+      inString = !inString
+      continue
+    }
+
+    if (inString) continue
+
+    if (char === '{' || char === '[') {
+      depth++
+    } else if (char === '}' || char === ']') {
+      depth--
+      if (depth === 0) {
+        return text.slice(startPos, i + 1)
+      }
+    }
+  }
+
+  return null
+}
+
 export async function chatJson(opts: {
   pool: string; prompt: string; env: GatewayEnv; fetchImpl?: typeof fetch
 }): Promise<unknown> {
@@ -55,9 +139,23 @@ export async function chatJson(opts: {
   if (typeof text !== 'string' || !text.trim()) {
     throw new LlmError('unparsable', 'gateway returned no content')
   }
+
+  // Сначала пытаемся разобрать напрямую (оптимальный путь для чистого JSON и ```-забора)
+  const stripped = stripFence(text)
   try {
-    return JSON.parse(stripFence(text))
+    return JSON.parse(stripped)
   } catch {
+    // Запасной путь: если в тексте есть рассуждение, вытащим JSON из конца
+    const extracted = extractJsonFromText(stripped)
+    if (extracted) {
+      try {
+        return JSON.parse(extracted)
+      } catch {
+        // Даже извлечённый JSON не парсится — это ошибка модели
+        throw new LlmError('unparsable', 'model output is not valid JSON')
+      }
+    }
+    // JSON в тексте не найден вообще
     throw new LlmError('unparsable', 'model output is not valid JSON')
   }
 }
