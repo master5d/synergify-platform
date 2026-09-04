@@ -153,6 +153,14 @@ jobs:
       - name: Install
         working-directory: workers
         run: npm ci
+      # Воркер тянет lib/rpg/skins-meta.ts из веба, а тот — `@pack/skins-meta`. Алиас
+      # ведёт в packs/_active, который материализует select-pack.mjs; на раннере его
+      # никто не звал, и esbuild падал «Could not resolve @pack/skins-meta» — деплой
+      # воркера из CI был сломан с 2026-09-04 18:36 (веб катился, API — нет). Локально
+      # не воспроизводится: symlink лежит от прошлого прогона тестов. Скрипт на голом node.
+      - name: Materialize course pack (@pack alias)
+        working-directory: LMS/tochka-sborki/web
+        run: node scripts/select-pack.mjs
       - name: Deploy
         working-directory: workers
         env:
