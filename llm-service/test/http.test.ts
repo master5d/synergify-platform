@@ -67,4 +67,24 @@ describe('HTTP', () => {
     const res = await app.request('/health')
     expect(res.status).toBe(200)
   })
+
+  it('заслон закрыт по умолчанию: новый маршрут, никем не подписанный на bearer, всё равно требует токен', async () => {
+    const app = createApp(env)
+    // Симулируем «кто-то добавил маршрут и забыл про заслон»: этот путь нигде явно не защищён.
+    app.get('/nobody-remembered-to-protect-this', c => c.json({ ok: true }))
+    const res = await app.request('/nobody-remembered-to-protect-this')
+    expect(res.status).toBe(401)
+  })
+
+  it('собственный баг (не LlmError) отдаёт 500 с кодом internal, без секретов в теле', async () => {
+    const app = createApp(env)
+    // signals отсутствует в теле — demand.ts упадёт на `signals.length` ДО похода в гейтвей:
+    // это баг вызова, а не сбой апстрима, и код ответа обязан это показывать.
+    const res = await app.request('/demand/classify', { method: 'POST', body: JSON.stringify({ catalog: [] }),
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer srv-token' } })
+    expect(res.status).toBe(500)
+    const json = await res.json() as any
+    expect(json.error.code).toBe('internal')
+    expect(JSON.stringify(json)).not.toContain('gk')
+  })
 })

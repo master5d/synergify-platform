@@ -1,4 +1,5 @@
 import { createHash, timingSafeEqual } from 'node:crypto'
+import { pathToFileURL } from 'node:url'
 import { Hono } from 'hono'
 import { serve } from '@hono/node-server'
 import { loadEnv, type ServiceEnv } from './config.js'
@@ -10,10 +11,13 @@ import { classifyDemand, draftBrief } from './demand.js'
 export function createApp(env: ServiceEnv): Hono {
   const app = new Hono()
 
-  app.get('/health', c => c.json({ ok: true }))
+  // Заслон навешен ГЛОБАЛЬНО, а не поимённо на три известных пути: маршрут, который кто-то
+  // добавит потом и забудет подписать на bearer, обязан остаться закрытым, а не утечь наружу.
+  // Ошибаться нужно в сторону отказа. /health — единственное явное исключение, разобранное
+  // внутри самой мидлвари (см. bearer ниже), а не списком путей снаружи.
+  app.use('*', bearer(env))
 
-  // Второй слой поверх CF Access: сервис не должен зависеть только от чужого периметра.
-  app.use('/prose', bearer(env)); app.use('/skin', bearer(env)); app.use('/demand/*', bearer(env))
+  app.get('/health', c => c.json({ ok: true }))
 
   app.post('/prose', run(env, async (body) => generateProse(body, env, env.fetchImpl)))
   app.post('/skin', run(env, async (body) => ({ skin: await classifySkin(body.film, env, env.fetchImpl) })))
@@ -38,6 +42,9 @@ function tokenMatches(got: string, want: string): boolean {
 
 function bearer(env: ServiceEnv) {
   return async (c: any, next: any) => {
+    // /health не требует токена и не ходит в гейтвей — единственное исключение из глобального заслона,
+    // и оно живёт здесь, а не списком защищённых путей снаружи (см. комментарий в createApp).
+    if (c.req.path === '/health') return next()
     const got = (c.req.header('authorization') || '').replace(/^Bearer\s+/i, '')
     if (!tokenMatches(got, env.API_TOKEN)) return c.json({ error: { code: 'unauthorized', message: 'bad token' } }, 401)
     await next()
@@ -54,15 +61,26 @@ function run(env: ServiceEnv, fn: (body: any) => Promise<unknown>) {
     try {
       return c.json(await fn(body) as any)
     } catch (e) {
-      const code = e instanceof LlmError ? e.code : 'gateway_unreachable'
-      const message = e instanceof LlmError ? e.message : 'upstream failure'
-      console.error(`[lms-llm] ${code}: ${message}`)   // секретов в message нет по контракту gateway.ts
-      return c.json({ error: { code, message } }, 502)
+      if (e instanceof LlmError) {
+        // Сбой апстрима (гейтвей/модель) — код и сообщение из контракта gateway.ts, секретов там нет.
+        console.error(`[lms-llm] ${e.code}: ${e.message}`)
+        return c.json({ error: { code: e.code, message: e.message } }, 502)
+      }
+      // Посторонняя ошибка — это НАШ баг, а не сбой сети или гейтвея, и код ответа обязан это
+      // показывать (502 бы соврал: гейтвей мог быть совершенно здоров). Клиенту — санитизированное
+      // тело без подробностей; в лог сервера — настоящая ошибка со стеком, иначе отлаживать нечем.
+      const err = e instanceof Error ? e : new Error(String(e))
+      console.error(`[lms-llm] internal error: ${err.stack || err.message}`)
+      return c.json({ error: { code: 'internal', message: 'internal server error' } }, 500)
     }
   }
 }
 
-if (process.env.NODE_ENV !== 'test' && import.meta.url === `file://${process.argv[1]}`) {
+// import.meta.url всегда file://-URL, а argv[1] на Windows — путь с обратными слэшами и буквой
+// диска: сырая конкатенация `file://${argv[1]}` никогда не совпадёт, и npm start молча ничего не
+// запустит. pathToFileURL нормализует путь под текущую ОС до сравнения.
+const isEntryPoint = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href
+if (process.env.NODE_ENV !== 'test' && isEntryPoint) {
   const env = loadEnv(process.env)
   serve({ fetch: createApp(env).fetch, port: env.PORT, hostname: '0.0.0.0' })
   console.log(`lms-llm listening on :${env.PORT}`)
