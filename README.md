@@ -37,6 +37,25 @@ cutover 2026-08-06; mc_hub остался личным контуром mamaev.c
   admission-гейт) + курс «Практика».
 - **`synergify/`** — зонтик synergify.com.
 
+## LLM-вызовы: только через `llm-service` (с 2026-09-04)
+
+Воркер БОЛЬШЕ НЕ ходит в Gemini напрямую. Все четыре LLM-операции (проза листа, классификация
+скина по фильму, разбор спроса, черновик брифа) идут в узкий сервис `llm-service/`, который живёт
+контейнером на hetzner и зовёт SOVERN-гейтвей по тайнету.
+
+Почему не напрямую в гейтвей: воркер работает на эдже Cloudflare и до тайнета не достаёт, а
+выставлять гейтвей наружу запрещено. Наружу выставлен только сервис — `lms-llm.mamaev.coach`
+за CF Access, с собственным bearer поверх.
+
+- Контракт и коды отказа: `llm-service/README.md`
+- Дизайн и обоснование: `NAUTILUS/docs/superpowers/specs/2026-09-04-lms-llm-service-design.md`
+- Секреты воркера: `LLM_SERVICE_TOKEN`, `LLM_CF_ACCESS_CLIENT_ID/SECRET` (НЕ те же, что
+  `CF_ACCESS_CLIENT_*` — те принадлежат Listmonk).
+
+**Деградация не изменилась:** отказ сервиса даёт шаблонную прозу и `prose_source='template'`,
+анкета собирается. Если в D1 массово `template` — сервис недоступен, смотреть логи воркера
+(в них с 2026-09-04 пишется машинный код отказа; раньше этот путь молчал).
+
 ## Авторинг (sovereign: прозу пишет агент автора, движок детерминирован)
 
 - **Новый курс:** `scripts/course-plan-prompt.ts "<идея>" ru --domain <url>` →
@@ -76,6 +95,11 @@ COURSE_PACK=living-practice npm test          # любой другой pack
 COURSE_PACK=living-practice npm run build
 
 # ⚠ Только через npm: pretest/prebuild материализуют packs/_active.
+# ⚠ Это про WEB. У workers/ своего pretest НЕТ, и материализация паков там не помогает:
+#   `@pack/*` — голый спецификатор, его резолвит АЛИАС в workers/vitest.config.ts, а не
+#   наличие файлов. Без алиаса intake.test.ts падает на импорте даже при живом _active
+#   (проверено 2026-09-04). Алиас опирается на packs/_active — гитигнорируемый симлинк,
+#   которого нет в свежем клоне и в git-worktree; там сперва собрать web или создать ссылку.
 # Голый `npx vitest run` возьмёт тот pack, что лежит в _active с прошлого раза —
 # гвард pack-resolution об этом скажет, но лучше не наступать.
 # ⚠ Windows/git-bash: COURSE_BASE_PATH=/praktika превращается в C:/Program Files/...
