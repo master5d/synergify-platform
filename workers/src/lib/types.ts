@@ -20,6 +20,8 @@ export interface Env {
   LISTMONK_CRM_LIST_ID: string
   LLM_SERVICE_URL: string
   LLM_SERVICE_TOKEN: string
+  LLM_CF_ACCESS_CLIENT_ID: string
+  LLM_CF_ACCESS_CLIENT_SECRET: string
 }
 
 export interface JWTPayload {

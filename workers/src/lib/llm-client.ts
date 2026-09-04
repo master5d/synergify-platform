@@ -6,12 +6,22 @@
 export interface LlmEnv {
   LLM_SERVICE_URL: string
   LLM_SERVICE_TOKEN: string
-  CF_ACCESS_CLIENT_ID: string
-  CF_ACCESS_CLIENT_SECRET: string
+  // Свой Access-service-token сервиса lms-llm, НЕ CF_ACCESS_CLIENT_ID/SECRET —
+  // те принадлежат Listmonk (см. crm.ts). Один токен на два Access-приложения
+  // плохо по трём причинам: ротация/отзыв ради одного ломает второе,
+  // компрометация даёт доступ сразу к обоим, а в логах не разобрать, кто ходил.
+  LLM_CF_ACCESS_CLIENT_ID: string
+  LLM_CF_ACCESS_CLIENT_SECRET: string
 }
 
 /** Строго больше внутренних 90s сервиса: иначе наверху виден собственный обрыв, а не причина. */
 export const LLM_TIMEOUT_MS = 100_000
+
+// Тот же приём, что в crm.ts (там не экспортируется — заводим свою копию,
+// а не трогаем чужой файл). Секрет с хвостовым переводом строки в env даёт
+// заголовок с невидимым символом, и Access отвечает отказом, который на вид
+// неотличим от «неверный токен» — такое ищут часами.
+const strip = (s: string | undefined) => (s ?? '').replace(/^﻿/, '').trim()
 
 export async function callLlm<T>(
   path: string, body: unknown, env: LlmEnv, fetchImpl: typeof fetch = fetch,
@@ -21,9 +31,9 @@ export async function callLlm<T>(
     headers: {
       'Content-Type': 'application/json',
       // Bearer сервиса — заслон самого lms-llm, два CF-заголовка — Access на эдже перед ним.
-      'Authorization': `Bearer ${env.LLM_SERVICE_TOKEN}`,
-      'CF-Access-Client-Id': env.CF_ACCESS_CLIENT_ID,
-      'CF-Access-Client-Secret': env.CF_ACCESS_CLIENT_SECRET,
+      'Authorization': `Bearer ${strip(env.LLM_SERVICE_TOKEN)}`,
+      'CF-Access-Client-Id': strip(env.LLM_CF_ACCESS_CLIENT_ID),
+      'CF-Access-Client-Secret': strip(env.LLM_CF_ACCESS_CLIENT_SECRET),
     },
     // 100s > внутренних 90s сервиса, чтобы отказ был виден с настоящей причиной, а не как обрыв воркера.
     signal: AbortSignal.timeout(LLM_TIMEOUT_MS),
