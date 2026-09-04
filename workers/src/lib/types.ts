@@ -4,7 +4,6 @@ export interface Env {
   SES_ACCESS_KEY_ID: string
   SES_SECRET_ACCESS_KEY: string
   SES_REGION?: string
-  GEMINI_API_KEY: string
   OWNER_EMAIL: string
   TELEGRAM_BOT_TOKEN: string
   TELEGRAM_WEBHOOK_SECRET: string
@@ -29,4 +28,25 @@ export interface JWTPayload {
   email: string
   iat: number
   exp: number
+}
+
+// Перенесены из удалённого lib/demand-gemini.ts (Task 9) — теперь это форма
+// ответа сервиса lms-llm, а не форма ответа Gemini напрямую.
+export interface DemandClassification {
+  classification: 'covered' | 'gap' | 'not_feasible' | 'unclassified'
+  matched_module: string | null
+  gap_topic_key: string | null
+  gap_topic_label: { ru: string; en: string } | null
+  feasibility_note: string | null
+  value_tier: 'high' | 'normal'
+}
+
+export interface BriefProposal {
+  proposed_type: 'module' | 'unit'
+  title: { ru: string; en: string }
+  learning_objective: string
+  slot: string
+  agentic_approach: string
+  unit_count_estimate: number
+  source_quotes: string[]
 }

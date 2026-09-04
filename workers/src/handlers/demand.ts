@@ -1,6 +1,6 @@
-import type { Env } from '../lib/types'
+import type { Env, DemandClassification, BriefProposal } from '../lib/types'
 import { extractSignals, valueTier, normalizeTopicKey, shouldRaiseBrief, WINDOW_MS } from '../lib/demand-signals'
-import { classifyDemand, draftBrief } from '../lib/demand-gemini'
+import { callLlm } from '../lib/llm-client'
 import { COURSE_CATALOG } from '../lib/course-catalog'
 
 const VALID_STATUS = ['open', 'accepted', 'rejected', 'shipped']
@@ -45,7 +45,8 @@ export async function runDemandRadar(
   try {
     const signals = extractSignals(answers)
     if (!signals.length) return
-    const classifications = await classifyDemand(signals, COURSE_CATALOG, env.GEMINI_API_KEY, fetchImpl)
+    const { items: classifications } = await callLlm<{ items: DemandClassification[] }>(
+      '/demand/classify', { signals, catalog: COURSE_CATALOG }, env, fetchImpl)
     const now = Date.now()
     for (let i = 0; i < signals.length; i++) {
       const s = signals[i]
@@ -98,7 +99,8 @@ async function maybeRaiseBrief(
   ).bind(topicKey).all()
   const quotes = (quotesRes.results ?? []).map((r: any) => r.raw_text as string)
 
-  const proposal = await draftBrief(label, quotes, COURSE_CATALOG, env.GEMINI_API_KEY, fetchImpl)
+  const proposal = await callLlm<BriefProposal>(
+    '/demand/brief', { topicLabel: label, quotes, catalog: COURSE_CATALOG }, env, fetchImpl)
   const briefId = crypto.randomUUID()
   await env.DB.prepare(
     `INSERT INTO content_demand_briefs (id,gap_topic_key,status,proposal_json,signal_count,created_at,decided_at)
