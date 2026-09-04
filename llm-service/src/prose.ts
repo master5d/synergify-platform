@@ -1,6 +1,6 @@
 import { chatJson, type GatewayEnv } from './gateway.js'
-import { LlmError } from './errors.js'
-import { buildProsePrompt } from './prompts.js'
+import { LlmError, BadRequestError } from './errors.js'
+import { buildProsePrompt, LANGUAGE_RULES } from './prompts.js'
 import type { ProseInput, ProseOut } from './types.js'
 
 export interface ProseEnv extends GatewayEnv { POOL_PROSE: string }
@@ -10,6 +10,12 @@ const FIELDS = ['legendaryTitle', 'backstory', 'firstQuest', 'finalBoss'] as con
 export async function generateProse(
   input: ProseInput, env: ProseEnv, fetchImpl?: typeof fetch,
 ): Promise<ProseOut> {
+  // Незнакомый язык — ошибка ВЫЗЫВАЮЩЕГО, и отвечать на неё надо отказом, а не
+  // догадкой модели: именно догадка выдала владельцу английский лист. Проверка
+  // стоит ДО гейтвея — кривой промпт не должен стоить ни токена, ни 9 секунд.
+  if (!LANGUAGE_RULES[input.language]) {
+    throw new BadRequestError(`unknown language: ${input.language}`)
+  }
   const raw = await chatJson({
     pool: env.POOL_PROSE, prompt: buildProsePrompt(input), env, fetchImpl,
   }) as Record<string, unknown>

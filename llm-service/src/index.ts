@@ -3,10 +3,9 @@ import { pathToFileURL } from 'node:url'
 import { Hono } from 'hono'
 import { serve } from '@hono/node-server'
 import { loadEnv, type ServiceEnv } from './config.js'
-import { LlmError } from './errors.js'
+import { LlmError, BadRequestError } from './errors.js'
 
 // М-6: ошибка вызывающего (не JSON-парсинг, а форма тела) — своя, узнаваемая run()'ом.
-class BadRequestError extends Error {}
 import { generateProse } from './prose.js'
 import { classifySkin } from './skin.js'
 import { classifyDemand, draftBrief } from './demand.js'

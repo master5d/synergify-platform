@@ -7,3 +7,7 @@ export class LlmError extends Error {
     this.name = 'LlmError'
   }
 }
+
+/** Ошибка ВЫЗЫВАЮЩЕГО (HTTP 400), а не апстрима. Живёт здесь, а не в index.ts:
+ *  её бросают и обработчики (prose.ts), а импортировать из точки входа — цикл. */
+export class BadRequestError extends Error {}

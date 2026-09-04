@@ -1,9 +1,26 @@
 import type { ProseInput, CatalogEntry, Signal } from './types.js'
 
+/** Язык листа — ИНСТРУКЦИЕЙ, а не токеном перечня.
+ *
+ *  Боевой дефект 2026-09-04: в промпт уезжало `Language: mix.` — голое значение
+ *  ответа G12. Модель не знает, что означают `mix` и `ru-tech` в НАШЕМ перечне,
+ *  и написала весь лист по-английски на русском курсе. Три значения G12 из
+ *  четырёх подразумевают русский текст, и ни для одного инструкции не было —
+ *  случайно работал только `en`.
+ *
+ *  `mix` здесь СОЗНАТЕЛЬНО отсутствует: это не язык, а отказ выбирать, и
+ *  разрешать его должен тот, кто знает локаль анкеты (воркер), а не модель. */
+export const LANGUAGE_RULES: Record<string, string> = {
+  ru: 'Write EVERY field in Russian. No English except proper nouns.',
+  'ru-tech': 'Write EVERY field in Russian, but keep established English technical terms (prompt, agent, API, workflow) in Latin script.',
+  en: 'Write EVERY field in English.',
+}
+
 export function buildProsePrompt(i: ProseInput): string {
   return [
     `You write RPG character-sheet prose for a learning platform.`,
-    `Language: ${i.language}. Register: ${i.register ?? 'neutral'}. World skin: ${i.worldSkin}. Class: ${i.charClass}. Niche: ${i.niche ?? 'n/a'}.`,
+    `LANGUAGE (highest priority): ${LANGUAGE_RULES[i.language] ?? LANGUAGE_RULES.ru}`,
+    `Register: ${i.register ?? 'neutral'}. World skin: ${i.worldSkin}. Class: ${i.charClass}. Niche: ${i.niche ?? 'n/a'}.`,
     `Learner aspirational figure (G11): ${i.aspirational ?? 'n/a'}.`,
     `Desired first win: ${i.firstWin ?? 'n/a'}. Success definition: ${i.successDef ?? 'n/a'}.`,
     `Return STRICT JSON: {"legendaryTitle","backstory","firstQuest","finalBoss"}.`,

@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { handleSubmit } from './intake'
 import type { LlmEnv } from '../lib/llm-client'
+import { requiredIds } from '../../../LMS/tochka-sborki/web/lib/intake/instrument'
 
 // Блокирующая находка 2 финального ревью: гварда на путь УСПЕХА не было —
 // «v2 submit» в intake.test.ts проверяет только status 200, а 200 отдаёт и
@@ -83,5 +84,32 @@ describe('успех интейка: /prose отвечает валидной п
     expect(sentBody.language).toBe('en')
     expect(sentBody).toHaveProperty('aspirational')
     expect(sentBody.aspirational).toBe('independence')
+  })
+})
+
+// Боевой дефект 2026-09-04: анкета v1, G12='mix' («Смесь — мне всё равно»),
+// переключатель сайта на русском — а лист пришёл ЦЕЛИКОМ по-английски.
+// `mix` — не язык, а отказ выбирать; уехав в сервис как есть, он отдал выбор
+// модели, и та выбрала английский. Решать обязана локаль анкеты.
+describe('G12=mix разрешается локалью анкеты, а не моделью', () => {
+  async function languageSentFor(locale: 'ru' | 'en') {
+    const db = fakeDb(1) // v1: sheetLanguage берётся из G12 как есть
+    const okFetch = vi.fn().mockResolvedValue({
+      ok: true, status: 200, json: async () => SERVICE_PROSE,
+    })
+    const answers: Record<string, unknown> = { G12: 'mix' }
+    for (const id of requiredIds(1)) if (answers[id] == null) answers[id] = 'x'
+    answers['G12'] = 'mix'
+    await handleSubmit(db, 'u1', { answers: answers as any, locale }, LLM_ENV, okFetch as any)
+    const proseCall = okFetch.mock.calls.find(c => String(c[0]).endsWith('/prose'))
+    return JSON.parse(proseCall![1].body).language
+  }
+
+  it('русская анкета → ru-tech, не mix', async () => {
+    expect(await languageSentFor('ru')).toBe('ru-tech')
+  })
+
+  it('английская анкета → en', async () => {
+    expect(await languageSentFor('en')).toBe('en')
   })
 })

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import type { Locale } from '@/lib/intake/types'
 import { buildCompanionRolePrompt } from '@/lib/intake/companion-role-prompt'
 import { AGENT_MEMORY } from '@/lib/intake/agent-memory'
+import { SheetSection, SHEET_PRE, SHEET_BTN } from './sheet-section'
 
 /**
  * Durable companion setup: a role-prompt the learner pastes ONCE into their agent's
@@ -31,16 +32,12 @@ export function CompanionSetup({ profile, locale }: { profile: any; locale: Loca
     background: a.key === agent ? 'var(--text-accent)' : 'transparent',
     color: a.key === agent ? 'var(--text-on-accent)' : 'var(--text-secondary)',
   })
-  const btn: React.CSSProperties = { background: 'var(--bg-surface)', color: 'var(--text-primary)', border: '1px solid var(--border-color)', borderRadius: 8, padding: '10px 16px', fontSize: 14, cursor: 'pointer', fontFamily: 'inherit' }
+  const btn = SHEET_BTN
 
   return (
-    <section style={{ maxWidth: 640, margin: '0 auto 3rem', padding: '0 1.5rem' }}>
-      <details style={{ border: '1px solid var(--border-color)', borderRadius: 10, background: 'var(--bg-surface)', padding: '0 1rem' }}>
-        <summary style={{ cursor: 'pointer', padding: '1rem 0', fontFamily: 'var(--font-mono)', fontSize: '.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-          ✨ {t.title}
-        </summary>
+    <SheetSection title={t.title} glyph="✨">
         <p style={{ color: 'var(--text-secondary)', fontSize: '.9rem', lineHeight: 1.55, margin: '0 0 1rem' }}>{t.intro}</p>
-        <pre style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 10, padding: '1rem', overflowX: 'auto', fontSize: '.78rem', lineHeight: 1.5, whiteSpace: 'pre-wrap', margin: 0 }}>{prompt}</pre>
+        <pre style={SHEET_PRE}>{prompt}</pre>
         <div style={{ marginTop: '1rem' }}>
           <button style={btn} onClick={copy}>{copied ? t.copied : t.copy}</button>
         </div>
@@ -52,7 +49,6 @@ export function CompanionSetup({ profile, locale }: { profile: any; locale: Loca
         <p style={{ color: 'var(--text-secondary)', fontSize: '.85rem', lineHeight: 1.5, margin: '.7rem 0 1rem' }}>
           <strong style={{ color: 'var(--text-primary)' }}>{t.where}</strong> {active.where[locale === 'en' ? 'en' : 'ru']}
         </p>
-      </details>
-    </section>
+    </SheetSection>
   )
 }

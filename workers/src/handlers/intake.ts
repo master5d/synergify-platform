@@ -60,8 +60,17 @@ export async function handleSubmit(
 
   // И-1: тело /prose типизировано конкретным ProseInput — опечатка в имени поля
   // теперь ловится компилятором, а не подставляется как undefined в промпт сервиса.
+  // G12='mix' («Смесь — мне всё равно») — не язык, а ОТКАЗ ВЫБИРАТЬ. Уехав в сервис
+  // как есть, он передавал выбор модели, и та выбирала английский: боевой лист
+  // 2026-09-04 пришёл целиком по-английски при русской анкете. Разрешает тот, кто
+  // знает локаль. В D1 колонка sheet_language сохраняет исходное 'mix' — это ответ
+  // учащегося, и переписывать его мы не вправе.
+  const proseLanguage = score.sheetLanguage === 'mix'
+    ? (locale === 'en' ? 'en' : 'ru-tech')
+    : score.sheetLanguage
+
   const proseInput: ProseInput = {
-    charClass: score.charClass, worldSkin: score.worldSkin, language: score.sheetLanguage,
+    charClass: score.charClass, worldSkin: score.worldSkin, language: proseLanguage,
     register: score.register, niche: score.niche,
     attributes: { int: score.int, wis: score.wis, con: score.con, dex: score.dex, cha: score.cha, str: score.str },
     aspirational: (answers['G11'] ?? answers['V_OUTCOME']) as string,

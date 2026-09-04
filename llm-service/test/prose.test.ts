@@ -100,3 +100,32 @@ describe('buildBriefPrompt', () => {
   })
 })
 
+
+// Боевой дефект 2026-09-04: лист владельца вышел ЦЕЛИКОМ по-английски при русском
+// курсе. Причина — в промпт уезжал голый токен перечня (`Language: mix.`), и модель,
+// которой никто не сказал, что этот токен значит, писала на языке по умолчанию.
+// Три значения G12 из четырёх (`ru`, `ru-tech`, `mix`) подразумевают русский текст,
+// и ни для одного инструкции не было.
+describe('язык листа задаётся словами, а не токеном перечня', () => {
+  it('ru → промпт ТРЕБУЕТ русский текст', () => {
+    expect(buildProsePrompt({ ...INPUT, language: 'ru' })).toMatch(/in Russian/)
+  })
+
+  it('ru-tech → русский текст с латинскими техтерминами', () => {
+    const p = buildProsePrompt({ ...INPUT, language: 'ru-tech' })
+    expect(p).toMatch(/in Russian/)
+    expect(p).toMatch(/technical terms/i)
+  })
+
+  it('en → английский, и это сказано явно', () => {
+    expect(buildProsePrompt({ ...INPUT, language: 'en' })).toMatch(/in English/)
+  })
+
+  it('незнакомый язык = отказ вызывающему, а не догадка модели', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue(reply(JSON.stringify(GOOD)))
+    await expect(generateProse({ ...INPUT, language: 'mix' }, ENV, fetchImpl as any))
+      .rejects.toThrow(/language/i)
+    // Главное: до гейтвея дело не дошло — токен не потратили на заведомо кривой промпт.
+    expect(fetchImpl).not.toHaveBeenCalled()
+  })
+})
