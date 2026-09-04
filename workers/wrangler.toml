@@ -3,6 +3,7 @@ main = "src/index.ts"
 compatibility_date = "2025-01-01"
 
 [vars]
+LLM_SERVICE_URL = "https://lms-llm.mamaev.coach"
 OWNER_EMAIL = "sasha@mamaev.coach"
 LISTMONK_URL = "https://listmonk.mamaev.coach"
 # listmonk CRM list «Точка Сборки CRM» (private, single opt-in) — создан на infra I4
