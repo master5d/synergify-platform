@@ -56,3 +56,24 @@ describe('draftBrief', () => {
     expect(p.source_quotes).toEqual(['q1', 'q2'])
   })
 })
+
+// Гвард к аудиту 2026-09-04: ключ обязан ехать в заголовке, а НЕ в query-строке.
+// URL целиком оседает в логах/метриках, поэтому «?key=...» — это утечка, которая
+// ничего не ломает и потому возвращается тихо. Проверяем обе половины утверждения:
+// в URL ключа нет И в заголовке он есть (одной первой половины мало — её удовлетворяет
+// и вызов, забывший ключ вовсе, который упал бы уже в проде).
+describe('транспорт ключа Gemini', () => {
+  it('шлёт ключ заголовком x-goog-api-key, а не в URL, и ставит таймаут', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue(geminiResponse(JSON.stringify([
+      { classification: 'covered', matched_module: '00', gap_topic_key: null,
+        gap_topic_label: null, feasibility_note: null, value_tier: 'normal' },
+    ])))
+    await classifyDemand([{ source: 'F3', text: 'x' }], COURSE_CATALOG, 'SEKRIT', fetchImpl as any)
+
+    const [url, init] = fetchImpl.mock.calls[0]
+    expect(url).not.toContain('key=')
+    expect(url).not.toContain('SEKRIT')
+    expect((init.headers as any)['x-goog-api-key']).toBe('SEKRIT')
+    expect(init.signal).toBeDefined()
+  })
+})

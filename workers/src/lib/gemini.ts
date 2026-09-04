@@ -1,3 +1,6 @@
+// 2026-09-04 (аудит лабы): ключ уехал из query-строки в заголовок x-goog-api-key.
+// URL целиком попадает в логи, метрики и Referer — секрет там жить не может (SOVRN §11.5).
+// Заодно AbortSignal.timeout: сетевой вызов без потолка вешает воркер (§11.6).
 import { SKINS_META } from '../../../LMS/tochka-sborki/web/lib/rpg/skins-meta'
 import type { WorldSkin } from '../../../LMS/tochka-sborki/web/lib/rpg/types'
 
@@ -35,11 +38,12 @@ export async function generateSheetProse(
   input: ProseInput, apiKey: string, fetchImpl: typeof fetch = fetch,
 ): Promise<Prose> {
   const model = 'gemini-2.5-pro'
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`
   const prompt = buildProsePrompt(input)
   try {
     const res = await fetchImpl(url, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+      signal: AbortSignal.timeout(60_000),
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: { responseMimeType: 'application/json', temperature: 0.8 },
@@ -73,11 +77,12 @@ export async function classifyFilmSkin(
   film: string, apiKey: string, fetchImpl: typeof fetch = fetch,
 ): Promise<string> {
   const model = 'gemini-2.0-flash'
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`
   const skins = 'slavic-myth|dark-fantasy|cyber-noir|space-opera|anime-quest|soviet-heroic|mystic-arcane|wanderer'
   try {
     const res = await fetchImpl(url, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+      signal: AbortSignal.timeout(60_000),
       body: JSON.stringify({ contents: [{ parts: [{ text:
         `Map this film/series to ONE world skin from [${skins}]. Reply with only the skin key. Film: "${film}"` }] }] }),
     })

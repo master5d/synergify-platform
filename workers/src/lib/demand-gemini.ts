@@ -1,3 +1,6 @@
+// 2026-09-04 (аудит лабы): ключ уехал из query-строки в заголовок x-goog-api-key.
+// URL целиком попадает в логи, метрики и Referer — секрет там жить не может (SOVRN §11.5).
+// Заодно AbortSignal.timeout: сетевой вызов без потолка вешает воркер (§11.6).
 import type { CatalogEntry } from './course-catalog'
 
 export interface DemandClassification {
@@ -25,7 +28,7 @@ export async function classifyDemand(
 ): Promise<DemandClassification[]> {
   if (!signals.length) return []
   const model = 'gemini-2.0-flash'
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`
   const catalogText = catalog.map(c => `${c.slug}: ${c.topic.en}`).join('\n')
   const signalsText = signals.map((s, i) => `${i}. (${s.source}) ${s.text}`).join('\n')
   const prompt = [
@@ -42,7 +45,8 @@ export async function classifyDemand(
   ].join('\n')
   try {
     const res = await fetchImpl(url, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+      signal: AbortSignal.timeout(60_000),
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: { responseMimeType: 'application/json', temperature: 0.2 },
@@ -89,7 +93,7 @@ export async function draftBrief(
   fetchImpl: typeof fetch = fetch,
 ): Promise<BriefProposal> {
   const model = 'gemini-2.5-pro'
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`
   const catalogText = catalog.map(c => `${c.slug}: ${c.topic.en}`).join('\n')
   const prompt = [
     `You are a course architect for an agentic-AI course. Learners asked for content not yet covered.`,
@@ -104,7 +108,8 @@ export async function draftBrief(
   ].join('\n')
   try {
     const res = await fetchImpl(url, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+      signal: AbortSignal.timeout(60_000),
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: { responseMimeType: 'application/json', temperature: 0.6 },

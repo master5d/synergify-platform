@@ -1,6 +1,9 @@
 // scripts/gen-skins.mjs
 // Dev-time only. Generates web/lib/rpg/skins/<skin>.json via Gemini.
 // Usage: GEMINI_API_KEY=... node scripts/gen-skins.mjs [skin1 skin2 ...]
+// 2026-09-04 (аудит лабы): ключ уехал из query-строки в заголовок x-goog-api-key.
+// URL целиком попадает в логи, метрики и Referer — секрет там жить не может (SOVRN §11.5).
+// Заодно AbortSignal.timeout: сетевой вызов без потолка вешает воркер (§11.6).
 import { writeFileSync, readFileSync, readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
@@ -44,8 +47,9 @@ async function gen(skin) {
     `Russian is primary; keep technical terms (API, prompt, agent, MCP) untranslated. Keep names short (zone ≤ 3 words, quest ≤ 7 words).`,
     `Return STRICT JSON: {"zoneNames":{"<slug>":{"ru","en"}},"questTitles":{"<slug>":{"ru","en"}}} covering all 9 slugs.`,
   ].join('\n')
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${KEY}`
-  const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent`
+  const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': KEY },
+      signal: AbortSignal.timeout(60_000),
     body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: 'application/json', temperature: 0.85 } }) })
   if (!res.ok) throw new Error(`${skin}: gemini ${res.status}`)
   const data = await res.json()
@@ -88,9 +92,10 @@ async function genUnitsForModule(skin, module) {
     `Russian is primary; keep technical terms (API, prompt, agent, MCP) untranslated. Keep each field concise.`,
     `Return STRICT JSON: {"<slug>":{"intro":{"ru","en"},"mentorHint":{"ru","en"},"outro":{"ru","en"}}} covering every unit slug.`,
   ].join('\n')
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${KEY}`
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent`
   const res = await fetch(url, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': KEY },
+      signal: AbortSignal.timeout(60_000),
     body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: 'application/json', temperature: 0.85 } }),
   })
   if (!res.ok) throw new Error(`${skin}/${module}: gemini ${res.status}`)
