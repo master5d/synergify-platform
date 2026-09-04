@@ -7,6 +7,19 @@ export interface DemandEnv extends GatewayEnv {
   POOL_DEMAND_CLASSIFY: string; POOL_DEMAND_BRIEF: string
 }
 
+function isNonEmptyString(v: unknown): v is string {
+  return typeof v === 'string' && v.trim().length > 0
+}
+
+function isNonEmptyBilingualLabel(v: unknown): v is { ru: string; en: string } {
+  return typeof v === 'object' && v !== null &&
+    isNonEmptyString((v as any).ru) && isNonEmptyString((v as any).en)
+}
+
+function isStringOrNull(v: unknown): v is string | null {
+  return v === null || typeof v === 'string'
+}
+
 export async function classifyDemand(
   signals: Signal[], catalog: CatalogEntry[], env: DemandEnv, fetchImpl?: typeof fetch,
 ): Promise<DemandClassification[]> {
@@ -21,6 +34,31 @@ export async function classifyDemand(
     throw new LlmError('bad_shape',
       `expected ${signals.length} items, got ${Array.isArray(items) ? items.length : 'non-array'}`)
   }
+
+  // Валидируем каждый элемент по типам.
+  const classifications = ['covered', 'gap', 'not_feasible', 'unclassified']
+  const valueTiers = ['high', 'normal']
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i] as any
+    if (!classifications.includes(item?.classification)) {
+      throw new LlmError('bad_shape', `item[${i}].classification "${item?.classification}" is not in [covered|gap|not_feasible|unclassified]`)
+    }
+    if (!valueTiers.includes(item?.value_tier)) {
+      throw new LlmError('bad_shape', `item[${i}].value_tier "${item?.value_tier}" is not in [high|normal]`)
+    }
+    if (!isStringOrNull(item?.matched_module)) {
+      throw new LlmError('bad_shape', `item[${i}].matched_module must be string or null, got ${typeof item?.matched_module}`)
+    }
+    if (!isStringOrNull(item?.gap_topic_key)) {
+      throw new LlmError('bad_shape', `item[${i}].gap_topic_key must be string or null, got ${typeof item?.gap_topic_key}`)
+    }
+    if (!isStringOrNull(item?.feasibility_note)) {
+      throw new LlmError('bad_shape', `item[${i}].feasibility_note must be string or null, got ${typeof item?.feasibility_note}`)
+    }
+    if (item?.gap_topic_label !== null && !isNonEmptyBilingualLabel(item?.gap_topic_label)) {
+      throw new LlmError('bad_shape', `item[${i}].gap_topic_label must be null or {ru, en} with non-empty strings`)
+    }
+  }
   return items as DemandClassification[]
 }
 
@@ -32,8 +70,29 @@ export async function draftBrief(
     pool: env.POOL_DEMAND_BRIEF,
     prompt: buildBriefPrompt(topicLabel, quotes, catalog), env, fetchImpl,
   }) as Record<string, unknown>
-  for (const f of ['proposed_type', 'title', 'learning_objective', 'slot', 'agentic_approach']) {
-    if (raw?.[f] == null) throw new LlmError('bad_shape', `brief field missing: ${f}`)
+
+  // Валидируем каждое поле по типам.
+  const proposedTypes = ['module', 'unit']
+  if (!proposedTypes.includes(String(raw?.proposed_type ?? '').trim())) {
+    throw new LlmError('bad_shape', `proposed_type must be "module" or "unit", got "${raw?.proposed_type}"`)
+  }
+  if (!isNonEmptyBilingualLabel(raw?.title)) {
+    throw new LlmError('bad_shape', 'title must be {ru, en} with non-empty strings')
+  }
+  if (!isNonEmptyString(raw?.learning_objective)) {
+    throw new LlmError('bad_shape', `learning_objective must be non-empty string, got "${raw?.learning_objective}"`)
+  }
+  if (!isNonEmptyString(raw?.slot)) {
+    throw new LlmError('bad_shape', `slot must be non-empty string, got "${raw?.slot}"`)
+  }
+  if (!isNonEmptyString(raw?.agentic_approach)) {
+    throw new LlmError('bad_shape', `agentic_approach must be non-empty string, got "${raw?.agentic_approach}"`)
+  }
+  if (!Number.isFinite(raw?.unit_count_estimate)) {
+    throw new LlmError('bad_shape', `unit_count_estimate must be finite number, got ${typeof raw?.unit_count_estimate}`)
+  }
+  if (!Array.isArray(raw?.source_quotes)) {
+    throw new LlmError('bad_shape', `source_quotes must be array, got ${typeof raw?.source_quotes}`)
   }
   return raw as unknown as BriefProposal
 }

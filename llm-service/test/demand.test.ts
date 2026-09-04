@@ -32,6 +32,35 @@ describe('classifyDemand', () => {
     await expect(classifyDemand([], CATALOG, ENV, f as any)).resolves.toEqual([])
     expect(f).not.toHaveBeenCalled()
   })
+
+  it('classification вне перечня = bad_shape (индекс в сообщении)', async () => {
+    const badItem = { ...ITEM, classification: 'invalid' }
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ items: [badItem] })))
+    const e = await classifyDemand(SIGNALS, CATALOG, ENV, f as any).catch((x: any) => x)
+    expect(e).toHaveProperty('code', 'bad_shape')
+    expect(String(e.message)).toContain('0')
+  })
+
+  it('value_tier вне перечня = bad_shape', async () => {
+    const badItem = { ...ITEM, value_tier: 'maybe' }
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ items: [badItem] })))
+    await expect(classifyDemand(SIGNALS, CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
+  })
+
+  it('gap_topic_label без ru = bad_shape', async () => {
+    const badItem = { ...ITEM, gap_topic_label: { en: 'Bot' } }
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ items: [badItem] })))
+    await expect(classifyDemand(SIGNALS, CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
+  })
+
+  it('matched_module как число вместо строки/null = bad_shape', async () => {
+    const badItem = { ...ITEM, matched_module: 123 }
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ items: [badItem] })))
+    await expect(classifyDemand(SIGNALS, CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
+  })
 })
 
 describe('draftBrief', () => {
@@ -47,5 +76,47 @@ describe('draftBrief', () => {
     const f = vi.fn().mockResolvedValue(reply(JSON.stringify(BRIEF)))
     await draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any)
     expect(JSON.parse(f.mock.calls[0][1].body).model).toBe('b-pool')
+  })
+
+  it('proposed_type вне перечня = bad_shape', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, proposed_type: 'invalid' })))
+    await expect(draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
+  })
+
+  it('title с пустой ru = bad_shape', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, title: { ru: '', en: 'T' } })))
+    await expect(draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
+  })
+
+  it('title без en = bad_shape', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, title: { ru: 'Т' } })))
+    await expect(draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
+  })
+
+  it('title как строка вместо объекта = bad_shape', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, title: 'Title' })))
+    await expect(draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
+  })
+
+  it('learning_objective пустая строка = bad_shape', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, learning_objective: '' })))
+    await expect(draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
+  })
+
+  it('unit_count_estimate как строка = bad_shape', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, unit_count_estimate: '2' })))
+    await expect(draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
+  })
+
+  it('source_quotes как строка вместо массива = bad_shape', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, source_quotes: 'quote' })))
+    await expect(draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
   })
 })
