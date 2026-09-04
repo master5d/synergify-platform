@@ -1,5 +1,18 @@
 import { describe, it, expect, vi } from 'vitest'
 import { handleProgress, handleMe, handleSubmit } from './intake'
+import type { LlmEnv } from '../lib/llm-client'
+
+// Фикс-раунд 1 (координатор): раньше здесь стояла строка 'key' четвёртым параметром
+// и vi.fn() без реализации — handleSubmit ждёт LlmEnv, а callLlm на пустом vi.fn()
+// падает синхронно (await undefined → undefined.ok), так что тест случайно ехал по
+// пути catch/fallback, а не по пути успеха, который якобы проверял.
+const LLM_ENV: LlmEnv = { LLM_SERVICE_URL: 'https://x', LLM_SERVICE_TOKEN: 't',
+  LLM_CF_ACCESS_CLIENT_ID: 'i', LLM_CF_ACCESS_CLIENT_SECRET: 's' }
+
+function okFetch() {
+  return vi.fn().mockResolvedValue({ ok: true, status: 200,
+    json: async () => ({ legendaryTitle: 'T', backstory: 'B', firstQuest: 'F', finalBoss: 'X' }) })
+}
 
 function fakeDb(row: any = null) {
   const store = { row }
@@ -29,7 +42,7 @@ describe('handleMe', () => {
 
 describe('handleSubmit', () => {
   it('rejects missing required answers', async () => {
-    const res = await handleSubmit(fakeDb(), 'user1', { answers: {} }, 'key', vi.fn() as any)
+    const res = await handleSubmit(fakeDb(), 'user1', { answers: {} }, LLM_ENV, okFetch() as any)
     expect(res.status).toBe(400)
   })
 })
@@ -72,7 +85,7 @@ describe('versioning', () => {
   it('v2 submit accepts empty required and scores via v2', async () => {
     const db = fakeDbV2()
     db._rows['user1'] = { user_id: 'user1', instrument_version: 2, current_step: 5, answers: '{}' }
-    const res = await handleSubmit(db, 'user1', { answers: { V_NICHE: 'coach', V_SKIN: 'cyber-noir' } }, 'key', vi.fn() as any)
+    const res = await handleSubmit(db, 'user1', { answers: { V_NICHE: 'coach', V_SKIN: 'cyber-noir' } }, LLM_ENV, okFetch() as any)
     expect(res.status).toBe(200)
   })
 })

@@ -103,7 +103,9 @@ export default {
         } else {
           let body: { answers?: any; locale?: 'ru' | 'en' }
           try { body = await request.json() } catch { return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders } }) }
-          response = await handleIntakeSubmit(env.DB, auth.sub, { answers: body.answers ?? {}, locale: body.locale }, env.GEMINI_API_KEY)
+          // handleSubmit берёт узкий LlmEnv, а не весь Env — Stripe/SES ему не нужны;
+          // Env структурно совместим (содержит все четыре поля LlmEnv), поэтому передаём env целиком.
+          response = await handleIntakeSubmit(env.DB, auth.sub, { answers: body.answers ?? {}, locale: body.locale }, env)
           if (response.ok) ctx.waitUntil(runDemandRadar(env, auth.sub, body.answers ?? {}))
         }
       } else if (path === '/api/alumni' && method === 'GET') {

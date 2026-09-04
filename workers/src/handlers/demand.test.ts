@@ -56,11 +56,25 @@ describe('listSignals', () => {
     expect(res.status).toBe(200)
   })
 })
+
 import { runDemandRadar } from './demand'
 import { vi } from 'vitest'
 
-function geminiResp(jsonText: string) {
-  return { ok: true, json: async () => ({ candidates: [{ content: { parts: [{ text: jsonText }] } }] }) }
+// Задача 9: сервис lms-llm отвечает уже разобранным JSON (не сырым Gemini-конвертом),
+// поэтому мок фетча теперь бьёт по пути запроса, а не оборачивает текст в candidates[].
+const LLM_ENV = { LLM_SERVICE_URL: 'https://x', LLM_SERVICE_TOKEN: 't',
+  LLM_CF_ACCESS_CLIENT_ID: 'i', LLM_CF_ACCESS_CLIENT_SECRET: 's' }
+
+function llmFetch(classifyItems: unknown[], brief?: unknown) {
+  return vi.fn(async (url: string) => {
+    if (url.includes('/demand/classify')) {
+      return { ok: true, json: async () => ({ items: classifyItems }) }
+    }
+    if (url.includes('/demand/brief')) {
+      return { ok: true, json: async () => brief }
+    }
+    throw new Error(`unexpected url in test: ${url}`)
+  })
 }
 
 // fake D1 that tracks inserts into both tables and answers COUNT/open-brief queries
@@ -95,11 +109,13 @@ function radarDb() {
 describe('runDemandRadar', () => {
   it('inserts a signal and raises a brief for a high-value gap', async () => {
     const db = radarDb()
-    const fetchImpl = vi.fn().mockResolvedValue(geminiResp(JSON.stringify([
-      { classification: 'gap', matched_module: null, gap_topic_key: 'telegram-intake-bot',
-        gap_topic_label: { ru: 'Бот заявок', en: 'Intake bot' }, feasibility_note: null, value_tier: 'high' },
-    ])))
-    const env = { DB: db, GEMINI_API_KEY: 'k' } as any
+    const fetchImpl = llmFetch(
+      [{ classification: 'gap', matched_module: null, gap_topic_key: 'telegram-intake-bot',
+        gap_topic_label: { ru: 'Бот заявок', en: 'Intake bot' }, feasibility_note: null, value_tier: 'high' }],
+      { proposed_type: 'unit', title: { ru: 'Бот заявок', en: 'Intake bot' }, learning_objective: 'x',
+        slot: 'x', agentic_approach: 'x', unit_count_estimate: 1, source_quotes: [] },
+    )
+    const env = { DB: db, ...LLM_ENV } as any
     await runDemandRadar(env, 'u1', { F3: 'bot that books my clients', F5: 'yes' }, fetchImpl as any)
     expect(db.inserts.some((i: any) => i.table === 'signals')).toBe(true)
     expect(db.inserts.some((i: any) => i.table === 'briefs')).toBe(true)
@@ -108,7 +124,7 @@ describe('runDemandRadar', () => {
   it('does nothing when there are no demand signals', async () => {
     const db = radarDb()
     const fetchImpl = vi.fn()
-    const env = { DB: db, GEMINI_API_KEY: 'k' } as any
+    const env = { DB: db, ...LLM_ENV } as any
     await runDemandRadar(env, 'u1', { F1: 'solo' }, fetchImpl as any)
     expect(db.inserts).toHaveLength(0)
     expect(fetchImpl).not.toHaveBeenCalled()

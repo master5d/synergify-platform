@@ -1,8 +1,11 @@
 import { scoreProfile } from '../../../LMS/tochka-sborki/web/lib/intake/scoring'
 import { scoreProfileV2 } from '../../../LMS/tochka-sborki/web/lib/intake/scoring-v2'
 import { requiredIds } from '../../../LMS/tochka-sborki/web/lib/intake/instrument'
-import { generateSheetProse, classifyFilmSkin } from '../lib/gemini'
+import { callLlm, SKIN_TIMEOUT_MS } from '../lib/llm-client'
+import { fallbackProse } from '../lib/gemini'
+import type { ProseInput, ProseResult } from '../lib/gemini'
 import type { Answers, InstrumentVersion, Locale } from '../../../LMS/tochka-sborki/web/lib/intake/types'
+import type { LlmEnv } from '../lib/llm-client'
 
 export async function handleMe(db: D1Database, userId: string): Promise<Response> {
   const row = await db.prepare('SELECT * FROM intake_profiles WHERE user_id = ?').bind(userId).first()
@@ -30,7 +33,7 @@ export async function handleSubmit(
   db: D1Database,
   userId: string,
   body: { answers: Answers; locale?: Locale },
-  geminiKey: string,
+  llm: LlmEnv,
   fetchImpl: typeof fetch = fetch,
 ): Promise<Response> {
   const answers = body.answers ?? {}
@@ -43,16 +46,38 @@ export async function handleSubmit(
 
   const score = version === 2 ? scoreProfileV2(answers, locale) : scoreProfile(answers)
   if (score.worldSkinSource === 'g3' && typeof answers['G3'] === 'string') {
-    score.worldSkin = (await classifyFilmSkin(answers['G3'] as string, geminiKey, fetchImpl)) as any
+    // Отказ сервиса скин не должен ронять весь сабмит — скин остаётся тем, что дал скоринг.
+    try {
+      // И-3: /skin отвечает за ~2s — не должен ждать общий 100s потолок /prose.
+      const r = await callLlm<{ skin: string }>('/skin', { film: answers['G3'] }, llm, fetchImpl, SKIN_TIMEOUT_MS)
+      score.worldSkin = r.skin as any
+    } catch (e) {
+      // И-2: без этой строки отказ сервиса не оставляет в воркере ни следа —
+      // единственная улика была бы в D1, куда никто не смотрит.
+      console.error('lms-llm /skin failed, keeping scoring-derived skin:', e)
+    }
   }
-  const prose = await generateSheetProse({
+
+  // И-1: тело /prose типизировано конкретным ProseInput — опечатка в имени поля
+  // теперь ловится компилятором, а не подставляется как undefined в промпт сервиса.
+  const proseInput: ProseInput = {
     charClass: score.charClass, worldSkin: score.worldSkin, language: score.sheetLanguage,
     register: score.register, niche: score.niche,
     attributes: { int: score.int, wis: score.wis, con: score.con, dex: score.dex, cha: score.cha, str: score.str },
     aspirational: (answers['G11'] ?? answers['V_OUTCOME']) as string,
     firstWin: (answers['A2'] ?? answers['V_OUTCOME']) as string,
     successDef: (answers['A10'] ?? answers['V_OUTCOME']) as string,
-  }, geminiKey, fetchImpl)
+  }
+  let prose
+  try {
+    const result: ProseResult = await callLlm<ProseResult>('/prose', proseInput, llm, fetchImpl)
+    prose = { ...result, source: 'gemini' as const }
+  } catch (e) {
+    // И-2: та же улика, что у /skin — единственный след отказа иначе прятался бы в D1.
+    console.error('lms-llm /prose failed, falling back to template prose:', e)
+    // Сервис недоступен/отказал — анкета всё равно собирается, на шаблонной прозе.
+    prose = { ...fallbackProse(proseInput), source: 'template' as const }
+  }
 
   const now = Date.now()
   await db.prepare(

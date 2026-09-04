@@ -1,7 +1,15 @@
-import type { Env } from '../lib/types'
+import type { Env, DemandClassification, BriefProposal } from '../lib/types'
 import { extractSignals, valueTier, normalizeTopicKey, shouldRaiseBrief, WINDOW_MS } from '../lib/demand-signals'
-import { classifyDemand, draftBrief } from '../lib/demand-gemini'
+import type { DemandSignal } from '../lib/demand-signals'
+import { callLlm } from '../lib/llm-client'
 import { COURSE_CATALOG } from '../lib/course-catalog'
+import type { CatalogEntry } from '../lib/course-catalog'
+
+// И-1 финального ревью: тела /demand/classify и /demand/brief типизированы —
+// раньше был только ответ (`callLlm<...>`), а тело шло как `unknown`, и опечатка
+// в имени поля не давала ни ошибки компиляции, ни ошибки рантайма.
+interface DemandClassifyInput { signals: DemandSignal[]; catalog: CatalogEntry[] }
+interface DemandBriefInput { topicLabel: { ru: string; en: string }; quotes: string[]; catalog: CatalogEntry[] }
 
 const VALID_STATUS = ['open', 'accepted', 'rejected', 'shipped']
 
@@ -45,7 +53,9 @@ export async function runDemandRadar(
   try {
     const signals = extractSignals(answers)
     if (!signals.length) return
-    const classifications = await classifyDemand(signals, COURSE_CATALOG, env.GEMINI_API_KEY, fetchImpl)
+    const classifyInput: DemandClassifyInput = { signals, catalog: COURSE_CATALOG }
+    const { items: classifications } = await callLlm<{ items: DemandClassification[] }>(
+      '/demand/classify', classifyInput, env, fetchImpl)
     const now = Date.now()
     for (let i = 0; i < signals.length; i++) {
       const s = signals[i]
@@ -98,7 +108,8 @@ async function maybeRaiseBrief(
   ).bind(topicKey).all()
   const quotes = (quotesRes.results ?? []).map((r: any) => r.raw_text as string)
 
-  const proposal = await draftBrief(label, quotes, COURSE_CATALOG, env.GEMINI_API_KEY, fetchImpl)
+  const briefInput: DemandBriefInput = { topicLabel: label, quotes, catalog: COURSE_CATALOG }
+  const proposal = await callLlm<BriefProposal>('/demand/brief', briefInput, env, fetchImpl)
   const briefId = crypto.randomUUID()
   await env.DB.prepare(
     `INSERT INTO content_demand_briefs (id,gap_topic_key,status,proposal_json,signal_count,created_at,decided_at)

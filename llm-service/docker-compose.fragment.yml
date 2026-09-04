@@ -1,0 +1,12 @@
+# Фрагмент для вставки внутрь существующего ключа services: в /root/sovern/docker-compose.yml
+# sovern-net объявлена как external: true в том же файле на строке 91
+  lms-llm:
+    build: ./lms-engine/llm-service
+    container_name: lms-llm
+    restart: unless-stopped
+    env_file:
+      - lms-llm.env
+    ports:
+      - "127.0.0.1:4310:4310"   # только loopback; наружу — через enerv-tunnel
+    networks:
+      - sovern-net
