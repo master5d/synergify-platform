@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { chatJson, stripFence, LlmError } from '../src/gateway.js'
 
-const ENV = { GATEWAY_URL: 'http://gw.test/v1', GATEWAY_API_KEY: 'k' }
+const ENV = { GATEWAY_URL: 'http://gw.test/v1', GATEWAY_API_KEY: 'sk-SEKRIT-TEST-VALUE' }
 
 function reply(content: string) {
   return { ok: true, status: 200, json: async () => ({ choices: [{ message: { content } }] }) }
@@ -38,8 +38,8 @@ describe('chatJson', () => {
     const fetchImpl = vi.fn().mockResolvedValue(reply('{"a":1}'))
     await chatJson({ pool: 'p', prompt: 'x', env: ENV, fetchImpl: fetchImpl as any })
     const [url, init] = fetchImpl.mock.calls[0]
-    expect(String(url)).not.toContain('k')
-    expect(init.headers.Authorization).toBe('Bearer k')
+    expect(String(url)).not.toContain(ENV.GATEWAY_API_KEY)
+    expect(init.headers.Authorization).toBe(`Bearer ${ENV.GATEWAY_API_KEY}`)
     expect(init.signal).toBeDefined()
   })
 
@@ -66,6 +66,6 @@ describe('chatJson', () => {
     const fetchImpl = vi.fn().mockRejectedValue(new Error('boom'))
     const e = await chatJson({ pool: 'p', prompt: 'x', env: ENV, fetchImpl: fetchImpl as any }).catch(x => x)
     expect(e).toBeInstanceOf(LlmError)
-    expect(JSON.stringify(e.message)).not.toContain('k')
+    expect(String((e as Error).message)).not.toContain(ENV.GATEWAY_API_KEY)
   })
 })
