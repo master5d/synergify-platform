@@ -94,5 +94,12 @@ export async function draftBrief(
   if (!Array.isArray(raw?.source_quotes)) {
     throw new LlmError('bad_shape', `source_quotes must be array, got ${typeof raw?.source_quotes}`)
   }
+  // Валидируем каждый элемент массива: каждый должен быть непустой строкой.
+  for (let i = 0; i < (raw.source_quotes as any[]).length; i++) {
+    const quote = (raw.source_quotes as any)[i]
+    if (!isNonEmptyString(quote)) {
+      throw new LlmError('bad_shape', `source_quotes[${i}] must be non-empty string, got ${typeof quote}`)
+    }
+  }
   return raw as unknown as BriefProposal
 }

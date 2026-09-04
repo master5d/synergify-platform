@@ -119,4 +119,30 @@ describe('draftBrief', () => {
     await expect(draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any))
       .rejects.toMatchObject({ code: 'bad_shape' })
   })
+
+  it('slot пустая строка = bad_shape', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, slot: '' })))
+    await expect(draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
+  })
+
+  it('agentic_approach пустая строка = bad_shape', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, agentic_approach: '' })))
+    await expect(draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any))
+      .rejects.toMatchObject({ code: 'bad_shape' })
+  })
+
+  it('source_quotes с не-строкой (число) = bad_shape (индекс в сообщении)', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, source_quotes: [1, 'valid', null] })))
+    const e = await draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any).catch((x: any) => x)
+    expect(e).toHaveProperty('code', 'bad_shape')
+    expect(String(e.message)).toContain('0')
+  })
+
+  it('source_quotes с пустой строкой = bad_shape (индекс в сообщении)', async () => {
+    const f = vi.fn().mockResolvedValue(reply(JSON.stringify({ ...BRIEF, source_quotes: ['valid', '', 'also'] })))
+    const e = await draftBrief({ ru: 'Т', en: 'T' }, ['q'], CATALOG, ENV, f as any).catch((x: any) => x)
+    expect(e).toHaveProperty('code', 'bad_shape')
+    expect(String(e.message)).toContain('1')
+  })
 })
