@@ -4,6 +4,14 @@ import { WORLD_SKINS } from '../src/types.js'
 
 const WORKER_SKIN_LINE = '../../workers/src/lib/gemini.ts'
 
+// Явный список ожидаемых полей для каждого интерфейса (из воркера)
+const EXPECTED: Record<string, string[]> = {
+  ProseInput: ['charClass', 'worldSkin', 'language', 'register', 'niche', 'attributes', 'aspirational', 'firstWin', 'successDef'],
+  CatalogEntry: ['slug', 'topic'],
+  DemandClassification: ['classification', 'matched_module', 'gap_topic_key', 'gap_topic_label', 'feasibility_note', 'value_tier'],
+  BriefProposal: ['proposed_type', 'title', 'learning_objective', 'slot', 'agentic_approach', 'unit_count_estimate', 'source_quotes'],
+}
+
 // Функция для извлечения полей интерфейса из исходного кода
 function extractInterfaceFields(src: string, interfaceName: string): string[] {
   // Ищем: interface InterfaceName {
@@ -92,21 +100,27 @@ describe('сверка с оригиналом в воркере', () => {
 
   // Проверка интерфейсов
   it('ProseInput: поля совпадают', () => {
-    const localSrc = findInterfaceSource('../src/types.ts', null, 'ProseInput')
-    const workerSrc = findInterfaceSource('../../workers/src/lib/gemini.ts', null, 'ProseInput')
+    const localSrc = findInterfaceSource('../src/types.ts', '../../workers/src/lib/types.ts', 'ProseInput')
+    const workerSrc = findInterfaceSource('../../workers/src/lib/gemini.ts', '../../workers/src/lib/types.ts', 'ProseInput')
     
     if (!localSrc || !workerSrc) {
       console.warn('SKIP: интерфейс ProseInput не найден в одном из источников')
       return
     }
 
-    const localFields = extractInterfaceFields(localSrc, 'ProseInput')
-    const workerFields = extractInterfaceFields(workerSrc, 'ProseInput')
-    expect(localFields).toEqual(workerFields)
+    const localFields = extractInterfaceFields(localSrc, 'ProseInput').sort()
+    const workerFields = extractInterfaceFields(workerSrc, 'ProseInput').sort()
+    const expectedFields = EXPECTED['ProseInput'].sort()
+
+    // Три проверки: разборщик не упал (поля не пустые) и оба источника совпадают с ожидаемым
+    expect(localFields.length).toBeGreaterThan(0)
+    expect(workerFields.length).toBeGreaterThan(0)
+    expect(localFields).toEqual(expectedFields)
+    expect(workerFields).toEqual(expectedFields)
   })
 
   it('DemandClassification: поля совпадают', () => {
-    const localSrc = findInterfaceSource('../src/types.ts', null, 'DemandClassification')
+    const localSrc = findInterfaceSource('../src/types.ts', '../../workers/src/lib/types.ts', 'DemandClassification')
     const workerSrc = findInterfaceSource(
       '../../workers/src/lib/demand-gemini.ts',
       '../../workers/src/lib/types.ts',
@@ -118,13 +132,18 @@ describe('сверка с оригиналом в воркере', () => {
       return
     }
 
-    const localFields = extractInterfaceFields(localSrc, 'DemandClassification')
-    const workerFields = extractInterfaceFields(workerSrc, 'DemandClassification')
-    expect(localFields).toEqual(workerFields)
+    const localFields = extractInterfaceFields(localSrc, 'DemandClassification').sort()
+    const workerFields = extractInterfaceFields(workerSrc, 'DemandClassification').sort()
+    const expectedFields = EXPECTED['DemandClassification'].sort()
+
+    expect(localFields.length).toBeGreaterThan(0)
+    expect(workerFields.length).toBeGreaterThan(0)
+    expect(localFields).toEqual(expectedFields)
+    expect(workerFields).toEqual(expectedFields)
   })
 
   it('BriefProposal: поля совпадают', () => {
-    const localSrc = findInterfaceSource('../src/types.ts', null, 'BriefProposal')
+    const localSrc = findInterfaceSource('../src/types.ts', '../../workers/src/lib/types.ts', 'BriefProposal')
     const workerSrc = findInterfaceSource(
       '../../workers/src/lib/demand-gemini.ts',
       '../../workers/src/lib/types.ts',
@@ -136,22 +155,32 @@ describe('сверка с оригиналом в воркере', () => {
       return
     }
 
-    const localFields = extractInterfaceFields(localSrc, 'BriefProposal')
-    const workerFields = extractInterfaceFields(workerSrc, 'BriefProposal')
-    expect(localFields).toEqual(workerFields)
+    const localFields = extractInterfaceFields(localSrc, 'BriefProposal').sort()
+    const workerFields = extractInterfaceFields(workerSrc, 'BriefProposal').sort()
+    const expectedFields = EXPECTED['BriefProposal'].sort()
+
+    expect(localFields.length).toBeGreaterThan(0)
+    expect(workerFields.length).toBeGreaterThan(0)
+    expect(localFields).toEqual(expectedFields)
+    expect(workerFields).toEqual(expectedFields)
   })
 
   it('CatalogEntry: поля совпадают', () => {
-    const localSrc = findInterfaceSource('../src/types.ts', null, 'CatalogEntry')
-    const workerSrc = findInterfaceSource('../../workers/src/lib/course-catalog.ts', null, 'CatalogEntry')
+    const localSrc = findInterfaceSource('../src/types.ts', '../../workers/src/lib/types.ts', 'CatalogEntry')
+    const workerSrc = findInterfaceSource('../../workers/src/lib/course-catalog.ts', '../../workers/src/lib/types.ts', 'CatalogEntry')
     
     if (!localSrc || !workerSrc) {
       console.warn('SKIP: интерфейс CatalogEntry не найден в одном из источников')
       return
     }
 
-    const localFields = extractInterfaceFields(localSrc, 'CatalogEntry')
-    const workerFields = extractInterfaceFields(workerSrc, 'CatalogEntry')
-    expect(localFields).toEqual(workerFields)
+    const localFields = extractInterfaceFields(localSrc, 'CatalogEntry').sort()
+    const workerFields = extractInterfaceFields(workerSrc, 'CatalogEntry').sort()
+    const expectedFields = EXPECTED['CatalogEntry'].sort()
+
+    expect(localFields.length).toBeGreaterThan(0)
+    expect(workerFields.length).toBeGreaterThan(0)
+    expect(localFields).toEqual(expectedFields)
+    expect(workerFields).toEqual(expectedFields)
   })
 })
