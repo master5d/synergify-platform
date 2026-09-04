@@ -44,5 +44,12 @@ export function buildBriefPrompt(
     `Pedagogy: each unit follows 4 phases — Activation, Reflection, Concept, Practice. Modules are numbered 00–08.`,
     `Propose how to deliver this. Return STRICT JSON:`,
     `{"proposed_type","title":{"ru","en"},"learning_objective","slot","agentic_approach","unit_count_estimate","source_quotes"}.`,
+    `Field constraints: proposed_type must be exactly "module" or "unit" (lowercase only, no alternatives).`,
+    `unit_count_estimate must be an integer (not a string, range, or decimal).`,
+    `source_quotes must be an array of strings, each quote taken directly from the provided learner quotes.`,
+    `slot must be a string representing module number (like "03"), not a numeric value.`,
   ].join('\n')
 }
+
+
+

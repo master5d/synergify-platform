@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { generateProse } from '../src/prose.js'
-import { buildProsePrompt } from '../src/prompts.js'
+import { buildProsePrompt, buildBriefPrompt } from '../src/prompts.js'
 
 const ENV = { GATEWAY_URL: 'http://gw.test/v1', GATEWAY_API_KEY: 'k', POOL_PROSE: 'test-pool' }
 const INPUT = {
@@ -55,3 +55,48 @@ describe('generateProse', () => {
     await expect(generateProse(INPUT, ENV, fetchImpl as any)).resolves.toEqual(GOOD)
   })
 })
+
+describe('buildBriefPrompt', () => {
+  it('содержит явное упоминание допустимых значений proposed_type', () => {
+    const prompt = buildBriefPrompt(
+      { ru: 'Тест', en: 'Test' },
+      ['quote 1', 'quote 2'],
+      [{ slug: '01', topic: { ru: 'Модуль', en: 'Module' } }]
+    )
+    expect(prompt).toContain('"module"')
+    expect(prompt).toContain('"unit"')
+    expect(prompt).toContain('lowercase')
+  })
+
+  it('содержит условие что unit_count_estimate целое число', () => {
+    const prompt = buildBriefPrompt(
+      { ru: 'Тест', en: 'Test' },
+      ['quote 1'],
+      [{ slug: '01', topic: { ru: 'Модуль', en: 'Module' } }]
+    )
+    expect(prompt).toContain('integer')
+    expect(prompt).toMatch(/not.*string|not.*range|not.*decimal/)
+  })
+
+  it('содержит условие что source_quotes массив строк из цитат', () => {
+    const prompt = buildBriefPrompt(
+      { ru: 'Тест', en: 'Test' },
+      ['quote 1'],
+      [{ slug: '01', topic: { ru: 'Модуль', en: 'Module' } }]
+    )
+    expect(prompt).toContain('source_quotes')
+    expect(prompt).toContain('array of strings')
+  })
+
+  it('содержит условие что slot строка (вида "03"), не число', () => {
+    const prompt = buildBriefPrompt(
+      { ru: 'Тест', en: 'Test' },
+      ['quote 1'],
+      [{ slug: '01', topic: { ru: 'Модуль', en: 'Module' } }]
+    )
+    expect(prompt).toContain('slot')
+    expect(prompt).toContain('string')
+    expect(prompt).toMatch(/not.*numeric|not.*number/)
+  })
+})
+
