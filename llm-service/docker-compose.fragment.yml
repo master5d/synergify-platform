@@ -1,0 +1,12 @@
+# Влить этот блок в /root/sovern/docker-compose.yml на hetzner.
+services:
+  lms-llm:
+    build: ./lms-engine/llm-service
+    container_name: lms-llm
+    restart: unless-stopped
+    env_file:
+      - lms-llm.env
+    ports:
+      - "127.0.0.1:4310:4310"   # только loopback; наружу — через enerv-tunnel
+    networks:
+      - sovern-net
