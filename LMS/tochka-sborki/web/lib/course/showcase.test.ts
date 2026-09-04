@@ -40,8 +40,10 @@ describeDefaultPack('getShowcase', () => {
     expect(getShowcase('ru').dream.heading).not.toBe(getShowcase('en').dream.heading)
     expect(getShowcase('ru').real.heading).not.toBe(getShowcase('en').real.heading)
   })
-  it('video source is null until a URL is configured', () => {
-    expect(getShowcase('ru').video.source).toBeNull()
+  // Видео витрины заведено 2026-09-01 (video-fab); тест «null until configured» с тех пор
+  // был красным в main и никого не останавливал — CI гоняет тесты только для чужого пака.
+  it.each(['ru', 'en'] as const)('video source is a local file per locale (%s)', (locale) => {
+    expect(getShowcase(locale).video.source).toEqual({ kind: 'file', src: `/showcase/tochka-sborki-${locale}.mp4` })
   })
 })
 
