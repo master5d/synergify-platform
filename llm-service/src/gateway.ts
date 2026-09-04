@@ -42,7 +42,15 @@ export async function chatJson(opts: {
     throw new LlmError('gateway_unreachable', 'gateway unreachable')
   }
   if (!res.ok) throw new LlmError('gateway_error', `gateway returned ${res.status}`)
-  const data = await res.json() as any
+  let data: any
+  try {
+    data = await res.json()
+  } catch {
+    // Гейтвей ответил 200, но телом не JSON — например, HTML от прокси на пути.
+    // Это отказ ТРАНСПОРТА, а не плохой ответ модели, поэтому gateway_error, не unparsable:
+    // «не смогли получить ответ» и «получили плохой ответ» — разные утверждения.
+    throw new LlmError('gateway_error', 'gateway response body is not JSON')
+  }
   const text = data?.choices?.[0]?.message?.content
   if (typeof text !== 'string' || !text.trim()) {
     throw new LlmError('unparsable', 'gateway returned no content')

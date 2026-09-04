@@ -68,4 +68,14 @@ describe('chatJson', () => {
     expect(e).toBeInstanceOf(LlmError)
     expect(String((e as Error).message)).not.toContain(ENV.GATEWAY_API_KEY)
   })
+
+  it('не-JSON в теле ответа гейтвея не пробивает контракт LlmError', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue({
+      ok: true, status: 200,
+      json: async () => { throw new SyntaxError('Unexpected token < in JSON at position 0') },
+    })
+    const e = await chatJson({ pool: 'p', prompt: 'x', env: ENV, fetchImpl: fetchImpl as any }).catch(x => x)
+    expect(e).toBeInstanceOf(LlmError)
+    expect((e as any).code).toBe('gateway_error')
+  })
 })
