@@ -11,7 +11,9 @@ interface Props {
   showCertificateCta?: boolean
 }
 
-const REPO_URL = 'https://github.com/master5d/tochka-sborki'
+// Публичный репо платформы (MIT, файл LICENSE в корне — решение владельца 2026-09-14). До этого ссылка
+// вела в master5d/tochka-sborki, где LICENSE не было: «MIT License» в футере открывал 404.
+const REPO_URL = 'https://github.com/master5d/synergify-platform'
 
 const labelStyle: React.CSSProperties = {
   fontFamily: 'var(--font-mono)',

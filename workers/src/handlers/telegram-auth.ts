@@ -1,8 +1,7 @@
 import type { Env } from '../lib/types'
 import { signJWT } from '../lib/jwt'
 import { verifyTelegramInitData } from '../lib/telegram-initdata'
-
-const SESSION_MAX_AGE = 2592000 // 30 days, matches handleVerify
+import { SESSION_MAX_AGE, sessionSetCookies, appendCookies } from '../lib/session-cookie'
 
 export async function handleTelegramAuth(request: Request, env: Env): Promise<Response> {
   let body: { initData?: string }
@@ -50,9 +49,7 @@ export async function handleTelegramAuth(request: Request, env: Env): Promise<Re
     { sub: user.id, email: user.email, iat: now, exp: now + SESSION_MAX_AGE },
     env.WORKER_JWT_SECRET
   )
-  const cookie = `session=${jwt}; HttpOnly; Secure; SameSite=Strict; Max-Age=${SESSION_MAX_AGE}; Path=/`
-  return new Response(JSON.stringify({ ok: true, email: user.email, telegram: true }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json', 'Set-Cookie': cookie },
-  })
+  // Сессия школы: на *.synergify.com — Domain=.synergify.com (lib/session-cookie).
+  const headers = appendCookies(new Headers({ 'Content-Type': 'application/json' }), sessionSetCookies(jwt, new URL(request.url).hostname))
+  return new Response(JSON.stringify({ ok: true, email: user.email, telegram: true }), { status: 200, headers })
 }

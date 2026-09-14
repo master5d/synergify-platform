@@ -4,6 +4,8 @@ import { requireAuth } from '../middleware'
 import { addCrmContact } from '../lib/crm'
 import { sendWelcomeEmail } from '../lib/welcome-email'
 import { sendEmailSES } from '../lib/ses'
+import { SESSION_MAX_AGE, sessionSetCookies, sessionClearCookies, appendCookies } from '../lib/session-cookie'
+import { resolveReturnBase } from '../lib/return-base'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -26,29 +28,31 @@ function buildSource(body: { utm_source?: string; utm_medium?: string; utm_campa
 }
 
 // Письмо magic-link на языке юзера (users.language). RU — дефолт; EN только для language === 'en'.
-function buildMagicLinkEmail(lang: string, verifyUrl: string): { subject: string; text: string; html: string } {
+// Имя курса — из LMS/registry.json по сайту, с которого просили вход (intake LMS#16): студент «Тишины»
+// больше не получает письмо «войти в курс «Точка Сборки»».
+function buildMagicLinkEmail(lang: string, verifyUrl: string, courseName: { ru: string; en: string }): { subject: string; text: string; html: string } {
   if (lang === 'en') {
     return {
       subject: 'Your sign-in link',
-      text: `Hi!\n\nYour sign-in link for the "Точка Сборки" course (valid for 15 minutes):\n${verifyUrl}\n\nIf you didn't request this, just ignore this email.`,
+      text: `Hi!\n\nYour sign-in link for the "${courseName.en}" course (valid for 15 minutes):\n${verifyUrl}\n\nIf you didn't request this, just ignore this email.`,
       html: `<p>Hi!</p>
-<p>Your sign-in link for the "Точка Сборки" course (valid for 15 minutes):</p>
+<p>Your sign-in link for the "${courseName.en}" course (valid for 15 minutes):</p>
 <p><a href="${verifyUrl}">Sign in to the course</a></p>
 <p>If you didn't request this, just ignore this email.</p>`,
     }
   }
   return {
     subject: 'Ваша ссылка для входа',
-    text: `Здравствуйте!\n\nВаша ссылка для входа в курс «Точка Сборки» (действует 15 минут):\n${verifyUrl}\n\nЕсли вы не запрашивали вход — просто проигнорируйте это письмо.`,
+    text: `Здравствуйте!\n\nВаша ссылка для входа в курс «${courseName.ru}» (действует 15 минут):\n${verifyUrl}\n\nЕсли вы не запрашивали вход — просто проигнорируйте это письмо.`,
     html: `<p>Здравствуйте!</p>
-<p>Ваша ссылка для входа в курс «Точка Сборки» (действует 15 минут):</p>
+<p>Ваша ссылка для входа в курс «${courseName.ru}» (действует 15 минут):</p>
 <p><a href="${verifyUrl}">Войти в курс</a></p>
 <p>Если вы не запрашивали вход — просто проигнорируйте это письмо.</p>`,
   }
 }
 
 export async function handleSendLink(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-  let body: { email?: string; telegram_handle?: string; utm_source?: string; utm_medium?: string; utm_campaign?: string }
+  let body: { email?: string; telegram_handle?: string; utm_source?: string; utm_medium?: string; utm_campaign?: string; return_to?: string }
   try { body = await request.json() } catch { return Response.json({ error: 'Invalid JSON' }, { status: 400 }) }
 
   const email = body.email?.trim().toLowerCase() ?? ''
@@ -81,13 +85,16 @@ export async function handleSendLink(request: Request, env: Env, ctx: ExecutionC
   const expiresAt = Math.floor(Date.now() / 1000) + 900
   await env.DB.prepare('INSERT INTO magic_links (token, user_id, expires_at) VALUES (?, ?, ?)').bind(token, user!.id, expiresAt).run()
 
-  const verifyUrl = `https://ai.synergify.com/auth/verify?token=${token}`
-  const mail = buildMagicLinkEmail(lang, verifyUrl)
+  // Ссылка ведёт на сайт курса, с которого просили вход (вариант A, intake LMS#16): только адрес курса
+  // из LMS/registry.json, иначе Точка Сборки. Раньше — всегда ai.synergify.com, и вход из академии не работал.
+  const { base, course } = resolveReturnBase(body.return_to)
+  const verifyUrl = `${base}/auth/verify?token=${token}`
+  const mail = buildMagicLinkEmail(lang, verifyUrl, course.name)
 
   // Транзакционное письмо: plain-text + минимальный HTML, одна ссылка, без маркетинговых стилей —
   // чтобы Gmail клал его в Inbox/Primary, а не в Promotions.
   const sendRes = await sendEmailSES(env, {
-    from: 'Точка Сборки <noreply@synergify.com>',
+    from: `${course.name.ru} <noreply@synergify.com>`,
     to: email,
     subject: mail.subject,
     text: mail.text,
@@ -141,15 +148,13 @@ export async function handleVerify(request: Request, env: Env): Promise<Response
   const email = userRow.email
 
   const jwt = await signJWT(
-    { sub: link.user_id, email, iat: now, exp: now + 2592000 },
+    { sub: link.user_id, email, iat: now, exp: now + SESSION_MAX_AGE },
     env.WORKER_JWT_SECRET
   )
 
-  const cookie = `session=${jwt}; HttpOnly; Secure; SameSite=Strict; Max-Age=2592000; Path=/`
-  return new Response(JSON.stringify({ ok: true, email }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json', 'Set-Cookie': cookie },
-  })
+  // Сессия школы: на *.synergify.com — Domain=.synergify.com (lib/session-cookie).
+  const headers = appendCookies(new Headers({ 'Content-Type': 'application/json' }), sessionSetCookies(jwt, new URL(request.url).hostname))
+  return new Response(JSON.stringify({ ok: true, email }), { status: 200, headers })
 }
 
 export async function handleMe(request: Request, env: Env): Promise<Response> {
@@ -158,12 +163,8 @@ export async function handleMe(request: Request, env: Env): Promise<Response> {
   return Response.json({ id: auth.sub, email: auth.email })
 }
 
-export async function handleLogout(_request: Request, _env: Env): Promise<Response> {
-  return new Response(JSON.stringify({ ok: true }), {
-    status: 200,
-    headers: {
-      'Content-Type': 'application/json',
-      'Set-Cookie': 'session=; HttpOnly; Secure; SameSite=Strict; Max-Age=0; Path=/',
-    },
-  })
+export async function handleLogout(request: Request, _env: Env): Promise<Response> {
+  // Стираем и host-only, и доменную cookie: иначе после выхода осталась бы одна из двух.
+  const headers = appendCookies(new Headers({ 'Content-Type': 'application/json' }), sessionClearCookies(new URL(request.url).hostname))
+  return new Response(JSON.stringify({ ok: true }), { status: 200, headers })
 }

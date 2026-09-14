@@ -30,5 +30,11 @@ zone_name = "mamaev.coach"
 pattern = "ai.synergify.com/api/*"
 zone_name = "synergify.com"
 
+# Академия: курсы в подпути (/praktika) ходят в /api/* своего домена — вход, прогресс, допуск
+# (вариант A, intake LMS#16). Без маршрута весь /api академии отдавал 404.
+[[routes]]
+pattern = "academy.synergify.com/api/*"
+zone_name = "synergify.com"
+
 [triggers]
 crons = ["0 16 * * *"]

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Nav } from '@/components/nav'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
+import { BASE_PATH } from '@/lib/base-path'
 
 const inputStyle = {
   padding: '0.875rem',
@@ -27,8 +28,14 @@ export function LoginForm({ locale }: Props) {
   const [oauthHref, setOauthHref] = useState('/api/auth/oauth/google/start')
 
   useEffect(() => {
+    // base — префикс курса в подпути (/praktika): воркер вернёт ошибку/дефолт на вход и главную курса,
+    // а не на корень домена школы (intake LMS#16, вариант A).
+    const params = new URLSearchParams()
     const redirect = new URLSearchParams(window.location.search).get('redirect')
-    setOauthHref(redirect ? `/api/auth/oauth/google/start?redirect=${encodeURIComponent(redirect)}` : '/api/auth/oauth/google/start')
+    if (redirect) params.set('redirect', redirect)
+    if (BASE_PATH) params.set('base', BASE_PATH)
+    const qs = params.toString()
+    setOauthHref(`/api/auth/oauth/google/start${qs ? `?${qs}` : ''}`)
   }, [])
 
   async function handleSubmit(e: React.FormEvent) {
@@ -40,7 +47,8 @@ export function LoginForm({ locale }: Props) {
       const redirect = params.get('redirect')
       if (redirect) sessionStorage.setItem('login_redirect', redirect)
       sessionStorage.setItem('login_locale', locale)
-      const body: Record<string, string> = { email }
+      // return_to — адрес сайта ЭТОГО курса: ссылка из письма приведёт сюда же (воркер сверяет с LMS/registry.json).
+      const body: Record<string, string> = { email, return_to: `${window.location.origin}${BASE_PATH}` }
       if (telegram.trim()) body.telegram_handle = telegram.trim()
       const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign'] as const
       for (const key of utmKeys) {

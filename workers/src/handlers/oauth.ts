@@ -2,8 +2,9 @@ import type { Env } from '../lib/types'
 import { signJWT, generateToken } from '../lib/jwt'
 import { parseCookies } from '../middleware'
 import { pkceChallenge, buildAuthorizeUrl, exchangeCode, fetchUserinfo, safeRedirectPath } from '../lib/oauth-google'
+import { SESSION_MAX_AGE, sessionSetCookies, appendCookies } from '../lib/session-cookie'
+import { safeBasePath } from '../lib/return-base'
 
-const SESSION_MAX_AGE = 2592000 // 30 days, matches handleVerify / handleTelegramAuth
 const TEMP_COOKIE = 'HttpOnly; Secure; SameSite=Lax; Max-Age=600; Path=/'
 
 function unconfigured(env: Env): boolean {
@@ -18,6 +19,9 @@ export async function handleOAuthStart(request: Request, env: Env): Promise<Resp
   const verifier = generateToken()
   const challenge = await pkceChallenge(verifier)
   const redirect = safeRedirectPath(url.searchParams.get('redirect'))
+  // Курс в подпути (/praktika): ошибка и возврат по умолчанию — на его вход и главную, а не на корень
+  // домена школы (там их нет — 404). intake LMS#16, вариант A.
+  const base = safeBasePath(url.searchParams.get('base'))
   const redirectUri = `${url.origin}/api/auth/oauth/google/callback`
   const authorize = buildAuthorizeUrl({ clientId: env.GOOGLE_OAUTH_CLIENT_ID, redirectUri, state, codeChallenge: challenge })
 
@@ -25,6 +29,7 @@ export async function handleOAuthStart(request: Request, env: Env): Promise<Resp
   headers.append('Set-Cookie', `oauth_state=${state}; ${TEMP_COOKIE}`)
   headers.append('Set-Cookie', `oauth_verifier=${verifier}; ${TEMP_COOKIE}`)
   headers.append('Set-Cookie', `oauth_redirect=${encodeURIComponent(redirect)}; ${TEMP_COOKIE}`)
+  headers.append('Set-Cookie', `oauth_base=${encodeURIComponent(base)}; ${TEMP_COOKIE}`)
   return new Response(null, { status: 302, headers })
 }
 
@@ -32,11 +37,12 @@ export async function handleOAuthCallback(request: Request, env: Env): Promise<R
   if (unconfigured(env)) return Response.json({ error: 'oauth_not_configured' }, { status: 503 })
 
   const url = new URL(request.url)
-  const fail = () => Response.redirect(`${url.origin}/login?error=oauth`, 302)
+  const cookies = parseCookies(request.headers.get('Cookie') ?? '')
+  const base = safeBasePath(cookies['oauth_base'] ? decodeURIComponent(cookies['oauth_base']) : null)
+  const fail = () => Response.redirect(`${url.origin}${base}/login?error=oauth`, 302)
 
   const code = url.searchParams.get('code')
   const state = url.searchParams.get('state')
-  const cookies = parseCookies(request.headers.get('Cookie') ?? '')
   // state-CSRF: query state must match the cookie set at /start
   if (!code || !state || !cookies['oauth_state'] || state !== cookies['oauth_state']) return fail()
   const verifier = cookies['oauth_verifier']
@@ -72,12 +78,13 @@ export async function handleOAuthCallback(request: Request, env: Env): Promise<R
   }
 
   const jwt = await signJWT({ sub: user.id, email: user.email, iat: now, exp: now + SESSION_MAX_AGE }, env.WORKER_JWT_SECRET)
-  const redirect = safeRedirectPath(cookies['oauth_redirect'] ? decodeURIComponent(cookies['oauth_redirect']) : '/')
+  const redirect = safeRedirectPath(cookies['oauth_redirect'] ? decodeURIComponent(cookies['oauth_redirect']) : `${base}/`)
 
   const headers = new Headers({ Location: `${url.origin}${redirect}` })
-  headers.append('Set-Cookie', `session=${jwt}; HttpOnly; Secure; SameSite=Strict; Max-Age=${SESSION_MAX_AGE}; Path=/`)
+  appendCookies(headers, sessionSetCookies(jwt, url.hostname))
   headers.append('Set-Cookie', 'oauth_state=; Max-Age=0; Path=/')
   headers.append('Set-Cookie', 'oauth_verifier=; Max-Age=0; Path=/')
   headers.append('Set-Cookie', 'oauth_redirect=; Max-Age=0; Path=/')
+  headers.append('Set-Cookie', 'oauth_base=; Max-Age=0; Path=/')
   return new Response(null, { status: 302, headers })
 }
