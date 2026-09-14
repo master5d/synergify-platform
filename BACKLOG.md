@@ -27,8 +27,8 @@
   «длинная волна Кондратьева» на замере 0/5). Ingest — через агента logos-foundry, только по слову владельца;
   текст Netguru не переносить.
 
-- [ ] **Видео к каждому модулю ТС, потом к каждому уроку** (идея владельца; intake LMS#6, `adopt` как
-  заказ video-fab — строка там же в `video-fab/docs/BACKLOG.md` «Заказы от других проектов»). Цепочка:
+- [ ] **Видео к каждому модулю ТС, потом к каждому уроку** (идея владельца; intake LMS#6; **цепочка
+  принята владельцем 2026-09-14**; `adopt` как заказ video-fab — строка там же в `video-fab/docs/BACKLOG.md` «Заказы от других проектов»). Цепочка:
   сценарий модуля = piece в LF → `lf-pull-lines` → `narrate` (VTT RU+EN) → композиция Remotion «Module» →
   owner-gate → `<VideoCheckpoint src transcript>` в первом юните модуля (`components/video-checkpoint.tsx`
   уже есть и ждёт медиа). Пилот — один модуль (00-kickstart), стоп: ролик не собирается из piece одной
