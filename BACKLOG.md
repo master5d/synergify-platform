@@ -10,9 +10,10 @@
   стирается старая host-only cookie, выход стирает обе); ссылка из письма ведёт на сайт курса, с которого просили вход, — только
   адрес курса из `LMS/registry.json` (`lib/return-base.ts`, иначе Точка Сборки), имя курса и отправитель письма — оттуда же; Google-вход
   помнит базу курса (`oauth_base`): ошибка и возврат по умолчанию — на `/praktika/…`. Тесты воркера 234/234 (новые: session-cookie,
-  return-base, auth-return, oauth-base). **Остался шаг владельца:** в Google Cloud Console → OAuth client → Authorized redirect URIs
-  добавить `https://academy.synergify.com/api/auth/oauth/google/callback`; до этого в академии работают вход по почте и Telegram, а
-  Google — нет. Исходная запись:
+  return-base, auth-return, oauth-base). **Google Console — СДЕЛАНО 2026-09-14** (по слову владельца, полоса local-owner):
+  в клиент `tochka-sborki-web` (проект `synergify-504117`) добавлен `https://academy.synergify.com/api/auth/oauth/google/callback`;
+  проба `/api/auth/oauth/google/start` академии в 21:02 UTC → экран входа Google (в 20:52 был `redirect_uri_mismatch`). Живой вход
+  человеком (почта + Google) ещё не прогнан. Исходная запись:
 - [ ] ~~**Вход на `/praktika` не работает — решение владельца.**~~ Найдено браузерным обходом 2026-09-14. 404 починены, но войти
   студенту «Тишины» по-прежнему нельзя: (1) воркер API привязан к `ai.mamaev.coach`, `mamaev.coach`, `ai.synergify.com` —
   `academy.synergify.com/api/*` = 404 (вход, прогресс, допуск, Google-старт); (2) cookie сессии без `Domain`, `SameSite=Strict`

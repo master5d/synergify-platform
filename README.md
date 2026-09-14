@@ -60,7 +60,7 @@ cutover 2026-08-06; mc_hub остался личным контуром mamaev.c
 (`Domain=.synergify.com` на школьных хостах, при входе стирается host-only, выход стирает обе). Ссылка из письма ведёт на
 сайт курса, с которого просили вход: страница входа шлёт `return_to`, воркер принимает только адрес курса из
 `LMS/registry.json` (`lib/return-base.ts`); имя курса в письме — оттуда же. Google-вход помнит базу курса (`oauth_base`).
-⚠ Redirect URI каждого домена с Google-входом должен быть в Google Cloud Console (академия — шаг владельца, см. `BACKLOG.md`).
+⚠ Redirect URI каждого домена с Google-входом должен быть в Google Cloud Console (клиент `tochka-sborki-web`, проект `synergify-504117`; `ai.` и `academy.` добавлены, 2026-09-14).
 
 Лицензия — MIT (`LICENSE` в корне). Задачи и решения владельца — `BACKLOG.md`; разбор PRD-intake раунда 2026-09-14 —
 `docs/superpowers/research/2026-09-14-lms-prd-intake.md`.
