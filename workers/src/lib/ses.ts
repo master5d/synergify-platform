@@ -12,6 +12,21 @@ export interface SesMessage {
 
 const strip = (s: string | undefined) => (s ?? '').replace(/^﻿/, '').trim()
 
+// Имя отправителя берётся из реестра курсов, а «Тишина, в которой слышно» содержит запятую: без
+// кодирования SES режет строку на два адреса и отвечает 400 «Local address contains control or
+// whitespace». Имя со спецсимволами RFC 5322 уходит MIME encoded-word (RFC 2047); прочие имена —
+// как раньше (кириллица без спецсимволов SES принимает, «Точка Сборки» так ходит с начала).
+export function encodeFromAddress(from: string): string {
+  const m = /^\s*(.*?)\s*<([^<>\s]+@[^<>\s]+)>\s*$/.exec(from)
+  if (!m || !m[1]) return from
+  const [, name, addr] = m
+  if (!/[()<>[\]:;@\\,."\x00-\x1f\x7f]/.test(name)) return `${name} <${addr}>`
+  const bytes = new TextEncoder().encode(name)
+  let bin = ''
+  for (const b of bytes) bin += String.fromCharCode(b)
+  return `=?UTF-8?B?${btoa(bin)}?= <${addr}>`
+}
+
 // Транзакционная отправка через SES v2 SendEmail (Simple). SigV4 через aws4fetch.
 // From не меняется относительно прежнего Resend-вызова; headers маппятся в Simple.Headers.
 export async function sendEmailSES(env: Env, msg: SesMessage): Promise<{ ok: boolean; status: number; error?: string }> {
@@ -23,7 +38,7 @@ export async function sendEmailSES(env: Env, msg: SesMessage): Promise<{ ok: boo
     service: 'ses',
   })
   const body: Record<string, unknown> = {
-    FromEmailAddress: msg.from,
+    FromEmailAddress: encodeFromAddress(msg.from),
     Destination: { ToAddresses: [msg.to] },
     Content: {
       Simple: {

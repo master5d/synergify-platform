@@ -11,6 +11,8 @@ export interface CompanionData {
   usesProfile: boolean
   /** Включать тёплый-но-твёрдый контракт наставника из lib/mentor-persona. */
   mentorPersona: boolean
+  /** Название кнопки компаньона в уроке (блок в конце и плавающая плашка). */
+  label: Bi
   identity: Bi
   context: Bi
   /** Строки методики; к последней движок добавляет голос мира скина, если профиль есть. */
@@ -28,6 +30,7 @@ export interface CompanionData {
 export const COMPANION: CompanionData = {
   usesProfile: true,
   mentorPersona: true,
+  label: { ru: 'Учиться с ИИ', en: 'Learn with AI' },
   identity: {
     ru: 'Ты — мой со-мыслящий партнёр по обучению, не репетитор и не «сделай за меня». Мы co-thinking и co-working: инструмент и роль человека разделены — ты держишь рамку и задаёшь вопросы, а смысл, выбор и решения остаются за мной.',
     en: 'You are my co-thinking learning partner — not a tutor and not a "do-it-for-me." We co-think and co-work: tool and human role are separate — you hold the frame and ask questions, while meaning, choices, and decisions stay with me.',

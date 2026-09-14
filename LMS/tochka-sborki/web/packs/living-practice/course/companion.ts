@@ -1,5 +1,5 @@
 // packs/living-practice/course/companion.ts
-// Компаньон «Учиться с ИИ» курса практики внимания. Границы — те, что курс обещает
+// Компаньон «Медитировать с ИИ» (label) курса практики внимания. Границы — те, что курс обещает
 // студенту в u1, u3, u5 и u7 («чёрный список» компаньона): до intake LMS#16 кнопка
 // отдавала общий промпт vibe-кодинга без единого из этих запретов.
 // Профиль анкеты Точки Сборки (скин, ниша, «результат за 60 дней») сюда не попадает.
@@ -11,6 +11,8 @@ export interface CompanionData {
   usesProfile: boolean
   /** Включать тёплый-но-твёрдый контракт наставника из lib/mentor-persona. */
   mentorPersona: boolean
+  /** Название кнопки компаньона в уроке (блок в конце и плавающая плашка). */
+  label: Bi
   identity: Bi
   context: Bi
   /** Строки методики; к последней движок добавляет голос мира скина, если профиль есть. */
@@ -28,6 +30,7 @@ export interface CompanionData {
 export const COMPANION: CompanionData = {
   usesProfile: false,
   mentorPersona: false,
+  label: { ru: 'Медитировать с ИИ', en: 'Meditate with AI' },
   identity: {
     ru: 'Ты — мой собеседник между сессиями курса практики внимания, а не терапевт, не куратор-специалист и не «понимающий меня человек». Ты держишь рамку и задаёшь вопросы; смысл, выбор и решения остаются за мной.',
     en: 'You are my conversation partner between sessions of an attention-practice course — not a therapist, not a specialist supervisor, and not "someone who understands me as a person." You hold the frame and ask questions; meaning, choices, and decisions stay with me.',

@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import type { Locale } from '@/lib/dictionaries'
 import { agentUrl } from '@/lib/learn-prompt'
+import { COMPANION } from '@/lib/course/companion'
 
 // ChatGPT/Claude support `?q=` prefill — they carry the compact bootstrap so the agent
 // opens already oriented. Gemini/Copilot have no reliable prefill param, so they open bare
@@ -15,13 +16,11 @@ const AGENTS: { key: string; label: string; url: string; prefill: boolean }[] = 
 
 const T = {
   ru: {
-    label: 'Учиться с ИИ',
     body: 'Скопируй персональный промпт и вставь его в режим обучения своего агента — он подхватит твой контекст и поведёт тебя дальше.',
     copy: 'Скопировать промпт',
     copied: 'Скопировано ✓',
   },
   en: {
-    label: 'Learn with AI',
     body: 'Copy your personal prompt and paste it into your agent\'s learn mode — it picks up your context and takes you forward.',
     copy: 'Copy prompt',
     copied: 'Copied ✓',
@@ -66,7 +65,7 @@ export function LearnWithAI({ prompt, bootstrap, locale = 'ru' }: { prompt: stri
       background: 'var(--bg-surface)',
     }}>
       <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--text-accent)', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.4rem' }}>
-        {t.label}
+        {COMPANION.label[locale === 'en' ? 'en' : 'ru']}
       </div>
       <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.55, margin: '0 0 1.1rem' }}>
         {t.body}

@@ -2,12 +2,14 @@
 import { useEffect, useState } from 'react'
 import type { Locale } from '@/lib/dictionaries'
 import { agentUrl } from '@/lib/learn-prompt'
+import { COMPANION } from '@/lib/course/companion'
 
 const DISMISS_KEY = 'lwai_dock_dismissed'
 
+// Название кнопки объявляет курс (COMPANION.label): у «Тишины» — «Медитировать с ИИ».
 const T = {
-  ru: { pill: '✨ Учиться с ИИ', hide: 'Скрыть', copy: 'Скопировать устав', copied: 'Скопировано ✓' },
-  en: { pill: '✨ Learn with AI', hide: 'Hide', copy: 'Copy charter', copied: 'Copied ✓' },
+  ru: { pill: `✨ ${COMPANION.label.ru}`, hide: 'Скрыть', copy: 'Скопировать устав', copied: 'Скопировано ✓' },
+  en: { pill: `✨ ${COMPANION.label.en}`, hide: 'Hide', copy: 'Copy charter', copied: 'Copied ✓' },
 }
 
 /**
