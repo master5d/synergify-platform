@@ -5,6 +5,26 @@
 
 ## Срочно (аудит «Тишины», intake LMS#16)
 
+- [ ] **Вход на `/praktika` не работает — решение владельца.** Найдено браузерным обходом 2026-09-14. 404 починены, но войти
+  студенту «Тишины» по-прежнему нельзя: (1) воркер API привязан к `ai.mamaev.coach`, `mamaev.coach`, `ai.synergify.com` —
+  `academy.synergify.com/api/*` = 404 (вход, прогресс, допуск, Google-старт); (2) cookie сессии без `Domain`, `SameSite=Strict`
+  → живёт только на `ai.synergify.com`; (3) ссылка из письма жёстко `https://ai.synergify.com/auth/verify` (`workers/src/handlers/auth.ts:84`);
+  (4) CORS без `academy.synergify.com`; (5) Google-callback строится от домена запроса → нужен в Google Console для академии.
+  Варианты: **A** — маршрут `academy.synergify.com/api/*` + cookie на `.synergify.com` (`SameSite=Lax`) + ссылка из письма на домен,
+  с которого просили вход + callback академии в Google Console (владелец); вход на Точке Сборки тогда виден и в академии, как и
+  задумано («вход после Точки Сборки»). **B** — вход только на ai.synergify.com, страница входа академии ведёт туда и назад по
+  полному URL (нужен разрешённый список доменов в open-redirect guard). Рекомендация — A: одна сессия школы, меньше переходов.
+- [ ] **Лицензия в футере — решение владельца.** Футер обоих курсов: «MIT License» → `https://github.com/master5d/tochka-sborki/blob/main/LICENSE`
+  = 404 (`components/footer.tsx`, `REPO_URL`). Публичный репо платформы — `master5d/synergify-platform`, файла `LICENSE` в нём нет.
+  Либо положить `LICENSE` (какой — решает владелец: код и тексты курса могут лицензироваться по-разному) и перевести `REPO_URL`,
+  либо убрать заявление о лицензии.
+- [x] **404 на живом сайте — СДЕЛАНО 2026-09-14** (браузерный обход 330 URL): уроки «Тишины» уводили на `/login/` корня школы
+  (`auth-guard` через `window.location` без префикса), «К урокам» — на `/quest-intake/` корня (у курса без анкеты теперь в программу),
+  иконки манифеста без `/praktika`, «Запросить новую ссылку» на `/login`, двойной префикс после входа (`verify-client`), EN-переключатель
+  на 404 → `/en/_not-found/`, в упражнениях Точки Сборки ссылки на файлы репо (`my-templates/*.md`, `course-feedback/`, `CHEATSHEET.md`) →
+  `/materials/…`, `/feedback/`, `/cheatsheet/` (шаблон JTBD выложен в `public/materials/`). Помощник `pagePath` + гвард
+  `lib/raw-navigation.test.ts` (сырая навигация на корень запрещена). Внешнее и не наше: openai.com/codex отдаёт 403 боту.
+
 - [x] **СДЕЛАНО 2026-09-14 — компаньон стал данными курса** (`packs/<pack>/course/companion.ts` + стаб
   `lib/course/companion.ts`; `lib/learn-prompt.ts` только собирает; у Точки Сборки промпт не изменился — 1459/1459; у
   «Тишины» — запреты u7, профиль анкеты не используется — 862/862; grep изоляции CI расширен; сборка «Тишины» — 0 совпадений).
