@@ -34,6 +34,11 @@ const pending = PENDING_ALIGNMENT[PACK_SLUG] ?? []
 const hasObjectives = (slug: string) => (meta('ru', slug).objectives ?? []).length > 0
 
 describe(`constructive alignment (${PACK_SLUG})`, () => {
+  it('frozen snapshot size is pinned (it may only shrink)', () => {
+    expect(PENDING_SNAPSHOT['tochka-sborki'].length, 'PENDING_SNAPSHOT может только уменьшаться').toBeLessThanOrEqual(10)
+    expect(PENDING_SNAPSHOT['living-practice'].length, 'PENDING_SNAPSHOT может только уменьшаться').toBeLessThanOrEqual(1)
+  })
+
   it('pending list only shrinks: subset of the frozen snapshot', () => {
     const snap = new Set(PENDING_SNAPSHOT[PACK_SLUG] ?? [])
     for (const s of pending) expect(snap.has(s), `${s} нет в PENDING_SNAPSHOT — новый модуль в храповик не прячется`).toBe(true)

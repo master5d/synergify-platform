@@ -20,7 +20,13 @@ const PLACEHOLDER = /^\s*(?:TODO|TBD|…|\.\.\.)?\s*$|\bTODO\b|\bTBD\b/
 const MARK_RE = /<SelfCheck\s+id="([^"]+)"\s*\/>/g
 const ANY_MARK_RE = /<SelfCheck\b/g
 
-export function selfCheckMarks(mdx: string): { ids: string[]; malformed: number } {
+// Метки внутри кода и MDX-комментариев не считаются: пример в ```-блоке или закомментированная
+// метка не рендерится как вопрос.
+const FENCE_RE = /```[\s\S]*?```/g
+const MDX_COMMENT_RE = /\{\/\*[\s\S]*?\*\/\}/g
+
+export function selfCheckMarks(source: string): { ids: string[]; malformed: number } {
+  const mdx = source.replace(FENCE_RE, '').replace(MDX_COMMENT_RE, '')
   const ids = [...mdx.matchAll(MARK_RE)].map(m => m[1])
   const all = (mdx.match(ANY_MARK_RE) ?? []).length
   return { ids, malformed: all - ids.length }

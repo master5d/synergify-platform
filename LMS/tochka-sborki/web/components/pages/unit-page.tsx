@@ -51,7 +51,7 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
           >
             <MDXRemote
               source={content}
-              components={{ ...mdxComponents, SelfCheck: bindSelfCheck(moduleMeta.checks, locale === 'en' ? 'en' : 'ru') }}
+              components={{ ...mdxComponents, SelfCheck: bindSelfCheck(moduleMeta.checks, locale === 'en' ? 'en' : 'ru', moduleSlug) }}
               options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
             />
           </Shell>

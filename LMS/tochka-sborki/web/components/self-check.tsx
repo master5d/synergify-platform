@@ -1,20 +1,21 @@
 'use client'
 import { useId, useRef, useState } from 'react'
 import type { SelfCheckItem } from '@/lib/content'
-import { isCorrect, makeTracker } from '@/lib/self-check'
+import { isCorrect, makeTracker, optionNote, type SelfCheckEvent } from '@/lib/self-check'
 
+// Пометки вариантов («— верный ответ» / «— ваш ответ») живут в lib/self-check.ts: optionNote.
 const T = {
   ru: { label: 'Проверь себя', check: 'Проверить', right: 'Верно', wrong: 'Не совсем' },
   en: { label: 'Check yourself', check: 'Check', right: 'Correct', wrong: 'Not quite' },
 }
 
-function sendPlausible(props: { unit: string; objective: string; correct: boolean }) {
+function sendPlausible(props: SelfCheckEvent) {
   // @ts-expect-error analytics global is optional
   if (typeof window !== 'undefined') window.plausible?.('self_check_answered', { props })
 }
 
 /** Вопрос «проверь себя» (intake LMS#8). Данные приходят с сервера из _meta.json модуля. */
-export function SelfCheck({ item, locale }: { item: SelfCheckItem; locale: 'ru' | 'en' }) {
+export function SelfCheck({ item, locale, moduleSlug }: { item: SelfCheckItem; locale: 'ru' | 'en'; moduleSlug: string }) {
   const t = T[locale]
   const name = useId()
   const [picked, setPicked] = useState<number | null>(null)
@@ -23,7 +24,7 @@ export function SelfCheck({ item, locale }: { item: SelfCheckItem; locale: 'ru' 
   // Дедуп на экземпляр (= на просмотр страницы), а не на вкладку: модульный Set глушил
   // повторный заход на урок и одинаковые id в разных модулях.
   const trackRef = useRef<ReturnType<typeof makeTracker> | null>(null)
-  if (!trackRef.current) trackRef.current = makeTracker(sendPlausible)
+  if (!trackRef.current) trackRef.current = makeTracker(sendPlausible, moduleSlug)
 
   const submit = () => {
     if (picked === null) return
@@ -38,12 +39,15 @@ export function SelfCheck({ item, locale }: { item: SelfCheckItem; locale: 'ru' 
           <span style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--text-accent)', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.4rem' }}>{t.label}</span>
           <span style={{ color: 'var(--text-primary)', fontWeight: 600, lineHeight: 1.5 }}>{item.question}</span>
         </legend>
-        {item.options.map((o, i) => (
+        {item.options.map((o, i) => {
+          const note = optionNote(i, item, picked, shown, locale)
+          return (
           <label key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'baseline', padding: '0.3rem 0', cursor: 'pointer', color: shown && i === item.answer ? 'var(--text-accent)' : 'var(--text-primary)' }}>
             <input type="radio" name={name} value={i} checked={picked === i} onChange={() => { setPicked(i); setShown(false) }} />
-            <span>{o}</span>
+            <span>{o}{note && <em style={{ fontStyle: 'normal', color: 'var(--text-secondary)' }}> {note}</em>}</span>
           </label>
-        ))}
+          )
+        })}
       </fieldset>
       <button type="button" onClick={submit} disabled={picked === null} style={{ marginTop: '0.75rem', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 700, padding: '0.5rem 1rem', borderRadius: 'var(--radius)', cursor: picked === null ? 'not-allowed' : 'pointer', border: '1px solid var(--text-accent)', background: 'var(--text-accent)', color: 'var(--text-on-accent)', opacity: picked === null ? 0.5 : 1 }}>
         {t.check}

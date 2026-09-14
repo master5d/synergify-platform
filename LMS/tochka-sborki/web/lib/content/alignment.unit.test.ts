@@ -27,6 +27,12 @@ describe('selfCheckMarks', () => {
     expect(r.ids).toEqual(['c1', 'c2'])
     expect(r.malformed).toBe(1)
   })
+  it('ignores marks inside fenced code and MDX comments', () => {
+    const src = 'a <SelfCheck id="c1"/>\n```mdx\n<SelfCheck id="c8"/>\n<SelfCheck q="x"/>\n```\n{/* <SelfCheck id="c9"/> */}\nb'
+    const r = selfCheckMarks(src)
+    expect(r.ids).toEqual(['c1'])
+    expect(r.malformed).toBe(0)
+  })
 })
 
 describe('validateModuleAlignment', () => {
@@ -61,6 +67,8 @@ describe('validateModuleAlignment', () => {
   it('rule 5: RU/EN parity', () => {
     expect(errs(i => { i.en.objectives!.push({ id: 'o4', text: 'Лишняя' }) }).join()).toMatch(/RU и EN.*цел/)
     expect(errs(i => { i.en.checks![0].answer = 1 }).join()).toMatch(/c1.*RU и EN/)
+    expect(errs(i => { i.en.checks!.pop(); i.marks.en.u2 = ['c2'] }).join()).toMatch(/RU и EN.*вопрос/)
+    expect(errs(i => { i.en.checks![0].objective = 'o2' }).join()).toMatch(/c1.*RU и EN/)
     expect(errs(i => { i.en.checks![0].unit = 'u2'; i.marks.en.u1 = []; i.marks.en.u2 = ['c1', 'c2', 'c3'] }).join()).toMatch(/c1.*RU и EN/)
   })
 })

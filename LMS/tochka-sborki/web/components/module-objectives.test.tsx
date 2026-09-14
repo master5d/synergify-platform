@@ -16,7 +16,7 @@ describe('ModuleObjectives', () => {
   it('disclosure for the syllabus is a collapsed <details> with EN label', () => {
     const html = renderToStaticMarkup(<ObjectivesDisclosure objectives={objectives} locale="en" />)
     expect(html).toContain('<details')
-    expect(html).not.toContain('open')
+    expect(html).not.toMatch(/<details[^>]*\sopen/)
     expect(html).toContain('Goals')
   })
 })
