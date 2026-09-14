@@ -14,6 +14,7 @@ import { UnitProse } from '@/components/unit-prose'
 import { UnitGates } from '@/components/unit-gates'
 import { MobileGate } from '@/components/mobile-gate'
 import { mdxComponents } from '@/components/mdx-components'
+import { bindSelfCheck } from '@/components/self-check-bound'
 import type { Locale } from '@/lib/dictionaries'
 
 interface Props { moduleSlug: string; unitSlug: string; locale: Locale }
@@ -48,7 +49,7 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
           >
             <MDXRemote
               source={content}
-              components={mdxComponents}
+              components={{ ...mdxComponents, SelfCheck: bindSelfCheck(moduleMeta.checks, locale === 'en' ? 'en' : 'ru') }}
               options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
             />
           </Shell>
