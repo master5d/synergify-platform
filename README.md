@@ -37,6 +37,34 @@ cutover 2026-08-06; mc_hub остался личным контуром mamaev.c
   admission-гейт) + курс «Практика».
 - **`synergify/`** — зонтик synergify.com.
 
+## Контракт pack'а: что ещё курс объявляет сам (с 2026-09-14, intake LMS#16)
+
+- **`course/companion.ts`** — компаньон «Учиться с ИИ» и стоячая роль (`standing`): контекст СВОЕГО курса,
+  методика, границы (`guardrails`), `usesProfile` (брать ли RPG-анкету), `mentorPersona`. `lib/learn-prompt.ts` и
+  `lib/intake/companion-role-prompt.ts` только собирают. Тест: компаньон называет свой курс и никогда чужой.
+- **`course/intake-gate.ts`** — копия ворот анкеты (даже при `gates.intake: false`).
+- **`public-owned.json`** — какие файлы `web/public/` принадлежат курсу; общие движка — `scripts/public-shared.json`.
+  Postbuild `scripts/prune-public.mjs` вырезает чужое из экспорта; гвард `lib/public-ownership.test.ts` — ровно один владелец.
+- Числа уроков в реестре/роадмапе/сертификате/описаниях сверяет `lib/content/lesson-count.test.ts`.
+- Чек-лист нового курса — `LMS/_template/CHECKLIST.md` §5a.
+
+## Подпуть курса: сырая навигация (с 2026-09-14)
+
+`basePath` переписывает только `next/link`, `router` и импортированные ассеты. `window.location.*` и `<a href="/…">` —
+только через `pagePath()` / `assetPath()` из `lib/base-path.ts`; гвард `lib/raw-navigation.test.ts`. Без этого все
+уроки «Тишины» уводили на `/login/` корня академии (404).
+
+## Вход школы: одна сессия на `.synergify.com` (вариант A, с 2026-09-14)
+
+Воркер привязан к `ai.synergify.com/api/*` И `academy.synergify.com/api/*`. Cookie сессии — `workers/src/lib/session-cookie.ts`
+(`Domain=.synergify.com` на школьных хостах, при входе стирается host-only, выход стирает обе). Ссылка из письма ведёт на
+сайт курса, с которого просили вход: страница входа шлёт `return_to`, воркер принимает только адрес курса из
+`LMS/registry.json` (`lib/return-base.ts`); имя курса в письме — оттуда же. Google-вход помнит базу курса (`oauth_base`).
+⚠ Redirect URI каждого домена с Google-входом должен быть в Google Cloud Console (академия — шаг владельца, см. `BACKLOG.md`).
+
+Лицензия — MIT (`LICENSE` в корне). Задачи и решения владельца — `BACKLOG.md`; разбор PRD-intake раунда 2026-09-14 —
+`docs/superpowers/research/2026-09-14-lms-prd-intake.md`.
+
 ## LLM-вызовы: только через `llm-service` (с 2026-09-04)
 
 Воркер БОЛЬШЕ НЕ ходит в Gemini напрямую. Все четыре LLM-операции (проза листа, классификация
