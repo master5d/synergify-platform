@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { ModuleMeta } from '@/lib/content'
 import type { Locale } from '@/lib/dictionaries'
+import { ObjectivesDisclosure } from './module-objectives'
 
 // Generic curriculum tree: module → units. Data-driven from getAllModules, so any course
 // renders its full syllabus without bespoke markup.
@@ -30,6 +31,7 @@ export function SyllabusTree({ modules, locale }: { modules: ModuleMeta[]; local
               {m.description}
             </p>
           )}
+          <ObjectivesDisclosure objectives={m.objectives} locale={locale === 'en' ? 'en' : 'ru'} />
           <ol style={{ listStyle: 'none', margin: '0.6rem 0 0', padding: 0, display: 'grid', gap: '0.35rem' }}>
             {(m.units ?? []).map((u, ui) => (
               <li key={u.slug}>

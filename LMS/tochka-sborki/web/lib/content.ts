@@ -37,6 +37,20 @@ export interface UnitMeta {
  *  практику внимания — проза. Отсутствие ключа = 'phases' (совместимость). */
 export type UnitLayout = 'phases' | 'prose'
 
+/** Цель модуля — проверяемое действие (intake LMS#9). */
+export interface Objective { id: string; text: string }
+
+/** Вопрос «проверь себя» (intake LMS#8): в MDX урока — только метка <SelfCheck id="…"/>. */
+export interface SelfCheckItem {
+  id: string
+  unit: string
+  objective: string
+  question: string
+  options: string[]
+  answer: number
+  explain: string
+}
+
 export interface ModuleMeta {
   slug: string
   module: number
@@ -46,6 +60,8 @@ export interface ModuleMeta {
   level: number
   units: { slug: string; title: string }[]
   layout?: UnitLayout
+  objectives?: Objective[]
+  checks?: SelfCheckItem[]
 }
 
 /** Разметка модуля с дефолтом. Единственная точка решения — не считать по месту. */

@@ -45,6 +45,9 @@ Everything a new course must provide. Engine code is reused unchanged; the items
 - [ ] `web/packs/<pack>/public-owned.json` — какие файлы `web/public/` принадлежат курсу; чужое вырезается из экспорта
       (`scripts/prune-public.mjs`), у каждого файла ровно один владелец (`lib/public-ownership.test.ts`).
 - [ ] Числа уроков в реестре, роадмапе, сертификате и описаниях модулей сверяет `lib/content/lesson-count.test.ts`.
+- [ ] Учебная связка — в `_meta.json` каждого модуля (RU и EN): `objectives` (3–5 проверяемых целей) и `checks`
+      (вопросы «проверь себя»: урок, цель, 2–5 вариантов, `answer`, объяснение); в MDX урока — метка
+      `<SelfCheck id="…"/>` обычно внутри `<Phase type="concept">` (после объяснения). Сверяет `lib/content/alignment.test.ts`.
 
 ## 6. Content — `web/packs/<pack>/content/{ru,en}/<NN-module>/`
 - [ ] One folder per module, numbered `NN-slug` (e.g. `01-intro`). See `content/{ru,en}/01-example/`.

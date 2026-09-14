@@ -62,6 +62,13 @@ describe('scaffoldModule (pure)', () => {
     expect(mdx).toContain('TODO')
   })
 
+  it('meta carries objectives from unit objectives and an empty checks list (alignment guard forces checks)', () => {
+    const files = scaffoldModule(outline, '2026-09-14')
+    const ru = JSON.parse(files.find(f => f.path.endsWith('ru/' + outline.slug + '/_meta.json'))!.content)
+    expect(ru.objectives).toEqual(outline.units.slice(0, 5).map((u, i) => ({ id: `o${i + 1}`, text: u.objective.ru })))
+    expect(ru.checks).toEqual([])
+  })
+
   it('the emitted _module.json passes validateStamp', () => {
     const stamp = JSON.parse(files.find(f => f.path.endsWith('_module.json'))!.content)
     expect(validateStamp(stamp)).toEqual([])

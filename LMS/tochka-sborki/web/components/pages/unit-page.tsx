@@ -14,6 +14,8 @@ import { UnitProse } from '@/components/unit-prose'
 import { UnitGates } from '@/components/unit-gates'
 import { MobileGate } from '@/components/mobile-gate'
 import { mdxComponents } from '@/components/mdx-components'
+import { bindSelfCheck } from '@/components/self-check-bound'
+import { ModuleObjectives } from '@/components/module-objectives'
 import type { Locale } from '@/lib/dictionaries'
 
 interface Props { moduleSlug: string; unitSlug: string; locale: Locale }
@@ -37,6 +39,7 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
       <div style={{ display: 'flex', minHeight: 'calc(100vh - 3rem)' }}>
         <Sidebar navItems={navItems} currentSlug={moduleSlug} currentUnit={unitSlug} locale={locale} />
         <main id="main-content" tabIndex={-1} style={{ flex: 1, padding: '2rem 3rem', maxWidth: '860px' }}>
+          {unitIndex === 0 && <ModuleObjectives objectives={moduleMeta.objectives} locale={locale === 'en' ? 'en' : 'ru'} />}
           <Shell
             moduleSlug={moduleSlug}
             unitSlug={unitSlug}
@@ -48,7 +51,7 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
           >
             <MDXRemote
               source={content}
-              components={mdxComponents}
+              components={{ ...mdxComponents, SelfCheck: bindSelfCheck(moduleMeta.checks, locale === 'en' ? 'en' : 'ru', moduleSlug) }}
               options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
             />
           </Shell>

@@ -32,6 +32,9 @@ jobs:
       - name: Install
         working-directory: LMS/tochka-sborki/web
         run: npm ci
+      - name: Test
+        working-directory: LMS/tochka-sborki/web
+        run: npm test
       - name: Build
         working-directory: LMS/tochka-sborki/web
         run: npm run build
