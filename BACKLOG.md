@@ -3,6 +3,18 @@
 Строка = действие. Вердикт intake считается записанным, только если его строка здесь (правило `/intake`).
 Ссылки на intake — квалифицированные (`intake LMS#N`), лог: `docs/superpowers/research/2026-09-14-lms-prd-intake.md`.
 
+## Решено владельцем (к спеке)
+
+- [ ] **ТС: модуль «Обучение моделей» — advanced level** (intake LMS#2, решение владельца 2026-09-14).
+  Как устроены и обучаются LLM: претрейн, данные, дообучение/LoRA, оценка — ПОСЛЕ основной агентной
+  практики. Форма в движке: optional-модуль вне спайна прогрессии (`OPTIONAL_MODULE_SLUGS` в
+  `lib/rpg/modules.ts`, прецедент `09-ai-notebook`); отдельного флага «advanced» в движке нет — завести ли
+  его (`_meta.json` / `course.config`) решает спека. Цена: framing во ВСЕХ скинах (zoneNames/questTitles
+  ru+en — гварды `skin-packs.test.ts`, `skins-coverage.test.ts`) + transformation. Первоисточники:
+  Microsoft generative-ai-for-beginners и ML-For-Beginners (MIT, уже в `materials.ts`); HF «The Smol
+  Training Playbook» — лицензия в Space не указана → только ссылка, не перевод/копия. Практика — суверенно
+  (дообучение малой модели на своём железе/бесплатном GPU), не платный облачный тюнинг.
+
 ## Owner-gated (ждут решения владельца)
 
 - [ ] **ТС: юнит «Азбука» до модуля 0** (intake LMS#1). Базовый словарь новичка: токен, контекстное окно,
