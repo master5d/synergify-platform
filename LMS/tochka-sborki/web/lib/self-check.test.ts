@@ -18,4 +18,10 @@ describe('self-check logic', () => {
     expect(send).toHaveBeenCalledTimes(2)
     expect(send).toHaveBeenNthCalledWith(1, { unit: 'u1', objective: 'o1', correct: false })
   })
+  it('dedup does not leak across tracker instances (one per mount)', () => {
+    const send = vi.fn()
+    makeTracker(send)(item, true)
+    makeTracker(send)(item, false)
+    expect(send).toHaveBeenCalledTimes(2)
+  })
 })

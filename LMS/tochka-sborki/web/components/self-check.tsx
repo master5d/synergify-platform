@@ -1,5 +1,5 @@
 'use client'
-import { useId, useState } from 'react'
+import { useId, useRef, useState } from 'react'
 import type { SelfCheckItem } from '@/lib/content'
 import { isCorrect, makeTracker } from '@/lib/self-check'
 
@@ -8,10 +8,10 @@ const T = {
   en: { label: 'Check yourself', check: 'Check', right: 'Correct', wrong: 'Not quite' },
 }
 
-const track = makeTracker(props => {
+function sendPlausible(props: { unit: string; objective: string; correct: boolean }) {
   // @ts-expect-error analytics global is optional
   if (typeof window !== 'undefined') window.plausible?.('self_check_answered', { props })
-})
+}
 
 /** Вопрос «проверь себя» (intake LMS#8). Данные приходят с сервера из _meta.json модуля. */
 export function SelfCheck({ item, locale }: { item: SelfCheckItem; locale: 'ru' | 'en' }) {
@@ -20,11 +20,15 @@ export function SelfCheck({ item, locale }: { item: SelfCheckItem; locale: 'ru' 
   const [picked, setPicked] = useState<number | null>(null)
   const [shown, setShown] = useState(false)
   const correct = isCorrect(item, picked)
+  // Дедуп на экземпляр (= на просмотр страницы), а не на вкладку: модульный Set глушил
+  // повторный заход на урок и одинаковые id в разных модулях.
+  const trackRef = useRef<ReturnType<typeof makeTracker> | null>(null)
+  if (!trackRef.current) trackRef.current = makeTracker(sendPlausible)
 
   const submit = () => {
     if (picked === null) return
     setShown(true)
-    track(item, correct)
+    trackRef.current?.(item, correct)
   }
 
   return (
