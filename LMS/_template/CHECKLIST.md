@@ -47,7 +47,7 @@ Everything a new course must provide. Engine code is reused unchanged; the items
 - [ ] Числа уроков в реестре, роадмапе, сертификате и описаниях модулей сверяет `lib/content/lesson-count.test.ts`.
 - [ ] Учебная связка — в `_meta.json` каждого модуля (RU и EN): `objectives` (3–5 проверяемых целей) и `checks`
       (вопросы «проверь себя»: урок, цель, 2–5 вариантов, `answer`, объяснение); в MDX урока — метка
-      `<SelfCheck id="…"/>` внутри `<Phase type="concept">`. Сверяет `lib/content/alignment.test.ts`.
+      `<SelfCheck id="…"/>` обычно внутри `<Phase type="concept">` (после объяснения). Сверяет `lib/content/alignment.test.ts`.
 
 ## 6. Content — `web/packs/<pack>/content/{ru,en}/<NN-module>/`
 - [ ] One folder per module, numbered `NN-slug` (e.g. `01-intro`). See `content/{ru,en}/01-example/`.
