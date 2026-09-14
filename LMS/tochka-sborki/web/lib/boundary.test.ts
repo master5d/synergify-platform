@@ -14,7 +14,7 @@ const STUBS = [
   'lib/manifest.ts',
   'lib/materials.ts',
   'lib/rpg/skins-meta.ts',
-  ...['ai-doubles', 'certificate', 'companion', 'dungeon-flavor', 'ecosystem', 'intake-questions',
+  ...['ai-doubles', 'certificate', 'companion', 'dungeon-flavor', 'ecosystem', 'intake-gate', 'intake-questions',
       'niche-map', 'notebook-pack', 'office-hours', 'showcase', 'skins', 'try-chains']
     .map((n) => `lib/course/${n}.ts`),
 ]
@@ -34,7 +34,7 @@ const rel = (p: string) => relative(ROOT, p).replaceAll('\\', '/')
 describe('engine ↔ pack boundary', () => {
   it('pack contract files exist', () => {
     for (const f of ['course.config.ts', 'dictionaries.ts', 'manifest.ts', 'materials.ts',
-                     'skins-meta.ts', 'README.md', 'content', 'skins', 'course']) {
+                     'skins-meta.ts', 'README.md', 'content', 'skins', 'course', 'public-owned.json']) {
       expect(existsSync(join(PACK_DIR, f)), f).toBe(true)
     }
   })

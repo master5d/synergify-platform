@@ -1,0 +1,4 @@
+{
+  "_comment": "Файлы web/public/, общие для ЛЮБОГО course-pack'а (движок). Остальное объявляет свой pack в packs/<pack>/public-owned.json; scripts/prune-public.mjs убирает из out/ чужое, гвард lib/public-ownership.test.ts требует ровно одного владельца (intake LMS#16). Запись с '/' на конце — каталог целиком.",
+  "files": ["sw.js", "icon-192.png", "icon-512.png", "icon-maskable-512.png", "author.jpg"]
+}

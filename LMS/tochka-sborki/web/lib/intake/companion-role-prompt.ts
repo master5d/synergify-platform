@@ -2,92 +2,58 @@
 // Durable, course-wide role prompt the learner pastes ONCE into their agent's persistent
 // memory (custom instructions / project / gem) so it stays a study companion across sessions.
 // The memory layer; the per-unit handoff (LearnWithAI dock) is the session layer.
+// Course-specific wording — which course, the loop, the laws, the boundaries — comes from the
+// active course-pack (lib/course/companion → @pack), same as lib/learn-prompt.ts (intake LMS#16):
+// before that a non-default course handed its learners a «Точка Сборки» mentor.
 import type { Locale } from './types'
 import { profileToCharter } from './charter'
 import { mentorFirmness, mentorStateAdaptation } from '../mentor-persona'
 import { academyCompanionLayer } from '../academy/companion'
-
-const COURSE = 'Точка Сборки'
+import { COMPANION } from '../course/companion'
 
 /**
  * Builds the standing companion role.
- * - With a profile: wraps the personalized charter (profileToCharter) in a course-wide
- *   standing role + a "remember this across all our sessions" memory directive.
- * - Without a profile (guest): a generic co-thinking study-companion role for the course.
+ * - With a profile (and a course that uses it): wraps the personalized charter (profileToCharter)
+ *   in a course-wide standing role + a "remember this across all our sessions" memory directive.
+ * - Otherwise (guest, or a course without the questionnaire): the course's generic standing role.
  */
 export function buildCompanionRolePrompt(profile: any | null, locale: Locale): string {
-  const ru = locale !== 'en'
+  const L = locale === 'en' ? 'en' : 'ru'
+  const C = COMPANION
+  const S = C.standing
+  const persona = C.mentorPersona ? [mentorFirmness(locale), ``, mentorStateAdaptation(locale), ``] : []
+  const guardrails = C.guardrails.length ? [C.guardrailsHeading[L], ...C.guardrails.map((g) => `- ${g[L]}`), ``] : []
 
-  if (!profile) {
-    return ru
-      ? [
-          `# Мой постоянный ИИ-наставник по курсу «${COURSE}»`,
-          ``,
-          `Запомни эту роль на все наши будущие сессии. Ты — мой со-мыслящий напарник по курсу «${COURSE}» — про vibe coding и agentic AI: способы со-мышления и со-работы с ИИ-агентами.`,
-          ``,
-          `Когда я приношу тебе урок или задачу — веди меня по циклу: намерение → системное мышление → дизайн-мышление → шаг → todo. Один фокус за ход, коротко.`,
-          ``,
-          `Законы: co-thinking, не «сделай за меня»; решение и голос всегда за мной; меньше помощи — больше рост.`,
-          ``,
-          mentorFirmness(locale),
-          ``,
-          mentorStateAdaptation(locale),
-          ``,
-          academyCompanionLayer(locale),
-          ``,
-          `Начни с одного вопроса: над чем я сейчас работаю.`,
-        ].join('\n')
-      : [
-          `# My standing AI mentor for the "${COURSE}" course`,
-          ``,
-          `Remember this role across all our future sessions. You are my co-thinking partner for the "${COURSE}" course — about vibe coding and agentic AI: ways of co-thinking and co-working with AI agents.`,
-          ``,
-          `When I bring you a lesson or a task, lead me through the loop: intent → systems thinking → design thinking → step → todo. One focus per turn, briefly.`,
-          ``,
-          `Laws: co-thinking, not "do it for me"; the decision and the voice always stay with me; less help — more growth.`,
-          ``,
-          mentorFirmness(locale),
-          ``,
-          mentorStateAdaptation(locale),
-          ``,
-          academyCompanionLayer(locale),
-          ``,
-          `Start with one question: what I'm working on right now.`,
-        ].join('\n')
+  if (!profile || !C.usesProfile) {
+    return [
+      S.heading[L],
+      ``,
+      S.guestRole[L],
+      ``,
+      S.guestLoop[L],
+      ``,
+      ...(S.guestLaws[L] ? [S.guestLaws[L], ``] : []),
+      ...persona,
+      ...guardrails,
+      academyCompanionLayer(locale),
+      ``,
+      S.guestOpener[L],
+    ].join('\n')
   }
 
   const charter = profileToCharter(profile, locale)
-  return ru
-    ? [
-        `# Мой постоянный ИИ-наставник по курсу «${COURSE}»`,
-        ``,
-        `Запомни этот устав на все наши будущие сессии — это твоя стоячая роль, пока я прохожу курс «${COURSE}» (vibe coding, agentic AI).`,
-        ``,
-        charter,
-        ``,
-        `---`,
-        mentorFirmness(locale),
-        ``,
-        mentorStateAdaptation(locale),
-        ``,
-        academyCompanionLayer(locale),
-        ``,
-        `Когда я приношу урок или задачу — веди по циклу: намерение → системное мышление → дизайн → шаг → todo. Держи устав между сессиями; начни с вопроса, над чем я сейчас работаю.`,
-      ].join('\n')
-    : [
-        `# My standing AI mentor for the "${COURSE}" course`,
-        ``,
-        `Remember this charter across all our future sessions — it is your standing role while I take the "${COURSE}" course (vibe coding, agentic AI).`,
-        ``,
-        charter,
-        ``,
-        `---`,
-        mentorFirmness(locale),
-        ``,
-        mentorStateAdaptation(locale),
-        ``,
-        academyCompanionLayer(locale),
-        ``,
-        `When I bring a lesson or task, lead me through the loop: intent → systems thinking → design → step → todo. Keep the charter across sessions; start by asking what I'm working on now.`,
-      ].join('\n')
+  return [
+    S.heading[L],
+    ``,
+    S.charterRole[L],
+    ``,
+    charter,
+    ``,
+    `---`,
+    ...persona,
+    ...guardrails,
+    academyCompanionLayer(locale),
+    ``,
+    S.charterClose[L],
+  ].join('\n')
 }

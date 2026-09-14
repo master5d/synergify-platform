@@ -1,12 +1,9 @@
 import { describe, it, expect } from 'vitest'
-import { readFileSync } from 'fs'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
 import { buildCompanionRolePrompt } from './intake/companion-role-prompt'
 import { academyCompanionLayer, PEER_PRINCIPLES } from './academy/companion'
 
-const HERE = dirname(fileURLToPath(import.meta.url))
-const src = readFileSync(join(HERE, 'intake', 'companion-role-prompt.ts'), 'utf8')
+// Minimal profile shape consumed via profileToCharter (world_skin + niche + answers).
+const profile = { world_skin: 'cyber_noir', niche: 'coach', outcome: 'первые клиенты', answers: '{}' }
 
 describe('academyCompanionLayer threads into the standing companion role (no drift)', () => {
   for (const locale of ['ru', 'en'] as const) {
@@ -19,8 +16,13 @@ describe('academyCompanionLayer threads into the standing companion role (no dri
     })
   }
 
-  it('all four branches call the layer (guest+profile × ru+en)', () => {
-    const calls = src.match(/academyCompanionLayer\(locale\)/g) ?? []
-    expect(calls.length).toBe(4)
+  // Поведение, а не подсчёт вызовов в исходнике: раньше тест ждал ровно 4 вызова и падал на
+  // рефакторинге без смены поведения (intake LMS#16 свернул ветки ru/en в одну).
+  it('all four branches carry the layer (guest+profile × ru+en)', () => {
+    for (const locale of ['ru', 'en'] as const) {
+      for (const p of [null, profile]) {
+        expect(buildCompanionRolePrompt(p, locale), `${p ? 'profile' : 'guest'} × ${locale}`).toContain(academyCompanionLayer(locale))
+      }
+    }
   })
 })

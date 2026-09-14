@@ -1,10 +1,17 @@
 import { describe, it, expect } from 'vitest'
 import { buildCompanionRolePrompt } from './companion-role-prompt'
+import { PACK_SLUG } from '../pack'
+import { COURSE } from '../course'
+import { COMPANION } from '../course/companion'
 
 // Minimal profile shape consumed via profileToCharter (world_skin + niche + answers).
 const profile = { world_skin: 'cyber_noir', niche: 'coach', outcome: 'первые клиенты', answers: '{}' }
 
-describe('buildCompanionRolePrompt', () => {
+// Формулировки устава — данные курса (packs/<pack>/course/companion.ts → standing), поэтому
+// проверки текста Точки Сборки привязаны к её pack'у; инварианты шва — ниже, для любого pack'а.
+const TS = PACK_SLUG === 'tochka-sborki'
+
+describe.runIf(TS)('buildCompanionRolePrompt (tochka-sborki)', () => {
   it('embeds the personalized charter identity when a profile is given (RU)', () => {
     const p = buildCompanionRolePrompt(profile, 'ru')
     expect(p).toContain('Точка Сборки')
@@ -37,7 +44,7 @@ describe('buildCompanionRolePrompt', () => {
   })
 })
 
-describe('anti-sycophancy contract', () => {
+describe.runIf(TS)('anti-sycophancy contract (tochka-sborki)', () => {
   it('carries the firmness contract in the profile branch (ru + en)', () => {
     expect(buildCompanionRolePrompt(profile, 'ru')).toMatch(/льст/)
     expect(buildCompanionRolePrompt(profile, 'en')).toMatch(/flatter/)
@@ -46,5 +53,32 @@ describe('anti-sycophancy contract', () => {
   it('carries the firmness contract in the guest branch (ru + en)', () => {
     expect(buildCompanionRolePrompt(null, 'ru')).toMatch(/льст/)
     expect(buildCompanionRolePrompt(null, 'en')).toMatch(/flatter/)
+  })
+})
+
+// Инвариант шва (intake LMS#16): стоячая роль говорит от имени АКТИВНОГО курса и несёт его границы.
+describe('standing role belongs to the active course (any pack)', () => {
+  it('names the active course, and a non-default course never names «Точка Сборки»', () => {
+    for (const p of [buildCompanionRolePrompt(null, 'ru'), buildCompanionRolePrompt(profile, 'ru')]) {
+      expect(p).toContain(COURSE.name)
+      if (!TS) expect(p).not.toContain('Точка Сборки')
+    }
+    if (!TS) {
+      expect(buildCompanionRolePrompt(null, 'en')).not.toContain('Точка Сборки')
+      expect(buildCompanionRolePrompt(profile, 'en')).not.toContain('Точка Сборки')
+    }
+  })
+
+  it('carries every boundary the course declares', () => {
+    const p = buildCompanionRolePrompt(profile, 'ru')
+    for (const g of COMPANION.guardrails) expect(p).toContain(g.ru)
+  })
+
+  it('a course without the questionnaire ignores a profile', () => {
+    if (COMPANION.usesProfile) return
+    const p = buildCompanionRolePrompt(profile, 'ru')
+    expect(p).not.toContain('coach')
+    expect(p).not.toContain('cyber_noir')
+    expect(p).toBe(buildCompanionRolePrompt(null, 'ru'))
   })
 })

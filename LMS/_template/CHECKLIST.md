@@ -40,6 +40,11 @@ Everything a new course must provide. Engine code is reused unchanged; the items
 - [ ] `usesProfile` — брать ли профиль RPG-анкеты (скин, ниша, запрос, режим); курс без RPG ставит `false`.
 - [ ] `mentorPersona` — нужен ли тёплый-но-твёрдый контракт наставника (`lib/mentor-persona.ts`).
 - [ ] Границы, которые курс обещает студенту в тексте, ОБЯЗАНЫ быть в `guardrails` — иначе обещание пустое (intake LMS#16).
+- [ ] `standing` — стоячая роль для памяти агента (устав на `/character`): заголовок, роль, петля, законы, первый вопрос.
+- [ ] `web/packs/<pack>/course/intake-gate.ts` — копия ворот анкеты (даже если `gates.intake: false` — честный текст).
+- [ ] `web/packs/<pack>/public-owned.json` — какие файлы `web/public/` принадлежат курсу; чужое вырезается из экспорта
+      (`scripts/prune-public.mjs`), у каждого файла ровно один владелец (`lib/public-ownership.test.ts`).
+- [ ] Числа уроков в реестре, роадмапе, сертификате и описаниях модулей сверяет `lib/content/lesson-count.test.ts`.
 
 ## 6. Content — `web/packs/<pack>/content/{ru,en}/<NN-module>/`
 - [ ] One folder per module, numbered `NN-slug` (e.g. `01-intro`). See `content/{ru,en}/01-example/`.

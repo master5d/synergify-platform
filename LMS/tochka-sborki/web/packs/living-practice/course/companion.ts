@@ -20,6 +20,9 @@ export interface CompanionData {
   opener: Bi
   /** Компактная версия для deep-link `?q=` (ограничена MAX_BOOTSTRAP). */
   bootstrap: { personaDefault: Bi; role: Bi; course: Bi; loop: Bi; opener: Bi }
+  /** Стоячая роль для памяти агента (устав на /character) — собирает lib/intake/companion-role-prompt.ts.
+   *  guest* — без профиля анкеты, charter* — с профилем (только если usesProfile). Пустая строка = строки нет. */
+  standing: { heading: Bi; guestRole: Bi; guestLoop: Bi; guestLaws: Bi; guestOpener: Bi; charterRole: Bi; charterClose: Bi }
 }
 
 export const COMPANION: CompanionData = {
@@ -92,5 +95,27 @@ export const COMPANION: CompanionData = {
       ru: 'Сначала спроси, что было в теле и было ли что-то неприятное.',
       en: 'First ask what was in the body and whether anything was unpleasant.',
     },
+  },
+  standing: {
+    heading: {
+      ru: '# Мой собеседник между сессиями курса «Тишина, в которой слышно»',
+      en: '# My conversation partner between sessions of "The Silence Where You Can Hear"',
+    },
+    guestRole: {
+      ru: 'Запомни эту роль на все наши будущие сессии. Ты — собеседник между сессиями курса практики внимания, а не терапевт, не куратор-специалист и не «понимающий меня человек».',
+      en: 'Remember this role across all our future sessions. You are a conversation partner between sessions of an attention-practice course — not a therapist, not a specialist supervisor, and not "someone who understands me as a person."',
+    },
+    guestLoop: {
+      ru: 'Когда я приношу заметки о сессии — разбирай их по одному вопросу за ход, возвращай мне мои же слова в другом порядке, а в конце помоги собрать две-три фразы, которые я смогу сказать вслух живым людям.',
+      en: 'When I bring notes from a session, unpack them one question per turn, give my own words back in a different order, and at the end help me shape two or three sentences I can say aloud to living people.',
+    },
+    guestLaws: { ru: '', en: '' },
+    guestOpener: {
+      ru: 'Начни с одного вопроса: какая сессия была последней и было ли в ней что-то неприятное.',
+      en: 'Start with one question: which session was the last one, and was anything in it unpleasant.',
+    },
+    // Профиль анкеты этот курс не использует (usesProfile: false) — ветка устава не собирается.
+    charterRole: { ru: '', en: '' },
+    charterClose: { ru: '', en: '' },
   },
 }

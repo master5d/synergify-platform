@@ -17,8 +17,10 @@ describe('mentorStateAdaptation threads into both prompt surfaces (no drift)', (
       if (COMPANION.mentorPersona) expect(p).toContain(mentorStateAdaptation(locale))
       else expect(p).not.toContain(mentorStateAdaptation(locale))
     })
-    it(`buildCompanionRolePrompt (no profile) includes the adaptation text (${locale})`, () => {
-      expect(buildCompanionRolePrompt(null, locale)).toContain(mentorStateAdaptation(locale))
+    it(`buildCompanionRolePrompt (no profile) threads the adaptation text iff the course enables the mentor persona (${locale})`, () => {
+      const p = buildCompanionRolePrompt(null, locale)
+      if (COMPANION.mentorPersona) expect(p).toContain(mentorStateAdaptation(locale))
+      else expect(p).not.toContain(mentorStateAdaptation(locale))
     })
   }
 })

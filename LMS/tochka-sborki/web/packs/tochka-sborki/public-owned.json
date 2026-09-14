@@ -1,0 +1,15 @@
+{
+  "_comment": "Файлы web/public/, которые принадлежат ЭТОМУ курсу: в сборку другого pack'а они не попадают (scripts/prune-public.mjs). Запись с '/' на конце — каталог целиком.",
+  "files": [
+    "_redirects",
+    "bot-avatar.png",
+    "install.sh",
+    "install.ps1",
+    "install-gfw.sh",
+    "install-gfw.ps1",
+    "captions/",
+    "showcase/",
+    "materials/",
+    "walkthroughs/"
+  ]
+}
