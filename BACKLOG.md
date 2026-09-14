@@ -14,6 +14,11 @@
   Microsoft generative-ai-for-beginners и ML-For-Beginners (MIT, уже в `materials.ts`); HF «The Smol
   Training Playbook» — лицензия в Space не указана → только ссылка, не перевод/копия. Практика — суверенно
   (дообучение малой модели на своём железе/бесплатном GPU), не платный облачный тюнинг.
+  Дополнение по intake LMS#4: основа практики — `huggingface/smol-course` (Apache-2.0: адаптация с
+  атрибуцией разрешена), теория — `huggingface/course` (Transformers, Apache-2.0).
+- [ ] **ТС: HF Agents Course в «Дальше и глубже»** (intake LMS#4, owner-gated) — `huggingface/agents-course`
+  (Apache-2.0, живой) рядом с курсом Microsoft по агентам в `materials.ts`; DeepLearning.AI — только
+  ссылкой (закрытая платформа).
 
 ## Owner-gated (ждут решения владельца)
 

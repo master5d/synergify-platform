@@ -20,6 +20,7 @@
 | LMS#1 | «Tochka + blog» — пост «С чего начать погружение в ИИ» (@prompt_design) | Evernote f341a2ea-d2a0-f9ac-3349-de653f01ff37 | `pattern-only` | `pattern-only` | паттернов нет (tutor уже есть) |
 | LMS#2 | «Tochka» — подборка бесплатных курсов по ИИ на русском (@prompt_design, сборник 1807) | Evernote dddc0fc4-aa00-4ac1-c5ec-bd7d275eb2de | `already covered` (`materials.ts`, 00/u4, шпаргалка) | `already covered` | паттернов нет |
 | LMS#3 | «Tochka» — клип блога Kajabi «Kajabi vs Thinkific for Course Creators» | Evernote e4f1daf3-3cc2-4280-9f14-52d6cf38c9b0 | `pattern-only` (триггер прогресса → письмо про advanced) | `pattern-only` (воронка отвала по урокам) | паттернов нет |
+| LMS#4 | «tochka» — роадмап новичка «основы → HF/DeepLearning.AI → n8n» (@prompt_design 1263) | Evernote 4ec5e0d7-dc02-75e7-ae18-651609c1d2d7 | `already covered` (09, 06, 08) + источники HF для advanced | `already covered` | паттернов нет |
 
 ---
 
@@ -144,6 +145,43 @@ community (п.7), три типа email-дрипов (п.23–25). Против 
 **Паттерны (лаба):** «люди = агенты»: «событие жизненного цикла → следующее действие» в лабе уже есть
 (labwatch, хуки SessionStart). Новых паттернов нет. Не брать: оценку «Kajabi сильнее» как факт — это текст
 вендора о себе.
+
+---
+
+## LMS#4 — «tochka»: роадмап новичка в ИИ-автоматизацию
+
+**Источник:** Evernote share 4ec5e0d7-dc02-75e7-ae18-651609c1d2d7 (создана 2026-03-26, медиа нет).
+Четвёртый пост @prompt_design в раунде.
+
+**Досье:** «в ИИ-автоматизацию не поздно, вы в пузыре». План: (1) основы через ChatGPT и NotebookLM
+(JSON, LLM, промпты); (2) базовые курсы Hugging Face и DeepLearning.AI; (3) практика в n8n. Развёрнуто в
+t.me/prompt_design/1263 (веб-превью): LLM, системный промпт, память, основы Python, JSON; Perplexity и
+ChatGPT; HF и DeepLearning.AI; n8n и Make; Google AI Studio; NotebookLM; шаблоны n8n
+(Marvomatic/n8n-templates); статья канала про LoRA на teletype.
+
+**Реальность:** пост канала, не перевод. Первоисточники проверены:
+- Hugging Face Learn — `huggingface/agents-course` (Apache-2.0, ~32k★, push 2026-09-09),
+  `huggingface/smol-course` (дообучение и выравнивание малых моделей, Apache-2.0, push 2026-08-20),
+  `huggingface/course` (Transformers, Apache-2.0).
+- DeepLearning.AI — бесплатные short courses, но это закрытая платформа без открытой лицензии: только
+  ссылка.
+- Marvomatic/n8n-templates — **лицензии нет**, «free & premium» (воронка) → не брать.
+- LoRA-гайд канала — без лицензии → только как пример темы.
+
+**Дедуп:** GUID — повторов нет. Точка Сборки покрывает план почти целиком:
+- NotebookLM → модуль `09-ai-notebook` (весь модуль про source-grounded тетрадку);
+- n8n / Make → `06-audio-pipeline` (u2, u4) и `08-agent-engineering` (u3 — реальный n8n-пайплайн, u4 —
+  продакшн-инфра, u5 — практика);
+- LLM, промпт, память → модули 04–05; JSON и Python не нужны по замыслу курса (vibe coding).
+- Нет в `materials.ts`: курсов Hugging Face и DeepLearning.AI.
+
+**Вердикт:** `already covered` для ТС и LMS. Одно дополнение:
+- **Первоисточники для модуля «Обучение моделей» (advanced, решение по LMS#2):** `smol-course` —
+  практическая основа (дообучение малой модели своими руками, Apache-2.0, можно адаптировать с атрибуцией),
+  `huggingface/course` — теория Transformers. HF Agents Course — кандидат в раздел «Дальше и глубже» рядом с
+  курсом Microsoft по агентам. → дописано в строку BACKLOG модуля; ссылки в материалы — owner-gated.
+
+**Паттерны (лаба):** нет. Не брать: n8n-templates (без лицензии, премиум-воронка).
 
 **Паттерны:** для «азбуки» из LMS#1 первоисточник с картинками всё ещё нужен, но конспект 1392 им
 быть не может, раз автор не назван. Кандидат на роль — генеративный курс Microsoft (уроки про токены и
