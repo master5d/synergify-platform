@@ -5,7 +5,10 @@
 
 ## Срочно (аудит «Тишины», intake LMS#16)
 
-- [ ] **Вход по почте не работает НИ НА ОДНОМ сайте (найдено 2026-09-14, ждёт слова владельца):** SES → 403,
+- [x] **СДЕЛАНО 2026-09-14 (владелец: «B»):** inline-политика `ses-v2-sendemail` на пользователе (`ses:SendEmail` на
+  `identity/synergify.com` и `identity/mamaev.coach`, группа не тронута); `send-link` на ai. и academy. → `{"ok":true}`
+  (адрес SES-симулятора `success@simulator.amazonses.com` — в D1 от пробы осталась его строка). Исходная запись:
+  **Вход по почте не работал НИ НА ОДНОМ сайте (найдено 2026-09-14):** SES → 403,
   IAM-пользователь `ses-smtp-user.20260811-150933` (ротация 08-11) не имеет `ses:SendEmail` на
   `identity/synergify.com` — воркер ходит в SES v2 API. Правка: дать пользователю/группе «только-отправка» `ses:SendEmail`
   на этот identity (ключи не менять). Проба: `POST /api/auth/send-link` на ai. и academy. — оба 403. Попутно
