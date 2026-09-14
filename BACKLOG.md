@@ -5,7 +5,15 @@
 
 ## Срочно (аудит «Тишины», intake LMS#16)
 
-- [ ] **Вход на `/praktika` не работает — решение владельца.** Найдено браузерным обходом 2026-09-14. 404 починены, но войти
+- [x] **Вход на `/praktika` — вариант A, СДЕЛАНО 2026-09-14 (решение владельца «1 А»):** маршрут
+  `academy.synergify.com/api/*` в `workers/wrangler.toml`; сессия школы на `.synergify.com` (`lib/session-cookie.ts`: при входе
+  стирается старая host-only cookie, выход стирает обе); ссылка из письма ведёт на сайт курса, с которого просили вход, — только
+  адрес курса из `LMS/registry.json` (`lib/return-base.ts`, иначе Точка Сборки), имя курса и отправитель письма — оттуда же; Google-вход
+  помнит базу курса (`oauth_base`): ошибка и возврат по умолчанию — на `/praktika/…`. Тесты воркера 234/234 (новые: session-cookie,
+  return-base, auth-return, oauth-base). **Остался шаг владельца:** в Google Cloud Console → OAuth client → Authorized redirect URIs
+  добавить `https://academy.synergify.com/api/auth/oauth/google/callback`; до этого в академии работают вход по почте и Telegram, а
+  Google — нет. Исходная запись:
+- [ ] ~~**Вход на `/praktika` не работает — решение владельца.**~~ Найдено браузерным обходом 2026-09-14. 404 починены, но войти
   студенту «Тишины» по-прежнему нельзя: (1) воркер API привязан к `ai.mamaev.coach`, `mamaev.coach`, `ai.synergify.com` —
   `academy.synergify.com/api/*` = 404 (вход, прогресс, допуск, Google-старт); (2) cookie сессии без `Domain`, `SameSite=Strict`
   → живёт только на `ai.synergify.com`; (3) ссылка из письма жёстко `https://ai.synergify.com/auth/verify` (`workers/src/handlers/auth.ts:84`);
@@ -14,7 +22,9 @@
   с которого просили вход + callback академии в Google Console (владелец); вход на Точке Сборки тогда виден и в академии, как и
   задумано («вход после Точки Сборки»). **B** — вход только на ai.synergify.com, страница входа академии ведёт туда и назад по
   полному URL (нужен разрешённый список доменов в open-redirect guard). Рекомендация — A: одна сессия школы, меньше переходов.
-- [ ] **Лицензия в футере — решение владельца.** Футер обоих курсов: «MIT License» → `https://github.com/master5d/tochka-sborki/blob/main/LICENSE`
+- [x] **Лицензия — MIT везде, СДЕЛАНО 2026-09-14 (решение владельца):** `LICENSE` (MIT, © 2026 Alexander Mamaev) в корне
+  `synergify-platform` и `tochka-sborki` (mc_hub); `REPO_URL` футера → `master5d/synergify-platform`. Исходная запись:
+- [ ] ~~**Лицензия в футере — решение владельца.**~~ Футер обоих курсов: «MIT License» → `https://github.com/master5d/tochka-sborki/blob/main/LICENSE`
   = 404 (`components/footer.tsx`, `REPO_URL`). Публичный репо платформы — `master5d/synergify-platform`, файла `LICENSE` в нём нет.
   Либо положить `LICENSE` (какой — решает владелец: код и тексты курса могут лицензироваться по-разному) и перевести `REPO_URL`,
   либо убрать заявление о лицензии.
