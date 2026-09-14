@@ -83,7 +83,9 @@ jobs:
       - name: Pack isolation (no default-course branding)
         working-directory: LMS/tochka-sborki/web
         run: |
-          if grep -rl "Точка Сборки — курс по vibe" out/ >/dev/null 2>&1; then
+          # + промпт компаньона «Учиться с ИИ» (intake LMS#16: «Тишина» отдавала
+          #   промпт «курс „Точка Сборки“», а старый grep видел только заголовок).
+          if grep -rlE 'Точка Сборки — курс по vibe|курс «Точка Сборки»|"Точка Сборки" course' out/ >/dev/null 2>&1; then
             echo "::error::pack ${{ matrix.pack }} собрался с идентичностью tochka-sborki"
             exit 1
           fi

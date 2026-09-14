@@ -57,7 +57,7 @@ export const CERTIFICATE: CertificateData = {
     ru: 'Карта различий — в руках.\nКруг собирается из живых людей.',
     en: 'The map of distinctions is in hand.\nA circle is made of living people.',
   },
-  footerMeta: { ru: '6 уроков · 1 модуль', en: '6 lessons · 1 module' },
+  footerMeta: { ru: '8 уроков · 1 модуль', en: '8 lessons · 1 module' },
   founderName: { ru: 'Саша Мамаев', en: 'Sasha Mamaev' },
   founderTitle: { ru: 'основатель · академия S.A.S.H.A', en: 'Founder · S.A.S.H.A academy' },
   publisher: {

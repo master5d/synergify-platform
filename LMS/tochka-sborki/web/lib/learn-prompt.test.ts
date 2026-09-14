@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { buildLearnPrompt, buildBootstrapDeepLink, agentUrl } from './learn-prompt'
+import { PACK_SLUG } from './pack'
+import { COURSE } from './course'
 
 const base = {
   locale: 'ru' as const,
@@ -8,7 +10,12 @@ const base = {
   totalUnits: 3,
 }
 
-describe('buildLearnPrompt', () => {
+// Формулировки компаньона — данные курса (packs/<pack>/course/companion.ts), поэтому
+// содержательные проверки привязаны к своему pack'у; общие инварианты — ниже, для любого.
+const TS = PACK_SLUG === 'tochka-sborki'
+const LP = PACK_SLUG === 'living-practice'
+
+describe.runIf(TS)('buildLearnPrompt (tochka-sborki)', () => {
   it('embeds co-thinking identity, Kolb, bisociation, and the 5-step loop', () => {
     const p = buildLearnPrompt(base)
     expect(p).toContain('co-thinking')
@@ -62,7 +69,7 @@ describe('buildLearnPrompt', () => {
   })
 })
 
-describe('buildBootstrapDeepLink', () => {
+describe.runIf(TS)('buildBootstrapDeepLink (tochka-sborki)', () => {
   it('is compact (≤1500 chars) and carries co-thinking + module + the loop', () => {
     const p = buildBootstrapDeepLink({ ...base, skinName: 'Кибер-Нуар', mentorName: 'Фиксер' })
     expect(p.length).toBeLessThanOrEqual(1500)
@@ -93,7 +100,7 @@ describe('agentUrl', () => {
   })
 })
 
-describe('anti-sycophancy contract', () => {
+describe.runIf(TS)('anti-sycophancy contract (tochka-sborki)', () => {
   it('buildLearnPrompt carries the firmness contract (ru + en)', () => {
     expect(buildLearnPrompt(base)).toMatch(/льст/)
     expect(buildLearnPrompt({ ...base, locale: 'en' })).toMatch(/flatter/)
@@ -106,5 +113,62 @@ describe('anti-sycophancy contract', () => {
     expect(en).toMatch(/flatter/)
     expect(ru.length).toBeLessThanOrEqual(1500)
     expect(en.length).toBeLessThanOrEqual(1500)
+  })
+})
+
+// Инвариант шва (intake LMS#16): компаньон говорит от имени АКТИВНОГО курса и никогда —
+// от имени чужого. До фикса «Тишина» отдавала своим студентам промпт «курс „Точка Сборки“».
+describe('companion belongs to the active course (any pack)', () => {
+  it('names the active course, and a non-default course never names «Точка Сборки»', () => {
+    const p = buildLearnPrompt(base)
+    const b = buildBootstrapDeepLink(base)
+    expect(p).toContain(COURSE.name)
+    expect(b).toContain(COURSE.name)
+    if (!TS) {
+      expect(p).not.toContain('Точка Сборки')
+      expect(b).not.toContain('Точка Сборки')
+      expect(buildLearnPrompt({ ...base, locale: 'en' })).not.toContain('Точка Сборки')
+      expect(buildBootstrapDeepLink({ ...base, locale: 'en' })).not.toContain('Точка Сборки')
+    }
+  })
+
+  it('bootstrap stays within the URL cap in both locales', () => {
+    expect(buildBootstrapDeepLink(base).length).toBeLessThanOrEqual(1500)
+    expect(buildBootstrapDeepLink({ ...base, locale: 'en' }).length).toBeLessThanOrEqual(1500)
+  })
+})
+
+describe.runIf(LP)('living-practice companion keeps the boundaries the course promises', () => {
+  it('carries the prohibitions from u1/u3/u5/u7 (ru + en)', () => {
+    const ru = buildLearnPrompt(base)
+    expect(ru).toMatch(/диагноз/)
+    expect(ru).toMatch(/кризисн/)
+    expect(ru).toMatch(/дольше|интенсивн/)
+    expect(ru).toMatch(/травм/)
+    expect(ru).toMatch(/по инерции согласишься/)
+    const en = buildLearnPrompt({ ...base, locale: 'en' })
+    expect(en).toMatch(/diagnos/)
+    expect(en).toMatch(/crisis/)
+    expect(en).toMatch(/longer|intense/)
+    expect(en).toMatch(/trauma/)
+  })
+
+  it('ignores the vibe-coding questionnaire profile entirely', () => {
+    const p = buildLearnPrompt({
+      ...base,
+      skinName: 'Кибер-Нуар', mentorName: 'Фиксер', niche: 'coach', outcome: 'выйти на первых клиентов',
+      appliedChallenge: 'Собери промпт под свою задачу.', mode: 'commander', mbti: 'INFP',
+    })
+    for (const leak of ['Кибер-Нуар', 'Фиксер', 'коучинг', 'выйти на первых клиентов', 'Собери промпт', 'опор', 'INFP', 'Колб', 'todo']) {
+      expect(p, leak).not.toContain(leak)
+    }
+  })
+
+  it('bootstrap carries the core prohibitions and no profile', () => {
+    const b = buildBootstrapDeepLink({ ...base, mentorName: 'Фиксер', outcome: 'выйти на первых клиентов' })
+    expect(b).toMatch(/диагноз/)
+    expect(b).toMatch(/кризисн/)
+    expect(b).not.toContain('Фиксер')
+    expect(b).not.toContain('выйти на первых клиентов')
   })
 })

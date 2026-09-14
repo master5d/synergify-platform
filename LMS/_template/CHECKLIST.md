@@ -35,6 +35,12 @@ Everything a new course must provide. Engine code is reused unchanged; the items
 - [ ] `web/lib/intake/questions.ts` — intake questions (выделение в pack — отдельный слайс).
 - [ ] `web/packs/<pack>/course/showcase.ts` — possibilities gallery on home.
 
+## 5a. Companion «Учиться с ИИ» — `web/packs/<pack>/course/companion.ts` (обязателен, не только для RPG)
+- [ ] `COMPANION`: `identity` / `context` (имя СВОЕГО курса) / `method` / `guardrails` / `opener` / `bootstrap`.
+- [ ] `usesProfile` — брать ли профиль RPG-анкеты (скин, ниша, запрос, режим); курс без RPG ставит `false`.
+- [ ] `mentorPersona` — нужен ли тёплый-но-твёрдый контракт наставника (`lib/mentor-persona.ts`).
+- [ ] Границы, которые курс обещает студенту в тексте, ОБЯЗАНЫ быть в `guardrails` — иначе обещание пустое (intake LMS#16).
+
 ## 6. Content — `web/packs/<pack>/content/{ru,en}/<NN-module>/`
 - [ ] One folder per module, numbered `NN-slug` (e.g. `01-intro`). See `content/{ru,en}/01-example/`.
 - [ ] `_meta.json` per module: `{ module, title, description, duration, level, units:[{slug,title}] }`

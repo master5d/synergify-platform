@@ -1,7 +1,7 @@
 // packs/living-practice/course.config.ts
 // Central course config — the single source of brand/domain/locale for the LMS engine.
 // Second course-pack: «Тишина, в которой слышно» (курс академии S.A.S.H.A).
-// Сайт не деплоится (status: coming-soon в LMS/registry.json) — домен здесь контрактный.
+// Живёт в подпути академии academy.synergify.com/praktika (status: live в LMS/registry.json).
 
 /** Bilingual string used across the LMS (course materials, syllabus, dictionaries). */
 export interface Bi { ru: string; en: string }

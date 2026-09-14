@@ -24,7 +24,7 @@ const RAW: RawEco = {
       key: 'learn',
       title: { ru: 'Читай', en: 'Read' },
       nodes: [
-        { label: { ru: 'Курс (6 уроков)', en: 'Course (6 lessons)' }, status: 'live' },
+        { label: { ru: 'Курс (8 уроков)', en: 'Course (8 lessons)' }, status: 'live' },
         { label: { ru: 'Памятка и карта курса', en: 'Pocket list & course map' }, status: 'live' },
         { label: { ru: 'Манифест академии', en: 'The academy manifesto' }, status: 'live' },
       ],

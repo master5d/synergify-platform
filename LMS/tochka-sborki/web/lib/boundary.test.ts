@@ -14,7 +14,7 @@ const STUBS = [
   'lib/manifest.ts',
   'lib/materials.ts',
   'lib/rpg/skins-meta.ts',
-  ...['ai-doubles', 'certificate', 'dungeon-flavor', 'ecosystem', 'intake-questions',
+  ...['ai-doubles', 'certificate', 'companion', 'dungeon-flavor', 'ecosystem', 'intake-questions',
       'niche-map', 'notebook-pack', 'office-hours', 'showcase', 'skins', 'try-chains']
     .map((n) => `lib/course/${n}.ts`),
 ]
