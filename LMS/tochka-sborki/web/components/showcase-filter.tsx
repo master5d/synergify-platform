@@ -4,10 +4,15 @@ import { useState } from 'react'
 import type { ShowcaseVM, CatFilter } from '@/lib/course/showcase'
 import { filterByCategory } from '@/lib/course/showcase'
 import type { Locale } from '@/lib/intake/types'
+import { COURSE } from '@/lib/course'
+import { pagePath } from '@/lib/base-path'
 
 export function ShowcaseFilter({ data, locale }: { data: ShowcaseVM; locale: Locale }) {
   const [active, setActive] = useState<CatFilter>('all')
-  const intakeHref = locale === 'en' ? '/en/quest-intake/' : '/quest-intake/'
+  // Курс без анкеты (gates.intake: false) ведёт CTA сразу в программу, а не в выключенный опросник;
+  // сырой <a> — поэтому pagePath: у курса в подпути иначе уходило на корень домена школы (404).
+  const lp = locale === 'en' ? '/en' : ''
+  const intakeHref = pagePath(COURSE.gates.intake ? `${lp}/quest-intake/` : `${lp}/syllabus/`)
   const deepDive = locale === 'en' ? '→ deep-dive' : '→ разбор'
   const allLabel = locale === 'en' ? 'All' : 'Все'
   const groupLabel = locale === 'en' ? 'Filter by category' : 'Фильтр по категории'

@@ -22,9 +22,10 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: '#0a0a0f',
     background_color: '#0a0a0f',
     icons: [
-      { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
-      { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
-      { src: '/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+      // assetPath: у курса в подпути иконки лежат под префиксом (/praktika/icon-192.png), корень школы их не отдаёт.
+      { src: assetPath('/icon-192.png'), sizes: '192x192', type: 'image/png', purpose: 'any' },
+      { src: assetPath('/icon-512.png'), sizes: '512x512', type: 'image/png', purpose: 'any' },
+      { src: assetPath('/icon-maskable-512.png'), sizes: '512x512', type: 'image/png', purpose: 'maskable' },
     ],
   }
 }

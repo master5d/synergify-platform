@@ -51,9 +51,12 @@ export function Nav({ locale: localeProp }: Props = {}) {
 
   const homeHref = locale === 'en' ? '/en/' : '/'
   const otherLocale: Locale = locale === 'en' ? 'ru' : 'en'
+  // На странице 404 путь — служебный `/_not-found`: переключатель вёл на `/en/_not-found/` (снова 404).
+  // Там язык меняем на главную нужной локали.
+  const langPath = pathname.includes('_not-found') ? (detected === 'en' ? '/en/' : '/') : pathname
   const otherHref = otherLocale === 'en'
-    ? '/en' + (pathname === '/' ? '/' : pathname)
-    : pathname.replace(/^\/en(\/|$)/, '/') || '/'
+    ? '/en' + (langPath === '/' ? '/' : langPath.replace(/^\/en(\/|$)/, '/'))
+    : langPath.replace(/^\/en(\/|$)/, '/') || '/'
 
   // Active-link detection (next.config has trailingSlash: true, so paths end with /)
   const normalize = (p: string) => p.replace(/\/+$/, '') || '/'

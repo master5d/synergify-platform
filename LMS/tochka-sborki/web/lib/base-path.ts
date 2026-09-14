@@ -11,3 +11,12 @@ export function assetPath(path: string): string {
   const clean = path.startsWith('/') ? path : `/${path}`
   return `${BASE_PATH}${clean}`
 }
+
+/**
+ * Путь страницы курса для СЫРОЙ навигации — `window.location.*` и `<a href>`: их basePath
+ * не переписывает (в отличие от next/link и router). Без префикса курс в подпути уводил
+ * студента на корень домена школы: `/login/` вместо `/praktika/login/` → 404 (intake LMS#16).
+ */
+export function pagePath(path: string): string {
+  return assetPath(path)
+}
