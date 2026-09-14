@@ -46,6 +46,9 @@ cutover 2026-08-06; mc_hub остался личным контуром mamaev.c
 - **`public-owned.json`** — какие файлы `web/public/` принадлежат курсу; общие движка — `scripts/public-shared.json`.
   Postbuild `scripts/prune-public.mjs` вырезает чужое из экспорта; гвард `lib/public-ownership.test.ts` — ровно один владелец.
 - Числа уроков в реестре/роадмапе/сертификате/описаниях сверяет `lib/content/lesson-count.test.ts`.
+- **Учебная связка** — `objectives` и `checks` в `_meta.json` модуля, метка `<SelfCheck id/>` в уроке; гвард
+  `lib/content/alignment.test.ts` (у каждой цели вопрос, у вопроса цель, RU = EN), раскатка — храповик
+  `lib/content/alignment-pending.ts`. Спека: `docs/superpowers/specs/2026-09-14-learning-alignment-design.md`.
 - Чек-лист нового курса — `LMS/_template/CHECKLIST.md` §5a.
 
 ## Подпуть курса: сырая навигация (с 2026-09-14)
