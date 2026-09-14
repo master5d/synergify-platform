@@ -36,7 +36,7 @@ const RAW: RawEco = {
         { label: { ru: 'Свой круг практики (ИГИ)', en: 'Your practice circle (IGI)' }, status: 'planned' },
         {
           label: { ru: 'Чат «Мастерская Перехода», тема «Тишина»', en: 'Chat "Мастерская Перехода", topic «Тишина»' },
-          desc: { ru: 'Найти людей для круга — t.me/kundaliniRUs', en: 'Find people for a circle — t.me/kundaliniRUs' },
+          desc: { ru: 'Найти людей для круга — t.me/kundaliniRUs/7823', en: 'Find people for a circle — t.me/kundaliniRUs/7823' },
           status: 'live',
         },
         { label: { ru: 'Сообщество S.A.S.H.A', en: 'S.A.S.H.A community' }, status: 'planned' },
