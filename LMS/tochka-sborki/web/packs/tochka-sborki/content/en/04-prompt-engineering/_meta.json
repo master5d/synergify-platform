@@ -74,7 +74,7 @@
         "“Don’t use professional jargon”"
       ],
       "answer": 0,
-      "explain": "Expected output describes the format, structure and length of the answer. B is the role, C the inputs, D a constraint (u2, “Full structure…”)."
+      "explain": "Expected output describes the format, structure and length of the answer. “You are an editor…” is the role, the documentation link is the inputs, and the ban on jargon is a constraint (u2, “Full structure…”)."
     },
     {
       "id": "c4",
