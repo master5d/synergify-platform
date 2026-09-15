@@ -35,7 +35,9 @@ Catch the moment: the last time Claude played something in the wrong key — tha
 | New stack added | CLAUDE.md |
 | Task completed | TODO.md |
 | Agent made a mistake you fixed | AGENTS.md |
-| Small mid-session clarification | `/btw New detail...` |
+| Mid-session clarification the agent must keep using | A normal message in the session (or a rule in CLAUDE.md if later sessions need it too) |
+
+`/btw` doesn't fit here: it's a side question about the current session, and it isn't added to the conversation history.
 
 ## Techniques for long sessions
 
@@ -74,14 +76,14 @@ Then merge the results.
 
 <Phase type="practice">
 
-Final task for Meeting 4:
+Final task for module 05:
 
 1. Launch Claude Code in your project: `claude`
 2. Give it a task from TODO.md
 3. Update CLAUDE.md if you learned something important about the project during work
 4. After the session: add one rule to AGENTS.md based on something Claude did wrong (if that happened)
 
-Send a `/btw` message with new info — see how the agent reacts.
+Mid-session, give the agent a new detail as a normal message — see whether it uses it in later answers. For comparison, ask a side question via `/btw`: notice that it isn't added to the conversation history.
 
 Save observations to `my-experiments/u4-memory-system.md`
 

@@ -29,9 +29,9 @@ duration: "12 мин"
 
 ## Что такое Skill
 
-Skill — это Markdown-файл с инструкцией, который Claude Code выполняет при вызове `/название`.
+Skill — это папка с Markdown-файлом `SKILL.md` внутри: инструкция, которую Claude Code выполняет при вызове `/название`. Имя папки и есть команда: папка `meeting-summary/` → `/meeting-summary`.
 
-### Структура файла skill'а
+### Структура файла SKILL.md
 
 ```markdown
 ---
@@ -64,8 +64,8 @@ description: Суммирует встречу из транскрипта ил�
 
 ### Где хранить Skills
 
-- `~/.claude/skills/` — личные, работают во всех проектах
-- `.claude/skills/` — проектные, в git
+- `~/.claude/skills/` — личные, работают во всех проектах: `~/.claude/skills/<имя>/SKILL.md`
+- `.claude/skills/` — проектные, в git: `.claude/skills/<имя>/SKILL.md`
 
 ### Как вызывать
 
@@ -90,8 +90,8 @@ description: Суммирует встречу из транскрипта ил�
 <OsBlock os="mac">
 
 ```bash
-mkdir -p ~/.claude/skills
-touch ~/.claude/skills/my-first-skill.md
+mkdir -p ~/.claude/skills/my-first-skill
+touch ~/.claude/skills/my-first-skill/SKILL.md
 ```
 
 </OsBlock>
@@ -99,13 +99,13 @@ touch ~/.claude/skills/my-first-skill.md
 <OsBlock os="windows">
 
 ```powershell
-New-Item -ItemType Directory "$HOME\.claude\skills" -Force
-ni "$HOME\.claude\skills\my-first-skill.md" -ItemType File
+New-Item -ItemType Directory "$HOME\.claude\skills\my-first-skill" -Force
+ni "$HOME\.claude\skills\my-first-skill\SKILL.md" -ItemType File
 ```
 
 </OsBlock>
 
-Заполни по шаблону выше. Используй реальный промпт который у тебя уже есть.
+Заполни `SKILL.md` по шаблону выше, в шапке укажи `name: my-first-skill` и `description` — что делает skill и когда его вызывать. Используй реальный промпт который у тебя уже есть.
 
 Протестируй:
 ```

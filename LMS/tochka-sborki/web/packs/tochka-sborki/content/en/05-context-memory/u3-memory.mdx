@@ -21,7 +21,7 @@ Run your work with the agent through your head: what from your experience has al
 
 Explaining the same thing every time burns time and tokens.
 
-But there's the opposite problem too: a CLAUDE.md with a thousand lines is worse than one with 100 lines. The longer it is, the worse the agent follows instructions.
+But there's the opposite problem too: a CLAUDE.md with a thousand lines is worse than a short one — up to ~200 lines. The longer it is, the worse the agent follows instructions.
 
 Don't picture this as a short summary — picture yourself as **a weaver at the loom**: the warp threads are pulled taut and precise — that tension is what holds the whole fabric. Add too many threads at once and the cloth sags, the loops tangle.
 
@@ -31,7 +31,7 @@ Notice your memory system: where is the tension just right, and where is it alre
 
 <Phase type="concept">
 
-## Three memory files
+## Memory files: three you write, one Claude writes
 
 ### CLAUDE.md — project context (the main one)
 
@@ -61,7 +61,7 @@ npm install && npm run dev
 - Architecture, final review
 ```
 
-**Limit: ~200 lines.** More than that and instruction-following degrades.
+**Limit: up to ~200 lines.** More than that and instruction-following degrades.
 
 ### TODO.md — current tasks
 
@@ -95,8 +95,10 @@ npm install && npm run dev
 Unlike the three files above, Claude **writes MEMORY.md itself**.
 
 What it saves: patterns, fixes, project quirks.
-Where it lives: `~/.claude/projects/<hash>/memory/` — local only.
+Where it lives: `~/.claude/projects/<project>/memory/MEMORY.md` — local only.
 Management: `/memory` — view and edit.
+
+The boundary is simple: Claude decides what goes into MEMORY.md. A rule that must hold for sure (say, after you fixed an agent mistake) you write yourself — in AGENTS.md.
 
 </Phase>
 

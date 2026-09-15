@@ -29,9 +29,9 @@ Notice in your head: which lock in your work is still picked by trial and error 
 
 ## What is a Skill
 
-A Skill is a Markdown file with instructions that Claude Code runs when you call `/name`.
+A Skill is a folder with a Markdown file `SKILL.md` inside: instructions that Claude Code runs when you call `/name`. The folder name is the command: folder `meeting-summary/` → `/meeting-summary`.
 
-### Skill file structure
+### SKILL.md structure
 
 ```markdown
 ---
@@ -64,8 +64,8 @@ You are a meeting assistant. Based on the provided data:
 
 ### Where to store Skills
 
-- `~/.claude/skills/` — personal, work across all projects
-- `.claude/skills/` — project-scoped, in git
+- `~/.claude/skills/` — personal, work across all projects: `~/.claude/skills/<name>/SKILL.md`
+- `.claude/skills/` — project-scoped, in git: `.claude/skills/<name>/SKILL.md`
 
 ### How to call
 
@@ -90,8 +90,8 @@ Create a skill for the task from Activation:
 <OsBlock os="mac">
 
 ```bash
-mkdir -p ~/.claude/skills
-touch ~/.claude/skills/my-first-skill.md
+mkdir -p ~/.claude/skills/my-first-skill
+touch ~/.claude/skills/my-first-skill/SKILL.md
 ```
 
 </OsBlock>
@@ -99,13 +99,13 @@ touch ~/.claude/skills/my-first-skill.md
 <OsBlock os="windows">
 
 ```powershell
-New-Item -ItemType Directory "$HOME\.claude\skills" -Force
-ni "$HOME\.claude\skills\my-first-skill.md" -ItemType File
+New-Item -ItemType Directory "$HOME\.claude\skills\my-first-skill" -Force
+ni "$HOME\.claude\skills\my-first-skill\SKILL.md" -ItemType File
 ```
 
 </OsBlock>
 
-Fill it out using the template above. Use a real prompt you already have.
+Fill out `SKILL.md` using the template above; in the header set `name: my-first-skill` and a `description` — what the skill does and when to call it. Use a real prompt you already have.
 
 Test it:
 ```

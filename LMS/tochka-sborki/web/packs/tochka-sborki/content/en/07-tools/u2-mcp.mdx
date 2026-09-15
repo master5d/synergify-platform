@@ -37,29 +37,36 @@ Run it in your head: if MCP is the shared code, what's the first "telegram" you'
 
 ## How to connect an MCP server
 
-In `.claude/settings.json` add:
+The simplest way is a terminal command, run from the project folder:
+
+```bash
+claude mcp add --scope project github -- npx -y <server-package>
+```
+
+Take `<server-package>` from the README of the MCP server you want: package names change, and the current one is always there. The README also says how to pass the token.
+
+With `--scope project`, Claude Code writes the server into `.mcp.json` at the project root — shared with the team and kept in git. You can also edit it by hand:
 
 ```json
 {
   "mcpServers": {
     "github": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "your-token"
-      }
+      "args": ["-y", "<server-package>"]
     }
   }
 }
 ```
 
+Personal servers (scope `user` or `local`) live in `~/.claude.json`. Don't put MCP servers in `.claude/settings.json` — Claude Code doesn't read them from there.
+
 ## Popular MCP servers
 
 | Server | What it gives you |
 |--------|---------|
-| `@modelcontextprotocol/server-github` | Issues, PRs, commits, repo files |
+| GitHub MCP server | Issues, PRs, commits, repo files |
 | `@modelcontextprotocol/server-filesystem` | Extended file system access |
-| `@modelcontextprotocol/server-brave-search` | Web search via Brave |
+| Web search MCP server | Searching the web |
 | Notion MCP | Read and write Notion pages |
 | Firecrawl | Web page scraping |
 
@@ -75,10 +82,10 @@ Fix: check JSON syntax and tokens before digging deeper.
 
 <Phase type="practice">
 
-Pick one MCP server from the table above (I recommend GitHub or Brave Search to start).
+Pick one MCP server from the table above (I recommend GitHub or web search to start).
 
-1. Find its docs (search: `MCP server [name]`)
-2. Add the config to `.claude/settings.json`
+1. Find its docs (search: `MCP server [name]`) and take the current package name from the README
+2. Add the server with `claude mcp add --scope project <name> -- npx -y <server-package>` (or write it into `.mcp.json` by hand)
 3. Restart Claude Code
 4. Verify the server connected: ask the agent "what MCP tools are available?"
 

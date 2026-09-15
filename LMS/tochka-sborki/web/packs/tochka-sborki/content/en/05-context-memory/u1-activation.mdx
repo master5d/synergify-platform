@@ -17,7 +17,7 @@ Run that session in your head: what exactly went on holiday along with their und
 
 <Phase type="reflection">
 
-Agents don't have memory the way humans do. Every message is everything they know right now.
+Agents don't have memory the way humans do. Everything they know right now is whatever sits in the current context window.
 
 Don't picture this as a "memory failure" — picture it as **a theatre prompter whispering from the wings**: they hear only the line you slip them in this moment. Everything spoken in earlier acts is already beyond their earshot.
 
@@ -40,7 +40,7 @@ Extra info throws the agent off. It picks a similar but wrong answer.
 
 ## Fix: manage what's in "field of view"
 
-Context isn't the entire chat history. It's what you've given the agent right now.
+Context isn't everything you've ever told the agent. It's what's in its window right now: this session's messages, plus the files and prompt you've given it.
 
 ```
 Bad:   200 files in context + 2 hours of history
