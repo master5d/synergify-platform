@@ -9,5 +9,169 @@
     { "slug": "u2-four-shifts", "title": "Four shifts" },
     { "slug": "u3-clones", "title": "Five clones" },
     { "slug": "u4-practice", "title": "Your first prompt" }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Tell Software 1.0, 2.0 and 3.0 apart by how the machine's behaviour is defined in each era"
+    },
+    {
+      "id": "o2",
+      "text": "Explain why working with an agent is co-thinking and not “AI does it instead of me”, and what stays with the human"
+    },
+    {
+      "id": "o3",
+      "text": "Rewrite a command as a delegation and a spec: add context, the “why” and “what not to do”"
+    },
+    {
+      "id": "o4",
+      "text": "Decide which part of a task to hand to the agent and which to keep for yourself"
+    },
+    {
+      "id": "o5",
+      "text": "Choose which AI clone to start with, and name the steps of its build cycle"
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-activation",
+      "objective": "o1",
+      "question": "How does Software 2.0 differ from Software 1.0?",
+      "options": [
+        "In 2.0 the machine is given examples it learns from, not rules",
+        "In 2.0 code is still written by hand, just faster",
+        "In 2.0 agents execute code from our intent",
+        "In 2.0 the computer does exactly what it's told, line by line"
+      ],
+      "answer": 0,
+      "explain": "In Software 1.0 a human writes the rules by hand; in 2.0 neural networks learn from data. Agents executing intent are already 3.0 (u1, “Three eras of programming”)."
+    },
+    {
+      "id": "c2",
+      "unit": "u1-activation",
+      "objective": "o2",
+      "question": "What stays with the human in Software 3.0?",
+      "options": [
+        "Nothing: the agent takes on both the intent and the decision",
+        "Only typing the code the agent can't write",
+        "The intent, the choice of how to work, and the final decision",
+        "Only launching the agent; after that it decides everything itself"
+      ],
+      "answer": 2,
+      "explain": "The lesson says not “AI writes instead of me” but “co-thinking and co-working”. You set the intent, you work together with the agent, and the decision stays with you (u1, the “Before / Now” table)."
+    },
+    {
+      "id": "c3",
+      "unit": "u1-activation",
+      "objective": "o2",
+      "question": "The AI returned something not quite what you meant. Where does the lesson advise looking for the cause first?",
+      "options": [
+        "In the model: it means this tool is weak",
+        "In the “map” you gave it: which landmarks and context it lacked",
+        "In chance: just repeating the same request is enough",
+        "In yourself: it means you can't work with AI"
+      ],
+      "answer": 1,
+      "explain": "The AI follows the map you gave it and invents what isn't on it. So start with what was and wasn't in the request, rather than blaming the tool or yourself (u1, reflection)."
+    },
+    {
+      "id": "c4",
+      "unit": "u2-four-shifts",
+      "objective": "o3",
+      "question": "Which request is closest to the “From commands → to delegation” shift?",
+      "options": [
+        "“Write a function”",
+        "“Write a validation function, quickly”",
+        "“Do it like last time”",
+        "“I need an email validation module with error logging for a production project”"
+      ],
+      "answer": 3,
+      "explain": "Delegation is explaining a task to a colleague: what is needed, what for, and in what context. “Write a function” and “quickly” remain commands without meaning (u2, shift 1)."
+    },
+    {
+      "id": "c5",
+      "unit": "u2-four-shifts",
+      "objective": "o3",
+      "question": "The agent's first answer didn't fit. How does the “From results → to experiments” shift suggest looking at this?",
+      "options": [
+        "The prompt failed; better to do the task yourself",
+        "You need to switch to another tool",
+        "It's a draft and data for the next iteration",
+        "You need to send the same request again unchanged"
+      ],
+      "answer": 2,
+      "explain": "The first answer is a draft, and a bad prompt is data about what to clarify. Then you iterate rather than give up (u2, shift 2)."
+    },
+    {
+      "id": "c6",
+      "unit": "u2-four-shifts",
+      "objective": "o3",
+      "question": "The prompt makes clear what to do and how, but the agent adds extra stuff every time. Which element of the spec is most likely missing?",
+      "options": [
+        "“Who”",
+        "“How”",
+        "None: extra stuff is an unavoidable trait of agents",
+        "“What not to do”"
+      ],
+      "answer": 3,
+      "explain": "A good spec has who / what / why / how / what not to do. Constraints are a separate part: without it the agent decides for itself where to stop (u2, shift 3 and the “Add constraints” practice)."
+    },
+    {
+      "id": "c7",
+      "unit": "u2-four-shifts",
+      "objective": "o4",
+      "question": "Which of these does the lesson advise keeping for yourself rather than delegating to the agent?",
+      "options": [
+        "The final review",
+        "The first draft",
+        "Searching for information",
+        "Routine operations"
+      ],
+      "answer": 0,
+      "explain": "The lesson suggests handing routine, the first draft and search to the agent. Strategy, final review and ethics stay with you (u2, shift 4)."
+    },
+    {
+      "id": "c8",
+      "unit": "u2-four-shifts",
+      "objective": "o2",
+      "question": "Which of the four shifts does the lesson call the only right one?",
+      "options": [
+        "Delegation: the others are special cases of it",
+        "None: they are different ways of co-working, and each fits a different task",
+        "Specifications: without a spec the others don't work",
+        "Attention management: it's the main one"
+      ],
+      "answer": 1,
+      "explain": "The four shifts are facets of co-working, not a ladder with one right rung. You choose the way to fit the task (u2, the introduction to “Four shifts in working with AI agents”; u1, “I choose the way of co-thinking that fits the task”)."
+    },
+    {
+      "id": "c9",
+      "unit": "u3-clones",
+      "objective": "o5",
+      "question": "Which AI clone does the lesson advise starting with?",
+      "options": [
+        "All five at once, to see the big picture",
+        "The one whose tasks cost you the most time",
+        "The one that's easiest to build technically",
+        "The one that saves the most hours according to the table, regardless of your work"
+      ],
+      "answer": 1,
+      "explain": "Don't build all five at once. Pick your first clone where you yourself lose the most; the hours in the table are a guide, not a rule (u3, “Five types of AI clones”)."
+    },
+    {
+      "id": "c10",
+      "unit": "u3-clones",
+      "objective": "o5",
+      "question": "The first version of the clone is built. What comes next in the build cycle?",
+      "options": [
+        "Check how it works and refine it",
+        "Start building the next clone right away",
+        "Collect the source data again from scratch",
+        "Nothing: the built clone is finished"
+      ],
+      "answer": 0,
+      "explain": "The cycle is Capture → Build → Test → Refine: after building, the clone is tested and refined. It's the same iterative approach as in the “From results → to experiments” shift (u3, u2)."
+    }
   ]
 }

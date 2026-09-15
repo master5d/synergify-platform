@@ -10,5 +10,197 @@
     { "slug": "u3-behind-gfw", "title": "Behind Great Firewall: no VPN" },
     { "slug": "u4-hermes-sovereign", "title": "Hermes + local stack" },
     { "slug": "u5-migrate", "title": "Migration plan for your workflow" }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Break an agentic stack down into three layers (agent/UI, routing/gateway, model provider) and explain that each layer is swapped independently"
+    },
+    {
+      "id": "o2",
+      "text": "Choose one of the four stacks based on your constraints (budget, access, hardware, privacy, setup time) and name the trade-offs of that choice"
+    },
+    {
+      "id": "o3",
+      "text": "Explain what the LiteLLM gateway gives you and how the fallback chain works all the way down to the local “floor”"
+    },
+    {
+      "id": "o4",
+      "text": "Tell the boss-worker scheme (Hermes) apart from a single agent that does everything itself, and determine when it's justified"
+    },
+    {
+      "id": "o5",
+      "text": "Draw up a step-by-step migration plan in which the old stack stays as a fallback until the new one has been tested on a real task"
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-activation",
+      "objective": "o1",
+      "question": "The combination “Claude Code → LiteLLM → Cerebras gpt-oss-120b” from the lesson shows the main property of a stack. Which one?",
+      "options": [
+        "Each layer (agent, gateway, provider) can be swapped independently of the others",
+        "Claude Code works only with Anthropic models",
+        "A gateway is required only for Chinese models",
+        "The agent and the model are the same thing; you choose them together"
+      ],
+      "answer": 0,
+      "explain": "A stack in the course consists of three layers, and each is replaced separately. That's why you can keep the convenient Claude Code interface and connect an open model to it (u1, “What ‘stack’ means here”)."
+    },
+    {
+      "id": "c2",
+      "unit": "u1-activation",
+      "objective": "o2",
+      "question": "Your company forbids sending code to an outside vendor. Which of the Claude Code drawbacks named in the lesson settles the matter here?",
+      "options": [
+        "A minimum of ~$20 a month",
+        "It needs a discrete graphics card",
+        "Telemetry: every request goes to Anthropic",
+        "It only works on a Mac"
+      ],
+      "answer": 2,
+      "explain": "Of the four drawbacks (price, access, vendor lock-in, telemetry), telemetry is the one that bears on a ban on sharing code. The lesson doesn't name a graphics card or a Mac as Claude Code requirements (u1, “Why not ‘just Claude Code’”)."
+    },
+    {
+      "id": "c3",
+      "unit": "u2-stack-matrix",
+      "objective": "o2",
+      "question": "You're not in China, your budget is $0, and all you have is a laptop without a GPU. Where does the lesson's decision tree lead?",
+      "options": [
+        "Claude Code",
+        "Cloud-OSS",
+        "Sovereign",
+        "Behind-GFW"
+      ],
+      "answer": 1,
+      "explain": "The first fork — China — gives “no.” There's no $20+ budget. There's no GPU or Mac M-series either. That leaves Cloud-OSS (u2, “Decision tree (if still unsure)”)."
+    },
+    {
+      "id": "c4",
+      "unit": "u2-stack-matrix",
+      "objective": "o2",
+      "question": "What do you pay for the maximum privacy of the Sovereign stack?",
+      "options": [
+        "The highest subscription price",
+        "It doesn't work in China",
+        "Being tied to a single vendor",
+        "The longest setup (half a day) and slightly lower out-of-box quality"
+      ],
+      "answer": 3,
+      "explain": "In the trade-offs table, Sovereign has maximum privacy and no vendor lock-in, but setup takes half a day, and out-of-box quality is 7/10 versus 9/10 for Claude Code (u2, “Honest trade-offs”)."
+    },
+    {
+      "id": "c5",
+      "unit": "u2-stack-matrix",
+      "objective": "o3",
+      "question": "What does the LiteLLM gateway change for the agent when there are several providers underneath it?",
+      "options": [
+        "The agent has to switch between provider addresses in turn",
+        "The gateway writes the code itself instead of the agent",
+        "The agent sees a single endpoint, and the gateway takes care of switching between providers on failure",
+        "The gateway is only needed to make things free"
+      ],
+      "answer": 2,
+      "explain": "In the lesson's image, the gateway is the conductor. The agent calls a single point, and under the hood the gateway distributes requests and moves on to fallback models (u2, reflection)."
+    },
+    {
+      "id": "c6",
+      "unit": "u3-behind-gfw",
+      "objective": "o3",
+      "question": "The lesson's config sets `fast-pool: [\"balanced\", \"local-floor\"]`. What happens if Cerebras (`fast-pool`) stops responding?",
+      "options": [
+        "The agent returns an error, and the request has to be repeated by hand",
+        "The gateway waits until Cerebras comes back",
+        "The request goes to paid Anthropic",
+        "The gateway sends the request to `balanced` (Gemini), and if that fails too — to the local model"
+      ],
+      "answer": 3,
+      "explain": "`fallbacks` records the order of the fallback options: Gemini first (in China, a Chinese provider), the local llama-server last. There's no Anthropic in this config at all (u3, step 3)."
+    },
+    {
+      "id": "c7",
+      "unit": "u3-behind-gfw",
+      "objective": "o3",
+      "question": "Why put a local model on llama-server at the end of the chain if the clouds are faster?",
+      "options": [
+        "It's the “floor” for when all the clouds are unavailable at once",
+        "A local model is always smarter than cloud ones",
+        "LiteLLM won't start without a local model",
+        "The clouds forbid using them without a local model"
+      ],
+      "answer": 0,
+      "explain": "The local model is the last level: it works even when not a single cloud responds. Its speed is more modest, but it depends neither on the network nor on someone else's limits (u3, step 4)."
+    },
+    {
+      "id": "c8",
+      "unit": "u3-behind-gfw",
+      "objective": "o1",
+      "question": "LiteLLM is already running on `localhost:4000`. You want to try Cline instead of Aider. What will you have to change?",
+      "options": [
+        "The whole LiteLLM config and the provider keys",
+        "Only the agent's connection: point it at the same `localhost:4000` and the model name",
+        "Move to a different model provider, because Cline doesn't work with Cerebras",
+        "Set up a separate gateway for each agent"
+      ],
+      "answer": 1,
+      "explain": "The gateway serves an OpenAI-compatible API. Any such agent connects to it the same way, so switching agents touches neither the gateway nor the providers (u3, step 5)."
+    },
+    {
+      "id": "c9",
+      "unit": "u4-hermes-sovereign",
+      "objective": "o4",
+      "question": "An agent is refactoring a module; by the fifth file it forgets the original plan and spends a lot of tokens getting back to it. How does the Hermes scheme answer this problem?",
+      "options": [
+        "It gives the agent a model with a bigger window so everything fits",
+        "The boss holds only the plan and state, and hands the implementation to workers — narrow subtasks with their own context",
+        "It forbids refactoring across several files",
+        "It runs all the workers with a shared context so each one sees everything"
+      ],
+      "answer": 1,
+      "explain": "This is the context-saturation pattern: one agent tries to play every role. Hermes works as a director: it frames a subtask, hands it to a worker, checks the result, and updates the plan. Implementation doesn't eat its context (u4, reflection)."
+    },
+    {
+      "id": "c10",
+      "unit": "u4-hermes-sovereign",
+      "objective": "o4",
+      "question": "For which task is the boss-worker scheme most likely unnecessary?",
+      "options": [
+        "A small edit in a single file",
+        "Several days of work on a long plan",
+        "Regular scheduled tasks (cron)",
+        "A big plan that has to be handed out to several workers"
+      ],
+      "answer": 0,
+      "explain": "The lesson calls boss-worker overkill for small tasks. It pays off on long plans, multi-day work, and cron tasks (u4, practice)."
+    },
+    {
+      "id": "c11",
+      "unit": "u5-migrate",
+      "objective": "o5",
+      "question": "You've chosen a new stack. Which move does the lesson call the most common migration mistake?",
+      "options": [
+        "Keeping both stacks running in parallel for a week",
+        "Moving one real task over first",
+        "Writing down where the new stack is slower and where it's faster",
+        "Deleting the old tool right away and switching completely to the new one"
+      ],
+      "answer": 3,
+      "explain": "The lesson compares migration to shedding a skin: the new stack first grows over the old one, and for a while both work. The other options are exactly the steps of the recommended plan (u5, reflection)."
+    },
+    {
+      "id": "c12",
+      "unit": "u5-migrate",
+      "objective": "o5",
+      "question": "Why, on the second day of the plan, repeat on the new stack a task you've already solved on the old one?",
+      "options": [
+        "To get a second, better result for that task",
+        "To convince yourself that the new one is better",
+        "To compare the stacks on a familiar task and record facts: where it's slower, where it's faster, where the problems are",
+        "To delete the old stack right after that"
+      ],
+      "answer": 2,
+      "explain": "A familiar task is a fair yardstick: the result is already known, and you see the difference that comes from the stack itself. The template asks you to record facts, not to talk yourself into anything (u5, “Migration template”)."
+    }
   ]
 }

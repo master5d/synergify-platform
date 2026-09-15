@@ -10,5 +10,225 @@
     { "slug": "u3-where-it-lies", "title": "Where it lies" },
     { "slug": "u4-formats", "title": "Output formats" },
     { "slug": "u5-practice", "title": "Practice" }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Tell a source-grounded notebook's answer from an answer of a regular chat and of a hybrid, and explain why a citation makes an answer checkable"
+    },
+    {
+      "id": "o2",
+      "text": "Predict what the notebook won't see in a source: what is shown but not said, and an empty source"
+    },
+    {
+      "id": "o3",
+      "text": "Check a notebook answer against the inspection checklist and choose an action for a warning signal"
+    },
+    {
+      "id": "o4",
+      "text": "Choose an output format for the consumption scenario and decline a format that has no scenario"
+    },
+    {
+      "id": "o5",
+      "text": "Assemble a notebook for your own task: a topic with a question, source selection, a first question about disagreements, inspection depth by how much the answer matters"
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-first-notebook",
+      "objective": "o1",
+      "question": "How does a notebook differ from a regular AI chat?",
+      "options": [
+        "It answers only from the sources you put into it, and attaches a citation with a link to every claim",
+        "It knows more because it is connected to search",
+        "It summarizes videos faster than a chat",
+        "It doesn't: it's the same chat with a different interface"
+      ],
+      "answer": 0,
+      "explain": "The essence of the notebook is being tied to your sources and giving every claim an address (u1, “Build first, understand second”)."
+    },
+    {
+      "id": "c2",
+      "unit": "u1-first-notebook",
+      "objective": "o5",
+      "question": "Why does the lesson advise asking a new notebook “Where do these videos disagree?” as the first question rather than “Summarize”?",
+      "options": [
+        "The notebook can't do summaries",
+        "The notebook answers the question about disagreements faster",
+        "A summary averages the material, while disagreements show where to think for yourself",
+        "The question about disagreements saves the free tier's limit"
+      ],
+      "answer": 2,
+      "explain": "A disagreement is the point where you need your own judgment, and a summary smooths it out (u1, step 3; the same move is repeated in u5)."
+    },
+    {
+      "id": "c3",
+      "unit": "u2-how-it-works",
+      "objective": "o1",
+      "question": "According to the lesson, what is trust in the notebook's answers built on?",
+      "options": [
+        "On its answers being more accurate than a chat's on average",
+        "On the ability to check every answer against a spot in the source",
+        "On a confident, smooth tone",
+        "On it being made by a large company"
+      ],
+      "answer": 1,
+      "explain": "A chat answering “from memory” may be right more often, but its answer has no seam to pull on. The notebook is checkable (u2, reflection)."
+    },
+    {
+      "id": "c4",
+      "unit": "u2-how-it-works",
+      "objective": "o2",
+      "question": "In a talk, the speaker spends almost the whole time showing code on the screen and says little. What will end up in the notebook?",
+      "options": [
+        "The notebook will analyze the code from the video footage",
+        "The notebook will refuse to accept such a source",
+        "The code will be pulled in from the model's general knowledge and marked with a citation",
+        "The talk will shrink to its spoken lines: what is shown but not said doesn't exist for it"
+      ],
+      "answer": 3,
+      "explain": "For the notebook, a video is its transcript. Anything that didn't make it into the subtitle text is unavailable to it (u2, “Source-grounding,” item 3)."
+    },
+    {
+      "id": "c5",
+      "unit": "u2-how-it-works",
+      "objective": "o1",
+      "question": "You attached the notebook to a regular chat (hybrid mode). What changes for checking?",
+      "options": [
+        "Nothing: the answers still stand only on the sources",
+        "Checking is no longer needed: the model separates memory from sources by itself",
+        "The knowledge boundary blurs, so clicking a citation and asking a control question become mandatory",
+        "Citations disappear completely"
+      ],
+      "answer": 2,
+      "explain": "In hybrid mode an answer may stand half on the model's memory, and you can't tell from the text (u2, “The third mode: hybrid”)."
+    },
+    {
+      "id": "c6",
+      "unit": "u3-where-it-lies",
+      "objective": "o3",
+      "question": "The notebook gave a coherent, confident answer without a single footnote. How should you read this, and what should you do?",
+      "options": [
+        "It's a sign that the answer is obvious and links aren't needed",
+        "It's a display glitch: refresh the page",
+        "Delete the notebook and assemble it again",
+        "It's a signal that the notebook drifted into general knowledge; re-ask with a prompt that requires citations"
+      ],
+      "answer": 3,
+      "explain": "Missing footnotes is the second item of the inspection checklist. The response is to re-ask so that an answer without evidence is forbidden (u3)."
+    },
+    {
+      "id": "c7",
+      "unit": "u3-where-it-lies",
+      "objective": "o3",
+      "question": "The notebook writes “research shows…”. What check does the lesson suggest?",
+      "options": [
+        "Ask directly which of the sources claims this: it may be a single article",
+        "Believe it: the word “research” means scientific consensus",
+        "Ask the notebook to add more research from the internet",
+        "Check how many times the phrase repeats in the answer"
+      ],
+      "answer": 0,
+      "explain": "A single source presented as consensus is the fifth place where the notebook drifts. One voice remains one voice (u3)."
+    },
+    {
+      "id": "c8",
+      "unit": "u3-where-it-lies",
+      "objective": "o2",
+      "question": "You put a video without subtitles into the notebook, and it answered about it in detail. Where did the details most likely come from?",
+      "options": [
+        "The notebook recognized the speech from the video footage",
+        "It “answered” from the video's title and general knowledge: the source was empty",
+        "Subtitles were pulled in automatically from another video",
+        "It's an accurate answer: otherwise the notebook would have said the source was empty"
+      ],
+      "answer": 1,
+      "explain": "The notebook doesn't always report that a source is empty, and it may fill the void with something plausible (u3, item 6 and activation)."
+    },
+    {
+      "id": "c9",
+      "unit": "u3-where-it-lies",
+      "objective": "o3",
+      "question": "To a control question about something you know is not in the sources, the notebook gave a fluent answer. What is the right conclusion?",
+      "options": [
+        "The notebook knows more than what is in the sources — that's a plus",
+        "It's a signal about the other answers in this session: they need checking too",
+        "The failure concerns only this question; the other answers are fine",
+        "The control question was worded incorrectly"
+      ],
+      "answer": 1,
+      "explain": "The control question exists precisely to find out whether the notebook holds the knowledge boundary. If it doesn't, no answer in the session can be trusted by default (u3, item 4)."
+    },
+    {
+      "id": "c10",
+      "unit": "u4-formats",
+      "objective": "o4",
+      "question": "Tomorrow you have to make a decision on the topic. When is an audio overview the dishonest choice here?",
+      "options": [
+        "When it is the only pass over a topic you will decide on: you cannot click a citation in audio",
+        "When you listen to it on the road",
+        "When you gave it the focus “concentrate on X”",
+        "An audio overview is always a dishonest format"
+      ],
+      "answer": 0,
+      "explain": "Audio is fine for a first pass during “dead” time. A decision needs a format where citations can be checked (u4, “When each format is the honest one”)."
+    },
+    {
+      "id": "c11",
+      "unit": "u4-formats",
+      "objective": "o4",
+      "question": "The sources clearly disagree, and you want to see exactly where. Which format does the lesson consider more honest?",
+      "options": [
+        "Slides",
+        "A mind map",
+        "All formats at once, so as not to miss anything",
+        "A table with a “quote” column"
+      ],
+      "answer": 3,
+      "explain": "Table rows force disagreements into the open, while prose smooths them over. “Pressing all the buttons” is the trap the lesson warns about (u4)."
+    },
+    {
+      "id": "c12",
+      "unit": "u5-practice",
+      "objective": "o5",
+      "question": "Which notebook topic, according to the lesson, is “dead on arrival”?",
+      "options": [
+        "“Which newsletter format fits my product”",
+        "“What is actually known about X”",
+        "“All about marketing”",
+        "A topic on which the sources argue"
+      ],
+      "answer": 2,
+      "explain": "A living notebook answers a specific question. A topic “in general” gives no criterion either for selecting sources or for questions (u5, “Assembling your own notebook — the order,” step 1)."
+    },
+    {
+      "id": "c13",
+      "unit": "u5-practice",
+      "objective": "o5",
+      "question": "How should you distribute inspection across your notebook's answers?",
+      "options": [
+        "Check every answer against the full checklist",
+        "The full checklist for answers that decisions rest on; background answers get spot checks: a citation click, a control question",
+        "Check only answers with numbers",
+        "Check only the session's first answer: if it's correct, so are the rest"
+      ],
+      "answer": 1,
+      "explain": "The depth of checking depends on what rests on the answer (u5, step 4)."
+    },
+    {
+      "id": "c14",
+      "unit": "u5-practice",
+      "objective": "o5",
+      "question": "To the question “Where do the sources argue?” the notebook replies that there is nothing to argue about. What might this mean?",
+      "options": [
+        "The topic is fully studied; you can make the decision",
+        "The notebook is broken",
+        "You need to add more sources, no matter which",
+        "The notebook may hold retellings of a single primary source, and the selection is worth revisiting"
+      ],
+      "answer": 3,
+      "explain": "No disagreements is a signal to check the source selection: “Ballast in a notebook is worse than emptiness” (u5, steps 2–3)."
+    }
   ]
 }
