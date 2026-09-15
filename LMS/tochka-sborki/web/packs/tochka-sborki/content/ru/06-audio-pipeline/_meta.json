@@ -2,7 +2,7 @@
   "module": 6,
   "title": "Pipeline автоматизации",
   "description": "Строим первый практический workflow",
-  "duration": "60 мин",
+  "duration": "45 мин",
   "level": 6,
   "units": [
     { "slug": "u1-activation", "title": "Информация, которую ты обрабатываешь вручную" },

@@ -423,8 +423,8 @@
     },
     "06-audio-pipeline/u1-activation": {
       "intro": {
-        "ru": "Товарищ, учёт и контроль — основа порядка. Но пока ты вручную перекладываешь аудиофайлы, план пятилетки сам себя не выполнит.",
-        "en": "Comrade, accounting and control are the foundation of order. But while you manually move audio files, the five-year plan will not fulfill itself."
+        "ru": "Товарищ, учёт и контроль — основа порядка. Но пока ты вручную перекладываешь сведения из статей в сводки, план пятилетки сам себя не выполнит.",
+        "en": "Comrade, accounting and control are the foundation of order. But while you manually shift facts from articles into reports, the five-year plan will not fulfill itself."
       },
       "mentorHint": {
         "ru": "Рутина закаляет, но смекалка экономит силы для рывка.",

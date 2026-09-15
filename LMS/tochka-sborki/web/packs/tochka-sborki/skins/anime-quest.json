@@ -451,8 +451,8 @@
     },
     "06-audio-pipeline/u3-build": {
       "intro": {
-        "ru": "Хватит слов, пора за дело! Собери свой первый звуковой pipeline и покажи, на что ты способен! Судьба мира ждёт!",
-        "en": "Enough talk, it's time for action! Assemble your first audio pipeline and show what you're made of! The fate of the world is waiting!"
+        "ru": "Хватит слов, пора за дело! Собери свою первую цепочку «триггер → действие» и покажи, на что ты способен! Судьба мира ждёт!",
+        "en": "Enough talk, it's time for action! Assemble your first trigger → action chain and show what you're made of! The fate of the world is waiting!"
       },
       "mentorHint": {
         "ru": "Сосредоточься! Каждый компонент твоего pipeline должен работать как единый механизм.",

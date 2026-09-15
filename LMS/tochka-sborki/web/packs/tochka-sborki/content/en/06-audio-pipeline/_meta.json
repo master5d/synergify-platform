@@ -2,7 +2,7 @@
   "module": 6,
   "title": "Automation Pipeline",
   "description": "Build your first practical workflow",
-  "duration": "60 min",
+  "duration": "45 min",
   "level": 6,
   "units": [
     { "slug": "u1-activation", "title": "The info you process by hand" },

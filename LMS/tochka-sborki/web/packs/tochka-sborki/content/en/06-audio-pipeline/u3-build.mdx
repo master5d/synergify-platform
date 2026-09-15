@@ -52,8 +52,12 @@ Output format:
 ## Worth remembering
 [quotes or facts]
 
-Save the result to a file ideas.md
+If you can't open the link, say so; don't summarize from guesswork.
 ```
+
+In a chat (claude.ai) the model won't create a file: copy the result into your ideas file, e.g. `my-experiments/ideas.md`. An agent with file access (Claude Code) can write it itself — add "Save the result to `my-experiments/ideas.md`" to the prompt.
+
+If the model can't open the link (this happens in a chat without a scraping tool), don't accept an answer based on guesswork: copy the article text and paste it into the message instead of the URL.
 
 ## Extended pipeline: multiple sources
 
@@ -67,8 +71,10 @@ Analyze three articles on the topic [topic]:
 
 For each: 3 ideas + 1 best quote.
 Then: find what they have in common and where they contradict.
-Save to research-[topic].md
+If you couldn't open a link, name it and don't analyze it.
 ```
+
+The safety net matters even more here: without a scraping tool the model may "imagine" three articles at once. If the links don't open, paste the article texts one by one. Save the result to `research-[topic].md` — by copying it in a chat, or by asking an agent to write the file.
 
 <SelfCheck id="c6"/>
 

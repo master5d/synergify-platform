@@ -451,8 +451,8 @@
     },
     "06-audio-pipeline/u3-build": {
       "intro": {
-        "ru": "Добро пожаловать в инженерный отсек! Здесь мы соединим наши системы и создадим первый автоматизированный аудио-pipeline, который станет голосом нашего корабля.",
-        "en": "Welcome to the engineering bay! Here, we will connect our systems and forge the first automated audio pipeline that will become our ship's voice."
+        "ru": "Добро пожаловать в инженерный отсек! Здесь мы соединим наши системы и соберём первый pipeline: сигнал на входе, цепочка действий, отчёт на выходе. Сегодня — ручной пробный прогон, завтра — автопилот.",
+        "en": "Welcome to the engineering bay! Here, we will connect our systems and assemble the first pipeline: a signal in, a chain of actions, a report out. Today a manual test run, tomorrow the autopilot."
       },
       "mentorHint": {
         "ru": "Каждый узел в твоем pipeline — это звено в цепи, что держит наш корабль в безопасности. Собирай с умом.",
