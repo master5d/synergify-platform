@@ -451,16 +451,16 @@
     },
     "06-audio-pipeline/u3-build": {
       "intro": {
-        "ru": "Теория обретает плоть. Пришло время соединить компоненты, связать эхо триггера с сущностью действия и сотворить свой первый звуковой pipeline.",
-        "en": "Theory takes form. It is time to connect the components, to bind the echo of a trigger to the essence of an action, and create your first sonic pipeline."
+        "ru": "Теория обретает плоть. Пришло время соединить компоненты, связать эхо триггера с сущностью действия и начертать свой первый pipeline — цепь заклятий от триггера до результата.",
+        "en": "Theory takes form. It is time to connect the components, to bind the echo of a trigger to the essence of an action, and inscribe your first pipeline — a chain of spells from trigger to result."
       },
       "mentorHint": {
         "ru": "Сосредоточься на потоке; позволь энергии течь сквозь созданные тобой каналы.",
         "en": "Focus on the flow; let the energy channel through the conduits you create."
       },
       "outro": {
-        "ru": "Твой первый голем из звука и кода ожил! Он будет служить тебе верой и правдой, освобождая твое время для новых свершений.",
-        "en": "Your first golem of sound and code is alive! It will serve you faithfully, freeing your time for greater creations."
+        "ru": "Твой первый голем из слов и кода сделал первый шаг по твоей команде! Научи его ходить самому — и он освободит твоё время для новых свершений.",
+        "en": "Your first golem of words and code has taken its first step at your command! Teach it to walk on its own, and it will free your time for greater creations."
       }
     },
     "06-audio-pipeline/u4-reflect": {

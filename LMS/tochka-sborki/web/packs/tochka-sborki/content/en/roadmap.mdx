@@ -47,7 +47,7 @@ Each topic is broken into 3–5 cognitive units following Kolb's cycle: **Activa
 | [**Stack Selection**](/en/lessons/03-stack-selection/) | Which agentic stack fits your constraints | 60 min |
 | [**Prompt Engineering**](/en/lessons/04-prompt-engineering/) | Writing the spec | 1–2 h |
 | [**Context & Memory**](/en/lessons/05-context-memory/) | Agent memory | 1 h |
-| [**Automation Pipeline**](/en/lessons/06-audio-pipeline/) | Chains of actions | 2–3 h |
+| [**Automation Pipeline**](/en/lessons/06-audio-pipeline/) | Chains of actions | 45 min |
 | [**Tools & Extensions**](/en/lessons/07-tools/) | MCP, Skills, Hooks, Superpowers | 2–3 h |
 | [**Agent Engineering**](/en/lessons/08-agent-engineering/) | Orchestration, prod infra, ENERV/SOVERN | 90 min |
 
@@ -169,23 +169,22 @@ How the agent holds information — and why without it, it forgets everything in
 
 ## Automation Pipeline
 
-From a manual prompt to an automated chain of actions.
+From a manual prompt to a pipeline that is ready to be automated.
 
 **Units:** Activation · Pipeline theory · Build · Reflection
 
 **Concepts:**
-- Pipeline thinking: URL → scrape → analyze → insights
-- Firecrawl and web scraping
-- Prompt chaining — linking prompts into a chain
-- Sources-first approach: data first, then analysis
-- Generating ideas.md and research-topics.md
+- Trigger → Action and three questions before you build: trigger, action, condition (when NOT to run)
+- Three pipeline types: manual, scheduled, event-driven — and how to pick one for the task
+- The path from manual to automated: a manual run as a draft first, then conditions, a schedule, notifications
+- The automation map: what you can delegate to a pipeline and what stays with a human
 
-**Tools:** Firecrawl, Claude Code, Obsidian CLI *(optional)*, web sources
+**Tools:** Claude (claude.ai or Claude Code), any agent that can scrape a page; Zapier/Make/n8n and Hooks as an overview
 
 **Projects:**
-- Pipeline for a chosen URL from start to output
-- Saved `ideas.md` and `research-topics.md` in `my-experiments/`
-- First automated workflow that saves 2–5 hours a week
+- Design and run by hand your first URL → insights pipeline, ready to be automated
+- A reusable prompt and your run results in `my-experiments/`
+- A list of candidate tasks to automate — your plan for the next modules
 
 ---
 
