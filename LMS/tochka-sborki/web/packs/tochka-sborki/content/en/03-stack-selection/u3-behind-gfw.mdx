@@ -103,7 +103,7 @@ CEREBRAS_API_KEY=csk-xxxxx
 
 ## Step 2: Google Gemini Flash (backup for longer tasks)
 
-1. `aistudio.google.com` is officially unavailable from mainland China. If you're in China, put a Chinese provider in this role (DeepSeek API or Qwen API). If not, get a key in AI Studio and add it to the same `.env`: `GEMINI_API_KEY=...`
+1. `aistudio.google.com` is officially unavailable from mainland China. If you're in China, put a Chinese provider in this role (DeepSeek API or Qwen API). If not, get a key in AI Studio and add it to the same `.env`: `GOOGLE_API_KEY=...`
 2. Gemini's free limits change — check them in your own AI Studio, not by numbers in a lesson
 
 ## Step 3: LiteLLM gateway
@@ -142,7 +142,7 @@ model_list:
   - model_name: balanced
     litellm_params:
       model: gemini/gemini-2.5-flash    # in China, swap for a Chinese provider
-      api_key: os.environ/GEMINI_API_KEY
+      api_key: os.environ/GOOGLE_API_KEY
 
   - model_name: local-floor
     litellm_params:
@@ -171,7 +171,7 @@ litellm --config ~/.config/litellm/config.yaml --port 4000
 <OsBlock os="windows">
 
 ```powershell
-Get-Content $HOME\.config\litellm\.env | % { $k,$v = $_ -split '=',2; Set-Item "env:$k" $v }
+Get-Content $HOME\.config\litellm\.env | ?{ $_ -match '^\s*[^#].*=' } | % { $k,$v = $_ -split '=',2; Set-Item "env:$k" $v }
 litellm --config $HOME\.config\litellm\config.yaml --port 4000
 ```
 
