@@ -51,7 +51,7 @@ irm https://ai.synergify.com/install.ps1 | iex
 
 > 💡 На Linux работает та же команда, что и для Mac (`curl … | bash`).
 
-> ⚠️ Такая команда скачивает чужой скрипт и сразу запускает его на твоём компьютере. Если хочешь сначала посмотреть, что он делает, скачай его в файл — `curl -fsSL https://ai.synergify.com/install.sh -o install.sh` (на Windows: `irm https://ai.synergify.com/install.ps1 -OutFile install.ps1`), — прочитай и только потом запусти (`bash install.sh` или `.\install.ps1`).
+> ⚠️ Такая команда скачивает чужой скрипт и сразу запускает его на твоём компьютере. Если хочешь сначала посмотреть, что он делает, скачай его в файл — `curl -fsSL https://ai.synergify.com/install.sh -o install.sh` (на Windows: `irm https://ai.synergify.com/install.ps1 -OutFile install.ps1`), — прочитай и только потом запусти (`bash install.sh` или `.\install.ps1`). Если Windows не даёт запустить скачанный скрипт из-за политики выполнения, запусти его так: `powershell -ExecutionPolicy Bypass -File install.ps1`.
 
 После установки открой **новый** терминал и запусти `claude`. Дальше — ручной путь, если хочешь понять каждый шаг.
 

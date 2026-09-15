@@ -47,7 +47,7 @@ duration: "20 мин"
 
 ## ⚡ Быстрая установка GFW-стека (одной строкой)
 
-Одна команда ставит LiteLLM-прокси и Aider и пишет готовый конфиг (Cerebras + Gemini Flash). Дальше останется вписать два ключа. Ниже — разбор по шагам, если хочешь понять, что происходит.
+Одна команда ставит LiteLLM-прокси и Aider и пишет готовый конфиг (Cerebras + Gemini Flash). Дальше останется вписать два ключа — в Китае замени ключ Gemini на китайского провайдера (шаг 2). Ниже — разбор по шагам, если хочешь понять, что происходит.
 
 <OsToggle />
 
@@ -91,7 +91,7 @@ irm https://ai.synergify.com/install-gfw.ps1 | iex
 
 ## Шаг 1: Cerebras (главный free-tier)
 
-1. Зайди на [cerebras.ai/cloud-inference](https://cerebras.ai/cloud-inference) — по нашему опыту открывается без VPN, но гарантий нет: проверь сам
+1. Зайди на [cerebras.ai/cloud-inference](https://cerebras.ai/cloud-inference) — официальных данных о доступе из Китая нет — проверь сам
 2. Регистрация через email. Условия пробного тарифа меняются: сейчас для бонусных кредитов нужно привязать карту
 3. Лимиты пробного тарифа (сейчас около 1M токенов в день) сверь на странице Rate Limits в документации Cerebras — они часто меняются
 4. Получи API key → сохрани в `~/.config/litellm/.env` (тот же файл, что у быстрой установки):
@@ -103,7 +103,7 @@ CEREBRAS_API_KEY=csk-xxxxx
 
 ## Шаг 2: Google Gemini Flash (backup для долгих задач)
 
-1. `aistudio.google.com` официально недоступен из материкового Китая. Если ты в Китае — поставь на эту роль китайского провайдера (DeepSeek API или Qwen API). Если нет — возьми ключ в AI Studio и допиши его в тот же `.env`: `GOOGLE_API_KEY=...`
+1. `aistudio.google.com` официально недоступен из материкового Китая. Если ты в Китае — поставь на эту роль китайского провайдера (DeepSeek API или Qwen API). Если нет — возьми ключ в AI Studio и допиши его в тот же `.env`: `GEMINI_API_KEY=...`
 2. Бесплатные лимиты Gemini меняются — смотри их в своём AI Studio, а не по цифрам из урока
 
 ## Шаг 3: LiteLLM gateway
@@ -142,7 +142,7 @@ model_list:
   - model_name: balanced
     litellm_params:
       model: gemini/gemini-2.5-flash    # в Китае замени на китайского провайдера
-      api_key: os.environ/GOOGLE_API_KEY
+      api_key: os.environ/GEMINI_API_KEY
 
   - model_name: local-floor
     litellm_params:
@@ -159,10 +159,23 @@ router_settings:
 
 Запуск. LiteLLM берёт ключи из переменных окружения (`os.environ/...` в конфиге), поэтому сначала загрузи `.env`:
 
+<OsBlock os="mac">
+
 ```bash
 set -a; source ~/.config/litellm/.env; set +a
 litellm --config ~/.config/litellm/config.yaml --port 4000
 ```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+Get-Content $HOME\.config\litellm\.env | % { $k,$v = $_ -split '=',2; Set-Item "env:$k" $v }
+litellm --config $HOME\.config\litellm\config.yaml --port 4000
+```
+
+</OsBlock>
 
 Теперь все агенты могут смотреть на `http://localhost:4000` как на «OpenAI-compatible API».
 

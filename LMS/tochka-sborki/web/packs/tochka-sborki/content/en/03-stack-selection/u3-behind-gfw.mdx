@@ -47,7 +47,7 @@ This unit isn't about bypassing — it's about **building a full agentic workflo
 
 ## ⚡ Quick install of the GFW stack (one line)
 
-One command installs the LiteLLM proxy and Aider and writes a ready config (Cerebras + Gemini Flash). Then you just add two keys. The step-by-step breakdown is below if you want to understand what happens.
+One command installs the LiteLLM proxy and Aider and writes a ready config (Cerebras + Gemini Flash). Then you just add two keys — in China, swap the Gemini key for a Chinese provider (step 2). The step-by-step breakdown is below if you want to understand what happens.
 
 <OsToggle />
 
@@ -91,7 +91,7 @@ After install: add your keys to `~/.config/litellm/.env`, run `start.sh`/`start.
 
 ## Step 1: Cerebras (main free tier)
 
-1. Go to [cerebras.ai/cloud-inference](https://cerebras.ai/cloud-inference) — in our experience it opens without VPN, but there's no guarantee: check it yourself
+1. Go to [cerebras.ai/cloud-inference](https://cerebras.ai/cloud-inference) — there's no official word on access from China — check it yourself
 2. Sign up with email. Trial terms change: right now the bonus credits require linking a card
 3. Check the trial limits (currently around 1M tokens a day) on the Rate Limits page of the Cerebras docs — they change often
 4. Grab the API key → save in `~/.config/litellm/.env` (the same file the quick install uses):
@@ -103,7 +103,7 @@ CEREBRAS_API_KEY=csk-xxxxx
 
 ## Step 2: Google Gemini Flash (backup for longer tasks)
 
-1. `aistudio.google.com` is officially unavailable from mainland China. If you're in China, put a Chinese provider in this role (DeepSeek API or Qwen API). If not, get a key in AI Studio and add it to the same `.env`: `GOOGLE_API_KEY=...`
+1. `aistudio.google.com` is officially unavailable from mainland China. If you're in China, put a Chinese provider in this role (DeepSeek API or Qwen API). If not, get a key in AI Studio and add it to the same `.env`: `GEMINI_API_KEY=...`
 2. Gemini's free limits change — check them in your own AI Studio, not by numbers in a lesson
 
 ## Step 3: LiteLLM gateway
@@ -142,7 +142,7 @@ model_list:
   - model_name: balanced
     litellm_params:
       model: gemini/gemini-2.5-flash    # in China, swap for a Chinese provider
-      api_key: os.environ/GOOGLE_API_KEY
+      api_key: os.environ/GEMINI_API_KEY
 
   - model_name: local-floor
     litellm_params:
@@ -159,10 +159,23 @@ router_settings:
 
 Run it. LiteLLM reads keys from environment variables (`os.environ/...` in the config), so load the `.env` first:
 
+<OsBlock os="mac">
+
 ```bash
 set -a; source ~/.config/litellm/.env; set +a
 litellm --config ~/.config/litellm/config.yaml --port 4000
 ```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+Get-Content $HOME\.config\litellm\.env | % { $k,$v = $_ -split '=',2; Set-Item "env:$k" $v }
+litellm --config $HOME\.config\litellm\config.yaml --port 4000
+```
+
+</OsBlock>
 
 Now every agent can point at `http://localhost:4000` as an "OpenAI-compatible API".
 

@@ -43,6 +43,8 @@ The simplest way is a terminal command, run from the project folder. For example
 claude mcp add --scope project brave-search -- npx -y @brave/brave-search-mcp-server
 ```
 
+The server needs a Brave API key — the package README says how to pass it.
+
 For other servers, take the package name from their README: names change, and the current one is always there. The README also says how to pass the token. The official GitHub server is `github/github-mcp-server`: it has a remote address `https://api.githubcopilot.com/mcp/` and a Docker image, and its README describes how to connect. The old `@modelcontextprotocol/server-github` and `@modelcontextprotocol/server-brave-search` packages are archived and no longer updated.
 
 With `--scope project`, Claude Code writes the server into `.mcp.json` at the project root — shared with the team and kept in git. You can also edit it by hand:
@@ -85,7 +87,7 @@ Fix: check JSON syntax and tokens before digging deeper.
 Pick one MCP server from the table above (I recommend Brave Search or GitHub to start).
 
 1. Find its docs (search: `MCP server [name]`) and take the current package name from the README
-2. Add the server with `claude mcp add --scope project <name> -- npx -y <server-package>` (or write it into `.mcp.json` by hand)
+2. Add the server with `claude mcp add --scope project <name> -- npx -y <server-package>` (or write it into `.mcp.json` by hand); for GitHub, follow its README: remote address or Docker, not `npx`
 3. Restart Claude Code
 4. Verify the server connected: ask the agent "what MCP tools are available?"
 

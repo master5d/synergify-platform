@@ -43,6 +43,8 @@ MCP — это общий дипломатический язык: посоль�
 claude mcp add --scope project brave-search -- npx -y @brave/brave-search-mcp-server
 ```
 
+Серверу нужен API-ключ Brave — как его передать, написано в README пакета.
+
 Для других серверов имя пакета бери из их README: имена меняются, актуальное всегда там же. Там же написано, как передать токен. Официальный сервер GitHub — `github/github-mcp-server`: у него есть удалённый адрес `https://api.githubcopilot.com/mcp/` и образ Docker, способ подключения описан в его README. Старые пакеты `@modelcontextprotocol/server-github` и `@modelcontextprotocol/server-brave-search` заархивированы и больше не обновляются.
 
 С `--scope project` Claude Code запишет сервер в файл `.mcp.json` в корне проекта — он общий для команды и лежит в git. Его можно править и руками:
@@ -85,7 +87,7 @@ claude mcp add --scope project brave-search -- npx -y @brave/brave-search-mcp-se
 Выбери один MCP-сервер из таблицы выше (рекомендую Brave Search или GitHub для старта).
 
 1. Найди его документацию (поиск: `MCP server [название]`) и возьми из README актуальное имя пакета
-2. Добавь сервер командой `claude mcp add --scope project <имя> -- npx -y <пакет-сервера>` (или впиши его в `.mcp.json` вручную)
+2. Добавь сервер командой `claude mcp add --scope project <имя> -- npx -y <пакет-сервера>` (или впиши его в `.mcp.json` вручную); для GitHub — как описано в его README: удалённый адрес или Docker, не `npx`
 3. Перезапусти Claude Code
 4. Проверь что сервер подключился: спроси агента «какие MCP-инструменты доступны?»
 

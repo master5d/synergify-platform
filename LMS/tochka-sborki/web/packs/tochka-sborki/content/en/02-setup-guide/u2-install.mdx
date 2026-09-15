@@ -51,7 +51,7 @@ irm https://ai.synergify.com/install.ps1 | iex
 
 > 💡 On Linux, use the same command as Mac (`curl … | bash`).
 
-> ⚠️ A command like this downloads someone else's script and runs it on your computer straight away. If you want to see what it does first, save it to a file — `curl -fsSL https://ai.synergify.com/install.sh -o install.sh` (on Windows: `irm https://ai.synergify.com/install.ps1 -OutFile install.ps1`) — read it, and only then run it (`bash install.sh` or `.\install.ps1`).
+> ⚠️ A command like this downloads someone else's script and runs it on your computer straight away. If you want to see what it does first, save it to a file — `curl -fsSL https://ai.synergify.com/install.sh -o install.sh` (on Windows: `irm https://ai.synergify.com/install.ps1 -OutFile install.ps1`) — read it, and only then run it (`bash install.sh` or `.\install.ps1`). If Windows execution policy blocks the downloaded script, run it like this: `powershell -ExecutionPolicy Bypass -File install.ps1`.
 
 After it finishes, open a **new** terminal and run `claude`. Below is the manual path if you want to understand each step.
 
