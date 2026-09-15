@@ -18,13 +18,13 @@ Here's the map of both sides:
 **Doesn't work in China without VPN:**
 - `claude.ai`, `console.anthropic.com` — Anthropic
 - `chatgpt.com`, `platform.openai.com` — OpenAI
-- `cursor.com`, most AI-IDEs
+- `cursor.com`, `github.com/features/copilot` — most AI-IDEs
+- `aistudio.google.com` — Google Gemini: AI Studio and the Gemini API are officially unavailable in mainland China
 - `huggingface.co` — models and datasets (blocked since 2023)
 - GitHub partially, npm registry (via mirrors)
 
 **Works out of the box:**
-- `cerebras.ai` — Cerebras Cloud Inference (US-based, not in China blocklist)
-- `aistudio.google.com` — Google Gemini Flash free tier
+- `cerebras.ai` — Cerebras Cloud Inference (US-based; there's no official word on access from China — check it yourself before building a stack on it)
 - `deepseek.com`, `qianwen.aliyun.com` — Chinese providers
 - `openrouter.ai` — partially, depends on model
 - Local models (after download) — forever
@@ -69,6 +69,8 @@ irm https://ai.synergify.com/install-gfw.ps1 | iex
 
 > 💡 On Linux, use the same command as Mac (`curl … | bash`).
 
+> ⚠️ This, too, runs someone else's script in one line. If you want to read it first, do as in module 02: save it to a file, open it, then run it.
+
 After install: add your keys to `~/.config/litellm/.env`, run `start.sh`/`start.ps1`, point Aider at `http://localhost:4000`.
 
 ## "Behind-GFW" architecture
@@ -79,8 +81,8 @@ After install: add your keys to `~/.config/litellm/.env`, run `start.sh`/`start.
 ├─────────────────────────────────────────────────────────┤
 │  Router: LiteLLM (localhost:4000)                       │
 │  ┌────────────────────────────────────────────────────┐ │
-│  │ fast-path:  Cerebras Qwen-3-235B (1000 TPS)        │ │
-│  │ balanced:   Gemini 2.5 Flash (via AI Studio)       │ │
+│  │ fast-path:  Cerebras gpt-oss-120b                  │ │
+│  │ balanced:   Gemini 2.5 Flash (in China: DeepSeek)  │ │
 │  │ chinese:    DeepSeek-Coder API / Qwen API          │ │
 │  │ floor:      local llama-server (Qwen3-Coder-30B)   │ │
 │  └────────────────────────────────────────────────────┘ │
@@ -89,21 +91,20 @@ After install: add your keys to `~/.config/litellm/.env`, run `start.sh`/`start.
 
 ## Step 1: Cerebras (main free tier)
 
-1. Go to [cerebras.ai/cloud-inference](https://cerebras.ai/cloud-inference) — works without VPN
-2. Sign up with email (no card needed)
-3. Free tier: ~1M tokens/day, 1000+ TPS on Qwen-3-235B
-4. Grab the API key → save in `~/.config/sovern/.env`:
+1. Go to [cerebras.ai/cloud-inference](https://cerebras.ai/cloud-inference) — in our experience it opens without VPN, but there's no guarantee: check it yourself
+2. Sign up with email. Trial terms change: right now the bonus credits require linking a card
+3. Check the trial limits (currently around 1M tokens a day) on the Rate Limits page of the Cerebras docs — they change often
+4. Grab the API key → save in `~/.config/litellm/.env` (the same file the quick install uses):
 
 ```bash
-# ~/.config/sovern/.env
+# ~/.config/litellm/.env
 CEREBRAS_API_KEY=csk-xxxxx
 ```
 
 ## Step 2: Google Gemini Flash (backup for longer tasks)
 
-1. `aistudio.google.com` — works from mainland via mainland Google domain
-2. Free tier: 15 RPM / 1500 RPD on Gemini 2.5 Flash
-3. If AI Studio is blocked — there are proxy-equivalents through Volcengine/Alibaba
+1. `aistudio.google.com` is officially unavailable from mainland China. If you're in China, put a Chinese provider in this role (DeepSeek API or Qwen API). If not, get a key in AI Studio and add it to the same `.env`: `GOOGLE_API_KEY=...`
+2. Gemini's free limits change — check them in your own AI Studio, not by numbers in a lesson
 
 ## Step 3: LiteLLM gateway
 
@@ -135,12 +136,12 @@ Minimal config in `~/.config/litellm/config.yaml`:
 model_list:
   - model_name: fast-pool
     litellm_params:
-      model: cerebras/qwen-3-235b-a22b
+      model: cerebras/gpt-oss-120b      # check against the current Cerebras catalog
       api_key: os.environ/CEREBRAS_API_KEY
 
   - model_name: balanced
     litellm_params:
-      model: gemini/gemini-2.5-flash
+      model: gemini/gemini-2.5-flash    # in China, swap for a Chinese provider
       api_key: os.environ/GOOGLE_API_KEY
 
   - model_name: local-floor
@@ -156,9 +157,10 @@ router_settings:
     - balanced: ["local-floor"]
 ```
 
-Run it:
+Run it. LiteLLM reads keys from environment variables (`os.environ/...` in the config), so load the `.env` first:
 
 ```bash
+set -a; source ~/.config/litellm/.env; set +a
 litellm --config ~/.config/litellm/config.yaml --port 4000
 ```
 

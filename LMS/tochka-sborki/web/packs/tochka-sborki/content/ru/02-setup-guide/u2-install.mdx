@@ -51,6 +51,8 @@ irm https://ai.synergify.com/install.ps1 | iex
 
 > 💡 На Linux работает та же команда, что и для Mac (`curl … | bash`).
 
+> ⚠️ Такая команда скачивает чужой скрипт и сразу запускает его на твоём компьютере. Если хочешь сначала посмотреть, что он делает, скачай его в файл — `curl -fsSL https://ai.synergify.com/install.sh -o install.sh` (на Windows: `irm https://ai.synergify.com/install.ps1 -OutFile install.ps1`), — прочитай и только потом запусти (`bash install.sh` или `.\install.ps1`).
+
 После установки открой **новый** терминал и запусти `claude`. Дальше — ручной путь, если хочешь понять каждый шаг.
 
 ## Установка Claude Code
@@ -152,7 +154,7 @@ function ll  { Get-ChildItem -Force }
 
 1. Установи Claude Code: `npm install -g @anthropic-ai/claude-code`
 2. Проверь: `claude --version`
-3. Настрой Git: `git config --global user.name "Твоё имя"`
+3. Настрой Git: `git config --global user.name "Твоё имя"` и `git config --global user.email "твоя@почта.com"`
 4. Запусти Claude Code в любой папке:
 
 <OsBlock os="mac">

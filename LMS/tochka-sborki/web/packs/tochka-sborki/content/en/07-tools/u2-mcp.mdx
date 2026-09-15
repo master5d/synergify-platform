@@ -37,22 +37,22 @@ Run it in your head: if MCP is the shared code, what's the first "telegram" you'
 
 ## How to connect an MCP server
 
-The simplest way is a terminal command, run from the project folder:
+The simplest way is a terminal command, run from the project folder. For example, the official Brave search server:
 
 ```bash
-claude mcp add --scope project github -- npx -y <server-package>
+claude mcp add --scope project brave-search -- npx -y @brave/brave-search-mcp-server
 ```
 
-Take `<server-package>` from the README of the MCP server you want: package names change, and the current one is always there. The README also says how to pass the token.
+For other servers, take the package name from their README: names change, and the current one is always there. The README also says how to pass the token. The official GitHub server is `github/github-mcp-server`: it has a remote address `https://api.githubcopilot.com/mcp/` and a Docker image, and its README describes how to connect. The old `@modelcontextprotocol/server-github` and `@modelcontextprotocol/server-brave-search` packages are archived and no longer updated.
 
 With `--scope project`, Claude Code writes the server into `.mcp.json` at the project root — shared with the team and kept in git. You can also edit it by hand:
 
 ```json
 {
   "mcpServers": {
-    "github": {
+    "brave-search": {
       "command": "npx",
-      "args": ["-y", "<server-package>"]
+      "args": ["-y", "@brave/brave-search-mcp-server"]
     }
   }
 }
@@ -64,9 +64,9 @@ Personal servers (scope `user` or `local`) live in `~/.claude.json`. Don't put M
 
 | Server | What it gives you |
 |--------|---------|
-| GitHub MCP server | Issues, PRs, commits, repo files |
+| `github/github-mcp-server` (official, from GitHub) | Issues, PRs, commits, repo files |
 | `@modelcontextprotocol/server-filesystem` | Extended file system access |
-| Web search MCP server | Searching the web |
+| `@brave/brave-search-mcp-server` (official, from Brave) | Searching the web |
 | Notion MCP | Read and write Notion pages |
 | Firecrawl | Web page scraping |
 
@@ -82,7 +82,7 @@ Fix: check JSON syntax and tokens before digging deeper.
 
 <Phase type="practice">
 
-Pick one MCP server from the table above (I recommend GitHub or web search to start).
+Pick one MCP server from the table above (I recommend Brave Search or GitHub to start).
 
 1. Find its docs (search: `MCP server [name]`) and take the current package name from the README
 2. Add the server with `claude mcp add --scope project <name> -- npx -y <server-package>` (or write it into `.mcp.json` by hand)

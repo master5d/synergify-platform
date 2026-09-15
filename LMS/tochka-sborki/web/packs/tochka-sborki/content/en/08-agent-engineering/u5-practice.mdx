@@ -7,7 +7,7 @@ duration: "20 min"
 
 <Phase type="activation">
 
-The goal of this unit is to pull everything you did in M8 into **one specification document**.
+The goal of this unit is to pull everything you did in module 08 into **one specification document**.
 
 Don't picture this as "a form to fill out" — picture it as a **general staging a campaign on the map**: he doesn't charge into battle himself — he positions the units, sets the objectives, draws the supply lines. The fighting comes later. First — the plan on paper.
 
@@ -23,7 +23,7 @@ Don't picture this as a questionnaire — picture it as an **architectural bluep
 
 | Question | What goes in the answer |
 |---|---|
-| **Trigger** | What kicks off the agent? (cron / webhook / event / manual run) |
+| **Trigger** | What kicks off the agent? (cron / webhook / event / poll / manual run) |
 | **Inputs** | What arrives? (format, volume, source) |
 | **Steps** | What nodes does the pipeline consist of? |
 | **AI vs Code** | Which nodes are LLM, which are code (see u2)? |
@@ -48,7 +48,7 @@ If even one question has no answer — the foundation isn't ready to pour. Which
 [One sentence: what the agent does, what pain it solves]
 
 ## Trigger
-- Type: cron / webhook / event / manual
+- Type: cron / webhook / event / poll / manual
 - Params: [e.g., every 5 minutes / on Gmail label / on repo push]
 
 ## Pipeline
@@ -136,7 +136,7 @@ Obsidian vault as .md files.
 | Scenario | Behavior |
 |---|---|
 | Gemini 500 | n8n retry 3× with exp backoff |
-| Broken JSON | Log + email is left with `AI Ingest` |
+| Broken JSON | Log + the email gets `AI-Ingest-Review` and loses `AI Ingest` — otherwise the trigger would grab it every minute |
 | Disk full | Email alert (Resend) |
 
 ## Cost
@@ -227,7 +227,7 @@ Constraints:
 
 If all 6 boxes are ticked — you've got a spec you can start building from.
 
-**Next step (after the course):**
+**Next step (after the module):**
 
 Take this spec and:
 1. Open n8n (free self-hosted or $20/mo cloud)

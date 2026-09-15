@@ -37,22 +37,22 @@ MCP — это общий дипломатический язык: посоль�
 
 ## Как подключить MCP-сервер
 
-Проще всего — командой в терминале, из папки проекта:
+Проще всего — командой в терминале, из папки проекта. Например, официальный сервер поиска Brave:
 
 ```bash
-claude mcp add --scope project github -- npx -y <пакет-сервера>
+claude mcp add --scope project brave-search -- npx -y @brave/brave-search-mcp-server
 ```
 
-`<пакет-сервера>` возьми из README нужного MCP-сервера: имена пакетов меняются, актуальное всегда там же. Там же написано, как передать токен.
+Для других серверов имя пакета бери из их README: имена меняются, актуальное всегда там же. Там же написано, как передать токен. Официальный сервер GitHub — `github/github-mcp-server`: у него есть удалённый адрес `https://api.githubcopilot.com/mcp/` и образ Docker, способ подключения описан в его README. Старые пакеты `@modelcontextprotocol/server-github` и `@modelcontextprotocol/server-brave-search` заархивированы и больше не обновляются.
 
 С `--scope project` Claude Code запишет сервер в файл `.mcp.json` в корне проекта — он общий для команды и лежит в git. Его можно править и руками:
 
 ```json
 {
   "mcpServers": {
-    "github": {
+    "brave-search": {
       "command": "npx",
-      "args": ["-y", "<пакет-сервера>"]
+      "args": ["-y", "@brave/brave-search-mcp-server"]
     }
   }
 }
@@ -64,9 +64,9 @@ claude mcp add --scope project github -- npx -y <пакет-сервера>
 
 | Сервер | Что даёт |
 |--------|---------|
-| MCP-сервер GitHub | Issues, PR, commits, файлы репозитория |
+| `github/github-mcp-server` (официальный, от GitHub) | Issues, PR, commits, файлы репозитория |
 | `@modelcontextprotocol/server-filesystem` | Расширенный доступ к файловой системе |
-| MCP-сервер веб-поиска | Поиск в интернете |
+| `@brave/brave-search-mcp-server` (официальный, от Brave) | Поиск в интернете |
 | Notion MCP | Чтение и запись страниц Notion |
 | Firecrawl | Скрапинг веб-страниц |
 
@@ -82,7 +82,7 @@ claude mcp add --scope project github -- npx -y <пакет-сервера>
 
 <Phase type="practice">
 
-Выбери один MCP-сервер из таблицы выше (рекомендую GitHub или веб-поиск для старта).
+Выбери один MCP-сервер из таблицы выше (рекомендую Brave Search или GitHub для старта).
 
 1. Найди его документацию (поиск: `MCP server [название]`) и возьми из README актуальное имя пакета
 2. Добавь сервер командой `claude mcp add --scope project <имя> -- npx -y <пакет-сервера>` (или впиши его в `.mcp.json` вручную)

@@ -33,7 +33,7 @@ What AI does poorly:
 - Access to fresh data without tools
 - Holding long contexts without loss
 
-This isn't a temporary issue. It's an **architectural** property of transformers.
+That's how today's models behave, and it's worth designing the system around it.
 
 Don't picture this as "uneven AI" — picture it as a **circus juggler** keeping balls, rings, and clubs airborne at once. Each object has its own rhythm and release angle. The juggler doesn't "catch everything the same way" — they **know which object needs which treatment**.
 
@@ -74,7 +74,7 @@ This means:
 
 **Real example: the ENERV pipeline**
 
-In ENERV (my semantic journal system), Gmail emails tagged `AI Ingest` are processed like this:
+In ENERV (my semantic journal system), Gmail emails tagged `AI Ingest` are processed like this (simplified; the full diagram is in u3):
 
 ```
 Gmail Trigger          ← tool, not AI
