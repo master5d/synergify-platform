@@ -9,5 +9,183 @@
     { "slug": "u2-context-vs-prompt", "title": "Context vs Prompt" },
     { "slug": "u3-memory", "title": "The memory system" },
     { "slug": "u4-practice", "title": "Tune your memory" }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Explain that at any moment the agent knows only what is in its “field of view”, and recognize three context problems: lost in the middle, context rot, distractors"
+    },
+    {
+      "id": "o2",
+      "text": "Separate context (stable background) from the prompt (the instruction for this request) and split them explicitly with headings or XML tags"
+    },
+    {
+      "id": "o3",
+      "text": "Choose where to store information: the project’s CLAUDE.md, the personal ~/.claude/CLAUDE.md, TODO.md, AGENTS.md, and tell them apart from MEMORY.md, which Claude writes itself"
+    },
+    {
+      "id": "o4",
+      "text": "Explain why a memory file must be short, and trim a bloated CLAUDE.md"
+    },
+    {
+      "id": "o5",
+      "text": "Apply long-session techniques: a summary compression before a new session and parallel agents for independent subtasks"
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-activation",
+      "objective": "o1",
+      "question": "According to the lesson, which preparation for a task will give the agent the best result?",
+      "options": [
+        "3–5 relevant files and a clean prompt for the task",
+        "All 200 project files and two hours of history: the more the agent knows, the more reliable it is",
+        "Only the chat history, no files: everything has already been said there",
+        "All the files, but with the important ones in the middle so the agent reads them more carefully"
+      ],
+      "answer": 0,
+      "explain": "The agent works with what is in its field of view. Anything extra becomes distractors, and the middle gets lost (u1, “Fix: manage what’s in ‘field of view’”)."
+    },
+    {
+      "id": "c2",
+      "unit": "u1-activation",
+      "objective": "o1",
+      "question": "Two hours into one session, the answers have got worse and invented details have appeared. Which context problem is this?",
+      "options": [
+        "Lost in the middle",
+        "Distractors",
+        "Context rot",
+        "Mixing context and prompt"
+      ],
+      "answer": 2,
+      "explain": "Hallucinations growing with the length of the conversation are a sign of context rot. Lost in the middle is about where data sits in the context; distractors are about similar extra fragments (u1, “Three context problems”)."
+    },
+    {
+      "id": "c3",
+      "unit": "u2-context-vs-prompt",
+      "objective": "o2",
+      "question": "Request: “I’m a startup founder writing to an investor, style is concise and confident. Write an email.” Where is the prompt here in the lesson’s sense?",
+      "options": [
+        "The whole text is the prompt",
+        "“Write an email” is the prompt, the rest is context",
+        "“Style is concise and confident” is the prompt, since it’s an instruction on how to write",
+        "“I’m a startup founder” is the prompt, the rest is context"
+      ],
+      "answer": 1,
+      "explain": "The prompt is a specific instruction for this request. Who you are, whom you’re writing to and in what style is information about the world, that is, context (u2, “Separating context and prompt”)."
+    },
+    {
+      "id": "c4",
+      "unit": "u2-context-vs-prompt",
+      "objective": "o2",
+      "question": "How does the lesson suggest laying out context and task in one message?",
+      "options": [
+        "As one paragraph, but with the task as the first sentence",
+        "Send the context as one message and the task as the next, with no markers",
+        "Repeat the context inside every line of the task",
+        "Separate them explicitly: headings “## CONTEXT” and “## TASK” or tags `<context>` and `<task>`"
+      ],
+      "answer": 3,
+      "explain": "The lesson gives two ways to separate explicitly: Markdown headings and XML tags. The model must see where the stable background is and where the instruction is (u2, “How to separate them explicitly”)."
+    },
+    {
+      "id": "c5",
+      "unit": "u2-context-vs-prompt",
+      "objective": "o3",
+      "question": "The agent needs your personal preferences in every project. Where do you store them?",
+      "options": [
+        "In each project’s CLAUDE.md",
+        "In TODO.md",
+        "In ~/.claude/CLAUDE.md",
+        "Write them at the start of every session"
+      ],
+      "answer": 2,
+      "explain": "A specific project’s rules and stack are stored in its CLAUDE.md, while personal things common to all projects go in ~/.claude/CLAUDE.md (u2, “Where to store stable context”)."
+    },
+    {
+      "id": "c6",
+      "unit": "u3-memory",
+      "objective": "o4",
+      "question": "CLAUDE.md has grown to a thousand lines, and the agent has started following the rules worse. What should you do according to the lesson?",
+      "options": [
+        "Add more rules to close the gaps",
+        "Move everything to TODO.md",
+        "Delete CLAUDE.md and explain everything verbally each time",
+        "Trim the file down to the essentials: the longer it is, the worse the agent follows instructions"
+      ],
+      "answer": 3,
+      "explain": "A memory file’s length works against it. The lesson sets a guideline of about 200 lines, and explaining verbally every time is the opposite extreme (u3, reflection and “Limit”)."
+    },
+    {
+      "id": "c7",
+      "unit": "u3-memory",
+      "objective": "o3",
+      "question": "How is MEMORY.md different from CLAUDE.md, TODO.md and AGENTS.md?",
+      "options": [
+        "Claude writes it itself, it’s stored only locally, and you can view and edit it via `/memory`",
+        "It isn’t: it’s just another file you fill in yourself",
+        "It lives in the repository and is shared by the whole team",
+        "It’s another name for AGENTS.md"
+      ],
+      "answer": 0,
+      "explain": "You write the lesson’s three files. Claude maintains MEMORY.md itself; it’s local automatic memory (u3, “MEMORY.md — Claude’s auto-memory”)."
+    },
+    {
+      "id": "c8",
+      "unit": "u3-memory",
+      "objective": "o3",
+      "question": "You’re switching from Claude Code to another agent (Aider, Cline). What from the lesson on memory still holds?",
+      "options": [
+        "Nothing: CLAUDE.md is specific to Claude Code",
+        "The idea itself: stable context lives in a file, and the agent reads it at session start; only the file names change",
+        "Memory transfers between tools automatically",
+        "You’ll have to paste the context into every message by hand"
+      ],
+      "answer": 1,
+      "explain": "CLAUDE.md is one implementation of the “persistent context file” pattern. Other agents have their own files, but the principle is the same (u3, callout “Not just Claude Code”)."
+    },
+    {
+      "id": "c9",
+      "unit": "u4-practice",
+      "objective": "o3",
+      "question": "The agent made a mistake, and you fixed it. According to the lesson’s table, where do you write a rule so the mistake doesn’t happen again?",
+      "options": [
+        "In TODO.md",
+        "In AGENTS.md",
+        "Nowhere: I’ll fix it again next time",
+        "In the “How to run” section of CLAUDE.md"
+      ],
+      "answer": 1,
+      "explain": "Architecture and stack are updated in CLAUDE.md, completed tasks in TODO.md, and rules for the agent’s behavior after its mistake in AGENTS.md (u4, “When to update what”)."
+    },
+    {
+      "id": "c10",
+      "unit": "u4-practice",
+      "objective": "o5",
+      "question": "The session context has filled up, and the work isn’t finished. What does the lesson suggest?",
+      "options": [
+        "Ask for a brief summary in the format “Done / Left / Issues” and start a new session with it",
+        "Keep going in the same chat: the model remembers everything said",
+        "Copy the entire chat history into the new session",
+        "Start a new session from scratch with nothing carried over"
+      ],
+      "answer": 0,
+      "explain": "Context compression keeps the essence and doesn’t drag into the new window a long history that is already degrading the answers (u4, “Context compression”; u1, Context Rot)."
+    },
+    {
+      "id": "c11",
+      "unit": "u4-practice",
+      "objective": "o5",
+      "question": "For which tasks does the lesson suggest running several agents in parallel?",
+      "options": [
+        "For steps of one chain, where each depends on the previous one",
+        "For one task given to three agents for reliability",
+        "For any task: parallel is always faster",
+        "For independent subtasks whose results are merged afterwards"
+      ],
+      "answer": 3,
+      "explain": "In the lesson’s example, three subtasks in different modules don’t depend on each other, so they can run in parallel and then be merged (u4, “Parallel agents for big tasks”)."
+    }
   ]
 }

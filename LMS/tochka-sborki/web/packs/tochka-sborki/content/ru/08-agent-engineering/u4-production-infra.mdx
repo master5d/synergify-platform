@@ -50,7 +50,7 @@ Vibe-coder часто думает только про (1). Agent engineer ду�
 > **Правило:** один tunnel — один процесс. Держи cloudflared **внутри** той же Docker-сети что и origins.
 
 **Грабли 2: Публичный IP как origin тоннеля**
-> Маршрутизировал `n8n.synergify.com` → `91.99.62.63:5678`. Это hairpin через публичную сеть — лишний hop, лишняя задержка, потенциальные таймауты.
+> Маршрутизировал `n8n.example.com` → `<IP-сервера>:5678`. Это hairpin через публичную сеть — лишний hop, лишняя задержка, потенциальные таймауты.
 > **Правило:** в tunnel-конфиге origin = Docker hostname (`http://enerv-n8n:5678`) или `host.docker.internal`.
 
 **Грабли 3: Langfuse v3 без ClickHouse**
@@ -58,7 +58,7 @@ Vibe-coder часто думает только про (1). Agent engineer ду�
 > **Правило:** читай release notes требований к ресурсам **до** обновления.
 
 **Грабли 4: n8n API не работает извне**
-> `curl https://n8n.synergify.com/api/v1` снаружи возвращает 200, но Python `urllib` получает 403 (видимо, CF challenge headers). Скрипты которые дёргают n8n API нужно запускать **на самом сервере**, обращаясь к `http://localhost:5678/api/v1`.
+> `curl https://n8n.example.com/api/v1` снаружи возвращает 200, но Python `urllib` получает 403 (видимо, CF challenge headers). Скрипты которые дёргают n8n API нужно запускать **на самом сервере**, обращаясь к `http://localhost:5678/api/v1`.
 > **Правило:** для управления — SSH + локальный URL. Публичный URL — только для UI.
 
 **Helper для длительных скриптов:**
@@ -75,16 +75,24 @@ run_bg /tmp/my-script.py
 
 **Pattern: 5-fallback LLM routing**
 
-В LiteLLM конфиге для моего стека:
+В моём стеке цепочка из пяти провайдеров: Anthropic → OpenAI → Gemini → Groq → бесплатный роутер Hugging Face. Минимальный рабочий фрагмент LiteLLM — основная модель и одна запасная:
 
 ```yaml
 model_list:
-  - anthropic/claude-sonnet      # primary
-  - openai/gpt-4o                # fallback 1
-  - google/gemini-flash          # fallback 2
-  - groq/llama-3-70b             # fallback 3 (fast/cheap)
-  - openai/router.huggingface.co # fallback 4 (free)
+  - model_name: main            # имя, которое зовёт твой код
+    litellm_params:
+      model: anthropic/claude-sonnet-4-5
+      api_key: os.environ/ANTHROPIC_API_KEY
+  - model_name: backup
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GOOGLE_API_KEY
+
+router_settings:
+  fallbacks: [{"main": ["backup"]}]   # упал main — запрос уходит в backup
 ```
+
+Остальные запасные добавляются так же: своя запись в `model_list` (`model_name` + `litellm_params`) и имя в списке `fallbacks`, по порядку. Id моделей — примеры: сверь с каталогом провайдера.
 
 Когда первый провайдер ложится — следующий подхватывает. Это **reliability** на уровне инфры, не на уровне промптов.
 
@@ -93,6 +101,12 @@ model_list:
 Каждый LLM-вызов в моих агентах автоматически уходит в Langfuse: input, output, цена, латентность, какая модель сработала, какая упала. Через две недели можно зайти и посмотреть **что именно AI ответил** на конкретном письме в 03:47 ночи.
 
 Без этого — ты слепой инженер.
+
+<SelfCheck id="c9"/>
+
+<SelfCheck id="c10"/>
+
+<SelfCheck id="c11"/>
 
 </Phase>
 

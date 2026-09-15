@@ -8,5 +8,151 @@
     { "slug": "u1-env-check", "title": "Environment check" },
     { "slug": "u2-install", "title": "Installing the tools" },
     { "slug": "u3-first-project", "title": "Your first project" }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Check the base environment (Node.js, Git, terminal) and use the error message to tell which tool needs to be installed"
+    },
+    {
+      "id": "o2",
+      "text": "Install Claude Code, make sure it launches, and get the terminal settings into working shape"
+    },
+    {
+      "id": "o3",
+      "text": "Explain what role CLAUDE.md plays for the agent in a project folder"
+    },
+    {
+      "id": "o4",
+      "text": "Write a CLAUDE.md the agent will follow: short, specific, with a split between “what I delegate / what I decide myself”"
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-env-check",
+      "objective": "o1",
+      "question": "You ran the check `node --version && git --version`. Node showed its version, and then came an error that git was not found. What do you do?",
+      "options": [
+        "Reinstall Node.js: since the whole command failed, the problem is in it",
+        "Install Git from the official site and run the check again",
+        "Skip Git and go straight to installing Claude Code: it will install everything else itself",
+        "Switch your terminal to Warp: git doesn't work in a regular terminal"
+      ],
+      "answer": 1,
+      "explain": "The check shows which tools are missing: git not found means you install Git and check again (u1, “How to check your environment in one command”, practice)."
+    },
+    {
+      "id": "c2",
+      "unit": "u1-env-check",
+      "objective": "o1",
+      "question": "Why is Node.js checked even before Claude Code is installed?",
+      "options": [
+        "Node.js is only needed for websites; it's checked just in case",
+        "Node.js replaces Git if Git isn't installed",
+        "Node.js is needed so the terminal supports AI hints",
+        "The Claude Code CLI itself runs on Node.js; without it the agent won't launch"
+      ],
+      "answer": 3,
+      "explain": "The minimal stack table says outright that Node.js is required for the Claude Code CLI. That's why it's part of the environment check (u1, “What you need for agentic coding”)."
+    },
+    {
+      "id": "c3",
+      "unit": "u2-install",
+      "objective": "o2",
+      "question": "The one-line install finished without errors, but in the same terminal window the `claude` command isn't found. Where do you start?",
+      "options": [
+        "Open a new terminal and run `claude` there",
+        "Run the install again right away",
+        "Uninstall Node.js and install everything by hand",
+        "Decide that Claude Code doesn't work on your system and move to another stack"
+      ],
+      "answer": 0,
+      "explain": "The lesson asks you to open a new terminal after installing: a window opened before the install may not know about the new command yet. If that doesn't help, there's a step-by-step manual path (u2, “Quick install (one line)”)."
+    },
+    {
+      "id": "c4",
+      "unit": "u2-install",
+      "objective": "o2",
+      "question": "How do you know Claude Code is installed and ready to work?",
+      "options": [
+        "The installer didn't print a single error; that's enough",
+        "A CLAUDE.md appeared in the Documents folder",
+        "`claude --version` responds, and `claude` in a folder opens a session (the first time, with a browser login)",
+        "`git --version` shows a version"
+      ],
+      "answer": 2,
+      "explain": "The lesson checks the install in two steps: the command responds with a version, and launching it opens an interactive session. No errors from the installer doesn't yet mean the agent launches (u2, “Check”, “First run”)."
+    },
+    {
+      "id": "c5",
+      "unit": "u2-install",
+      "objective": "o2",
+      "question": "You added shortcut functions (`gst`, `gp`) to your PowerShell profile, but they don't work in the open window. What do you do?",
+      "options": [
+        "Rewrite them as aliases with parameters: functions don't work in PowerShell",
+        "Add them to `~/.bashrc`",
+        "Reload the profile (`. $PROFILE`) or restart PowerShell",
+        "Reinstall Git"
+      ],
+      "answer": 2,
+      "explain": "Changes to the profile take effect when you reload it or open PowerShell again. Functions are chosen here on purpose: PowerShell doesn't handle aliases with parameters well (u2, “Handy terminal settings”)."
+    },
+    {
+      "id": "c6",
+      "unit": "u3-first-project",
+      "objective": "o3",
+      "question": "Why put CLAUDE.md in the project folder?",
+      "options": [
+        "Claude Code reads it on its own every time it launches in that folder: it's the agent's memory of the project",
+        "It's the file where Claude Code writes a log of its actions",
+        "It's an instruction for people on the team; the agent doesn't read it",
+        "Git needs it to make the first commit"
+      ],
+      "answer": 0,
+      "explain": "CLAUDE.md gives the agent the project context: who you are, what the project is, the stack, how to run it. The file is picked up automatically, so you don't have to explain it all over again in every session (u3, “CLAUDE.md — the agent's project memory”)."
+    },
+    {
+      "id": "c7",
+      "unit": "u3-first-project",
+      "objective": "o4",
+      "question": "Which line in CLAUDE.md will work better?",
+      "options": [
+        "“Format the code properly”",
+        "“Write neatly and cleanly”",
+        "“Follow best practices”",
+        "“Use 2-space indent”"
+      ],
+      "answer": 3,
+      "explain": "The agent follows a specific instruction you can check more precisely than a general wish (u3, “CLAUDE.md tips”)."
+    },
+    {
+      "id": "c8",
+      "unit": "u3-first-project",
+      "objective": "o4",
+      "question": "For a month you kept adding everything to CLAUDE.md, and the file grew to 500 lines. What does the lesson advise?",
+      "options": [
+        "That's how it should be: the more the agent knows, the more precisely it works",
+        "Cut it down to 200 lines: in a long file the agent follows instructions worse",
+        "Split the file into five identical CLAUDE.md files in one folder",
+        "Delete the file and explain the context all over again in every session"
+      ],
+      "answer": 1,
+      "explain": "The lesson sets a limit of 200 lines: in a long file the agent follows instructions worse. You update the file when the architecture or stack changes, rather than adding everything to it (u3, “CLAUDE.md tips”)."
+    },
+    {
+      "id": "c9",
+      "unit": "u3-first-project",
+      "objective": "o4",
+      "question": "What does the lesson's CLAUDE.md template leave to you rather than delegate to the agent?",
+      "options": [
+        "Writing code from specs",
+        "Tests",
+        "Documentation",
+        "Architecture decisions and the final quality review"
+      ],
+      "answer": 3,
+      "explain": "The template has two sections. Code from specs, tests, and documentation you delegate to the agent, while architecture and the final quality review you keep for yourself (u3, “Minimal template”)."
+    }
   ]
 }

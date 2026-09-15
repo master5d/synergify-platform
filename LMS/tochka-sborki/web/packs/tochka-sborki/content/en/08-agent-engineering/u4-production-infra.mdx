@@ -50,7 +50,7 @@ Configuration:
 > **Rule:** one tunnel — one process. Keep cloudflared **inside** the same Docker network as the origins.
 
 **Rake 2: Public IP as tunnel origin**
-> I routed `n8n.synergify.com` → `91.99.62.63:5678`. That's a hairpin through the public network — extra hop, extra latency, potential timeouts.
+> I routed `n8n.example.com` → `<server-IP>:5678`. That's a hairpin through the public network — extra hop, extra latency, potential timeouts.
 > **Rule:** in the tunnel config, origin = Docker hostname (`http://enerv-n8n:5678`) or `host.docker.internal`.
 
 **Rake 3: Langfuse v3 without ClickHouse**
@@ -58,7 +58,7 @@ Configuration:
 > **Rule:** read release notes for resource requirements **before** upgrading.
 
 **Rake 4: n8n API doesn't work from outside**
-> `curl https://n8n.synergify.com/api/v1` from the outside returns 200, but Python `urllib` gets 403 (apparently, CF challenge headers). Scripts that hit the n8n API have to run **on the server itself**, against `http://localhost:5678/api/v1`.
+> `curl https://n8n.example.com/api/v1` from the outside returns 200, but Python `urllib` gets 403 (apparently, CF challenge headers). Scripts that hit the n8n API have to run **on the server itself**, against `http://localhost:5678/api/v1`.
 > **Rule:** for management — SSH + local URL. The public URL is for the UI only.
 
 **Helper for long-running scripts:**
@@ -75,16 +75,24 @@ This solves "closed SSH — script died." Any script >30 seconds — through `ru
 
 **Pattern: 5-fallback LLM routing**
 
-In the LiteLLM config for my stack:
+My stack chains five providers: Anthropic → OpenAI → Gemini → Groq → the free Hugging Face router. A minimal working LiteLLM snippet — a primary model and one fallback:
 
 ```yaml
 model_list:
-  - anthropic/claude-sonnet      # primary
-  - openai/gpt-4o                # fallback 1
-  - google/gemini-flash          # fallback 2
-  - groq/llama-3-70b             # fallback 3 (fast/cheap)
-  - openai/router.huggingface.co # fallback 4 (free)
+  - model_name: main            # the name your code calls
+    litellm_params:
+      model: anthropic/claude-sonnet-4-5
+      api_key: os.environ/ANTHROPIC_API_KEY
+  - model_name: backup
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GOOGLE_API_KEY
+
+router_settings:
+  fallbacks: [{"main": ["backup"]}]   # main is down — the call goes to backup
 ```
+
+More fallbacks are added the same way: their own entry in `model_list` (`model_name` + `litellm_params`) and a name in the `fallbacks` list, in order. The model ids are examples: check them against the provider's catalog.
 
 When the first provider goes down — the next one catches the call. This is **reliability** at the infra layer, not the prompt layer.
 
@@ -93,6 +101,12 @@ When the first provider goes down — the next one catches the call. This is **r
 Every LLM call from my agents automatically lands in Langfuse: input, output, cost, latency, which model worked, which one died. Two weeks later you can drop in and see **what exactly AI replied** for a specific email at 03:47 in the morning.
 
 Without that — you're a blind engineer.
+
+<SelfCheck id="c9"/>
+
+<SelfCheck id="c10"/>
+
+<SelfCheck id="c11"/>
 
 </Phase>
 

@@ -10,5 +10,211 @@
     { "slug": "u3-orchestration", "title": "Orchestration: ENERV Case Study" },
     { "slug": "u4-production-infra", "title": "Prototype → Production" },
     { "slug": "u5-practice", "title": "Design Your Clone" }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Recognize from the symptoms that a task has outgrown a single prompt, and name what that symptom needs instead of a prompt"
+    },
+    {
+      "id": "o2",
+      "text": "Break a task into steps and pick an executor for each: AI, AI with a tool, deterministic code/API, or a human"
+    },
+    {
+      "id": "o3",
+      "text": "Explain which decisions in a pipeline's architecture protect it from failure: small steps, idempotency, separating trigger and action"
+    },
+    {
+      "id": "o4",
+      "text": "Check an agent against the five blocks of production readiness and assign a problem to the right block"
+    },
+    {
+      "id": "o5",
+      "text": "Write an agent specification before the code: honestly mark the gaps and tell a spec from a charter"
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-activation",
+      "objective": "o1",
+      "question": "Your prompt gives a good result in roughly seven cases out of ten. According to the symptoms table, what do you need to add?",
+      "options": [
+        "Rewrite the prompt in more detail until it starts working every time",
+        "Verification of the result and retry",
+        "Run the task on a schedule",
+        "Build an interface so that another person can run the task"
+      ],
+      "answer": 1,
+      "explain": "An unstable result isn't cured by yet another wording but by verification and retry (u1, “Signs you've hit the ceiling of vibe coding”). Scheduling and an interface belong to other symptoms."
+    },
+    {
+      "id": "c2",
+      "unit": "u1-activation",
+      "objective": "o1",
+      "question": "According to the lesson, how does agent engineering differ from vibe coding?",
+      "options": [
+        "Agent engineering is vibe coding with a more powerful model",
+        "Vibe coding is for people who don't write code, while agent engineering requires writing everything by hand",
+        "The only difference is the number of prompts: an agent engineer has more of them",
+        "Vibe coding is for the prototype, while agent engineering is for making several unpredictable agents work reliably in production"
+      ],
+      "answer": 3,
+      "explain": "Vibe coding lowers the entry barrier and gives you a prototype. Agent engineering is the discipline of coordinating agents reliably, that is, production (u1, reflection)."
+    },
+    {
+      "id": "c3",
+      "unit": "u2-jagged-intelligence",
+      "objective": "o2",
+      "question": "A pipeline has the step “count the exact number of items in an order.” By the logic of jagged intelligence, how should you handle it?",
+      "options": [
+        "Give the model a tool (calculator, DB) or make this step code",
+        "Hand it to the model: it copes with 100,000 lines of code, so it will cope with counting",
+        "Ask the model to count twice and take the average",
+        "Remove the step from the pipeline entirely"
+      ],
+      "answer": 0,
+      "explain": "Precise counting is among the things AI “drops,” and what is hard for the model doesn't match what is hard for a human. Such a step gets a tool, not more trust (u2)."
+    },
+    {
+      "id": "c4",
+      "unit": "u2-jagged-intelligence",
+      "objective": "o2",
+      "question": "The step “check that the record isn't a duplicate” is currently done by an LLM. What does the lesson advise?",
+      "options": [
+        "Keep the LLM: it understands the meaning of records better",
+        "Put a second LLM after this check for verification",
+        "Replace it with deterministic code: AI where code or an API is enough is a common source of unreliability",
+        "Hand the check to a human"
+      ],
+      "answer": 2,
+      "explain": "In the decomposition table, dedup is listed as Code. The lesson directly calls AI in steps where code or an API is enough the most common source of unreliability (u2, practice)."
+    },
+    {
+      "id": "c5",
+      "unit": "u2-jagged-intelligence",
+      "objective": "o2",
+      "question": "Under the “taste rule,” how is the work split between you and AI?",
+      "options": [
+        "AI chooses what to build, and you write the code",
+        "AI does everything, you only launch it",
+        "You choose what to build and verify the result; AI writes the code and fixes what you flagged",
+        "You write the code, AI checks it"
+      ],
+      "answer": 2,
+      "explain": "Execution goes to AI, while direction and verification stay with the human (u2, “Taste rule for the agent engineer”)."
+    },
+    {
+      "id": "c6",
+      "unit": "u3-orchestration",
+      "objective": "o3",
+      "question": "Why in ENERV does an email get `AI-Ingest-Done` and lose `AI Ingest` after processing?",
+      "options": [
+        "So that after a crash and restart the pipeline doesn't pick up processed emails again",
+        "So that a human can see in Gmail which emails have been read",
+        "So that Gemini knows which folder to put the file in",
+        "To save space in the mailbox"
+      ],
+      "answer": 0,
+      "explain": "The labels make processing idempotent: a repeated run doesn't create duplicates (u3, “What to notice,” item 2)."
+    },
+    {
+      "id": "c7",
+      "unit": "u3-orchestration",
+      "objective": "o3",
+      "question": "In a six-step pipeline, the fourth step failed. What does orchestration give you compared with one big prompt?",
+      "options": [
+        "Nothing: the whole run is lost, just as with a single prompt",
+        "The fourth step is automatically rewritten by the model",
+        "The pipeline skips the failed step on its own and moves on",
+        "The results of steps 1–3 are kept, and the failure is localized in one place that can be checked and fixed separately"
+      ],
+      "answer": 3,
+      "explain": "Small steps are tested separately, and after a failure you don't lose what came before it: this is “one thread snapping” in the loom image (u3, reflection)."
+    },
+    {
+      "id": "c8",
+      "unit": "u3-orchestration",
+      "objective": "o3",
+      "question": "What does it give you that trigger and action are separated in ENERV?",
+      "options": [
+        "The trigger fires only after the action has finished without errors",
+        "An error in the action doesn't break the trigger: it keeps polling the mailbox independently",
+        "The action can be run manually without the trigger, and that is the main goal",
+        "The separation is only there to make the diagram look nicer"
+      ],
+      "answer": 1,
+      "explain": "The trigger works on its own, and a processing failure doesn't stop new emails from being received (u3, “What to notice,” item 3)."
+    },
+    {
+      "id": "c9",
+      "unit": "u4-production-infra",
+      "objective": "o4",
+      "question": "Three days ago step 4 went wrong, and you want to see what exactly the model replied. Which of the five blocks is responsible for this?",
+      "options": [
+        "Execution",
+        "Cost control",
+        "Security",
+        "Observability"
+      ],
+      "answer": 3,
+      "explain": "Observability is the ability to see, after the fact, the input, output, and model of every call. Without it, in the lesson's words, “you're a blind engineer” (u4)."
+    },
+    {
+      "id": "c10",
+      "unit": "u4-production-infra",
+      "objective": "o4",
+      "question": "The main LLM provider went down. Where does the lesson solve this problem?",
+      "options": [
+        "In the prompt: ask the model to “answer even during outages”",
+        "In the infrastructure: a chain of fallback providers where the next one catches the request",
+        "Manually: wait for the provider to come back up",
+        "In the security block: change the API key"
+      ],
+      "answer": 1,
+      "explain": "A provider outage is a reliability issue, and it is solved by routing at the infrastructure level, not by the wording of a prompt (u4, “Pattern: 5-fallback LLM routing”)."
+    },
+    {
+      "id": "c11",
+      "unit": "u4-production-infra",
+      "objective": "o4",
+      "question": "A retry loop got stuck, and the number of LLM calls per day is growing manyfold. Which block does this risk belong to first of all?",
+      "options": [
+        "Execution",
+        "Observability",
+        "Cost control",
+        "Security"
+      ],
+      "answer": 2,
+      "explain": "The question of what the worst case will cost and what happens if the bill starts multiplying sits in the Cost block (u4, practice). Retry helps reliability, but without a ceiling it turns into a money risk."
+    },
+    {
+      "id": "c12",
+      "unit": "u5-practice",
+      "objective": "o5",
+      "question": "You are filling out the spec and don't know what the cost ceiling will be. What does the lesson advise?",
+      "options": [
+        "Put `[?]` and leave the question open",
+        "Write a plausible estimate so the spec looks finished",
+        "Delete the Cost section: it can be added after launch",
+        "Put the spec aside and start writing code right away"
+      ],
+      "answer": 0,
+      "explain": "The spec is written before the code and must honestly show the gaps. If a question has no answer, “the foundation isn't ready to pour” (u5)."
+    },
+    {
+      "id": "c13",
+      "unit": "u5-practice",
+      "objective": "o5",
+      "question": "How does an agent's charter differ from its specification?",
+      "options": [
+        "The spec describes how the agent works (triggers, nodes, storage); the charter describes who it is when it talks to a human",
+        "They are the same thing; the charter is just another name",
+        "The charter describes triggers and storage, the spec describes the agent's character",
+        "Every agent needs a charter, while only an agent that talks needs a spec"
+      ],
+      "answer": 0,
+      "explain": "The spec is the “plumbing,” the agent's hands. The charter is needed by a clone that talks: it holds the frame from session to session (u5, “The clone's other half: the charter”)."
+    }
   ]
 }

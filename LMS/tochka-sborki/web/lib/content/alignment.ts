@@ -15,7 +15,8 @@ export interface AlignmentInput {
   malformed: Record<Locale, number>
 }
 
-const PLACEHOLDER = /^\s*(?:TODO|TBD|…|\.\.\.)?\s*$|\bTODO\b|\bTBD\b/
+// «TODO.md» — имя файла, которому учит модуль 05, а не заглушка: TODO с расширением файла не считается.
+const PLACEHOLDER = /^\s*(?:TODO|TBD|…|\.\.\.)?\s*$|\bTODO\b(?!\.\w)|\bTBD\b/
 
 const MARK_RE = /<SelfCheck\s+id="([^"]+)"\s*\/>/g
 const ANY_MARK_RE = /<SelfCheck\b/g

@@ -10,5 +10,169 @@
     { "slug": "u3-hooks", "title": "Hooks: event automation" },
     { "slug": "u4-skills", "title": "Skills: modular capabilities" },
     { "slug": "u5-practice", "title": "Plug it in and test" }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Tell apart an MCP server, a Hook, and a Skill by purpose and choose the mechanism for the task"
+    },
+    {
+      "id": "o2",
+      "text": "Explain what MCP gives the agent, connect a server through the config, and on failure check the JSON syntax and tokens first"
+    },
+    {
+      "id": "o3",
+      "text": "Choose the hook event for the task (before or after an action, on completion) and check a hook before adding it, because it runs any command"
+    },
+    {
+      "id": "o4",
+      "text": "Turn a recurring prompt into a Skill and decide whether to keep it as personal or as project-scoped"
+    },
+    {
+      "id": "o5",
+      "text": "Assemble a minimal clone from CLAUDE.md, MCP, Skill, and Hook, giving each element its role and keeping the frame, the goal, and the check for yourself"
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-activation",
+      "objective": "o1",
+      "question": "The agent needs to read and add to pages in Notion, but right now it can't see them. Which extension mechanism solves this?",
+      "options": [
+        "An MCP server: it gives the agent a new tool for accessing the service",
+        "A Hook: it runs code on an event",
+        "A Skill: a reusable scenario called via `/имя`",
+        "A more detailed prompt describing Notion"
+      ],
+      "answer": 0,
+      "explain": "Access to an external service is a new tool, and tools are what MCP gives the agent. A Hook reacts to events, a Skill packages a scenario, but neither one opens access to a service (u1, “Taxonomy of Claude Code extensions”)."
+    },
+    {
+      "id": "c2",
+      "unit": "u1-activation",
+      "objective": "o5",
+      "question": "How does the lesson suggest understanding the “agency level”?",
+      "options": [
+        "As the share of work AI has taken away from you",
+        "As a measure of how smart the model is",
+        "As a measure of how much you deliberately delegate, while you hold the frame, the goal, and the check",
+        "As a goal: the higher the level, the better, for any task"
+      ],
+      "answer": 2,
+      "explain": "Even at level five the tool only executes: the frame, the goal, and the check stay with the human. The level is chosen separately for each task; “higher” doesn't mean “better” (u1, the note under “Agency levels”)."
+    },
+    {
+      "id": "c3",
+      "unit": "u2-mcp",
+      "objective": "o2",
+      "question": "On its own decision, the agent calls an API and creates an issue in a repository. Which MCP primitive is it using?",
+      "options": [
+        "Resources: data sources controlled by the application",
+        "Tools: functions the model calls",
+        "Prompts: templates the user picks",
+        "Hooks: commands that run on an event"
+      ],
+      "answer": 1,
+      "explain": "An action (an API request, a write) on the model's decision is Tools. Resources are data for reading, like GET requests. Prompts are templates the user picks. Hooks are not an MCP primitive (u2, “MCP: three primitives”)."
+    },
+    {
+      "id": "c4",
+      "unit": "u2-mcp",
+      "objective": "o2",
+      "question": "After you add an MCP server to the config and restart, `Server transport closed unexpectedly` appears. Where do you start?",
+      "options": [
+        "Reinstall Claude Code",
+        "Go straight to hunting for a bug in the MCP server's code",
+        "Switch to another server from the list of popular ones",
+        "Check the config's JSON syntax and that the token was passed correctly"
+      ],
+      "answer": 3,
+      "explain": "Most connection problems come down to JSON syntax, port conflicts, or a token that wasn't passed. The lesson advises checking syntax and tokens before digging deeper (u2, “Common errors (~60% of issues)”)."
+    },
+    {
+      "id": "c5",
+      "unit": "u3-hooks",
+      "objective": "o3",
+      "question": "You need to check every bash command the agent runs for safety before it runs. Which hook event fits?",
+      "options": [
+        "`PostToolUse`: after the agent has used a tool",
+        "`Notification`: when the agent wants to get your attention",
+        "`PreToolUse`: before the agent uses a tool",
+        "`Stop`: when the agent has finished its work"
+      ],
+      "answer": 2,
+      "explain": "A check makes sense before the action: once launched, the command has already run. That's why the lesson ties validation and limits for production to `PreToolUse` (u3, “Practical examples” and “Security”)."
+    },
+    {
+      "id": "c6",
+      "unit": "u3-hooks",
+      "objective": "o3",
+      "question": "In someone else's repository you've found a ready-made hook that “automates everything.” What should you do by the lesson's rules?",
+      "options": [
+        "Add it right away: a hook is just a setting, it doesn't break anything",
+        "Add it if the repository has a lot of stars",
+        "Add it and see what changes after the first task",
+        "First work out exactly what the hook does: it can run any command"
+      ],
+      "answer": 3,
+      "explain": "A hook executes an arbitrary command on your machine. That's why hooks from untrusted sources aren't run, and any hook is read first and only then added (u3, “Security”)."
+    },
+    {
+      "id": "c7",
+      "unit": "u4-skills",
+      "objective": "o4",
+      "question": "Which prompt is the best candidate to become a Skill?",
+      "options": [
+        "A prompt you keep coming back to: a code check, a meeting summary",
+        "A one-off question you'll never need again",
+        "The longest prompt in the project",
+        "Any model answer you liked"
+      ],
+      "answer": 0,
+      "explain": "A Skill is called via `/имя` without setting it up again, so it pays off on recurring tasks. The lesson says outright that a good reusable prompt is already almost a Skill (u4, “Activation” and “Reflection”)."
+    },
+    {
+      "id": "c8",
+      "unit": "u4-skills",
+      "objective": "o4",
+      "question": "A code review Skill has to work for the whole team in this project. Where do you store it?",
+      "options": [
+        "In the personal skills folder: it will work across all your projects",
+        "In the project skills folder, which lives in git together with the project",
+        "In CLAUDE.md, as a paragraph of text",
+        "In the hooks config, so it runs automatically"
+      ],
+      "answer": 1,
+      "explain": "Personal skills work across all projects, but only for you. Project skills live in git and reach everyone who clones the repository (u4, “Where to store Skills”)."
+    },
+    {
+      "id": "c9",
+      "unit": "u5-practice",
+      "objective": "o5",
+      "question": "In the code review clone, which element sets “You are a senior developer, focused on security and readability”?",
+      "options": [
+        "The GitHub MCP server",
+        "CLAUDE.md: context, who you are and what you do",
+        "The `/code-review` Skill",
+        "A Hook on the `Stop` event"
+      ],
+      "answer": 1,
+      "explain": "Each element of the clone has its own role. CLAUDE.md sets the context and priorities, MCP gives access, the Skill is the scenario, the Hook is automation after completion (u5, “Final architecture: an AI clone for a real task”)."
+    },
+    {
+      "id": "c10",
+      "unit": "u5-practice",
+      "objective": "o5",
+      "question": "In the same clone, a comment on the PR should appear by itself when the agent finishes its work. Which element is responsible for that?",
+      "options": [
+        "A Hook on the `Stop` event",
+        "The `/code-review` Skill: it's the one analyzing the diff anyway",
+        "The GitHub MCP server: it sees the PR",
+        "CLAUDE.md with the instruction “always comment on the PR”"
+      ],
+      "answer": 0,
+      "explain": "An automatic action on the “agent finished its work” event is a hook on `Stop`. MCP gives access to the PR and the Skill analyzes the diff, but neither fires on an event by itself (u5, “Example: Code Review clone”; u3, the events table)."
+    }
   ]
 }

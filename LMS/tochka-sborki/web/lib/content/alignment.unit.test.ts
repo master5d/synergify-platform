@@ -51,6 +51,10 @@ describe('validateModuleAlignment', () => {
     expect(errs(i => { i.ru.checks![0].options = ['один'] }).join()).toMatch(/2–5/)
     expect(errs(i => { i.ru.checks![0].answer = 2 }).join()).toMatch(/answer/)
     expect(errs(i => { i.ru.checks![0].explain = '…' }).join()).toMatch(/заглушка/)
+    expect(errs(i => { i.ru.checks![0].explain = 'TODO: дописать' }).join()).toMatch(/заглушка/)
+    expect(errs(i => { i.ru.checks![0].explain = 'Объяснение. TODO.' }).join()).toMatch(/заглушка/)
+    expect(errs(i => { i.ru.checks![0].explain = 'Закрытые задачи — в TODO.md' })).toEqual([])
+    expect(errs(i => { i.ru.checks![0].options = ['В TODO.md', 'В CLAUDE.md'] })).toEqual([])
     expect(errs(i => { i.ru.checks![1].id = 'c1' }).join()).toMatch(/повтор/)
   })
   it('rule 3: objective without a check', () => {

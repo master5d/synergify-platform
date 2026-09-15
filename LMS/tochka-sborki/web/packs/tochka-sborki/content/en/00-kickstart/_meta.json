@@ -9,5 +9,169 @@
     { "slug": "u2-tools", "title": "Map of tools" },
     { "slug": "u3-first-steps", "title": "First steps" },
     { "slug": "u4-sources", "title": "The Source or the Packaging" }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Explain how roles are split in vibe coding: what you decide and check, and what the AI agent does"
+    },
+    {
+      "id": "o2",
+      "text": "Assign an AI tool to one of the four quadrants by what it does, and explain why Claude Code is an AI dev platform"
+    },
+    {
+      "id": "o3",
+      "text": "Tell the vibe coding cycle apart from the old development cycle"
+    },
+    {
+      "id": "o4",
+      "text": "Tell a primary source from packaging by three signs: licence, date of the last edit, author and participation"
+    },
+    {
+      "id": "o5",
+      "text": "Explain which question the source check answers and which it doesn't, and what sovereignty in learning means"
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-map",
+      "objective": "o1",
+      "question": "In vibe coding, who checks that the result works?",
+      "options": [
+        "The AI agent: it tests the code it wrote itself",
+        "You",
+        "A separate tester, as in old development",
+        "No one: if the agent wrote the code, it works"
+      ],
+      "answer": 1,
+      "explain": "In the lesson's roles table, “checks the result” is the tester in old development and you in vibe coding. The agent writes the code, but the checking stays with the human (u1, “Difference in approach”)."
+    },
+    {
+      "id": "c2",
+      "unit": "u1-map",
+      "objective": "o1",
+      "question": "“You are the conductor. AI is the orchestra.” By this metaphor, what do you need to be able to do?",
+      "options": [
+        "Write code yourself in every language the agent uses",
+        "Nothing: the orchestra will play on its own, the conductor is just present",
+        "Hire a programmer who will manage the agent",
+        "Know what the result should be, and hand the execution to the agent"
+      ],
+      "answer": 3,
+      "explain": "A conductor doesn't need to play every instrument; they need to know the score. You decide what to build, and the agent writes the code (u1, “Your new stack”)."
+    },
+    {
+      "id": "c3",
+      "unit": "u2-tools",
+      "objective": "o2",
+      "question": "You need a tool that works with the project's files, the terminal and the project's memory, rather than just drawing an interface. Which quadrant is it?",
+      "options": [
+        "AI dev platforms",
+        "Zero-code builders",
+        "Design-to-code",
+        "AI coding assistants inside the IDE"
+      ],
+      "answer": 0,
+      "explain": "Deep work with code and projects is the AI dev platforms quadrant. The lesson places Claude Code there, the tool this course is built on (u2, “Where this course sits”)."
+    },
+    {
+      "id": "c4",
+      "unit": "u2-tools",
+      "objective": "o2",
+      "question": "You want to get a ready app from a single prompt in a few minutes, without going into the code. Which quadrant is made for this?",
+      "options": [
+        "AI dev platforms",
+        "Design-to-code",
+        "Zero-code builders",
+        "AI coding assistants"
+      ],
+      "answer": 2,
+      "explain": "The zero-code builders quadrant turns a prompt into a ready app in minutes. Design-to-code starts from a design, and AI dev platforms work deeply with code (u2, “The map: 4 quadrants of AI tools”)."
+    },
+    {
+      "id": "c5",
+      "unit": "u3-first-steps",
+      "objective": "o3",
+      "question": "How does the vibe coding cycle differ from the old one?",
+      "options": [
+        "It has no checking: the agent writes error-free code right away",
+        "You still write the code, and the agent only looks for errors",
+        "You describe the task, the agent writes the code, and you check and tweak",
+        "The task is described once, and after that the cycle runs without you"
+      ],
+      "answer": 2,
+      "explain": "Before, you wrote, ran and fixed things yourself. Now you describe the task and check the result, and the agent writes the code. The cycle remains, though: “tweak → repeat” (u3, “Vibe coding: what it actually means”)."
+    },
+    {
+      "id": "c6",
+      "unit": "u4-sources",
+      "objective": "o4",
+      "question": "A seemingly open repository has no licence file. What are you allowed to do with it?",
+      "options": [
+        "By default, nothing: the rights stay with the author",
+        "Anything: since there's no licence, there are no restrictions either",
+        "Everything except commercial use",
+        "You may copy it, but not modify it"
+      ],
+      "answer": 0,
+      "explain": "No licence doesn't mean “anything goes”. By default the rights stay with the author. “No commercial use” is a separate licence, `CC BY-NC` (u4, “The licence — what you're allowed to do”)."
+    },
+    {
+      "id": "c7",
+      "unit": "u4-sources",
+      "objective": "o4",
+      "question": "Which of two courses would the lesson call more alive?",
+      "options": [
+        "The one released yesterday: it's newer",
+        "Equally: only the publication date matters",
+        "The one with more followers",
+        "The one released in 2024 and maintained since"
+      ],
+      "answer": 3,
+      "explain": "Look at the date of the last edit, not the date of publication. A course abandoned right after launch soon describes a world that no longer exists (u4, “The date of the last change — the expiry date”)."
+    },
+    {
+      "id": "c8",
+      "unit": "u4-sources",
+      "objective": "o4",
+      "question": "Which signal does the lesson advise looking at to see whether anyone checked the material before you?",
+      "options": [
+        "The author's follower count",
+        "The number of people who participate: forks, issues, discussions",
+        "How nicely the page is designed",
+        "The price: paid material is better checked"
+      ],
+      "answer": 1,
+      "explain": "The signal is not audience but participation. Material nobody has fixed or discussed may be good, but you will be its first tester (u4, “The author — who made it”)."
+    },
+    {
+      "id": "c9",
+      "unit": "u4-sources",
+      "objective": "o5",
+      "question": "Which question does the three-glance check answer?",
+      "options": [
+        "Whether this is good material",
+        "Whether you'll be able to understand it",
+        "Whether the material is worth its price",
+        "What happens if the author disappears"
+      ],
+      "answer": 3,
+      "explain": "The check doesn't say whether the material is good: a live open repository can be useless, and a closed course can be excellent. It shows whether the material stays with you if the author is gone (u4, “What the check won't tell you”)."
+    },
+    {
+      "id": "c10",
+      "unit": "u4-sources",
+      "objective": "o5",
+      "question": "What does the lesson call sovereignty in learning?",
+      "options": [
+        "Not paying anyone for learning",
+        "Not being left with nothing when someone else's platform shuts down",
+        "Learning only from materials with an open licence",
+        "Not trusting any source without checking"
+      ],
+      "answer": 1,
+      "explain": "It's not about refusing to pay or distrusting everything: the lesson says outright that suspicion costs as much time as blind trust. Sovereignty is when the material stays with you (u4, “What the check won't tell you”)."
+    }
   ]
 }

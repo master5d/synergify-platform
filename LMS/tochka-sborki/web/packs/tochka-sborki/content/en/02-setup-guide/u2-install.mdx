@@ -51,6 +51,8 @@ irm https://ai.synergify.com/install.ps1 | iex
 
 > 💡 On Linux, use the same command as Mac (`curl … | bash`).
 
+> ⚠️ A command like this downloads someone else's script and runs it on your computer straight away. If you want to see what it does first, save it to a file — `curl -fsSL https://ai.synergify.com/install.sh -o install.sh` (on Windows: `irm https://ai.synergify.com/install.ps1 -OutFile install.ps1`) — read it, and only then run it (`bash install.sh` or `.\install.ps1`). If Windows execution policy blocks the downloaded script, run it like this: `powershell -ExecutionPolicy Bypass -File install.ps1`.
+
 After it finishes, open a **new** terminal and run `claude`. Below is the manual path if you want to understand each step.
 
 ## Installing Claude Code
@@ -144,6 +146,12 @@ function ll  { Get-ChildItem -Force }
 
 </OsBlock>
 
+<SelfCheck id="c3"/>
+
+<SelfCheck id="c4"/>
+
+<SelfCheck id="c5"/>
+
 </Phase>
 
 <Phase type="practice">
@@ -152,7 +160,7 @@ Run through these in order:
 
 1. Install Claude Code: `npm install -g @anthropic-ai/claude-code`
 2. Check: `claude --version`
-3. Set up Git: `git config --global user.name "Your name"`
+3. Set up Git: `git config --global user.name "Your name"` and `git config --global user.email "your@email.com"`
 4. Launch Claude Code in any folder:
 
 <OsBlock os="mac">

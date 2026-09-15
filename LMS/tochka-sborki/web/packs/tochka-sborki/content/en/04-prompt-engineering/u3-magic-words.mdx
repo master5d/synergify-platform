@@ -29,7 +29,7 @@ Hold that sound. At the collision of "incantation" and "instrument tuning" — w
 |----------|-------|--------|
 | Generic answer | `Think step by step` | Activates a chain of reasoning — model shows its logic |
 | Too abstract | `Give a concrete example` | Validates the abstraction against a real case |
-| Hallucinations | `Only answer if you're sure` | Cuts down on inventing facts |
+| Hallucinations | `Only answer if you're sure` | Can cut down on inventing facts, but doesn't rule it out — still check the facts |
 | Unclear logic | `Explain your reasoning` | Shows the thinking — easy to spot mistakes |
 | Unstructured output | `Use the format: [table/list/JSON]` | Sets the response structure |
 | Vague task | `Be specific` | Reduces generalizations |
@@ -51,11 +51,17 @@ Only answer if you're confident in the analysis."
 Result: Structured answer with logic, 95% useful info
 ```
 
+The percentages are notional: they show the difference, they weren't measured.
+
 ### What does NOT work
 
-- `Please` / `Thank you` — politeness doesn't move quality
-- Threats (`this is important for my career`) — no impact
+- `Please` / `Thank you` — tone affects the answer weakly and differently across models: don't count on politeness as a quality lever
+- Threats (`this is important for my career`) — the effect is unstable, don't rely on them
 - Repeating the prompt unchanged — you need to rephrase, not repeat
+
+<SelfCheck id="c5"/>
+
+<SelfCheck id="c6"/>
 
 </Phase>
 

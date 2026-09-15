@@ -9,5 +9,137 @@
     { "slug": "u2-pipeline-theory", "title": "Trigger → Action model" },
     { "slug": "u3-build", "title": "Build your pipeline" },
     { "slug": "u4-reflect", "title": "What to automate next?" }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Break a recurring information flow down into trigger, action, and condition (what kicks it off, what happens, when not to run)"
+    },
+    {
+      "id": "o2",
+      "text": "Tell apart a manual, a scheduled, and an event-driven pipeline and choose the type for the task"
+    },
+    {
+      "id": "o3",
+      "text": "Build the path from manual to automatic: first run the manual pipeline as a draft and find the weak spot, then add conditions, a schedule, and notifications"
+    },
+    {
+      "id": "o4",
+      "text": "Use the automation map to judge which task can be delegated to a pipeline and which one needs a human"
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-activation",
+      "objective": "o1",
+      "question": "In the pipeline “you give a URL → Firecrawl scrapes → Claude analyzes → the result is saved to Markdown,” what is the trigger here?",
+      "options": [
+        "Scraping the page with Firecrawl",
+        "You giving the article URL",
+        "The model analyzing the text",
+        "Saving the result to a Markdown file"
+      ],
+      "answer": 1,
+      "explain": "The trigger is what kicks off the process. Everything else in the chain is action — the steps that come after the launch (u1, “Today's pipeline”)."
+    },
+    {
+      "id": "c2",
+      "unit": "u1-activation",
+      "objective": "o1",
+      "question": "A pipeline processed the same article twice and hit the rate limit. Which of the three questions before building was left unanswered during design?",
+      "options": [
+        "Trigger: what kicks off the process",
+        "Action: what should happen",
+        "All three were answered; it's just a service failure",
+        "Condition: when should it NOT run"
+      ],
+      "answer": 3,
+      "explain": "Duplicates, rate limits, and errors are exactly the third question, condition. It defines when the pipeline should not run (u1, “Three questions before building a pipeline”)."
+    },
+    {
+      "id": "c3",
+      "unit": "u2-pipeline-theory",
+      "objective": "o2",
+      "question": "Every new email has to be classified and a draft reply prepared for approval. Which pipeline type fits?",
+      "options": [
+        "Event-driven: runs when a new email arrives",
+        "Manual: you run it yourself when you remember",
+        "Scheduled: once a day on a schedule",
+        "This isn't a pipeline: it needs a human, not automation"
+      ],
+      "answer": 0,
+      "explain": "The process is kicked off by an event — an email arriving — not by the clock and not by your decision. The lesson walks through this exact example as event-driven. The draft goes for approval, so the decision stays with a human (u2, “Three pipeline types”)."
+    },
+    {
+      "id": "c4",
+      "unit": "u2-pipeline-theory",
+      "objective": "o2",
+      "question": "Occasionally, once every couple of weeks, you need to break down an article you've come across. Which pipeline type is more appropriate here?",
+      "options": [
+        "Scheduled: every morning, so nothing slips by",
+        "Event-driven: on every new message",
+        "Manual: you run it yourself when needed",
+        "None: automating irregular tasks is pointless"
+      ],
+      "answer": 2,
+      "explain": "A manual pipeline fits irregular tasks best: the algorithm is already assembled, and you pick the moment to run it. A schedule fits regular tasks (u2, “Manual pipeline (today)”)."
+    },
+    {
+      "id": "c5",
+      "unit": "u2-pipeline-theory",
+      "objective": "o3",
+      "question": "You've come up with a pipeline for a weekly report. Where does the lesson suggest starting?",
+      "options": [
+        "Set up the schedule right away so you never have to come back to the task",
+        "Pick the most advanced tool so you don't have to redo it",
+        "Run it manually, make sure the algorithm works, and only then automate the trigger",
+        "Start with notifications and add the processing steps later"
+      ],
+      "answer": 2,
+      "explain": "If you automate an unverified algorithm, its mistakes will repeat on schedule too. So the manual run comes first, and automating the trigger comes later (u2, the tip at the end of “Concept”)."
+    },
+    {
+      "id": "c6",
+      "unit": "u3-build",
+      "objective": "o3",
+      "question": "The first run of the pipeline came out uneven: one part of the result was weak. How does the lesson suggest treating this?",
+      "options": [
+        "As a rough cut: find the one spot that “sagged” and make it the upgrade point for the second version",
+        "As a sign that the prompt is bad and has to be rewritten from scratch",
+        "As a reason to add more sources right away so the weak spot gets lost",
+        "As a normal result that doesn't need touching"
+      ],
+      "answer": 0,
+      "explain": "The first run is a rough cut. Its job is to show where the chain sags, not to deliver a perfect result. The one weak spot you find becomes the plan for the next version (u3, “Reflection” and practice step 4, “Rate it: what worked? what could be better?”)."
+    },
+    {
+      "id": "c7",
+      "unit": "u4-reflect",
+      "objective": "o3",
+      "question": "The manual pipeline already works reliably. Which of these does the lesson call the natural next step?",
+      "options": [
+        "Rewrite everything from scratch in an automation tool",
+        "Hand the pipeline the choice of which decisions to make based on the results as well",
+        "Drop saving to a file, since the result is visible in the chat anyway",
+        "Add a condition, for example “if the article is under 500 words — skip”"
+      ],
+      "answer": 3,
+      "explain": "The path to automatic goes step by step on top of a working manual pipeline: conditions, a schedule, notifications, connecting to other tools. There's no need to rewrite from scratch (u4, “Next steps: from manual to automatic”)."
+    },
+    {
+      "id": "c8",
+      "unit": "u4-reflect",
+      "objective": "o4",
+      "question": "Which of these tasks does the automation map leave to a human?",
+      "options": [
+        "Information gathering: URL → summary → file",
+        "Decision-making",
+        "Content analysis: text → insights → report",
+        "Meeting breakdown: audio → transcript → tasks"
+      ],
+      "answer": 1,
+      "explain": "Gathering and analysis are easy to automate; meetings and emails are medium. The map marks decision-making as hard and needing a human (u4, “Automation map: what to delegate next”)."
+    }
   ]
 }

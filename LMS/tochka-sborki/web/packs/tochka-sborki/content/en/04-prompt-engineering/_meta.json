@@ -10,5 +10,197 @@
     { "slug": "u3-magic-words", "title": "Magic words" },
     { "slug": "u4-sins", "title": "The sins of prompting" },
     { "slug": "u5-practice", "title": "A professional prompt" }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Explain why a prompt without context gives a random result: the model fills in what’s missing with typical values"
+    },
+    {
+      "id": "o2",
+      "text": "Assemble a prompt from the parts “role, task, inputs, expected output, constraints” and assign a prompt fragment to the right part"
+    },
+    {
+      "id": "o3",
+      "text": "Match a problem in the answer with the phrase that fixes it, and tell it apart from techniques that don’t work (politeness, pressure, repeating unchanged)"
+    },
+    {
+      "id": "o4",
+      "text": "Recognize a prompting sin (context rot, lost in the middle, distractors, mixing context and prompt, aggressive tone) and choose the correction"
+    },
+    {
+      "id": "o5",
+      "text": "Choose an approach for a recurring task (meta-prompting, the reusable-assistant template) and explain why automation comes only after you can write and verify the task"
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-activation",
+      "objective": "o1",
+      "question": "You write “Write an article about marketing” and get a smooth but useless text. Why did that happen?",
+      "options": [
+        "The model doesn’t understand marketing well, and you need a different model",
+        "The model wasn’t given the audience, length, style and focus, and filled them in with the most typical values",
+        "The prompt is too short in characters, and the model handles short texts worse",
+        "The prompt had no polite greeting"
+      ],
+      "answer": 1,
+      "explain": "An LLM continues text the way a typical person would write it. Anything not specified, it guesses as “average” (u1, “Why bad prompts give bad results”)."
+    },
+    {
+      "id": "c2",
+      "unit": "u1-activation",
+      "objective": "o2",
+      "question": "Prompt: “You are an experienced copywriter. Write a post about our new product.” What does it lack according to the formula for a good prompt?",
+      "options": [
+        "Nothing: a role and a task are enough",
+        "Only a polite greeting at the start",
+        "Only the phrase “think step by step”",
+        "Inputs, expected output and constraints"
+      ],
+      "answer": 3,
+      "explain": "The role and task are there, but the model doesn’t know which product to write about, what result is needed, or what it must not do. The formula from u1 requires all five parts."
+    },
+    {
+      "id": "c3",
+      "unit": "u2-spec-formula",
+      "objective": "o2",
+      "question": "Which fragment belongs to the “Expected output” section?",
+      "options": [
+        "“A Markdown table of five rows: term, definition, example”",
+        "“You are an editor of technical texts”",
+        "“Here is a link to the API documentation”",
+        "“Don’t use professional jargon”"
+      ],
+      "answer": 0,
+      "explain": "Expected output describes the format, structure and length of the answer. “You are an editor…” is the role, the documentation link is the inputs, and the ban on jargon is a constraint (u2, “Full structure…”)."
+    },
+    {
+      "id": "c4",
+      "unit": "u2-spec-formula",
+      "objective": "o5",
+      "question": "You can’t yet write and verify the task clearly, but you want to hand it straight to an agent in an automated loop. What does the lesson say?",
+      "options": [
+        "That’s the way to do it: the agent will figure it out, that’s the point of automation",
+        "The problem is a lack of imagination; first you need to come up with an image of the result",
+        "First learn to write the task and carry it to a result together with AI, and only then hand the loop to an agent",
+        "You can write the task and automate it at the same time; the order doesn’t matter"
+      ],
+      "answer": 2,
+      "explain": "The order of the stages matters: imagination, then task, then automation. Skip a stage and you automate confusion. And the barrier isn’t imagination: almost everyone has the image of the result (u2, “The barrier isn’t imagination”)."
+    },
+    {
+      "id": "c5",
+      "unit": "u3-magic-words",
+      "objective": "o3",
+      "question": "The model confidently cites facts that don’t exist. Which phrase from the lesson targets this problem?",
+      "options": [
+        "“Use the format: table”",
+        "“Be specific”",
+        "“Only answer if you’re sure”",
+        "“Please be more accurate”"
+      ],
+      "answer": 2,
+      "explain": "In the u3 table, hallucinations are matched with “Only answer if you’re sure”. Format and specificity solve other problems, and you shouldn’t count on politeness as a lever for quality. The phrase cuts down on made-up facts but doesn’t rule them out."
+    },
+    {
+      "id": "c6",
+      "unit": "u3-magic-words",
+      "objective": "o3",
+      "question": "The answer didn’t work for you. Which next step does the lesson consider effective?",
+      "options": [
+        "Rephrase the prompt and add a phrase that fixes the specific problem in the answer",
+        "Send the same prompt again: the second attempt will come out better",
+        "Add “this is very important for my career”",
+        "Add “please” and “thank you”"
+      ],
+      "answer": 0,
+      "explain": "Repeating unchanged gets you nothing, and pressure and politeness work weakly and unreliably. What works is rephrasing and a phrase aimed at the specific failure (u3, “What does NOT work”)."
+    },
+    {
+      "id": "c7",
+      "unit": "u4-sins",
+      "objective": "o4",
+      "question": "A long prompt opens with an intro, has the main requirement in the middle and a conclusion at the end. The model ignores the requirement. Which correction does the lesson give?",
+      "options": [
+        "Start a new chat: this is context rot",
+        "Write the requirement in capitals and more harshly",
+        "Add more details to the middle so the requirement stands out",
+        "Put the critical part up front and repeat it at the end"
+      ],
+      "answer": 3,
+      "explain": "This is “lost in the middle”: the model over-weights the beginning and end of the context. The correction is critical stuff up front, details after, a repeat at the end (u4, sin 2)."
+    },
+    {
+      "id": "c8",
+      "unit": "u4-sins",
+      "objective": "o4",
+      "question": "You gave the model five files, two of them old versions. In its answer it uses an outdated function. What do you do?",
+      "options": [
+        "Add more files so the model has the full picture",
+        "Keep only the relevant files and write explicitly “Ignore old versions”",
+        "Move the old versions to the middle of the context",
+        "Repeat the request more sternly"
+      ],
+      "answer": 1,
+      "explain": "Similar fragments are distractors: they throw the model off the correct answer. The cure is selecting the context, not adding to it (u4, sin 3)."
+    },
+    {
+      "id": "c9",
+      "unit": "u4-sins",
+      "objective": "o4",
+      "question": "The result didn’t work. Which line is closest to what the lesson advises?",
+      "options": [
+        "“This is completely wrong! Redo it now!”",
+        "“No. Redo it.”",
+        "The same original request, sent again",
+        "“That didn’t work. Try without recursion.”"
+      ],
+      "answer": 3,
+      "explain": "The lesson names aggressive tone as one of the sins. A working correction is neutral and says what to change (u4, sin 5)."
+    },
+    {
+      "id": "c10",
+      "unit": "u5-practice",
+      "objective": "o5",
+      "question": "Every week you prepare the same report. What does the lesson suggest?",
+      "options": [
+        "Write the prompt from scratch each time to adapt to the week",
+        "Set up a reusable assistant (role, objective, context, instructions, notes) — for example, a Claude Project, a Gem or a Skill",
+        "Keep one endless chat so the model “remembers” past reports",
+        "Save a good answer and copy it every week"
+      ],
+      "answer": 1,
+      "explain": "For recurring tasks, u5 gives the reusable-assistant template. An endless chat runs into context rot from u4."
+    },
+    {
+      "id": "c11",
+      "unit": "u5-practice",
+      "objective": "o5",
+      "question": "You don’t know where to start with a complex prompt. Which technique does the lesson suggest?",
+      "options": [
+        "Send the task as a single word and refine it over several iterations",
+        "Put every phrase from the “magic words” table into the prompt at once",
+        "Ask Claude to write the prompt for you: describe the task and the criteria each of its responses must meet",
+        "Put the task off until you have a complete image of the result"
+      ],
+      "answer": 2,
+      "explain": "This is meta-prompting: a prompt that writes prompts. You provide the task and criteria; the model fills in the parameters (u5)."
+    },
+    {
+      "id": "c12",
+      "unit": "u5-practice",
+      "objective": "o2",
+      "question": "The checklist item “Output is defined” — what does it check?",
+      "options": [
+        "That the prompt makes it clear how to tell whether the answer is right",
+        "That the prompt names the model you’ll send it to",
+        "That the answer will be longer than a set number of words",
+        "That the prompt has already been run at least once"
+      ],
+      "answer": 0,
+      "explain": "The expected output sets the criterion for checking: without it there’s nothing to compare “right” against (u5, “Checklist before you hit send”)."
+    }
   ]
 }

@@ -77,7 +77,7 @@ Hermes's context isn't eaten by implementation. Worker contexts are atomic and t
 
 ### Get Hermes
 
-Hermes is open-source, lives in the SOVERN repo:
+> ⚠️ This is an illustration of the architecture: there is no public `sovern-stack/hermes` repository. The commands and config below show the idea, not a working install.
 
 ```bash
 git clone https://github.com/sovern-stack/hermes
@@ -119,7 +119,7 @@ Hermes will:
 
 ### Skill system (optional)
 
-Hermes uses the DeepVista Skill Schema — modular `.md` files with YAML frontmatter:
+Hermes skills are modular `.md` files with a YAML header, similar to `SKILL.md` in Claude Code:
 
 ```yaml
 ---
@@ -139,6 +139,10 @@ When the skill triggers:
 
 This is the equivalent of `.claude/skills/`, but **portable across agents**.
 
+<SelfCheck id="c9"/>
+
+<SelfCheck id="c10"/>
+
 </Phase>
 
 <Phase type="practice">
@@ -151,7 +155,7 @@ This is the equivalent of `.claude/skills/`, but **portable across agents**.
   - When you **don't** need Hermes (boss-worker is overkill for small tasks)
   - When you do (long plans, multi-day work, cron tasks)
 
-**Full practice (2–3 hours, optional):**
+**Full practice (2–3 hours, optional):** only possible if you have access to Hermes — there is no public repository (see above).
 1. Clone Hermes, install
 2. Create the first plan with a real task from your work
 3. Run `hermes execute` with one worker (a fake echo-worker is fine for testing)

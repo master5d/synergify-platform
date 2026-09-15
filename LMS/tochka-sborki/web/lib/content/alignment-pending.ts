@@ -11,6 +11,6 @@ export const PENDING_SNAPSHOT: Record<string, readonly string[]> = {
 }
 
 export const PENDING_ALIGNMENT: Record<string, readonly string[]> = {
-  'tochka-sborki': PENDING_SNAPSHOT['tochka-sborki'],
+  'tochka-sborki': [],
   'living-practice': [],
 }

@@ -32,9 +32,10 @@ Notice in your head: how many "tiles" in your workflow still need you to push th
 | Event | When it fires |
 |---------|-----------------|
 | `PreToolUse` | Before the agent uses a tool |
-| `PostToolUse` | After the agent uses a tool |
+| `PostToolUse` | After the agent uses a tool (after every call) |
 | `Notification` | When the agent wants to get your attention |
-| `Stop` | When the agent finishes |
+| `Stop` | When the agent finishes its response (end of turn) |
+| `SessionEnd` | When the session ends |
 
 ## Hook config
 
@@ -49,7 +50,7 @@ In `.claude/settings.json`:
         "hooks": [
           {
             "type": "command",
-            "command": "echo 'File written: ' && date >> ~/claude-log.txt"
+            "command": "echo \"File written: $(date)\" >> ~/claude-log.txt"
           }
         ]
       }
@@ -57,6 +58,8 @@ In `.claude/settings.json`:
   }
 }
 ```
+
+The `>>` redirect is required here: without it, `echo` writes not to the log but to standard output, which Claude Code itself parses.
 
 ## Practical examples
 
@@ -74,6 +77,10 @@ A Hook can run any command. A few rules:
 - Don't run hooks from untrusted sources
 - Check what a hook does before adding it
 - For production systems, limit what the agent can do via PreToolUse
+
+<SelfCheck id="c5"/>
+
+<SelfCheck id="c6"/>
 
 </Phase>
 
