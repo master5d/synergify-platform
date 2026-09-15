@@ -229,7 +229,7 @@ const OTHER_CASES: OtherCase[] = [
     href: 'https://github.com/Shubhamsaboo/awesome-llm-apps/tree/main/rag_tutorials' },
   { id: 'voice-agents', icon: '🎧',
     title: { ru: 'Голосовые агенты', en: 'Voice agents' },
-    blurb: { ru: 'Аудиогид, поддержка по телефону, разбор страхового случая живым разговором. Соседняя ветка к нашему модулю 6.', en: 'An audio tour guide, phone support, an insurance claim handled in live conversation. A neighbour to our module 6.' },
+    blurb: { ru: 'Аудиогид, поддержка по телефону, разбор страхового случая живым разговором.', en: 'An audio tour guide, phone support, an insurance claim handled in live conversation.' },
     source: { ru: 'awesome-llm-apps · Apache-2.0', en: 'awesome-llm-apps · Apache-2.0' },
     href: 'https://github.com/Shubhamsaboo/awesome-llm-apps/tree/main/voice_ai_agents' },
   { id: 'recipes', icon: '🧰',
