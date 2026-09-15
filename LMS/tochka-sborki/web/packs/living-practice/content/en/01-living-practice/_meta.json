@@ -68,12 +68,12 @@
       "objective": "o1",
       "question": "How does the course define its place relative to therapy?",
       "options": [
-        "The course can replace therapy while you wait for a specialist appointment",
         "The course does not treat and does not replace therapy; at best it sits beside a specialist",
+        "The course can replace therapy while you wait for a specialist appointment",
         "The course works gently with trauma if you go slowly",
         "The course replaces therapy for those without a diagnosis"
       ],
-      "answer": 1,
+      "answer": 0,
       "explain": "In the first step the course states outright that it does not treat, does not replace therapy, and does not work with trauma: clinical context is required for that (u1, “What the course does not do”)."
     },
     {
@@ -83,11 +83,11 @@
       "question": "What duration limits does the course set?",
       "options": [
         "Start with 10 minutes and reach an hour by week 8",
-        "Usually 10–20 minutes, ceiling — 30–45 minutes per session, no home retreats and no “hundred days straight”",
         "Duration doesn’t matter if you practice without missing a hundred days in a row",
-        "As long as there’s no discomfort"
+        "As long as there’s no discomfort",
+        "Usually 10–20 minutes, ceiling — 30–45 minutes per session, no home retreats and no “hundred days straight”"
       ],
-      "answer": 1,
+      "answer": 3,
       "explain": "There is no evidence that “more” equals “better”, and intensity and retreats are listed as risk factors. Therefore the course sets a ceiling (u2, “‘More’ does not mean ‘better’”)."
     },
     {
@@ -97,11 +97,11 @@
       "question": "During a scan a certain area feels uncomfortable. What does the course suggest?",
       "options": [
         "Stay in that area a bit longer to finish the pass",
-        "Close your eyes to focus better on the sensation",
         "Leave the area immediately, return your gaze to an external object; if it intensifies, stand up and walk",
+        "Close your eyes to focus better on the sensation",
         "“Breathe into the tension” to release it"
       ],
-      "answer": 2,
+      "answer": 1,
       "explain": "The task is to stay inside the window of tolerance, not to finish the scan. Eyes stay open, an external return point and the right to stop are standard course elements. “Breathing into pain” belongs to therapy language, not the course (u3)."
     },
     {
@@ -111,11 +111,11 @@
       "question": "While naming, excitement arises: “I’ll note everything, nothing will be missed.” How does the course interpret this?",
       "options": [
         "As a sign of progress: attention sharpens",
-        "As a signal to slow down and return to clean breathing for a minute",
         "As a reason to extend the session until the excitement passes",
+        "As a signal to slow down and return to clean breathing for a minute",
         "As a cue to move to intensive noting"
       ],
-      "answer": 1,
+      "answer": 2,
       "explain": "Naming in the course is a light ten-minute annotation. Continuous intense noting without a teacher is not given to beginners: it’s a “speed-up” practice (u4, “The line that must not be crossed here”)."
     },
     {
@@ -124,12 +124,12 @@
       "objective": "o3",
       "question": "Which of these does the course label a stop signal that requires ending the session?",
       "options": [
+        "A sense of unreality of self or world that does not pass after practice",
         "Attention repeatedly drifts into thoughts",
         "In one body area you “don’t feel” anything",
-        "A sense of unreality of self or world that does not pass after practice",
         "The session was boring"
       ],
-      "answer": 2,
+      "answer": 0,
       "explain": "Wandering mind and “don’t feel” are considered normal parts of the exercise (u2, u3). The unreality feeling is listed among stop signals in step 5."
     },
     {
@@ -139,11 +139,11 @@
       "question": "During the course thoughts of self-harm appear. What does the course say?",
       "options": [
         "Shorten sessions to five minutes and keep going",
+        "Exit the learning scenario immediately and reach a living person: a professional or a crisis line (in the US — 988, other countries — findahelpline.com)",
         "Discuss it with the AI companion: that’s what it’s for",
-        "Wait for the circle meeting and share there",
-        "Exit the learning scenario immediately and reach a living person: a professional or a crisis line (in the US — 988, other countries — findahelpline.com)"
+        "Wait for the circle meeting and share there"
       ],
-      "answer": 3,
+      "answer": 1,
       "explain": "This stop signal is not a cue to reduce dosage, but a cue to seek a living person right away. Neither the course text, nor the companion, nor the circle chat serve as crisis help (u5, u7, u8)."
     },
     {
@@ -154,10 +154,10 @@
       "options": [
         "It means you’re practicing incorrectly",
         "It means you’ve progressed and should endure it",
-        "It means the dose is currently high and should be reduced",
-        "It means the practice isn’t suitable for you at all"
+        "It means the practice isn’t suitable for you at all",
+        "It means the dose is currently high and should be reduced"
       ],
-      "answer": 2,
+      "answer": 3,
       "explain": "The interpretation changes how long the difficulty lasts. Therefore the course does not call it an error or progress: it’s a signal to lower the dose (u5, “The words you explain difficulty to yourself with are an intervention”)."
     },
     {
@@ -166,12 +166,12 @@
       "objective": "o4",
       "question": "Which of these requests should the AI companion not fulfill?",
       "options": [
+        "Suggest practicing longer because everything is going well",
         "Parse session notes one question at a time",
         "Remind why the course has a duration ceiling",
-        "Suggest practicing longer because everything is going well",
         "Help craft two-three phrases for living people"
       ],
-      "answer": 2,
+      "answer": 0,
       "explain": "Session unpacking, material repetition, and phrase preparation for the circle are within the companion’s role. Pushing for longer duration or intensity is on the “blocklist” (u7)."
     },
     {
@@ -181,11 +181,11 @@
       "question": "Why does this course place AI between sessions rather than instead of people?",
       "options": [
         "The model still answers meditation questions worse than a human",
-        "Research shows that digital programs work better with a human in the loop",
         "Living people are needed only for crisis cases",
+        "Research shows that digital programs work better with a human in the loop",
         "It’s cheaper for the course"
       ],
-      "answer": 1,
+      "answer": 2,
       "explain": "A guided format yields a noticeably larger effect than solo work, even when the guide isn’t a clinician. Hence AI fills the gap between lessons, and the course leads to living people (u7, u8)."
     },
     {
@@ -196,10 +196,10 @@
       "options": [
         "Discuss his experience with the whole circle to give feedback",
         "Suggest he practice longer to work through it",
-        "Not interpret or treat, but help him get to a specialist",
-        "Ask him to tell everything to the end since he’s already started"
+        "Ask him to tell everything to the end since he’s already started",
+        "Not interpret or treat, but help him get to a specialist"
       ],
-      "answer": 2,
+      "answer": 3,
       "explain": "The circle is not a therapy group: they do not interpret others’ experience or treat each other. Its task is to help the person reach a specialist. Additionally, each person has the right to stay silent or leave (u8, “How to assemble a circle that stands a chance”)."
     }
   ]
