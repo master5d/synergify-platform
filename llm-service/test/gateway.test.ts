@@ -43,6 +43,14 @@ describe('chatJson', () => {
     expect(init.signal).toBeDefined()
   })
 
+  it('вызов подписан x-sovern-agent — иначе строка учёта гейтвея ложится unattributed', async () => {
+    // 2026-09-19: живой вызов /skin прошёл за 1.45 с, но в usage.db лёг как
+    // unattributed — сервис себя не называл. Гейтвей берёт имя только из заголовка.
+    const fetchImpl = vi.fn().mockResolvedValue(reply('{"a":1}'))
+    await chatJson({ pool: 'p', prompt: 'x', env: ENV, fetchImpl: fetchImpl as any })
+    expect(fetchImpl.mock.calls[0][1].headers['x-sovern-agent']).toBe('lms-llm')
+  })
+
   it('обрезанный ответ = unparsable, а не пустой результат', async () => {
     const fetchImpl = vi.fn().mockResolvedValue(reply('{"legendaryTitle": "Зод'))
     await expect(chatJson({ pool: 'p', prompt: 'x', env: ENV, fetchImpl: fetchImpl as any }))
