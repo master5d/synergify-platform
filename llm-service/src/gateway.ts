@@ -111,7 +111,14 @@ export async function chatJson(opts: {
   try {
     res = await fetchImpl(`${env.GATEWAY_URL}/chat/completions`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${env.GATEWAY_API_KEY}` },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${env.GATEWAY_API_KEY}`,
+        // Кто зовёт. Без этого заголовка строка в usage.db гейтвея ложится
+        // `unattributed`, и при разборе «кто выедает квоту» сервис невидим —
+        // ровно так 2026-09-19 искали виновника флуда по IP в логе гейтвея.
+        'x-sovern-agent': 'lms-llm',
+      },
       signal: AbortSignal.timeout(GATEWAY_TIMEOUT_MS),
       body: JSON.stringify({
         model: pool,
