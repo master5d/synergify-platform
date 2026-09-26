@@ -1,7 +1,7 @@
 // lib/authoring/review.ts
-// S4 of the course-authoring engine: a deterministic readability lint (the "review pass"
-// as an executable gate) + (Task 2) a polish PROMPT the author's agent uses to tighten prose.
-// No live LLM. Pure. Run alongside S3's validateDraftMdx.
+// S4 of the course-authoring engine: deterministic readability + pedagogy lints (the "review
+// pass" as an executable gate) + (Task 2) a polish PROMPT the author's agent uses to tighten
+// prose. No live LLM. Pure. Run alongside S3's validateDraftMdx.
 
 import type { Locale } from '@/lib/dictionaries'
 
@@ -23,6 +23,25 @@ function phaseProseLines(body: string): string[] {
     .filter(l => l.length > 0 && !/^<\/?Phase/.test(l) && !/^\{\/\*/.test(l) && !/^#/.test(l))
     .map(l => l.replace(/^-\s+/, '').replace(/^>\s*/, '').trim())
     .filter(Boolean)
+}
+
+// Pedagogy checks (S4 addendum, intake LMS#7/#9): mechanically decidable from the lesson
+// text alone. Anything that needs semantic judgment (prerequisites named, terms explained
+// at first use, exercises tied to covered material, sources not fabricated, Mayer's 12
+// principles) has no mechanical marker in this repo yet and stays out — see BACKLOG.md.
+
+// The 4-phase order is not just house style: components/phase.tsx hardcodes the same
+// PHASE_ORDER to drive the unit wizard, and validateDraftMdx enforces it for fresh drafts.
+// A shipped lesson that authored its phases out of order broke that contract silently.
+export function lintPhaseOrder(mdx: string): string[] {
+  const found = [...mdx.matchAll(/<Phase type="(\w+)">/g)].map(m => m[1])
+  if (found.length === 0) return []
+  const present = PHASES.filter(p => found.includes(p))
+  if (found.length !== PHASES.length || present.length !== PHASES.length) return [] // missing/duplicate phase — flagged elsewhere
+  if (found.join(',') !== PHASES.join(',')) {
+    return [`phases: expected order ${PHASES.join(' -> ')} (got ${found.join(' -> ')})`]
+  }
+  return []
 }
 
 export function lintReadability(mdx: string): string[] {
