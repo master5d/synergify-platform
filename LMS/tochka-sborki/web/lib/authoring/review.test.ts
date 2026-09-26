@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { lintReadability, buildPolishPrompt } from './review'
+import { lintReadability, lintPhaseOrder, buildPolishPrompt } from './review'
 import { draftLesson, SAMPLE_NOTES } from './draft'
 import { lintDehustle } from './dehustle'
 
@@ -24,6 +24,29 @@ describe('lintReadability', () => {
   it('flags a too-vague practice step', () => {
     const dirty = clean.replace('Do this: name one real task you want this module to help you finish', 'Do this: go')
     expect(lintReadability(dirty).some(e => /too vague/.test(e))).toBe(true)
+  })
+})
+
+describe('lintPhaseOrder', () => {
+  it('passes a clean S3 draft (activation -> reflection -> concept -> practice)', () => {
+    expect(lintPhaseOrder(clean)).toEqual([])
+  })
+  it('flags reflection and concept swapped (the real 03-stack-selection/u2-stack-matrix bug)', () => {
+    const swapped = clean
+      .replace('<Phase type="reflection">', '<Phase type="TMP">')
+      .replace('<Phase type="concept">', '<Phase type="reflection">')
+      .replace('<Phase type="TMP">', '<Phase type="concept">')
+    const findings = lintPhaseOrder(swapped)
+    expect(findings).toHaveLength(1)
+    expect(findings[0]).toMatch(/expected order activation -> reflection -> concept -> practice/)
+    expect(findings[0]).toMatch(/got activation -> concept -> reflection -> practice/)
+  })
+  it('ignores prose-layout content with no Phase tags', () => {
+    expect(lintPhaseOrder('# Just a page\n\nNo phases here.')).toEqual([])
+  })
+  it('does not pile on when a phase is missing entirely (lintReadability already flags it)', () => {
+    const missingPractice = clean.replace(/<Phase type="practice">[\s\S]*<\/Phase>/, '')
+    expect(lintPhaseOrder(missingPractice)).toEqual([])
   })
 })
 
