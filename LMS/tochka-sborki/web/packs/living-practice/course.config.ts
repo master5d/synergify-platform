@@ -23,6 +23,8 @@ export const COURSE = {
     rpg: false,
     /** Страница сертификата и ссылка на неё. */
     certificate: false,
+    /** Ретро выпускника (до/после, промпт, план) на странице сертификата. */
+    graduateRetro: false,
   },
   /** Курс школы: нужна сессия и допуск академии; RPG-опросник профиля не нужен. */
   gates: { auth: true, intake: false, admission: true },

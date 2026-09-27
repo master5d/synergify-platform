@@ -8,6 +8,12 @@ interface FeedbackBody {
   unclear?: string
   other?: string
   locale?: string
+  // Graduate retro (intake LMS#10): before/after, best prompt, plan for the month —
+  // same table/handler as module feedback, the free-text "review" reuses `other`.
+  retroBefore?: string
+  retroAfter?: string
+  retroPrompt?: string
+  retroPlan?: string
 }
 
 export async function handleFeedback(request: Request, env: Env): Promise<Response> {
@@ -23,8 +29,10 @@ export async function handleFeedback(request: Request, env: Env): Promise<Respon
   }
 
   await env.DB.prepare(
-    `INSERT INTO course_feedback (id, lesson, recommend, impact, apply, unclear, other, locale, created_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO course_feedback
+       (id, lesson, recommend, impact, apply, unclear, other, locale, created_at,
+        retro_before, retro_after, retro_prompt, retro_plan)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   ).bind(
     crypto.randomUUID(),
     body.lesson,
@@ -35,6 +43,10 @@ export async function handleFeedback(request: Request, env: Env): Promise<Respon
     body.other ?? null,
     body.locale ?? null,
     Math.floor(Date.now() / 1000),
+    body.retroBefore ?? null,
+    body.retroAfter ?? null,
+    body.retroPrompt ?? null,
+    body.retroPlan ?? null,
   ).run()
 
   return Response.json({ ok: true })

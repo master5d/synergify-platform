@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Nav } from '@/components/nav'
 import { Footer } from '@/components/footer'
 import { CertificateSVG } from '@/components/certificate-svg'
+import { GraduateRetroForm } from '@/components/graduate-retro-form'
+import { COURSE } from '@/lib/course'
 import type { Locale } from '@/lib/dictionaries'
 
 const COPY = {
@@ -323,6 +325,8 @@ export function CertificatePage({ locale }: Props) {
             </a>
           </section>
         )}
+
+        {COURSE.features.graduateRetro && <GraduateRetroForm locale={locale} name={name} />}
       </main>
       {/* CTA «получи сертификат» на самой странице сертификата бессмысленна */}
       <Footer locale={locale} showCertificateCta={false} />
