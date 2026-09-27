@@ -431,5 +431,10 @@
   Listmonk → письмо. Хук в `workers/src/handlers/progress.ts` (`handleComplete`), best-effort, как
   `lib/crm.ts`. Первое применение — предложить модуль «Обучение моделей» (advanced) тем, кто закончил
   агентную часть ТС. Сейчас Listmonk получает только лида при входе.
-- [ ] **Платформа: воронка отвала по урокам** (intake LMS#3) в `/api/admin/stats`: сколько учеников
+- [x] **Платформа: воронка отвала по урокам** (intake LMS#3) в `/api/admin/stats`: сколько учеников
   дошло до каждого юнита и где бросили, по каждому pack'у (`progress.course`). Сейчас там три счётчика.
+  2026-09-27: `/api/admin/stats` отдаёт `funnel`/`dropoff`/`notStarted` (порядок — из нумерации слагов pack'а, сверен тестом с `_meta.json`), воронка выведена на `/admin/leads`.
+- [ ] **Платформа: юнит-прогресс в D1** (след воронки отвала). Юниты отмечаются только в localStorage
+  (`lib/unit-progress.ts`), в `progress` пишутся лишь слаги уровня модуля/страницы, и `progress-provider`
+  не шлёт `course` (всё ложится под дефолт воркера). Слать `модуль/юнит` + `course` из pack'а — воронка
+  подхватит юниты без правок (`splitSlug` в `workers/src/handlers/stats.ts`).

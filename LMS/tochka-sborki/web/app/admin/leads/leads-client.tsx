@@ -10,12 +10,28 @@ interface Lead {
   telegram_handle: string | null
 }
 
+interface FunnelRow { module: string; unit: string | null; reached: number; completed: number }
+interface DropoffRow { course: string; module: string | null; unit: string | null; stalled: number }
+interface Stats {
+  total: number
+  learners: number
+  intakeCompleted: number
+  // Поля воронки добавлены позже — старый воркер их не отдаёт, поэтому необязательные.
+  notStarted?: number
+  stallDays?: number
+  funnel?: Record<string, FunnelRow[]>
+  dropoff?: DropoffRow[]
+}
+
+const lessonLabel = (r: { module: string | null; unit: string | null }) =>
+  r.module == null ? 'ничего не завершили' : r.unit ? `${r.module} / ${r.unit}` : r.module
+
 export function LeadsClient() {
   const [leads, setLeads] = useState<Lead[] | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [q, setQ] = useState('')
   const [syncMsg, setSyncMsg] = useState<string | null>(null)
-  const [stats, setStats] = useState<{ total: number; learners: number; intakeCompleted: number } | null>(null)
+  const [stats, setStats] = useState<Stats | null>(null)
 
   useEffect(() => {
     fetch('/api/admin/leads?limit=2000', { credentials: 'include' })
@@ -80,6 +96,60 @@ export function LeadsClient() {
             </div>
           ))}
         </div>
+      )}
+      {stats?.funnel && Object.keys(stats.funnel).length > 0 && (
+        <section style={{ marginBottom: '2rem' }}>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '.75rem' }}>Воронка по урокам</h2>
+          {stats.notStarted != null && (
+            <p style={{ color: 'var(--text-secondary)', fontSize: '.85rem', marginBottom: '.75rem' }}>
+              Не начали ни одного урока: <b style={{ color: 'var(--text-primary)' }}>{stats.notStarted}</b>
+            </p>
+          )}
+          {Object.entries(stats.funnel).map(([course, rows]) => {
+            const top = Math.max(1, ...rows.map(r => r.reached))
+            return (
+              <div key={course} style={{ marginBottom: '1.25rem', overflowX: 'auto' }}>
+                <h3 style={{ fontSize: '.95rem', fontWeight: 700, marginBottom: '.4rem' }}>{course}</h3>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '.85rem' }}>
+                  <thead>
+                    <tr style={{ textAlign: 'left', color: 'var(--text-secondary)' }}>
+                      <th style={{ padding: '6px 8px' }}>урок</th><th style={{ padding: '6px 8px' }}>дошли</th>
+                      <th style={{ padding: '6px 8px' }}>завершили</th><th style={{ padding: '6px 8px', width: '40%' }} />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rows.map(r => (
+                      <tr key={lessonLabel(r)} style={{ borderTop: '1px solid var(--border-color)' }}>
+                        <td style={{ padding: '6px 8px' }}>{lessonLabel(r)}</td>
+                        <td style={{ padding: '6px 8px' }}>{r.reached}</td>
+                        <td style={{ padding: '6px 8px' }}>{r.completed}</td>
+                        <td style={{ padding: '6px 8px' }}>
+                          <div style={{ height: 8, borderRadius: 4, background: 'var(--border-color)', width: `${(r.reached / top) * 100}%` }}>
+                            <div style={{ height: 8, borderRadius: 4, background: 'var(--text-accent)', width: r.reached ? `${(r.completed / r.reached) * 100}%` : 0 }} />
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )
+          })}
+          {stats.dropoff && stats.dropoff.length > 0 && (
+            <>
+              <h3 style={{ fontSize: '.95rem', fontWeight: 700, margin: '1rem 0 .4rem' }}>
+                Где остановились (нет активности {stats.stallDays ?? '?'}+ дн., последний завершённый урок)
+              </h3>
+              <ul style={{ fontSize: '.85rem', paddingLeft: '1.2rem', color: 'var(--text-secondary)' }}>
+                {stats.dropoff.slice(0, 10).map(d => (
+                  <li key={`${d.course}:${lessonLabel(d)}`}>
+                    <b style={{ color: 'var(--text-primary)' }}>{d.stalled}</b> — {d.course}: {lessonLabel(d)}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </section>
       )}
       <h1 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem' }}>Лиды ({leads.length})</h1>
       <div style={{ display: 'flex', gap: 12, marginBottom: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
