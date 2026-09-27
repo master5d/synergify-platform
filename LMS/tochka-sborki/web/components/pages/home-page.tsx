@@ -13,6 +13,7 @@ import { BeforeAfter } from '@/components/before-after'
 import { DreamScenarios } from '@/components/dream-scenarios'
 import { ShowcaseGallery } from '@/components/showcase-gallery'
 import { assetPath } from '@/lib/base-path'
+import { EntryFrame } from '@/components/entry-frame'
 
 const lessonsHref = (locale: Locale, slug: string) =>
   locale === 'en' ? `/en/lessons/${slug}/` : `/lessons/${slug}/`
@@ -95,6 +96,9 @@ export function HomePage({ locale }: Props) {
         }}>
           {t.hero.subtitle}
         </p>
+
+        {/* Рамка входа: обещание «бесплатно, без встроенных продаж» (данные pack'а). */}
+        <EntryFrame locale={locale} style={{ marginBottom: '1.5rem' }} />
 
         <p style={{
           fontFamily: 'var(--font-mono)',

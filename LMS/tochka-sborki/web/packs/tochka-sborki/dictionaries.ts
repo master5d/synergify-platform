@@ -242,6 +242,14 @@ export type Dictionary = {
   telegram: {
     signingIn: string
   }
+  /** Рамка входа (intake LMS#1 + LMS#10): обещание «бесплатно, без встроенных продаж»
+   *  и одна фраза позиционирования через свойства курса. Опционально: pack без поля —
+   *  блока нет. Обещающая форма — гейтится манифестом pack'а (packs/<slug>/manifest.ts). */
+  entryFrame?: {
+    label: string
+    promise: string
+    positioning: string
+  }
 }
 
 export const dictionaries: Record<Locale, Dictionary> = {
@@ -548,6 +556,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
     telegram: {
       signingIn: 'Входим через Telegram…',
     },
+    // Черновик на вычитку владельцем (intake LMS#1 + LMS#10).
+    entryFrame: {
+      label: 'рамка входа',
+      promise: 'Бесплатно и без встроенных продаж: все модули открыты целиком, внутри курса нечего докупать.',
+      positioning: 'Учишься асинхронно, в своём темпе; вход бесплатный; стек суверенный — твои инструменты на твоей машине; а каждая задача идёт по детерминированному руслу — от постановки до проверки.',
+    },
   },
   en: {
     nav: {
@@ -851,6 +865,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     telegram: {
       signingIn: 'Signing in via Telegram…',
+    },
+    // Draft for owner review (intake LMS#1 + LMS#10).
+    entryFrame: {
+      label: 'entry frame',
+      promise: 'Free, with no built-in sales: every module is fully open, and there is nothing to buy inside the course.',
+      positioning: 'You learn asynchronously, at your own pace; entry is free; the stack is sovereign — your tools on your own machine; and every task runs along a deterministic channel — from framing to verification.',
     },
   },
 }

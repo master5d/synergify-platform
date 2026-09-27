@@ -246,6 +246,14 @@ export type Dictionary = {
   telegram: {
     signingIn: string
   }
+  /** Рамка входа (intake LMS#1 + LMS#10): обещание «бесплатно, без встроенных продаж»
+   *  и одна фраза позиционирования через свойства курса. Опционально: pack без поля —
+   *  блока нет. Обещающая форма — гейтится манифестом pack'а (packs/<slug>/manifest.ts). */
+  entryFrame?: {
+    label: string
+    promise: string
+    positioning: string
+  }
 }
 
 export const dictionaries: Record<Locale, Dictionary> = {

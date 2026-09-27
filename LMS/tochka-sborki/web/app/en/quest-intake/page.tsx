@@ -1,3 +1,4 @@
 import { Nav } from '@/components/nav'
 import { IntakeWizard } from '@/components/intake/intake-wizard'
-export default function Page() { return (<><Nav locale="en" /><IntakeWizard locale="en" /></>) }
+import { EntryFrame } from '@/components/entry-frame'
+export default function Page() { return (<><Nav locale="en" /><EntryFrame locale="en" style={{ margin: '2rem auto 0', width: 'calc(100% - 2.5rem)' }} /><IntakeWizard locale="en" /></>) }
