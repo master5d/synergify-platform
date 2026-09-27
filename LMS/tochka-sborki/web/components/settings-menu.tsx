@@ -2,8 +2,12 @@
 
 import { useEffect, useId, useRef, useState } from 'react'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { useTheme } from '@/components/theme-provider'
 import { RpgModeToggle } from '@/components/rpg-mode-toggle'
-import { LiteToggle } from '@/components/lite-toggle'
+import { effectiveRpgMode, type RpgMode } from '@/lib/rpg-mode'
+import { LiteToggle, LITE_LABEL } from '@/components/lite-toggle'
+import { useLite } from '@/components/lite-provider'
+import { getDictionary } from '@/lib/dictionaries'
 import type { Locale } from '@/lib/intake/types'
 
 interface Props {
@@ -58,7 +62,15 @@ const LABELS: Record<'ru' | 'en', {
 export function SettingsMenu({ locale, os, onToggleOs, osTitle, osLabel }: Props) {
   const l: 'ru' | 'en' = locale === 'en' ? 'en' : 'ru'
   const t = LABELS[l]
+  const nav = getDictionary(locale).nav
   const [open, setOpen] = useState(false)
+  // Иконки (☀/☾/🖥, 🎲/📄, 🍎/⊞) сами по себе не говорят, какое значение выбрано
+  // прямо сейчас — подписи для этого уже есть в дереве доступности (aria-label/title
+  // тех же переключателей), здесь они просто становятся видимыми рядом с иконками.
+  const { pref: themePref } = useTheme()
+  const { pref: litePref } = useLite()
+  const [rpgMode, setRpgMode] = useState<RpgMode>('rpg')
+  useEffect(() => { setRpgMode(effectiveRpgMode()) }, [])
   // Низ шапки в момент открытия. Нужен только узкому экрану, где панель
   // прижимается к краям окна: шапка там переносится в несколько рядов, и её
   // высота заранее неизвестна (44px без переносов, 123px с ними).
@@ -98,6 +110,8 @@ export function SettingsMenu({ locale, os, onToggleOs, osTitle, osLabel }: Props
     fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)',
     color: 'var(--text-secondary)', whiteSpace: 'nowrap',
   }
+  const valueStyle: React.CSSProperties = { ...captionStyle, color: 'var(--text-primary)' }
+  const osShort = os === 'mac' ? 'macOS' : 'Windows'
 
   return (
     <div ref={wrapRef} style={{ position: 'relative', display: 'flex' }}>
@@ -129,7 +143,8 @@ export function SettingsMenu({ locale, os, onToggleOs, osTitle, osLabel }: Props
         aria-label={t.button}
         title={t.button}
         style={{
-          display: 'flex', alignItems: 'center', gap: '0.35rem',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem',
+          minWidth: '24px', minHeight: '24px',
           background: open ? 'var(--bg-surface)' : 'transparent',
           border: '1px solid var(--border-color)',
           borderRadius: 20, cursor: 'pointer', padding: '3px 10px',
@@ -162,17 +177,26 @@ export function SettingsMenu({ locale, os, onToggleOs, osTitle, osLabel }: Props
 
           <div style={{ ...rowStyle, borderTop: '1px solid var(--border-color)' }}>
             <span style={captionStyle}>{t.theme}</span>
-            <ThemeToggle locale={locale} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span style={valueStyle}>{nav.theme[themePref]}</span>
+              <ThemeToggle locale={locale} />
+            </div>
           </div>
 
           <div style={{ ...rowStyle, borderTop: '1px solid var(--border-color)' }}>
             <span style={captionStyle}>{t.presentation}</span>
-            <RpgModeToggle locale={locale} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span style={valueStyle}>{nav.rpgMode[rpgMode]}</span>
+              <RpgModeToggle locale={locale} />
+            </div>
           </div>
 
           <div style={{ ...rowStyle, borderTop: '1px solid var(--border-color)' }}>
             <span style={captionStyle}>{t.traffic}</span>
-            <LiteToggle locale={locale} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span style={valueStyle}>{(LITE_LABEL[l] ?? LITE_LABEL.ru)[litePref]}</span>
+              <LiteToggle locale={locale} />
+            </div>
           </div>
 
           {os && (
@@ -184,12 +208,17 @@ export function SettingsMenu({ locale, os, onToggleOs, osTitle, osLabel }: Props
                 title={osTitle}
                 aria-label={osLabel}
                 style={{
-                  display: 'flex', background: 'var(--bg-surface)',
-                  border: '1px solid var(--border-color)', borderRadius: 20,
-                  overflow: 'hidden', cursor: 'pointer', padding: 0,
+                  display: 'flex', alignItems: 'center', gap: '0.5rem',
+                  background: 'transparent', border: 'none', cursor: 'pointer', padding: 0,
                   fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)',
                 }}
               >
+                <span style={valueStyle}>{osShort}</span>
+                <span style={{
+                  display: 'flex', background: 'var(--bg-surface)',
+                  border: '1px solid var(--border-color)', borderRadius: 20,
+                  overflow: 'hidden',
+                }}>
                 <span style={{
                   padding: '3px 8px',
                   background: os === 'mac' ? 'var(--text-accent)' : 'transparent',
@@ -202,6 +231,7 @@ export function SettingsMenu({ locale, os, onToggleOs, osTitle, osLabel }: Props
                   color: os === 'windows' ? 'var(--text-on-accent)' : 'var(--text-secondary)',
                   fontWeight: os === 'windows' ? 700 : 400,
                 }}>🪟</span>
+                </span>
               </button>
             </div>
           )}

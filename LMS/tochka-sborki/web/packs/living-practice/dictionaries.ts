@@ -24,6 +24,8 @@ export type Dictionary = {
     store: string
     login: string
     logout: string
+    /** Доступное имя кнопки-бургера мобильного меню и заголовок его панели (≤720px). */
+    menu: string
     osTitle: string
     osCurrent: (os: string) => string
     theme: { title: string; light: string; dark: string; system: string }
@@ -235,6 +237,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       certificate: 'Сертификат',
       login: '→ Войти',
       logout: 'Выйти',
+      menu: 'Меню',
       osTitle: 'Сменить OS',
       osCurrent: (os: string) => `Текущая OS: ${os === 'mac' ? 'macOS' : 'Windows'}. Нажми для смены.`,
       theme: { title: 'Тема', light: 'Светлая', dark: 'Тёмная', system: 'Системная' },
@@ -510,6 +513,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       certificate: 'Certificate',
       login: '→ Sign in',
       logout: 'Sign out',
+      menu: 'Menu',
       osTitle: 'Switch OS',
       osCurrent: (os: string) => `Current OS: ${os === 'mac' ? 'macOS' : 'Windows'}. Click to switch.`,
       theme: { title: 'Theme', light: 'Light', dark: 'Dark', system: 'System' },
