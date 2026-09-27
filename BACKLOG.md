@@ -20,13 +20,32 @@
   и после входа ученик не вернётся в урок.
 - [ ] **Вход не объясняет, почему ученик здесь** [аудит, sev 3]: шёл в урок — видит «ВОЙТИ В КУРС» без
   строки «урок откроется после входа»; `redirect` читается только для ссылки Google.
-- [ ] **Шрифты темы не применяются** [аудит]: `model-kit.css` ждёт `'Geist Mono'`, а пакет `geist`
-  регистрирует `GeistMono` (`--font-geist-mono`, в репо не используется); Geist Sans и Unbounded
-  (заголовок h1) тоже не подключены — на проде системные шрифты. Проверить глазами до правки.
+- [x] **Шрифты темы не применяются — ИСПРАВЛЕНО 2026-09-27 (`claude/w9-theme-fonts-contrast`):**
+  подтверждено чтением кода — `--font-mono` в `themes/model-kit.css` был буквальной строкой
+  `'Geist Mono'` (ни одного `@font-face` с таким именем нет), `--font-sans` не был задан вовсе.
+  Правка: `--font-mono`/`--font-sans` ссылаются на `var(--font-geist-mono)`/`var(--font-geist-sans)` —
+  переменные, которые реально регистрирует `geist/font/{mono,sans}` в `app/layout.tsx`
+  (`GeistMono.variable`/`GeistSans.variable`); `app/globals.css` применяет `--font-sans` к `<html>`
+  (без этого Preflight Tailwind резолвит свой дефолтный стек на этапе сборки и не видит
+  переопределение в теме). Подтверждено в собранном `out/`: `--font-geist-sans`/`--font-geist-mono`
+  разворачиваются в `GeistSans`/`GeistMono`, оба объявлены в `@font-face`. Заголовок h1 на `/login`
+  по-прежнему без `--font-display` (Unbounded) — по всему сайту это единообразный паттерн
+  (`home-page.tsx`, `footer.tsx`, `certificate-page.tsx`, `not-found.tsx`: `fontFamily: 'var(--font-display), system-ui, sans-serif'`
+  на h1/h2 с `fontWeight: 900`), намерение недвусмысленно, но фикс — правка `components/login-form.tsx:91`,
+  которую эта задача не трогает (файл правит соседняя задача волны). Тест-регрессия:
+  `lib/a11y/theme-fonts.test.ts` (сверяет имена переменных темы с `geist/dist/*.js` и с `layout.tsx`).
 - [ ] **Мобильная навигация без меню** [оба аудита]: при ≤720px вторичные ссылки `display:none !important`
   (`components/nav.tsx:127-128`), замены нет — программу курса без входа с телефона не открыть.
-- [ ] **Контраст полей** [аудит]: граница поля и кнопки Google 1.30:1 (dark) / 1.43:1 (light) при
-  норме 3:1 (WCAG 1.4.11); placeholder в light 3.40:1 при норме 4.5:1.
+- [x] **Контраст полей — ИСПРАВЛЕНО 2026-09-27 (`claude/w9-theme-fonts-contrast`):** цифры аудита
+  подтверждены (`--border-color` на `--bg-primary`/`--bg-surface`: dark 1.29/1.18, light 1.33/1.43;
+  плейсхолдер `color-mix(currentcolor 50%)` на `--bg-surface`: light 3.40, dark ≈4.77 — норма
+  WCAG 1.4.11 ≥3:1 и 1.4.3 ≥4.5:1). Правка на уровне токенов, не хардкодом в компонентах: новые
+  `--border-interactive`/`--placeholder-color` в `themes/model-kit.css`, применены в
+  `app/globals.css` через `input, select, textarea, a[href^="/api/auth/oauth/"]` и `::placeholder`
+  (`components/login-form.tsx` не тронут — правит соседняя задача волны). Общий `--border-color`
+  не менялся (иначе рамки всех карточек стали бы крикливыми). Таблица до/после — в отчёте задачи;
+  тест-регрессия: `lib/a11y/contrast.test.ts` (border ≥3:1 на обоих фонах, placeholder ≥4.5:1,
+  для обеих тем).
 - [ ] Мелочи [аудит]: нет «изменить email / отправить ещё раз» после отправки ссылки; баннер
   «Switch to English» тем же акцентом спорит с главной кнопкой; «→ Войти» на мобильном 21px (<24px);
   «Roadmap» по-английски среди русских пунктов; пункты «Настроек» — только иконки.
