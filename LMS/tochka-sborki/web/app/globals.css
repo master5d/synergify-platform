@@ -10,6 +10,11 @@
 html {
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  /* Preflight красит html дефолтным Tailwind-стеком (--theme(--default-font-family, ...) —
+     резолвится на этапе сборки, не видит --font-sans темы). Geist Sans подключён в layout.tsx,
+     но без этой строки весь обычный текст сайта рендерился системным шрифтом (смок-аудит
+     2026-09-27: «Шрифты темы не применяются»). */
+  font-family: var(--font-sans);
 }
 
 a {
@@ -23,6 +28,29 @@ a:hover {
 
 pre, code {
   font-family: var(--font-mono);
+}
+
+/* ── Контраст интерактивных границ (WCAG 1.4.11, ≥3:1) ──────────────────
+   Поля ввода и Google-кнопка входа берут --border-color — токен декоративных
+   рамок карточек (1.3–1.4:1 на фоне), для «graphical objects» этого мало.
+   Отдельный --border-interactive точечно через селектор, не трогая компоненты
+   (login-form.tsx правит соседняя задача волны) и не задирая общий --border-color
+   (иначе рамки всех карточек станут кричащими). Ссылка на Google matched по href —
+   единственный `<a>` с этим путём в репо (components/login-form.tsx). */
+input,
+select,
+textarea,
+a[href^="/api/auth/oauth/"] {
+  --border-color: var(--border-interactive);
+}
+
+/* ── Контраст плейсхолдера (WCAG 1.4.3, ≥4.5:1) ──────────────────────────
+   Preflight красит ::placeholder в currentColor 50% — на --text-primary в light-теме
+   это 3.40:1 при норме 4.5:1 (смок-аудит 2026-09-27: «Контраст полей»). */
+input::placeholder,
+textarea::placeholder {
+  color: var(--placeholder-color);
+  opacity: 1;
 }
 
 /* ── Accessibility: keyboard-nav foundations ────────────────────────── */
