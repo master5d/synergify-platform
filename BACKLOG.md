@@ -10,16 +10,37 @@
 Без входа урок уводит на `/login/?redirect=…` (`components/auth-guard.tsx`), поэтому оба смотрели вход.
 Помечено [код] — подтверждено чтением кода контроллером; [аудит] — со слов аудитора, не перепроверено.
 
-- [ ] **Поля входа без подписей** [код]: у email и telegram нет `<label>`/`aria-label`, только
+- [x] **Поля входа без подписей — СДЕЛАНО 2026-09-27** [код]: у email и telegram теперь настоящие
+  `<label htmlFor>` (`components/login-form.tsx`, id/name/`autoComplete="email"`); у telegram — постоянная
+  подпись «Telegram (необязательно)» плюс отдельная подсказка-«зачем» через `aria-describedby`
+  (не только placeholder — тот и раньше пропадал при вводе). Текст подсказки — из уже существующего в
+  коде описания роли telegram (`workers/src/handlers/nudge-cron.ts`, `telegram-webhook.ts`: напоминание
+  о курсе), новых функций не добавлено. Было: у email и telegram нет `<label>`/`aria-label`, только
   placeholder (`components/login-form.tsx:141-155`); при вводе пропадает и «(необязательно)» у telegram.
   Доступность (WCAG 1.3.1 / 3.3.2) — наш `design-audit` этого не увидел.
-- [ ] **Сетевая ошибка входа показывает сырой `err.message`** [код]: `catch` в `login-form.tsx:71-73` отдаёт
-  `err.message` («Failed to fetch»), русская `networkError` не показывается никогда — `err` всегда `Error`.
-- [ ] **Проверка входа: пустой экран и потеря возврата** [код]: пока `/api/auth/me` отвечает, урок —
-  `return null` без индикатора (`auth-guard.tsx`); при сбое сети `catch` уводит на вход БЕЗ `?redirect`,
-  и после входа ученик не вернётся в урок.
-- [ ] **Вход не объясняет, почему ученик здесь** [аудит, sev 3]: шёл в урок — видит «ВОЙТИ В КУРС» без
-  строки «урок откроется после входа»; `redirect` читается только для ссылки Google.
+- [x] **Сетевая ошибка входа показывает сырой `err.message` — СДЕЛАНО 2026-09-27** [код]: сеть/сервер
+  разведены в чистую `lib/login-flow.ts` (`sendLoginLink`/`mapSendLinkError`, тесты — `login-flow.test.ts`):
+  `catch` всегда даёт `t.networkError`, известные коды `/api/auth/send-link` (`Valid email required`,
+  `Failed to send email`) — на `t.invalidEmail`/`t.sendFailed`, неизвестный код и сырые поля ответа
+  (`details` с SES-текстом) — на `t.defaultError`; строка ошибки — `role="alert"`. Было: `catch` в
+  `login-form.tsx:71-73` отдавал `err.message` («Failed to fetch»), русская `networkError` не
+  показывалась никогда — `err` всегда `Error`.
+- [x] **Проверка входа: пустой экран и потеря возврата — СДЕЛАНО 2026-09-27** [код]: пока
+  `/api/auth/me` отвечает, `auth-guard.tsx` показывает индикатор (`role="status" aria-busy="true"`,
+  текст `t.authGuard.checking` из словаря) вместо `return null`; сетевой сбой (`catch`) теперь уходит
+  на вход С `?redirect=` на текущий путь — логика вынесена в чистую `lib/auth-check.ts` (`checkAuth`,
+  тесты — `auth-check.test.ts`), обе ветки (не-2xx и reject) отдают одну и ту же ссылку с redirect.
+  Было: пока `/api/auth/me` отвечает, урок — `return null` без индикатора (`auth-guard.tsx`); при сбое
+  сети `catch` уводил на вход БЕЗ `?redirect`, и после входа ученик не возвращался в урок.
+- [x] **Вход не объясняет, почему ученик здесь — СДЕЛАНО 2026-09-27** [аудит, sev 3]: строка
+  `t.login.redirectHint` («Войди, и урок откроется.» / «Sign in, and the lesson will open.») над формой,
+  когда в URL есть валидный `?redirect=`; про цену/бесплатность ничего не сказано (в репо не
+  задокументировано). `redirect` теперь проверяется как внутренний путь тем же гейтом, что у
+  OAuth-старта на воркере (`lib/safe-redirect.ts` — правило `workers/src/lib/oauth-google.ts:safeRedirectPath`
+  повторено на клиенте: один ведущий слэш, не `//`, без схемы, без `..`); используется и для строки, и для
+  `oauthHref`, и для того, что кладётся в `sessionStorage` перед magic-link (раньше туда шёл сырой
+  параметр без проверки). Тесты — `safe-redirect.test.ts`. Было: шёл в урок — видел «ВОЙТИ В КУРС» без
+  строки «урок откроется после входа»; `redirect` читался только для ссылки Google.
 - [x] **Шрифты темы не применяются — ИСПРАВЛЕНО 2026-09-27 (`claude/w9-theme-fonts-contrast`):**
   подтверждено чтением кода — `--font-mono` в `themes/model-kit.css` был буквальной строкой
   `'Geist Mono'` (ни одного `@font-face` с таким именем нет), `--font-sans` не был задан вовсе.
@@ -79,6 +100,9 @@
   Мелочи [аудит]: нет «изменить email / отправить ещё раз» после отправки ссылки; баннер
   «Switch to English» тем же акцентом спорит с главной кнопкой; «→ Войти» на мобильном 21px (<24px);
   «Roadmap» по-английски среди русских пунктов; пункты «Настроек» — только иконки.
+  Дополнение 2026-09-27 (вливание `claude/w9-login-flow`): «изменить email» и «отправить ещё раз»
+  после отправки ссылки — СДЕЛАНО (`login-form.tsx`, `t.login.changeEmail`/`t.login.resend`, защита
+  от повторного клика; 429 воркера мапится на `t.login.rateLimited`).
 - [ ] **«Roadmap» по-английски среди русских пунктов ТС — решение владельца (не найден след).** Проверено
   2026-09-27: `git log -S` по `packs/tochka-sborki/dictionaries.ts` даёт один коммит — исходный импорт
   репозитория (`cef222e`, «UI-аудит Learn Your Way»), там `roadmap: 'Roadmap'` уже одинаков в RU и EN —
