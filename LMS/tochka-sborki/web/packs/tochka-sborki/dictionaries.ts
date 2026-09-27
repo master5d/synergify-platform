@@ -234,7 +234,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     nav: {
       brand: 'Точка Сборки',
       syllabus: 'Программа',
-      roadmap: 'Roadmap',
+      roadmap: 'Дорожная карта',
       cheatsheet: 'Шпаргалка',
       questLog: '⬡ Квест-лог',
       profile: 'Профиль',

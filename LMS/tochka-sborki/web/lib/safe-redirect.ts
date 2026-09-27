@@ -1,12 +1,14 @@
-// Open-redirect guard for the `?redirect=` read directly off the URL on the client
-// (login-form). Same rule as the worker's own guard for OAuth
-// (workers/src/lib/oauth-google.ts:safeRedirectPath) and the courses that a returned
-// magic-link may point to (workers/src/lib/return-base.ts): only a same-origin
-// absolute path — single leading slash (not protocol-relative "//"), no backslash,
-// no "..". Anything else is untrusted and must not be used for navigation or copy.
-export function isSafeRedirect(raw: string | null | undefined): raw is string {
-  if (!raw) return false
-  if (!/^\/(?!\/)/.test(raw)) return false
-  if (raw.includes('\\') || raw.includes('..')) return false
-  return true
+// Единственный гейт open-redirect для `?redirect=` на клиенте (login-form читает его с URL,
+// nav-links прокидывает его в «→ Войти» и EN/RU). Тот же смысл, что у гейтов воркера
+// (workers/src/lib/oauth-google.ts:safeRedirectPath, workers/src/lib/return-base.ts):
+// только внутренний путь этого сайта — один ведущий `/` (не протокол-относительный `//`),
+// без схемы (`://`), без `\`, без пробельных символов и без `..`. Всё остальное — недоверенное:
+// ни навигации, ни подсказки в тексте, ни sessionStorage.
+const SAFE_INTERNAL_PATH = /^\/(?!\/)[^\s\\]*$/
+
+export function sanitizeInternalPath(raw: string | null | undefined): string | null {
+  if (typeof raw !== 'string' || raw === '') return null
+  if (!SAFE_INTERNAL_PATH.test(raw)) return null
+  if (raw.includes('://') || raw.includes('..')) return null
+  return raw
 }

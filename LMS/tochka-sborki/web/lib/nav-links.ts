@@ -4,6 +4,7 @@
 // COURSE.features решает движок (вызывающая сторона передаёт флаги как данные) — этот
 // файл имени курса не знает, только форму флагов.
 import type { Dictionary } from '@/lib/dictionaries'
+import { sanitizeInternalPath } from '@/lib/safe-redirect'
 
 export type Locale = 'ru' | 'en'
 
@@ -47,17 +48,8 @@ export function secondaryNavLinks({ locale, email, features, nav, questLogLabel 
 // без контекста, а переключение языка НА странице входа сбрасывает ?redirect= —
 // после входа ученика возвращает не туда. `redirect` при этом должен быть только
 // внутренним путём (basePath пака в нём уже учтён вызывающей стороной через pagePath):
-// без этого поле стало бы open-redirect (?redirect=https://evil).
-
-/** Внутренний путь: один ведущий `/`, без протокола и без `//`/`\`-трюков протокол-относительной ссылки. */
-const SAFE_INTERNAL_PATH = /^\/(?!\/)(?!\\)[^\s\\]*$/
-
-export function sanitizeInternalPath(raw: string | null | undefined): string | null {
-  if (typeof raw !== 'string' || raw === '') return null
-  if (!SAFE_INTERNAL_PATH.test(raw)) return null
-  if (raw.includes('://')) return null
-  return raw
-}
+// без этого поле стало бы open-redirect (?redirect=https://evil). Гейт один на весь
+// клиент — lib/safe-redirect.ts.
 
 /** Добавляет `?redirect=<путь>` к href — только если путь прошёл sanitizeInternalPath. */
 export function withRedirectParam(href: string, redirect: string | null | undefined): string {

@@ -4,7 +4,7 @@ import { useState, useEffect, useId } from 'react'
 import { Nav } from '@/components/nav'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
 import { BASE_PATH } from '@/lib/base-path'
-import { isSafeRedirect } from '@/lib/safe-redirect'
+import { sanitizeInternalPath } from '@/lib/safe-redirect'
 import { sendLoginLink } from '@/lib/login-flow'
 
 const inputStyle = {
@@ -70,7 +70,7 @@ export function LoginForm({ locale }: Props) {
     // base — префикс курса в подпути (/praktika): воркер вернёт ошибку/дефолт на вход и главную курса,
     // а не на корень домена школы (intake LMS#16, вариант A).
     const rawRedirect = new URLSearchParams(window.location.search).get('redirect')
-    const safeRedirect = isSafeRedirect(rawRedirect) ? rawRedirect : null
+    const safeRedirect = sanitizeInternalPath(rawRedirect)
     setRedirect(safeRedirect)
     const params = new URLSearchParams()
     if (safeRedirect) params.set('redirect', safeRedirect)

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { secondaryNavLinks, sanitizeInternalPath, withRedirectParam, type NavLink } from './nav-links'
+import { secondaryNavLinks, withRedirectParam, type NavLink } from './nav-links'
 
 const NAV = {
-  brand: 'Курс', syllabus: 'Программа', roadmap: 'Roadmap', cheatsheet: 'Шпаргалка',
+  brand: 'Курс', syllabus: 'Программа', roadmap: 'Дорожная карта', cheatsheet: 'Шпаргалка',
   feedback: 'Фидбек', certificate: 'Сертификат', questLog: '⬡ Квест-лог', profile: 'Профиль',
   synergems: 'Синергемы', support: 'Поддержать', store: 'Магазин', login: '→ Войти', logout: 'Выйти',
   osTitle: 'Сменить OS', osCurrent: () => '', theme: { title: '', light: '', dark: '', system: '' },
@@ -53,34 +53,6 @@ describe('secondaryNavLinks', () => {
       locale: 'en', email: null, features: { rpg: false, certificate: false }, nav: NAV as any, questLogLabel: NAV.questLog,
     })
     expect(links.every((l) => l.href.startsWith('/en/'))).toBe(true)
-  })
-})
-
-describe('sanitizeInternalPath', () => {
-  it.each([
-    '/lessons/01-introduction/',
-    '/praktika/lessons/01-introduction/',
-    '/en/roadmap/',
-    '/x?y=1&z=2',
-  ])('внутренний путь %s проходит', (p) => {
-    expect(sanitizeInternalPath(p)).toBe(p)
-  })
-
-  it.each([
-    null,
-    undefined,
-    '',
-    '//evil.com',
-    '///evil.com',
-    'https://evil.com',
-    'http://evil.com/x',
-    'javascript:alert(1)',
-    '/\\evil.com',
-    '/\\\\evil.com',
-    'evil.com/x',
-    '/x\ty',
-  ])('внешний/битый путь %s отбрасывается', (p) => {
-    expect(sanitizeInternalPath(p as string | null)).toBeNull()
   })
 })
 

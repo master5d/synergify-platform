@@ -46,7 +46,7 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
     label: { ru: 'Из курса', en: 'From the course' },
     items: [
       { kind: 'link', title: { ru: 'Шпаргалка', en: 'Cheatsheet' }, href: '/cheatsheet/' },
-      { kind: 'link', title: { ru: 'Roadmap', en: 'Roadmap' }, href: '/roadmap/' },
+      { kind: 'link', title: { ru: 'Дорожная карта', en: 'Roadmap' }, href: '/roadmap/' },
       { kind: 'link', title: { ru: 'Установка стека (macOS/Linux)', en: 'Install the stack (macOS/Linux)' }, href: '/install.sh' },
       { kind: 'link', title: { ru: 'Установка стека (Windows)', en: 'Install the stack (Windows)' }, href: '/install.ps1' },
       { kind: 'link', title: { ru: 'Установка за GFW (cloud-relay)', en: 'Install behind GFW (cloud relay)' }, href: '/install-gfw.sh' },

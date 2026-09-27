@@ -1,29 +1,34 @@
 import { describe, expect, it } from 'vitest'
-import { isSafeRedirect } from './safe-redirect'
+import { sanitizeInternalPath } from './safe-redirect'
 
-describe('isSafeRedirect', () => {
-  it('accepts a same-origin absolute path', () => {
-    expect(isSafeRedirect('/lessons/01-introduction/')).toBe(true)
-    expect(isSafeRedirect('/en/lessons/01-introduction/?x=1')).toBe(true)
+describe('sanitizeInternalPath', () => {
+  it.each([
+    '/lessons/01-introduction/',
+    '/en/lessons/01-introduction/?x=1',
+    '/praktika/lessons/01-introduction/',
+    '/en/roadmap/',
+    '/x?y=1&z=2',
+  ])('внутренний путь %s проходит', (p) => {
+    expect(sanitizeInternalPath(p)).toBe(p)
   })
 
-  it('rejects protocol-relative //', () => {
-    expect(isSafeRedirect('//evil.com')).toBe(false)
-  })
-
-  it('rejects an absolute URL with a scheme', () => {
-    expect(isSafeRedirect('https://evil.com')).toBe(false)
-    expect(isSafeRedirect('http://x')).toBe(false)
-  })
-
-  it('rejects backslashes and path traversal', () => {
-    expect(isSafeRedirect('/\\evil.com')).toBe(false)
-    expect(isSafeRedirect('/../etc/passwd')).toBe(false)
-  })
-
-  it('rejects empty/missing input', () => {
-    expect(isSafeRedirect(null)).toBe(false)
-    expect(isSafeRedirect(undefined)).toBe(false)
-    expect(isSafeRedirect('')).toBe(false)
+  it.each([
+    null,
+    undefined,
+    '',
+    '//evil.com',
+    '///evil.com',
+    'https://evil.com',
+    'http://evil.com/x',
+    'javascript:alert(1)',
+    '/\\evil.com',
+    '/\\\\evil.com',
+    'evil.com/x',
+    '/x\ty',
+    '/../etc/passwd',
+    '/lessons/../../x',
+    '/redirect?to=https://evil.com',
+  ])('внешний/битый путь %s отбрасывается', (p) => {
+    expect(sanitizeInternalPath(p as string | null)).toBeNull()
   })
 })

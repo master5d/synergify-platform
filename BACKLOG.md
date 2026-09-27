@@ -80,11 +80,15 @@
   теперь ведёт на `/login/?redirect=<текущий путь>` (`withRedirectParam` + `pagePath`, тот же формат,
   что уже ждёт `auth-guard.tsx`/`verify-client.tsx`); на самой странице входа ссылка на себя лишняя —
   скрыта. EN/RU на странице входа с `?redirect=` теперь сохраняет его при переключении языка. `redirect`
-  проверяется как внутренний путь (`sanitizeInternalPath` в `lib/nav-links.ts`) — внешний
+  проверяется как внутренний путь (`sanitizeInternalPath`; с 2026-09-27 — в `lib/safe-redirect.ts`) — внешний
   (`https://…`, `//…`, `javascript:`) отбрасывается, open-redirect не заводится; гвард
   `lib/raw-navigation.test.ts` и `lib/base-path.test.ts` зелёные без правок. Тесты —
   `lib/nav-links.test.ts` (sanitizeInternalPath/withRedirectParam), `components/nav-auth-links.test.ts`.
   Это не строка исходного аудита, а часть той же волны (навигация шапки) — добавлено по ходу правки.
+  **Два гейта слиты в один 2026-09-27:** `isSafeRedirect` (login-form) и `sanitizeInternalPath` (nav-links)
+  проверяли одно и то же с разными дырами (первый пропускал пробельные символы, второй — `..`).
+  Теперь одна функция `sanitizeInternalPath` в `lib/safe-redirect.ts` с объединённым правилом, тесты
+  обеих сторон собраны в `lib/safe-redirect.test.ts`.
 - [~] **Мелочи — ЧАСТИЧНО СДЕЛАНО 2026-09-27:** баннер «Switch to English» стал вторичной (контурной)
   кнопкой — фон снят, остались акцентная рамка и текст, тот же стиль, что у вторичных CTA в курсе
   (`components/lang-suggest-banner.tsx`; логика показа не менялась). «→ Войти» на мобильном, EN/RU и
@@ -103,7 +107,7 @@
   Дополнение 2026-09-27 (вливание `claude/w9-login-flow`): «изменить email» и «отправить ещё раз»
   после отправки ссылки — СДЕЛАНО (`login-form.tsx`, `t.login.changeEmail`/`t.login.resend`, защита
   от повторного клика; 429 воркера мапится на `t.login.rateLimited`).
-- [ ] **«Roadmap» по-английски среди русских пунктов ТС — решение владельца (не найден след).** Проверено
+- [x] **«Roadmap» по-английски среди русских пунктов ТС — РЕШЕНО владельцем 2026-09-27: «Дорожная карта».** Переведены RU-сторона: пункт навигации (`dictionaries.ts`), карточка материалов (`materials.ts`), заголовок страницы и h1 `content/ru/roadmap.mdx`; EN остаётся «Roadmap». Исходная запись: Проверено
   2026-09-27: `git log -S` по `packs/tochka-sborki/dictionaries.ts` даёт один коммит — исходный импорт
   репозитория (`cef222e`, «UI-аудит Learn Your Way»), там `roadmap: 'Roadmap'` уже одинаков в RU и EN —
   явного решения оставить как есть в истории нет. При этом `packs/living-practice` тот же пункт
