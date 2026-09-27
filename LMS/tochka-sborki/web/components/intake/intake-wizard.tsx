@@ -7,6 +7,7 @@ import type { Answers, AnswerValue, InstrumentVersion, Locale } from '@/lib/inta
 import { CharterReveal } from './charter-reveal'
 import { OnboardingBridge } from './onboarding-bridge'
 import { IntakeGate } from './intake-gate'
+import { AutomationVerdictCard } from './automation-verdict-card'
 import { buildCompanionCharter } from '@/lib/intake/charter'
 import { deriveMbti } from '@/lib/intake/mbti'
 import { SKINS_META } from '@/lib/rpg/skins-meta'
@@ -204,14 +205,18 @@ export function IntakeWizard({ locale }: { locale: Locale }) {
         </p>
       )}
       <h1 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '1.2rem', lineHeight: 1.3 }}>{q.prompt[locale]}</h1>
-      <QuestionRenderer
-        question={q}
-        locale={locale}
-        value={answers[q.id]}
-        onChange={setAnswer}
-        otherValue={answers[otherKey] as string | undefined}
-        onOtherChange={setOther}
-      />
+      {q.format === 'automation-verdict'
+        ? <AutomationVerdictCard locale={locale} answers={answers} onChange={setAnswer} />
+        : (
+          <QuestionRenderer
+            question={q}
+            locale={locale}
+            value={answers[q.id]}
+            onChange={setAnswer}
+            otherValue={answers[otherKey] as string | undefined}
+            onOtherChange={setOther}
+          />
+        )}
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, marginTop: '2rem' }}>
         <button className="intake-nav-btn" disabled={step === 0} onClick={() => goTo(step - 1)}>← {locale === 'en' ? 'Back' : 'Назад'}</button>
         {isLast
