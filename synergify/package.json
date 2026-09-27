@@ -10,10 +10,11 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240524.0",
     "typescript": "^5.4.0",
-    "vitest": "^4.1.10",
+    "vitest": "^4.1.11",
     "wrangler": "~4.107.0"
   },
   "overrides": {
-    "sharp": "^0.35.3"
+    "sharp": "^0.35.4",
+    "undici": "^7.29.0"
   }
 }
