@@ -85,6 +85,20 @@
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "Всякий ученик начинает с алфавита гримуара. Шесть слов силы откроют тебе смысл заклинаний, что звучат вокруг.",
+        "en": "Every apprentice begins with the grimoire's alphabet. Six words of power will reveal the meaning of the spells spoken around you."
+      },
+      "mentorHint": {
+        "ru": "Не заучивай слово — пойми, что оно творит.",
+        "en": "Don't memorise the word — understand what it does."
+      },
+      "outro": {
+        "ru": "Алфавит постигнут. Теперь шёпот заклинаний стал речью, и ты готов услышать своего призрака.",
+        "en": "The alphabet is mastered. The whisper of spells has become speech, and you are ready to hear your ghost."
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "Всякое великое заклятие начинается с шёпота — бесплотной идеи. Прислушайся к своему призраку, ибо мы научимся придавать ему форму.",

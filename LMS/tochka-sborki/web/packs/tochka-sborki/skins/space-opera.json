@@ -85,6 +85,20 @@
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "Кадет, прежде чем выйти на мостик, выучи бортовой словарь. Шесть терминов — и ни один доклад экипажа не застанет тебя врасплох.",
+        "en": "Cadet, before you step onto the bridge, learn the ship's glossary. Six terms — and no crew report will catch you off guard."
+      },
+      "mentorHint": {
+        "ru": "На мостике путаница в словах опаснее метеоритов.",
+        "en": "On the bridge, muddled words are more dangerous than meteors."
+      },
+      "outro": {
+        "ru": "Словарь загружен в бортовой компьютер. Теперь можно ловить первый сигнал — твою идею-призрак.",
+        "en": "The glossary is loaded into the ship's computer. Now you can catch the first signal — your ghost idea."
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "Добро пожаловать на борт, кадет. В безграничной пустоте космоса каждая великая миссия начинается с одного-единственного сигнала, с идеи-призрака на краю известной вселенной.",

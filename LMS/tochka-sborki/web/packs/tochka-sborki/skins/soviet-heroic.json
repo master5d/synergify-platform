@@ -85,6 +85,20 @@
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "Прежде чем встать к станку, рабочий изучает технику безопасности и названия узлов. Шесть терминов — и цех заговорит с тобой на одном языке.",
+        "en": "Before stepping up to the machine, a worker learns the safety rules and the names of the parts. Six terms — and the factory floor will speak your language."
+      },
+      "mentorHint": {
+        "ru": "Товарищ, незнание терминов не освобождает от брака.",
+        "en": "Comrade, not knowing the terms doesn't excuse a defective part."
+      },
+      "outro": {
+        "ru": "Техминимум сдан! Термины усвоены, пора браться за чертёж своей идеи.",
+        "en": "Technical minimum passed! The terms are learned — time to take up the blueprint of your idea."
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "Идея без плана — призрак, бродящий по цеху. Наша задача — загнать его в рамки конкретного проекта и поставить к станку.",

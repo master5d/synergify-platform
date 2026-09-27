@@ -85,6 +85,20 @@
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "Прежде чем выйти на арену, герой учит язык этого мира! Шесть волшебных слов — и ни один босс не собьёт тебя с толку!",
+        "en": "Before stepping into the arena, a hero learns the language of this world! Six magic words — and no boss will ever confuse you!"
+      },
+      "mentorHint": {
+        "ru": "Слово, которое ты понял, — это уже оружие в твоём инвентаре!",
+        "en": "A word you understand is already a weapon in your inventory!"
+      },
+      "outro": {
+        "ru": "Словарь героя собран! Теперь ты понимаешь, о чём шепчутся на арене. Вперёд — за своей идеей-призраком!",
+        "en": "Your hero's glossary is complete! Now you understand what the arena whispers about. Onward — to catch your Ghost-Idea!"
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "Мир AI ждёт! Твой квест начинается, герой! Первое испытание — поймать призрачную идею, что станет твоей путеводной звездой!",

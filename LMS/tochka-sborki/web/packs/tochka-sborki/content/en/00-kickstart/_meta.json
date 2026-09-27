@@ -2,9 +2,10 @@
   "module": 0,
   "title": "Kickstart",
   "description": "A map for newcomers to AI coding",
-  "duration": "32 min",
+  "duration": "42 min",
   "level": 0,
   "units": [
+    { "slug": "u0-azbuka", "title": "ABC: six words before you start" },
     { "slug": "u1-map", "title": "Your ghost idea" },
     { "slug": "u2-tools", "title": "Map of tools" },
     { "slug": "u3-first-steps", "title": "First steps" },
@@ -25,11 +26,11 @@
     },
     {
       "id": "o4",
-      "text": "Tell a primary source from packaging by three signs: licence, date of the last edit, author and participation"
+      "text": "Tell a primary source from packaging by three signs (licence, date of the last edit, author and participation) and explain which question this check answers and what sovereignty in learning means"
     },
     {
-      "id": "o5",
-      "text": "Explain which question the source check answers and which it doesn't, and what sovereignty in learning means"
+      "id": "o6",
+      "text": "Explain in plain words token, context window, temperature, how models differ, prompt vs context, agent — and where LLMs sit in the nesting doll AI ⊃ ML ⊃ deep learning"
     }
   ],
   "checks": [
@@ -148,7 +149,7 @@
     {
       "id": "c9",
       "unit": "u4-sources",
-      "objective": "o5",
+      "objective": "o4",
       "question": "Which question does the three-glance check answer?",
       "options": [
         "Whether this is good material",
@@ -162,7 +163,7 @@
     {
       "id": "c10",
       "unit": "u4-sources",
-      "objective": "o5",
+      "objective": "o4",
       "question": "What does the lesson call sovereignty in learning?",
       "options": [
         "Not paying anyone for learning",
@@ -172,6 +173,34 @@
       ],
       "answer": 1,
       "explain": "It's not about refusing to pay or distrusting everything: the lesson says outright that suspicion costs as much time as blind trust. Sovereignty is when the material stays with you (u4, “What the check won't tell you”)."
+    },
+    {
+      "id": "c11",
+      "unit": "u0-azbuka",
+      "objective": "o6",
+      "question": "You asked a model the same question twice in new chats and got different answers. What does that mean?",
+      "options": [
+        "The model is broken: there is always one correct answer",
+        "That's expected: the model picks each next word with some randomness, and temperature controls it",
+        "The model remembered the first question and decided not to repeat itself",
+        "The second chat ran out of tokens"
+      ],
+      "answer": 1,
+      "explain": "The model writes its answer piece by piece, each time choosing among several likely continuations. How boldly it chooses is set by temperature. So one good answer needs checking, not trusting as a guarantee (u0, “Temperature”)."
+    },
+    {
+      "id": "c12",
+      "unit": "u0-azbuka",
+      "objective": "o6",
+      "question": "How is an agent different from an ordinary chat with a model?",
+      "options": [
+        "An agent is just a bigger, smarter model",
+        "It isn't: they're two names for the same thing",
+        "An agent has tools and a loop: it takes a step itself, looks at the result and decides what's next",
+        "An agent answers without context, so it's faster"
+      ],
+      "answer": 2,
+      "explain": "A chat answers; an agent acts. Inside the agent is the same model, but with tools added (files, commands, search) and a loop of think → act → look (u0, “Agent”)."
     }
   ]
 }

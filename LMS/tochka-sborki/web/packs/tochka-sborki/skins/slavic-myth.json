@@ -85,6 +85,20 @@
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "Прежде чем в дорогу собираться, надобно слова знать заветные. Шесть их всего — выучишь, и ни один леший не заморочит.",
+        "en": "Before setting out on the road, one must know the cherished words. There are but six — learn them, and no wood-spirit will lead you astray."
+      },
+      "mentorHint": {
+        "ru": "Кто вещь по имени зовёт, тот ею и правит.",
+        "en": "Whoever calls a thing by its name holds sway over it."
+      },
+      "outro": {
+        "ru": "Вот и азбука освоена. Теперь речи мудрецов тебе понятны — пора разглядеть свой замысел.",
+        "en": "There, the alphabet is learned. Now the sages' speech makes sense to you — time to take a look at your own design."
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "Всякая добрая изба начинается с замысла, с духа-невидимки, что вьётся под потолком. Давай же приглядимся к твоему призраку-идее, разглядим его очертания.",

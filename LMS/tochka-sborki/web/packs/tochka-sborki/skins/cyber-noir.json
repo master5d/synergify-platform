@@ -85,6 +85,20 @@
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "В этом городе у каждого свой жаргон. Токены, окна, температура — пока не знаешь слов, тебя водят за нос. Начнём с азбуки.",
+        "en": "In this city everyone speaks their own slang. Tokens, windows, temperature — until you know the words, you get played. We start with the basics."
+      },
+      "mentorHint": {
+        "ru": "Кто знает язык улицы, того не обсчитают.",
+        "en": "Whoever knows the street's language doesn't get short-changed."
+      },
+      "outro": {
+        "ru": "Словарь при тебе. Теперь ты слышишь сеть, а не шум. Пора ловить своего призрака.",
+        "en": "You've got the lexicon. Now you hear the net, not the noise. Time to catch your ghost."
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "В этом городе из стекла и хрома каждая идея — призрак в сети, ждущий своего носителя. Сейчас мы поймаем твоего.",

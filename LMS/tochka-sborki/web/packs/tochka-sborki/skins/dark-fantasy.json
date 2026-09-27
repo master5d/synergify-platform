@@ -85,6 +85,20 @@
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "Прежде чем вступить в туман, выучи имена того, что в нём обитает. Названное теряет власть пугать.",
+        "en": "Before you step into the mist, learn the names of what dwells within it. What is named loses its power to frighten."
+      },
+      "mentorHint": {
+        "ru": "Истинное имя — первый ключ к любой печати.",
+        "en": "A true name is the first key to any seal."
+      },
+      "outro": {
+        "ru": "Шесть имён произнесены, и туман отступил на шаг. Теперь можно звать своего духа-идею.",
+        "en": "Six names have been spoken, and the mist has drawn back a step. Now you may summon your spirit-idea."
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "Мир окутан туманом возможностей, и в нем твоя идея блуждает, словно беспокойный дух. Мы должны придать ей форму, прежде чем она канет в небытие.",
