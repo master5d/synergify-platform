@@ -130,6 +130,21 @@ export type Dictionary = {
     surveyHeading: string
     surveySkipHint: string
   }
+  retro: {
+    heading: string
+    subtitle: string
+    beforeLabel: string
+    afterLabel: string
+    promptLabel: string
+    planLabel: string
+    reviewLabel: string
+    requiredError: string
+    submitting: string
+    submit: string
+    successMessage: string
+    errorMessage: string
+    downloadAction: string
+  }
   capture: {
     nameLabel: string
     emailLabel: string
@@ -407,6 +422,21 @@ export const dictionaries: Record<Locale, Dictionary> = {
       pageDescription: 'Обратная связь по курсу',
       surveyHeading: 'Как прошёл модуль?',
       surveySkipHint: 'Любой вопрос можно пропустить — по желанию.',
+    },
+    retro: {
+      heading: 'Ретро выпускника',
+      subtitle: 'Четыре вопроса, которые стоит задать себе на финале. Ответы уходят нам как отзыв — «план на месяц» и «до/после» можно сразу скачать себе.',
+      beforeLabel: 'Что ты умел(а) до курса?',
+      afterLabel: 'Что ты умеешь теперь?',
+      promptLabel: 'Лучший промпт курса — тот, который выстрелил сильнее всего',
+      planLabel: 'План на месяц: что применишь в первую очередь',
+      reviewLabel: 'Отзыв о курсе',
+      requiredError: 'Заполни это поле',
+      submitting: 'Отправляем…',
+      submit: 'Отправить ретро →',
+      successMessage: '✓ Спасибо! Ретро сохранено.',
+      errorMessage: 'Что-то пошло не так, попробуй снова.',
+      downloadAction: '↓ Скачать план и до/после (.md)',
     },
     capture: {
       nameLabel: 'Имя',
@@ -696,6 +726,21 @@ export const dictionaries: Record<Locale, Dictionary> = {
       pageDescription: 'Feedback on the course',
       surveyHeading: 'How was this module?',
       surveySkipHint: "You can skip any question — it's optional.",
+    },
+    retro: {
+      heading: 'Graduate retro',
+      subtitle: 'Four questions worth asking yourself at the finish line. Your answers go to us as feedback — you can download the "plan" and "before/after" for yourself right away.',
+      beforeLabel: 'What could you do before the course?',
+      afterLabel: 'What can you do now?',
+      promptLabel: 'Best prompt of the course — the one that landed hardest',
+      planLabel: 'Plan for the month: what you’ll apply first',
+      reviewLabel: 'Course review',
+      requiredError: 'Fill in this field',
+      submitting: 'Sending…',
+      submit: 'Send retro →',
+      successMessage: '✓ Thanks! Retro saved.',
+      errorMessage: 'Something went wrong, try again.',
+      downloadAction: '↓ Download plan and before/after (.md)',
     },
     capture: {
       nameLabel: 'Name',

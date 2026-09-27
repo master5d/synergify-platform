@@ -302,8 +302,28 @@
 - [ ] **ТС: ступень роли «AI Solution Architect» в роадмапе** (intake LMS#15, owner-gated). Роадмап ведёт к «AI Generalist»,
   а в разделе инструментов уже есть «от пользователя Claude Code к архитектору собственной системы». Следующая ступень после
   курса — архитектор агентных решений для бизнеса; пересекается с advanced-модулем и с ролью владельца на mamaev.coach.
-- [ ] **ТС: ретро выпускника** (intake LMS#10, **принято владельцем 2026-09-14**) по мотивам `glebis/claude-skills/lab-retro` (MIT):
-  до/после, лучший промпт, план на месяц, отзыв — на финале рядом с сертификатом, отзыв в `course_feedback`.
+- [x] **ТС: ретро выпускника — СДЕЛАНО 2026-09-27** (intake LMS#10, принято владельцем 2026-09-14):
+  `components/graduate-retro-form.tsx` на странице сертификата (`components/pages/certificate-page.tsx`,
+  RU+EN) — четыре обязательных поля (до/после, лучший промпт курса, план на месяц, отзыв), только
+  вошедшему студенту (`lib/graduate-retro.ts:fetchIsGraduate` — `/api/auth/me`, тот же приём, что уже
+  использует certificate-page); отправка через существующий `/api/feedback` с `credentials: 'include'`
+  (`lib/graduate-retro.ts:submitRetro`), отзыв — в уже существующую колонку `other`, до/после и промпт/план —
+  в новые nullable-колонки `retro_before/retro_after/retro_prompt/retro_plan` (миграция
+  `workers/migrations/0017_course_feedback_retro.sql`, новую таблицу заводить не пришлось). «План на месяц» и
+  «до/после» дополнительно скачиваются студентом своим `.md`-файлом на клиенте (`buildRetroMarkdown`) —
+  лучший промпт и отзыв в файл не уходят, это только нам. Фича — флаг pack'а `COURSE.features.graduateRetro`
+  (`true` у Точки Сборки, `false` у `living-practice`, движок не хардкодит имя курса), строки — в словарях
+  обоих pack'ов (`packs/*/dictionaries.ts: retro`). Тесты: `lib/graduate-retro.test.ts` (валидация, auth-гейт,
+  отправка, генерация `.md` — с подставным fetch, тот же приём, что `lib/login-flow.ts`/`lib/auth-check.ts`,
+  репо не ставит jsdom), `components/graduate-retro-form.test.tsx` (SSR-рендер без входа — пусто; подписи,
+  видимые ошибки, гейт по флагу — по исходнику, как `nav-mobile-menu.test.ts`), `lib/course-features.test.ts`
+  расширен новым флагом, `workers/src/handlers/feedback.test.ts` — новые колонки персистятся, старый путь
+  (`lesson`-only) не задет. Проверено: `npm test`/`npx tsc --noEmit`/`npm run build` для обоих pack'ов
+  (tochka-sborki и `COURSE_PACK=living-practice`), `pack isolation` grep — чисто; `workers`: `npm test` 238/238.
+  ⚠ Миграция `0017` — additive/nullable, но не входит в CI-деплой (D1-миграции этого репо применяются вручную,
+  прецедент — комментарий в `0016_oauth_google.sql`): нужно применить на прод-D1 через cloudflare-api MCP
+  `/query` (не wrangler) до того, как этот код смёржат в `main`, иначе `/api/feedback` начнёт отдавать ошибку
+  «no such column» на ЛЮБОЙ фидбек, не только ретро.
 - [ ] **ТС: «автоматизировать ли вообще»** (intake LMS#10, **принято владельцем 2026-09-14**) по мотивам `automation-advisor` (MIT): четыре
   измерения + окупаемость — первым шагом русла задачи в онбординге.
 - [x] **Движок: встроенные мини-проверки «проверь себя» — СДЕЛАНО 2026-09-14** (`components/self-check.tsx`, данные в

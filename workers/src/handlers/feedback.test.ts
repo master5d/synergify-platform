@@ -55,4 +55,38 @@ describe('handleFeedback', () => {
     expect(res.status).toBe(200)
     expect(feedbackInsert(calls)).toBeDefined()
   })
+
+  it('persists graduate-retro fields (before/after, prompt, plan) alongside the review in `other`', async () => {
+    const calls: DbCall[] = []
+    const res = await handleFeedback(
+      req({
+        lesson: 'graduate-retro',
+        other: 'review text',
+        locale: 'ru',
+        retroBefore: 'copy-paste from ChatGPT',
+        retroAfter: 'agents with MCP and hooks',
+        retroPrompt: 'best prompt of the course',
+        retroPlan: 'ship one automation a week',
+      }),
+      makeEnv({ calls }),
+    )
+    expect(res.status).toBe(200)
+    const ins = feedbackInsert(calls)
+    expect(ins).toBeDefined()
+    expect(ins!.binds).toContain('graduate-retro')
+    expect(ins!.binds).toContain('copy-paste from ChatGPT')
+    expect(ins!.binds).toContain('agents with MCP and hooks')
+    expect(ins!.binds).toContain('best prompt of the course')
+    expect(ins!.binds).toContain('ship one automation a week')
+    expect(ins!.binds).toContain('review text')
+  })
+
+  it('retro fields default to null when omitted (module feedback unaffected)', async () => {
+    const calls: DbCall[] = []
+    await handleFeedback(req({ lesson: '01-introduction', recommend: '5' }), makeEnv({ calls }))
+    const ins = feedbackInsert(calls)!
+    const sql = ins.sql
+    const retroBeforeIdx = sql.match(/\(([^)]+)\)/)![1].split(',').map(s => s.trim()).indexOf('retro_before')
+    expect(ins.binds[retroBeforeIdx]).toBeNull()
+  })
 })
