@@ -35,7 +35,8 @@ gates surfaces by flag, never by course name — enforced by a set of guard test
 
 ## CI
 
-`.github/workflows/deploy.yml` runs on every push to `main`: builds and deploys the LMS engine,
+`.github/workflows/deploy.yml` runs on pushes to `main` that touch the engine, the academy, the
+workers, or the course registry (and on manual dispatch): builds and deploys the LMS engine,
 the academy shell, and the platform-API worker, plus a build+test matrix across every other
 course pack with a cross-check that no pack ships another pack's branding.
 
