@@ -190,17 +190,29 @@ export type Dictionary = {
   login: {
     label: string
     heading: string
+    emailLabel: string
+    telegramLabel: string
+    telegramHint: string
     emailPlaceholder: string
     telegramPlaceholder: string
     submit: string
     sending: string
+    resend: string
+    changeEmail: string
     sentConfirm: (email: string) => string
     defaultError: string
     networkError: string
+    invalidEmail: string
+    sendFailed: string
+    rateLimited: string
+    redirectHint: string
     footnote: string
     pageTitle: string
     google: string
     or: string
+  }
+  authGuard: {
+    checking: string
   }
   onboarding: {
     step: string
@@ -468,17 +480,29 @@ export const dictionaries: Record<Locale, Dictionary> = {
     login: {
       label: '⬡ Вход',
       heading: 'Войти\nв курс',
+      emailLabel: 'Email',
+      telegramLabel: 'Telegram (необязательно)',
+      telegramHint: 'Бот напомнит про курс в Telegram, если пропустишь урок.',
       emailPlaceholder: 'твой@email.com',
-      telegramPlaceholder: '@telegram (необязательно)',
+      telegramPlaceholder: '@telegram',
       submit: 'Получить ссылку →',
       sending: 'Отправляем...',
+      resend: 'Отправить ещё раз',
+      changeEmail: '← Изменить email',
       sentConfirm: (email: string) => `✓ Ссылка отправлена на ${email}. Проверь почту.`,
       defaultError: 'Что-то пошло не так. Попробуй снова.',
       networkError: 'Ошибка сети. Проверь подключение.',
+      invalidEmail: 'Введи настоящий email.',
+      sendFailed: 'Не получилось отправить письмо. Попробуй ещё раз через минуту.',
+      rateLimited: 'Слишком много попыток. Подожди немного и попробуй снова.',
+      redirectHint: 'Войди, и урок откроется.',
       footnote: 'Без паролей. Получишь ссылку на почту — один клик и ты внутри.',
       pageTitle: 'Вход — Точка Сборки',
       google: 'Войти через Google',
       or: 'или',
+    },
+    authGuard: {
+      checking: 'Проверяем вход…',
     },
     onboarding: {
       step: '⬡ Шаг 1 из 1',
@@ -744,17 +768,29 @@ export const dictionaries: Record<Locale, Dictionary> = {
     login: {
       label: '⬡ Sign in',
       heading: 'Enter\nthe course',
+      emailLabel: 'Email',
+      telegramLabel: 'Telegram (optional)',
+      telegramHint: "The bot will nudge you on Telegram if you fall behind on a lesson.",
       emailPlaceholder: 'your@email.com',
-      telegramPlaceholder: '@telegram (optional)',
+      telegramPlaceholder: '@telegram',
       submit: 'Get the link →',
       sending: 'Sending...',
+      resend: 'Resend',
+      changeEmail: '← Change email',
       sentConfirm: (email: string) => `✓ Link sent to ${email}. Check your inbox.`,
       defaultError: 'Something went wrong. Try again.',
       networkError: 'Network error. Check your connection.',
+      invalidEmail: 'Enter a valid email address.',
+      sendFailed: "Couldn't send the email. Try again in a minute.",
+      rateLimited: 'Too many attempts. Wait a bit and try again.',
+      redirectHint: 'Sign in, and the lesson will open.',
       footnote: 'No passwords. You get a link in your inbox — one click and you are in.',
       pageTitle: 'Sign in — Tochka Sborki',
       google: 'Continue with Google',
       or: 'or',
+    },
+    authGuard: {
+      checking: 'Checking your sign-in…',
     },
     onboarding: {
       step: '⬡ Step 1 of 1',
