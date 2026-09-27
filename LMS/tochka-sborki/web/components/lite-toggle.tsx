@@ -4,20 +4,25 @@ import { useLite } from '@/components/lite-provider'
 import type { Locale } from '@/lib/dictionaries'
 import type { LitePref } from '@/lib/lite-pref'
 
-const SEGMENTS: { key: LitePref; label: string }[] = [
-  { key: 'on', label: 'Lite' },
-  { key: 'auto', label: 'Auto' },
-  { key: 'off', label: 'Full' },
-]
+const SEGMENTS: LitePref[] = ['on', 'auto', 'off']
 
 const ARIA: Record<Locale, { group: string } & Record<LitePref, string>> = {
   ru: { group: 'Режим экономии трафика', on: 'Лёгкий режим', auto: 'Авто (по скорости сети)', off: 'Полный режим' },
   en: { group: 'Data-saver mode', on: 'Lite mode', auto: 'Auto (by connection)', off: 'Full mode' },
 }
 
+// Видимые подписи сегментов — раньше были захардкожены по-английски (Lite/Auto/Full)
+// независимо от локали, хотя вся остальная панель настроек локализована. Экспортируется:
+// SettingsMenu переиспользует те же подписи для видимого текста текущего значения.
+export const LITE_LABEL: Record<Locale, Record<LitePref, string>> = {
+  ru: { on: 'Лайт', auto: 'Авто', off: 'Полный' },
+  en: { on: 'Lite', auto: 'Auto', off: 'Full' },
+}
+
 export function LiteToggle({ locale }: { locale: Locale }) {
   const { pref, setPref } = useLite()
   const a = ARIA[locale] ?? ARIA.ru
+  const label = LITE_LABEL[locale] ?? LITE_LABEL.ru
   const [mounted, setMounted] = useState(false)
 
   // Render only after mount: pref is corrected from storage in an effect.
@@ -38,17 +43,17 @@ export function LiteToggle({ locale }: { locale: Locale }) {
         fontSize: 'var(--text-xs)',
       }}
     >
-      {SEGMENTS.map(seg => {
-        const active = pref === seg.key
+      {SEGMENTS.map(key => {
+        const active = pref === key
         return (
           <button
-            key={seg.key}
+            key={key}
             type="button"
             role="radio"
             aria-checked={active}
-            aria-label={a[seg.key]}
-            title={a[seg.key]}
-            onClick={() => setPref(seg.key)}
+            aria-label={a[key]}
+            title={a[key]}
+            onClick={() => setPref(key)}
             style={{
               padding: '3px 8px',
               cursor: 'pointer',
@@ -58,7 +63,7 @@ export function LiteToggle({ locale }: { locale: Locale }) {
               fontWeight: active ? 700 : 400,
             }}
           >
-            {seg.label}
+            {label[key]}
           </button>
         )
       })}
