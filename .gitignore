@@ -30,4 +30,8 @@ academy/_notes
 !.dev.vars.example
 
 # Рабочие места worktree и локальные настройки агента (SDD-прогон 2026-09-04).
-.claude/
+# Проектные скиллы (.claude/skills/) — версионируются: чужой скилл ставится с пином и
+# атрибуцией (humane nielsen-heuristics, 2026-09-27). `.claude/*`, а не `.claude/`:
+# каталог, исключённый целиком, негацией обратно не вернуть.
+.claude/*
+!.claude/skills/
