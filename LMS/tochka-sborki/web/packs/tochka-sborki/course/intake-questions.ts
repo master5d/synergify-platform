@@ -72,6 +72,57 @@ export const QUESTIONS_V2: Question[] = [
       en: 'e.g.: build a landing page · automate reports · write posts faster',
     },
   },
+  // ── «Стоит ли это вообще автоматизировать?» (intake LMS#10, принято владельцем 2026-09-14).
+  // Первый шаг русла задачи: прежде чем выбирать инструмент — четыре измерения + окупаемость.
+  // По мотивам automation-advisor (MIT, glebis/claude-skills) — разбор происхождения и
+  // лицензии в lib/intake/automation-check.ts. Все четыре — likert 1..5, тот же рендер, что
+  // у V_ATTN/V_RHYTHM выше, без правок <QuestionRenderer>. Вердикт-карточка — V_AUTO_VERDICT.
+  {
+    id: 'V_AUTO_FREQ', module: 'V', format: 'likert', required: false,
+    prompt: {
+      ru: 'Как часто тебе нужно делать эту задачу? 1 — разово, 5 — каждый день',
+      en: 'How often do you need to do this task? 1 — one-off, 5 — every day',
+    },
+  },
+  {
+    id: 'V_AUTO_TIME', module: 'V', format: 'likert', required: false,
+    prompt: {
+      ru: 'Сколько времени уходит за один раз? 1 — пара минут, 5 — несколько часов',
+      en: 'How long does one run take? 1 — a couple of minutes, 5 — several hours',
+    },
+  },
+  {
+    id: 'V_AUTO_ERROR', module: 'V', format: 'likert', required: false,
+    prompt: {
+      ru: 'Что будет, если тут ошибиться? 1 — мелочь, легко исправить, 5 — дорого или опасно',
+      en: 'What happens if this goes wrong? 1 — a trifle, easy to fix, 5 — costly or risky',
+    },
+  },
+  {
+    id: 'V_AUTO_LONGEVITY', module: 'V', format: 'likert', required: false,
+    prompt: {
+      ru: 'Сколько ещё это будет тебе нужно? 1 — скоро не актуально, 5 — годами',
+      en: 'How long will you still need this? 1 — soon irrelevant, 5 — for years',
+    },
+  },
+  {
+    id: 'V_AUTO_BUILD', module: 'V', format: 'single', required: false,
+    prompt: {
+      ru: 'Сколько времени, по ощущению, займёт сама автоматизация?',
+      en: 'How long do you think building the automation itself would take?',
+    },
+    options: [
+      { value: 'lt1h', label: { ru: 'Меньше часа', en: 'Under an hour' } },
+      { value: 'h1_4', label: { ru: '2–4 часа', en: '2–4 hours' } },
+      { value: 'h4_16', label: { ru: 'День-два (4–16 часов)', en: 'A day or two (4–16 hours)' } },
+      { value: 'h16plus', label: { ru: 'Больше недели (16+ часов)', en: 'More than a week (16+ hours)' } },
+      { value: 'dont_know', label: { ru: 'Пока не знаю', en: "Don't know yet" } },
+    ],
+  },
+  {
+    id: 'V_AUTO_VERDICT', module: 'V', format: 'automation-verdict', required: false,
+    prompt: { ru: 'Стоит ли это вообще автоматизировать?', en: 'Is this even worth automating?' },
+  },
   {
     id: 'V_RHYTHM', module: 'V', format: 'single', required: false,
     prompt: { ru: 'Поймай свой ритм.', en: 'Catch your rhythm.' },
