@@ -15,6 +15,8 @@ export const COURSE = {
   } as Bi,
   // Single source of truth for SEO (sitemap/robots) and the PWA manifest. No trailing slash.
   domain: 'https://academy.synergify.com/praktika',
+  /** Ключ курса в платформенном прогрессе (progress.course воркера, события → Listmonk). */
+  progressKey: 'living-practice',
   locales: ['ru', 'en'] as const,
   /** Какие слои движка включены у этого курса. Ядро гейтит поверхности по флагам,
    *  а не по имени pack'а: курс без RPG не должен носить чужой квест-обвес. */

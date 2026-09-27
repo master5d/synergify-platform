@@ -17,6 +17,10 @@ export interface Env {
   CF_ACCESS_CLIENT_ID: string
   CF_ACCESS_CLIENT_SECRET: string
   LISTMONK_CRM_LIST_ID: string
+  /** "1" включает события прогресса → Listmonk (lib/progress-events.ts). По умолчанию "0". */
+  PROGRESS_EVENTS_ENABLED?: string
+  /** Список-назначение событий прогресса; пусто = не слать. */
+  LISTMONK_PROGRESS_LIST_ID?: string
   LLM_SERVICE_URL: string
   LLM_SERVICE_TOKEN: string
   LLM_CF_ACCESS_CLIENT_ID: string

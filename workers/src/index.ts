@@ -81,7 +81,7 @@ export default {
       } else if (path === '/api/progress/view' && method === 'POST') {
         response = await handleView(request, env)
       } else if (path === '/api/progress/complete' && method === 'POST') {
-        response = await handleComplete(request, env)
+        response = await handleComplete(request, env, ctx)
       } else if (path === '/api/progress/list' && method === 'GET') {
         response = await handleList(request, env)
       } else if (path === '/api/intake/me' && method === 'GET') {

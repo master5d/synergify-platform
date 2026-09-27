@@ -17,6 +17,7 @@ import { mdxComponents } from '@/components/mdx-components'
 import { bindSelfCheck } from '@/components/self-check-bound'
 import { ModuleObjectives } from '@/components/module-objectives'
 import type { Locale } from '@/lib/dictionaries'
+import { outlineFromNav } from '@/lib/progress-sync'
 
 interface Props { moduleSlug: string; unitSlug: string; locale: Locale }
 
@@ -48,6 +49,7 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
             unitIndex={unitIndex}
             totalUnits={moduleMeta.units.length}
             locale={locale}
+            outline={outlineFromNav(navItems)}
           >
             <MDXRemote
               source={content}

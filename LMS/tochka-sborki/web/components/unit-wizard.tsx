@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { UnitWizardContext } from './unit-wizard-context'
 import { useUnitProgress } from '@/lib/unit-progress'
+import { reportUnitCompleted, type CourseOutline } from '@/lib/progress-sync'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
 import { SKINS_META } from '@/lib/rpg/skins-meta'
 import { getUnitFraming } from '@/lib/rpg/unit-framing'
@@ -44,6 +45,8 @@ interface Props {
   unitIndex: number
   totalUnits: number
   locale?: Locale
+  /** Структура курса — для серверного прогресса (lib/progress-sync.ts). */
+  outline?: CourseOutline
   children: React.ReactNode
 }
 
@@ -55,6 +58,7 @@ export function UnitWizard({
   unitIndex,
   totalUnits,
   locale = 'ru',
+  outline,
   children,
 }: Props) {
   const t = getDictionary(locale).wizard
@@ -179,6 +183,7 @@ export function UnitWizard({
 
   function handleComplete() {
     markCompleted(moduleSlug, unitSlug)
+    void reportUnitCompleted({ course: COURSE.progressKey, moduleSlug, unitSlug, outline })
     if (chosenMode) award(unitKey, chosenMode)
     logPacing(unitKey, chosenMode ?? 'commander')
     setDone(true)

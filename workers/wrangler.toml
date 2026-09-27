@@ -8,6 +8,10 @@ OWNER_EMAIL = "sasha@mamaev.coach"
 LISTMONK_URL = "https://listmonk.mamaev.coach"
 # listmonk CRM list «Точка Сборки CRM» (private, single opt-in) — создан на infra I4
 LISTMONK_CRM_LIST_ID = "7"
+# События прогресса «модуль/курс завершён» → Listmonk (intake LMS#3, lib/progress-events.ts).
+# ВЫКЛЮЧЕНО: письма ученикам — действие наружу, включает владелец ("1" + id списка).
+PROGRESS_EVENTS_ENABLED = "0"
+LISTMONK_PROGRESS_LIST_ID = ""
 
 # Логи воркера (SES статус отправки) — чтобы отлаживать доставку magic-link, а не вслепую
 [observability]
