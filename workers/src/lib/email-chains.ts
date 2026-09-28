@@ -3,7 +3,7 @@
 // Как nudge-policy.ts: всё, что решает, — здесь и под тестом; обработчик только собирает вход.
 import {
   MODULE_ORDER, MODULE_META, type ModuleRevision,
-  lessonUrl, homeUrl, supportUrl, certificateUrl, academyUrl,
+  lessonUrl, homeUrl, careUrl, certificateUrl, academyUrl,
 } from './course-order'
 export { pickLocale } from './bot-copy'   // users.language → 'en' | 'ru', как у Telegram-бота
 
@@ -121,7 +121,7 @@ export function pickStep(i: ChainInput): ChainPick | null {
     if (f1 != null && !i.sent.has('finish-2') && within(i.nowSec - f1, WINDOWS['finish-2'])) {
       return pick('finish-2', 'finish-2', {
         academy_url: academyUrl(l),   // решение владельца 2026-09-28: приглашение в академию
-        support_url: supportUrl(l),
+        care_url: careUrl(l),
       }, allMilestoneKeys)
     }
   }
@@ -178,7 +178,7 @@ export function pickStep(i: ChainInput): ChainPick | null {
       const resumeUrl = lessonUrl(resume.slug, l)
       const data: ChainData =
         step === 'lapse-1' ? { module_title: titleOf(resume.module, l), resume_url: resumeUrl, done_modules: countSpine(i.course, done), total_modules: i.course.spine.length }
-        : step === 'lapse-2' ? { module_title: titleOf(resume.module, l), resume_url: resumeUrl, support_url: supportUrl(l) }
+        : step === 'lapse-2' ? { module_title: titleOf(resume.module, l), resume_url: resumeUrl, care_url: careUrl(l) }
         : { resume_url: resumeUrl }
       return pick(step, key, data)
     }

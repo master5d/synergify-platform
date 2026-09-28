@@ -3,6 +3,23 @@
 Строка = действие. Вердикт intake считается записанным, только если его строка здесь (правило `/intake`).
 Ссылки на intake — квалифицированные (`intake LMS#N`), лог: `docs/superpowers/research/2026-09-14-lms-prd-intake.md`.
 
+## Служба заботы (волна 18, запрос владельца 2026-09-28)
+
+- [x] **Служба заботы — СДЕЛАНО 2026-09-28**: одно окно помощи для трёх сайтов. Страницы — курс
+  `/care/` + `/en/care/` (движок: `components/pages/care-page.tsx`, у «Тишины» — `/praktika/care/`),
+  академия `/zabota/` + `/en/zabota/` (`academy/components/care-page.tsx`), mamaev.coach `/care/` (репо
+  mc_hub, ветка `w18/care-desk`). Ссылки — футер курса (колонка автора), «двери» футера академии, футер
+  главной mamaev.coach. Приёмник — `POST /api/care` (`workers/src/handlers/care.ts`): закрытый список
+  тем, honeypot `company`, лимит 3/email и 10/IP в час по журналу, письмо владельцу (`notifyOwnerCare`)
+  + автоответ через SES без пересказа текста обращения; `GET /api/care` отдаёт публичный конфиг.
+  Темы/срок ответа/лимиты — один файл `LMS/care.json`. Учебные письма `lapse-2`/`finish-2` вели на
+  донат `/support/` — теперь поле `care_url` → `/care/` (шаблоны перезалить в Listmonk после мержа).
+  - для включения журнала — миграция `workers/migrations/0020_care_requests.sql` к prod D1 (слово
+    владельца). Без неё приёмник не падает: письмо и автоответ уходят, пропуск записи — в лог воркера
+    (`care: JOURNAL WRITE SKIPPED`), лимит частоты не считается (остаётся honeypot).
+  - срок ответа «в течение 2 рабочих дней» — плейсхолдер, решение владельца (`LMS/care.json` →
+    `responseTime`; mamaev.coach берёт его из `GET /api/care`, у него свой запасной экземпляр).
+
 ## Путь «ссылка на урок → вход» (смок-аудит 2026-09-27, ai.synergify.com/lessons/01-introduction/)
 
 Два независимых аудита одного экрана: наш `design-audit` и `nielsen-heuristics` (пак humane,

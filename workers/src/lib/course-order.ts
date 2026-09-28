@@ -105,8 +105,14 @@ export function homeUrl(locale: 'ru' | 'en'): string {
   return locale === 'en' ? 'https://ai.synergify.com/en/' : 'https://ai.synergify.com/'
 }
 
+/** «Поддержать» (донат) — кнопка Telegram-бота /support. */
 export function supportUrl(locale: 'ru' | 'en'): string {
   return locale === 'en' ? 'https://ai.synergify.com/en/support/' : 'https://ai.synergify.com/support/'
+}
+
+/** Служба заботы курса (волна 18). Не /support/ — там «Поддержать» (донат), учебные письма туда не ведут. */
+export function careUrl(locale: 'ru' | 'en'): string {
+  return locale === 'en' ? 'https://ai.synergify.com/en/care/' : 'https://ai.synergify.com/care/'
 }
 
 export function storeUrl(locale: 'ru' | 'en'): string {

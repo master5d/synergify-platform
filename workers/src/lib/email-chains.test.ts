@@ -89,10 +89,10 @@ describe('lapse chain (started, not finished)', () => {
     })
   })
 
-  it('7 days → lapse-2 with support_url; 14 days → lapse-3; 21+ → silence', () => {
+  it('7 days → lapse-2 with care_url; 14 days → lapse-3; 21+ → silence', () => {
     const at = (idle: number) => pickStep(input({ progress: [row('02-setup-guide/u1-env-check', NOW - idle)] }))
     expect(at(7 * D + H)?.step).toBe('lapse-2')
-    expect(at(7 * D + H)?.data).toMatchObject({ module_title: 'Базовый сетап', support_url: 'https://ai.synergify.com/support/' })
+    expect(at(7 * D + H)?.data).toMatchObject({ module_title: 'Базовый сетап', care_url: 'https://ai.synergify.com/care/' })
     expect(at(14 * D + H)?.step).toBe('lapse-3')
     expect(Object.keys(at(14 * D + H)!.data).sort()).toEqual(['course_name', 'home_url', 'resume_url'])
     expect(at(22 * D)).toBeNull()
@@ -214,13 +214,13 @@ describe('finish', () => {
     expect(p?.alsoMark).toEqual(['milestone@08-agent-engineering'])
   })
 
-  it('finish-2 comes 7 days after finish-1 with the academy invite and support url', () => {
+  it('finish-2 comes 7 days after finish-1 with the academy invite and care url', () => {
     const sent = new Map([['finish-1', NOW - 7 * D - H]])
     const p = pickStep(input({ locale: 'en', courseEventAt: NOW - 8 * D, sent }))
     expect(p?.step).toBe('finish-2')
     expect(p?.data).toMatchObject({
       academy_url: 'https://academy.synergify.com/en/',
-      support_url: 'https://ai.synergify.com/en/support/',
+      care_url: 'https://ai.synergify.com/en/care/',
     })
     expect(pickStep(input({ courseEventAt: NOW - 8 * D, sent: new Map([['finish-1', NOW - 3 * D]]) }))).toBeNull()
   })

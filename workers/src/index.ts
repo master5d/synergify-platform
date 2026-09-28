@@ -1,5 +1,6 @@
 import type { Env } from './lib/types'
 import { handleFeedback } from './handlers/feedback'
+import { handleCare, handleCareConfig } from './handlers/care'
 import { handleSendLink, handleVerify, handleMe, handleLogout } from './handlers/auth'
 import { handleTelegramAuth } from './handlers/telegram-auth'
 import { handleOAuthStart, handleOAuthCallback } from './handlers/oauth'
@@ -58,6 +59,10 @@ export default {
 
       if (path === '/api/feedback' && method === 'POST') {
         response = await handleFeedback(request, env)
+      } else if (path === '/api/care' && method === 'POST') {
+        response = await handleCare(request, env, ctx)
+      } else if (path === '/api/care' && method === 'GET') {
+        response = handleCareConfig()
       } else if (path === '/api/leads/capture' && method === 'POST') {
         response = await handleLeadCapture(request, env, ctx)
       } else if (path === '/api/auth/send-link' && method === 'POST') {

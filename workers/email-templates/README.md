@@ -58,11 +58,11 @@
 | `start-1` | `start_url` — первый юнит модуля 00 |
 | `start-2` | `start_url` — юнит «Азбука» (`00-kickstart/u0-azbuka`) |
 | `lapse-1` | `module_title`, `resume_url`, `done_modules`, `total_modules` |
-| `lapse-2` | `module_title`, `resume_url`, `support_url` |
+| `lapse-2` | `module_title`, `resume_url`, `care_url` (служба заботы курса `/care/`, не донат `/support/`) |
 | `lapse-3` | `resume_url` |
 | `milestone` | `module_title`, `next_title`, `next_url`, `done_modules`, `total_modules`, `from`, `to` (трансформация модуля); для последнего модуля спайна `next_title`/`next_url` пусты |
 | `finish-1` | `certificate_url` |
-| `finish-2` | `academy_url` (главная академии: вход открывается после Точки Сборки), `support_url` |
+| `finish-2` | `academy_url` (главная академии: вход открывается после Точки Сборки), `care_url` |
 | `update` | `module_title`, `summary` (`revision.summary` из `_meta.json` на языке ученика — что изменилось), `module_url` (страница модуля) |
 
 Поле, которого нет в данных, шаблон обязан пережить: необязательные блоки обёрнуты в `{{ if .Tx.Data.x }}`.

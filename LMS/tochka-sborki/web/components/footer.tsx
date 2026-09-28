@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
 import { CourseSwitcher } from '@/components/academy/course-switcher'
+import { careCopy } from '@/lib/care'
 
 interface Props {
   locale?: Locale
@@ -157,6 +158,9 @@ export function Footer({ locale = 'ru', topics = [], showCertificateCta = true }
             <span style={{ ...linkStyle, color: 'var(--text-primary)' }}>
               {t.authorName}
             </span>
+            <Link href={`${prefix}/care/`} style={linkStyle}>
+              {careCopy(locale).footerLink}
+            </Link>
             <Link href={`${prefix}/feedback/`} style={linkStyle}>
               {t.sendFeedback}
             </Link>

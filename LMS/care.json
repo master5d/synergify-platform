@@ -1,0 +1,25 @@
+{
+  "_comment": "Служба заботы — единый конфиг для всех поверхностей: воркер (POST/GET /api/care, автоответ), страница курса (движок web), страница академии (academy/, fs-мост), mamaev.coach берёт срок ответа и темы из GET /api/care. responseTime — РЕШЕНИЕ ВЛАДЕЛЬЦА (плейсхолдер 2026-09-28): меняется только здесь.",
+  "responseTime": {
+    "ru": "в течение 2 рабочих дней",
+    "en": "within 2 business days"
+  },
+  "topics": [
+    { "key": "access", "ru": "Вход и доступ", "en": "Sign-in and access" },
+    { "key": "stuck", "ru": "Застрял в уроке", "en": "Stuck in a lesson" },
+    { "key": "content", "ru": "Вопрос по содержанию", "en": "Question about the content" },
+    { "key": "tech", "ru": "Техническая проблема", "en": "Technical problem" },
+    { "key": "idea", "ru": "Предложение", "en": "Suggestion" },
+    { "key": "other", "ru": "Другое", "en": "Other" }
+  ],
+  "sites": {
+    "tochka-sborki": { "name": { "ru": "Точка Сборки", "en": "Tochka Sborki" }, "origin": "https://ai.synergify.com" },
+    "academy": { "name": { "ru": "Школа синергемы", "en": "Synergema Authentica Starseed Holon Academy" }, "origin": "https://academy.synergify.com" },
+    "mamaev-coach": { "name": { "ru": "mamaev.coach", "en": "mamaev.coach" }, "origin": "https://mamaev.coach" }
+  },
+  "limits": {
+    "messageMin": 5,
+    "messageMax": 4000,
+    "pageUrlMax": 500
+  }
+}

@@ -63,4 +63,18 @@ describe('email templates ↔ chain policy', () => {
       expect(lay).toContain('{{ .Tx.Data.unsubscribe_url }}')
     }
   })
+
+  // Волна 18: «Рассказать, где застрял» / «ответ в одну строку» вели на /support/ — это «Поддержать»
+  // (донат). Учебные письма зовут в службу заботы; поле донатной ссылки в шаблонах не читается.
+  it('study emails point to the care desk, never to the donation page', () => {
+    const templates = readdirSync(DIR).filter(f => f.endsWith('.html'))
+    for (const f of templates) expect(fields(read(f)).has('support_url'), f).toBe(false)
+    for (const step of ['lapse-2', 'finish-2'] as Step[]) {
+      for (const locale of ['ru', 'en'] as const) {
+        const pick = pickStep(base({ ...SCENARIOS[step], locale }))
+        expect(String(pick!.data.care_url)).toMatch(/^https:\/\/ai\.synergify\.com\/(en\/)?care\/$/)
+        expect(fields(read(`${templateName(TOCHKA_SBORKI, step, locale)}.html`)).has('care_url')).toBe(true)
+      }
+    }
+  })
 })
