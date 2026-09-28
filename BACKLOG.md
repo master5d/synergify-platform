@@ -215,6 +215,7 @@
   5 целей / 13 вопросов, `level: 9` (после ядра 00–08; флаг «advanced» не заводился), практика — SFT+LoRA на SmolLM2
   по smol-course v1 (Apache-2.0, атрибуция в u5), framing во всех скинах, transformation, материалы (HF LLM Course, smol-course).
   **Владельцу:** вычитать тексты и framing скинов; решить, нужен ли отдельный флаг/бейдж «advanced» в UI; прогнать практику u5 в Colab вживую.
+  **2026-09-28 значок «advanced» (решение владельца):** поле `advanced: true` в `_meta.json` модуля → `components/advanced-badge.tsx` на главной, в программе и в сайдбаре; ставится только модулю вне спайна (тест `lib/content/advanced-modules.test.ts`).
 - [ ] **ТС: HF Agents Course в «Дальше и глубже»** (intake LMS#4, owner-gated) — `huggingface/agents-course`
   (Apache-2.0, живой) рядом с курсом Microsoft по агентам в `materials.ts`; DeepLearning.AI — только
   ссылкой (закрытая платформа).
@@ -453,6 +454,7 @@
   Названия модулей и трансформации для писем — `MODULE_META` в `course-order.ts`, сверены тестом с `_meta.json` и `transformations.ts`.
   Для включения (решает владелец): миграция `workers/migrations/0019_email_chains.sql` к prod D1 → заливка шаблонов
   (`workers/email-templates/`) в Listmonk → `EMAIL_CHAINS_ENABLED = "1"` в `workers/wrangler.toml`, деплой воркера.
+  **2026-09-28 ВКЛЮЧЕНО владельцем:** миграция 0019 применена к prod D1, 16 шаблонов залиты в Listmonk (id 5–20), `EMAIL_CHAINS_ENABLED = "1"`. finish-2 по решению владельца — приглашение в академию (`academy_url`), а не «Обучение моделей».
 - [x] **Платформа: воронка отвала по урокам** (intake LMS#3) в `/api/admin/stats`: сколько учеников
   дошло до каждого юнита и где бросили, по каждому pack'у (`progress.course`). Сейчас там три счётчика.
   2026-09-27: `/api/admin/stats` отдаёт `funnel`/`dropoff`/`notStarted` (порядок — из нумерации слагов pack'а, сверен тестом с `_meta.json`), воронка выведена на `/admin/leads`.

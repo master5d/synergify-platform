@@ -2,8 +2,8 @@
 // workers/email-templates/README.md). I/O (D1, Listmonk tx) — в handlers/email-chain-cron.ts.
 // Как nudge-policy.ts: всё, что решает, — здесь и под тестом; обработчик только собирает вход.
 import {
-  MODULE_ORDER, MODULE_META, ADVANCED_MODULE_SLUG, NOTEBOOK_MODULE_SLUG,
-  lessonUrl, homeUrl, supportUrl, certificateUrl,
+  MODULE_ORDER, MODULE_META,
+  lessonUrl, homeUrl, supportUrl, certificateUrl, academyUrl,
 } from './course-order'
 export { pickLocale } from './bot-copy'   // users.language → 'en' | 'ru', как у Telegram-бота
 
@@ -113,8 +113,7 @@ export function pickStep(i: ChainInput): ChainPick | null {
     const f1 = i.sent.get('finish-1')
     if (f1 != null && !i.sent.has('finish-2') && within(i.nowSec - f1, WINDOWS['finish-2'])) {
       return pick('finish-2', 'finish-2', {
-        advanced_url: lessonUrl(ADVANCED_MODULE_SLUG, l),
-        notebook_url: lessonUrl(NOTEBOOK_MODULE_SLUG, l),
+        academy_url: academyUrl(l),   // решение владельца 2026-09-28: приглашение в академию
         support_url: supportUrl(l),
       }, allMilestoneKeys)
     }

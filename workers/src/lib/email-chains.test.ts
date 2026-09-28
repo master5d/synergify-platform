@@ -214,13 +214,12 @@ describe('finish', () => {
     expect(p?.alsoMark).toEqual(['milestone@08-agent-engineering'])
   })
 
-  it('finish-2 comes 7 days after finish-1 with advanced/notebook/support urls', () => {
+  it('finish-2 comes 7 days after finish-1 with the academy invite and support url', () => {
     const sent = new Map([['finish-1', NOW - 7 * D - H]])
     const p = pickStep(input({ locale: 'en', courseEventAt: NOW - 8 * D, sent }))
     expect(p?.step).toBe('finish-2')
     expect(p?.data).toMatchObject({
-      advanced_url: 'https://ai.synergify.com/en/lessons/10-model-training/',
-      notebook_url: 'https://ai.synergify.com/en/lessons/09-ai-notebook/',
+      academy_url: 'https://academy.synergify.com/en/',
       support_url: 'https://ai.synergify.com/en/support/',
     })
     expect(pickStep(input({ courseEventAt: NOW - 8 * D, sent: new Map([['finish-1', NOW - 3 * D]]) }))).toBeNull()

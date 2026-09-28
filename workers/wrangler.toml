@@ -14,7 +14,7 @@ PROGRESS_EVENTS_ENABLED = "1"
 LISTMONK_PROGRESS_LIST_ID = "8"  # «Точка Сборки — прогресс», создан 2026-09-27
 # Учебные цепочки писем через Listmonk tx (handlers/email-chain-cron.ts, тот же cron, что Telegram-nudge).
 # ВЫКЛЮЧЕНО: включает владелец — миграция 0019 к prod D1 → заливка шаблонов ts-* → "1".
-EMAIL_CHAINS_ENABLED = "0"
+EMAIL_CHAINS_ENABLED = "1"  # учебные цепочки писем — включены владельцем 2026-09-28 (миграция 0019 применена)
 
 # Логи воркера (SES статус отправки) — чтобы отлаживать доставку magic-link, а не вслепую
 [observability]

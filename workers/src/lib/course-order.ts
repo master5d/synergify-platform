@@ -71,8 +71,6 @@ export const MODULE_META: Record<string, { title: Bi; from: Bi; to: Bi }> = {
 
 /** Модуль «AI-тетрадка» (вне спайна). */
 export const NOTEBOOK_MODULE_SLUG = '09-ai-notebook'
-/** Модуль «Обучение моделей» (advanced, вне спайна) — единственное место, где живёт этот слаг. */
-export const ADVANCED_MODULE_SLUG = '10-model-training'
 
 export interface NextLesson { slug: string; resume: boolean }
 
@@ -88,6 +86,11 @@ export function nextLesson(completed: Set<string>, viewed: Set<string>): NextLes
 export function lessonUrl(slug: string, locale: 'ru' | 'en'): string {
   const base = locale === 'en' ? 'https://ai.synergify.com/en' : 'https://ai.synergify.com'
   return `${base}/lessons/${slug}/`
+}
+
+/** Академия (LMS/registry.json → academy.url): вход открывается после прохождения Точки Сборки. */
+export function academyUrl(locale: 'ru' | 'en'): string {
+  return locale === 'en' ? 'https://academy.synergify.com/en/' : 'https://academy.synergify.com/'
 }
 
 export function certificateUrl(locale: 'ru' | 'en'): string {

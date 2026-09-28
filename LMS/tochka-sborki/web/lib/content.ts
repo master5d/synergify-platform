@@ -58,6 +58,8 @@ export interface ModuleMeta {
   description: string
   duration: string
   level: number
+  /** Продвинутый модуль: в списках модулей показывается значок «advanced» (components/advanced-badge.tsx). */
+  advanced?: boolean
   units: { slug: string; title: string }[]
   layout?: UnitLayout
   objectives?: Objective[]
@@ -73,6 +75,7 @@ export interface NavigationItem {
   slug: string
   title: string
   level: number
+  advanced?: boolean
   type: 'lesson' | 'module'
   order: number
   units?: { slug: string; title: string }[]
@@ -170,6 +173,7 @@ export function getNavigationItems(locale = 'ru'): NavigationItem[] {
         slug: entry.name,
         title: meta.title,
         level: meta.level,
+        advanced: meta.advanced === true,
         order: meta.module,
         type: 'module',
         units: meta.units,

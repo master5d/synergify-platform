@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getAllModules } from '@/lib/content'
+import { AdvancedBadge } from '@/components/advanced-badge'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
 import { Nav } from '@/components/nav'
 import { Footer } from '@/components/footer'
@@ -261,6 +262,7 @@ export function HomePage({ locale }: Props) {
                   lineHeight: 1.15,
                 }}>
                   {m.title}
+                  {m.advanced && <AdvancedBadge />}
                 </h3>
                 <p style={{
                   fontSize: '0.95rem',

@@ -4,6 +4,7 @@
   "description": "An advanced module after the agentic practice: how LLMs are built and trained, why data is the main work, when to fine-tune and when a prompt and context are enough — and your own fine-tune of a small model on a free GPU",
   "duration": "42 min",
   "level": 9,
+  "advanced": true,
   "units": [
     { "slug": "u1-inside-the-model", "title": "What's inside a model" },
     { "slug": "u2-data-is-the-work", "title": "Data is the main work" },
