@@ -1,6 +1,7 @@
 // lib/eidetics/lessons.ts
 // Проза уроков «Эйдетики». Как у скорочтения: структура — course.ts, проза — здесь.
-// 2026-09-28: ЧЕРНОВИК агента по решению владельца («сделай черновик и вычитку»), ждёт вычитки;
+// 2026-09-28: черновик агента по решению владельца («сделай черновик и вычитку») + вычитка вторым агентом
+// (факты сверены с первоисточниками: абстракты PubMed/Crossref, полные тексты там, где цифры не в абстракте);
 // статус модуля — 'soon', пока владелец не скажет иначе. Опорные тезисы и источники — в спеке
 // docs/superpowers/specs/2026-09-28-eidetics.md. Текст оригинальный, ни фразы из чужих курсов.
 // Утверждения об эффективности — только со ссылкой на источник спеки. Урок 4: RU — буквенно-цифровой
@@ -13,13 +14,13 @@ import type { Locale } from '../dictionaries'
 
 export const EIDETICS_PROSE: Record<string, Bi> = {
   images: {
-    ru: `Память охотнее держит то, что можно увидеть, услышать или потрогать, чем голое слово. На этом стоят все приёмы модуля: цепочка, дворец памяти, коды чисел, имена. Поэтому первый урок — про сырьё: как превратить слово или мысль в образ, за который память может зацепиться, и как связать два образа так, чтобы один вытаскивал другой. Но начнём с замера: чтобы потом понять, помогает ли тебе хоть что-то, нужна точка «до».
+    ru: `Память охотнее держит то, что можно увидеть, услышать или потрогать, чем голое слово. На этом стоят все приёмы модуля: цепочка, дворец памяти, коды чисел, имена. Поэтому первый урок — про сырьё. Как превратить слово или мысль в образ, за который память может зацепиться? И как связать два образа так, чтобы один вытаскивал другой? Но начнём с замера: чтобы потом понять, помогает ли тебе хоть что-то, нужна точка «до».
 
 ## Почему образ держится лучше слова
 
-Канадский психолог Аллан Пайвио предложил теорию двойного кодирования (Paivio 1971): конкретное слово вроде «яблоко» хранится двумя путями — как слово и как картинка, а абстрактное вроде «польза» — в основном одним. Отсюда объяснение давно замеченного факта: конкретные слова в опытах запоминаются лучше абстрактных.
+Канадский психолог Аллан Пайвио предложил теорию двойного кодирования (Paivio 1971). По ней конкретное слово вроде «яблоко» хранится двумя путями — как слово и как картинка, а абстрактное вроде «польза» — в основном одним. Отсюда объяснение давно замеченного факта: конкретные слова в опытах запоминаются лучше абстрактных.
 
-Важная оговорка. Это теория, которая объясняет, почему образные приёмы вообще могут работать, а не проверка какого-то приёма. В большом обзоре учебных техник (Dunlosky 2013) «образы» как отдельный приём получили низкую оценку полезности: они помогают со списками конкретных слов и мало — со сложными учебными текстами. Образ — кирпич. Работать он начинает в конструкции, о которой следующие уроки.
+Важная оговорка. Это теория, которая объясняет, почему образные приёмы вообще могут работать, а не проверка какого-то приёма. В большом обзоре учебных техник (Dunlosky 2013) два образных приёма получили низкую оценку полезности. Первый — представлять образы при чтении учебного текста. Второй — keyword mnemonic, образ-созвучие для иностранных слов. Польза от них есть, но в узких условиях: на части материалов и на коротких сроках. Образ — кирпич. Работать он начинает в конструкции, о которой следующие уроки.
 
 ## Какой образ держится
 
@@ -35,7 +36,7 @@ export const EIDETICS_PROSE: Record<string, Bi> = {
 
 Ты в сцене. Если яблоко катится тебе под ноги, это твоё событие, а не картинка из учебника.
 
-Абстрактное слово переводят в конкретное двумя способами. По смыслу: «свобода» — распахнутая дверца клетки, «время» — песочные часы. По созвучию: «тенденция» — тент, «аргумент» — аргонавт на корабле. Созвучие кажется глупым, и это нормально: образ никто, кроме тебя, не увидит, ему нужно быть не красивым, а цепким.
+Абстрактное слово переводят в конкретное двумя способами. По смыслу: «свобода» — распахнутая дверца клетки, «время» — песочные часы. По созвучию: «тенденция» — тент, «аргумент» — аргонавт на корабле. Созвучие кажется глупым, и это нормально: образ никто, кроме тебя, не увидит, поэтому ему нужно быть не красивым, а цепким.
 
 ## Как связать два образа
 
@@ -45,7 +46,7 @@ export const EIDETICS_PROSE: Record<string, Bi> = {
 
 ## Упражнение
 
-Сегодня, 20 минут, плюс одна короткая проверка позже.
+Сегодня — 20 минут, плюс одна короткая проверка позже.
 
 1. Замер «до». Открой \`/trenazhery/eidetika/ryad/\`, выбери слова и длину 10. Запоминай как обычно, без приёмов из этого урока, и сразу проверь себя. Через час или завтра пройди отложенную проверку этого ряда. Запиши обе цифры — это твоя точка отсчёта.
 2. Возьми новый ряд из 10 слов (новый ряд в тренажёре или любые 10 слов из книги). На каждое слово — образ за 10–15 секунд. Запиши одной строкой, что ты видишь: не «кот», а «рыжий кот с порванным ухом».
@@ -57,7 +58,7 @@ export const EIDETICS_PROSE: Record<string, Bi> = {
 
 Урок даёт навык, на котором держится всё остальное: быстро превращать слово в сцену и сцеплять сцены попарно. Сначала это медленно, 10–15 секунд на слово — нормальный темп новичка.
 
-Чего не даёт. Отдельные образы не хранят порядок: пары ты вспомнишь, а ряд — нет. На сложном связном тексте образы помогают мало, это видно и в обзоре Dunlosky 2013. И главное: результат замера «до» — не приговор и не норма, с которой надо сравнивать других. Сравнивать в этом модуле можно только себя с собой.
+Чего не даёт. Отдельные образы не хранят порядок: пары ты вспомнишь, а ряд — нет. При чтении связного учебного текста образы помогают лишь в узких условиях — так их оценивает и обзор Dunlosky 2013. И главное: результат замера «до» — не приговор и не норма, с которой надо сравнивать других. Сравнивать в этом модуле можно только себя с собой.
 
 ## Источники
 
@@ -69,7 +70,7 @@ export const EIDETICS_PROSE: Record<string, Bi> = {
 
 The Canadian psychologist Allan Paivio proposed dual-coding theory (Paivio 1971): a concrete word like "apple" is stored in two ways, as a word and as a picture, while an abstract one like "benefit" is stored mostly in one. That offers an explanation for a long-observed fact: in experiments, concrete words are remembered better than abstract ones.
 
-An important caveat. This is a theory that explains why imagery techniques can work at all, not a test of any particular technique. In a large review of learning techniques (Dunlosky 2013), imagery used on its own was rated low in utility: it helps with lists of concrete words and does little for complex study texts. An image is a brick. It starts working inside a structure, which is what the next lessons are about.
+An important caveat. This is a theory that explains why imagery techniques can work at all, not a test of any particular technique. In a large review of learning techniques (Dunlosky 2013), two imagery techniques were rated low in utility: forming mental images while reading a study text, and the keyword mnemonic — a sound-alike image for learning foreign words. Both help, but only under narrow conditions: with some materials and over short retention intervals. An image is a brick. It starts working inside a structure, which is what the next lessons are about.
 
 ## What makes an image stick
 
@@ -85,7 +86,7 @@ Other senses. A crunch, a smell, the weight in your hand — each detail adds an
 
 You in the scene. If the apple rolls under your feet, it is your event, not a picture from a textbook.
 
-Abstract words are turned into concrete ones in two ways. By meaning: "freedom" becomes a cage door swung open, "time" an hourglass. By sound: "tendency" becomes a tent, "argument" an Argonaut on a ship. Sound-alikes feel silly, and that is fine: nobody but you will see the image, and it needs to be sticky, not beautiful.
+Abstract words are turned into concrete ones in two ways. By meaning: "freedom" becomes a cage door swung open, "time" an hourglass. By sound: "tendency" becomes a tent, "argument" an Argonaut on a ship. Sound-alikes feel silly, and that is fine: nobody but you will ever see the image, so it needs to be sticky, not beautiful.
 
 ## How to link two images
 
@@ -95,7 +96,7 @@ Not everyone's inner pictures are vivid, and that is fine. The technique needs n
 
 ## Exercise
 
-Today, 20 minutes, plus one short check later.
+Today: 20 minutes, plus one short check later.
 
 1. The "before" measurement. Open \`/en/trenazhery/eidetika/ryad/\`, choose words and length 10. Memorise the way you normally would, without anything from this lesson, and check yourself right away. An hour later or tomorrow, take the delayed check for that series. Write down both numbers — that is your starting point.
 2. Take a new series of 10 words (a new series in the trainer, or any 10 words from a book). Give each word an image in 10–15 seconds. Write down in one line what you see: not "cat" but "ginger cat with a torn ear".
@@ -107,7 +108,7 @@ Today, 20 minutes, plus one short check later.
 
 This lesson gives you the skill everything else rests on: quickly turning a word into a scene and hooking scenes together in pairs. At first it is slow; 10–15 seconds per word is a normal beginner's pace.
 
-What it does not give you. Separate images do not store order: you will recall the pairs but not the series. With complex connected text, images help little, which is also what the Dunlosky 2013 review shows. And most importantly: your "before" score is not a verdict and not a norm to compare other people against. In this module the only comparison is you against yourself.
+What it does not give you. Separate images do not store order: you will recall the pairs but not the series. When you read connected study text, images help only under narrow conditions — which is also how the Dunlosky 2013 review rates them. And most importantly: your "before" score is not a verdict and not a norm to compare other people against. In this module the only comparison is you against yourself.
 
 ## Sources
 
@@ -119,9 +120,9 @@ What it does not give you. Separate images do not store order: you will recall t
 
 ## Опыт с историями
 
-Классическая проверка приёма — опыт Бауэра и Кларк (Bower & Clark 1969). Студенты учили двенадцать списков по десять существительных. Одной группе предложили на каждый список сочинить короткую историю, в которой слова идут по порядку; другая группа учила списки как обычно, времени у обеих было поровну. Сразу после каждого списка обе группы вспоминали его почти полностью. Разница проявилась в конце, когда нужно было вспомнить все двенадцать списков: группа историй назвала около 93 % слов, контрольная — около 13 %.
+Классическая проверка приёма — опыт Бауэра и Кларк (Bower & Clark 1969). Двадцать четыре студента учили двенадцать списков по десять существительных. Половине предложили на каждый список сочинить историю, в которой слова идут по порядку. Другая половина учила списки как обычно, и времени у каждого было столько же, сколько у его пары из первой группы. Сразу после каждого списка обе группы вспоминали его без ошибок. Разница проявилась в конце, когда нужно было снова вспомнить все двенадцать списков: группа историй назвала около 93 % слов, контрольная — около 13 %.
 
-Цифры впечатляют, но важно, что именно они описывают: студентов, списки конкретных слов, лабораторию и отложенную проверку в конце опыта. Твой результат будет другим, и его стоит мерить самому — для этого в тренажёре есть отложенная проверка.
+Цифры впечатляют, но важно, что именно они описывают: двадцать четыре студента, списки конкретных слов, лаборатория и отложенная проверка в конце того же занятия. Твой результат будет другим, и его стоит мерить самому — для этого в тренажёре есть отложенная проверка.
 
 ## Цепочка и история — не одно и то же
 
@@ -143,7 +144,7 @@ What it does not give you. Separate images do not store order: you will recall t
 
 ## Упражнение
 
-Сегодня, 20–25 минут, плюс отложенная проверка.
+Сегодня — 20–25 минут, плюс отложенная проверка.
 
 1. Открой \`/trenazhery/eidetika/ryad/\`, слова, длина 10. Сначала на каждое слово сделай образ, как в прошлом уроке, затем свяжи их в одну историю по порядку. Времени бери столько, сколько нужно: скорость сейчас не важна.
 2. Воспроизведи ряд, пройдя историю в голове от начала до конца. Посмотри на две цифры тренажёра: сколько названо и сколько на своём месте.
@@ -159,14 +160,14 @@ What it does not give you. Separate images do not store order: you will recall t
 
 ## Источники
 
-1. Bower G.H., Clark M.C. (1969). Narrative stories as mediators for serial learning. Psychonomic Science 14, 181–182. doi:10.3758/BF03332778`,
+1. Bower G.H., Clark M.C. (1969). Narrative stories as mediators for serial learning. Psychonomic Science 14(4), 181–182. doi:10.3758/BF03332778`,
     en: `In the previous lesson images came together in pairs. But pairs do not remember order: you will recall that the cat goes with the umbrella and not what came before the cat. This lesson is about turning scattered images into one thread along which a series can be recalled from start to finish.
 
 ## An experiment with stories
 
-The classic test of this technique is the study by Bower and Clark (Bower & Clark 1969). Students learned twelve lists of ten nouns each. One group was asked to make up a short story for each list, with the words in order; the other group learned the lists the usual way, and both had the same amount of time. Right after each list, both groups recalled it almost completely. The difference appeared at the end, when all twelve lists had to be recalled: the story group named about 93% of the words, the control group about 13%.
+The classic test of this technique is the study by Bower and Clark (Bower & Clark 1969). Twenty-four students learned twelve lists of ten nouns each. Half of them were asked to make up a story for each list, with the words in order. The other half learned the lists the usual way, each given exactly as much time as their partner in the story group. Right after each list, both groups recalled it without errors. The difference appeared at the end, when all twelve lists had to be recalled again: the story group named about 93% of the words, the control group about 13%.
 
-The numbers are impressive, but it matters what they describe: students, lists of concrete words, a laboratory, and a delayed check at the end of the session. Your result will be different, and it is worth measuring yourself — that is what the trainer's delayed check is for.
+The numbers are impressive, but it matters what they describe: twenty-four students, lists of concrete words, a laboratory, and a delayed check at the end of the same session. Your result will be different, and it is worth measuring yourself — that is what the trainer's delayed check is for.
 
 ## A chain and a story are not the same thing
 
@@ -188,7 +189,7 @@ An example series: lighthouse, glove, soup, violin, cloud. You climb the lightho
 
 ## Exercise
 
-Today, 20–25 minutes, plus the delayed check.
+Today: 20–25 minutes, plus the delayed check.
 
 1. Open \`/en/trenazhery/eidetika/ryad/\`, words, length 10. First make an image for each word, as in the previous lesson, then link them into one story in order. Take as long as you need: speed does not matter yet.
 2. Recall the series by walking through the story in your head from beginning to end. Look at the trainer's two numbers: how many recalled and how many in the right place.
@@ -204,20 +205,20 @@ What it does not give you. Recalling from the middle is awkward: to get to the s
 
 ## Sources
 
-1. Bower G.H., Clark M.C. (1969). Narrative stories as mediators for serial learning. Psychonomic Science 14, 181–182. doi:10.3758/BF03332778`,
+1. Bower G.H., Clark M.C. (1969). Narrative stories as mediators for serial learning. Psychonomic Science 14(4), 181–182. doi:10.3758/BF03332778`,
   },
   loci: {
     ru: `У истории из прошлого урока есть слабое место: она держит порядок, но не даёт опоры, если сюжет оборвался. Метод локусов решает это иначе. Опора — не придуманный сюжет, а маршрут, который ты и так знаешь наизусть: своя квартира, дорога, двор. Ты мысленно раскладываешь образы по точкам этого маршрута, а потом проходишь его ещё раз и собираешь то, что оставил.
 
 ## Что показывают исследования
 
-Этот приём проверен лучше остальных в модуле.
+Из приёмов запоминания в этом модуле этот проверен лучше всех.
 
-Магуайр с коллегами (Maguire 2003) сравнили участников соревнований по запоминанию с обычными людьми. По результатам тестов на интеллект и по строению мозга «чемпионы» от контрольной группы не отличались. Отличалось другое: девять из десяти пользовались методом локусов, и при запоминании у них сильнее работали области мозга, связанные с пространственной памятью и ориентированием. Вывод исследования — выдающиеся результаты в запоминании идут от приёма, а не от особой памяти.
+Магуайр с коллегами (Maguire 2003) сравнили десять участников соревнований по запоминанию с десятью обычными людьми. По тестам на интеллект и по строению мозга «чемпионы» от контрольной группы не отличались. Отличалось другое: девять из десяти хотя бы в части заданий пользовались методом локусов. При запоминании у них работали области мозга, важные для пространственной памяти, в том числе гиппокамп. Вывод авторов: выдающиеся результаты объясняются не интеллектом и не строением мозга, а пространственной стратегией запоминания.
 
-Дреслер с коллегами (Dresler 2017) проверили, можно ли этому научить новичка. Люди без опыта шесть недель тренировали метод локусов примерно по полчаса в день. Число слов, которые они запоминали из списка в 72 слова, выросло примерно с 26 до 62. Группы, которые тренировали рабочую память или не тренировались вовсе, такого роста не показали. Через четыре месяца значительная часть прироста у тренировавшихся сохранялась. Повторный анализ тех же участников (Wagner 2021) подтвердил, что память держалась месяцами, а мозг при запоминании работал экономнее.
+Дреслер с коллегами (Dresler 2017) проверили, можно ли этому научить новичка. Люди без опыта шесть недель тренировали метод локусов: 40 занятий по полчаса. Число слов, которые они запоминали из списка в 72 слова, выросло в среднем примерно с 26 до 62. Группы, которые тренировали рабочую память или не тренировались вовсе, такого роста не показали. Через четыре месяца тренировавшиеся всё ещё вспоминали в среднем больше чем на 22 слова больше, чем до тренировки. Повторный анализ части тех же данных (Wagner 2021) показал, что тренировка укрепила именно долговременное запоминание. Активность ряда областей мозга при запоминании у них снизилась — авторы толкуют это как более экономную работу.
 
-Две оговорки. Это были добровольцы, которые шесть недель занимались ежедневно по программе. И проверяли их на списках слов — на том, для чего приём и создан.
+Две оговорки. Это были молодые мужчины-добровольцы, которые шесть недель занимались каждый день по программе. И проверяли их на списках слов — на том, для чего приём и создан.
 
 ## Как выбрать маршрут
 
@@ -243,19 +244,19 @@ What it does not give you. Recalling from the middle is awkward: to get to the s
 
 ## Упражнение
 
-Сегодня, 25–30 минут, плюс отложенная проверка.
+Сегодня — 25–30 минут, плюс отложенная проверка.
 
 1. Открой \`/trenazhery/eidetika/dvorec/\` и запиши свой маршрут: 10 точек по порядку. Маршрут хранится только в этом браузере.
 2. Закрой глаза и пройди маршрут дважды, не открывая список. Если какая-то точка всплывает с трудом, замени её на более заметную.
 3. Запусти тренировку дворца: разложи слова по точкам и пройди маршрут. Не торопись, скорость сейчас не важна.
-4. Затем открой \`/trenazhery/eidetika/ryad/\`, слова, длина 10 или 15, и разложи ряд по тому же маршруту. Через час или больше пройди отложенную проверку.
+4. Затем открой \`/trenazhery/eidetika/ryad/\`, слова, длина 10 — по слову на точку, — и разложи ряд по тому же маршруту. Через час или больше пройди отложенную проверку.
 5. Сравни с историей из прошлого урока. Какой приём держался лучше именно у тебя?
 
 ## Что это даёт и чего не даёт
 
-Метод локусов даёт порядок и доступ с любого места: чтобы вспомнить седьмое слово, достаточно мысленно подойти к седьмой точке. Он лучше других приёмов модуля подтверждён исследованиями — Dresler 2017, Wagner 2021.
+Метод локусов даёт порядок и доступ с любого места: чтобы вспомнить седьмое слово, достаточно мысленно подойти к седьмой точке. Среди приёмов запоминания в модуле он подтверждён исследованиями лучше всех — Dresler 2017, Wagner 2021.
 
-Чего не даёт. Он требует подготовки: маршрут нужно завести и пройти несколько раз до работы с ним. Новички в исследовании тренировались неделями, а не один вечер. Лучше всего он подходит для рядов — слов, пунктов, чисел, — и хуже для смысла связного текста, где важны отношения между идеями. И он не улучшает память вообще: участники Maguire 2003 не отличались особой памятью, у них был отработанный приём.
+Чего не даёт. Он требует подготовки: маршрут нужно завести и пройти несколько раз до работы с ним. Новички в исследовании тренировались неделями, а не один вечер. Лучше всего он подходит для рядов — слов, пунктов, чисел — и хуже для смысла связного текста, где важны отношения между идеями. И он не улучшает память вообще: участники Maguire 2003 не отличались ни интеллектом, ни строением мозга, зато занимались мнемотехникой в среднем больше одиннадцати лет.
 
 ## Источники
 
@@ -266,13 +267,13 @@ What it does not give you. Recalling from the middle is awkward: to get to the s
 
 ## What the research shows
 
-This technique is better tested than anything else in the module.
+Of the memorisation techniques in this module, this one is the best tested.
 
-Maguire and colleagues (Maguire 2003) compared competitors in memory championships with ordinary people. On intelligence tests and in brain structure, the "champions" did not differ from the control group. Something else did: nine out of ten used the method of loci, and while memorising, brain regions linked to spatial memory and navigation were more active in them. The study's conclusion is that outstanding memorisation comes from technique, not from an unusual memory.
+Maguire and colleagues (Maguire 2003) compared ten memory-championship competitors with ten ordinary people. On intelligence tests and in brain structure, the "champions" did not differ from the control group. Something else did: nine out of ten used the method of loci for at least some of the tasks. While they memorised, brain regions important for spatial memory were engaged, the hippocampus among them. The authors' conclusion: outstanding memory performance was explained not by intellect or brain structure but by a spatial learning strategy.
 
-Dresler and colleagues (Dresler 2017) tested whether a newcomer can learn it. People with no experience trained the method of loci for six weeks, about half an hour a day. The number of words they remembered from a 72-word list rose from roughly 26 to roughly 62. Groups that trained working memory or did not train at all showed no such rise. Four months later, the trained group had kept a substantial part of the gain. A follow-up analysis of the same participants (Wagner 2021) confirmed that the memories lasted for months and that the brain worked more economically while memorising.
+Dresler and colleagues (Dresler 2017) tested whether a newcomer can learn it. People with no experience trained the method of loci for six weeks: 40 sessions of half an hour. The number of words they remembered from a 72-word list rose on average from roughly 26 to roughly 62. Groups that trained working memory or did not train at all showed no such rise. Four months later, the trained group still recalled on average more than 22 words more than before training. A further analysis of part of the same data (Wagner 2021) showed that the training strengthened durable, long-term memories in particular. Activity in several brain regions during memorising went down — the authors read this as the brain working more efficiently.
 
-Two caveats. These were volunteers who practised daily on a programme for six weeks. And they were tested on word lists — exactly what the technique is made for.
+Two caveats. These were young male volunteers who practised every day on a programme for six weeks. And they were tested on word lists — exactly what the technique is made for.
 
 ## How to choose a route
 
@@ -298,19 +299,19 @@ The same route can be filled many times. After a day or two the old images fade 
 
 ## Exercise
 
-Today, 25–30 minutes, plus the delayed check.
+Today: 25–30 minutes, plus the delayed check.
 
 1. Open \`/en/trenazhery/eidetika/dvorec/\` and write down your route: 10 places in order. The route is stored only in this browser.
-2. Close your eyes and walk the route twice without looking at the list. If a place comes up with difficulty, replace it with a more noticeable one.
-3. Start a palace run: place the words at the points and walk the route. Do not hurry; speed does not matter yet.
-4. Then open \`/en/trenazhery/eidetika/ryad/\`, words, length 10 or 15, and lay the series out along the same route. An hour or more later, take the delayed check.
+2. Close your eyes and walk the route twice without looking at the list. If a place is hard to bring to mind, replace it with a more noticeable one.
+3. Start a palace walk: place the words at the places and walk the route. Do not hurry; speed does not matter yet.
+4. Then open \`/en/trenazhery/eidetika/ryad/\`, words, length 10 — one word per place — and lay the series out along the same route. An hour or more later, take the delayed check.
 5. Compare with the story from the previous lesson. Which technique held better for you in particular?
 
 ## What this gives you, and what it does not
 
-The method of loci gives you order and access from any point: to recall the seventh word, you only need to walk up to the seventh place in your mind. Of all the techniques in this module it has the strongest research support — Dresler 2017, Wagner 2021.
+The method of loci gives you order and access from any point: to recall the seventh word, you only need to walk up to the seventh place in your mind. Of the memorisation techniques in this module it has the strongest research support — Dresler 2017, Wagner 2021.
 
-What it does not give you. It takes preparation: the route has to be set up and walked a few times before you use it. The newcomers in the study trained for weeks, not for one evening. It suits series best — words, points, numbers — and fits less well with the meaning of connected text, where relations between ideas matter. And it does not improve memory in general: the participants in Maguire 2003 had no special memory, they had a well-practised technique.
+What it does not give you. It takes preparation: the route has to be set up and walked a few times before you use it. The newcomers in the study trained for weeks, not for one evening. It suits series best — words, items, numbers — and fits less well with the meaning of connected text, where relations between ideas matter. And it does not improve memory in general: the participants in Maguire 2003 did not differ in intellect or brain structure, but they had practised mnemonics for more than eleven years on average.
 
 ## Sources
 
@@ -325,11 +326,11 @@ What it does not give you. It takes preparation: the route has to be set up and 
 
 Сразу честно: это практика и традиция, а не метод с сильной доказательной базой. В англоязычной традиции такой код называют «Major system», или фонетической системой. Он давно известен и широко используется, но хороших контролируемых исследований именно этого приёма мало, и цифр эффекта мы приводить не будем.
 
-Косвенно на принцип указывает другая работа. Эрикссон и Чейз (Ericsson & Chase 1982) описали студента, который за больше чем двести часов тренировок довёл число цифр, запоминаемых на слух, примерно с семи до почти восьмидесяти. Особой памяти у него не было: он был бегуном и превращал группы цифр во время забегов, то есть в то, что уже знал. Это не наш код, но тот же принцип — цифра получает смысл через знакомое. И там же видна граница: на буквах объём его памяти остался обычным.
+Косвенно на принцип указывает другая работа. Эрикссон и Чейз (Ericsson, Chase & Faloon 1980; Ericsson & Chase 1982) описали студента, который тренировался больше двухсот часов. За это время число цифр, которые он удерживал на слух, выросло примерно с семи до почти восьмидесяти. Особой памяти у него не было. Он был бегуном и превращал группы цифр в результаты забегов: 3492 — «3 минуты 49,2 секунды, почти мировой рекорд на милю». Это не наш код, но тот же принцип — цифра получает смысл через знакомое. И там же видна граница: на случайных согласных объём его памяти остался обычным.
 
 ## Русская таблица
 
-Для русского языка устоялась своя таблица — буквенно-цифровой код из школы мнемотехники В. А. Козаренко (система «Джордано»). Её мы и берём, а не изобретаем новую: у неё есть учебник, упражнения и сообщество тех, кто ей пользуется. Каждой цифре в ней соответствуют две согласные:
+Для русского языка устоялась своя таблица — буквенно-цифровой код из системы запоминания «Джордано» В. А. Козаренко. Её мы и берём, а не изобретаем новую: у неё есть учебник с упражнениями. Каждой цифре в ней соответствуют две согласные:
 
 0 — Н, М · 1 — Г, Ж · 2 — Д, Т · 3 — К, Х · 4 — Ч, Щ · 5 — П, Б · 6 — Ш, Л · 7 — С, З · 8 — В, Ф · 9 — Р, Ц.
 
@@ -337,15 +338,15 @@ What it does not give you. It takes preparation: the route has to be set up and 
 
 ## Как число становится словом
 
-Гласные, Й, Ь и Ъ не считаются — их вставляешь как угодно. В этой традиции число читают по первым согласным слова: для двузначного числа — по двум первым, остальные буквы не читаются. Примеры: 13 — гайка (Г, К), 25 — дуб (Д, Б), 35 — куб, 40 — чайник (Ч, Н), 50 — пень, 79 — сыр, 86 — вилка.
+Считаются только согласные, гласные вставляешь как угодно. В учебнике Козаренко правило такое: значимые согласные должны стоять в слове первыми, остальные согласные не учитываются. Для двузначного числа это две первые согласные. Примеры: 13 — жук (Ж, К), 25 — дуб (Д, Б), 35 — куб, 40 — чемодан (Ч, М), 50 — пень, 79 — сыр, 86 — вилка.
 
-Для каждой пары цифр есть четыре сочетания согласных, поэтому слово почти всегда находится. Выбирай то, что легко увидеть: предмет или животное лучше, чем чувство или действие.
+Для каждой пары цифр есть четыре сочетания согласных, поэтому слово обычно находится. Выбирай то, что легко увидеть: предмет или животное лучше, чем чувство или действие.
 
 Длинное число режут на пары. 257935 — это 25, 79, 35: дуб, сыр, куб. Дальше как в прошлых уроках: с дуба свисает сыр, сыр падает на кубик и раскалывает его. Или раскладываешь три образа по первым трём точкам своего маршрута.
 
 ## Упражнение
 
-Сегодня 25–30 минут, затем по 5 минут несколько дней.
+Сегодня — 25–30 минут, затем по 5 минут несколько дней.
 
 1. Выучи таблицу: 10 минут. Выпиши её, закрой, восстанови по памяти, сверь. Повтори, пока не восстановишь без ошибок.
 2. Составь слова для десяти двузначных чисел — любых, например от 10 до 19. Запиши по одному слову на число и больше его не меняй: постоянный словарь работает быстрее, чем каждый раз новое слово.
@@ -361,15 +362,16 @@ What it does not give you. It takes preparation: the route has to be set up and 
 
 ## Источники
 
-1. Ericsson K.A., Chase W.G. (1982). Exceptional memory. American Scientist 70(6), 607–615.
-2. Козаренко В. А. Учебник мнемотехники. Система запоминания «Джордано». М.: Джордано, 2002 (есть переиздания) — источник русской таблицы; не исследование, а учебник практики.`,
+1. Ericsson K.A., Chase W.G., Faloon S. (1980). Acquisition of a memory skill. Science 208(4448), 1181–1182. doi:10.1126/science.7375930
+2. Ericsson K.A., Chase W.G. (1982). Exceptional memory. American Scientist 70(6), 607–615.
+3. Козаренко В. А. Учебник мнемотехники. Система запоминания «Джордано». М., 2002 (электронное издание сайта «Мнемоникон»; в каталогах встречается и 2007 год) — источник русской таблицы и правила первых согласных (глава 4 «Приёмы кодирования»); не исследование, а учебник практики.`,
     en: `A word is easy to turn into an image. A number is not: "seventy-nine" shows you nothing. So numbers need an intermediate step — a code that turns digits into consonant sounds, and consonants into words. After that, those words are handled like any others: put into a story or along a route.
 
 ## Where the technique comes from and how well it is tested
 
 To be upfront: this is practice and tradition, not a method with strong evidence behind it. In English it is called the Major system, or the phonetic system. It has been known for a long time and is widely used, but good controlled studies of this particular technique are scarce, and we will not quote effect sizes.
 
-Another study points to the principle indirectly. Ericsson and Chase (Ericsson & Chase 1982) described a student who, over more than two hundred hours of practice, raised the number of spoken digits he could hold from about seven to nearly eighty. He had no special memory: he was a runner and turned groups of digits into running times — into something he already knew. That is not our code, but it is the same principle: a digit gains meaning through something familiar. And the limit shows there too: his memory for letters stayed ordinary.
+Another line of research points to the principle indirectly. Ericsson and Chase (Ericsson, Chase & Faloon 1980; Ericsson & Chase 1982) described a student who, over more than two hundred hours of practice, raised the number of spoken digits he could hold from about seven to nearly eighty. He had no special memory. He was a runner and turned groups of digits into running times: 3492 became "three forty-nine point two, a near-world-record mile". That is not our code, but it is the same principle: a digit gains meaning through something familiar. And the limit shows there too: with random consonants his memory span stayed ordinary.
 
 ## The table
 
@@ -391,7 +393,7 @@ A long number is cut into pairs. 257935 is 25, 79, 35: nail, cap, mule. Then as 
 
 ## Exercise
 
-Today 25–30 minutes, then 5 minutes a day for a few days.
+Today: 25–30 minutes, then 5 minutes a day for a few days.
 
 1. Learn the table: 10 minutes. Write it out, cover it, rebuild it from memory, compare. Repeat until you can rebuild it without mistakes.
 2. Make words for ten two-digit numbers — any ten, say 10 to 19. Write down one word per number and do not change it afterwards: a fixed dictionary works faster than a new word each time.
@@ -407,8 +409,9 @@ What it does not give you. The evidence for this particular system is thin — i
 
 ## Sources
 
-1. Ericsson K.A., Chase W.G. (1982). Exceptional memory. American Scientist 70(6), 607–615.
-2. The Major system itself is a practical tradition, not a research finding; the Russian letter code is from V. A. Kozarenko, "Textbook of Mnemonics. The Giordano memory system" (Moscow, 2002; later editions) — a practice manual, not a study.`,
+1. Ericsson K.A., Chase W.G., Faloon S. (1980). Acquisition of a memory skill. Science 208(4448), 1181–1182. doi:10.1126/science.7375930
+2. Ericsson K.A., Chase W.G. (1982). Exceptional memory. American Scientist 70(6), 607–615.
+3. The Major system itself is a practical tradition, not a research finding; the Russian letter code is from V. A. Kozarenko, "Textbook of Mnemonics. The Giordano memory system" (Moscow, 2002, an online edition; some catalogues give 2007) — a practice manual, not a study.`,
   },
   names: {
     ru: `Лицо человека ты узнаёшь через месяц, а имя вылетает через минуту. Это обычное дело: лицо ты видел, а имя — случайное слово, которое никак с этим лицом не связано. Урок про то, как эту связь сделать самому: найти в лице заметную деталь, превратить имя в образ и соединить их.
@@ -417,13 +420,13 @@ What it does not give you. The evidence for this particular system is thin — i
 
 ## Три шага
 
-Приём с образами для пар «лицо — имя» проверял Маккарти (McCarty 1980). Он состоит из трёх шагов, и в опыте участники, которые им пользовались, запоминали пары «лицо — имя» лучше контрольной группы.
+Приём с образами для пар «лицо — имя» исследовал Маккарти (McCarty 1980). В приёме три части: заметная черта лица, имя, превращённое в конкретный образ, и сцена, где они взаимодействуют. В первом опыте участники учили пары по шести вариантам стратегии с разными сочетаниями этих частей. Без любой из трёх частей приём терял эффективность. Второй опыт показал, что черта-подсказка тем слабее, чем чаще её выбирают для разных лиц, и тем сильнее, чем больше она отличает лицо от остальных.
 
-Первый — заметная черта. Найди в лице то, что бросается в глаза именно тебе: густые брови, высокий лоб, ямочка на подбородке, веснушки. Выбирай черты лица, а не одежду и не причёску: они не меняются к следующей встрече.
+Первый — заметная черта. Найди в лице то, что отличает его от других и бросается в глаза именно тебе: густые брови, высокий лоб, ямочка на подбородке, веснушки. Выбирай черты лица, а не одежду и не причёску: они не меняются к следующей встрече.
 
 Второй — имя становится образом. По смыслу или по созвучию, как абстрактные слова в первом уроке: Роман — толстая книга-роман, Марина — причал с лодками, Лев — лев, Олег — олень, Роза — роза.
 
-Третий — связь. Образ имени взаимодействует с чертой: из густых бровей Романа торчат страницы книги; на высоком лбу Марины, как на причале, покачиваются лодки. Сцена существует только у тебя в голове, поэтому она может быть нелепой. Но не делай её насмешкой над внешностью человека: смешное к образу, а не к человеку.
+Третий — связь. Образ имени взаимодействует с чертой: из густых бровей Романа торчат страницы книги; на высоком лбу Марины, как на причале, покачиваются лодки. Сцена существует только у тебя в голове, поэтому она может быть нелепой. Но не делай её насмешкой над внешностью человека: смешным может быть образ, а не человек.
 
 ## Закрепить сразу
 
@@ -439,33 +442,34 @@ What it does not give you. The evidence for this particular system is thin — i
 
 ## Упражнение
 
-Сегодня, 15 минут, плюс проверка через час. Все люди ниже выдуманы.
+Сегодня — 15 минут, плюс проверка через час. Все люди ниже выдуманы.
 
-1. Прочитай пять описаний и для каждого сделай три шага: черта, образ имени, связь. Запиши сцену одной строкой.
-2. Марина — высокий лоб, светлые кудри. Олег — очень широкие плечи, маленький нос. Вера — тёмные глаза, ямочки на щеках. Тимур — густая короткая борода, шрам на брови. Роза — веснушки, острый подбородок.
-3. Закрой описания и сцены на час.
-4. Через час закрой имена в описаниях и по чертам лица вспомни каждое имя. Для каждого, кого не вспомнил, посмотри на сцену: что в ней было слабым — черта, образ имени или связь.
-5. На ближайшей реальной встрече с новым человеком сделай три шага в голове. Записывать сцены про реальных людей не нужно: приём работает в уме.
+Марина — высокий лоб, светлые кудри. Олег — очень широкие плечи, маленький нос. Вера — тёмные глаза, ямочки на щеках. Тимур — густая короткая борода, шрам на брови. Роза — веснушки, острый подбородок.
+
+1. Для каждого из пяти описаний сделай три шага: черта, образ имени, связь. Запиши сцену одной строкой.
+2. Отложи описания и сцены на час.
+3. Через час закрой имена в описаниях и по чертам лица вспомни каждое имя. Для каждого, кого не вспомнил, посмотри на сцену: что в ней было слабым — черта, образ имени или связь.
+4. На ближайшей реальной встрече с новым человеком сделай три шага в голове. Записывать сцены про реальных людей не нужно: приём работает в уме.
 
 ## Что это даёт и чего не даёт
 
-Приём даёт связь между лицом и именем, которой без него нет, — именно её проверял McCarty 1980. Привычки разговора дают то, без чего приём не срабатывает: имя, которое ты действительно услышал.
+Приём даёт связь между лицом и именем, которой без него нет, — именно её исследовал McCarty 1980. Привычки разговора дают то, без чего приём не срабатывает: имя, которое ты действительно услышал.
 
 Чего не даёт. Он не работает, если имя прозвучало мимо тебя: сначала внимание, потом образ. Он рассчитан на несколько новых людей за раз, а не на сотню. И это не лечение. У некоторых людей узнавание лиц трудно от рождения, и приём этого не изменит. Если память на лица или имена резко ухудшилась — это повод обратиться к врачу, а не к тренажёру.
 
 ## Источники
 
 1. McCarty D.L. (1980). Investigation of a visual imagery mnemonic device for acquiring face–name associations. Journal of Experimental Psychology: Human Learning and Memory 6(2), 145–155.
-2. Roediger H.L., Karpicke J.D. (2006). Test-enhanced learning. Psychological Science 17(3), 249–255. doi:10.1111/j.1467-9280.2006.01693.x`,
+2. Roediger H.L., Karpicke J.D. (2006). Test-enhanced learning: taking memory tests improves long-term retention. Psychological Science 17(3), 249–255. doi:10.1111/j.1467-9280.2006.01693.x`,
     en: `You recognise a person's face a month later, yet their name slips away within a minute. That is normal: you saw the face, while the name is an arbitrary word with no link to it. This lesson is about making that link yourself: find a noticeable detail in the face, turn the name into an image, and join the two.
 
 There is no trainer for this lesson, and that is a decision, not a gap. A trainer would need photos and names of real people, and that is other people's data. So the exercise uses imaginary examples, and the real practice happens in live conversation.
 
 ## Three steps
 
-An imagery technique for face–name pairs was tested by McCarty (McCarty 1980). It has three steps, and in the study participants who used it learned face–name pairs better than a control group.
+An imagery technique for face–name pairs was studied by McCarty (McCarty 1980). It has three parts: a distinctive facial feature, the name turned into a concrete image, and a scene in which the two interact. In the first experiment, participants learned pairs with one of six versions of the strategy, each combining these parts differently. Without any one of the three parts, the technique lost its effect. The second experiment showed that a feature is a weaker cue the more often it is used for different faces, and a stronger one the more it sets the face apart.
 
-First, a distinctive feature. Find something in the face that catches your eye in particular: thick eyebrows, a high forehead, a cleft chin, freckles. Choose features of the face, not clothes or hairstyle: those change by the next meeting.
+First, a distinctive feature. Find something in the face that sets it apart and catches your eye in particular: thick eyebrows, a high forehead, a cleft chin, freckles. Choose features of the face, not clothes or hairstyle: those change by the next meeting.
 
 Second, the name becomes an image. By meaning or by sound, like the abstract words in the first lesson: Rose — a rose, Bill — a bird's bill, Carl — a car, Mark — a marker pen, Jack — a car jack.
 
@@ -479,30 +483,31 @@ If you did not catch the name, ask again. That is normal and polite.
 
 Say the name aloud once in the conversation — naturally, without emphasis.
 
-A few minutes later, recall the name silently while looking at the person. That is a small test, and testing yourself fixes material better than rereading it — more on that in the last lesson (Roediger & Karpicke 2006).
+A few minutes later, recall the name silently while looking at the person. That is a small test, and testing yourself makes things stick better than rereading — more on that in the last lesson (Roediger & Karpicke 2006).
 
 Say goodbye using the name.
 
 ## Exercise
 
-Today, 15 minutes, plus a check an hour later. Everyone below is invented.
+Today: 15 minutes, plus a check an hour later. Everyone below is invented.
 
-1. Read five descriptions and do the three steps for each: feature, name image, link. Write the scene down in one line.
-2. Rose — high forehead, fair curls. Carl — very broad shoulders, a small nose. Grace — dark eyes, dimples. Mark — a short thick beard, a scar across one eyebrow. Bill — freckles, a pointed chin.
-3. Put the descriptions and scenes away for an hour.
-4. An hour later, cover the names in the descriptions and recall each name from the facial features. For each one you missed, look at the scene: what was weak — the feature, the name image, or the link?
-5. Next time you meet someone new in real life, do the three steps in your head. There is no need to write down scenes about real people: the technique works in the mind.
+Rose — high forehead, fair curls. Carl — very broad shoulders, a small nose. Grace — dark eyes, dimples. Mark — a short thick beard, a scar across one eyebrow. Bill — freckles, a pointed chin.
+
+1. For each of the five descriptions, do the three steps: feature, name image, link. Write the scene down in one line.
+2. Put the descriptions and scenes away for an hour.
+3. An hour later, cover the names in the descriptions and recall each name from the facial features. For each one you missed, look at the scene: what was weak — the feature, the name image, or the link?
+4. Next time you meet someone new in real life, do the three steps in your head. There is no need to write down scenes about real people: the technique works in the mind.
 
 ## What this gives you, and what it does not
 
-The technique gives you a link between face and name that does not exist without it — exactly what McCarty 1980 tested. The conversation habits give you what the technique cannot work without: a name you actually heard.
+The technique gives you a link between face and name that does not exist without it — exactly what McCarty 1980 studied. The conversation habits give you what the technique cannot work without: a name you actually heard.
 
 What it does not give you. It does not work if the name went past you: attention first, image second. It is meant for a few new people at a time, not for a hundred. And it is not a treatment. For some people recognising faces is hard from birth, and a technique will not change that. If your memory for faces or names has suddenly got worse, see a doctor, not a trainer.
 
 ## Sources
 
 1. McCarty D.L. (1980). Investigation of a visual imagery mnemonic device for acquiring face–name associations. Journal of Experimental Psychology: Human Learning and Memory 6(2), 145–155.
-2. Roediger H.L., Karpicke J.D. (2006). Test-enhanced learning. Psychological Science 17(3), 249–255. doi:10.1111/j.1467-9280.2006.01693.x`,
+2. Roediger H.L., Karpicke J.D. (2006). Test-enhanced learning: taking memory tests improves long-term retention. Psychological Science 17(3), 249–255. doi:10.1111/j.1467-9280.2006.01693.x`,
   },
   spacing: {
     ru: `Всё, что ты запоминал в этом модуле, без возврата блекнет. Ты это уже видел: отложенная проверка в тренажёре почти всегда даёт меньше, чем проверка сразу. Это не сбой, а обычная работа памяти. Последний урок — про то, как возвращаться к запомненному так, чтобы оно держалось, и не тратить на это лишнего времени.
@@ -511,11 +516,11 @@ What it does not give you. It does not work if the name went past you: attention
 
 Здесь опора самая надёжная во всём модуле.
 
-Первое — распределённое повторение. Сепеда с коллегами (Cepeda 2006) свели вместе сотни экспериментов: повторение, разнесённое во времени, даёт лучшее запоминание, чем то же время, потраченное за один присест. И чем дольше нужно помнить, тем длиннее выгодные промежутки между повторами.
+Первое — распределённое повторение. Сепеда с коллегами (Cepeda 2006) свели вместе 317 экспериментов из 184 статей. Вывод: повторение, разнесённое во времени, даёт лучшее запоминание, чем то же время, потраченное за один присест. И чем дольше нужно помнить, тем длиннее выгодные промежутки между повторами.
 
-Второе — вспоминание вместо перечитывания. Рёдигер и Карпик (Roediger & Karpicke 2006) показали: те, кто после изучения проверял себя, через неделю помнили больше тех, кто перечитывал материал, — хотя вторые были увереннее в своём результате.
+Второе — вспоминание вместо перечитывания. Рёдигер и Карпик (Roediger & Karpicke 2006) дали студентам учебные тексты. Одни после чтения вспоминали прочитанное, другие перечитывали. Через пять минут перечитывание даже выигрывало. Но через два дня и через неделю больше помнили те, кто вспоминал, хотя перечитывавшие были увереннее в своём результате.
 
-В большом обзоре учебных техник (Dunlosky 2013) именно эти два приёма — распределённая практика и самопроверка — получили высшую оценку полезности. Для сравнения: образы как отдельный приём в том же обзоре оценены низко. Поэтому последний урок — не приложение к модулю, а то, что удерживает результат всех остальных.
+В большом обзоре учебных техник (Dunlosky 2013) именно эти два приёма — распределённая практика и самопроверка — получили высшую оценку полезности. Для сравнения: образы при чтении текста и keyword mnemonic в том же обзоре оценены низко. Поэтому последний урок — не приложение к модулю, а то, что удерживает результат всех остальных.
 
 ## План повторов
 
@@ -525,17 +530,17 @@ What it does not give you. It does not work if the name went past you: attention
 
 ## Как повторять
 
-Повтор — это попытка вспомнить, а не перечитывание. Пройди маршрут или историю в голове, назови всё, что нашёл, и только потом сверься. Трудное вспоминание неприятнее лёгкого перечитывания, и именно поэтому оно работает.
+Повтор — это попытка вспомнить, а не перечитывание. Пройди маршрут или историю в голове, назови всё, что нашёл, и только потом сверься. Трудное вспоминание неприятнее лёгкого перечитывания, но держит лучше — это и показал опыт Рёдигера и Карпика.
 
 На каждый повтор уходит минута-две. Три-четыре таких возврата — меньше десяти минут на ряд.
 
 ## Упражнение
 
-Сегодня 15 минут, дальше по две минуты в назначенные дни.
+Сегодня — 15 минут, дальше по две минуты в назначенные дни.
 
-1. Открой \`/trenazhery/eidetika/ryad/\`, слова, длина 15. Запомни ряд приёмом, который у тебя лучше сработал в прошлых уроках: историей или по маршруту. Проверь сразу.
+1. Открой \`/trenazhery/eidetika/ryad/\`, слова, длина 15. Запомни ряд приёмом, который у тебя лучше сработал в прошлых уроках: историей или по маршруту. Пока ряд на экране, сфотографируй его или перепиши на листок и убери, не перечитывая: тренажёр ряд больше не покажет, а эталон понадобится для сверки. Проверь себя сразу.
 2. Через час или больше пройди отложенную проверку в тренажёре.
-3. Дальше повторяй по плану, без тренажёра: запиши ряд по памяти на листок, потом сверь со своей записью, сделанной в первый день. Отметь дату и сколько вспомнил.
+3. Дальше повторяй по плану, без тренажёра: запиши ряд по памяти, потом сверь с эталоном из первого дня. Отметь дату и сколько вспомнил.
 4. Через неделю сравни три строки: замер «до» из первого урока, отложенную проверку сегодня и результат через неделю.
 5. Реши, что будешь держать так дальше — слова, числа, даты, пункты — и заведи для этого один список с датами повторов.
 
@@ -545,12 +550,12 @@ What it does not give you. It does not work if the name went past you: attention
 
 Чего не даёт. Повтор не спасёт то, что не было запомнено: сначала образ, история или маршрут, потом интервалы. Держать можно только то, к чему возвращаешься, — забытый список не восстановится задним числом.
 
-И честный итог модуля. Реалистичный результат шести уроков — умение запоминать ряды слов, чисел и имён заметно надёжнее, чем в замере «до», если тратить на это время и возвращаться к запомненному. Фотографической памяти в конце курса нет — ни у тебя, ни у рекордсменов, которые, как показали Maguire 2003 и Ericsson & Chase 1982, пользуются приёмами, а не особой памятью. Сравнивать свой результат стоит только со своим же замером «до».
+И честный итог модуля. Реалистичный результат шести уроков — умение запоминать ряды слов, чисел и имён заметно надёжнее, чем в замере «до», если тратить на это время и возвращаться к запомненному. Фотографической памяти в конце курса нет — ни у тебя, ни у рекордсменов. За их результатами, как показали Maguire 2003 и Ericsson & Chase 1982, стоят отработанные приёмы, а не особый склад памяти. Сравнивать свой результат стоит только со своим же замером «до».
 
 ## Источники
 
 1. Cepeda N.J. et al. (2006). Distributed practice in verbal recall tasks: a review and quantitative synthesis. Psychological Bulletin 132(3), 354–380. doi:10.1037/0033-2909.132.3.354
-2. Roediger H.L., Karpicke J.D. (2006). Test-enhanced learning. Psychological Science 17(3), 249–255. doi:10.1111/j.1467-9280.2006.01693.x
+2. Roediger H.L., Karpicke J.D. (2006). Test-enhanced learning: taking memory tests improves long-term retention. Psychological Science 17(3), 249–255. doi:10.1111/j.1467-9280.2006.01693.x
 3. Dunlosky J. et al. (2013). Improving students' learning with effective learning techniques. Psychological Science in the Public Interest 14(1), 4–58. doi:10.1177/1529100612453266
 4. Maguire E.A. et al. (2003). Routes to remembering: the brains behind superior memory. Nature Neuroscience 6(1), 90–95. doi:10.1038/nn988
 5. Ericsson K.A., Chase W.G. (1982). Exceptional memory. American Scientist 70(6), 607–615.`,
@@ -560,11 +565,11 @@ What it does not give you. It does not work if the name went past you: attention
 
 This is where the module stands on its firmest ground.
 
-First, spaced repetition. Cepeda and colleagues (Cepeda 2006) brought together hundreds of experiments: repetition spread out over time produces better retention than the same time spent in one sitting. And the longer you need to remember something, the longer the useful gaps between repetitions.
+First, spaced repetition. Cepeda and colleagues (Cepeda 2006) brought together 317 experiments from 184 articles: repetition spread out over time produces better retention than the same time spent in one sitting. And the longer you need to remember something, the longer the useful gaps between repetitions.
 
-Second, recall instead of rereading. Roediger and Karpicke (Roediger & Karpicke 2006) showed that people who tested themselves after studying remembered more a week later than those who reread the material — even though the rereaders were more confident of their result.
+Second, recall instead of rereading. Roediger and Karpicke (Roediger & Karpicke 2006) gave students study texts. After reading, some recalled what they had read, while others reread it. Five minutes later, rereading was even ahead. But two days and a week later, those who had recalled remembered more — even though the rereaders were more confident of their result.
 
-In a large review of learning techniques (Dunlosky 2013), these two — distributed practice and practice testing — received the top utility rating. For comparison, imagery used on its own was rated low in the same review. So this last lesson is not an appendix to the module; it is what keeps the result of all the others.
+In a large review of learning techniques (Dunlosky 2013), these two — distributed practice and practice testing — received the top utility rating. For comparison, imagery while reading text and the keyword mnemonic were rated low in the same review. So this last lesson is not an appendix to the module; it is what keeps the result of all the others.
 
 ## A repetition plan
 
@@ -574,17 +579,17 @@ The adjustment rule. If recall came easily, make the next gap longer. If it was 
 
 ## How to repeat
 
-A repetition is an attempt to recall, not a rereading. Walk the route or the story in your head, name everything you find, and only then check. Effortful recall feels less pleasant than easy rereading, and that is exactly why it works.
+A repetition is an attempt to recall, not a rereading. Walk the route or the story in your head, name everything you find, and only then check. Effortful recall feels less pleasant than easy rereading, but it holds better — which is what the Roediger and Karpicke study showed.
 
 Each repetition takes a minute or two. Three or four such returns cost under ten minutes per series.
 
 ## Exercise
 
-Today 15 minutes, then two minutes on the scheduled days.
+Today: 15 minutes, then two minutes on the scheduled days.
 
-1. Open \`/en/trenazhery/eidetika/ryad/\`, words, length 15. Memorise the series with the technique that worked better for you in the earlier lessons: a story or a route. Check right away.
+1. Open \`/en/trenazhery/eidetika/ryad/\`, words, length 15. Memorise the series with the technique that worked better for you in the earlier lessons: a story or a route. While the series is on screen, take a photo of it or copy it onto paper and put it away unread: the trainer will not show it again, and you will need this reference to check against. Check yourself right away.
 2. An hour or more later, take the delayed check in the trainer.
-3. After that, repeat on schedule without the trainer: write the series down from memory on paper, then compare with the copy you made on the first day. Note the date and how many you recalled.
+3. After that, repeat on schedule without the trainer: write the series down from memory, then compare it with your reference from the first day. Note the date and how many you recalled.
 4. After a week, compare three lines: the "before" measurement from the first lesson, today's delayed check, and the result a week later.
 5. Decide what you will keep this way from now on — words, numbers, dates, points — and start one list with repetition dates for it.
 
@@ -594,12 +599,12 @@ Repetitions at growing intervals, with self-testing, give you material that hold
 
 What it does not give you. Repetition cannot rescue what was never memorised: first the image, the story or the route, then the intervals. You can only keep what you return to — a forgotten list will not come back after the fact.
 
-And an honest summary of the module. A realistic outcome of six lessons is the ability to memorise series of words, numbers and names noticeably more reliably than in your "before" measurement, provided you put in the time and return to what you memorised. There is no photographic memory at the end of this course — not for you, and not for record holders either, who, as Maguire 2003 and Ericsson & Chase 1982 showed, use techniques rather than an unusual memory. The only comparison worth making is with your own "before" measurement.
+And an honest summary of the module. A realistic outcome of six lessons is the ability to memorise series of words, numbers and names noticeably more reliably than in your "before" measurement, provided you put in the time and return to what you memorised. There is no photographic memory at the end of this course — not for you, and not for record holders either. Behind their results, as Maguire 2003 and Ericsson & Chase 1982 showed, lie well-practised techniques rather than an unusual kind of memory. The only comparison worth making is with your own "before" measurement.
 
 ## Sources
 
 1. Cepeda N.J. et al. (2006). Distributed practice in verbal recall tasks: a review and quantitative synthesis. Psychological Bulletin 132(3), 354–380. doi:10.1037/0033-2909.132.3.354
-2. Roediger H.L., Karpicke J.D. (2006). Test-enhanced learning. Psychological Science 17(3), 249–255. doi:10.1111/j.1467-9280.2006.01693.x
+2. Roediger H.L., Karpicke J.D. (2006). Test-enhanced learning: taking memory tests improves long-term retention. Psychological Science 17(3), 249–255. doi:10.1111/j.1467-9280.2006.01693.x
 3. Dunlosky J. et al. (2013). Improving students' learning with effective learning techniques. Psychological Science in the Public Interest 14(1), 4–58. doi:10.1177/1529100612453266
 4. Maguire E.A. et al. (2003). Routes to remembering: the brains behind superior memory. Nature Neuroscience 6(1), 90–95. doi:10.1038/nn988
 5. Ericsson K.A., Chase W.G. (1982). Exceptional memory. American Scientist 70(6), 607–615.`,
