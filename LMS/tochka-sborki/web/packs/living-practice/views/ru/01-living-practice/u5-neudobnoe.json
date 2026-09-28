@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-living-practice",
+  "unit": "u5-neudobnoe",
+  "locale": "ru",
+  "title": "Неудобное: что делать, когда поднялось",
+  "sourceHash": "sha256:f63185a587ed87c9a2cefb209cedc5bf07e0489bf5c108aa492d417cca63479d",
+  "outline": [
+    {
+      "heading": "То, ради чего практика вообще что-то делает",
+      "points": [
+        {
+          "text": "Практика убирает шум.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что показали, когда наконец спросили",
+      "points": [
+        {
+          "text": "Britton, Lindahl, Cooper, Canby и Palitsky (Clinical Psychological Science, 2021) — 96 участников восьминедельной программы, интервью независимым оценщиком по 44-пунктному опроснику:",
+          "origin": "extract"
+        },
+        {
+          "text": "Goldberg, Lam, Britton и Davidson (Psychotherapy Research, 2022) — популяционная выборка США, 434 человека с опытом медитации:",
+          "origin": "extract"
+        },
+        {
+          "text": "И одна деталь оттуда, которую редко пересказывают: люди, сообщившие о вреде, были так же рады, что практиковали, как и остальные.",
+          "origin": "extract"
+        },
+        {
+          "text": "Matko и Van Dam (Current Opinion in Psychology, 2026)",
+          "origin": "extract"
+        },
+        {
+          "text": "Устойчивы два вывода: неприятные эффекты распространены, а стойкий вред редок — порядка нескольких процентов до полутора десятков.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Окно толерантности — второй раз, и не случайно",
+      "points": [
+        {
+          "text": "трудный опыт внутри окна — материал. Трудный опыт за краем окна — сигнал остановиться.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Стоп-сигналы",
+      "points": [
+        {
+          "text": "Последний пункт — не «повод сбавить дозу», а повод немедленно выйти из учебного сценария и обратиться к живому человеку: специалисту или кризисной службе.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Слова, которыми ты объясняешь себе трудное, — это вмешательство",
+      "points": [
+        {
+          "text": "Работа «The roles and impacts of worldviews in the context of meditation-related challenges» (Transcultural Psychiatry, 2022) показала: интерпретационная рамка сама меняет траекторию и длительность трудностей.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Два способа вернуться",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Куда идти, если держится дольше сессии",
+      "points": [
+        {
+          "text": "Если тяжесть выходит за пределы сессии и держится несколько дней — притормози практику и обратись к живому специалисту.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c5",
+    "c6",
+    "c7"
+  ],
+  "audio": null
+}

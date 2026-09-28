@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-introduction",
+  "unit": "u4-practice",
+  "locale": "en",
+  "title": "Your first prompt",
+  "sourceHash": "sha256:e867e8416b306282187eefba9cd980ccccdb92963a254d3100b021ef1d01dd6f",
+  "outline": [
+    {
+      "heading": "What's next: the course map",
+      "points": [
+        {
+          "text": "You finished module 01.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [],
+  "audio": null
+}

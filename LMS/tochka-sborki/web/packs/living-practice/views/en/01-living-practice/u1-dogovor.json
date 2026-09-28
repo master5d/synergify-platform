@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-living-practice",
+  "unit": "u1-dogovor",
+  "locale": "en",
+  "title": "The agreement: what is here and what is not",
+  "sourceHash": "sha256:b07b135a322fc90e7079aa2c537d381f95353aa25a6d9ab2ed808405719c00bc",
+  "outline": [
+    {
+      "heading": "What this course is",
+      "points": [
+        {
+          "text": "Eight steps of attention practice.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the research shows — unrounded",
+      "points": [
+        {
+          "text": "The largest review assembled for medical decision-making (Goyal et al., JAMA Internal Medicine, 2014; 47 clinical trials, 3,515 people) gives mindfulness programmes a small effect: anxiety d≈0.38, depression d≈0.30, pain d≈0.33 — against active controls.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the course does not do",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Risks named before the practice, not after",
+      "points": [
+        {
+          "text": "For a long time these numbers didn't exist for a simple reason: 84% of clinical trials never asked about adverse events at all (Wong et al., cited in Baer et al., 2019).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Who may need company for this format",
+      "points": [
+        {
+          "text": "Not a ban and not a filter — routing.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Stop signals",
+      "points": [
+        {
+          "text": "If the heaviness persists beyond the session, contact a living professional.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null
+}

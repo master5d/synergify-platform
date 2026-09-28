@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-living-practice",
+  "unit": "u8-krug",
+  "locale": "en",
+  "title": "The circle: where all of this leads",
+  "sourceHash": "sha256:0eec932f7863c998e65e34770a0ce984a105a8db0f5d0d402a676ab2a8276b58",
+  "outline": [
+    {
+      "heading": "Why a circle rather than another app",
+      "points": [
+        {
+          "text": "What follows honestly: the evidence supports not \"the group as such\" but a living person in the loop.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How to assemble a circle that stands a chance",
+      "points": [
+        {
+          "text": "If you have no frame of your own for a meeting, there's a ready one: the Group Insight Game (GII) — six cards, four steps, one turn each around the circle.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How to choose a school or a course",
+      "points": [
+        {
+          "text": "An eighth, informal one: there's no humane way out of the course.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How this course ends",
+      "points": [
+        {
+          "text": "The course succeeded at the moment it became unnecessary.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c10"
+  ],
+  "audio": null
+}

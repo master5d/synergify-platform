@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-living-practice",
+  "unit": "u3-telo",
+  "locale": "en",
+  "title": "Body: a scan with your eyes open",
+  "sourceHash": "sha256:057c4c959408344108197e973d1290bf3bcea83846165fafd33a250c2a7e3aad",
+  "outline": [
+    {
+      "heading": "Why attention to the body at all",
+      "points": [
+        {
+          "text": "The body gives what the breath cannot: scale.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The honest caveat that usually gets put at the end",
+      "points": [
+        {
+          "text": "With a history of trauma, prolonged uninterrupted concentration on bodily sensation is not a suitable format.",
+          "origin": "extract"
+        },
+        {
+          "text": "David Treleaven, Trauma-Sensitive Mindfulness (W. W. Norton, 2018)",
+          "origin": "extract"
+        },
+        {
+          "text": "In the sample of Goldberg, Lam, Britton and Davidson (Psychotherapy Research, 2022; 434 people with meditation experience), re-experiencing traumatic material is among the most frequent adverse effects, and adverse childhood events appear as a risk factor.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The window of tolerance",
+      "points": [
+        {
+          "text": "Treleaven's central notion is the window of tolerance.",
+          "origin": "extract"
+        },
+        {
+          "text": "The task is not to \"finish the scan\" but to stay inside the window, even if that means cutting the scan off halfway.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Four modifications that make the format safer",
+      "points": [
+        {
+          "text": "A fifth, separate one: movement as a way back.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What is not done here",
+      "points": [
+        {
+          "text": "No \"working with the holding pattern\", no \"releasing trauma from the body\", no \"breathing into the pain\".",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null
+}

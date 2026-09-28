@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-introduction",
+  "unit": "u1-activation",
+  "locale": "ru",
+  "title": "Твой опыт с AI",
+  "sourceHash": "sha256:ad6ac99a81849f6034fe1d396e61b0d16d120ef1c61e7bd1f454ba498ee22f64",
+  "outline": [
+    {
+      "heading": "Три эпохи программирования",
+      "points": [
+        {
+          "text": "Software 3.0 — агенты исполняют код по нашему замыслу.",
+          "origin": "extract"
+        },
+        {
+          "text": "Не «AI пишет вместо меня», а со-мышление и со-работа: ты и агент думаете и делаете вместе.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2",
+    "c3"
+  ],
+  "audio": null
+}

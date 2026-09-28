@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-living-practice",
+  "unit": "u6-bez-zakuporki",
+  "locale": "en",
+  "title": "Awareness without sealing over",
+  "sourceHash": "sha256:936f8e2c1ad70208db87be39fe39107236fc1dcfe7e62d9e5b203632875725da",
+  "outline": [
+    {
+      "heading": "Two different things called by one word",
+      "points": [
+        {
+          "text": "The second: achieving a smooth state in which the unpleasant doesn't reach you.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What exactly gets pushed out",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "A sense of one's own importance, included",
+      "points": [
+        {
+          "text": "An honest caveat: this is philosophical polemic, not research.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How this looks in courses",
+      "points": [
+        {
+          "text": "There is a recognisable construction.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What practice without sealing over does",
+      "points": [
+        {
+          "text": "And a consequence that leads straight into step eight: if practice raises what concerns other people, then it gets worked through with people.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [],
+  "audio": null
+}

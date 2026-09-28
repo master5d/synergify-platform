@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-introduction",
+  "unit": "u2-four-shifts",
+  "locale": "en",
+  "title": "Four shifts",
+  "sourceHash": "sha256:493d5df1f75ec2fef079f347a5b8266d7482fec63133bec8b3e9119b10a40d54",
+  "outline": [
+    {
+      "heading": "Four shifts in working with AI agents",
+      "points": [
+        {
+          "text": "This isn't \"AI doing it instead of you\" — these are four ways of co-working: different facets of how you and the agent think and build together.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "1️⃣ From commands → to delegation",
+          "points": [
+            {
+              "text": "The agent isn't a robot you give commands to.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "2️⃣ From results → to experiments",
+          "points": [
+            {
+              "text": "The first answer is a draft, not a verdict.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "3️⃣ From actions → to specifications",
+          "points": [
+            {
+              "text": "A good spec has: Who / What / Why / How / What not to do.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "4️⃣ From \"do it all yourself\" → to attention management",
+          "points": [
+            {
+              "text": "Delegate to the agent: routine, first drafts, search.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c4",
+    "c5",
+    "c6",
+    "c7",
+    "c8"
+  ],
+  "audio": null
+}

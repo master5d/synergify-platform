@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-living-practice",
+  "unit": "u5-neudobnoe",
+  "locale": "en",
+  "title": "The uncomfortable: what to do when it surfaces",
+  "sourceHash": "sha256:61fa25119899ee16dbe3cba98a6bfcf4f98d0827c708f041138962833a7ccff9",
+  "outline": [
+    {
+      "heading": "The thing that makes practice do anything at all",
+      "points": [
+        {
+          "text": "Practice removes noise.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What showed up once somebody finally asked",
+      "points": [
+        {
+          "text": "Britton, Lindahl, Cooper, Canby and Palitsky (Clinical Psychological Science, 2021) — 96 participants in an eight-week programme, interviewed by an independent assessor on a 44-item instrument:",
+          "origin": "extract"
+        },
+        {
+          "text": "Goldberg, Lam, Britton and Davidson (Psychotherapy Research, 2022) — a US population sample, 434 people with meditation experience:",
+          "origin": "extract"
+        },
+        {
+          "text": "And one detail from there that is rarely retold: people who reported harm were just as glad they had practised as everyone else.",
+          "origin": "extract"
+        },
+        {
+          "text": "Matko and Van Dam (Current Opinion in Psychology, 2026)",
+          "origin": "extract"
+        },
+        {
+          "text": "Two conclusions are stable: unpleasant effects are common, and persistent harm is rare — on the order of a few per cent up to the mid-teens.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The window of tolerance — a second time, and not by accident",
+      "points": [
+        {
+          "text": "difficult experience inside the window is material. Difficult experience past the edge of the window is a signal to stop.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Stop signals",
+      "points": [
+        {
+          "text": "The last item is not \"a reason to lower the dose\" but a reason to leave the learning scenario immediately and reach a living person: a professional or a crisis line.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The words you explain difficulty to yourself with are an intervention",
+      "points": [
+        {
+          "text": "The paper \"The roles and impacts of worldviews in the context of meditation-related challenges\" (Transcultural Psychiatry, 2022) showed that the interpretive frame itself changes the trajectory and duration of difficulties.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Two ways back",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Where to go if it persists beyond the session",
+      "points": [
+        {
+          "text": "If the heaviness reaches past the session and holds for several days, ease off practice and contact a living professional.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c5",
+    "c6",
+    "c7"
+  ],
+  "audio": null
+}

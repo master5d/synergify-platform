@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-introduction",
+  "unit": "u4-practice",
+  "locale": "ru",
+  "title": "Первый промпт",
+  "sourceHash": "sha256:6613a37167aef6e5648664f1d5d4cf37bd7360d62264469a69f627663088795e",
+  "outline": [
+    {
+      "heading": "Что дальше: карта курса",
+      "points": [
+        {
+          "text": "Ты прошёл модуль 01.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [],
+  "audio": null
+}

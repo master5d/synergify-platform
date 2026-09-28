@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-introduction",
+  "unit": "u3-clones",
+  "locale": "ru",
+  "title": "Пять клонов",
+  "sourceHash": "sha256:7bfdfdfa4d85e4acbba659823bd66376256bd95ebc52e5d64917820dc640a2cf",
+  "outline": [
+    {
+      "heading": "Пять типов AI-клонов",
+      "points": [
+        {
+          "text": "Часы в колонке «Экономит» — ориентир автора, у тебя цифры будут свои.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c9",
+    "c10"
+  ],
+  "audio": null
+}

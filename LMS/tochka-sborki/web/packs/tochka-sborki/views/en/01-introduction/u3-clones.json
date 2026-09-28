@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-introduction",
+  "unit": "u3-clones",
+  "locale": "en",
+  "title": "Five clones",
+  "sourceHash": "sha256:321858d75ea25773d91cd6d1cc1d7a98385cfbf9d2453d136b2f95c703c971a1",
+  "outline": [
+    {
+      "heading": "Five types of AI clones",
+      "points": [
+        {
+          "text": "The hours in the \"Saves\" column are the author's rough estimate — your numbers will be your own.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c9",
+    "c10"
+  ],
+  "audio": null
+}

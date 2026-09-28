@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-introduction",
+  "unit": "u1-activation",
+  "locale": "en",
+  "title": "Your experience with AI",
+  "sourceHash": "sha256:3c2ac0dfb717db3e398a3144eda3759c699eee824fc48bc8be0e7930bef9c69f",
+  "outline": [
+    {
+      "heading": "Three eras of programming",
+      "points": [
+        {
+          "text": "Software 3.0 — agents execute code from our intent.",
+          "origin": "extract"
+        },
+        {
+          "text": "Not \"AI writes instead of me,\" but co-thinking and co-working: you and the agent think and build together.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2",
+    "c3"
+  ],
+  "audio": null
+}

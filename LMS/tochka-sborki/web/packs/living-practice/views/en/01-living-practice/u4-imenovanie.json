@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "generator": "extract-v1",
+  "module": "01-living-practice",
+  "unit": "u4-imenovanie",
+  "locale": "en",
+  "title": "Thoughts: naming instead of fighting",
+  "sourceHash": "sha256:197f5fce9495852b0202257f879d4eff8629d9164dca3df0817ad1b19aff5187",
+  "outline": [
+    {
+      "heading": "What naming is",
+      "points": [
+        {
+          "text": "There is one rule and it is strict: the word must be short, neutral, and said inwardly once.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The line that must not be crossed here",
+      "points": [
+        {
+          "text": "There is a version of this technique that is not given at all in a beginner course without a teacher present: continuous intensive noting in the style of long retreats, aimed at \"stages of insight\" and passing through the \"dark night\".",
+          "origin": "extract"
+        },
+        {
+          "text": "An important caveat about Lindahl 2017: those are not population frequencies.",
+          "origin": "extract"
+        },
+        {
+          "text": "The practical conclusion is simple: naming here is a light label for ten minutes, not an instrument of assault.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Why this isn't fighting with thoughts",
+      "points": [
+        {
+          "text": "Hence the key distinction we'll return to in step five: the label \"anxiety\" is not a diagnosis and not a verdict.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4"
+  ],
+  "audio": null
+}
