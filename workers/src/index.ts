@@ -17,6 +17,7 @@ import { getStats } from './handlers/stats'
 import { handleLeadCapture } from './handlers/leads-capture'
 import { handleAlumniList, handleAlumniMe, handleAlumniOptin } from './handlers/alumni'
 import { handleAdmission, handleAcademyMe } from './handlers/academy'
+import { handleCertificateCode, handleCertificateVerify } from './handlers/certificate'
 import { requireAuth, requireOwner } from './middleware'
 
 const ALLOWED_ORIGINS = [
@@ -131,6 +132,10 @@ export default {
         response = await handleAdmission(request, env)
       } else if (path === '/api/academy/me' && method === 'GET') {
         response = await handleAcademyMe(request, env)
+      } else if (path === '/api/certificate/code' && method === 'GET') {
+        response = await handleCertificateCode(request, env)
+      } else if (path === '/api/certificate/verify' && method === 'GET') {
+        response = await handleCertificateVerify(request, env)
       } else if (path === '/api/admin/leads' && method === 'GET') {
         const auth = await requireOwner(request, env)
         response = auth instanceof Response ? auth
