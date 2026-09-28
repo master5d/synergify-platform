@@ -24,7 +24,7 @@ export function LearningPlanCard({ profile, zones, locale, moduleTitles }: {
   const btn = SHEET_BTN
 
   return (
-    <SheetSection title={t.title} glyph="🗺">
+    <SheetSection id="learning-plan" title={t.title} glyph="🗺">
       {taskRoute && (
         <TaskRouteView route={taskRoute} locale={locale} outcome={profileTaskText(profile)} moduleTitles={moduleTitles} style={{ marginBottom: '1rem' }} />
       )}

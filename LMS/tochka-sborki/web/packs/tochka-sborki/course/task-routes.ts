@@ -608,6 +608,10 @@ export interface TaskRouteCopy {
   routeHeading: L
   /** Подпись шага в квест-логе: {n} — номер шага. */
   questStepLabel: L
+  /** Плашка на странице юнита, который — шаг русла ученика: {n} — номер шага. */
+  unitStepLabel: L
+  /** Ссылка с плашки юнита на «Личный план обучения». */
+  unitPlanLink: L
 }
 
 export const TASK_ROUTE_COPY: TaskRouteCopy = {
@@ -653,4 +657,6 @@ export const TASK_ROUTE_COPY: TaskRouteCopy = {
   resultLabel: { ru: 'В конце у тебя:', en: 'What you end up with:' },
   routeHeading: { ru: 'Твоя задача — русло', en: 'Your task — the route' },
   questStepLabel: { ru: 'шаг {n} задачи', en: 'task step {n}' },
+  unitStepLabel: { ru: 'Шаг {n} твоей задачи', en: 'Step {n} of your task' },
+  unitPlanLink: { ru: 'Весь план', en: 'Full plan' },
 }

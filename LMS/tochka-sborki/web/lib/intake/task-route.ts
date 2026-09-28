@@ -219,6 +219,17 @@ export function routeStepsByModule(route: TaskRoute): Record<string, { index: nu
   return out
 }
 
+/**
+ * Шаги русла, которые приходятся на этот юнит (номер 1-based, как в плане). Пусто — юнит не из русла
+ * (плашки «Шаг N твоей задачи» на странице юнита нет). Шаг 0 (проверка «стоит ли») сюда не входит:
+ * его текст — про шаг анкеты, а не про юнит.
+ */
+export function routeStepsForUnit(route: TaskRoute | null | undefined, moduleSlug: string, unitSlug: string): { index: number; step: RouteStep }[] {
+  if (!route) return []
+  const unit = `${moduleSlug}/${unitSlug}`
+  return route.steps.flatMap((step, i) => (step.unit === unit ? [{ index: i + 1, step }] : []))
+}
+
 /** Модуль «босса» русла — там, где стоит последний шаг (рабочий результат). */
 export function routeFinalModule(route: TaskRoute): string {
   return unitModule(route.steps[route.steps.length - 1].unit)

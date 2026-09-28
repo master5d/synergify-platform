@@ -18,11 +18,11 @@ import type { ReactNode } from 'react'
  * ровно тот сценарий, ради которого оба блока и существуют.
  */
 export function SheetSection(
-  { title, glyph, children, marginBottom = '1rem' }:
-  { title: string; glyph?: string; children: ReactNode; marginBottom?: string },
+  { title, glyph, children, marginBottom = '1rem', id }:
+  { title: string; glyph?: string; children: ReactNode; marginBottom?: string; id?: string },
 ) {
   return (
-    <section style={{ maxWidth: 640, margin: `1rem auto ${marginBottom}`, padding: '0 1.5rem' }}>
+    <section id={id} style={{ scrollMarginTop: '4rem', maxWidth: 640, margin: `1rem auto ${marginBottom}`, padding: '0 1.5rem' }}>
       <details style={{ border: '1px solid var(--border-color)', borderRadius: 10, background: 'var(--bg-surface)', padding: '0 1rem' }}>
         <summary style={{
           cursor: 'pointer', padding: '1rem 0', fontFamily: 'var(--font-mono)',

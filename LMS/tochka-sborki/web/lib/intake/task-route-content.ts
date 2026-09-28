@@ -22,6 +22,16 @@ export function questStepLabel(n: number, locale: Locale): string {
   return TASK_ROUTE_COPY.questStepLabel[locale].replace('{n}', String(n))
 }
 
+/** Плашка на странице юнита: «Шаг N твоей задачи». */
+export function unitStepLabel(n: number, locale: Locale): string {
+  return TASK_ROUTE_COPY.unitStepLabel[locale].replace('{n}', String(n))
+}
+
+/** Где живёт «Личный план обучения» с руслом целиком — лист персонажа. */
+export function taskPlanHref(locale: Locale): string {
+  return pagePath(`${locale === 'en' ? '/en' : ''}/character/#learning-plan`)
+}
+
 /** Ссылка на юнит русла: '06-audio-pipeline/u3-build' → /lessons/06-audio-pipeline/u3-build/ (+ локаль, префикс курса). */
 export function routeUnitHref(unit: string, locale: Locale): string {
   return pagePath(`${locale === 'en' ? '/en' : ''}/lessons/${unit}/`)

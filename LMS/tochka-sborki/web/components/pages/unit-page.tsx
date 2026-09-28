@@ -19,6 +19,7 @@ import { bindInterestExample } from '@/components/interest-example-bound'
 import { ModuleObjectives } from '@/components/module-objectives'
 import { LessonViews } from '@/components/lesson-views'
 import { getLessonViews } from '@/lib/lesson-views/load'
+import { UnitRouteStep } from '@/components/intake/unit-route-step'
 import type { Locale } from '@/lib/dictionaries'
 import { outlineFromNav } from '@/lib/progress-sync'
 
@@ -44,6 +45,7 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
         <Sidebar navItems={navItems} currentSlug={moduleSlug} currentUnit={unitSlug} locale={locale} />
         <main id="main-content" tabIndex={-1} style={{ flex: 1, padding: '2rem 3rem', maxWidth: '860px' }}>
           {unitIndex === 0 && <ModuleObjectives objectives={moduleMeta.objectives} locale={locale === 'en' ? 'en' : 'ru'} />}
+          <UnitRouteStep moduleSlug={moduleSlug} unitSlug={unitSlug} locale={locale === 'en' ? 'en' : 'ru'} />
           {/* Представления урока (LMS#8): вкладки есть, только если у юнита есть свежий артефакт pack'а. */}
           <LessonViews data={getLessonViews(moduleSlug, unitSlug, locale === 'en' ? 'en' : 'ru', moduleMeta.checks)} locale={locale === 'en' ? 'en' : 'ru'}>
           <Shell
