@@ -5,13 +5,13 @@
   "unit": "u3-first-project",
   "locale": "ru",
   "title": "Первый проект",
-  "sourceHash": "sha256:9a2335f2b8bcfeebeee685cfe61fc892b7e77a7ee739ca7f2f86eb40f77f1352",
+  "sourceHash": "sha256:466ae7b61f1b277a673c63000ae2972c80cfe897438ed19c83f616367067ec5a",
   "outline": [
     {
-      "heading": "CLAUDE.md — память агента для проекта",
+      "heading": "AGENTS.md — память агента о проекте",
       "points": [
         {
-          "text": "CLAUDE.md — это Markdown-файл, который Claude Code читает автоматически при каждом запуске в папке.",
+          "text": "AGENTS.md — это Markdown-файл с правилами и контекстом проекта.",
           "origin": "extract"
         }
       ],
@@ -27,7 +27,7 @@
           "children": []
         },
         {
-          "heading": "Советы по CLAUDE.md",
+          "heading": "Советы по AGENTS.md",
           "points": [],
           "children": []
         }
@@ -47,9 +47,9 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:19128a5d18aa1978e8a3ea1e277aec8b535ffbe20ab574f7f8a5359ebcb618ee",
+        "sourceHash": "sha256:365e78d4a421b38a12f1ecd1438397fe717598b98259abce45a0a3fbe72245b9",
         "points": [
-          "CLAUDE.md — это файл формата Markdown, который Claude Code автоматически считывает при каждом запуске в папке."
+          "AGENTS.md представляет собой файл в формате Markdown, где хранятся правила и контекст твоего проекта."
         ]
       }
     ]

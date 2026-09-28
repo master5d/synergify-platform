@@ -5,14 +5,14 @@
   "unit": "u3-memory",
   "locale": "en",
   "title": "The memory system",
-  "sourceHash": "sha256:e9853f27d8f359860380931b3ac621efb34efdb34728a1a13f04e44e4818e970",
+  "sourceHash": "sha256:ddebd373f9944152f35e6d3c65594719bbeb6fc0398f3d48dd5c6e705dcbb037",
   "outline": [
     {
       "heading": "Memory files: three you write, one Claude writes",
       "points": [],
       "children": [
         {
-          "heading": "CLAUDE.md — project context (the main one)",
+          "heading": "AGENTS.md — project context and rules (the main one)",
           "points": [
             {
               "text": "Limit: up to ~200 lines.",
@@ -27,8 +27,13 @@
           "children": []
         },
         {
-          "heading": "AGENTS.md — instructions for the agent",
-          "points": [],
+          "heading": "STATE.md — where you stopped",
+          "points": [
+            {
+              "text": "A new session starts from a blank slate.",
+              "origin": "extract"
+            }
+          ],
           "children": []
         },
         {
@@ -56,9 +61,15 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:bfac95e6d02c24346e1bd0e4842dfd9dd2d29d7c2a36d3cbaee35251c1972d6a",
+        "sourceHash": "sha256:6a797b2987e78488a02f7b3b3d15b53f2f171e12cb24cfd5a2d3b08499b0d9f8",
         "points": [
-          "You keep this to a limit of about 200 lines."
+          "You should limit the length to ~200 lines."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2321fc0e6c83729638ff8483ac0db556bf94ee2627c2965388d2bb1754192603",
+        "points": [
+          "You start a new session from a blank slate."
         ]
       },
       {

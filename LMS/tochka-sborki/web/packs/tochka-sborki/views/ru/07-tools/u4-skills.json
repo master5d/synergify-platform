@@ -5,7 +5,7 @@
   "unit": "u4-skills",
   "locale": "ru",
   "title": "Skills: модульные способности",
-  "sourceHash": "sha256:87391820d918fd9b62b7844e047952bb2a52893b425591ee94b326a9cb6a95a1",
+  "sourceHash": "sha256:b631a450e5213fdf118e438d7da3ad7fc96c605f4a562944e248c3c003c98082",
   "outline": [
     {
       "heading": "Что такое Skill",

@@ -73,5 +73,48 @@
     "c12",
     "c13"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:d197accc07ab1b9cb1e0daa94bd373875ef48d3c7736e4090f63aeca8ab61874",
+        "points": [
+          "Pendel is Russian slang for a kick in the pants."
+        ]
+      },
+      {
+        "sourceHash": "sha256:5cbde51e8a389a3d9e74ac0b66ea65a5789c95fae9b5d73d3c4f8617f92058d6",
+        "points": [
+          "Your agent should state in the report if it does not support a zone like hooks."
+        ]
+      },
+      {
+        "sourceHash": "sha256:eaddeef797322c9cc447dd7018c10d387938de9a8a332adb0b3ddee0ec692e16",
+        "points": [
+          "The first line matters because auditing and fixing are separate steps."
+        ]
+      },
+      {
+        "sourceHash": "sha256:ceb0f89b206dcfbb0bda33d1c7daa0eba1307e288d5e9d01c012c4041110801d",
+        "points": [
+          "You might find that the report is long."
+        ]
+      },
+      {
+        "sourceHash": "sha256:55faacb554db5b1b581a6e7c63057fb76e15d43439060193bc7673683fef7324",
+        "points": [
+          "You should commit any uncommitted changes separately first."
+        ]
+      },
+      {
+        "sourceHash": "sha256:1193a540a8d56d71b123b1d403a76b53f98f014cba2fa71931ce95b3a2707745",
+        "points": [
+          "This is a retelling of a reader's review of a third-party starter kit for Claude Code and not our measurement."
+        ]
+      }
+    ]
+  }
 }

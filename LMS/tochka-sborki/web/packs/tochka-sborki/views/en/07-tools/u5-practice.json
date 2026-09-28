@@ -5,7 +5,7 @@
   "unit": "u5-practice",
   "locale": "en",
   "title": "Plug it in and test",
-  "sourceHash": "sha256:8176127046f9da5ab36a854f766144f9e8942af252a0e67859e438923a1e3bc0",
+  "sourceHash": "sha256:d23b7db2319ad32df40d88b0787d4aa388494a55d6824038dca2dba138680da5",
   "outline": [
     {
       "heading": "Final architecture: an AI clone for a real task",

@@ -86,5 +86,50 @@
     "c8",
     "c9"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:d6c3df9a844c4fc9ce6bd0e8c770131c88bbe27ce3e6785781c9b95efc7a5878",
+        "points": [
+          "The evidence says that digital programmes work best when there is a human in the loop.",
+          "A trial by Segal and colleagues in JAMA Psychiatry in 2020 with 460 participants showed an advantage over usual care.",
+          "This programme used coach support rather than being a purely self-guided app.",
+          "The course takes the position that AI sits between sessions rather than instead of people."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2062d27065bd7e50d9bb03815cacdadc36e443514b8d8449c1148b10064faaf0",
+        "points": [
+          "The boundaries for the companion are based on normative documents and proven effects instead of being invented by the course."
+        ]
+      },
+      {
+        "sourceHash": "sha256:bbb43d77e05583fb58e06fd9110cc64520511b5f7436ec3dddb50cec5b441a5d",
+        "points": [
+          "The American Psychological Association Health Advisory on generative AI chatbots and wellness applications from November 2025 is the weightiest normative source available today.",
+          "This vendor statement acts as an admission that an eight-week course with a companion is a long interaction.",
+          "The Illinois WOPR Act for Wellness and Oversight for Psychological Resources was signed as PA 104-0054 on 1 August 2025.",
+          "Nevada and Utah passed similar restrictions in 2025."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c64e1451758bee5ca4822c8d099a9866c7f9ca964ff0ad67c3c49b5cd2ac5924",
+        "points": [
+          "One more thing worth saying plainly is that it does not read your state."
+        ]
+      },
+      {
+        "sourceHash": "sha256:1336153b8fa2847ab490162f83bdc1dd95a3eea0fb939a1f120722aab2eda08f",
+        "points": [
+          "In the US you can call the 988 Suicide & Crisis Lifeline or the local crisis line in another country.",
+          "Checked numbers for Russia, Ukraine, Israel and Germany are in step five.",
+          "Other countries are in the international directory findahelpline.com."
+        ]
+      }
+    ]
+  }
 }

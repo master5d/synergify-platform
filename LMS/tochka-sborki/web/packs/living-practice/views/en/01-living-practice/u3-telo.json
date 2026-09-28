@@ -73,5 +73,47 @@
   "cards": [
     "c3"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:d4cd352ae298ac9902f54bb8e5e46c64612f7f5e16f47abd0c0180994c5279a8",
+        "points": [
+          "The body gives you scale that the breath cannot."
+        ]
+      },
+      {
+        "sourceHash": "sha256:948ff9ac17f4c4fc263ef942ee98b164e39b7914ea9bdfc083ba570757ef670a",
+        "points": [
+          "If you have a history of trauma, prolonged uninterrupted concentration on bodily sensation is not a suitable format.",
+          "David Treleaven addresses this in Trauma-Sensitive Mindfulness, W. W. Norton, 2018.",
+          "Goldberg, Lam, Britton and Davidson studied 434 people with meditation experience in Psychotherapy Research, 2022.",
+          "Re-experiencing traumatic material is a frequent adverse effect and adverse childhood events are a risk factor."
+        ]
+      },
+      {
+        "sourceHash": "sha256:bb43480e2cb9e018870a5983df1780a6f83e8c10015a6ab21f393fab1fbaaa71",
+        "points": [
+          "Treleaven's central notion is the window of tolerance.",
+          "Your task is to stay inside the window rather than finishing the scan.",
+          "You may need to cut the scan off halfway to stay within the window."
+        ]
+      },
+      {
+        "sourceHash": "sha256:f752e6baf3e351f7eea0c2ad61898c718c390d375ff2f0918c00e499e78984c8",
+        "points": [
+          "Movement is a separate fifth way back."
+        ]
+      },
+      {
+        "sourceHash": "sha256:143b5b1e2d42d92db9f03d8e2c36d3ff2b1f94e22de87f151e28d66efb37ac52",
+        "points": [
+          "You do not work with the holding pattern, release trauma from the body, or breathe into the pain."
+        ]
+      }
+    ]
+  }
 }

@@ -5,14 +5,14 @@
   "unit": "u3-memory",
   "locale": "ru",
   "title": "Система памяти",
-  "sourceHash": "sha256:1f81de5c0309ffe868c9134d780760f96dce981716694ed448a6c1af8851d78d",
+  "sourceHash": "sha256:8c92d6a3086961b25574b65124281452298368df4b0119febf6ae642bdf0c05d",
   "outline": [
     {
       "heading": "Файлы памяти: три пишешь ты, один — Claude",
       "points": [],
       "children": [
         {
-          "heading": "CLAUDE.md — контекст проекта (главный)",
+          "heading": "AGENTS.md — контекст и правила проекта (главный)",
           "points": [
             {
               "text": "Лимит: до ~200 строк.",
@@ -27,8 +27,13 @@
           "children": []
         },
         {
-          "heading": "AGENTS.md — инструкции для агента",
-          "points": [],
+          "heading": "STATE.md — где остановились",
+          "points": [
+            {
+              "text": "Новая сессия начинается с чистого листа.",
+              "origin": "extract"
+            }
+          ],
           "children": []
         },
         {
@@ -56,9 +61,15 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:9ca4f87b68ddbfd52f72eb156315835c8d3db5fdaffca6439eeed5ca37b1ce0c",
+        "sourceHash": "sha256:5bed8ec369ad0d1727d04a0ec8461fdcc37d9480d2c8f8dd221c374ded736b74",
         "points": [
-          "Для этого файла установлен лимит до 200 строк."
+          "Объем этого файла ограничен лимитом до ~200 строк."
+        ]
+      },
+      {
+        "sourceHash": "sha256:04a7f9debee4138584c7e4e68cf5e14b6e3dfa9ca9f03e3337939dae768cc935",
+        "points": [
+          "Твоя новая сессия всегда начинается с чистого листа."
         ]
       },
       {

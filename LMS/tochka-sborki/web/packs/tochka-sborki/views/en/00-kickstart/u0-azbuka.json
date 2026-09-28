@@ -98,5 +98,60 @@
     "c11",
     "c12"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:2603f6668b967951846e74805eb99fc66f2bc3e5efec1f960312e1f1d7cd5768",
+        "points": [
+          "You often see AI, neural network, machine learning and LLM used as synonyms."
+        ]
+      },
+      {
+        "sourceHash": "sha256:8f6132c76097808488fa4951c7ca0f607747bb604ed5b43169682c4f79b4bbea",
+        "points": [
+          "You can see it yourself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e356f392e4c552bfb5283dfb78ae39317b5f12e99e7dc19feb086b5171db7528",
+        "points": [
+          "You can see it yourself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:7ec1bd511cbacffe9a45abaf44040b91272b55dfd1cf55a1658d5ce39731a29a",
+        "points": [
+          "You can see it for yourself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:de8d1eda2fc09b8b9dd70110f52c9cbf9120b7532f39aa2003f692f95add13d9",
+        "points": [
+          "You can see it for yourself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e91e578dabf89b85d0009c41c74cf23bf6716cb4bcb5b47079f2511e0b143382",
+        "points": [
+          "You can see it for yourself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:4a43f04253f5915a277f3b8cb193458be318f61ccb8a9d9fbacc4b23a02d6805",
+        "points": [
+          "You see it for yourself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:bdfc3e5354375aed407d0b66633e00f479db20eafd8bdbdd498128718cec6f76",
+        "points": [
+          "A token serves as the unit of measure."
+        ]
+      }
+    ]
+  }
 }

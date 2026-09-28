@@ -5,13 +5,13 @@
   "unit": "u3-first-project",
   "locale": "en",
   "title": "Your first project",
-  "sourceHash": "sha256:573281243ba404148a71e6e7243d915d9e756060cbbd1734ab95dc178f0ec6a0",
+  "sourceHash": "sha256:a32856ed8ddac804e5d09ea5876ffd29d1cb59fe398423c4e996b9e331a2a1fc",
   "outline": [
     {
-      "heading": "CLAUDE.md — the agent's project memory",
+      "heading": "AGENTS.md — the agent's project memory",
       "points": [
         {
-          "text": "CLAUDE.md is a Markdown file that Claude Code reads automatically every time it launches in a folder.",
+          "text": "AGENTS.md is a Markdown file with the project's rules and context.",
           "origin": "extract"
         }
       ],
@@ -27,7 +27,7 @@
           "children": []
         },
         {
-          "heading": "CLAUDE.md tips",
+          "heading": "AGENTS.md tips",
           "points": [],
           "children": []
         }
@@ -47,9 +47,9 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:77641dd85281f1be20ba06f1e8bf242dfa3cb133c0f84d244fd4c4749887c3a2",
+        "sourceHash": "sha256:cee1c7d30342b5ea4ef255ecf1193da2a1d6f3a7bc56087cc689224038118555",
         "points": [
-          "Claude Code automatically reads the CLAUDE.md Markdown file every time it starts in a folder."
+          "This Markdown file stores the rules and context for the project."
         ]
       }
     ]

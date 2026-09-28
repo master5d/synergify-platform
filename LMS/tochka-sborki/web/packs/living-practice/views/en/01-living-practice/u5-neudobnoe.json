@@ -99,5 +99,58 @@
     "c6",
     "c7"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:73362474f28d3559afe58d9847be52d2b518ca6dcbe0c76d8db25e7513dc6d73",
+        "points": [
+          "Practice acts to remove noise."
+        ]
+      },
+      {
+        "sourceHash": "sha256:47a45b080ba66ad8e97264bb47785f3e795784e0a0f34db92d0ce7a9912486bf",
+        "points": [
+          "Britton, Lindahl, Cooper, Canby, Palitsky, Goldberg, Lam, Davidson, Matko and Van Dam interviewed and sampled people with meditation experience.",
+          "Two conclusions are stable: unpleasant effects are common, and persistent harm is rare.",
+          "This harm occurs on the order of a few per cent up to the mid-teens.",
+          "People who reported harm were just as glad they had practised as everyone else."
+        ]
+      },
+      {
+        "sourceHash": "sha256:438beb5653ff7578ae22ab256dc1c046e3eedfbdaf81dbc265d8ea419bfc480d",
+        "points": [
+          "Difficult experience inside the window is material.",
+          "Difficult experience past the edge of the window is a signal to stop."
+        ]
+      },
+      {
+        "sourceHash": "sha256:3e481e2f3e7a022339f078a8efadcab033bd52c2c40c36a297e673871efcbbac",
+        "points": [
+          "The last item is a reason to leave the learning scenario immediately and reach a professional or a crisis line instead of lowering the dose."
+        ]
+      },
+      {
+        "sourceHash": "sha256:963f3a168eea3dd0f068d8682acdfd73e55f21a131b47385d4ca0125d9a3335a",
+        "points": [
+          "The paper on worldviews and meditation-related challenges shows that the interpretive frame itself changes the trajectory and duration of difficulties."
+        ]
+      },
+      {
+        "sourceHash": "sha256:0a7b775bdb5b8a1dcdd11937d5d2b24edbfb5b5b959825d2a26f4d41c3019007",
+        "points": [
+          "There are two working returns for when a session has rocked you but the stop signals have not appeared."
+        ]
+      },
+      {
+        "sourceHash": "sha256:9d01aa44ea867e75fbf9ed1f67de121a77dc0e7d9a04986aa2318f7dc953c818",
+        "points": [
+          "If heaviness lasts for several days after your session, ease off your practice and contact a living professional."
+        ]
+      }
+    ]
+  }
 }
