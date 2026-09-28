@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { buildLearnPrompt, buildBootstrapDeepLink, agentUrl } from './learn-prompt'
+import { buildLearnPrompt, buildBootstrapDeepLink, agentUrl, MAX_BOOTSTRAP, PRACTICE_RULES } from './learn-prompt'
 import { PACK_SLUG } from './pack'
 import { COURSE } from './course'
+import { COMPANION } from './course/companion'
 
 const base = {
   locale: 'ru' as const,
@@ -170,5 +171,68 @@ describe.runIf(LP)('living-practice companion keeps the boundaries the course pr
     expect(b).toMatch(/кризисн/)
     expect(b).not.toContain('Фиксер')
     expect(b).not.toContain('выйти на первых клиентов')
+  })
+})
+
+// Режим «Помоги мне практиковаться» (intake LMS#18): правила движка, поверх любого курса.
+describe('practice mode (any pack)', () => {
+  const practice = { ...base, studyMode: 'practice' as const }
+
+  it('learn mode is unchanged by default and carries no practice rules', () => {
+    expect(buildLearnPrompt({ ...base, studyMode: 'learn' })).toBe(buildLearnPrompt(base))
+    expect(buildBootstrapDeepLink({ ...base, studyMode: 'learn' })).toBe(buildBootstrapDeepLink(base))
+    expect(buildLearnPrompt(base)).not.toMatch(/сократическ/i)
+    expect(buildBootstrapDeepLink(base)).not.toMatch(/Режим практики/)
+  })
+
+  it('full prompt carries Socratic questions, stepwise hints and the self-check rule (ru)', () => {
+    const p = buildLearnPrompt(practice)
+    expect(p).toContain(PRACTICE_RULES.heading.ru)
+    expect(p).toMatch(/Не давай готовый ответ/)
+    expect(p).toMatch(/сократические вопросы/)
+    expect(p).toMatch(/подсказывай по шагам/)
+    expect(p).toMatch(/«Проверь себя».*не называй правильный вариант/)
+    expect(p).toMatch(/только после того, как я ответил сам/)
+    expect(p).toContain(COURSE.name) // остаётся промптом своего курса
+  })
+
+  it('full prompt carries the same rules in English', () => {
+    const p = buildLearnPrompt({ ...practice, locale: 'en' })
+    expect(p).toContain('"Help me practice" mode')
+    expect(p).toMatch(/Socratic questions/)
+    expect(p).toMatch(/hint step by step/)
+    expect(p).toMatch(/"Check yourself".*never name the correct option/)
+    expect(p).toMatch(/only after I have answered on my own/)
+  })
+
+  it('practice rules come before the opener, after the course boundaries', () => {
+    const p = buildLearnPrompt(practice)
+    expect(p.indexOf(PRACTICE_RULES.heading.ru)).toBeGreaterThan(p.indexOf(COURSE.name))
+    expect(p.endsWith(COMPANION.opener.ru)).toBe(true)
+    expect(p.indexOf(PRACTICE_RULES.heading.ru)).toBeLessThan(p.indexOf(COMPANION.opener.ru))
+  })
+
+  it('bootstrap carries the compact practice clause in both locales', () => {
+    const ru = buildBootstrapDeepLink(practice)
+    const en = buildBootstrapDeepLink({ ...practice, locale: 'en' })
+    expect(ru).toMatch(/Режим практики: не давай готовый ответ/)
+    expect(ru).toMatch(/сократические вопросы/)
+    expect(ru).toMatch(/«Проверь себя».*не называй правильный вариант/)
+    expect(en).toMatch(/Practice mode: do not give the finished answer/)
+    expect(en).toMatch(/"Check yourself".*never name the correct option/)
+    expect(ru).toContain(COURSE.name)
+  })
+
+  it('bootstrap stays within MAX_BOOTSTRAP and keeps the practice clause even with a huge profile', () => {
+    const long = 'цель '.repeat(400)
+    for (const locale of ['ru', 'en'] as const) {
+      const b = buildBootstrapDeepLink({ ...practice, locale, outcome: long, moduleTitle: 'М'.repeat(2000), mentorName: 'Фиксер', skinName: 'Кибер-Нуар', niche: 'coach' })
+      expect(b.length).toBeLessThanOrEqual(MAX_BOOTSTRAP)
+      expect(b).toContain(PRACTICE_RULES.compact[locale].trim().slice(0, 40))
+      // prefill-ссылка: тот же лимит, что у режима «Учиться» (кап до encodeURIComponent)
+      expect(decodeURIComponent(agentUrl('claude', b).split('?q=')[1])).toBe(b)
+    }
+    expect(buildBootstrapDeepLink(practice).length).toBeLessThanOrEqual(MAX_BOOTSTRAP)
+    expect(buildBootstrapDeepLink({ ...practice, locale: 'en' }).length).toBeLessThanOrEqual(MAX_BOOTSTRAP)
   })
 })

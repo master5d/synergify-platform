@@ -25,7 +25,46 @@ export interface LearnPromptInput {
   appliedChallenge?: string | null
   mbti?: string | null
   relational?: RelationalStyle | null
+  /** 'learn' (по умолчанию) — объяснять по методике курса; 'practice' — «Помоги мне практиковаться». */
+  studyMode?: StudyMode
 }
+
+export type StudyMode = 'learn' | 'practice'
+
+/**
+ * Режим «Помоги мне практиковаться» (intake LMS#18, Coursera Coach). Правила — движка, а не
+ * pack'а: они про форму помощи (не отдавать ответ), а не про предмет курса, и ложатся поверх
+ * методики и границ любого курса. «Проверь себя» / "Check yourself" — подписи SelfCheck в уроке.
+ */
+export const PRACTICE_RULES = {
+  heading: {
+    ru: 'Режим «Помоги мне практиковаться» — сейчас я тренируюсь сам, а не слушаю объяснение:',
+    en: '"Help me practice" mode — right now I am practicing myself, not listening to an explanation:',
+  },
+  rules: [
+    {
+      ru: 'Не давай готовый ответ, решение или текст целиком. Задавай сократические вопросы — по одному за ход, — чтобы я сам дошёл до ответа.',
+      en: 'Do not hand me the finished answer, solution, or text. Ask Socratic questions — one per turn — so I reach the answer myself.',
+    },
+    {
+      ru: 'Если я застрял — подсказывай по шагам: сначала самая маленькая подсказка, следующая — только если я снова застрял. Полное решение — только когда я прямо попрошу его после своей попытки.',
+      en: 'If I am stuck, hint step by step: the smallest hint first, the next one only if I am stuck again. The full solution only when I explicitly ask for it after my own attempt.',
+    },
+    {
+      ru: 'Во время самопроверки («Проверь себя») не называй правильный вариант и не отсекай неверные — только наводи вопросами. Объясняй, почему верно именно так, только после того, как я ответил сам.',
+      en: 'During a self-check ("Check yourself"), never name the correct option and do not rule out wrong ones — only guide me with questions. Explain why the answer is right only after I have answered on my own.',
+    },
+    {
+      ru: 'После моего ответа коротко скажи, что в моём рассуждении сработало и где была развилка.',
+      en: 'After I answer, say briefly what worked in my reasoning and where the fork was.',
+    },
+  ],
+  /** Компактная версия для `?q=` — те же три правила одной фразой. */
+  compact: {
+    ru: ' Режим практики: не давай готовый ответ — задавай сократические вопросы по одному, подсказки по шагам от самой маленькой; в самопроверке («Проверь себя») не называй правильный вариант, только наводи вопросами, а объясняй после того, как я ответил сам. ',
+    en: ' Practice mode: do not give the finished answer — ask Socratic questions one at a time, hints step by step from the smallest; during a self-check ("Check yourself") never name the correct option, only guide with questions, and explain after I have answered on my own. ',
+  },
+} as const
 
 const NICHE: Record<string, { ru: string; en: string }> = {
   coach: { ru: 'коучинг и психотерапия', en: 'coaching and therapy' },
@@ -119,21 +158,23 @@ export function buildBootstrapDeepLink(i: LearnPromptInput): string {
     : B.personaDefault[L]
   const role = B.role[L].replace('{firm}', mentorFirmnessCompact(i.locale))
 
-  const text = ru
+  const head = ru
     ? `${persona}${role} ` +
       `${B.course.ru}${niche ? `, моя сфера — ${niche}` : ''}. ` +
       `Сейчас я на материале: модуль «${i.moduleTitle}», юнит ${unitNo} из ${i.totalUnits}.` +
       (outcome ? ` Мой запрос: «${outcome}».` : '') +
-      B.loop.ru +
-      B.opener.ru
+      B.loop.ru
     : `${persona}${role} ` +
       `${B.course.en}${niche ? `, my field is ${niche}` : ''}. ` +
       `I'm currently on: module "${i.moduleTitle}", unit ${unitNo} of ${i.totalUnits}.` +
       (outcome ? ` My goal: "${outcome}".` : '') +
-      B.loop.en +
-      B.opener.en
+      B.loop.en
 
-  return cap(text, MAX_BOOTSTRAP)
+  if (i.studyMode !== 'practice') return cap(head + B.opener[L], MAX_BOOTSTRAP)
+  // Практика: правило режима и opener не должны отрезаться капом — укорачивается голова.
+  const tail = cap(PRACTICE_RULES.compact[L] + B.opener[L], MAX_BOOTSTRAP)
+  // −2: пробел-склейка и «…», который cap дописывает сверх своего max.
+  return `${cap(head, MAX_BOOTSTRAP - tail.length - 2)} ${tail}`
 }
 
 /** Deep-link that opens the learner's own agent with the prompt prefilled (mirror of blog/lib/ai-prompt.ts). */
@@ -190,6 +231,9 @@ export function buildLearnPrompt(i: LearnPromptInput): string {
     '',
     ...method,
     ...guardrails,
+    ...(i.studyMode === 'practice'
+      ? [PRACTICE_RULES.heading[L], ...PRACTICE_RULES.rules.map((r) => `- ${r[L]}`), '']
+      : []),
     applied,
     '',
     C.opener[L],

@@ -144,6 +144,9 @@ export function UnitWizard({
   }
   const learnPrompt = buildLearnPrompt(learnInput)
   const learnBootstrap = buildBootstrapDeepLink(learnInput)
+  const practiceInput = { ...learnInput, studyMode: 'practice' as const }
+  const practicePrompt = buildLearnPrompt(practiceInput)
+  const practiceBootstrap = buildBootstrapDeepLink(practiceInput)
 
   function scrollToTop() {
     topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -419,7 +422,12 @@ export function UnitWizard({
         </div>
       </div>
 
-      <LearnWithAI prompt={learnPrompt} bootstrap={learnBootstrap} locale={locale} />
+      <LearnWithAI
+        prompt={learnPrompt}
+        bootstrap={learnBootstrap}
+        practice={{ prompt: practicePrompt, bootstrap: practiceBootstrap }}
+        locale={locale}
+      />
       <LearnWithAIDock prompt={learnPrompt} bootstrap={learnBootstrap} locale={locale} />
     </UnitWizardContext.Provider>
   )

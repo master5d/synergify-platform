@@ -19,29 +19,52 @@ const T = {
     body: 'Скопируй персональный промпт и вставь его в режим обучения своего агента — он подхватит твой контекст и поведёт тебя дальше.',
     copy: 'Скопировать промпт',
     copied: 'Скопировано ✓',
+    modeLabel: 'Режим компаньона',
+    learn: 'Учиться',
+    practice: 'Практиковаться',
+    learnHint: 'Объясняет материал по методике курса.',
+    practiceHint: 'Помоги мне практиковаться: вопросы вместо готового ответа, подсказки по шагам; в «Проверь себя» не называет ответ, пока ты не ответишь сам.',
   },
   en: {
     body: 'Copy your personal prompt and paste it into your agent\'s learn mode — it picks up your context and takes you forward.',
     copy: 'Copy prompt',
     copied: 'Copied ✓',
+    modeLabel: 'Companion mode',
+    learn: 'Learn',
+    practice: 'Practice',
+    learnHint: 'Explains the material using the course method.',
+    practiceHint: 'Help me practice: questions instead of the finished answer, step-by-step hints; in “Check yourself” it won’t name the answer until you answer yourself.',
   },
 }
 
-/** Hands the learner a personalized study system-prompt for their own agent. */
-export function LearnWithAI({ prompt, bootstrap, locale = 'ru' }: { prompt: string; bootstrap?: string; locale?: Locale }) {
+type StudyMode = 'learn' | 'practice'
+
+/**
+ * Hands the learner a personalized study system-prompt for their own agent. With `practice`
+ * given, a «Учиться / Практиковаться» switch picks which prompt the copy button and the
+ * ChatGPT/Claude prefill carry (intake LMS#18) — our LLM is never called.
+ */
+export function LearnWithAI({ prompt, bootstrap, practice, locale = 'ru' }: {
+  prompt: string
+  bootstrap?: string
+  practice?: { prompt: string; bootstrap?: string }
+  locale?: Locale
+}) {
   const [copied, setCopied] = useState(false)
+  const [mode, setMode] = useState<StudyMode>('learn')
   const t = T[locale === 'en' ? 'en' : 'ru']
+  const active = mode === 'practice' && practice ? practice : { prompt, bootstrap }
 
   const track = (agent: string) => {
     // @ts-expect-error analytics global is optional
-    if (typeof window !== 'undefined') window.plausible?.('learn_with_ai_clicked', { props: { agent, mode: 'inline' } })
+    if (typeof window !== 'undefined') window.plausible?.('learn_with_ai_clicked', { props: { agent, mode: 'inline', studyMode: mode } })
   }
   const hrefFor = (a: typeof AGENTS[number]) =>
-    a.prefill && bootstrap ? agentUrl(a.key as 'chatgpt' | 'claude', bootstrap) : a.url
+    a.prefill && active.bootstrap ? agentUrl(a.key as 'chatgpt' | 'claude', active.bootstrap) : a.url
   const copy = async () => {
     track('copy')
     try {
-      await navigator.clipboard.writeText(prompt)
+      await navigator.clipboard.writeText(active.prompt)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch { /* clipboard blocked — agent buttons still open */ }
@@ -70,6 +93,31 @@ export function LearnWithAI({ prompt, bootstrap, locale = 'ru' }: { prompt: stri
       <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.55, margin: '0 0 1.1rem' }}>
         {t.body}
       </p>
+      {practice && (
+        <div style={{ margin: '0 0 0.9rem' }}>
+          <div role="group" aria-label={t.modeLabel} style={{ display: 'inline-flex', border: '1px solid var(--border-color)', borderRadius: 'var(--radius)', overflow: 'hidden' }}>
+            {(['learn', 'practice'] as const).map(m => (
+              <button
+                key={m}
+                type="button"
+                aria-pressed={mode === m}
+                onClick={() => { setMode(m); setCopied(false) }}
+                style={{
+                  fontFamily: 'var(--font-mono)', fontSize: '0.8rem', fontWeight: 700,
+                  padding: '0.45rem 0.9rem', border: 'none', cursor: 'pointer',
+                  background: mode === m ? 'var(--text-accent)' : 'transparent',
+                  color: mode === m ? 'var(--text-on-accent)' : 'var(--text-secondary)',
+                }}
+              >
+                {m === 'learn' ? t.learn : t.practice}
+              </button>
+            ))}
+          </div>
+          <p aria-live="polite" style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-xs)', lineHeight: 1.5, margin: '0.45rem 0 0' }}>
+            {mode === 'practice' ? t.practiceHint : t.learnHint}
+          </p>
+        </div>
+      )}
       <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', alignItems: 'center' }}>
         <button type="button" onClick={copy} style={primary}>{copied ? t.copied : t.copy}</button>
         {AGENTS.map(a => (
