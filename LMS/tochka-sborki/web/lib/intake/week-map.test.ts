@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import {
   TASK_KINDS, WEEK_MAP_MAX_TASK_CHARS, WEEK_MAP_MAX_TASKS, WEEK_MAP_MIN_TASKS,
   addTask, buildWeekRoute, classifyTask, decodeWeekMap, encodeWeekMap, normalizeTaskText, removeTask,
-  setTaskBucket, weekMapFromAnswers, type TaskKind, type WeekTask,
+  planWeekRoute, setTaskBucket, weekMapFromAnswers, type TaskKind, type WeekTask,
 } from './week-map'
 
 const MODULES = Object.fromEntries(TASK_KINDS.map(k => [k, `mod-${k}`])) as Record<TaskKind, string>
@@ -150,5 +150,19 @@ describe('buildWeekRoute', () => {
     const r = buildWeekRoute(t, MODULES)
     expect(r.status).toBe('ready')
     expect(r.counts.keep).toBe(3)
+  })
+})
+
+describe('planWeekRoute', () => {
+  it('null when there are fewer than the minimum tasks or nothing is sorted', () => {
+    expect(planWeekRoute([], MODULES)).toBeNull()
+    expect(planWeekRoute(setTaskBucket(tasksOf('посты', 'отчёт'), 0, 'keep'), MODULES)).toBeNull()
+    expect(planWeekRoute(tasksOf('посты', 'отчёт', 'созвоны'), MODULES)).toBeNull()
+  })
+  it('partially sorted map still yields a route of the sorted tasks', () => {
+    const r = planWeekRoute(setTaskBucket(tasksOf('посты', 'отчёт', 'созвоны'), 1, 'ai_does'), MODULES)!
+    expect(r.status).toBe('unsorted')
+    expect(r.items.map(i => i.text)).toEqual(['отчёт'])
+    expect(r.unsortedCount).toBe(2)
   })
 })

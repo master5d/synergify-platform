@@ -7,7 +7,7 @@ import {
   type WeekTask,
 } from '@/lib/intake/week-map'
 import { buildWeekMapContent } from '@/lib/intake/week-map-content'
-import { pagePath } from '@/lib/base-path'
+import { WeekRouteView } from './week-route-view'
 
 // Шаг «Карта недели» (module V, следующим после вердикта по одной задаче V_AUTO_VERDICT).
 // Ученик выписывает 3–7 повторяющихся дел, раскладывает по корзинам — и видит личный маршрут:
@@ -45,7 +45,6 @@ export function WeekMapCard({ locale, value, onChange, moduleTitles }: {
 
   const route = buildWeekRoute(tasks, c.moduleByKind)
   const atLimit = tasks.length >= WEEK_MAP_MAX_TASKS
-  const prefix = locale === 'en' ? '/en' : ''
   const statusText =
     route.status === 'empty' ? c.empty
       : route.status === 'too_few' ? c.tooFew
@@ -130,37 +129,8 @@ export function WeekMapCard({ locale, value, onChange, moduleTitles }: {
       )}
 
       {route.status === 'ready' && (
-        <section style={{ borderTop: '1px solid var(--border-color)', paddingTop: '0.9rem' }}>
-          <h2 style={{ fontSize: '1.15rem', fontWeight: 700, marginBottom: '0.4rem' }}>{c.routeHeading}</h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: 1.5, marginBottom: '0.9rem' }}>{c.routeLead}</p>
-          {WEEK_BUCKETS.filter(b => route.counts[b] > 0).map(b => (
-            <div key={b} style={{ marginBottom: '1rem' }}>
-              <div style={{
-                fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--text-accent)',
-                textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.4rem',
-              }}>
-                {c.buckets[b].label} · {route.counts[b]}
-              </div>
-              <ol style={{ margin: 0, paddingLeft: '1.2rem' }}>
-                {route.items.filter(it => it.bucket === b).map(it => (
-                  <li key={it.text} style={{ marginBottom: '0.45rem', fontSize: '0.92rem', lineHeight: 1.5 }}>
-                    <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{it.text}</span>
-                    <br />
-                    <span style={{ color: 'var(--text-secondary)' }}>{c.buckets[b].moduleLead} </span>
-                    <a
-                      href={pagePath(`${prefix}/lessons/${it.moduleSlug}/`)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ color: 'var(--text-accent)' }}
-                    >
-                      {moduleTitles?.[it.moduleSlug] ?? it.moduleSlug}
-                    </a>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          ))}
-        </section>
+        <WeekRouteView route={route} locale={locale} moduleTitles={moduleTitles} newTab
+          style={{ borderTop: '1px solid var(--border-color)', paddingTop: '0.9rem' }} />
       )}
     </div>
   )

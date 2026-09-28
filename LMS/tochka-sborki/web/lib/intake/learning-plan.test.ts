@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { buildLearningPlan, profileToLearningPlan, type LearningPlanInput } from './learning-plan'
+import { buildLearningPlan, profileToLearningPlan, profileWeekRoute, type LearningPlanInput } from './learning-plan'
+import { buildWeekMapContent } from './week-map-content'
 import type { ZoneVM } from '@/lib/rpg/types'
 
 const base: LearningPlanInput = {
@@ -60,5 +61,62 @@ describe('profileToLearningPlan', () => {
     expect(md).toContain('- Знакомство: из ИИ это код → в четыре сдвига') // current zone + transform
     expect(md).toContain('/exercises')                   // course experiential default
     expect(md).toContain('/ask')                         // accountability default
+  })
+})
+
+describe('«Карта недели» в плане обучения', () => {
+  const zones: ZoneVM[] = [
+    { slug: '00', order: 0, zoneName: 'Старт', questTitle: '', moduleTitle: '', durationLabel: '', status: 'current', isNiche: false, href: '#' },
+  ]
+  const ru = buildWeekMapContent('ru')
+  const en = buildWeekMapContent('en')
+  const mod = ru.moduleByKind
+  const titles = Object.fromEntries(Object.values(mod).map(s => [s, `Название ${s}`]))
+  const profileWith = (week: unknown) => ({ answers: JSON.stringify({ F3: 'цель', V_WEEK_MAP: week }), char_level: 1, world_skin: 'wanderer' })
+  const full = ['ai_does|еженедельный отчёт', 'ai_helps|писать посты', 'keep|разговор с мамой']
+
+  it('есть карта: раздел маршрута по корзинам, дело → модуль со ссылкой, своя подпись у «оставляю себе»', () => {
+    const md = profileToLearningPlan(profileWith(full), zones, 'ru', titles)
+    expect(md).toContain(`## 🗺 ${ru.routeHeading}`)
+    expect(md).toContain(`**${ru.buckets.ai_does.label}**`)
+    expect(md).toContain(`- еженедельный отчёт — ${ru.buckets.ai_does.moduleLead} Название ${mod.data} (/lessons/${mod.data}/)`)
+    expect(md).toContain(`- разговор с мамой — ${ru.buckets.keep.moduleLead} Название ${mod.other} (/lessons/${mod.other}/)`)
+    // порядок корзин: ИИ делает → ИИ помогает → оставляю себе; раздел — до «Шагов через опыт»
+    expect(md.indexOf(ru.buckets.ai_does.label)).toBeLessThan(md.indexOf(ru.buckets.ai_helps.label))
+    expect(md.indexOf(ru.buckets.ai_helps.label)).toBeLessThan(md.indexOf(ru.buckets.keep.label))
+    expect(md.indexOf(ru.routeHeading)).toBeLessThan(md.indexOf('## 🛠 Шаги через опыт'))
+  })
+
+  it('EN: English labels and /en links', () => {
+    const md = profileToLearningPlan(profileWith(full), zones, 'en', titles)
+    expect(md).toContain(`## 🗺 ${en.routeHeading}`)
+    expect(md).toContain(`(/en/lessons/${mod.data}/)`)
+  })
+
+  it('нет карты / мусор / меньше трёх дел / ничего не разложено — раздела нет', () => {
+    for (const week of [undefined, 'ai_does|отчёт', ['ai_does|отчёт', 'keep|посты'], ['-|отчёт', '-|посты', '-|созвоны']]) {
+      const p = profileWith(week)
+      expect(profileWeekRoute(p, 'ru'), JSON.stringify(week)).toBeNull()
+      expect(profileToLearningPlan(p, zones, 'ru', titles)).not.toContain(ru.routeHeading)
+    }
+    expect(profileWeekRoute({ answers: '{битый json' }, 'ru')).toBeNull()
+    expect(profileWeekRoute(null, 'ru')).toBeNull()
+  })
+
+  it('частично разложена: маршрут по разложенным + сколько осталось без корзины', () => {
+    const p = profileWith(['ai_does|еженедельный отчёт', '-|писать посты', '-|созвон с командой'])
+    const route = profileWeekRoute(p, 'ru')!
+    expect(route.items.map(i => i.text)).toEqual(['еженедельный отчёт'])
+    expect(route.unsortedCount).toBe(2)
+    const md = profileToLearningPlan(p, zones, 'ru', titles)
+    expect(md).toContain('- еженедельный отчёт')
+    expect(md).not.toContain('- писать посты')
+    expect(md).toContain(ru.unsortedInPlan(2))
+  })
+
+  it('без переданных названий берёт moduleTitle зон, иначе слаг', () => {
+    const z: ZoneVM[] = [{ ...zones[0], slug: mod.data, moduleTitle: 'Из зоны' }]
+    const md = profileToLearningPlan(profileWith(full), z, 'ru')
+    expect(md).toContain(`Из зоны (/lessons/${mod.data}/)`)
   })
 })

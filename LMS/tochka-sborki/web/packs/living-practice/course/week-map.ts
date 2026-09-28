@@ -31,6 +31,8 @@ export interface WeekMapData {
   rejectedEmpty: L
   rejectedDuplicate: L
   unsortedHint: L
+  /** Маршрут в плане обучения, если часть дел не разложена. {n} — сколько таких. */
+  unsortedInPlan: L
   tooFew: L
   empty: L
   routeHeading: L
@@ -78,6 +80,10 @@ export const WEEK_MAP: WeekMapData = {
   unsortedHint: {
     ru: 'Разложи по корзинам все дела — маршрут соберётся, когда у каждого будет своё место.',
     en: 'Sort every task into a bucket — the route comes together once each has its place.',
+  },
+  unsortedInPlan: {
+    ru: 'Ещё без корзины: {n}. Когда поймёшь, куда их, — маршрут станет полнее.',
+    en: 'Still without a bucket: {n}. Once you know where they go, the route gets fuller.',
   },
   tooFew: {
     ru: 'Добавь ещё немного: по одному-двум делам неделю не видно. Нужно хотя бы {min}.',

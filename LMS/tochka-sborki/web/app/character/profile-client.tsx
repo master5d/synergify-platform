@@ -62,7 +62,8 @@ export function ProfileClient({ modules, locale }: Props) {
           </div>
         </div>
       </main>
-      <LearningPlanCard profile={profile} zones={vm.zones} locale={locale} />
+      <LearningPlanCard profile={profile} zones={vm.zones} locale={locale}
+        moduleTitles={Object.fromEntries(Object.entries(modules).map(([slug, m]) => [slug, m.title]))} />
       <CharterCard profile={profile} locale={locale} />
       <CompanionSetup profile={profile} locale={locale} />
       <OfficeHoursCard locale={locale} />

@@ -30,7 +30,7 @@ describe('buildWeekMapContent', () => {
       expect(c.countHint(4)).toContain('4')
       expect(c.countHint(4)).toContain(String(WEEK_MAP_MIN_TASKS))
       expect(c.countHint(4)).toContain(String(WEEK_MAP_MAX_TASKS))
-      for (const s of [c.countHint(1), c.limitReached, c.tooFew]) expect(s).not.toMatch(/\{\w+\}/)
+      for (const s of [c.countHint(1), c.limitReached, c.tooFew, c.unsortedInPlan(2)]) expect(s).not.toMatch(/\{\w+\}/)
     })
 
     it(`frames «keep» as a choice, not a failure (${locale})`, () => {

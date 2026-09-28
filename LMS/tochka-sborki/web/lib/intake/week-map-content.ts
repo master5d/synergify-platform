@@ -1,6 +1,7 @@
 import type { Locale } from '@/lib/intake/types'
 import { WEEK_BUCKETS, WEEK_MAP_MAX_TASKS, WEEK_MAP_MIN_TASKS, type TaskKind, type WeekBucket } from './week-map'
 import { WEEK_MAP } from '@/lib/course/week-map'
+import { pagePath } from '@/lib/base-path'
 
 // Копия и таблица «тип работы → модуль» — course-data в pack'е (packs/<pack>/course/week-map.ts,
 // intake LMS#17); этот builder и <WeekMapCard> — движок. Мирует automation-check-content.
@@ -25,6 +26,7 @@ export interface WeekMapContent {
   rejectedEmpty: string
   rejectedDuplicate: string
   unsortedHint: string
+  unsortedInPlan: (n: number) => string
   tooFew: string
   empty: string
   routeHeading: string
@@ -59,10 +61,16 @@ export function buildWeekMapContent(locale: Locale): WeekMapContent {
     rejectedEmpty: T.rejectedEmpty[locale],
     rejectedDuplicate: T.rejectedDuplicate[locale],
     unsortedHint: T.unsortedHint[locale],
+    unsortedInPlan: (n: number) => fill(T.unsortedInPlan[locale], { n }),
     tooFew: fill(T.tooFew[locale], limits),
     empty: T.empty[locale],
     routeHeading: T.routeHeading[locale],
     routeLead: T.routeLead[locale],
     buckets,
   }
+}
+
+/** Ссылка на модуль курса из маршрута: локаль + префикс курса (для сырых <a> и текста плана). */
+export function weekRouteModuleHref(slug: string, locale: Locale): string {
+  return pagePath(`${locale === 'en' ? '/en' : ''}/lessons/${slug}/`)
 }

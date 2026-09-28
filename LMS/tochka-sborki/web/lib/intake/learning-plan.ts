@@ -2,6 +2,8 @@ import type { Locale } from './types'
 import type { ZoneVM } from '@/lib/rpg/types'
 import { SKINS_META } from '@/lib/rpg/skins-meta'
 import { parseOutcome } from './parse-outcome'
+import { WEEK_BUCKETS, WEEK_MAP_ANSWER_KEY, decodeWeekMap, planWeekRoute, type WeekRoute } from './week-map'
+import { buildWeekMapContent, weekRouteModuleHref } from './week-map-content'
 
 export interface PlanStep { name: string; transform?: { from: string; to: string } }
 
@@ -15,6 +17,43 @@ export interface LearningPlanInput {
   steps: PlanStep[]
   experiential: string[]
   accountability: string[]
+  /** Разложенная «Карта недели» (null/нет — раздела в плане нет). */
+  weekRoute?: WeekRoute | null
+  /** слаг модуля → название, для маршрута; нет — слаг. */
+  moduleTitles?: Record<string, string>
+}
+
+/** Раздел плана «личный маршрут» текстом (для копирования) — те же подписи, что у <WeekRouteView>. */
+function weekRouteSection(route: WeekRoute, locale: Locale, titles: Record<string, string> | undefined): string[] {
+  const c = buildWeekMapContent(locale)
+  const lines = [`## 🗺 ${c.routeHeading}`, c.routeLead]
+  for (const b of WEEK_BUCKETS) {
+    if (route.counts[b] === 0) continue
+    lines.push('', `**${c.buckets[b].label}**`)
+    for (const it of route.items.filter(i => i.bucket === b)) {
+      const title = titles?.[it.moduleSlug] ?? it.moduleSlug
+      lines.push(`- ${it.text} — ${c.buckets[b].moduleLead} ${title} (${weekRouteModuleHref(it.moduleSlug, locale)})`)
+    }
+  }
+  if (route.unsortedCount > 0) lines.push('', c.unsortedInPlan(route.unsortedCount))
+  return [...lines, '']
+}
+
+/**
+ * Маршрут «Карты недели» из профиля анкеты (`answers` — JSON-строка или объект, как у parseOutcome).
+ * null — карта не заполнена, дел меньше минимума или ни одно не разложено: блока в плане нет.
+ */
+export function profileWeekRoute(profile: { answers?: unknown } | null | undefined, locale: Locale): WeekRoute | null {
+  let answers: Record<string, unknown> | null | undefined
+  try {
+    const raw = profile?.answers
+    answers = typeof raw === 'string' ? JSON.parse(raw) : (raw as Record<string, unknown> | null | undefined)
+  } catch {
+    return null
+  }
+  const value = answers?.[WEEK_MAP_ANSWER_KEY]
+  const tasks = decodeWeekMap(Array.isArray(value) ? (value as string[]) : undefined)
+  return planWeekRoute(tasks, buildWeekMapContent(locale).moduleByKind)
 }
 
 export function buildLearningPlan(i: LearningPlanInput): string {
@@ -60,6 +99,7 @@ export function buildLearningPlan(i: LearningPlanInput): string {
     `## ${t.steps}`,
     stepsBlock,
     ``,
+    ...(i.weekRoute ? weekRouteSection(i.weekRoute, i.locale, i.moduleTitles) : []),
     `## ${t.exp}`,
     i.experiential.map(e => `- ${e}`).join('\n'),
     ``,
@@ -73,7 +113,9 @@ export function buildLearningPlan(i: LearningPlanInput): string {
   ].join('\n')
 }
 
-export function profileToLearningPlan(profile: any, zones: ZoneVM[], locale: Locale): string {
+export function profileToLearningPlan(
+  profile: any, zones: ZoneVM[], locale: Locale, moduleTitles?: Record<string, string>,
+): string {
   const ru = locale !== 'en'
   const completedCount = zones.filter(z => z.status === 'completed').length
   const curIdx = zones.findIndex(z => z.status === 'current')
@@ -113,5 +155,7 @@ export function profileToLearningPlan(profile: any, zones: ZoneVM[], locale: Loc
     steps,
     experiential,
     accountability,
+    weekRoute: profileWeekRoute(profile, locale),
+    moduleTitles: moduleTitles ?? Object.fromEntries(zones.map(z => [z.slug, z.moduleTitle]).filter(([, t]) => t)),
   })
 }

@@ -226,3 +226,14 @@ export function buildWeekRoute(tasks: WeekTask[], moduleByKind: Record<TaskKind,
           : 'ready'
   return { status, items, unsortedCount, counts }
 }
+
+/**
+ * Маршрут для «Личного плана обучения» (страница персонажа): null — показывать нечего.
+ * Блок есть, только если задач хотя бы WEEK_MAP_MIN_TASKS и хоть одна разложена; частично
+ * разложенная карта даёт маршрут по разложенным (unsortedCount говорит, сколько осталось).
+ */
+export function planWeekRoute(tasks: WeekTask[], moduleByKind: Record<TaskKind, string>): WeekRoute | null {
+  if (tasks.length < WEEK_MAP_MIN_TASKS) return null
+  const route = buildWeekRoute(tasks, moduleByKind)
+  return route.items.length > 0 ? route : null
+}
