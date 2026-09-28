@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "ru",
   "title": "Информация, которую ты обрабатываешь вручную",
-  "sourceHash": "sha256:24a3631dd745cfe93d827730bcc48c2f6d7f4e5c698b5ac86a80c938db215fa5",
+  "sourceHash": "sha256:0e414a31557c5a592dd3dafb5fe1522383331e5388ef5811ec6f36c086c41adb",
   "outline": [
     {
       "heading": "Любая автоматизация = Trigger → Action",

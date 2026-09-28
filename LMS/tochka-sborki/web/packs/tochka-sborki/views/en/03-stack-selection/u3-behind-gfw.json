@@ -5,7 +5,7 @@
   "unit": "u3-behind-gfw",
   "locale": "en",
   "title": "Behind Great Firewall: no VPN",
-  "sourceHash": "sha256:a19eb7bcf8311d43dedd8f472f70f5bd4d993d6f9c99b736ec0e1af7a62028f7",
+  "sourceHash": "sha256:39ddad7c26de3a44e4e47bceedafe7ef696f8cde01bf957f80cea95f90b6612b",
   "outline": [
     {
       "heading": "⚡ Quick install of the GFW stack (one line)",

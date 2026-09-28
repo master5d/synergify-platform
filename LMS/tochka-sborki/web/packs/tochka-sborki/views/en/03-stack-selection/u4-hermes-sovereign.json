@@ -5,7 +5,7 @@
   "unit": "u4-hermes-sovereign",
   "locale": "en",
   "title": "Hermes + local stack",
-  "sourceHash": "sha256:d1f3b49bfccfeaa6a91aafeb8fae689ee2e571656d4f286521407d99b2b5cb7e",
+  "sourceHash": "sha256:ea9f0d081ff9d4bf63843cc4e9efc827d3b38bc3fde41f4a48e12ede7570ea2b",
   "outline": [
     {
       "heading": "SOVERN stack architecture",

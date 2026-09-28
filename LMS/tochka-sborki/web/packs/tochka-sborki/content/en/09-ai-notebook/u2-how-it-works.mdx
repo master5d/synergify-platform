@@ -9,7 +9,7 @@ duration: "7 min"
 
 You hold a notebook from the previous unit. Ask the question people usually postpone: how is it different from a regular AI chat at all?
 
-Picture two interlocutors. The first has read everything on the internet and answers from memory — smooth, confident, no pauses. The second sits over a stack of papers you yourself brought, leafs through the stack before every answer, and points a finger at a paragraph while answering.
+Picture two interlocutors. The first has read everything on the internet and answers from memory — smooth, confident, no pauses. The second sits over a stack of papers you yourself brought and leafs through the stack before every answer. While answering, they point a finger at a paragraph.
 
 Which of the two would you take along to check a decision that matters to you?
 
@@ -41,13 +41,13 @@ Three consequences worth knowing:
 
 ## Under the hood — in module 05 language
 
-If you took the context-and-memory module, you will recognize the mechanics: sources are cut into chunks, the chunks relevant to your question are retrieved, and they are placed into the model's context with the instruction "answer only from this." A notebook is managed context with mandatory citations — not a different kind of magic.
+If you took the context-and-memory module, you will recognize the mechanics: sources are cut into chunks, and the chunks relevant to your question are retrieved. They are placed into the model's context with the instruction "answer only from this." A notebook is managed context with mandatory citations — not a different kind of magic.
 
 That is why the prompts in the [pack](/en/notebook/) are built the way they are: each demands a citation. Requiring citations is how you force a tool to show its seams even when it would rather answer smoothly.
 
 ## The third mode: hybrid
 
-There is also a middle option: a notebook can be attached to a regular assistant chat (in Gemini — directly as a source in the conversation). The model then answers with **general knowledge plus your sources** — and questions about the notebook come back with links into it.
+There is also a middle option. A notebook can be attached to a regular assistant chat (in Gemini — directly as a source in the conversation). The model then answers with **general knowledge plus your sources** — and questions about the notebook come back with links into it.
 
 Convenient — and treacherous: the knowledge boundary that a pure notebook holds firmly ("the sources do not cover this") blurs in hybrid mode. An answer may stand half on your documents and half on the model's memory, and the seam is invisible in smooth prose. In hybrid mode the habits of the next unit — clicking citations and asking control questions — go from useful to mandatory.
 

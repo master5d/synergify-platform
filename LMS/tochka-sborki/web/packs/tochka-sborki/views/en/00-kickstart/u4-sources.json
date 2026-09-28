@@ -5,7 +5,7 @@
   "unit": "u4-sources",
   "locale": "en",
   "title": "The Source or the Packaging",
-  "sourceHash": "sha256:7db3641458289619bbe40b99c97ef6a561da32475098fe0bcd598cb9ce40bb25",
+  "sourceHash": "sha256:d4dbab0d1fb1b0a382e933463ddc3b7df70a13f0b722f3503e6ba5ba3df638c3",
   "outline": [
     {
       "heading": "Three glances at the back of the jar",

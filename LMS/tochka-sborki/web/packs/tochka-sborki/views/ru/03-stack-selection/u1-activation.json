@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "ru",
   "title": "Какие у тебя ограничения?",
-  "sourceHash": "sha256:fe5077d2ae72693b5ef750af36dbd38369c5efd910dc1f15479c9a878b2e9b73",
+  "sourceHash": "sha256:c394cba31358fb4121052862a83c66e73a369a9a719aa3f6cbba14a002e6e351",
   "outline": [
     {
       "heading": "Почему нельзя «просто Claude Code»",

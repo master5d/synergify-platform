@@ -5,7 +5,7 @@
   "unit": "u3-build",
   "locale": "ru",
   "title": "Собери свой pipeline",
-  "sourceHash": "sha256:823d4b3c5108232c29e492d62a079cf59489c2f53ac9eeabb9157f26e6332d50",
+  "sourceHash": "sha256:33ffbe60351f7249ef4f9ca3d8dc3cacb2297b471835ada66ad592bb16018330",
   "outline": [
     {
       "heading": "Полный pipeline: URL → Insights",

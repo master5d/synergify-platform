@@ -5,13 +5,13 @@
   "unit": "u1-first-notebook",
   "locale": "en",
   "title": "A notebook in 15 minutes",
-  "sourceHash": "sha256:631f1dd4b55fd0cfc1f9b46719087d2ff27ce07b2dae5d9f497da1563a5936bd",
+  "sourceHash": "sha256:b6036882a15cff232c8a6204a1017471c82569d2fb9dfec7a489f9f2da63a1e5",
   "outline": [
     {
       "heading": "Build first, understand second",
       "points": [
         {
-          "text": "It is not a chat: the notebook answers only from the sources you put into it, and attaches a citation linking into the source for every claim.",
+          "text": "The notebook answers only from the sources you put into it, and attaches a citation linking into the source for every claim.",
           "origin": "extract"
         }
       ],
@@ -51,9 +51,9 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:ca69df738234ebe2cff29892236e9229fd7664ee80e42ec73f6d7dd95012295d",
+        "sourceHash": "sha256:c5e74daca9404b54225800fe8579a45996663713e9632901be4fbf7448ef59ee",
         "points": [
-          "This is not a chat because the notebook only answers using your sources and attaches a citation linking into the source for every claim."
+          "Your notebook answers using only the sources you provide and includes a citation linking to the source for every claim."
         ]
       },
       {

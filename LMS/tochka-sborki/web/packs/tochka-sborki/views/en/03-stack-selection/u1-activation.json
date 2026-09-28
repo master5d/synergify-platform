@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "en",
   "title": "What are your constraints?",
-  "sourceHash": "sha256:f9f8c0099d113cb82f8e2405256e663e58861fa3061a069331362b9f112ea146",
+  "sourceHash": "sha256:53a5d13497ad568bfd80a336cdc10bdc0b1cd6657d745be8348180efdddc561f",
   "outline": [
     {
       "heading": "Why not \"just Claude Code\"",

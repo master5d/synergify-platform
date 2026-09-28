@@ -5,7 +5,7 @@
   "unit": "u2-pipeline-theory",
   "locale": "en",
   "title": "Trigger → Action model",
-  "sourceHash": "sha256:8b061e0b66a0b760273f44ed9dffafabd3b2da226c04d25f5d5626861e03736e",
+  "sourceHash": "sha256:1a8c292fb5eed1c55d167760d9849a9b887a9573ae9bbf8a103d8071ed43d69e",
   "outline": [
     {
       "heading": "Three pipeline types",

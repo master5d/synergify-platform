@@ -5,7 +5,7 @@
   "unit": "u2-how-it-works",
   "locale": "en",
   "title": "How it works",
-  "sourceHash": "sha256:fa16384439d66d230a6760569f5685b5fe123519dc05d1b6b1586d6d60698ecc",
+  "sourceHash": "sha256:c56cc7148731d9afd376e6925d559c22d0f8e5684b5d9b9f304b3531d5565d9b",
   "outline": [
     {
       "heading": "Source-grounding: the answer is tied to a source",
@@ -33,7 +33,7 @@
       "heading": "Under the hood — in module 05 language",
       "points": [
         {
-          "text": "If you took the context-and-memory module, you will recognize the mechanics: sources are cut into chunks, the chunks relevant to your question are retrieved, and they are placed into the model's context with the instruction \"answer only from this.\" A notebook is managed context with mandatory citations — not a different kind of magic.",
+          "text": "If you took the context-and-memory module, you will recognize the mechanics: sources are cut into chunks, and the chunks relevant to your question are retrieved.",
           "origin": "extract"
         }
       ],
@@ -71,11 +71,9 @@
         ]
       },
       {
-        "sourceHash": "sha256:37f75a065027a6009e525d39f72bbc43ed238be2d9bb8a23cb192bf0455f5cb9",
+        "sourceHash": "sha256:456195417bf6e32e2a5294c62f0918b1b04d9fd64f5d4242a84302454699181d",
         "points": [
-          "If you took the context-and-memory module, you will recognize how sources are cut into chunks and retrieved.",
-          "These chunks are placed into the context with instructions to answer only from that information.",
-          "The notebook uses managed context with mandatory citations instead of a different kind of magic."
+          "If you took the context-and-memory module, you will recognize the mechanics of cutting sources into chunks and retrieving those relevant to your question."
         ]
       },
       {

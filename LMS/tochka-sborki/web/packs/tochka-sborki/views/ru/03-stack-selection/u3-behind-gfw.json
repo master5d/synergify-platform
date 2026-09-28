@@ -5,7 +5,7 @@
   "unit": "u3-behind-gfw",
   "locale": "ru",
   "title": "Behind Great Firewall: без VPN",
-  "sourceHash": "sha256:e8306e12c72e5d475734f55b7b49ff3f7d0d4d57f31799126684bb6f01f6a42c",
+  "sourceHash": "sha256:e871f8c2b54ccecd5bea04f4ce54047ff731953ea6accee0c39281103fa296da",
   "outline": [
     {
       "heading": "⚡ Быстрая установка GFW-стека (одной строкой)",

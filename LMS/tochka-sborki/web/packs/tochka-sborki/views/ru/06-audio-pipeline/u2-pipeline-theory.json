@@ -5,7 +5,7 @@
   "unit": "u2-pipeline-theory",
   "locale": "ru",
   "title": "Trigger → Action модель",
-  "sourceHash": "sha256:ca054b65090d3a4fa4001db343a3058485d4c528471047984d139da9cde6b8ad",
+  "sourceHash": "sha256:c04e3e5942135796eef947187a8f3bf9b528cc68889f2fd91a2a25131eee7cbe",
   "outline": [
     {
       "heading": "Три типа pipeline",

@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "en",
   "title": "The info you process by hand",
-  "sourceHash": "sha256:cd5e9eb7fc4ed7fa78056b36615768680580128c451226d19619fa7446f36ffe",
+  "sourceHash": "sha256:1159f3433cbd7eeccbe0320d655e5c888f5653230ff37f6d733207887155a9cc",
   "outline": [
     {
       "heading": "Every automation = Trigger → Action",

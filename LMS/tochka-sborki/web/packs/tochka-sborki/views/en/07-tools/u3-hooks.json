@@ -5,7 +5,7 @@
   "unit": "u3-hooks",
   "locale": "en",
   "title": "Hooks: event automation",
-  "sourceHash": "sha256:71435f36e1a0785ca1ab5e01bfa72f2e409a4d19a3ce2608f289c93709b5dfa9",
+  "sourceHash": "sha256:b14b5befa5d90dad9dc16f3af18d40b2f48b98f400e790009a959eb92f972db2",
   "outline": [
     {
       "heading": "Events for Hooks",

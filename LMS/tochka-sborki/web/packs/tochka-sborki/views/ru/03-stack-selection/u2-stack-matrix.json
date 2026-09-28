@@ -5,7 +5,7 @@
   "unit": "u2-stack-matrix",
   "locale": "ru",
   "title": "Матрица 4 стеков",
-  "sourceHash": "sha256:d9061555c1250e341d291a10ce659893e7797ee371fbc589f788b723c11c019e",
+  "sourceHash": "sha256:3825c7de7b9d211abb65e974089aa59d8d70b2fc026088735b1376e14d6270a2",
   "outline": [
     {
       "heading": "Trade-offs честно",

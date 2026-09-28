@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "en",
   "title": "What's Claude Code missing?",
-  "sourceHash": "sha256:f5f3eafdd0767ead379e4a2848daef9c46ea3967419f62ae583611dd90fdea50",
+  "sourceHash": "sha256:a037eb5004636839d21b41b99bf734617ac05bdd166fbf6c7ce92655df7c67b9",
   "outline": [
     {
       "heading": "Taxonomy of Claude Code extensions",

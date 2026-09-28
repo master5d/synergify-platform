@@ -5,13 +5,13 @@
   "unit": "u2-four-shifts",
   "locale": "en",
   "title": "Four shifts",
-  "sourceHash": "sha256:493d5df1f75ec2fef079f347a5b8266d7482fec63133bec8b3e9119b10a40d54",
+  "sourceHash": "sha256:8d61bafcc3d3648012088f7dc5ac68eea6c30fa01a1d4f56e471e1e44d5e86b6",
   "outline": [
     {
       "heading": "Four shifts in working with AI agents",
       "points": [
         {
-          "text": "This isn't \"AI doing it instead of you\" — these are four ways of co-working: different facets of how you and the agent think and build together.",
+          "text": "This isn't \"AI doing it instead of you\" — these are four ways of co-working.",
           "origin": "extract"
         }
       ],
@@ -73,9 +73,9 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:4ff73ac82d4134d178bd98607740c54f7a766e15f2f078b6013095f089b64abc",
+        "sourceHash": "sha256:6840226a610c7918eeed085ff18ab2e142df9f87087c3a5bcd1ae5cdc4fe60eb",
         "points": [
-          "This is not AI doing it instead of you but four ways of co-working to think and build together."
+          "Rather than the AI doing the work instead of you, these are four ways for you to work together."
         ]
       },
       {
