@@ -17,6 +17,8 @@ const base = (over: Partial<ChainInput>): ChainInput => ({
   lastEmailAt: null, telegramNudges: false, progress: [], moduleEvents: [], courseEventAt: null,
   sent: new Map(), ...over,
 })
+const day = (sec: number) => new Date(sec * 1000).toISOString().slice(0, 10)
+const revised = { ...TOCHKA_SBORKI, revisions: { '01-introduction': { version: 2, date: day(N - 2 * DAY), summary: { ru: 'Новая практика.', en: 'A new practice.' } } } }
 const open = (daysAgo: number) => [{ lesson_slug: '01-introduction/u2-four-shifts', viewed_at: N - daysAgo * DAY, completed_at: null }]
 
 const SCENARIOS: Record<Step, Partial<ChainInput>> = {
@@ -28,6 +30,7 @@ const SCENARIOS: Record<Step, Partial<ChainInput>> = {
   milestone: { progress: open(1), moduleEvents: [{ subject: '01-introduction', created_at: N - DAY }] },
   'finish-1': { progress: open(1), courseEventAt: N - DAY },
   'finish-2': { progress: open(9), courseEventAt: N - 10 * DAY, sent: new Map([['finish-1', N - 8 * DAY]]) },
+  update: { course: revised, moduleEvents: [{ subject: '01-introduction', created_at: N - 30 * DAY }] },
 }
 
 describe('email templates ↔ chain policy', () => {

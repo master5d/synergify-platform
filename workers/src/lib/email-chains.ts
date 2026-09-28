@@ -2,7 +2,7 @@
 // workers/email-templates/README.md). I/O (D1, Listmonk tx) — в handlers/email-chain-cron.ts.
 // Как nudge-policy.ts: всё, что решает, — здесь и под тестом; обработчик только собирает вход.
 import {
-  MODULE_ORDER, MODULE_META,
+  MODULE_ORDER, MODULE_META, type ModuleRevision,
   lessonUrl, homeUrl, supportUrl, certificateUrl, academyUrl,
 } from './course-order'
 export { pickLocale } from './bot-copy'   // users.language → 'en' | 'ru', как у Telegram-бота
@@ -24,9 +24,10 @@ export const WINDOWS = {
   milestone: [0, 7],       // от события progress_events
   'finish-1': [0, 14],     // от события kind='course'
   'finish-2': [7, 14],     // от отправки finish-1
+  update: [0, 14],         // от даты ревизии модуля (revision.date в _meta.json)
 } as const
 
-export type Step = 'start-1' | 'start-2' | 'lapse-1' | 'lapse-2' | 'lapse-3' | 'milestone' | 'finish-1' | 'finish-2'
+export type Step = 'start-1' | 'start-2' | 'lapse-1' | 'lapse-2' | 'lapse-3' | 'milestone' | 'finish-1' | 'finish-2' | 'update'
 export type Locale = 'ru' | 'en'
 type Bi = { ru: string; en: string }
 
@@ -39,6 +40,7 @@ export interface ChainCourse {
   spine: readonly string[]   // обязательные модули по порядку (done/total, next)
   startUnit: string          // start-1 → start_url
   azbukaUnit: string         // start-2 → start_url
+  revisions: Readonly<Record<string, ModuleRevision>>   // модуль → существенная ревизия (шаг update)
 }
 
 export const TOCHKA_SBORKI: ChainCourse = {
@@ -50,6 +52,8 @@ export const TOCHKA_SBORKI: ChainCourse = {
   // шаг start-2 («шесть слов до старта»), и две одинаковые ссылки подряд бессмысленны.
   startUnit: '00-kickstart/u1-map',
   azbukaUnit: '00-kickstart/u0-azbuka',
+  revisions: Object.fromEntries(Object.entries(MODULE_META)
+    .flatMap(([mod, m]): [string, ModuleRevision][] => (m.revision ? [[mod, m.revision]] : []))),
 }
 
 export const CHAIN_COURSES: readonly ChainCourse[] = [TOCHKA_SBORKI]
@@ -77,7 +81,7 @@ export interface ChainPick {
   step: Step
   stepKey: string
   data: ChainData
-  /** Ключи, которые надо пометить отправленными вместе с этим шагом (схлопнутые milestone). */
+  /** Ключи, которые надо пометить отправленными вместе с этим шагом (схлопнутые milestone / update). */
   alsoMark: string[]
 }
 
@@ -90,6 +94,9 @@ const within = (ageSec: number, [from, to]: readonly [number, number]) => ageSec
 const moduleOf = (slug: string) => slug.split('/')[0]
 const titleOf = (mod: string, l: Locale) => MODULE_META[mod]?.title[l] ?? mod
 export const milestoneKey = (mod: string) => `milestone@${mod}`
+export const updateKey = (mod: string, version: number) => `update@${mod}@v${version}`
+/** Начало дня ревизии (UTC), секунды. */
+export const revisionAt = (r: ModuleRevision) => Math.floor(Date.parse(`${r.date}T00:00:00Z`) / 1000)
 
 export function pickStep(i: ChainInput): ChainPick | null {
   if (i.emailOptout) return null
@@ -137,6 +144,20 @@ export function pickStep(i: ChainInput): ChainPick | null {
     }, allMilestoneKeys.filter(k => k !== milestoneKey(mod)))
   }
 
+  // 2b. update — модуль, который ученик уже закрыл, существенно переработан. Не напоминание:
+  // гейты Telegram-канала и тишины 20 ч к нему не относятся. Ниже milestone: окно milestone (7 дн.)
+  // короче окна update (14 дн.) и оно — отклик на свежее действие самого ученика; суточная
+  // отсрочка update ничего не стоит. Несколько обновлённых модулей — одно письмо о самом свежем.
+  const updates = pendingUpdates(i)
+  if (updates.length) {
+    const [top, ...rest] = updates
+    return pick('update', updateKey(top.mod, top.rev.version), {
+      module_title: titleOf(top.mod, l),
+      summary: top.rev.summary[l],
+      module_url: lessonUrl(top.mod, l),
+    }, rest.map(u => updateKey(u.mod, u.rev.version)))
+  }
+
   // 3–4. Напоминания: канал один (Telegram важнее), и не сразу после активности.
   if (i.telegramNudges) return null
   const lastActivityAt = i.progress.reduce<number | null>(
@@ -179,6 +200,31 @@ function doneModules(i: ChainInput): Set<string> {
   const done = new Set(i.moduleEvents.map(e => e.subject))
   for (const r of i.progress) if (r.completed_at && !r.lesson_slug.includes('/')) done.add(r.lesson_slug)
   return done
+}
+
+/** Когда ученик закрыл модуль: событие kind='module' → старая запись прогресса целым модулем →
+ *  для выпускника (kind='course') модуль спайна считается закрытым в момент выпуска. */
+function closedAt(i: ChainInput, mod: string): number | null {
+  const ev = i.moduleEvents.find(e => e.subject === mod)
+  if (ev) return ev.created_at
+  const legacy = i.progress.find(r => r.lesson_slug === mod && r.completed_at)
+  if (legacy?.completed_at) return legacy.completed_at
+  return i.courseEventAt != null && i.course.spine.includes(mod) ? i.courseEventAt : null
+}
+
+/** Непосланные обновления в окне: модуль закрыт ДО дня ревизии. Свежайшая ревизия первой. */
+function pendingUpdates(i: ChainInput): { mod: string; rev: ModuleRevision; at: number }[] {
+  const out: { mod: string; rev: ModuleRevision; at: number }[] = []
+  for (const [mod, rev] of Object.entries(i.course.revisions)) {
+    if (!(rev.version >= 2)) continue
+    const at = revisionAt(rev)
+    if (!Number.isFinite(at) || !within(i.nowSec - at, WINDOWS.update)) continue
+    if (i.sent.has(updateKey(mod, rev.version))) continue
+    const closed = closedAt(i, mod)
+    if (closed == null || closed >= at) continue
+    out.push({ mod, rev, at })
+  }
+  return out.sort((a, b) => b.at - a.at || i.course.spine.indexOf(b.mod) - i.course.spine.indexOf(a.mod))
 }
 
 const countSpine = (c: ChainCourse, done: Set<string>) => c.spine.filter(m => done.has(m)).length

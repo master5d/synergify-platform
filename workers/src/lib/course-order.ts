@@ -8,10 +8,14 @@ export const MODULE_ORDER = [
 
 type Bi = { ru: string; en: string }
 
-/** Название модуля (ru/en = `title` из `_meta.json`) и его трансформация «было → стало»
- *  (зеркало web `lib/rpg/transformations.ts`). Воркер не видит контент — копия здесь,
- *  расхождение ловит course-order.test.ts. Письма (lib/email-chains.ts) берут отсюда. */
-export const MODULE_META: Record<string, { title: Bi; from: Bi; to: Bi }> = {
+/** Существенная переработка модуля = поле `revision` в `_meta.json` (ru/en: version и date общие,
+ *  summary на языке файла). Нет поля = версия 1. Шаг письма `update` (lib/email-chains.ts). */
+export interface ModuleRevision { version: number; date: string; summary: Bi }
+
+/** Название модуля (ru/en = `title` из `_meta.json`), его трансформация «было → стало»
+ *  (зеркало web `lib/rpg/transformations.ts`) и ревизия (`revision` из `_meta.json`). Воркер не
+ *  видит контент — копия здесь, расхождение ловит course-order.test.ts. Письма берут отсюда. */
+export const MODULE_META: Record<string, { title: Bi; from: Bi; to: Bi; revision?: ModuleRevision }> = {
   '00-kickstart': {
     title: { ru: 'Kickstart', en: 'Kickstart' },
     from: { ru: 'теряюсь в терминах ИИ', en: 'lost in AI jargon' },

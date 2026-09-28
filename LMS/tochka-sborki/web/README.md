@@ -143,6 +143,16 @@ CLOUDFLARE_API_TOKEN=<token> npx wrangler pages deploy out --project-name=tochka
 Модуль = папка `content/{ru,en}/NN-slug/` с `_meta.json` (module, title, description,
 duration, level, units[]) и `uX-*.mdx` файлами. Frontmatter unit-а: `title, unit, module, duration`.
 
+**Ревизия модуля** — необязательное поле `_meta.json`:
+`"revision": { "version": 2, "date": "YYYY-MM-DD", "summary": "одна-две фразы, что изменилось" }`.
+Нет поля = версия 1. Ставит автор сознательно, при существенной переработке модуля (новая практика,
+переписанная концепция, другой инструмент) — правки опечаток и формулировок поле НЕ трогают. Следующая
+переработка — `version` +1 и новая дата. Поле ставится в `ru` и `en` одновременно: `version` и `date`
+совпадают, `summary` — на языке файла. Затем копия в `workers/src/lib/course-order.ts` (`MODULE_META.revision`,
+расхождение ловит `course-order.test.ts`) и деплой воркера: в течение 14 дней от `date` выпускники и те,
+кто закрыл модуль до этой даты, получают письмо «обновление навыка» (шаг `update`,
+`workers/email-templates/README.md`). Дата в будущем — письмо уйдёт, когда она наступит.
+
 Спец-компоненты в MDX:
 - `<OsToggle />` + `<OsBlock os="mac|windows">…</OsBlock>` — Mac/Win команды
 - `<AgentToggle />` + `<AgentBlock stack="claude|sovereign|cloud-oss|behind-gfw">…</AgentBlock>`

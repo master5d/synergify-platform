@@ -60,6 +60,29 @@ describe('MODULE_META vs real course pack', () => {
     })
   }
 
+  // Ревизия будит письмо «обновление навыка»: воркер не должен разъехаться с контентом ни в дате,
+  // ни в версии, ни в тексте summary — и ru/en ревизуются одновременно.
+  const revision = (lang: string, slug: string) =>
+    JSON.parse(readFileSync(`${CONTENT}${lang}/${slug}/_meta.json`, 'utf8')).revision as
+      { version: number; date: string; summary: string } | undefined
+  for (const slug of Object.keys(MODULE_META)) {
+    it(`${slug}: revision == _meta.json revision (ru and en in step)`, () => {
+      const ru = revision('ru', slug)
+      const en = revision('en', slug)
+      expect(!!ru, 'revision есть только в одном языке').toBe(!!en)
+      if (!ru || !en) {
+        expect(MODULE_META[slug].revision).toBeUndefined()
+        return
+      }
+      expect({ version: en.version, date: en.date }).toEqual({ version: ru.version, date: ru.date })
+      expect(Number.isInteger(ru.version) && ru.version >= 2, 'version — целое ≥ 2 (нет поля = версия 1)').toBe(true)
+      expect(ru.date).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+      expect(new Date(`${ru.date}T00:00:00Z`).toISOString().slice(0, 10)).toBe(ru.date)
+      expect(ru.summary.trim() && en.summary.trim()).toBeTruthy()
+      expect(MODULE_META[slug].revision).toEqual({ version: ru.version, date: ru.date, summary: { ru: ru.summary, en: en.summary } })
+    })
+  }
+
   it('MODULE_ORDER (spine) and the notebook module are in the pack', () => {
     for (const slug of [...MODULE_ORDER, NOTEBOOK_MODULE_SLUG]) expect(MODULE_META[slug]).toBeDefined()
   })

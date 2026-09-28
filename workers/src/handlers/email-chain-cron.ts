@@ -3,7 +3,7 @@
 // Выключено по умолчанию (EMAIL_CHAINS_ENABLED="0"). Одно письмо не роняет прогон.
 import type { Env } from '../lib/types'
 import {
-  CHAIN_COURSES, WINDOWS, pickLocale, pickStep, templateName,
+  CHAIN_COURSES, WINDOWS, pickLocale, pickStep, templateName, revisionAt,
   type ChainCourse, type ChainPick, type ModuleEvent, type ProgressRow, EMAIL_THROTTLE_SEC,
 } from '../lib/email-chains'
 import { unsubscribeUrl } from '../lib/email-unsubscribe'
@@ -29,7 +29,11 @@ interface Listmonk { url: string; headers: Record<string, string> }
 
 export interface ChainRunResult { sent: number; failed: number; skipped: string | null }
 
-export async function runEmailChains(env: Env, nowSec: number = Math.floor(Date.now() / 1000)): Promise<ChainRunResult> {
+export async function runEmailChains(
+  env: Env,
+  nowSec: number = Math.floor(Date.now() / 1000),
+  courses: readonly ChainCourse[] = CHAIN_COURSES,   // тесты подставляют курс с ревизиями
+): Promise<ChainRunResult> {
   if (strip(env.EMAIL_CHAINS_ENABLED) !== '1') {
     console.log('email-chains: disabled (EMAIL_CHAINS_ENABLED), skip')
     return { sent: 0, failed: 0, skipped: 'disabled' }
@@ -44,7 +48,7 @@ export async function runEmailChains(env: Env, nowSec: number = Math.floor(Date.
 
   let sent = 0
   let failed = 0
-  for (const course of CHAIN_COURSES) {
+  for (const course of courses) {
     for (const c of await candidates(env, course, nowSec)) {
       if (sent >= MAX_SENDS_PER_RUN) {
         console.log(`email-chains: run cap ${MAX_SENDS_PER_RUN} reached, rest tomorrow`)
@@ -143,6 +147,24 @@ async function candidates(env: Env, course: ChainCourse, nowSec: number): Promis
   const activeSince = nowSec - WINDOWS['lapse-3'][1] * DAY
   const eventSince = nowSec - Math.max(WINDOWS.milestone[1], WINDOWS['finish-1'][1]) * DAY
   const finishSince = nowSec - WINDOWS['finish-2'][1] * DAY
+  // update: только пока окно какой-то ревизии открыто (обычно ни одной — и выборка не растёт).
+  // Тогда — выпускники и закрывшие обновлённые модули до дня ревизии; точное решение — в политике.
+  const live = Object.entries(course.revisions)
+    .map(([mod, r]) => ({ mod, version: r.version, at: revisionAt(r) }))
+    .filter(r => r.version >= 2 && r.at <= nowSec && nowSec - r.at < WINDOWS.update[1] * DAY)
+  let updateSql = ''
+  const updateArgs: (string | number)[] = []
+  if (live.length) {
+    const mods = live.map(r => r.mod)
+    const before = Math.max(...live.map(r => r.at))
+    const marks = mods.map(() => '?').join(', ')
+    updateSql =
+      ' OR EXISTS (SELECT 1 FROM progress_events e WHERE e.user_id = u.id AND e.course = ? AND e.created_at < ? ' +
+      `AND (e.kind = 'course' OR (e.kind = 'module' AND e.subject IN (${marks}))))` +
+      ' OR EXISTS (SELECT 1 FROM progress p WHERE p.user_id = u.id AND p.course = ? ' +
+      `AND p.lesson_slug IN (${marks}) AND p.completed_at IS NOT NULL AND p.completed_at < ?)`
+    updateArgs.push(course.key, before, ...mods, course.key, ...mods, before)
+  }
   const { results } = await env.DB.prepare(
     'SELECT id, email, language, created_at, telegram_id, nudge_optout, last_email_at FROM users u ' +
     "WHERE email_optout = 0 AND email IS NOT NULL AND email != '' " +
@@ -151,8 +173,9 @@ async function candidates(env: Env, course: ChainCourse, nowSec: number): Promis
     'OR EXISTS (SELECT 1 FROM progress p WHERE p.user_id = u.id AND p.course = ? AND MAX(p.viewed_at, COALESCE(p.completed_at, 0)) >= ?) ' +
     'OR EXISTS (SELECT 1 FROM progress_events e WHERE e.user_id = u.id AND e.course = ? AND e.created_at >= ?) ' +
     "OR EXISTS (SELECT 1 FROM email_sends s WHERE s.user_id = u.id AND s.course = ? AND s.step_key = 'finish-1' AND s.sent_at >= ?)" +
+    updateSql +
     ') ORDER BY created_at'
-  ).bind(nowSec - EMAIL_THROTTLE_SEC, regSince, course.key, activeSince, course.key, eventSince, course.key, finishSince)
+  ).bind(nowSec - EMAIL_THROTTLE_SEC, regSince, course.key, activeSince, course.key, eventSince, course.key, finishSince, ...updateArgs)
     .all<Candidate>()
   return results ?? []
 }

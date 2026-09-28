@@ -64,7 +64,13 @@ export interface ModuleMeta {
   layout?: UnitLayout
   objectives?: Objective[]
   checks?: SelfCheckItem[]
+  /** Существенная переработка модуля (ставит автор, не правка опечаток). Нет поля = версия 1.
+   *  Будит письмо «обновление навыка» выпускникам (workers/src/lib/email-chains.ts, шаг update). */
+  revision?: ModuleRevision
 }
+
+/** Ревизия модуля: version ≥ 2, date — день выхода (YYYY-MM-DD), summary — что изменилось, на языке файла. */
+export interface ModuleRevision { version: number; date: string; summary: string }
 
 /** Разметка модуля с дефолтом. Единственная точка решения — не считать по месту. */
 export function unitLayout(meta: Pick<ModuleMeta, 'layout'>): UnitLayout {

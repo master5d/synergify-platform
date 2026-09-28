@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
 import { runEmailChains, MAX_SENDS_PER_RUN } from './email-chain-cron'
 import { signUnsubscribe } from '../lib/email-unsubscribe'
+import { TOCHKA_SBORKI } from '../lib/email-chains'
 import type { Env } from '../lib/types'
 
 const SECRET = 'test-secret-32-characters-minimum!!'
@@ -40,6 +41,7 @@ const TEMPLATES = [
   { id: 11, name: 'ts-start-1-ru', type: 'tx' },
   { id: 12, name: 'ts-milestone-ru', type: 'tx' },
   { id: 13, name: 'ts-finish-1-ru', type: 'tx' },
+  { id: 14, name: 'ts-update-ru', type: 'tx' },
   { id: 99, name: 'ts-start-1-en', type: 'campaign' },   // не tx — не считается
 ]
 
@@ -195,6 +197,42 @@ describe('runEmailChains', () => {
     const spy = listmonkFetch()
     expect((await runEmailChains(env(d1), NOW)).sent).toBe(0)
     expect(txCalls(spy)).toHaveLength(0)
+  })
+
+  it('update: long-ago closers and graduates become candidates only while a revision window is open', async () => {
+    const { db, d1 } = sqliteD1()
+    const ev = db.prepare("INSERT INTO progress_events (user_id, course, kind, subject, created_at) VALUES (?, 'tochka-sborki', ?, ?, ?)")
+    addUser(db, 'closer', { created_at: NOW - 200 * D })
+    ev.run('closer', 'module', '04-prompt-engineering', NOW - 150 * D)
+    addUser(db, 'grad', { created_at: NOW - 200 * D })
+    ev.run('grad', 'course', 'tochka-sborki', NOW - 120 * D)
+    addUser(db, 'legacy', { created_at: NOW - 200 * D })
+    db.prepare("INSERT INTO progress (user_id, lesson_slug, viewed_at, completed_at, course) VALUES ('legacy', '04-prompt-engineering', ?, ?, 'tochka-sborki')").run(NOW - 150 * D, NOW - 150 * D)
+    addUser(db, 'other', { created_at: NOW - 200 * D })   // закрыл другой модуль — не кандидат
+    ev.run('other', 'module', '03-stack-selection', NOW - 150 * D)
+    addUser(db, 'late', { created_at: NOW - 200 * D })    // закрыл уже после ревизии
+    ev.run('late', 'module', '04-prompt-engineering', NOW - 10 * D)
+
+    const day = (sec: number) => new Date(sec * 1000).toISOString().slice(0, 10)
+    const withRev = (daysAgo: number) => [{
+      ...TOCHKA_SBORKI,
+      revisions: { '04-prompt-engineering': { version: 2, date: day(NOW - daysAgo * D), summary: { ru: 'Новое.', en: 'New.' } } },
+    }]
+
+    let spy = listmonkFetch()
+    expect((await runEmailChains(env(d1), NOW, withRev(20))).sent).toBe(0)   // окно закрыто
+    expect(txCalls(spy)).toHaveLength(0)
+
+    vi.restoreAllMocks()
+    spy = listmonkFetch()
+    expect((await runEmailChains(env(d1), NOW, withRev(12))).sent).toBe(3)
+    const bodies = txCalls(spy).map(c => JSON.parse((c[1] as any).body))
+    expect(bodies.map(b => b.subscriber_email).sort()).toEqual(['closer@x.test', 'grad@x.test', 'legacy@x.test'])
+    expect(bodies[0]).toMatchObject({
+      template_id: 14,
+      data: { module_title: 'Промпт-инжиниринг', summary: 'Новое.', module_url: 'https://ai.synergify.com/lessons/04-prompt-engineering/' },
+    })
+    expect(sends(db).filter((r: any) => r.step_key === 'update@04-prompt-engineering@v2')).toHaveLength(3)
   })
 
   it(`stops at MAX_SENDS_PER_RUN (${MAX_SENDS_PER_RUN})`, async () => {

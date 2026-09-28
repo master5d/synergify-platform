@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { pickStep, templateName, TOCHKA_SBORKI, CHAIN_COURSES, type ChainInput, type ProgressRow } from './email-chains'
-import { MODULE_ORDER } from './course-order'
+import { MODULE_ORDER, MODULE_META, type ModuleRevision } from './course-order'
 
 const H = 3600
 const D = 24 * H
@@ -234,6 +234,112 @@ describe('finish', () => {
     expect(pickStep(everything)?.step).toBe('milestone')
     expect(pickStep({ ...everything, moduleEvents: [] })?.step).toBe('lapse-1')
     expect(pickStep({ ...everything, courseEventAt: NOW - D })?.step).toBe('finish-1')
+  })
+})
+
+describe('update (skill refresh for those who closed a revised module)', () => {
+  const rev = (daysAgo: number, version = 2, summary = { ru: 'Новая практика с агентом.', en: 'A new agent practice.' }): ModuleRevision =>
+    ({ version, date: utcDay(NOW - daysAgo * D), summary })
+  const revAt = (daysAgo: number) => Date.parse(`${utcDay(NOW - daysAgo * D)}T00:00:00Z`) / 1000
+  const course = (revisions: Record<string, ModuleRevision>) => ({ ...TOCHKA_SBORKI, revisions })
+  const closed = (mod: string, at: number) => ({ subject: mod, created_at: at })
+
+  it('the real course carries exactly the revisions from MODULE_META', () => {
+    const expected = Object.fromEntries(Object.entries(MODULE_META).filter(([, m]) => m.revision).map(([k, m]) => [k, m.revision]))
+    expect(TOCHKA_SBORKI.revisions).toEqual(expected)
+  })
+
+  it('module closed before the revision day → update with title, summary and module url', () => {
+    const p = pickStep(input({
+      locale: 'en',
+      course: course({ '04-prompt-engineering': rev(2) }),
+      moduleEvents: [closed('04-prompt-engineering', NOW - 40 * D)],
+    }))
+    expect(p?.step).toBe('update')
+    expect(p?.stepKey).toBe('update@04-prompt-engineering@v2')
+    expect(p?.data).toMatchObject({
+      module_title: 'Prompt Engineering',
+      summary: 'A new agent practice.',
+      module_url: 'https://ai.synergify.com/en/lessons/04-prompt-engineering/',
+    })
+    expect(p?.alsoMark).toEqual([])
+  })
+
+  it('version 1 (no field or version < 2) → nothing', () => {
+    const ev = [closed('04-prompt-engineering', NOW - 40 * D)]
+    expect(pickStep(input({ course: course({}), moduleEvents: ev }))).toBeNull()
+    expect(pickStep(input({ course: course({ '04-prompt-engineering': rev(2, 1) }), moduleEvents: ev }))).toBeNull()
+  })
+
+  it('closed on/after the revision day → nothing; closed the day before → yes', () => {
+    const c = course({ '04-prompt-engineering': rev(3) })
+    const sent = new Map([['milestone@04-prompt-engineering', NOW - 3 * D]])   // milestone своё уже отработал
+    expect(pickStep(input({ course: c, sent, moduleEvents: [closed('04-prompt-engineering', revAt(3) + H)] }))).toBeNull()
+    expect(pickStep(input({ course: c, sent, moduleEvents: [closed('04-prompt-engineering', revAt(3))] }))).toBeNull()
+    expect(pickStep(input({ course: c, sent, moduleEvents: [closed('04-prompt-engineering', revAt(3) - H)] }))?.step).toBe('update')
+  })
+
+  it('module never closed → nothing (a non-graduate who has not reached it)', () => {
+    expect(pickStep(input({ course: course({ '04-prompt-engineering': rev(2) }), moduleEvents: [closed('03-stack-selection', NOW - 40 * D)] }))).toBeNull()
+  })
+
+  it('outside the 14-day window (and a future date) → nothing', () => {
+    const ev = [closed('04-prompt-engineering', NOW - 60 * D)]
+    expect(pickStep(input({ course: course({ '04-prompt-engineering': rev(15) }), moduleEvents: ev }))).toBeNull()
+    expect(pickStep(input({ course: course({ '04-prompt-engineering': rev(-2) }), moduleEvents: ev }))).toBeNull()
+    expect(pickStep(input({ course: course({ '04-prompt-engineering': rev(13) }), moduleEvents: ev }))?.step).toBe('update')
+  })
+
+  it('same version already sent → nothing; a new version → sent again', () => {
+    const ev = [closed('04-prompt-engineering', NOW - 90 * D)]
+    const sent = new Map([['update@04-prompt-engineering@v2', NOW - 30 * D]])
+    expect(pickStep(input({ course: course({ '04-prompt-engineering': rev(2) }), moduleEvents: ev, sent }))).toBeNull()
+    expect(pickStep(input({ course: course({ '04-prompt-engineering': rev(2, 3) }), moduleEvents: ev, sent }))?.stepKey)
+      .toBe('update@04-prompt-engineering@v3')
+  })
+
+  it('graduate: spine modules count as closed at graduation; off-spine ones need their own event', () => {
+    const grad = { courseEventAt: NOW - 50 * D, sent: new Map([['finish-1', NOW - 50 * D], ['finish-2', NOW - 43 * D]]) }
+    expect(pickStep(input({ ...grad, course: course({ '05-context-memory': rev(1) }) }))?.stepKey).toBe('update@05-context-memory@v2')
+    expect(pickStep(input({ ...grad, course: course({ '10-model-training': rev(1) }) }))).toBeNull()
+    expect(pickStep(input({ ...grad, course: course({ '10-model-training': rev(1) }), moduleEvents: [closed('10-model-training', NOW - 20 * D)] }))?.step)
+      .toBe('update')
+  })
+
+  it('legacy whole-module progress row counts as closing', () => {
+    const p = pickStep(input({
+      course: course({ '02-setup-guide': rev(1) }),
+      progress: [row('02-setup-guide', NOW - 100 * D, NOW - 100 * D)],
+    }))
+    expect(p?.stepKey).toBe('update@02-setup-guide@v2')
+  })
+
+  it('several revised modules → one letter about the freshest, the rest marked', () => {
+    const p = pickStep(input({
+      course: course({ '02-setup-guide': rev(5), '04-prompt-engineering': rev(1), '03-stack-selection': rev(3) }),
+      moduleEvents: ['02-setup-guide', '03-stack-selection', '04-prompt-engineering'].map(m => closed(m, NOW - 40 * D)),
+    }))
+    expect(p?.stepKey).toBe('update@04-prompt-engineering@v2')
+    expect(p?.alsoMark.sort()).toEqual(['update@02-setup-guide@v2', 'update@03-stack-selection@v2'])
+  })
+
+  it('priority: finish-1 / finish-2 > milestone > update > lapse', () => {
+    const c = course({ '00-kickstart': rev(2) })
+    const base = { course: c, moduleEvents: [closed('00-kickstart', NOW - 40 * D)] }
+    expect(pickStep(input({ ...base, courseEventAt: NOW - D }))?.step).toBe('finish-1')
+    expect(pickStep(input({ ...base, courseEventAt: NOW - 8 * D, sent: new Map([['finish-1', NOW - 7 * D - H]]) }))?.step).toBe('finish-2')
+    const fresh = pickStep(input({ ...base, moduleEvents: [...base.moduleEvents, closed('01-introduction', NOW - H)] }))
+    expect(fresh?.step).toBe('milestone')
+    expect(fresh?.alsoMark.filter(k => k.startsWith('update@'))).toEqual([])   // update не поглощается — придёт следующим днём
+    expect(pickStep(input({ ...base, progress: [row('01-introduction/u1-activation', NOW - 3 * D - H)] }))?.step).toBe('update')
+  })
+
+  it('not a reminder: Telegram channel and 20h quiet do not block it; opt-out and 20h throttle do', () => {
+    const base = { course: course({ '00-kickstart': rev(2) }), moduleEvents: [closed('00-kickstart', NOW - 40 * D)] }
+    expect(pickStep(input({ ...base, telegramNudges: true, progress: [row('01-introduction/u1-activation', NOW - H)] }))?.step).toBe('update')
+    expect(pickStep(input({ ...base, emailOptout: true }))).toBeNull()
+    expect(pickStep(input({ ...base, lastEmailAt: NOW - 19 * H }))).toBeNull()
+    expect(pickStep(input({ ...base, lastEmailAt: NOW - 21 * H }))?.step).toBe('update')
   })
 })
 
