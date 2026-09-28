@@ -40,6 +40,10 @@
     "09-ai-notebook": {
       "ru": "Навигационный Архив",
       "en": "Navigation Archive"
+    },
+    "10-model-training": {
+      "ru": "Верфь Разумов",
+      "en": "Shipyard of Minds"
     }
   },
   "questTitles": {
@@ -82,6 +86,10 @@
     "09-ai-notebook": {
       "ru": "Проложить курс по источникам",
       "en": "Chart a course through sources"
+    },
+    "10-model-training": {
+      "ru": "Собрать бортовой разум своими руками",
+      "en": "Build an onboard mind with your own hands"
     }
   },
   "units": {
@@ -713,6 +721,76 @@
       "outro": {
         "ru": "Миссия выполнена. Часы просмотра стали навигационной выжимкой с доказательствами.",
         "en": "Mission complete. Hours of watching became a navigation extract with evidence."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Вскрываем ядро бортового разума: токены, эмбеддинги, внимание. Схема ядра опубликована в 2017-м.",
+        "en": "We open the core of the onboard mind: tokens, embeddings, attention. The core’s schematic was published in 2017."
+      },
+      "mentorHint": {
+        "ru": "Бортовой разум прокладывает правдоподобный курс, а не проверенный. Держи руку на штурвале.",
+        "en": "The onboard mind plots a plausible course, not a verified one. Keep your hand on the helm."
+      },
+      "outro": {
+        "ru": "Ядро изучено. Ясно, откуда берутся уверенные ошибки навигации.",
+        "en": "The core is studied. It is clear where confident navigation errors come from."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "Главное в навигации — не двигатель, а карты. Наши карты — данные.",
+        "en": "The key to navigation is not the engine but the charts. Our charts are data."
+      },
+      "mentorHint": {
+        "ru": "Ошибка в карте, повторённая тысячу раз, уведёт весь флот.",
+        "en": "A chart error repeated a thousand times will lead the whole fleet astray."
+      },
+      "outro": {
+        "ru": "Цикл полёта освоен. После сбоя — к картам, а не к двигателю.",
+        "en": "The flight cycle is mastered. After a failure — to the charts, not the engine."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Не каждый манёвр требует перепрошивки ядра. Сначала команды, потом бортовой архив, потом экипаж.",
+        "en": "Not every maneuver needs a core reflash. First commands, then the onboard archive, then the crew."
+      },
+      "mentorHint": {
+        "ru": "LoRA — навесной модуль: отстыковал — и корабль прежний.",
+        "en": "LoRA is a bolt-on module: undock it and the ship is as before."
+      },
+      "outro": {
+        "ru": "Решение принято по приборам. Перепрошивка — только когда кончились другие варианты.",
+        "en": "The decision is made by instruments. A reflash only when other options are exhausted."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Разум идеально прошёл знакомый маршрут. Проверим его в неизведанном секторе.",
+        "en": "The mind flew the familiar route perfectly. We test it in an uncharted sector."
+      },
+      "mentorHint": {
+        "ru": "Контрольный сектор закрывают до обучения — иначе он уже не контрольный.",
+        "en": "The control sector is sealed before training — otherwise it is no longer a control."
+      },
+      "outro": {
+        "ru": "Полётная проверка настроена. Память ты теперь отличаешь от умения.",
+        "en": "Flight check configured. You now tell memory from skill."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Своя верфь, свой малый разум, бесплатные мощности. Никаких арендованных доков.",
+        "en": "Your own shipyard, your own small mind, free capacity. No rented docks."
+      },
+      "mentorHint": {
+        "ru": "Сними показания до старта — иначе нечем мерить полёт.",
+        "en": "Take the readings before launch — otherwise there is nothing to measure the flight by."
+      },
+      "outro": {
+        "ru": "Разум собран и испытан. Ты знаешь, когда хватит команды, а когда разум стоит учить.",
+        "en": "The mind is built and tested. You know when a command suffices and when the mind is worth training."
       }
     }
   }

@@ -9,6 +9,7 @@ export const COURSE_ORDER = [
   '07-tools',
   '08-agent-engineering',
   '09-ai-notebook',
+  '10-model-training',
 ] as const
 
 export type CourseSlug = (typeof COURSE_ORDER)[number]

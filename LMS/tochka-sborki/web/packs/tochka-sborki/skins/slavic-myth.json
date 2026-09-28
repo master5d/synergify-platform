@@ -40,6 +40,10 @@
     "09-ai-notebook": {
       "ru": "Изба с Письменами",
       "en": "The Hut of Writings"
+    },
+    "10-model-training": {
+      "ru": "Кузница Сварога",
+      "en": "Svarog’s Forge"
     }
   },
   "questTitles": {
@@ -82,6 +86,10 @@
     "09-ai-notebook": {
       "ru": "Вытянуть правду по следу",
       "en": "Pull truth by the trail"
+    },
+    "10-model-training": {
+      "ru": "Выковать своего помощника по мерке",
+      "en": "Forge a helper to your own measure"
     }
   },
   "units": {
@@ -713,6 +721,76 @@
       "outro": {
         "ru": "Готово. Из долгого просмотра вышла добыча с уликами.",
         "en": "Done. Long viewing turned into findings with evidence."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Заглянем, как устроен говорящий истукан. Нет в нём души — только привычка складывать слово к слову.",
+        "en": "Let us see how the talking idol is made. There is no soul in it — only a habit of laying word after word."
+      },
+      "mentorHint": {
+        "ru": "Складно — не значит верно. Истукан говорит, как говорили до него.",
+        "en": "Smooth does not mean true. The idol speaks the way others spoke before it."
+      },
+      "outro": {
+        "ru": "Теперь видишь, откуда у него уверенная небылица.",
+        "en": "Now you see where its confident tall tale comes from."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "Хороший кузнец больше времени тратит на руду, чем на ковку. Наша руда — примеры.",
+        "en": "A good smith spends more time on the ore than on the forging. Our ore is examples."
+      },
+      "mentorHint": {
+        "ru": "Худая руда — худой клинок, сколько ни куй.",
+        "en": "Poor ore makes a poor blade, however long you hammer."
+      },
+      "outro": {
+        "ru": "Круг ремесла понятен. Не вышло — иди к руде, а не к молоту.",
+        "en": "The circle of the craft is plain. If it failed — go to the ore, not the hammer."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Не всякое дело новой ковки требует. Иной раз хватит верного слова да грамоты под рукой.",
+        "en": "Not every task needs new forging. Sometimes the right word and a charter at hand suffice."
+      },
+      "mentorHint": {
+        "ru": "LoRA — накладка на старый клинок: сняли — и клинок цел.",
+        "en": "LoRA is an overlay on the old blade: take it off and the blade is whole."
+      },
+      "outro": {
+        "ru": "Решил по уму. Перековка — последнее дело, а не первое.",
+        "en": "You decided wisely. Reforging is the last resort, not the first."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Помощник гладко ответил на знакомое. А на незнакомое? Проверим по-честному.",
+        "en": "The helper answered the familiar smoothly. And the unfamiliar? Let us check honestly."
+      },
+      "mentorHint": {
+        "ru": "Отложи часть примеров до ковки — они и скажут правду.",
+        "en": "Set some examples aside before forging — they will tell the truth."
+      },
+      "outro": {
+        "ru": "Мерило готово. Выученное от умелого теперь отличишь.",
+        "en": "The yardstick is ready. You can now tell the rote from the skilled."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Пришла пора своей ковки: малый помощник, своя кузня, своя руда.",
+        "en": "The time has come for your own forging: a small helper, your own smithy, your own ore."
+      },
+      "mentorHint": {
+        "ru": "Смерь помощника до ковки, иначе не поймёшь, что переменилось.",
+        "en": "Measure the helper before forging, or you will not know what changed."
+      },
+      "outro": {
+        "ru": "Выковано! Знаешь теперь, когда хватит слова, а когда помощника учить.",
+        "en": "Forged! Now you know when a word suffices and when the helper must be taught."
       }
     }
   }

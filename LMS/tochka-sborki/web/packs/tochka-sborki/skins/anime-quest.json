@@ -40,6 +40,10 @@
     "09-ai-notebook": {
       "ru": "Зал Доказанных Свитков",
       "en": "Hall of Proven Scrolls"
+    },
+    "10-model-training": {
+      "ru": "Кузница Весов",
+      "en": "Forge of Weights"
     }
   },
   "questTitles": {
@@ -82,6 +86,10 @@
     "09-ai-notebook": {
       "ru": "Извлеки Истину из Источников!",
       "en": "Extract Truth from the Sources!"
+    },
+    "10-model-training": {
+      "ru": "Выкуй Свою Модель!",
+      "en": "Forge Your Own Model!"
     }
   },
   "units": {
@@ -713,6 +721,76 @@
       "outro": {
         "ru": "Победа! Ты больше не тонешь в роликах: ты извлекаешь знание с цитатами.",
         "en": "Victory! You no longer drown in videos: you extract knowledge with quotes."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Новая арка! Заглянем внутрь противника, с которым ты сражался весь курс: токены, внимание, предсказание следующего хода.",
+        "en": "A new arc! We look inside the opponent you fought all course long: tokens, attention, predicting the next move."
+      },
+      "mentorHint": {
+        "ru": "Знай технику врага: он бьёт правдоподобно, а не правдиво.",
+        "en": "Know the enemy technique: it strikes plausibly, not truthfully."
+      },
+      "outro": {
+        "ru": "Броня снята! Теперь ты видишь, откуда берётся уверенная ошибка.",
+        "en": "Armor off! Now you see where a confident mistake comes from."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "Настоящая тренировка — не выбор меча, а тысячи отработанных приёмов. Сегодня твои приёмы — это данные.",
+        "en": "Real training is not choosing a sword but thousands of practiced moves. Today your moves are data."
+      },
+      "mentorHint": {
+        "ru": "Кривой пример, повторённый сто раз, — это кривой удар в бою.",
+        "en": "A crooked example repeated a hundred times is a crooked strike in battle."
+      },
+      "outro": {
+        "ru": "Цикл освоен! Ты знаешь, куда возвращаться после поражения: к данным.",
+        "en": "Cycle mastered! You know where to return after a defeat: to the data."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Не каждый бой требует новой техники. Сначала слово, потом контекст, потом союзники — и только потом перековка.",
+        "en": "Not every fight needs a new technique. First words, then context, then allies — and only then reforging."
+      },
+      "mentorHint": {
+        "ru": "LoRA — лёгкий доспех поверх старого: снял и надел, когда нужно.",
+        "en": "LoRA is light armor over the old one: take it off and put it on when needed."
+      },
+      "outro": {
+        "ru": "Отлично! Теперь ты выбираешь перековку осознанно, а не от отчаяния.",
+        "en": "Excellent! Now you choose reforging deliberately, not out of despair."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Победа на тренировочной арене ещё не победа. Проверим бойца на соперниках, которых он не видел.",
+        "en": "A win in the training arena is not yet a win. We test the fighter against opponents it has never seen."
+      },
+      "mentorHint": {
+        "ru": "Выученный ответ — не сила. Сила — это новый вопрос, взятый чисто.",
+        "en": "A memorized answer is not power. Power is a new question taken cleanly."
+      },
+      "outro": {
+        "ru": "Есть! У тебя есть честная арена: holdout, критерии, сравнение.",
+        "en": "Yes! You have an honest arena: holdout, criteria, comparison."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Финальная битва арки: ты сам сдвигаешь веса малой модели на бесплатной видеокарте!",
+        "en": "The arc’s final battle: you shift a small model’s weights yourself on a free GPU!"
+      },
+      "mentorHint": {
+        "ru": "Замерь «до» ещё до боя. Без него «после» — просто хвастовство.",
+        "en": "Measure \"before\" before the fight. Without it, \"after\" is just bragging."
+      },
+      "outro": {
+        "ru": "ПОБЕДА! Ты знаешь, когда агенту хватит слова, а когда модель стоит учить.",
+        "en": "VICTORY! You know when a word is enough for the agent and when a model is worth training."
       }
     }
   }

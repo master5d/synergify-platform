@@ -40,6 +40,10 @@
     "09-ai-notebook": {
       "ru": "Бюро Источников",
       "en": "Bureau of Sources"
+    },
+    "10-model-training": {
+      "ru": "НИИ Машинного Обучения",
+      "en": "Machine Learning Research Institute"
     }
   },
   "questTitles": {
@@ -82,6 +86,10 @@
     "09-ai-notebook": {
       "ru": "Организовать тетрадь доказательств",
       "en": "Organize the evidence notebook"
+    },
+    "10-model-training": {
+      "ru": "Наладить выпуск своей модели по нормативу",
+      "en": "Launch production of your own model to standard"
     }
   },
   "units": {
@@ -713,6 +721,76 @@
       "outro": {
         "ru": "Задание выполнено. Часы просмотра превращены в проверяемую выжимку.",
         "en": "Assignment complete. Hours of watching have become a verifiable extract."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Разбираем изделие по узлам: токены, эмбеддинги, внимание, претрейн. Чертёж — статья 2017 года.",
+        "en": "We take the product apart by assemblies: tokens, embeddings, attention, pretraining. The blueprint is a 2017 paper."
+      },
+      "mentorHint": {
+        "ru": "Изделие рассчитано на правдоподобие, а не на истину. Учитывай это в эксплуатации.",
+        "en": "The product is designed for plausibility, not truth. Account for that in operation."
+      },
+      "outro": {
+        "ru": "Устройство изучено. Причина уверенного брака установлена.",
+        "en": "The design is studied. The cause of confident defects is established."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "Главный цех — не сборочный, а заготовительный. Сырьё — данные.",
+        "en": "The main workshop is not assembly but procurement. The raw material is data."
+      },
+      "mentorHint": {
+        "ru": "Бракованная заготовка даёт бракованную продукцию. Входной контроль обязателен.",
+        "en": "A defective blank yields defective output. Incoming inspection is mandatory."
+      },
+      "outro": {
+        "ru": "Технологический цикл освоен. После брака — назад к заготовкам.",
+        "en": "The production cycle is mastered. After a defect — back to the blanks."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Рационализаторское предложение: сначала исчерпать дешёвые методы, потом переоснащать станок.",
+        "en": "A rationalization proposal: exhaust the cheap methods first, then retool the machine."
+      },
+      "mentorHint": {
+        "ru": "LoRA — сменная оснастка: основной станок не трогаем.",
+        "en": "LoRA is interchangeable tooling: we leave the main machine untouched."
+      },
+      "outro": {
+        "ru": "Решение обосновано. Переоснащение — только при исчерпании резервов.",
+        "en": "The decision is justified. Retooling only when reserves are exhausted."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Испытания изделия проводятся на образцах, которых оно не видело. Иначе это не испытания.",
+        "en": "Product trials are run on samples it has never seen. Otherwise they are not trials."
+      },
+      "mentorHint": {
+        "ru": "Контрольная партия откладывается до начала производства.",
+        "en": "The control batch is set aside before production begins."
+      },
+      "outro": {
+        "ru": "Методика испытаний утверждена. Впечатление протоколом не считается.",
+        "en": "The test method is approved. An impression does not count as a report."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Пуск опытного образца: малая модель, собственные мощности, бесплатный стенд.",
+        "en": "Launch of the prototype: a small model, our own capacity, a free test bench."
+      },
+      "mentorHint": {
+        "ru": "Замер «до» — исходная точка отчёта. Без него план не сдать.",
+        "en": "The \"before\" measurement is the report’s baseline. Without it the plan cannot be signed off."
+      },
+      "outro": {
+        "ru": "Опытный образец испытан. Ты знаешь, когда хватит инструкции, а когда нужна новая модель.",
+        "en": "The prototype is tested. You know when an instruction suffices and when a new model is needed."
       }
     }
   }

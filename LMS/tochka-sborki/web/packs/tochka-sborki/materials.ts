@@ -81,7 +81,8 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
   },
   {
     // Второй уровень: фундамент про модели и данные. Намеренно ПОСЛЕ основного курса —
-    // Точка Сборки про агентную практику, а не про обучение моделей.
+    // ядро Точки Сборки про агентную практику; обучение моделей вынесено в опциональный
+    // модуль 10-model-training (advanced), а здесь — его первоисточники.
     label: { ru: 'Фундамент: модели и данные', en: 'Foundations: models and data' },
     items: [
       {
@@ -112,6 +113,26 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
           en: 'Working with data: collection, cleaning, visualisation. Microsoft, MIT',
         },
         href: 'https://github.com/microsoft/Data-Science-For-Beginners',
+        external: true,
+      },
+      {
+        kind: 'link',
+        title: { ru: 'LLM Course от Hugging Face', en: 'Hugging Face LLM Course' },
+        description: {
+          ru: 'Трансформеры и экосистема Hugging Face изнутри — теория к модулю «Обучение моделей». Apache-2.0',
+          en: 'Transformers and the Hugging Face ecosystem from the inside — theory for the Model Training module. Apache-2.0',
+        },
+        href: 'https://huggingface.co/learn/llm-course',
+        external: true,
+      },
+      {
+        kind: 'link',
+        title: { ru: 'smol-course: дообучение малых моделей', en: 'smol-course: fine-tuning small models' },
+        description: {
+          ru: 'Практический курс Hugging Face: SFT, LoRA, оценка на малых моделях — основа практики модуля «Обучение моделей». Apache-2.0',
+          en: 'A hands-on Hugging Face course: SFT, LoRA, evaluation on small models — the basis of the Model Training practice. Apache-2.0',
+        },
+        href: 'https://github.com/huggingface/smol-course',
         external: true,
       },
     ],

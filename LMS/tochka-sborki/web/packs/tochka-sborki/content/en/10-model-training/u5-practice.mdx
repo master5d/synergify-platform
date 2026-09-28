@@ -1,0 +1,131 @@
+---
+title: "Practice: fine-tune a small model"
+unit: 5
+module: 10
+duration: "9 min"
+---
+
+<Phase type="activation">
+
+You already have a task laid out along the cycle, a climb up the "prompt → context → agents" ladder, and an evaluation plan. One thing is missing — a run of your own.
+
+Picture an evening after which you've shifted a model's weights with your own hands. No paid cloud, on a free GPU in the browser or on your own hardware.
+
+What do you want to see in the "before" and "after" comparison to believe that it worked?
+
+</Phase>
+
+<Phase type="reflection">
+
+Keep that answer in mind — it's your success criterion, and it has to exist before the run, not after.
+
+Notice one more thing. Throughout the course you built a sovereign stack: your tools, your context, your agents. A small model fine-tuned on your own data is the next step on the same path.
+
+Consider which of your examples you're willing to hand to someone else's cloud, and which you're not.
+
+</Phase>
+
+<Phase type="concept">
+
+## The basis of the practice — smol-course
+
+This practice is based on Hugging Face's [smol-course](https://github.com/huggingface/smol-course) (Apache-2.0 license). What follows is a condensed retelling with our changes; the original always takes precedence.
+
+One caveat. The current version of the course builds on the larger SmolLM3 and in places suggests paid runs in the Hugging Face cloud. We need the archived **v1** version in the same repository: its exercises use SmolLM2 and have a launch-in-Colab button.
+
+- `v1/1_instruction_tuning` — notebook `sft_finetuning_example.ipynb`: SFT on SmolLM2.
+- `v1/3_parameter_efficient_finetuning/notebooks` — `finetune_sft_peft.ipynb` (LoRA) and `load_lora_adapter.ipynb` (how to load an adapter).
+- `v1/4_evaluation` — how evaluation works.
+
+For deeper theory on transformers and the libraries, see Hugging Face's [LLM Course](https://huggingface.co/learn/llm-course) (repository `huggingface/course`, Apache-2.0).
+
+For those who want to understand how models are trained from scratch, Hugging Face has [The Smol Training Playbook](https://huggingface.co/spaces/HuggingFaceTB/smol-training-playbook). Its license isn't stated, so we only link to it and don't retell it.
+
+## Where to get a GPU for free
+
+- **Google Colab** or **Kaggle Notebooks** — free GPUs in the browser. Limits and availability change and aren't guaranteed — check the terms on the spot.
+- **Your own hardware** — any CUDA GPU or an Apple Silicon Mac. A 135M-parameter model is modest in memory; a CPU run is possible too, but slow.
+
+Paid cloud fine-tuning isn't needed here: the goal of the practice is to go through the whole cycle, not to set a record.
+
+## Five steps of a run
+
+**1. Data.** Collect examples into a `train.jsonl` file, one dialogue per line, in a format TRL understands:
+
+```json
+{"messages": [{"role": "user", "content": "request"}, {"role": "assistant", "content": "desired answer"}]}
+```
+
+Keep the holdout from unit 4 in a separate file. It does not go into training.
+
+**2. Measure "before."** Run the holdout through the original model and save the answers:
+
+```python
+from transformers import pipeline
+
+pipe = pipeline("text-generation", model="HuggingFaceTB/SmolLM2-135M-Instruct")
+out = pipe([{"role": "user", "content": "a request from the holdout"}], max_new_tokens=200)
+print(out[0]["generated_text"])
+```
+
+**3. Train with LoRA.** A skeleton based on the TRL docs — before running, check it against the `finetune_sft_peft.ipynb` notebook, as library APIs change:
+
+```python
+from datasets import load_dataset
+from peft import LoraConfig
+from trl import SFTConfig, SFTTrainer
+
+train = load_dataset("json", data_files="train.jsonl", split="train")
+
+trainer = SFTTrainer(
+    model="HuggingFaceTB/SmolLM2-135M-Instruct",
+    train_dataset=train,
+    args=SFTConfig(output_dir="smollm2-my-task", learning_rate=1e-4),
+    peft_config=LoraConfig(),
+)
+trainer.train()
+trainer.save_model()
+```
+
+If the trainer complains about the number format (bf16) on an older GPU, take the settings from the course notebook — they're tuned for Colab.
+
+**4. Measure "after."** Load the adapter following `load_lora_adapter.ipynb` and run the same holdout with the same requests.
+
+**5. Compare.** Check the "before" and "after" answers against the criteria from unit 4. Add the cheap alternative: the original model with a good prompt.
+
+## Attribution
+
+This practice is adapted from [huggingface/smol-course](https://github.com/huggingface/smol-course) and the [TRL](https://huggingface.co/docs/trl/sft_trainer) documentation (both Apache-2.0, © Hugging Face). Changes: translation, condensing, our own task and evaluation framing.
+
+<SelfCheck id="c12"/>
+
+<SelfCheck id="c13"/>
+
+</Phase>
+
+<Phase type="practice">
+
+Go through the five steps on your task from units 2–4, or on a learning task if the ladder showed fine-tuning isn't needed.
+
+```
+Task: [...]
+Model: [SmolLM2-135M-Instruct / 360M-Instruct]
+Where I trained: [Colab / Kaggle / own hardware — which]
+Examples: train [...] / holdout [...]
+
+Criteria (from unit 4): [...]
+
+Before:    [how many holdout answers met the criteria]
+After:     [how many met them]
+Prompt without fine-tuning: [how many met them]
+What broke (forgetting): [...]
+
+Conclusion: fine-tuning [paid off / didn't pay off], because [...]
+What I'll fix in the data for the next run: [...]
+```
+
+Save it to `my-experiments/u5-fine-tune.md`.
+
+This is the module's graduation artifact. Any honest outcome is valuable — even "the prompt did just as well." Now you know when an agent is fine with a prompt and context, and when a model is worth training.
+
+</Phase>

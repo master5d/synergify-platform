@@ -40,6 +40,10 @@
     "09-ai-notebook": {
       "ru": "Обсерватория Источников",
       "en": "Observatory of Sources"
+    },
+    "10-model-training": {
+      "ru": "Лаборатория Алхимика",
+      "en": "The Alchemist’s Laboratory"
     }
   },
   "questTitles": {
@@ -82,6 +86,10 @@
     "09-ai-notebook": {
       "ru": "Настроить тетрадь различения",
       "en": "Tune the notebook of discernment"
+    },
+    "10-model-training": {
+      "ru": "Трансмутация весов: от данных к умению",
+      "en": "Transmutation of Weights: from Data to Skill"
     }
   },
   "units": {
@@ -713,6 +721,76 @@
       "outro": {
         "ru": "Прибор настроен. Ты извлекаешь знание с координатами.",
         "en": "The instrument is tuned. You extract knowledge with coordinates."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Заглянем в реторту оракула. Внутри — не прозрение, а узор вероятностей, сплетённый из чужих слов.",
+        "en": "We look into the oracle’s retort. Inside is not insight, but a pattern of probabilities woven from others’ words."
+      },
+      "mentorHint": {
+        "ru": "Правдоподобное и истинное — разные металлы, хоть и блестят одинаково.",
+        "en": "The plausible and the true are different metals, though they shine alike."
+      },
+      "outro": {
+        "ru": "Реторта прозрачна. Ты видишь, откуда берётся уверенный морок.",
+        "en": "The retort is clear. You see where confident illusion comes from."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "Великое делание начинается не с огня, а с очищения первоматерии. Первоматерия — это данные.",
+        "en": "The Great Work begins not with fire, but with purifying the prima materia. The prima materia is data."
+      },
+      "mentorHint": {
+        "ru": "Нечистый ингредиент отравит весь эликсир.",
+        "en": "An impure ingredient poisons the whole elixir."
+      },
+      "outro": {
+        "ru": "Круг делания ясен. После неудачи ты очищаешь материю, а не раздуваешь огонь.",
+        "en": "The circle of the Work is clear. After failure you purify the matter, not stoke the fire."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Не каждую задачу решает трансмутация. Часто хватает верной формулы и нужного свитка рядом.",
+        "en": "Not every task is solved by transmutation. Often the right formula and the right scroll nearby suffice."
+      },
+      "mentorHint": {
+        "ru": "LoRA — тонкая настойка поверх основы: основа остаётся нетронутой.",
+        "en": "LoRA is a fine tincture over the base: the base stays untouched."
+      },
+      "outro": {
+        "ru": "Выбор сделан по закону соответствия: средство по мере задачи.",
+        "en": "The choice follows the law of correspondence: the means fits the measure of the task."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Эликсир прекрасно действует на тех, на ком его варили. Проверим на тех, кого он не знал.",
+        "en": "The elixir works beautifully on those it was brewed on. We test it on those it has never known."
+      },
+      "mentorHint": {
+        "ru": "Отложи часть материи до опыта — она станет твоим пробным камнем.",
+        "en": "Set part of the matter aside before the experiment — it becomes your touchstone."
+      },
+      "outro": {
+        "ru": "Пробный камень готов. Ты отличаешь золото умения от позолоты памяти.",
+        "en": "The touchstone is ready. You tell the gold of skill from the gilding of memory."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Время собственного делания: малый сосуд, своя печь, своя первоматерия.",
+        "en": "Time for your own Work: a small vessel, your own furnace, your own prima materia."
+      },
+      "mentorHint": {
+        "ru": "Взвесь сосуд до опыта, иначе не узнаешь, что превратилось.",
+        "en": "Weigh the vessel before the experiment, or you will not know what transformed."
+      },
+      "outro": {
+        "ru": "Делание завершено. Ты знаешь, когда хватит формулы, а когда нужна трансмутация.",
+        "en": "The Work is complete. You know when a formula suffices and when transmutation is needed."
       }
     }
   }

@@ -24,6 +24,8 @@ export const MICRO_TRANSFORMATIONS: Record<CourseModuleSlug, Transformation> = {
                            to:   { ru: 'оркеструю агентов под задачу',    en: 'I orchestrate agents for the task' } },
   '09-ai-notebook':      { from: { ru: 'смотрю часами',                  en: 'watch for hours' },
                            to:   { ru: 'извлекаю с уликами',             en: 'extract with evidence' } },
+  '10-model-training':   { from: { ru: '«модель — чёрный ящик»',         en: '"the model is a black box"' },
+                           to:   { ru: 'знаю, когда хватит промпта, а когда учить модель', en: 'I know when a prompt is enough and when to train a model' } },
 }
 
 export function getTransformation(

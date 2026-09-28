@@ -1,0 +1,99 @@
+---
+title: "Fine-tuning: when and how"
+unit: 3
+module: 10
+duration: "9 min"
+---
+
+<Phase type="activation">
+
+The agent in your project keeps answering in the wrong format. You've already rewritten the prompt three times, added examples, put a template in the context. It got better, but not perfect.
+
+Somewhere nearby you hear the advice: "Just fine-tune the model."
+
+Before agreeing, consider: what exactly needs to change — the model's knowledge, its manner, or your framing of the task?
+
+</Phase>
+
+<Phase type="reflection">
+
+These three things are treated differently. The prompt fixes the framing. Knowledge is easiest to supply through context. Manner and format are sometimes genuinely cheaper to bake into the weights.
+
+Recall the course's ladder. Module [04](/en/lessons/04-prompt-engineering/) — phrasing, [05](/en/lessons/05-context-memory/) — context and memory, [08](/en/lessons/08-agent-engineering/) — splitting work across agents and checks.
+
+Which rung of that ladder are you on right now with your task?
+
+</Phase>
+
+<Phase type="concept">
+
+## When NOT to fine-tune
+
+Climb the ladder from the bottom and stop at the first rung that solves the task:
+
+1. **Prompt** — a clear spec, examples in the request, an answer format (module 04).
+2. **Context and RAG** — put the needed documents in the context or retrieve them by search (module 05).
+3. **Tools and agents** — give the model a calculator, search, a checker; split the task into roles (modules 07–08).
+4. **Fine-tuning** — only if rungs 1–3 hit a ceiling and you have data.
+
+Why this order. The first three rungs change in minutes and roll back with a single edit. Fine-tuning needs a dataset, a run, and a fresh evaluation after every change.
+
+And a separate note on facts. Fresh and changing knowledge is more practical to keep in context: update the document and the answer updates. Weights don't update that way.
+
+## When fine-tuning is justified
+
+- You need a **stable format or style** that the prompt holds unreliably.
+- You need a **narrow skill** on your own data: ticket classification, field extraction.
+- You need a **small model** that runs locally, fast and cheap — and it has to be brought up to the task.
+
+## SFT: learning from examples
+
+**SFT** (supervised fine-tuning) is training on "request → desired answer" pairs. The mechanics are the same as pretraining: predict the next token. Only now the text is yours, and the error is counted on the answer.
+
+This is how a base model is turned into an assistant. The same way, you can teach a small model your format.
+
+## LoRA and PEFT: training only a part
+
+Full fine-tuning changes all of the model's weights and needs a lot of memory. **PEFT** (parameter-efficient fine-tuning) is a family of methods that train only a small part.
+
+The most common is **LoRA** ([Hu et al., 2021](https://arxiv.org/abs/2106.09685)). The original weights are frozen, and small **adapter** matrices are trained alongside them. An adapter is orders of magnitude smaller than the model, easy to store, swap and roll back.
+
+The **QLoRA** variant also compresses (quantizes) the frozen base so it fits on a modest GPU.
+
+## Choosing a small model
+
+For learning and narrow tasks, take a model of the **SmolLM2** class from Hugging Face: 135M, 360M or 1.7B parameters, Apache-2.0 license. M means millions of parameters, B means billions.
+
+- **Base** or **Instruct**: for a dialogue format start with Instruct — post-training has already been done for you.
+- A small model knows little about the world. It becomes strong only on a narrow task with good examples.
+- The smaller the model, the faster the run and the more experiments you fit in. For a first time, that's enough.
+
+<SelfCheck id="c7"/>
+
+<SelfCheck id="c8"/>
+
+<SelfCheck id="c9"/>
+
+</Phase>
+
+<Phase type="practice">
+
+Run your task from unit 2 up the ladder — honestly, rung by rung.
+
+```
+Task: [...]
+
+1. Prompt: what I tried, where the ceiling is: [...]
+2. Context / RAG: what I tried, where the ceiling is: [...]
+3. Tools / agents: what I tried, where the ceiling is: [...]
+
+Verdict: fine-tuning is [needed / not needed]
+If needed — what changes: [format / style / narrow skill / small model]
+Candidate model: [SmolLM2-135M-Instruct / 360M-Instruct / other — why]
+```
+
+Save it to `my-experiments/u3-ladder.md`.
+
+If rung 1 or 2 closed the task, you've saved yourself a dataset and many hours. In that case, run the unit 5 practice on a learning task.
+
+</Phase>

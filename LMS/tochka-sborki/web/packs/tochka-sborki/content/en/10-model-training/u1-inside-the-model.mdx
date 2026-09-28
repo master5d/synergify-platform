@@ -1,0 +1,90 @@
+---
+title: "What's inside a model"
+unit: 1
+module: 10
+duration: "8 min"
+---
+
+<Phase type="activation">
+
+Throughout the course you worked with the model from the outside: you phrased the task, held the context, plugged in tools, assembled agents. The model stayed a black box that sometimes answers brilliantly and sometimes confidently makes things up.
+
+Recall the last time that happened. The agent named a function that doesn't exist, invented a link, or "remembered" a fact that never was.
+
+What do you think: is this a glitch that will soon be fixed — or is it how the machine itself is built?
+
+</Phase>
+
+<Phase type="reflection">
+
+Keep both options in mind. If it's a glitch, you can just wait for the next version. If it's a property of the design, you'll have to learn to live with it.
+
+In modules [04](/en/lessons/04-prompt-engineering/) and [05](/en/lessons/05-context-memory/) you already fought this in practice: you gave the model sources and demanded grounding. Consider why that trick works at all.
+
+The answer becomes clear once you see what the model actually learns.
+
+</Phase>
+
+<Phase type="concept">
+
+## Tokens: how the model sees text
+
+The model doesn't read letters or words. Text is cut into **tokens** — pieces of words, sometimes whole words, sometimes single characters. Each token maps to a number in the model's vocabulary.
+
+Hence the everyday oddities: the model is bad at counting letters in a word and gets confused by long numbers. It sees chunks, not letters.
+
+## Embeddings: meaning as coordinates
+
+Each token number turns into an **embedding** — a long vector of numbers. Pieces with similar meaning land close together in this space. You met the same idea in semantic search in module 05.
+
+## The transformer and attention
+
+The core mechanism of modern models is described in the paper ["Attention Is All You Need"](https://arxiv.org/abs/1706.03762) (Vaswani et al., 2017). The architecture is called the **transformer**.
+
+The gist of **attention**: for each token, the model decides which other tokens in the text to look at, and how strongly. In "the cat didn't fit in the box because it was too small," the word "it" should look at "box."
+
+There are many attention layers, and each refines the picture. Nothing else is inside: no fact database, no truth check.
+
+## Pretraining: predict the next token
+
+The model learns one task: **predict the next token** from the previous ones. It is shown a huge text corpus and guesses the continuation billions of times. Each mistake nudges its numbers slightly — the **weights**, or **parameters**.
+
+This is **pretraining**. It produces a base model — an excellent text continuer, but not yet an assistant. **Post-training** makes it one: further training on "question → good answer" examples and tuning to human preferences.
+
+## Why the model knows — and why it lies
+
+To continue text well, it pays for the model to capture the regularities of the world: grammar, facts, styles of reasoning. That's why it "knows."
+
+But the training goal is a **plausible** continuation, not a **true** one. Where data is scarce or contradictory, plausible and true diverge. The model continues smoothly — and is confidently wrong.
+
+That's why the trick from modules 04–05 works. When a source sits in the context, the most plausible continuation is the one that leans on the source.
+
+<SelfCheck id="c1"/>
+
+<SelfCheck id="c2"/>
+
+<SelfCheck id="c3"/>
+
+</Phase>
+
+<Phase type="practice">
+
+Run a small experiment on any model you have access to.
+
+```
+1. Ask the model about something very narrow from your work,
+   something barely present in public texts: [question]
+   → is the answer confident? correct?
+
+2. Same question, but put a source paragraph in the context: [source]
+   → what changed?
+
+3. Ask it to count the letters in a long, rare word: [word]
+   → correct? how does this relate to tokens?
+```
+
+Save your observations to `my-experiments/u1-inside-the-model.md`.
+
+The first item is the key one: it shows where plausible and true diverge in your own field.
+
+</Phase>

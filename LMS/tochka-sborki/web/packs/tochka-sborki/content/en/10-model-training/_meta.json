@@ -1,0 +1,220 @@
+{
+  "module": 10,
+  "title": "Model Training",
+  "description": "An advanced module after the agentic practice: how LLMs are built and trained, why data is the main work, when to fine-tune and when a prompt and context are enough — and your own fine-tune of a small model on a free GPU",
+  "duration": "42 min",
+  "level": 9,
+  "units": [
+    { "slug": "u1-inside-the-model", "title": "What's inside a model" },
+    { "slug": "u2-data-is-the-work", "title": "Data is the main work" },
+    { "slug": "u3-fine-tuning", "title": "Fine-tuning: when and how" },
+    { "slug": "u4-evaluation", "title": "Evaluation: did it help" },
+    { "slug": "u5-practice", "title": "Practice: fine-tune a small model" }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Explain how tokens, embeddings, attention and pretraining on next-token prediction add up to an LLM — and why the same design produces confident mistakes"
+    },
+    {
+      "id": "o2",
+      "text": "Lay out your task along the machine learning cycle and pick an algorithm class by what you need to get — including the conclusion \"no LLM needed here\""
+    },
+    {
+      "id": "o3",
+      "text": "Decide whether fine-tuning is needed or the task is closed by a prompt, context/RAG and agents; choose between full fine-tuning and LoRA and pick a small model"
+    },
+    {
+      "id": "o4",
+      "text": "Plan an honest evaluation: set the holdout aside before training, recognize overfitting and forgetting, tell a benchmark apart from a check on your own task"
+    },
+    {
+      "id": "o5",
+      "text": "Fine-tune a small model on a free GPU or your own hardware and record a \"before / after / prompt without fine-tuning\" comparison against criteria set in advance"
+    }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-inside-the-model",
+      "objective": "o1",
+      "question": "What task does the model learn during pretraining?",
+      "options": [
+        "Telling true statements from false ones",
+        "Predicting the next token from the previous ones",
+        "Answering user questions in a dialogue",
+        "Looking up facts in a knowledge base"
+      ],
+      "answer": 1,
+      "explain": "Pretraining is guessing the continuation of text over a huge corpus. The dialogue assistant comes later, in post-training (u1, \"Pretraining: predict the next token\")."
+    },
+    {
+      "id": "c2",
+      "unit": "u1-inside-the-model",
+      "objective": "o1",
+      "question": "Why can a model be wrong confidently and smoothly?",
+      "options": [
+        "Its goal is a plausible continuation, not a true one; where data is scarce, the two diverge",
+        "Developers add mistakes on purpose",
+        "The model gets tired in long dialogues",
+        "It's a bug in a specific version and will be fixed in the next"
+      ],
+      "answer": 0,
+      "explain": "A confident mistake is a property of the training goal itself, not a random glitch (u1, \"Why the model knows — and why it lies\")."
+    },
+    {
+      "id": "c3",
+      "unit": "u1-inside-the-model",
+      "objective": "o1",
+      "question": "What does the attention mechanism in a transformer do?",
+      "options": [
+        "Checks the answer against a fact database before output",
+        "Compresses text so it fits into the context",
+        "For each token, decides which other tokens in the text to look at, and how strongly",
+        "Chooses which user to answer first"
+      ],
+      "answer": 2,
+      "explain": "Attention links tokens to each other: \"it\" looks at \"box.\" There is no fact database inside (u1, \"The transformer and attention\"; the paper \"Attention Is All You Need,\" 2017)."
+    },
+    {
+      "id": "c4",
+      "unit": "u2-data-is-the-work",
+      "objective": "o2",
+      "question": "The model failed the test. Where does the machine learning cycle most often send you first?",
+      "options": [
+        "To choosing a bigger model",
+        "To the data: collecting and preprocessing examples",
+        "Straight to prediction on real data",
+        "To buying a more powerful GPU"
+      ],
+      "answer": 1,
+      "explain": "A cycle, not a straight line: after the test you usually go back to the data, not to the model (u2, \"The machine learning cycle\")."
+    },
+    {
+      "id": "c5",
+      "unit": "u2-data-is-the-work",
+      "objective": "o2",
+      "question": "How does the lesson suggest treating the phrase \"80% of an ML project's time goes to data\"?",
+      "options": [
+        "It's a precise measurement from a large study",
+        "It's an outdated figure; today data takes 20%",
+        "It's folklore without a clear primary source; the direction is worth checking in your own practice",
+        "It's a marketing invention; data doesn't matter"
+      ],
+      "answer": 2,
+      "explain": "The figure has no primary source, so it isn't a measurement. But you'll see for yourself in the practice that data is the main work (u2, \"80% of the time is data\")."
+    },
+    {
+      "id": "c6",
+      "unit": "u2-data-is-the-work",
+      "objective": "o2",
+      "question": "From order history, you need to predict how many units of a product will sell next month. Which algorithm class does the map suggest?",
+      "options": [
+        "Clustering",
+        "A generative model (LLM)",
+        "Anomaly detection",
+        "Regression"
+      ],
+      "answer": 3,
+      "explain": "You need to get a number — that's regression. An LLM isn't required here (u2, the \"task → algorithm class\" map)."
+    },
+    {
+      "id": "c7",
+      "unit": "u3-fine-tuning",
+      "objective": "o3",
+      "question": "An agent needs fresh internal policies that change every month. What does the lesson advise first?",
+      "options": [
+        "Fine-tune the model on the policies and repeat monthly",
+        "Put the current documents in the context or retrieve them by search (RAG)",
+        "Take a bigger model: it knows more",
+        "Nothing: the model will learn about the policies by itself"
+      ],
+      "answer": 1,
+      "explain": "Changing facts are more practical to keep in context: update the document and the answer updates. Weights don't update that way (u3, \"When NOT to fine-tune\"; module 05)."
+    },
+    {
+      "id": "c8",
+      "unit": "u3-fine-tuning",
+      "objective": "o3",
+      "question": "How does LoRA differ from full fine-tuning?",
+      "options": [
+        "The original weights are frozen; small adapters are trained alongside them",
+        "LoRA trains the model from scratch, but faster",
+        "LoRA changes only the prompt, not the model",
+        "LoRA works only on paid cloud GPUs"
+      ],
+      "answer": 0,
+      "explain": "LoRA belongs to the PEFT family: the base is frozen, the adapter is orders of magnitude smaller than the model and easy to roll back (u3, \"LoRA and PEFT\")."
+    },
+    {
+      "id": "c9",
+      "unit": "u3-fine-tuning",
+      "objective": "o3",
+      "question": "According to the lesson, when is fine-tuning justified?",
+      "options": [
+        "The prompt was never tried, but you want the best result right away",
+        "The model needs to know this week's news",
+        "You need a stable format or a narrow skill, prompt and context hit a ceiling, and you have examples",
+        "The model sometimes answers too verbosely"
+      ],
+      "answer": 2,
+      "explain": "Fine-tuning is the top rung of the ladder: first prompt, context, agents, and only then weights — if you have data (u3)."
+    },
+    {
+      "id": "c10",
+      "unit": "u4-evaluation",
+      "objective": "o4",
+      "question": "Loss on train keeps falling, but on validation it has started to rise. What does that mean?",
+      "options": [
+        "All good: the model is learning",
+        "The validation set is broken",
+        "The model is overfitting: it fits the training examples and does worse on new ones",
+        "You need to increase the number of epochs"
+      ],
+      "answer": 2,
+      "explain": "Train and validation diverging is the classic overfitting signal. Varied data, fewer epochs and early stopping help (u4, \"Overfitting\")."
+    },
+    {
+      "id": "c11",
+      "unit": "u4-evaluation",
+      "objective": "o4",
+      "question": "The fine-tuned model improved on a popular public benchmark. What's the right conclusion?",
+      "options": [
+        "The model definitely got better at your task",
+        "It says nothing certain about your task; check with your own holdout against your own criteria",
+        "The benchmark matters more than your own check",
+        "No need to compare with the original model"
+      ],
+      "answer": 1,
+      "explain": "A benchmark doesn't know your task, and its texts may have ended up in training data. Your own check comes from your own holdout (u4, \"Benchmark versus your task\")."
+    },
+    {
+      "id": "c12",
+      "unit": "u5-practice",
+      "objective": "o5",
+      "question": "When do you need to measure the original model's answers on the holdout?",
+      "options": [
+        "Before training — otherwise there's nothing to compare \"after\" with",
+        "Only after training, to save time",
+        "Not at all: looking at the loss is enough",
+        "Only if fine-tuning didn't help"
+      ],
+      "answer": 0,
+      "explain": "The \"before\" measurement on the same holdout with the same requests is the baseline for comparison (u5, \"Five steps of a run,\" step 2)."
+    },
+    {
+      "id": "c13",
+      "unit": "u5-practice",
+      "objective": "o5",
+      "question": "After the run, the fine-tuned model and the original model with a good prompt met the criteria almost equally. How do you record it?",
+      "options": [
+        "As a failed practice: the result must be redone",
+        "As a success: any fine-tuning beats a prompt",
+        "As an honest conclusion: fine-tuning didn't pay off, the prompt is enough",
+        "Not at all: such results aren't recorded"
+      ],
+      "answer": 2,
+      "explain": "Any honest outcome is valuable. Comparing with the cheap alternative is part of evaluation, and \"the prompt is enough\" is exactly the module's answer (u5, practice; u4, step 5)."
+    }
+  ]
+}

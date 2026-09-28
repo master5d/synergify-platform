@@ -40,6 +40,10 @@
     "09-ai-notebook": {
       "ru": "Скрипторий Свидетельств",
       "en": "Scriptorium of Testimony"
+    },
+    "10-model-training": {
+      "ru": "Кузня Големов",
+      "en": "The Golem Forge"
     }
   },
   "questTitles": {
@@ -82,6 +86,10 @@
     "09-ai-notebook": {
       "ru": "Сковать конспект на цепях источника",
       "en": "Bind the digest to its sources"
+    },
+    "10-model-training": {
+      "ru": "Вдохнуть волю в голема: данные, веса, испытание",
+      "en": "Breathe will into the golem: data, weights, trial"
     }
   },
   "units": {
@@ -713,6 +721,76 @@
       "outro": {
         "ru": "Обряд завершён. Ты извлекаешь с уликами и оставляешь тьму без добычи.",
         "en": "The rite is complete. You extract with evidence and leave the dark empty-handed."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Спустимся в недра голема. Там нет души — лишь бесконечные руны, что угадывают следующую руну.",
+        "en": "We descend into the golem’s depths. There is no soul — only endless runes guessing the next rune."
+      },
+      "mentorHint": {
+        "ru": "Голем говорит складно не потому, что знает, а потому, что так звучало прежде.",
+        "en": "The golem speaks smoothly not because it knows, but because that is how it sounded before."
+      },
+      "outro": {
+        "ru": "Недра изведаны. Ты знаешь, откуда в его голосе уверенная ложь.",
+        "en": "The depths are charted. You know where the confident lie in its voice comes from."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "Голема лепят не молотом, а глиной. Глина — это примеры, и в любой партии есть изъян.",
+        "en": "A golem is shaped not by the hammer but by clay. The clay is examples, and every batch has flaws."
+      },
+      "mentorHint": {
+        "ru": "Порченая глина, вмешанная в тело, треснет в бою.",
+        "en": "Tainted clay kneaded into the body will crack in battle."
+      },
+      "outro": {
+        "ru": "Круг ремесла замкнут. После неудачи ты возвращаешься к глине, а не к молоту.",
+        "en": "The circle of the craft is closed. After failure you return to the clay, not to the hammer."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Не всякий голем требует перековки. Иногда хватит верного слова и нужного свитка у изголовья.",
+        "en": "Not every golem needs reforging. Sometimes the right word and the right scroll at its head suffice."
+      },
+      "mentorHint": {
+        "ru": "LoRA — печать поверх старой плоти: снимается без крови.",
+        "en": "LoRA is a seal over the old flesh: it comes off without blood."
+      },
+      "outro": {
+        "ru": "Выбор сделан с холодной головой. Перековка — последний обряд, а не первый.",
+        "en": "The choice is made with a cold head. Reforging is the last rite, not the first."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Голем безупречно повторил заученное. Это ещё не воля — это эхо. Испытаем его на незнакомом.",
+        "en": "The golem flawlessly repeated what it learned. That is not yet will — it is an echo. We try it on the unfamiliar."
+      },
+      "mentorHint": {
+        "ru": "Спрячь часть глины до ковки. Лишь она скажет правду о големе.",
+        "en": "Hide part of the clay before forging. Only it will tell the truth about the golem."
+      },
+      "outro": {
+        "ru": "Испытание готово. Ты отличаешь выученное эхо от настоящего умения.",
+        "en": "The trial is ready. You can tell a learned echo from true skill."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Час настал: ты сам вдыхаешь волю в малого голема — в своей кузне, без чужих жрецов.",
+        "en": "The hour has come: you breathe will into a small golem yourself — in your own forge, without foreign priests."
+      },
+      "mentorHint": {
+        "ru": "Запомни голема до обряда. Иначе не узнаешь, что изменил.",
+        "en": "Remember the golem before the rite. Otherwise you will not know what you changed."
+      },
+      "outro": {
+        "ru": "Обряд свершён. Ты знаешь, когда хватит слова, а когда голема стоит перековать.",
+        "en": "The rite is done. You know when a word suffices and when the golem is worth reforging."
       }
     }
   }

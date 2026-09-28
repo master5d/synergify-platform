@@ -40,6 +40,10 @@
     "09-ai-notebook": {
       "ru": "Архив Улик",
       "en": "Evidence Archive"
+    },
+    "10-model-training": {
+      "ru": "Подпольная Лаборатория",
+      "en": "Underground Lab"
     }
   },
   "questTitles": {
@@ -82,6 +86,10 @@
     "09-ai-notebook": {
       "ru": "Вытащить факты из шума.",
       "en": "Pull facts out of the noise."
+    },
+    "10-model-training": {
+      "ru": "Разобрать модель на детали и собрать свою.",
+      "en": "Take the model apart and build your own."
     }
   },
   "units": {
@@ -713,6 +721,76 @@
       "outro": {
         "ru": "Дело закрыто: из часов просмотра получился короткий отчёт с уликами.",
         "en": "Case closed: hours of viewing became a short report with evidence."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Вскрываем чёрный ящик. Внутри нет свидетеля — только статистика, которая умеет звучать уверенно.",
+        "en": "We crack the black box. There is no witness inside — only statistics that know how to sound sure."
+      },
+      "mentorHint": {
+        "ru": "Модель не врёт нарочно. Она просто продолжает строку так, как её продолжают все.",
+        "en": "The model does not lie on purpose. It just continues the line the way everyone does."
+      },
+      "outro": {
+        "ru": "Механизм вскрыт. Теперь ясно, почему показания без источника ничего не стоят.",
+        "en": "Mechanism exposed. Now it is clear why testimony without a source is worthless."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "В этом деле главная работа — не выбор ствола, а грязные досье. Данные.",
+        "en": "In this case the main work is not choosing the gun but the dirty files. Data."
+      },
+      "mentorHint": {
+        "ru": "Что слили в обучение, то модель и расскажет. Проверь досье до допроса.",
+        "en": "Whatever was leaked into training is what the model will tell. Check the files before the interrogation."
+      },
+      "outro": {
+        "ru": "Цикл ясен. После провала возвращаешься не к модели, а к уликам.",
+        "en": "The cycle is clear. After a failure you go back not to the model but to the evidence."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Совет «просто дообучи» звучит как лёгкие деньги. Сначала проверим дешёвые пути.",
+        "en": "\"Just fine-tune it\" sounds like easy money. First we check the cheap routes."
+      },
+      "mentorHint": {
+        "ru": "Свежие факты держи в папке на столе, а не в памяти осведомителя.",
+        "en": "Keep fresh facts in the folder on the desk, not in the informant’s memory."
+      },
+      "outro": {
+        "ru": "Решение трезвое. Перековка — только когда все остальные двери закрыты.",
+        "en": "A sober call. Retraining only when every other door is shut."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Идеальный ответ на знакомый вопрос — подозрительно. Проверяем на том, чего модель не видела.",
+        "en": "A perfect answer to a familiar question is suspicious. We test on what the model has not seen."
+      },
+      "mentorHint": {
+        "ru": "Отложенная выборка — это свидетель, которого не показывали обвиняемому.",
+        "en": "The holdout is a witness never shown to the suspect."
+      },
+      "outro": {
+        "ru": "Протокол проверки готов. Впечатления больше не проходят за доказательства.",
+        "en": "The test protocol is ready. Impressions no longer pass for proof."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Своя модель, своё железо, свои данные. Никакого чужого облака.",
+        "en": "Your model, your hardware, your data. No one else’s cloud."
+      },
+      "mentorHint": {
+        "ru": "Замер «до» — алиби результата. Без него дело развалится.",
+        "en": "The \"before\" measurement is the result’s alibi. Without it the case falls apart."
+      },
+      "outro": {
+        "ru": "Дело закрыто. Ты знаешь, когда хватит промпта, а когда модель стоит учить.",
+        "en": "Case closed. You know when a prompt is enough and when a model is worth training."
       }
     }
   }

@@ -33,6 +33,17 @@ describe('micro-transformations', () => {
     })
   })
 
+  it('includes the optional model-training module transformation', () => {
+    expect(getTransformation('10-model-training', 'ru')).toEqual({
+      from: '«модель — чёрный ящик»',
+      to: 'знаю, когда хватит промпта, а когда учить модель',
+    })
+    expect(getTransformation('10-model-training', 'en')).toEqual({
+      from: '"the model is a black box"',
+      to: 'I know when a prompt is enough and when to train a model',
+    })
+  })
+
   it('returns null for an unknown slug', () => {
     expect(getTransformation('does-not-exist', 'ru')).toBeNull()
   })

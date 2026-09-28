@@ -60,7 +60,7 @@ export const CERTIFICATE: CertificateData = {
     ru: 'Точка сборки пройдена.\nТы готов(а) к следующему витку.',
     en: 'The assembly point is set.\nYou’re ready for what comes next.',
   },
-  // Сертификат выдаётся за обязательную часть: 9 модулей ядра (00–08), 40 юнитов; опциональный 09 не входит.
+  // Сертификат выдаётся за обязательную часть: 9 модулей ядра (00–08), 40 юнитов; опциональные 09 и 10 не входят.
   // Число сверяет гвард lib/content/lesson-count.test.ts (до него здесь жило устаревшее число и «7 тем»).
   footerMeta: { ru: '40 юнитов · 9 модулей', en: '40 units · 9 modules' },
   founderName: { ru: 'Саша Мамаев', en: 'Sasha Mamaev' },
