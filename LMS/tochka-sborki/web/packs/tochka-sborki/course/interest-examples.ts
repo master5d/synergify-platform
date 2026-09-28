@@ -1,13 +1,23 @@
 // packs/tochka-sborki/course/interest-examples.ts
 //
 // Примеры концепт-фазы, которые можно пересказать через сферу ученика (intake LMS#8,
-// спека docs/superpowers/specs/2026-09-28-interest-example.md). Пилот — 3 юнита.
+// спека docs/superpowers/specs/2026-09-28-interest-example.md). Пилот — 3 юнита; волна 19 — +00/u0-azbuka.
 // Метка в MDX юнита: <InterestExample id="…"/>. Текст здесь — ОБЩИЙ пример: его видит каждый
 // до ответа воркера и при любом отказе. Воркер берёт исходник отсюда, а не от клиента.
 // Относительные импорты: файл тянет воркер. Черновик: формулировки на вычитку владельцем.
 import type { InterestExampleItem } from '../../../lib/interest-example/types'
 
 export const INTEREST_EXAMPLES: InterestExampleItem[] = [
+  // Волна 19: вынесено из MDX юнита ДОСЛОВНО (без переписывания); подпись «Как увидеть самому.» осталась в MDX.
+  {
+    module: '00-kickstart',
+    unit: 'u0-azbuka',
+    id: 'temperature',
+    text: {
+      ru: 'Задай один и тот же вопрос дважды, каждый раз в новом чате: «Придумай название для кофейни у реки». Ответы будут разными — это и есть случайность выбора в работе. В обычном чате ручки температуры не видно, её заранее выставил сервис; напрямую её задают через API. Вывод для практики: один удачный ответ ещё не значит, что так будет всегда, — проверяй.',
+      en: 'Ask the same question twice, each time in a new chat: "Come up with a name for a riverside café." The answers will differ — that\'s randomness of choice at work. In an ordinary chat you don\'t see the temperature dial; the service has set it for you, and it\'s set directly through the API. The practical takeaway: one good answer doesn\'t mean it will always come out that way — check.',
+    },
+  },
   {
     module: '01-introduction',
     unit: 'u2-four-shifts',
