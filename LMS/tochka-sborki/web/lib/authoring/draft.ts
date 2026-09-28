@@ -117,6 +117,23 @@ export function normalizeEol(text: string): string {
   return text.replace(/^﻿/, '').replace(/\r\n?/g, '\n')
 }
 
+/** Activation/reflection must stay mental: the learner is never told to write or type.
+ *  The rule catches the DIRECTIVE, not the word. Cut first: quoted speech ("…", “…”, «…», „…“),
+ *  inline/fenced code and `>` blockquotes — those quote someone else's prompt («"write me a post"»,
+ *  `Write a function`). Then EN `write`/`type` counts only at a clause start (line/sentence start,
+ *  after `:;,—–`, or after and/then/now/please/first/next) — «learned to write prompts» and
+ *  «code you still need to write» are descriptive and stay clean. RU «напиши/запиши» are imperative
+ *  forms by themselves, so they count anywhere outside quotes (хвост волны 18, 2026-09-28). */
+export function hasWriteTypeImperative(text: string): boolean {
+  const prose = text
+    .replace(/```[\s\S]*?```/g, ' ')
+    .split('\n').filter(l => !/^\s*>/.test(l)).map(l => l.replace(/^\s*(?:[-*+]|\d+[.)])\s+/, '')).join('\n')
+    .replace(/`[^`\n]*`/g, ' ')
+    .replace(/"[^"\n]*"|“[^”\n]*”|«[^»\n]*»|„[^“”\n]*[“”]/g, ' ')
+  if (/(^|[^\p{L}])(напиши|запиши)(?![\p{L}])/iu.test(prose)) return true
+  return /(^|[.!?:;,—–]\s*|\b(?:and|then|now|please|first|next)\s+)(?:write|type)\b/im.test(prose)
+}
+
 export function validateDraftMdx(raw: string): string[] {
   const mdx = normalizeEol(raw)
   const errors: string[] = []
@@ -131,7 +148,7 @@ export function validateDraftMdx(raw: string): string[] {
   const block = (type: string) =>
     new RegExp(`<Phase type="${type}">([\\s\\S]*?)</Phase>`).exec(mdx)?.[1] ?? ''
   for (const type of ['activation', 'reflection']) {
-    if (/\b(напиши|запиши|type|write)\b/i.test(block(type))) {
+    if (hasWriteTypeImperative(block(type))) {
       errors.push(`${type}: contains a write/type imperative (must be mental)`)
     }
   }

@@ -34,10 +34,11 @@
   `lib/content/alignment.ts`); CRLF/BOM нормализуются (`normalizeEol`) при чтении и в самих линтерах — «missing title»
   у Windows-чекаута ушёл. Тесты-повторы обоих багов (падают на старом коде) + реальный урок 05/u3-memory.
   Прогон по 120 урокам обоих паков — осталось (контент не трогали):
-  - [ ] `03-stack-selection/u2-stack-matrix` (RU+EN): фазы в порядке activation → concept → reflection → practice — настоящее нарушение.
-  - [ ] ложные «write/type imperative» (цитата/описание, не повелительное): EN `01/u2-four-shifts` (activation,
+  - [x] `03-stack-selection/u2-stack-matrix` (RU+EN) — СДЕЛАНО 2026-09-28: reflection («оркестр/дирижёр») поставлена перед concept (таблица trade-offs + decision tree + SelfCheck c3–c5 остались в concept), связка с activation — одна фраза «выбрал попутчика — но в дальней дороге редко идут вдвоём»; порядок фаз по всем урокам — 0 нарушений.
+  - [x] ложные «write/type imperative» (цитата/описание, не повелительное): EN `01/u2-four-shifts` (activation,
     «"write me an Instagram post"»), EN `07/u5-practice` (reflection, «learned to write prompts»), EN
-    `08/u4-production-infra` (activation, «code you still need to write») — правило ловит слово, а не наклонение; решить: сузить правило или переписать.
+    `08/u4-production-infra` (activation, «code you still need to write») — СДЕЛАНО 2026-09-28: правило сужено (`hasWriteTypeImperative`, `lib/authoring/draft.ts`) — цитаты ("…" “…” «…» „…“), inline/fenced код и `>` blockquote вырезаются, EN write/type считается только в начале клауза (строка/после . ! ? : ; , — / после and/then/now/please/first/next,
+    маркер списка снимается); RU напиши/запиши — везде вне цитат (старый `\b` без флага `u` кириллицу не ловил вовсе). Три фикстуры-повтора + настоящие директивы в `draft.test.ts`; прогон — 0 ложных.
   - [ ] «long sentence» (>25 слов) — 225 находок в 83 файлах: ТС 121 (EN 86 / RU 35), «Тишина» 104 (EN 70 / RU 34);
     EN заметно длиннее RU — проход полировки по EN.
 - [x] **Шаг русла внутри юнита — СДЕЛАНО 2026-09-28**: `<UnitRouteStep/>` (`components/intake/unit-route-step.tsx`)
