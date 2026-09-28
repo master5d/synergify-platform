@@ -112,7 +112,7 @@ cat error.log | claude -p 'объясни ошибку'
 | Claude путается, повторяется | `/clear` — обнулить |
 | Контекст &gt;85% + новая задача | `/clear` — без вариантов |
 
-> 💡 CLAUDE.md **перезагружается автоматически** после /compact и auto-compact — инструкции не теряются.
+> 💡 CLAUDE.md (а с ним и подключённый `@AGENTS.md`) **перезагружается автоматически** после /compact и auto-compact — инструкции не теряются.
 
 ---
 
@@ -271,15 +271,16 @@ think → think hard → think harder → ultrathink
 # 1. Создай и войди в проект
 mkdir my-project && cd my-project
 
-# 2. Создай контекстные файлы
-touch CLAUDE.md TODO.md AGENTS.md
+# 2. Создай файлы памяти
+touch AGENTS.md TODO.md STATE.md
+echo '@AGENTS.md' > CLAUDE.md
 
-# 3. Инициализируй CLAUDE.md
+# 3. Заполни AGENTS.md вместе с агентом
 claude
-/init       # ← внутри Claude Code
+# «Изучи проект и заполни AGENTS.md: стек, как запустить, правила»
 
 # 4. Или заполни вручную:
-# Stack, как запустить, инструкции агенту
+# Stack, как запустить, правила агенту
 
 # 5. Дай первую задачу
 ```
@@ -292,20 +293,21 @@ claude
 # 1. Создай и войди в проект
 mkdir my-project; cd my-project
 
-# 2. Создай контекстные файлы (PowerShell)
-ni CLAUDE.md, TODO.md, AGENTS.md -ItemType File
+# 2. Создай файлы памяти (PowerShell)
+ni AGENTS.md, TODO.md, STATE.md -ItemType File
+Set-Content CLAUDE.md '@AGENTS.md'
 
-# 3. Инициализируй CLAUDE.md
+# 3. Заполни AGENTS.md вместе с агентом
 claude
-/init       # ← внутри Claude Code
+# «Изучи проект и заполни AGENTS.md: стек, как запустить, правила»
 
 # 4. Или заполни вручную:
-# Stack, как запустить, инструкции агенту
+# Stack, как запустить, правила агенту
 
 # 5. Дай первую задачу
 ```
 
-> 💡 Альтернатива через WSL/Git Bash: `mkdir my-project && cd my-project && touch CLAUDE.md TODO.md AGENTS.md`
+> 💡 Альтернатива через WSL/Git Bash: `mkdir my-project && cd my-project && touch AGENTS.md TODO.md STATE.md && echo '@AGENTS.md' > CLAUDE.md`
 
 </OsBlock>
 
@@ -365,28 +367,29 @@ claude
 
 ## 📄 Обязательные файлы проекта
 
-### CLAUDE.md
+### AGENTS.md
 
-**Быстрый старт:**
-```bash
-/init  # Auto-генерирует CLAUDE.md из существующего проекта
-```
+Один файл контекста и правил проекта для любого агента: Codex, Cursor, Copilot, Antigravity, Hermes читают его сами.
 
 **Где разместить:**
-- `./CLAUDE.md` — проект (коммитится в git)
-- `~/.claude/CLAUDE.md` — личный (все проекты)
+- `./AGENTS.md` — проект (коммитится в git)
+- `./CLAUDE.md` — одна строка `@AGENTS.md`: так его читает Claude Code
+- `~/.claude/CLAUDE.md` — личный (все проекты, только Claude Code)
 
 **Лимит:** ~200 строк (важно для контекста)
 
 **Минимальная структура:**
 ```markdown
-# Project Context
+# AGENTS.md
 ## Моя роль
 ## Проект
 ## Стек
 ## Как запустить
-## Инструкции для Claude Code
+## Правила
+## Чего избегать
 ```
+
+`/init` в Claude Code генерирует CLAUDE.md из существующего проекта. Перенеси полезное в AGENTS.md, а в CLAUDE.md оставь `@AGENTS.md`.
 
 ### TODO.md
 ```markdown
@@ -398,14 +401,13 @@ claude
 ## ✅ ЗАВЕРШЕНО
 ```
 
-### AGENTS.md
+### STATE.md
 ```markdown
-# Agent Instructions
-## Для любой работы
-## Для /explore
-## Для /plan
-## Для /code
-## Чего избегать
+# Состояние проекта
+## Где мы сейчас
+## Что сделано
+## Что мешает
+## Следующий шаг
 ```
 
 ---
@@ -415,7 +417,7 @@ claude
 | Ошибка | Решение |
 | --- | --- |
 | Контекст переполнен | Дай только релевантные файлы |
-| Агент спрашивает всё | Добавь информацию в CLAUDE.md |
+| Агент спрашивает всё | Добавь информацию в AGENTS.md |
 | Результат неправильный | Уточни, что именно не так, итерируй |
 | Дистракторы | Убери лишние файлы из контекста |
 | "Lost in the Middle" | Важное в начало или конец, не в середину |

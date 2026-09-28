@@ -31,7 +31,7 @@
     },
     {
       "id": "o5",
-      "text": "Assemble a minimal clone from CLAUDE.md, MCP, Skill, and Hook, giving each element its role and keeping the frame, the goal, and the check for yourself"
+      "text": "Assemble a minimal clone from AGENTS.md, MCP, Skill, and Hook, giving each element its role and keeping the frame, the goal, and the check for yourself"
     }
   ],
   "checks": [
@@ -141,7 +141,7 @@
       "options": [
         "In the personal skills folder: it will work across all your projects",
         "In the project skills folder, which lives in git together with the project",
-        "In CLAUDE.md, as a paragraph of text",
+        "In AGENTS.md, as a paragraph of text",
         "In the hooks config, so it runs automatically"
       ],
       "answer": 1,
@@ -154,12 +154,12 @@
       "question": "In the code review clone, which element sets “You are a senior developer, focused on security and readability”?",
       "options": [
         "The GitHub MCP server",
-        "CLAUDE.md: context, who you are and what you do",
+        "AGENTS.md: context, who you are and what you do",
         "The `/code-review` Skill",
         "A Hook on the `Stop` event"
       ],
       "answer": 1,
-      "explain": "Each element of the clone has its own role. CLAUDE.md sets the context and priorities, MCP gives access, the Skill is the scenario, the Hook is automation after completion (u5, “Final architecture: an AI clone for a real task”)."
+      "explain": "Each element of the clone has its own role. AGENTS.md sets the context and priorities, MCP gives access, the Skill is the scenario, the Hook is automation after completion (u5, “Final architecture: an AI clone for a real task”)."
     },
     {
       "id": "c10",
@@ -170,7 +170,7 @@
         "A Hook on the `Stop` event",
         "The `/code-review` Skill: it's the one analyzing the diff anyway",
         "The GitHub MCP server: it sees the PR",
-        "CLAUDE.md with the instruction “always comment on the PR”"
+        "AGENTS.md with the instruction “always comment on the PR”"
       ],
       "answer": 0,
       "explain": "An automatic action on the “agent finished its work” event is a hook on `Stop`. MCP gives access to the PR and the Skill analyzes the diff, but neither fires on an event by itself (u5, “Example: Code Review clone”; u3, the events table)."

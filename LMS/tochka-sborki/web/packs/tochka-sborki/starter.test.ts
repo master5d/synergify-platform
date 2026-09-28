@@ -2,13 +2,15 @@
 // Архив собирается из packs/tochka-sborki/starter.json на prebuild; здесь он собирается
 // в памяти тем же кодом (scripts/build-starter.mjs) и проверяется как его увидит ученик:
 // состав, отсутствие секретов и мусора, рабочий hook, связь со страницей и уроками.
+// Два издания — RU (основное) и EN (starter.json → editions.en): общие гварды гоняются
+// по обоим, язык EN-издания проверяется отдельно.
 // Тест живёт в pack'е Точки Сборки и читает его напрямую — работает при любом COURSE_PACK.
 import { describe, it, expect } from 'vitest'
 import { existsSync, mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { tmpdir } from 'node:os'
 import { execFileSync } from 'node:child_process'
-import { buildStarter, readZip } from '../../scripts/build-starter.mjs'
+import { buildStarter, readZip, starterEditions } from '../../scripts/build-starter.mjs'
 import { STARTER } from './course/starter'
 import { localizeLesson } from '../../lib/starter/starter'
 
@@ -16,13 +18,27 @@ const ROOT = process.cwd()
 const PACK = join(ROOT, 'packs', 'tochka-sborki')
 
 interface ZipEntry { name: string; data: Buffer; mode: number }
-const built = buildStarter(PACK) as { archive: string; buffer: Buffer; manifest: { root: string } }
-const entries: ZipEntry[] = readZip(built.buffer)
-const rootDir = `${built.manifest.root}/`
-const files = new Map(entries.map((e) => [e.name.slice(rootDir.length), e]))
-const text = (p: string) => files.get(p)!.data.toString('utf8')
+interface Built { archive: string; buffer: Buffer; manifest: { root: string } }
 
-describe('стартер: состав архива', () => {
+function open(edition?: string) {
+  const built = buildStarter(PACK, edition) as Built
+  const entries: ZipEntry[] = readZip(built.buffer)
+  const rootDir = `${built.manifest.root}/`
+  const files = new Map(entries.map((e) => [e.name.slice(rootDir.length), e]))
+  const text = (p: string) => files.get(p)!.data.toString('utf8')
+  return { edition, built, entries, rootDir, files, text }
+}
+
+const EDITIONS = { ru: open(), en: open('en') }
+const ALL = Object.entries(EDITIONS) as [keyof typeof EDITIONS, ReturnType<typeof open>][]
+
+it('у pack\'а ровно два издания стартера: основное (RU) и en', () => {
+  expect(starterEditions(PACK)).toEqual([undefined, 'en'])
+  expect(EDITIONS.ru.built.archive).toBe('tochka-starter.zip')
+  expect(EDITIONS.en.built.archive).toBe('tochka-starter-en.zip')
+})
+
+describe.each(ALL)('стартер %s: состав архива', (loc, { entries, rootDir, files, text }) => {
   it('все записи лежат в одной корневой папке', () => {
     for (const e of entries) expect(e.name.startsWith(rootDir), e.name).toBe(true)
   })
@@ -44,10 +60,11 @@ describe('стартер: состав архива', () => {
     expect(leaked).toEqual([])
   })
 
-  it('шаблоны — те же файлы, что в LMS/tochka-sborki/my-templates (без второй копии в репо)', () => {
-    for (const name of ['agent-charter.md', 'feedback-template.md']) {
-      const src = readFileSync(join(ROOT, '..', 'my-templates', name), 'utf8').replace(/\r\n/g, '\n')
-      expect(text(`my-templates/${name}`)).toBe(src)
+  it('шаблоны — те же файлы, что в LMS/tochka-sborki/my-templates (EN — в my-templates/en/)', () => {
+    const dir = loc === 'en' ? join(ROOT, '..', 'my-templates', 'en') : join(ROOT, '..', 'my-templates')
+    for (const name of ['agent-charter.md', 'automation-recipes.md', 'feedback-template.md', 'feedback-final-jtbd.md']) {
+      const src = readFileSync(join(dir, name), 'utf8').replace(/\r\n/g, '\n')
+      expect(text(`my-templates/${name}`), name).toBe(src)
     }
   })
 
@@ -57,8 +74,34 @@ describe('стартер: состав архива', () => {
   })
 
   it('сборка детерминирована: тот же исходник → тот же архив', () => {
-    const again = buildStarter(PACK) as { buffer: Buffer }
-    expect(again.buffer.equals(built.buffer)).toBe(true)
+    const again = buildStarter(PACK, loc === 'en' ? 'en' : undefined) as Built
+    expect(again.buffer.equals(EDITIONS[loc].built.buffer)).toBe(true)
+  })
+})
+
+it('издания совпадают по составу: EN — перевод RU, а не другой стартер', () => {
+  expect([...EDITIONS.en.files.keys()]).toEqual([...EDITIONS.ru.files.keys()])
+  // Конфиг hook'а Claude Code не зависит от языка — один и тот же.
+  expect(EDITIONS.en.text('.claude/settings.json')).toBe(EDITIONS.ru.text('.claude/settings.json'))
+  expect(EDITIONS.en.text('.gitignore').split('\n').filter((l) => l && !l.startsWith('#')))
+    .toEqual(EDITIONS.ru.text('.gitignore').split('\n').filter((l) => l && !l.startsWith('#')))
+})
+
+describe('стартер en: язык', () => {
+  const CYR = /[\u0400-\u04FF]/
+  it('проверка прибора: регэксп ловит кириллицу', () => {
+    expect(CYR.test('Точка')).toBe(true)
+    expect(CYR.test('Tochka Sborki')).toBe(false)
+  })
+
+  it.each([...EDITIONS.en.files.keys()])('%s — без кириллицы', (p) => {
+    const lines = EDITIONS.en.text(p).split('\n').map((l, i) => [i + 1, l] as const).filter(([, l]) => CYR.test(l))
+    expect(lines.map(([n, l]) => `${n}: ${l}`)).toEqual([])
+  })
+
+  it('RU-издание действительно русское (иначе сверка выше ничего не значит)', () => {
+    expect(CYR.test(EDITIONS.ru.text('AGENTS.md'))).toBe(true)
+    expect(CYR.test(EDITIONS.ru.text('hooks/session-start.mjs'))).toBe(true)
   })
 })
 
@@ -82,17 +125,17 @@ const LAB_LEAKS: [string, RegExp][] = [
   ['гейтвей лаборатории', /sovrn|litellm/i],
 ]
 
-describe('стартер: нет секретов и мусора', () => {
+it('паттерны секретов вообще ловят ключ (проверка прибора на известном ответе)', () => {
+  const fake = ['sk-ant-', 'A'.repeat(24)].join('')
+  expect(SECRET_PATTERNS.some(([, re]) => re.test(`KEY=${fake}`))).toBe(true)
+  expect(LAB_LEAKS.some(([, re]) => re.test('see C:\\telo\\x'))).toBe(true)
+})
+
+describe.each(ALL)('стартер %s: нет секретов и мусора', (_loc, { files, text }) => {
   it.each([...files.keys()])('%s — без ключей и следов лаборатории', (p) => {
     const s = text(p)
     const hits = [...SECRET_PATTERNS, ...LAB_LEAKS].filter(([, re]) => re.test(s)).map(([n]) => n)
     expect(hits, `${p}: ${hits.join(', ')}`).toEqual([])
-  })
-
-  it('паттерны секретов вообще ловят ключ (проверка прибора на известном ответе)', () => {
-    const fake = ['sk-ant-', 'A'.repeat(24)].join('')
-    expect(SECRET_PATTERNS.some(([, re]) => re.test(`KEY=${fake}`))).toBe(true)
-    expect(LAB_LEAKS.some(([, re]) => re.test('see C:\\telo\\x'))).toBe(true)
   })
 
   it('нет мусора: .env, системных файлов, логов, node_modules', () => {
@@ -116,7 +159,7 @@ describe('стартер: нет секретов и мусора', () => {
   })
 })
 
-describe('стартер: один файл правил для всех агентов', () => {
+describe.each(ALL)('стартер %s: один файл правил для всех агентов', (_loc, { files, text }) => {
   it('CLAUDE.md подключает AGENTS.md импортом (работает в любой версии Claude Code)', () => {
     expect(text('CLAUDE.md').split('\n')[0]).toBe('@AGENTS.md')
   })
@@ -141,7 +184,7 @@ describe('стартер: один файл правил для всех аге�
   })
 })
 
-describe('стартер: hook начала сессии', () => {
+describe.each(ALL)('стартер %s: hook начала сессии', (loc, { files, text }) => {
   const claude = JSON.parse(text('.claude/settings.json'))
   const codex = JSON.parse(text('.codex/hooks.json'))
 
@@ -158,7 +201,7 @@ describe('стартер: hook начала сессии', () => {
     expect(h.command).toBe('node hooks/session-start.mjs')
   })
 
-  it('скрипт из распакованного архива печатает STATE.md и TODO.md', () => {
+  it('скрипт из распакованного архива печатает STATE.md и TODO.md, но не AGENTS.md (вторая копия)', () => {
     const dir = mkdtempSync(join(tmpdir(), 'starter-'))
     try {
       for (const [p, e] of files) {
@@ -169,7 +212,9 @@ describe('стартер: hook начала сессии', () => {
       const out = execFileSync(process.execPath, [join(dir, 'hooks', 'session-start.mjs')], { cwd: tmpdir(), encoding: 'utf8', timeout: 10_000 })
       expect(out).toContain('===== STATE.md =====')
       expect(out).toContain('===== TODO.md =====')
-      expect(out).toContain('# Состояние проекта')
+      expect(out).not.toContain('===== AGENTS.md =====')
+      expect(out).toContain(loc === 'en' ? '# Project state' : '# Состояние проекта')
+      expect(out).toContain(loc === 'en' ? 'Project memory (session-start hook)' : 'Память проекта (hook начала сессии)')
     } finally {
       rmSync(dir, { recursive: true, force: true })
     }
@@ -179,16 +224,20 @@ describe('стартер: hook начала сессии', () => {
 describe('страница «Стартер»', () => {
   const s = STARTER!
 
-  it('ссылка на скачивание совпадает с собираемым архивом', () => {
-    expect(s.archive).toBe(`/downloads/${built.archive}`)
-    expect(s.folder).toBe(built.manifest.root)
+  it('ссылка на скачивание в каждой локали совпадает со своим архивом', () => {
+    expect(s.archive.ru).toBe(`/downloads/${EDITIONS.ru.built.archive}`)
+    expect(s.archive.en).toBe(`/downloads/${EDITIONS.en.built.archive}`)
+    expect(s.folder).toBe(EDITIONS.ru.built.manifest.root)
+    expect(s.folder).toBe(EDITIONS.en.built.manifest.root)
   })
 
   it('каталог архива не совпадает с маршрутом страницы (иначе export затрёт файл)', () => {
     // Случай сборки 2026-09-28: архив в public/starter/ рядом со страницей /starter/ —
     // next export положил туда index.html, а zip в out/ не доехал. Ни одной ошибки.
-    const dir = s.archive.split('/')[1]
-    expect(existsSync(join(ROOT, 'app', dir)), `app/${dir} — маршрут`).toBe(false)
+    for (const href of [s.archive.ru, s.archive.en]) {
+      const dir = href.split('/')[1]
+      expect(existsSync(join(ROOT, 'app', dir)), `app/${dir} — маршрут`).toBe(false)
+    }
   })
 
   it('владение public/downloads/ объявлено pack\'ом (prune-public не вырежет архив)', () => {
@@ -248,5 +297,29 @@ describe('страница «Стартер»', () => {
       expect(lesson('en', p), `en/${p}`).toContain('](/en/starter/)')
     }
     expect(readFileSync(join(PACK, 'materials.ts'), 'utf8')).toContain("href: '/starter/'")
+  })
+})
+
+// Одна схема файлов правил для стартера и уроков (рисерч docs/superpowers/research/
+// 2026-09-28-agent-rules-files-best-practice.md): AGENTS.md — контекст и правила,
+// CLAUDE.md — строка @AGENTS.md. Уроки не должны снова учить делить их на «контекст/инструкции».
+describe('уроки учат той же схеме, что стартер', () => {
+  const read = (loc: string, p: string) => readFileSync(join(PACK, 'content', loc, p), 'utf8')
+  const UNITS = ['02-setup-guide/u3-first-project.mdx', '05-context-memory/u3-memory.mdx']
+
+  it.each(['ru', 'en'])('%s: 02/u3 и 05/u3 создают CLAUDE.md строкой @AGENTS.md', (loc) => {
+    for (const p of UNITS) {
+      const s = read(loc, p)
+      expect(s, p).toContain("echo '@AGENTS.md' > CLAUDE.md")
+      expect(s, p).toContain("Set-Content CLAUDE.md '@AGENTS.md'")
+      // Пустой CLAUDE.md рядом с AGENTS.md выключил бы чтение AGENTS.md в Claude Code.
+      expect(s, p).not.toMatch(/touch CLAUDE\.md|ni CLAUDE\.md/)
+    }
+  })
+
+  it.each(['ru', 'en'])('%s: 05/u3 знает STATE.md и не делит «CLAUDE.md — контекст / AGENTS.md — инструкции»', (loc) => {
+    const s = read(loc, '05-context-memory/u3-memory.mdx')
+    expect(s).toMatch(/### STATE\.md/)
+    expect(s).not.toMatch(/### CLAUDE\.md/)
   })
 })

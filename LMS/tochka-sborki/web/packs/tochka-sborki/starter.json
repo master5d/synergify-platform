@@ -15,5 +15,19 @@
       "files": ["agent-charter.md", "automation-recipes.md", "feedback-template.md", "feedback-final-jtbd.md"]
     }
   ],
-  "executable": ["hooks/session-start.mjs"]
+  "executable": ["hooks/session-start.mjs"],
+  "editions": {
+    "en": {
+      "_comment": "Английское издание: те же файлы в starter-en/, шаблоны — EN-копии рядом с RU-оригиналами (LMS/tochka-sborki/my-templates/en/). Отдаётся со страницы /en/starter.",
+      "archive": "tochka-starter-en.zip",
+      "source": "starter-en",
+      "include": [
+        {
+          "from": "../../../my-templates/en",
+          "to": "my-templates",
+          "files": ["agent-charter.md", "automation-recipes.md", "feedback-template.md", "feedback-final-jtbd.md"]
+        }
+      ]
+    }
+  }
 }

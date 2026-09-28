@@ -10,7 +10,8 @@
 import type { StarterData } from '@/lib/starter/types'
 
 export const STARTER: StarterData | null = {
-  archive: '/downloads/tochka-starter.zip',
+  // RU-страница отдаёт RU-архив, /en/starter — английское издание (starter.json → editions.en).
+  archive: { ru: '/downloads/tochka-starter.zip', en: '/downloads/tochka-starter-en.zip' },
   folder: 'tochka-starter',
   eyebrow: { ru: 'стартер студента', en: 'student starter' },
   heading: { ru: 'Стартер: проект для курса с любым агентом', en: 'Starter: a course project for any agent' },
@@ -59,8 +60,8 @@ export const STARTER: StarterData | null = {
       command: 'claude',
       open: { ru: 'В терминале перейди в папку и запусти claude. При первом запуске он спросит, доверяешь ли ты папке.', en: 'In the terminal, go to the folder and run claude. On first launch it asks whether you trust the folder.' },
       reads: {
-        ru: 'CLAUDE.md. В нём одна строка @AGENTS.md — она подключает общий файл правил целиком.',
-        en: 'CLAUDE.md. Its single line @AGENTS.md imports the shared rules file in full.',
+        ru: 'CLAUDE.md. В нём одна строка @AGENTS.md — она подключает общий файл правил целиком. Новые версии читают AGENTS.md и сами, но только когда рядом нет CLAUDE.md; импорт работает в любой версии.',
+        en: 'CLAUDE.md. Its single line @AGENTS.md imports the shared rules file in full. Newer versions read AGENTS.md on their own, but only when there is no CLAUDE.md next to it; the import works in any version.',
       },
       hook: {
         ru: 'Есть: .claude/settings.json запускает hook начала сессии, и агент сразу видит STATE.md и TODO.md.',
@@ -85,8 +86,8 @@ export const STARTER: StarterData | null = {
         en: 'Yes: .codex/hooks.json. Codex runs it only after you trust the project and approve the hook with /hooks. Until then the “read STATE.md” rule in AGENTS.md does the same job.',
       },
       sources: [
-        { label: 'Codex — AGENTS.md', href: 'https://developers.openai.com/codex/guides/agents-md' },
-        { label: 'Codex — hooks', href: 'https://developers.openai.com/codex/hooks' },
+        { label: 'Codex — AGENTS.md', href: 'https://learn.chatgpt.com/docs/agent-configuration/agents-md' },
+        { label: 'Codex — hooks', href: 'https://learn.chatgpt.com/docs/hooks' },
       ],
     },
     {
@@ -139,8 +140,8 @@ export const STARTER: StarterData | null = {
         en: 'A hook is a command that runs on your computer. Before approving it, open hooks/session-start.mjs: it only reads two files and prints them. It needs Node.js.',
       },
       {
-        ru: 'В уроках часто написано «CLAUDE.md». В стартере правила живут в AGENTS.md: где урок говорит «добавь в CLAUDE.md», добавляй в AGENTS.md — так правило увидит любой агент.',
-        en: 'Lessons often say “CLAUDE.md”. In the starter the rules live in AGENTS.md: where a lesson says “add to CLAUDE.md”, add it to AGENTS.md so every agent sees it.',
+        ru: 'Схема та же, что в уроках курса: контекст и правила живут в AGENTS.md, CLAUDE.md только подключает его. Так советует документация Claude Code, и так правило увидит любой агент. Личное для всех проектов клади в глобальный файл своего агента (~/.claude/CLAUDE.md), а не сюда.',
+        en: 'The same scheme as in the course lessons: context and rules live in AGENTS.md, CLAUDE.md only imports it. This is what the Claude Code docs recommend, and every agent sees the rule. Personal preferences for all projects go into your agent’s global file (~/.claude/CLAUDE.md), not here.',
       },
       {
         ru: 'Что агент читает при старте, мы взяли из его официальной документации. Агенты обновляются: если твой ведёт себя иначе, первая команда всё равно просит его прочитать файлы явно.',

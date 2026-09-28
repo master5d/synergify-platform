@@ -21,8 +21,8 @@ export interface StarterAgent {
 export interface StarterFile { path: string; what: Bi; lesson?: string }
 
 export interface StarterData {
-  /** Путь архива в public/ — обязан совпадать с starter.json (гвард в тесте). */
-  archive: string
+  /** Путь архива в public/ по локалям — обязан совпадать с starter.json и его editions (гвард в тесте). */
+  archive: Bi
   /** Корневая папка внутри архива. */
   folder: string
   eyebrow: Bi

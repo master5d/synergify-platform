@@ -112,7 +112,7 @@ cat error.log | claude -p 'explain the error'
 | Claude is looping, getting confused | `/clear` — reset |
 | Context &gt;85% + new task | `/clear` — no question |
 
-> 💡 CLAUDE.md is **auto-reloaded** after /compact and auto-compact — instructions aren't lost.
+> 💡 CLAUDE.md (and the `@AGENTS.md` it imports) is **auto-reloaded** after /compact and auto-compact — instructions aren't lost.
 
 ---
 
@@ -271,15 +271,16 @@ Or the `Alt+T` key. Useful for: architectural decisions, tough bugs, ambiguous s
 # 1. Create and enter a project
 mkdir my-project && cd my-project
 
-# 2. Create context files
-touch CLAUDE.md TODO.md AGENTS.md
+# 2. Create memory files
+touch AGENTS.md TODO.md STATE.md
+echo '@AGENTS.md' > CLAUDE.md
 
-# 3. Initialize CLAUDE.md
+# 3. Fill in AGENTS.md with the agent
 claude
-/init       # ← inside Claude Code
+# "Study the project and fill in AGENTS.md: stack, how to run, rules"
 
 # 4. Or fill in manually:
-# Stack, how to run, agent instructions
+# Stack, how to run, agent rules
 
 # 5. Give it the first task
 ```
@@ -292,20 +293,21 @@ claude
 # 1. Create and enter a project
 mkdir my-project; cd my-project
 
-# 2. Create context files (PowerShell)
-ni CLAUDE.md, TODO.md, AGENTS.md -ItemType File
+# 2. Create memory files (PowerShell)
+ni AGENTS.md, TODO.md, STATE.md -ItemType File
+Set-Content CLAUDE.md '@AGENTS.md'
 
-# 3. Initialize CLAUDE.md
+# 3. Fill in AGENTS.md with the agent
 claude
-/init       # ← inside Claude Code
+# "Study the project and fill in AGENTS.md: stack, how to run, rules"
 
 # 4. Or fill in manually:
-# Stack, how to run, agent instructions
+# Stack, how to run, agent rules
 
 # 5. Give it the first task
 ```
 
-> 💡 Alternative via WSL/Git Bash: `mkdir my-project && cd my-project && touch CLAUDE.md TODO.md AGENTS.md`
+> 💡 Alternative via WSL/Git Bash: `mkdir my-project && cd my-project && touch AGENTS.md TODO.md STATE.md && echo '@AGENTS.md' > CLAUDE.md`
 
 </OsBlock>
 
@@ -365,28 +367,29 @@ You are — [description + expertise]
 
 ## 📄 Required project files
 
-### CLAUDE.md
+### AGENTS.md
 
-**Quick start:**
-```bash
-/init  # Auto-generates CLAUDE.md from an existing project
-```
+One file of project context and rules for any agent: Codex, Cursor, Copilot, Antigravity and Hermes read it on their own.
 
 **Where to put it:**
-- `./CLAUDE.md` — project (committed to git)
-- `~/.claude/CLAUDE.md` — personal (all projects)
+- `./AGENTS.md` — project (committed to git)
+- `./CLAUDE.md` — one line, `@AGENTS.md`: that is how Claude Code reads it
+- `~/.claude/CLAUDE.md` — personal (all projects, Claude Code only)
 
 **Limit:** ~200 lines (important for context)
 
 **Minimal structure:**
 ```markdown
-# Project Context
+# AGENTS.md
 ## My role
 ## Project
 ## Stack
 ## How to run
-## Instructions for Claude Code
+## Rules
+## What to avoid
 ```
+
+`/init` in Claude Code generates a CLAUDE.md from an existing project. Move what's useful into AGENTS.md and leave `@AGENTS.md` in CLAUDE.md.
 
 ### TODO.md
 ```markdown
@@ -398,14 +401,13 @@ You are — [description + expertise]
 ## ✅ DONE
 ```
 
-### AGENTS.md
+### STATE.md
 ```markdown
-# Agent Instructions
-## For any work
-## For /explore
-## For /plan
-## For /code
-## What to avoid
+# Project state
+## Where we are
+## Done
+## Blockers
+## Next step
 ```
 
 ---
@@ -415,7 +417,7 @@ You are — [description + expertise]
 | Mistake | Fix |
 | --- | --- |
 | Context overflowing | Only feed relevant files |
-| Agent asks everything | Add the info to CLAUDE.md |
+| Agent asks everything | Add the info to AGENTS.md |
 | Wrong result | Specify what exactly is off, iterate |
 | Distractors | Remove extra files from context |
 | "Lost in the Middle" | Important stuff at the start or end, not middle |

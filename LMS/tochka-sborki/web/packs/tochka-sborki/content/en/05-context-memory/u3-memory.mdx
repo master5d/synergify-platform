@@ -5,7 +5,7 @@ module: 5
 duration: "12 min"
 ---
 
-> 💡 **Not just Claude Code.** `CLAUDE.md` is one implementation of the "persistent context file" pattern. In Aider it's `.aider.conf.yml` + `CONVENTIONS.md`, in Hermes — skills in `.md` files with a YAML header, in Cline — `.clinerules`. The concept is universal: context lives in a file, the agent reads it at session start.
+> 💡 **Not just Claude Code.** A rules file is the "persistent context file" pattern, and it has a shared standard: `AGENTS.md`. Codex, Cursor, GitHub Copilot, Antigravity, Hermes and other agents read it on their own. Claude Code has its own `CLAUDE.md`, so that file holds one line, `@AGENTS.md`, which imports the shared file. The concept is universal: context lives in a file, the agent reads it at session start.
 
 <Phase type="activation">
 
@@ -21,7 +21,7 @@ Run your work with the agent through your head: what from your experience has al
 
 Explaining the same thing every time burns time and tokens.
 
-But there's the opposite problem too: a CLAUDE.md with a thousand lines is worse than a short one — up to ~200 lines. The longer it is, the worse the agent follows instructions.
+But there's the opposite problem too: an AGENTS.md with a thousand lines is worse than a short one — up to ~200 lines. The longer it is, the worse the agent follows instructions.
 
 Don't picture this as a short summary — picture yourself as **a weaver at the loom**: the warp threads are pulled taut and precise — that tension is what holds the whole fabric. Add too many threads at once and the cloth sags, the loops tangle.
 
@@ -33,10 +33,12 @@ Notice your memory system: where is the tension just right, and where is it alre
 
 ## Memory files: three you write, one Claude writes
 
-### CLAUDE.md — project context (the main one)
+### AGENTS.md — project context and rules (the main one)
+
+One file for everything the agent must know in every session: who you are, what the project is, how to work and what not to do. Any agent reads it. Claude Code imports it through a `CLAUDE.md` with the single line `@AGENTS.md`.
 
 ```markdown
-# Project Context
+# AGENTS.md
 
 ## My role
 [Profile, expertise]
@@ -59,9 +61,18 @@ npm install && npm run dev
 
 ## What I decide myself
 - Architecture, final review
+
+## Rules
+- Write tests alongside code
+- Show a plan before a big change
+
+## What to avoid
+- Don't change architecture without sign-off
 ```
 
 **Limit: up to ~200 lines.** More than that and instruction-following degrades.
+
+In a big project you can put a separate `AGENTS.md` into a subfolder: the agent picks it up when it works there. For a first project one file in the root is enough.
 
 ### TODO.md — current tasks
 
@@ -76,18 +87,22 @@ npm install && npm run dev
 - [x] Task 3
 ```
 
-### AGENTS.md — instructions for the agent
+### STATE.md — where you stopped
+
+A new session starts from a blank slate. STATE.md gives it the picture back in a minute. Update it at the end of a session, or ask the agent: "save the state".
 
 ```markdown
-## For any task
-- Use TypeScript
-- Write tests alongside code
+## Where we are
+[What we are working on]
 
-## For /explore
-- Focus on architecture
+## Done
+- …
 
-## What to avoid
-- Don't change architecture without sign-off
+## Blockers
+- …
+
+## Next step
+[One action]
 ```
 
 ### MEMORY.md — Claude's auto-memory
@@ -98,7 +113,7 @@ What it saves: patterns, fixes, project quirks.
 Where it lives: `~/.claude/projects/<project>/memory/MEMORY.md` — local only.
 Management: `/memory` — view and edit.
 
-The boundary is simple: Claude decides what goes into MEMORY.md. A rule that must hold for sure (say, after you fixed an agent mistake) you write yourself — in AGENTS.md.
+The boundary is simple: Claude decides what goes into MEMORY.md, and only Claude on your computer sees that memory. A rule that must hold for sure (say, after you fixed an agent mistake) you write yourself — in AGENTS.md.
 
 <SelfCheck id="c6"/>
 
@@ -117,7 +132,8 @@ Create your memory system:
 ```bash
 mkdir -p ~/my-ai-project
 cd ~/my-ai-project
-touch CLAUDE.md TODO.md AGENTS.md
+touch AGENTS.md TODO.md STATE.md
+echo '@AGENTS.md' > CLAUDE.md
 ```
 
 </OsBlock>
@@ -127,12 +143,13 @@ touch CLAUDE.md TODO.md AGENTS.md
 ```powershell
 New-Item -ItemType Directory $HOME\my-ai-project -Force
 cd $HOME\my-ai-project
-ni CLAUDE.md, TODO.md, AGENTS.md -ItemType File
+ni AGENTS.md, TODO.md, STATE.md -ItemType File
+Set-Content CLAUDE.md '@AGENTS.md'
 ```
 
 </OsBlock>
 
-Fill in CLAUDE.md using the template above — use a real project or a task from your work.
+Fill in AGENTS.md using the template above — use a real project or a task from your work.
 
 Add at least 3 tasks to TODO.md that you actually have right now.
 

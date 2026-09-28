@@ -19,7 +19,7 @@ duration: "12 мин"
 
 Вспомни, как ты давал имя чему-то важному — проекту, питомцу, персонажу в игре. В момент, когда имя произнесено, — оно начинает определять форму.
 
-Не думай об этом как «я создал CLAUDE.md». Представь, как **называют новорождённого**: имя ещё не отражает ничего, что будет, — но уже задаёт характер, задаёт ожидание, задаёт вектор.
+Не думай об этом как «я создал AGENTS.md». Представь, как **называют новорождённого**: имя ещё не отражает ничего, что будет, — но уже задаёт характер, задаёт ожидание, задаёт вектор.
 
 Прокрути в голове: что ты сейчас «называешь»? **Какое имя даёшь своему проекту — и что это имя говорит агенту о том, кто ты и чего хочешь?**
 
@@ -27,14 +27,16 @@ duration: "12 мин"
 
 <Phase type="concept">
 
-## CLAUDE.md — память агента для проекта
+## AGENTS.md — память агента о проекте
 
-CLAUDE.md — это Markdown-файл, который Claude Code читает автоматически при каждом запуске в папке.
+AGENTS.md — это Markdown-файл с правилами и контекстом проекта. Это общий стандарт: Codex, Cursor, GitHub Copilot, Antigravity, Hermes и другие агенты читают его сами при запуске в папке.
+
+У Claude Code свой файл — `CLAUDE.md`. Чтобы не вести два файла, положи в `CLAUDE.md` одну строку `@AGENTS.md`: она подключает `AGENTS.md` целиком. Так советует документация Claude Code. Правила пишешь в одном месте, и видит их любой агент.
 
 ### Минимальный шаблон
 
 ```markdown
-# Project Context
+# AGENTS.md
 
 ## Моя роль
 [Кто я, что я знаю, мой опыт]
@@ -53,7 +55,7 @@ CLAUDE.md — это Markdown-файл, который Claude Code читает 
 ## Как запустить
 [Команды для старта]
 
-## Что делегировать Claude
+## Что делегировать агенту
 - Написание кода по ТЗ
 - Тесты
 - Документирование
@@ -63,7 +65,7 @@ CLAUDE.md — это Markdown-файл, который Claude Code читает 
 - Финальная проверка качества
 ```
 
-> 💡 **Готовый вариант.** [Стартер студента](/starter/) — это такой проект, уже собранный: `AGENTS.md` (правила для любого агента) + `CLAUDE.md` со строкой `@AGENTS.md`, `TODO.md`, память между сессиями, `my-experiments/`, шаблоны. Работает с Claude Code, Codex, Antigravity и Hermes. Если берёшь его, правила из этого урока пиши в `AGENTS.md`. Собрать папку руками по шагам ниже — тоже хороший путь: так видно, из чего она состоит.
+> 💡 **Готовый вариант.** [Стартер студента](/starter/) — это такой проект, уже собранный: `AGENTS.md` + `CLAUDE.md` со строкой `@AGENTS.md`, `TODO.md`, память между сессиями, `my-experiments/`, шаблоны. Работает с Claude Code, Codex, Antigravity и Hermes. Собрать папку руками по шагам ниже — тоже хороший путь: так видно, из чего она состоит.
 
 ### Создание проекта
 
@@ -75,7 +77,8 @@ CLAUDE.md — это Markdown-файл, который Claude Code читает 
 mkdir -p ~/my-ai-project
 cd ~/my-ai-project
 git init
-touch CLAUDE.md
+touch AGENTS.md
+echo '@AGENTS.md' > CLAUDE.md
 mkdir -p src my-experiments
 ```
 
@@ -87,17 +90,19 @@ mkdir -p src my-experiments
 New-Item -ItemType Directory $HOME\my-ai-project -Force
 cd $HOME\my-ai-project
 git init
-ni CLAUDE.md -ItemType File
+ni AGENTS.md -ItemType File
+Set-Content CLAUDE.md '@AGENTS.md'
 New-Item -ItemType Directory src, my-experiments -Force
 ```
 
 </OsBlock>
 
-### Советы по CLAUDE.md
+### Советы по AGENTS.md
 
 - Держи до **200 строк** — длиннее снижает качество следования инструкциям
 - Будь конкретным: `«Используй 2-пробельный отступ»` лучше чем `«форматируй правильно»`
 - Обновляй когда меняется архитектура или стек
+- `CLAUDE.md` не заполняй: в нём только строка `@AGENTS.md`. Что нужно одному Claude Code, пиши ниже этой строки
 
 <SelfCheck id="c6"/>
 
@@ -119,7 +124,8 @@ New-Item -ItemType Directory src, my-experiments -Force
 mkdir -p ~/my-ai-project
 cd ~/my-ai-project
 git init
-touch CLAUDE.md
+touch AGENTS.md
+echo '@AGENTS.md' > CLAUDE.md
 mkdir -p my-experiments
 ```
 
@@ -131,13 +137,14 @@ mkdir -p my-experiments
 New-Item -ItemType Directory $HOME\my-ai-project -Force
 cd $HOME\my-ai-project
 git init
-ni CLAUDE.md -ItemType File
+ni AGENTS.md -ItemType File
+Set-Content CLAUDE.md '@AGENTS.md'
 New-Item -ItemType Directory my-experiments -Force
 ```
 
 </OsBlock>
 
-Заполни CLAUDE.md по шаблону — напиши про реальный проект или задачу, над которой хочешь работать.
+Заполни AGENTS.md по шаблону — напиши про реальный проект или задачу, над которой хочешь работать.
 
 Затем запусти Claude Code в этой папке:
 
@@ -145,7 +152,7 @@ New-Item -ItemType Directory my-experiments -Force
 claude
 ```
 
-Задай агенту: `«Прочитай CLAUDE.md и скажи, что ты теперь знаешь о проекте»`
+Задай агенту: `«Прочитай правила проекта и скажи, что ты теперь знаешь о проекте»`
 
 Сохрани результат в `my-experiments/u3-claude-reads-context.md`
 

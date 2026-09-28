@@ -8,6 +8,10 @@
 // фиксированная дата, сортировка, LF в тексте: тот же исходник → тот же архив.
 // Pack без starter.json стартера не получает.
 //
+// Издания (`editions` в starter.json): тот же стартер на другом языке — свой каталог
+// исходника, свой архив и свой include шаблонов; остальные поля (root, rename, executable)
+// наследуются от основного описания. Основное описание — издание по умолчанию (RU).
+//
 // Использование: node scripts/build-starter.mjs   (npm prebuild/pretest; npm run starter)
 import { readFileSync, readdirSync, statSync, existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { join, dirname, resolve, relative, sep } from 'node:path'
@@ -25,6 +29,23 @@ export function readStarterManifest(packDir) {
   const p = join(packDir, 'starter.json')
   if (!existsSync(p)) return null
   return JSON.parse(readFileSync(p, 'utf8'))
+}
+
+/** Описание издания: основное (edition не задан) или `editions[edition]` поверх основного. */
+export function editionManifest(base, edition) {
+  if (!base) return null
+  const { editions, _comment, ...main } = base
+  if (!edition) return main
+  const over = editions?.[edition]
+  if (!over) throw new Error(`build-starter: в starter.json нет издания «${edition}»`)
+  return { ...main, ...over }
+}
+
+/** Имена изданий pack'а: [undefined (основное), ...ключи editions]. */
+export function starterEditions(packDir) {
+  const base = readStarterManifest(packDir)
+  if (!base) return []
+  return [undefined, ...Object.keys(base.editions ?? {})]
 }
 
 function walk(dir) {
@@ -48,7 +69,7 @@ function renamed(rel, rename) {
  * Список файлов стартера: [{ path, data }] — path внутри архива (без корневой папки),
  * data — Buffer. Текст нормализуется в LF и проверяется на BOM.
  */
-export function collectStarterFiles(packDir, manifest = readStarterManifest(packDir)) {
+export function collectStarterFiles(packDir, manifest = editionManifest(readStarterManifest(packDir))) {
   if (!manifest) throw new Error(`build-starter: в ${packDir} нет starter.json`)
   const files = new Map()
   const add = (path, abs) => {
@@ -187,9 +208,9 @@ export function readZip(buf) {
   return out
 }
 
-/** Полная сборка: pack → { archive, buffer, files }. */
-export function buildStarter(packDir) {
-  const manifest = readStarterManifest(packDir)
+/** Полная сборка: pack (+ издание) → { archive, buffer, files }. */
+export function buildStarter(packDir, edition) {
+  const manifest = editionManifest(readStarterManifest(packDir), edition)
   if (!manifest) return null
   const files = collectStarterFiles(packDir, manifest)
   const exec = new Set(manifest.executable ?? [])
@@ -207,8 +228,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const slugs = readdirSync(packsDir).filter((n) => !n.startsWith('_') && statSync(join(packsDir, n)).isDirectory())
   let built = 0
   const seen = new Map()
-  for (const slug of slugs) {
-    const res = buildStarter(join(packsDir, slug))
+  for (const slug of slugs) for (const edition of starterEditions(join(packsDir, slug))) {
+    const res = buildStarter(join(packsDir, slug), edition)
     if (!res) continue
     if (seen.has(res.archive)) {
       console.error(`build-starter: архив ${res.archive} объявлен двумя pack'ами (${seen.get(res.archive)}, ${slug})`)
@@ -219,7 +240,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     mkdirSync(outDir, { recursive: true })
     writeFileSync(join(outDir, res.archive), res.buffer)
     built++
-    console.log(`build-starter: ${slug} → public/downloads/${res.archive} (${res.files.length} файлов, ${res.buffer.length} байт)`)
+    console.log(`build-starter: ${slug}${edition ? `/${edition}` : ''} → public/downloads/${res.archive} (${res.files.length} файлов, ${res.buffer.length} байт)`)
   }
   if (!built) console.log("build-starter: ни у одного pack'а нет starter.json — стартер не собирается")
 }

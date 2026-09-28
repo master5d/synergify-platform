@@ -37,7 +37,7 @@ Don't think of this as "the finish line." Picture a chess grandmaster whose open
 You can assemble a full specialized agent from:
 
 ```
-CLAUDE.md          ← context: who you are and what you do
+AGENTS.md          ← context: who you are and what you do
 + MCP server       ← access to needed tools (GitHub, Notion, browser)
 + Skill            ← reusable scenario for your task
 + Hook             ← automation after completion
@@ -46,7 +46,7 @@ CLAUDE.md          ← context: who you are and what you do
 ### Example: Meeting Intelligence clone
 
 ```
-CLAUDE.md: "You are a meeting assistant. Priority: structured outputs"
+AGENTS.md: "You are a meeting assistant. Priority: structured outputs"
 MCP: Google Calendar (to fetch meetings)
 Skill: /meeting-summary (transcript → decisions + tasks)
 Hook: SessionEnd → send summary to Slack
@@ -55,7 +55,7 @@ Hook: SessionEnd → send summary to Slack
 ### Example: Code Review clone
 
 ```
-CLAUDE.md: "You are a senior developer. Focus: security and readability"
+AGENTS.md: "You are a senior developer. Focus: security and readability"
 MCP: GitHub (sees PRs and files)
 Skill: /code-review (analyze diff → find issues)
 Hook: Stop → auto-add a comment to the PR
@@ -81,7 +81,7 @@ Pick one task from your list (u1-missing-tools.md or u3-my-clone.md from module 
 
 Assemble a minimal clone for it:
 
-1. Update CLAUDE.md with context for this task
+1. Update AGENTS.md with context for this task
 2. Connect one MCP server (if needed)
 3. Create one Skill (reusable prompt)
 4. Optional: add a Hook for notifications

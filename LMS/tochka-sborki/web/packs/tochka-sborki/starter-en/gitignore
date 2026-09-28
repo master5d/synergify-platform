@@ -1,0 +1,24 @@
+# Keys and secrets never go to git. A template without values is fine: .env.example
+.env*
+!.env.example
+
+# Personal agent settings and notes (everyone has their own; the shared repository doesn't need them)
+.claude/settings.local.json
+CLAUDE.local.md
+AGENTS.override.md
+
+# Dependencies and builds
+node_modules/
+dist/
+build/
+.next/
+out/
+__pycache__/
+.venv/
+
+# OS and editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.tmp

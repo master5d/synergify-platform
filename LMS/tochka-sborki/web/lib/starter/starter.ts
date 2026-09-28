@@ -69,7 +69,7 @@ export function getStarter(locale: Locale): StarterVM | null {
   const s = STARTER
   const labels = Object.fromEntries(Object.entries(LABELS).map(([k, v]) => [k, v[locale]])) as StarterVM['labels']
   return {
-    archive: s.archive,
+    archive: s.archive[locale],
     folder: s.folder,
     eyebrow: s.eyebrow[locale],
     heading: s.heading[locale],

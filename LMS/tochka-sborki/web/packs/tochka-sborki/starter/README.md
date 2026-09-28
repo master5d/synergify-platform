@@ -41,9 +41,8 @@ Antigravity, Hermes или другим, который читает `AGENTS.md`
 | `.codex/hooks.json` | Подключает этот же hook в Codex | 07/u3 |
 | `.gitignore` | Не пускает в git ключи (`.env`), личные настройки агента и мусор | 07/u6 |
 
-В уроках курса часто написано «CLAUDE.md». В стартере все правила живут в `AGENTS.md`, а
-`CLAUDE.md` только подключает его. Где урок говорит «добавь в CLAUDE.md» — добавляй в `AGENTS.md`:
-так правило увидит любой агент, а не только Claude Code.
+Так же устроен проект в уроках курса (02/u3, 05/u3): контекст и правила живут в `AGENTS.md`, а
+`CLAUDE.md` только подключает его. Правило, записанное в `AGENTS.md`, увидит любой агент.
 
 ## Что прочитает твой агент при старте
 
@@ -51,7 +50,7 @@ Antigravity, Hermes или другим, который читает `AGENTS.md`
 
 | Агент | Файл правил | Hook при старте сессии |
 |-------|-------------|------------------------|
-| **Claude Code** | `CLAUDE.md`, а через строку `@AGENTS.md` — и `AGENTS.md` | Да: `.claude/settings.json` → `SessionStart`. При первом запуске Claude Code спросит, доверяешь ли ты этой папке |
+| **Claude Code** | `CLAUDE.md`, а через строку `@AGENTS.md` — и `AGENTS.md`. Новые версии читают `AGENTS.md` и сами, но только если рядом нет `CLAUDE.md`; импорт работает в любой версии | Да: `.claude/settings.json` → `SessionStart`. При первом запуске Claude Code спросит, доверяешь ли ты этой папке |
 | **Codex** | `AGENTS.md` (ищет от корня git-репозитория до текущей папки) | Да: `.codex/hooks.json` → `SessionStart`. Codex запустит hook только после того, как ты доверишь проект и одобришь hook командой `/hooks` |
 | **Antigravity** | `AGENTS.md` (читает его как правила workspace) | Стартер на hooks Antigravity не рассчитывает |
 | **Hermes** | `AGENTS.md` (из `.hermes.md`, `AGENTS.md`, `CLAUDE.md` берёт первый найденный) | Нет: hooks Hermes настраиваются в `~/.hermes/`, не в проекте |
@@ -66,8 +65,8 @@ Antigravity, Hermes или другим, который читает `AGENTS.md`
 Источники:
 - Claude Code — память и `AGENTS.md`: https://code.claude.com/docs/en/memory
 - Claude Code — hooks: https://code.claude.com/docs/en/hooks
-- Codex — `AGENTS.md`: https://developers.openai.com/codex/guides/agents-md
-- Codex — hooks: https://developers.openai.com/codex/hooks
+- Codex — `AGENTS.md`: https://learn.chatgpt.com/docs/agent-configuration/agents-md
+- Codex — hooks: https://learn.chatgpt.com/docs/hooks
 - Antigravity — rules: https://www.antigravity.google/docs/rules
 - Hermes — context files: https://hermes-agent.nousresearch.com/docs/user-guide/features/context-files
 
@@ -80,12 +79,7 @@ Antigravity, Hermes или другим, который читает `AGENTS.md`
 
 ---
 
-## In English
+## English version
 
-A project skeleton for the Tochka Sborki course that works with any agent that reads `AGENTS.md`.
-Unzip it, run `git init` and start your agent (`claude`, `codex`, `hermes`, or open the folder in
-Antigravity) from the folder root. First prompt: *"Read the project rules file and STATE.md. Tell me
-what you now know about the project and ask me three questions to fill in AGENTS.md."*
-`AGENTS.md` is the single rules file; `CLAUDE.md` only imports it with `@AGENTS.md`. The session-start
-hook is wired for Claude Code (`.claude/settings.json`) and Codex (`.codex/hooks.json`, needs `/hooks`
-approval); it needs Node.js. No keys, no global config changes.
+The English edition of this starter is on the course site, page `/en/starter`,
+archive `tochka-starter-en.zip`.
