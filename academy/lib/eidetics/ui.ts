@@ -11,7 +11,9 @@ export const EIDETICS_UI = {
     trainersLabel: 'тренажёры',
     progressLabel: 'твой замер',
     badge: 'готовится',
-    intro: 'Тренажёры ниже уже работают. Уроки ещё пишутся — вот структура, которую они примут.',
+    draftBadge: 'черновик',
+    lessonEyebrow: 'эйдетика · урок',
+    intro: 'Тренажёры ниже уже работают. Уроки — черновик на вычитке: текст ещё может меняться.',
     honestLabel: 'честно',
     honest: [
       'Метод локусов проверен: в исследованиях новички после нескольких недель тренировки запоминали заметно больше, и эффект держался месяцами (Dresler 2017, Wagner 2021).',
@@ -35,7 +37,9 @@ export const EIDETICS_UI = {
     trainersLabel: 'trainers',
     progressLabel: 'your measurements',
     badge: 'in preparation',
-    intro: 'The trainers below work right now. The lessons are still being written — here is the shape they will take.',
+    draftBadge: 'draft',
+    lessonEyebrow: 'eidetics · lesson',
+    intro: 'The trainers below work right now. The lessons are a draft under review: the text may still change.',
     honestLabel: 'honestly',
     honest: [
       'The method of loci is well tested: in studies, newcomers remembered markedly more after a few weeks of training, and the effect held for months (Dresler 2017, Wagner 2021).',

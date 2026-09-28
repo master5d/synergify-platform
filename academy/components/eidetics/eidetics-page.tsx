@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import type { Locale } from '../../lib/dictionaries'
 import { resolveEideticsCourse } from '../../lib/eidetics/course'
+import { getEideticsProse } from '../../lib/eidetics/lessons'
 import { EIDETICS_UI } from '../../lib/eidetics/ui'
 import { EideticsProgress } from './eidetics-progress'
 
@@ -63,10 +64,17 @@ export function EideticsPage({ locale }: { locale: Locale }) {
             </span>
             <div>
               <h3 style={{ margin: '0 0 0.4rem', lineHeight: 1.35 }}>
-                {/* Страниц уроков пока нет: проза пишется владельцем (lessons.test.ts держит это честным). */}
-                <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-base)', fontWeight: 600 }}>{lesson.title}</span>
+                {/* Ссылка — только у урока с прозой: ненаписанный slug страницы не имеет (lessons.test.ts). */}
+                {getEideticsProse(lesson.slug, locale) ? (
+                  <a href={`${prefix}/trenazhery/eidetika/${lesson.slug}/`} style={{ color: 'var(--text-primary)', fontSize: 'var(--text-base)', fontWeight: 600, textDecoration: 'none' }}>
+                    {lesson.title}
+                  </a>
+                ) : (
+                  <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-base)', fontWeight: 600 }}>{lesson.title}</span>
+                )}
                 <span style={{ marginLeft: '0.6rem', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', textTransform: 'lowercase', letterSpacing: '0.08em', color: GOLD }}>
-                  {t.badge}
+                  {/* Черновик до вычитки владельцем: бейдж снимается вместе с переводом модуля в 'live'. */}
+                  {getEideticsProse(lesson.slug, locale) ? (c.status === 'live' ? null : t.draftBadge) : t.badge}
                 </span>
               </h3>
               <p style={{ color: 'var(--text-muted)', lineHeight: 1.6, fontSize: 'var(--text-base)', margin: 0 }}>{lesson.objective}</p>

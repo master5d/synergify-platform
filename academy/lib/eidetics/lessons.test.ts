@@ -40,11 +40,12 @@ describe('eidetics prose', () => {
     }
   })
 
-  // Маршрута урока пока нет: под output:'export' пустой generateStaticParams роняет сборку.
-  // Как только владелец напишет прозу, этот тест упадёт и напомнит завести
-  // app/(en/)trenazhery/eidetika/[slug]/page.tsx по образцу скорочтения и ссылки на странице модуля.
-  it('written prose requires a lesson route (no dead links to unwritten pages)', () => {
-    const route = join(process.cwd(), 'app', 'trenazhery', 'eidetika', '[slug]', 'page.tsx')
-    if (!existsSync(route)) expect(writtenEideticsSlugs()).toEqual([])
+  // Под output:'export' маршрут [slug] с пустым generateStaticParams роняет сборку, а проза без
+  // маршрута — мёртвые ссылки. Маршруты заведены 2026-09-28 вместе с черновиком прозы (RU и EN).
+  it('written prose requires a lesson route in both locales (no dead links to unwritten pages)', () => {
+    for (const parts of [['app', 'trenazhery'], ['app', 'en', 'trenazhery']]) {
+      const route = join(process.cwd(), ...parts, 'eidetika', '[slug]', 'page.tsx')
+      if (!existsSync(route)) expect(writtenEideticsSlugs(), route).toEqual([])
+    }
   })
 })
