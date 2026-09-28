@@ -23,6 +23,8 @@ export interface Env {
   LISTMONK_PROGRESS_LIST_ID?: string
   /** "1" включает учебные цепочки писем через Listmonk tx (handlers/email-chain-cron.ts). По умолчанию "0". */
   EMAIL_CHAINS_ENABLED?: string
+  /** "1" включает приглашения ботом в Telegram-сообщество (lib/community.ts). По умолчанию "0". */
+  COMMUNITY_INVITES_ENABLED?: string
   LLM_SERVICE_URL: string
   LLM_SERVICE_TOKEN: string
   LLM_CF_ACCESS_CLIENT_ID: string

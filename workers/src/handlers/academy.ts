@@ -1,13 +1,14 @@
 import type { Env } from '../lib/types'
 import { requireAuth } from '../middleware'
 import { loadCompletedRows, missingCatalogModules } from '../lib/course-completion'
+import { ACADEMY_PLACE, invitesEnabled, maybeInviteToCommunity } from '../lib/community'
 
 const COURSE = 'tochka-sborki'
 
 /** POST /api/academy/admission — server-verified grant: completed progress must
  *  cover every COURSE_CATALOG module (строкой модуля или всеми его юнитами —
  *  lib/course-completion.ts, тот же критерий у проверки сертификата). Idempotent (INSERT OR IGNORE). */
-export async function handleAdmission(request: Request, env: Env): Promise<Response> {
+export async function handleAdmission(request: Request, env: Env, ctx?: ExecutionContext): Promise<Response> {
   const auth = await requireAuth(request, env)
   if (auth instanceof Response) return auth
 
@@ -33,6 +34,13 @@ export async function handleAdmission(request: Request, env: Env): Promise<Respo
   const row = await env.DB.prepare(
     'SELECT granted_at FROM admissions WHERE user_id = ? AND course = ?'
   ).bind(auth.sub, COURSE).first<{ granted_at: number }>()
+
+  // Слой сообщества: новый допуск → бот один раз приглашает в чат академии (выключено флагом).
+  if (invitesEnabled(env)) {
+    const invite = maybeInviteToCommunity(env, { userId: auth.sub, place: ACADEMY_PLACE, trigger: 'admission' })
+    if (ctx) ctx.waitUntil(invite)
+    else await invite
+  }
 
   return Response.json({ granted: true, course: COURSE, granted_at: row?.granted_at ?? now })
 }

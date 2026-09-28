@@ -4,6 +4,7 @@ import { nextLesson, lessonUrl, homeUrl, supportUrl, storeUrl } from '../lib/cou
 import { botCopy, pickLocale, type BotLocale } from '../lib/bot-copy'
 import { sendMessage, sendForceReply } from '../lib/telegram-api'
 import { notifyOwnerQuestion } from '../lib/owner-notify'
+import { communityLinks } from '../lib/community'
 
 async function loadProgress(env: Env, userId: string): Promise<{ completed: Set<string>; viewed: Set<string> }> {
   const { results } = await env.DB.prepare(
@@ -56,6 +57,22 @@ export async function handleTelegramWebhook(request: Request, env: Env): Promise
       await sendMessage(env, intent.chatId, copy.supportIntro, { text: copy.supportButton, url: supportUrl(locale) })
     } else if (intent.kind === 'store') {
       await sendMessage(env, intent.chatId, copy.storeIntro, { text: copy.storeButton, url: storeUrl(locale) })
+    } else if (intent.kind === 'community') {
+      // По запросу — всегда, без флага рассылки и без учёта отказа: это ответ, а не приглашение.
+      const links = communityLinks(locale)
+      await sendMessage(env, intent.chatId, links.length
+        ? [copy.communityListIntro, ...links.map(l => `• ${l.name}: ${l.url}`)].join('\n')
+        : copy.communityNone)
+    } else if (intent.kind === 'community_off') {
+      // Отдельный запрос, не в общем SELECT: до миграции 0021 колонки нет, а бот обязан работать.
+      if (user) {
+        try {
+          await env.DB.prepare('UPDATE users SET community_optout = 1 WHERE id = ?').bind(user.id).run()
+        } catch (e) {
+          console.error('community_optout write failed (migration 0021 applied?)', e)
+        }
+      }
+      await sendMessage(env, intent.chatId, copy.communityOffAck)
     } else if (intent.kind === 'ask') {
       const question = intent.text?.trim()
       if (!question) {

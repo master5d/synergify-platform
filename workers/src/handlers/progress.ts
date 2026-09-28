@@ -1,6 +1,7 @@
 import type { Env } from '../lib/types'
 import { requireAuth } from '../middleware'
 import { emitProgressEvents, isValidCourse, parseOutline } from '../lib/progress-events'
+import { invitesEnabled, maybeInviteToCommunity } from '../lib/community'
 
 export async function handleView(request: Request, env: Env): Promise<Response> {
   const auth = await requireAuth(request, env)
@@ -45,6 +46,14 @@ export async function handleComplete(request: Request, env: Env, ctx?: Execution
     })
     if (ctx) ctx.waitUntil(events)
     else await events
+  }
+
+  // Слой сообщества: после первого урока курса бот один раз приглашает в группу/тему курса.
+  // Выключено флагом COMMUNITY_INVITES_ENABLED; при выключенном флаге в БД не ходит вовсе.
+  if (isValidCourse(course) && invitesEnabled(env)) {
+    const invite = maybeInviteToCommunity(env, { userId: auth.sub, place: course, trigger: 'first-lesson' })
+    if (ctx) ctx.waitUntil(invite)
+    else await invite
   }
 
   return Response.json({ ok: true })

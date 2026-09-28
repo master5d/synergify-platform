@@ -75,4 +75,11 @@ describe('parseUpdate', () => {
     const r = parseUpdate({ message: { text: '/store@tochka_sborki_lms_bot', from: { id: 4 }, chat: { id: 4 } } })
     expect(r.kind).toBe('store')
   })
+
+  it('parses /community and the «Не присылать такое» callback', () => {
+    expect(parseUpdate({ message: { text: '/community', from: { id: 4 }, chat: { id: 4 } } }).kind).toBe('community')
+    expect(parseUpdate({ message: { text: '/communityx', from: { id: 4 }, chat: { id: 4 } } }).kind).toBe('other')
+    const cb = parseUpdate({ callback_query: { data: 'community_off', from: { id: 5 }, message: { chat: { id: 5 } } } })
+    expect(cb).toMatchObject({ kind: 'community_off', fromId: '5', chatId: 5 })
+  })
 })

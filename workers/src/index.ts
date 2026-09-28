@@ -159,7 +159,7 @@ export default {
           response = await handleAlumniOptin(env.DB, auth.sub, body)
         }
       } else if (path === '/api/academy/admission' && method === 'POST') {
-        response = await handleAdmission(request, env)
+        response = await handleAdmission(request, env, ctx)
       } else if (path === '/api/academy/me' && method === 'GET') {
         response = await handleAcademyMe(request, env)
       } else if (path === '/api/certificate/code' && method === 'GET') {
