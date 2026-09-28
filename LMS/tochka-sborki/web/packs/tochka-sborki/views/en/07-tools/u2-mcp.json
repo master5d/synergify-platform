@@ -50,9 +50,7 @@
     "sections": [
       {
         "sourceHash": "sha256:a97d4c778a0feb7635df1cfc4986990a407c9c750b471e9b9c01556ed27b440b",
-        "points": [
-          "The simplest way for you is to run a terminal command from the project folder."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:a291ab4eeeff3c4fd483c74c531d3763ab9b25d7f6fcb961b11d66052be26244",

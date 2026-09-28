@@ -39,15 +39,11 @@
     "sections": [
       {
         "sourceHash": "sha256:42b7b5cd6068e8214de9d7aabb78cd44ccc3bd67bea8f22412451ff392c0df4c",
-        "points": [
-          "В чате claude.ai модель не создаст файл, поэтому скопируй результат в свой файл идей, например в my-experiments/ideas.md."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:83e23e26e662219e6dcd56af98e74b0fce8bee5f024847a648f54ae8f0eba77a",
-        "points": [
-          "Здесь страховка еще важнее, так как без инструмента скрапинга модель может додумать сразу три статьи."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

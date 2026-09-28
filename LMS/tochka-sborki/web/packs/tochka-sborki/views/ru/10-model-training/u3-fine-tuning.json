@@ -84,9 +84,7 @@
       },
       {
         "sourceHash": "sha256:e41f30914f74ca86fffbe98dce85959cab3ae4e5338bc0a88eddbf55714cf704",
-        "points": [
-          "Для учёбы и узких задач бери модель SmolLM2 от Hugging Face на 135M, 360M или 1.7B параметров с лицензией Apache-2.0."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

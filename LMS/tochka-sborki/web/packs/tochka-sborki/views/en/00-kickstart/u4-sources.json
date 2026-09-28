@@ -77,9 +77,7 @@
       },
       {
         "sourceHash": "sha256:0dfd774da35a52b4d135a79aa2e79f902224f8746dd829fce5179f60e0b6f2ac",
-        "points": [
-          "The course materials include a link to Microsoft's agents course."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:8b883db604c342168905967970421e5c3087a3785176db1537ff29d6fe0dda4f",

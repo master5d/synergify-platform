@@ -18,6 +18,9 @@ export const COURSE = {
   /** Ключ курса в платформенном прогрессе (progress.course воркера, события → Listmonk). */
   progressKey: 'tochka-sborki',
   locales: ['ru', 'en'] as const,
+  /** Представления урока (LMS#8): что открывает вкладка «Конспект» по умолчанию, если у юнита есть пересказ.
+   *  'paraphrase' — пересказ, кнопка «Показать дословно»; 'verbatim' — дословно, кнопка «Показать пересказ». */
+  lessonViews: { summaryDefault: 'paraphrase' as 'paraphrase' | 'verbatim' },
   /** Какие слои движка включены у этого курса. Ядро гейтит поверхности по флагам,
    *  а не по имени pack'а: курс без RPG не должен носить чужой квест-обвес. */
   features: {

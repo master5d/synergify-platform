@@ -46,9 +46,7 @@
     "sections": [
       {
         "sourceHash": "sha256:9c89c8dad8445de59f10b98e1a4848f237cb55363659c0bb899cecb8bcc651fa",
-        "points": [
-          "Ты можешь собрать полноценного специализированного агента."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

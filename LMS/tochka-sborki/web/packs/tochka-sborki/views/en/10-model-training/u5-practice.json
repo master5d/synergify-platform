@@ -60,9 +60,7 @@
     "sections": [
       {
         "sourceHash": "sha256:95f7d9a8d16bb5346e3ab6a795c113f21d42f1aa523af22aeee8720d9a2d8c8d",
-        "points": [
-          "This practice is based on the Hugging Face smol-course under the Apache-2.0 license."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:ecccb3689d0854147abb5944c2665b8ad4ec7d96434c601496cc0306a3ba7d58",
@@ -72,15 +70,11 @@
       },
       {
         "sourceHash": "sha256:2a346f5f3ae1af1ba6cf8f3e9fff863b03c4bf76d527515603008487fb30d3ba",
-        "points": [
-          "You train with LoRA."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:2fcfdcdb3b8631b11f2dbe549727f19341197f2458701c52ed1764cdaf1c6e2a",
-        "points": [
-          "This practice is adapted from the huggingface/smol-course and TRL documentation which are both under the Apache-2.0 license from Hugging Face."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

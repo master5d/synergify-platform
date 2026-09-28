@@ -66,9 +66,7 @@
       },
       {
         "sourceHash": "sha256:a2e0667b12bfa87f9f248593f54d2410c262ce702cab060149c4c999e5d6c419",
-        "points": [
-          "Заметь, что ни один пункт не требует технических знаний."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

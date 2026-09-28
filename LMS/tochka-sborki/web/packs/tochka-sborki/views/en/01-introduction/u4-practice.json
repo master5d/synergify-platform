@@ -27,9 +27,7 @@
     "sections": [
       {
         "sourceHash": "sha256:91af1eaee8eee83717c8fe4d0f75b522fef6bcf9f3dac296ad73c292fd5a664e",
-        "points": [
-          "You have finished module 01."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

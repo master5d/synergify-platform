@@ -13,10 +13,17 @@ export const PARAPHRASE_GENERATOR = 'paraphrase-v1'
 /** Алиас пула гейтвея, НЕ имя провайдерской модели (HARD RULE лаборатории). */
 export const PARAPHRASE_POOL = 'prose-pool'
 
+/** Почему раздел закреплён дословным: `near-identical` — пересказ почти совпал с дословным текстом (хранить
+ *  нечего); `review` — вычитка нашла искажение смысла. Такие разделы модели повторно не отправляются
+ *  (`review` — даже при `--refresh`). */
+export type VerbatimReason = 'near-identical' | 'review'
+
 export interface ParaphraseSection {
   /** Хэш входа пересказа: заголовок + дословные тезисы раздела. Не совпал с текущим outline — пересказ не показывается. */
   sourceHash: string
-  points: string[]
+  /** Пункты пересказа. Нет — раздел закреплён дословным (см. `verbatim`). */
+  points?: string[]
+  verbatim?: VerbatimReason
 }
 
 export interface ParaphraseBlock {
@@ -178,17 +185,54 @@ export function checkParaphraseSection(
   return [...new Set(out)]
 }
 
+// ── Почти дословный пересказ ─────────────────────────────────────────────────────
+
+/** Порог схожести, с которого пересказ считается «почти дословным» и не хранится.
+ *  Метрика — коэффициент Дайса по мультимножествам токенов (буквы/цифры, нижний регистр) всего раздела.
+ *  Замер на 326 разделах курса (2026-09-28): все пары ≥ 0.85 отличаются только связками, «ты/твой»,
+ *  «это — это … представляет собой», пунктуацией и кавычками; в 0.80–0.84 уже встречаются настоящие
+ *  перестройки (связки инструментов 03/u1, списки меток 09/u3). 0.9 оставлял бы явные почти-копии
+ *  («Твоя тетрадка — это не архив, а рабочий стол»). */
+export const NEAR_IDENTICAL = 0.85
+
+function tokens(s: string): Map<string, number> {
+  const m = new Map<string, number>()
+  for (const t of s.toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? []) m.set(t, (m.get(t) ?? 0) + 1)
+  return m
+}
+
+/** Коэффициент Дайса по мультимножествам токенов: 1 — те же слова, 0 — ни одного общего. */
+export function similarity(verbatim: string[], paraphrase: string[]): number {
+  const a = tokens(verbatim.join(' '))
+  const b = tokens(paraphrase.join(' '))
+  let common = 0
+  let total = 0
+  for (const [t, n] of a) { common += Math.min(n, b.get(t) ?? 0); total += n }
+  for (const n of b.values()) total += n
+  return total ? (2 * common) / total : 1
+}
+
+/** Запись раздела после гварда: почти дословный пересказ не хранится — только метка, чтобы не слать повторно. */
+export function settleSection(node: Pick<OutlineNode, 'heading' | 'points'>, points: string[]): ParaphraseSection {
+  const sourceHash = sectionHash(node)
+  return similarity(node.points.map(p => p.text), points) >= NEAR_IDENTICAL
+    ? { sourceHash, verbatim: 'near-identical' }
+    : { sourceHash, points }
+}
+
 /** Outline для показа: разделы с годным пересказом получают его пункты (origin 'llm'), остальные — дословные.
  *  null — если ни один раздел не пересказан (тогда переключатель «дословно» не нужен). */
 export function paraphrasedOutline(
   outline: OutlineNode[], block: ParaphraseBlock | undefined, source: string, locale: 'ru' | 'en', rules: ManifestRule[],
 ): OutlineNode[] | null {
   if (!block || block.source !== 'paraphrase' || block.pool !== PARAPHRASE_POOL) return null
-  const byHash = new Map(block.sections.map(s => [s.sourceHash, s.points]))
+  const byHash = new Map(block.sections.flatMap(s => (s.points && !s.verbatim ? [[s.sourceHash, s.points] as const] : [])))
   let used = 0
   const map = (nodes: OutlineNode[]): OutlineNode[] => nodes.map(n => {
     const pts = n.points.length ? byHash.get(sectionHash(n)) : undefined
-    const ok = pts && checkParaphraseSection(pts, n, source, locale, rules).length === 0
+    const ok = pts
+      && similarity(n.points.map(p => p.text), pts) < NEAR_IDENTICAL
+      && checkParaphraseSection(pts, n, source, locale, rules).length === 0
     if (ok) used++
     return {
       heading: n.heading,

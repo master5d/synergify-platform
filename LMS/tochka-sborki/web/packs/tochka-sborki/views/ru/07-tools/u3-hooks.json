@@ -55,9 +55,7 @@
     "sections": [
       {
         "sourceHash": "sha256:4d368c67cde344d001c65629c102527e83fd531dac3d9e7f9438551d92ea5f57",
-        "points": [
-          "Ни одно из этих событий не наступает по часам."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:699e6d792314c74718278b5858d9a407d88aab371af5f4824cc16c4d26be71ac",

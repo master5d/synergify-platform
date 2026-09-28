@@ -80,10 +80,7 @@
       },
       {
         "sourceHash": "sha256:c5b10644198f82fda76dfbb71b8bb87e3ac3171e85f021e2172ed3a28b545b1f",
-        "points": [
-          "The largest review for medical decision-making by Goyal et al. in JAMA Internal Medicine 2014 included 47 clinical trials and 3,515 people.",
-          "It shows mindfulness programmes have a small effect on anxiety d≈0.38, depression d≈0.30, and pain d≈0.33 against active controls."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:69b0bfa515bea8cd2a4ec7520c8e95cf81dbef73ef03c280b646165d2cf3cc56",
@@ -100,9 +97,7 @@
       },
       {
         "sourceHash": "sha256:ca43683e192b38d6680ccf8ce1c23caf9ab100aadda145ef5a9ab66e5c573fe0",
-        "points": [
-          "Contact a living professional if the heaviness persists beyond the session."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

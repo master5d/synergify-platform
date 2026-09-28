@@ -74,9 +74,7 @@
       },
       {
         "sourceHash": "sha256:7f4edd9c617a56e033e74af11ee1679fac523077d0e2e047702311d0fffc4be4",
-        "points": [
-          "Claude writes MEMORY.md itself, unlike the other three files."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

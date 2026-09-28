@@ -77,9 +77,7 @@
       },
       {
         "sourceHash": "sha256:3368fbeafb7cce4c40b51d154b84850d4af7f9035fdf5c1e8135c1007af2ceaf",
-        "points": [
-          "The course succeeded at the moment it became unnecessary."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

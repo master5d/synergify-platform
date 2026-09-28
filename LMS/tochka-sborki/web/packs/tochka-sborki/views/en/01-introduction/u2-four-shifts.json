@@ -86,21 +86,15 @@
       },
       {
         "sourceHash": "sha256:abedc635bcdea4f5dab0d850706ff515a2dec79982ac22b9825bde280ff6988a",
-        "points": [
-          "The first answer is a draft and not a verdict."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:a44192cd5f1c8fa33319e81798afeede2ed69a50ed11a9638492e92af86fe29a",
-        "points": [
-          "A good spec has who, what, why, how, and what not to do."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:f64aa80f7b1f798c0a6c1f97b0e8e7f192eb98e865513bd81eeec0c95c74fae4",
-        "points": [
-          "Delegate routine, first drafts, and search to the agent."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

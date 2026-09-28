@@ -50,9 +50,7 @@
     "sections": [
       {
         "sourceHash": "sha256:17358025e4d7a518047e2ba14c06c40a5d5879fa46d36710c6dd921dd647e3ec",
-        "points": [
-          "Ты дописываешь ссылку в inbox.txt одной строкой."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:43893c3c02b8ceac04247a1671248660399c60e30cd6f8f8366b5d86d0763aef",

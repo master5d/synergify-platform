@@ -41,10 +41,11 @@ const btn = { fontFamily: 'var(--font-mono)', fontSize: '0.85rem', padding: '0.4
 
 const toggle = { fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', background: 'none', border: 'none', padding: 0, color: 'var(--text-secondary)', textDecoration: 'underline', cursor: 'pointer' } as const
 
-/** Конспект: пересказ по умолчанию (если есть и прошёл гвард), переключатель «дословно» — как у примера из интереса. */
+/** Конспект: пересказ (если есть и прошёл гвард) или дословно — что сначала, решает pack (`summaryDefault`);
+ *  переключатель — как у примера из интереса. */
 export function Summary({ data, locale }: { data: LessonViewsData; locale: 'ru' | 'en' }) {
   const t = T[locale]
-  const [verbatim, setVerbatim] = useState(false)
+  const [verbatim, setVerbatim] = useState(data.summaryDefault === 'verbatim')
   const para = data.paraphrased !== null && !verbatim
   const outline = para ? data.paraphrased! : data.outline
   const section = (n: OutlineNode, depth: number, key: number): ReactNode => (

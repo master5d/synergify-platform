@@ -83,9 +83,7 @@
       },
       {
         "sourceHash": "sha256:501bd286ffcee24b125ef2a59176d1c5bed8b7a0381e311e090f1ebfc0b27491",
-        "points": [
-          "The core mechanism of modern models is described in the paper Attention Is All You Need by Vaswani et al., 2017."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:b68eeaabf6e28109c99208b6c649ec81527956b6a2f377cb40fa490d13cea1e6",

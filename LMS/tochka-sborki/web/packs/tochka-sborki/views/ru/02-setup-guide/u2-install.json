@@ -82,9 +82,7 @@
     "sections": [
       {
         "sourceHash": "sha256:3b13127d62fbb9d3db6aa628f6f41e655cc6957db56d78f282098d915f08e298",
-        "points": [
-          "Если ты хочешь сразу получить рабочую лабораторию, выполни одну команду в терминале."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:172178812375841c9d82c3fb10b48c9ae2ff31650614c0decbcad521797e81ed",
@@ -106,9 +104,7 @@
       },
       {
         "sourceHash": "sha256:33d4b05b911c1294d6931c85d26f703d88d6c78e771196770dce1144d84a10ea",
-        "points": [
-          "PowerShell использует профиль вместо файла .bashrc."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

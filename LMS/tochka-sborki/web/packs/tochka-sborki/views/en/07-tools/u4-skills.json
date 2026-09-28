@@ -51,9 +51,7 @@
     "sections": [
       {
         "sourceHash": "sha256:d4596d45ad6474d3a69a76d74709b8133dee09e7ab204432200a4ec9cdd8619f",
-        "points": [
-          "A Skill is a folder containing a Markdown file named SKILL.md with instructions that Claude Code runs when you call /name."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

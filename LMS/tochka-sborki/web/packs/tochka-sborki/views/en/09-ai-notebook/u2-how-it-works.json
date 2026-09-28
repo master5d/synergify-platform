@@ -80,10 +80,7 @@
       },
       {
         "sourceHash": "sha256:fd59bf43a0dd52037e5a6154170da7e7e6d9159007d6700406924571cab3806f",
-        "points": [
-          "The model answers using general knowledge combined with your sources.",
-          "Questions about the notebook come back with links into it."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

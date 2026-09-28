@@ -45,9 +45,7 @@
       },
       {
         "sourceHash": "sha256:8b5cffb74479d3a3ac643e8717c84bba35dd38c632abca71512bfaa47ece494c",
-        "points": [
-          "The safety net is even more important here because without a scraping tool the model might imagine three articles at once."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

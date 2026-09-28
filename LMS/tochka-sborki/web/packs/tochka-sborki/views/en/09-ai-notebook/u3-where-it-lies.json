@@ -70,9 +70,7 @@
       },
       {
         "sourceHash": "sha256:d8e9f71d763778d73b941aecf0734320087cc94bf48d392e8ad2d9e83193e085",
-        "points": [
-          "Notice that not one item requires technical knowledge."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

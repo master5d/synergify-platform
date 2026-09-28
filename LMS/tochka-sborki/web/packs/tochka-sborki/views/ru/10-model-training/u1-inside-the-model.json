@@ -77,15 +77,11 @@
       },
       {
         "sourceHash": "sha256:48d63e1bc0a889668e54754b12881bda29174f1b7952034a0c04c922cc293e26",
-        "points": [
-          "Каждый номер токена превращается в эмбеддинг, который представляет собой длинный вектор чисел."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:d3242ace4aea18dc202f6ba0359345d55e5c3468c4ed158860e0a4ecbd83d77a",
-        "points": [
-          "Главный механизм современных моделей описан в статье Attention Is All You Need авторов Vaswani и соавторов 2017 года."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:2e33ef8372d8535679c08e109ba7424301ae8fc80db39d6904474c27da9a9a60",
@@ -95,9 +91,7 @@
       },
       {
         "sourceHash": "sha256:0bf674e1edf5b253b37588861ca0d48f38c448dfd3450b560f4903f5e482d1ba",
-        "points": [
-          "Чтобы хорошо продолжать текст, модели выгодно ухватить закономерности мира, включая грамматику, факты и стиль рассуждений."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

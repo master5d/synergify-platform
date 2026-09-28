@@ -106,9 +106,7 @@
     "sections": [
       {
         "sourceHash": "sha256:2603f6668b967951846e74805eb99fc66f2bc3e5efec1f960312e1f1d7cd5768",
-        "points": [
-          "You often see AI, neural network, machine learning and LLM used as synonyms."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:8f6132c76097808488fa4951c7ca0f607747bb604ed5b43169682c4f79b4bbea",

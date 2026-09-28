@@ -8,6 +8,7 @@ import type { SelfCheckItem } from '../content'
 import { sourceHash, unitChecks, type LessonViewsArtifact, type OutlineNode } from './extract'
 import { paraphrasedOutline } from './paraphrase'
 import { MANIFEST } from '../manifest'
+import { COURSE } from '../course'
 
 export interface ViewCard { id: string; question: string; answer: string; explain: string }
 
@@ -17,6 +18,8 @@ export interface LessonViewsData {
   /** Конспект пересказом: разделы, чей пересказ прошёл гвард, — пересказ, остальные — дословно.
    *  null — пересказа нет; вкладка «Конспект» показывает дословный outline. */
   paraphrased: OutlineNode[] | null
+  /** Что «Конспект» показывает сначала — настройка pack'а (`COURSE.lessonViews.summaryDefault`). */
+  summaryDefault: 'paraphrase' | 'verbatim'
   cards: ViewCard[]
 }
 
@@ -51,5 +54,5 @@ export function getLessonViews(
   })
   // Гвард пересказа — ещё раз при сборке: не прошедший раздел ученик видит дословным, даже если тест пропустили.
   const paraphrased = paraphrasedOutline(a.outline, a.paraphrase, mdx, locale, MANIFEST)
-  return { title: a.title, outline: a.outline, paraphrased, cards }
+  return { title: a.title, outline: a.outline, paraphrased, summaryDefault: COURSE.lessonViews.summaryDefault, cards }
 }

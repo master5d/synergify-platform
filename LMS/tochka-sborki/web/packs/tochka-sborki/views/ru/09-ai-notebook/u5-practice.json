@@ -65,9 +65,7 @@
       },
       {
         "sourceHash": "sha256:f4cd91ae533257713d43abf053da8ca4ca93fb8972fcbd4fb9107f48e90419a2",
-        "points": [
-          "Твоя тетрадка — это не архив, а рабочий стол."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

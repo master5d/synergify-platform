@@ -89,9 +89,7 @@
       },
       {
         "sourceHash": "sha256:91e3349aafdfe6e29b02c0e6c217f8b46626da1c35bf00a60dbe3d7d04d0c2ca",
-        "points": [
-          "Fragments in the context that are similar throw the model off the correct answer."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:ce517a433cc39837b99613bbee8242e24a93a38bc8813596ba673be7b20c4502",

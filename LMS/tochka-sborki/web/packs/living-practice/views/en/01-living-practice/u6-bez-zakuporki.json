@@ -67,9 +67,7 @@
     "sections": [
       {
         "sourceHash": "sha256:40af9b65e6742d64d3799c811e6e515300f4e9183d0b4454dfc2b33655652e2e",
-        "points": [
-          "You achieve a smooth state where the unpleasant does not reach you."
-        ]
+        "verbatim": "review"
       },
       {
         "sourceHash": "sha256:8b832525c894dac11426817fed29f1252bdaa2a82fe8bfc104c672e5b5d44b29",
@@ -85,9 +83,7 @@
       },
       {
         "sourceHash": "sha256:35e22b66334a5dabd8afb236e82305a6e33ddb041de7788254616dd3443670f8",
-        "points": [
-          "There is a recognisable construction."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:81f091efb07d45868fceb2254ca6da20da7c648a99da09378607d9679d332d27",

@@ -68,9 +68,7 @@
       },
       {
         "sourceHash": "sha256:04a7f9debee4138584c7e4e68cf5e14b6e3dfa9ca9f03e3337939dae768cc935",
-        "points": [
-          "Твоя новая сессия всегда начинается с чистого листа."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:5b673289a0d5e02ae16e7680b9b67fb3221bd5c4ae94e89a0134e5907203b07a",

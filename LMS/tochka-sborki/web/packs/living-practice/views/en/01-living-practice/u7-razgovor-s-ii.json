@@ -118,17 +118,11 @@
       },
       {
         "sourceHash": "sha256:c64e1451758bee5ca4822c8d099a9866c7f9ca964ff0ad67c3c49b5cd2ac5924",
-        "points": [
-          "One more thing worth saying plainly is that it does not read your state."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:1336153b8fa2847ab490162f83bdc1dd95a3eea0fb939a1f120722aab2eda08f",
-        "points": [
-          "In the US you can call the 988 Suicide & Crisis Lifeline or the local crisis line in another country.",
-          "Checked numbers for Russia, Ukraine, Israel and Germany are in step five.",
-          "Other countries are in the international directory findahelpline.com."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

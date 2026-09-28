@@ -47,9 +47,7 @@
     "sections": [
       {
         "sourceHash": "sha256:d91a88583bc61e7b9ca8491c25b5368f563a25c3129e91ba5039ac0f611cf91d",
-        "points": [
-          "Если ты не знаешь, с чего начать, попроси Claude написать промпт за тебя."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:b0aaa16f0cb4fbca686c6fac55ea1dcdf9830ee76e062833a467bffcffb9fcbf",

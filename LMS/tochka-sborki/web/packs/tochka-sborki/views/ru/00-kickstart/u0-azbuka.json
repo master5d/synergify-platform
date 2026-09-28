@@ -106,9 +106,7 @@
     "sections": [
       {
         "sourceHash": "sha256:743353da917ff3c5d4b800657ff8c6ba7c6d81117cca79eb996b1d07cbc29d7a",
-        "points": [
-          "Слова ИИ, нейросеть, машинное обучение и LLM часто используют как синонимы."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:f529cbe6c83531c10bffeefc8a33aee9236013def8e70ce96adb735e43d0ccab",

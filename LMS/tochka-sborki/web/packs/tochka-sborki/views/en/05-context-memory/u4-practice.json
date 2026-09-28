@@ -68,15 +68,11 @@
       },
       {
         "sourceHash": "sha256:7b0dd3191fdf942a05ca9c59725dbc9f94df7d6857c76c7cc9d4768e96b3ed56",
-        "points": [
-          "You do this at the start of a new session or when context fills up."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:8d8fc31a854490ce051a11c7873ec5d524b04a1773498adb4187165226dd8af5",
-        "points": [
-          "You run several agents for independent subtasks."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

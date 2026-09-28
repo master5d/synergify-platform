@@ -66,21 +66,15 @@
       },
       {
         "sourceHash": "sha256:36734ff345cc174f80b77d8aaa5977ca65bfd112fab2db4eba1cceaecfa5b620",
-        "points": [
-          "Overfitting happens when the model fits the training examples so tightly that it does worse on new ones."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:b02928e2289132c259bcf77cb50f7e00214a24813ca9bbf143776e7a547a715e",
-        "points": [
-          "You build your own evaluation set for your task from the same holdout."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:922084bc1be01fb803c2d111c5cd0f14a616c8719c770857fd32979914f54534",
-        "points": [
-          "The size of the evaluation set depends on the task."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

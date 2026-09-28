@@ -7,6 +7,8 @@
 //   … --paraphrase                                       — после извлечения: пересказ конспекта через гейтвей
 //   … --paraphrase --refresh                             — пересказать заново и уже пересказанные разделы
 //   … --report <file.json>                               — все ответы модели с вердиктом гварда (для вычитки)
+//   … --pin-verbatim <pack>/<locale>/<module>/<unit>#<заголовок>  — закрепить раздел дословным по итогам вычитки
+//                                                          (verbatim: "review"; модель его больше не получает, даже с --refresh)
 //
 // Дословная часть (extract) детерминирована, сети не требует. Готовый пересказ переносится между пересборками
 // по хэшу раздела: раздел не изменился — пересказ остаётся, изменился — выпадает (и это печатается).
@@ -52,7 +54,9 @@ const paraphrase = argv.includes('--paraphrase')
 const refresh = argv.includes('--refresh')
 const reportIdx = argv.indexOf('--report')
 const reportPath = reportIdx >= 0 ? argv[reportIdx + 1] : undefined
-const positional = argv.filter((a, i) => !a.startsWith('--') && !(reportIdx >= 0 && i === reportIdx + 1))
+const valueIdx = new Set(argv.flatMap((a, i) => (a === '--report' || a === '--pin-verbatim' ? [i + 1] : [])))
+const pins = argv.flatMap((a, i) => (a === '--pin-verbatim' && argv[i + 1] ? [argv[i + 1]] : []))
+const positional = argv.filter((a, i) => !a.startsWith('--') && !valueIdx.has(i))
 const [packArg, moduleArg] = positional
 
 function artifactPath(pack: string, locale: string, module: string, unit: string): string {
@@ -71,14 +75,35 @@ function serialize(a: Artifact): string {
   return JSON.stringify(a, null, 2) + '\n'
 }
 
-/** Пересказ предыдущей версии, чьи разделы не изменились; порядок — по текущему outline. */
-function carryParaphrase(prev: Artifact | null, outline: OutlineNode[]): { block?: Artifact['paraphrase']; dropped: number } {
+type Section = import('../lib/lesson-views/paraphrase').ParaphraseSection
+
+/** Пересказ предыдущей версии, чьи разделы не изменились; порядок — по текущему outline. Почти дословный
+ *  пересказ (схожесть ≥ NEAR_IDENTICAL) становится меткой `near-identical` — детерминированно, без сети.
+ *  Закрепления `--pin-verbatim` этого юнита ставят метку `review`. */
+function carryParaphrase(prev: Artifact | null, outline: OutlineNode[], unitPins: string[]): { block?: Artifact['paraphrase']; dropped: number; near: number } {
   const old = prev?.paraphrase
-  if (!old) return { dropped: 0 }
-  const byHash = new Map(old.sections.map(s => [s.sourceHash, s]))
-  const kept = pp.sectionsWithPoints(outline).flatMap(n => byHash.get(pp.sectionHash(n)) ?? [])
-  const dropped = old.sections.length - kept.length
-  return { block: kept.length ? { ...old, sections: kept } : undefined, dropped }
+  const nodes = pp.sectionsWithPoints(outline)
+  const byHash = new Map((old?.sections ?? []).map(s => [s.sourceHash, s]))
+  for (const heading of unitPins) {
+    const n = nodes.find(x => x.heading === heading)
+    if (!n) throw new Error(`--pin-verbatim: раздела «${heading}» с тезисами нет`)
+    byHash.set(pp.sectionHash(n), { sourceHash: pp.sectionHash(n), verbatim: 'review' })
+  }
+  let near = 0
+  const kept = nodes.flatMap(n => {
+    const s = byHash.get(pp.sectionHash(n))
+    if (!s) return []
+    if (s.points && !s.verbatim) {
+      const settled = pp.settleSection(n, s.points)
+      if (settled.verbatim) near++
+      return [settled]
+    }
+    return [s]
+  })
+  const current = new Set(nodes.map(n => pp.sectionHash(n)))
+  const dropped = (old?.sections ?? []).filter(s => !current.has(s.sourceHash)).length
+  const meta = old ?? { source: 'paraphrase' as const, generator: pp.PARAPHRASE_GENERATOR, pool: pp.PARAPHRASE_POOL, sections: [] }
+  return { block: kept.length ? { ...meta, sections: kept } : undefined, dropped, near }
 }
 
 type Outcome = 'written' | 'same' | 'skipped' | 'empty'
@@ -95,8 +120,10 @@ function generate(pack: string, locale: Locale, module: string, unit: string): O
     console.log(`EMPTY ${pack}/${locale}/${module}/${unit}: в концепт-фазе нет прозы — артефакта нет`)
     return 'empty'
   }
-  const { block, dropped } = carryParaphrase(prev, next.outline)
+  const unitPins = pins.flatMap(p => (p.startsWith(`${pack}/${locale}/${module}/${unit}#`) ? [p.slice(p.indexOf('#') + 1)] : []))
+  const { block, dropped, near } = carryParaphrase(prev, next.outline, unitPins)
   if (block) next.paraphrase = block
+  if (near) console.log(`NEAR ${pack}/${locale}/${module}/${unit}: ${near} разд. — пересказ почти дословный, не хранится`)
   if (dropped) console.log(`STALE ${pack}/${locale}/${module}/${unit}: пересказ ${dropped} разд. выпал (раздел изменился) — --paraphrase`)
   const json = serialize(next)
   if (prevRaw === json) return 'same'
@@ -231,7 +258,7 @@ async function paraphraseAll(): Promise<number> {
   }
 
   const targets = jobs.filter(([pack, locale, module, unit]) => existsSync(artifactPath(pack, locale, module, unit)))
-  const stats = { units: 0, sections: 0, accepted: 0, rejected: 0, empty: 0, transport: 0 }
+  const stats = { units: 0, sections: 0, accepted: 0, near: 0, rejected: 0, empty: 0, transport: 0 }
   const reasons = new Map<string, number>()
   const report: ReportRow[] = []
 
@@ -241,13 +268,14 @@ async function paraphraseAll(): Promise<number> {
     const a = JSON.parse(readFileSync(file, 'utf8')) as Artifact
     const { mdx } = contentOf(pack, locale, module, unit)
     const rules = await rulesOf(pack)
-    const have = new Set(refresh ? [] : (a.paraphrase?.sections ?? []).map(s => s.sourceHash))
+    // Уже решённые разделы не отправляются: пересказ, метка near-identical; метка review — даже при --refresh.
+    const have = new Set((a.paraphrase?.sections ?? []).filter(s => !refresh || s.verbatim === 'review').map(s => s.sourceHash))
     const nodes = pp.sectionsWithPoints(a.outline)
     const todo = nodes.filter(n => !have.has(pp.sectionHash(n)))
     if (!todo.length) return
     stats.units++
     stats.sections += todo.length
-    const fresh = new Map<string, string[]>()
+    const fresh = new Map<string, Section>()
     // Разделы — пачками по BATCH: пул «думает», и на длинном юните рассуждение съедает бюджет до конца JSON
     // (finish=length). Пустой/обрезанный ответ — до EMPTY_RETRIES повторов, потом пачка остаётся дословной.
     for (let from = 0; from < todo.length; from += BATCH) {
@@ -286,16 +314,18 @@ async function paraphraseAll(): Promise<number> {
           }
         } else {
           stats.accepted++
-          fresh.set(pp.sectionHash(n), pts)
+          const settled = pp.settleSection(n, pts)
+          if (settled.verbatim) stats.near++
+          fresh.set(settled.sourceHash, settled)
         }
       })
     }
     // Каждый юнит обрабатывает ровно один воркер — гонки за файл нет.
-    const prevSections = new Map((refresh ? [] : a.paraphrase?.sections ?? []).map(s => [s.sourceHash, s.points]))
+    const prevSections = new Map((a.paraphrase?.sections ?? []).filter(s => have.has(s.sourceHash)).map(s => [s.sourceHash, s]))
     const sections = nodes.flatMap(n => {
       const h = pp.sectionHash(n)
-      const pts = fresh.get(h) ?? prevSections.get(h)
-      return pts ? [{ sourceHash: h, points: pts }] : []
+      const sec = fresh.get(h) ?? prevSections.get(h)
+      return sec ? [sec] : []
     })
     const next: Artifact = { ...a }
     delete next.paraphrase
@@ -310,7 +340,7 @@ async function paraphraseAll(): Promise<number> {
   }))
 
   if (reportPath) writeFileSync(reportPath, JSON.stringify(report, null, 2) + '\n', 'utf8')
-  console.log(`paraphrase: юнитов с вызовом ${stats.units}, разделов ${stats.sections} — прошли гвард ${stats.accepted}, отброшены гвардом ${stats.rejected}, пустой/битый ответ ${stats.empty}, отказ транспорта (юнитов) ${stats.transport}`)
+  console.log(`paraphrase: юнитов с вызовом ${stats.units}, разделов ${stats.sections} — прошли гвард ${stats.accepted} (из них почти дословных, не хранятся: ${stats.near}), отброшены гвардом ${stats.rejected}, пустой/битый ответ ${stats.empty}, отказ транспорта (юнитов) ${stats.transport}`)
   for (const [r, n] of [...reasons].sort((x, y) => y[1] - x[1])) console.log(`  отброшено: ${n} × ${r}`)
   if (stats.transport || stats.empty) console.error('ПЕРЕСКАЗ НЕПОЛНЫЙ: часть разделов осталась дословной не по решению гварда, а из-за гейтвея — перезапусти --paraphrase')
   return stats.transport || stats.empty ? 3 : 0

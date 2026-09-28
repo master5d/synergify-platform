@@ -16,9 +16,10 @@ import { getLessonViews, readArtifact } from './load'
 import { LessonViews, Summary, availableViews } from '../../components/lesson-views'
 import {
   buildPrompt, checkParaphrasePoint, checkParaphraseSection, paraphrasedOutline, parseReply, sectionHash, sectionsWithPoints,
-  PARAPHRASE_GENERATOR, PARAPHRASE_POOL,
+  settleSection, similarity, NEAR_IDENTICAL, PARAPHRASE_GENERATOR, PARAPHRASE_POOL,
 } from './paraphrase'
 import { MANIFEST } from '../manifest'
+import { COURSE } from '../course'
 
 const LOCALES = ['ru', 'en'] as const
 const REGEN = 'node scripts/gen-lesson-views.ts'
@@ -106,7 +107,15 @@ describe(`lesson views guards (${PACK_SLUG})`, () => {
         for (const s of p.sections) {
           const n = nodes.get(s.sourceHash)
           if (!n) { findings.push(`раздел ${s.sourceHash.slice(0, 15)} не из текущего outline: ${REGEN}`); continue }
+          if (s.verbatim) {
+            // Закреплён дословным: пунктов нет, причина — одна из известных.
+            if (s.points || !['near-identical', 'review'].includes(s.verbatim)) findings.push(`«${n.heading}»: битая метка verbatim`)
+            continue
+          }
+          if (!s.points) { findings.push(`«${n.heading}»: нет ни пунктов, ни метки verbatim`); continue }
           findings.push(...checkParaphraseSection(s.points, n, src, locale, MANIFEST).map(f => `«${n.heading}»: ${f}`))
+          const sim = similarity(n.points.map(x => x.text), s.points)
+          if (sim >= NEAR_IDENTICAL) findings.push(`«${n.heading}»: почти дословный пересказ (${sim.toFixed(2)}) хранится — ${REGEN}`)
         }
         expect(findings).toEqual([])
         expect(p.sections.length).toBeGreaterThan(0)
@@ -126,7 +135,8 @@ describe(`lesson views guards (${PACK_SLUG})`, () => {
       expect(html).toContain('role="tablist"')
       expect(html).toContain('BODY')
       expect((html.match(/role="tab"/g) ?? []).length).toBe(availableViews(data!).length)
-      expect(data!.paraphrased !== null).toBe(Boolean(a.paraphrase?.sections.length))
+      expect(data!.paraphrased !== null).toBe(Boolean(a.paraphrase?.sections.some(x => x.points && !x.verbatim)))
+      expect(data!.summaryDefault).toBe(COURSE.lessonViews.summaryDefault)
     })
   }
 })
@@ -196,7 +206,7 @@ describe('пересказ конспекта (paraphrase-v1)', () => {
     '</Phase>',
   ].join('\n')
   const outline = extractOutline(src)
-  const ok = 'В начале каждой сессии Claude Code читает файл CLAUDE.md.'
+  const ok = 'Каждую сессию Claude Code начинает с чтения файла CLAUDE.md.'
 
   it('чистый пересказ годен; имена, числа и код, которые есть в уроке, разрешены', () => {
     expect(checkParaphrasePoint(ok, src, 'ru', MANIFEST)).toEqual([])
@@ -256,12 +266,60 @@ describe('пересказ конспекта (paraphrase-v1)', () => {
 
   it('вкладка «Конспект»: пересказ по умолчанию и кнопка «дословно»; без пересказа кнопки нет', () => {
     const para = [{ ...outline[0], points: [{ text: 'ПЕРЕСКАЗ', origin: 'llm' as const }] }]
-    const html = renderToStaticMarkup(createElement(Summary, { data: { title: 'X', outline, paraphrased: para, cards: [] }, locale: 'ru' }))
+    const html = renderToStaticMarkup(createElement(Summary, { data: { title: 'X', outline, paraphrased: para, summaryDefault: 'paraphrase', cards: [] }, locale: 'ru' }))
     expect(html).toContain('ПЕРЕСКАЗ')
     expect(html).not.toContain(outline[0].points[0].text)
     expect(html).toContain('Показать дословно')
-    const plainHtml = renderToStaticMarkup(createElement(Summary, { data: { title: 'X', outline, paraphrased: null, cards: [] }, locale: 'en' }))
+    const plainHtml = renderToStaticMarkup(createElement(Summary, { data: { title: 'X', outline, paraphrased: null, summaryDefault: 'paraphrase', cards: [] }, locale: 'en' }))
     expect(plainHtml).toContain(outline[0].points[0].text)
     expect(plainHtml).not.toContain('Show verbatim')
+  })
+
+  it('pack «Тишина» (verbatim по умолчанию): дословно сначала, кнопка «Показать пересказ»', () => {
+    const para = [{ ...outline[0], points: [{ text: 'ПЕРЕСКАЗ', origin: 'llm' as const }] }]
+    const html = renderToStaticMarkup(createElement(Summary, { data: { title: 'X', outline, paraphrased: para, summaryDefault: 'verbatim', cards: [] }, locale: 'ru' }))
+    expect(html).toContain(outline[0].points[0].text)
+    expect(html).not.toContain('ПЕРЕСКАЗ')
+    expect(html).toContain('Показать пересказ')
+    expect(html).toContain('aria-pressed="true"')
+  })
+
+  it('схожесть: Дайс по токенам; почти дословный пересказ становится меткой near-identical', () => {
+    expect(similarity(['Первый ответ — черновик, не приговор.'], ['Первый ответ — черновик, не приговор'])).toBe(1)
+    expect(similarity(['a b c d'], ['e f g h'])).toBe(0)
+    const near = settleSection(outline[0], [outline[0].points[0].text.replace('каждой', 'любой')])
+    expect(near).toEqual({ sourceHash: sectionHash(outline[0]), verbatim: 'near-identical' })
+    expect(settleSection(outline[0], [ok])).toEqual({ sourceHash: sectionHash(outline[0]), points: [ok] })
+    expect(similarity(outline[0].points.map(p => p.text), [ok])).toBeLessThan(NEAR_IDENTICAL)
+  })
+
+  it('метки verbatim и почти дословные пункты в показ не идут', () => {
+    const base = { source: 'paraphrase' as const, generator: PARAPHRASE_GENERATOR, pool: PARAPHRASE_POOL }
+    const h = sectionHash(outline[0])
+    expect(paraphrasedOutline(outline, { ...base, sections: [{ sourceHash: h, verbatim: 'review' }] }, src, 'ru', MANIFEST)).toBeNull()
+    expect(paraphrasedOutline(outline, { ...base, sections: [{ sourceHash: h, verbatim: 'near-identical' }] }, src, 'ru', MANIFEST)).toBeNull()
+    expect(paraphrasedOutline(outline, { ...base, sections: [{ sourceHash: h, points: [outline[0].points[0].text] }] }, src, 'ru', MANIFEST)).toBeNull()
+    expect(paraphrasedOutline(outline, { ...base, sections: [{ sourceHash: h, points: [ok], verbatim: 'review' }] }, src, 'ru', MANIFEST)).toBeNull()
+  })
+})
+
+describe('умолчание вкладки «Конспект» — настройка pack\'а', () => {
+  const cfg = (pack: string) => readFileSync(join(process.cwd(), 'packs', pack, 'course.config.ts'), 'utf8')
+  it('каждый pack объявляет lessonViews.summaryDefault', () => {
+    const packs = readdirSync(join(process.cwd(), 'packs'), { withFileTypes: true }).filter(e => e.isDirectory() && !e.name.startsWith('_'))
+    for (const p of packs) expect(cfg(p.name), p.name).toMatch(/lessonViews:\s*\{\s*summaryDefault:\s*'(paraphrase|verbatim)'/)
+  })
+  it('ТС — пересказ, «Тишина» — дословно (2 из 8 пересказов исказили смысл)', () => {
+    expect(cfg('tochka-sborki')).toMatch(/summaryDefault:\s*'paraphrase'/)
+    expect(cfg('living-practice')).toMatch(/summaryDefault:\s*'verbatim'/)
+  })
+  it('вычитка: два искажения «Тишины» (EN u5, u6) закреплены дословными', () => {
+    const lp = (unit: string) => JSON.parse(readFileSync(join(process.cwd(), 'packs', 'living-practice', 'views', 'en', '01-living-practice', `${unit}.json`), 'utf8')) as LessonViewsArtifact
+    for (const [unit, heading] of [['u5-neudobnoe', 'What showed up once somebody finally asked'], ['u6-bez-zakuporki', 'Two different things called by one word']]) {
+      const a = lp(unit)
+      const n = sectionsWithPoints(a.outline).find(x => x.heading === heading)!
+      expect(n, `${unit}: раздел «${heading}»`).toBeTruthy()
+      expect(a.paraphrase!.sections.find(x => x.sourceHash === sectionHash(n))).toEqual({ sourceHash: sectionHash(n), verbatim: 'review' })
+    }
   })
 })

@@ -78,15 +78,11 @@
       },
       {
         "sourceHash": "sha256:99bd4383e07a64ed216cb8aa561e62410c18eb526d301e24dd5d5f8cb30312f9",
-        "points": [
-          "Full fine-tuning changes all weights in the model and needs a lot of memory."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:b174d7b9e31599bd52ef3a2c7778adcda83a842375db3db9055f47b7bdfe9fbd",
-        "points": [
-          "For learning and narrow tasks, you take a SmolLM2 class model from Hugging Face with 135M, 360M or 1.7B parameters and an Apache-2.0 license."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

@@ -60,9 +60,7 @@
     "sections": [
       {
         "sourceHash": "sha256:a54816b503c56d041765c75487fcbf1fcfeb9a9e4e2219b6ab669f3bfa35694a",
-        "points": [
-          "Эта практика собрана по мотивам smol-course от Hugging Face под лицензией Apache-2.0."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:43e66f8d11d952d3f17bcb814b738c949779c71cd79c2f6ae243a547530d4867",
@@ -78,9 +76,7 @@
       },
       {
         "sourceHash": "sha256:406371950e1ca00bd997958fc8c3bed106c2e6daae113ad3669710a752c1bd53",
-        "points": [
-          "Практика адаптирована по материалам huggingface/smol-course и документации TRL от Hugging Face под лицензией Apache-2.0."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

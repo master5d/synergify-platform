@@ -99,21 +99,15 @@
       },
       {
         "sourceHash": "sha256:006d234835afcbecbc05571453cb1daa2b11a6da78affa189d7a889cc87a4d4a",
-        "points": [
-          "Отчёт может оказаться длинным."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:14788c715bfcaa7bf03f2e9685b2fdb100e106f705572bdc9ca51bdbb7ce7a56",
-        "points": [
-          "Если у тебя есть незакоммиченные изменения, сначала закоммить их отдельно."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:10ebc2515499c880cd9b49646f0aea172aaf5a5ffcbda2cce150504776dd74d0",
-        "points": [
-          "Это пересказ отзыва читателя о стороннем стартере для Claude Code, а не наш замер."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

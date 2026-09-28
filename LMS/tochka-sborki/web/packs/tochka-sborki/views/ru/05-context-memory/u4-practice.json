@@ -62,15 +62,11 @@
     "sections": [
       {
         "sourceHash": "sha256:9966e7be43027acef7bca63fb77c547f77356d119b85c087d1b92729eb66788f",
-        "points": [
-          "/btw не подходит для этого, так как это побочный вопрос о текущей сессии, который не попадает в историю разговора."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:762e97082901c591c61c4a37cd8f1c99cc2ada6b5b78a5db5ca45bf01c9ee3c5",
-        "points": [
-          "Это происходит в начале новой сессии или когда контекст заполнился."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:b3d1c0f7b1cd79d41d51be636a4615691ccf36691955883f7ac9885dac29dab8",

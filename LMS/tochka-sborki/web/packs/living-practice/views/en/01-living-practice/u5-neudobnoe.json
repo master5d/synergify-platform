@@ -113,19 +113,11 @@
       },
       {
         "sourceHash": "sha256:47a45b080ba66ad8e97264bb47785f3e795784e0a0f34db92d0ce7a9912486bf",
-        "points": [
-          "Britton, Lindahl, Cooper, Canby, Palitsky, Goldberg, Lam, Davidson, Matko and Van Dam interviewed and sampled people with meditation experience.",
-          "Two conclusions are stable: unpleasant effects are common, and persistent harm is rare.",
-          "This harm occurs on the order of a few per cent up to the mid-teens.",
-          "People who reported harm were just as glad they had practised as everyone else."
-        ]
+        "verbatim": "review"
       },
       {
         "sourceHash": "sha256:438beb5653ff7578ae22ab256dc1c046e3eedfbdaf81dbc265d8ea419bfc480d",
-        "points": [
-          "Difficult experience inside the window is material.",
-          "Difficult experience past the edge of the window is a signal to stop."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:3e481e2f3e7a022339f078a8efadcab033bd52c2c40c36a297e673871efcbbac",
@@ -141,9 +133,7 @@
       },
       {
         "sourceHash": "sha256:0a7b775bdb5b8a1dcdd11937d5d2b24edbfb5b5b959825d2a26f4d41c3019007",
-        "points": [
-          "There are two working returns for when a session has rocked you but the stop signals have not appeared."
-        ]
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:9d01aa44ea867e75fbf9ed1f67de121a77dc0e7d9a04986aa2318f7dc953c818",

@@ -39,10 +39,7 @@
     "sections": [
       {
         "sourceHash": "sha256:9984535e3e0949f61351a63d9209bdd4ff684eebee6b5209db2bcd3d2ae7acf6",
-        "points": [
-          "Ты рассмотришь реальный кейс ENERV n8n pipeline.",
-          "Важно заметить, что это не один большой промпт, а спроектированная архитектура."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }
