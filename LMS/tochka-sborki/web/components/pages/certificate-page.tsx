@@ -10,7 +10,9 @@ import { COURSE } from '@/lib/course'
 import type { Locale } from '@/lib/dictionaries'
 import type { CourseOutline } from '@/lib/progress-sync'
 import { BASE_PATH } from '@/lib/base-path'
-import { buildEvidence, verifyPageUrl, SPINE_TOTAL, type ProgressRow } from '@/lib/certificate-evidence'
+import { buildEvidence, interpretVerify, verifyPageUrl, SPINE_TOTAL, type ProgressRow } from '@/lib/certificate-evidence'
+import { PLATFORM_API } from '@/lib/platform-api'
+import { certificationIdentity, linkedInAddToProfileUrl } from '@/lib/linkedin-add-to-profile'
 
 const COPY = {
   ru: {
@@ -22,6 +24,7 @@ const COPY = {
     download: '↓ Скачать SVG',
     shareX: 'Поделиться в X',
     shareLI: 'Поделиться в LinkedIn',
+    addLI: 'Добавить в профиль LinkedIn',
     copyLink: 'Скопировать ссылку',
     copied: '✓ Скопировано',
     shareText: 'Получил золотой билет «Точки Сборки» — vibe coding, Claude Code, агенты, автоматизация.',
@@ -48,6 +51,7 @@ const COPY = {
     download: '↓ Download SVG',
     shareX: 'Share on X',
     shareLI: 'Share on LinkedIn',
+    addLI: 'Add to LinkedIn profile',
     copyLink: 'Copy link',
     copied: '✓ Copied',
     shareText: 'Earned my Tochka Sborki golden ticket — vibe coding, Claude Code, agents, automation.',
@@ -132,17 +136,45 @@ export function CertificatePage({ locale, outline = NO_OUTLINE }: Props) {
 
   // Публичный адрес проверки: код выдаёт воркер только по сессии; показываем, лишь когда
   // курс засчитан сервером (admission) — иначе проверка ответила бы «не подтверждён».
-  const [verifyUrl, setVerifyUrl] = useState<string | null>(null)
+  const [verifyCode, setVerifyCode] = useState<string | null>(null)
   const [qrSvg, setQrSvg] = useState<string | null>(null)
   useEffect(() => {
     if (!academyGranted) return
     fetch('/api/certificate/code', { credentials: 'include' })
       .then(r => (r.ok ? r.json() : null))
       .then(d => {
-        if (typeof d?.code === 'string') setVerifyUrl(verifyPageUrl(window.location.origin, locale, d.code, BASE_PATH))
+        if (typeof d?.code === 'string') setVerifyCode(d.code)
       })
       .catch(() => {})
-  }, [academyGranted, locale])
+  }, [academyGranted])
+  const verifyUrl = useMemo(
+    () => (verifyCode && typeof window !== 'undefined' ? verifyPageUrl(window.location.origin, locale, verifyCode, BASE_PATH) : null),
+    [verifyCode, locale],
+  )
+
+  // «Добавить в профиль LinkedIn» (intake LMS#18): дата выпуска и курс — те же, что покажет
+  // проверка (/api/certificate/verify), а не сегодняшняя дата с картинки. Нет ответа — ссылка
+  // всё равно есть, но без месяца/года (пустых полей LinkedIn не шлём).
+  const [verified, setVerified] = useState<{ course: string; completedAt: string } | null>(null)
+  useEffect(() => {
+    if (!verifyCode) return
+    const ctrl = new AbortController()
+    const timer = setTimeout(() => ctrl.abort(), 10_000)
+    fetch(`${PLATFORM_API}/api/certificate/verify?c=${encodeURIComponent(verifyCode)}`, { signal: ctrl.signal })
+      .then(async r => {
+        const res = interpretVerify(r.status, await r.json().catch(() => null))
+        if (res.state === 'valid') setVerified({ course: res.course, completedAt: res.completedAt })
+      })
+      .catch(() => {})
+      .finally(() => clearTimeout(timer))
+    return () => { clearTimeout(timer); ctrl.abort() }
+  }, [verifyCode])
+  const linkedInAddUrl = useMemo(() => {
+    if (!verifyCode || !verifyUrl) return null
+    const id = certificationIdentity(verified?.course ?? COURSE.progressKey, locale)
+    if (!id) return null
+    return linkedInAddToProfileUrl({ ...id, issuedAt: verified?.completedAt, certId: verifyCode, certUrl: verifyUrl })
+  }, [verifyCode, verifyUrl, verified, locale])
   useEffect(() => {
     if (!verifyUrl) return
     QRCode.toString(verifyUrl, { type: 'svg', margin: 1, color: { dark: '#0f0f0e', light: '#ebe7df' }, width: 160 })
@@ -331,6 +363,26 @@ export function CertificatePage({ locale, outline = NO_OUTLINE }: Props) {
               >
                 in  {t.shareLI}
               </button>
+              {linkedInAddUrl && (
+                <a
+                  href={linkedInAddUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    padding: '0.75rem 1.25rem',
+                    background: 'transparent',
+                    color: 'var(--text-primary)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: 'var(--radius)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.8rem',
+                    textAlign: 'left',
+                    textDecoration: 'none',
+                  }}
+                >
+                  in  {t.addLI}
+                </a>
+              )}
               <button
                 onClick={copyLink}
                 style={{
