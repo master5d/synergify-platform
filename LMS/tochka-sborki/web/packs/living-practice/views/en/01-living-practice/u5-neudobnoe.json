@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-living-practice",
   "unit": "u5-neudobnoe",
   "locale": "en",
@@ -75,7 +75,12 @@
     },
     {
       "heading": "Two ways back",
-      "points": [],
+      "points": [
+        {
+          "text": "When a session has rocked you but the stop signals haven't appeared, there are two working returns",
+          "origin": "extract"
+        }
+      ],
       "children": []
     },
     {

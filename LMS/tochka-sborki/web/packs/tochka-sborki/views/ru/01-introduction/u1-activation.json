@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-introduction",
   "unit": "u1-activation",
   "locale": "ru",
@@ -27,5 +27,19 @@
     "c2",
     "c3"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:598c20943784e77678ee8e864abd8382da208ba75a75ae6994aee4f8d805eb7f",
+        "points": [
+          "В эпоху Software 3.0 агенты исполняют код по твоему замыслу.",
+          "Ты не просто отдаешь задачи AI, а думаешь и работаешь вместе с агентом."
+        ]
+      }
+    ]
+  }
 }

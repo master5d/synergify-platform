@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-living-practice",
   "unit": "u6-bez-zakuporki",
   "locale": "en",
@@ -19,7 +19,12 @@
     },
     {
       "heading": "What exactly gets pushed out",
-      "points": [],
+      "points": [
+        {
+          "text": "Three things, and all three regularly",
+          "origin": "extract"
+        }
+      ],
       "children": []
     },
     {
@@ -54,5 +59,42 @@
     }
   ],
   "cards": [],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:40af9b65e6742d64d3799c811e6e515300f4e9183d0b4454dfc2b33655652e2e",
+        "points": [
+          "You achieve a smooth state where the unpleasant does not reach you."
+        ]
+      },
+      {
+        "sourceHash": "sha256:8b832525c894dac11426817fed29f1252bdaa2a82fe8bfc104c672e5b5d44b29",
+        "points": [
+          "There are three things and all three occur regularly."
+        ]
+      },
+      {
+        "sourceHash": "sha256:3ef0603d7ca105003a7dc1ce483935e2c936b8fd80c60fe9d0408b34021d61f8",
+        "points": [
+          "This is a philosophical polemic rather than research."
+        ]
+      },
+      {
+        "sourceHash": "sha256:35e22b66334a5dabd8afb236e82305a6e33ddb041de7788254616dd3443670f8",
+        "points": [
+          "There is a recognisable construction."
+        ]
+      },
+      {
+        "sourceHash": "sha256:81f091efb07d45868fceb2254ca6da20da7c648a99da09378607d9679d332d27",
+        "points": [
+          "If practice raises what concerns other people, you work through it with people in a consequence leading straight into step eight."
+        ]
+      }
+    ]
+  }
 }

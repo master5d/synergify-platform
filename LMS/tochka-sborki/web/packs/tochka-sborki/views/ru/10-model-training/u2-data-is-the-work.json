@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "10-model-training",
+  "unit": "u2-data-is-the-work",
+  "locale": "ru",
+  "title": "Данные — основная работа",
+  "sourceHash": "sha256:67afc47bc5307c9a083c271964ece6c2ec880d95d9cd7ce714fd4c4504200c3e",
+  "outline": [
+    {
+      "heading": "Цикл машинного обучения",
+      "points": [
+        {
+          "text": "Цикл, а не прямая: после теста обычно возвращаешься к данным, а не к модели.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "«80 % времени — данные»",
+      "points": [
+        {
+          "text": "Часто повторяют, что подготовка данных съедает около 80 % времени ML-проекта.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Карта «задача → класс алгоритма»",
+      "points": [
+        {
+          "text": "Не каждая задача требует LLM.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4",
+    "c5",
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:c96515b6e499b60e862485cb45b0cdbcece2785d914fbbe67198ea82e23c8292",
+        "points": [
+          "Процесс представляет собой цикл, а не прямую, поэтому после теста ты обычно возвращаешься к данным, а не к модели."
+        ]
+      },
+      {
+        "sourceHash": "sha256:50af01590e76ce0acaab45aa19f670c12316f239dee3301c8e294030e3b974d3",
+        "points": [
+          "Подготовка данных часто занимает около 80 % времени всего ML-проекта."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fe26744d2ca16804db466e4e09d214e94c02e84eee5a2ef21465dc69d6aa894d",
+        "points": [
+          "Далеко не каждая задача требует использования LLM."
+        ]
+      }
+    ]
+  }
+}

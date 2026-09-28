@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "07-tools",
+  "unit": "u1-activation",
+  "locale": "en",
+  "title": "What's Claude Code missing?",
+  "sourceHash": "sha256:f5f3eafdd0767ead379e4a2848daef9c46ea3967419f62ae583611dd90fdea50",
+  "outline": [
+    {
+      "heading": "Taxonomy of Claude Code extensions",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Agency levels",
+      "points": [
+        {
+          "text": "This scale is one of the popular author-made frameworks (Avi Chawla, \"5 Levels of Agentic AI Systems\"), not an accepted standard.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:1871dabe53d372a14d0d977c1c47f1b64089227613dfa6216da8cfa720192f95",
+        "points": [
+          "This scale is a popular framework by Avi Chawla called 5 Levels of Agentic AI Systems but is not an accepted standard."
+        ]
+      }
+    ]
+  }
+}

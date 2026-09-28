@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-living-practice",
   "unit": "u3-telo",
   "locale": "ru",
@@ -69,5 +69,44 @@
   "cards": [
     "c3"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:895f7d29c6e7c5d7f3ba04a34cfa4f89ad7094838f4b8635951ce7fae9452765",
+        "points": [
+          "Внимание к телу дает тебе масштаб, которого нельзя достичь только через дыхание."
+        ]
+      },
+      {
+        "sourceHash": "sha256:54e8fb3d35f3d387441d5b8b5c788b89cf267999e16d0bbdfce5a0fc00ebae20",
+        "points": [
+          "При истории травмы тебе не подходит формат длительного и непрерывного сосредоточения на телесных ощущениях.",
+          "Об этом пишет Дэвид Треливен в книге Trauma-Sensitive Mindfulness, W. W. Norton, 2018.",
+          "Исследование Goldberg, Lam, Britton и Davidson, Psychotherapy Research, 2022 на 434 человеках связывает повторное переживание травмы с событиями детства."
+        ]
+      },
+      {
+        "sourceHash": "sha256:296fac19efb01dc795c5d281e6b97bff7ce60e31c72130ee2787a688fc9b2659",
+        "points": [
+          "Твоя задача не в завершении практики, а в сохранении себя внутри окна толерантности даже при обрыве сканирования."
+        ]
+      },
+      {
+        "sourceHash": "sha256:1e0076af1df2b184e94acaaac1c6e7e65496639f92a95f7d1ee9666d56267c4c",
+        "points": [
+          "Движение предлагается как пятая отдельная модификация, помогающая тебе вернуться."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c9da993986eab2d1e200fbb8d3f4f827a4e9ddfc75234e4d5d905904bba5c6d3",
+        "points": [
+          "Здесь ты не будешь работать с зажимами, отпускать травму из тела или дышать в боль."
+        ]
+      }
+    ]
+  }
 }

@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-setup-guide",
+  "unit": "u2-install",
+  "locale": "ru",
+  "title": "Установка инструментов",
+  "sourceHash": "sha256:16853ccefae27a65c2d28826a37305da57a05a5f8e0c115e83eef9cfc3c88756",
+  "outline": [
+    {
+      "heading": "⚡ Быстрая установка (одной строкой)",
+      "points": [
+        {
+          "text": "Хочешь сразу рабочую лабораторию — выполни одну команду в терминале.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Установка Claude Code",
+      "points": [
+        {
+          "text": "Claude Code — это CLI (command-line interface), агент который работает прямо в терминале.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Установка",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Проверка",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Первый запуск",
+          "points": [
+            {
+              "text": "Claude Code откроет интерактивную сессию.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Git: базовая конфигурация",
+          "points": [
+            {
+              "text": "Команды одинаковы на всех системах",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Полезные настройки терминала",
+          "points": [
+            {
+              "text": "PowerShell использует профиль вместо .bashrc.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4",
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:3b13127d62fbb9d3db6aa628f6f41e655cc6957db56d78f282098d915f08e298",
+        "points": [
+          "Если ты хочешь сразу получить рабочую лабораторию, выполни одну команду в терминале."
+        ]
+      },
+      {
+        "sourceHash": "sha256:172178812375841c9d82c3fb10b48c9ae2ff31650614c0decbcad521797e81ed",
+        "points": [
+          "Claude Code — это агент с интерфейсом командной строки, который работает прямо в твоем терминале."
+        ]
+      },
+      {
+        "sourceHash": "sha256:ee86f9f5b98bc632671b1e6312b760ccbb147382763d7ea384f69e1e62704ecd",
+        "points": [
+          "Claude Code откроет для тебя интерактивную сессию."
+        ]
+      },
+      {
+        "sourceHash": "sha256:b934a72db36b032dfc663c69185de77c3a3ccbfc67f253c20b7668d36bcd8278",
+        "points": [
+          "Эти команды будут одинаковыми на всех системах."
+        ]
+      },
+      {
+        "sourceHash": "sha256:33d4b05b911c1294d6931c85d26f703d88d6c78e771196770dce1144d84a10ea",
+        "points": [
+          "PowerShell использует профиль вместо файла .bashrc."
+        ]
+      }
+    ]
+  }
+}

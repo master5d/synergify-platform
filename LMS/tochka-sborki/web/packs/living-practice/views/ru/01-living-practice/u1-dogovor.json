@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-living-practice",
   "unit": "u1-dogovor",
   "locale": "ru",
@@ -66,5 +66,44 @@
   "cards": [
     "c1"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:2a4ff9c966634476b03e9759ed32b43a6504d94e8b2b32388c64f21a881a8f5a",
+        "points": [
+          "Тебя ждут восемь шагов практики внимания."
+        ]
+      },
+      {
+        "sourceHash": "sha256:3c96117cd81ffaba0482fdb433ef4e189b2c1153584757f7864df15c2fd182bb",
+        "points": [
+          "Крупный обзор Goyal et al. в JAMA Internal Medicine за 2014 год на основе 47 испытаний и 3515 человек показал малый эффект.",
+          "Программы осознанности дают результаты d≈0.38 для тревоги, d≈0.30 для депрессии и d≈0.33 для боли против активного контроля."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c782370277752a7ff59ab93e73f3e086e5e2d34d48c83c86f5e467cad75c34ad",
+        "points": [
+          "Долгое время данных о рисках не было, так как 84% испытаний не спрашивали о нежелательных явлениях согласно обзору Wong и коллег.",
+          "Эти сведения приводятся по Baer et al., 2019."
+        ]
+      },
+      {
+        "sourceHash": "sha256:41ae79468a5afaa7ac53b67c0f6c14faeb8f98efb2056f6d86caec941450635f",
+        "points": [
+          "Это не запрет или отсев, а способ твоей маршрутизации."
+        ]
+      },
+      {
+        "sourceHash": "sha256:4c46db925df3a5468e10748dc65e45d6adc18973b85286a5c6098fa72a900ec7",
+        "points": [
+          "Если после сессии у тебя сохраняется чувство тяжести, обратись к живому специалисту."
+        ]
+      }
+    ]
+  }
 }

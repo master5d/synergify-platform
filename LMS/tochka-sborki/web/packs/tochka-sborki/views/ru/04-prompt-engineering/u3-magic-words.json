@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-prompt-engineering",
+  "unit": "u3-magic-words",
+  "locale": "ru",
+  "title": "Магические слова",
+  "sourceHash": "sha256:a04e1aef2e550de731ff31fff6553a54754cfd2b20e3f10559fa7010316d9bf3",
+  "outline": [
+    {
+      "heading": "Фразы, которые стабильно улучшают результат",
+      "points": [],
+      "children": [
+        {
+          "heading": "Пример: с магией и без",
+          "points": [
+            {
+              "text": "Проценты условные: они показывают разницу, а не измерены.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Что НЕ работает",
+          "points": [],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c5",
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:b2471ada27fed6a77f4ff964169aca3719388cd2ef099c2c2fcd37d6681a316a",
+        "points": [
+          "Эти проценты условны, так как они лишь показывают разницу и не являются результатом измерений."
+        ]
+      }
+    ]
+  }
+}

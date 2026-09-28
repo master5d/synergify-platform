@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "10-model-training",
+  "unit": "u4-evaluation",
+  "locale": "ru",
+  "title": "Оценка: помогло ли",
+  "sourceHash": "sha256:4c926b15a68fcee7ab4aac17f32115cea5165d076ddeea397c015a4f078e0e4a",
+  "outline": [
+    {
+      "heading": "Holdout: отложи до начала",
+      "points": [
+        {
+          "text": "Главное правило оценки: часть примеров откладывается до обучения и не показывается модели.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Переобучение",
+      "points": [
+        {
+          "text": "Переобучение (overfitting) — модель подстраивается под обучающие примеры так плотно, что хуже работает на новых.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Бенчмарк против своей задачи",
+      "points": [
+        {
+          "text": "Поэтому для своей задачи собирай свой набор проверки — из того же holdout.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Как понять, что дообучение помогло",
+      "points": [
+        {
+          "text": "Размер проверочного набора — вопрос задачи.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c10",
+    "c11"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:d8c1d724eed88b82390eae06ed61907322e628458c3c04c92a3611d31f687eee",
+        "points": [
+          "По главному правилу оценки тебе нужно отложить часть примеров до обучения и не показывать их модели."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fa13767e2f64ee67b03ad17a2cdda36732c7f32b2f28de4bf3f7984ce1b1f4fa",
+        "points": [
+          "При переобучении модель подстраивается под обучающие примеры так плотно, что начинает хуже работать на новых."
+        ]
+      },
+      {
+        "sourceHash": "sha256:6d1a3411456cb1d69307b0e86ffc7b919343f7317c8bf290bd2f8f019d275e03",
+        "points": [
+          "Для своей задачи собирай собственный набор проверки из того же holdout."
+        ]
+      },
+      {
+        "sourceHash": "sha256:edffaa25fe9491f6687b0ff000ec788ce271b132a84701511d1c69505f4c3014",
+        "points": [
+          "Размер проверочного набора зависит от твоей конкретной задачи."
+        ]
+      }
+    ]
+  }
+}

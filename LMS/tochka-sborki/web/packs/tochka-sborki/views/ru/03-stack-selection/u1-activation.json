@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-stack-selection",
+  "unit": "u1-activation",
+  "locale": "ru",
+  "title": "Какие у тебя ограничения?",
+  "sourceHash": "sha256:fe5077d2ae72693b5ef750af36dbd38369c5efd910dc1f15479c9a878b2e9b73",
+  "outline": [
+    {
+      "heading": "Почему нельзя «просто Claude Code»",
+      "points": [
+        {
+          "text": "И ты не «хуже» — просто agentic AI больше не моно-инструмент, есть открытые альтернативы.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что такое «стек»",
+      "points": [
+        {
+          "text": "Например: Claude Code → LiteLLM → Cerebras gpt-oss-120b — Claude Code UI с открытой моделью Aider → прямой OpenRouter → DeepSeek-Coder — классический OSS workflow Hermes → LiteLLM с fallback массивом — SOVERN-pattern",
+          "origin": "extract"
+        },
+        {
+          "text": "Этот модуль научит тебя думать про стек целиком, а не «знать одну тулзу».",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:a69e054e9ccf54ecb93be3784d4cf465f8235b3c64aab775152478cf8b08ee39",
+        "points": [
+          "Ты не хуже, ведь агентный ИИ перестал быть моно-инструментом и теперь существуют открытые альтернативы."
+        ]
+      },
+      {
+        "sourceHash": "sha256:7fac095f4a5e84451ab4b5512435aca9f4e63195cf8f8ef0953f7faae501748a",
+        "points": [
+          "Ты можешь использовать связки вроде Claude Code с LiteLLM и Cerebras gpt-oss-120b или Claude Code UI с Aider, прямым OpenRouter и DeepSeek-Coder.",
+          "Также возможны классический OSS workflow Hermes или LiteLLM с fallback массивом в SOVERN-pattern.",
+          "Этот модуль научит тебя думать про стек целиком, а не просто знать одну тулзу."
+        ]
+      }
+    ]
+  }
+}

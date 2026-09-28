@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-introduction",
   "unit": "u4-practice",
   "locale": "ru",
@@ -19,5 +19,18 @@
     }
   ],
   "cards": [],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:ff70972cf5135726abe33532b9e8aab01288dac59e98dd252375973caf272755",
+        "points": [
+          "Ты завершил изучение модуля 01."
+        ]
+      }
+    ]
+  }
 }

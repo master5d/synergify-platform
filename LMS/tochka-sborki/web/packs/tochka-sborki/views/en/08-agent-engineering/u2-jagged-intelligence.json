@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "08-agent-engineering",
+  "unit": "u2-jagged-intelligence",
+  "locale": "en",
+  "title": "Jagged Intelligence: What to Delegate",
+  "sourceHash": "sha256:2492c801160f206c4d0d884ce1529e389abfb8ceabfe711cf2fbe126438d5f92",
+  "outline": [
+    {
+      "heading": "",
+      "points": [
+        {
+          "text": "Taste rule for the agent engineer:",
+          "origin": "extract"
+        },
+        {
+          "text": "This means: You choose — what to build AI writes — the code that does it You verify — that the result matches the intent AI fixes — what you flagged as wrong",
+          "origin": "extract"
+        },
+        {
+          "text": "Real example: the ENERV pipeline",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4",
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:aa6df4dbb87e4823b0b793eab2a1e8165f010581b1b90a7ae3605093d6d04098",
+        "points": [
+          "You follow the taste rule for the agent engineer.",
+          "You choose what to build while the AI writes the code.",
+          "You verify that the result matches your intent and the AI fixes what you flag as wrong.",
+          "The ENERV pipeline serves as a real example."
+        ]
+      }
+    ]
+  }
+}

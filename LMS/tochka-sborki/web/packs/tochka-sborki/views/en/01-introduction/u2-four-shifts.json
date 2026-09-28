@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-introduction",
   "unit": "u2-four-shifts",
   "locale": "en",
@@ -66,5 +66,42 @@
     "c7",
     "c8"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:4ff73ac82d4134d178bd98607740c54f7a766e15f2f078b6013095f089b64abc",
+        "points": [
+          "This is not AI doing it instead of you but four ways of co-working to think and build together."
+        ]
+      },
+      {
+        "sourceHash": "sha256:7dba658811c75f61fa19d6e676188333f1660cffff39e663db26e5525d41a4e4",
+        "points": [
+          "The agent is not a robot you give commands to."
+        ]
+      },
+      {
+        "sourceHash": "sha256:abedc635bcdea4f5dab0d850706ff515a2dec79982ac22b9825bde280ff6988a",
+        "points": [
+          "The first answer is a draft and not a verdict."
+        ]
+      },
+      {
+        "sourceHash": "sha256:a44192cd5f1c8fa33319e81798afeede2ed69a50ed11a9638492e92af86fe29a",
+        "points": [
+          "A good spec has who, what, why, how, and what not to do."
+        ]
+      },
+      {
+        "sourceHash": "sha256:f64aa80f7b1f798c0a6c1f97b0e8e7f192eb98e865513bd81eeec0c95c74fae4",
+        "points": [
+          "Delegate routine, first drafts, and search to the agent."
+        ]
+      }
+    ]
+  }
 }

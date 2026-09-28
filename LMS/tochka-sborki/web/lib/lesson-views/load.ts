@@ -6,12 +6,17 @@ import path from 'node:path'
 import { PACK_DIR, CONTENT_ROOT } from '../pack'
 import type { SelfCheckItem } from '../content'
 import { sourceHash, unitChecks, type LessonViewsArtifact, type OutlineNode } from './extract'
+import { paraphrasedOutline } from './paraphrase'
+import { MANIFEST } from '../manifest'
 
 export interface ViewCard { id: string; question: string; answer: string; explain: string }
 
 export interface LessonViewsData {
   title: string
   outline: OutlineNode[]
+  /** Конспект пересказом: разделы, чей пересказ прошёл гвард, — пересказ, остальные — дословно.
+   *  null — пересказа нет; вкладка «Конспект» показывает дословный outline. */
+  paraphrased: OutlineNode[] | null
   cards: ViewCard[]
 }
 
@@ -35,7 +40,8 @@ export function getLessonViews(
   if (!a) return null
   const mdxPath = path.join(CONTENT_ROOT, locale, module, `${unit}.mdx`)
   const own = unitChecks(checks, unit)
-  if (!fs.existsSync(mdxPath) || a.sourceHash !== sourceHash(fs.readFileSync(mdxPath, 'utf8'), own)) {
+  const mdx = fs.existsSync(mdxPath) ? fs.readFileSync(mdxPath, 'utf8') : null
+  if (mdx === null || a.sourceHash !== sourceHash(mdx, own)) {
     console.warn(`lesson-views: ${locale}/${module}/${unit} устарел — вкладки скрыты; node scripts/gen-lesson-views.ts`)
     return null
   }
@@ -43,5 +49,7 @@ export function getLessonViews(
     const c = own.find(x => x.id === id)
     return c ? [{ id, question: c.question, answer: c.options[c.answer], explain: c.explain }] : []
   })
-  return { title: a.title, outline: a.outline, cards }
+  // Гвард пересказа — ещё раз при сборке: не прошедший раздел ученик видит дословным, даже если тест пропустили.
+  const paraphrased = paraphrasedOutline(a.outline, a.paraphrase, mdx, locale, MANIFEST)
+  return { title: a.title, outline: a.outline, paraphrased, cards }
 }

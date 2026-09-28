@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "05-context-memory",
+  "unit": "u3-memory",
+  "locale": "en",
+  "title": "The memory system",
+  "sourceHash": "sha256:e9853f27d8f359860380931b3ac621efb34efdb34728a1a13f04e44e4818e970",
+  "outline": [
+    {
+      "heading": "Memory files: three you write, one Claude writes",
+      "points": [],
+      "children": [
+        {
+          "heading": "CLAUDE.md — project context (the main one)",
+          "points": [
+            {
+              "text": "Limit: up to ~200 lines.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "TODO.md — current tasks",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "AGENTS.md — instructions for the agent",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "MEMORY.md — Claude's auto-memory",
+          "points": [
+            {
+              "text": "Unlike the three files above, Claude writes MEMORY.md itself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c6",
+    "c7",
+    "c8"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:bfac95e6d02c24346e1bd0e4842dfd9dd2d29d7c2a36d3cbaee35251c1972d6a",
+        "points": [
+          "You keep this to a limit of about 200 lines."
+        ]
+      },
+      {
+        "sourceHash": "sha256:7f4edd9c617a56e033e74af11ee1679fac523077d0e2e047702311d0fffc4be4",
+        "points": [
+          "Claude writes MEMORY.md itself, unlike the other three files."
+        ]
+      }
+    ]
+  }
+}

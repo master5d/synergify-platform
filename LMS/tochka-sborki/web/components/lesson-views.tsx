@@ -10,6 +10,8 @@ export const T = {
     label: 'Как читать урок',
     text: 'Текст', summary: 'Конспект', cards: 'Карточки', map: 'Карта',
     summaryNote: 'Ключевые фразы урока дословно. Полный текст — во вкладке «Текст».',
+    paraNote: 'Пересказ ключевых фраз урока: его написала модель, а проверка убедилась, что в нём нет чисел, ссылок и названий, которых нет в уроке. Полный текст — во вкладке «Текст».',
+    showVerbatim: 'Показать дословно', showParaphrase: 'Показать пересказ',
     card: (i: number, n: number) => `Карточка ${i} из ${n}`,
     show: 'Показать ответ', hide: 'Скрыть ответ', prev: 'Назад', next: 'Дальше',
     mapNote: 'Разделы урока и их ключевые фразы. Узлы сворачиваются.',
@@ -18,6 +20,8 @@ export const T = {
     label: 'How to read this lesson',
     text: 'Text', summary: 'Summary', cards: 'Cards', map: 'Map',
     summaryNote: 'Key sentences of the lesson, verbatim. The full lesson is under “Text”.',
+    paraNote: 'A retelling of the lesson’s key sentences: a model wrote it, and a check made sure it adds no numbers, links or names that are not in the lesson. The full lesson is under “Text”.',
+    showVerbatim: 'Show verbatim', showParaphrase: 'Show the retelling',
     card: (i: number, n: number) => `Card ${i} of ${n}`,
     show: 'Show answer', hide: 'Hide answer', prev: 'Back', next: 'Next',
     mapNote: 'Lesson sections and their key sentences. Nodes collapse.',
@@ -35,7 +39,14 @@ const box = { margin: '1rem 0 2rem', padding: '1.25rem 1.5rem', border: '1px sol
 const note = { margin: '0 0 1rem', color: 'var(--text-secondary)', fontSize: 'var(--text-xs)' } as const
 const btn = { fontFamily: 'var(--font-mono)', fontSize: '0.85rem', padding: '0.4rem 0.9rem', borderRadius: 'var(--radius)', border: '1px solid var(--border-color)', background: 'transparent', color: 'var(--text-primary)', cursor: 'pointer' } as const
 
-function Summary({ outline, locale }: { outline: OutlineNode[]; locale: 'ru' | 'en' }) {
+const toggle = { fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', background: 'none', border: 'none', padding: 0, color: 'var(--text-secondary)', textDecoration: 'underline', cursor: 'pointer' } as const
+
+/** Конспект: пересказ по умолчанию (если есть и прошёл гвард), переключатель «дословно» — как у примера из интереса. */
+export function Summary({ data, locale }: { data: LessonViewsData; locale: 'ru' | 'en' }) {
+  const t = T[locale]
+  const [verbatim, setVerbatim] = useState(false)
+  const para = data.paraphrased !== null && !verbatim
+  const outline = para ? data.paraphrased! : data.outline
   const section = (n: OutlineNode, depth: number, key: number): ReactNode => (
     <div key={key} style={{ marginTop: depth === 0 ? '1.25rem' : '0.75rem', paddingLeft: depth ? '1rem' : 0 }}>
       {n.heading && (depth === 0
@@ -51,8 +62,15 @@ function Summary({ outline, locale }: { outline: OutlineNode[]; locale: 'ru' | '
   )
   return (
     <section style={box}>
-      <p style={note}>{T[locale].summaryNote}</p>
-      {outline.map((n, i) => section(n, 0, i))}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem 1rem', alignItems: 'baseline', justifyContent: 'space-between' }}>
+        <p style={{ ...note, flex: '1 1 20rem' }}>{para ? t.paraNote : t.summaryNote}</p>
+        {data.paraphrased && (
+          <button type="button" style={toggle} aria-pressed={verbatim} onClick={() => setVerbatim(v => !v)}>
+            {verbatim ? t.showParaphrase : t.showVerbatim}
+          </button>
+        )}
+      </div>
+      <div aria-live="polite">{outline.map((n, i) => section(n, 0, i))}</div>
     </section>
   )
 }
@@ -152,7 +170,7 @@ export function LessonViews({ data, locale, children }: { data: LessonViewsData 
       <div role="tabpanel" id={`${base}-panel-text`} aria-labelledby={`${base}-tab-text`} hidden={view !== 'text'}>{children}</div>
       {view !== 'text' && (
         <div role="tabpanel" id={`${base}-panel-${view}`} aria-labelledby={`${base}-tab-${view}`}>
-          {view === 'summary' && <Summary outline={data.outline} locale={locale} />}
+          {view === 'summary' && <Summary data={data} locale={locale} />}
           {view === 'cards' && <Cards data={data} locale={locale} />}
           {view === 'map' && <MapView data={data} locale={locale} />}
         </div>

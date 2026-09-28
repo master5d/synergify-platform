@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-living-practice",
   "unit": "u2-dyhanie",
   "locale": "ru",

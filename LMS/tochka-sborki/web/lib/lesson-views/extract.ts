@@ -6,11 +6,13 @@
 // только `import type` из локальных модулей, без enum/namespace/parameter properties.
 import { createHash } from 'node:crypto'
 import type { SelfCheckItem } from '../content'
+import type { ParaphraseBlock } from './paraphrase'
 
-export const GENERATOR = 'extract-v1'
+export const GENERATOR = 'extract-v2'
 export const SCHEMA = 1
 
-/** extract — дословный фрагмент источника; manual/llm — перефраз, проверяется числовым гвардом. */
+/** extract — дословный фрагмент источника; manual — ручной перефраз (числовой гвард);
+ *  llm — пункт пересказа, живёт только в блоке `paraphrase` и проверяется его гвардом. */
 export type PointOrigin = 'extract' | 'manual' | 'llm'
 
 export interface ViewPoint { text: string; origin: PointOrigin }
@@ -35,6 +37,9 @@ export interface LessonViewsArtifact {
   cards: string[]
   /** Слот озвучки — следующий шаг (см. спеку), пока всегда null. */
   audio: null
+  /** Пересказ конспекта моделью (paraphrase.ts). Не часть извлечения: генератор переносит его между
+   *  пересборками по хэшу раздела, дословная часть от него не зависит. */
+  paraphrase?: ParaphraseBlock
 }
 
 const FRONTMATTER_RE = /^---\n[\s\S]*?\n---\n?/
@@ -134,6 +139,14 @@ function theses(lines: string[]): ViewPoint[] {
     for (const block of blocks) {
       const s = sentences(block).find(isSentence)
       if (s) { out.push(s); break }
+    }
+  }
+  // extract-v2: раздел, где проза — только вводная фраза перед кодом/таблицей/списком
+  // («…у каждого свои стороны:»), даёт её тезисом без двоеточия. Дословность сохраняется.
+  if (out.length === 0) {
+    for (const block of blocks) {
+      const s = sentences(block).find(x => /[:：]$/.test(x) && wordCount(x) >= 3)
+      if (s) { out.push(s.replace(/\s*[:：]$/, '')); break }
     }
   }
   return out.map(t => ({ text: t, origin: 'extract' as const }))

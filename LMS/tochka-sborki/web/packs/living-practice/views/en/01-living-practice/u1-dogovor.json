@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-living-practice",
   "unit": "u1-dogovor",
   "locale": "en",
@@ -66,5 +66,44 @@
   "cards": [
     "c1"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:599b82760ba9700bf3f9223db96112927217741a9b3a63c920ed52c34b00152e",
+        "points": [
+          "This course offers eight steps of attention practice."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c5b10644198f82fda76dfbb71b8bb87e3ac3171e85f021e2172ed3a28b545b1f",
+        "points": [
+          "The largest review for medical decision-making by Goyal et al. in JAMA Internal Medicine 2014 included 47 clinical trials and 3,515 people.",
+          "It shows mindfulness programmes have a small effect on anxiety d≈0.38, depression d≈0.30, and pain d≈0.33 against active controls."
+        ]
+      },
+      {
+        "sourceHash": "sha256:69b0bfa515bea8cd2a4ec7520c8e95cf81dbef73ef03c280b646165d2cf3cc56",
+        "points": [
+          "These numbers were missing for a long time because 84% of clinical trials never asked about adverse events.",
+          "This is according to Wong et al. as cited in Baer et al., 2019."
+        ]
+      },
+      {
+        "sourceHash": "sha256:64a494b53c6ab706451036963bd3a857b13c42183c698e8ab9d193d5f56b0d39",
+        "points": [
+          "This is not a ban or a filter but a method of routing."
+        ]
+      },
+      {
+        "sourceHash": "sha256:ca43683e192b38d6680ccf8ce1c23caf9ab100aadda145ef5a9ab66e5c573fe0",
+        "points": [
+          "Contact a living professional if the heaviness persists beyond the session."
+        ]
+      }
+    ]
+  }
 }

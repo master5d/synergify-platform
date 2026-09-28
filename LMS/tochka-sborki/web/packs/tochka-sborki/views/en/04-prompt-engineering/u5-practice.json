@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-prompt-engineering",
+  "unit": "u5-practice",
+  "locale": "en",
+  "title": "A professional prompt",
+  "sourceHash": "sha256:54bd97fd45c37cd6fcf8b9176c522af3c84bfea6fdac8fff009e1291d671abb7",
+  "outline": [
+    {
+      "heading": "Meta-prompting: a prompt that writes prompts",
+      "points": [
+        {
+          "text": "If you don't know where to start — ask Claude to write the prompt for you",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Template for a reusable assistant",
+          "points": [
+            {
+              "text": "For repeating tasks (Claude Project, Gemini Gem, Claude Code Skill)",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Checklist before you hit send",
+          "points": [],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c10",
+    "c11",
+    "c12"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:dfa3dd7d643a60e1cc2d5c8ff6c49e3d30c95823446c2391835e042dea8287f1",
+        "points": [
+          "You can ask Claude to write the prompt for you if you do not know where to start."
+        ]
+      },
+      {
+        "sourceHash": "sha256:51fa2216ed2e70e01b6424d6fdba5561f4e8b2e7e0a45de651b37ec8da441c88",
+        "points": [
+          "Use a template for repeating tasks like a Claude Project, Gemini Gem, or Claude Code Skill."
+        ]
+      }
+    ]
+  }
+}

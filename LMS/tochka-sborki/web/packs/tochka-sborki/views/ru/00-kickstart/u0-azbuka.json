@@ -1,0 +1,157 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "00-kickstart",
+  "unit": "u0-azbuka",
+  "locale": "ru",
+  "title": "Азбука: шесть слов до старта",
+  "sourceHash": "sha256:60f1eaf9cc342229c4d0898bcf0f7c52b22a823d9b3bcbb07d9c6d022d7516f4",
+  "outline": [
+    {
+      "heading": "Где мы находимся: матрёшка",
+      "points": [
+        {
+          "text": "Слова «ИИ», «нейросеть», «машинное обучение» и «LLM» часто говорят как синонимы.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Шесть слов",
+      "points": [],
+      "children": [
+        {
+          "heading": "Токен",
+          "points": [
+            {
+              "text": "Как увидеть самому.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Контекстное окно",
+          "points": [
+            {
+              "text": "Как увидеть самому.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Температура",
+          "points": [
+            {
+              "text": "Как увидеть самому.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Почему моделей много и чем они отличаются",
+          "points": [
+            {
+              "text": "Как увидеть самому.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Промпт и контекст",
+          "points": [
+            {
+              "text": "Как увидеть самому.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Агент",
+          "points": [
+            {
+              "text": "Как увидеть самому.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "heading": "Как слова связаны",
+      "points": [
+        {
+          "text": "Токен — единица измерения.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c11",
+    "c12"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:743353da917ff3c5d4b800657ff8c6ba7c6d81117cca79eb996b1d07cbc29d7a",
+        "points": [
+          "Слова ИИ, нейросеть, машинное обучение и LLM часто используют как синонимы."
+        ]
+      },
+      {
+        "sourceHash": "sha256:f529cbe6c83531c10bffeefc8a33aee9236013def8e70ce96adb735e43d0ccab",
+        "points": [
+          "Ты можешь увидеть это самостоятельно."
+        ]
+      },
+      {
+        "sourceHash": "sha256:8af77c2b11a85c7cbb1c46d4bf857dece481fdbf1effac2c5bcc29ea3be7e6f3",
+        "points": [
+          "Ты можешь посмотреть на это сам."
+        ]
+      },
+      {
+        "sourceHash": "sha256:71b4c1bb7b8500abedafbb3011114e36ca52231392b4d3b93fc9640af8ae209e",
+        "points": [
+          "Ты можешь увидеть это своими глазами."
+        ]
+      },
+      {
+        "sourceHash": "sha256:3614eeeffba4205c1580be8883abae3bd49d6ec9b9a59db0d43cdc411950f690",
+        "points": [
+          "Ты можешь увидеть это сам."
+        ]
+      },
+      {
+        "sourceHash": "sha256:4b7311a218c2a7e8b4a60cf95e256f4b24051602e9fc57dbd5953c355890aadc",
+        "points": [
+          "Ты можешь посмотреть на это самостоятельно."
+        ]
+      },
+      {
+        "sourceHash": "sha256:a36fc2845cc7bd025cf82937930a46fa85f19b0c0f318c6075bf0137a7032a45",
+        "points": [
+          "Ты можешь увидеть это самостоятельно."
+        ]
+      },
+      {
+        "sourceHash": "sha256:9ccf367046bc1a994ade6113014439ca9f5743d71d0508f1c7aaac67494c6810",
+        "points": [
+          "Токен является единицей измерения."
+        ]
+      }
+    ]
+  }
+}

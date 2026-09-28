@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "07-tools",
+  "unit": "u1-activation",
+  "locale": "ru",
+  "title": "Чего не хватает Claude Code?",
+  "sourceHash": "sha256:55dbaca90aa8dfc76b72adf1825b032f4d3e80f591c17fde2600240d901ddb99",
+  "outline": [
+    {
+      "heading": "Таксономия расширений Claude Code",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Уровни агентности",
+      "points": [
+        {
+          "text": "Эта шкала — одна из популярных авторских схем (Avi Chawla, «5 Levels of Agentic AI Systems»), а не общепринятый стандарт.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:a20b052f6a91b3efa0cd9c1987e7bae6ddf9f40eacec9a6ba8957cfa45c532b3",
+        "points": [
+          "Эта шкала представляет собой популярную авторскую схему Avi Chawla под названием 5 Levels of Agentic AI Systems, а не общепринятый стандарт."
+        ]
+      }
+    ]
+  }
+}

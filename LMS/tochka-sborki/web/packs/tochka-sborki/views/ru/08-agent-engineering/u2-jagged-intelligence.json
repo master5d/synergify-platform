@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "08-agent-engineering",
+  "unit": "u2-jagged-intelligence",
+  "locale": "ru",
+  "title": "Jagged Intelligence: что отдавать AI",
+  "sourceHash": "sha256:5c895eac0f11a44e4de4be05fc9cfe35457549444f6e1fd2699ec99dfeba7d25",
+  "outline": [
+    {
+      "heading": "",
+      "points": [
+        {
+          "text": "Правило вкуса для agent engineer:",
+          "origin": "extract"
+        },
+        {
+          "text": "Это означает: Ты выбираешь — что строить AI пишет — код, который это делает Ты проверяешь — что результат соответствует замыслу AI чинит — то, что ты подсветил как ошибку",
+          "origin": "extract"
+        },
+        {
+          "text": "Реальный пример: ENERV пайплайн",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4",
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:7515f386576cfdebde003ca1a631dcaf327576e94cb7a41ac2c694e7e283e278",
+        "points": [
+          "Правило вкуса для agent engineer заключается в разделении ролей между тобой и искусственным интеллектом.",
+          "Ты выбираешь цель и проверяешь результат, а машина пишет код и исправляет ошибки по твоим указаниям.",
+          "Этот подход иллюстрирует реальный пример пайплайна ENERV."
+        ]
+      }
+    ]
+  }
+}

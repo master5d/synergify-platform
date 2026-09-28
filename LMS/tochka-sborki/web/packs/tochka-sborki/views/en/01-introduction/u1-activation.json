@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-introduction",
   "unit": "u1-activation",
   "locale": "en",
@@ -27,5 +27,20 @@
     "c2",
     "c3"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:430f80b0eda4f240b991b9cc3e01d30a1c7fa11014b483fad6151adef421e26e",
+        "points": [
+          "Software 3.0 involves agents that execute code based on your intent.",
+          "It is not about AI writing instead of you, but about co-thinking and co-working.",
+          "You and the agent think and build together."
+        ]
+      }
+    ]
+  }
 }

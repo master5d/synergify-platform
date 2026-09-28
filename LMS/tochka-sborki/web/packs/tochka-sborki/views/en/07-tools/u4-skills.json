@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "07-tools",
+  "unit": "u4-skills",
+  "locale": "en",
+  "title": "Skills: modular capabilities",
+  "sourceHash": "sha256:fc53febb817490a3efb2f6e8abe96d64f28e08ab42c01469886b913a0d1d6746",
+  "outline": [
+    {
+      "heading": "What is a Skill",
+      "points": [
+        {
+          "text": "A Skill is a folder with a Markdown file SKILL.md inside: instructions that Claude Code runs when you call /name.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "SKILL.md structure",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Where to store Skills",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "How to call",
+          "points": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "heading": "Plugin vs Skill",
+      "points": [],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c7",
+    "c8"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:d4596d45ad6474d3a69a76d74709b8133dee09e7ab204432200a4ec9cdd8619f",
+        "points": [
+          "A Skill is a folder containing a Markdown file named SKILL.md with instructions that Claude Code runs when you call /name."
+        ]
+      }
+    ]
+  }
+}

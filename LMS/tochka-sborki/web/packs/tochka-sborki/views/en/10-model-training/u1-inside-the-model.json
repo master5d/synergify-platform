@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "10-model-training",
+  "unit": "u1-inside-the-model",
+  "locale": "en",
+  "title": "What's inside a model",
+  "sourceHash": "sha256:31d16e3b353ca5f37d669411402fad20278e5bf848fa86ca1b1beb929f624a41",
+  "outline": [
+    {
+      "heading": "Tokens: how the model sees text",
+      "points": [
+        {
+          "text": "The model doesn't read letters or words.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Embeddings: meaning as coordinates",
+      "points": [
+        {
+          "text": "Each token number turns into an embedding — a long vector of numbers.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The transformer and attention",
+      "points": [
+        {
+          "text": "The core mechanism of modern models is described in the paper \"Attention Is All You Need\" (Vaswani et al., 2017).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Pretraining: predict the next token",
+      "points": [
+        {
+          "text": "The model learns one task: predict the next token from the previous ones.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Why the model knows — and why it lies",
+      "points": [
+        {
+          "text": "To continue text well, it pays for the model to capture the regularities of the world: grammar, facts, styles of reasoning.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2",
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:eb45e6f1ac57b3289f4422bfb3e9b590f2bd6b31b0a98a23c9fe6065732a016c",
+        "points": [
+          "The model does not read letters or words."
+        ]
+      },
+      {
+        "sourceHash": "sha256:df2b47b66ec0b9a849b87f7921000c61ac1f9e5abdc99c87925eef6b90607db8",
+        "points": [
+          "Every token number is turned into an embedding which is a long vector of numbers."
+        ]
+      },
+      {
+        "sourceHash": "sha256:501bd286ffcee24b125ef2a59176d1c5bed8b7a0381e311e090f1ebfc0b27491",
+        "points": [
+          "The core mechanism of modern models is described in the paper Attention Is All You Need by Vaswani et al., 2017."
+        ]
+      },
+      {
+        "sourceHash": "sha256:b68eeaabf6e28109c99208b6c649ec81527956b6a2f377cb40fa490d13cea1e6",
+        "points": [
+          "The model learns one task which is predicting the next token from the ones that came before."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2034e10fd4712aae47ef74e2d5ded7bc814e4c776f3ccc7191caebbab7b37a56",
+        "points": [
+          "The model captures world regularities like grammar, facts, and styles of reasoning to help it continue text well."
+        ]
+      }
+    ]
+  }
+}

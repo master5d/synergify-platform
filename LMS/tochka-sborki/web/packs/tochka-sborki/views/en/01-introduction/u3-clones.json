@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-introduction",
   "unit": "u3-clones",
   "locale": "en",
@@ -22,5 +22,18 @@
     "c9",
     "c10"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:a9696fb84d9f1c22e1da3da9d54dc597d01e91abb1231a7dc65e6dded1b3c01b",
+        "points": [
+          "The hours listed as saved are the author's rough estimates, and your own numbers will be different."
+        ]
+      }
+    ]
+  }
 }

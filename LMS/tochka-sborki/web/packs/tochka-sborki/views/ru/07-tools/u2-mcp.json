@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "07-tools",
+  "unit": "u2-mcp",
+  "locale": "ru",
+  "title": "MCP: суперсилы через протокол",
+  "sourceHash": "sha256:588b85813d3bcac4a9d95ba9e14454f3e19e83fd23d81e2f02c9ecab224094c7",
+  "outline": [
+    {
+      "heading": "MCP: три примитива",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Как подключить MCP-сервер",
+      "points": [
+        {
+          "text": "Проще всего — командой в терминале, из папки проекта.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Популярные MCP-серверы",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Частые ошибки (~60% проблем)",
+      "points": [
+        {
+          "text": "Решение: проверь JSON-синтаксис и токены прежде чем искать глубже.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:5024a1c20c2bf0831bf28d37289c1362d2b0002bad571729fe827929363b57ab",
+        "points": [
+          "Проще всего тебе будет воспользоваться командой в терминале из папки проекта."
+        ]
+      },
+      {
+        "sourceHash": "sha256:792e1be897596df653bccc582383cdf4136340b2b4250554303cbbae98509362",
+        "points": [
+          "Тебе стоит проверить JSON-синтаксис и токены, прежде чем искать решение глубже."
+        ]
+      }
+    ]
+  }
+}

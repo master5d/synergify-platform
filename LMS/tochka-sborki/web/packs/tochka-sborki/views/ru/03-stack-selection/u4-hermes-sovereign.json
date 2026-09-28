@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-stack-selection",
+  "unit": "u4-hermes-sovereign",
+  "locale": "ru",
+  "title": "Hermes + локальный стек",
+  "sourceHash": "sha256:c0879eca178a763ad2d4e09cc9b4a28a92d19d4f88fa4d2ff86955229834996a",
+  "outline": [
+    {
+      "heading": "Архитектура SOVERN stack",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Установка Hermes (упрощённая версия)",
+      "points": [],
+      "children": [
+        {
+          "heading": "Требования",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Скачать Hermes",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Базовый конфиг",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Первый запуск",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Skill system (опционально)",
+          "points": [
+            {
+              "text": "Это аналог .claude/skills/, но переносимый между агентами.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c9",
+    "c10"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:bcdbb736b44c9a1dce93140c7c5126c5c14b9ebfd28df8fb998c97399906e801",
+        "points": [
+          "Эта система напоминает .claude/skills/, но ты можешь переносить её между разными агентами."
+        ]
+      }
+    ]
+  }
+}

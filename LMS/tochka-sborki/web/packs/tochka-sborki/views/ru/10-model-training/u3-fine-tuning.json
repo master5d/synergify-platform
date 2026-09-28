@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "10-model-training",
+  "unit": "u3-fine-tuning",
+  "locale": "ru",
+  "title": "Дообучение: когда и как",
+  "sourceHash": "sha256:d519e622217d165fedc219e5017294d3aef100380dbcbfa8cf070acf1b76b3aa",
+  "outline": [
+    {
+      "heading": "Когда дообучать НЕ надо",
+      "points": [
+        {
+          "text": "Почему такой порядок.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Когда дообучение оправдано",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "SFT: учить на примерах",
+      "points": [
+        {
+          "text": "SFT (supervised fine-tuning) — дообучение на парах «запрос → желаемый ответ».",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "LoRA и PEFT: учить не всё",
+      "points": [
+        {
+          "text": "Полное дообучение меняет все веса модели и требует много памяти.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Выбор малой модели",
+      "points": [
+        {
+          "text": "Для учёбы и узких задач бери модель класса SmolLM2 от Hugging Face: 135M, 360M или 1.7B параметров, лицензия Apache-2.0.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c7",
+    "c8",
+    "c9"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:efdf62c0bc48da997414ccc3a2f8c180643f69136cf1661fd0d95c1139dd978f",
+        "points": [
+          "В уроке объясняется, почему выбран именно такой порядок."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e1282f79a68a9cf8ec8d25b2942f7b007d0fee6ab922bce20d3c3801d39e07e5",
+        "points": [
+          "SFT или supervised fine-tuning — это дообучение на парах из запроса и желаемого ответа."
+        ]
+      },
+      {
+        "sourceHash": "sha256:f65baa1fdf423253cd7e4b8462215884a8d7d61ce0e6eb99b14aafd4a57f79ca",
+        "points": [
+          "При полном дообучении меняются все веса модели, что требует большого количества памяти."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e41f30914f74ca86fffbe98dce85959cab3ae4e5338bc0a88eddbf55714cf704",
+        "points": [
+          "Для учёбы и узких задач бери модель SmolLM2 от Hugging Face на 135M, 360M или 1.7B параметров с лицензией Apache-2.0."
+        ]
+      }
+    ]
+  }
+}

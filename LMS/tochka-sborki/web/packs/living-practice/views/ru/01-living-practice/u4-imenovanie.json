@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-living-practice",
   "unit": "u4-imenovanie",
   "locale": "ru",
@@ -49,5 +49,33 @@
   "cards": [
     "c4"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:668f5bc86bb785b58ae0415c0de58ce07708c1758b99e16f2b03d20176658b1a",
+        "points": [
+          "Твое слово должно быть коротким и нейтральным.",
+          "Произнеси его про себя всего один раз."
+        ]
+      },
+      {
+        "sourceHash": "sha256:0937e3eb96c59eb144faea57fe2d05814971d8aa87790846d2874e24d226103b",
+        "points": [
+          "Интенсивную версию техники для прохождения стадии прозрения или темной ночи не дают новичкам без учителя.",
+          "В работе Lindahl 2017 указаны не популяционные частоты.",
+          "Именование здесь служит легкой пометкой на десять минут, а не инструментом штурма."
+        ]
+      },
+      {
+        "sourceHash": "sha256:73aafa3069e81f1ee32e2cc5e53655b9d6c2961b746a5294ad3b08d4bbe482a5",
+        "points": [
+          "Твоя пометка тревога не является диагнозом или оценкой."
+        ]
+      }
+    ]
+  }
 }

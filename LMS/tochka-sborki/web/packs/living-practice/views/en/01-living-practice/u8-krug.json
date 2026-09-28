@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-living-practice",
   "unit": "u8-krug",
   "locale": "en",
@@ -51,5 +51,36 @@
   "cards": [
     "c10"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:9be31c5df31d34f39f6b05268214c5da88f954ff93cf555175866c9909d2d7f6",
+        "points": [
+          "Evidence supports having a living person in the loop rather than just focusing on the group itself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:55c8243a4c27391efaf38c9b4e3d7205a1730d5d50777f35fdd29ca159037db2",
+        "points": [
+          "If you have no frame for a meeting, use the Group Insight Game (GII) with six cards, four steps, and one turn around the circle."
+        ]
+      },
+      {
+        "sourceHash": "sha256:25f87af0be48dfb8b2ffc02652e1ae563f3edfa226defebdfede7f58aca3748c",
+        "points": [
+          "An eighth informal point is that there is no humane way out of the course."
+        ]
+      },
+      {
+        "sourceHash": "sha256:3368fbeafb7cce4c40b51d154b84850d4af7f9035fdf5c1e8135c1007af2ceaf",
+        "points": [
+          "The course succeeded at the moment it became unnecessary."
+        ]
+      }
+    ]
+  }
 }

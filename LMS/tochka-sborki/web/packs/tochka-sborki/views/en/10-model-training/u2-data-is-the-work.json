@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "10-model-training",
+  "unit": "u2-data-is-the-work",
+  "locale": "en",
+  "title": "Data is the main work",
+  "sourceHash": "sha256:3ad4f0ee6c8ea1763a88b7335fd6f0d932ebeb086a8968080afc52e97b3f1614",
+  "outline": [
+    {
+      "heading": "The machine learning cycle",
+      "points": [
+        {
+          "text": "A cycle, not a straight line: after the test you usually go back to the data, not to the model.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "\"80% of the time is data\"",
+      "points": [
+        {
+          "text": "People often repeat that data preparation eats about 80% of an ML project's time.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Map: \"task → algorithm class\"",
+      "points": [
+        {
+          "text": "Not every task needs an LLM.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4",
+    "c5",
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:a3d49d19f319f870447438042bceda328a974272055bfd15fac478be777a9717",
+        "points": [
+          "The cycle is not a straight line.",
+          "After the test, you usually go back to the data instead of the model."
+        ]
+      },
+      {
+        "sourceHash": "sha256:d706339cc5ebb711b6251d794f22a80d098737145d6f9fa400e33d2185ffbec4",
+        "points": [
+          "People often repeat that data preparation takes about 80% of the time in an ML project."
+        ]
+      },
+      {
+        "sourceHash": "sha256:a35472c2ae6c9fcbeb2fc20433c79ede375d76a628627d462283e1bdd95a5610",
+        "points": [
+          "You do not need an LLM for every task."
+        ]
+      }
+    ]
+  }
+}

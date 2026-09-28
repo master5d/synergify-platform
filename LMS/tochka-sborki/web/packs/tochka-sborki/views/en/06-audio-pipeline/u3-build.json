@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-audio-pipeline",
+  "unit": "u3-build",
+  "locale": "en",
+  "title": "Build your pipeline",
+  "sourceHash": "sha256:b5e6ed9957204151d2e6b5fe578181cd0498a2f86eef69f11afa55dcb689461f",
+  "outline": [
+    {
+      "heading": "Full pipeline: URL → Insights",
+      "points": [
+        {
+          "text": "In a chat (claude.ai) the model won't create a file: copy the result into your ideas file, e.g. my-experiments/ideas.md.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Extended pipeline: multiple sources",
+      "points": [
+        {
+          "text": "The safety net matters even more here: without a scraping tool the model may \"imagine\" three articles at once.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:19e98a23a2b8296c45236325365670fc4d79a1527cb76c45aaa553fceafcc8e3",
+        "points": [
+          "The model in claude.ai will not create a file, so you should copy the result into your ideas file like my-experiments/ideas.md."
+        ]
+      },
+      {
+        "sourceHash": "sha256:8b5cffb74479d3a3ac643e8717c84bba35dd38c632abca71512bfaa47ece494c",
+        "points": [
+          "The safety net is even more important here because without a scraping tool the model might imagine three articles at once."
+        ]
+      }
+    ]
+  }
+}

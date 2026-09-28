@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-living-practice",
   "unit": "u7-razgovor-s-ii",
   "locale": "en",
@@ -31,7 +31,12 @@
     },
     {
       "heading": "What the companion may do",
-      "points": [],
+      "points": [
+        {
+          "text": "The boundaries aren't invented by the course — they're assembled from normative documents and from the few places where an effect has actually been shown",
+          "origin": "extract"
+        }
+      ],
       "children": []
     },
     {

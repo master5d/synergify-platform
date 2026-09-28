@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-stack-selection",
+  "unit": "u2-stack-matrix",
+  "locale": "en",
+  "title": "Matrix of 4 stacks",
+  "sourceHash": "sha256:c4e156ae332437a88511a7056f13f0289c19664e028a1de54f5ccdbead7aa308",
+  "outline": [
+    {
+      "heading": "Honest trade-offs",
+      "points": [
+        {
+          "text": "No stack is \"best\" — each has its angle",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Decision tree (if still unsure)",
+      "points": [],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4",
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:24d8ed43425f5ce395eeefaa1b8727a58e961dfa298e9e824585d860c37b3d7d",
+        "points": [
+          "You will find that no stack is the best because each one has its own angle."
+        ]
+      }
+    ]
+  }
+}

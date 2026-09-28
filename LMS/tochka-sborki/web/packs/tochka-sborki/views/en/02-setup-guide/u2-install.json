@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-setup-guide",
+  "unit": "u2-install",
+  "locale": "en",
+  "title": "Installing the tools",
+  "sourceHash": "sha256:fb7852cf8f93832791bf0c435c4ce67f74112585c53bab8a2fc3d74bb148c382",
+  "outline": [
+    {
+      "heading": "⚡ Quick install (one line)",
+      "points": [
+        {
+          "text": "Want a working lab right away?",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Installing Claude Code",
+      "points": [
+        {
+          "text": "Claude Code is a CLI (command-line interface), an agent that works right in your terminal.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Install",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Check",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "First run",
+          "points": [
+            {
+              "text": "Claude Code will open an interactive session.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Git: basic config",
+          "points": [
+            {
+              "text": "Same on every system",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Handy terminal settings",
+          "points": [
+            {
+              "text": "PowerShell uses a profile script instead of .bashrc.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4",
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:3e049302dc1b3b05adf4078da0bc0b254d4cd83127f6baf276ab4c82d7c571ec",
+        "points": [
+          "You can have a working lab right away."
+        ]
+      },
+      {
+        "sourceHash": "sha256:06a7d5df280ce5754a9c5a3e0f6eafb3fc63b8d8c9d793b1a8bea53ef747108a",
+        "points": [
+          "Claude Code is a command-line interface agent that works right in your terminal."
+        ]
+      },
+      {
+        "sourceHash": "sha256:a3b6c531ef9735e4beaae84873d6376e514ea8ccae1ecaab21664b8c133f15a2",
+        "points": [
+          "Claude Code will open an interactive session."
+        ]
+      },
+      {
+        "sourceHash": "sha256:d84d774b20bd15305e05037442eae6bd854810dc60696055b36b55b5281911fa",
+        "points": [
+          "This is the same on every system."
+        ]
+      },
+      {
+        "sourceHash": "sha256:eb702dbf616f810910e6582ac774f87a2058f4a7880097e6815ee4c2b5e5f120",
+        "points": [
+          "PowerShell uses a profile script instead of .bashrc."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-setup-guide",
+  "unit": "u3-first-project",
+  "locale": "en",
+  "title": "Your first project",
+  "sourceHash": "sha256:573281243ba404148a71e6e7243d915d9e756060cbbd1734ab95dc178f0ec6a0",
+  "outline": [
+    {
+      "heading": "CLAUDE.md — the agent's project memory",
+      "points": [
+        {
+          "text": "CLAUDE.md is a Markdown file that Claude Code reads automatically every time it launches in a folder.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Minimal template",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Creating a project",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "CLAUDE.md tips",
+          "points": [],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c6",
+    "c7",
+    "c8",
+    "c9"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:77641dd85281f1be20ba06f1e8bf242dfa3cb133c0f84d244fd4c4749887c3a2",
+        "points": [
+          "Claude Code automatically reads the CLAUDE.md Markdown file every time it starts in a folder."
+        ]
+      }
+    ]
+  }
+}

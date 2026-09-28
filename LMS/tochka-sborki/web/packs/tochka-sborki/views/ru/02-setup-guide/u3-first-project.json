@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-setup-guide",
+  "unit": "u3-first-project",
+  "locale": "ru",
+  "title": "Первый проект",
+  "sourceHash": "sha256:9a2335f2b8bcfeebeee685cfe61fc892b7e77a7ee739ca7f2f86eb40f77f1352",
+  "outline": [
+    {
+      "heading": "CLAUDE.md — память агента для проекта",
+      "points": [
+        {
+          "text": "CLAUDE.md — это Markdown-файл, который Claude Code читает автоматически при каждом запуске в папке.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Минимальный шаблон",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Создание проекта",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Советы по CLAUDE.md",
+          "points": [],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c6",
+    "c7",
+    "c8",
+    "c9"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:19128a5d18aa1978e8a3ea1e277aec8b535ffbe20ab574f7f8a5359ebcb618ee",
+        "points": [
+          "CLAUDE.md — это файл формата Markdown, который Claude Code автоматически считывает при каждом запуске в папке."
+        ]
+      }
+    ]
+  }
+}

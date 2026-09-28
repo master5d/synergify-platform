@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "10-model-training",
+  "unit": "u5-practice",
+  "locale": "ru",
+  "title": "Практика: дообучить малую модель",
+  "sourceHash": "sha256:ac8db6e117b97959c2677e63ee99b9bd690d4730eb578e069f5791a68f3852ef",
+  "outline": [
+    {
+      "heading": "Основа практики — smol-course",
+      "points": [
+        {
+          "text": "Практика собрана по мотивам smol-course от Hugging Face (лицензия Apache-2.0).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Где взять видеокарту бесплатно",
+      "points": [
+        {
+          "text": "Платный облачный тюнинг здесь не нужен: задача практики — пройти цикл целиком, а не выжать рекорд.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Пять шагов прогона",
+      "points": [
+        {
+          "text": "Обучение с LoRA.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Атрибуция",
+      "points": [
+        {
+          "text": "Практика адаптирована по материалам huggingface/smol-course и документации TRL (обе — Apache-2.0, © Hugging Face).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c12",
+    "c13"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:a54816b503c56d041765c75487fcbf1fcfeb9a9e4e2219b6ab669f3bfa35694a",
+        "points": [
+          "Эта практика собрана по мотивам smol-course от Hugging Face под лицензией Apache-2.0."
+        ]
+      },
+      {
+        "sourceHash": "sha256:43e66f8d11d952d3f17bcb814b738c949779c71cd79c2f6ae243a547530d4867",
+        "points": [
+          "Тебе не понадобится платный облачный тюнинг, так как задача практики — пройти цикл целиком, а не выжать рекорд."
+        ]
+      },
+      {
+        "sourceHash": "sha256:0fb1d8050119447a8af6b13c74eb657ddbcb4df1b796347c2eae8c4afd857a13",
+        "points": [
+          "Ты проведешь обучение с использованием LoRA."
+        ]
+      },
+      {
+        "sourceHash": "sha256:406371950e1ca00bd997958fc8c3bed106c2e6daae113ad3669710a752c1bd53",
+        "points": [
+          "Практика адаптирована по материалам huggingface/smol-course и документации TRL от Hugging Face под лицензией Apache-2.0."
+        ]
+      }
+    ]
+  }
+}

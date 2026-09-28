@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "00-kickstart",
+  "unit": "u1-map",
+  "locale": "en",
+  "title": "Your ghost idea",
+  "sourceHash": "sha256:ccd1d1d046f5fba8ca3259a38b56ddf610c8b6e77357a42f054ead7669ef6fcd",
+  "outline": [
+    {
+      "heading": "What is vibe coding?",
+      "points": [
+        {
+          "text": "In plain terms: you set the intent — AI writes the code, and the decision stays with you.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Difference in approach",
+          "points": [
+            {
+              "text": "Your new stack: You are the conductor.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:4afb7e9cf2eb304f5ea23514b5dff6479a354bc08beb4adbe992c601655158bf",
+        "points": [
+          "You set the intent for the AI to write the code, but you keep the final decision."
+        ]
+      },
+      {
+        "sourceHash": "sha256:87c6f5666d6e8d1fd1719ddca9ce60a5b825f2ca1a538eb9cd922bc18513596f",
+        "points": [
+          "You take on the role of the conductor in your new stack."
+        ]
+      }
+    ]
+  }
+}

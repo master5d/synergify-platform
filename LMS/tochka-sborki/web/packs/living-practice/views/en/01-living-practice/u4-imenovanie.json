@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-living-practice",
   "unit": "u4-imenovanie",
   "locale": "en",
@@ -49,5 +49,32 @@
   "cards": [
     "c4"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:bc8bb2b7c24262db37abecaa9b6f55e405c48c17546333c00b50c17cedcb7fa3",
+        "points": [
+          "You follow one strict rule that the word must be short, neutral, and said inwardly once."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e8e561a00f89eb402fab0f01af7c0be436d6bf151646d59fff51fc1a96569fcf",
+        "points": [
+          "You do not use the intensive noting from long retreats for stages of insight and the dark night without a teacher.",
+          "The Lindahl 2017 caveat is that those are not population frequencies.",
+          "You use naming as a light label for ten minutes rather than an instrument of assault."
+        ]
+      },
+      {
+        "sourceHash": "sha256:16815b2f7a14ecab3c29e2f9041267edccd983f8a9ee4f25f5d7b1560e53a35c",
+        "points": [
+          "You return to the key distinction in step five that the label anxiety is not a diagnosis and not a verdict."
+        ]
+      }
+    ]
+  }
 }

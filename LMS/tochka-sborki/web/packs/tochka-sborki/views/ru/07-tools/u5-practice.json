@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "07-tools",
+  "unit": "u5-practice",
+  "locale": "ru",
+  "title": "Подключи и протестируй",
+  "sourceHash": "sha256:2284a9a636256893f4fb1cd04431d0821d05b55012c34def11b4a4758e55965f",
+  "outline": [
+    {
+      "heading": "Финальная архитектура: AI-клон для реальной задачи",
+      "points": [
+        {
+          "text": "Ты можешь собрать полноценного специализированного агента из",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Пример: Meeting Intelligence клон",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Пример: Code Review клон",
+          "points": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "heading": "Следующие шаги после модуля",
+      "points": [],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c9",
+    "c10"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:9c89c8dad8445de59f10b98e1a4848f237cb55363659c0bb899cecb8bcc651fa",
+        "points": [
+          "Ты можешь собрать полноценного специализированного агента."
+        ]
+      }
+    ]
+  }
+}

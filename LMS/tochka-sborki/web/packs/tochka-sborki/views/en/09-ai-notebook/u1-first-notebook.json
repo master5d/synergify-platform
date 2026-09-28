@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "09-ai-notebook",
+  "unit": "u1-first-notebook",
+  "locale": "en",
+  "title": "A notebook in 15 minutes",
+  "sourceHash": "sha256:631f1dd4b55fd0cfc1f9b46719087d2ff27ce07b2dae5d9f497da1563a5936bd",
+  "outline": [
+    {
+      "heading": "Build first, understand second",
+      "points": [
+        {
+          "text": "It is not a chat: the notebook answers only from the sources you put into it, and attaches a citation linking into the source for every claim.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The fifteen minutes",
+      "points": [
+        {
+          "text": "Open the notebook pack — three ready-made packs.",
+          "origin": "extract"
+        },
+        {
+          "text": "Create a notebook and add sources.",
+          "origin": "extract"
+        },
+        {
+          "text": "Ask your first question — not \"summarize,\" but the one from the prompt kit: \"Where do these videos disagree with each other?\" Disagreements beat summaries: a summary averages, a disagreement shows you where to think for yourself.",
+          "origin": "extract"
+        },
+        {
+          "text": "Click two citations.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:ca69df738234ebe2cff29892236e9229fd7664ee80e42ec73f6d7dd95012295d",
+        "points": [
+          "This is not a chat because the notebook only answers using your sources and attaches a citation linking into the source for every claim."
+        ]
+      },
+      {
+        "sourceHash": "sha256:363ed34d6abd5ecc92419633c859074fc7a32dd4cf757a116163675ec6ddc580",
+        "points": [
+          "Open the three ready-made notebook packs.",
+          "Create a notebook and add your sources.",
+          "Ask your first question about where videos disagree because summaries average while disagreements show you where to think for yourself.",
+          "Click two citations."
+        ]
+      }
+    ]
+  }
+}

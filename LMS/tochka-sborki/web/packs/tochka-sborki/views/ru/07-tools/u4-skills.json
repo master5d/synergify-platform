@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "07-tools",
+  "unit": "u4-skills",
+  "locale": "ru",
+  "title": "Skills: модульные способности",
+  "sourceHash": "sha256:87391820d918fd9b62b7844e047952bb2a52893b425591ee94b326a9cb6a95a1",
+  "outline": [
+    {
+      "heading": "Что такое Skill",
+      "points": [
+        {
+          "text": "Skill — это папка с Markdown-файлом SKILL.md внутри: инструкция, которую Claude Code выполняет при вызове /название.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Структура файла SKILL.md",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Где хранить Skills",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Как вызывать",
+          "points": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "heading": "Plugin vs Skill",
+      "points": [],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c7",
+    "c8"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:ec80da680b19cec0c8176e79fe824e92e28d99e333df4dbb4004c50243e4bacc",
+        "points": [
+          "Skill — это папка с Markdown-файлом SKILL.md, содержащая инструкцию, которую Claude Code выполняет при твоем вызове через косую черту и название."
+        ]
+      }
+    ]
+  }
+}

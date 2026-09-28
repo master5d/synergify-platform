@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-introduction",
   "unit": "u3-clones",
   "locale": "ru",
@@ -22,5 +22,18 @@
     "c9",
     "c10"
   ],
-  "audio": null
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:db386b8cbcd8c8489c0583323af1b6511667c1ed2bf4fceb29fbdfcd6905dea2",
+        "points": [
+          "Время в колонке экономии считается ориентиром автора, поэтому твои личные показатели будут другими."
+        ]
+      }
+    ]
+  }
 }

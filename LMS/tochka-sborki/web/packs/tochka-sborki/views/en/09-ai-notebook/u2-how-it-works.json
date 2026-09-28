@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "09-ai-notebook",
+  "unit": "u2-how-it-works",
+  "locale": "en",
+  "title": "How it works",
+  "sourceHash": "sha256:fa16384439d66d230a6760569f5685b5fe123519dc05d1b6b1586d6d60698ecc",
+  "outline": [
+    {
+      "heading": "Source-grounding: the answer is tied to a source",
+      "points": [
+        {
+          "text": "The notebook works differently: before answering, it finds the relevant pieces in your sources and builds the answer on them.",
+          "origin": "extract"
+        },
+        {
+          "text": "A citation is not a decoration — it is a seam.",
+          "origin": "extract"
+        },
+        {
+          "text": "The notebook knows only what you gave it.",
+          "origin": "extract"
+        },
+        {
+          "text": "For the notebook, a video is its transcript.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Under the hood — in module 05 language",
+      "points": [
+        {
+          "text": "If you took the context-and-memory module, you will recognize the mechanics: sources are cut into chunks, the chunks relevant to your question are retrieved, and they are placed into the model's context with the instruction \"answer only from this.\" A notebook is managed context with mandatory citations — not a different kind of magic.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The third mode: hybrid",
+      "points": [
+        {
+          "text": "The model then answers with general knowledge plus your sources — and questions about the notebook come back with links into it.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4",
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:be39bb066ad8515b761bf42ee58cf04790ce6c4d9988fd7c1e4b1c61b12b4c41",
+        "points": [
+          "The notebook finds relevant pieces in your sources to build its answers.",
+          "A citation acts as a seam rather than a decoration.",
+          "The notebook only knows what you have provided to it.",
+          "For the notebook, a video is its transcript."
+        ]
+      },
+      {
+        "sourceHash": "sha256:37f75a065027a6009e525d39f72bbc43ed238be2d9bb8a23cb192bf0455f5cb9",
+        "points": [
+          "If you took the context-and-memory module, you will recognize how sources are cut into chunks and retrieved.",
+          "These chunks are placed into the context with instructions to answer only from that information.",
+          "The notebook uses managed context with mandatory citations instead of a different kind of magic."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fd59bf43a0dd52037e5a6154170da7e7e6d9159007d6700406924571cab3806f",
+        "points": [
+          "The model answers using general knowledge combined with your sources.",
+          "Questions about the notebook come back with links into it."
+        ]
+      }
+    ]
+  }
+}

@@ -61,9 +61,10 @@ cutover 2026-08-06; mc_hub остался личным контуром mamaev.c
   `lib/content/alignment.test.ts` (у каждой цели вопрос, у вопроса цель, RU = EN), раскатка — храповик
   `lib/content/alignment-pending.ts`. Спека: `docs/superpowers/specs/2026-09-14-learning-alignment-design.md`.
 - **Представления урока** (конспект / карточки / карта) — артефакты `packs/<pack>/views/{ru,en}/<module>/<unit>.json`,
-  выводятся из MDX и `checks` генератором `node scripts/gen-lesson-views.ts` (детерминированно, без LLM). Гвард
-  `lib/lesson-views/views.test.ts`: хэш источника свежий (правка MDX пилотного юнита требует перегенерации), пункты
-  дословно из урока. Вкладки на юните — `components/lesson-views.tsx`. Спека: `docs/superpowers/specs/2026-09-28-lesson-views.md`.
+  выводятся из MDX и `checks` генератором `node scripts/gen-lesson-views.ts` (детерминированно, без LLM); весь курс ТС
+  и «Тишина». Пересказ конспекта — оффлайн `… <pack> --paraphrase` (гейтвей, пул `prose-pool`, `LITELLM_KEY`), гвард
+  `lib/lesson-views/paraphrase.ts`. Гвард `lib/lesson-views/views.test.ts`: хэш источника свежий (правка MDX юнита
+  требует перегенерации), пункты дословно из урока, пересказ без чужих чисел/имён. Вкладки на юните — `components/lesson-views.tsx`. Спека: `docs/superpowers/specs/2026-09-28-lesson-views.md`.
 - Чек-лист нового курса — `LMS/_template/CHECKLIST.md` §5a.
 
 ## Подпуть курса: сырая навигация (с 2026-09-14)

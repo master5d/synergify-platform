@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "00-kickstart",
+  "unit": "u2-tools",
+  "locale": "ru",
+  "title": "Карта инструментов",
+  "sourceHash": "sha256:55b329e6578b2e3f9f13df6dcdd56753a3ed8d1c866071b5d819654e1b44f7e1",
+  "outline": [
+    {
+      "heading": "Карта: 4 квадранта AI-инструментов",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Где находится этот курс",
+      "points": [
+        {
+          "text": "Claude Code — это квадрант 🟪.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Твоя новая роль: PM + QA + Дирижёр",
+      "points": [
+        {
+          "text": "В Software 3.0 роли сместились: Product Manager (ТЫ): решаешь, ЧТО строить.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:ddab6a139ca22ee0f62ecf1034ff3ece61b4f94055870986f70d039ac38ce2d5",
+        "points": [
+          "Claude Code представляет собой квадрант 🟪."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e5c226340e26b8c0db625caf665bb6d0f9e17b89006e72abe15d0a2de5f397e9",
+        "points": [
+          "В Software 3.0 роли сместились, и теперь ты как Product Manager решаешь, что именно нужно строить."
+        ]
+      }
+    ]
+  }
+}

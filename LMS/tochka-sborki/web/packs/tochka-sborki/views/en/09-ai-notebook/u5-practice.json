@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "09-ai-notebook",
+  "unit": "u5-practice",
+  "locale": "en",
+  "title": "Practice",
+  "sourceHash": "sha256:9f9f2b15aba254c72038e8b9b90cb70928581fcc4fa87275c127984eb7b03bb1",
+  "outline": [
+    {
+      "heading": "Assembling your own notebook — the order",
+      "points": [
+        {
+          "text": "A topic with a question, not \"in general.\" A notebook \"about marketing\" is dead on arrival.",
+          "origin": "extract"
+        },
+        {
+          "text": "Sources — 5–15, selected with the three looks.",
+          "origin": "extract"
+        },
+        {
+          "text": "First question — a disagreement question.",
+          "origin": "extract"
+        },
+        {
+          "text": "Inspection — by stakes.",
+          "origin": "extract"
+        },
+        {
+          "text": "Format — by scenario.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A notebook lives as long as its question",
+      "points": [
+        {
+          "text": "A notebook is a workbench, not an archive.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c12",
+    "c13",
+    "c14"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:19aa1b5bdceba1bfd504ef6bed9b1b132ff8b1802635bb1dbba9b3bce434ec30",
+        "points": [
+          "Base your topic on a specific question because a notebook about marketing will not work.",
+          "Select 5–15 sources using the three looks.",
+          "Start with a disagreement question and inspect your materials by stakes.",
+          "Choose your format based on the scenario."
+        ]
+      },
+      {
+        "sourceHash": "sha256:19e7d3475ea0ac53ff846cc069b86a7844d77151c1d7ca4aafee1cbc8aa179e4",
+        "points": [
+          "Your notebook is a workbench rather than an archive."
+        ]
+      }
+    ]
+  }
+}

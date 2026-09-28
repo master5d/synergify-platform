@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "07-tools",
+  "unit": "u6-pendel",
+  "locale": "en",
+  "title": "Pendel: your agent audits your project",
+  "sourceHash": "sha256:ff376616d2e02f61c3c1443a34b91470aa2990b874a97d28ae227dfaa1585f93",
+  "outline": [
+    {
+      "heading": "What \"Pendel\" is",
+      "points": [
+        {
+          "text": "Pendel is Russian slang for \"a kick in the pants\".",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Six audit zones",
+      "points": [
+        {
+          "text": "If your agent doesn't support a zone (hooks, for example), it should say so in the report.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The audit prompt",
+      "points": [
+        {
+          "text": "The first line matters: auditing and fixing are separate steps.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The rule: fix three, not everything",
+      "points": [
+        {
+          "text": "The report may turn out long.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How to check that a fix didn't break anything",
+      "points": [
+        {
+          "text": "If there are uncommitted changes, commit them separately first.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "An example from a review",
+      "points": [
+        {
+          "text": "This is a retelling of a reader's review of a third-party starter kit for Claude Code, not our measurement.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c11",
+    "c12",
+    "c13"
+  ],
+  "audio": null
+}

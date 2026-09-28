@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "05-context-memory",
+  "unit": "u2-context-vs-prompt",
+  "locale": "en",
+  "title": "Context vs Prompt",
+  "sourceHash": "sha256:696cdfc554f28143355becc75e9a03b9e5ab91f2d202dee865303baa7241b7ae",
+  "outline": [
+    {
+      "heading": "Separating context and prompt",
+      "points": [],
+      "children": [
+        {
+          "heading": "How to separate them explicitly",
+          "points": [
+            {
+              "text": "Or via XML tags",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Where to store stable context",
+          "points": [],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4",
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:1f31de94bcd239bd4d4689a0fa2ea6509b40b9e1d983356b8b3f2b2b35f0840d",
+        "points": [
+          "You can use XML tags to separate them explicitly."
+        ]
+      }
+    ]
+  }
+}

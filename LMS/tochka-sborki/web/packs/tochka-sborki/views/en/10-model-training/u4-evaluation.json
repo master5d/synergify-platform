@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "10-model-training",
+  "unit": "u4-evaluation",
+  "locale": "en",
+  "title": "Evaluation: did it help",
+  "sourceHash": "sha256:4bc931cadc55c2322da5bdf2b9086d20d7d2f2fb696e5ebd1f25e077121e6486",
+  "outline": [
+    {
+      "heading": "Holdout: set it aside before you start",
+      "points": [
+        {
+          "text": "The main rule of evaluation: some examples are set aside before training and never shown to the model.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Overfitting",
+      "points": [
+        {
+          "text": "Overfitting — the model fits the training examples so tightly that it does worse on new ones.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Benchmark versus your task",
+      "points": [
+        {
+          "text": "So for your task, build your own evaluation set — from the same holdout.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How to tell whether fine-tuning helped",
+      "points": [
+        {
+          "text": "The size of the evaluation set depends on the task.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c10",
+    "c11"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:0038b2d16ccb9dc0e1f100afb942af70c4208a5ddf7672146d90c8770a482b07",
+        "points": [
+          "The main rule of evaluation is to set aside some examples before training and never show them to the model."
+        ]
+      },
+      {
+        "sourceHash": "sha256:36734ff345cc174f80b77d8aaa5977ca65bfd112fab2db4eba1cceaecfa5b620",
+        "points": [
+          "Overfitting happens when the model fits the training examples so tightly that it does worse on new ones."
+        ]
+      },
+      {
+        "sourceHash": "sha256:b02928e2289132c259bcf77cb50f7e00214a24813ca9bbf143776e7a547a715e",
+        "points": [
+          "You build your own evaluation set for your task from the same holdout."
+        ]
+      },
+      {
+        "sourceHash": "sha256:922084bc1be01fb803c2d111c5cd0f14a616c8719c770857fd32979914f54534",
+        "points": [
+          "The size of the evaluation set depends on the task."
+        ]
+      }
+    ]
+  }
+}

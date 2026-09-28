@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-setup-guide",
+  "unit": "u1-env-check",
+  "locale": "en",
+  "title": "Environment check",
+  "sourceHash": "sha256:9b1674dd48b5fca1d9c62f92f052352f84cc69cc87dc46353ea1bfa234f9e2c9",
+  "outline": [
+    {
+      "heading": "What you need for agentic coding",
+      "points": [
+        {
+          "text": "Think of it as unboxing.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "How to check your environment in one command",
+          "points": [
+            {
+              "text": "If there's an error — whichever tool isn't found is the one you need to install.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "What to download if not installed",
+          "points": [],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:fa7c3bf1a20695ab463c8214b2184003050815a829daf63a4648038c880e2012",
+        "points": [
+          "You can think of this as unboxing."
+        ]
+      },
+      {
+        "sourceHash": "sha256:746c7af0aa263f4e311f020e27963b90df8477e7c5cc39766c9a9b2924844bc8",
+        "points": [
+          "If an error occurs, you need to install whichever tool was not found."
+        ]
+      }
+    ]
+  }
+}

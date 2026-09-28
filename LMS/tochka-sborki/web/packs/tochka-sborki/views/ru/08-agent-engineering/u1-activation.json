@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "08-agent-engineering",
+  "unit": "u1-activation",
+  "locale": "ru",
+  "title": "Когда промпт перестаёт работать",
+  "sourceHash": "sha256:66baea162155daa85ae6247c2c1afb3410d643aabe255186f89bb73b1f83ad12",
+  "outline": [
+    {
+      "heading": "",
+      "points": [
+        {
+          "text": "Признаки того, что ты упёрся в потолок vibe coding:",
+          "origin": "extract"
+        },
+        {
+          "text": "Три эры программирования (Карпати: Software 2.0 — эссе 2017 года, Software 3.0 — доклад 2025 года):",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:12f6b3c7b0b3e34a10649962f9cc559a3838371f0dbba37893b17b8cf203eebf",
+        "points": [
+          "Ты можешь заметить признаки того, что возможности подхода vibe coding достигли своего потолка.",
+          "Карпати выделяет три эры программирования, упоминая Software 2.0 в эссе 2017 года и Software 3.0 в докладе 2025 года."
+        ]
+      }
+    ]
+  }
+}

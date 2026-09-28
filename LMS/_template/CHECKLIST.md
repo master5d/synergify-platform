@@ -49,7 +49,8 @@ Everything a new course must provide. Engine code is reused unchanged; the items
       (вопросы «проверь себя»: урок, цель, 2–5 вариантов, `answer`, объяснение); в MDX урока — метка
       `<SelfCheck id="…"/>` обычно внутри `<Phase type="concept">` (после объяснения). Сверяет `lib/content/alignment.test.ts`.
 - [ ] (опционально) Представления урока — `node scripts/gen-lesson-views.ts <pack> <module>` → `packs/<pack>/views/`;
-      после правки MDX такого юнита — `node scripts/gen-lesson-views.ts` (иначе `lib/lesson-views/views.test.ts` красный).
+      после правки MDX такого юнита — `node scripts/gen-lesson-views.ts` (иначе `lib/lesson-views/views.test.ts` красный);
+      пересказ конспекта — `node scripts/gen-lesson-views.ts <pack> --paraphrase` (нужен `LITELLM_KEY`, гейтвей).
 
 ## 6. Content — `web/packs/<pack>/content/{ru,en}/<NN-module>/`
 - [ ] One folder per module, numbered `NN-slug` (e.g. `01-intro`). See `content/{ru,en}/01-example/`.

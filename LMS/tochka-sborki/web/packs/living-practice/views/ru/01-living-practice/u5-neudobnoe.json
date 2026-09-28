@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generator": "extract-v1",
+  "generator": "extract-v2",
   "module": "01-living-practice",
   "unit": "u5-neudobnoe",
   "locale": "ru",
@@ -75,7 +75,12 @@
     },
     {
       "heading": "Два способа вернуться",
-      "points": [],
+      "points": [
+        {
+          "text": "Когда сессия качнула, но до стоп-сигналов не дошло, есть два рабочих возврата",
+          "origin": "extract"
+        }
+      ],
       "children": []
     },
     {

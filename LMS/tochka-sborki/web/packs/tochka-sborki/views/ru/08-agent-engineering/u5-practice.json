@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "08-agent-engineering",
+  "unit": "u5-practice",
+  "locale": "ru",
+  "title": "Спроектируй своего клона",
+  "sourceHash": "sha256:1cd73d15fdc39ab16fe119a66d952931c56d5577d77768e07ca7ee2952001045",
+  "outline": [
+    {
+      "heading": "",
+      "points": [
+        {
+          "text": "Шаблон спецификации агента",
+          "origin": "extract"
+        },
+        {
+          "text": "Реальный пример заполненной спеки — упрощённая версия ENERV ingest:",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Вторая половина клона: устав",
+      "points": [
+        {
+          "text": "Устав превращает его в стабильного со-мыслящего напарника: завтра, через месяц, в чужих руках он держит ту же рамку.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c12",
+    "c13"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:2cf55c959a4fd2fa5e2c20e3ba4abd27afc71f9adc4d6febd8a61d3c595be2b5",
+        "points": [
+          "Представлен шаблон спецификации агента.",
+          "Приведен реальный пример заполненной спецификации на основе упрощенной версии ENERV ingest."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e9b1c610becd3d304a3bba706f80f0d186ac1fa78768e5578a7fb7758156df86",
+        "points": [
+          "Устав превращает клона в стабильного напарника, который мыслит в одном направлении с тобой.",
+          "С ним помощник сохранит заданные рамки через любое время и даже в чужих руках."
+        ]
+      }
+    ]
+  }
+}

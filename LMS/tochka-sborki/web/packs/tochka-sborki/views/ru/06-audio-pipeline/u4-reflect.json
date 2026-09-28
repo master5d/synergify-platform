@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-audio-pipeline",
+  "unit": "u4-reflect",
+  "locale": "ru",
+  "title": "Что автоматизировать дальше?",
+  "sourceHash": "sha256:fbefbf3b32c29895ed0c579807980589cd8de1f8fc86551b325e8949127be06a",
+  "outline": [
+    {
+      "heading": "Карта автоматизации: что делегировать дальше",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Следующие шаги: от ручного к автоматическому",
+      "points": [
+        {
+          "text": "Первые два шага ты сделаешь руками в следующем юните (u5): условие (там это «дубли») и запуск по расписанию.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c7",
+    "c8"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:d9912f796293390f5b894992febae405fd8e980c1f7ec72a4437770e1568b9b4",
+        "points": [
+          "В следующем юните u5 ты вручную выполнишь первые два шага: настроишь условие для дублей и запуск по расписанию."
+        ]
+      }
+    ]
+  }
+}

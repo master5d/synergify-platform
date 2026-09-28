@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "05-context-memory",
+  "unit": "u4-practice",
+  "locale": "en",
+  "title": "Tune your memory",
+  "sourceHash": "sha256:4d3192e1d6309064eb846c54236f0c338409907730cae92c6b92c22c53426fea",
+  "outline": [
+    {
+      "heading": "When to update what",
+      "points": [
+        {
+          "text": "/btw doesn't fit here: it's a side question about the current session, and it isn't added to the conversation history.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Techniques for long sessions",
+      "points": [],
+      "children": [
+        {
+          "heading": "Context compression",
+          "points": [
+            {
+              "text": "At the start of a new session or when context fills up",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Prioritizing information",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Parallel agents for big tasks",
+          "points": [
+            {
+              "text": "For independent subtasks, run several agents",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c9",
+    "c10",
+    "c11"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:ac96f51ef70470308c7a8e2c50d93a0390d6455628fd454f7f0cc0eac399c089",
+        "points": [
+          "You do not use /btw here because it is a side question about the current session and is not added to the conversation history."
+        ]
+      },
+      {
+        "sourceHash": "sha256:7b0dd3191fdf942a05ca9c59725dbc9f94df7d6857c76c7cc9d4768e96b3ed56",
+        "points": [
+          "You do this at the start of a new session or when context fills up."
+        ]
+      },
+      {
+        "sourceHash": "sha256:8d8fc31a854490ce051a11c7873ec5d524b04a1773498adb4187165226dd8af5",
+        "points": [
+          "You run several agents for independent subtasks."
+        ]
+      }
+    ]
+  }
+}

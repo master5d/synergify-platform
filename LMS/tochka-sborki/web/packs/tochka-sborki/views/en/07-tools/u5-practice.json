@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "07-tools",
+  "unit": "u5-practice",
+  "locale": "en",
+  "title": "Plug it in and test",
+  "sourceHash": "sha256:8176127046f9da5ab36a854f766144f9e8942af252a0e67859e438923a1e3bc0",
+  "outline": [
+    {
+      "heading": "Final architecture: an AI clone for a real task",
+      "points": [
+        {
+          "text": "You can assemble a full specialized agent from",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Example: Meeting Intelligence clone",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Example: Code Review clone",
+          "points": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "heading": "Next steps after this module",
+      "points": [],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c9",
+    "c10"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:be270d61da49b73896c3dd99f01d8aa0cabf2036a86b0ddd66f8b6ef65610e83",
+        "points": [
+          "You can put together a complete specialized agent."
+        ]
+      }
+    ]
+  }
+}

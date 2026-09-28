@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "00-kickstart",
+  "unit": "u0-azbuka",
+  "locale": "en",
+  "title": "ABC: six words before you start",
+  "sourceHash": "sha256:ecc9fae1570196df8af9f343d3326c7f3ef0efc85939e9bb304bd786e02c1619",
+  "outline": [
+    {
+      "heading": "Where we are: the nesting doll",
+      "points": [
+        {
+          "text": "\"AI\", \"neural network\", \"machine learning\" and \"LLM\" are often used as synonyms.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Six words",
+      "points": [],
+      "children": [
+        {
+          "heading": "Token",
+          "points": [
+            {
+              "text": "See it yourself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Context window",
+          "points": [
+            {
+              "text": "See it yourself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Temperature",
+          "points": [
+            {
+              "text": "See it yourself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Why there are so many models, and how they differ",
+          "points": [
+            {
+              "text": "See it yourself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Prompt and context",
+          "points": [
+            {
+              "text": "See it yourself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Agent",
+          "points": [
+            {
+              "text": "See it yourself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "heading": "How the words connect",
+      "points": [
+        {
+          "text": "A token is the unit of measure.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c11",
+    "c12"
+  ],
+  "audio": null
+}
