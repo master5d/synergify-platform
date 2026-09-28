@@ -393,7 +393,18 @@
   командой за ≤1 день. К урокам — после 2–3 модулей и замера по воронке отвала (LMS#3). Хостинг: свои
   субтитры работают только с собственным mp4 (не embed); mp4 не класть в git публичного репо —
   R2/YouTube решает спека.
-- [ ] **Стартер студента ТС — агент-агностик** (решение владельца 2026-09-14, из intake LMS#7). Свой аналог
+- [x] **Стартер студента ТС — агент-агностик — СДЕЛАНО 2026-09-28** (ветка `w19/student-starter`): скачиваемый архив
+  `/downloads/tochka-starter.zip`, собирается на prebuild/pretest из `packs/tochka-sborki/starter.json` + `starter/`
+  (`scripts/build-starter.mjs`, zip без зависимостей, детерминирован; шаблоны берёт из `LMS/tochka-sborki/my-templates/`, в git
+  архива нет). Состав: `AGENTS.md` (единый файл правил) + `CLAUDE.md` = `@AGENTS.md`, `TODO.md`, `STATE.md` (память между
+  сессиями), `HYGIENE.md` (→ Пендель 07/u6), `my-experiments/`, `my-templates/` (4 шаблона), hook `hooks/session-start.mjs`
+  (Node) через `.claude/settings.json` (exec-форма) и `.codex/hooks.json`, `.gitignore`. Что читает каждый агент — по официальной
+  документации (Claude Code memory/hooks, Codex AGENTS.md/hooks, Antigravity rules, Hermes context files); живым запуском
+  проверены Claude Code (правила + hook) и Codex (правила). Страница `/starter` + `/en/starter` (3 шага, вкладки по агентам),
+  ссылки из 00/u3, 02/u3 (RU+EN) и материалов; в карте сайта только у курса со стартером. Гварды — `packs/tochka-sborki/starter.test.ts`
+  (состав, секреты/следы лаборатории, мусор, BOM/CRLF, hook печатает память, страница ↔ архив, ссылки ru/en). Не сделано из
+  исходной записи (к спеке): «одна команда» установки, скиллы курса по модулям, «Пендель» как скилл, бэкап+откат.
+  Исходная запись: Свой аналог
   claude-code-starter (идея, не код — у него нет лицензии): одна команда готовит среду для обучения по
   **всем модулям** курса под любой из четырёх агентов — **Claude Code, Codex, Antigravity, Hermes**. Опоры, что
   уже есть: (1) `public/install.sh|ps1|-gfw.*` — ставят только Node + Git + Claude Code; (2) NAUTILUS

@@ -16,7 +16,7 @@ const STUBS = [
   'lib/rpg/skins-meta.ts',
   ...['ai-doubles', 'automation-check', 'certificate', 'companion', 'dungeon-flavor', 'ecosystem', 'intake-gate',
       'intake-questions', 'notebook-pack', 'office-hours', 'showcase', 'skins', 'try-chains',
-      'week-map', 'task-routes']
+      'week-map', 'task-routes', 'starter']
     .map((n) => `lib/course/${n}.ts`),
 ]
 

@@ -45,6 +45,15 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
   {
     label: { ru: 'Из курса', en: 'From the course' },
     items: [
+      {
+        kind: 'link',
+        title: { ru: 'Стартер студента', en: 'Student starter' },
+        description: {
+          ru: 'Готовый проект для курса с любым агентом: AGENTS.md, память, my-experiments, шаблоны',
+          en: 'A ready course project for any agent: AGENTS.md, memory, my-experiments, templates',
+        },
+        href: '/starter/',
+      },
       { kind: 'link', title: { ru: 'Шпаргалка', en: 'Cheatsheet' }, href: '/cheatsheet/' },
       { kind: 'link', title: { ru: 'Дорожная карта', en: 'Roadmap' }, href: '/roadmap/' },
       { kind: 'link', title: { ru: 'Установка стека (macOS/Linux)', en: 'Install the stack (macOS/Linux)' }, href: '/install.sh' },

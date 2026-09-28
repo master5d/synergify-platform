@@ -8,9 +8,10 @@
     "start": "next start",
     "test": "vitest run",
     "test:watch": "vitest",
-    "prebuild": "node scripts/select-pack.mjs",
-    "pretest": "node scripts/select-pack.mjs",
+    "prebuild": "node scripts/select-pack.mjs && node scripts/build-starter.mjs",
+    "pretest": "node scripts/select-pack.mjs && node scripts/build-starter.mjs",
     "select-pack": "node scripts/select-pack.mjs",
+    "starter": "node scripts/build-starter.mjs",
     "postbuild": "node scripts/stamp-sw.mjs && node scripts/prune-public.mjs"
   },
   "dependencies": {
