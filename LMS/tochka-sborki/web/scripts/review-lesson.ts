@@ -4,7 +4,7 @@
 // a polish prompt to stdout for the author's agent.
 // Run from web/:  npx --yes tsx scripts/review-lesson.ts <mdx-file> [ru|en]
 import { readFileSync } from 'node:fs'
-import { validateDraftMdx } from '../lib/authoring/draft'
+import { validateDraftMdx, normalizeEol } from '../lib/authoring/draft'
 import { lintReadability, lintPhaseOrder, buildPolishPrompt } from '../lib/authoring/review'
 
 const [mdxFile, localeArg] = process.argv.slice(2)
@@ -17,7 +17,8 @@ if (!mdxFile) {
 
 let mdx: string
 try {
-  mdx = readFileSync(mdxFile, 'utf8')
+  // CRLF/BOM → LF: иначе фронтматтер Windows-чекаута не парсится («missing title»).
+  mdx = normalizeEol(readFileSync(mdxFile, 'utf8'))
 } catch {
   console.error(`cannot read file: ${mdxFile}`)
   process.exit(1)

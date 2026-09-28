@@ -111,7 +111,14 @@ export function draftLesson(i: DraftInput): string {
 
 /** Reusable MDX conformance check (also validates S4's polished output later).
  *  [] = conforms. */
-export function validateDraftMdx(mdx: string): string[] {
+/** Файл урока с CRLF (Windows-чекаут, autocrlf) или BOM → LF без BOM. Без этого `^---\ntitle:` не видит
+ *  фронтматтер и линтер кричит «missing title» у полностью годного урока (хвост волны 18). */
+export function normalizeEol(text: string): string {
+  return text.replace(/^﻿/, '').replace(/\r\n?/g, '\n')
+}
+
+export function validateDraftMdx(raw: string): string[] {
+  const mdx = normalizeEol(raw)
   const errors: string[] = []
   if (!/^---\ntitle: "/.test(mdx)) errors.push('frontmatter: missing title')
 

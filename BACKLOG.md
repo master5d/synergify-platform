@@ -29,6 +29,17 @@
   `unavailable` → ручной выбор русла. Считаются только вызовы, дошедшие бы до модели. Ярус — советующий: кэш
   недоступен → пропуск с `RATE LIMIT SKIPPED` в логе. Граница: Cache API per-colo и не атомарен — мягкий потолок;
   жёсткий учёт = таблица D1 (отдельная миграция, не заводилась).
+- [x] **Линтер уроков: две ложные находки — СДЕЛАНО 2026-09-28** (`lib/authoring/review.ts`, `lib/authoring/draft.ts`,
+  `scripts/review-lesson.ts`): «leftover TODO» больше не срабатывает на имя файла `TODO.md` (исключение как в
+  `lib/content/alignment.ts`); CRLF/BOM нормализуются (`normalizeEol`) при чтении и в самих линтерах — «missing title»
+  у Windows-чекаута ушёл. Тесты-повторы обоих багов (падают на старом коде) + реальный урок 05/u3-memory.
+  Прогон по 120 урокам обоих паков — осталось (контент не трогали):
+  - [ ] `03-stack-selection/u2-stack-matrix` (RU+EN): фазы в порядке activation → concept → reflection → practice — настоящее нарушение.
+  - [ ] ложные «write/type imperative» (цитата/описание, не повелительное): EN `01/u2-four-shifts` (activation,
+    «"write me an Instagram post"»), EN `07/u5-practice` (reflection, «learned to write prompts»), EN
+    `08/u4-production-infra` (activation, «code you still need to write») — правило ловит слово, а не наклонение; решить: сузить правило или переписать.
+  - [ ] «long sentence» (>25 слов) — 225 находок в 83 файлах: ТС 121 (EN 86 / RU 35), «Тишина» 104 (EN 70 / RU 34);
+    EN заметно длиннее RU — проход полировки по EN.
 
 ## Путь «ссылка на урок → вход» (смок-аудит 2026-09-27, ai.synergify.com/lessons/01-introduction/)
 

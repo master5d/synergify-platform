@@ -4,10 +4,14 @@
 // prose. No live LLM. Pure. Run alongside S3's validateDraftMdx.
 
 import type { Locale } from '@/lib/dictionaries'
+import { normalizeEol } from './draft'
 
 const MAX_SENTENCE_WORDS = 25
 const MIN_PRACTICE_CHARS = 20
 const PHASES = ['activation', 'reflection', 'concept', 'practice'] as const
+// «TODO.md» — имя файла, которому учит модуль 05, а не заглушка: TODO с расширением файла не считается
+// (то же исключение, что PLACEHOLDER в lib/content/alignment.ts).
+const LEFTOVER_TODO = /\bTODO\b(?!\.\w)/
 
 function phaseBody(mdx: string, type: string): string {
   return new RegExp(`<Phase type="${type}">([\\s\\S]*?)</Phase>`).exec(mdx)?.[1] ?? ''
@@ -44,12 +48,13 @@ export function lintPhaseOrder(mdx: string): string[] {
   return []
 }
 
-export function lintReadability(mdx: string): string[] {
+export function lintReadability(raw: string): string[] {
+  const mdx = normalizeEol(raw)
   const findings: string[] = []
   for (const type of PHASES) {
     const body = phaseBody(mdx, type)
     if (body.trim().length === 0) { findings.push(`${type}: empty phase body`); continue }
-    if (/\bTODO\b/.test(body)) findings.push(`${type}: leftover TODO`)
+    if (LEFTOVER_TODO.test(body)) findings.push(`${type}: leftover TODO`)
 
     const lines = phaseProseLines(body)
     for (const line of lines) {
