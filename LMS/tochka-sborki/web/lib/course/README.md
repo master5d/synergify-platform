@@ -20,6 +20,10 @@ toward the multi-course platform (see `LMS/_template/`, `docs/curriculum-backlog
 - `interest-examples.ts` — `INTEREST_EXAMPLES`, general concept-phase examples that may be retold
   for the learner's field (intake LMS#8). Workers import BOTH packs' files directly (the worker
   owns the source text, not the client); the pack files import types relatively.
+- `task-routes.ts` — закрытый каталог «русел задачи» онбординга (`TASK_ROUTES`, `TASK_ROUTE_CLARIFY`,
+  `TASK_ROUTE_COPY`). Воркер (`/api/intake/task-route`) берёт из него каталог для классификатора через
+  `lib/intake/task-route.ts`; pack-файл импортирует типы относительно. Спека:
+  `docs/superpowers/specs/2026-09-28-onboarding-fork-task-routes.md`.
 
 ## Convention
 - Course data lives here; engine logic stays in `lib/`.

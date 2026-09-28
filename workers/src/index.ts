@@ -13,6 +13,7 @@ import { handleStripeWebhook } from './handlers/stripe-webhook'
 import { handleView, handleComplete, handleList } from './handlers/progress'
 import { handleMe as handleIntakeMe, handleProgress as handleIntakeProgress, handleSubmit as handleIntakeSubmit } from './handlers/intake'
 import { runDemandRadar, listBriefs, listSignals, decideBrief } from './handlers/demand'
+import { handleTaskRoute } from './handlers/task-route'
 import { listLeads, syncContacts } from './handlers/leads'
 import { getStats } from './handlers/stats'
 import { handleLeadCapture } from './handlers/leads-capture'
@@ -106,6 +107,16 @@ export default {
           let body: { answers?: any; currentStep?: number; instrumentVersion?: number }
           try { body = await request.json() } catch { return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders } }) }
           response = await handleIntakeProgress(env.DB, auth.sub, { answers: body.answers ?? {}, currentStep: body.currentStep ?? 0, instrumentVersion: body.instrumentVersion === 2 ? 2 : 1 })
+        }
+      } else if (path === '/api/intake/task-route' && method === 'POST') {
+        // Русло задачи онбординга: сопоставление текста с закрытым каталогом (llm-service), исход — всегда 200.
+        const auth = await requireAuth(request, env)
+        if (auth instanceof Response) {
+          response = auth
+        } else {
+          let body: { text?: unknown; role?: unknown }
+          try { body = await request.json() } catch { return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders } }) }
+          response = await handleTaskRoute(body, env)
         }
       } else if (path === '/api/intake/submit' && method === 'POST') {
         const auth = await requireAuth(request, env)

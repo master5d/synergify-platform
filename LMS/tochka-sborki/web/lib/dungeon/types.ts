@@ -1,6 +1,7 @@
 // web/lib/dungeon/types.ts
 import type { Locale, WorldSkin } from '@/lib/intake/types'
 import type { Bi } from '@/lib/rpg/types'
+import type { TaskRoute } from '@/lib/intake/task-route'
 
 export type StageTier = 'task' | 'process' | 'outcome'
 
@@ -25,4 +26,8 @@ export interface DungeonInput {
   niche: string | null
   outcome: string | null
   isModuleCompleted: (moduleSlug: string) => boolean
+  /** Русло сквозной задачи: есть — модуль подземелья = модуль последнего шага, этапы = шаги русла, босс = результат. */
+  route?: TaskRoute | null
+  /** Текст задачи (V_OUTCOME) для {outcome} в результате русла. */
+  taskText?: string | null
 }

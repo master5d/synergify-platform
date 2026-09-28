@@ -36,6 +36,8 @@ export interface ZoneVM {
   durationLabel: string
   status: QuestStatus
   isNiche: boolean
+  /** Шаги русла сквозной задачи в этом модуле (1-based номер + название); нет русла/шага — undefined. */
+  routeSteps?: { index: number; title: string }[]
   href: string
   transform?: { from: string; to: string } // module micro-transformation, localized
 }

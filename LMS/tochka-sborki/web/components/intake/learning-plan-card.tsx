@@ -4,6 +4,8 @@ import type { Locale } from '@/lib/intake/types'
 import type { ZoneVM } from '@/lib/rpg/types'
 import { profileToLearningPlan, profileWeekRoute } from '@/lib/intake/learning-plan'
 import { WeekRouteView } from './week-route-view'
+import { TaskRouteView } from './task-route-view'
+import { profileTaskRoute, profileTaskText } from '@/lib/intake/task-route'
 import { SheetSection, SHEET_PRE, SHEET_BTN } from './sheet-section'
 
 // moduleTitles — слаг → название модуля (страница персонажа берёт из _meta.json): для «Карты недели».
@@ -14,6 +16,8 @@ export function LearningPlanCard({ profile, zones, locale, moduleTitles }: {
   const plan = profileToLearningPlan(profile, zones, locale, moduleTitles)
   // Разложенная карта недели — кликабельно рядом с текстом плана (в <pre> ссылки не нажимаются).
   const weekRoute = profileWeekRoute(profile, locale)
+  // Русло сквозной задачи (режим «есть задача») — тоже кликабельно, над картой недели.
+  const taskRoute = profileTaskRoute(profile)
   const t = locale === 'en'
     ? { title: 'Personal learning plan', copy: 'Copy plan', copied: 'Copied ✓' }
     : { title: 'Личный план обучения', copy: 'Скопировать план', copied: 'Скопировано ✓' }
@@ -21,6 +25,9 @@ export function LearningPlanCard({ profile, zones, locale, moduleTitles }: {
 
   return (
     <SheetSection title={t.title} glyph="🗺">
+      {taskRoute && (
+        <TaskRouteView route={taskRoute} locale={locale} outcome={profileTaskText(profile)} moduleTitles={moduleTitles} style={{ marginBottom: '1rem' }} />
+      )}
       {weekRoute && (
         <WeekRouteView route={weekRoute} locale={locale} moduleTitles={moduleTitles} style={{ marginBottom: '1rem' }} />
       )}

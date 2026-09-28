@@ -1,6 +1,6 @@
 // web/lib/intake/types.ts
 export type Locale = 'ru' | 'en'
-export type QuestionFormat = 'number' | 'single' | 'multi' | 'likert' | 'text' | 'automation-verdict' | 'week-map'
+export type QuestionFormat = 'number' | 'single' | 'multi' | 'likert' | 'text' | 'automation-verdict' | 'week-map' | 'task-route'
 export type AttributeCode = 'INT' | 'WIS' | 'CON' | 'DEX' | 'CHA' | 'STR'
 export type ModuleId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'V' | 'VD'
 
@@ -26,6 +26,8 @@ export type WorldSkin =
 export interface QuestionOption {
   value: string
   label: { ru: string; en: string }
+  /** Опция видна, только если на questionId ответили equals; вопрос без ответа — видны все (visibleOptions). */
+  showIf?: { questionId: string; equals: string }
 }
 
 export interface Question {

@@ -19,7 +19,7 @@ export function useDungeon(params: DungeonInput) {
   const view = useMemo(
     () => buildDungeon(params),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [params.locale, params.skin, params.niche, params.outcome, params.isModuleCompleted],
+    [params.locale, params.skin, params.niche, params.outcome, params.isModuleCompleted, params.route, params.taskText],
   )
 
   const isCleared = useCallback(

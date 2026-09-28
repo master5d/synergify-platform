@@ -3,6 +3,7 @@
 
 import Link from 'next/link'
 import type { Locale, WorldSkin } from '@/lib/intake/types'
+import type { TaskRoute } from '@/lib/intake/task-route'
 import { useDungeon } from '@/lib/dungeon/use-dungeon'
 import { HelpTip } from '@/components/help/help-tip'
 
@@ -20,10 +21,12 @@ interface Props {
   moduleTitle: string
   isModuleCompleted: (moduleSlug: string) => boolean
   helpId?: string
+  route?: TaskRoute | null
+  taskText?: string | null
 }
 
-export function DungeonCard({ locale, accent, skin, niche, outcome, moduleTitle, isModuleCompleted, helpId }: Props) {
-  const { view, bossCleared, ready } = useDungeon({ locale, skin, niche, outcome, isModuleCompleted })
+export function DungeonCard({ locale, accent, skin, niche, outcome, moduleTitle, isModuleCompleted, helpId, route, taskText }: Props) {
+  const { view, bossCleared, ready } = useDungeon({ locale, skin, niche, outcome, isModuleCompleted, route, taskText })
   if (!ready) return null
 
   const prefix = locale === 'en' ? '/en' : ''

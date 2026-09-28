@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { getQuestions, getModuleIntros } from '@/lib/intake/instrument'
-import { visibleQuestions } from '@/lib/intake/visible'
+import { visibleQuestions, visibleOptions } from '@/lib/intake/visible'
 import { QuestionRenderer } from './question-renderer'
 import type { Answers, AnswerValue, InstrumentVersion, Locale } from '@/lib/intake/types'
 import { CharterReveal } from './charter-reveal'
@@ -9,6 +9,7 @@ import { OnboardingBridge } from './onboarding-bridge'
 import { IntakeGate } from './intake-gate'
 import { AutomationVerdictCard } from './automation-verdict-card'
 import { WeekMapCard } from './week-map-card'
+import { TaskRouteCard } from './task-route-card'
 import { buildCompanionCharter } from '@/lib/intake/charter'
 import { deriveMbti } from '@/lib/intake/mbti'
 import { SKINS_META } from '@/lib/rpg/skins-meta'
@@ -212,9 +213,11 @@ export function IntakeWizard({ locale, moduleTitles }: { locale: Locale; moduleT
         ? <AutomationVerdictCard locale={locale} answers={answers} onChange={setAnswer} />
         : q.format === 'week-map'
         ? <WeekMapCard locale={locale} value={answers[q.id]} onChange={setAnswer} moduleTitles={moduleTitles} />
+        : q.format === 'task-route'
+        ? <TaskRouteCard key={q.id} locale={locale} answers={answers} onChange={setAnswer} moduleTitles={moduleTitles} />
         : (
           <QuestionRenderer
-            question={q}
+            question={q.options ? { ...q, options: visibleOptions(q, answers) } : q}
             locale={locale}
             value={answers[q.id]}
             onChange={setAnswer}

@@ -4,6 +4,8 @@ import { SKINS_META } from '@/lib/rpg/skins-meta'
 import { parseOutcome } from './parse-outcome'
 import { WEEK_BUCKETS, WEEK_MAP_ANSWER_KEY, decodeWeekMap, planWeekRoute, type WeekRoute } from './week-map'
 import { buildWeekMapContent, weekRouteModuleHref } from './week-map-content'
+import { profileTaskRoute, profileTaskText, unitModule, type TaskRoute } from './task-route'
+import { buildTaskRouteContent, routeResultText, routeUnitHref } from './task-route-content'
 
 export interface PlanStep { name: string; transform?: { from: string; to: string } }
 
@@ -21,6 +23,28 @@ export interface LearningPlanInput {
   weekRoute?: WeekRoute | null
   /** слаг модуля → название, для маршрута; нет — слаг. */
   moduleTitles?: Record<string, string>
+  /** Русло сквозной задачи (режим «есть задача»); null/нет — раздела нет, курс по порядку. */
+  taskRoute?: TaskRoute | null
+  /** Текст задачи (V_OUTCOME) для {outcome} в результате русла. */
+  taskText?: string | null
+}
+
+/** Раздел плана «Твоя задача — русло» текстом — те же подписи, что у <TaskRouteView>. */
+function taskRouteSection(route: TaskRoute, outcome: string | null, locale: Locale, titles: Record<string, string> | undefined): string[] {
+  const c = buildTaskRouteContent(locale)
+  const mod = (unit: string) => titles?.[unitModule(unit)] ?? unitModule(unit)
+  return [
+    `## 🧭 ${c.routeHeading}: ${route.title[locale]}`,
+    route.summary[locale],
+    '',
+    `0. ${c.checkTitle} — ${mod(route.check.unit)} (${routeUnitHref(route.check.unit, locale)})`,
+    ...route.steps.map((s, i) => `${i + 1}. ${s.title[locale]} — ${mod(s.unit)} (${routeUnitHref(s.unit, locale)}): ${s.action[locale]}`),
+    '',
+    `${c.falseRoadLabel} ${route.falseRoad.title[locale]}. ${route.falseRoad.why[locale]}`,
+    '',
+    `${c.resultLabel} ${routeResultText(route, outcome, locale)}`,
+    '',
+  ]
 }
 
 /** Раздел плана «личный маршрут» текстом (для копирования) — те же подписи, что у <WeekRouteView>. */
@@ -99,6 +123,7 @@ export function buildLearningPlan(i: LearningPlanInput): string {
     `## ${t.steps}`,
     stepsBlock,
     ``,
+    ...(i.taskRoute ? taskRouteSection(i.taskRoute, i.taskText ?? null, i.locale, i.moduleTitles) : []),
     ...(i.weekRoute ? weekRouteSection(i.weekRoute, i.locale, i.moduleTitles) : []),
     `## ${t.exp}`,
     i.experiential.map(e => `- ${e}`).join('\n'),
@@ -156,6 +181,8 @@ export function profileToLearningPlan(
     experiential,
     accountability,
     weekRoute: profileWeekRoute(profile, locale),
+    taskRoute: profileTaskRoute(profile),
+    taskText: profileTaskText(profile),
     moduleTitles: moduleTitles ?? Object.fromEntries(zones.map(z => [z.slug, z.moduleTitle]).filter(([, t]) => t)),
   })
 }

@@ -47,6 +47,18 @@ export const QUESTIONS_V2: Question[] = [
       { value: 'understand', label: { ru: 'Понимать, как всё устроено', en: 'Understanding how things work' } },
     ],
   },
+  // ── Развилка «криэйтор / предприниматель» + сквозная задача (решение владельца 2026-09-14; спека
+  // docs/superpowers/specs/2026-09-28-onboarding-fork-task-routes.md). Роль сужает опции V_NICHE (showIf у опции)
+  // и каталог русел (course/task-routes.ts). Режим «есть задача» открывает шаг V_TASK_ROUTE после V_OUTCOME;
+  // «хочу научиться» — курс по порядку, русло не навязывается.
+  {
+    id: 'V_ROLE', module: 'V', format: 'single', required: false,
+    prompt: { ru: 'Кто ты в своём деле?', en: 'Who are you in your work?' },
+    options: [
+      { value: 'creator', label: { ru: 'Криэйтор — создаю контент, продукты, смыслы', en: 'Creator — I make content, products, ideas' } },
+      { value: 'entrepreneur', label: { ru: 'Предприниматель — веду бизнес, клиентов, процессы', en: 'Entrepreneur — I run a business, clients, processes' } },
+    ],
+  },
   {
     id: 'V_NICHE', module: 'V', format: 'single', required: false,
     prompt: { ru: 'Где ты себя видишь — твоя сфера?', en: 'Where do you see yourself — your field?' },
@@ -54,11 +66,19 @@ export const QUESTIONS_V2: Question[] = [
       { value: 'coach', label: { ru: 'Коучинг, психология, сопровождение', en: 'Coaching, psychology, guidance' } },
       { value: 'massage', label: { ru: 'Тело, практики, массаж', en: 'Body, practices, bodywork' } },
       { value: 'astrology', label: { ru: 'Астрология, духовное', en: 'Astrology, spiritual' } },
-      { value: 'content', label: { ru: 'Контент, блог, медиа', en: 'Content, blogging, media' } },
-      { value: 'ecommerce', label: { ru: 'Торговля, продукты', en: 'Commerce, products' } },
-      { value: 'service', label: { ru: 'Сервис, услуги (другое)', en: 'Service business (other)' } },
+      { value: 'content', label: { ru: 'Контент, блог, медиа', en: 'Content, blogging, media' }, showIf: { questionId: 'V_ROLE', equals: 'creator' } },
+      { value: 'ecommerce', label: { ru: 'Торговля, продукты', en: 'Commerce, products' }, showIf: { questionId: 'V_ROLE', equals: 'entrepreneur' } },
+      { value: 'service', label: { ru: 'Сервис, услуги (другое)', en: 'Service business (other)' }, showIf: { questionId: 'V_ROLE', equals: 'entrepreneur' } },
       { value: 'tech', label: { ru: 'Технологии, разработка', en: 'Tech, development' } },
       { value: 'other', label: { ru: 'Другое', en: 'Other' } },
+    ],
+  },
+  {
+    id: 'V_TASK_MODE', module: 'V', format: 'single', required: false,
+    prompt: { ru: 'С чем ты пришёл?', en: 'What did you come with?' },
+    options: [
+      { value: 'task', label: { ru: 'Есть готовая задача — хочу её сделать', en: 'I have a task — I want to get it done' } },
+      { value: 'learn', label: { ru: 'Хочу научиться создавать — пройду курс по порядку', en: 'I want to learn to build — I will take the course in order' } },
     ],
   },
   {
@@ -71,6 +91,13 @@ export const QUESTIONS_V2: Question[] = [
       ru: 'напр.: собрать лендинг · автоматизировать отчёты · писать посты быстрее',
       en: 'e.g.: build a landing page · automate reports · write posts faster',
     },
+  },
+  // Русло задачи: текст V_OUTCOME → классификатор (только закрытый каталог) → уточнение / ручной выбор.
+  // Ответ — string[] [ключ, источник, снимок текста] (lib/intake/task-route.ts).
+  {
+    id: 'V_TASK_ROUTE', module: 'V', format: 'task-route', required: false,
+    showIf: { questionId: 'V_TASK_MODE', equals: 'task' },
+    prompt: { ru: 'Какой дорогой делается твоя задача?', en: 'Which road does your task take?' },
   },
   // ── «Стоит ли это вообще автоматизировать?» (intake LMS#10, принято владельцем 2026-09-14).
   // Первый шаг русла задачи: прежде чем выбирать инструмент — четыре измерения + окупаемость.

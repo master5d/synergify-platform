@@ -2,8 +2,9 @@ import type { ProseEnv } from './prose.js'
 import type { SkinEnv } from './skin.js'
 import type { DemandEnv } from './demand.js'
 import type { InterestEnv } from './interest.js'
+import type { TaskRouteEnv } from './task-route.js'
 
-export interface ServiceEnv extends ProseEnv, SkinEnv, DemandEnv, InterestEnv {
+export interface ServiceEnv extends ProseEnv, SkinEnv, DemandEnv, InterestEnv, TaskRouteEnv {
   API_TOKEN: string
   PORT: number
   fetchImpl?: typeof fetch
@@ -31,6 +32,7 @@ export function loadEnv(src: NodeJS.ProcessEnv): ServiceEnv {
     POOL_DEMAND_BRIEF: src.POOL_DEMAND_BRIEF || 'google/gemini-3-flash-preview',
     // Пересказ примера под сферу ученика — черновой пул гейтвея (алиас, не модель).
     POOL_INTEREST: src.POOL_INTEREST || 'draft-pool',
+    POOL_TASK_ROUTE: src.POOL_TASK_ROUTE || 'reasoning',
     PORT: Number(src.PORT || 4310),
   }
 }
