@@ -569,6 +569,20 @@
         "en": "The ritual is complete, and your creation walks the world. Your journey as its master has only just begun."
       }
     },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Прежде чем идти дальше во тьму, осмотри свою цитадель: где треснула стена, где в подвале завелась плесень?",
+        "en": "Before venturing further into the dark, inspect your citadel: where has the wall cracked, where has mould crept into the cellar?"
+      },
+      "mentorHint": {
+        "ru": "Не пытайся укрепить все стены за одну ночь. Три пролома, заделанных надёжно, спасут крепость.",
+        "en": "Do not try to shore up every wall in one night. Three breaches sealed well will save the fortress."
+      },
+      "outro": {
+        "ru": "Три пролома заделаны, и камень держит. Цитадель готова к следующему походу.",
+        "en": "Three breaches are sealed, and the stone holds. The citadel is ready for the next campaign."
+      }
+    },
     "08-agent-engineering/u1-activation": {
       "intro": {
         "ru": "Старые заклинания слабеют, их сила иссякает перед сложностью Эфира. Чтобы повелевать новыми сущностями из Пустоты, простого prompt'а уже недостаточно.",

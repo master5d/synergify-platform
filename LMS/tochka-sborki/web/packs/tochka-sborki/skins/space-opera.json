@@ -569,6 +569,20 @@
         "en": "Systems are nominal, crew! You have successfully upgraded our ship's core. The galaxy awaits, and we are ready for new discoveries!"
       }
     },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Перед прыжком в новый сектор экипаж проводит диагностику корабля: перегретые узлы, лишний груз, забытые протоколы.",
+        "en": "Before jumping to a new sector, the crew runs ship diagnostics: overheated systems, excess cargo, forgotten protocols."
+      },
+      "mentorHint": {
+        "ru": "Не перезагружай все системы разом. Три исправления с проверкой после каждого — и корабль держит курс.",
+        "en": "Don't reboot every system at once. Three fixes, each checked after it lands — and the ship holds its course."
+      },
+      "outro": {
+        "ru": "Диагностика завершена, три системы в норме. Остальные пункты — в бортовой журнал. Курс на следующий сектор.",
+        "en": "Diagnostics complete, three systems nominal. The rest goes in the ship's log. Setting course for the next sector."
+      }
+    },
     "08-agent-engineering/u1-activation": {
       "intro": {
         "ru": "Корабль входит в некартографированный сектор, и стандартные команды навигации больше не справляются. Пришло время создать настоящего автономного штурмана.",

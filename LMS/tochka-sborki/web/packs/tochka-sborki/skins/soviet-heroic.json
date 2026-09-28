@@ -569,6 +569,20 @@
         "en": "The system is operating nominally; tests are passed. This tool is ready to serve the common cause. New frontiers await!"
       }
     },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Перед новой пятилеткой — техосмотр! Бригада проверяет станки: где износ, где лишнее, где нарушен порядок в цехе.",
+        "en": "Before a new five-year plan — an inspection! The brigade checks the machines: where there is wear, clutter, disorder on the shop floor."
+      },
+      "mentorHint": {
+        "ru": "Не штурмуй всё разом. Три узла, отремонтированных и проверенных, — это план, выполненный честно.",
+        "en": "Don't storm everything at once. Three units repaired and checked is a plan honestly fulfilled."
+      },
+      "outro": {
+        "ru": "Три узла в строю, цех работает. Остальные замечания — в журнал, на следующую смену.",
+        "en": "Three units are back in service, the shop is running. The remaining notes go in the log for the next shift."
+      }
+    },
     "08-agent-engineering/u1-activation": {
       "intro": {
         "ru": "Первоначальная пятилетка для нашего prompt'а выполнена досрочно, но результаты... неудовлетворительные. Теперь мы должны применить инженерную смекалку, ибо цели Партии не ждут идеальных условий.",

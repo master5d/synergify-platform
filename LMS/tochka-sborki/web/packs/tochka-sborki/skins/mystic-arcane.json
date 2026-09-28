@@ -569,6 +569,20 @@
         "en": "Your agent has connected to the world and answered your call! This is a great step on the Archmage's path. Carry this fire into the next halls of knowledge."
       }
     },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Сила накапливается, но вместе с ней — пыль на полках библиотеки. Пусть твой фамильяр пройдёт по залам и укажет, где порядок нарушен.",
+        "en": "Power accumulates, and with it the dust on the library shelves. Let your familiar walk the halls and show where order has been broken."
+      },
+      "mentorHint": {
+        "ru": "Не переписывай весь гримуар разом. Три исправленных страницы, сверенных с оригиналом, — вот истинная работа.",
+        "en": "Do not rewrite the whole grimoire at once. Three corrected pages, checked against the original, are the true work."
+      },
+      "outro": {
+        "ru": "Библиотека снова дышит. Три страницы исправлены, остальное ждёт своего часа в списке.",
+        "en": "The library breathes again. Three pages are corrected; the rest awaits its hour on the list."
+      }
+    },
     "08-agent-engineering/u1-activation": {
       "intro": {
         "ru": "Когда простого заклинания (prompt) уже недостаточно, чтобы повелевать эфиром, мы должны научиться плести более сложные узы для наших созданий.",

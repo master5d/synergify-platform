@@ -569,6 +569,20 @@
         "en": "VICTORY! You have walked the path and created not just code, but a true combat AI agent! Your legend is just beginning!"
       }
     },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Перед новой аркой герой всегда возвращается в додзё! Пора проверить своё снаряжение: где затупился клинок, где порвался плащ?",
+        "en": "Before a new arc, the hero always returns to the dojo! Time to check your gear: where has the blade dulled, where has the cloak torn?"
+      },
+      "mentorHint": {
+        "ru": "Не чини всё сразу! Три приёма, отточенных до блеска, сильнее двадцати недоученных.",
+        "en": "Don't fix everything at once! Three moves polished to perfection beat twenty half-learned ones."
+      },
+      "outro": {
+        "ru": "Снаряжение в порядке, три слабых места закрыты! Теперь ты готов к следующей арке — к настоящим агентам!",
+        "en": "Your gear is in order, three weak spots are sealed! Now you're ready for the next arc — real agents!"
+      }
+    },
     "08-agent-engineering/u1-activation": {
       "intro": {
         "ru": "Враги стали сильнее, и твой базовый prompt больше не сносит им и половины HP! Пришло время освоить новую технику и создать настоящего боевого agent'а!",

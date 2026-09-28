@@ -569,6 +569,20 @@
         "en": "You built it, you armed it, and you tested it. The agent is now your operative in the digital shadows. The real work begins."
       }
     },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Каждое дело оставляет следы: брошенные конфиги, забытые ключи, файлы-монстры. Пора прочесать собственную берлогу.",
+        "en": "Every case leaves traces: abandoned configs, forgotten keys, monster files. Time to sweep your own den."
+      },
+      "mentorHint": {
+        "ru": "Не верь рапорту на слово. Три улики, проверенные лично, стоят больше двадцати непроверенных.",
+        "en": "Don't take the report on faith. Three leads you checked yourself are worth more than twenty you didn't."
+      },
+      "outro": {
+        "ru": "Берлога вычищена ровно настолько, чтобы в ней снова можно было работать. Остальное — в папку «на потом».",
+        "en": "The den is clean enough to work in again. The rest goes in the \"later\" file."
+      }
+    },
     "08-agent-engineering/u1-activation": {
       "intro": {
         "ru": "Одиночный prompt — как уличный информатор. Иногда он замолкает или врёт, и тогда нужен другой подход.",

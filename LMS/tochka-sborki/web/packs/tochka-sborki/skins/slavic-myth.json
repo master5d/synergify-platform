@@ -569,6 +569,20 @@
         "en": "It did it, phew, it did it! Now we know our agent is ready for work. Great accomplishments await us beyond the threshold of this module."
       }
     },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Прежде чем в дальнюю дорогу, хозяин обходит двор: где плетень покосился, где в амбаре мыши хозяйничают.",
+        "en": "Before a long road, the master walks the yard: where the fence leans, where mice have taken over the barn."
+      },
+      "mentorHint": {
+        "ru": "За всё сразу не хватайся. Три дела сделай на совесть — и каждое проверь своими глазами.",
+        "en": "Don't grab everything at once. Do three jobs properly — and check each with your own eyes."
+      },
+      "outro": {
+        "ru": "Двор прибран, плетень выправлен. Остальное хозяйство подождёт — дорога зовёт.",
+        "en": "The yard is tidy, the fence set straight. The rest of the household can wait — the road is calling."
+      }
+    },
     "08-agent-engineering/u1-activation": {
       "intro": {
         "ru": "Бывает, попросишь домового помочь, а он будто не слышит. Так и с AI agent: старый prompt больше не работает, и нужно найти новые слова, чтобы договориться.",
