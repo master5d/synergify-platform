@@ -291,6 +291,24 @@ export function AcademyPage({ locale }: Props) {
         </div>
       </section>
 
+      {/* ── СООБЩЕСТВО: чат академии (intake LMS#13) ───────────────── */}
+      {t.community.url && (
+        <section id="community" className="w-pad" style={{ ...SHELL, padding: '0 40px 104px' }}>
+          <div className="w-2col" style={{
+            display: 'grid', gridTemplateColumns: 'minmax(0,0.72fr) minmax(0,1.28fr)', gap: '64px', alignItems: 'center',
+            borderTop: '1px solid var(--border-color)', paddingTop: '48px',
+          }}>
+            <div style={EYEBROW}>{t.community.label}</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '26px', alignItems: 'flex-start' }}>
+              <p style={{ margin: 0, fontSize: '20px', lineHeight: 1.55, textWrap: 'pretty', maxWidth: '58ch' }}>
+                {t.community.body}
+              </p>
+              <a className="a-link" href={t.community.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '16px' }}>{t.community.linkLabel}</a>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── ОСНОВАТЕЛЬ ─────────────────────────────────────────────── */}
       <section id="founder" className="w-pad" style={{ ...SHELL, padding: '0 40px 104px' }}>
         <div style={{ ...EYEBROW, marginBottom: '40px' }}>{t.founderLabel}</div>

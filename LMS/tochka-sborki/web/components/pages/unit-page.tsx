@@ -22,6 +22,8 @@ import { getLessonViews } from '@/lib/lesson-views/load'
 import { UnitRouteStep } from '@/components/intake/unit-route-step'
 import type { Locale } from '@/lib/dictionaries'
 import { outlineFromNav } from '@/lib/progress-sync'
+import { CommunityUnit } from '@/components/community-unit'
+import { getCommunityUnit } from '@/lib/community'
 
 interface Props { moduleSlug: string; unitSlug: string; locale: Locale }
 
@@ -69,6 +71,8 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
             />
           </Shell>
           </LessonViews>
+          {/* Слой сообщества (LMS#13): записи встреч к уроку и ветка модуля в конце модуля. */}
+          <CommunityUnit vm={getCommunityUnit(moduleSlug, unitSlug, nextUnit === null, locale === 'en' ? 'en' : 'ru')} />
         </main>
       </div>
       <Footer locale={locale} topics={navItems.filter(i => i.type === 'module').map(i => ({ slug: i.slug, title: i.title }))} />

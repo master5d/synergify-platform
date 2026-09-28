@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { AlumniClient } from '@/components/alumni-client'
 import { pageTitle } from '@/lib/page-title'
+import { getCommunityEntry } from '@/lib/community'
 
 export const metadata: Metadata = {
   title: pageTitle('Синергемы'),
@@ -9,5 +10,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <AlumniClient locale="ru" />
+  return <AlumniClient locale="ru" community={getCommunityEntry('ru')} />
 }

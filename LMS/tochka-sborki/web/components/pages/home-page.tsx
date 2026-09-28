@@ -6,6 +6,8 @@ import { Nav } from '@/components/nav'
 import { Footer } from '@/components/footer'
 import { ProgramVenn } from '@/components/program-venn'
 import { EcosystemDiagram } from '@/components/ecosystem-diagram'
+import { CommunityCard } from '@/components/community-card'
+import { getCommunityEntry } from '@/lib/community'
 import { getEcosystem } from '@/lib/course/ecosystem'
 import { FaqAccordion } from '@/components/faq-accordion'
 import { HeroSecondaryCta } from '@/components/hero-secondary-cta'
@@ -26,6 +28,7 @@ interface Props { locale: Locale }
 export function HomePage({ locale }: Props) {
   const t = getDictionary(locale)
   const modules = getAllModules(locale)
+  const community = getCommunityEntry(locale === 'en' ? 'en' : 'ru')
 
   return (
     <>
@@ -226,6 +229,12 @@ export function HomePage({ locale }: Props) {
 
       <ProgramVenn locale={locale} />
       <EcosystemDiagram data={getEcosystem(locale)} locale={locale} />
+      {/* Слой сообщества (LMS#13): вход в группу курса; пусто в pack'е — не рисуется. */}
+      {community && (
+        <div style={{ padding: '0 2rem 2rem' }}>
+          <CommunityCard vm={community} style={{ maxWidth: 'var(--content-max)', margin: '0 auto', boxSizing: 'border-box' }} />
+        </div>
+      )}
 
       {/* ── ПРОГРАММА ────────────────────────────────────────── */}
       <section id="program" className="home-program-section" style={{ padding: 'var(--section-gap) 2rem', scrollMarginTop: '2rem' }}>

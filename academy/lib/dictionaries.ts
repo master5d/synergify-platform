@@ -42,6 +42,8 @@ export interface AcademyDictionary {
     charterSectionLabel: string
     charterBridge: string
     charterLabel: string
+    /** Слой сообщества (intake LMS#13): чат академии в Telegram. url '' — раздела нет. */
+    community: { label: string; body: string; linkLabel: string; url: string }
     founderLabel: string
     founderName: string
     founderBody: string[]
@@ -137,6 +139,12 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
       charterSectionLabel: 'правила дома',
       charterBridge: 'У дома есть правила — не устав, а то, чем мы отвечаем за это пространство: никакой изоляции, никакой зависимости от школы, уйти можно молча.',
       charterLabel: 'Правила дома — чем мы отвечаем →',
+      community: {
+        label: 'сообщество',
+        body: 'Ученики и мастера академии встречаются в Telegram-чате «Мастерская Перехода»: вопросы, круги практики, записи живых встреч. Вход — по ссылке и когда захочется; школа туда твоих данных не передаёт.',
+        linkLabel: 'Чат «Мастерская Перехода» →',
+        url: 'https://t.me/kundaliniRUs',
+      },
       founderLabel: 'основатель',
       founderName: 'Александр Мамаев',
       founderBody: [
@@ -254,6 +262,12 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
       charterSectionLabel: 'house rules',
       charterBridge: 'This house has rules — not a statute, but what we answer for in this space: no isolation, no dependence on the school, and you may leave in silence.',
       charterLabel: 'House rules — what we answer for →',
+      community: {
+        label: 'community',
+        body: 'Learners and masters of the academy meet in the Telegram chat "Мастерская Перехода": questions, practice circles, recordings of live sessions. Join by the link, whenever you like; the school passes none of your data there.',
+        linkLabel: 'The "Мастерская Перехода" chat →',
+        url: 'https://t.me/kundaliniRUs',
+      },
       founderLabel: 'founder',
       founderName: 'Alexander Mamaev',
       founderBody: [
