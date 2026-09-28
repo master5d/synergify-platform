@@ -78,15 +78,16 @@ describe.runIf(PACK_SLUG === 'tochka-sborki')('сквозная задача н�
     expect(learn).not.toContain('Контент-пайплайн')
   })
 
-  it('подземелье: русло заменяет NICHE_MODULE — модуль результата, этапы = шаги, босс = результат', () => {
-    expect(dungeonModuleFor('coach', route)).toBe('07-tools')
-    expect(dungeonModuleFor('coach', null)).toBe('04-prompt-engineering')
+  it('подземелье: с руслом — модуль результата, этапы = шаги, босс = результат; без русла — по прогрессу', () => {
+    expect(dungeonModuleFor(route, [])).toBe('07-tools')
+    expect(dungeonModuleFor(null, [])).toBe('00-kickstart')
+    expect(dungeonModuleFor(null, [], (s) => s === '00-kickstart' || s === '01-introduction')).toBe('01-introduction')
     const v = buildDungeon({ locale: 'ru', skin: 'slavic-myth', niche: 'coach', outcome: null, isModuleCompleted: () => true, route, taskText: 'контент для ипотеки' })
     expect(v.module).toBe('07-tools')
     expect(v.stages.map(s => s.body)).toEqual(route.steps.slice(-3).map(s => `${s.title.ru} — ${s.action.ru}`))
     expect(v.boss.body).toContain('«контент для ипотеки»')
-    // Ид этапов по-прежнему в пространстве ниши — учёт пройденного не ломается.
-    expect(v.boss.id).toBe('dungeon:coach:boss')
+    // Пройденность — в пространстве модуля подземелья, не ниши (смена русла не переносит отметки чужого модуля).
+    expect(v.boss.id).toBe('dungeon:07-tools:boss')
   })
 
   it('квест-лог: у модулей с шагом русла — подписи шагов, «ниша» — модуль результата', () => {
@@ -99,6 +100,8 @@ describe.runIf(PACK_SLUG === 'tochka-sborki')('сквозная задача н�
     expect(vm.zones.find(z => z.slug === '04-prompt-engineering')?.isNiche).toBe(false)
     const learn = buildQuestLog({ ...profile, answers: JSON.stringify({ ...answers, V_TASK_MODE: 'learn' }) }, modules, [], () => 'none', null, 'ru')
     expect(learn.zones.every(z => !z.routeSteps)).toBe(true)
-    expect(learn.zones.find(z => z.slug === '04-prompt-engineering')?.isNiche).toBe(true)
+    // «хочу научиться»: без русла зона подземелья — по прогрессу; ничего не закрыто → первый модуль спайна.
+    expect(learn.zones.find(z => z.slug === '00-kickstart')?.isNiche).toBe(true)
+    expect(learn.zones.find(z => z.slug === '04-prompt-engineering')?.isNiche).toBe(false)
   })
 })

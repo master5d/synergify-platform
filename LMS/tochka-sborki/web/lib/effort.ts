@@ -2,7 +2,7 @@
 // Синергема matching engine (Phase C, fb_bfbdbcf0). Keyed-data vocabulary of effort-intents —
 // the ACTIVE opt-in signal a learner declares to gather a синергема. This replaces the passive
 // `niche` as the clustering key (niche becomes a secondary per-card tag). Mirrors the
-// engine+keyed-data pattern of lib/course/niche-map.ts + certificate.ts. All effort copy lives
+// engine+keyed-data pattern of lib/course/dungeon-flavor.ts + certificate.ts. All effort copy lives
 // here; every string is de-hustle clean (lib/effort.test.ts asserts lintDehustle []).
 import type { Bi } from '@/lib/rpg/types'
 import type { Locale } from '@/lib/dictionaries'

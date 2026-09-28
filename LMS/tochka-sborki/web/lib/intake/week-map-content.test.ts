@@ -5,7 +5,7 @@ import { buildWeekMapContent } from './week-map-content'
 import { TASK_KINDS, WEEK_BUCKETS, WEEK_MAP_MAX_TASKS, WEEK_MAP_MIN_TASKS } from './week-map'
 import { CONTENT_ROOT } from '@/lib/pack'
 
-// Реальные модули активного pack'а — по каталогам контента (как niche-map.test для чужих pack'ов).
+// Реальные модули активного pack'а — по каталогам контента (как у спайна подземелья для чужих pack'ов).
 const REAL_SLUGS = readdirSync(join(CONTENT_ROOT, 'ru'), { withFileTypes: true })
   .filter(e => e.isDirectory() && /^\d{2}-/.test(e.name))
   .map(e => e.name)

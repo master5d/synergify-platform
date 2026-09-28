@@ -194,7 +194,8 @@ export function profileTaskRoute(profile: { answers?: unknown } | null | undefin
 }
 
 /**
- * Текст задачи для подстановки {outcome} в русло: V_OUTCOME (parseOutcome читает только v1-ключ F3).
+ * Текст задачи для подстановки {outcome} в русло: V_OUTCOME, нормализованный (parseOutcome читает V_OUTCOME с фолбэком
+ * на v1-ключ F3, без нормализации длины).
  * null — текста нет (fillOutcome подставит «твоя задача»).
  */
 export function profileTaskText(profile: { answers?: unknown } | null | undefined): string | null {

@@ -1,6 +1,5 @@
 // web/lib/rpg/quest-log.test.ts
 import { describe, it, expect } from 'vitest'
-import { PACK_SLUG } from '@/lib/pack'
 import { buildQuestLog } from './quest-log'
 import { getTransformation } from './transformations'
 import type { SkinPack } from './types'
@@ -31,11 +30,13 @@ describe('buildQuestLog', () => {
     expect(vm.zones.find(z => z.slug === '00-kickstart')!.questTitle).toBe('Зов тропы')
     expect(vm.zones.find(z => z.slug === '01-introduction')!.questTitle).toBe('Введение') // fallback
   })
-  // NICHE_MODULE второго pack'а указывает в его собственный модуль, которого нет в
-  // фикстуре точки-сборки. Для tochka-sborki — 1-в-1.
-  it.runIf(PACK_SLUG === 'tochka-sborki')('flags the niche module', () => {
-    const vm = buildQuestLog(profile, modules, [], () => 'none', pack, 'ru')
-    expect(vm.zones.find(z => z.slug === '04-prompt-engineering')?.isNiche).toBe(true)
+  // Зона подземелья без русла — по прогрессу в спайне квест-линии, ниша не влияет.
+  it('flags the dungeon zone by progress, not by niche', () => {
+    const fresh = buildQuestLog(profile, modules, [], () => 'none', pack, 'ru')
+    expect(fresh.zones.filter(z => z.isNiche).map(z => z.slug)).toEqual(['00-kickstart'])
+    const done = new Set(['00-kickstart', '01-introduction', '02-setup-guide'])
+    const vm = buildQuestLog({ ...profile, niche: 'tech' }, modules, [...done], (s: string) => done.has(s) ? 'completed' : 'none', pack, 'ru')
+    expect(vm.zones.filter(z => z.isNiche).map(z => z.slug)).toEqual(['02-setup-guide'])
   })
   it('summary counts completed', () => {
     const vm = buildQuestLog(profile, modules, ['00-kickstart'], (s) => s === '00-kickstart' ? 'completed' : 'none', pack, 'ru')

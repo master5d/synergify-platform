@@ -26,6 +26,8 @@ export interface DungeonInput {
   niche: string | null
   outcome: string | null
   isModuleCompleted: (moduleSlug: string) => boolean
+  /** Модули курса (слаги контента активного pack'а) — спайн для выбора модуля без русла. Нет — MODULE_SLUGS. */
+  courseModules?: readonly string[]
   /** Русло сквозной задачи: есть — модуль подземелья = модуль последнего шага, этапы = шаги русла, босс = результат. */
   route?: TaskRoute | null
   /** Текст задачи (V_OUTCOME) для {outcome} в результате русла. */

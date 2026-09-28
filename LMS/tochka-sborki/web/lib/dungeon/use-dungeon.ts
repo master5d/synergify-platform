@@ -4,8 +4,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import type { DungeonInput } from './types'
 import { buildDungeon } from './build-dungeon'
-import { FLAVOR_BANK } from '@/lib/course/dungeon-flavor'
-import { readDungeon, writeDungeon, markCleared, type DungeonStore } from './dungeon-store'
+import { readDungeon, writeDungeon, markCleared, isCleared as isStoreCleared, dungeonStageId, type DungeonStore } from './dungeon-store'
 import { useShards } from '@/lib/cs/use-shards'
 
 export function useDungeon(params: DungeonInput) {
@@ -19,11 +18,11 @@ export function useDungeon(params: DungeonInput) {
   const view = useMemo(
     () => buildDungeon(params),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [params.locale, params.skin, params.niche, params.outcome, params.isModuleCompleted, params.route, params.taskText],
+    [params.locale, params.skin, params.niche, params.outcome, params.isModuleCompleted, params.route, params.taskText, params.courseModules],
   )
 
   const isCleared = useCallback(
-    (id: string): boolean => store?.clearedIds.includes(id) ?? false,
+    (id: string): boolean => (store ? isStoreCleared(store, id) : false),
     [store],
   )
 
@@ -31,12 +30,12 @@ export function useDungeon(params: DungeonInput) {
     (id: string, cs: number) => {
       setStore(prev => {
         const base = prev ?? { clearedIds: [] }
-        if (base.clearedIds.includes(id)) return base
+        if (isStoreCleared(base, id)) return base
         const next = markCleared(base, id)
         writeDungeon(next)
         return next
       })
-      credit(id, cs) // key is already namespaced (dungeon:<niche>:…); applyCredit is idempotent
+      credit(id, cs) // key is already namespaced (dungeon:<module>:…); applyCredit is idempotent
     },
     [credit],
   )
@@ -46,12 +45,11 @@ export function useDungeon(params: DungeonInput) {
   return { view, isCleared, clear, bossCleared, ready: store !== null && shardsReady }
 }
 
-// Lightweight read for the World Map flip (no CS, no build).
-export function useNicheDungeonCleared(niche: string | null): boolean {
+// Lightweight read for the World Map flip (no CS, no build): босс подземелья данного модуля пройден?
+export function useDungeonBossCleared(module: string | null): boolean {
   const [cleared, setCleared] = useState(false)
   useEffect(() => {
-    const n = niche && FLAVOR_BANK[niche] ? niche : 'other'
-    setCleared(readDungeon().clearedIds.includes(`dungeon:${n}:boss`))
-  }, [niche])
+    setCleared(module ? isStoreCleared(readDungeon(), dungeonStageId(module, 'boss')) : false)
+  }, [module])
   return cleared
 }

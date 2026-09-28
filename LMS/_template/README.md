@@ -13,7 +13,7 @@ app and swapping the course-specific data** listed in [`CHECKLIST.md`](./CHECKLI
 | Layer | Where | New course… |
 |---|---|---|
 | **Engine** (reuse as-is) | content-loader, i18n structure, PWA, SEO (sitemap/robots), RPG layer (rpg/cs/dungeon/quests/wellbeing/intake), auth/guards, learn-with-AI, syllabus/materials renderers | keeps unchanged |
-| **Course data** (fill in) | `lib/course.ts`, `lib/dictionaries.ts` values, `lib/materials.ts`, `lib/rpg/skins/*` + `skins-meta`, `lib/rpg/niche-map.ts`, `lib/showcase.ts`, `content/{ru,en}/` | replaces |
+| **Course data** (fill in) | `lib/course.ts`, `lib/dictionaries.ts` values, `lib/materials.ts`, `lib/rpg/skins/*` + `skins-meta`, `course/dungeon-flavor.ts`, `lib/showcase.ts`, `content/{ru,en}/` | replaces |
 
 ## Quickstart (current, copy-based)
 

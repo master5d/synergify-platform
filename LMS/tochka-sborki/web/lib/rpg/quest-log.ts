@@ -21,10 +21,11 @@ export function buildQuestLog(
   getState: GetState, pack: SkinPack | null, locale: 'ru' | 'en',
 ): QuestLogVM {
   const order = QUEST_LINES[profile.char_class] ?? [...MODULE_SLUGS]
-  // Русло сквозной задачи: зона-«ниша» — модуль результата русла; у зон с шагами русла — их подписи.
+  // Зона подземелья (isNiche) — модуль подземелья: русло → модуль результата русла, без русла — по прогрессу
+  // в спайне квест-линии (ниша на выбор не влияет). У зон с шагами русла — их подписи.
   const route = profileTaskRoute(profile)
   const stepsByModule = route ? routeStepsByModule(route) : {}
-  const nicheSlug = route || profile.niche ? dungeonModuleFor(profile.niche, route) : undefined
+  const nicheSlug = dungeonModuleFor(route, order, (slug) => getState(slug) === 'completed')
 
   const statuses: QuestStatus[] = order.map(slug => getState(slug) === 'completed' ? 'completed' : 'todo')
   const currentIdx = statuses.findIndex(s => s !== 'completed')

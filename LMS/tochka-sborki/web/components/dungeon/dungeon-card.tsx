@@ -23,10 +23,12 @@ interface Props {
   helpId?: string
   route?: TaskRoute | null
   taskText?: string | null
+  /** Модули курса — спайн для выбора модуля подземелья без русла. */
+  courseModules?: readonly string[]
 }
 
-export function DungeonCard({ locale, accent, skin, niche, outcome, moduleTitle, isModuleCompleted, helpId, route, taskText }: Props) {
-  const { view, bossCleared, ready } = useDungeon({ locale, skin, niche, outcome, isModuleCompleted, route, taskText })
+export function DungeonCard({ locale, accent, skin, niche, outcome, moduleTitle, isModuleCompleted, helpId, route, taskText, courseModules }: Props) {
+  const { view, bossCleared, ready } = useDungeon({ locale, skin, niche, outcome, isModuleCompleted, route, taskText, courseModules })
   if (!ready) return null
 
   const prefix = locale === 'en' ? '/en' : ''

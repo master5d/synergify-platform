@@ -31,7 +31,7 @@ Everything a new course must provide. Engine code is reused unchanged; the items
 
 ## 5. RPG layer data (optional — only if using gamification)
 - [ ] `web/packs/<pack>/skins/*.json` + `skins-meta.ts` — themed worlds/mentors.
-- [ ] `web/packs/<pack>/course/niche-map.ts` — niche → module mapping.
+- [ ] `web/packs/<pack>/course/dungeon-flavor.ts` — niche dungeon flavor (`FLAVOR_BANK`) + `{niche}` slot words (`NICHE_SLOT`). Модуль подземелья ниша не выбирает (русло / прогресс).
 - [ ] `web/lib/intake/questions.ts` — intake questions (выделение в pack — отдельный слайс).
 - [ ] `web/packs/<pack>/course/showcase.ts` — possibilities gallery on home.
 

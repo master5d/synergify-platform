@@ -56,7 +56,8 @@ export function DashboardClient({ modules, unitsByModule, locale }: Props) {
   const completed = Object.keys(modules).filter(s => getState(s) === 'completed')
   const taskRoute = profileTaskRoute(profile)
   const taskText = profileTaskText(profile)
-  const dungeonModule = dungeonModuleFor(profile.niche ?? null, taskRoute)
+  const courseModules = Object.keys(modules)
+  const dungeonModule = dungeonModuleFor(taskRoute, courseModules, (slug) => getState(slug) === 'completed')
   const outcome = parseOutcome(profile)
   const aspiration = parseAspiration(profile)
   const moduleTitles = Object.fromEntries(Object.entries(modules).map(([slug, m]) => [slug, m.title]))
@@ -116,6 +117,7 @@ export function DashboardClient({ modules, unitsByModule, locale }: Props) {
           helpId="dungeon-card"
           route={taskRoute}
           taskText={taskText}
+          courseModules={courseModules}
         />
         <Vault activeSkin={profile.world_skin as WorldSkin} locale={locale} helpId="vault" />
       </main>

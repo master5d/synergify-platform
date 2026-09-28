@@ -5,6 +5,7 @@ import type { TaskRoute } from '@/lib/intake/task-route'
 import { getAppliedChallenge, fillNicheSlots } from '@/lib/cs/applied-challenge'
 import { FLAVOR_BANK } from '@/lib/course/dungeon-flavor'
 import { dungeonModuleFor } from './dungeon-module'
+import { dungeonStageId } from './dungeon-store'
 import { fillOutcome } from '@/lib/intake/task-route'
 
 const TIERS: StageTier[] = ['task', 'process', 'outcome']
@@ -14,16 +15,16 @@ const BOSS_CS = 50
 export function buildDungeon(input: DungeonInput): DungeonView {
   const { locale, niche: rawNiche, outcome } = input
   // rawNiche = the learner's literal F2 value, used for {niche} slot-fill display.
-  // niche = the resolved, flavor-bank-validated key, used for the dungeon's flavor, module, and ids.
+  // niche = the resolved, flavor-bank-validated key — только флейвор (имя, интро, босс); модуль от ниши не зависит.
   const niche = rawNiche && FLAVOR_BANK[rawNiche] ? rawNiche : 'other'
-  // Русло сквозной задачи заменяет грубое NICHE_MODULE: подземелье — там, где собирается результат русла.
+  // Модуль: русло → модуль результата русла; без русла — по прогрессу в спайне курса (dungeon-module.ts).
   const route = input.route ?? null
-  const module = dungeonModuleFor(niche, route)
+  const module = dungeonModuleFor(route, input.courseModules ?? [], input.isModuleCompleted)
   const flavor = FLAVOR_BANK[niche]
   const locked = !input.isModuleCompleted(module)
 
   const stages = TIERS.map((tier, i) => ({
-    id: `dungeon:${niche}:s${i + 1}`,
+    id: dungeonStageId(module, `s${i + 1}`),
     tier,
     body: route
       ? routeStageBody(route, i, locale)
@@ -32,7 +33,7 @@ export function buildDungeon(input: DungeonInput): DungeonView {
   }))
 
   const boss = {
-    id: `dungeon:${niche}:boss`,
+    id: dungeonStageId(module, 'boss'),
     name: flavor.bossName[locale],
     body: route
       ? fillOutcome(route.result[locale], input.taskText ?? outcome, locale)

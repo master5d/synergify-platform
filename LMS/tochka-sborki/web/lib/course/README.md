@@ -7,8 +7,8 @@ toward the multi-course platform (see `LMS/_template/`, `docs/curriculum-backlog
 ## Here now
 **Phase 1 — web-only (safe with the `@/` alias):**
 - `showcase.ts` — possibilities gallery data (`getShowcase`, `videoEmbedUrl`).
-- `dungeon-flavor.ts` — niche dungeon flavor bank (`FLAVOR_BANK`).
-- `niche-map.ts` — niche → module / slot mapping (`NICHE_MODULE`, `NICHE_SLOT`).
+- `dungeon-flavor.ts` — niche dungeon flavor bank (`FLAVOR_BANK`) + `{niche}` slot words (`NICHE_SLOT`).
+  Ниша — только флейвор: модуль подземелья выбирает `lib/dungeon/dungeon-module.ts` (русло / прогресс).
 
 **Phase 2 — workers cross-consumed (RELATIVE imports only, Gotcha 2):**
 - `skins.ts` — `SKINS_META` world-skin data. `lib/rpg/skins-meta.ts` keeps the helpers
@@ -27,6 +27,6 @@ toward the multi-course platform (see `LMS/_template/`, `docs/curriculum-backlog
 
 ## Convention
 - Course data lives here; engine logic stays in `lib/`.
-- **Web-only data** (showcase, dungeon-flavor, niche-map): import via `@/lib/course/*`.
+- **Web-only data** (showcase, dungeon-flavor): import via `@/lib/course/*`.
 - **Workers cross-consumed data** (skins, intake-questions): import/export with **relative**
   paths only — workers tsc can't resolve the `@/` alias (Gotcha 2).

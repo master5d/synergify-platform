@@ -91,7 +91,7 @@ web/
 | Подсистема | Где | Что делает |
 |------------|-----|-----------|
 | **Intake** | `app/quest-intake/`, `lib/intake/` | Опросник → профиль `{ niche, cog_tier, world_skin, F3-outcome }` в D1 `intake_profiles`. `scoring.ts`, `attributes.ts`, `parse-outcome.ts` |
-| **Квест-лог** | `app/dashboard/`, `lib/rpg/` | World Map (зоны = модули), QuestFeed, CharacterStrip. `quest-log.ts`, `map-layout.ts`, `niche-map.ts` |
+| **Квест-лог** | `app/dashboard/`, `lib/rpg/` | World Map (зоны = модули), QuestFeed, CharacterStrip. `quest-log.ts`, `map-layout.ts`; подземелье — `lib/dungeon/` (модуль: русло / прогресс) |
 | **Лист персонажа** | `app/character/` | Атрибуты, выведенные из intake-ответов |
 | **Themed skins** | `lib/rpg/skins/*.json`, `skins-meta.ts`, `unit-framing.ts` | 7 миров; переформулировка юнитов под выбранный скин |
 | **Cognitive Shards** | `lib/cs/` | Единая валюта (вместо XP). Режимы commander 1.0× / copilot 1.5× / archmage 2.5×. `wallet.ts`, `award.ts`, `modes.ts`, `applied-challenge.ts` |

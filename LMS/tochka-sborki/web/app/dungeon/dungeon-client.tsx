@@ -39,15 +39,18 @@ export function DungeonClient({ moduleTitles, locale }: { moduleTitles: Record<s
 
   const route = profileTaskRoute(profile)
   const taskText = profileTaskText(profile)
-  const nicheModule = dungeonModuleFor(niche, route)
-  const moduleTitle = moduleTitles[nicheModule] ?? nicheModule
+  // Модуль подземелья: русло → модуль результата; без русла — по прогрессу (useProgress уже загружен).
+  const courseModules = Object.keys(moduleTitles)
+  const isModuleCompleted = (slug: string) => getState(slug) === 'completed'
+  const dungeonModule = dungeonModuleFor(route, courseModules, isModuleCompleted)
+  const moduleTitle = moduleTitles[dungeonModule] ?? dungeonModule
 
-  return <DungeonInner skin={skin} accent={accent} niche={niche} outcome={outcome} moduleTitle={moduleTitle} locale={locale} isModuleCompleted={(slug) => getState(slug) === 'completed'} route={route} taskText={taskText} />
+  return <DungeonInner skin={skin} accent={accent} niche={niche} outcome={outcome} moduleTitle={moduleTitle} locale={locale} isModuleCompleted={isModuleCompleted} route={route} taskText={taskText} courseModules={courseModules} />
 }
 
-function DungeonInner(props: { skin: WorldSkin; accent: string; niche: string | null; outcome: string | null; moduleTitle: string; locale: Locale; isModuleCompleted: (slug: string) => boolean; route: TaskRoute | null; taskText: string | null }) {
-  const { skin, accent, niche, outcome, moduleTitle, locale, isModuleCompleted, route, taskText } = props
-  const { view, isCleared, clear, ready } = useDungeon({ locale, skin, niche, outcome, isModuleCompleted, route, taskText })
+function DungeonInner(props: { skin: WorldSkin; accent: string; niche: string | null; outcome: string | null; moduleTitle: string; locale: Locale; isModuleCompleted: (slug: string) => boolean; route: TaskRoute | null; taskText: string | null; courseModules: readonly string[] }) {
+  const { skin, accent, niche, outcome, moduleTitle, locale, isModuleCompleted, route, taskText, courseModules } = props
+  const { view, isCleared, clear, ready } = useDungeon({ locale, skin, niche, outcome, isModuleCompleted, route, taskText, courseModules })
   return (
     <>
       <Nav locale={locale} />
