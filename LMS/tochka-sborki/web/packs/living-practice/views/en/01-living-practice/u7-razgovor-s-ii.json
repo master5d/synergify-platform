@@ -5,7 +5,7 @@
   "unit": "u7-razgovor-s-ii",
   "locale": "en",
   "title": "Talking with AI: an interlocutor, not a curator",
-  "sourceHash": "sha256:ee1a34d345bfe8c249383303d9406ed99dd91d6aaf29ca72d697ae3110d5ce04",
+  "sourceHash": "sha256:db9b344b9208180a9d069e8a0cea2fba76122d45be5e37006cca1de3a3033f24",
   "outline": [
     {
       "heading": "Start with the most inconvenient fact",
@@ -15,7 +15,7 @@
           "origin": "extract"
         },
         {
-          "text": "The largest online randomised trial in this area — Segal and colleagues (JAMA Psychiatry, 2020; 460 participants) — showed an advantage of an online programme over usual care.",
+          "text": "The largest online randomised trial here, by Segal and colleagues (JAMA Psychiatry, 2020; 460 participants), showed an advantage of an online programme over usual care.",
           "origin": "extract"
         },
         {
@@ -47,11 +47,11 @@
           "origin": "extract"
         },
         {
-          "text": "That is a vendor statement rather than research — an admission against interest — and it bears directly on our construction: an eight-week course with a companion is precisely a long interaction.",
+          "text": "OpenAI's statement bears directly on our construction: an eight-week course with a companion is precisely a long interaction.",
           "origin": "extract"
         },
         {
-          "text": "Illinois WOPR Act (Wellness and Oversight for Psychological Resources, PA 104-0054, signed 1 August 2025)",
+          "text": "The third fact is legal: the Illinois WOPR Act (Wellness and Oversight for Psychological Resources, PA 104-0054, signed 1 August 2025).",
           "origin": "extract"
         },
         {
@@ -93,12 +93,12 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:d6c3df9a844c4fc9ce6bd0e8c770131c88bbe27ce3e6785781c9b95efc7a5878",
+        "sourceHash": "sha256:6d7eb6d7d4dfc3ddbe38a56daa02a65a1c1cfa34ce6c2b2da527d43e3d2ec5d0",
         "points": [
-          "The evidence says that digital programmes work best when there is a human in the loop.",
-          "A trial by Segal and colleagues in JAMA Psychiatry in 2020 with 460 participants showed an advantage over usual care.",
-          "This programme used coach support rather than being a purely self-guided app.",
-          "The course takes the position that AI sits between sessions rather than instead of people."
+          "Evidence shows that digital programs work best when there is a human in the loop.",
+          "A large trial by Segal and colleagues in JAMA Psychiatry 2020 with 460 participants showed an online program was better than usual care.",
+          "The program in that trial ran with coach support instead of being a purely self-guided app.",
+          "This course takes the position that AI sits between sessions rather than replacing people."
         ]
       },
       {
@@ -108,11 +108,11 @@
         ]
       },
       {
-        "sourceHash": "sha256:bbb43d77e05583fb58e06fd9110cc64520511b5f7436ec3dddb50cec5b441a5d",
+        "sourceHash": "sha256:a502f525d7a1bd6687ca75f3c709c5b656184ce3947dd222deb58c361316a5c5",
         "points": [
-          "The American Psychological Association Health Advisory on generative AI chatbots and wellness applications from November 2025 is the weightiest normative source available today.",
-          "This vendor statement acts as an admission that an eight-week course with a companion is a long interaction.",
-          "The Illinois WOPR Act for Wellness and Oversight for Psychological Resources was signed as PA 104-0054 on 1 August 2025.",
+          "The American Psychological Association Health Advisory on generative AI chatbots and wellness applications from November 2025 is the weightiest normative source today.",
+          "OpenAI's statement on long interactions bears directly on the construction of this eight-week course.",
+          "Legal facts include the Illinois WOPR Act for Wellness and Oversight for Psychological Resources PA 104-0054 signed on 1 August 2025.",
           "Nevada and Utah passed similar restrictions in 2025."
         ]
       },

@@ -5,7 +5,7 @@
   "unit": "u4-imenovanie",
   "locale": "en",
   "title": "Thoughts: naming instead of fighting",
-  "sourceHash": "sha256:197f5fce9495852b0202257f879d4eff8629d9164dca3df0817ad1b19aff5187",
+  "sourceHash": "sha256:59199be8841cff04243b68e26bba30a0530bddbad77c8dcb1cde9b92b963e6ea",
   "outline": [
     {
       "heading": "What naming is",
@@ -21,7 +21,7 @@
       "heading": "The line that must not be crossed here",
       "points": [
         {
-          "text": "There is a version of this technique that is not given at all in a beginner course without a teacher present: continuous intensive noting in the style of long retreats, aimed at \"stages of insight\" and passing through the \"dark night\".",
+          "text": "That version is continuous intensive noting in the style of long retreats, aimed at \"stages of insight\" and passing through the \"dark night\".",
           "origin": "extract"
         },
         {
@@ -62,11 +62,11 @@
         ]
       },
       {
-        "sourceHash": "sha256:e8e561a00f89eb402fab0f01af7c0be436d6bf151646d59fff51fc1a96569fcf",
+        "sourceHash": "sha256:80e35588d2b3cdfe9e9827e58b55ef5e07211ec71c01dc39d144cf263d48d074",
         "points": [
-          "You do not use the intensive noting from long retreats for stages of insight and the dark night without a teacher.",
-          "The Lindahl 2017 caveat is that those are not population frequencies.",
-          "You use naming as a light label for ten minutes rather than an instrument of assault."
+          "You avoid the continuous intensive noting of long retreats aimed at stages of insight or passing through the dark night.",
+          "You should note the caveat that Lindahl 2017 does not represent population frequencies.",
+          "You use naming as a light label for ten minutes rather than as an instrument of assault."
         ]
       },
       {

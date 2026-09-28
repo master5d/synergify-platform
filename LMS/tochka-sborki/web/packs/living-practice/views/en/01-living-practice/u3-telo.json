@@ -5,7 +5,7 @@
   "unit": "u3-telo",
   "locale": "en",
   "title": "Body: a scan with your eyes open",
-  "sourceHash": "sha256:057c4c959408344108197e973d1290bf3bcea83846165fafd33a250c2a7e3aad",
+  "sourceHash": "sha256:d98e8f7f1f3b7edde60ca8b1f97e0fe52b1c3e88857fcf42c01b5d6106893d9a",
   "outline": [
     {
       "heading": "Why attention to the body at all",
@@ -25,11 +25,15 @@
           "origin": "extract"
         },
         {
-          "text": "David Treleaven, Trauma-Sensitive Mindfulness (W. W. Norton, 2018)",
+          "text": "David Treleaven, Trauma-Sensitive Mindfulness (W. W. Norton, 2018) is the practical frame the field of trauma-sensitive practice stands on.",
           "origin": "extract"
         },
         {
-          "text": "In the sample of Goldberg, Lam, Britton and Davidson (Psychotherapy Research, 2022; 434 people with meditation experience), re-experiencing traumatic material is among the most frequent adverse effects, and adverse childhood events appear as a risk factor.",
+          "text": "The second source is population data: Goldberg, Lam, Britton and Davidson (Psychotherapy Research, 2022; 434 people with meditation experience).",
+          "origin": "extract"
+        },
+        {
+          "text": "In their sample, re-experiencing traumatic material is among the most frequent adverse effects, and adverse childhood events appear as a risk factor.",
           "origin": "extract"
         }
       ],
@@ -86,13 +90,8 @@
         ]
       },
       {
-        "sourceHash": "sha256:948ff9ac17f4c4fc263ef942ee98b164e39b7914ea9bdfc083ba570757ef670a",
-        "points": [
-          "If you have a history of trauma, prolonged uninterrupted concentration on bodily sensation is not a suitable format.",
-          "David Treleaven addresses this in Trauma-Sensitive Mindfulness, W. W. Norton, 2018.",
-          "Goldberg, Lam, Britton and Davidson studied 434 people with meditation experience in Psychotherapy Research, 2022.",
-          "Re-experiencing traumatic material is a frequent adverse effect and adverse childhood events are a risk factor."
-        ]
+        "sourceHash": "sha256:fc0170dff4361e25b465dc76c8f96ea39d315fa0a522526df707b486b67967eb",
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:bb43480e2cb9e018870a5983df1780a6f83e8c10015a6ab21f393fab1fbaaa71",

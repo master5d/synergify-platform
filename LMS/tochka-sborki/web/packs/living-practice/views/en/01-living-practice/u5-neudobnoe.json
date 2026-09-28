@@ -5,7 +5,7 @@
   "unit": "u5-neudobnoe",
   "locale": "en",
   "title": "The uncomfortable: what to do when it surfaces",
-  "sourceHash": "sha256:61fa25119899ee16dbe3cba98a6bfcf4f98d0827c708f041138962833a7ccff9",
+  "sourceHash": "sha256:72dedf5dd82def6e16e5feb3e82eaf41fda7d8ed220a9bd5193d81b135bce405",
   "outline": [
     {
       "heading": "The thing that makes practice do anything at all",
@@ -21,7 +21,7 @@
       "heading": "What showed up once somebody finally asked",
       "points": [
         {
-          "text": "Britton, Lindahl, Cooper, Canby and Palitsky (Clinical Psychological Science, 2021) — 96 participants in an eight-week programme, interviewed by an independent assessor on a 44-item instrument:",
+          "text": "Britton, Lindahl, Cooper, Canby and Palitsky (Clinical Psychological Science, 2021) — 96 participants in an eight-week programme.",
           "origin": "extract"
         },
         {
@@ -33,11 +33,11 @@
           "origin": "extract"
         },
         {
-          "text": "Matko and Van Dam (Current Opinion in Psychology, 2026)",
+          "text": "The review by Matko and Van Dam (Current Opinion in Psychology, 2026) summarises the spread: 25–87% of practitioners report adverse effects, 3–37% report functional impairment.",
           "origin": "extract"
         },
         {
-          "text": "Two conclusions are stable: unpleasant effects are common, and persistent harm is rare — on the order of a few per cent up to the mid-teens.",
+          "text": "Unpleasant effects are common, and persistent harm is rare — on the order of a few per cent up to the mid-teens.",
           "origin": "extract"
         }
       ],
@@ -57,7 +57,7 @@
       "heading": "Stop signals",
       "points": [
         {
-          "text": "The last item is not \"a reason to lower the dose\" but a reason to leave the learning scenario immediately and reach a living person: a professional or a crisis line.",
+          "text": "The last item is a reason to leave the learning scenario immediately and reach a living person: a professional or a crisis line.",
           "origin": "extract"
         }
       ],
@@ -67,7 +67,11 @@
       "heading": "The words you explain difficulty to yourself with are an intervention",
       "points": [
         {
-          "text": "The paper \"The roles and impacts of worldviews in the context of meditation-related challenges\" (Transcultural Psychiatry, 2022) showed that the interpretive frame itself changes the trajectory and duration of difficulties.",
+          "text": "The source is the paper \"The roles and impacts of worldviews in the context of meditation-related challenges\" (Transcultural Psychiatry, 2022).",
+          "origin": "extract"
+        },
+        {
+          "text": "It showed that the interpretive frame itself changes the trajectory and duration of difficulties.",
           "origin": "extract"
         }
       ],
@@ -112,7 +116,7 @@
         ]
       },
       {
-        "sourceHash": "sha256:47a45b080ba66ad8e97264bb47785f3e795784e0a0f34db92d0ce7a9912486bf",
+        "sourceHash": "sha256:1fedebb94a19c0838c1a6dc9e4dddc1e062a52927eebfe8aa9bd110f87bfd5fc",
         "verbatim": "review"
       },
       {
@@ -120,15 +124,14 @@
         "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:3e481e2f3e7a022339f078a8efadcab033bd52c2c40c36a297e673871efcbbac",
-        "points": [
-          "The last item is a reason to leave the learning scenario immediately and reach a professional or a crisis line instead of lowering the dose."
-        ]
+        "sourceHash": "sha256:06b90f0486dbbdcce4f02cc6afd85b4975a28e7f2e813c3e5ee4c4f889e6b203",
+        "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:963f3a168eea3dd0f068d8682acdfd73e55f21a131b47385d4ca0125d9a3335a",
+        "sourceHash": "sha256:35da4db1c1ec6add024ce860bca9e6ac75e881ebbe0bcdaec03ec6cce136b435",
         "points": [
-          "The paper on worldviews and meditation-related challenges shows that the interpretive frame itself changes the trajectory and duration of difficulties."
+          "A 2022 paper in Transcultural Psychiatry showed the roles and impacts of worldviews in the context of meditation-related challenges.",
+          "The interpretive frame you use changes the trajectory and duration of your difficulties."
         ]
       },
       {

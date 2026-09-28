@@ -5,7 +5,7 @@
   "unit": "u1-dogovor",
   "locale": "en",
   "title": "The agreement: what is here and what is not",
-  "sourceHash": "sha256:b07b135a322fc90e7079aa2c537d381f95353aa25a6d9ab2ed808405719c00bc",
+  "sourceHash": "sha256:997fdb49e30e6c4410712100b5052a6505d8e899c4df25cfdab72aa423655d79",
   "outline": [
     {
       "heading": "What this course is",
@@ -36,7 +36,7 @@
       "heading": "Risks named before the practice, not after",
       "points": [
         {
-          "text": "For a long time these numbers didn't exist for a simple reason: 84% of clinical trials never asked about adverse events at all (Wong et al., cited in Baer et al., 2019).",
+          "text": "The reason is simple: 84% of clinical trials never asked about adverse events at all (Wong et al., cited in Baer et al., 2019).",
           "origin": "extract"
         }
       ],
@@ -83,11 +83,8 @@
         "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:69b0bfa515bea8cd2a4ec7520c8e95cf81dbef73ef03c280b646165d2cf3cc56",
-        "points": [
-          "These numbers were missing for a long time because 84% of clinical trials never asked about adverse events.",
-          "This is according to Wong et al. as cited in Baer et al., 2019."
-        ]
+        "sourceHash": "sha256:294720f9357293d9703761f6255adac2bcfa9ac289dbc9329876f31c6d7d6d62",
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:64a494b53c6ab706451036963bd3a857b13c42183c698e8ab9d193d5f56b0d39",

@@ -5,7 +5,7 @@
   "unit": "u8-krug",
   "locale": "en",
   "title": "The circle: where all of this leads",
-  "sourceHash": "sha256:0eec932f7863c998e65e34770a0ce984a105a8db0f5d0d402a676ab2a8276b58",
+  "sourceHash": "sha256:82fe8051411fca065ea36c679e834a71f1b643257ab9f1f8e7a722b166c8abf3",
   "outline": [
     {
       "heading": "Why a circle rather than another app",
@@ -21,7 +21,7 @@
       "heading": "How to assemble a circle that stands a chance",
       "points": [
         {
-          "text": "If you have no frame of your own for a meeting, there's a ready one: the Group Insight Game (GII) — six cards, four steps, one turn each around the circle.",
+          "text": "If you have no frame of your own for a meeting, there's a ready one: the Group Insight Game (GII).",
           "origin": "extract"
         }
       ],
@@ -64,9 +64,9 @@
         ]
       },
       {
-        "sourceHash": "sha256:55c8243a4c27391efaf38c9b4e3d7205a1730d5d50777f35fdd29ca159037db2",
+        "sourceHash": "sha256:86e6a71c3d7071345ce83a35642451655a2e51c76e6022ac13c706fd5ca0e4d9",
         "points": [
-          "If you have no frame for a meeting, use the Group Insight Game (GII) with six cards, four steps, and one turn around the circle."
+          "You can use the Group Insight Game (GII) as a ready frame for your meeting if you do not have one of your own."
         ]
       },
       {
