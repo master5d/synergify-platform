@@ -116,7 +116,7 @@ export default {
         } else {
           let body: { text?: unknown; role?: unknown }
           try { body = await request.json() } catch { return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders } }) }
-          response = await handleTaskRoute(body, env)
+          response = await handleTaskRoute(body, env, fetch, { cache: caches.default, userId: auth.sub })
         }
       } else if (path === '/api/intake/submit' && method === 'POST') {
         const auth = await requireAuth(request, env)

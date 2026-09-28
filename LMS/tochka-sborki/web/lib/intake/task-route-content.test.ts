@@ -33,6 +33,8 @@ describe('requestTaskRoute — деградация', () => {
   it('сеть упала / не-2xx / мусор → unavailable', async () => {
     await expect(requestTaskRoute('abc', null, vi.fn().mockRejectedValue(new Error('offline')) as any)).resolves.toEqual({ status: 'unavailable' })
     await expect(requestTaskRoute('abc', null, vi.fn().mockResolvedValue(res(502, {})) as any)).resolves.toEqual({ status: 'unavailable' })
+    // 429 лимита частоты воркера (волна 19) — тоже ручной выбор, анкета не блокируется.
+    await expect(requestTaskRoute('abc', null, vi.fn().mockResolvedValue(res(429, { error: 'rate_limited', retryAfterSec: 60 })) as any)).resolves.toEqual({ status: 'unavailable' })
     await expect(requestTaskRoute('abc', null, vi.fn().mockResolvedValue(res(200, { status: 'unavailable' })) as any)).resolves.toEqual({ status: 'unavailable' })
     await expect(requestTaskRoute('abc', null, vi.fn().mockResolvedValue(res(200, 'garbage')) as any)).resolves.toEqual({ status: 'unavailable' })
   })
