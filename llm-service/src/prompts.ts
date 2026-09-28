@@ -1,4 +1,4 @@
-import type { ProseInput, CatalogEntry, Signal } from './types.js'
+import type { ProseInput, CatalogEntry, Signal, Interest } from './types.js'
 
 /** Язык листа — ИНСТРУКЦИЕЙ, а не токеном перечня.
  *
@@ -68,5 +68,30 @@ export function buildBriefPrompt(
   ].join('\n')
 }
 
+/** Сфера ученика — описанием, а не голым токеном перечня (тот же урок, что с языком листа). */
+export const INTEREST_GLOSS: Record<Interest, string> = {
+  coach: 'coaching, psychology and client guidance',
+  massage: 'bodywork, massage and body practices',
+  astrology: 'astrology and spiritual practice',
+  content: 'content creation, blogging and media',
+  ecommerce: 'commerce: selling products online',
+  service: 'running a small service business',
+  tech: 'technology and software development',
+}
 
-
+export function buildInterestExamplePrompt(source: string, interest: Interest, language: string): string {
+  return [
+    `You rewrite ONE example from a lesson so it fits the learner's field. You do not add teaching, only swap the setting.`,
+    `LANGUAGE (highest priority): ${LANGUAGE_RULES[language] ?? LANGUAGE_RULES.ru}`,
+    `Learner's field: ${INTEREST_GLOSS[interest]}.`,
+    `Rules:`,
+    `- Keep the same idea, the same number of paragraphs and roughly the same length (within 30%).`,
+    `- Change only who acts and in what situation, so the people and the task come from the learner's field.`,
+    `- Do NOT invent facts, statistics, product names or links. Use only numbers that appear in the source.`,
+    `- Copy every inline code span in backticks EXACTLY, character for character. Do not add new ones.`,
+    `- Calm, honest tone: no selling, no urgency, no promises of results.`,
+    `Return STRICT JSON {"example":"<rewritten example>"}; separate paragraphs with a blank line (\\n\\n).`,
+    `--- SOURCE EXAMPLE ---`,
+    source,
+  ].join('\n')
+}

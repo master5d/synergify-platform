@@ -15,6 +15,7 @@ import { UnitGates } from '@/components/unit-gates'
 import { MobileGate } from '@/components/mobile-gate'
 import { mdxComponents } from '@/components/mdx-components'
 import { bindSelfCheck } from '@/components/self-check-bound'
+import { bindInterestExample } from '@/components/interest-example-bound'
 import { ModuleObjectives } from '@/components/module-objectives'
 import type { Locale } from '@/lib/dictionaries'
 import { outlineFromNav } from '@/lib/progress-sync'
@@ -53,7 +54,11 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
           >
             <MDXRemote
               source={content}
-              components={{ ...mdxComponents, SelfCheck: bindSelfCheck(moduleMeta.checks, locale === 'en' ? 'en' : 'ru', moduleSlug) }}
+              components={{
+                ...mdxComponents,
+                SelfCheck: bindSelfCheck(moduleMeta.checks, locale === 'en' ? 'en' : 'ru', moduleSlug),
+                InterestExample: bindInterestExample(moduleSlug, unitSlug, locale === 'en' ? 'en' : 'ru'),
+              }}
               options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
             />
           </Shell>

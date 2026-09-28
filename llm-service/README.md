@@ -5,7 +5,7 @@ SOVERN-гейтвей по тайнету. Наружу выставлен `ener
 `lms-llm.mamaev.coach` за CF Access.
 
 Зачем он есть: Cloudflare Worker с эджа не достаёт до тайнета, а выставлять
-гейтвей наружу запрещено (см. спеку). Сервис публикует четыре узкие операции
+гейтвей наружу запрещено (см. спеку). Сервис публикует пять узких операций
 с фиксированными промптами — не интерфейс к гейтвею.
 
 Дизайн: `NAUTILUS/docs/superpowers/specs/2026-09-04-lms-llm-service-design.md`
@@ -21,6 +21,7 @@ SOVERN-гейтвей по тайнету. Наружу выставлен `ener
 | POST | `/skin` | `{film}` | `{skin}` |
 | POST | `/demand/classify` | `{signals,catalog}` | `{items:[...]}` |
 | POST | `/demand/brief` | `{topicLabel,quotes,catalog}` | `BriefProposal` |
+| POST | `/interest-example` | `{source,interest,language}` | `{example}` |
 
 ## Коды ошибок
 

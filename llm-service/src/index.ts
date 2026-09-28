@@ -9,6 +9,7 @@ import { LlmError, BadRequestError } from './errors.js'
 import { generateProse } from './prose.js'
 import { classifySkin } from './skin.js'
 import { classifyDemand, draftBrief } from './demand.js'
+import { rewriteExample } from './interest.js'
 
 export function createApp(env: ServiceEnv): Hono {
   const app = new Hono()
@@ -34,6 +35,7 @@ export function createApp(env: ServiceEnv): Hono {
   }))
   app.post('/demand/brief', run(env, async (body) =>
     draftBrief(body.topicLabel, body.quotes, body.catalog, env, env.fetchImpl)))
+  app.post('/interest-example', run(env, async (body) => rewriteExample(body, env, env.fetchImpl)))
 
   return app
 }

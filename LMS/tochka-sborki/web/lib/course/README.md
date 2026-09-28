@@ -17,6 +17,9 @@ toward the multi-course platform (see `LMS/_template/`, `docs/curriculum-backlog
 - `intake-questions.ts` — `QUESTIONS_V2`, `MODULE_INTROS_V2`. `lib/intake/instrument.ts`
   (workers-pulled) imports it relatively (`../course/intake-questions`); the file imports
   types relatively (`../intake/types`).
+- `interest-examples.ts` — `INTEREST_EXAMPLES`, general concept-phase examples that may be retold
+  for the learner's field (intake LMS#8). Workers import BOTH packs' files directly (the worker
+  owns the source text, not the client); the pack files import types relatively.
 
 ## Convention
 - Course data lives here; engine logic stays in `lib/`.
