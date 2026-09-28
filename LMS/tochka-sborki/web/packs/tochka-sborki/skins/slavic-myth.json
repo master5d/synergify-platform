@@ -499,6 +499,20 @@
         "en": "With every thought, your household becomes more magical and orderly. You are no longer just a worker, but the wise keeper of a clever home."
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Пора домовому своё время знать. С первыми петухами он сам за работу возьмётся, а что уже сделано — второй раз переделывать не станет.",
+        "en": "Time for the domovoi to know its own hours. At first cockcrow it gets to work by itself and never redoes what is already done."
+      },
+      "mentorHint": {
+        "ru": "Справный помощник зарубки на притолоке ставит: что сделано, то сделано. Без зарубок и домовой запутается.",
+        "en": "A good helper cuts notches in the lintel: what's done is done. Without the notches even a domovoi gets muddled."
+      },
+      "outro": {
+        "ru": "Проснулся ты, а дело уж сделано. Домовой всю ночь трудился и ни одной работы дважды не взял.",
+        "en": "You wake up and the work is already done. The domovoi toiled all night and never took the same job twice."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Слепили мы с тобой гомункула, хорош собой, да молчит. Давай-ка подумаем, какого слова заветного, какого толчка ему для дела не хватает.",

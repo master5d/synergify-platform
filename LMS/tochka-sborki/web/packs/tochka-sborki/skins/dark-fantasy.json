@@ -499,6 +499,20 @@
         "en": "The path of automation stretches before you, fraught with both untold efficiency and unforeseen peril. Choose your next steps wisely, for every chain you forge binds you as much as it serves you."
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Настал час вдохнуть в конструкт собственный ритм. Он будет пробуждаться с рассветом и помнить каждую уже исполненную клятву.",
+        "en": "The hour has come to give your construct a rhythm of its own. It will wake at dawn and remember every oath already fulfilled."
+      },
+      "mentorHint": {
+        "ru": "Страж без памяти обречён сражаться с одними и теми же тенями вечно. Дай ему летопись свершённого.",
+        "en": "A guardian without memory is doomed to fight the same shadows forever. Give it a chronicle of deeds done."
+      },
+      "outro": {
+        "ru": "Конструкт бдит, пока ты спишь. На рассвете тебя ждёт свиток с плодами его ночного труда.",
+        "en": "The construct keeps watch while you sleep. At dawn a scroll with the fruits of its night's work awaits you."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Голем из кода стоит неподвижно, могущественный, но безмолвный слуга. Чтобы повелевать им, ты должен сначала пробудить его разум.",

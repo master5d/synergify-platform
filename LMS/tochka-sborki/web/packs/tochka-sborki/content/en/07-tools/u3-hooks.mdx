@@ -37,6 +37,8 @@ Notice in your head: how many "tiles" in your workflow still need you to push th
 | `Stop` | When the agent finishes its response (end of turn) |
 | `SessionEnd` | When the session ends |
 
+None of these events happens by the clock. The scheduled pipeline from [module 06](/en/lessons/06-audio-pipeline/u5-schedule/) is started by the OS scheduler, not a hook. But hooks do fire in the `claude -p` run from your `run.sh`. A `Stop` hook can, for example, notify you that the morning digest is ready.
+
 ## Hook config
 
 In `.claude/settings.json`:

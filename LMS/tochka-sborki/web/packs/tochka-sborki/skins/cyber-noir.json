@@ -499,6 +499,20 @@
         "en": "You've acquired a new skill. The city is your sandbox now. Get to work."
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Ночная смена. Город не спит, и твой pipeline тоже не будет. Он выйдет на работу по часам и не тронет дела, которые уже закрыты.",
+        "en": "Night shift. The city never sleeps, and neither will your pipeline. It clocks in on schedule and leaves closed cases alone."
+      },
+      "mentorHint": {
+        "ru": "Закрытое дело не открывают дважды. Веди журнал — иначе утонешь в собственных отчётах.",
+        "en": "You don't reopen a closed case. Keep a log, or you'll drown in your own reports."
+      },
+      "outro": {
+        "ru": "Смена отработана без тебя. Утром на столе лежит свежая сводка — и ни одного дубля.",
+        "en": "The shift ran without you. In the morning a fresh brief is on your desk, and not a single duplicate."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Агент — чистый лист, призрак в машине, ждущий приказа. Сейчас мы дадим ему цель.",

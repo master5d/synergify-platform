@@ -5,7 +5,7 @@ module: 6
 duration: "5 min"
 ---
 
-> 💡 **Stack-agnostic.** This module uses Claude Code as a case study (Firecrawl scrape → analysis). In other stacks the pattern is the same: Aider + Firecrawl CLI; Hermes + a `web-research` skill; Cline + MCP Firecrawl. See module 03 for your stack.
+> 💡 **Stack-agnostic.** This module uses Claude Code as a case study: the built-in WebFetch tool reads the page, then comes the analysis. In other stacks the pattern is the same: you need any page-reading tool your agent has (built-in or an MCP server, module 07). See module 03 for your stack.
 
 <Phase type="activation">
 
@@ -50,7 +50,7 @@ This is the foundational mental model:
 ```
 Trigger:  You give an article URL
    ↓
-Action 1: Firecrawl scrapes the page → returns clean text
+Action 1: the agent reads the page → gets the text
    ↓
 Action 2: Claude analyzes the text
    ↓

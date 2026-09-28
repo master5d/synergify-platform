@@ -499,6 +499,20 @@
         "en": "Your training here is complete! Now go and automate your destiny! New challenges are already waiting for you beyond the horizon!"
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Новая техника: призыв по расписанию! Твой pipeline будет выходить на бой сам, каждое утро, и не станет дважды бить уже поверженного врага.",
+        "en": "A new technique: the scheduled summon! Your pipeline will enter battle on its own every morning and never strike an already defeated foe twice."
+      },
+      "mentorHint": {
+        "ru": "Настоящий мастер помнит каждый выигранный бой. Без этой памяти даже сильнейшая техника тратит силы впустую.",
+        "en": "A true master remembers every battle won. Without that memory even the strongest technique wastes its power."
+      },
+      "outro": {
+        "ru": "Техника освоена! Твой pipeline сражается, пока ты спишь, и утром ждёт тебя с трофеями.",
+        "en": "Technique mastered! Your pipeline fights while you sleep and greets you in the morning with the spoils."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Твой AI-агент уже силён, но это лишь тень его истинной мощи! Пришло время пробудить его скрытый потенциал и выйти за рамки простого чата!",

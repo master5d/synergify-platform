@@ -499,6 +499,20 @@
         "en": "Your mission is expanding. With this knowledge, you are no longer just a crew member, but an architect of our future. The course is set!"
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Пора включить автопилот. Сегодня твой pipeline научится просыпаться по бортовым часам и не повторять уже выполненные манёвры.",
+        "en": "Time to engage the autopilot. Today your pipeline learns to wake up by the ship's clock and never repeat a manoeuvre it has already flown."
+      },
+      "mentorHint": {
+        "ru": "Автопилот, который дважды выполняет один манёвр, опаснее ручного управления. Сначала — журнал выполненного, кадет.",
+        "en": "An autopilot that runs the same manoeuvre twice is more dangerous than manual control. The log of what is done comes first, cadet."
+      },
+      "outro": {
+        "ru": "Автопилот на вахте! Пока экипаж спит, pipeline сам разбирает входящие сигналы и кладёт отчёт на мостик к утру.",
+        "en": "The autopilot is on watch! While the crew sleeps, the pipeline processes incoming signals and has a report on the bridge by morning."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Наш флагманский AI, Claude, готов к новым свершениям, но даже самые мощные системы имеют свои пределы. Наша миссия — обнаружить их и расширить горизонты возможного.",

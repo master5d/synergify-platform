@@ -111,6 +111,8 @@ ni "$HOME\.claude\skills\my-first-skill\SKILL.md" -ItemType File
 
 Fill out `SKILL.md` using the template above; in the header set `name: my-first-skill` and a `description` — what the skill does and when to call it. Use a real prompt you already have.
 
+The first candidate is `my-experiments/u3-pipeline-prompt.md` from module 06. Then the agent call in `run.sh` from [06/u5](/en/lessons/06-audio-pipeline/u5-schedule/) gets shorter: `claude -p "/my-first-skill $url"`.
+
 Test it:
 ```
 /my-first-skill [give real data]

@@ -499,6 +499,20 @@
         "en": "The plan is drafted, the objectives are clear. You are no longer just an operator, but the vanguard of the automation labor front. To work, comrade!"
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Товарищ, переводим участок на автоматический режим! Pipeline выйдет на смену по гудку и не будет дважды обрабатывать одну деталь.",
+        "en": "Comrade, we are switching the section to automatic mode! The pipeline starts its shift at the whistle and never processes the same part twice."
+      },
+      "mentorHint": {
+        "ru": "Учёт — основа социалистического хозяйства. Журнал выполненного бережёт и время, и ресурсы.",
+        "en": "Accounting is the foundation of a planned economy. A log of what is done saves both time and resources."
+      },
+      "outro": {
+        "ru": "План перевыполнен без сверхурочных! Утренняя смена уже разобрала входящие, а рационализатор может браться за следующий участок.",
+        "en": "The plan is overfulfilled without overtime! The morning shift has already processed the incoming, and the innovator can take on the next section."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Товарищ, перед тобой — почти готовый agent. Он силён, но нем и бездействует, как трактор без зажигания. Наша задача — дать ему искру.",

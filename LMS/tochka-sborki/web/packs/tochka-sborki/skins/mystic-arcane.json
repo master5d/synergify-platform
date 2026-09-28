@@ -499,6 +499,20 @@
         "en": "Your sight has sharpened; you now see the invisible connections. The path to mastery is open, and every new pipeline is a step toward its peak."
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Время вплести в заклятие ход светил. Твой голем будет пробуждаться в назначенный час и не повторять уже сотворённых чар.",
+        "en": "Time to weave the course of the stars into your spell. Your golem will wake at the appointed hour and never recast a spell already cast."
+      },
+      "mentorHint": {
+        "ru": "Заклятие без памяти повторяет себя до истощения мага. Веди гримуар исполненного.",
+        "en": "A spell without memory repeats itself until the mage is drained. Keep a grimoire of what is done."
+      },
+      "outro": {
+        "ru": "Голем трудится в ночи сам. С рассветом на твоём столе — свиток, написанный без твоей руки.",
+        "en": "The golem works through the night on its own. At dawn a scroll lies on your desk, written without your hand."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Наш голем из кода могуч, но слеп и глух к миру за пределами своего пергамента. Пришло время даровать ему чувства, чтобы он мог действовать в нашей реальности.",

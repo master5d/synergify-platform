@@ -111,6 +111,8 @@ ni "$HOME\.claude\skills\my-first-skill\SKILL.md" -ItemType File
 
 Заполни `SKILL.md` по шаблону выше, в шапке укажи `name: my-first-skill` и `description` — что делает skill и когда его вызывать. Используй реальный промпт который у тебя уже есть.
 
+Первый кандидат — `my-experiments/u3-pipeline-prompt.md` из модуля 06. Тогда в `run.sh` из [06/u5](/lessons/06-audio-pipeline/u5-schedule/) вызов агента станет короче: `claude -p "/my-first-skill $url"`.
+
 Протестируй:
 ```
 /my-first-skill [дай реальные данные]

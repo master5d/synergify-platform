@@ -84,7 +84,7 @@ ENERV is my personal knowledge management system. Every email tagged in Gmail wi
 
 1. **AI only in 2 nodes out of 9** — Gemini Router (classification) and ACL Transformer (text writing). The rest is deterministic code or API calls. That's jagged intelligence applied.
 
-2. **Idempotency via labels** — after a successful run, the email gets `AI-Ingest-Done` and loses `AI Ingest`. If the pipeline crashes and restarts, processed emails won't be picked up again.
+2. **Idempotency via labels** — after a successful run, the email gets `AI-Ingest-Done` and loses `AI Ingest`. If the pipeline crashes and restarts, processed emails won't be picked up again. This is the same "duplicates" condition you built in module 06 as `done.txt` ([06, "A pipeline that runs on its own"](/en/lessons/06-audio-pipeline/u5-schedule/)). A label on an email and a line in a file solve the same problem.
 
 3. **Trigger + Action are separated** — the Gmail trigger gets polled by n8n every minute independently. Any error in the action doesn't break the trigger.
 
