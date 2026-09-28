@@ -27,8 +27,8 @@ describe.runIf(PACK_SLUG === 'tochka-sborki')('skin pack unit-framing coverage',
   const keys = PACK_SLUG === 'tochka-sborki' ? expectedKeys() : []
   const files = readdirSync(skinsDir).filter(f => f.endsWith('.json'))
 
-  it('discovers 51 unit keys', () => {
-    expect(keys.length).toBe(51)
+  it('discovers 52 unit keys', () => {
+    expect(keys.length).toBe(52)
   })
 
   for (const file of files) {
