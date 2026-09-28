@@ -102,6 +102,11 @@
 Отложено (решает владелец): поддержка Gemini CLI одной строкой `.gemini/settings.json`
 (`{"context":{"fileName":["AGENTS.md"]}}`). Сейчас стартер перечисляет четыре агента
 (Claude Code, Codex, Antigravity, Hermes); Gemini CLI в их число не входит.
+**Добавлено 2026-09-28** (ветка `w20/starter-gemini`, решение контроллера по делегированию владельца):
+`.gemini/settings.json` = `{"context": {"fileName": ["AGENTS.md", "GEMINI.md"]}}` в обоих изданиях —
+`GEMINI.md` оставлен, потому что `context.fileName` заменяет имя по умолчанию. Hook для Gemini CLI
+стартер не подключает. Trusted folders: по документации функция выключена по умолчанию; в недоверенной
+папке `.gemini/settings.json` не загружается — это сказано в README стартера.
 
 Не проверено: читает ли Cursor `CLAUDE.md`; что главнее в Antigravity, `GEMINI.md` или
 `AGENTS.md` (порядок есть только в блогах [B]).

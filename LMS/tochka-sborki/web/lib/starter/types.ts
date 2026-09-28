@@ -2,7 +2,7 @@
 
 export interface Bi { ru: string; en: string }
 
-export type StarterAgentId = 'claude-code' | 'codex' | 'antigravity' | 'hermes'
+export type StarterAgentId = 'claude-code' | 'codex' | 'gemini-cli' | 'antigravity' | 'hermes'
 
 export interface StarterAgent {
   id: StarterAgentId

@@ -17,8 +17,8 @@ export const STARTER: StarterData | null = {
   heading: { ru: 'Стартер: проект для курса с любым агентом', en: 'Starter: a course project for any agent' },
   intro: [
     {
-      ru: 'Готовая папка проекта, с которой можно пройти весь курс: файл правил агента, память между сессиями, папка для практик, шаблоны и чек-лист гигиены. Работает с Claude Code, Codex, Antigravity, Hermes и любым агентом, который читает AGENTS.md.',
-      en: 'A ready project folder for the whole course: an agent rules file, memory between sessions, a folder for practice results, templates and a hygiene checklist. Works with Claude Code, Codex, Antigravity, Hermes and any agent that reads AGENTS.md.',
+      ru: 'Готовая папка проекта, с которой можно пройти весь курс: файл правил агента, память между сессиями, папка для практик, шаблоны и чек-лист гигиены. Работает с Claude Code, Codex, Gemini CLI, Antigravity, Hermes и любым агентом, который читает AGENTS.md.',
+      en: 'A ready project folder for the whole course: an agent rules file, memory between sessions, a folder for practice results, templates and a hygiene checklist. Works with Claude Code, Codex, Gemini CLI, Antigravity, Hermes and any agent that reads AGENTS.md.',
     },
     {
       ru: 'Ничего не устанавливает и не пишет в твою домашнюю папку. Ключей в нём нет. Агента, Node.js и Git ставит установщик из урока «Установка».',
@@ -91,6 +91,25 @@ export const STARTER: StarterData | null = {
       ],
     },
     {
+      id: 'gemini-cli',
+      name: 'Gemini CLI',
+      command: 'gemini',
+      open: { ru: 'В терминале перейди в папку и запусти gemini.', en: 'In the terminal, go to the folder and run gemini.' },
+      reads: {
+        ru: 'AGENTS.md. Сам Gemini CLI ищет только GEMINI.md, поэтому .gemini/settings.json задаёт context.fileName = AGENTS.md, GEMINI.md. GEMINI.md оставлен в списке, чтобы Gemini CLI видел и твой собственный GEMINI.md, если ты его заведёшь.',
+        en: 'AGENTS.md. On its own Gemini CLI looks only for GEMINI.md, so .gemini/settings.json sets context.fileName to AGENTS.md, GEMINI.md. GEMINI.md stays in the list so Gemini CLI still sees a GEMINI.md of your own if you add one.',
+      },
+      hook: {
+        ru: 'Нет: стартер не подключает hook для Gemini CLI. Память подхватывается правилом в AGENTS.md. Если ты включил Trusted folders (по документации выключено по умолчанию), доверь папку — в недоверенной папке Gemini CLI не читает .gemini/settings.json.',
+        en: 'No: the starter wires no hook for Gemini CLI. Memory is picked up by the rule in AGENTS.md. If you enabled Trusted folders (off by default per the docs), trust the folder: in an untrusted folder Gemini CLI does not read .gemini/settings.json.',
+      },
+      sources: [
+        { label: 'Gemini CLI — GEMINI.md, context.fileName', href: 'https://geminicli.com/docs/cli/gemini-md/' },
+        { label: 'Gemini CLI — configuration', href: 'https://geminicli.com/docs/reference/configuration' },
+        { label: 'Gemini CLI — trusted folders', href: 'https://geminicli.com/docs/cli/trusted-folders/' },
+      ],
+    },
+    {
       id: 'antigravity',
       name: 'Antigravity',
       open: { ru: 'Открой папку как workspace и напиши промпт в панели агента.', en: 'Open the folder as a workspace and type the prompt in the agent panel.' },
@@ -130,6 +149,7 @@ export const STARTER: StarterData | null = {
     { path: 'my-templates/', what: { ru: 'Устав агента, рецепты автоматизации, шаблоны отзывов', en: 'Agent charter, automation recipes, feedback templates' } },
     { path: 'hooks/session-start.mjs', what: { ru: 'Hook: показывает агенту STATE.md и TODO.md в начале сессии', en: 'Hook: shows STATE.md and TODO.md at session start' }, lesson: '/lessons/07-tools/u3-hooks/' },
     { path: '.claude/settings.json · .codex/hooks.json', what: { ru: 'Подключают этот hook в Claude Code и Codex', en: 'Wire that hook into Claude Code and Codex' } },
+    { path: '.gemini/settings.json', what: { ru: 'Говорит Gemini CLI читать AGENTS.md', en: 'Tells Gemini CLI to read AGENTS.md' } },
     { path: '.gitignore', what: { ru: 'Не пускает в git ключи (.env) и личные настройки агента', en: 'Keeps keys (.env) and personal agent settings out of git' } },
   ],
   honest: {

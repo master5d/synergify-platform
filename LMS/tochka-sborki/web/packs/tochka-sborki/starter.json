@@ -1,12 +1,13 @@
 {
-  "_comment": "Стартер студента (агент-агностик). scripts/build-starter.mjs собирает из этого описания архив public/downloads/<archive> на prebuild; тест packs/tochka-sborki/starter.test.ts сверяет состав, отсутствие секретов и мусора. Каталоги с точкой в исходнике названы без неё (dot-claude/, dot-codex/, gitignore): иначе правила .gitignore репозитория (.claude/*) и хуки лаборатории ловили бы исходник стартера как настоящий конфиг.",
+  "_comment": "Стартер студента (агент-агностик). scripts/build-starter.mjs собирает из этого описания архив public/downloads/<archive> на prebuild; тест packs/tochka-sborki/starter.test.ts сверяет состав, отсутствие секретов и мусора. Каталоги с точкой в исходнике названы без неё (dot-claude/, dot-codex/, dot-gemini/, gitignore): иначе правила .gitignore репозитория (.claude/*) и хуки лаборатории ловили бы исходник стартера как настоящий конфиг.",
   "archive": "tochka-starter.zip",
   "root": "tochka-starter",
   "source": "starter",
   "rename": {
     "gitignore": ".gitignore",
     "dot-claude/": ".claude/",
-    "dot-codex/": ".codex/"
+    "dot-codex/": ".codex/",
+    "dot-gemini/": ".gemini/"
   },
   "include": [
     {

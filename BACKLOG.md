@@ -443,6 +443,9 @@
   шпаргалка, упражнения, roadmap (RU+EN) и шаблон устава. EN-архив `tochka-starter-en.zip` (издание `editions.en` в
   starter.json, исходник `starter-en/`, шаблоны `LMS/tochka-sborki/my-templates/en/`) отдаёт `/en/starter`; гварды — состав
   обоих архивов, паритет файлов, EN без кириллицы. Отложено владельцу: Gemini CLI одной строкой `.gemini/settings.json`.
+  **2026-09-28, ветка `w20/starter-gemini`:** Gemini CLI добавлен (решение контроллера по «реши сам» владельца) —
+  `.gemini/settings.json` (`context.fileName` = `AGENTS.md`, `GEMINI.md`) в обоих изданиях, строка в README и вкладка на
+  `/starter` (RU+EN), hook для Gemini не подключён; Trusted folders описаны по документации. Гвард — JSON и `AGENTS.md` в тесте.
   Исходная запись: Свой аналог
   claude-code-starter (идея, не код — у него нет лицензии): одна команда готовит среду для обучения по
   **всем модулям** курса под любой из четырёх агентов — **Claude Code, Codex, Antigravity, Hermes**. Опоры, что

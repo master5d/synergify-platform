@@ -49,7 +49,7 @@ describe.each(ALL)('стартер %s: состав архива', (loc, { entri
       'my-experiments/README.md', 'my-templates/README.md',
       'my-templates/agent-charter.md', 'my-templates/automation-recipes.md',
       'my-templates/feedback-template.md', 'my-templates/feedback-final-jtbd.md',
-      'hooks/session-start.mjs', '.claude/settings.json', '.codex/hooks.json',
+      'hooks/session-start.mjs', '.claude/settings.json', '.codex/hooks.json', '.gemini/settings.json',
     ]
     const missing = required.filter((f) => !files.has(f))
     expect(missing, `нет в архиве: ${missing.join(', ')}`).toEqual([])
@@ -83,6 +83,7 @@ it('издания совпадают по составу: EN — перевод
   expect([...EDITIONS.en.files.keys()]).toEqual([...EDITIONS.ru.files.keys()])
   // Конфиг hook'а Claude Code не зависит от языка — один и тот же.
   expect(EDITIONS.en.text('.claude/settings.json')).toBe(EDITIONS.ru.text('.claude/settings.json'))
+  expect(EDITIONS.en.text('.gemini/settings.json')).toBe(EDITIONS.ru.text('.gemini/settings.json'))
   expect(EDITIONS.en.text('.gitignore').split('\n').filter((l) => l && !l.startsWith('#')))
     .toEqual(EDITIONS.ru.text('.gitignore').split('\n').filter((l) => l && !l.startsWith('#')))
 })
@@ -178,6 +179,15 @@ describe.each(ALL)('стартер %s: один файл правил для в�
     expect(a).toMatch(/\.env/)
   })
 
+  it('Gemini CLI: .gemini/settings.json — валидный JSON, context.fileName ведёт на AGENTS.md', () => {
+    // По умолчанию Gemini CLI ищет только GEMINI.md; context.fileName заменяет это имя (строка или массив).
+    const g = JSON.parse(text('.gemini/settings.json'))
+    const names = ([] as string[]).concat(g.context.fileName)
+    expect(names[0]).toBe('AGENTS.md')
+    // GEMINI.md в списке: без него свой GEMINI.md ученика Gemini CLI перестал бы видеть.
+    expect(names).toContain('GEMINI.md')
+  })
+
   it('нет .hermes.md и AGENTS.override.md — они перебили бы AGENTS.md у Hermes/Codex', () => {
     expect(files.has('.hermes.md')).toBe(false)
     expect(files.has('AGENTS.override.md')).toBe(false)
@@ -245,8 +255,8 @@ describe('страница «Стартер»', () => {
     expect(owned).toContain('downloads/')
   })
 
-  it('четыре агента, у каждого — официальный источник', () => {
-    expect(s.agents.map((a) => a.id)).toEqual(['claude-code', 'codex', 'antigravity', 'hermes'])
+  it('пять агентов, у каждого — официальный источник', () => {
+    expect(s.agents.map((a) => a.id)).toEqual(['claude-code', 'codex', 'gemini-cli', 'antigravity', 'hermes'])
     for (const a of s.agents) {
       expect(a.sources.length, a.id).toBeGreaterThan(0)
       for (const src of a.sources) expect(src.href, a.id).toMatch(/^https:\/\//)

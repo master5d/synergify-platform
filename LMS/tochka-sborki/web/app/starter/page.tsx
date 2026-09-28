@@ -6,7 +6,7 @@ import { pageTitle } from '@/lib/page-title'
 export const metadata: Metadata = {
   title: pageTitle('Стартер студента'),
   description:
-    'Готовый проект для курса с любым агентом — Claude Code, Codex, Antigravity, Hermes: файл правил AGENTS.md, память между сессиями, папка для практик, шаблоны и чек-лист гигиены. Три шага: скачай, открой в агенте, первая команда.',
+    'Готовый проект для курса с любым агентом — Claude Code, Codex, Gemini CLI, Antigravity, Hermes: файл правил AGENTS.md, память между сессиями, папка для практик, шаблоны и чек-лист гигиены. Три шага: скачай, открой в агенте, первая команда.',
 }
 
 export default function Page() {
