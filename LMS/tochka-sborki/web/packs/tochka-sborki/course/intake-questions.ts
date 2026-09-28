@@ -123,6 +123,17 @@ export const QUESTIONS_V2: Question[] = [
     id: 'V_AUTO_VERDICT', module: 'V', format: 'automation-verdict', required: false,
     prompt: { ru: 'Стоит ли это вообще автоматизировать?', en: 'Is this even worth automating?' },
   },
+  // ── «Карта недели» (intake LMS#17, одобрено владельцем 2026-09-28). Следующий под-шаг после
+  // вердикта по одной задаче: 3–7 повторяющихся дел недели → корзины «ИИ делает / ИИ помогает /
+  // оставляю себе» → модуль курса на каждое дело. Логика — lib/intake/week-map.ts, копия и
+  // таблица «тип работы → модуль» — course/week-map.ts этого пака. Ответ — string[] под этим id.
+  {
+    id: 'V_WEEK_MAP', module: 'V', format: 'week-map', required: false,
+    prompt: {
+      ru: 'А теперь — вся неделя: что у тебя повторяется?',
+      en: 'Now the whole week: what keeps repeating for you?',
+    },
+  },
   {
     id: 'V_RHYTHM', module: 'V', format: 'single', required: false,
     prompt: { ru: 'Поймай свой ритм.', en: 'Catch your rhythm.' },

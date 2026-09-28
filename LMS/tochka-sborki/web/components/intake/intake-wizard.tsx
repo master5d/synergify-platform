@@ -8,12 +8,15 @@ import { CharterReveal } from './charter-reveal'
 import { OnboardingBridge } from './onboarding-bridge'
 import { IntakeGate } from './intake-gate'
 import { AutomationVerdictCard } from './automation-verdict-card'
+import { WeekMapCard } from './week-map-card'
 import { buildCompanionCharter } from '@/lib/intake/charter'
 import { deriveMbti } from '@/lib/intake/mbti'
 import { SKINS_META } from '@/lib/rpg/skins-meta'
 import type { WorldSkin } from '@/lib/rpg/types'
 
-export function IntakeWizard({ locale }: { locale: Locale }) {
+// moduleTitles — слаг модуля → название (страница-сервер читает _meta.json): нужны шагу «Карта недели»,
+// который ведёт каждое дело в модуль курса. Клиент сам файловую систему не читает.
+export function IntakeWizard({ locale, moduleTitles }: { locale: Locale; moduleTitles?: Record<string, string> }) {
   const [answers, setAnswers] = useState<Answers>({})
   const [step, setStep] = useState(0)
   const [submitting, setSubmitting] = useState(false)
@@ -207,6 +210,8 @@ export function IntakeWizard({ locale }: { locale: Locale }) {
       <h1 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '1.2rem', lineHeight: 1.3 }}>{q.prompt[locale]}</h1>
       {q.format === 'automation-verdict'
         ? <AutomationVerdictCard locale={locale} answers={answers} onChange={setAnswer} />
+        : q.format === 'week-map'
+        ? <WeekMapCard locale={locale} value={answers[q.id]} onChange={setAnswer} moduleTitles={moduleTitles} />
         : (
           <QuestionRenderer
             question={q}

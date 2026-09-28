@@ -1,6 +1,6 @@
 // web/lib/intake/types.ts
 export type Locale = 'ru' | 'en'
-export type QuestionFormat = 'number' | 'single' | 'multi' | 'likert' | 'text' | 'automation-verdict'
+export type QuestionFormat = 'number' | 'single' | 'multi' | 'likert' | 'text' | 'automation-verdict' | 'week-map'
 export type AttributeCode = 'INT' | 'WIS' | 'CON' | 'DEX' | 'CHA' | 'STR'
 export type ModuleId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'V' | 'VD'
 
