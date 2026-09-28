@@ -1,0 +1,5 @@
+<!-- subject: {{ .Tx.Data.module_title }}: продолжим с того же места? -->
+<p>Привет!</p>
+<p>Вы остановились в модуле «{{ .Tx.Data.module_title }}». Пройдено модулей: {{ .Tx.Data.done_modules }} из {{ .Tx.Data.total_modules }}.</p>
+<p>Кнопка ниже ведёт ровно туда, где вы остановились, а не на главную. Не ставьте себе задачу «доделать модуль» — сделайте одно следующее действие: один юнит, минут десять.</p>
+<p style="margin:24px 0"><a href="{{ .Tx.Data.resume_url }}" style="background:#1a1a1a;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:6px;display:inline-block">Продолжить</a></p>

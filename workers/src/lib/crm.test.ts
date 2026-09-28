@@ -28,7 +28,19 @@ describe('addCrmContact', () => {
       lists: [3],
       status: 'enabled',
       preconfirm_subscriptions: false,
+      attribs: { language: 'ru', source: 'site' },
     })
+  })
+
+  it('returns true on success, omits empty attribs', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('{}', { status: 200 }))
+    await expect(addCrmContact(baseEnv, { email: 'a@b.com' })).resolves.toBe(true)
+    expect(JSON.parse((fetchMock.mock.calls[0][1] as any).body).attribs).toEqual({})
+  })
+
+  it('returns false on a non-409 error', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('boom', { status: 500 }))
+    await expect(addCrmContact(baseEnv, { email: 'a@b.com' })).resolves.toBe(false)
   })
 
   it('no-ops when LISTMONK_URL is missing', async () => {
@@ -39,11 +51,11 @@ describe('addCrmContact', () => {
 
   it('treats a 409 (already exists) as a noop, not an error', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('conflict', { status: 409 }))
-    await expect(addCrmContact(baseEnv, { email: 'a@b.com' })).resolves.toBeUndefined()
+    await expect(addCrmContact(baseEnv, { email: 'a@b.com' })).resolves.toBe(true)
   })
 
   it('does not throw when fetch rejects', async () => {
     vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('network'))
-    await expect(addCrmContact(baseEnv, { email: 'a@b.com' })).resolves.toBeUndefined()
+    await expect(addCrmContact(baseEnv, { email: 'a@b.com' })).resolves.toBe(false)
   })
 })

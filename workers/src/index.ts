@@ -5,6 +5,8 @@ import { handleTelegramAuth } from './handlers/telegram-auth'
 import { handleOAuthStart, handleOAuthCallback } from './handlers/oauth'
 import { handleTelegramWebhook } from './handlers/telegram-webhook'
 import { runDailyNudge } from './handlers/nudge-cron'
+import { runEmailChains } from './handlers/email-chain-cron'
+import { handleEmailUnsubscribe } from './handlers/email-unsubscribe'
 import { handleSupportCheckout, handleProductCheckout } from './handlers/checkout'
 import { handleStripeWebhook } from './handlers/stripe-webhook'
 import { handleView, handleComplete, handleList } from './handlers/progress'
@@ -68,6 +70,8 @@ export default {
         response = await handleOAuthCallback(request, env)
       } else if (path === '/api/telegram/webhook' && method === 'POST') {
         response = await handleTelegramWebhook(request, env)
+      } else if (path === '/api/email/unsubscribe' && (method === 'GET' || method === 'POST')) {
+        response = await handleEmailUnsubscribe(request, env)
       } else if (path === '/api/checkout/support' && method === 'POST') {
         response = await handleSupportCheckout(request, env)
       } else if (path === '/api/checkout/product' && method === 'POST') {
@@ -173,6 +177,8 @@ export default {
   },
 
   async scheduled(_event: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
-    ctx.waitUntil(runDailyNudge(env))
+    // Два независимых прогона: падение одного не роняет другой.
+    ctx.waitUntil(runDailyNudge(env).catch(e => console.error('daily nudge failed', e)))
+    ctx.waitUntil(runEmailChains(env).catch(e => console.error('email chains failed', e)))
   },
 }

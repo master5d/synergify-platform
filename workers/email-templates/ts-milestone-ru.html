@@ -1,0 +1,7 @@
+<!-- subject: Модуль «{{ .Tx.Data.module_title }}» закрыт — {{ .Tx.Data.done_modules }} из {{ .Tx.Data.total_modules }} -->
+<p>Привет!</p>
+<p>Модуль «{{ .Tx.Data.module_title }}» пройден целиком. Пройдено модулей: {{ .Tx.Data.done_modules }} из {{ .Tx.Data.total_modules }}.</p>
+{{ if .Tx.Data.from }}<p>Сдвиг этого модуля — от «{{ .Tx.Data.from }}» к «{{ .Tx.Data.to }}». Проверьте честно: это уже про вас? Если нет — перечитайте практику модуля: это дешевле, чем идти дальше с дырой.</p>{{ end }}
+<p>Скажите одному человеку, что закрыли модуль и что будете делать дальше. Обещание кому-то держит темп лучше любых напоминаний.</p>
+{{ if .Tx.Data.next_url }}<p>Следующий модуль — «{{ .Tx.Data.next_title }}».</p>
+<p style="margin:24px 0"><a href="{{ .Tx.Data.next_url }}" style="background:#1a1a1a;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:6px;display:inline-block">Открыть следующий модуль</a></p>{{ end }}

@@ -442,6 +442,17 @@
   → письмо про «Обучение моделей» (Listmonk сам по событию не шлёт — кампания по сегменту разово/по расписанию);
   (3) в `workers/wrangler.toml` `PROGRESS_EVENTS_ENABLED = "1"` и `LISTMONK_PROGRESS_LIST_ID = "<id списка>"`, деплой воркера и web.
   Модули, закрытые до включения, события не дают — догонит следующее завершение модуля (в атрибут идут все закрытые).
+- [x] **Платформа: учебные email-цепочки через Listmonk tx** (2026-09-27, код готов, ВЫКЛЮЧЕНО). Оркестратор в воркере:
+  чистая политика `workers/src/lib/email-chains.ts` (start-1/2 без старта, lapse-1/2/3 после 3/7/14 дней тишины с ключом
+  эпизода `lapse-N@<день активности>`, milestone по `progress_events kind='module'` со схлопыванием, finish-1 по `kind='course'`,
+  finish-2 через 7 дней; приоритет finish > milestone > lapse > start; ≤1 письма/20 ч; напоминания молчат 20 ч после активности
+  и для привязавших Telegram с включёнными nudge; окна шагов не дают разослать устаревшее при включении) + cron
+  `handlers/email-chain-cron.ts` рядом с Telegram-nudge: захват шага в `email_sends` до отправки, откат при неуспехе,
+  blocklisted в Listmonk → `email_optout`, нет подписчика → CRM-список, шаблон `ts-<step>-<lang>` по имени, лимит 200 писем/прогон.
+  Отписка `GET/POST /api/email/unsubscribe` (HMAC-подпись, one-click RFC 8058, `List-Unsubscribe` в tx-заголовках) — только от учебных писем.
+  Названия модулей и трансформации для писем — `MODULE_META` в `course-order.ts`, сверены тестом с `_meta.json` и `transformations.ts`.
+  Для включения (решает владелец): миграция `workers/migrations/0019_email_chains.sql` к prod D1 → заливка шаблонов
+  (`workers/email-templates/`) в Listmonk → `EMAIL_CHAINS_ENABLED = "1"` в `workers/wrangler.toml`, деплой воркера.
 - [x] **Платформа: воронка отвала по урокам** (intake LMS#3) в `/api/admin/stats`: сколько учеников
   дошло до каждого юнита и где бросили, по каждому pack'у (`progress.course`). Сейчас там три счётчика.
   2026-09-27: `/api/admin/stats` отдаёт `funnel`/`dropoff`/`notStarted` (порядок — из нумерации слагов pack'а, сверен тестом с `_meta.json`), воронка выведена на `/admin/leads`.
