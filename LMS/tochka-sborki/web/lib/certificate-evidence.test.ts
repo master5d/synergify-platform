@@ -7,6 +7,7 @@ import { MODULE_SLUGS } from './rpg/modules'
 import { MICRO_TRANSFORMATIONS } from './rpg/transformations'
 import { getNavigationItems } from './content'
 import { outlineFromNav } from './progress-sync'
+import { PACK_SLUG } from './pack'
 import {
   EVIDENCE_FONT, EVIDENCE_GAP, EVIDENCE_MAX_ROWS, EVIDENCE_ROW0, EVIDENCE_STEP, VERIFY_FONT,
 } from '@/components/certificate-svg'
@@ -15,7 +16,8 @@ const OUTLINE = outlineFromNav(getNavigationItems('ru'))
 const unitRows = (mod: string, at = 100): ProgressRow[] =>
   OUTLINE[mod].map((u, i) => ({ lesson_slug: `${mod}/${u}`, completed_at: at + i, course: 'tochka-sborki' }))
 
-describe('buildEvidence', () => {
+// Фикстуры — модули спайна Точки Сборки; у living-practice сертификата нет (features.certificate=false).
+describe.runIf(PACK_SLUG === 'tochka-sborki')('buildEvidence', () => {
   it('no progress → no evidence (nothing is invented)', () => {
     expect(buildEvidence([], OUTLINE, 'ru')).toEqual([])
   })
