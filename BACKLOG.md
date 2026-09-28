@@ -538,10 +538,14 @@
 - [ ] **Учебные цепочки: сухой прогон «кому что ушло бы сегодня»** (intake LMS#19, Rippling — предпросмотр перед запуском).
   Админ-эндпоинт (requireAdmin, как `/api/admin/stats`) или скрипт: по живым D1-данным прогоняет `pickStep` без отправки и без
   email в выводе — счётчики по шагам + обезличенные id. Сейчас сухой прогон при включении цепочек (2026-09-28) делался руками.
-- [ ] **Сертификат: «Добавить в профиль LinkedIn»** (intake LMS#18, Coursera). Рядом с «Поделиться в LinkedIn» — ссылка
+- [x] **Сертификат: «Добавить в профиль LinkedIn» — СДЕЛАНО 2026-09-28** (intake LMS#18, Coursera). `lib/linkedin-add-to-profile.ts`:
+  `linkedin.com/profile/add?startTask=CERTIFICATION_NAME` + organizationName, issueYear/Month из `completedAt` проверки, certId = код,
+  certUrl = verify-URL; кнопка только при полученном коде. Рядом с «Поделиться в LinkedIn» — ссылка
   LinkedIn add-to-profile (Licenses & certifications): название курса, организация из `LMS/registry.json`, месяц/год выпуска,
   Credential ID (код проверки) и verify-URL сертификата с уликами. Без API и без ключей — только URL-параметры.
-- [ ] **Компаньон: режим «Помоги мне практиковаться»** (intake LMS#18, Coursera Coach). В промпт «Учиться с ИИ»
+- [x] **Компаньон: режим «Помоги мне практиковаться» — СДЕЛАНО 2026-09-28** (intake LMS#18, Coursera Coach). `studyMode:
+  'practice'` в `lib/learn-prompt` (PRACTICE_RULES, правила движка поверх любого pack'а) + переключатель «Учиться / Практиковаться»
+  в `LearnWithAI`; bootstrap `?q=` в пределах MAX_BOOTSTRAP. В промпт «Учиться с ИИ»
   (`components/learn-with-ai.tsx`, `lib/learn-prompt`) — вариант с сократическими вопросами вместо готового ответа и правило
   «во время самопроверки не называть ответ, только наводить». Суверенно: промпт уходит в агента ученика, наш LLM не нужен.
 - [ ] **Role Play как вид практики** (intake LMS#18, Coursera Role Play, owner-gated). Ученик тренируется на AI-персонаже
