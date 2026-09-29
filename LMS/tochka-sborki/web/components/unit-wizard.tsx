@@ -15,6 +15,7 @@ import { suggestModeFromCalibration } from '@/lib/pacing/suggest-mode'
 import { MODE } from '@/lib/cs/modes'
 import { getAppliedChallenge } from '@/lib/cs/applied-challenge'
 import { buildLearnPrompt, buildBootstrapDeepLink } from '@/lib/learn-prompt'
+import type { UnitReference } from '@/lib/learn-prompt-reference'
 import { LearnWithAI } from '@/components/learn-with-ai'
 import { LearnWithAIDock } from '@/components/learn-with-ai-dock'
 import { ModeSelector } from '@/components/cs/mode-selector'
@@ -47,6 +48,8 @@ interface Props {
   locale?: Locale
   /** Структура курса — для серверного прогресса (lib/progress-sync.ts). */
   outline?: CourseOutline
+  /** Эталон юнита для полного промпта компаньона (Педагогика 5); собирается на сервере из данных pack'а. */
+  reference?: UnitReference | null
   children: React.ReactNode
 }
 
@@ -59,6 +62,7 @@ export function UnitWizard({
   totalUnits,
   locale = 'ru',
   outline,
+  reference = null,
   children,
 }: Props) {
   const t = getDictionary(locale).wizard
@@ -74,7 +78,6 @@ export function UnitWizard({
   const [pack, setPack] = useState<SkinPack | null>(null)
   const [niche, setNiche] = useState<string | null>(null)
   const [outcome, setOutcome] = useState<string | null>(null)
-  const [mbti, setMbti] = useState<string | null>(null)
   const [relational, setRelational] = useState<RelationalStyle | null>(null)
 
   const unitKey = `${moduleSlug}/${unitSlug}`
@@ -104,7 +107,6 @@ export function UnitWizard({
         if (!p?.world_skin) return
         setSkin(p.world_skin as WorldSkin)
         setNiche(p.niche ?? null)
-        setMbti(p.mbti ?? null)
         try { setRelational(p.relational_style ? JSON.parse(p.relational_style) : null) } catch { setRelational(null) }
         try {
           const ans = typeof p.answers === 'string' ? JSON.parse(p.answers) : p.answers
@@ -139,8 +141,8 @@ export function UnitWizard({
     outcome,
     mode: chosenMode ?? null,
     appliedChallenge: appliedChallenge ?? null,
-    mbti,
     relational,
+    reference,
   }
   const learnPrompt = buildLearnPrompt(learnInput)
   const learnBootstrap = buildBootstrapDeepLink(learnInput)

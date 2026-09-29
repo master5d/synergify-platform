@@ -31,6 +31,8 @@ import { pickPretest, toPretestItem } from '@/lib/pedagogy/pretest'
 import { pretestKey } from '@/lib/pedagogy/local'
 import { PretestProvider } from '@/components/pretest'
 import { bindPretestEcho, bindPretestPhase } from '@/components/pretest-bound'
+import { unitReference } from '@/lib/learn-prompt-reference'
+import { PRACTICE_REFERENCES } from '@/lib/course/practice-references'
 
 interface Props { moduleSlug: string; unitSlug: string; locale: Locale }
 
@@ -50,6 +52,8 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
   // Pretest в активации (LMS#20): вопросы — данные (_meta.json / правило «первый в концепте»), MDX не правится.
   const pretest = COURSE.pedagogy.pretest ? pickPretest(moduleMeta, unitSlug, content).map(toPretestItem) : []
   const pretestIds = pretest.map(p => p.id)
+  // Эталон юнита для полного промпта компаньона (Педагогика 5): checks + эталон практики pack'а.
+  const reference = unitReference(moduleMeta, moduleSlug, unitSlug, locale, PRACTICE_REFERENCES)
 
   return (
     <UnitGates locale={locale}>
@@ -74,6 +78,7 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
             totalUnits={moduleMeta.units.length}
             locale={locale}
             outline={outlineFromNav(navItems)}
+            reference={reference}
           >
             <MDXRemote
               source={content}

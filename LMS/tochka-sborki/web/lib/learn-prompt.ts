@@ -4,13 +4,17 @@
 // assembles; who the companion is, which course it speaks for, its method and its
 // boundaries come from the active course-pack (lib/course/companion → @pack), so a
 // course never hands its learners another course's companion (intake LMS#16).
-// Profile slots (skin/niche/F3/mode/MBTI/applied challenge) are used only when the
-// pack opts in (COMPANION.usesProfile).
+// Profile slots (skin/niche/F3/mode/applied challenge/relational style) are used only when the
+// pack opts in (COMPANION.usesProfile). MBTI сюда НЕ идёт (Педагогика — риски, intake LMS#20):
+// подгонка обучения под «тип» — meshing-гипотеза learning styles без доказательств (Pashler 2008).
+// Эталон юнита (reference) — только в полном промпте, не в `?q=`-prefill (lib/learn-prompt-reference.ts).
 import type { Mode } from './cs/types'
 import type { Locale } from './dictionaries'
 import type { RelationalStyle } from './intake/types'
+import { normalizeErrorStyle } from './intake/mbti'
 import { mentorFirmness, mentorFirmnessCompact, mentorStateAdaptation } from './mentor-persona'
 import { COMPANION } from './course/companion'
+import { referenceLines, type UnitReference } from './learn-prompt-reference'
 
 export interface LearnPromptInput {
   locale: Locale
@@ -23,8 +27,9 @@ export interface LearnPromptInput {
   outcome?: string | null    // F3 free text
   mode?: Mode | null
   appliedChallenge?: string | null
-  mbti?: string | null
   relational?: RelationalStyle | null
+  /** Эталон юнита (checks + эталон практики pack'а). Только для buildLearnPrompt; prefill его не несёт. */
+  reference?: UnitReference | null
   /** 'learn' (по умолчанию) — объяснять по методике курса; 'practice' — «Помоги мне практиковаться». */
   studyMode?: StudyMode
 }
@@ -97,19 +102,19 @@ const MODE_FALLBACK = {
 }
 
 function bondingLine(i: LearnPromptInput, ru: boolean): string {
-  if (!i.mbti && !i.relational) return ''
+  if (!i.relational) return ''
   const r = i.relational
   const errMap = {
-    ru: { soft_feedback: 'правь мягко', lose_motivation: 'береги мотивацию, хвали за попытку', calm: 'правь прямо, без смягчения', fix_immediately: 'давай сразу точную правку' },
-    en: { soft_feedback: 'correct gently', lose_motivation: 'protect motivation, praise the attempt', calm: 'correct directly', fix_immediately: 'give the exact fix immediately' },
+    ru: { soft_feedback: 'правь мягко', lose_motivation: 'береги мотивацию, хвали за попытку', calm: 'правь прямо, без смягчения', step_hints: 'сразу покажи, где ошибка, и подсказывай по шагам — исправляю я сам' },
+    en: { soft_feedback: 'correct gently', lose_motivation: 'protect motivation, praise the attempt', calm: 'correct directly', step_hints: 'point out right away where the mistake is and hint step by step — I make the fix myself' },
   }
   const attnMap = {
     ru: { short: 'короткими ходами по 3–5 минут', mid: 'блоками по 10–15 минут', long: 'можно длинными заходами' },
     en: { short: 'in short 3–5 minute turns', mid: 'in 10–15 minute blocks', long: 'longer stretches are fine' },
   }
   const parts: string[] = []
-  if (i.mbti) parts.push(ru ? `мой психотип — ${i.mbti} (учитывай его в тоне и подаче)` : `my MBTI is ${i.mbti} (factor it into tone and delivery)`)
-  if (r?.errorStyle) parts.push((ru ? errMap.ru : errMap.en)[r.errorStyle])
+  const err = normalizeErrorStyle(r?.errorStyle)
+  if (err) parts.push((ru ? errMap.ru : errMap.en)[err])
   if (r?.attention) parts.push((ru ? attnMap.ru : attnMap.en)[r.attention])
   if (!parts.length) return ''
   return (ru ? 'Под привязку: ' : 'For bonding: ') + parts.join('; ') + '.'
@@ -231,6 +236,7 @@ export function buildLearnPrompt(i: LearnPromptInput): string {
     '',
     ...method,
     ...guardrails,
+    ...referenceLines(i.reference, i.locale),
     ...(i.studyMode === 'practice'
       ? [PRACTICE_RULES.heading[L], ...PRACTICE_RULES.rules.map((r) => `- ${r[L]}`), '']
       : []),

@@ -29,6 +29,11 @@ toward the multi-course platform (see `LMS/_template/`, `docs/curriculum-backlog
   запреты автора, варианты под роль анкеты (V_ROLE). Метка в практике юнита — `<RolePlay id="…"/>`; правила сцены
   и сборку промпта держит движок `lib/role-play.ts`, гварды — `lib/role-play.test.ts`. Web-only; pack-файл
   импортирует типы относительно. У living-practice список пуст намеренно.
+- `practice-references.ts` — эталоны практик для компаньона «Учиться с ИИ» (`PRACTICE_REFERENCES`, Педагогика 5,
+  intake LMS#20): критерии хорошего выполнения + 2–4 типичные ошибки на юнит. Движок `lib/learn-prompt-reference.ts`
+  добавляет к ним ключевые идеи юнита из checks `_meta.json` и правило «не раскрывай, направляй»; эталон едет только
+  в полном копируемом промпте, не в `?q=`-prefill. Юнит без записи — только ключевые идеи. Заполнено пилотно
+  (tochka-sborki: 04/u2, 04/u5, 05/u4); у living-practice список пуст намеренно.
 
 ## Convention
 - Course data lives here; engine logic stays in `lib/`.

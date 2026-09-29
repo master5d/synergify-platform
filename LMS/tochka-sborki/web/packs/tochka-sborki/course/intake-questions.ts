@@ -178,7 +178,7 @@ export const QUESTIONS_V2: Question[] = [
       { value: 'calm', label: { ru: 'Спокойно, ошибка = настройка', en: 'Calmly — a mistake is just tuning' } },
       { value: 'lose_motivation', label: { ru: 'Падает мотивация', en: 'I lose motivation' } },
       { value: 'soft_feedback', label: { ru: 'Нужен мягкий фидбек', en: 'I need gentle feedback' } },
-      { value: 'fix_immediately', label: { ru: 'Люблю сразу исправлять', en: 'I like to fix it right away' } },
+      { value: 'step_hints', label: { ru: 'Хочу сразу понять, где ошибка, и исправить сам', en: 'I want to see right away where it went wrong — and fix it myself' } },
     ],
   },
   {

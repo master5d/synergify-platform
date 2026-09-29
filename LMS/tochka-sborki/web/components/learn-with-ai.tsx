@@ -14,7 +14,12 @@ const AGENTS: { key: string; label: string; url: string; prefill: boolean }[] = 
   { key: 'copilot', label: 'Copilot', url: 'https://copilot.microsoft.com/', prefill: false },
 ]
 
-const T = {
+// Честное предупреждение (Педагогика 5, intake LMS#20): в полевом RCT ученики с GPT решали практику
+// лучше, а на экзамене без ИИ — хуже, и сами этого не замечали (Bastani et al., PNAS 2025).
+export const RESEARCH_URL = 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12232635/'
+export const RESEARCH_CITE = 'Bastani et al., PNAS 2025'
+
+export const T = {
   ru: {
     body: 'Скопируй персональный промпт и вставь его в режим обучения своего агента — он подхватит твой контекст и поведёт тебя дальше.',
     copy: 'Скопировать промпт',
@@ -24,6 +29,8 @@ const T = {
     practice: 'Практиковаться',
     learnHint: 'Объясняет материал по методике курса.',
     practiceHint: 'Помоги мне практиковаться: вопросы вместо готового ответа, подсказки по шагам; в «Проверь себя» не называет ответ, пока ты не ответишь сам.',
+    caveat: 'Честно: с ИИ кажется, что умеешь больше, чем без него. После практики проверь себя без ИИ.',
+    caveatSource: 'В исследовании школьники с ChatGPT решали практику лучше, а на контрольной без ИИ — хуже, и сами этого не заметили.',
   },
   en: {
     body: 'Copy your personal prompt and paste it into your agent\'s learn mode — it picks up your context and takes you forward.',
@@ -34,6 +41,8 @@ const T = {
     practice: 'Practice',
     learnHint: 'Explains the material using the course method.',
     practiceHint: 'Help me practice: questions instead of the finished answer, step-by-step hints; in “Check yourself” it won’t name the answer until you answer yourself.',
+    caveat: 'Honestly: with AI it feels like you can do more than you can without it. After practice, check yourself without AI.',
+    caveatSource: 'In the study, students with ChatGPT did better on practice but worse on the test without AI — and did not notice it themselves.',
   },
 }
 
@@ -92,6 +101,13 @@ export function LearnWithAI({ prompt, bootstrap, practice, locale = 'ru' }: {
       </div>
       <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.55, margin: '0 0 1.1rem' }}>
         {t.body}
+      </p>
+      <p data-testid="lwai-caveat" style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-xs)', lineHeight: 1.5, margin: '-0.4rem 0 1.1rem' }}>
+        {t.caveat}{' '}
+        <a href={RESEARCH_URL} target="_blank" rel="noopener" title={t.caveatSource} aria-label={`${RESEARCH_CITE}. ${t.caveatSource}`}
+          style={{ color: 'var(--text-secondary)', textDecoration: 'underline dotted', whiteSpace: 'nowrap' }}>
+          ({RESEARCH_CITE})
+        </a>
       </p>
       {practice && (
         <div style={{ margin: '0 0 0.9rem' }}>

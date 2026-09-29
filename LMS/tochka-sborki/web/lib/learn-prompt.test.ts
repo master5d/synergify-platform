@@ -3,6 +3,12 @@ import { buildLearnPrompt, buildBootstrapDeepLink, agentUrl, MAX_BOOTSTRAP, PRAC
 import { PACK_SLUG } from './pack'
 import { COURSE } from './course'
 import { COMPANION } from './course/companion'
+import { REFERENCE_RULES, unitReference } from './learn-prompt-reference'
+import { PRACTICE_REFERENCES } from './course/practice-references'
+import { normalizeErrorStyle } from './intake/mbti'
+import { getAllModules, getModuleMeta } from './content'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 
 const base = {
   locale: 'ru' as const,
@@ -57,9 +63,8 @@ describe.runIf(TS)('buildLearnPrompt (tochka-sborki)', () => {
     expect(p).toMatch(/unit 2 of 3/)
   })
 
-  it('adds a bonding directive from MBTI + relational style', () => {
-    const p = buildLearnPrompt({ ...base, mbti: 'INFP', relational: { rhythm: 'suave', errorStyle: 'soft_feedback', anchor: 'support', attention: 'short' } })
-    expect(p).toContain('INFP')
+  it('adds a bonding directive from the relational style (без MBTI)', () => {
+    const p = buildLearnPrompt({ ...base, relational: { rhythm: 'suave', errorStyle: 'soft_feedback', anchor: 'support', attention: 'short' } })
     expect(p).toMatch(/мягк/i)        // soft feedback → gentle correction
     expect(p).toMatch(/корот|3–5|мелк/) // short attention → short turns
   })
@@ -159,7 +164,7 @@ describe.runIf(LP)('living-practice companion keeps the boundaries the course pr
       ...base,
       skinName: 'Кибер-Нуар', mentorName: 'Фиксер', niche: 'coach', outcome: 'выйти на первых клиентов',
       appliedChallenge: 'Собери промпт под свою задачу.', mode: 'commander', mbti: 'INFP',
-    })
+    } as Parameters<typeof buildLearnPrompt>[0])
     for (const leak of ['Кибер-Нуар', 'Фиксер', 'коучинг', 'выйти на первых клиентов', 'Собери промпт', 'опор', 'INFP', 'Колб', 'todo']) {
       expect(p, leak).not.toContain(leak)
     }
@@ -234,5 +239,106 @@ describe('practice mode (any pack)', () => {
     }
     expect(buildBootstrapDeepLink(practice).length).toBeLessThanOrEqual(MAX_BOOTSTRAP)
     expect(buildBootstrapDeepLink({ ...practice, locale: 'en' }).length).toBeLessThanOrEqual(MAX_BOOTSTRAP)
+  })
+})
+
+// Педагогика 5 и «риски» (intake LMS#20): защита от «ИИ сделал за меня» и MBTI вне правил обучения.
+describe('companion guard: no ready-made fix, reference hidden, no MBTI (any pack)', () => {
+  const ref = {
+    keyPoints: ['Что остаётся за человеком? → Замысел и решение. ЭТАЛОН-МАРКЕР-42'],
+    solution: 'Промпт по CTID, все пять разделов. ЭТАЛОН-МАРКЕР-43',
+    mistakes: ['Задача размыта. ЭТАЛОН-МАРКЕР-44'],
+  }
+  type In = Parameters<typeof buildLearnPrompt>[0]
+
+  it('source carries no «ready fix» branch', () => {
+    const src = readFileSync(join(process.cwd(), 'lib', 'learn-prompt.ts'), 'utf8')
+    expect(src).not.toMatch(/точную правку|exact fix|fix_immediately/)
+  })
+
+  it('legacy fix_immediately profile reads as step hints, never as a ready fix (ru/en)', () => {
+    for (const locale of ['ru', 'en'] as const) {
+      for (const studyMode of ['learn', 'practice'] as const) {
+        const p = buildLearnPrompt({ ...base, locale, studyMode, relational: { rhythm: null, errorStyle: 'fix_immediately', anchor: null, attention: null } })
+        expect(p).not.toMatch(/точную правку|готовую правку|exact fix|fix immediately/i)
+        if (COMPANION.usesProfile) {
+          expect(p).toMatch(locale === 'ru' ? /подсказывай по шагам — исправляю я сам/ : /hint step by step — I make the fix myself/)
+        }
+      }
+    }
+    expect(normalizeErrorStyle('fix_immediately')).toBe('step_hints')
+    expect(normalizeErrorStyle('calm')).toBe('calm')
+    expect(normalizeErrorStyle(undefined)).toBeNull()
+  })
+
+  it('reference is in the full prompt with the «do not reveal» rule (ru/en, both modes)', () => {
+    for (const locale of ['ru', 'en'] as const) {
+      for (const studyMode of ['learn', 'practice'] as const) {
+        const p = buildLearnPrompt({ ...base, locale, studyMode, reference: ref })
+        expect(p).toContain(REFERENCE_RULES.heading[locale])
+        expect(p).toContain(REFERENCE_RULES.rules[0][locale])
+        for (const m of ['42', '43', '44']) expect(p).toContain(`ЭТАЛОН-МАРКЕР-${m}`)
+        expect(p.endsWith(COMPANION.opener[locale])).toBe(true)
+      }
+    }
+    expect(buildLearnPrompt(base)).not.toContain(REFERENCE_RULES.heading.ru)
+    expect(buildLearnPrompt({ ...base, reference: null })).toBe(buildLearnPrompt(base))
+  })
+
+  it('reference never reaches the ?q= prefill, which stays within MAX_BOOTSTRAP', () => {
+    for (const locale of ['ru', 'en'] as const) {
+      for (const studyMode of ['learn', 'practice'] as const) {
+        const b = buildBootstrapDeepLink({ ...base, locale, studyMode, reference: ref })
+        expect(b).not.toContain('ЭТАЛОН-МАРКЕР')
+        expect(b).not.toContain(REFERENCE_RULES.heading[locale])
+        expect(b).toBe(buildBootstrapDeepLink({ ...base, locale, studyMode }))
+        expect(b.length).toBeLessThanOrEqual(MAX_BOOTSTRAP)
+      }
+    }
+  })
+
+  it('MBTI does not take part in the learning rules (Pashler 2008)', () => {
+    for (const locale of ['ru', 'en'] as const) {
+      const relational = { rhythm: 'suave', errorStyle: 'calm', anchor: null, attention: 'mid' } as const
+      const withMbti = { ...base, locale, mbti: 'INFP', relational } as In
+      const withoutMbti: In = { ...base, locale, relational }
+      for (const studyMode of ['learn', 'practice'] as const) {
+        const p = buildLearnPrompt({ ...withMbti, studyMode })
+        expect(p).not.toMatch(/INFP|MBTI|психотип/)
+        expect(p).toBe(buildLearnPrompt({ ...withoutMbti, studyMode }))
+        expect(buildBootstrapDeepLink({ ...withMbti, studyMode })).not.toMatch(/INFP|MBTI|психотип/)
+      }
+    }
+  })
+})
+
+describe('unitReference: data of the active pack', () => {
+  it('builds key ideas from the unit checks; null for a unit without checks and entry', () => {
+    const mod = getAllModules('ru').find((m) => (m.checks ?? []).length > 0)!
+    const c = mod.checks![0]
+    const r = unitReference(mod, mod.slug, c.unit, 'ru')!
+    expect(r.keyPoints.some((k) => k.includes(c.options[c.answer]) && k.includes(c.question))).toBe(true)
+    expect(unitReference({ checks: [] }, mod.slug, 'no-such-unit', 'ru')).toBeNull()
+  })
+
+  it('every practice reference points to a real unit in both locales and has 2–4 mistakes', () => {
+    for (const r of PRACTICE_REFERENCES) {
+      for (const locale of ['ru', 'en'] as const) {
+        const meta = getModuleMeta(r.module, locale)
+        expect(meta.units.map((u) => u.slug), `${r.module}/${r.unit}`).toContain(r.unit)
+        expect(r.solution[locale].length, `${r.unit} solution ${locale}`).toBeGreaterThan(40)
+        const ur = unitReference(meta, r.module, r.unit, locale, PRACTICE_REFERENCES)!
+        expect(ur.solution).toBe(r.solution[locale])
+        expect(buildLearnPrompt({ ...base, locale, reference: ur })).toContain(r.solution[locale])
+      }
+      expect(r.mistakes.length).toBeGreaterThanOrEqual(2)
+      expect(r.mistakes.length).toBeLessThanOrEqual(4)
+      for (const m of r.mistakes) expect(m.ru && m.en).toBeTruthy()
+    }
+  })
+
+  it.runIf(TS)('tochka-sborki: pilot references exist for 2–3 practices', () => {
+    expect(PRACTICE_REFERENCES.length).toBeGreaterThanOrEqual(2)
+    expect(PRACTICE_REFERENCES.length).toBeLessThanOrEqual(3)
   })
 })

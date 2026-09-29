@@ -9,9 +9,13 @@ export type InstrumentVersion = 1 | 2
 export type MbtiAxis = 'E' | 'I' | 'S' | 'N' | 'T' | 'F' | 'J' | 'P'
 export type MbtiType = string // 4-letter, e.g. 'INTJ'
 
+/** V_ERR. 'step_hints' заменил 'fix_immediately' (Педагогика 5, intake LMS#20) — см. normalizeErrorStyle. */
+export type ErrorStyle = 'calm' | 'lose_motivation' | 'soft_feedback' | 'step_hints'
+
 export interface RelationalStyle {
   rhythm: 'suave' | 'fuego' | 'libre' | 'ritual' | null
-  errorStyle: 'calm' | 'lose_motivation' | 'soft_feedback' | 'fix_immediately' | null
+  /** 'fix_immediately' — только в старых профилях D1; читать через normalizeErrorStyle. */
+  errorStyle: ErrorStyle | 'fix_immediately' | null
   anchor: 'support' | 'topics' | 'quick_wins' | 'structure' | 'freedom' | null
   attention: 'short' | 'mid' | 'long' | null
 }

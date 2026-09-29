@@ -11,7 +11,7 @@ import { AutomationVerdictCard } from './automation-verdict-card'
 import { WeekMapCard } from './week-map-card'
 import { TaskRouteCard } from './task-route-card'
 import { buildCompanionCharter } from '@/lib/intake/charter'
-import { deriveMbti } from '@/lib/intake/mbti'
+import { relationalStyle } from '@/lib/intake/mbti'
 import { SKINS_META } from '@/lib/rpg/skins-meta'
 import type { WorldSkin } from '@/lib/rpg/types'
 
@@ -94,8 +94,7 @@ export function IntakeWizard({ locale, moduleTitles }: { locale: Locale; moduleT
           mentorName: meta?.mentor?.name[locale] ?? null,
           niche: answers['V_NICHE'] as string | undefined,
           outcome: answers['V_OUTCOME'] as string | undefined,
-          mbti: deriveMbti(answers),
-          relational: { rhythm: (answers['V_RHYTHM'] as any) ?? null, errorStyle: (answers['V_ERR'] as any) ?? null, anchor: (answers['V_ANCHOR'] as any) ?? null, attention: (answers['V_ATTN'] as any) ?? null },
+          relational: relationalStyle(answers),
         }))
         setPendingHref(href)
       } else window.location.replace(href)
