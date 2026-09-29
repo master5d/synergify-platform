@@ -2,6 +2,8 @@
 import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import type { OutlineNode } from '@/lib/lesson-views/extract'
 import type { LessonViewsData } from '@/lib/lesson-views/load'
+import { recordAnswer } from '@/lib/spaced-review'
+import { COURSE } from '@/lib/course'
 
 // Представления урока из одного источника (intake LMS#8, спека 2026-09-28-lesson-views).
 // «Текст» — сам урок (children), он не размонтируется: шаг мастера и ответы самопроверок живут дальше.
@@ -14,6 +16,8 @@ export const T = {
     showVerbatim: 'Показать дословно', showParaphrase: 'Показать пересказ',
     card: (i: number, n: number) => `Карточка ${i} из ${n}`,
     show: 'Показать ответ', hide: 'Скрыть ответ', prev: 'Назад', next: 'Дальше',
+    recallHint: 'Сначала вспомни ответ сам — потом открой.',
+    recalled: 'Вспомнил', notRecalled: 'Не вспомнил', graded: 'Отмечено: вопрос вернётся в блоке «Вспомни», когда подойдёт срок.',
     mapNote: 'Разделы урока и их ключевые фразы. Узлы сворачиваются.',
   },
   en: {
@@ -24,6 +28,8 @@ export const T = {
     showVerbatim: 'Show verbatim', showParaphrase: 'Show the retelling',
     card: (i: number, n: number) => `Card ${i} of ${n}`,
     show: 'Show answer', hide: 'Hide answer', prev: 'Back', next: 'Next',
+    recallHint: 'Recall the answer yourself first, then reveal it.',
+    recalled: 'I remembered', notRecalled: 'I did not', graded: 'Noted: the question comes back in “Recall” when it is due.',
     mapNote: 'Lesson sections and their key sentences. Nodes collapse.',
   },
 }
@@ -76,25 +82,46 @@ export function Summary({ data, locale }: { data: LessonViewsData; locale: 'ru' 
   )
 }
 
-function Cards({ data, locale }: { data: LessonViewsData; locale: 'ru' | 'en' }) {
+/** Карточки — режим вспоминания: вопрос, ответ скрыт до «Показать»; после — самооценка, которая кладёт
+ *  вопрос в коробки интервального повтора (один раз на карточку за просмотр). */
+export function Cards({ data, locale }: { data: LessonViewsData; locale: 'ru' | 'en' }) {
   const t = T[locale]
   const [i, setI] = useState(0)
   const [open, setOpen] = useState(false)
+  const [graded, setGraded] = useState<Record<string, boolean>>({})
   const answerId = useId()
   const card = data.cards[i]
   const go = (d: number) => { setI(x => Math.min(data.cards.length - 1, Math.max(0, x + d))); setOpen(false) }
+  const grade = (remembered: boolean) => {
+    if (graded[card.id]) return
+    setGraded(g => ({ ...g, [card.id]: true }))
+    recordAnswer(COURSE.progressKey, {
+      module: card.module,
+      item: { id: card.id, unit: card.unit, question: card.question, options: card.options, answer: card.correctIndex, explain: card.explain },
+      correct: remembered, locale, now: Date.now(),
+    })
+  }
   return (
     <section style={box} aria-roledescription="carousel">
       <p style={{ ...note, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--text-accent)' }} aria-live="polite">
         {t.card(i + 1, data.cards.length)}
       </p>
       <p style={{ margin: '0 0 1rem', fontWeight: 600, lineHeight: 1.5, color: 'var(--text-primary)' }}>{card.question}</p>
+      {!open && <p style={note}>{t.recallHint}</p>}
       <button type="button" style={btn} aria-expanded={open} aria-controls={answerId} onClick={() => setOpen(o => !o)}>
         {open ? t.hide : t.show}
       </button>
       <div id={answerId} hidden={!open} style={{ marginTop: '1rem', lineHeight: 1.55 }}>
         <p style={{ margin: '0 0 0.5rem', color: 'var(--text-accent)', fontWeight: 600 }}>{card.answer}</p>
         <p style={{ margin: 0, color: 'var(--text-secondary)' }}>{card.explain}</p>
+        {graded[card.id]
+          ? <p style={{ ...note, margin: '0.75rem 0 0' }} aria-live="polite">{t.graded}</p>
+          : (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.75rem' }}>
+              <button type="button" style={btn} onClick={() => grade(true)}>{t.recalled}</button>
+              <button type="button" style={btn} onClick={() => grade(false)}>{t.notRecalled}</button>
+            </div>
+          )}
       </div>
       <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1.25rem' }}>
         <button type="button" style={{ ...btn, opacity: i === 0 ? 0.5 : 1 }} disabled={i === 0} onClick={() => go(-1)}>{t.prev}</button>

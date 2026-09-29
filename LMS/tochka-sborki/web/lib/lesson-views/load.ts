@@ -10,7 +10,12 @@ import { paraphrasedOutline } from './paraphrase'
 import { MANIFEST } from '../manifest'
 import { COURSE } from '../course'
 
-export interface ViewCard { id: string; question: string; answer: string; explain: string }
+/** Карточка вкладки «Карточки». module/unit/options/correctIndex — для интервального повтора: самооценка
+ *  «вспомнил / не вспомнил» кладёт вопрос в коробки Лейтнера (lib/spaced-review.ts) вместе с копией вопроса. */
+export interface ViewCard {
+  id: string; question: string; answer: string; explain: string
+  module: string; unit: string; options: string[]; correctIndex: number
+}
 
 export interface LessonViewsData {
   title: string
@@ -50,7 +55,7 @@ export function getLessonViews(
   }
   const cards = a.cards.flatMap(id => {
     const c = own.find(x => x.id === id)
-    return c ? [{ id, question: c.question, answer: c.options[c.answer], explain: c.explain }] : []
+    return c ? [{ id, question: c.question, answer: c.options[c.answer], explain: c.explain, module, unit, options: c.options, correctIndex: c.answer }] : []
   })
   // Гвард пересказа — ещё раз при сборке: не прошедший раздел ученик видит дословным, даже если тест пропустили.
   const paraphrased = paraphrasedOutline(a.outline, a.paraphrase, mdx, locale, MANIFEST)

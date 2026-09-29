@@ -2,6 +2,8 @@
 import { useId, useRef, useState } from 'react'
 import type { SelfCheckItem } from '@/lib/content'
 import { isCorrect, makeTracker, optionNote, type SelfCheckEvent } from '@/lib/self-check'
+import { recordAnswer } from '@/lib/spaced-review'
+import { COURSE } from '@/lib/course'
 
 // Пометки вариантов («— верный ответ» / «— ваш ответ») живут в lib/self-check.ts: optionNote.
 const T = {
@@ -25,11 +27,18 @@ export function SelfCheck({ item, locale, moduleSlug }: { item: SelfCheckItem; l
   // повторный заход на урок и одинаковые id в разных модулях.
   const trackRef = useRef<ReturnType<typeof makeTracker> | null>(null)
   if (!trackRef.current) trackRef.current = makeTracker(sendPlausible, moduleSlug)
+  // Интервальный повтор: в коробки ложится ПЕРВЫЙ ответ за просмотр — честная попытка вспомнить,
+  // а не перебор вариантов до «Верно».
+  const recordedRef = useRef(false)
 
   const submit = () => {
     if (picked === null) return
     setShown(true)
     trackRef.current?.(item, correct)
+    if (!recordedRef.current) {
+      recordedRef.current = true
+      recordAnswer(COURSE.progressKey, { module: moduleSlug, item, correct, locale, now: Date.now() })
+    }
   }
 
   return (
