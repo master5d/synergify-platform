@@ -25,6 +25,7 @@ export const COMMUNITY: CommunityData = {
     '08-agent-engineering': COURSE_TOPIC,
     '09-ai-notebook': COURSE_TOPIC,
     '10-model-training': COURSE_TOPIC,
+    '11-second-brain': COURSE_TOPIC,
   },
   // 'модуль/юнит' → записи живых встреч к этому уроку.
   recordings: {},

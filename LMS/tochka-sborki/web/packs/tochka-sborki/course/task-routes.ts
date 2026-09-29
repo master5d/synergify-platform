@@ -397,6 +397,14 @@ export const TASK_ROUTES: TaskRoute[] = [
           en: 'Add the repeated actions as skills.',
         },
       },
+      {
+        unit: '11-second-brain/u5-practice',
+        title: { ru: 'Второй мозг на связи', en: 'A second brain within reach' },
+        action: {
+          ru: 'Подключи канал связи и один чужой навык — по чек-листу безопасности.',
+          en: 'Connect a channel and one skill from someone else — following the security checklist.',
+        },
+      },
     ],
     falseRoad: {
       title: { ru: 'Дообучить модель, чтобы она «помнила меня»', en: 'Fine-tune a model so it "remembers me"' },

@@ -169,6 +169,33 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
     ],
   },
   {
+    // Первоисточники опционального модуля 11-second-brain: уроки пересказывают официальные доки,
+    // а первоисточник главнее (Channels — research preview, синтаксис может меняться).
+    label: { ru: 'Второй мозг: первоисточники', en: 'Second brain: primary sources' },
+    items: [
+      {
+        kind: 'link',
+        title: { ru: 'Channels в Claude Code (англ.)', en: 'Channels in Claude Code' },
+        description: {
+          ru: 'Официальная документация: как подключить Telegram, Discord или iMessage к своей сессии и закрыть доступ чужим. Research preview',
+          en: 'Official documentation: connecting Telegram, Discord or iMessage to your own session and locking out strangers. Research preview',
+        },
+        href: 'https://code.claude.com/docs/en/channels',
+        external: true,
+      },
+      {
+        kind: 'link',
+        title: { ru: 'Открытый формат Agent Skills (англ.)', en: 'The open Agent Skills format' },
+        description: {
+          ru: 'Спецификация навыка-папки с SKILL.md и список агентов, которые её читают',
+          en: 'The spec for a skill folder with SKILL.md and a list of agents that read it',
+        },
+        href: 'https://agentskills.io',
+        external: true,
+      },
+    ],
+  },
+  {
     label: { ru: 'Инструменты стека', en: 'Stack tools' },
     items: [
       { kind: 'tool', title: { ru: 'Claude Code', en: 'Claude Code' }, href: 'https://claude.com/claude-code', external: true },

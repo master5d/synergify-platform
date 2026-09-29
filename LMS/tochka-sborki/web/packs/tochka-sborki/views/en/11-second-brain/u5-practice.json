@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u5-practice",
+  "locale": "en",
+  "title": "Practice: build your own second brain",
+  "sourceHash": "sha256:a2b6a3fee01eebda3f419711541ac8c33783921fc61d4a0f01a7ef720f0fc799",
+  "outline": [
+    {
+      "heading": "The build plan",
+      "points": [
+        {
+          "text": "One skill from someone else.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Together with others",
+      "points": [
+        {
+          "text": "A second brain is personal, but learning to build one is easier next to others.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c13",
+    "c14"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:d01db0d7f78d476ec9ad1ff5a8c72f619e04b80e96e69951b8d21f8b4d4d76ff",
+        "points": [
+          "You take one skill from someone else."
+        ]
+      },
+      {
+        "sourceHash": "sha256:d557446d3373403893bad72fe18cc7d6bca8de315e575041423771945b024ad2",
+        "points": [
+          "While your second brain is personal, you find it easier to learn how to build it with others."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u2-channel",
+  "locale": "en",
+  "title": "A channel: your agent within reach",
+  "sourceHash": "sha256:367f4aa20945d0e3da39e4fa8095d9bba2775098221791967f256a14024bda1b",
+  "outline": [
+    {
+      "heading": "How a channel works",
+      "points": [
+        {
+          "text": "A message travels like this",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Channels in Claude Code",
+      "points": [
+        {
+          "text": "A rehearsal with no outside services — fakechat.",
+          "origin": "extract"
+        },
+        {
+          "text": "Telegram — following the documentation:",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Email and other agents",
+      "points": [
+        {
+          "text": "Email usually connects differently: through an MCP server for your mail service (module 07).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "When you are away from the terminal",
+      "points": [
+        {
+          "text": "If the agent needs your permission for an action, the session waits for your answer.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4",
+    "c5",
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:6f1eeb6854a1ee3868111037963992dc7b4e3bf937d423f9f3349bb76671081b",
+        "points": [
+          "You can see how a message travels."
+        ]
+      },
+      {
+        "sourceHash": "sha256:7adf7826f98e486fa9440504c24376e46ade3b28dffe38294a86d322e9a93e67",
+        "points": [
+          "You use fakechat for a rehearsal with no outside services.",
+          "You follow the documentation for Telegram."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fb63be4de535dfa0613cf48155bd782847eae7604c57e03cbfe0525479ec8318",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:bd148c26d88457ace8cb25bc40b1cc27e225f1f3d0cb518b9562181e33d56034",
+        "points": [
+          "The session will wait for your response if the agent requires permission to perform an action."
+        ]
+      }
+    ]
+  }
+}

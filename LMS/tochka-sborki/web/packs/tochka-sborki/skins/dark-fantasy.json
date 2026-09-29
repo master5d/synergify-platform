@@ -44,6 +44,10 @@
     "10-model-training": {
       "ru": "Кузня Големов",
       "en": "The Golem Forge"
+    },
+    "11-second-brain": {
+      "ru": "Склеп Памяти",
+      "en": "Crypt of Memory"
     }
   },
   "questTitles": {
@@ -90,6 +94,10 @@
     "10-model-training": {
       "ru": "Вдохнуть волю в голема: данные, веса, испытание",
       "en": "Breathe will into the golem: data, weights, trial"
+    },
+    "11-second-brain": {
+      "ru": "Взрастить второй разум в своих стенах",
+      "en": "Raise a second mind within your own walls"
     }
   },
   "units": {
@@ -819,6 +827,76 @@
       "outro": {
         "ru": "Обряд свершён. Ты знаешь, когда хватит слова, а когда голема стоит перековать.",
         "en": "The rite is done. You know when a word suffices and when the golem is worth reforging."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Чужие хранители берут плату и могут закрыть врата. Заложим свой склеп памяти.",
+        "en": "Foreign keepers take tribute and may shut their gates. We lay our own crypt of memory."
+      },
+      "mentorHint": {
+        "ru": "Хроника без указания свитка — лишь шёпот теней.",
+        "en": "A chronicle that names no scroll is only a whisper of shadows."
+      },
+      "outro": {
+        "ru": "Склеп заложен. Твоя память больше не в чужой власти.",
+        "en": "The crypt is laid. Your memory is no longer in foreign hands."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Ворон несёт весть через земли. Но кто ещё может говорить с твоим вороном?",
+        "en": "A raven carries word across the lands. But who else may speak to your raven?"
+      },
+      "mentorHint": {
+        "ru": "Ворон слушает лишь того, чья печать на свитке.",
+        "en": "The raven heeds only the one whose seal is on the scroll."
+      },
+      "outro": {
+        "ru": "Ворон приручен. Чужие голоса он не донесёт.",
+        "en": "The raven is tamed. It will not carry strangers’ voices."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Мастера передают заклинания. Не в крови — в книгах.",
+        "en": "Masters pass on their spells. Not in the blood — in books."
+      },
+      "mentorHint": {
+        "ru": "Сожжёшь книгу — забудешь заклинание. Сила была в страницах.",
+        "en": "Burn the book — forget the spell. The power was in the pages."
+      },
+      "outro": {
+        "ru": "Истина открыта: передаются книги, а не сама душа голема.",
+        "en": "The truth is revealed: books are handed over, not the golem’s soul."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "Проклятие прячется в строках чужих писем и подаренных гримуаров.",
+        "en": "A curse hides in the lines of strangers’ letters and gifted grimoires."
+      },
+      "mentorHint": {
+        "ru": "Чужой гримуар читают при свете, прежде чем внести в дом.",
+        "en": "A stranger’s grimoire is read by daylight before it enters the house."
+      },
+      "outro": {
+        "ru": "Шесть оберегов наложены. Проклятию нет хода.",
+        "en": "Six wards are laid. The curse finds no way in."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Время ритуала: память, ворон и первый подаренный гримуар — в одном круге.",
+        "en": "Time for the ritual: memory, the raven and the first gifted grimoire — in one circle."
+      },
+      "mentorHint": {
+        "ru": "Свеча-страж должна уцелеть. Погасла без спроса — обереги слабы.",
+        "en": "The sentinel candle must survive. If it goes out unbidden, the wards are weak."
+      },
+      "outro": {
+        "ru": "Второй разум пробуждён в твоих стенах. Он служит лишь тебе.",
+        "en": "The second mind has woken within your walls. It serves only you."
       }
     }
   }

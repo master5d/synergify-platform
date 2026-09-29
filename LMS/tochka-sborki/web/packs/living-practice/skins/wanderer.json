@@ -44,6 +44,10 @@
     "10-model-training": {
       "ru": "Развилка 10",
       "en": "Crossroad 10"
+    },
+    "11-second-brain": {
+      "ru": "Развилка 11",
+      "en": "Crossroad 11"
     }
   },
   "questTitles": {
@@ -90,6 +94,10 @@
     "10-model-training": {
       "ru": "Выучить свою модель",
       "en": "Train your own model"
+    },
+    "11-second-brain": {
+      "ru": "Собрать свой второй мозг",
+      "en": "Build your own second brain"
     }
   }
 }

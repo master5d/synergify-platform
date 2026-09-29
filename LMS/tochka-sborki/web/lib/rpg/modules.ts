@@ -10,7 +10,7 @@ export type ModuleSlug = (typeof MODULE_SLUGS)[number]
 // Optional modules: present in content/ (nav, syllabus, World Map via getAllModules)
 // and in skins/transformations, but OUTSIDE the progression spine — quest-lines,
 // macro-phases, quest-log totals and the academy admission catalog ignore them.
-export const OPTIONAL_MODULE_SLUGS = ['09-ai-notebook', '10-model-training'] as const
+export const OPTIONAL_MODULE_SLUGS = ['09-ai-notebook', '10-model-training', '11-second-brain'] as const
 export type OptionalModuleSlug = (typeof OPTIONAL_MODULE_SLUGS)[number]
 
 /** Core + optional: every module that has content, skin framing and a transformation. */

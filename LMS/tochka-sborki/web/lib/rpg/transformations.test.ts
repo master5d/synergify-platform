@@ -44,6 +44,17 @@ describe('micro-transformations', () => {
     })
   })
 
+  it('includes the optional second-brain module transformation', () => {
+    expect(getTransformation('11-second-brain', 'ru')).toEqual({
+      from: '«второй мозг — это дорогой сервис»',
+      to: 'держу свой второй мозг в своих файлах',
+    })
+    expect(getTransformation('11-second-brain', 'en')).toEqual({
+      from: '"a second brain is a pricey service"',
+      to: 'I keep my own second brain in my own files',
+    })
+  })
+
   it('returns null for an unknown slug', () => {
     expect(getTransformation('does-not-exist', 'ru')).toBeNull()
   })

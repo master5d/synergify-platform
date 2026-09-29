@@ -44,6 +44,10 @@
     "10-model-training": {
       "ru": "Лаборатория Алхимика",
       "en": "The Alchemist’s Laboratory"
+    },
+    "11-second-brain": {
+      "ru": "Библиотека Памяти",
+      "en": "Library of Memory"
     }
   },
   "questTitles": {
@@ -90,6 +94,10 @@
     "10-model-training": {
       "ru": "Трансмутация весов: от данных к умению",
       "en": "Transmutation of Weights: from Data to Skill"
+    },
+    "11-second-brain": {
+      "ru": "Собрать второй разум из своих свитков",
+      "en": "Assemble a second mind from your own scrolls"
     }
   },
   "units": {
@@ -819,6 +827,76 @@
       "outro": {
         "ru": "Делание завершено. Ты знаешь, когда хватит формулы, а когда нужна трансмутация.",
         "en": "The Work is complete. You know when a formula suffices and when transmutation is needed."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Знание, взятое в аренду, могут забрать. Начнём свою библиотеку.",
+        "en": "Knowledge on loan can be taken back. We begin our own library."
+      },
+      "mentorHint": {
+        "ru": "Оракул без ссылки на свиток — лишь эхо в пустом зале.",
+        "en": "An oracle that cites no scroll is only an echo in an empty hall."
+      },
+      "outro": {
+        "ru": "Библиотека заложена. Архив стал собеседником.",
+        "en": "The library is founded. The archive has become a conversation partner."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Магическое зеркало связи: говоришь издалека — отвечают из дома.",
+        "en": "A scrying mirror of contact: you speak from afar — home answers."
+      },
+      "mentorHint": {
+        "ru": "В зеркало может заглянуть любой. Зачаруй его на свой облик.",
+        "en": "Anyone can peer into a mirror. Enchant it to your own likeness."
+      },
+      "outro": {
+        "ru": "Зеркало настроено. Оно откликается лишь тебе.",
+        "en": "The mirror is attuned. It answers only you."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Формулы кочуют от мага к магу — на пергаменте, а не в крови.",
+        "en": "Formulas wander from mage to mage — on parchment, not in the blood."
+      },
+      "mentorHint": {
+        "ru": "Новый навык — новый свиток на полке, а не перемена в сути оракула.",
+        "en": "A new skill is a new scroll on the shelf, not a change in the oracle’s essence."
+      },
+      "outro": {
+        "ru": "Тайна раскрыта: передаются свитки, а сущность остаётся прежней.",
+        "en": "The mystery is solved: scrolls are passed on, the essence stays the same."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "Чужая формула может скрывать иное заклинание между строк.",
+        "en": "A stranger’s formula may hide another spell between its lines."
+      },
+      "mentorHint": {
+        "ru": "Читай формулу целиком, прежде чем произнести.",
+        "en": "Read the whole formula before you speak it aloud."
+      },
+      "outro": {
+        "ru": "Круг защиты начерчен шестью знаками.",
+        "en": "The protective circle is drawn with six signs."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Великое делание: память, зеркало и первый чужой свиток сплавляются воедино.",
+        "en": "The Great Work: memory, the mirror and the first borrowed scroll fuse into one."
+      },
+      "mentorHint": {
+        "ru": "Проверь сплав трижды — золото не терпит догадок.",
+        "en": "Test the alloy three times — gold tolerates no guesswork."
+      },
+      "outro": {
+        "ru": "Второй разум собран. Он хранится в твоих стенах и говорит по твоему зову.",
+        "en": "The second mind is assembled. It lives within your walls and speaks at your call."
       }
     }
   }

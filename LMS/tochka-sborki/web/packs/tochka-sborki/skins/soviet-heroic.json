@@ -44,6 +44,10 @@
     "10-model-training": {
       "ru": "НИИ Машинного Обучения",
       "en": "Machine Learning Research Institute"
+    },
+    "11-second-brain": {
+      "ru": "Отдел Личного Архива",
+      "en": "Personal Archive Department"
     }
   },
   "questTitles": {
@@ -90,6 +94,10 @@
     "10-model-training": {
       "ru": "Наладить выпуск своей модели по нормативу",
       "en": "Launch production of your own model to standard"
+    },
+    "11-second-brain": {
+      "ru": "Наладить свой второй мозг без аренды мощностей",
+      "en": "Set up your own second brain without leasing capacity"
     }
   },
   "units": {
@@ -819,6 +827,76 @@
       "outro": {
         "ru": "Опытный образец испытан. Ты знаешь, когда хватит инструкции, а когда нужна новая модель.",
         "en": "The prototype is tested. You know when an instruction suffices and when a new model is needed."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Архив в арендованном помещении — риск для производства. Переводим фонды к себе.",
+        "en": "An archive in leased premises is a production risk. We move the holdings in-house."
+      },
+      "mentorHint": {
+        "ru": "Справка без номера дела к рассмотрению не принимается.",
+        "en": "A certificate without a file number is not accepted for review."
+      },
+      "outro": {
+        "ru": "Фонды на месте. Архив отвечает на запросы по форме.",
+        "en": "The holdings are in place. The archive answers requests in proper form."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Прокладываем линию связи с объектом. Работа идёт на месте, по проводу — только сводки.",
+        "en": "We lay a communication line to the site. Work stays on site; only reports travel the wire."
+      },
+      "mentorHint": {
+        "ru": "Пропуск на линию — строго по списку. Посторонним вход воспрещён.",
+        "en": "Access to the line is strictly by list. Unauthorised persons keep out."
+      },
+      "outro": {
+        "ru": "Линия сдана в эксплуатацию. Посторонние отсечены.",
+        "en": "The line is commissioned. Unauthorised persons are cut off."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Передаём передовой опыт между бригадами. Документацией, а не перековкой изделия.",
+        "en": "We share best practice between crews. Through documentation, not by reforging the product."
+      },
+      "mentorHint": {
+        "ru": "Инструкция на столе — изделие работает по ней. Убрали инструкцию — работает по-старому.",
+        "en": "Instructions on the desk — the product follows them. Remove them — it works the old way."
+      },
+      "outro": {
+        "ru": "Порядок передачи опыта утверждён. Изделие не перестраивалось.",
+        "en": "The procedure for sharing experience is approved. The product was not rebuilt."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "Поступило письмо с требованием выдать ключи. Бдительность!",
+        "en": "A letter demanding the keys has arrived. Stay vigilant!"
+      },
+      "mentorHint": {
+        "ru": "Входящая корреспонденция — не распоряжение руководства.",
+        "en": "Incoming correspondence is not a directive from management."
+      },
+      "outro": {
+        "ru": "Шесть пунктов техники безопасности введены в действие.",
+        "en": "Six safety regulations are now in force."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Сборка на объекте: архив, линия связи и одна внедрённая инструкция.",
+        "en": "On-site assembly: the archive, the line and one adopted instruction."
+      },
+      "mentorHint": {
+        "ru": "Приёмка — по трём испытаниям. Без протокола объект не сдаётся.",
+        "en": "Acceptance takes three tests. Without a protocol the site is not handed over."
+      },
+      "outro": {
+        "ru": "Объект принят. Второй мозг работает на своих мощностях.",
+        "en": "The site is accepted. The second brain runs on its own capacity."
       }
     }
   }

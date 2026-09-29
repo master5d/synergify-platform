@@ -1,0 +1,101 @@
+---
+title: "A second brain that stays with you"
+unit: 1
+module: 11
+duration: "9 min"
+---
+
+<Phase type="activation">
+
+Imagine the service that holds all your notes shuts down a year from now. Or triples its price.
+
+What would you still have in your hands? Notes, habits, links between ideas — or just an export nobody can read?
+
+Someone will say: "A second brain is a great thing, but it is expensive." Think about what exactly you would be paying for: the storage, the model, or someone else's wrapper around them?
+
+</Phase>
+
+<Phase type="reflection">
+
+Split a second brain into three parts. **Memory** is what you know and have decided. **The model** is what thinks. **The agent** is the hands that read memory and add to it.
+
+What usually costs a lot is a ready-made wrapper where all three parts are glued together and live somewhere else. If memory is plain files in your folder, you can swap the model and keep the memory.
+
+Recall module [05](/en/lessons/05-context-memory/): `AGENTS.md`, `TODO.md`, `STATE.md`. That is already the seed of a second brain. What does it lack to become someone you can talk to?
+
+</Phase>
+
+<Phase type="concept">
+
+## What a second brain means in this module
+
+The phrase "second brain" caught on thanks to Tiago Forte's book "Building a Second Brain" (2022). There it is a note system a person keeps.
+
+Here we add an agent to the notes. A **second brain** is a folder of files that your agent reads and adds to when you ask. Not an app and not a subscription.
+
+## Three layers
+
+- **Memory** — Markdown files: rules (`AGENTS.md`), where you left off (`STATE.md`), tasks (`TODO.md`), notes and archive (for example, a `notes/` folder).
+- **Agent** — Claude Code, Codex or any other agent that reads project files.
+- **Channel** — how your messages reach the agent when you are away from the computer. That is unit 2.
+
+A model is needed too, but it is replaceable. It is your current subscription or a local model from module [03](/en/lessons/03-stack-selection/).
+
+## What "stays with you" means
+
+Test your setup with three questions:
+
+1. Do the files live with you, in an open format that needs no special program?
+2. Can you switch the agent or the model without losing the memory?
+3. Can you make a full copy with one command — say, a git commit?
+
+Three "yes" answers — the second brain is yours. Even one "no" — you are renting it.
+
+## The archive as a conversation partner
+
+The main shift is not storing more but asking differently. You do not search the archive by keywords. You ask it a question, like a person:
+
+- "What did I think about moving last year?"
+- "Where have I already solved a similar problem?"
+- "Which project decisions did we make, and why?"
+
+The agent searches the files and answers. The rule is the same as in module [09](/en/lessons/09-ai-notebook/): every claim needs an address. An answer without a file name is the model's guess, not memory.
+
+## What goes into memory and what does not
+
+**Put in:** decisions and their reasons, lessons after mistakes, notes, meeting outcomes, rough thoughts.
+
+**Keep out:** passwords, keys, tokens, other people's personal data. Memory is read by the agent — and by anyone you ever show it to.
+
+<SelfCheck id="c1"/>
+
+<SelfCheck id="c2"/>
+
+<SelfCheck id="c3"/>
+
+</Phase>
+
+<Phase type="practice">
+
+Take the project from module 05 or the [student starter](/en/starter/) and create a `notes/` folder in it.
+
+Put three to five real notes there: a decision you made recently, a lesson after a mistake, an idea you would hate to lose. No secrets in them.
+
+Add these lines to `AGENTS.md`:
+
+```markdown
+## Second brain
+- My notes live in notes/. When answering from them, name the file for each fact.
+- If the answer is not in the files, say so — do not make it up.
+```
+
+Ask the agent a question about the archive:
+
+```
+Using the files in notes/, answer: what decisions did I make in the last month, and why?
+Name the file for each point.
+```
+
+Check every address against its file. Save the question, the answer and the result of the check in `my-experiments/u1-archive-dialog.md`.
+
+</Phase>

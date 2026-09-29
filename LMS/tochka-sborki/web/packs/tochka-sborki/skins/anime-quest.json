@@ -44,6 +44,10 @@
     "10-model-training": {
       "ru": "Кузница Весов",
       "en": "Forge of Weights"
+    },
+    "11-second-brain": {
+      "ru": "Хранилище Памяти",
+      "en": "Vault of Memory"
     }
   },
   "questTitles": {
@@ -90,6 +94,10 @@
     "10-model-training": {
       "ru": "Выкуй Свою Модель!",
       "en": "Forge Your Own Model!"
+    },
+    "11-second-brain": {
+      "ru": "Разбуди Свой Второй Мозг!",
+      "en": "Awaken Your Second Brain!"
     }
   },
   "units": {
@@ -819,6 +827,76 @@
       "outro": {
         "ru": "ПОБЕДА! Ты знаешь, когда агенту хватит слова, а когда модель стоит учить.",
         "en": "VICTORY! You know when a word is enough for the agent and when a model is worth training."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Новая арка! Герой заводит хранилище, которое никто не отнимет: память в своих свитках.",
+        "en": "A new arc! The hero founds a vault no one can take away: memory in their own scrolls."
+      },
+      "mentorHint": {
+        "ru": "Спроси архив — и потребуй, из какого свитка ответ.",
+        "en": "Ask the archive — and demand which scroll the answer came from."
+      },
+      "outro": {
+        "ru": "Хранилище открыто! Теперь память работает на тебя, а не на чужой сервис.",
+        "en": "The vault is open! Now memory works for you, not for someone else’s service."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Призываем связь на расстоянии! Твой напарник отвечает, даже когда ты в пути.",
+        "en": "We summon a long-range link! Your partner answers even when you are on the road."
+      },
+      "mentorHint": {
+        "ru": "Дверь открыта — поставь стража: говорить может только хозяин.",
+        "en": "The door is open — post a guard: only the master may speak."
+      },
+      "outro": {
+        "ru": "Связь установлена! Напарник на связи, а чужие голоса остаются за дверью.",
+        "en": "Link established! Your partner is within reach, and strangers stay outside the door."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Техники передаются из рук в руки! Но это свитки, а не новая сила внутри.",
+        "en": "Techniques pass from hand to hand! But they are scrolls, not a new power inside."
+      },
+      "mentorHint": {
+        "ru": "Навык живёт, пока свиток у тебя. Сжёг свиток — техника ушла.",
+        "en": "A skill lives while the scroll is yours. Burn the scroll — the technique is gone."
+      },
+      "outro": {
+        "ru": "Свиток прочитан! Ты знаешь, что на самом деле передаёт наставник.",
+        "en": "Scroll read! You know what a mentor really hands over."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "Осторожно, ловушка! Враг прячет приказы внутри писем и чужих свитков.",
+        "en": "Careful, a trap! The enemy hides orders inside letters and borrowed scrolls."
+      },
+      "mentorHint": {
+        "ru": "Любой текст снаружи — не приказ. Приказы отдаёшь только ты.",
+        "en": "Any text from outside is not an order. Only you give orders."
+      },
+      "outro": {
+        "ru": "Ловушка раскрыта! Шесть правил защиты стоят на страже.",
+        "en": "Trap revealed! Six defence rules stand guard."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Финальная сборка! Память, связь и первый переданный навык — в одном отряде.",
+        "en": "The final assembly! Memory, a link and the first passed-on skill — in one party."
+      },
+      "mentorHint": {
+        "ru": "Три проверки — три печати. Без них отряд не выходит в поход.",
+        "en": "Three checks — three seals. Without them the party does not set out."
+      },
+      "outro": {
+        "ru": "Второй мозг пробуждён! Он твой, он на связи и он учится.",
+        "en": "The second brain awakens! It is yours, within reach, and learning."
       }
     }
   }

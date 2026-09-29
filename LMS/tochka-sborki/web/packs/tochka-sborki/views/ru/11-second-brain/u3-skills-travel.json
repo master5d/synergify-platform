@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u3-skills-travel",
+  "locale": "ru",
+  "title": "Навыки переходят от агента к агенту",
+  "sourceHash": "sha256:f9d91d6517735a37f939b6e78e321da13a97cfb6c2cffa49c1252b3cd4a2826d",
+  "outline": [
+    {
+      "heading": "«Мой агент учит твоего» — по-честному",
+      "points": [
+        {
+          "text": "Можно собрать общий чат, где один агент показывает другому, как работать.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Навык — это папка",
+      "points": [
+        {
+          "text": "Ты уже делал навык в модуле 07.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Три способа передать навык",
+      "points": [
+        {
+          "text": "Многие авторы выкладывают свои навыки открыто и бесплатно.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что передаётся, а что нет",
+      "points": [
+        {
+          "text": "Передаётся: навыки, шаблоны AGENTS.md, чек-листы, примеры хороших ответов.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Как агент перенимает навык из разговора",
+      "points": [
+        {
+          "text": "Есть и обратный путь.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c7",
+    "c8",
+    "c9"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:fc33662499c4715ab7c24383c05656d1a58fab3cd3ac37229b4acec32327a947",
+        "points": [
+          "Ты можешь создать общий чат, в котором один агент покажет другому, как работать."
+        ]
+      },
+      {
+        "sourceHash": "sha256:965e00b68840155d744e0ce2c1bb45b1282e7d6752db4285cb990714dbf1475e",
+        "points": [
+          "В модуле 07 ты уже занимался созданием навыка."
+        ]
+      },
+      {
+        "sourceHash": "sha256:884517e12c06b6f815d6739fb120d5a0d202ff1617f78dd5dbcad0b7c16579d0",
+        "points": [
+          "Многие авторы выкладывают свои навыки в открытый доступ совершенно бесплатно."
+        ]
+      },
+      {
+        "sourceHash": "sha256:07f339fbf79e03b8959db0532b289ad38674115b1791456d61cfcae6475b4a0b",
+        "points": [
+          "Передавать можно навыки, шаблоны AGENTS.md, чек-листы и примеры хороших ответов."
+        ]
+      },
+      {
+        "sourceHash": "sha256:4c4019a418275717f823adb8f03ceca69d9fbb5a0107538630a02d83af0ee06b",
+        "points": [
+          "Для этого процесса есть и обратный путь."
+        ]
+      }
+    ]
+  }
+}

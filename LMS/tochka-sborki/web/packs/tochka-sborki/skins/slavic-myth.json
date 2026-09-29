@@ -44,6 +44,10 @@
     "10-model-training": {
       "ru": "Кузница Сварога",
       "en": "Svarog’s Forge"
+    },
+    "11-second-brain": {
+      "ru": "Терем Памяти",
+      "en": "Tower of Memory"
     }
   },
   "questTitles": {
@@ -90,6 +94,10 @@
     "10-model-training": {
       "ru": "Выковать своего помощника по мерке",
       "en": "Forge a helper to your own measure"
+    },
+    "11-second-brain": {
+      "ru": "Поставить свой терем памяти",
+      "en": "Raise your own tower of memory"
     }
   },
   "units": {
@@ -819,6 +827,76 @@
       "outro": {
         "ru": "Выковано! Знаешь теперь, когда хватит слова, а когда помощника учить.",
         "en": "Forged! Now you know when a word suffices and when the helper must be taught."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Чужой терем хозяин может запереть. Ставим свой — из своих брёвен.",
+        "en": "Another’s tower its master can lock. We raise our own — from our own logs."
+      },
+      "mentorHint": {
+        "ru": "Сказ без указания, из какой он летописи, — небылица.",
+        "en": "A tale that names no chronicle is a tall tale."
+      },
+      "outro": {
+        "ru": "Терем поставлен. Летописи твои и отвечают тебе.",
+        "en": "The tower stands. The chronicles are yours and answer to you."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Сорока весть на хвосте несёт. Научим её лететь к тебе домой.",
+        "en": "The magpie carries news on its tail. We teach it to fly to your home."
+      },
+      "mentorHint": {
+        "ru": "Сорока слушает всех. Пусть отвечает лишь хозяину.",
+        "en": "The magpie listens to everyone. Let it answer only its master."
+      },
+      "outro": {
+        "ru": "Весточка долетела. Чужие голоса сорока не носит.",
+        "en": "The message arrived. The magpie carries no strangers’ voices."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Мастер передаёт ремесло ученику — берестой, а не колдовством.",
+        "en": "The master passes the craft to the apprentice — on birch bark, not by sorcery."
+      },
+      "mentorHint": {
+        "ru": "Потерял бересту — забыл ремесло. Сила была в грамоте.",
+        "en": "Lose the bark — forget the craft. The power was in the writing."
+      },
+      "outro": {
+        "ru": "Понял, что передаётся: грамота, а не душа истукана.",
+        "en": "Now you know what is passed on: the writing, not the idol’s soul."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "Лихие люди прячут наговор в чужих письмах и подарках.",
+        "en": "Rogues hide a spell in strangers’ letters and gifts."
+      },
+      "mentorHint": {
+        "ru": "Чужое слово — не приказ. Приказ в тереме отдаёт хозяин.",
+        "en": "A stranger’s word is not an order. In the tower, the master gives orders."
+      },
+      "outro": {
+        "ru": "Шесть оберегов на воротах. Наговор не пройдёт.",
+        "en": "Six charms on the gates. The spell will not pass."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Собираем всё вместе: терем, сороку и первую чужую грамоту.",
+        "en": "We bring it all together: the tower, the magpie and the first borrowed writing."
+      },
+      "mentorHint": {
+        "ru": "Три проверки — три замка на воротах.",
+        "en": "Three checks — three locks on the gates."
+      },
+      "outro": {
+        "ru": "Терем живёт. Второй мозг твой и служит тебе.",
+        "en": "The tower lives. The second brain is yours and serves you."
       }
     }
   }

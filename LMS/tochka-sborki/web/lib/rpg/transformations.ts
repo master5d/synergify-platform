@@ -26,6 +26,8 @@ export const MICRO_TRANSFORMATIONS: Record<CourseModuleSlug, Transformation> = {
                            to:   { ru: 'извлекаю с уликами',             en: 'extract with evidence' } },
   '10-model-training':   { from: { ru: '«модель — чёрный ящик»',         en: '"the model is a black box"' },
                            to:   { ru: 'знаю, когда хватит промпта, а когда учить модель', en: 'I know when a prompt is enough and when to train a model' } },
+  '11-second-brain':     { from: { ru: '«второй мозг — это дорогой сервис»', en: '"a second brain is a pricey service"' },
+                           to:   { ru: 'держу свой второй мозг в своих файлах', en: 'I keep my own second brain in my own files' } },
 }
 
 export function getTransformation(

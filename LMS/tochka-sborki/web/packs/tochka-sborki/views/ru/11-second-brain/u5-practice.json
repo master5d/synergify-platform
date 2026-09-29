@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u5-practice",
+  "locale": "ru",
+  "title": "Практика: собрать свой второй мозг",
+  "sourceHash": "sha256:ef88ab332e29a1765a6ef22a14e85c1ed77b88684504643d4c61a27d551dd471",
+  "outline": [
+    {
+      "heading": "План сборки",
+      "points": [
+        {
+          "text": "Один переданный навык.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Вместе с другими",
+      "points": [
+        {
+          "text": "Второй мозг — личный, а учиться собирать его проще рядом с другими.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c13",
+    "c14"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:59fe4ef796f1e4d51151bf0c1a39d6bd6207c7f085b94c1eb6ab77a1b17dc25a",
+        "points": [
+          "Тебе передадут один навык."
+        ]
+      },
+      {
+        "sourceHash": "sha256:58396870dacc726ae0a6dad14a26b3a10cdf2d93a15724a0d0193011c7c4b1c9",
+        "points": [
+          "Второй мозг принадлежит тебе, но учиться его собирать проще рядом с другими людьми."
+        ]
+      }
+    ]
+  }
+}

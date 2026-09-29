@@ -1,0 +1,107 @@
+---
+title: "Skills travel from agent to agent"
+unit: 3
+module: 11
+duration: "9 min"
+---
+
+<Phase type="activation">
+
+A friend's agent sorts incoming email in a minute: what is urgent, what can wait, who needs a reply. You want the same.
+
+You most likely use the same model. The subscription is similar too.
+
+So what makes their agent different from yours? And what exactly do you need from your friend so your agent learns the same thing?
+
+</Phase>
+
+<Phase type="reflection">
+
+If the model is the same, the difference is not in the model itself. It is in what sits next to it: rules, memory, skills.
+
+All of that is text in files. And files can be handed over.
+
+It sounds almost too simple. Think about where the catch is — we come back to it in unit 4.
+
+</Phase>
+
+<Phase type="concept">
+
+## "My agent teaches yours" — honestly
+
+You can set up a shared chat where one agent shows another how to work. It looks like training. But the model's weights do not change.
+
+There is no fine-tuning from module [10](/en/lessons/10-model-training/) here. What travels is text: a skill folder, a rules template, examples. Your agent reads those files and starts working differently.
+
+A simple consequence follows. A skill lives as long as the files are with you. Delete the folder — the skill is gone. Edit a file — the skill changes at once, with no training runs and no GPUs.
+
+## A skill is a folder
+
+You already made a skill in module [07](/en/lessons/07-tools/u4-skills/). A quick reminder of its shape:
+
+```
+meeting-summary/
+├── SKILL.md       # required: name, description and instructions
+├── scripts/       # optional: executable code
+└── references/    # optional: reference files
+```
+
+This format is the open [Agent Skills](https://agentskills.io) standard. Anthropic created it and opened it to everyone. Claude Code, Codex, Gemini CLI, Cursor, GitHub Copilot and other agents read the same format.
+
+So a skill built for one agent often works for another.
+
+## Three ways to hand over a skill
+
+1. **Copy the folder.** Personal skills go to `~/.claude/skills/<name>/`, project skills to `.claude/skills/<name>/`.
+2. **A shared repository.** The author publishes skills in an open git repository. You clone it into a separate folder, read it and copy only what you need. Updates come through `git pull` — and you read those too.
+3. **A plugin.** A bundle of several skills installed with `/plugin install` (module 07).
+
+Many authors publish their skills openly and for free. One example is the [anthropics/skills](https://github.com/anthropics/skills) repository.
+
+## What travels and what does not
+
+**Travels:** skills, `AGENTS.md` templates, checklists, examples of good answers.
+
+**Does not travel:** your memory, your keys, and someone else's personal memory. Everyone keeps their own archive.
+
+Do not copy someone else's rules wholesale. Take the idea and restate it for your own project.
+
+## How an agent picks up a skill from a conversation
+
+There is a reverse path too. When you and the agent finish a task well, ask:
+
+```
+Save what we just did as a skill in .claude/skills/.
+Show me SKILL.md before saving it.
+```
+
+The same works for something you saw elsewhere. Describe in your own words what the other agent does — yours will shape it into a skill. You read it and edit it.
+
+<SelfCheck id="c7"/>
+
+<SelfCheck id="c8"/>
+
+<SelfCheck id="c9"/>
+
+</Phase>
+
+<Phase type="practice">
+
+Find one skill made by someone else: from a fellow learner, an open repository, or [anthropics/skills](https://github.com/anthropics/skills).
+
+**Do not install it yet.** Download or clone it into a separate folder outside your `skills/`.
+
+Read every file of the skill in full, including `scripts/` if it exists. Then break it down in `my-experiments/u3-skill-transfer.md`:
+
+```
+Skill: [name, where it came from — link]
+What it does, in my own words: [...]
+Files inside: [...]
+Executable code (scripts/): [yes / no — what it does]
+What it touches: [files / network / nothing]
+What is still unclear: [...]
+```
+
+Installing comes in unit 5, after the security checklist.
+
+</Phase>

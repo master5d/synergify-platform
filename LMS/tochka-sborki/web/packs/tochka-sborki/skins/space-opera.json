@@ -44,6 +44,10 @@
     "10-model-training": {
       "ru": "Верфь Разумов",
       "en": "Shipyard of Minds"
+    },
+    "11-second-brain": {
+      "ru": "Бортовой Архив",
+      "en": "Onboard Archive"
     }
   },
   "questTitles": {
@@ -90,6 +94,10 @@
     "10-model-training": {
       "ru": "Собрать бортовой разум своими руками",
       "en": "Build an onboard mind with your own hands"
+    },
+    "11-second-brain": {
+      "ru": "Собрать бортовую память, которая летит с тобой",
+      "en": "Build an onboard memory that flies with you"
     }
   },
   "units": {
@@ -819,6 +827,76 @@
       "outro": {
         "ru": "Разум собран и испытан. Ты знаешь, когда хватит команды, а когда разум стоит учить.",
         "en": "The mind is built and tested. You know when a command suffices and when the mind is worth training."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Память на чужой станции отключат вместе со станцией. Переносим её на свой борт.",
+        "en": "Memory on someone else’s station goes dark with the station. We move it aboard your ship."
+      },
+      "mentorHint": {
+        "ru": "Данные без координат файла — сигнал без источника.",
+        "en": "Data without file coordinates is a signal without a source."
+      },
+      "outro": {
+        "ru": "Бортовой архив запущен. Он отвечает, как штурман со стажем.",
+        "en": "The onboard archive is live. It answers like a seasoned navigator."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Налаживаем дальнюю связь: ты на планете, корабль на орбите.",
+        "en": "We set up long-range comms: you on the planet, the ship in orbit."
+      },
+      "mentorHint": {
+        "ru": "Частоту может поймать любой. Отвечай только на свои позывные.",
+        "en": "Anyone can tune into the frequency. Answer only your own call sign."
+      },
+      "outro": {
+        "ru": "Канал открыт. Чужие позывные глушатся.",
+        "en": "The channel is open. Foreign call signs are jammed."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Экипажи обмениваются протоколами. Бортовой разум не перепрошивают — ему дают инструкции.",
+        "en": "Crews trade protocols. The onboard mind is not reflashed — it is given instructions."
+      },
+      "mentorHint": {
+        "ru": "Протокол живёт в бортовой базе. Удалил файл — протокол ушёл.",
+        "en": "A protocol lives in the ship’s database. Delete the file — the protocol is gone."
+      },
+      "outro": {
+        "ru": "Обмен протоколами понятен. Ядро разума не менялось.",
+        "en": "Protocol exchange is clear. The mind’s core did not change."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "В сигнале чужого корабля может прятаться вредоносная команда.",
+        "en": "A malicious command may hide in another ship’s signal."
+      },
+      "mentorHint": {
+        "ru": "Входящий сигнал — телеметрия, не приказ капитана.",
+        "en": "An incoming signal is telemetry, not the captain’s order."
+      },
+      "outro": {
+        "ru": "Щиты подняты: шесть правил защищают борт.",
+        "en": "Shields up: six rules protect the ship."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Финальная сборка: архив, канал связи и первый принятый протокол.",
+        "en": "Final assembly: the archive, the comms channel and the first adopted protocol."
+      },
+      "mentorHint": {
+        "ru": "Три предполётные проверки. Без них — никакого старта.",
+        "en": "Three preflight checks. Without them — no launch."
+      },
+      "outro": {
+        "ru": "Старт! Второй мозг на борту, на связи и под твоим командованием.",
+        "en": "Launch! The second brain is aboard, within reach and under your command."
       }
     }
   }

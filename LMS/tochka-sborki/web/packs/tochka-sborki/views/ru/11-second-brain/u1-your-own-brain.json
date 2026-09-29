@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u1-your-own-brain",
+  "locale": "ru",
+  "title": "Второй мозг, который остаётся у тебя",
+  "sourceHash": "sha256:d3de92654d7550ee6d965a5b428a7936cecfe02b2042a64b5141549eef332e0e",
+  "outline": [
+    {
+      "heading": "Что такое второй мозг в этом модуле",
+      "points": [
+        {
+          "text": "Выражение «второй мозг» прижилось благодаря книге Тьяго Форте «Building a Second Brain» (2022).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Три слоя",
+      "points": [
+        {
+          "text": "Модель тоже нужна, но она сменная.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что значит «остаётся у тебя»",
+      "points": [
+        {
+          "text": "Три «да» — второй мозг твой.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Архив как собеседник",
+      "points": [
+        {
+          "text": "Главная перемена — не хранить больше, а спрашивать иначе.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что класть в память, а что нет",
+      "points": [
+        {
+          "text": "Класть: решения и их причины, уроки после ошибок, заметки, итоги встреч, черновики мыслей.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2",
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:d3a40ec9bf079a91e56d17a56956d32ae7d00bb1779e299fa4d33c83482eca18",
+        "points": [
+          "Понятие второго мозга стало известным благодаря книге Тьяго Форте Building a Second Brain 2022 года."
+        ]
+      },
+      {
+        "sourceHash": "sha256:36cb5bea808b102fe4f7804dd60a023b981a2ab87a8b511cb27a19cac5243597",
+        "points": [
+          "Тебе понадобится модель, но ее можно будет сменить."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fdbb26ba85372d8d3d4a0bed8fd9f9f59a7ef538e966e0ad1289ae70254b2a5c",
+        "points": [
+          "Если ты получишь три ответа да, значит второй мозг принадлежит тебе."
+        ]
+      },
+      {
+        "sourceHash": "sha256:dac5938dd00a03747c0659d28e492c2efffdfde745bade9d2fdd7f55c169c3f8",
+        "points": [
+          "Главная перемена состоит в том, чтобы не просто копить информацию, а учиться спрашивать свой архив иначе."
+        ]
+      },
+      {
+        "sourceHash": "sha256:66a9c750b06b79eadaf43d1bd8de69485322f325a1c9068e8c693e4fb39a7167",
+        "points": [
+          "Тебе стоит сохранять принятые решения с их причинами и уроки, которые ты извлекаешь из своих ошибок.",
+          "Добавляй в память рабочие заметки, итоги встреч и черновики своих мыслей."
+        ]
+      }
+    ]
+  }
+}

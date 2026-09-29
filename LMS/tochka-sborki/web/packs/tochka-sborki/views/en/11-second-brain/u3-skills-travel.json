@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u3-skills-travel",
+  "locale": "en",
+  "title": "Skills travel from agent to agent",
+  "sourceHash": "sha256:d9fe786867ce82d304574056b7ca2b6b45f4206dd117bb69dfd1d4632df4a4ac",
+  "outline": [
+    {
+      "heading": "\"My agent teaches yours\" — honestly",
+      "points": [
+        {
+          "text": "You can set up a shared chat where one agent shows another how to work.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A skill is a folder",
+      "points": [
+        {
+          "text": "You already made a skill in module 07.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Three ways to hand over a skill",
+      "points": [
+        {
+          "text": "Many authors publish their skills openly and for free.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What travels and what does not",
+      "points": [
+        {
+          "text": "Does not travel: your memory, your keys, and someone else's personal memory.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How an agent picks up a skill from a conversation",
+      "points": [
+        {
+          "text": "There is a reverse path too.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c7",
+    "c8",
+    "c9"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:31486b1a33d3b3a0598d4d0ff285a63ebef234d9ac6fd252869f3d75f995ae71",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:219578a8574f9d7b2e542c1f1a1da123d532c74d6f5d03819b6ca35183753b49",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:4a6e7e85faae5bd8c7a0ee5178370d30461c099ed78ef20ac8db140190c37d0f",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:d71aad48deb82cb522918ea4f2919f1be4754d3da5154bcdf41bfa7fa60534a3",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:537490405c3ca2c739f89396ba918a28ca6cdf88bfdd252b22846b3e6cf61347",
+        "points": [
+          "There is also a reverse path."
+        ]
+      }
+    ]
+  }
+}

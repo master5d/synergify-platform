@@ -44,6 +44,10 @@
     "10-model-training": {
       "ru": "Подпольная Лаборатория",
       "en": "Underground Lab"
+    },
+    "11-second-brain": {
+      "ru": "Личный Архив",
+      "en": "Private Archive"
     }
   },
   "questTitles": {
@@ -90,6 +94,10 @@
     "10-model-training": {
       "ru": "Разобрать модель на детали и собрать свою.",
       "en": "Take the model apart and build your own."
+    },
+    "11-second-brain": {
+      "ru": "Завести архив, который не продадут вместе с сервером.",
+      "en": "Keep an archive nobody sells off with the server."
     }
   },
   "units": {
@@ -819,6 +827,76 @@
       "outro": {
         "ru": "Дело закрыто. Ты знаешь, когда хватит промпта, а когда модель стоит учить.",
         "en": "Case closed. You know when a prompt is enough and when a model is worth training."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Архив в чужом облаке — улика в чужом сейфе. Переносим дело к себе.",
+        "en": "An archive in someone else’s cloud is evidence in someone else’s safe. We move the case home."
+      },
+      "mentorHint": {
+        "ru": "Показания без номера папки ничего не стоят. Требуй адрес.",
+        "en": "Testimony without a folder number is worthless. Demand the address."
+      },
+      "outro": {
+        "ru": "Архив у тебя. Теперь он отвечает на вопросы, как свидетель под присягой.",
+        "en": "The archive is yours. Now it answers questions like a witness under oath."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Нужна связь с базой, пока ты в городе. Проводим защищённую линию.",
+        "en": "You need a line to base while you are out in the city. We run a secure wire."
+      },
+      "mentorHint": {
+        "ru": "Номер бота знает кто угодно. Трубку берёшь только на свои звонки.",
+        "en": "Anyone can learn the bot’s number. You pick up only your own calls."
+      },
+      "outro": {
+        "ru": "Линия проведена. Чужие звонки уходят в пустоту.",
+        "en": "The line is live. Strangers’ calls drop into the void."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Приёмы переходят от агента к агенту. Никакой магии — только папки с инструкциями.",
+        "en": "Tricks pass from agent to agent. No magic — just folders of instructions."
+      },
+      "mentorHint": {
+        "ru": "Мозги у агентов одни и те же. Разница — в досье, которое лежит рядом.",
+        "en": "The agents have the same brains. The difference is the file lying next to them."
+      },
+      "outro": {
+        "ru": "Схема ясна. Передаются файлы, а не душа машины.",
+        "en": "The scheme is clear. Files change hands, not the machine’s soul."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "Письмо от «поддержки» просит ключи. Классическая подстава.",
+        "en": "A letter from \"support\" asks for the keys. A classic setup."
+      },
+      "mentorHint": {
+        "ru": "Всё, что пришло снаружи, — улика, а не приказ.",
+        "en": "Everything that comes from outside is evidence, not an order."
+      },
+      "outro": {
+        "ru": "Подставу раскусили. Шесть правил держат периметр.",
+        "en": "The setup is busted. Six rules hold the perimeter."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Собираем свою сеть: архив, линия связи, один проверенный приём.",
+        "en": "We assemble our own network: an archive, a line, one vetted trick."
+      },
+      "mentorHint": {
+        "ru": "Канарейка в шахте цела — значит, периметр держит.",
+        "en": "The canary in the mine is still alive — the perimeter holds."
+      },
+      "outro": {
+        "ru": "Дело закрыто. Второй мозг твой, на связи и под замком.",
+        "en": "Case closed. The second brain is yours, within reach and under lock."
       }
     }
   }

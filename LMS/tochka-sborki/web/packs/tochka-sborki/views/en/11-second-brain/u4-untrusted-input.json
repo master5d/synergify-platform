@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u4-untrusted-input",
+  "locale": "en",
+  "title": "Security: everything that comes from outside",
+  "sourceHash": "sha256:5538f707006d56014db21a96bf67a3cac316a3db37ec765dcb05adad9d225c5c",
+  "outline": [
+    {
+      "heading": "Prompt injection",
+      "points": [
+        {
+          "text": "Prompt injection is text inside data that the model takes as an instruction.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Where a second brain has holes",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Six rules",
+      "points": [
+        {
+          "text": "Rule 2 goes into AGENTS.md.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "If the chat is shared",
+      "points": [
+        {
+          "text": "Sometimes several people and their agents gather in one group and learn from each other.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c10",
+    "c11",
+    "c12"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:948a56120f8a82b620a84e52ffeb73c9b4115d733188ae64c244f4b7440ab30e",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:8f9923bf9591b2b393319ad6a403c3630b809ad982bad44d94bcc92c96383164",
+        "points": [
+          "You place Rule 2 into AGENTS.md."
+        ]
+      },
+      {
+        "sourceHash": "sha256:0df36d0bc55ea23b265051281029495ef6d3202591ecf582298f8b31f248e8d6",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

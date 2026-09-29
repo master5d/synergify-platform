@@ -1,0 +1,121 @@
+---
+title: "A channel: your agent within reach"
+unit: 2
+module: 11
+duration: "10 min"
+---
+
+<Phase type="activation">
+
+You are on the road. A thought comes that you would hate to lose. Or you need to ask your archive quickly: "what did I decide about this client?"
+
+The terminal stayed at home, on the computer. The agent is there too, next to your files.
+
+How would you like to reach it — and who else should definitely not get that ability?
+
+</Phase>
+
+<Phase type="reflection">
+
+A channel is only a door. Memory and work stay where they were: on your computer, in your folder.
+
+The door changes one thing: now someone can knock from outside. So it matters not only how to open the door but also who can knock on it.
+
+Keep both questions in mind. The first one is covered here, the second in unit 4.
+
+</Phase>
+
+<Phase type="concept">
+
+## How a channel works
+
+A message travels like this:
+
+```
+you in a messenger → bot → channel plugin → running agent session → your files
+                                                    ↓
+you in a messenger ← bot ← agent's reply ←──────────┘
+```
+
+Three properties matter:
+
+- **The work happens on your side.** The agent answers from a session on your computer and works with your real files. The messenger's cloud only carries the text.
+- **The session must be open.** No running session — nobody to answer. For a constant connection, people keep the agent in a separate terminal window or a background process.
+- **A bot is an address.** Anyone who knows the bot's name can message it. That is why you need a list of allowed senders.
+
+## Channels in Claude Code
+
+Claude Code has **Channels** for this — [official documentation](https://code.claude.com/docs/en/channels). Right now it is a research preview: the set of channels and the command syntax may change. So the steps below retell the documentation, and the original always wins.
+
+The preview includes Telegram, Discord and iMessage. Each channel is a plugin from the official marketplace. The plugins need [Bun](https://bun.sh).
+
+**A rehearsal with no outside services — fakechat.** It is a demo channel: a chat in the browser on your own computer, with no bots or tokens.
+
+```
+/plugin install fakechat@claude-plugins-official
+```
+
+Then exit Claude Code and start it again with the channel:
+
+```bash
+claude --channels plugin:fakechat@claude-plugins-official
+```
+
+Open `http://localhost:8787` and send a message — it arrives in your session, and the reply comes back to the browser.
+
+**Telegram — following the documentation:**
+
+1. In Telegram, open [@BotFather](https://t.me/BotFather), send `/newbot`, get the bot token.
+2. In Claude Code: `/plugin install telegram@claude-plugins-official`.
+3. Save the token: `/telegram:configure <token>`. It lands in `~/.claude/channels/telegram/.env` — outside the project and outside git.
+4. Restart: `claude --channels plugin:telegram@claude-plugins-official`.
+5. Message the bot — it replies with a pairing code. In Claude Code: `/telegram:access pair <code>`.
+6. Close the door to everyone else: `/telegram:access policy allowlist`.
+
+After step six, messages from other accounts are silently dropped. Do not skip this step.
+
+## Email and other agents
+
+**Email** usually connects differently: through an MCP server for your mail service (module [07](/en/lessons/07-tools/)). The agent reads mail when you ask it to; it does not receive messages on its own.
+
+Keep in mind: anyone in the world can send you an email. There is no built-in list of allowed senders here.
+
+**Other agents** — Hermes, OpenClaw and similar — can live in messengers through their own gateways. The pattern is the same: a bot, allowed senders, work on your machine. Look up the commands in their documentation.
+
+## When you are away from the terminal
+
+If the agent needs your permission for an action, the session waits for your answer. The documentation mentions a mode that skips such prompts. For an agent that can be reached from outside, we do not turn it on — unit 4 explains why.
+
+<SelfCheck id="c4"/>
+
+<SelfCheck id="c5"/>
+
+<SelfCheck id="c6"/>
+
+</Phase>
+
+<Phase type="practice">
+
+Run the fakechat rehearsal using the steps above.
+
+Once the channel works, send from the browser:
+
+```
+What is in my STATE.md right now? Keep it short.
+```
+
+Look at the terminal: what the incoming message and the reply call look like.
+
+If you want Telegram, connect it following the documentation — step six included. Then send the same question from your phone.
+
+Save to `my-experiments/u2-channel.md`:
+
+```
+Channel: [fakechat / Telegram / other]
+Where the token lives: [file path — NOT the token itself]
+Who is on the allowed list: [only me / ...]
+What I saw in the terminal when the message arrived: [...]
+What was unclear: [...]
+```
+
+</Phase>

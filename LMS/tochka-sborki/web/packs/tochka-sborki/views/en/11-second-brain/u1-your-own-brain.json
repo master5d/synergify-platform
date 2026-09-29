@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u1-your-own-brain",
+  "locale": "en",
+  "title": "A second brain that stays with you",
+  "sourceHash": "sha256:b991bc5f0ed95ec4db5f4f5e3c1f6c7993644ca0ec670a7038f15482a9b15c54",
+  "outline": [
+    {
+      "heading": "What a second brain means in this module",
+      "points": [
+        {
+          "text": "The phrase \"second brain\" caught on thanks to Tiago Forte's book \"Building a Second Brain\" (2022).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Three layers",
+      "points": [
+        {
+          "text": "A model is needed too, but it is replaceable.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What \"stays with you\" means",
+      "points": [
+        {
+          "text": "Three \"yes\" answers — the second brain is yours.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The archive as a conversation partner",
+      "points": [
+        {
+          "text": "The main shift is not storing more but asking differently.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What goes into memory and what does not",
+      "points": [
+        {
+          "text": "Put in: decisions and their reasons, lessons after mistakes, notes, meeting outcomes, rough thoughts.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2",
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:36279a55123c4106fc0df81482c5ca7a30960f57cfb96f1b6d48c5e69d76178e",
+        "points": [
+          "The phrase second brain became popular through the book Building a Second Brain by Tiago Forte from 2022."
+        ]
+      },
+      {
+        "sourceHash": "sha256:46775c675a8a00d83d7be21aeb9206048d67754bc902c9ab3e7b26fe40acba55",
+        "points": [
+          "You also need a model, but it can be replaced."
+        ]
+      },
+      {
+        "sourceHash": "sha256:9f94f59d92f1aa54dc2fa680b97d8f6d4a31f1b24ca67ea911455dfa7e0796b1",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:58aa4c4d5f720029854de642d26a9d0c738fc2d15bc6ebeb9ea25d160186394a",
+        "points": [
+          "The primary change involves how you ask questions rather than how much you store."
+        ]
+      },
+      {
+        "sourceHash": "sha256:5dd067237037dd26ab730a6a113e72ae66da6278e6a5f253297557369d05b733",
+        "points": [
+          "You should record your decisions and the reasons behind them along with lessons learned from mistakes.",
+          "Include your notes, the outcomes of meetings, and any rough thoughts you have."
+        ]
+      }
+    ]
+  }
+}
