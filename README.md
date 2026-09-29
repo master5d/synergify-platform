@@ -23,11 +23,16 @@ cd LMS/tochka-sborki/web && npm install && npm run dev
   [**The Silence Where You Can Hear**](https://academy.synergify.com/praktika) ("eight steps of
   attention practice"), per `LMS/registry.json`.
 - **Platform API** (`workers/`) — one Cloudflare Worker serving auth, progress, admission,
-  feedback, CRM, Telegram, and checkout across every course domain.
+  feedback, CRM, Telegram, and checkout across every course domain; since 2026-09 also the course
+  email chains (daily cron → Listmonk tx templates in `workers/email-templates/`, dry run at
+  `/api/admin/email-chains/dry-run`), the care desk (`/api/care`), public certificate verification,
+  community invites via the Telegram bot, and spaced review of self-checks (`/api/checks/answer`).
 - **Academy storefront** (`academy/`) — the school shell at academy.synergify.com.
 - **Home** (`synergify/`) — the synergify.com umbrella site.
 - **LLM service** (`llm-service/`) — a narrow Hono service that fronts the platform's LLM calls,
-  keeping direct model access out of the edge worker.
+  keeping direct model access out of the edge worker. It calls the SOVERN gateway by pool alias only
+  (`prose-pool`, `reasoning`, `draft-pool`; a test forbids raw provider model names) and runs on the
+  hub as a hand-built container, not via compose.
 
 Each course pack declares its own lesson layout, engine features, and auth gates; the engine
 gates surfaces by flag, never by course name — enforced by a set of guard tests
