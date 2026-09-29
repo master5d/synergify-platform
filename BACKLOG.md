@@ -634,6 +634,9 @@
   подаче», `bondingLine`) и в устав агента (`## Profile — MBTI`). Убран из обоих как основание адаптации (learning styles/meshing,
   Pashler 2008); тест держит промпт одинаковым с MBTI и без. RPG-флейвора у MBTI нет (скин — V_SKIN, класс — атрибуты), анкета его
   по-прежнему собирает в `profiles.mbti` без потребителя — вопрос владельцу: снять V_MBTI_* из анкеты или дать им флейвор.
+  - 2026-09-29: вопросы MBTI сняты из анкеты (слово владельца); старые значения в D1 не трогались. Сняты 5 вопросов `V_MBTI_*`
+    (SR + 4 оси) в обоих pack'ах, `deriveMbti` и `ScoreResult.mbti`; `lib/intake/mbti.ts` → `relational-style.ts`; воркер колонку
+    `intake_profiles.mbti` больше не пишет (колонка и данные на месте).
   CS-кошелёк/награды — правило в силе: лидерборды и бейджи не вводить (Hanus & Fox 2015), сюжет RPG оставить.
 - [x] **Учебные цепочки: сухой прогон «кому что ушло бы сегодня» — СДЕЛАНО 2026-09-28** (intake LMS#19, Rippling).
   `GET /api/admin/email-chains/dry-run?at=<unix|ISO>` (requireOwner, как `/api/admin/stats`): `dryRunEmailChains` идёт тем же

@@ -1,7 +1,7 @@
 import type { Locale, RelationalStyle } from './types'
 import { SKINS_META } from '@/lib/rpg/skins-meta'
 import { parseOutcome } from './parse-outcome'
-import { relationalStyle } from './mbti'
+import { relationalStyle } from './relational-style'
 
 export interface CharterInput {
   locale: Locale

@@ -1,5 +1,5 @@
 import { assignClass, type Attributes } from './scoring'
-import { deriveMbti, relationalStyle } from './mbti'
+import { relationalStyle } from './relational-style'
 import type { Answers, Locale, ScoreResult, WorldSkin } from './types'
 
 const num = (a: Answers, id: string, table: Record<string, number>) => {
@@ -60,7 +60,6 @@ export function scoreProfileV2(answers: Answers, locale: Locale): ScoreResult {
     niche: (answers['V_NICHE'] as string) ?? null,
     os: (answers['V_OS'] as string) ?? null,
     strLowConfidence: !hasDepth,
-    mbti: deriveMbti(answers),
     relationalStyle: relationalStyle(answers),
   }
 }

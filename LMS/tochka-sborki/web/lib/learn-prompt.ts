@@ -11,7 +11,7 @@
 import type { Mode } from './cs/types'
 import type { Locale } from './dictionaries'
 import type { RelationalStyle } from './intake/types'
-import { normalizeErrorStyle } from './intake/mbti'
+import { normalizeErrorStyle } from './intake/relational-style'
 import { mentorFirmness, mentorFirmnessCompact, mentorStateAdaptation } from './mentor-persona'
 import { COMPANION } from './course/companion'
 import { referenceLines, type UnitReference } from './learn-prompt-reference'

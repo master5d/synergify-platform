@@ -11,7 +11,7 @@ import { AutomationVerdictCard } from './automation-verdict-card'
 import { WeekMapCard } from './week-map-card'
 import { TaskRouteCard } from './task-route-card'
 import { buildCompanionCharter } from '@/lib/intake/charter'
-import { relationalStyle } from '@/lib/intake/mbti'
+import { relationalStyle } from '@/lib/intake/relational-style'
 import { SKINS_META } from '@/lib/rpg/skins-meta'
 import type { WorldSkin } from '@/lib/rpg/types'
 

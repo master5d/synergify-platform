@@ -1,8 +1,9 @@
-import type { Answers, ErrorStyle, MbtiType, RelationalStyle } from './types'
+import type { Answers, ErrorStyle, RelationalStyle } from './types'
 
-// MBTI собирается анкетой, но НЕ основание адаптации обучения (Педагогика — риски, intake LMS#20):
-// подгонка подачи под «тип» — meshing-гипотеза learning styles без доказательной базы (Pashler 2008).
-// Промпт компаньона и устав агента MBTI не читают; тест — lib/learn-prompt.test.ts.
+// Стиль отношений из анкеты v2 (ритм, реакция на ошибку, опора, внимание) — для бондинга компаньона и устава.
+// Вопросы MBTI сняты из анкеты 2026-09-29 (слово владельца; Педагогика — риски, intake LMS#20): подгонка
+// подачи под «тип» — meshing-гипотеза learning styles без доказательной базы (Pashler 2008). Старые
+// значения profiles.mbti в D1 не мигрируются и не удаляются — код их просто не читает и не пишет.
 
 /**
  * Ветки «сразу готовая правка» больше нет (Педагогика 5; Bastani 2025 PNAS: получавшие готовое на
@@ -12,22 +13,6 @@ import type { Answers, ErrorStyle, MbtiType, RelationalStyle } from './types'
 export function normalizeErrorStyle(v: RelationalStyle['errorStyle'] | undefined): ErrorStyle | null {
   if (v === 'fix_immediately') return 'step_hints'
   return v ?? null
-}
-
-const SIXTEEN = new Set([
-  'INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP',
-  'ISTJ','ISFJ','ESTJ','ESFJ','ISTP','ISFP','ESTP','ESFP',
-])
-
-export function deriveMbti(a: Answers): MbtiType | null {
-  const sr = a['V_MBTI_SR']
-  if (typeof sr === 'string' && SIXTEEN.has(sr)) return sr
-  const ei = a['V_MBTI_EI'], sn = a['V_MBTI_SN'], tf = a['V_MBTI_TF'], jp = a['V_MBTI_JP']
-  if (typeof ei === 'string' && typeof sn === 'string' && typeof tf === 'string' && typeof jp === 'string') {
-    const t = `${ei}${sn}${tf}${jp}`
-    return SIXTEEN.has(t) ? t : null
-  }
-  return null
 }
 
 export function relationalStyle(a: Answers): RelationalStyle {

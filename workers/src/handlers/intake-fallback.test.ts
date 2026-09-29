@@ -37,11 +37,12 @@ function fakeDb(existingVersion = 2) {
 // нулевой индекс user_id, дальше по списку колонок из VALUES.
 const BIND = {
   worldSkin: 12,
-  legendaryTitle: 20,
-  backstory: 21,
-  firstQuest: 22,
-  finalBoss: 23,
-  proseSource: 24,
+  // mbti из INSERT убран 2026-09-29 (вопросы MBTI сняты из анкеты) — проза сдвинулась на 1.
+  legendaryTitle: 19,
+  backstory: 20,
+  firstQuest: 21,
+  finalBoss: 22,
+  proseSource: 23,
 }
 
 describe('деградация интейка: отказ сервиса не должен ронять сабмит', () => {

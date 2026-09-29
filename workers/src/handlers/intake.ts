@@ -92,21 +92,21 @@ export async function handleSubmit(
   await db.prepare(
     `INSERT INTO intake_profiles
        (user_id, status, instrument_version, answers, current_step, int_score, wis_score, con_score, dex_score, cha_score, str_score,
-        char_class, char_level, world_skin, cog_tier, register, sheet_language, niche, os, mbti, relational_style,
+        char_class, char_level, world_skin, cog_tier, register, sheet_language, niche, os, relational_style,
         legendary_title, backstory, first_quest, final_boss, prose_source, created_at, updated_at, completed_at)
-     VALUES (?, 'completed', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+     VALUES (?, 'completed', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
      ON CONFLICT(user_id) DO UPDATE SET status='completed', answers=excluded.answers,
         int_score=excluded.int_score, wis_score=excluded.wis_score, con_score=excluded.con_score,
         dex_score=excluded.dex_score, cha_score=excluded.cha_score, str_score=excluded.str_score,
         char_class=excluded.char_class, char_level=excluded.char_level, world_skin=excluded.world_skin,
         cog_tier=excluded.cog_tier, register=excluded.register, sheet_language=excluded.sheet_language,
-        niche=excluded.niche, os=excluded.os, mbti=excluded.mbti, relational_style=excluded.relational_style,
+        niche=excluded.niche, os=excluded.os, relational_style=excluded.relational_style,
         legendary_title=excluded.legendary_title, backstory=excluded.backstory, first_quest=excluded.first_quest,
         final_boss=excluded.final_boss, prose_source=excluded.prose_source, updated_at=excluded.updated_at, completed_at=excluded.completed_at`,
   ).bind(
     userId, version, JSON.stringify(answers), 0, score.int, score.wis, score.con, score.dex, score.cha, score.str,
     score.charClass, score.charLevel, score.worldSkin, score.cogTier, score.register, score.sheetLanguage,
-    score.niche, score.os, score.mbti, score.relationalStyle ? JSON.stringify(score.relationalStyle) : null,
+    score.niche, score.os, score.relationalStyle ? JSON.stringify(score.relationalStyle) : null,
     prose.legendaryTitle, prose.backstory, prose.firstQuest, prose.finalBoss, prose.source, now, now, now,
   ).run()
 

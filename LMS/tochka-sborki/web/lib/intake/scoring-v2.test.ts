@@ -4,7 +4,7 @@ import { scoreProfileV2 } from './scoring-v2'
 const core = {
   V_WHY: 'project', V_HOOK: 'build', V_NICHE: 'coach', V_RHYTHM: 'fuego',
   V_ERR: 'calm', V_ATTN: 'mid', V_MODE: 'game', V_ANCHOR: 'quick_wins',
-  V_SKIN: 'cyber-noir', V_OS: 'mac', V_MBTI_SR: 'ENFP',
+  V_SKIN: 'cyber-noir', V_OS: 'mac',
 }
 
 describe('scoreProfileV2', () => {
@@ -15,8 +15,12 @@ describe('scoreProfileV2', () => {
     expect(s.worldSkinSource).toBe('v2')
     expect(s.os).toBe('mac')
     expect(s.cogTier).toBe(2)
-    expect(s.mbti).toBe('ENFP')
     expect(s.relationalStyle?.rhythm).toBe('fuego')
+  })
+  it('старый ответ V_MBTI_* (профили до 2026-09-29) скоринг не читает и mbti не отдаёт', () => {
+    const s = scoreProfileV2({ ...core, V_MBTI_SR: 'ENFP' }, 'ru')
+    expect(s).not.toHaveProperty('mbti')
+    expect(s).toEqual(scoreProfileV2(core, 'ru'))
   })
   it('core-only is low confidence', () => {
     expect(scoreProfileV2(core, 'ru').strLowConfidence).toBe(true)
@@ -35,7 +39,6 @@ describe('scoreProfileV2', () => {
     expect(s.niche).toBeNull()
     expect(s.worldSkin).toBe('wanderer')
     expect(s.worldSkinSource).toBe('wanderer-fallback')
-    expect(s.mbti).toBeNull()
     expect(s.sheetLanguage).toBe('en')
   })
 })

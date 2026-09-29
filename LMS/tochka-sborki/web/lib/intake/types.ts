@@ -6,9 +6,6 @@ export type ModuleId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'V' | 'VD'
 
 export type InstrumentVersion = 1 | 2
 
-export type MbtiAxis = 'E' | 'I' | 'S' | 'N' | 'T' | 'F' | 'J' | 'P'
-export type MbtiType = string // 4-letter, e.g. 'INTJ'
-
 /** V_ERR. 'step_hints' заменил 'fix_immediately' (Педагогика 5, intake LMS#20) — см. normalizeErrorStyle. */
 export type ErrorStyle = 'calm' | 'lose_motivation' | 'soft_feedback' | 'step_hints'
 
@@ -66,6 +63,5 @@ export interface ScoreResult {
   niche: string | null
   os: string | null
   strLowConfidence: boolean
-  mbti: MbtiType | null
   relationalStyle: RelationalStyle | null
 }

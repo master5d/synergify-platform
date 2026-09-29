@@ -1,5 +1,5 @@
 // web/lib/intake/questions.v2.ts
-// v2 instrument — short sensory core (LINGVÆTICA voice) + adaptive MBTI + optional depth.
+// v2 instrument — short sensory core (LINGVÆTICA voice) + optional depth.
 // Every question is optional. Value keys for niche/skin/os reuse the canonical v1 enums
 // so the RPG layer + companion consume the same fields. New question IDs never collide
 // with v1 (A1..G12, OS). Scored by scoring-v2.ts, never by v1 scoring.ts.
@@ -210,57 +210,6 @@ export const QUESTIONS_V2: Question[] = [
       { value: 'quick_wins', label: { ru: 'Быстрые победы', en: 'Quick wins' } },
       { value: 'structure', label: { ru: 'Чёткая структура', en: 'Clear structure' } },
       { value: 'freedom', label: { ru: 'Свобода выбора', en: 'Freedom of choice' } },
-    ],
-  },
-  {
-    id: 'V_MBTI_SR', module: 'V', format: 'single', required: false,
-    prompt: { ru: 'Знаешь свой психотип (MBTI)?', en: 'Do you know your MBTI type?' },
-    options: [
-      { value: 'INTJ', label: { ru: 'INTJ', en: 'INTJ' } }, { value: 'INTP', label: { ru: 'INTP', en: 'INTP' } },
-      { value: 'ENTJ', label: { ru: 'ENTJ', en: 'ENTJ' } }, { value: 'ENTP', label: { ru: 'ENTP', en: 'ENTP' } },
-      { value: 'INFJ', label: { ru: 'INFJ', en: 'INFJ' } }, { value: 'INFP', label: { ru: 'INFP', en: 'INFP' } },
-      { value: 'ENFJ', label: { ru: 'ENFJ', en: 'ENFJ' } }, { value: 'ENFP', label: { ru: 'ENFP', en: 'ENFP' } },
-      { value: 'ISTJ', label: { ru: 'ISTJ', en: 'ISTJ' } }, { value: 'ISFJ', label: { ru: 'ISFJ', en: 'ISFJ' } },
-      { value: 'ESTJ', label: { ru: 'ESTJ', en: 'ESTJ' } }, { value: 'ESFJ', label: { ru: 'ESFJ', en: 'ESFJ' } },
-      { value: 'ISTP', label: { ru: 'ISTP', en: 'ISTP' } }, { value: 'ISFP', label: { ru: 'ISFP', en: 'ISFP' } },
-      { value: 'ESTP', label: { ru: 'ESTP', en: 'ESTP' } }, { value: 'ESFP', label: { ru: 'ESFP', en: 'ESFP' } },
-      { value: 'unknown', label: { ru: 'Не знаю / не уверен — подскажите', en: "Don't know / not sure — guide me" } },
-    ],
-  },
-  {
-    id: 'V_MBTI_EI', module: 'V', format: 'single', required: false,
-    showIf: { questionId: 'V_MBTI_SR', equals: 'unknown' },
-    prompt: { ru: 'После плотного дня тебя заряжает…', en: 'After a full day, you recharge by…' },
-    options: [
-      { value: 'E', label: { ru: 'Быть среди людей', en: 'Being around people' } },
-      { value: 'I', label: { ru: 'Побыть одному', en: 'Being on your own' } },
-    ],
-  },
-  {
-    id: 'V_MBTI_SN', module: 'V', format: 'single', required: false,
-    showIf: { questionId: 'V_MBTI_SR', equals: 'unknown' },
-    prompt: { ru: 'Тебе ближе…', en: 'You lean toward…' },
-    options: [
-      { value: 'S', label: { ru: 'Конкретика и факты', en: 'Concrete facts' } },
-      { value: 'N', label: { ru: 'Идеи и возможности', en: 'Ideas and possibilities' } },
-    ],
-  },
-  {
-    id: 'V_MBTI_TF', module: 'V', format: 'single', required: false,
-    showIf: { questionId: 'V_MBTI_SR', equals: 'unknown' },
-    prompt: { ru: 'Решая, ты опираешься на…', en: 'Deciding, you rely on…' },
-    options: [
-      { value: 'T', label: { ru: 'Логику', en: 'Logic' } },
-      { value: 'F', label: { ru: 'Ценности и людей', en: 'Values and people' } },
-    ],
-  },
-  {
-    id: 'V_MBTI_JP', module: 'V', format: 'single', required: false,
-    showIf: { questionId: 'V_MBTI_SR', equals: 'unknown' },
-    prompt: { ru: 'Тебе комфортнее, когда…', en: "You're more comfortable when…" },
-    options: [
-      { value: 'J', label: { ru: 'Есть план', en: "There's a plan" } },
-      { value: 'P', label: { ru: 'Всё открыто', en: 'Things stay open' } },
     ],
   },
   {
