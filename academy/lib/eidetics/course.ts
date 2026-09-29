@@ -22,7 +22,7 @@ export const EIDETICS_COURSE: EideticsCourse = {
     ru: 'Запоминать через образы, сюжет и знакомый маршрут — и проверять по своим замерам, держится ли.',
     en: 'Remember through images, stories and a familiar route — and check against your own measurements whether it lasts.',
   },
-  status: 'soon',
+  status: 'live', // 2026-09-29: черновик вычитан (факты сверены), live — слово владельца
   lessons: [
     {
       slug: 'images',

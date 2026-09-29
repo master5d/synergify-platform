@@ -50,11 +50,11 @@ describe('EIDETICS_COURSE', () => {
     }
   })
 
-  // Публикация — только после вычитки владельцем: смена на 'live' должна быть осознанной.
-  it('ships as soon (not live) until the owner has reviewed it', () => {
-    expect(EIDETICS_COURSE.status).toBe('soon')
-    expect(isEideticsLive()).toBe(false)
-    expect(isEideticsLive({ ...EIDETICS_COURSE, status: 'live' })).toBe(true)
+  // Публикация — только после вычитки владельцем: смена на 'live' должна быть осознанной (live — 2026-09-29, слово владельца).
+  it('is live after the owner review (2026-09-29)', () => {
+    expect(EIDETICS_COURSE.status).toBe('live')
+    expect(isEideticsLive()).toBe(true)
+    expect(isEideticsLive({ ...EIDETICS_COURSE, status: 'soon' })).toBe(false)
   })
 })
 
@@ -64,6 +64,6 @@ describe('resolveEideticsCourse', () => {
     const en = resolveEideticsCourse('en')
     expect(ru.lessons).toHaveLength(6)
     expect(ru.title).not.toBe(en.title)
-    expect(ru.status).toBe('soon')
+    expect(ru.status).toBe('live')
   })
 })
