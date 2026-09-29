@@ -21,6 +21,8 @@ interface Stats {
   stallDays?: number
   funnel?: Record<string, FunnelRow[]>
   dropoff?: DropoffRow[]
+  /** Стоп-критерий пилота интервального повтора; приходит только при SPACED_REVIEW_ENABLED="1" в воркере. */
+  spacedReview?: { course: string; eligible: number; answered: number }[]
 }
 
 // GET /api/admin/email-chains/dry-run — «кому что ушло бы сегодня» (без email, id обрезан до 8 символов).
@@ -174,6 +176,22 @@ export function LeadsClient() {
               </ul>
             </>
           )}
+        </section>
+      )}
+      {stats?.spacedReview && stats.spacedReview.length > 0 && (
+        <section style={{ marginBottom: '2rem' }}>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '.5rem' }}>Интервальный повтор (пилот)</h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '.85rem', marginBottom: '.5rem' }}>
+            Доля учеников, ответивших на повтор, из тех, у кого подошёл срок. Стоп-критерий: через месяц меньше 10% — свернуть.
+          </p>
+          <ul style={{ fontSize: '.85rem', paddingLeft: '1.2rem', color: 'var(--text-secondary)' }}>
+            {stats.spacedReview.map(r => (
+              <li key={r.course}>
+                {r.course}: <b style={{ color: 'var(--text-primary)' }}>{r.answered}</b> из {r.eligible}
+                {r.eligible > 0 && <> ({Math.round((100 * r.answered) / r.eligible)}%)</>}
+              </li>
+            ))}
+          </ul>
         </section>
       )}
       {chains && (

@@ -12,11 +12,13 @@ import { handleEmailUnsubscribe } from './handlers/email-unsubscribe'
 import { handleSupportCheckout, handleProductCheckout } from './handlers/checkout'
 import { handleStripeWebhook } from './handlers/stripe-webhook'
 import { handleView, handleComplete, handleList } from './handlers/progress'
+import { handleCheckAnswer } from './handlers/check-reviews'
 import { handleMe as handleIntakeMe, handleProgress as handleIntakeProgress, handleSubmit as handleIntakeSubmit } from './handlers/intake'
 import { runDemandRadar, listBriefs, listSignals, decideBrief } from './handlers/demand'
 import { handleTaskRoute } from './handlers/task-route'
 import { listLeads, syncContacts } from './handlers/leads'
 import { getStats } from './handlers/stats'
+import { spacedReviewEnabled } from './lib/check-reviews'
 import { handleLeadCapture } from './handlers/leads-capture'
 import { handleAlumniList, handleAlumniMe, handleAlumniOptin } from './handlers/alumni'
 import { handleAdmission, handleAcademyMe } from './handlers/academy'
@@ -97,6 +99,9 @@ export default {
         response = await handleComplete(request, env, ctx)
       } else if (path === '/api/progress/list' && method === 'GET') {
         response = await handleList(request, env)
+      } else if (path === '/api/checks/answer' && method === 'POST') {
+        // Интервальный повтор (Педагогика 1): за флагом SPACED_REVIEW_ENABLED, выключено до миграции 0022.
+        response = await handleCheckAnswer(request, env)
       } else if (path === '/api/intake/me' && method === 'GET') {
         const auth = await requireAuth(request, env)
         response = auth instanceof Response ? auth : await handleIntakeMe(env.DB, auth.sub)
@@ -179,7 +184,7 @@ export default {
         response = auth instanceof Response ? auth : await syncContacts(env)
       } else if (path === '/api/admin/stats' && method === 'GET') {
         const auth = await requireOwner(request, env)
-        response = auth instanceof Response ? auth : await getStats(env.DB)
+        response = auth instanceof Response ? auth : await getStats(env.DB, undefined, { spacedReview: spacedReviewEnabled(env) })
       } else if (path === '/api/admin/email-chains/dry-run' && method === 'GET') {
         const auth = await requireOwner(request, env)
         response = auth instanceof Response ? auth : await handleEmailChainDryRun(env, url)

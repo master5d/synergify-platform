@@ -1,0 +1,8 @@
+<!-- subject: Two questions from what you've covered — a one-minute recall -->
+<!-- DRAFT of the "review 2 questions" step (Pedagogy 1, spaced-review pilot). NOT uploaded to Listmonk:
+     sync_listmonk_templates.py only takes ts-*.html from the directory root. Data — reviewEmailData()
+     in src/lib/check-reviews.ts (review_count, review_url); the step is not wired into email-chains.ts. -->
+<p>Hi!</p>
+<p>Time to recall: {{ .Tx.Data.review_count }} question(s) from earlier lessons are due. Recalling after a pause sticks better than re-reading, and it takes a minute.</p>
+<p>The "Recall" block at the start of your next lesson will show them.</p>
+<p style="margin:24px 0"><a href="{{ .Tx.Data.review_url }}" style="background:#1a1a1a;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:6px;display:inline-block">Recall and continue</a></p>

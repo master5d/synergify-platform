@@ -1,4 +1,5 @@
 // Authoritative learner counts for the owner-gated admin + lesson drop-off funnel.
+import { loadSpacedReviewStats } from '../lib/check-reviews'
 
 // Сколько дней без активности в курсе считается «бросил»: последний завершённый
 // урок такого ученика идёт в dropoff. Совпадает с LAPSE_SEC из lib/nudge-policy
@@ -34,7 +35,11 @@ export function compareLessonSlugs(a: string, b: string): number {
   return 0
 }
 
-export async function getStats(db: D1Database, nowSec = Math.floor(Date.now() / 1000)): Promise<Response> {
+export async function getStats(
+  db: D1Database,
+  nowSec = Math.floor(Date.now() / 1000),
+  opts: { spacedReview?: boolean } = {},
+): Promise<Response> {
   const count = async (sql: string): Promise<number> =>
     (await db.prepare(sql).first<{ c: number }>())?.c ?? 0
 
@@ -94,5 +99,8 @@ export async function getStats(db: D1Database, nowSec = Math.floor(Date.now() / 
       || (a.r.last_done == null ? -1 : b.r.last_done == null ? 1 : compareLessonSlugs(a.r.last_done, b.r.last_done)))
     .map(({ r, module, unit }) => ({ course: r.course, module, unit, stalled: r.stalled }))
 
-  return Response.json({ total, learners, intakeCompleted, notStarted, stallDays: STALL_DAYS, funnel, dropoff })
+  // Стоп-критерий пилота интервального повтора — только при включённом флаге: до миграции 0022 таблицы нет.
+  const spacedReview = opts.spacedReview ? await loadSpacedReviewStats(db, nowSec) : undefined
+
+  return Response.json({ total, learners, intakeCompleted, notStarted, stallDays: STALL_DAYS, funnel, dropoff, spacedReview })
 }

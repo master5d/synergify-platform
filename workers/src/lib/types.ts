@@ -25,6 +25,8 @@ export interface Env {
   EMAIL_CHAINS_ENABLED?: string
   /** "1" включает приглашения ботом в Telegram-сообщество (lib/community.ts). По умолчанию "0". */
   COMMUNITY_INVITES_ENABLED?: string
+  /** "1" включает серверный интервальный повтор самопроверок (lib/check-reviews.ts). По умолчанию "0". */
+  SPACED_REVIEW_ENABLED?: string
   LLM_SERVICE_URL: string
   LLM_SERVICE_TOKEN: string
   LLM_CF_ACCESS_CLIENT_ID: string
