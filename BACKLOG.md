@@ -594,6 +594,9 @@
     миграция `workers/migrations/0022_check_reviews.sql`, `POST /api/checks/answer`, `dueToday` для писем, доля в `/admin/leads` —
     за `SPACED_REVIEW_ENABLED="0"`; шаблон письма — черновик `email-templates/drafts/ts-review-*` (в Listmonk не залит).
     **Для серверной части — миграция 0022 к prod D1 (слово владельца)**, затем флаг "1" и подключение клиента к эндпоинту.
+  - 2026-09-29: сервер включён (миграция 0022 применена), клиент шлёт ответы; письмо «повтори» — не включено.
+    Вошедший ученик (`/api/progress/list` → 200, `useProgress().authed`) дублирует первый ответ за просмотр в `POST /api/checks/answer`
+    (`syncAnswer` в `web/lib/spaced-review.ts`: самопроверка — `lesson`, «Вспомни» — `review`, карточки — `card`); best-effort, аноним не шлёт.
 - [x] **Педагогика 2: pretest в activation — СДЕЛАНО 2026-09-28** (intake LMS#20; Pan & Carpenter 2023). В конце фазы activation —
   блок «Угадай до объяснения» с пометкой «ошибаться можно»: вопрос и варианты без ответа и объяснения (`toPretestItem`), догадка —
   в localStorage. Ответ — в концепте, у той же самопроверки; над ней «до объяснения ты выбрал …». Выбор вопросов — данные

@@ -2,8 +2,9 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import type { OutlineNode } from '@/lib/lesson-views/extract'
 import type { LessonViewsData } from '@/lib/lesson-views/load'
-import { recordAnswer } from '@/lib/spaced-review'
+import { recordAnswer, syncAnswer } from '@/lib/spaced-review'
 import { COURSE } from '@/lib/course'
+import { useProgress } from '@/components/progress-provider'
 import {
   THINK_LOCKED, THINK_MIN, canOpen, filledThoughts, parseThink, readJson, thinkEdit, thinkKey, thinkSkip, thinkSubmit, writeJson,
   type ThinkState,
@@ -114,6 +115,7 @@ export function Cards({ data, locale }: { data: LessonViewsData; locale: 'ru' | 
   const [open, setOpen] = useState(false)
   const [graded, setGraded] = useState<Record<string, boolean>>({})
   const answerId = useId()
+  const { authed } = useProgress()
   const card = data.cards[i]
   const go = (d: number) => { setI(x => Math.min(data.cards.length - 1, Math.max(0, x + d))); setOpen(false) }
   const grade = (remembered: boolean) => {
@@ -124,6 +126,7 @@ export function Cards({ data, locale }: { data: LessonViewsData; locale: 'ru' | 
       item: { id: card.id, unit: card.unit, question: card.question, options: card.options, answer: card.correctIndex, explain: card.explain },
       correct: remembered, locale, now: Date.now(),
     })
+    void syncAnswer(authed, { course: COURSE.progressKey, module: card.module, unit: card.unit, checkId: card.id, correct: remembered, source: 'card' })
   }
   return (
     <section style={box} aria-roledescription="carousel">

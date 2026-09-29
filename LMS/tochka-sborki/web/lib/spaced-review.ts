@@ -7,7 +7,7 @@
 //   верный ответ В СРОК (или позже) — на коробку выше, в последней остаётся (раз в 21 день);
 //   верный ответ РАНЬШЕ срока — ничего не меняет (это не повтор через паузу, а перечитывание);
 //   неверный ответ — всегда в коробку 0.
-// Ответ хранится только в браузере ученика (как unit_progress); сервер — отдельный шаг за флагом.
+// Ответ хранится в браузере ученика (как unit_progress); вошедший ученик ещё и шлёт копию на сервер (syncAnswer ниже).
 import type { SelfCheckItem } from './content'
 
 export const INTERVAL_DAYS = [1, 3, 7, 21] as const
@@ -166,4 +166,31 @@ export function recordAnswer(
   const next = applyAnswer(readStore(courseKey), a)
   writeStore(courseKey, next)
   return next[reviewKey(a.module, a.item.id)] ?? null
+}
+
+// ---- копия ответа на сервер (POST /api/checks/answer, воркер lib/check-reviews.ts) ----
+// localStorage остаётся источником для «Вспомни»; сервер ведёт свои коробки для метрики стоп-критерия
+// (/api/admin/stats → spacedReview) и будущего письма «повтори». Best-effort: только для вошедших
+// (аноним получил бы 401 — запрос не шлём вовсе), сбой сети/сервера ученик не замечает.
+
+export type AnswerSource = 'lesson' | 'review' | 'card'
+
+export interface ServerAnswer { course: string; module: string; unit: string; checkId: string; correct: boolean; source: AnswerSource }
+
+export function answerPayload(a: ServerAnswer) {
+  return { course: a.course, module: a.module, unit: a.unit, check_id: a.checkId, correct: a.correct, source: a.source }
+}
+
+/** Отправить копию ответа. authed=false — ничего не делает. Никогда не бросает. */
+export async function syncAnswer(authed: boolean, a: ServerAnswer, fetchFn: typeof fetch = fetch): Promise<void> {
+  if (!authed) return
+  try {
+    await fetchFn('/api/checks/answer', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(answerPayload(a)),
+      keepalive: true,
+    })
+  } catch {}
 }

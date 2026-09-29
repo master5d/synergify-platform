@@ -148,9 +148,9 @@ describe('POST /api/checks/answer', () => {
     expect(spacedReviewEnabled({ SPACED_REVIEW_ENABLED: '1' })).toBe(true)
   })
 
-  it('wrangler.toml держит флаг выключенным', () => {
+  it('wrangler.toml держит флаг включённым (миграция 0022 применена 2026-09-29)', () => {
     const toml = readFileSync(fileURLToPath(new URL('../../wrangler.toml', import.meta.url)), 'utf8')
-    expect(toml).toMatch(/^SPACED_REVIEW_ENABLED = "0"/m)
+    expect(toml).toMatch(/^SPACED_REVIEW_ENABLED = "1"/m)
   })
 
   it('флаг выключен — { enabled:false }, ни сессии, ни D1', async () => {

@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import {
   DAY_MS, INTERVAL_DAYS, LAST_BOX, REVIEW_LIMIT,
-  applyAnswer, parseStore, pickDue, reviewKey, scheduleNext, storageKey,
+  answerPayload, applyAnswer, parseStore, pickDue, reviewKey, scheduleNext, storageKey, syncAnswer,
   type ReviewStore,
 } from './spaced-review'
 
@@ -119,5 +119,30 @@ describe('pickDue — что повторить сейчас', () => {
     expect(pickDue({}, { now: T0, locale: 'ru', current, isCompleted: () => true })).toEqual([])
     expect(pickDue(build(), { now: T0, locale: 'ru', current, isCompleted: () => false })).toEqual([])
     expect(pickDue(build(), { now: T0 - 30 * DAY_MS, locale: 'ru', current, isCompleted: () => true })).toEqual([])
+  })
+})
+
+describe('syncAnswer — копия ответа на сервер (POST /api/checks/answer)', () => {
+  const a = { course: 'tochka-sborki', module: 'm1', unit: 'u1', checkId: 'c1', correct: true, source: 'review' as const }
+  it('тело — в формате воркера (check_id, source)', () => {
+    expect(answerPayload(a)).toEqual({ course: 'tochka-sborki', module: 'm1', unit: 'u1', check_id: 'c1', correct: true, source: 'review' })
+  })
+  it('аноним — запроса нет вовсе', async () => {
+    const f = vi.fn()
+    await syncAnswer(false, a, f as unknown as typeof fetch)
+    expect(f).not.toHaveBeenCalled()
+  })
+  it('вошедший — один POST с куками на /api/checks/answer', async () => {
+    const f = vi.fn().mockResolvedValue(new Response('{}'))
+    await syncAnswer(true, a, f as unknown as typeof fetch)
+    expect(f).toHaveBeenCalledTimes(1)
+    const [url, init] = f.mock.calls[0]
+    expect(url).toBe('/api/checks/answer')
+    expect(init).toMatchObject({ method: 'POST', credentials: 'include' })
+    expect(JSON.parse(init.body)).toEqual(answerPayload(a))
+  })
+  it('сеть упала / сервер 500 — не бросает', async () => {
+    await expect(syncAnswer(true, a, vi.fn().mockRejectedValue(new TypeError('offline')) as unknown as typeof fetch)).resolves.toBeUndefined()
+    await expect(syncAnswer(true, a, vi.fn().mockResolvedValue(new Response('', { status: 500 })) as unknown as typeof fetch)).resolves.toBeUndefined()
   })
 })

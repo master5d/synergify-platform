@@ -100,7 +100,7 @@ export default {
       } else if (path === '/api/progress/list' && method === 'GET') {
         response = await handleList(request, env)
       } else if (path === '/api/checks/answer' && method === 'POST') {
-        // Интервальный повтор (Педагогика 1): за флагом SPACED_REVIEW_ENABLED, выключено до миграции 0022.
+        // Интервальный повтор (Педагогика 1): за флагом SPACED_REVIEW_ENABLED (включён 2026-09-29, миграция 0022 применена).
         response = await handleCheckAnswer(request, env)
       } else if (path === '/api/intake/me' && method === 'GET') {
         const auth = await requireAuth(request, env)

@@ -2,7 +2,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { isCorrect, optionNote } from '@/lib/self-check'
 import {
-  DAY_MS, pickDue, readStore, recordAnswer,
+  DAY_MS, pickDue, readStore, recordAnswer, syncAnswer,
   type DueCard, type Locale, type ReviewEvent,
 } from '@/lib/spaced-review'
 import { parseProgress, STORAGE_KEY as UNIT_PROGRESS_KEY } from '@/lib/unit-progress'
@@ -11,7 +11,8 @@ import { COURSE } from '@/lib/course'
 
 // Блок «Вспомни» в начале юнита (BACKLOG «Педагогика 1», пилот интервального повтора).
 // 2–3 самопроверки из ПРОЙДЕННЫХ юнитов, у которых подошёл срок по коробкам Лейтнера (lib/spaced-review.ts).
-// Нечего повторять — блока нет вовсе. На сервере не рендерится: всё знание — в localStorage ученика.
+// Нечего повторять — блока нет вовсе. На сервере не рендерится: выбор — из localStorage ученика;
+// ответ вошедшего ещё и уходит копией на сервер (source='review' → reviewed_at, метрика стоп-критерия).
 
 export const T = {
   ru: {
@@ -52,6 +53,7 @@ export function ReviewItem({ card, locale, onAnswered }: { card: DueCard; locale
   const [shown, setShown] = useState(false)
   const [nextDays, setNextDays] = useState<number | null>(null)
   const done = useRef(false)
+  const { authed } = useProgress()
   const correct = isCorrect(s, picked)
 
   const submit = () => {
@@ -65,6 +67,7 @@ export function ReviewItem({ card, locale, onAnswered }: { card: DueCard; locale
       item: { id: card.record.id, unit: card.record.unit, ...s },
       correct, locale, now,
     })
+    void syncAnswer(authed, { course: COURSE.progressKey, module: card.record.module, unit: card.record.unit, checkId: card.record.id, correct, source: 'review' })
     if (rec) setNextDays(Math.round((rec.due - now) / DAY_MS))
     onAnswered?.({ module: card.record.module, unit: card.record.unit, correct, box: rec?.box ?? 0 })
   }
