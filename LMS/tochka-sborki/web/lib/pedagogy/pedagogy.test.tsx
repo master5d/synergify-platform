@@ -182,7 +182,7 @@ describe('«сначала сам»: вкладки «Конспект» и «К
   const data = (thinkFirst: boolean): LessonViewsData => ({
     title: 'Урок', summaryDefault: 'verbatim', paraphrased: null, thinkFirst, unitKey: 'm/u',
     outline: [{ heading: 'Раздел', points: [{ text: 'КЛЮЧЕВАЯ-ФРАЗА' } as never], children: [] }],
-    cards: [{ id: 'c1', question: 'Карточка?', answer: 'Ответ', explain: 'Почему' }],
+    cards: [{ id: 'c1', question: 'Карточка?', answer: 'Ответ', explain: 'Почему', module: 'm', unit: 'u', options: ['Ответ', 'Другое'], correctIndex: 0 }],
   })
   const written: ThinkState = { thoughts: ['моя мысль один', 'моя мысль два', ''], status: 'written' }
   const view = (v: 'summary' | 'map' | 'cards', d: LessonViewsData, think: ThinkState, locale: 'ru' | 'en' = 'ru') =>
