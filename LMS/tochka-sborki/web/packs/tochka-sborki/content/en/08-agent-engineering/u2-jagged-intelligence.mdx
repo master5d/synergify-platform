@@ -104,17 +104,15 @@ That's what agent engineering is — a **designed** combination of AI nodes and 
 
 <Phase type="practice">
 
-Take your task from unit 1. Break it into steps. For each step, classify:
+Take your task from unit 1. Break it into steps and give each one a type: AI, Tool or Code. Warm up on a worked example first.
+
+<FadedExample id="ai-tool-code"/>
+
+Save your breakdown to `my-experiments/agent-decomposition.md` as a table:
 
 | Step | Type | Who does it |
 |-----|-----|-----------|
-| Download emails | Tool | Gmail API |
-| Understand the topic | AI | LLM |
-| Write to file | Tool | File system |
-| Check for duplicates | Code | deterministic code |
-| Notify you | Tool | Telegram/Slack API |
-
-Save to `my-experiments/agent-decomposition.md` as a table.
+| … | AI / Tool / Code | … |
 
 **Key question:** for which steps are you currently trying to use AI where **simple code or an API is enough**? That's the most common source of unreliability.
 

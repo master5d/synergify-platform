@@ -5,7 +5,7 @@
   "unit": "u3-memory",
   "locale": "ru",
   "title": "Система памяти",
-  "sourceHash": "sha256:ea0cc3c822ba5eb76b12ca4df27344d49cf2efc29b6533272074eed7249da5ad",
+  "sourceHash": "sha256:4794db4782db5963dbc63bb9a2da5b413666ff4abcc3ec736b94474bf39a6d59",
   "outline": [
     {
       "heading": "Файлы памяти: три пишешь ты, один — Claude",

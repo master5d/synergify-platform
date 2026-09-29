@@ -17,6 +17,8 @@ import { mdxComponents } from '@/components/mdx-components'
 import { bindSelfCheck } from '@/components/self-check-bound'
 import { bindInterestExample } from '@/components/interest-example-bound'
 import { bindRolePlay } from '@/components/role-play-bound'
+import { bindFadedExample } from '@/components/faded-example-bound'
+import { bindNoAiCheck } from '@/components/no-ai-check-bound'
 import { ModuleObjectives } from '@/components/module-objectives'
 import { LessonViews } from '@/components/lesson-views'
 import { SpacedReview } from '@/components/spaced-review'
@@ -88,6 +90,8 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
                 SelfCheck: bindPretestEcho(bindSelfCheck(moduleMeta.checks, lc, moduleSlug), pretestIds, lc),
                 InterestExample: bindInterestExample(moduleSlug, unitSlug, locale === 'en' ? 'en' : 'ru'),
                 RolePlay: bindRolePlay(moduleSlug, unitSlug, locale === 'en' ? 'en' : 'ru'),
+                FadedExample: bindFadedExample(moduleSlug, unitSlug, locale === 'en' ? 'en' : 'ru'),
+                NoAiCheck: bindNoAiCheck(moduleSlug, unitSlug, locale === 'en' ? 'en' : 'ru'),
               }}
               options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
             />

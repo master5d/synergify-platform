@@ -35,6 +35,13 @@ toward the multi-course platform (see `LMS/_template/`, `docs/curriculum-backlog
   в полном копируемом промпте, не в `?q=`-prefill. Юнит без записи — только ключевые идеи. Заполнено пилотно
   (tochka-sborki: 04/u2, 04/u5, 05/u4); у living-practice список пуст намеренно.
 
+- `faded-examples.ts` — faded worked examples (`FADED_EXAMPLES`, BACKLOG «Педагогика 4», intake LMS#20): полный разбор →
+  та же задача с пропусками (эталон скрыт до «Сравнить с эталоном») → самостоятельно; «Сразу к самостоятельной» без штрафа.
+  Метка в практике — `<FadedExample id="…"/>`; ступени и гварды — `lib/faded-example.ts` / `lib/faded-example.test.ts`.
+- `no-ai-checks.ts` — «Проверь себя без ИИ» (`NO_AI_CHECKS`, BACKLOG «Педагогика 5»): 1–2 вопроса своими словами с
+  опорными пунктами в конце практики с агентом. Метка — `<NoAiCheck id="…"/>`; пояснение «зачем» (Bastani 2025) и гварды —
+  `lib/no-ai-check.ts` / `lib/no-ai-check.test.ts`. У living-practice оба списка пусты (волна 23 «Тишину» не трогает).
+
 ## Convention
 - Course data lives here; engine logic stays in `lib/`.
 - **Web-only data** (showcase, dungeon-flavor): import via `@/lib/course/*`.
