@@ -5,7 +5,7 @@
   "unit": "u2-channel",
   "locale": "en",
   "title": "A channel: your agent within reach",
-  "sourceHash": "sha256:ac97f2dc9b12efb13e52962d5ecb14c22908638e3b7c21f4f6ccdab9a111a788",
+  "sourceHash": "sha256:9e12d4e8850c8a3d37361308be6b0e02d32ef9e669f3ba6694c5331833166602",
   "outline": [
     {
       "heading": "How a channel works",
@@ -26,6 +26,16 @@
         },
         {
           "text": "Telegram — following the documentation:",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "If it does not work",
+      "points": [
+        {
+          "text": "A first run usually trips over the marketplace, a channel that is not running, a busy port or the requirements",
           "origin": "extract"
         }
       ],
@@ -74,6 +84,12 @@
         "points": [
           "Fakechat is a rehearsal with no outside services.",
           "You follow the documentation for Telegram."
+        ]
+      },
+      {
+        "sourceHash": "sha256:459ad5ad971f4120601048495e5a587fa0568c71d885b7ccd38f39052fa2c609",
+        "points": [
+          "Your first run might fail because of the marketplace, an inactive channel, a busy port, or the requirements."
         ]
       },
       {

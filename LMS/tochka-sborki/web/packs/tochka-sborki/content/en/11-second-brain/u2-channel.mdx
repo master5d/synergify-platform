@@ -47,7 +47,14 @@ Three properties matter:
 
 Claude Code has **Channels** for this — [official documentation](https://code.claude.com/docs/en/channels). Right now it is a research preview: the set of channels and the command syntax may change. So the steps below retell the documentation, and the original always wins.
 
-The preview includes Telegram, Discord and iMessage. Each channel is a plugin from the official marketplace. The plugins need [Bun](https://bun.sh).
+**Requirements:**
+
+- You sign in to Claude Code with a claude.ai account or an Anthropic Console key. Channels are not available through Amazon Bedrock, Google Cloud or Microsoft Foundry.
+- Pro and Max without an organization — it works right away. On Team and Enterprise, an admin with the Owner role has to enable channels first.
+- [Bun](https://bun.sh): the channel plugins run on it. Check with `bun --version`.
+- The `--channels` flag does not show up in `claude --help` during the preview, but it works.
+
+The preview includes Telegram, Discord and iMessage (iMessage is macOS only). Each channel is a plugin from the official marketplace. When the installer asks for a scope, choose user scope: the plugin is then available in all your projects.
 
 **A rehearsal with no outside services — fakechat.** It is a demo channel: a chat in the browser on your own computer, with no bots or tokens.
 
@@ -61,18 +68,29 @@ Then exit Claude Code and start it again with the channel:
 claude --channels plugin:fakechat@claude-plugins-official
 ```
 
-Open `http://localhost:8787` and send a message — it arrives in your session, and the reply comes back to the browser.
+On startup, Claude Code shows a notice: messages from `plugin:fakechat@claude-plugins-official` go straight into this session.
+
+Open `http://localhost:8787` and send a message. In the terminal it shows up as a line like `← fakechat · web: …`. The agent answers by calling the `reply` tool: the terminal shows the call itself, while the reply text appears only in the browser. If Claude Code asks for permission before the first reply, approve it.
 
 **Telegram — following the documentation:**
 
 1. In Telegram, open [@BotFather](https://t.me/BotFather), send `/newbot`, get the bot token.
-2. In Claude Code: `/plugin install telegram@claude-plugins-official`.
-3. Save the token: `/telegram:configure <token>`. It lands in `~/.claude/channels/telegram/.env` — outside the project and outside git.
+2. In Claude Code: `/plugin install telegram@claude-plugins-official`. If the installer says "Run /reload-plugins to activate", run `/reload-plugins`.
+3. Save the token: `/telegram:configure <token>`. It lands in `~/.claude/channels/telegram/.env` — outside the project and outside git. Alternatively, set the `TELEGRAM_BOT_TOKEN` environment variable before starting Claude Code.
 4. Restart: `claude --channels plugin:telegram@claude-plugins-official`.
 5. Message the bot — it replies with a pairing code. In Claude Code: `/telegram:access pair <code>`.
 6. Close the door to everyone else: `/telegram:access policy allowlist`.
 
 After step six, messages from other accounts are silently dropped. Do not skip this step.
+
+## If it does not work
+
+A first run usually trips over the marketplace, a channel that is not running, a busy port or the requirements:
+
+- **"Marketplace "claude-plugins-official" not found".** Add the marketplace: `/plugin marketplace add anthropics/claude-plugins-official` — then retry the install.
+- **The bot sends no code.** Check that Claude Code is running with `--channels`: without a running channel the bot stays silent.
+- **Port 8787 is busy after a crash.** Most likely the previous channel server — a Bun process — is still hanging. Find the process holding the port: on Windows — with Task Manager or Resource Monitor, on macOS and Linux — `lsof -i :8787`. Close that process and start again.
+- **No channel notice on startup and no messages.** Recheck the requirements above: sign-in method, plan, Bun.
 
 ## Email and other agents
 
@@ -84,7 +102,11 @@ Keep in mind: anyone in the world can send you an email. There is no built-in li
 
 ## When you are away from the terminal
 
-If the agent needs your permission for an action, the session waits for your answer. The documentation mentions a mode that skips such prompts. For an agent that can be reached from outside, we do not turn it on — unit 4 explains why.
+If the agent needs your permission for an action, the session waits for your answer. A channel can forward that prompt to the messenger. Then anyone on the allowed list can approve or deny the agent's action. One more reason to keep only yourself there (unit 4, rule 5).
+
+The documentation also mentions a mode that skips such prompts. For an agent that can be reached from outside, we do not turn it on — unit 4 explains why.
+
+_Tested live in 2026-09 on Claude Code 2.1.x: fakechat._
 
 <SelfCheck id="c4"/>
 
@@ -104,7 +126,7 @@ Once the channel works, send from the browser:
 What is in my STATE.md right now? Keep it short.
 ```
 
-Look at the terminal: what the incoming message and the reply call look like.
+Look at the terminal: what the incoming message and the reply call look like. The reply text will not be there — it goes to the browser.
 
 If you want Telegram, connect it following the documentation — step six included. Then send the same question from your phone.
 
