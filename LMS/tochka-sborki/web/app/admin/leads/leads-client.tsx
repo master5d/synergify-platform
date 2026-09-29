@@ -23,6 +23,23 @@ interface Stats {
   dropoff?: DropoffRow[]
 }
 
+// GET /api/admin/email-chains/dry-run — «кому что ушло бы сегодня» (без email, id обрезан до 8 символов).
+interface ChainsDryRun {
+  at: number
+  enabled: boolean
+  candidates: number
+  byStep: Record<string, number>
+  skipped: Record<string, number>
+}
+const SKIP_LABEL: Record<string, string> = {
+  optout: 'отписаны',
+  throttle: 'письмо было < 20 ч назад',
+  telegram: 'напоминания идут в Telegram',
+  quiet: 'активны < 20 ч назад',
+  'out-of-window': 'вне окна цепочки',
+  'no-step': 'шаг уже ушёл / нечего слать',
+}
+
 const lessonLabel = (r: { module: string | null; unit: string | null }) =>
   r.module == null ? 'ничего не завершили' : r.unit ? `${r.module} / ${r.unit}` : r.module
 
@@ -32,6 +49,7 @@ export function LeadsClient() {
   const [q, setQ] = useState('')
   const [syncMsg, setSyncMsg] = useState<string | null>(null)
   const [stats, setStats] = useState<Stats | null>(null)
+  const [chains, setChains] = useState<ChainsDryRun | null>(null)
 
   useEffect(() => {
     fetch('/api/admin/leads?limit=2000', { credentials: 'include' })
@@ -47,6 +65,13 @@ export function LeadsClient() {
     fetch('/api/admin/stats', { credentials: 'include' })
       .then(r => (r.ok ? r.json() : null))
       .then(d => { if (d) setStats(d) })
+      .catch(() => {})
+  }, [])
+
+  useEffect(() => {
+    fetch('/api/admin/email-chains/dry-run', { credentials: 'include' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => { if (d) setChains(d) })
       .catch(() => {})
   }, [])
 
@@ -148,6 +173,37 @@ export function LeadsClient() {
                 ))}
               </ul>
             </>
+          )}
+        </section>
+      )}
+      {chains && (
+        <section style={{ marginBottom: '2rem' }}>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '.5rem' }}>Учебные письма: что ушло бы сегодня</h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '.85rem', marginBottom: '.75rem' }}>
+            Сухой прогон цепочек, ничего не отправлено. Кандидатов: <b style={{ color: 'var(--text-primary)' }}>{chains.candidates}</b>
+            {!chains.enabled && ' · рассылка выключена (EMAIL_CHAINS_ENABLED=0)'}
+          </p>
+          <table style={{ borderCollapse: 'collapse', fontSize: '.85rem', minWidth: 320 }}>
+            <thead>
+              <tr style={{ textAlign: 'left', color: 'var(--text-secondary)' }}>
+                <th style={{ padding: '6px 8px' }}>шаг</th><th style={{ padding: '6px 8px' }}>писем</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.keys(chains.byStep).length === 0 && (
+                <tr style={{ borderTop: '1px solid var(--border-color)' }}><td style={{ padding: '6px 8px' }} colSpan={2}>сегодня ничего</td></tr>
+              )}
+              {Object.entries(chains.byStep).map(([step, n]) => (
+                <tr key={step} style={{ borderTop: '1px solid var(--border-color)' }}>
+                  <td style={{ padding: '6px 8px' }}>{step}</td><td style={{ padding: '6px 8px' }}>{n}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {Object.keys(chains.skipped).length > 0 && (
+            <p style={{ color: 'var(--text-secondary)', fontSize: '.8rem', marginTop: '.5rem' }}>
+              Пропущены: {Object.entries(chains.skipped).map(([k, n]) => `${SKIP_LABEL[k] ?? k} — ${n}`).join(' · ')}
+            </p>
           )}
         </section>
       )}

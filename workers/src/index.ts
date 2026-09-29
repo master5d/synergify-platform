@@ -7,6 +7,7 @@ import { handleOAuthStart, handleOAuthCallback } from './handlers/oauth'
 import { handleTelegramWebhook } from './handlers/telegram-webhook'
 import { runDailyNudge } from './handlers/nudge-cron'
 import { runEmailChains } from './handlers/email-chain-cron'
+import { handleEmailChainDryRun } from './handlers/email-chain-dry-run'
 import { handleEmailUnsubscribe } from './handlers/email-unsubscribe'
 import { handleSupportCheckout, handleProductCheckout } from './handlers/checkout'
 import { handleStripeWebhook } from './handlers/stripe-webhook'
@@ -179,6 +180,9 @@ export default {
       } else if (path === '/api/admin/stats' && method === 'GET') {
         const auth = await requireOwner(request, env)
         response = auth instanceof Response ? auth : await getStats(env.DB)
+      } else if (path === '/api/admin/email-chains/dry-run' && method === 'GET') {
+        const auth = await requireOwner(request, env)
+        response = auth instanceof Response ? auth : await handleEmailChainDryRun(env, url)
       } else if (path === '/api/admin/content-demand/briefs' && method === 'GET') {
         const auth = await requireOwner(request, env)
         response = auth instanceof Response ? auth : await listBriefs(env.DB, url.searchParams.get('status') ?? undefined)

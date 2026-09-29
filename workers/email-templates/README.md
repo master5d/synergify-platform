@@ -36,6 +36,16 @@
 - напоминания не шлются тем, кто привязал Telegram и не отказался от напоминаний там: канал один;
 - `lapse`-эпизод начинается заново после новой активности (ключ шага включает день последней активности).
 
+## Сухой прогон: «кому что ушло бы сегодня»
+
+`GET /api/admin/email-chains/dry-run?at=<unix-секунды|ISO-дата>` (только владелец, как `/api/admin/stats`;
+`at` не задан — сейчас). Тот же отбор кандидатов и та же политика, что у cron (`dryRunEmailChains` в
+`handlers/email-chain-cron.ts`), но без записи в D1 и без Listmonk; работает и при `EMAIL_CHAINS_ENABLED=0`.
+Ответ: `{ at, enabled, candidates, byStep: {шаг: n}, skipped: {причина: n}, items: [{ user, course, step, stepKey, locale }] }`,
+`user` — первые 8 символов id, email нет. Причины: `optout`, `throttle`, `telegram`, `quiet`, `out-of-window`,
+`no-step`. Чего прогон не видит: blocklist в Listmonk, отсутствующий tx-шаблон, потолок 200 писем за прогон.
+Блок «Учебные письма: что ушло бы сегодня» — на `/admin/leads`.
+
 ## Имена шаблонов
 
 `ts-<step>-<lang>`, где `lang` — `ru` или `en`: `ts-start-1-ru`, `ts-milestone-en` и т. д. Всего 18.

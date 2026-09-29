@@ -98,9 +98,27 @@ export const updateKey = (mod: string, version: number) => `update@${mod}@v${ver
 /** Начало дня ревизии (UTC), секунды. */
 export const revisionAt = (r: ModuleRevision) => Math.floor(Date.parse(`${r.date}T00:00:00Z`) / 1000)
 
+/** Почему шаг не выбран — те же гейты, что в политике (сухой прогон считает по ним). */
+export type SkipReason =
+  | 'optout'          // отписан от писем
+  | 'throttle'        // учебное письмо было меньше 20 ч назад
+  | 'telegram'        // напоминания идут в Telegram
+  | 'quiet'           // был активен меньше 20 ч назад
+  | 'out-of-window'   // ни одно окно цепочки сейчас не открыто
+  | 'no-step'         // окно открыто, но шаг уже отправлен / вести некуда (выпускник, всё закрыто)
+
+export type ChainVerdict = { pick: ChainPick; reason: null } | { pick: null; reason: SkipReason }
+
 export function pickStep(i: ChainInput): ChainPick | null {
-  if (i.emailOptout) return null
-  if (i.lastEmailAt != null && i.nowSec - i.lastEmailAt < EMAIL_THROTTLE_SEC) return null
+  return explainStep(i).pick
+}
+
+/** То же решение, что pickStep, плюс причина отказа. pickStep — тонкая обёртка над ним. */
+export function explainStep(i: ChainInput): ChainVerdict {
+  const skip = (reason: SkipReason): ChainVerdict => ({ pick: null, reason })
+  const ok = (p: ChainPick): ChainVerdict => ({ pick: p, reason: null })
+  if (i.emailOptout) return skip('optout')
+  if (i.lastEmailAt != null && i.nowSec - i.lastEmailAt < EMAIL_THROTTLE_SEC) return skip('throttle')
 
   const l = i.locale
   const base: ChainData = { course_name: i.course.name[l], home_url: homeUrl(l) }
@@ -109,8 +127,8 @@ export function pickStep(i: ChainInput): ChainPick | null {
     .filter(e => !i.sent.has(milestoneKey(e.subject)))
     .sort((a, b) => b.created_at - a.created_at || i.course.spine.indexOf(b.subject) - i.course.spine.indexOf(a.subject))
   const allMilestoneKeys = unsentMilestones.map(e => milestoneKey(e.subject))
-  const pick = (step: Step, stepKey: string, data: ChainData, alsoMark: string[] = []): ChainPick =>
-    ({ step, stepKey, data: { ...base, ...data }, alsoMark })
+  const pick = (step: Step, stepKey: string, data: ChainData, alsoMark: string[] = []): ChainVerdict =>
+    ok({ step, stepKey, data: { ...base, ...data }, alsoMark })
 
   // 1. finish — курс закрыт. Висящие milestone схлопываются в него.
   if (i.courseEventAt != null) {
@@ -159,22 +177,22 @@ export function pickStep(i: ChainInput): ChainPick | null {
   }
 
   // 3–4. Напоминания: канал один (Telegram важнее), и не сразу после активности.
-  if (i.telegramNudges) return null
+  if (i.telegramNudges) return skip('telegram')
   const lastActivityAt = i.progress.reduce<number | null>(
     (m, r) => Math.max(m ?? 0, r.viewed_at ?? 0, r.completed_at ?? 0), null)
-  if (lastActivityAt != null && i.nowSec - lastActivityAt < QUIET_SEC) return null
+  if (lastActivityAt != null && i.nowSec - lastActivityAt < QUIET_SEC) return skip('quiet')
 
   // 3. lapse — курс начат и не закончен.
   if (lastActivityAt != null) {
-    if (i.courseEventAt != null) return null
+    if (i.courseEventAt != null) return skip('no-step')
     const resume = resumeTarget(i, done)
-    if (!resume) return null
+    if (!resume) return skip('no-step')
     const idle = i.nowSec - lastActivityAt
     const episode = utcDay(lastActivityAt)
     for (const step of ['lapse-3', 'lapse-2', 'lapse-1'] as const) {
       if (!within(idle, WINDOWS[step])) continue
       const key = `${step}@${episode}`
-      if (i.sent.has(key)) return null
+      if (i.sent.has(key)) return skip('no-step')
       const resumeUrl = lessonUrl(resume.slug, l)
       const data: ChainData =
         step === 'lapse-1' ? { module_title: titleOf(resume.module, l), resume_url: resumeUrl, done_modules: countSpine(i.course, done), total_modules: i.course.spine.length }
@@ -182,7 +200,7 @@ export function pickStep(i: ChainInput): ChainPick | null {
         : { resume_url: resumeUrl }
       return pick(step, key, data)
     }
-    return null
+    return skip('out-of-window')
   }
 
   // 4. start — курс не начат.
@@ -192,7 +210,8 @@ export function pickStep(i: ChainInput): ChainPick | null {
     const unit = step === 'start-1' ? i.course.startUnit : i.course.azbukaUnit
     return pick(step, step, { start_url: lessonUrl(unit, l) })
   }
-  return null
+  const inWindow = (['start-2', 'start-1'] as const).some(s => within(age, WINDOWS[s]))
+  return skip(inWindow ? 'no-step' : 'out-of-window')
 }
 
 /** Закрытые модули: событие progress_events или старая запись прогресса целым модулем. */

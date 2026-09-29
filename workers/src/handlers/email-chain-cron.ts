@@ -3,8 +3,9 @@
 // Выключено по умолчанию (EMAIL_CHAINS_ENABLED="0"). Одно письмо не роняет прогон.
 import type { Env } from '../lib/types'
 import {
-  CHAIN_COURSES, WINDOWS, pickLocale, pickStep, templateName, revisionAt,
-  type ChainCourse, type ChainPick, type ModuleEvent, type ProgressRow, EMAIL_THROTTLE_SEC,
+  CHAIN_COURSES, WINDOWS, pickLocale, pickStep, explainStep, templateName, revisionAt,
+  type ChainCourse, type ChainInput, type ChainPick, type ModuleEvent, type ProgressRow, EMAIL_THROTTLE_SEC,
+  type Locale, type SkipReason, type Step,
 } from '../lib/email-chains'
 import { unsubscribeUrl } from '../lib/email-unsubscribe'
 import { addCrmContact } from '../lib/crm'
@@ -22,6 +23,7 @@ interface Candidate {
   created_at: number
   telegram_id: string | null
   nudge_optout: number
+  email_optout: number
   last_email_at: number | null
 }
 
@@ -73,29 +75,9 @@ type Outcome = 'sent' | 'failed' | 'none'
 async function processCandidate(
   env: Env, lm: Listmonk, templates: Map<string, number>, course: ChainCourse, c: Candidate, nowSec: number,
 ): Promise<Outcome> {
-  const [prog, events, sends] = await Promise.all([
-    env.DB.prepare('SELECT lesson_slug, viewed_at, completed_at FROM progress WHERE user_id = ? AND course = ?')
-      .bind(c.id, course.key).all<ProgressRow>(),
-    env.DB.prepare('SELECT kind, subject, created_at FROM progress_events WHERE user_id = ? AND course = ?')
-      .bind(c.id, course.key).all<ModuleEvent & { kind: string }>(),
-    env.DB.prepare('SELECT step_key, sent_at FROM email_sends WHERE user_id = ? AND course = ?')
-      .bind(c.id, course.key).all<{ step_key: string; sent_at: number }>(),
-  ])
-  const ev = events.results ?? []
-  const locale = pickLocale(c.language)
-  const pick = pickStep({
-    nowSec,
-    locale,
-    course,
-    createdAt: c.created_at,
-    emailOptout: false,               // отфильтрован в SQL
-    lastEmailAt: c.last_email_at,
-    telegramNudges: c.telegram_id != null && !c.nudge_optout,
-    progress: prog.results ?? [],
-    moduleEvents: ev.filter(e => e.kind === 'module'),
-    courseEventAt: ev.find(e => e.kind === 'course')?.created_at ?? null,
-    sent: new Map((sends.results ?? []).map(s => [s.step_key, s.sent_at])),
-  })
+  const input = await chainInput(env, course, c, nowSec)
+  const locale = input.locale
+  const pick = pickStep(input)
   if (!pick) return 'none'
 
   const name = templateName(course, pick.step, locale)
@@ -141,8 +123,80 @@ async function processCandidate(
   return 'sent'
 }
 
-/** Кандидаты: не отписаны, не писали 20 ч, и хоть какое-то окно цепочки может быть открыто. */
-async function candidates(env: Env, course: ChainCourse, nowSec: number): Promise<Candidate[]> {
+/** Вход политики для одного кандидата — только SELECT'ы. Общий путь cron и сухого прогона. */
+async function chainInput(env: Env, course: ChainCourse, c: Candidate, nowSec: number): Promise<ChainInput> {
+  const [prog, events, sends] = await Promise.all([
+    env.DB.prepare('SELECT lesson_slug, viewed_at, completed_at FROM progress WHERE user_id = ? AND course = ?')
+      .bind(c.id, course.key).all<ProgressRow>(),
+    env.DB.prepare('SELECT kind, subject, created_at FROM progress_events WHERE user_id = ? AND course = ?')
+      .bind(c.id, course.key).all<ModuleEvent & { kind: string }>(),
+    env.DB.prepare('SELECT step_key, sent_at FROM email_sends WHERE user_id = ? AND course = ?')
+      .bind(c.id, course.key).all<{ step_key: string; sent_at: number }>(),
+  ])
+  const ev = events.results ?? []
+  return {
+    nowSec,
+    locale: pickLocale(c.language),
+    course,
+    createdAt: c.created_at,
+    emailOptout: !!c.email_optout,    // в cron отфильтрован в SQL; сухой прогон видит и отписанных
+    lastEmailAt: c.last_email_at,
+    telegramNudges: c.telegram_id != null && !c.nudge_optout,
+    progress: prog.results ?? [],
+    moduleEvents: ev.filter(e => e.kind === 'module'),
+    courseEventAt: ev.find(e => e.kind === 'course')?.created_at ?? null,
+    sent: new Map((sends.results ?? []).map(s => [s.step_key, s.sent_at])),
+  }
+}
+
+export interface DryRunItem { user: string; course: string; step: Step; stepKey: string; locale: Locale }
+export interface DryRunResult {
+  at: number
+  enabled: boolean                                  // EMAIL_CHAINS_ENABLED — шлёт ли cron на самом деле
+  candidates: number
+  byStep: Partial<Record<Step, number>>
+  skipped: Partial<Record<SkipReason, number>>
+  items: DryRunItem[]
+}
+
+/**
+ * Сухой прогон: тот же отбор кандидатов и та же политика, что runEmailChains, на момент nowSec —
+ * без записи в D1 и без Listmonk. В ответе нет email и полного id (user = первые 8 символов).
+ * Гейты optout/throttle cron отсекает в SQL; здесь SQL их не отсекает, а политика (те же проверки)
+ * называет причину — набор выбранных шагов от этого не меняется. Чего сухой прогон знать не может:
+ * blocklist подписчика в Listmonk, отсутствующий tx-шаблон и потолок MAX_SENDS_PER_RUN.
+ */
+export async function dryRunEmailChains(
+  env: Env,
+  nowSec: number = Math.floor(Date.now() / 1000),
+  courses: readonly ChainCourse[] = CHAIN_COURSES,
+): Promise<DryRunResult> {
+  const res: DryRunResult = {
+    at: nowSec, enabled: strip(env.EMAIL_CHAINS_ENABLED) === '1', candidates: 0, byStep: {}, skipped: {}, items: [],
+  }
+  const picked = new Set<string>()   // cron ставит last_email_at → в следующем курсе этот ученик под лимитом
+  for (const course of courses) {
+    for (const c of await candidates(env, course, nowSec, { gated: false })) {
+      res.candidates++
+      const input = await chainInput(env, course, c, nowSec)
+      const v = picked.has(c.id) && !input.emailOptout
+        ? { pick: null, reason: 'throttle' as const }
+        : explainStep(input)
+      if (!v.pick) {
+        res.skipped[v.reason] = (res.skipped[v.reason] ?? 0) + 1
+        continue
+      }
+      picked.add(c.id)
+      res.byStep[v.pick.step] = (res.byStep[v.pick.step] ?? 0) + 1
+      res.items.push({ user: c.id.slice(0, 8), course: course.key, step: v.pick.step, stepKey: v.pick.stepKey, locale: input.locale })
+    }
+  }
+  return res
+}
+
+/** Кандидаты: не отписаны, не писали 20 ч, и хоть какое-то окно цепочки может быть открыто.
+ *  gated: false (сухой прогон) — без гейтов optout/throttle: их проверит политика и назовёт причину. */
+async function candidates(env: Env, course: ChainCourse, nowSec: number, opts: { gated: boolean } = { gated: true }): Promise<Candidate[]> {
   const regSince = nowSec - WINDOWS['start-2'][1] * DAY
   const activeSince = nowSec - WINDOWS['lapse-3'][1] * DAY
   const eventSince = nowSec - Math.max(WINDOWS.milestone[1], WINDOWS['finish-1'][1]) * DAY
@@ -165,17 +219,18 @@ async function candidates(env: Env, course: ChainCourse, nowSec: number): Promis
       `AND p.lesson_slug IN (${marks}) AND p.completed_at IS NOT NULL AND p.completed_at < ?)`
     updateArgs.push(course.key, before, ...mods, course.key, ...mods, before)
   }
+  const gateSql = opts.gated ? 'email_optout = 0 AND (last_email_at IS NULL OR last_email_at < ?) AND ' : ''
+  const gateArgs = opts.gated ? [nowSec - EMAIL_THROTTLE_SEC] : []
   const { results } = await env.DB.prepare(
-    'SELECT id, email, language, created_at, telegram_id, nudge_optout, last_email_at FROM users u ' +
-    "WHERE email_optout = 0 AND email IS NOT NULL AND email != '' " +
-    'AND (last_email_at IS NULL OR last_email_at < ?) AND (' +
+    'SELECT id, email, language, created_at, telegram_id, nudge_optout, email_optout, last_email_at FROM users u ' +
+    "WHERE email IS NOT NULL AND email != '' AND " + gateSql + '(' +
     'created_at >= ? ' +
     'OR EXISTS (SELECT 1 FROM progress p WHERE p.user_id = u.id AND p.course = ? AND MAX(p.viewed_at, COALESCE(p.completed_at, 0)) >= ?) ' +
     'OR EXISTS (SELECT 1 FROM progress_events e WHERE e.user_id = u.id AND e.course = ? AND e.created_at >= ?) ' +
     "OR EXISTS (SELECT 1 FROM email_sends s WHERE s.user_id = u.id AND s.course = ? AND s.step_key = 'finish-1' AND s.sent_at >= ?)" +
     updateSql +
     ') ORDER BY created_at'
-  ).bind(nowSec - EMAIL_THROTTLE_SEC, regSince, course.key, activeSince, course.key, eventSince, course.key, finishSince, ...updateArgs)
+  ).bind(...gateArgs, regSince, course.key, activeSince, course.key, eventSince, course.key, finishSince, ...updateArgs)
     .all<Candidate>()
   return results ?? []
 }

@@ -563,9 +563,11 @@
 
 ## Owner-gated (ждут решения владельца)
 
-- [ ] **Учебные цепочки: сухой прогон «кому что ушло бы сегодня»** (intake LMS#19, Rippling — предпросмотр перед запуском).
-  Админ-эндпоинт (requireAdmin, как `/api/admin/stats`) или скрипт: по живым D1-данным прогоняет `pickStep` без отправки и без
-  email в выводе — счётчики по шагам + обезличенные id. Сейчас сухой прогон при включении цепочек (2026-09-28) делался руками.
+- [x] **Учебные цепочки: сухой прогон «кому что ушло бы сегодня» — СДЕЛАНО 2026-09-28** (intake LMS#19, Rippling).
+  `GET /api/admin/email-chains/dry-run?at=<unix|ISO>` (requireOwner, как `/api/admin/stats`): `dryRunEmailChains` идёт тем же
+  путём, что cron (общие `candidates` + `chainInput`, политика `explainStep` = `pickStep` + причина отказа), без записи в D1 и
+  без Listmonk; ответ — счётчики по шагам и причинам пропуска, `items` с id в 8 символов, без email. Блок на `/admin/leads`,
+  вызов — `workers/email-templates/README.md`.
 - [x] **Сертификат: «Добавить в профиль LinkedIn» — СДЕЛАНО 2026-09-28** (intake LMS#18, Coursera). `lib/linkedin-add-to-profile.ts`:
   `linkedin.com/profile/add?startTask=CERTIFICATION_NAME` + organizationName, issueYear/Month из `completedAt` проверки, certId = код,
   certUrl = verify-URL; кнопка только при полученном коде. Рядом с «Поделиться в LinkedIn» — ссылка
