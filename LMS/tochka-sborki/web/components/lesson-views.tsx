@@ -1,9 +1,13 @@
 'use client'
-import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
+import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import type { OutlineNode } from '@/lib/lesson-views/extract'
 import type { LessonViewsData } from '@/lib/lesson-views/load'
 import { recordAnswer } from '@/lib/spaced-review'
 import { COURSE } from '@/lib/course'
+import {
+  THINK_LOCKED, THINK_MIN, canOpen, filledThoughts, parseThink, readJson, thinkEdit, thinkKey, thinkSkip, thinkSubmit, writeJson,
+  type ThinkState,
+} from '@/lib/pedagogy/local'
 
 // Представления урока из одного источника (intake LMS#8, спека 2026-09-28-lesson-views).
 // «Текст» — сам урок (children), он не размонтируется: шаг мастера и ответы самопроверок живут дальше.
@@ -19,6 +23,16 @@ export const T = {
     recallHint: 'Сначала вспомни ответ сам — потом открой.',
     recalled: 'Вспомнил', notRecalled: 'Не вспомнил', graded: 'Отмечено: вопрос вернётся в блоке «Вспомни», когда подойдёт срок.',
     mapNote: 'Разделы урока и их ключевые фразы. Узлы сворачиваются.',
+    thinkTitle: 'Сначала своими словами',
+    thinkLead: (n: number) => `Запиши ${n}–3 мысли по уроку: что запомнил, что здесь главное. Потом откроются «Конспект» и «Карта» — и ты сравнишь.`,
+    thinkSlot: (i: number) => `Мысль ${i}`,
+    thinkPlaceholder: ['Что я запомнил…', 'Что здесь главное…', 'Что пока непонятно (можно не писать)…'],
+    thinkOpen: 'Открыть и сравнить',
+    thinkNeed: (n: number, k: number) => `Ещё ${n - k} из ${n}: пара слов — уже мысль.`,
+    thinkWhy: 'Почему стоит сначала самому: когда вспоминаешь и объясняешь своими словами, урок укладывается прочнее, чем при чтении готового конспекта. Минута своих слов окупается.',
+    thinkSkip: 'Пропустить',
+    mine: 'Мои мысли до конспекта',
+    mineNote: 'Сравни: что совпало с ключевыми фразами, что ты упустил, что добавил от себя.',
   },
   en: {
     label: 'How to read this lesson',
@@ -31,6 +45,16 @@ export const T = {
     recallHint: 'Recall the answer yourself first, then reveal it.',
     recalled: 'I remembered', notRecalled: 'I did not', graded: 'Noted: the question comes back in “Recall” when it is due.',
     mapNote: 'Lesson sections and their key sentences. Nodes collapse.',
+    thinkTitle: 'Your own words first',
+    thinkLead: (n: number) => `Write ${n}–3 thoughts about the lesson: what you remember, what matters most. Then “Summary” and “Map” open — and you compare.`,
+    thinkSlot: (i: number) => `Thought ${i}`,
+    thinkPlaceholder: ['What I remember…', 'What matters most here…', 'What is still unclear (optional)…'],
+    thinkOpen: 'Open and compare',
+    thinkNeed: (n: number, k: number) => `${n - k} more of ${n}: a few words already count.`,
+    thinkWhy: 'Why yourself first: recalling and explaining in your own words makes the lesson stick better than reading a ready-made summary. A minute of your own words pays off.',
+    thinkSkip: 'Skip',
+    mine: 'My thoughts before the summary',
+    mineNote: 'Compare: what matches the key sentences, what you missed, what you added yourself.',
   },
 }
 
@@ -154,10 +178,76 @@ function MapView({ data, locale }: { data: LessonViewsData; locale: 'ru' | 'en' 
   )
 }
 
+/** «Сначала сам» (LMS#20, Педагогика 3; ICAP, self-explanation): 2–3 своих мысли — потом конспект.
+ *  «Пропустить» есть всегда, но с пояснением, зачем сначала своими словами. */
+export function ThinkFirstGate({ state, onChange, locale }: { state: ThinkState; onChange: (s: ThinkState) => void; locale: 'ru' | 'en' }) {
+  const t = T[locale]
+  const base = useId()
+  const k = filledThoughts(state.thoughts).length
+  const ready = canOpen(state)
+  return (
+    <section style={box} aria-labelledby={`${base}-h`}>
+      <h2 id={`${base}-h`} style={{ fontSize: '1.05rem', margin: '0 0 0.4rem', color: 'var(--text-primary)' }}>{t.thinkTitle}</h2>
+      <p style={note}>{t.thinkLead(THINK_MIN)}</p>
+      {state.thoughts.map((v, i) => (
+        <label key={i} style={{ display: 'block', margin: '0 0 0.6rem' }}>
+          <span style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: '0.2rem' }}>{t.thinkSlot(i + 1)}</span>
+          <textarea rows={2} value={v} placeholder={t.thinkPlaceholder[i] ?? ''} onChange={e => onChange(thinkEdit(state, i, e.target.value))}
+            style={{ width: '100%', boxSizing: 'border-box', font: 'inherit', padding: '0.5rem 0.7rem', borderRadius: 'var(--radius)', border: '1px solid var(--border-color)', background: 'transparent', color: 'var(--text-primary)', resize: 'vertical' }} />
+        </label>
+      ))}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem 1rem', alignItems: 'center', marginTop: '0.5rem' }}>
+        <button type="button" disabled={!ready} onClick={() => onChange(thinkSubmit(state))}
+          style={{ ...btn, borderColor: 'var(--text-accent)', color: 'var(--text-accent)', opacity: ready ? 1 : 0.5, cursor: ready ? 'pointer' : 'not-allowed' }}>
+          {t.thinkOpen}
+        </button>
+        {!ready && <span aria-live="polite" style={{ ...note, margin: 0 }}>{t.thinkNeed(THINK_MIN, k)}</span>}
+      </div>
+      <p style={{ ...note, margin: '1.25rem 0 0.4rem' }}>{t.thinkWhy}</p>
+      <button type="button" style={toggle} onClick={() => onChange(thinkSkip(state))}>{t.thinkSkip}</button>
+    </section>
+  )
+}
+
+function MyThoughts({ thoughts, locale }: { thoughts: string[]; locale: 'ru' | 'en' }) {
+  const t = T[locale]
+  return (
+    <aside style={{ ...box, flex: '1 1 14rem', borderStyle: 'dashed' }} aria-label={t.mine}>
+      <p style={{ ...note, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--text-accent)', margin: '0 0 0.5rem' }}>{t.mine}</p>
+      <ul style={{ margin: '0 0 0.75rem', paddingLeft: '1.2rem', color: 'var(--text-primary)', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
+        {filledThoughts(thoughts).map((x, i) => <li key={i}>{x}</li>)}
+      </ul>
+      <p style={{ ...note, margin: 0 }}>{t.mineNote}</p>
+    </aside>
+  )
+}
+
+/** Содержимое вкладки с учётом «сначала сам»: закрыто — поле мыслей; открыто — вид и (если писал) свои мысли рядом. */
+export function GatedView({ view, data, locale, think, onThink }: {
+  view: Exclude<ViewKey, 'text'>; data: LessonViewsData; locale: 'ru' | 'en'; think: ThinkState; onThink: (s: ThinkState) => void
+}) {
+  const gated = data.thinkFirst === true && (view === 'summary' || view === 'map')
+  if (gated && think.status === 'locked') return <ThinkFirstGate state={think} onChange={onThink} locale={locale} />
+  const body = view === 'summary' ? <Summary data={data} locale={locale} />
+    : view === 'cards' ? <Cards data={data} locale={locale} />
+    : <MapView data={data} locale={locale} />
+  if (!gated || think.status !== 'written') return body
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0 1rem', alignItems: 'flex-start' }}>
+      <div style={{ flex: '2 1 24rem', minWidth: 0 }}>{body}</div>
+      <MyThoughts thoughts={think.thoughts} locale={locale} />
+    </div>
+  )
+}
+
 export function LessonViews({ data, locale, children }: { data: LessonViewsData | null; locale: 'ru' | 'en'; children: ReactNode }) {
   const [view, setView] = useState<ViewKey>('text')
+  const [think, setThinkState] = useState<ThinkState>(THINK_LOCKED)
   const base = useId()
   const tabs = useRef<(HTMLButtonElement | null)[]>([])
+  const storage = data?.thinkFirst && data.unitKey ? thinkKey(COURSE.progressKey, data.unitKey) : null
+  useEffect(() => { if (storage) setThinkState(parseThink(readJson(storage)) ?? THINK_LOCKED) }, [storage])
+  const setThink = (s: ThinkState) => { setThinkState(s); if (storage) writeJson(storage, s) }
   if (!data) return <>{children}</>
   const t = T[locale]
   const views = availableViews(data)
@@ -198,9 +288,7 @@ export function LessonViews({ data, locale, children }: { data: LessonViewsData 
       <div role="tabpanel" id={`${base}-panel-text`} aria-labelledby={`${base}-tab-text`} hidden={view !== 'text'}>{children}</div>
       {view !== 'text' && (
         <div role="tabpanel" id={`${base}-panel-${view}`} aria-labelledby={`${base}-tab-${view}`}>
-          {view === 'summary' && <Summary data={data} locale={locale} />}
-          {view === 'cards' && <Cards data={data} locale={locale} />}
-          {view === 'map' && <MapView data={data} locale={locale} />}
+          <GatedView view={view} data={data} locale={locale} think={think} onThink={setThink} />
         </div>
       )}
     </>

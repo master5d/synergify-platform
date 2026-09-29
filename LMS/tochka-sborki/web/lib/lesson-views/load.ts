@@ -26,6 +26,11 @@ export interface LessonViewsData {
   /** Что «Конспект» показывает сначала — настройка pack'а (`COURSE.lessonViews.summaryDefault`). */
   summaryDefault: 'paraphrase' | 'verbatim'
   cards: ViewCard[]
+  /** «Сначала сам» (LMS#20, Педагогика 3): «Конспект»/«Карта» закрыты до 2–3 своих мыслей ученика.
+   *  Настройка pack'а `COURSE.pedagogy.thinkFirst`; нет поля — выключено. */
+  thinkFirst?: boolean
+  /** `module/unit` — ключ локального хранилища своих мыслей. */
+  unitKey?: string
 }
 
 export function viewsPath(locale: string, module: string, unit: string, packDir = PACK_DIR): string {
@@ -59,5 +64,6 @@ export function getLessonViews(
   })
   // Гвард пересказа — ещё раз при сборке: не прошедший раздел ученик видит дословным, даже если тест пропустили.
   const paraphrased = paraphrasedOutline(a.outline, a.paraphrase, mdx, locale, MANIFEST)
-  return { title: a.title, outline: a.outline, paraphrased, summaryDefault: COURSE.lessonViews.summaryDefault, cards }
+  return { title: a.title, outline: a.outline, paraphrased, summaryDefault: COURSE.lessonViews.summaryDefault, cards,
+    thinkFirst: COURSE.pedagogy.thinkFirst, unitKey: `${module}/${unit}` }
 }

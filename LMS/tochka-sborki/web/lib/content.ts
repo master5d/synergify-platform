@@ -64,6 +64,9 @@ export interface ModuleMeta {
   layout?: UnitLayout
   objectives?: Objective[]
   checks?: SelfCheckItem[]
+  /** Pretest в активации (LMS#20): явный выбор автора `{ "<unit>": ["c3"] }`, до двух id; `[]` — выключен
+   *  у урока. Нет ключа урока — первый вопрос юнита, размеченный в концепте (lib/pedagogy/pretest.ts). */
+  pretest?: Record<string, string[]>
   /** Существенная переработка модуля (ставит автор, не правка опечаток). Нет поля = версия 1.
    *  Будит письмо «обновление навыка» выпускникам (workers/src/lib/email-chains.ts, шаг update). */
   revision?: ModuleRevision
