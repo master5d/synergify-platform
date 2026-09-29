@@ -86,6 +86,28 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
         href: 'https://github.com/microsoft/ai-agents-for-beginners',
         external: true,
       },
+      {
+        // intake LMS#4: huggingface/agents-course — Apache-2.0 (проверено 2026-09-28, push 2026-09-15).
+        kind: 'link',
+        title: { ru: 'Hugging Face Agents Course (англ.)', en: 'Hugging Face Agents Course' },
+        description: {
+          ru: 'Курс Hugging Face про агентов: как они устроены, агентные фреймворки на практике, финальный проект. Бесплатно, Apache-2.0',
+          en: 'Hugging Face course on agents: how they work, agent frameworks in practice, a final project. Free, Apache-2.0',
+        },
+        href: 'https://huggingface.co/learn/agents-course',
+        external: true,
+      },
+      {
+        // intake LMS#4: закрытая платформа без открытой лицензии — только ссылкой.
+        kind: 'link',
+        title: { ru: 'Короткие курсы DeepLearning.AI (англ.)', en: 'DeepLearning.AI short courses' },
+        description: {
+          ru: 'Часовые курсы про агентов, RAG и оркестрацию. Бесплатно, но закрытая платформа: нужна регистрация, лицензии нет',
+          en: 'Hour-long courses on agents, RAG and orchestration. Free, but a closed platform: sign-up required, no open licence',
+        },
+        href: 'https://www.deeplearning.ai/short-courses/',
+        external: true,
+      },
     ],
   },
   {

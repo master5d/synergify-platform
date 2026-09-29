@@ -268,3 +268,35 @@ After mastering the topics, you get four powers:
 - **Power to Build with AI** — assemble pipelines and tools for your tasks
 - **Power to Automate with AI** — claw back, by the author's estimate, 5–15 hours a week from routine
 - **Power to Network with AI** — share patterns with the community and amplify each other
+
+---
+
+## 🧭 The next step: AI Solution Architect
+
+The course leads to the AI generalist — someone who solves their own problems together with an agent. If you want to go further, the next step is **AI Solution Architect**: the person who designs a whole agentic system around a business problem.
+
+**What the role is.** It's not an ML engineer or a data scientist: an architect doesn't train models from scratch or build image classifiers. They start from the business problem and decide:
+- where an agent is actually needed, and where a script, an existing service, or a person is enough;
+- how to break the process into AI / Tool / Code nodes and where the checks go between them;
+- which models and which stack fit the budget, the data, privacy, and the risks;
+- how the system remembers, is observed, falls back to a spare route, and stays safe — in production, not in a demo.
+
+**What in the course leads there.**
+
+| Architect skill | Where in the course |
+| :--- | :--- |
+| A spec instead of a command: goal, constraints, acceptance criteria | [Prompt Engineering](/en/lessons/04-prompt-engineering/) |
+| System state and memory: what the agent knows and where it lives | [Context & Memory](/en/lessons/05-context-memory/) |
+| The process as a pipeline: trigger, condition, idempotency | [Automation Pipeline](/en/lessons/06-audio-pipeline/) |
+| Integrations and extensions: MCP, Skills, Hooks | [Tools & Extensions](/en/lessons/07-tools/) |
+| AI / Tool / Code decomposition, prod infra, fallback model routing | [Agent Engineering](/en/lessons/08-agent-engineering/) |
+| When to fine-tune a model and when a prompt and context are enough | [Model Training](/en/lessons/10-model-training/) |
+
+**What to pick up next:**
+- [Building Effective AI Agents](https://www.anthropic.com/engineering/building-effective-agents) — Anthropic's article on patterns: workflows vs agents, and when you don't need an agent at all. Free.
+- [Hugging Face Agents Course](https://huggingface.co/learn/agents-course) — agent frameworks in practice. Free, Apache-2.0.
+- [AI Agents for Beginners](https://github.com/microsoft/ai-agents-for-beginners) — agent design patterns, MCP, memory, security. Free, MIT; our guide to it is in the course materials, "Going deeper" section.
+- [AI Engineering](https://github.com/chiphuyen/aie-book) — Chip Huyen's book (O'Reilly, 2025) on evaluation, RAG, agents, and infrastructure. The resource list in the repo is free, **the book itself is paid**.
+- [DeepLearning.AI short courses](https://www.deeplearning.ai/short-courses/) — short courses on agents and orchestration. Free, but a closed platform that requires sign-up.
+
+An honest note on this step: the course doesn't make you an architect and doesn't promise a job or income. The step is earned on real systems — take one problem of your own and bring it to production against the production checklist from the Agent Engineering module. It's also the course author's current role: this map comes from that practice.

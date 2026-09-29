@@ -273,9 +273,11 @@
   по smol-course v1 (Apache-2.0, атрибуция в u5), framing во всех скинах, transformation, материалы (HF LLM Course, smol-course).
   **Владельцу:** вычитать тексты и framing скинов; решить, нужен ли отдельный флаг/бейдж «advanced» в UI; прогнать практику u5 в Colab вживую.
   **2026-09-28 значок «advanced» (решение владельца):** поле `advanced: true` в `_meta.json` модуля → `components/advanced-badge.tsx` на главной, в программе и в сайдбаре; ставится только модулю вне спайна (тест `lib/content/advanced-modules.test.ts`).
-- [ ] **ТС: HF Agents Course в «Дальше и глубже»** (intake LMS#4, owner-gated) — `huggingface/agents-course`
+- [x] **ТС: HF Agents Course в «Дальше и глубже» — СДЕЛАНО 2026-09-28** (intake LMS#4, выбрано владельцем) — `huggingface/agents-course`
   (Apache-2.0, живой) рядом с курсом Microsoft по агентам в `materials.ts`; DeepLearning.AI — только
   ссылкой (закрытая платформа).
+  **Сделано:** в `packs/tochka-sborki/materials.ts` («Дальше и глубже») — HF Agents Course (`huggingface.co/learn/agents-course`,
+  лицензия репо проверена 2026-09-28: Apache-2.0) и DeepLearning.AI short courses с пометкой «закрытая платформа, лицензии нет».
 - [ ] **LF: сырьё для эссе «будущее уже здесь, но неравномерно»** (intake LMS#5, owner-gated). Рамка Гибсона
   про неравный доступ к ИИ → суверенный стек; контр-тезис из своей хроники (LF `docs/chronicle/2026-08-09-…`:
   «длинная волна Кондратьева» на замере 0/5). Ingest — через агента logos-foundry, только по слову владельца;
@@ -383,9 +385,14 @@
   ещё одним рендером, а не переписыванием.
 - [ ] **Академия: роль «Мастер мира»** (intake LMS#12, owner-gated) — следующая ступень гостевого мастера
   (`AUTHORING-MODULE`): задаёт стиль, голоса, отбор и отсеивает брак ИИ; мерджит владелец.
-- [ ] **ТС: ступень роли «AI Solution Architect» в роадмапе** (intake LMS#15, owner-gated). Роадмап ведёт к «AI Generalist»,
+- [x] **ТС: ступень роли «AI Solution Architect» в роадмапе — СДЕЛАНО 2026-09-28** (intake LMS#15, выбрано владельцем). Роадмап ведёт к «AI Generalist»,
   а в разделе инструментов уже есть «от пользователя Claude Code к архитектору собственной системы». Следующая ступень после
   курса — архитектор агентных решений для бизнеса; пересекается с advanced-модулем и с ролью владельца на mamaev.coach.
+  **Сделано:** раздел «🧭 Следующая ступень: AI Solution Architect» в конце `content/{ru,en}/roadmap.mdx` (роадмап рендерится
+  прямо из MDX, представлений у него нет): что за роль (архитектура агентных систем под задачу бизнеса, не классическое ML),
+  таблица «навык → модуль» (04–08, 10), что добрать (Anthropic «Building Effective AI Agents», HF Agents Course, MS AI Agents
+  for Beginners, AI Engineering Chip Huyen — книга помечена платной, DeepLearning.AI — закрытая платформа), честная оговорка без
+  обещаний работы/дохода; автор курса — одной строкой без ссылки на mamaev.coach и без услуг.
 - [x] **ТС: ретро выпускника — СДЕЛАНО 2026-09-27** (intake LMS#10, принято владельцем 2026-09-14):
   `components/graduate-retro-form.tsx` на странице сертификата (`components/pages/certificate-page.tsx`,
   RU+EN) — четыре обязательных поля (до/после, лучший промпт курса, план на месяц, отзыв), только
