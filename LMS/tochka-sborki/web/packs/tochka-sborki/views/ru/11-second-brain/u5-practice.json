@@ -5,13 +5,13 @@
   "unit": "u5-practice",
   "locale": "ru",
   "title": "Практика: собрать свой второй мозг",
-  "sourceHash": "sha256:ef88ab332e29a1765a6ef22a14e85c1ed77b88684504643d4c61a27d551dd471",
+  "sourceHash": "sha256:94f7797e739f9cdb8bcd9d19a1e25e1c5ee5654382147ab1383d41e37c88bbec",
   "outline": [
     {
       "heading": "План сборки",
       "points": [
         {
-          "text": "Один переданный навык.",
+          "text": "Теперь соединяем заготовки из юнитов 1–4 в минимальный рабочий второй мозг.",
           "origin": "extract"
         }
       ],
@@ -39,16 +39,14 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:59fe4ef796f1e4d51151bf0c1a39d6bd6207c7f085b94c1eb6ab77a1b17dc25a",
+        "sourceHash": "sha256:84eca0c5a32cb2de5e96c68d76f411526b38ed6c2498dd5e736187b225b67310",
         "points": [
-          "Тебе передадут один навык."
+          "Сейчас ты соединяешь заготовки из юнитов 1–4 в минимальный рабочий второй мозг."
         ]
       },
       {
         "sourceHash": "sha256:58396870dacc726ae0a6dad14a26b3a10cdf2d93a15724a0d0193011c7c4b1c9",
-        "points": [
-          "Второй мозг принадлежит тебе, но учиться его собирать проще рядом с другими людьми."
-        ]
+        "verbatim": "review"
       }
     ]
   }

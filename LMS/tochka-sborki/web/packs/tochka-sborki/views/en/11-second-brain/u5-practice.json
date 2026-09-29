@@ -5,13 +5,13 @@
   "unit": "u5-practice",
   "locale": "en",
   "title": "Practice: build your own second brain",
-  "sourceHash": "sha256:a2b6a3fee01eebda3f419711541ac8c33783921fc61d4a0f01a7ef720f0fc799",
+  "sourceHash": "sha256:2434ca1e578fd976f28eca25a54d4bfdb40ae922f5f870acd167f7803bebdc8a",
   "outline": [
     {
       "heading": "The build plan",
       "points": [
         {
-          "text": "One skill from someone else.",
+          "text": "Now we connect the pieces from units 1–4 into a minimal working second brain.",
           "origin": "extract"
         }
       ],
@@ -39,16 +39,14 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:d01db0d7f78d476ec9ad1ff5a8c72f619e04b80e96e69951b8d21f8b4d4d76ff",
+        "sourceHash": "sha256:e077fdbf32717904335bdf6a22fe5e78d0fbb19daf4415c6b738d4fd9725f3cf",
         "points": [
-          "You take one skill from someone else."
+          "You will now connect the pieces from units 1–4 to create a minimal working second brain."
         ]
       },
       {
         "sourceHash": "sha256:d557446d3373403893bad72fe18cc7d6bca8de315e575041423771945b024ad2",
-        "points": [
-          "While your second brain is personal, you find it easier to learn how to build it with others."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

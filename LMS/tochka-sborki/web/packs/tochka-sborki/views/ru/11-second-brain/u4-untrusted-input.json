@@ -5,7 +5,7 @@
   "unit": "u4-untrusted-input",
   "locale": "ru",
   "title": "Безопасность: всё, что пришло снаружи",
-  "sourceHash": "sha256:7d5d2b84c9b489dafff00dff1b8ca32eb8e7b2c58412f57ea63e55c2f1721cc5",
+  "sourceHash": "sha256:1df42ac7f60af9d1cd4e5e0ea4c18967457c16ffd1e0cfd036c732a52f39b122",
   "outline": [
     {
       "heading": "Prompt injection",
@@ -19,14 +19,19 @@
     },
     {
       "heading": "Где дыры у второго мозга",
-      "points": [],
+      "points": [
+        {
+          "text": "Чужой текст может попасть к агенту четырьмя путями.",
+          "origin": "extract"
+        }
+      ],
       "children": []
     },
     {
       "heading": "Шесть правил",
       "points": [
         {
-          "text": "Правило 2 записывается в AGENTS.md.",
+          "text": "Правило 2 модель может нарушить, даже если оно записано в AGENTS.md: оно снижает риск, но ничего не гарантирует.",
           "origin": "extract"
         }
       ],
@@ -36,7 +41,7 @@
       "heading": "Если чат общий",
       "points": [
         {
-          "text": "Бывает, что несколько людей и их агенты собираются в одной группе и учатся друг у друга.",
+          "text": "Но каждый участник — источник недоверенного текста.",
           "origin": "extract"
         }
       ],
@@ -56,19 +61,22 @@
     "sections": [
       {
         "sourceHash": "sha256:031ebeedbe91c9f92a91bcbba1a6ffd803055010f46cfc90a8069fb782133fc9",
-        "points": [
-          "Так называют текст внутри данных, который модель ошибочно принимает за инструкцию."
-        ]
+        "verbatim": "review"
       },
       {
-        "sourceHash": "sha256:ddbda0c125f83d43f869be7559b29fc43a32fef03185641a54cbbd3c574f7d51",
-        "points": [
-          "Правило 2 тебе нужно записывать в файл AGENTS.md."
-        ]
-      },
-      {
-        "sourceHash": "sha256:9098d0cb27d1fa92dbbf2e356b0883cbd7a7f1e82843e9f5db2c8a3e45bd4020",
+        "sourceHash": "sha256:2b39990f5a281bec14893a72a24c38185d02c2b3b09db5e7b5a4562a3e9d6bda",
         "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:b4073c190f3bb110b13959cd2a78c47a7afe042e6893e72fac8872a6581d1d59",
+        "points": [
+          "Модель может нарушить правило 2, даже если ты записал его в AGENTS.md.",
+          "Это помогает снизить риск, но ничего не гарантирует."
+        ]
+      },
+      {
+        "sourceHash": "sha256:3f019194e87dc70f84187694f4c667254d9d980f2cde90c841fa9a5e60f023f1",
+        "verbatim": "review"
       }
     ]
   }

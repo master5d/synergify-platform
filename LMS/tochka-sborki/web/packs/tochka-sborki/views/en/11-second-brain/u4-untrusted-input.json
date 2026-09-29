@@ -5,7 +5,7 @@
   "unit": "u4-untrusted-input",
   "locale": "en",
   "title": "Security: everything that comes from outside",
-  "sourceHash": "sha256:5538f707006d56014db21a96bf67a3cac316a3db37ec765dcb05adad9d225c5c",
+  "sourceHash": "sha256:4beb385a4331489941fe0045060e70aef9c3b9e56f31008100567370258e1180",
   "outline": [
     {
       "heading": "Prompt injection",
@@ -19,14 +19,19 @@
     },
     {
       "heading": "Where a second brain has holes",
-      "points": [],
+      "points": [
+        {
+          "text": "Someone else's text can reach your agent in four ways.",
+          "origin": "extract"
+        }
+      ],
       "children": []
     },
     {
       "heading": "Six rules",
       "points": [
         {
-          "text": "Rule 2 goes into AGENTS.md.",
+          "text": "The model can break rule 2 even when it is written in AGENTS.md: the rule lowers the risk but guarantees nothing.",
           "origin": "extract"
         }
       ],
@@ -36,7 +41,7 @@
       "heading": "If the chat is shared",
       "points": [
         {
-          "text": "Sometimes several people and their agents gather in one group and learn from each other.",
+          "text": "But every participant is a source of untrusted text.",
           "origin": "extract"
         }
       ],
@@ -56,16 +61,18 @@
     "sections": [
       {
         "sourceHash": "sha256:948a56120f8a82b620a84e52ffeb73c9b4115d733188ae64c244f4b7440ab30e",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:7b1d1074079c0af635d8711a2ebd66a27dceb04484f3a4e8fc3db6fc09874917",
         "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:8f9923bf9591b2b393319ad6a403c3630b809ad982bad44d94bcc92c96383164",
-        "points": [
-          "You place Rule 2 into AGENTS.md."
-        ]
+        "sourceHash": "sha256:84c2b64a1929444971a28c6ad4080acefa0811c0e0d6f827b437ada8b8731a50",
+        "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:0df36d0bc55ea23b265051281029495ef6d3202591ecf582298f8b31f248e8d6",
+        "sourceHash": "sha256:0a57051823599dcffa55f15042114918b22dcf255cc29b480a149d94b121b720",
         "verbatim": "near-identical"
       }
     ]

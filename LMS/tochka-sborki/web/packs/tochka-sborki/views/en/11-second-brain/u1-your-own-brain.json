@@ -5,13 +5,13 @@
   "unit": "u1-your-own-brain",
   "locale": "en",
   "title": "A second brain that stays with you",
-  "sourceHash": "sha256:b991bc5f0ed95ec4db5f4f5e3c1f6c7993644ca0ec670a7038f15482a9b15c54",
+  "sourceHash": "sha256:0ede05c7c0ccbcb6e6afd04b52dde6a90a8d5ae0b772b6373abcc4841d5a4b52",
   "outline": [
     {
       "heading": "What a second brain means in this module",
       "points": [
         {
-          "text": "The phrase \"second brain\" caught on thanks to Tiago Forte's book \"Building a Second Brain\" (2022).",
+          "text": "In this module, a second brain is a folder of files that your agent reads and adds to when you ask.",
           "origin": "extract"
         }
       ],
@@ -21,7 +21,7 @@
       "heading": "Three layers",
       "points": [
         {
-          "text": "A model is needed too, but it is replaceable.",
+          "text": "A second brain rests on three layers: memory, an agent and a channel.",
           "origin": "extract"
         }
       ],
@@ -70,33 +70,26 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:36279a55123c4106fc0df81482c5ca7a30960f57cfb96f1b6d48c5e69d76178e",
-        "points": [
-          "The phrase second brain became popular through the book Building a Second Brain by Tiago Forte from 2022."
-        ]
-      },
-      {
-        "sourceHash": "sha256:46775c675a8a00d83d7be21aeb9206048d67754bc902c9ab3e7b26fe40acba55",
-        "points": [
-          "You also need a model, but it can be replaced."
-        ]
-      },
-      {
-        "sourceHash": "sha256:9f94f59d92f1aa54dc2fa680b97d8f6d4a31f1b24ca67ea911455dfa7e0796b1",
+        "sourceHash": "sha256:dda325bc2f0efac47ba8bfa0c036e54cc53dcbc53f15d538b2aeb882779fc13e",
         "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:58aa4c4d5f720029854de642d26a9d0c738fc2d15bc6ebeb9ea25d160186394a",
+        "sourceHash": "sha256:ad36466baf9d275abf479f95472f0a39ab1b5f145ba3f3b31dbf2b9979989a9e",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:9f94f59d92f1aa54dc2fa680b97d8f6d4a31f1b24ca67ea911455dfa7e0796b1",
         "points": [
-          "The primary change involves how you ask questions rather than how much you store."
+          "The second brain is yours if you have three yes answers."
         ]
       },
       {
+        "sourceHash": "sha256:58aa4c4d5f720029854de642d26a9d0c738fc2d15bc6ebeb9ea25d160186394a",
+        "verbatim": "near-identical"
+      },
+      {
         "sourceHash": "sha256:5dd067237037dd26ab730a6a113e72ae66da6278e6a5f253297557369d05b733",
-        "points": [
-          "You should record your decisions and the reasons behind them along with lessons learned from mistakes.",
-          "Include your notes, the outcomes of meetings, and any rough thoughts you have."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }

@@ -29,7 +29,7 @@ It sounds almost too simple. Think about where the catch is — we come back to 
 
 ## "My agent teaches yours" — honestly
 
-You can set up a shared chat where one agent shows another how to work. It looks like training. But the model's weights do not change.
+You can set up a shared chat where one agent shows another how to work. It looks like training, but **the model's weights do not change**.
 
 There is no fine-tuning from module [10](/en/lessons/10-model-training/) here. What travels is text: a skill folder, a rules template, examples. Your agent reads those files and starts working differently.
 
@@ -48,27 +48,27 @@ meeting-summary/
 
 This format is the open [Agent Skills](https://agentskills.io) standard. Anthropic created it and opened it to everyone. Claude Code, Codex, Gemini CLI, Cursor, GitHub Copilot and other agents read the same format.
 
-So a skill built for one agent often works for another.
+So **a skill built for one agent often works for another**.
 
 ## Three ways to hand over a skill
 
 1. **Copy the folder.** Personal skills go to `~/.claude/skills/<name>/`, project skills to `.claude/skills/<name>/`.
 2. **A shared repository.** The author publishes skills in an open git repository. You clone it into a separate folder, read it and copy only what you need. Updates come through `git pull` — and you read those too.
-3. **A plugin.** A bundle of several skills installed with `/plugin install` (module 07).
+3. **A plugin.** A package installed with `/plugin install` (module 07). Besides skills, it can carry hooks and MCP servers, which means executable code.
 
-Many authors publish their skills openly and for free. One example is the [anthropics/skills](https://github.com/anthropics/skills) repository.
+Many authors publish their skills openly. One example is the [anthropics/skills](https://github.com/anthropics/skills) repository. Most skills there are under the Apache 2.0 license, while the document skills (docx, pdf, pptx, xlsx) are source-available only. The authors themselves call them examples and advise testing a skill in your own setup first.
 
 ## What travels and what does not
 
 **Travels:** skills, `AGENTS.md` templates, checklists, examples of good answers.
 
-**Does not travel:** your memory, your keys, and someone else's personal memory. Everyone keeps their own archive.
+**Does not travel:** personal memory — neither yours nor anyone else's — and keys. Everyone keeps their own archive.
 
 Do not copy someone else's rules wholesale. Take the idea and restate it for your own project.
 
 ## How an agent picks up a skill from a conversation
 
-There is a reverse path too. When you and the agent finish a task well, ask:
+There is a reverse path too: the agent turns a job well done into a skill. When you and the agent finish a task well, ask:
 
 ```
 Save what we just did as a skill in .claude/skills/.

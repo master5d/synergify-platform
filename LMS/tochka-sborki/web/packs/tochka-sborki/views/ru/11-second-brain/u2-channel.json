@@ -5,13 +5,13 @@
   "unit": "u2-channel",
   "locale": "ru",
   "title": "Канал связи: агент на связи",
-  "sourceHash": "sha256:ade9a0bfe2bc93bb86192fe74df7b4465586d0ec5303ab14a9009e1f6034163a",
+  "sourceHash": "sha256:794b9d45b7e8e027230144722b07486530b1d64eac9ab6652eb109a0c8b9fb63",
   "outline": [
     {
       "heading": "Как устроен канал",
       "points": [
         {
-          "text": "Путь сообщения выглядит так",
+          "text": "Сообщение идёт из мессенджера до сессии агента на твоём компьютере и обратно",
           "origin": "extract"
         }
       ],
@@ -64,27 +64,25 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:9c6e7f65a16d9bf16dec0014493d5970b0e758c1c62879d7af805df60caf3b0d",
-        "verbatim": "near-identical"
+        "sourceHash": "sha256:e64afc5456b0de3fbf9d471087bba71984d725cabd437a2c7ccbf11f75af4718",
+        "verbatim": "review"
       },
       {
         "sourceHash": "sha256:010a191f118b8ea4614e3087b3b099cf4ab4e4ba3d2cceee31a9bfe7124d1793",
         "points": [
-          "Для репетиции без внешних сервисов ты используешь fakechat.",
-          "Telegram настраивается по шагам из документации."
+          "Для репетиции без внешних сервисов ты можешь использовать fakechat.",
+          "Подключение Telegram выполняется по шагам из документации."
         ]
       },
       {
         "sourceHash": "sha256:d06bbd13566396d6f90ef4dbd0bf118ed2cf6f0757d83ee2f2c3af0b65c9e182",
         "points": [
-          "Почта подключается иначе, через MCP-сервер почтового сервиса из модуля 07."
+          "Почта обычно подключается через MCP-сервер почтового сервиса, как указано в модуле 07."
         ]
       },
       {
         "sourceHash": "sha256:ecd66f4a8f39cc7cc94077253b0748bb6168c5da7e7853f4e546e67974395c52",
-        "points": [
-          "Сессия будет ждать твоего ответа, если агенту потребуется разрешение на выполнение какого-либо действия."
-        ]
+        "verbatim": "review"
       }
     ]
   }

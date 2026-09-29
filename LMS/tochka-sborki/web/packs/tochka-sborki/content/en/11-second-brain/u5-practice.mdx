@@ -29,13 +29,13 @@ Think about what will be your sign that "it works": which question from the phon
 
 ## The build plan
 
-You already prepared the pieces in units 1–4. Now we connect them.
+Now **we connect the pieces from units 1–4 into a minimal working second brain**.
 
-**1. Memory.** A project with the starter or the folder from module 05. It has `notes/` with real notes, plus the "Second brain" and "Incoming messages" blocks in `AGENTS.md`.
+**1. Memory.** The project from module 05 or the starter. It has `notes/` with real notes, plus the "Second brain" and "Incoming messages" blocks in `AGENTS.md`.
 
 **2. Channel.** First fakechat, then — if you want — Telegram following the [Channels documentation](https://code.claude.com/docs/en/channels). Only you are on the allowed list. The token sits in the channel's `.env`, not in the project.
 
-**3. One skill from someone else.** The one you broke down in unit 3. Apply rule 1 from unit 4 to it. If everything is clear, copy it into your project's `.claude/skills/<name>/`. If something is unclear, pick another skill or build your own from a conversation.
+**3. Skill.** One skill from someone else — the one you broke down in unit 3. Apply rule 1 from unit 4 to it. If everything is clear, copy it into your project's `.claude/skills/<name>/`. If something is unclear, pick another skill or build your own from a conversation.
 
 **4. Three checks.**
 
@@ -49,10 +49,11 @@ You already prepared the pieces in units 1–4. Now we connect them.
 git init
 git status
 git add AGENTS.md CLAUDE.md STATE.md TODO.md notes .claude/skills
+git status
 git commit -m "second brain: memory, rules, first skill"
 ```
 
-Add files by name, as here: that way a stray secret does not slip into the history.
+Add files by name, as here, not everything at once: that way a stray secret does not slip into the history. List only what you actually have: if one path is missing, git adds nothing. The `notes` and `.claude/skills` folders go in whole, so check `git status` once more before committing.
 
 ## Together with others
 
@@ -60,7 +61,7 @@ A second brain is personal, but learning to build one is easier next to others. 
 
 This is what "my agent teaches yours" looks like in an honest form. You share skill folders through open repositories. Everyone reads a skill before installing it. Each person's memory stays their own.
 
-Everything in this module is open tools and your own files. There is nothing extra to buy: the agent and the model you already use are enough.
+There is nothing extra to buy: your files, plus the agent and the model you already use, are enough.
 
 <SelfCheck id="c13"/>
 

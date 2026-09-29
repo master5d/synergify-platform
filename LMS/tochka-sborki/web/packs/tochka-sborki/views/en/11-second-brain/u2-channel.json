@@ -5,13 +5,13 @@
   "unit": "u2-channel",
   "locale": "en",
   "title": "A channel: your agent within reach",
-  "sourceHash": "sha256:367f4aa20945d0e3da39e4fa8095d9bba2775098221791967f256a14024bda1b",
+  "sourceHash": "sha256:ac97f2dc9b12efb13e52962d5ecb14c22908638e3b7c21f4f6ccdab9a111a788",
   "outline": [
     {
       "heading": "How a channel works",
       "points": [
         {
-          "text": "A message travels like this",
+          "text": "A message travels from the messenger to the agent session on your computer and back",
           "origin": "extract"
         }
       ],
@@ -64,15 +64,15 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:6f1eeb6854a1ee3868111037963992dc7b4e3bf937d423f9f3349bb76671081b",
+        "sourceHash": "sha256:5ca6532c7b4f4efe1fbc30ce271cf7829e214c0e39758125516b8b571ab268ea",
         "points": [
-          "You can see how a message travels."
+          "Messages travel from your messenger to the agent session on your computer and back."
         ]
       },
       {
         "sourceHash": "sha256:7adf7826f98e486fa9440504c24376e46ade3b28dffe38294a86d322e9a93e67",
         "points": [
-          "You use fakechat for a rehearsal with no outside services.",
+          "Fakechat is a rehearsal with no outside services.",
           "You follow the documentation for Telegram."
         ]
       },
@@ -82,9 +82,7 @@
       },
       {
         "sourceHash": "sha256:bd148c26d88457ace8cb25bc40b1cc27e225f1f3d0cb518b9562181e33d56034",
-        "points": [
-          "The session will wait for your response if the agent requires permission to perform an action."
-        ]
+        "verbatim": "near-identical"
       }
     ]
   }
