@@ -16,6 +16,7 @@ import { MobileGate } from '@/components/mobile-gate'
 import { mdxComponents } from '@/components/mdx-components'
 import { bindSelfCheck } from '@/components/self-check-bound'
 import { bindInterestExample } from '@/components/interest-example-bound'
+import { bindRolePlay } from '@/components/role-play-bound'
 import { ModuleObjectives } from '@/components/module-objectives'
 import { LessonViews } from '@/components/lesson-views'
 import { getLessonViews } from '@/lib/lesson-views/load'
@@ -66,6 +67,7 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
                 ...mdxComponents,
                 SelfCheck: bindSelfCheck(moduleMeta.checks, locale === 'en' ? 'en' : 'ru', moduleSlug),
                 InterestExample: bindInterestExample(moduleSlug, unitSlug, locale === 'en' ? 'en' : 'ru'),
+                RolePlay: bindRolePlay(moduleSlug, unitSlug, locale === 'en' ? 'en' : 'ru'),
               }}
               options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
             />

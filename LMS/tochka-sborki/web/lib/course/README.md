@@ -25,6 +25,11 @@ toward the multi-course platform (see `LMS/_template/`, `docs/curriculum-backlog
   `lib/intake/task-route.ts`; pack-файл импортирует типы относительно. Спека:
   `docs/superpowers/specs/2026-09-28-onboarding-fork-task-routes.md`.
 
+- `role-plays.ts` — сценарии Role Play (`ROLE_PLAYS`, intake LMS#18): персонаж, ситуация, цель, 3–5 критериев,
+  запреты автора, варианты под роль анкеты (V_ROLE). Метка в практике юнита — `<RolePlay id="…"/>`; правила сцены
+  и сборку промпта держит движок `lib/role-play.ts`, гварды — `lib/role-play.test.ts`. Web-only; pack-файл
+  импортирует типы относительно. У living-practice список пуст намеренно.
+
 ## Convention
 - Course data lives here; engine logic stays in `lib/`.
 - **Web-only data** (showcase, dungeon-flavor): import via `@/lib/course/*`.
