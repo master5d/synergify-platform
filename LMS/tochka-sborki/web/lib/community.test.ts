@@ -73,11 +73,12 @@ describe('community pack data', () => {
     for (const list of Object.values(COMMUNITY.recordings)) for (const r of list) expect(r.date).toMatch(/^\d{4}-\d{2}-\d{2}$/)
   })
 
-  // Точка Сборки: группу и ветки даёт владелец — до его слова всё выключено и пусто, ничего не рисуется.
-  it.runIf(PACK_SLUG === 'tochka-sborki')('tochka-sborki: disabled and empty until the owner gives the group', () => {
-    expect(COMMUNITY.enabled).toBe(false)
-    expect(COMMUNITY.groupUrl).toBe('')
-    expect(getCommunityEntry('ru')).toBeNull()
+  // Точка Сборки: тема курса в чате «Мастерская Перехода» (владелец 2026-09-28); веток модулей нет — все ведут в неё.
+  it.runIf(PACK_SLUG === 'tochka-sborki')('tochka-sborki: enabled, every module leads to the one course topic', () => {
+    expect(COMMUNITY.enabled).toBe(true)
+    expect(getCommunityEntry('ru')!.url).toBe('https://t.me/kundaliniRUs/7755')
+    expect(new Set(Object.values(COMMUNITY.moduleTopics))).toEqual(new Set(['https://t.me/kundaliniRUs/7755']))
+    expect(Object.keys(COMMUNITY.moduleTopics)).toContain('00-kickstart')
   })
 
   // «Тишина»: тема «Тишина» в чате академии (владелец 2026-09-14) + оговорки u8; ветки модулей нет намеренно.

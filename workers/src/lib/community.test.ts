@@ -70,14 +70,20 @@ describe('maybeInviteToCommunity', () => {
     expect(spy).not.toHaveBeenCalled()
   })
 
-  it('empty place config (Точка Сборки before the owner gives the group) → silent', async () => {
-    const { db, d1 } = sqliteD1()
-    addUser(db, 'u1'); complete(db, 'u1', 'tochka-sborki')
-    const spy = tg()
-    const res = await maybeInviteToCommunity(env(d1), { userId: 'u1', place: 'tochka-sborki', trigger: 'first-lesson', nowSec: NOW })
-    expect(res.reason).toBe('no-place')
-    expect(spy).not.toHaveBeenCalled()
-    expect(invites(db)).toEqual([])
+  it('empty place config → silent (url temporarily blanked)', async () => {
+    const saved = COMMUNITY_INVITES['tochka-sborki'].url
+    COMMUNITY_INVITES['tochka-sborki'].url = ''
+    try {
+      const { db, d1 } = sqliteD1()
+      addUser(db, 'u1'); complete(db, 'u1', 'tochka-sborki')
+      const spy = tg()
+      const res = await maybeInviteToCommunity(env(d1), { userId: 'u1', place: 'tochka-sborki', trigger: 'first-lesson', nowSec: NOW })
+      expect(res.reason).toBe('no-place')
+      expect(spy).not.toHaveBeenCalled()
+      expect(invites(db)).toEqual([])
+    } finally {
+      COMMUNITY_INVITES['tochka-sborki'].url = saved
+    }
   })
 
   it('after the first completed lesson: one invite with url + opt-out buttons, recorded', async () => {

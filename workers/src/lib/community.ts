@@ -23,8 +23,8 @@ export const ACADEMY_PLACE = 'academy'
 /** Места приглашений. Ссылки курсов сверены тестом с packs/<pack>/course/community.ts
  *  (community.test.ts): поменял в pack'е — поменяй здесь. Пустой url гасит приглашение. */
 export const COMMUNITY_INVITES: Record<InvitePlace, CommunityPlace> = {
-  // Группу, темы и ссылки Точки Сборки даёт владелец (BACKLOG, «слой сообщества»).
-  'tochka-sborki': { url: '', name: { ru: 'сообщество курса «Точка Сборки»', en: 'the Tochka Sborki course community' } },
+  // Тема курса в чате «Мастерская Перехода» — дана владельцем 2026-09-28.
+  'tochka-sborki': { url: 'https://t.me/kundaliniRUs/7755', name: { ru: 'тема «Точка Сборки» в чате «Мастерская Перехода»', en: 'the Tochka Sborki topic in the "Мастерская Перехода" chat' } },
   // Тема «Тишина» в чате академии — открыта владельцем 2026-09-14 (BACKLOG, «Круг „Тишины“»).
   'living-practice': {
     url: 'https://t.me/kundaliniRUs/7823',
