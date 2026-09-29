@@ -9,14 +9,14 @@ import { parseGuesses, readJson, writeJson } from '@/lib/pedagogy/local'
 export const T = {
   ru: {
     label: 'Угадай до объяснения',
-    note: 'Ошибаться можно — это часть обучения. Догадка до объяснения помогает потом запомнить ответ. Правильный ответ будет дальше, после объяснения.',
+    note: 'Ошибаться можно: это часть обучения. Догадка помогает потом лучше запомнить ответ, а сам ответ будет дальше, после объяснения.',
     fix: 'Зафиксировать догадку',
     fixed: (o: string) => `Догадка записана: «${o}». Сверишь её после объяснения — в блоке «Проверь себя».`,
     echo: (o: string) => `Этот вопрос был в начале урока — до объяснения ты выбрал «${o}». Ответь теперь и сравни: что изменилось?`,
   },
   en: {
     label: 'Guess before the explanation',
-    note: 'Getting it wrong is fine — it is part of learning. A guess before the explanation helps you remember the answer later. The correct answer comes further on, after the explanation.',
+    note: 'Getting it wrong is fine: it is part of learning. Guessing first helps the answer stick later, and the answer itself comes after the explanation.',
     fix: 'Lock in my guess',
     fixed: (o: string) => `Guess saved: “${o}”. You will check it after the explanation — in the “Check yourself” block.`,
     echo: (o: string) => `This question opened the lesson — before the explanation you picked “${o}”. Answer it now and compare: what changed?`,

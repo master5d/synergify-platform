@@ -3,7 +3,7 @@
 // Сценарии Role Play (intake LMS#18, решение владельца 2026-09-28): ученик тренируется на AI-персонаже
 // промптом в своём агенте. Метка в практике юнита: <RolePlay id="…"/>. Правила сцены (не выходить из
 // роли, не решать за ученика, разбор по критериям) добавляет движок — lib/role-play.ts; здесь — только
-// то, что решает автор: персонаж, ситуация, цель, критерии, запреты сцены. Черновик: на вычитку владельцем.
+// то, что решает автор: персонаж, ситуация, цель, критерии, запреты сцены. Вычитано 2026-09-29.
 // Относительные импорты: как у остальных данных pack'а.
 import type { RolePlayScenario } from '../../../lib/role-play'
 
@@ -30,7 +30,7 @@ export const ROLE_PLAYS: RolePlayScenario[] = [
       creator: {
         persona: { ru: 'Редактор', en: 'Editor' },
         character: {
-          ru: 'Редактор — опытный и спокойный, бережёт голос автора. Не переписывает за него, а спрашивает по одному: кому это, что человек унесёт с собой, какой первый небольшой выпуск можно сделать.',
+          ru: 'Редактор — опытный и спокойный, бережёт голос автора. Не переписывает за него, а спрашивает по одному: для кого это, что человек унесёт с собой, какой первый небольшой выпуск можно сделать.',
           en: 'An editor — experienced and calm, protective of the author\'s voice. Does not rewrite for the author; asks one thing at a time: who is it for, what will a person take away, what small first piece can be made.',
         },
         context: {
@@ -63,7 +63,7 @@ export const ROLE_PLAYS: RolePlayScenario[] = [
       en: 'Turn the image of the idea into a task: who it is for, what the small first step is, and how to tell it worked.',
     },
     criteria: [
-      { ru: 'Назвал, для кого идея и какую их заботу она снимает.', en: 'Named who the idea is for and which of their concerns it takes away.' },
+      { ru: 'Назвал, для кого идея и какую проблему она им решает.', en: 'Named who the idea is for and which of their problems it solves.' },
       { ru: 'Описал первый небольшой шаг, а не весь проект целиком.', en: 'Described a small first step rather than the whole project.' },
       { ru: 'Сказал, по какому признаку поймёт, что шаг удался.', en: 'Said what sign will show the step worked.' },
       { ru: 'На сомнение ответил по существу — без нажима и без обещаний «всё получится».', en: 'Answered doubt on substance — no pressure and no promises that "it will all work out".' },
@@ -80,7 +80,7 @@ export const ROLE_PLAYS: RolePlayScenario[] = [
     persona: { ru: 'Заказчик', en: 'Client' },
     character: {
       ru: 'Заказчик — владелец небольшого дела, занятой и доброжелательный. Хочет «что-нибудь красивое», но что именно — не знает. На точные вопросы отвечает охотно, сам подробностей не даёт.',
-      en: 'A small business owner, busy and friendly. Wants "something nice" but not sure what. Answers precise questions willingly, never volunteers details.',
+      en: 'A small business owner, busy and friendly. Wants "something nice" but is not sure what. Answers precise questions willingly, never volunteers details.',
     },
     context: {
       ru: 'Заказчик пришёл с запросом «нужен текст для нашей страницы, сделай красиво». До начала работы мне нужно вытянуть из него ТЗ по CTID: контекст, задача, инструкции, данные.',
@@ -116,7 +116,7 @@ export const ROLE_PLAYS: RolePlayScenario[] = [
       en: 'An experienced engineer, calm and thorough. Reads the agent spec for the first time, asks one question at a time, ignores style and looks for gaps that would break the agent in real use.',
     },
     context: {
-      ru: 'Я показываю свою спеку агента: вставлю текст или перескажу. Ревьюер проверяет trigger, pipeline, где LLM и где код, failure modes, стоимость, трейсы и где нужна проверка человеком.',
+      ru: 'Я показываю свою спеку агента: вставляю текст или пересказываю. Ревьюер проверяет trigger, pipeline, где LLM и где код, failure modes, стоимость, трейсы и где нужна проверка человеком.',
       en: 'I show my agent spec, pasted or summarized. The reviewer checks the trigger, pipeline, LLM vs code nodes, failure modes, cost, traces and where a human check is needed.',
     },
     opener: {
@@ -132,7 +132,7 @@ export const ROLE_PLAYS: RolePlayScenario[] = [
       { ru: 'Назвал хотя бы один failure mode и что агент в этом случае делает.', en: 'Named at least one failure mode and what the agent does in that case.' },
       { ru: 'Назвал потолок стоимости в день или честно пометил его как [?].', en: 'Stated the daily cost ceiling or honestly marked it as [?].' },
       { ru: 'Не выдумывал ответы: неизвестное признал и записал вопросом.', en: 'Made nothing up: admitted unknowns and wrote them down as questions.' },
-      { ru: 'В конце сформулировал одну–три правки спеки.', en: 'At the end stated one to three fixes to the spec.' },
+      { ru: 'В конце сформулировал от одной до трёх правок спеки.', en: 'At the end stated one to three fixes to the spec.' },
     ],
     rules: [
       { ru: 'Если спеки нет в разговоре — ревьюер просит её показать и не придумывает её сам.', en: 'If the spec is not in the chat, the reviewer asks for it and never invents it.' },

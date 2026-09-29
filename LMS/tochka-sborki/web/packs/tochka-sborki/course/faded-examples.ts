@@ -15,7 +15,7 @@ export const FADED_EXAMPLES: FadedExampleData[] = [
     worked: {
       task: {
         ru: 'Пример из Концепции: справка по API для Python-разработчиков. Разберём его по пяти разделам.',
-        en: 'The example from Concept: an API reference for Python developers. Let us take it apart section by section.',
+        en: 'The example from Concept: an API reference for Python developers. Let’s take it apart section by section.',
       },
       steps: [
         {
@@ -77,8 +77,8 @@ export const FADED_EXAMPLES: FadedExampleData[] = [
     },
     faded: {
       task: {
-        ru: 'Промпт из первого урока модуля: «Ты — опытный копирайтер. Напиши пост про наш новый продукт». Роль и задача уже есть. Допиши три недостающих раздела: опиши, что в каждом должно стоять.',
-        en: 'The prompt from the first lesson of the module: “You are an experienced copywriter. Write a post about our new product.” The role and the task are there. Fill in the three missing sections: describe what belongs in each.',
+        ru: 'Промпт из самопроверки первого урока: «Ты — опытный копирайтер. Напиши пост про наш новый продукт». Роль и задача уже есть. Допиши три недостающих раздела: опиши, что в каждом должно стоять.',
+        en: 'The prompt from the self-check in the first lesson: “You are an experienced copywriter. Write a post about our new product.” The role and the task are there. Fill in the three missing sections: describe what belongs in each.',
       },
       steps: [
         {
@@ -144,7 +144,7 @@ export const FADED_EXAMPLES: FadedExampleData[] = [
     worked: {
       task: {
         ru: 'После рабочей сессии у тебя четыре заметки. Разложим их по файлам памяти.',
-        en: 'After a work session you have four notes. Let us sort them into the memory files.',
+        en: 'After a work session you have four notes. Let’s sort them into the memory files.',
       },
       steps: [
         {
@@ -178,7 +178,7 @@ export const FADED_EXAMPLES: FadedExampleData[] = [
             en: 'AGENTS.md, “Rules” or “What to avoid”: “Don’t change architecture without sign-off”.',
           },
           why: {
-            ru: 'Правило, которое должно работать наверняка, записываешь ты сам. Что запомнить в MEMORY.md, Claude решает сам, так что на него не полагайся.',
+            ru: 'Правило, которое должно работать наверняка, записываешь ты. Что попадёт в MEMORY.md, решает Claude, так что на эту память не полагайся.',
             en: 'A rule that must hold for sure is one you write yourself. Claude decides on its own what goes into MEMORY.md, so do not rely on it.',
           },
         },
@@ -258,7 +258,7 @@ export const FADED_EXAMPLES: FadedExampleData[] = [
         },
         {
           label: { ru: 'Actions', en: 'Actions' },
-          text: { ru: '1. Собрать RSS. 2. Проанализировать новые записи. 3. Собрать отчёт.', en: '1. Collect RSS. 2. Analyze the new entries. 3. Put together the report.' },
+          text: { ru: '1. Собрать RSS. 2. Проанализировать новые записи. 3. Подготовить отчёт.', en: '1. Collect RSS. 2. Analyze the new entries. 3. Put together the report.' },
           why: {
             ru: 'Шаги идут по порядку: выход одного становится входом следующего.',
             en: 'The steps run in order: the output of one is the input of the next.',
@@ -267,7 +267,7 @@ export const FADED_EXAMPLES: FadedExampleData[] = [
         {
           label: { ru: 'Condition', en: 'Condition' },
           text: {
-            ru: 'Не запускать, если новых записей нет; не включать в отчёт то, что уже было в прошлом.',
+            ru: 'Не запускать, если новых записей нет; не повторять то, что уже было в прошлом отчёте.',
             en: 'Do not run if there are no new entries; do not repeat what was already in the last report.',
           },
           why: {
@@ -320,7 +320,7 @@ export const FADED_EXAMPLES: FadedExampleData[] = [
           label: { ru: 'Condition', en: 'Condition' },
           blank: true,
           text: {
-            ru: 'Не запускать повторно на уже обработанное письмо (дубли). Не отправлять ответ самому — только черновик на согласование.',
+            ru: 'Не запускать повторно на уже обработанное письмо (дубли). Не отправлять ответ автоматически — только черновик на согласование.',
             en: 'Do not run again on an email that was already handled (duplicates). Do not send the reply itself — only a draft for approval.',
           },
           why: {

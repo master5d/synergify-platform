@@ -18,7 +18,7 @@ export const NO_AI_CHECKS: NoAiCheckData[] = [
           en: 'In your own words: how is the work split between you and the agent in vibe coding?',
         },
         points: [
-          { ru: 'Ты знаешь, что должно получиться, и решаешь, что строить', en: 'You know what the result should be and decide what to build' },
+          { ru: 'Ты задаёшь замысел и решаешь, что строить', en: 'You set the intent and decide what to build' },
           { ru: 'Код пишет агент: исполнение можно отдать', en: 'The agent writes the code: execution can be handed off' },
           { ru: 'Проверяешь, что результат работает, ты, а не агент', en: 'You, not the agent, check that the result works' },
         ],
@@ -93,7 +93,7 @@ export const NO_AI_CHECKS: NoAiCheckData[] = [
         },
         points: [
           { ru: 'На входе — ссылка или текст реальной статьи', en: 'In: a link to, or the text of, a real article' },
-          { ru: 'Шаги — промпт из Концепции: идеи, темы для изучения, цитаты в заданном формате', en: 'Steps: the prompt from Concept — ideas, topics to explore, quotes in a set format' },
+          { ru: 'Шаги — из промпта Концепции: прочитать страницу, выделить идеи, темы для изучения, цитаты или факты', en: 'Steps: from the Concept prompt — read the page, pull out ideas, topics to explore, quotes or facts' },
           { ru: 'На выходе — файл с результатом и сохранённый промпт для следующего раза', en: 'Out: a file with the result and the saved prompt for next time' },
         ],
       },
@@ -105,7 +105,7 @@ export const NO_AI_CHECKS: NoAiCheckData[] = [
         points: [
           { ru: 'Первый прогон — черновой монтаж: он показывает, где цепочка проседает', en: 'The first run is a rough cut: it shows where the chain sags' },
           { ru: 'Одно найденное слабое место и есть план второй версии', en: 'The one weak spot you found is the plan for version two' },
-          { ru: 'Если ссылка не открылась, ответ «по догадке» не принимают: вставляют текст статьи', en: 'If the link did not open, a guessed answer does not count: paste the article text instead' },
+          { ru: 'Если ссылка не открылась, не принимай ответ «по догадке»: вставь текст статьи', en: 'If the link did not open, do not accept a guessed answer: paste the article text instead' },
         ],
       },
     ],
@@ -123,7 +123,7 @@ export const NO_AI_CHECKS: NoAiCheckData[] = [
         points: [
           { ru: 'AI — там, где он силён: классификация, текст-в-структуру', en: 'AI goes where it shines: classification, text-to-structure' },
           { ru: 'Точный счёт, проверка дублей, вызовы API — код или инструмент', en: 'Exact counting, duplicate checks, API calls — code or a tool' },
-          { ru: 'Чего не знаешь, то в спеке стоит как [?], а не догадкой', en: 'What you do not know stays in the spec as [?], not as a guess' },
+          { ru: 'Чего не знаешь, отмечено в спеке как [?], а не закрыто догадкой', en: 'What you do not know stays in the spec as [?], not as a guess' },
         ],
       },
       {
@@ -132,7 +132,7 @@ export const NO_AI_CHECKS: NoAiCheckData[] = [
           en: 'Name one failure mode of your agent and where you will see it.',
         },
         points: [
-          { ru: 'В спеке описано, что сломается и что тогда происходит', en: 'The spec says what breaks and what happens then' },
+          { ru: 'В спеке описано, что может сломаться и что тогда делать', en: 'The spec says what can break and what to do then' },
           { ru: 'Указано, где смотреть трейсы', en: 'It says where to look at traces' },
         ],
       },

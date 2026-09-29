@@ -4,7 +4,7 @@
 // Компаньон знает, как выглядит хорошее выполнение и где обычно ошибаются, и ведёт к этому вопросами,
 // не раскрывая эталон (правило движка — lib/learn-prompt-reference.ts). Эталон — критерии хорошей
 // работы, а не готовый текст за ученика. Заполнено ПИЛОТНО для трёх практик; у остальных юнитов
-// компаньон берёт только ключевые идеи из checks (_meta.json). Черновик: на вычитку владельцем.
+// компаньон берёт только ключевые идеи из checks (_meta.json). Вычитано 2026-09-29.
 // Относительные импорты: как у остальных данных pack'а.
 import type { PracticeReference } from '../../../lib/learn-prompt-reference'
 
@@ -13,42 +13,42 @@ export const PRACTICE_REFERENCES: PracticeReference[] = [
     module: '04-prompt-engineering',
     unit: 'u2-spec-formula',
     solution: {
-      ru: 'Промпт по CTID под реальную задачу ученика, все пять разделов заполнены конкретикой. Роль называет экспертизу, а не «ты — помощник». Задача — одно предложение с глаголом результата. Входные данные перечислены: что именно ученик даст модели. Ожидаемый результат проверяем: формат, структура, объём, критерий «хорошо». Ограничения — что не делать, чем пользоваться, максимум. Промпт протестирован в Claude, и ученик может сказать, что в ответе совпало с ожидаемым результатом, а что нет.',
-      en: 'A CTID prompt for the learner\'s real task, with all five sections filled in concretely. Role names the expertise, not "you are an assistant". Task is one sentence with an outcome verb. Input data is listed: exactly what the learner will give the model. Expected result is checkable: format, structure, length, a criterion for "good". Constraints say what not to do, what to use, the maximum. The prompt has been tested in Claude, and the learner can say what in the answer matched the expected result and what did not.',
+      ru: 'Промпт по CTID под реальную задачу ученика, все пять разделов заполнены конкретикой. Роль называет экспертизу, а не «ты — помощник». Задача — одно предложение с глаголом результата. Входные данные перечислены: что именно ученик даст модели. Ожидаемый результат можно проверить: формат, структура, объём, критерии качества. Ограничения — что не делать, чем пользоваться, максимум. Промпт протестирован в Claude, и ученик может сказать, что в ответе совпало с ожидаемым результатом, а что нет.',
+      en: 'A CTID prompt for the learner\'s real task, with all five sections filled in concretely. Role names the expertise, not "you are an assistant". Task is one sentence with an outcome verb. Inputs are listed: exactly what the learner will give the model. Expected output is checkable: format, structure, length, quality criteria. Constraints say what not to do, what to use, the maximum. The prompt has been tested in Claude, and the learner can say what in the answer matched the expected output and what did not.',
     },
     mistakes: [
       { ru: 'Задача размыта («помоги с отчётом»): нет результата, по которому можно проверить ответ.', en: 'The task is vague ("help with the report"): there is no result to check the answer against.' },
-      { ru: '«Ожидаемый результат» пуст или общий («хорошо и подробно») — ни формата, ни объёма, ни критерия.', en: '"Expected result" is empty or generic ("good and detailed") — no format, length or criterion.' },
-      { ru: 'Контекст и инструкция перемешаны в одном абзаце, данные не отделены от задачи.', en: 'Context and instruction are mixed in one paragraph; the data is not separated from the task.' },
-      { ru: 'Промпт написан, но не протестирован — нет сверки ответа модели с ожидаемым результатом.', en: 'The prompt is written but not tested — the model\'s answer was never compared with the expected result.' },
+      { ru: '«Ожидаемый результат» пуст или общий («хорошо и подробно»): ни формата, ни объёма, ни критерия.', en: '"Expected output" is empty or generic ("good and detailed"): no format, length or criterion.' },
+      { ru: 'Разделы слиты в один абзац: входные данные не отделены от задачи, ограничения потерялись в тексте.', en: 'The sections are merged into one paragraph: the inputs are not separated from the task, and the constraints get lost in the text.' },
+      { ru: 'Промпт написан, но не протестирован: ответ модели не сверен с ожидаемым результатом.', en: 'The prompt is written but not tested: the model\'s answer was never compared with the expected output.' },
     ],
   },
   {
     module: '04-prompt-engineering',
     unit: 'u5-practice',
     solution: {
-      ru: 'Переиспользуемый промпт под задачу, которая у ученика повторяется каждую неделю. Полная структура CTID (Роль, Задача, Входные данные, Ожидаемый результат, Ограничения); меняющаяся часть вынесена в явное место для вставки — промпт работает без переписывания. Важное стоит в начале и не утонуло в середине. Нет дистракторов и лишнего текста. Контекст отделён от инструкции заголовками. Тон нейтральный, без крика. Ученик прошёлся по пяти грехам и чеклисту и может назвать, что поправил. Сохранён в my-experiments/u5-reusable-prompt.md.',
-      en: 'A reusable prompt for a task the learner repeats every week. Full CTID structure (Role, Task, Input data, Expected result, Constraints); the part that changes each time has an explicit slot, so the prompt works without rewriting. The important part comes first and is not buried in the middle. No distractors or filler. Context is separated from instruction with headings. Neutral tone, no shouting. The learner went through the five sins and the checklist and can name what they fixed. Saved to my-experiments/u5-reusable-prompt.md.',
+      ru: 'Переиспользуемый промпт под задачу, которая у ученика повторяется каждую неделю. Полная структура CTID (Роль, Задача, Входные данные, Ожидаемый результат, Ограничения); для меняющейся части оставлено явное место, поэтому промпт работает без переписывания. Добавлены 2–3 фразы из таблицы магических слов под главную проблему задачи. Важное стоит в начале, а не в середине. Нет дистракторов и лишнего текста. Контекст отделён от инструкции заголовками. Тон нейтральный, без крика. Ученик проверил промпт на пять грехов и по чеклисту и может назвать, что поправил. Сохранён в my-experiments/u5-reusable-prompt.md.',
+      en: 'A reusable prompt for a task the learner repeats every week. Full CTID structure (Role, Task, Inputs, Expected output, Constraints); the part that changes each time has an explicit slot, so the prompt works without rewriting. It adds 2–3 phrases from the magic-words table aimed at the main problem of the task. The important part comes first and is not buried in the middle. No distractors or filler. Context is separated from instruction with headings. Neutral tone, no shouting. The learner checked the prompt against the five sins and the checklist and can name what they fixed. Saved to my-experiments/u5-reusable-prompt.md.',
     },
     mistakes: [
       { ru: 'Промпт одноразовый: конкретные данные этой недели вшиты в текст, места для новых нет.', en: 'The prompt is single-use: this week\'s data is baked into the text, with no slot for new input.' },
       { ru: 'Критичное правило стоит в середине длинного текста (Lost in the Middle).', en: 'A critical rule sits in the middle of a long text (Lost in the Middle).' },
       { ru: 'Проверка на пять грехов сделана «на глаз»: ученик не может назвать ни одной правки.', en: 'The five-sins check was done by eye: the learner cannot name a single fix.' },
-      { ru: 'Промпт попросили написать модель целиком (мета-промпт) и не прочитали: ученик не может объяснить его разделы.', en: 'The whole prompt was generated by the model (meta-prompt) and not read through: the learner cannot explain its sections.' },
+      { ru: 'Промпт целиком написала модель (мета-промпт), а ученик его не прочитал и не может объяснить разделы.', en: 'The whole prompt was generated by the model (meta-prompt) and not read through: the learner cannot explain its sections.' },
     ],
   },
   {
     module: '05-context-memory',
     unit: 'u4-practice',
     solution: {
-      ru: 'Ученик провёл реальную сессию Claude Code над задачей из своего TODO.md. После сессии: STATE.md обновлён (где остановились, что дальше), в AGENTS.md в разделе «Правила» появилось одно правило, выведенное из конкретного промаха агента (если промах был), и новое знание о проекте, если оно появилось. Проверено, что уточнение обычным сообщением агент учитывает дальше, а побочный вопрос через /btw в историю разговора не попадает. Наблюдения записаны в my-experiments/u4-memory-system.md своими словами.',
+      ru: 'Ученик провёл реальную сессию Claude Code над задачей из своего TODO.md. После сессии STATE.md обновлён (где остановились, что дальше). В разделе «Правила» AGENTS.md появилось одно правило, выведенное из конкретного промаха агента (если промах был). Новое знание о проекте, если оно появилось, тоже записано в AGENTS.md. Проверено, что уточнение обычным сообщением агент учитывает дальше, а побочный вопрос через /btw в историю разговора не попадает. Наблюдения записаны в my-experiments/u4-memory-system.md своими словами.',
       en: 'The learner ran a real Claude Code session on a task from their TODO.md. After the session: STATE.md is updated (where we stopped, what is next); AGENTS.md "Rules" has one rule derived from a concrete agent mistake (if there was one), plus new project knowledge if any came up. They checked that a clarification sent as a normal message is carried forward, while a side question via /btw does not enter the conversation history. Observations are written up in my-experiments/u4-memory-system.md in their own words.',
     },
     mistakes: [
-      { ru: 'Правило в AGENTS.md общее («пиши лучше») — не выведено из конкретного промаха и не проверяемо.', en: 'The rule in AGENTS.md is generic ("write better") — not derived from a concrete mistake and not checkable.' },
-      { ru: 'STATE.md не обновлён после сессии — следующая сессия начнётся с нуля.', en: 'STATE.md was not updated after the session — the next one starts from scratch.' },
-      { ru: 'Уточнение, нужное агенту дальше, отправлено через /btw — и потерялось.', en: 'A clarification the agent needs later was sent via /btw — and got lost.' },
-      { ru: 'Ход сессии записан пересказом агента, а не своими наблюдениями.', en: 'The session is written up as the agent\'s own summary instead of the learner\'s observations.' },
+      { ru: 'Правило в AGENTS.md общее («пиши лучше»): оно не выведено из конкретного промаха, и его не проверить.', en: 'The rule in AGENTS.md is generic ("write better") — not derived from a concrete mistake and not checkable.' },
+      { ru: 'STATE.md не обновлён после сессии, и следующая начнётся с нуля.', en: 'STATE.md was not updated after the session — the next one starts from scratch.' },
+      { ru: 'Уточнение, которое агент должен учитывать дальше, отправлено через /btw — и потерялось.', en: 'A clarification the agent needs later was sent via /btw — and got lost.' },
+      { ru: 'Вместо своих наблюдений в файле пересказ сессии, который написал агент.', en: 'The session is written up as the agent\'s own summary instead of the learner\'s observations.' },
     ],
   },
 ]
