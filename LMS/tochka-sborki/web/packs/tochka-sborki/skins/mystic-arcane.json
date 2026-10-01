@@ -40,6 +40,14 @@
     "09-ai-notebook": {
       "ru": "Обсерватория Источников",
       "en": "Observatory of Sources"
+    },
+    "10-model-training": {
+      "ru": "Лаборатория Алхимика",
+      "en": "The Alchemist’s Laboratory"
+    },
+    "11-second-brain": {
+      "ru": "Библиотека Памяти",
+      "en": "Library of Memory"
     }
   },
   "questTitles": {
@@ -82,9 +90,31 @@
     "09-ai-notebook": {
       "ru": "Настроить тетрадь различения",
       "en": "Tune the notebook of discernment"
+    },
+    "10-model-training": {
+      "ru": "Трансмутация весов: от данных к умению",
+      "en": "Transmutation of Weights: from Data to Skill"
+    },
+    "11-second-brain": {
+      "ru": "Собрать второй разум из своих свитков",
+      "en": "Assemble a second mind from your own scrolls"
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "Всякий ученик начинает с алфавита гримуара. Шесть слов силы откроют тебе смысл заклинаний, что звучат вокруг.",
+        "en": "Every apprentice begins with the grimoire's alphabet. Six words of power will reveal the meaning of the spells spoken around you."
+      },
+      "mentorHint": {
+        "ru": "Не заучивай слово — пойми, что оно творит.",
+        "en": "Don't memorise the word — understand what it does."
+      },
+      "outro": {
+        "ru": "Алфавит постигнут. Теперь шёпот заклинаний стал речью, и ты готов услышать своего призрака.",
+        "en": "The alphabet is mastered. The whisper of spells has become speech, and you are ready to hear your ghost."
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "Всякое великое заклятие начинается с шёпота — бесплотной идеи. Прислушайся к своему призраку, ибо мы научимся придавать ему форму.",
@@ -477,6 +507,20 @@
         "en": "Your sight has sharpened; you now see the invisible connections. The path to mastery is open, and every new pipeline is a step toward its peak."
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Время вплести в заклятие ход светил. Твой голем будет пробуждаться в назначенный час и не повторять уже сотворённых чар.",
+        "en": "Time to weave the course of the stars into your spell. Your golem will wake at the appointed hour and never recast a spell already cast."
+      },
+      "mentorHint": {
+        "ru": "Заклятие без памяти повторяет себя до истощения мага. Веди гримуар исполненного.",
+        "en": "A spell without memory repeats itself until the mage is drained. Keep a grimoire of what is done."
+      },
+      "outro": {
+        "ru": "Голем трудится в ночи сам. С рассветом на твоём столе — свиток, написанный без твоей руки.",
+        "en": "The golem works through the night on its own. At dawn a scroll lies on your desk, written without your hand."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Наш голем из кода могуч, но слеп и глух к миру за пределами своего пергамента. Пришло время даровать ему чувства, чтобы он мог действовать в нашей реальности.",
@@ -545,6 +589,20 @@
       "outro": {
         "ru": "Твой agent обрёл связь с миром и ответил на твой зов! Это великий шаг на пути Архимага. Неси этот огонь в следующие залы познания.",
         "en": "Your agent has connected to the world and answered your call! This is a great step on the Archmage's path. Carry this fire into the next halls of knowledge."
+      }
+    },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Сила накапливается, но вместе с ней — пыль на полках библиотеки. Пусть твой фамильяр пройдёт по залам и укажет, где порядок нарушен.",
+        "en": "Power accumulates, and with it the dust on the library shelves. Let your familiar walk the halls and show where order has been broken."
+      },
+      "mentorHint": {
+        "ru": "Не переписывай весь гримуар разом. Три исправленных страницы, сверенных с оригиналом, — вот истинная работа.",
+        "en": "Do not rewrite the whole grimoire at once. Three corrected pages, checked against the original, are the true work."
+      },
+      "outro": {
+        "ru": "Библиотека снова дышит. Три страницы исправлены, остальное ждёт своего часа в списке.",
+        "en": "The library breathes again. Three pages are corrected; the rest awaits its hour on the list."
       }
     },
     "08-agent-engineering/u1-activation": {
@@ -699,6 +757,146 @@
       "outro": {
         "ru": "Прибор настроен. Ты извлекаешь знание с координатами.",
         "en": "The instrument is tuned. You extract knowledge with coordinates."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Заглянем в реторту оракула. Внутри — не прозрение, а узор вероятностей, сплетённый из чужих слов.",
+        "en": "We look into the oracle’s retort. Inside is not insight, but a pattern of probabilities woven from others’ words."
+      },
+      "mentorHint": {
+        "ru": "Правдоподобное и истинное — разные металлы, хоть и блестят одинаково.",
+        "en": "The plausible and the true are different metals, though they shine alike."
+      },
+      "outro": {
+        "ru": "Реторта прозрачна. Ты видишь, откуда берётся уверенный морок.",
+        "en": "The retort is clear. You see where confident illusion comes from."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "Великое делание начинается не с огня, а с очищения первоматерии. Первоматерия — это данные.",
+        "en": "The Great Work begins not with fire, but with purifying the prima materia. The prima materia is data."
+      },
+      "mentorHint": {
+        "ru": "Нечистый ингредиент отравит весь эликсир.",
+        "en": "An impure ingredient poisons the whole elixir."
+      },
+      "outro": {
+        "ru": "Круг делания ясен. После неудачи ты очищаешь материю, а не раздуваешь огонь.",
+        "en": "The circle of the Work is clear. After failure you purify the matter, not stoke the fire."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Не каждую задачу решает трансмутация. Часто хватает верной формулы и нужного свитка рядом.",
+        "en": "Not every task is solved by transmutation. Often the right formula and the right scroll nearby suffice."
+      },
+      "mentorHint": {
+        "ru": "LoRA — тонкая настойка поверх основы: основа остаётся нетронутой.",
+        "en": "LoRA is a fine tincture over the base: the base stays untouched."
+      },
+      "outro": {
+        "ru": "Выбор сделан по закону соответствия: средство по мере задачи.",
+        "en": "The choice follows the law of correspondence: the means fits the measure of the task."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Эликсир прекрасно действует на тех, на ком его варили. Проверим на тех, кого он не знал.",
+        "en": "The elixir works beautifully on those it was brewed on. We test it on those it has never known."
+      },
+      "mentorHint": {
+        "ru": "Отложи часть материи до опыта — она станет твоим пробным камнем.",
+        "en": "Set part of the matter aside before the experiment — it becomes your touchstone."
+      },
+      "outro": {
+        "ru": "Пробный камень готов. Ты отличаешь золото умения от позолоты памяти.",
+        "en": "The touchstone is ready. You tell the gold of skill from the gilding of memory."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Время собственного делания: малый сосуд, своя печь, своя первоматерия.",
+        "en": "Time for your own Work: a small vessel, your own furnace, your own prima materia."
+      },
+      "mentorHint": {
+        "ru": "Взвесь сосуд до опыта, иначе не узнаешь, что превратилось.",
+        "en": "Weigh the vessel before the experiment, or you will not know what transformed."
+      },
+      "outro": {
+        "ru": "Делание завершено. Ты знаешь, когда хватит формулы, а когда нужна трансмутация.",
+        "en": "The Work is complete. You know when a formula suffices and when transmutation is needed."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Знание, взятое в аренду, могут забрать. Начнём свою библиотеку.",
+        "en": "Knowledge on loan can be taken back. We begin our own library."
+      },
+      "mentorHint": {
+        "ru": "Оракул без ссылки на свиток — лишь эхо в пустом зале.",
+        "en": "An oracle that cites no scroll is only an echo in an empty hall."
+      },
+      "outro": {
+        "ru": "Библиотека заложена. Архив стал собеседником.",
+        "en": "The library is founded. The archive has become a conversation partner."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Магическое зеркало связи: говоришь издалека — отвечают из дома.",
+        "en": "A scrying mirror of contact: you speak from afar — home answers."
+      },
+      "mentorHint": {
+        "ru": "В зеркало может заглянуть любой. Зачаруй его на свой облик.",
+        "en": "Anyone can peer into a mirror. Enchant it to your own likeness."
+      },
+      "outro": {
+        "ru": "Зеркало настроено. Оно откликается лишь тебе.",
+        "en": "The mirror is attuned. It answers only you."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Формулы кочуют от мага к магу — на пергаменте, а не в крови.",
+        "en": "Formulas wander from mage to mage — on parchment, not in the blood."
+      },
+      "mentorHint": {
+        "ru": "Новый навык — новый свиток на полке, а не перемена в сути оракула.",
+        "en": "A new skill is a new scroll on the shelf, not a change in the oracle’s essence."
+      },
+      "outro": {
+        "ru": "Тайна раскрыта: передаются свитки, а сущность остаётся прежней.",
+        "en": "The mystery is solved: scrolls are passed on, the essence stays the same."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "Чужая формула может скрывать иное заклинание между строк.",
+        "en": "A stranger’s formula may hide another spell between its lines."
+      },
+      "mentorHint": {
+        "ru": "Читай формулу целиком, прежде чем произнести.",
+        "en": "Read the whole formula before you speak it aloud."
+      },
+      "outro": {
+        "ru": "Круг защиты начерчен шестью знаками.",
+        "en": "The protective circle is drawn with six signs."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Великое делание: память, зеркало и первый чужой свиток сплавляются воедино.",
+        "en": "The Great Work: memory, the mirror and the first borrowed scroll fuse into one."
+      },
+      "mentorHint": {
+        "ru": "Проверь сплав трижды — золото не терпит догадок.",
+        "en": "Test the alloy three times — gold tolerates no guesswork."
+      },
+      "outro": {
+        "ru": "Второй разум собран. Он хранится в твоих стенах и говорит по твоему зову.",
+        "en": "The second mind is assembled. It lives within your walls and speaks at your call."
       }
     }
   }

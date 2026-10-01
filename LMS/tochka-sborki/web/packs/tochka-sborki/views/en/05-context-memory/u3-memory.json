@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "05-context-memory",
+  "unit": "u3-memory",
+  "locale": "en",
+  "title": "The memory system",
+  "sourceHash": "sha256:bd69b603be2fb59c8cd65eae6ef0cda048598fa35dbf496b01a0b127750b1c3f",
+  "outline": [
+    {
+      "heading": "Memory files: three you write, one Claude writes",
+      "points": [],
+      "children": [
+        {
+          "heading": "AGENTS.md — project context and rules (the main one)",
+          "points": [
+            {
+              "text": "Limit: up to ~200 lines.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "TODO.md — current tasks",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "STATE.md — where you stopped",
+          "points": [
+            {
+              "text": "A new session starts from a blank slate.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "MEMORY.md — Claude's auto-memory",
+          "points": [
+            {
+              "text": "Unlike the three files above, Claude writes MEMORY.md itself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c6",
+    "c7",
+    "c8"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:6a797b2987e78488a02f7b3b3d15b53f2f171e12cb24cfd5a2d3b08499b0d9f8",
+        "points": [
+          "You should limit the length to ~200 lines."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2321fc0e6c83729638ff8483ac0db556bf94ee2627c2965388d2bb1754192603",
+        "points": [
+          "You start a new session from a blank slate."
+        ]
+      },
+      {
+        "sourceHash": "sha256:7f4edd9c617a56e033e74af11ee1679fac523077d0e2e047702311d0fffc4be4",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

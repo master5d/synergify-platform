@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "05-context-memory",
+  "unit": "u3-memory",
+  "locale": "ru",
+  "title": "Система памяти",
+  "sourceHash": "sha256:4794db4782db5963dbc63bb9a2da5b413666ff4abcc3ec736b94474bf39a6d59",
+  "outline": [
+    {
+      "heading": "Файлы памяти: три пишешь ты, один — Claude",
+      "points": [],
+      "children": [
+        {
+          "heading": "AGENTS.md — контекст и правила проекта (главный)",
+          "points": [
+            {
+              "text": "Лимит: до ~200 строк.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "TODO.md — текущие задачи",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "STATE.md — где остановились",
+          "points": [
+            {
+              "text": "Новая сессия начинается с чистого листа.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "MEMORY.md — автоматическая память Claude",
+          "points": [
+            {
+              "text": "В отличие от трёх файлов выше, MEMORY.md пишет Claude сам.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c6",
+    "c7",
+    "c8"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:5bed8ec369ad0d1727d04a0ec8461fdcc37d9480d2c8f8dd221c374ded736b74",
+        "points": [
+          "Объем этого файла ограничен лимитом до ~200 строк."
+        ]
+      },
+      {
+        "sourceHash": "sha256:04a7f9debee4138584c7e4e68cf5e14b6e3dfa9ca9f03e3337939dae768cc935",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:5b673289a0d5e02ae16e7680b9b67fb3221bd5c4ae94e89a0134e5907203b07a",
+        "points": [
+          "Этот файл Claude пишет сам, в отличие от трёх документов выше."
+        ]
+      }
+    ]
+  }
+}

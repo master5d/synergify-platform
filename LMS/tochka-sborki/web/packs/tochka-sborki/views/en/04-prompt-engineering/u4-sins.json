@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-prompt-engineering",
+  "unit": "u4-sins",
+  "locale": "en",
+  "title": "The sins of prompting",
+  "sourceHash": "sha256:c457d8d1b396011b5e5d764f58d01b82b71ad90c5a64b6b3a86c28a14e95713a",
+  "outline": [
+    {
+      "heading": "Five sins of prompting",
+      "points": [],
+      "children": [
+        {
+          "heading": "Context Rot",
+          "points": [
+            {
+              "text": "The longer the conversation, the worse the model handles early information.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Lost in the Middle",
+          "points": [
+            {
+              "text": "The model over-weights the beginning and end of the context.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Distractors — extra stuff pulls attention",
+          "points": [
+            {
+              "text": "Similar fragments in the context throw the model off the correct answer.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Mixing context and prompt",
+          "points": [
+            {
+              "text": "Context (who you are, what's going on) and instruction (what to do specifically) are different things.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Aggressive tone instead of a correction",
+          "points": [
+            {
+              "text": "Research disagrees on how rudeness affects the answer.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c7",
+    "c8",
+    "c9"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:10d8c3507d854fdddbddc4f76b842061288cd4a6548ea85342a94742547dc89f",
+        "points": [
+          "As your conversation grows longer, the model handles early information less effectively."
+        ]
+      },
+      {
+        "sourceHash": "sha256:a07bea53b143bfb655a89c2368b36c256b66f8efc4877fd4e9aa79ce53c9785c",
+        "points": [
+          "The model gives too much weight to the beginning and the end of the context."
+        ]
+      },
+      {
+        "sourceHash": "sha256:91e3349aafdfe6e29b02c0e6c217f8b46626da1c35bf00a60dbe3d7d04d0c2ca",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:ce517a433cc39837b99613bbee8242e24a93a38bc8813596ba673be7b20c4502",
+        "points": [
+          "The context of who you are and what is going on is different from the instruction for what to do specifically."
+        ]
+      },
+      {
+        "sourceHash": "sha256:f1a3e59e3975a29d118e06aef0fc29c74c595e0f6adc47eb7f87f10566d79a49",
+        "points": [
+          "Research does not agree on how your rudeness affects the answer."
+        ]
+      }
+    ]
+  }
+}

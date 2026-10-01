@@ -17,6 +17,16 @@ export interface Env {
   CF_ACCESS_CLIENT_ID: string
   CF_ACCESS_CLIENT_SECRET: string
   LISTMONK_CRM_LIST_ID: string
+  /** "1" включает события прогресса → Listmonk (lib/progress-events.ts). По умолчанию "0". */
+  PROGRESS_EVENTS_ENABLED?: string
+  /** Список-назначение событий прогресса; пусто = не слать. */
+  LISTMONK_PROGRESS_LIST_ID?: string
+  /** "1" включает учебные цепочки писем через Listmonk tx (handlers/email-chain-cron.ts). По умолчанию "0". */
+  EMAIL_CHAINS_ENABLED?: string
+  /** "1" включает приглашения ботом в Telegram-сообщество (lib/community.ts). По умолчанию "0". */
+  COMMUNITY_INVITES_ENABLED?: string
+  /** "1" включает серверный интервальный повтор самопроверок (lib/check-reviews.ts). По умолчанию "0". */
+  SPACED_REVIEW_ENABLED?: string
   LLM_SERVICE_URL: string
   LLM_SERVICE_TOKEN: string
   LLM_CF_ACCESS_CLIENT_ID: string

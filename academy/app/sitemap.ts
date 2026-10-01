@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { writtenSpeedreadingSlugs } from '../lib/speedreading/lessons'
+import { isEideticsLive } from '../lib/eidetics/course'
+import { writtenEideticsSlugs } from '../lib/eidetics/lessons'
 
 // ⚠ Metadata-route под `output: 'export'` требует force-static (гоча Next 16).
 export const dynamic = 'force-static'
@@ -10,9 +12,12 @@ const SITE = 'https://academy.synergify.com'
  *  Уроки /praktika/<slug>/ за admission-гейтом — в sitemap не попадают (noindex).
  *  Тренажёры и уроки скорочтения публичны (public-domain метод) — попадают. */
 const PATHS: string[] = [
-  '', 'pravila',
+  '', 'pravila', 'zabota',
   'trenazhery', 'trenazhery/rsvp', 'trenazhery/schulte', 'trenazhery/test',
   ...writtenSpeedreadingSlugs().map((slug) => `trenazhery/${slug}`),
+  // «Эйдетика» — только после вычитки владельцем (status 'live'); до того страницы noindex.
+  ...(isEideticsLive() ? ['trenazhery/eidetika', 'trenazhery/eidetika/ryad', 'trenazhery/eidetika/dvorec'] : []),
+  ...(isEideticsLive() ? writtenEideticsSlugs().map((slug) => `trenazhery/eidetika/${slug}`) : []),
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {

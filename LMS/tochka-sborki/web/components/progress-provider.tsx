@@ -15,6 +15,8 @@ interface ProgressContextValue {
   markViewed: (slug: string) => Promise<void>
   markCompleted: (slug: string) => Promise<void>
   loaded: boolean
+  /** Есть сессия: /api/progress/list ответил 200 (он под requireAuth). До ответа — false. */
+  authed: boolean
 }
 
 const ProgressContext = createContext<ProgressContextValue>({
@@ -22,6 +24,7 @@ const ProgressContext = createContext<ProgressContextValue>({
   markViewed: async () => {},
   markCompleted: async () => {},
   loaded: false,
+  authed: false,
 })
 
 export function useProgress(): ProgressContextValue {
@@ -31,10 +34,15 @@ export function useProgress(): ProgressContextValue {
 export function ProgressProvider({ children }: { children: React.ReactNode }) {
   const [progressMap, setProgressMap] = useState<Map<string, ProgressState>>(new Map())
   const [loaded, setLoaded] = useState(false)
+  const [authed, setAuthed] = useState(false)
 
   useEffect(() => {
     fetch('/api/progress/list', { credentials: 'include' })
-      .then(r => r.ok ? r.json() as Promise<ProgressRow[]> : [])
+      .then(r => {
+        if (!r.ok) return []
+        setAuthed(true)
+        return r.json() as Promise<ProgressRow[]>
+      })
       .then(rows => {
         const map = new Map<string, ProgressState>()
         for (const row of rows) {
@@ -80,7 +88,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   }, [progressMap])
 
   return (
-    <ProgressContext.Provider value={{ getState, markViewed, markCompleted, loaded }}>
+    <ProgressContext.Provider value={{ getState, markViewed, markCompleted, loaded, authed }}>
       {children}
     </ProgressContext.Provider>
   )

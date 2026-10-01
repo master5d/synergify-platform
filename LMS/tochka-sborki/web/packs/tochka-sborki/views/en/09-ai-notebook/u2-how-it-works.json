@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "09-ai-notebook",
+  "unit": "u2-how-it-works",
+  "locale": "en",
+  "title": "How it works",
+  "sourceHash": "sha256:c56cc7148731d9afd376e6925d559c22d0f8e5684b5d9b9f304b3531d5565d9b",
+  "outline": [
+    {
+      "heading": "Source-grounding: the answer is tied to a source",
+      "points": [
+        {
+          "text": "The notebook works differently: before answering, it finds the relevant pieces in your sources and builds the answer on them.",
+          "origin": "extract"
+        },
+        {
+          "text": "A citation is not a decoration — it is a seam.",
+          "origin": "extract"
+        },
+        {
+          "text": "The notebook knows only what you gave it.",
+          "origin": "extract"
+        },
+        {
+          "text": "For the notebook, a video is its transcript.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Under the hood — in module 05 language",
+      "points": [
+        {
+          "text": "If you took the context-and-memory module, you will recognize the mechanics: sources are cut into chunks, and the chunks relevant to your question are retrieved.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The third mode: hybrid",
+      "points": [
+        {
+          "text": "The model then answers with general knowledge plus your sources — and questions about the notebook come back with links into it.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4",
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:be39bb066ad8515b761bf42ee58cf04790ce6c4d9988fd7c1e4b1c61b12b4c41",
+        "points": [
+          "The notebook finds relevant pieces in your sources to build its answers.",
+          "A citation acts as a seam rather than a decoration.",
+          "The notebook only knows what you have provided to it.",
+          "For the notebook, a video is its transcript."
+        ]
+      },
+      {
+        "sourceHash": "sha256:456195417bf6e32e2a5294c62f0918b1b04d9fd64f5d4242a84302454699181d",
+        "points": [
+          "If you took the context-and-memory module, you will recognize the mechanics of cutting sources into chunks and retrieving those relevant to your question."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fd59bf43a0dd52037e5a6154170da7e7e6d9159007d6700406924571cab3806f",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

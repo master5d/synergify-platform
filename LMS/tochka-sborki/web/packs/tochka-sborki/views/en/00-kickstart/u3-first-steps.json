@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "00-kickstart",
+  "unit": "u3-first-steps",
+  "locale": "en",
+  "title": "First steps",
+  "sourceHash": "sha256:2f4e26c114118ef32b2fabd6124f9c1e12293c2fcfbe5c05829ca78dbdbbf63d",
+  "outline": [
+    {
+      "heading": "The path through modules 00–09",
+      "points": [
+        {
+          "text": "Each module — one concrete skill, one concrete result.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Vibe coding: what it actually means",
+      "points": [
+        {
+          "text": "You stop being the doer — you become the director.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:69c5625c3b2061f1552f6389c8cfb02c6b1d3ddf28aea44bb93199d9692b73cf",
+        "points": [
+          "Each module focuses on one concrete skill and one concrete result."
+        ]
+      },
+      {
+        "sourceHash": "sha256:ed040f14a950a7c7e5d8b552b30c9021d3b98a690a09ff8a7ec736c21a7bf2d7",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

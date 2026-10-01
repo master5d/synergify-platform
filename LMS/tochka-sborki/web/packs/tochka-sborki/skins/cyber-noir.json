@@ -40,6 +40,14 @@
     "09-ai-notebook": {
       "ru": "Архив Улик",
       "en": "Evidence Archive"
+    },
+    "10-model-training": {
+      "ru": "Подпольная Лаборатория",
+      "en": "Underground Lab"
+    },
+    "11-second-brain": {
+      "ru": "Личный Архив",
+      "en": "Private Archive"
     }
   },
   "questTitles": {
@@ -82,9 +90,31 @@
     "09-ai-notebook": {
       "ru": "Вытащить факты из шума.",
       "en": "Pull facts out of the noise."
+    },
+    "10-model-training": {
+      "ru": "Разобрать модель на детали и собрать свою.",
+      "en": "Take the model apart and build your own."
+    },
+    "11-second-brain": {
+      "ru": "Завести архив, который не продадут вместе с сервером.",
+      "en": "Keep an archive nobody sells off with the server."
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "В этом городе у каждого свой жаргон. Токены, окна, температура — пока не знаешь слов, тебя водят за нос. Начнём с азбуки.",
+        "en": "In this city everyone speaks their own slang. Tokens, windows, temperature — until you know the words, you get played. We start with the basics."
+      },
+      "mentorHint": {
+        "ru": "Кто знает язык улицы, того не обсчитают.",
+        "en": "Whoever knows the street's language doesn't get short-changed."
+      },
+      "outro": {
+        "ru": "Словарь при тебе. Теперь ты слышишь сеть, а не шум. Пора ловить своего призрака.",
+        "en": "You've got the lexicon. Now you hear the net, not the noise. Time to catch your ghost."
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "В этом городе из стекла и хрома каждая идея — призрак в сети, ждущий своего носителя. Сейчас мы поймаем твоего.",
@@ -477,6 +507,20 @@
         "en": "You've acquired a new skill. The city is your sandbox now. Get to work."
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Ночная смена. Город не спит, и твой pipeline тоже не будет. Он выйдет на работу по часам и не тронет дела, которые уже закрыты.",
+        "en": "Night shift. The city never sleeps, and neither will your pipeline. It clocks in on schedule and leaves closed cases alone."
+      },
+      "mentorHint": {
+        "ru": "Закрытое дело не открывают дважды. Веди журнал — иначе утонешь в собственных отчётах.",
+        "en": "You don't reopen a closed case. Keep a log, or you'll drown in your own reports."
+      },
+      "outro": {
+        "ru": "Смена отработана без тебя. Утром на столе лежит свежая сводка — и ни одного дубля.",
+        "en": "The shift ran without you. In the morning a fresh brief is on your desk, and not a single duplicate."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Агент — чистый лист, призрак в машине, ждущий приказа. Сейчас мы дадим ему цель.",
@@ -545,6 +589,20 @@
       "outro": {
         "ru": "Ты его создал, вооружил и протестировал. Теперь агент — твой оперативник в цифровых тенях. Настоящая работа только начинается.",
         "en": "You built it, you armed it, and you tested it. The agent is now your operative in the digital shadows. The real work begins."
+      }
+    },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Каждое дело оставляет следы: брошенные конфиги, забытые ключи, файлы-монстры. Пора прочесать собственную берлогу.",
+        "en": "Every case leaves traces: abandoned configs, forgotten keys, monster files. Time to sweep your own den."
+      },
+      "mentorHint": {
+        "ru": "Не верь рапорту на слово. Три улики, проверенные лично, стоят больше двадцати непроверенных.",
+        "en": "Don't take the report on faith. Three leads you checked yourself are worth more than twenty you didn't."
+      },
+      "outro": {
+        "ru": "Берлога вычищена ровно настолько, чтобы в ней снова можно было работать. Остальное — в папку «на потом».",
+        "en": "The den is clean enough to work in again. The rest goes in the \"later\" file."
       }
     },
     "08-agent-engineering/u1-activation": {
@@ -699,6 +757,146 @@
       "outro": {
         "ru": "Дело закрыто: из часов просмотра получился короткий отчёт с уликами.",
         "en": "Case closed: hours of viewing became a short report with evidence."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Вскрываем чёрный ящик. Внутри нет свидетеля — только статистика, которая умеет звучать уверенно.",
+        "en": "We crack the black box. There is no witness inside — only statistics that know how to sound sure."
+      },
+      "mentorHint": {
+        "ru": "Модель не врёт нарочно. Она просто продолжает строку так, как её продолжают все.",
+        "en": "The model does not lie on purpose. It just continues the line the way everyone does."
+      },
+      "outro": {
+        "ru": "Механизм вскрыт. Теперь ясно, почему показания без источника ничего не стоят.",
+        "en": "Mechanism exposed. Now it is clear why testimony without a source is worthless."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "В этом деле главная работа — не выбор ствола, а грязные досье. Данные.",
+        "en": "In this case the main work is not choosing the gun but the dirty files. Data."
+      },
+      "mentorHint": {
+        "ru": "Что слили в обучение, то модель и расскажет. Проверь досье до допроса.",
+        "en": "Whatever was leaked into training is what the model will tell. Check the files before the interrogation."
+      },
+      "outro": {
+        "ru": "Цикл ясен. После провала возвращаешься не к модели, а к уликам.",
+        "en": "The cycle is clear. After a failure you go back not to the model but to the evidence."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Совет «просто дообучи» звучит как лёгкие деньги. Сначала проверим дешёвые пути.",
+        "en": "\"Just fine-tune it\" sounds like easy money. First we check the cheap routes."
+      },
+      "mentorHint": {
+        "ru": "Свежие факты держи в папке на столе, а не в памяти осведомителя.",
+        "en": "Keep fresh facts in the folder on the desk, not in the informant’s memory."
+      },
+      "outro": {
+        "ru": "Решение трезвое. Перековка — только когда все остальные двери закрыты.",
+        "en": "A sober call. Retraining only when every other door is shut."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Идеальный ответ на знакомый вопрос — подозрительно. Проверяем на том, чего модель не видела.",
+        "en": "A perfect answer to a familiar question is suspicious. We test on what the model has not seen."
+      },
+      "mentorHint": {
+        "ru": "Отложенная выборка — это свидетель, которого не показывали обвиняемому.",
+        "en": "The holdout is a witness never shown to the suspect."
+      },
+      "outro": {
+        "ru": "Протокол проверки готов. Впечатления больше не проходят за доказательства.",
+        "en": "The test protocol is ready. Impressions no longer pass for proof."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Своя модель, своё железо, свои данные. Никакого чужого облака.",
+        "en": "Your model, your hardware, your data. No one else’s cloud."
+      },
+      "mentorHint": {
+        "ru": "Замер «до» — алиби результата. Без него дело развалится.",
+        "en": "The \"before\" measurement is the result’s alibi. Without it the case falls apart."
+      },
+      "outro": {
+        "ru": "Дело закрыто. Ты знаешь, когда хватит промпта, а когда модель стоит учить.",
+        "en": "Case closed. You know when a prompt is enough and when a model is worth training."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Архив в чужом облаке — улика в чужом сейфе. Переносим дело к себе.",
+        "en": "An archive in someone else’s cloud is evidence in someone else’s safe. We move the case home."
+      },
+      "mentorHint": {
+        "ru": "Показания без номера папки ничего не стоят. Требуй адрес.",
+        "en": "Testimony without a folder number is worthless. Demand the address."
+      },
+      "outro": {
+        "ru": "Архив у тебя. Теперь он отвечает на вопросы, как свидетель под присягой.",
+        "en": "The archive is yours. Now it answers questions like a witness under oath."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Нужна связь с базой, пока ты в городе. Проводим защищённую линию.",
+        "en": "You need a line to base while you are out in the city. We run a secure wire."
+      },
+      "mentorHint": {
+        "ru": "Номер бота знает кто угодно. Трубку берёшь только на свои звонки.",
+        "en": "Anyone can learn the bot’s number. You pick up only your own calls."
+      },
+      "outro": {
+        "ru": "Линия проведена. Чужие звонки уходят в пустоту.",
+        "en": "The line is live. Strangers’ calls drop into the void."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Приёмы переходят от агента к агенту. Никакой магии — только папки с инструкциями.",
+        "en": "Tricks pass from agent to agent. No magic — just folders of instructions."
+      },
+      "mentorHint": {
+        "ru": "Мозги у агентов одни и те же. Разница — в досье, которое лежит рядом.",
+        "en": "The agents have the same brains. The difference is the file lying next to them."
+      },
+      "outro": {
+        "ru": "Схема ясна. Передаются файлы, а не душа машины.",
+        "en": "The scheme is clear. Files change hands, not the machine’s soul."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "Письмо от «поддержки» просит ключи. Классическая подстава.",
+        "en": "A letter from \"support\" asks for the keys. A classic setup."
+      },
+      "mentorHint": {
+        "ru": "Всё, что пришло снаружи, — улика, а не приказ.",
+        "en": "Everything that comes from outside is evidence, not an order."
+      },
+      "outro": {
+        "ru": "Подставу раскусили. Шесть правил держат периметр.",
+        "en": "The setup is busted. Six rules hold the perimeter."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Собираем свою сеть: архив, линия связи, один проверенный приём.",
+        "en": "We assemble our own network: an archive, a line, one vetted trick."
+      },
+      "mentorHint": {
+        "ru": "Канарейка в шахте цела — значит, периметр держит.",
+        "en": "The canary in the mine is still alive — the perimeter holds."
+      },
+      "outro": {
+        "ru": "Дело закрыто. Второй мозг твой, на связи и под замком.",
+        "en": "Case closed. The second brain is yours, within reach and under lock."
       }
     }
   }

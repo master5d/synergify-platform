@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { CertificatePage } from '@/components/pages/certificate-page'
 import { COURSE } from '@/lib/course'
 import { pageTitle } from '@/lib/page-title'
+import { getNavigationItems } from '@/lib/content'
+import { outlineFromNav } from '@/lib/progress-sync'
 
 export const metadata: Metadata = {
   title: pageTitle('Сертификат'),
@@ -14,5 +16,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <CertificatePage locale="ru" />
+  return <CertificatePage locale="ru" outline={outlineFromNav(getNavigationItems('ru'))} />
 }

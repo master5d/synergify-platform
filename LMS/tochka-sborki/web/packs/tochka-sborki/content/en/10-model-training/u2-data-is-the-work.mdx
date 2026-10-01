@@ -1,0 +1,96 @@
+---
+title: "Data is the main work"
+unit: 2
+module: 10
+duration: "8 min"
+---
+
+<Phase type="activation">
+
+Picture two teams. The first spends a week choosing a model and tweaking training settings. The second spends a week going through its examples: removing duplicates, fixing mixed-up answers, adding rare cases.
+
+Both trained a model on the same hardware.
+
+Whose model do you think will handle the real task better?
+
+</Phase>
+
+<Phase type="reflection">
+
+Most likely you bet on the second. A model learns exactly what it was shown — mistakes in the examples included.
+
+It's the same idea as in module 04: the agent does what you phrased, not what you meant. In training, your phrasing is the dataset. Every crooked example is a crooked spec, repeated many times.
+
+Consider where in your work you already have "input → correct output" examples that someone has checked.
+
+</Phase>
+
+<Phase type="concept">
+
+## The machine learning cycle
+
+Every ML project, from an email classifier to fine-tuning an LLM, goes through the same seven steps:
+
+1. **Data collection** — examples of the task, ideally from real life.
+2. **Preprocessing** — cleaning, deduplication, a single format, labeling.
+3. **Model selection** — the algorithm class and a specific model for the task.
+4. **Training** — the model adjusts its weights to the examples.
+5. **Testing** — checking on examples the model hasn't seen.
+6. **Tuning** — fixing data and settings based on the test, then training again.
+7. **Prediction** — the model works on new data in the real task.
+
+A cycle, not a straight line: after the test you usually go back to the data, not to the model.
+
+## "80% of the time is data"
+
+People often repeat that data preparation eats about 80% of an ML project's time. This figure has no clear primary source — treat it as folklore, not a measurement.
+
+The direction, though, is easy to check yourself. In this module's practice, steps 1–2 will take you longer than launching the training itself.
+
+## Map: "task → algorithm class"
+
+Not every task needs an LLM. First name what exactly you need to get:
+
+| What you need | Algorithm class | Example |
+| :--- | :--- | :--- |
+| A number | regression | price, lead time, demand |
+| A label from a list | classification | ticket topic, spam or not |
+| Groups without ready labels | clustering | customer segments |
+| The unusual | anomaly detection | a strange transaction |
+| "What else fits" | recommender systems | the next product or lesson |
+| Text, code, an answer | generative models (LLM) | an email, a summary, a dialogue |
+
+Classical ML is covered in Microsoft's [ML-For-Beginners](https://github.com/microsoft/ML-For-Beginners) course (MIT). For many rows of the table, a model that trains in minutes on an ordinary laptop is enough.
+
+For LLMs the cycle is the same. Step 1 is "request → good answer" pairs, and step 2 is proofreading them.
+
+<InterestExample id="pairs"/>
+
+<SelfCheck id="c4"/>
+
+<SelfCheck id="c5"/>
+
+<SelfCheck id="c6"/>
+
+</Phase>
+
+<Phase type="practice">
+
+Take one task from your work that you'd like to "hand to a model" and lay it out along the cycle.
+
+```
+Task: [...]
+What I need to get: [number / label / group / anomaly / recommendation / text]
+Algorithm class from the map: [...]
+Is an LLM needed here at all: [yes / no — why]
+
+Step 1. Where I'll get examples: [...]  How many I have right now: [...]
+Step 2. What I'll have to clean in them: [...]
+Step 5. What I'll test on that the model hasn't seen: [...]
+```
+
+Save it to `my-experiments/u2-ml-cycle.md`.
+
+If the "is an LLM needed" line says "no," that's a full result for this unit, not a failure.
+
+</Phase>

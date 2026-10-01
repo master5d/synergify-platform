@@ -17,7 +17,7 @@ Run each joint of your design in your head: which one honestly looks like a temp
 
 <Phase type="reflection">
 
-Picture an editor at the cutting table: hundreds of clips in front of them, and the goal isn't to make a perfect film — it's to **assemble a first rough cut** so they can see where the story falls apart.
+Picture an editor at the cutting table: hundreds of clips in front of them. The goal isn't to make a perfect film — it's to **assemble a first rough cut** so they can see where the story falls apart.
 
 No great edit starts from a first take. First comes the rough cut: everything in order, even if it's uneven. Then the director watches to see what grips and what sags.
 
@@ -57,7 +57,7 @@ If you can't open the link, say so; don't summarize from guesswork.
 
 In a chat (claude.ai) the model won't create a file: copy the result into your ideas file, e.g. `my-experiments/ideas.md`. An agent with file access (Claude Code) can write it itself — add "Save the result to `my-experiments/ideas.md`" to the prompt.
 
-If the model can't open the link (this happens in a chat without a scraping tool), don't accept an answer based on guesswork: copy the article text and paste it into the message instead of the URL.
+If the model can't open the link (this happens in a chat without a scraping tool), don't accept an answer based on guesswork. Copy the article text and paste it into the message instead of the URL.
 
 ## Extended pipeline: multiple sources
 
@@ -85,12 +85,14 @@ The safety net matters even more here: without a scraping tool the model may "im
 Run your pipeline right now:
 
 1. Take a URL from a real task (article, docs, post)
-2. Use the prompt from Concept above
+2. Send the prompt from Concept above to your agent: in the chat (claude.ai) or in Claude Code
 3. Get the result
 4. Rate it: what worked? what could be better?
 
 Save the result to `my-experiments/u3-pipeline-result.md`
 
 Save the prompt to `my-experiments/u3-pipeline-prompt.md` — this is your first reusable pipeline.
+
+<NoAiCheck id="no-ai"/>
 
 </Phase>

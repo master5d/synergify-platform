@@ -55,3 +55,34 @@ describe('model-kit WCAG AA contrast guard', () => {
     }
   }
 })
+
+// Смок-аудит 2026-09-27 «Путь ссылка на урок → вход»: граница поля ввода и Google-кнопки
+// (--border-color) и плейсхолдер (currentColor 50% из Tailwind Preflight) не проходили
+// WCAG на обоих фонах, которые их реально окружают (страница = --bg-primary, само поле =
+// --bg-surface). Заведены отдельные токены --border-interactive/--placeholder-color
+// (globals.css применяет их через `input, select, textarea, a[href^="/api/auth/oauth/"]`
+// и `::placeholder`, не трогая компоненты) — этот guard не даёт им регрессировать.
+const NON_TEXT_BACKGROUNDS = ['bg-primary', 'bg-surface'] as const
+
+describe('model-kit interactive-border & placeholder contrast guard', () => {
+  const css = readFileSync(MODEL_KIT, 'utf8')
+  for (const theme of ['dark', 'light'] as const) {
+    const t = themeTokens(css, theme)
+    for (const bg of NON_TEXT_BACKGROUNDS) {
+      it(`${theme}: --border-interactive on --${bg} meets WCAG 1.4.11 non-text (>=3)`, () => {
+        const r = contrastRatio(t['border-interactive'], t[bg])
+        expect(
+          r,
+          `${theme} --border-interactive (${t['border-interactive']}) on --${bg} (${t[bg]}) = ${r.toFixed(2)}`,
+        ).toBeGreaterThanOrEqual(3)
+      })
+    }
+    it(`${theme}: --placeholder-color on --bg-surface meets WCAG 1.4.3 text (>=4.5)`, () => {
+      const r = contrastRatio(t['placeholder-color'], t['bg-surface'])
+      expect(
+        r,
+        `${theme} --placeholder-color (${t['placeholder-color']}) on --bg-surface (${t['bg-surface']}) = ${r.toFixed(2)}`,
+      ).toBeGreaterThanOrEqual(4.5)
+    })
+  }
+})

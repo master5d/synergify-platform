@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u3-skills-travel",
+  "locale": "ru",
+  "title": "Навыки переходят от агента к агенту",
+  "sourceHash": "sha256:5ca2c5de47a1de2b0a5072137e6444943d177af8d3957466202c94052c66efbb",
+  "outline": [
+    {
+      "heading": "«Мой агент учит твоего» — по-честному",
+      "points": [
+        {
+          "text": "Выглядит как обучение, но веса модели при этом не меняются.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Навык — это папка",
+      "points": [
+        {
+          "text": "Значит, навык, собранный для одного агента, часто подходит и другому.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Три способа передать навык",
+      "points": [
+        {
+          "text": "Многие авторы выкладывают свои навыки открыто.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что передаётся, а что нет",
+      "points": [
+        {
+          "text": "Передаётся: навыки, шаблоны AGENTS.md, чек-листы, примеры хороших ответов.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Как агент перенимает навык из разговора",
+      "points": [
+        {
+          "text": "Есть и обратный путь: агент сам оформляет навык из удачной работы.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c7",
+    "c8",
+    "c9"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:8452803d93b09b68b96fc6f136f62d652484a07035497ee32c9e92fa90aa17f4",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:787105c19a6fdca2084b9be4399a268a26df828cb5fd2b9c13e5b9e88aabbf99",
+        "points": [
+          "Навык, который ты собрал для одного агента, часто подходит и другому."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e94fbb5f5bba9ae92bf7532beffcccdb7819a0f7c5104535f099cab07481fb8e",
+        "points": [
+          "Многие авторы выкладывают свои навыки в открытый доступ."
+        ]
+      },
+      {
+        "sourceHash": "sha256:07f339fbf79e03b8959db0532b289ad38674115b1791456d61cfcae6475b4a0b",
+        "points": [
+          "Передаются навыки, шаблоны AGENTS.md и чек-листы.",
+          "Также можно передавать примеры хороших ответов."
+        ]
+      },
+      {
+        "sourceHash": "sha256:783831a327aec334e3f1db6bd3657f1ecf0ca9b09d3c7c073acbe3a94dd8f12d",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

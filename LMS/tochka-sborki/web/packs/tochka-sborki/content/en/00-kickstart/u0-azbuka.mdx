@@ -1,0 +1,135 @@
+---
+title: "ABC: six words before you start"
+unit: 1
+module: 0
+duration: "10 min"
+---
+
+<Phase type="activation">
+
+Picture walking into a workshop where everyone has known each other for years. Someone says "I ran out of tokens", another answers "the context is full, start over", a third suggests "turning the temperature down". The words sound familiar, yet the meaning slips past you.
+
+Run through it in your head: which of these words have you already heard and nodded along to without being sure you got it? No shame — that's how everyone starts.
+
+</Phase>
+
+<Phase type="reflection">
+
+You don't need to understand how an engine works to drive a car. But "tank", "brake" and "gear" you do need: without them you can't follow the instructor, or your own car.
+
+AI is the same. The six words in this unit are your "tank" and "brake". They're enough to understand what's happening on your screen and not to panic when the model acts strangely. Catch it in your head: which of them feels foggiest right now?
+
+</Phase>
+
+<Phase type="concept">
+
+## Where we are: the nesting doll
+
+"AI", "neural network", "machine learning" and "LLM" are often used as synonyms. In fact they sit inside one another, like a nesting doll.
+
+<figure>
+<svg viewBox="0 0 480 360" width="100%" role="img" aria-label="Nesting doll: artificial intelligence contains machine learning, which contains deep learning, which contains large language models (LLMs)">
+  <rect x="4" y="4" width="472" height="352" rx="18" fill="none" stroke="currentColor" strokeOpacity="0.35" strokeWidth="2" />
+  <text x="22" y="34" fill="currentColor" fontSize="18" fontWeight="700">Artificial intelligence (AI)</text>
+  <text x="22" y="56" fill="currentColor" fillOpacity="0.7" fontSize="14">a machine doing what used to take a mind</text>
+  <rect x="32" y="72" width="416" height="272" rx="16" fill="currentColor" fillOpacity="0.03" stroke="currentColor" strokeOpacity="0.5" strokeWidth="2" />
+  <text x="50" y="102" fill="currentColor" fontSize="18" fontWeight="700">Machine learning (ML)</text>
+  <text x="50" y="124" fill="currentColor" fillOpacity="0.7" fontSize="14">rules are learned from examples, not by hand</text>
+  <rect x="60" y="140" width="360" height="192" rx="14" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeOpacity="0.65" strokeWidth="2" strokeDasharray="6 4" />
+  <text x="78" y="170" fill="currentColor" fontSize="18" fontWeight="700">Deep learning</text>
+  <text x="78" y="192" fill="currentColor" fillOpacity="0.7" fontSize="14">many-layered neural networks</text>
+  <rect x="88" y="208" width="304" height="112" rx="12" fill="currentColor" fillOpacity="0.1" stroke="currentColor" strokeWidth="3" />
+  <text x="240" y="244" textAnchor="middle" fill="currentColor" fontSize="22" fontWeight="700">LLM</text>
+  <text x="240" y="268" textAnchor="middle" fill="currentColor" fontSize="14">large language models</text>
+  <text x="240" y="296" textAnchor="middle" fill="currentColor" fontSize="14" fontWeight="700">Claude, ChatGPT, Gemini — you are here</text>
+</svg>
+</figure>
+
+**AI** is the biggest umbrella: any machine doing something "smart", from a chess program to a sat-nav. Inside it is **machine learning**: instead of writing the rules, you show the program lots of examples and it works the rules out itself. Inside that is **deep learning**: the same idea, but on many-layered neural networks. And right in the middle are **LLMs**, large language models trained on huge amounts of text. Claude and ChatGPT live here.
+
+Why it matters: when the news says "AI has learned to…", it could mean anything from the four layers. Everything you'll use in this course is the smallest doll.
+
+## Six words
+
+### 1. Token
+
+**The idea.** A model reads text not letter by letter or word by word, but in pieces called tokens. A token can be a whole short word, part of a long word, or a punctuation mark. Everything in the LLM world is measured in tokens: request length, memory size, price.
+
+**Analogy.** A construction set: before text goes into the model, it's taken apart into bricks. A short common word is one brick, a rare long one is several.
+
+**See it yourself.** Open any online tokenizer (for example, [platform.openai.com/tokenizer](https://platform.openai.com/tokenizer)) and paste one sentence in English, then the same sentence in another language you know. The non-English version usually takes more tokens: it gets chopped finer. The practical takeaway: long non-English text eats through limits faster.
+
+### 2. Context window
+
+**The idea.** This is how many tokens the model sees at once: the whole conversation, attached files, hidden instructions and its own reply. Anything that doesn't fit simply doesn't exist for the model.
+
+**Analogy.** A desk. While papers are on the desk, you work with them. When the desk is full, old sheets go into a drawer — and from then on you can't see them, even though they were there.
+
+**See it yourself.** In Claude Code, run `/context` — you'll see how full the window already is and with what. In a very long chat, ask the model to repeat your very first message word for word. If it stumbles or paraphrases, the beginning has already dropped out of view. That's why long work is better split into sessions, with the important bits kept in files — that's module 05.
+
+### 3. Temperature
+
+**The idea.** The model writes its answer one token at a time, each time choosing among several likely continuations. Temperature is the dial that decides how boldly to choose. Low — almost always the most likely option, answers are even and repeatable. High — the unexpected more often, answers are livelier but mistakes are more common too.
+
+**Analogy.** Two cooks with one recipe: one weighs every gram, the other improvises. The first makes the same dish every time; the second sometimes a masterpiece, sometimes too much salt.
+
+**See it yourself.**
+
+<InterestExample id="temperature"/>
+
+### 4. Why there are so many models, and how they differ
+
+**The idea.** Models differ in size, in the data they learned from, in what they were further trained for, in window size, speed and price. There is no single best one. A big model thinks deeper but is slower and costlier; a small one answers instantly and cheaply, but more simply.
+
+**Analogy.** Transport. A scooter, a truck and a train don't compete over which is "better" — they're for different trips. You don't take a train to the bakery.
+
+**See it yourself.** Ask one question to two models — for example, by switching the model in the chat menu or with `/model` in Claude Code. Compare speed, length and tone. Which stack to pick for your own conditions is module 03.
+
+### 5. Prompt and context
+
+**The idea.** The prompt is what you're asking for right now. The context is everything the model sees along with that request: earlier messages, files, project instructions. The model doesn't answer the prompt — it answers the prompt *in context*.
+
+**Analogy.** "How much is it?" in a shop makes sense to the seller only if they can see what's in your hands. Without that, the same question is a riddle.
+
+**See it yourself.** Open a new chat and ask: "And how much is that in euros?" The model will ask what you mean. Now ask the same in a chat where you've just discussed a price in dollars — it gets it right away. Same prompt, different context. How to craft a prompt is module 04; how to manage context is module 05.
+
+### 6. Agent
+
+**The idea.** A chat answers; an agent acts. An agent is a model plus tools (reading files, running commands, searching the web) plus a loop. The loop: think → take a step → look at the result → decide what's next — and so on until the task is closed.
+
+**Analogy.** A phone consultant versus a technician who shows up with a toolbox. The consultant tells you what to unscrew. The technician unscrews it, checks what leaks, and tightens some more.
+
+**See it yourself.** Once you've installed Claude Code (module 02), ask it inside a project folder: "Find the largest file here and tell me what's in it." You'll see a chain of steps: it lists the files itself, opens the right one, and only then answers. How to design agents that work reliably is module 08.
+
+## How the words connect
+
+A token is the unit of measure. The window is measured in tokens. Prompt and context together have to fit in the window. Temperature decides how the model picks the next token. Models differ, among other things, in window size and price per token. And an agent is a model that, in a loop, keeps adding the results of its own actions to its context.
+
+<SelfCheck id="c11"/>
+
+<SelfCheck id="c12"/>
+
+</Phase>
+
+<Phase type="practice">
+
+Three short experiments, two minutes each:
+
+1. **Temperature.** The same question in two new chats. Did the answers match or not?
+2. **Context.** "And how much is that in euros?" in an empty chat and in a chat that already had a price. How do the answers differ?
+3. **Tokens.** One sentence in English and in another language in a tokenizer. How big is the gap?
+
+Save your observations to `my-experiments/u0-azbuka.md`:
+
+```
+Temperature: [matched / didn't — how they differed]
+Context: [what the model said in the empty chat and in the chat with a price]
+Tokens: [English — N, other language — M]
+The word that got clearest: [...]
+```
+
+No need to memorise the six words. Keep this unit handy: the course cheat sheet links to it.
+
+**Primary source.** If you want to go deeper — Microsoft's open course [Generative AI for Beginners](https://github.com/microsoft/generative-ai-for-beginners) (MIT licence) covers these ideas in detail, with illustrations. The text of this unit is written in our own words, not translated from there.
+
+</Phase>

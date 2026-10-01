@@ -45,8 +45,17 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
   {
     label: { ru: 'Из курса', en: 'From the course' },
     items: [
+      {
+        kind: 'link',
+        title: { ru: 'Стартер студента', en: 'Student starter' },
+        description: {
+          ru: 'Готовый проект для курса с любым агентом: AGENTS.md, память, my-experiments, шаблоны',
+          en: 'A ready course project for any agent: AGENTS.md, memory, my-experiments, templates',
+        },
+        href: '/starter/',
+      },
       { kind: 'link', title: { ru: 'Шпаргалка', en: 'Cheatsheet' }, href: '/cheatsheet/' },
-      { kind: 'link', title: { ru: 'Roadmap', en: 'Roadmap' }, href: '/roadmap/' },
+      { kind: 'link', title: { ru: 'Дорожная карта', en: 'Roadmap' }, href: '/roadmap/' },
       { kind: 'link', title: { ru: 'Установка стека (macOS/Linux)', en: 'Install the stack (macOS/Linux)' }, href: '/install.sh' },
       { kind: 'link', title: { ru: 'Установка стека (Windows)', en: 'Install the stack (Windows)' }, href: '/install.ps1' },
       { kind: 'link', title: { ru: 'Установка за GFW (cloud-relay)', en: 'Install behind GFW (cloud relay)' }, href: '/install-gfw.sh' },
@@ -77,11 +86,34 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
         href: 'https://github.com/microsoft/ai-agents-for-beginners',
         external: true,
       },
+      {
+        // intake LMS#4: huggingface/agents-course — Apache-2.0 (проверено 2026-09-28, push 2026-09-15).
+        kind: 'link',
+        title: { ru: 'Hugging Face Agents Course (англ.)', en: 'Hugging Face Agents Course' },
+        description: {
+          ru: 'Курс Hugging Face про агентов: как они устроены, агентные фреймворки на практике, финальный проект. Бесплатно, Apache-2.0',
+          en: 'Hugging Face course on agents: how they work, agent frameworks in practice, a final project. Free, Apache-2.0',
+        },
+        href: 'https://huggingface.co/learn/agents-course',
+        external: true,
+      },
+      {
+        // intake LMS#4: закрытая платформа без открытой лицензии — только ссылкой.
+        kind: 'link',
+        title: { ru: 'Короткие курсы DeepLearning.AI (англ.)', en: 'DeepLearning.AI short courses' },
+        description: {
+          ru: 'Часовые курсы про агентов, RAG и оркестрацию. Бесплатно, но закрытая платформа: нужна регистрация, лицензии нет',
+          en: 'Hour-long courses on agents, RAG and orchestration. Free, but a closed platform: sign-up required, no open licence',
+        },
+        href: 'https://www.deeplearning.ai/short-courses/',
+        external: true,
+      },
     ],
   },
   {
     // Второй уровень: фундамент про модели и данные. Намеренно ПОСЛЕ основного курса —
-    // Точка Сборки про агентную практику, а не про обучение моделей.
+    // ядро Точки Сборки про агентную практику; обучение моделей вынесено в опциональный
+    // модуль 10-model-training (advanced), а здесь — его первоисточники.
     label: { ru: 'Фундамент: модели и данные', en: 'Foundations: models and data' },
     items: [
       {
@@ -112,6 +144,53 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
           en: 'Working with data: collection, cleaning, visualisation. Microsoft, MIT',
         },
         href: 'https://github.com/microsoft/Data-Science-For-Beginners',
+        external: true,
+      },
+      {
+        kind: 'link',
+        title: { ru: 'LLM Course от Hugging Face', en: 'Hugging Face LLM Course' },
+        description: {
+          ru: 'Трансформеры и экосистема Hugging Face изнутри — теория к модулю «Обучение моделей». Apache-2.0',
+          en: 'Transformers and the Hugging Face ecosystem from the inside — theory for the Model Training module. Apache-2.0',
+        },
+        href: 'https://huggingface.co/learn/llm-course',
+        external: true,
+      },
+      {
+        kind: 'link',
+        title: { ru: 'smol-course: дообучение малых моделей', en: 'smol-course: fine-tuning small models' },
+        description: {
+          ru: 'Практический курс Hugging Face: SFT, LoRA, оценка на малых моделях — основа практики модуля «Обучение моделей». Apache-2.0',
+          en: 'A hands-on Hugging Face course: SFT, LoRA, evaluation on small models — the basis of the Model Training practice. Apache-2.0',
+        },
+        href: 'https://github.com/huggingface/smol-course',
+        external: true,
+      },
+    ],
+  },
+  {
+    // Первоисточники опционального модуля 11-second-brain: уроки пересказывают официальные доки,
+    // а первоисточник главнее (Channels — research preview, синтаксис может меняться).
+    label: { ru: 'Второй мозг: первоисточники', en: 'Second brain: primary sources' },
+    items: [
+      {
+        kind: 'link',
+        title: { ru: 'Channels в Claude Code (англ.)', en: 'Channels in Claude Code' },
+        description: {
+          ru: 'Официальная документация: как подключить Telegram, Discord или iMessage к своей сессии и закрыть доступ чужим. Research preview',
+          en: 'Official documentation: connecting Telegram, Discord or iMessage to your own session and locking out strangers. Research preview',
+        },
+        href: 'https://code.claude.com/docs/en/channels',
+        external: true,
+      },
+      {
+        kind: 'link',
+        title: { ru: 'Открытый формат Agent Skills (англ.)', en: 'The open Agent Skills format' },
+        description: {
+          ru: 'Спецификация навыка-папки с SKILL.md и список агентов, которые её читают',
+          en: 'The spec for a skill folder with SKILL.md and a list of agents that read it',
+        },
+        href: 'https://agentskills.io',
         external: true,
       },
     ],

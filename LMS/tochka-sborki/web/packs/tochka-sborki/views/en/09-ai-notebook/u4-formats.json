@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "09-ai-notebook",
+  "unit": "u4-formats",
+  "locale": "en",
+  "title": "Output formats",
+  "sourceHash": "sha256:c961d63295494975b40d983df11d7d4352de78c4e5921db3845ca20d65006da6",
+  "outline": [
+    {
+      "heading": "When each format is the honest one",
+      "points": [
+        {
+          "text": "Text digest with citations — when you need to master the material and cite it downstream: at work, in a text, in an argument.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The one-format rule",
+      "points": [
+        {
+          "text": "One session — one format, chosen for the scenario.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c10",
+    "c11"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:93cbf5816001ea0f81b43abddcf1a4735f4837e7da05764b3a1f2467d5231870",
+        "points": [
+          "You use a text digest with citations when you need to master the material.",
+          "This format helps you cite it downstream at work, in a text, or in an argument."
+        ]
+      },
+      {
+        "sourceHash": "sha256:68ea16b784c6930f7216b095e236e1642127806a6cc97e7c1641fdcd77f305ff",
+        "points": [
+          "You use one format for each session, chosen for the scenario."
+        ]
+      }
+    ]
+  }
+}

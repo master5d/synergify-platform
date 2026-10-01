@@ -15,6 +15,10 @@ function metaJson(moduleIndex: number, m: ModuleOutline, locale: 'ru' | 'en'): s
     duration: 'TODO',
     level: m.level,
     units: m.units.map(u => ({ slug: u.slug, title: u.title[locale] })),
+    // Учебная связка (спека 2026-09-14): цели уроков — черновик целей модуля; вопросы пишет автор,
+    // гвард alignment не пропустит модуль с пустым checks.
+    objectives: m.units.slice(0, 5).map((u, i) => ({ id: `o${i + 1}`, text: u.objective[locale] })),
+    checks: [],
   }
   return JSON.stringify(meta, null, 2) + '\n'
 }

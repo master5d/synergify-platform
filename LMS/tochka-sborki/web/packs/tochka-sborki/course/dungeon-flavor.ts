@@ -1,5 +1,6 @@
 // web/lib/course/dungeon-flavor.ts
 import type { NicheFlavor } from '@/lib/dungeon/types'
+import type { Bi } from '@/lib/rpg/types'
 
 // Per-niche dungeon identity. Skin-neutral (skin = accent/chrome); niche is the identity axis.
 // `other` is both its own niche and the fallback for null/unknown niches.
@@ -52,4 +53,17 @@ export const FLAVOR_BANK: Record<string, NicheFlavor> = {
     intro: { ru: 'Твой путь ещё не на картах — тем интереснее. Спустись и собери агента под свою собственную задачу.', en: 'Your path isn\'t on the maps yet — all the better. Descend and build an agent for your own task.' },
     bossChallenge: { ru: 'Спроектируй агента под {niche}, который закрывает твою главную повторяемую задачу — ради {outcome}.', en: 'Design an agent for {niche} that closes your single biggest repeatable task — for {outcome}.' },
   },
+}
+
+// niche (F2 value) -> readable slot word for {niche} substitution (флейвор, не маршрутизация).
+// Locative-optimized for the dominant "в {niche}" phrasing; `other`/unknown/null intentionally
+// absent -> NICHE_FALLBACK (lib/cs/applied-challenge.ts).
+export const NICHE_SLOT: Record<string, Bi> = {
+  coach:     { ru: 'коучинге',   en: 'coaching' },
+  massage:   { ru: 'массаже',    en: 'massage' },
+  astrology: { ru: 'астрологии', en: 'astrology' },
+  content:   { ru: 'контенте',   en: 'content' },
+  ecommerce: { ru: 'e-commerce', en: 'e-commerce' },
+  service:   { ru: 'услугах',    en: 'services' },
+  tech:      { ru: 'разработке', en: 'tech' },
 }

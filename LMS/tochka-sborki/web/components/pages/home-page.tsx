@@ -1,10 +1,13 @@
 import Link from 'next/link'
 import { getAllModules } from '@/lib/content'
+import { AdvancedBadge } from '@/components/advanced-badge'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
 import { Nav } from '@/components/nav'
 import { Footer } from '@/components/footer'
 import { ProgramVenn } from '@/components/program-venn'
 import { EcosystemDiagram } from '@/components/ecosystem-diagram'
+import { CommunityCard } from '@/components/community-card'
+import { getCommunityEntry } from '@/lib/community'
 import { getEcosystem } from '@/lib/course/ecosystem'
 import { FaqAccordion } from '@/components/faq-accordion'
 import { HeroSecondaryCta } from '@/components/hero-secondary-cta'
@@ -13,6 +16,7 @@ import { BeforeAfter } from '@/components/before-after'
 import { DreamScenarios } from '@/components/dream-scenarios'
 import { ShowcaseGallery } from '@/components/showcase-gallery'
 import { assetPath } from '@/lib/base-path'
+import { EntryFrame } from '@/components/entry-frame'
 
 const lessonsHref = (locale: Locale, slug: string) =>
   locale === 'en' ? `/en/lessons/${slug}/` : `/lessons/${slug}/`
@@ -24,6 +28,7 @@ interface Props { locale: Locale }
 export function HomePage({ locale }: Props) {
   const t = getDictionary(locale)
   const modules = getAllModules(locale)
+  const community = getCommunityEntry(locale === 'en' ? 'en' : 'ru')
 
   return (
     <>
@@ -95,6 +100,9 @@ export function HomePage({ locale }: Props) {
         }}>
           {t.hero.subtitle}
         </p>
+
+        {/* Рамка входа: обещание «бесплатно, без встроенных продаж» (данные pack'а). */}
+        <EntryFrame locale={locale} style={{ marginBottom: '1.5rem' }} />
 
         <p style={{
           fontFamily: 'var(--font-mono)',
@@ -221,6 +229,12 @@ export function HomePage({ locale }: Props) {
 
       <ProgramVenn locale={locale} />
       <EcosystemDiagram data={getEcosystem(locale)} locale={locale} />
+      {/* Слой сообщества (LMS#13): вход в группу курса; пусто в pack'е — не рисуется. */}
+      {community && (
+        <div style={{ padding: '0 2rem 2rem' }}>
+          <CommunityCard vm={community} style={{ maxWidth: 'var(--content-max)', margin: '0 auto', boxSizing: 'border-box' }} />
+        </div>
+      )}
 
       {/* ── ПРОГРАММА ────────────────────────────────────────── */}
       <section id="program" className="home-program-section" style={{ padding: 'var(--section-gap) 2rem', scrollMarginTop: '2rem' }}>
@@ -257,6 +271,7 @@ export function HomePage({ locale }: Props) {
                   lineHeight: 1.15,
                 }}>
                   {m.title}
+                  {m.advanced && <AdvancedBadge />}
                 </h3>
                 <p style={{
                   fontSize: '0.95rem',

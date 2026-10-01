@@ -8,6 +8,8 @@ import { EFFORT_INTENTS, resolveEffort } from '@/lib/effort'
 import { IgiRitual } from '@/components/igi-ritual'
 import { SynergemMentor } from '@/components/synergem-mentor'
 import { SynergemAcceleration } from '@/components/synergem-acceleration'
+import { CommunityCard } from '@/components/community-card'
+import type { CommunityEntryVM } from '@/lib/community'
 
 const NICHE_LABEL: Record<string, { ru: string; en: string }> = {
   coach: { ru: 'Коучинг и психотерапия', en: 'Coaching & therapy' },
@@ -27,7 +29,7 @@ function plural(n: number, one: string, few: string, many: string): string {
   return many
 }
 
-export function AlumniClient({ locale }: { locale: Locale }) {
+export function AlumniClient({ locale, community = null }: { locale: Locale; community?: CommunityEntryVM | null }) {
   const router = useRouter()
   const en = locale === 'en'
   const [list, setList] = useState<Entry[]>([])
@@ -73,6 +75,8 @@ export function AlumniClient({ locale }: { locale: Locale }) {
       <main style={{ maxWidth: 660, margin: '0 auto', padding: '2.5rem 1.5rem' }}>
         <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: 900, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>{t.title}</h1>
         <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '2rem', maxWidth: '56ch' }}>{t.sub}</p>
+        {/* Слой сообщества (LMS#13): пространство общения во время учёбы — поверх справочника выпускников. */}
+        <CommunityCard vm={community} style={{ marginBottom: '2.5rem' }} />
 
         <section style={{ border: '1px solid var(--border-color)', borderRadius: 10, padding: '1.25rem', background: 'var(--bg-surface)', marginBottom: '2.5rem' }}>
           <label style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', cursor: 'pointer', marginBottom: '1rem' }}>

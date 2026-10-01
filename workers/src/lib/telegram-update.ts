@@ -1,7 +1,7 @@
 import { ASK_PROMPTS } from './bot-copy'
 
 export interface BotIntent {
-  kind: 'start' | 'continue' | 'stop' | 'support' | 'store' | 'ask' | 'other'
+  kind: 'start' | 'continue' | 'stop' | 'support' | 'store' | 'ask' | 'community' | 'community_off' | 'other'
   fromId: string | null    // telegram numeric id as decimal string (< 2^53 assumed)
   chatId: number | null
   languageCode: string | null
@@ -26,7 +26,7 @@ export function parseUpdate(update: unknown): BotIntent {
   if (u.callback_query) {
     const cq = u.callback_query
     return {
-      kind: cq.data === 'continue' ? 'continue' : 'other',
+      kind: cq.data === 'continue' ? 'continue' : cq.data === 'community_off' ? 'community_off' : 'other',
       fromId: idToStr(cq.from?.id),
       chatId: numOrNull(cq.message?.chat?.id),
       languageCode: strOrNull(cq.from?.language_code),
@@ -55,6 +55,8 @@ export function parseUpdate(update: unknown): BotIntent {
       kind = 'support'
     } else if (/^\/store(\b|@|$)/.test(text)) {
       kind = 'store'
+    } else if (/^\/community(\b|@|$)/.test(text)) {
+      kind = 'community'
     } else if (/^\/ask(\b|@|$)/.test(text)) {
       kind = 'ask'
       payload = text.replace(/^\/ask(@\S+)?\s*/, '').trim() || null

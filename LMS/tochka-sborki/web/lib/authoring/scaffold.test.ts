@@ -30,6 +30,16 @@ describe('scaffoldCourse', () => {
     expect(meta.units.map((u: { slug: string }) => u.slug)).toEqual(['u1-intro', 'u2-practice'])
   })
 
+  it('meta carries objectives from unit objectives (max 5) and an empty checks list (alignment guard parity with module-scaffold)', () => {
+    const module = SAMPLE_OUTLINE.modules[0]
+    const ru = JSON.parse(byPath('content/ru/01-sample/_meta.json')!.content)
+    expect(ru.objectives).toEqual(module.units.slice(0, 5).map((u, i) => ({ id: `o${i + 1}`, text: u.objective.ru })))
+    expect(ru.checks).toEqual([])
+    const en = JSON.parse(byPath('content/en/01-sample/_meta.json')!.content)
+    expect(en.objectives).toEqual(module.units.slice(0, 5).map((u, i) => ({ id: `o${i + 1}`, text: u.objective.en })))
+    expect(en.checks).toEqual([])
+  })
+
   it('every .mdx has a title frontmatter line and the four Phase tags in order', () => {
     for (const f of files.filter(f => f.path.endsWith('.mdx'))) {
       expect(f.content).toMatch(/^---\ntitle: "/)

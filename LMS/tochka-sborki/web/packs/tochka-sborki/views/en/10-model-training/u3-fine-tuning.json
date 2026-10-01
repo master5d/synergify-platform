@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "10-model-training",
+  "unit": "u3-fine-tuning",
+  "locale": "en",
+  "title": "Fine-tuning: when and how",
+  "sourceHash": "sha256:0fe54a3efd003d05f9af5e668dc06320654b1c38e496e31492f1b242154796a0",
+  "outline": [
+    {
+      "heading": "When NOT to fine-tune",
+      "points": [
+        {
+          "text": "Why this order.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "When fine-tuning is justified",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "SFT: learning from examples",
+      "points": [
+        {
+          "text": "SFT (supervised fine-tuning) is training on \"request → desired answer\" pairs.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "LoRA and PEFT: training only a part",
+      "points": [
+        {
+          "text": "Full fine-tuning changes all of the model's weights and needs a lot of memory.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Choosing a small model",
+      "points": [
+        {
+          "text": "For learning and narrow tasks, take a model of the SmolLM2 class from Hugging Face: 135M, 360M or 1.7B parameters, Apache-2.0 license.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c7",
+    "c8",
+    "c9"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:6481ba9fe38238614c5b8e05328aac6532eb533f7e19654835d1132326465e7c",
+        "points": [
+          "You see why this order is used."
+        ]
+      },
+      {
+        "sourceHash": "sha256:a5552b7a540f955c4e6d6e4715b4d20f0eb9edef38e7662966c030c9198c963d",
+        "points": [
+          "Supervised fine-tuning or SFT is training on pairs of requests and desired answers."
+        ]
+      },
+      {
+        "sourceHash": "sha256:99bd4383e07a64ed216cb8aa561e62410c18eb526d301e24dd5d5f8cb30312f9",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:b174d7b9e31599bd52ef3a2c7778adcda83a842375db3db9055f47b7bdfe9fbd",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

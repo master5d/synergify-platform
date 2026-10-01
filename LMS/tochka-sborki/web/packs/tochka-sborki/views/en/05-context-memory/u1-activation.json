@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "05-context-memory",
+  "unit": "u1-activation",
+  "locale": "en",
+  "title": "When the agent didn't get you",
+  "sourceHash": "sha256:e3d917fd443cd9aad956c144b703474d37d5d4c2546ceeeaf503062a3cd4b9fc",
+  "outline": [
+    {
+      "heading": "Three context problems",
+      "points": [],
+      "children": [
+        {
+          "heading": "Lost in the Middle",
+          "points": [
+            {
+              "text": "Data in the middle of the context gets ignored.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Context Rot",
+          "points": [
+            {
+              "text": "The longer the conversation, the worse the answer quality.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Distractors",
+          "points": [
+            {
+              "text": "Extra info throws the agent off.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "heading": "Fix: manage what's in \"field of view\"",
+      "points": [
+        {
+          "text": "Context isn't everything you've ever told the agent.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:e715f970f887362b8d90c62406e062fcd94aed54297dfb6da58e70680fa9e322",
+        "points": [
+          "The agent ignores data you place in the middle of the context."
+        ]
+      },
+      {
+        "sourceHash": "sha256:8c321c565af06b7d81a10006478a0af7fcd7354c4141ea66c9a37a66f75b8cd6",
+        "points": [
+          "Answer quality gets worse as your conversation becomes longer."
+        ]
+      },
+      {
+        "sourceHash": "sha256:01d9a3959e0565436f951d9feae64f3a48338709fe949cf8d3230728c0a73a92",
+        "points": [
+          "Extra information you provide throws the agent off."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fe0707fe2c2994dbc5ce1de90e89ee6ca5d36e0dffed4f368aa7cb974d8c3add",
+        "points": [
+          "Context is not everything you have ever told the agent."
+        ]
+      }
+    ]
+  }
+}

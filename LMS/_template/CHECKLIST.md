@@ -31,7 +31,7 @@ Everything a new course must provide. Engine code is reused unchanged; the items
 
 ## 5. RPG layer data (optional — only if using gamification)
 - [ ] `web/packs/<pack>/skins/*.json` + `skins-meta.ts` — themed worlds/mentors.
-- [ ] `web/packs/<pack>/course/niche-map.ts` — niche → module mapping.
+- [ ] `web/packs/<pack>/course/dungeon-flavor.ts` — niche dungeon flavor (`FLAVOR_BANK`) + `{niche}` slot words (`NICHE_SLOT`). Модуль подземелья ниша не выбирает (русло / прогресс).
 - [ ] `web/lib/intake/questions.ts` — intake questions (выделение в pack — отдельный слайс).
 - [ ] `web/packs/<pack>/course/showcase.ts` — possibilities gallery on home.
 
@@ -48,6 +48,9 @@ Everything a new course must provide. Engine code is reused unchanged; the items
 - [ ] Учебная связка — в `_meta.json` каждого модуля (RU и EN): `objectives` (3–5 проверяемых целей) и `checks`
       (вопросы «проверь себя»: урок, цель, 2–5 вариантов, `answer`, объяснение); в MDX урока — метка
       `<SelfCheck id="…"/>` обычно внутри `<Phase type="concept">` (после объяснения). Сверяет `lib/content/alignment.test.ts`.
+- [ ] (опционально) Представления урока — `node scripts/gen-lesson-views.ts <pack> <module>` → `packs/<pack>/views/`;
+      после правки MDX такого юнита — `node scripts/gen-lesson-views.ts` (иначе `lib/lesson-views/views.test.ts` красный);
+      пересказ конспекта — `node scripts/gen-lesson-views.ts <pack> --paraphrase` (нужен `LITELLM_KEY`, гейтвей).
 
 ## 6. Content — `web/packs/<pack>/content/{ru,en}/<NN-module>/`
 - [ ] One folder per module, numbered `NN-slug` (e.g. `01-intro`). See `content/{ru,en}/01-example/`.

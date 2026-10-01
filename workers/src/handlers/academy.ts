@@ -1,12 +1,14 @@
 import type { Env } from '../lib/types'
 import { requireAuth } from '../middleware'
-import { COURSE_CATALOG } from '../lib/course-catalog'
+import { loadCompletedRows, missingCatalogModules } from '../lib/course-completion'
+import { ACADEMY_PLACE, invitesEnabled, maybeInviteToCommunity } from '../lib/community'
 
 const COURSE = 'tochka-sborki'
 
 /** POST /api/academy/admission — server-verified grant: completed progress must
- *  cover every COURSE_CATALOG module slug. Idempotent (INSERT OR IGNORE). */
-export async function handleAdmission(request: Request, env: Env): Promise<Response> {
+ *  cover every COURSE_CATALOG module (строкой модуля или всеми его юнитами —
+ *  lib/course-completion.ts, тот же критерий у проверки сертификата). Idempotent (INSERT OR IGNORE). */
+export async function handleAdmission(request: Request, env: Env, ctx?: ExecutionContext): Promise<Response> {
   const auth = await requireAuth(request, env)
   if (auth instanceof Response) return auth
 
@@ -19,12 +21,7 @@ export async function handleAdmission(request: Request, env: Env): Promise<Respo
     return Response.json({ granted: true, course: COURSE, granted_at: existing.granted_at })
   }
 
-  const { results } = await env.DB.prepare(
-    'SELECT lesson_slug FROM progress WHERE user_id = ? AND course = ? AND completed_at IS NOT NULL'
-  ).bind(auth.sub, COURSE).all<{ lesson_slug: string }>()
-
-  const completed = new Set(results.map(r => r.lesson_slug))
-  const missing = COURSE_CATALOG.map(m => m.slug).filter(slug => !completed.has(slug))
+  const missing = missingCatalogModules(await loadCompletedRows(env.DB, auth.sub, COURSE))
   if (missing.length > 0) {
     return Response.json({ error: 'course incomplete', missing }, { status: 403 })
   }
@@ -37,6 +34,13 @@ export async function handleAdmission(request: Request, env: Env): Promise<Respo
   const row = await env.DB.prepare(
     'SELECT granted_at FROM admissions WHERE user_id = ? AND course = ?'
   ).bind(auth.sub, COURSE).first<{ granted_at: number }>()
+
+  // Слой сообщества: новый допуск → бот один раз приглашает в чат академии (выключено флагом).
+  if (invitesEnabled(env)) {
+    const invite = maybeInviteToCommunity(env, { userId: auth.sub, place: ACADEMY_PLACE, trigger: 'admission' })
+    if (ctx) ctx.waitUntil(invite)
+    else await invite
+  }
 
   return Response.json({ granted: true, course: COURSE, granted_at: row?.granted_at ?? now })
 }

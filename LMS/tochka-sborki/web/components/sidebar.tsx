@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { AdvancedBadge } from './advanced-badge'
 import { useEffect, useState } from 'react'
 import type { NavigationItem } from '@/lib/content'
 import { useProgress } from './progress-provider'
@@ -95,7 +96,7 @@ export function Sidebar({ navItems, currentSlug, currentUnit, locale = 'ru' }: S
               borderLeft: isActiveModule ? '2px solid var(--text-accent)' : '2px solid transparent',
             }}>
               <span style={{ color: 'var(--border-color)', fontSize: '0.8rem' }}>⬡</span>
-              <span style={{ flex: 1 }}>{item.title}</span>
+              <span style={{ flex: 1 }}>{item.title}{item.advanced && <AdvancedBadge size="xs" />}</span>
             </Link>
 
             {/* Unit sub-items — visible when this module is active */}

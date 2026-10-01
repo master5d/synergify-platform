@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-audio-pipeline",
+  "unit": "u1-activation",
+  "locale": "ru",
+  "title": "Информация, которую ты обрабатываешь вручную",
+  "sourceHash": "sha256:0e414a31557c5a592dd3dafb5fe1522383331e5388ef5811ec6f36c086c41adb",
+  "outline": [
+    {
+      "heading": "Любая автоматизация = Trigger → Action",
+      "points": [
+        {
+          "text": "Это фундаментальный mental model",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Три вопроса перед построением pipeline",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Наш pipeline сегодня",
+          "points": [
+            {
+              "text": "Это ручной trigger.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:8be210f23e790ca45c46afcb86231ce26ecb914bca4111f9d9d885d8ec8db791",
+        "points": [
+          "Это фундаментальная ментальная модель."
+        ]
+      },
+      {
+        "sourceHash": "sha256:9d130b1b7c891eec0be5cddeed354d5af0ce2fbce529f74fc92c7461732dce4e",
+        "points": [
+          "Сегодня используется ручной триггер."
+        ]
+      }
+    ]
+  }
+}

@@ -7,3 +7,6 @@ next-env.d.ts
 
 # активный pack материализуется prebuild-скриптом
 packs/_active
+
+# стартер студента собирается из packs/<pack>/starter.json на prebuild/pretest (scripts/build-starter.mjs)
+public/downloads/

@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u4-untrusted-input",
+  "locale": "en",
+  "title": "Security: everything that comes from outside",
+  "sourceHash": "sha256:4beb385a4331489941fe0045060e70aef9c3b9e56f31008100567370258e1180",
+  "outline": [
+    {
+      "heading": "Prompt injection",
+      "points": [
+        {
+          "text": "Prompt injection is text inside data that the model takes as an instruction.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Where a second brain has holes",
+      "points": [
+        {
+          "text": "Someone else's text can reach your agent in four ways.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Six rules",
+      "points": [
+        {
+          "text": "The model can break rule 2 even when it is written in AGENTS.md: the rule lowers the risk but guarantees nothing.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "If the chat is shared",
+      "points": [
+        {
+          "text": "But every participant is a source of untrusted text.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c10",
+    "c11",
+    "c12"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:948a56120f8a82b620a84e52ffeb73c9b4115d733188ae64c244f4b7440ab30e",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:7b1d1074079c0af635d8711a2ebd66a27dceb04484f3a4e8fc3db6fc09874917",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:84c2b64a1929444971a28c6ad4080acefa0811c0e0d6f827b437ada8b8731a50",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:0a57051823599dcffa55f15042114918b22dcf255cc29b480a149d94b121b720",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

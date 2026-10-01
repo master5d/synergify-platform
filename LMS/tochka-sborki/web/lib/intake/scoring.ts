@@ -76,7 +76,6 @@ export function scoreProfile(answers: Answers): ScoreResult {
     niche: (answers['F2'] as string) ?? null,
     os: (answers['OS'] as string) ?? null,
     strLowConfidence: strInputs < 2,
-    mbti: null,
     relationalStyle: null,
   }
 }

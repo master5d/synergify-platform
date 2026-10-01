@@ -15,8 +15,8 @@ import { Vault } from '@/components/cs/vault'
 import { DailyPanel } from '@/components/quests/daily-panel'
 import { useUnitProgress } from '@/lib/unit-progress'
 import { DungeonCard } from '@/components/dungeon/dungeon-card'
-import { NICHE_MODULE } from '@/lib/course/niche-map'
-import { FLAVOR_BANK } from '@/lib/course/dungeon-flavor'
+import { dungeonModuleFor } from '@/lib/dungeon/dungeon-module'
+import { profileTaskRoute, profileTaskText } from '@/lib/intake/task-route'
 import { parseOutcome } from '@/lib/intake/parse-outcome'
 import { HelpTip } from '@/components/help/help-tip'
 import { IntroCard } from '@/components/help/intro-card'
@@ -54,8 +54,10 @@ export function DashboardClient({ modules, unitsByModule, locale }: Props) {
 
   const accent = SKINS_META[profile.world_skin as keyof typeof SKINS_META]?.accent ?? 'var(--text-accent)'
   const completed = Object.keys(modules).filter(s => getState(s) === 'completed')
-  const dungeonNiche = profile.niche && FLAVOR_BANK[profile.niche] ? profile.niche : 'other'
-  const dungeonModule = NICHE_MODULE[dungeonNiche] ?? '04-prompt-engineering'
+  const taskRoute = profileTaskRoute(profile)
+  const taskText = profileTaskText(profile)
+  const courseModules = Object.keys(modules)
+  const dungeonModule = dungeonModuleFor(taskRoute, courseModules, (slug) => getState(slug) === 'completed')
   const outcome = parseOutcome(profile)
   const aspiration = parseAspiration(profile)
   const moduleTitles = Object.fromEntries(Object.entries(modules).map(([slug, m]) => [slug, m.title]))
@@ -113,6 +115,9 @@ export function DashboardClient({ modules, unitsByModule, locale }: Props) {
           moduleTitle={modules[dungeonModule]?.title ?? dungeonModule}
           isModuleCompleted={(slug) => getState(slug) === 'completed'}
           helpId="dungeon-card"
+          route={taskRoute}
+          taskText={taskText}
+          courseModules={courseModules}
         />
         <Vault activeSkin={profile.world_skin as WorldSkin} locale={locale} helpId="vault" />
       </main>

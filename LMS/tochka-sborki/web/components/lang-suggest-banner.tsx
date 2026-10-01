@@ -93,9 +93,12 @@ export function LangSuggestBanner() {
         type="button"
         onClick={handleSwitch}
         style={{
+          // Вторичная (контурная) кнопка — тот же стиль, что уже используют
+          // вторичные CTA в курсе (напр. handleComplete в unit-wizard.tsx):
+          // заполненный акцентом фон здесь спорил с главной кнопкой страницы.
           padding: '0.4rem 0.85rem',
-          background: 'var(--text-accent)',
-          color: 'var(--text-on-accent)',
+          background: 'transparent',
+          color: 'var(--text-accent)',
           border: '1px solid var(--text-accent)',
           borderRadius: '3px',
           fontFamily: 'var(--font-mono)',

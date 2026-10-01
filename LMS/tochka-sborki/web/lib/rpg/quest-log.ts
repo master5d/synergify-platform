@@ -2,7 +2,8 @@
 import type { CharacterClass, WorldSkin } from '@/lib/intake/types'
 import { MODULE_SLUGS } from './modules'
 import { QUEST_LINES } from './quest-lines'
-import { NICHE_MODULE } from '@/lib/course/niche-map'
+import { dungeonModuleFor } from '@/lib/dungeon/dungeon-module'
+import { profileTaskRoute, routeStepsByModule } from '@/lib/intake/task-route'
 import { getTransformation } from './transformations'
 import type { SkinPack, QuestLogVM, ZoneVM, QuestStatus } from './types'
 
@@ -11,6 +12,8 @@ type ModuleInfo = Record<string, { title: string; duration: string }>
 type Profile = {
   char_class: CharacterClass; world_skin: WorldSkin; niche: string | null
   char_level: number; legendary_title: string
+  /** Ответы анкеты (JSON-строка или объект) — для русла сквозной задачи. */
+  answers?: unknown
 }
 
 export function buildQuestLog(
@@ -18,7 +21,11 @@ export function buildQuestLog(
   getState: GetState, pack: SkinPack | null, locale: 'ru' | 'en',
 ): QuestLogVM {
   const order = QUEST_LINES[profile.char_class] ?? [...MODULE_SLUGS]
-  const nicheSlug = profile.niche ? NICHE_MODULE[profile.niche] : undefined
+  // Зона подземелья (isNiche) — модуль подземелья: русло → модуль результата русла, без русла — по прогрессу
+  // в спайне квест-линии (ниша на выбор не влияет). У зон с шагами русла — их подписи.
+  const route = profileTaskRoute(profile)
+  const stepsByModule = route ? routeStepsByModule(route) : {}
+  const nicheSlug = dungeonModuleFor(route, order, (slug) => getState(slug) === 'completed')
 
   const statuses: QuestStatus[] = order.map(slug => getState(slug) === 'completed' ? 'completed' : 'todo')
   const currentIdx = statuses.findIndex(s => s !== 'completed')
@@ -34,6 +41,7 @@ export function buildQuestLog(
     durationLabel: modules[slug]?.duration || '',
     status: statuses[i],
     isNiche: slug === nicheSlug,
+    routeSteps: stepsByModule[slug]?.map(({ index, step }) => ({ index, title: step.title[locale] })),
     href: `${base}/lessons/${slug}/`,
     transform: getTransformation(slug, locale) ?? undefined,
   }))

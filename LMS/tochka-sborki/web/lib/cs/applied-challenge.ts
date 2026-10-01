@@ -2,7 +2,7 @@
 import type { ChallengeTier, IntakeLite } from './types'
 import type { Locale } from '@/lib/intake/types'
 import { CHALLENGE_TEMPLATES } from './challenge-templates'
-import { NICHE_SLOT } from '@/lib/course/niche-map'
+import { NICHE_SLOT } from '@/lib/course/dungeon-flavor'
 
 const NICHE_FALLBACK: Record<Locale, string> = { ru: 'твоей сфере', en: 'your field' }
 

@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-introduction",
+  "unit": "u4-practice",
+  "locale": "ru",
+  "title": "Первый промпт",
+  "sourceHash": "sha256:6613a37167aef6e5648664f1d5d4cf37bd7360d62264469a69f627663088795e",
+  "outline": [
+    {
+      "heading": "Что дальше: карта курса",
+      "points": [
+        {
+          "text": "Ты прошёл модуль 01.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:ff70972cf5135726abe33532b9e8aab01288dac59e98dd252375973caf272755",
+        "points": [
+          "Ты завершил изучение модуля 01."
+        ]
+      }
+    ]
+  }
+}

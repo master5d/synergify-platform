@@ -9,7 +9,7 @@ duration: "8 min"
 
 Hold one of your typical prompts in mind — the kind you send to an agent again and again.
 
-Don't look at it as a "message" — picture it as **a full case folder in an investigator's hands**: the entire dossier — timeline, testimonies, evidence — versus a single question tossed at a departing witness. One delivers understanding; the other delivers only a moment.
+Don't look at it as a "message" — picture it as **a full case folder in an investigator's hands**. The entire dossier — timeline, testimonies, evidence — versus a single question tossed at a departing witness. One delivers understanding; the other delivers only a moment.
 
 Notice your prompt: what in there is the permanent case file, and what is the on-the-fly question? Do they live in one block of text, still tangled together?
 
@@ -19,7 +19,7 @@ Notice your prompt: what in there is the permanent case file, and what is the on
 
 Context = stable background. Assignment = a specific instruction for this moment.
 
-Don't picture this as onboarding — picture yourself as a **film editor**: the raw footage is enormous, but only what genuinely serves this scene makes the final cut. Everything else stays on the shelf, out of frame.
+Don't picture this as onboarding — picture yourself as a **film editor**. The raw footage is enormous, but only what genuinely serves this scene makes the final cut. Everything else stays on the shelf, out of frame.
 
 Run it through your head: if your prompts were a rough cut, what would you trim in the final edit? What could sit on the shelf and be pulled only when it's actually needed?
 
@@ -32,12 +32,9 @@ Run it through your head: if your prompts were a rough cut, what would you trim 
 ```
 Context = information about the world (goals, roles, rules, data, history)
 Prompt  = a specific instruction for this request
-
-"Write an email" = PROMPT (task)
-
-"I'm a startup founder writing to an investor, style is concise and confident,
-goal: lock in a meeting" = CONTEXT
 ```
+
+<InterestExample id="context-vs-prompt"/>
 
 ### How to separate them explicitly
 
@@ -69,10 +66,10 @@ Check this code for security issues.
 
 | What | Where to store |
 |-----|-------------|
-| Project rules, stack | CLAUDE.md in the project folder |
-| Personal preferences | ~/.claude/CLAUDE.md |
+| Project rules, stack | AGENTS.md in the project folder (Claude Code imports it with the line `@AGENTS.md` in CLAUDE.md) |
+| Personal preferences | Your agent's global file: `~/.claude/CLAUDE.md` for Claude Code, `~/.codex/AGENTS.md` for Codex |
 | Current tasks | TODO.md |
-| Agent instructions | AGENTS.md |
+| Where the last session stopped | STATE.md |
 
 <SelfCheck id="c3"/>
 

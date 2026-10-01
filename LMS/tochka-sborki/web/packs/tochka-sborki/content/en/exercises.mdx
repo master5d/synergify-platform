@@ -135,20 +135,20 @@ Result: a Button.tsx file with usage examples
 
 ## 📋 Exercise 3: Structuring context
 
-**Goal:** Learn to create good CLAUDE.md and TODO.md files.
+**Goal:** Learn to create good AGENTS.md, TODO.md and STATE.md files.
 
 ### Task:
 
 Take an existing project (anything on your disk). For it, create:
 
-1. **CLAUDE.md** — full project context
+1. **AGENTS.md** — full project context and rules (+ a `CLAUDE.md` with the line `@AGENTS.md` for Claude Code)
 2. **TODO.md** — current tasks
-3. **AGENTS.md** — instructions for Claude Code
+3. **STATE.md** — where you stopped
 
-### CLAUDE.md structure:
+### AGENTS.md structure:
 
 ```markdown
-# Project Context
+# AGENTS.md
 
 ## My role
 [Who I am for this project]
@@ -176,19 +176,20 @@ Take an existing project (anything on your disk). For it, create:
 
 ```bash
 cd [your-project]
-touch CLAUDE.md TODO.md AGENTS.md
+touch AGENTS.md TODO.md STATE.md
+echo '@AGENTS.md' > CLAUDE.md
 
 # Fill in each file
 # Save results to git
-git add CLAUDE.md TODO.md AGENTS.md
-git commit -m "Add context files for Claude Code"
+git add AGENTS.md CLAUDE.md TODO.md STATE.md
+git commit -m "Add agent context files"
 ```
 
 ### Check:
 
-- [ ] CLAUDE.md has all the info needed?
+- [ ] AGENTS.md has all the info needed and your work style?
 - [ ] TODO.md has priorities set?
-- [ ] AGENTS.md describes your work style?
+- [ ] STATE.md says what to do next?
 - [ ] Files added to git?
 
 ---
@@ -274,7 +275,7 @@ The prompt should:
 3. Suggest improvements with project context in mind
 4. Provide code examples
 
-Make sure the prompt is clear and uses info from CLAUDE.md
+Make sure the prompt is clear and uses info from AGENTS.md
 ```
 
 ### What to do:
@@ -503,7 +504,7 @@ After completing all the exercises, write:
 [How I usually work with Claude Code]
 
 ## Tools I use:
-[CLAUDE.md, TODO.md, AGENTS.md and others]
+[AGENTS.md, TODO.md, STATE.md and others]
 
 ## How I track progress:
 [How I know it's done right]
@@ -629,7 +630,7 @@ Save to `my-experiments/exercise-9-vibe-build.md`:
 
 - [ ] Exercise 1: Rewrite commands as delegations
 - [ ] Exercise 2: Experimentation (3 iterations)
-- [ ] Exercise 3: Structuring context (CLAUDE.md, TODO.md, AGENTS.md)
+- [ ] Exercise 3: Structuring context (AGENTS.md, TODO.md, STATE.md)
 - [ ] Exercise 4: Using /explore
 - [ ] Exercise 5: Meta-prompting
 - [ ] Exercise 6: Parallel agents

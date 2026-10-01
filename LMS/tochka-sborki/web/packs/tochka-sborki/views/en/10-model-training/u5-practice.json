@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "10-model-training",
+  "unit": "u5-practice",
+  "locale": "en",
+  "title": "Practice: fine-tune a small model",
+  "sourceHash": "sha256:70a31d1be293009e8a1734ed0415f7247114440d44843bb0052e7c906ea49e2b",
+  "outline": [
+    {
+      "heading": "The basis of the practice — smol-course",
+      "points": [
+        {
+          "text": "This practice is based on Hugging Face's smol-course (Apache-2.0 license).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Where to get a GPU for free",
+      "points": [
+        {
+          "text": "Paid cloud fine-tuning isn't needed here: the goal of the practice is to go through the whole cycle, not to set a record.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Five steps of a run",
+      "points": [
+        {
+          "text": "Train with LoRA.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Attribution",
+      "points": [
+        {
+          "text": "This practice is adapted from huggingface/smol-course and the TRL documentation (both Apache-2.0, © Hugging Face).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c12",
+    "c13"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:95f7d9a8d16bb5346e3ab6a795c113f21d42f1aa523af22aeee8720d9a2d8c8d",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:ecccb3689d0854147abb5944c2665b8ad4ec7d96434c601496cc0306a3ba7d58",
+        "points": [
+          "You do not need paid cloud fine-tuning because the goal is to complete the full cycle rather than setting a record."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2a346f5f3ae1af1ba6cf8f3e9fff863b03c4bf76d527515603008487fb30d3ba",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:2fcfdcdb3b8631b11f2dbe549727f19341197f2458701c52ed1764cdaf1c6e2a",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

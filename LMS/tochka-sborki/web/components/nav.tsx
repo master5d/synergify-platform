@@ -7,8 +7,11 @@ import { getDictionary, type Locale } from '@/lib/dictionaries'
 import { detectOs, readStoredOs, storeOs, type Os } from '@/lib/os-pref'
 import { activeEasterEgg, type EasterEgg } from '@/lib/easter-eggs'
 import { useRpgMode } from '@/lib/use-rpg-mode'
+import { pagePath } from '@/lib/base-path'
+import { secondaryNavLinks, withRedirectParam } from '@/lib/nav-links'
 import { SkipLink } from '@/components/skip-link'
 import { SettingsMenu } from '@/components/settings-menu'
+import { NavMobileMenu } from '@/components/nav-mobile-menu'
 import { COURSE } from '@/lib/course'
 
 interface Props { locale?: Locale }
@@ -24,6 +27,10 @@ export function Nav({ locale: localeProp }: Props = {}) {
   const [os, setOs] = useState<Os | null>(null)
   // Date-driven easter egg — computed client-side to avoid SSR/hydration date drift.
   const [egg, setEgg] = useState<EasterEgg | null>(null)
+  // `?redirect=` текущего URL — только для сохранения при переключении языка на
+  // странице входа (window.location, а не useSearchParams: Nav рендерится на
+  // ~30 страницах без общего Suspense-каркаса, заводить его ради одного поля — лишнее).
+  const [redirectParam, setRedirectParam] = useState<string | null>(null)
 
   useEffect(() => {
     setEgg(activeEasterEgg())
@@ -35,6 +42,14 @@ export function Nav({ locale: localeProp }: Props = {}) {
     // not only after a visit to the cheatsheet has stored a value.
     setOs(readStoredOs() ?? detectOs())
   }, [])
+
+  useEffect(() => {
+    try {
+      setRedirectParam(new URLSearchParams(window.location.search).get('redirect'))
+    } catch {
+      setRedirectParam(null)
+    }
+  }, [pathname])
 
   async function handleLogout() {
     await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' })
@@ -54,14 +69,30 @@ export function Nav({ locale: localeProp }: Props = {}) {
   // На странице 404 путь — служебный `/_not-found`: переключатель вёл на `/en/_not-found/` (снова 404).
   // Там язык меняем на главную нужной локали.
   const langPath = pathname.includes('_not-found') ? (detected === 'en' ? '/en/' : '/') : pathname
-  const otherHref = otherLocale === 'en'
+  const otherHrefBase = otherLocale === 'en'
     ? '/en' + (langPath === '/' ? '/' : langPath.replace(/^\/en(\/|$)/, '/'))
     : langPath.replace(/^\/en(\/|$)/, '/') || '/'
+  // На странице входа с ?redirect= переключение языка не должно терять контекст —
+  // без этого EN/RU уводил на другую локаль главной, а не туда, откуда пришли за входом.
+  const otherHref = withRedirectParam(otherHrefBase, redirectParam)
 
   // Active-link detection (next.config has trailingSlash: true, so paths end with /)
   const normalize = (p: string) => p.replace(/\/+$/, '') || '/'
   const here = normalize(pathname)
   const isActive = (href: string) => here === normalize(href)
+  const loginPath = `${locale === 'en' ? '/en' : ''}/login/`
+  const isLoginPage = isActive(loginPath)
+  // pagePath, а не сырой pathname: `redirect` уходит в OAuth-callback и auth-guard,
+  // которые ждут путь с basePath пака (intake LMS#16, вариант A).
+  const loginHref = withRedirectParam(loginPath, pagePath(pathname))
+  const questLogLabel = plain('navQuestLog', t.nav.questLog)
+  const links = secondaryNavLinks({
+    locale,
+    email,
+    features: { rpg: COURSE.features.rpg, certificate: COURSE.features.certificate },
+    nav: t.nav,
+    questLogLabel,
+  })
   const navLinkStyle = (href: string): React.CSSProperties => {
     const active = isActive(href)
     return {
@@ -124,8 +155,13 @@ export function Nav({ locale: localeProp }: Props = {}) {
            их ширина предсказуема, ужимать нужно навигацию, а не элементы управления. */
         nav > div:last-of-type > *:not(.nav-secondary-links) { flex: 0 0 auto; }
 
+        /* Бургер — замена полосе ссылок только на ≤720px (см. ниже); на десктопе
+           не показывается и ничего не меняет (BACKLOG «Мобильная навигация без меню»). */
+        .nav-mobile-menu { display: none; }
+
         @media (max-width: 720px) {
           .nav-secondary-links { display: none !important; }
+          .nav-mobile-menu { display: flex !important; }
           .nav-brand-glyph { display: none !important; }
           /* Правая группа (язык + 4 переключателя + вход) занимала 522px при
              экране 390 и распирала страницу горизонтальным скроллом. Даём ей
@@ -151,21 +187,26 @@ export function Nav({ locale: localeProp }: Props = {}) {
       </Link>
       <div style={{ display: 'flex', gap: '1rem', fontSize: '0.875rem', alignItems: 'center' }}>
         <div className="nav-secondary-links" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', minWidth: 0 }}>
-        {COURSE.features.rpg && email && (() => { const h = `${locale === 'en' ? '/en' : ''}/dashboard/`; return <Link href={h} style={navLinkStyle(h)}>{plain('navQuestLog', t.nav.questLog)}</Link> })()}
-        {COURSE.features.rpg && email && (() => { const h = `${locale === 'en' ? '/en' : ''}/character/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.profile}</Link> })()}
-        {COURSE.features.rpg && email && (() => { const h = `${locale === 'en' ? '/en' : ''}/alumni/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.synergems}</Link> })()}
-        {(() => { const h = `${locale === 'en' ? '/en' : ''}/syllabus/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.syllabus}</Link> })()}
-        {(() => { const h = `${locale === 'en' ? '/en' : ''}/roadmap/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.roadmap}</Link> })()}
-        {(() => { const h = `${locale === 'en' ? '/en' : ''}/cheatsheet/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.cheatsheet}</Link> })()}
-        {(() => { const h = `${locale === 'en' ? '/en' : ''}/feedback/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.feedback}</Link> })()}
-        {(() => { const h = `${locale === 'en' ? '/en' : ''}/support/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.support}</Link> })()}
-        {COURSE.features.certificate && (() => { const h = `${locale === 'en' ? '/en' : ''}/certificate/`; return <Link href={h} style={navLinkStyle(h)}>{t.nav.certificate} <span aria-hidden="true">◆</span></Link> })()}
+        {links.map((l) => (
+          <Link key={l.key} href={l.href} style={navLinkStyle(l.href)}>
+            {l.label}{l.deco ? <> <span aria-hidden="true">{l.deco}</span></> : null}
+          </Link>
+        ))}
         </div>
+
+        {/* Бургер: та же полоса ссылок, что и выше, только свёрнутая для ≤720px —
+            туда, где .nav-secondary-links скрыт. Список общий (lib/nav-links.ts),
+            поэтому мобильное меню не может показать больше пунктов, чем десктоп. */}
+        <NavMobileMenu links={links} isActive={isActive} label={t.nav.menu} />
 
         {/* Language switcher */}
         <Link
           href={otherHref}
           style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '24px',
             fontFamily: 'var(--font-mono)',
             fontSize: 'var(--text-xs)',
             color: 'var(--text-secondary)',
@@ -220,9 +261,23 @@ export function Nav({ locale: localeProp }: Props = {}) {
               {t.nav.logout}
             </button>
           </>
-        ) : (
-          <Link href={`${locale === 'en' ? '/en' : ''}/login/`} style={{ color: 'var(--text-accent)', fontFamily: 'var(--font-mono)' }}>{t.nav.login}</Link>
-        )}
+        ) : !isLoginPage ? (
+          // На самой странице входа ссылка на неё саму лишняя — скрыта, а не просто неактивна
+          // (иначе перед ней всё равно нужно было бы объяснять, почему клик никуда не ведёт).
+          // redirect тут — путь, откуда пришли (withRedirectParam режет всё внешнее).
+          <Link
+            href={loginHref}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              minHeight: '24px',
+              color: 'var(--text-accent)',
+              fontFamily: 'var(--font-mono)',
+            }}
+          >
+            {t.nav.login}
+          </Link>
+        ) : null}
       </div>
     </nav>
     </>

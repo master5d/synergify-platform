@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "00-kickstart",
+  "unit": "u2-tools",
+  "locale": "en",
+  "title": "Map of tools",
+  "sourceHash": "sha256:dbc2d85a53cb1478c15449d95a39510e5f3a813e15dae240d4da354de4b261ed",
+  "outline": [
+    {
+      "heading": "The map: 4 quadrants of AI tools",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Where this course sits",
+      "points": [
+        {
+          "text": "Claude Code is quadrant 🟪.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Your new role: PM + QA + Conductor",
+      "points": [
+        {
+          "text": "In Software 3.0 the roles have shifted: Product Manager (YOU): decide WHAT to build.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:9cf13e48c987be227c6d44169d1fcaec033540152c95f633b123a4b323d91140",
+        "points": [
+          "Claude Code is in the purple quadrant."
+        ]
+      },
+      {
+        "sourceHash": "sha256:07d59a8608296237c7b7eecce3db8822cff96486024af5d1fe7c9145c42a6462",
+        "points": [
+          "In Software 3.0 the roles have shifted and you are the Product Manager who decides what to build."
+        ]
+      }
+    ]
+  }
+}

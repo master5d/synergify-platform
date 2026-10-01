@@ -1,0 +1,108 @@
+---
+title: "Practice: build your own second brain"
+unit: 5
+module: 11
+duration: "12 min"
+---
+
+<Phase type="activation">
+
+Picture an evening a month from now. You are on the road, messaging your bot from the phone: "What did I decide about moving, and why?"
+
+A minute later the answer arrives — with the names of the notes it came from. All of it runs on your computer, in your files, with no new subscription.
+
+Which piece of this picture do you already have, and which is still missing?
+
+</Phase>
+
+<Phase type="reflection">
+
+You do not need a complete second brain at once. You need a minimal one that works: one memory, one channel, one skill.
+
+Nobody can say in advance how long it will take. For some the build takes an evening, for others several evenings — it depends on experience and on what is already installed. Both are fine.
+
+Think about what will be your sign that "it works": which question from the phone must get the right answer?
+
+</Phase>
+
+<Phase type="concept">
+
+## The build plan
+
+Now **we connect the pieces from units 1–4 into a minimal working second brain**.
+
+**1. Memory.** The project from module 05 or the starter. It has `notes/` with real notes, plus the "Second brain" and "Incoming messages" blocks in `AGENTS.md`.
+
+**2. Channel.** First fakechat, then — if you want — Telegram following the [Channels documentation](https://code.claude.com/docs/en/channels). Only you are on the allowed list. The token sits in the channel's `.env`, not in the project.
+
+**3. Skill.** One skill from someone else — the one you broke down in unit 3. Apply rule 1 from unit 4 to it. If everything is clear, copy it into your project's `.claude/skills/<name>/`. If something is unclear, pick another skill or build your own from a conversation.
+
+**4. Three checks.**
+
+- **Archive:** a question through the channel gets an answer with file addresses, and the addresses match.
+- **Door:** ask a friend to message your bot. There should be no reply. Fakechat does not need this check: it is open only on your computer.
+- **Canary:** the test from unit 4 — the file is not deleted without your confirmation.
+
+**5. A copy.** Save the second brain in git. Before the first commit, make sure no tokens or passwords are in the files and `.env` is listed in `.gitignore`.
+
+```bash
+git init
+git status
+git add AGENTS.md CLAUDE.md STATE.md TODO.md notes .claude/skills
+git status
+git commit -m "second brain: memory, rules, first skill"
+```
+
+Add files by name, as here, not everything at once: that way a stray secret does not slip into the history. List only what you actually have: if one path is missing, git adds nothing. The `notes` and `.claude/skills` folders go in whole, so check `git status` once more before committing.
+
+## Together with others
+
+A second brain is personal, but learning to build one is easier next to others. Show your result in the course community: what works and what does not. Do not post keys, tokens or notes.
+
+This is what "my agent teaches yours" looks like in an honest form. You share skill folders through open repositories. Everyone reads a skill before installing it. Each person's memory stays their own.
+
+For memory and skills there is nothing extra to buy: they are your files, and any agent can work with them. The channel is a different story: the channels from unit 2 are a Claude Code feature. If you use a different agent (Codex, a local model), look for its own messenger gateway in its documentation. Hermes and OpenClaw, for example, have one.
+
+<SelfCheck id="c13"/>
+
+<SelfCheck id="c14"/>
+
+</Phase>
+
+<Phase type="practice">
+
+Build a minimal second brain following the plan above. Then save a report to `my-experiments/u5-second-brain.md`:
+
+```
+# My second brain
+
+## Memory
+Project folder: [path]
+Notes in notes/: [count]
+Blocks in AGENTS.md: [Second brain / Incoming messages]
+
+## Channel
+Which: [fakechat / Telegram / other]
+Who is on the allowed list: [...]
+Where the token lives: [path, NOT the token itself]
+
+## Skill
+Name and source: [...]
+Read in full, including scripts/: [yes]
+What it does for me: [...]
+
+## Checks
+Archive answers with addresses: [yes / no — what is wrong]
+A stranger's message got no reply: [yes / no / not applicable for fakechat]
+The canary was not deleted without my confirmation: [yes / no — which layer worked]
+
+## Copy
+Commit without secrets: [yes — commit hash]
+
+## Next step
+[what I add next time: a second skill, email, ...]
+```
+
+If a check failed, that is a result too. Note what broke and go back to the relevant unit.
+
+</Phase>

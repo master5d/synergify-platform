@@ -1,0 +1,100 @@
+---
+title: "Evaluation: did it help"
+unit: 4
+module: 10
+duration: "8 min"
+---
+
+<Phase type="activation">
+
+You fine-tuned a model and asked it about three examples from your dataset. All three answers are perfect, word for word as in the labels.
+
+The first reaction is joy. The second, if you listen closely, is suspicion.
+
+What exactly did this check show: that the model learned the task — or that it memorized the answers?
+
+</Phase>
+
+<Phase type="reflection">
+
+You know the difference between "understood" and "memorized" from school. A student who learned the answers to the exam cards will ace those cards and fail on a new question.
+
+It's the same with a model. Checking on training examples measures memory, not skill.
+
+Consider: which examples from your task could the model definitely not have learned from?
+
+</Phase>
+
+<Phase type="concept">
+
+## Holdout: set it aside before you start
+
+The main rule of evaluation: **some examples are set aside before training and never shown to the model**. This is the **holdout** set.
+
+Data is usually split into three parts:
+
+- **train** — the model learns from these;
+- **validation** — you tune settings on these along the way;
+- **test** — you look at it once, at the end.
+
+If you edited the data while looking at errors on test, it has become validation. An honest evaluation needs a new one.
+
+## Overfitting
+
+**Overfitting** — the model fits the training examples so tightly that it does worse on new ones. The signal in the logs: loss on train keeps falling, while on validation it stops falling or rises.
+
+What helps: more varied examples, fewer epochs (passes over the data), early stopping on validation.
+
+Fine-tuning also has a flip side — **catastrophic forgetting**. The model learned your format and unlearned what it could do before. So check old skills too, not only the new one.
+
+## Benchmark versus your task
+
+Public **benchmarks** measure general skills: knowledge, reasoning, code. They are useful for comparing models with each other.
+
+But they have two limits for you:
+
+1. A benchmark doesn't know your task. Gains on it don't promise gains on your tickets.
+2. The texts of popular benchmarks may have ended up in models' training data. Then a high score partly measures memory.
+
+So for your task, build **your own evaluation set** — from the same holdout.
+
+## How to tell whether fine-tuning helped
+
+1. **Criteria before the run.** Decide in advance what counts as a good answer: format kept, field extracted correctly, tone fits.
+2. **The same holdout set** goes through the model "before" and "after."
+3. **Compare by criteria**, not by impression. If you can, look at the answers without knowing which model produced them.
+4. **Check that nothing broke:** a couple of questions on general skills.
+5. **Compare with the cheap alternative:** the same original model with a good prompt from module 04. If the difference is small, fine-tuning didn't pay off.
+
+The size of the evaluation set depends on the task. For a first estimate, a few dozen examples will do. That's an order-of-magnitude estimate, not a norm.
+
+<SelfCheck id="c10"/>
+
+<SelfCheck id="c11"/>
+
+</Phase>
+
+<Phase type="practice">
+
+Plan the evaluation for your task before training anything.
+
+```
+Task: [...]
+Total examples: [...]
+  → train: [...]  validation: [...]  test (holdout): [...]
+How I set the holdout aside: [randomly / by time / by source — why]
+
+Criteria for a good answer (before the run):
+1. [...]
+2. [...]
+3. [...]
+
+Cheap alternative to compare against: [prompt from module 04 / context from module 05]
+What I'll check for forgetting: [2–3 questions on general skills]
+```
+
+Save it to `my-experiments/u4-eval-plan.md`.
+
+This plan is half of the unit 5 practice. Without it, any fine-tuning result will be an impression, not a measurement.
+
+</Phase>

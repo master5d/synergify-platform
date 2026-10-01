@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-audio-pipeline",
+  "unit": "u2-pipeline-theory",
+  "locale": "en",
+  "title": "Trigger → Action model",
+  "sourceHash": "sha256:02a76351bdb268de773897448a8ddbf9d04d3c9e20dbd2bb54c7030e56259453",
+  "outline": [
+    {
+      "heading": "Three pipeline types",
+      "points": [],
+      "children": [
+        {
+          "heading": "Manual pipeline (today)",
+          "points": [
+            {
+              "text": "You run it manually when needed.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Scheduled pipeline",
+          "points": [
+            {
+              "text": "Runs on a schedule.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Event-driven pipeline",
+          "points": [
+            {
+              "text": "Runs when something happens.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "heading": "Tools for pipelines",
+      "points": [],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4",
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:2d9e9d8001d579c8592c9efd247fedb510f2009cb9444015210b7da4f97b9217",
+        "points": [
+          "You start it yourself whenever you need it to run."
+        ]
+      },
+      {
+        "sourceHash": "sha256:af99cb6b190c1ff2780dce1771bcd4e89099adc65405da8c45236007079f600c",
+        "points": [
+          "It runs according to a set schedule."
+        ]
+      },
+      {
+        "sourceHash": "sha256:393c897b9c882ee0cde2fa1985bb14ca27660d6c0e966fccac01cc718732e867",
+        "points": [
+          "It starts whenever something happens."
+        ]
+      }
+    ]
+  }
+}

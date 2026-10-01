@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-prompt-engineering",
+  "unit": "u2-spec-formula",
+  "locale": "en",
+  "title": "The spec formula",
+  "sourceHash": "sha256:3f854809bfebe951ac573558f2380ffdcfeb4e8e9e07c8d885664f6a33264e97",
+  "outline": [
+    {
+      "heading": "A professional prompt structure: CTID",
+      "points": [],
+      "children": [
+        {
+          "heading": "Quick mnemonic to get started",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Full structure for reproducible results",
+          "points": [
+            {
+              "text": "It unfolds the same four CTID parts into five sections: Context → Role, Task → Task, Data → Inputs, Instructions → Expected output and Constraints.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Example in action",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "The barrier isn't imagination",
+          "points": [
+            {
+              "text": "What stops them is different — the imagination isn't translated into a written task.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:9a7119893bbc1c9562a05b6e006adafeb64ca422bba491016ec0334262fec4d5",
+        "points": [
+          "You unfold the four CTID parts of Context, Task, Data, and Instructions into five sections for Role, Task, Inputs, Expected output, and Constraints."
+        ]
+      },
+      {
+        "sourceHash": "sha256:5fcf910d1a05d06b2f3a3307c368e3c02306060227c140bf419f2375c2a73151",
+        "points": [
+          "What stops you is that your imagination is not translated into a written task."
+        ]
+      }
+    ]
+  }
+}

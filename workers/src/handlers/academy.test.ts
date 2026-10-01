@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { handleAdmission, handleAcademyMe } from './academy'
 import { COURSE_CATALOG } from '../lib/course-catalog'
+import { CATALOG_UNITS } from '../lib/course-completion'
 import type { Env } from '../lib/types'
 import { signJWT } from '../lib/jwt'
 
@@ -80,6 +81,18 @@ describe('handleAdmission', () => {
     expect(body.course).toBe('tochka-sborki')
     expect(body.granted_at).toBe(12345) // read back — idempotent repeat returns the ORIGINAL grant time
     expect(run).toHaveBeenCalled() // INSERT OR IGNORE issued
+  })
+
+  it('grants when every catalog module is closed by its units (unit-format progress)', async () => {
+    // Интерфейс юнитов пишет `модуль/юнит`, строк уровня модуля нет — дверь всё равно открывается.
+    const req = await makeAuthRequest('https://ai.synergify.com/api/academy/admission', 'POST')
+    const { env, run } = makeEnv({
+      completedSlugs: ALL_SLUGS.flatMap(s => CATALOG_UNITS[s].map(u => `${s}/${u}`)),
+      admissionFirstSeq: [null, { granted_at: 5 }],
+    })
+    const res = await handleAdmission(req, env)
+    expect(res.status).toBe(200)
+    expect(run).toHaveBeenCalled()
   })
 
   it('an existing admission is permanent: granted without re-checking progress', async () => {

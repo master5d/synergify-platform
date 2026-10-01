@@ -19,7 +19,7 @@ Don't picture it as "a piece of text." Picture a falconer's hawk: it doesn't thi
 
 A good reusable prompt is already almost a Skill.
 
-Don't think of this as "saved text." Picture a locksmith who cut a key to fit one specific lock: it slides in without fumbling, on the first move — no trial and error, no friction. A Skill is that key for your task: `/skill-name`, and the agent opens exactly what's needed.
+Don't think of this as "saved text." Picture a locksmith who cut a key to fit one specific lock. It slides in without fumbling, on the first move — no trial and error, no friction. A Skill is that key for your task: `/skill-name`, and the agent opens exactly what's needed.
 
 Notice in your head: which lock in your work is still picked by trial and error every time?
 
@@ -110,6 +110,8 @@ ni "$HOME\.claude\skills\my-first-skill\SKILL.md" -ItemType File
 </OsBlock>
 
 Fill out `SKILL.md` using the template above; in the header set `name: my-first-skill` and a `description` — what the skill does and when to call it. Use a real prompt you already have.
+
+The first candidate is `my-experiments/u3-pipeline-prompt.md` from module 06. Then the agent call in `run.sh` from [06/u5](/en/lessons/06-audio-pipeline/u5-schedule/) gets shorter: `claude -p "/my-first-skill $url"`.
 
 Test it:
 ```

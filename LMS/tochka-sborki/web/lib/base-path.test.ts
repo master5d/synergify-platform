@@ -48,7 +48,12 @@ describe('префикс проведён во все четыре места', 
   })
 
   it('вызовы API остаются в корне домена — platform-API один на все курсы', () => {
-    const guard = read('components/auth-guard.tsx')
-    expect(guard, 'API-вызов получил префикс курса — воркер его не отдаёт').toMatch(/fetch\('\/api\//)
+    // Сам fetch — в lib/auth-check.ts (чистая checkAuth(), вызывается из auth-guard.tsx)
+    // и lib/login-flow.ts (sendLoginLink(), вызывается из login-form.tsx); fetchImpl —
+    // это тот же переданный fetch, просто под другим именем параметра (для тестов с подставным fetch).
+    const check = read('lib/auth-check.ts')
+    expect(check, 'API-вызов получил префикс курса — воркер его не отдаёт').toMatch(/fetchImpl\('\/api\//)
+    const flow = read('lib/login-flow.ts')
+    expect(flow, 'API-вызов получил префикс курса — воркер его не отдаёт').toMatch(/fetchImpl\('\/api\//)
   })
 })

@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-audio-pipeline",
+  "unit": "u1-activation",
+  "locale": "en",
+  "title": "The info you process by hand",
+  "sourceHash": "sha256:1159f3433cbd7eeccbe0320d655e5c888f5653230ff37f6d733207887155a9cc",
+  "outline": [
+    {
+      "heading": "Every automation = Trigger → Action",
+      "points": [
+        {
+          "text": "This is the foundational mental model",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Three questions before building a pipeline",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Today's pipeline",
+          "points": [
+            {
+              "text": "Manual trigger.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:ea5dc616a967023a6d76a1b463c24e9718ed2f8a8a8e75fab3d7146ee6d5a2e1",
+        "points": [
+          "Every automation is a trigger and an action which is your foundational mental model."
+        ]
+      },
+      {
+        "sourceHash": "sha256:304f2f136f58971a7cc5bf595d1d86e106044a36c499b30058ca1a64bd996744",
+        "points": [
+          "Your current pipeline uses a manual trigger."
+        ]
+      }
+    ]
+  }
+}

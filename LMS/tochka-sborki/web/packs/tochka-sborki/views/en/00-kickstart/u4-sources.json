@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "00-kickstart",
+  "unit": "u4-sources",
+  "locale": "en",
+  "title": "The Source or the Packaging",
+  "sourceHash": "sha256:d4dbab0d1fb1b0a382e933463ddc3b7df70a13f0b722f3503e6ba5ba3df638c3",
+  "outline": [
+    {
+      "heading": "Three glances at the back of the jar",
+      "points": [
+        {
+          "text": "The licence — what you're allowed to do",
+          "origin": "extract"
+        },
+        {
+          "text": "The date of the last change — the expiry date",
+          "origin": "extract"
+        },
+        {
+          "text": "The author — who made it",
+          "origin": "extract"
+        },
+        {
+          "text": "A separate signal is how many people look at it and fix it.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A live example: audit our own recommendation",
+      "points": [
+        {
+          "text": "The course materials link to Microsoft's agents course.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the check won't tell you",
+      "points": [
+        {
+          "text": "The check answers a different question: what happens if the author disappears.",
+          "origin": "extract"
+        },
+        {
+          "text": "That's sovereignty applied to learning: not \"never pay anyone\", but never be left with nothing when someone else's platform shuts down.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c6",
+    "c7",
+    "c8",
+    "c9",
+    "c10"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:c62741cfb1200a468dd2449d1dc469fe99f1e08318818abc7c79291fd3a02c34",
+        "points": [
+          "You check the license to see what you are allowed to do.",
+          "The date of the last change acts as an expiry date while you identify the author.",
+          "You also consider how many people look at and fix the work as a separate signal."
+        ]
+      },
+      {
+        "sourceHash": "sha256:0dfd774da35a52b4d135a79aa2e79f902224f8746dd829fce5179f60e0b6f2ac",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:8b883db604c342168905967970421e5c3087a3785176db1537ff29d6fe0dda4f",
+        "points": [
+          "This check answers the question of what happens if the author disappears.",
+          "You apply sovereignty to your learning so you are never left with nothing if a platform shuts down."
+        ]
+      }
+    ]
+  }
+}

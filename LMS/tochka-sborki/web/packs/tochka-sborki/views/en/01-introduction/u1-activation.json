@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-introduction",
+  "unit": "u1-activation",
+  "locale": "en",
+  "title": "Your experience with AI",
+  "sourceHash": "sha256:84e5109955c77a961e3fc1a9d14c210eca1acd9a49d1447f89302af1163b195d",
+  "outline": [
+    {
+      "heading": "Three eras of programming",
+      "points": [
+        {
+          "text": "Software 3.0 — agents execute code from our intent.",
+          "origin": "extract"
+        },
+        {
+          "text": "Not \"AI writes instead of me,\" but co-thinking and co-working: you and the agent think and build together.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2",
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:430f80b0eda4f240b991b9cc3e01d30a1c7fa11014b483fad6151adef421e26e",
+        "points": [
+          "Software 3.0 involves agents that execute code based on your intent.",
+          "It is not about AI writing instead of you, but about co-thinking and co-working.",
+          "You and the agent think and build together."
+        ]
+      }
+    ]
+  }
+}

@@ -1,6 +1,15 @@
 :root {
   /* Theme-agnostic: layout, type scale, radius, fonts — identical in both themes */
-  --font-mono: 'Geist Mono', monospace;
+  /* Синхронизировано с тем, что реально регистрирует next/font в app/layout.tsx:
+     GeistSans.variable = '--font-geist-sans', GeistMono.variable = '--font-geist-mono'
+     (пакет `geist`, см. node_modules/geist/dist/{sans,mono}.js). Раньше здесь стояла
+     буквальная строка 'Geist Mono' — ни один @font-face с таким именем не существует,
+     шрифт молча падал на fallback (смок-аудит 2026-09-27: «Шрифты темы не применяются»).
+     --font-sans не был задан вовсе, и Preflight Tailwind брал свой дефолтный стек. */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, 'Liberation Mono', 'Courier New', monospace;
   --radius: 4px;
   --display-size: clamp(2.8rem, 7vw, 6.5rem);
   --section-label-size: var(--text-xs);
@@ -27,6 +36,17 @@
   --text-accent: #00d1ff;       /* Refined "Cyber Blue" for more expensive vibe */
   --border-color: #242433;
   --border-accent: #00d1ff30;
+  /* Отдельный токен для границ интерактивных элементов (поле ввода, Google-кнопка входа):
+     --border-color на bg-primary/bg-surface даёт 1.29:1/1.18:1 — ниже нормы WCAG 1.4.11 (3:1).
+     Общий --border-color не трогаем (рамки карточек и так проходят по назначению — это
+     декоративная граница, не «graphical object», к ней 1.4.11 не применяется). Применяется
+     точечно через CSS-селектор в globals.css, не через компоненты (смок-аудит 2026-09-27).
+     3.42:1 на bg-primary, 3.11:1 на bg-surface. */
+  --border-interactive: #62628b;
+  /* Плейсхолдер полей входа: Tailwind Preflight красит его в currentColor 50% —
+     на --text-primary это 3.40:1 (light) при норме 4.5:1. Берём готовый AA-совместимый
+     цвет темы вместо полупрозрачного (--text-secondary уже проходит 4.5:1 на bg-surface). */
+  --placeholder-color: #8e8ea0;
   --text-on-accent: #000000;
   --crit: #ff6b5b;
   --phase-1: #00d1ff;           /* Unified with accent */
@@ -45,6 +65,12 @@
   --text-accent: #0063ab;       /* AA на ВСЕХ фонах: #0070c0 давал 4.13 на bg-secondary */
   --border-color: #d8d2c6;
   --border-accent: #0063ab40;   /* держим в паре с --text-accent, иначе рамки тянут старый оттенок */
+  /* См. dark: та же граница интерактивных элементов. 1.33:1 на bg-primary, 1.43:1 на
+     bg-surface у --border-color — ниже нормы 3:1. 3.05:1 на bg-primary, 3.27:1 на bg-surface. */
+  --border-interactive: #8e8a82;
+  /* Плейсхолдер: currentColor 50% на --text-primary давал 3.40:1 при норме 4.5:1.
+     --text-secondary уже AA (>=4.5:1) на bg-surface. */
+  --placeholder-color: #5a5a6a;
   --text-on-accent: #ffffff;
   --crit: #c42619;              /* darkened to clear AA for error text on paper */
   --phase-1: #0077cc;

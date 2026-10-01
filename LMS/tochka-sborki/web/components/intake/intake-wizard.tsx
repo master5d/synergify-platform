@@ -1,18 +1,23 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { getQuestions, getModuleIntros } from '@/lib/intake/instrument'
-import { visibleQuestions } from '@/lib/intake/visible'
+import { visibleQuestions, visibleOptions } from '@/lib/intake/visible'
 import { QuestionRenderer } from './question-renderer'
 import type { Answers, AnswerValue, InstrumentVersion, Locale } from '@/lib/intake/types'
 import { CharterReveal } from './charter-reveal'
 import { OnboardingBridge } from './onboarding-bridge'
 import { IntakeGate } from './intake-gate'
+import { AutomationVerdictCard } from './automation-verdict-card'
+import { WeekMapCard } from './week-map-card'
+import { TaskRouteCard } from './task-route-card'
 import { buildCompanionCharter } from '@/lib/intake/charter'
-import { deriveMbti } from '@/lib/intake/mbti'
+import { relationalStyle } from '@/lib/intake/relational-style'
 import { SKINS_META } from '@/lib/rpg/skins-meta'
 import type { WorldSkin } from '@/lib/rpg/types'
 
-export function IntakeWizard({ locale }: { locale: Locale }) {
+// moduleTitles — слаг модуля → название (страница-сервер читает _meta.json): нужны шагу «Карта недели»,
+// который ведёт каждое дело в модуль курса. Клиент сам файловую систему не читает.
+export function IntakeWizard({ locale, moduleTitles }: { locale: Locale; moduleTitles?: Record<string, string> }) {
   const [answers, setAnswers] = useState<Answers>({})
   const [step, setStep] = useState(0)
   const [submitting, setSubmitting] = useState(false)
@@ -89,8 +94,7 @@ export function IntakeWizard({ locale }: { locale: Locale }) {
           mentorName: meta?.mentor?.name[locale] ?? null,
           niche: answers['V_NICHE'] as string | undefined,
           outcome: answers['V_OUTCOME'] as string | undefined,
-          mbti: deriveMbti(answers),
-          relational: { rhythm: (answers['V_RHYTHM'] as any) ?? null, errorStyle: (answers['V_ERR'] as any) ?? null, anchor: (answers['V_ANCHOR'] as any) ?? null, attention: (answers['V_ATTN'] as any) ?? null },
+          relational: relationalStyle(answers),
         }))
         setPendingHref(href)
       } else window.location.replace(href)
@@ -204,14 +208,22 @@ export function IntakeWizard({ locale }: { locale: Locale }) {
         </p>
       )}
       <h1 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '1.2rem', lineHeight: 1.3 }}>{q.prompt[locale]}</h1>
-      <QuestionRenderer
-        question={q}
-        locale={locale}
-        value={answers[q.id]}
-        onChange={setAnswer}
-        otherValue={answers[otherKey] as string | undefined}
-        onOtherChange={setOther}
-      />
+      {q.format === 'automation-verdict'
+        ? <AutomationVerdictCard locale={locale} answers={answers} onChange={setAnswer} />
+        : q.format === 'week-map'
+        ? <WeekMapCard locale={locale} value={answers[q.id]} onChange={setAnswer} moduleTitles={moduleTitles} />
+        : q.format === 'task-route'
+        ? <TaskRouteCard key={q.id} locale={locale} answers={answers} onChange={setAnswer} moduleTitles={moduleTitles} />
+        : (
+          <QuestionRenderer
+            question={q.options ? { ...q, options: visibleOptions(q, answers) } : q}
+            locale={locale}
+            value={answers[q.id]}
+            onChange={setAnswer}
+            otherValue={answers[otherKey] as string | undefined}
+            onOtherChange={setOther}
+          />
+        )}
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, marginTop: '2rem' }}>
         <button className="intake-nav-btn" disabled={step === 0} onClick={() => goTo(step - 1)}>← {locale === 'en' ? 'Back' : 'Назад'}</button>
         {isLast

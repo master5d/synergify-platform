@@ -1,0 +1,5 @@
+<!-- subject: {{ .Tx.Data.module_title }}: pick up where you left off? -->
+<p>Hi,</p>
+<p>You stopped in "{{ .Tx.Data.module_title }}". Modules done: {{ .Tx.Data.done_modules }} of {{ .Tx.Data.total_modules }}.</p>
+<p>The button below takes you exactly where you stopped, not to the home page. Don't aim to "finish the module" — take one next step: one unit, about ten minutes.</p>
+<p style="margin:24px 0"><a href="{{ .Tx.Data.resume_url }}" style="background:#1a1a1a;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:6px;display:inline-block">Continue</a></p>

@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-living-practice",
+  "unit": "u7-razgovor-s-ii",
+  "locale": "en",
+  "title": "Talking with AI: an interlocutor, not a curator",
+  "sourceHash": "sha256:db9b344b9208180a9d069e8a0cea2fba76122d45be5e37006cca1de3a3033f24",
+  "outline": [
+    {
+      "heading": "Start with the most inconvenient fact",
+      "points": [
+        {
+          "text": "The evidence says that what works in digital programmes is a human in the loop.",
+          "origin": "extract"
+        },
+        {
+          "text": "The largest online randomised trial here, by Segal and colleagues (JAMA Psychiatry, 2020; 460 participants), showed an advantage of an online programme over usual care.",
+          "origin": "extract"
+        },
+        {
+          "text": "The detail usually lost in retellings: the programme ran with coach support, not as a purely self-guided app.",
+          "origin": "extract"
+        },
+        {
+          "text": "Hence the course's honest position: AI sits here between sessions, not instead of people.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the companion may do",
+      "points": [
+        {
+          "text": "The boundaries aren't invented by the course — they're assembled from normative documents and from the few places where an effect has actually been shown",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the companion may not do — and why",
+      "points": [
+        {
+          "text": "The American Psychological Association Health Advisory on generative AI chatbots and wellness applications (November 2025) is the weightiest normative source available today.",
+          "origin": "extract"
+        },
+        {
+          "text": "OpenAI's statement bears directly on our construction: an eight-week course with a companion is precisely a long interaction.",
+          "origin": "extract"
+        },
+        {
+          "text": "The third fact is legal: the Illinois WOPR Act (Wellness and Oversight for Psychological Resources, PA 104-0054, signed 1 August 2025).",
+          "origin": "extract"
+        },
+        {
+          "text": "Similar restrictions passed in Nevada and Utah in 2025.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The blocklist, briefly",
+      "points": [
+        {
+          "text": "And one more thing worth saying plainly: it does not read your state.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Whom to call instead",
+      "points": [
+        {
+          "text": "In the US, the 988 Suicide & Crisis Lifeline; in another country, the local crisis line: checked numbers for Russia, Ukraine, Israel and Germany are in step five, other countries in the international directory findahelpline.com.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c8",
+    "c9"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:6d7eb6d7d4dfc3ddbe38a56daa02a65a1c1cfa34ce6c2b2da527d43e3d2ec5d0",
+        "points": [
+          "Evidence shows that digital programs work best when there is a human in the loop.",
+          "A large trial by Segal and colleagues in JAMA Psychiatry 2020 with 460 participants showed an online program was better than usual care.",
+          "The program in that trial ran with coach support instead of being a purely self-guided app.",
+          "This course takes the position that AI sits between sessions rather than replacing people."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2062d27065bd7e50d9bb03815cacdadc36e443514b8d8449c1148b10064faaf0",
+        "points": [
+          "The boundaries for the companion are based on normative documents and proven effects instead of being invented by the course."
+        ]
+      },
+      {
+        "sourceHash": "sha256:a502f525d7a1bd6687ca75f3c709c5b656184ce3947dd222deb58c361316a5c5",
+        "points": [
+          "The American Psychological Association Health Advisory on generative AI chatbots and wellness applications from November 2025 is the weightiest normative source today.",
+          "OpenAI's statement on long interactions bears directly on the construction of this eight-week course.",
+          "Legal facts include the Illinois WOPR Act for Wellness and Oversight for Psychological Resources PA 104-0054 signed on 1 August 2025.",
+          "Nevada and Utah passed similar restrictions in 2025."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c64e1451758bee5ca4822c8d099a9866c7f9ca964ff0ad67c3c49b5cd2ac5924",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:1336153b8fa2847ab490162f83bdc1dd95a3eea0fb939a1f120722aab2eda08f",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

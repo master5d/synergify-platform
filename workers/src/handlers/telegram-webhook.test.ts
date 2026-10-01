@@ -155,4 +155,42 @@ describe('handleTelegramWebhook', () => {
     const body = JSON.parse((spy.mock.calls[0][1] as RequestInit).body as string)
     expect(body.reply_markup.inline_keyboard[0][0].web_app.url).toBe('https://mamaev.coach/store/')
   })
+
+  it('/community lists the configured community links (on request — even for an opted-out user)', async () => {
+    const spy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('{"ok":true}', { status: 200 }))
+    await handleTelegramWebhook(
+      req({ message: { text: '/community', from: { id: 800, language_code: 'en' }, chat: { id: 800 } } }),
+      makeEnv({ user: { id: 'u-800', language: 'en', nudge_optout: 1 } })
+    )
+    const body = JSON.parse((spy.mock.calls[0][1] as RequestInit).body as string)
+    expect(body.text).toMatch(/^Where learners meet:/)
+    expect(body.text).toContain('https://t.me/kundaliniRUs/7823')
+  })
+
+  it('«Не присылать такое» sets community_optout = 1 and acks; /start does not clear it', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('{"ok":true}', { status: 200 }))
+    const calls: DbCall[] = []
+    await handleTelegramWebhook(
+      req({ callback_query: { data: 'community_off', from: { id: 801 }, message: { chat: { id: 801 } } } }),
+      makeEnv({ user: { id: 'u-801', language: 'ru', nudge_optout: 0 }, calls })
+    )
+    const upd = calls.find(c => /UPDATE users SET community_optout = 1/.test(c.sql))
+    expect(upd!.binds[0]).toBe('u-801')
+    const startCalls: DbCall[] = []
+    await handleTelegramWebhook(
+      req({ message: { text: '/start', from: { id: 801 }, chat: { id: 801 } } }),
+      makeEnv({ user: { id: 'u-801', language: 'ru', nudge_optout: 1 }, calls: startCalls })
+    )
+    expect(startCalls.find(c => /community_optout/.test(c.sql))).toBeUndefined()
+  })
+
+  it('bot keeps answering before migration 0021: the main user lookup does not read community_optout', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('{"ok":true}', { status: 200 }))
+    const calls: DbCall[] = []
+    await handleTelegramWebhook(
+      req({ message: { text: '/continue', from: { id: 802 }, chat: { id: 802 } } }),
+      makeEnv({ user: { id: 'u-802', language: 'ru', nudge_optout: 0 }, calls })
+    )
+    expect(calls.filter(c => /community_optout/.test(c.sql))).toEqual([])
+  })
 })

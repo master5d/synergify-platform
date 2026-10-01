@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u2-channel",
+  "locale": "ru",
+  "title": "Канал связи: агент на связи",
+  "sourceHash": "sha256:9316089733347b2826ba7d3fb06b837afc375773c3859e94528f30b57675bd00",
+  "outline": [
+    {
+      "heading": "Как устроен канал",
+      "points": [
+        {
+          "text": "Сообщение идёт из мессенджера до сессии агента на твоём компьютере и обратно",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Каналы в Claude Code",
+      "points": [
+        {
+          "text": "Репетиция без внешних сервисов — fakechat.",
+          "origin": "extract"
+        },
+        {
+          "text": "Telegram — по шагам документации:",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Если не заработало",
+      "points": [
+        {
+          "text": "Первый запуск чаще всего спотыкается о маркетплейс, незапущенный канал, занятый порт или требования",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Почта и другие агенты",
+      "points": [
+        {
+          "text": "Почта обычно подключается иначе: через MCP-сервер почтового сервиса (модуль 07).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Когда ты не у терминала",
+      "points": [
+        {
+          "text": "Если агенту нужно твоё разрешение на действие, сессия ждёт ответа.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4",
+    "c5",
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:e64afc5456b0de3fbf9d471087bba71984d725cabd437a2c7ccbf11f75af4718",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:010a191f118b8ea4614e3087b3b099cf4ab4e4ba3d2cceee31a9bfe7124d1793",
+        "points": [
+          "Для репетиции без внешних сервисов ты можешь использовать fakechat.",
+          "Подключение Telegram выполняется по шагам из документации."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c41632330373c9174cfc351a670b0943d0b03cf0a877903c116f0422c533d8b3",
+        "points": [
+          "Твой первый запуск может не получиться из-за проблем с маркетплейсом, незапущенного канала, занятого порта или невыполненных требований."
+        ]
+      },
+      {
+        "sourceHash": "sha256:d06bbd13566396d6f90ef4dbd0bf118ed2cf6f0757d83ee2f2c3af0b65c9e182",
+        "points": [
+          "Почта обычно подключается через MCP-сервер почтового сервиса, как указано в модуле 07."
+        ]
+      },
+      {
+        "sourceHash": "sha256:ecd66f4a8f39cc7cc94077253b0748bb6168c5da7e7853f4e546e67974395c52",
+        "verbatim": "review"
+      }
+    ]
+  }
+}

@@ -40,6 +40,14 @@
     "09-ai-notebook": {
       "ru": "Бюро Источников",
       "en": "Bureau of Sources"
+    },
+    "10-model-training": {
+      "ru": "НИИ Машинного Обучения",
+      "en": "Machine Learning Research Institute"
+    },
+    "11-second-brain": {
+      "ru": "Отдел Личного Архива",
+      "en": "Personal Archive Department"
     }
   },
   "questTitles": {
@@ -82,9 +90,31 @@
     "09-ai-notebook": {
       "ru": "Организовать тетрадь доказательств",
       "en": "Organize the evidence notebook"
+    },
+    "10-model-training": {
+      "ru": "Наладить выпуск своей модели по нормативу",
+      "en": "Launch production of your own model to standard"
+    },
+    "11-second-brain": {
+      "ru": "Наладить свой второй мозг без аренды мощностей",
+      "en": "Set up your own second brain without leasing capacity"
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "Прежде чем встать к станку, рабочий изучает технику безопасности и названия узлов. Шесть терминов — и цех заговорит с тобой на одном языке.",
+        "en": "Before stepping up to the machine, a worker learns the safety rules and the names of the parts. Six terms — and the factory floor will speak your language."
+      },
+      "mentorHint": {
+        "ru": "Товарищ, незнание терминов не освобождает от брака.",
+        "en": "Comrade, not knowing the terms doesn't excuse a defective part."
+      },
+      "outro": {
+        "ru": "Техминимум сдан! Термины усвоены, пора браться за чертёж своей идеи.",
+        "en": "Technical minimum passed! The terms are learned — time to take up the blueprint of your idea."
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "Идея без плана — призрак, бродящий по цеху. Наша задача — загнать его в рамки конкретного проекта и поставить к станку.",
@@ -477,6 +507,20 @@
         "en": "The plan is drafted, the objectives are clear. You are no longer just an operator, but the vanguard of the automation labor front. To work, comrade!"
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Товарищ, переводим участок на автоматический режим! Pipeline выйдет на смену по гудку и не будет дважды обрабатывать одну деталь.",
+        "en": "Comrade, we are switching the section to automatic mode! The pipeline starts its shift at the whistle and never processes the same part twice."
+      },
+      "mentorHint": {
+        "ru": "Учёт — основа социалистического хозяйства. Журнал выполненного бережёт и время, и ресурсы.",
+        "en": "Accounting is the foundation of a planned economy. A log of what is done saves both time and resources."
+      },
+      "outro": {
+        "ru": "План перевыполнен без сверхурочных! Утренняя смена уже разобрала входящие, а рационализатор может браться за следующий участок.",
+        "en": "The plan is overfulfilled without overtime! The morning shift has already processed the incoming, and the innovator can take on the next section."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Товарищ, перед тобой — почти готовый agent. Он силён, но нем и бездействует, как трактор без зажигания. Наша задача — дать ему искру.",
@@ -545,6 +589,20 @@
       "outro": {
         "ru": "Система работает штатно, испытания пройдены. Этот инструмент готов служить на благо общего дела. Впереди новые рубежи!",
         "en": "The system is operating nominally; tests are passed. This tool is ready to serve the common cause. New frontiers await!"
+      }
+    },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Перед новой пятилеткой — техосмотр! Бригада проверяет станки: где износ, где лишнее, где нарушен порядок в цехе.",
+        "en": "Before a new five-year plan — an inspection! The brigade checks the machines: where there is wear, clutter, disorder on the shop floor."
+      },
+      "mentorHint": {
+        "ru": "Не штурмуй всё разом. Три узла, отремонтированных и проверенных, — это план, выполненный честно.",
+        "en": "Don't storm everything at once. Three units repaired and checked is a plan honestly fulfilled."
+      },
+      "outro": {
+        "ru": "Три узла в строю, цех работает. Остальные замечания — в журнал, на следующую смену.",
+        "en": "Three units are back in service, the shop is running. The remaining notes go in the log for the next shift."
       }
     },
     "08-agent-engineering/u1-activation": {
@@ -699,6 +757,146 @@
       "outro": {
         "ru": "Задание выполнено. Часы просмотра превращены в проверяемую выжимку.",
         "en": "Assignment complete. Hours of watching have become a verifiable extract."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Разбираем изделие по узлам: токены, эмбеддинги, внимание, претрейн. Чертёж — статья 2017 года.",
+        "en": "We take the product apart by assemblies: tokens, embeddings, attention, pretraining. The blueprint is a 2017 paper."
+      },
+      "mentorHint": {
+        "ru": "Изделие рассчитано на правдоподобие, а не на истину. Учитывай это в эксплуатации.",
+        "en": "The product is designed for plausibility, not truth. Account for that in operation."
+      },
+      "outro": {
+        "ru": "Устройство изучено. Причина уверенного брака установлена.",
+        "en": "The design is studied. The cause of confident defects is established."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "Главный цех — не сборочный, а заготовительный. Сырьё — данные.",
+        "en": "The main workshop is not assembly but procurement. The raw material is data."
+      },
+      "mentorHint": {
+        "ru": "Бракованная заготовка даёт бракованную продукцию. Входной контроль обязателен.",
+        "en": "A defective blank yields defective output. Incoming inspection is mandatory."
+      },
+      "outro": {
+        "ru": "Технологический цикл освоен. После брака — назад к заготовкам.",
+        "en": "The production cycle is mastered. After a defect — back to the blanks."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Рационализаторское предложение: сначала исчерпать дешёвые методы, потом переоснащать станок.",
+        "en": "A rationalization proposal: exhaust the cheap methods first, then retool the machine."
+      },
+      "mentorHint": {
+        "ru": "LoRA — сменная оснастка: основной станок не трогаем.",
+        "en": "LoRA is interchangeable tooling: we leave the main machine untouched."
+      },
+      "outro": {
+        "ru": "Решение обосновано. Переоснащение — только при исчерпании резервов.",
+        "en": "The decision is justified. Retooling only when reserves are exhausted."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Испытания изделия проводятся на образцах, которых оно не видело. Иначе это не испытания.",
+        "en": "Product trials are run on samples it has never seen. Otherwise they are not trials."
+      },
+      "mentorHint": {
+        "ru": "Контрольная партия откладывается до начала производства.",
+        "en": "The control batch is set aside before production begins."
+      },
+      "outro": {
+        "ru": "Методика испытаний утверждена. Впечатление протоколом не считается.",
+        "en": "The test method is approved. An impression does not count as a report."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Пуск опытного образца: малая модель, собственные мощности, бесплатный стенд.",
+        "en": "Launch of the prototype: a small model, our own capacity, a free test bench."
+      },
+      "mentorHint": {
+        "ru": "Замер «до» — исходная точка отчёта. Без него план не сдать.",
+        "en": "The \"before\" measurement is the report’s baseline. Without it the plan cannot be signed off."
+      },
+      "outro": {
+        "ru": "Опытный образец испытан. Ты знаешь, когда хватит инструкции, а когда нужна новая модель.",
+        "en": "The prototype is tested. You know when an instruction suffices and when a new model is needed."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Архив в арендованном помещении — риск для производства. Переводим фонды к себе.",
+        "en": "An archive in leased premises is a production risk. We move the holdings in-house."
+      },
+      "mentorHint": {
+        "ru": "Справка без номера дела к рассмотрению не принимается.",
+        "en": "A certificate without a file number is not accepted for review."
+      },
+      "outro": {
+        "ru": "Фонды на месте. Архив отвечает на запросы по форме.",
+        "en": "The holdings are in place. The archive answers requests in proper form."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Прокладываем линию связи с объектом. Работа идёт на месте, по проводу — только сводки.",
+        "en": "We lay a communication line to the site. Work stays on site; only reports travel the wire."
+      },
+      "mentorHint": {
+        "ru": "Пропуск на линию — строго по списку. Посторонним вход воспрещён.",
+        "en": "Access to the line is strictly by list. Unauthorised persons keep out."
+      },
+      "outro": {
+        "ru": "Линия сдана в эксплуатацию. Посторонние отсечены.",
+        "en": "The line is commissioned. Unauthorised persons are cut off."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Передаём передовой опыт между бригадами. Документацией, а не перековкой изделия.",
+        "en": "We share best practice between crews. Through documentation, not by reforging the product."
+      },
+      "mentorHint": {
+        "ru": "Инструкция на столе — изделие работает по ней. Убрали инструкцию — работает по-старому.",
+        "en": "Instructions on the desk — the product follows them. Remove them — it works the old way."
+      },
+      "outro": {
+        "ru": "Порядок передачи опыта утверждён. Изделие не перестраивалось.",
+        "en": "The procedure for sharing experience is approved. The product was not rebuilt."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "Поступило письмо с требованием выдать ключи. Бдительность!",
+        "en": "A letter demanding the keys has arrived. Stay vigilant!"
+      },
+      "mentorHint": {
+        "ru": "Входящая корреспонденция — не распоряжение руководства.",
+        "en": "Incoming correspondence is not a directive from management."
+      },
+      "outro": {
+        "ru": "Шесть пунктов техники безопасности введены в действие.",
+        "en": "Six safety regulations are now in force."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Сборка на объекте: архив, линия связи и одна внедрённая инструкция.",
+        "en": "On-site assembly: the archive, the line and one adopted instruction."
+      },
+      "mentorHint": {
+        "ru": "Приёмка — по трём испытаниям. Без протокола объект не сдаётся.",
+        "en": "Acceptance takes three tests. Without a protocol the site is not handed over."
+      },
+      "outro": {
+        "ru": "Объект принят. Второй мозг работает на своих мощностях.",
+        "en": "The site is accepted. The second brain runs on its own capacity."
       }
     }
   }

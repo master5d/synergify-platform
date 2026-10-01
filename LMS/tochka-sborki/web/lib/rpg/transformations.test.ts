@@ -33,6 +33,28 @@ describe('micro-transformations', () => {
     })
   })
 
+  it('includes the optional model-training module transformation', () => {
+    expect(getTransformation('10-model-training', 'ru')).toEqual({
+      from: '«модель — чёрный ящик»',
+      to: 'знаю, когда хватит промпта, а когда учить модель',
+    })
+    expect(getTransformation('10-model-training', 'en')).toEqual({
+      from: '"the model is a black box"',
+      to: 'I know when a prompt is enough and when to train a model',
+    })
+  })
+
+  it('includes the optional second-brain module transformation', () => {
+    expect(getTransformation('11-second-brain', 'ru')).toEqual({
+      from: '«второй мозг — это дорогой сервис»',
+      to: 'держу свой второй мозг в своих файлах',
+    })
+    expect(getTransformation('11-second-brain', 'en')).toEqual({
+      from: '"a second brain is a pricey service"',
+      to: 'I keep my own second brain in my own files',
+    })
+  })
+
   it('returns null for an unknown slug', () => {
     expect(getTransformation('does-not-exist', 'ru')).toBeNull()
   })

@@ -1,10 +1,18 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import QRCode from 'qrcode'
 import { Nav } from '@/components/nav'
 import { Footer } from '@/components/footer'
 import { CertificateSVG } from '@/components/certificate-svg'
+import { GraduateRetroForm } from '@/components/graduate-retro-form'
+import { COURSE } from '@/lib/course'
 import type { Locale } from '@/lib/dictionaries'
+import type { CourseOutline } from '@/lib/progress-sync'
+import { BASE_PATH } from '@/lib/base-path'
+import { buildEvidence, interpretVerify, verifyPageUrl, SPINE_TOTAL, type ProgressRow } from '@/lib/certificate-evidence'
+import { PLATFORM_API } from '@/lib/platform-api'
+import { certificationIdentity, linkedInAddToProfileUrl } from '@/lib/linkedin-add-to-profile'
 
 const COPY = {
   ru: {
@@ -16,6 +24,7 @@ const COPY = {
     download: '↓ Скачать SVG',
     shareX: 'Поделиться в X',
     shareLI: 'Поделиться в LinkedIn',
+    addLI: 'Добавить в профиль LinkedIn',
     copyLink: 'Скопировать ссылку',
     copied: '✓ Скопировано',
     shareText: 'Получил золотой билет «Точки Сборки» — vibe coding, Claude Code, агенты, автоматизация.',
@@ -24,6 +33,14 @@ const COPY = {
     academyBody: 'Золотой билет — это и вход. Точка сборки пройдена, и академия S.A.S.H.A — закрытая школа живых связей — теперь узнаёт тебя.',
     academyCta: 'Войти в академию →',
     academyUrl: 'https://academy.synergify.com/',
+    evidenceLabel: '/ улики',
+    evidenceHeading: 'Что освоено',
+    evidenceNone: 'Платформа пока не видит ни одного пройденного модуля. Улики появятся, когда ты войдёшь и пройдёшь юниты — они попадут и на сертификат.',
+    unitsDone: (d: number, t: number | null) => `юнитов на платформе: ${d}${t ? ` из ${t}` : ''}`,
+    moduleRowOnly: 'модуль отмечен пройденным',
+    evidenceNote: 'Здесь только то, что записано на платформе в твоём аккаунте. Отметки юнитов без входа (они живут в этом браузере) и ответы «Проверь себя» (они нигде не хранятся) в улики не входят.',
+    verifyLabel: 'Проверить сертификат',
+    verifyNote: 'Любой может открыть этот адрес и увидеть, что курс пройден и какие модули в него вошли, — без твоего email и без имени.',
   },
   en: {
     label: '/ certificate',
@@ -34,6 +51,7 @@ const COPY = {
     download: '↓ Download SVG',
     shareX: 'Share on X',
     shareLI: 'Share on LinkedIn',
+    addLI: 'Add to LinkedIn profile',
     copyLink: 'Copy link',
     copied: '✓ Copied',
     shareText: 'Earned my Tochka Sborki golden ticket — vibe coding, Claude Code, agents, automation.',
@@ -42,14 +60,28 @@ const COPY = {
     academyBody: 'The golden ticket is also an entrance. Your assembly point is set, and S.A.S.H.A — the gated school of living connections — now recognizes you.',
     academyCta: 'Enter the academy →',
     academyUrl: 'https://academy.synergify.com/en/',
+    evidenceLabel: '/ evidence',
+    evidenceHeading: 'What was mastered',
+    evidenceNone: 'The platform does not see any completed module yet. Evidence appears once you sign in and complete units — it goes onto the certificate too.',
+    unitsDone: (d: number, t: number | null) => `units on the platform: ${d}${t ? ` of ${t}` : ''}`,
+    moduleRowOnly: 'module marked complete',
+    evidenceNote: 'Only what the platform recorded in your account is shown. Unit marks made without signing in (they live in this browser) and “Check yourself” answers (never stored) are not evidence.',
+    verifyLabel: 'Verify certificate',
+    verifyNote: 'Anyone can open this address and see that the course is complete and which modules it covers — without your email or name.',
   },
 }
 
 const STORAGE_KEY = 'cert_name'
 
-interface Props { locale: Locale }
+interface Props {
+  locale: Locale
+  /** Модуль → юниты (из навигации pack'а): знаменатель «юнитов N из M» и правило «все юниты = модуль». */
+  outline?: CourseOutline
+}
 
-export function CertificatePage({ locale }: Props) {
+const NO_OUTLINE: CourseOutline = {}
+
+export function CertificatePage({ locale, outline = NO_OUTLINE }: Props) {
   const t = COPY[locale]
   const [name, setName] = useState('')
   const [copied, setCopied] = useState(false)
@@ -87,6 +119,68 @@ export function CertificatePage({ locale }: Props) {
       .then(d => { if (d?.granted) setAcademyGranted(true) })
       .catch(() => {})
   }, [])
+
+  // Улики: только прогресс, записанный на платформе (D1), — см. lib/certificate-evidence.ts.
+  const [rows, setRows] = useState<ProgressRow[] | null>(null)
+  useEffect(() => {
+    if (!COURSE.features.rpg) return
+    fetch('/api/progress/list', { credentials: 'include' })
+      .then(r => (r.ok ? r.json() : []))
+      .then(d => setRows(Array.isArray(d) ? d : []))
+      .catch(() => setRows([]))
+  }, [])
+  const evidence = useMemo(
+    () => (rows ? buildEvidence(rows, outline, locale, COURSE.progressKey) : []),
+    [rows, outline, locale],
+  )
+
+  // Публичный адрес проверки: код выдаёт воркер только по сессии; показываем, лишь когда
+  // курс засчитан сервером (admission) — иначе проверка ответила бы «не подтверждён».
+  const [verifyCode, setVerifyCode] = useState<string | null>(null)
+  const [qrSvg, setQrSvg] = useState<string | null>(null)
+  useEffect(() => {
+    if (!academyGranted) return
+    fetch('/api/certificate/code', { credentials: 'include' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => {
+        if (typeof d?.code === 'string') setVerifyCode(d.code)
+      })
+      .catch(() => {})
+  }, [academyGranted])
+  const verifyUrl = useMemo(
+    () => (verifyCode && typeof window !== 'undefined' ? verifyPageUrl(window.location.origin, locale, verifyCode, BASE_PATH) : null),
+    [verifyCode, locale],
+  )
+
+  // «Добавить в профиль LinkedIn» (intake LMS#18): дата выпуска и курс — те же, что покажет
+  // проверка (/api/certificate/verify), а не сегодняшняя дата с картинки. Нет ответа — ссылка
+  // всё равно есть, но без месяца/года (пустых полей LinkedIn не шлём).
+  const [verified, setVerified] = useState<{ course: string; completedAt: string } | null>(null)
+  useEffect(() => {
+    if (!verifyCode) return
+    const ctrl = new AbortController()
+    const timer = setTimeout(() => ctrl.abort(), 10_000)
+    fetch(`${PLATFORM_API}/api/certificate/verify?c=${encodeURIComponent(verifyCode)}`, { signal: ctrl.signal })
+      .then(async r => {
+        const res = interpretVerify(r.status, await r.json().catch(() => null))
+        if (res.state === 'valid') setVerified({ course: res.course, completedAt: res.completedAt })
+      })
+      .catch(() => {})
+      .finally(() => clearTimeout(timer))
+    return () => { clearTimeout(timer); ctrl.abort() }
+  }, [verifyCode])
+  const linkedInAddUrl = useMemo(() => {
+    if (!verifyCode || !verifyUrl) return null
+    const id = certificationIdentity(verified?.course ?? COURSE.progressKey, locale)
+    if (!id) return null
+    return linkedInAddToProfileUrl({ ...id, issuedAt: verified?.completedAt, certId: verifyCode, certUrl: verifyUrl })
+  }, [verifyCode, verifyUrl, verified, locale])
+  useEffect(() => {
+    if (!verifyUrl) return
+    QRCode.toString(verifyUrl, { type: 'svg', margin: 1, color: { dark: '#0f0f0e', light: '#ebe7df' }, width: 160 })
+      .then(setQrSvg)
+      .catch(() => {})
+  }, [verifyUrl])
 
   const date = new Date().toISOString().slice(0, 10)
   const displayName = name.trim() || (locale === 'en' ? 'Anonymous Vibe Coder' : 'Анонимный Vibe Coder')
@@ -174,7 +268,15 @@ export function CertificatePage({ locale }: Props) {
         }}>
           {/* Left: SVG */}
           <div>
-            <CertificateSVG ref={svgRef} name={displayName} date={date} locale={locale} />
+            <CertificateSVG
+              ref={svgRef}
+              name={displayName}
+              date={date}
+              locale={locale}
+              evidence={evidence}
+              evidenceTotal={SPINE_TOTAL}
+              verifyUrl={verifyUrl ?? undefined}
+            />
           </div>
 
           {/* Right: controls */}
@@ -261,6 +363,26 @@ export function CertificatePage({ locale }: Props) {
               >
                 in  {t.shareLI}
               </button>
+              {linkedInAddUrl && (
+                <a
+                  href={linkedInAddUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    padding: '0.75rem 1.25rem',
+                    background: 'transparent',
+                    color: 'var(--text-primary)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: 'var(--radius)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.8rem',
+                    textAlign: 'left',
+                    textDecoration: 'none',
+                  }}
+                >
+                  in  {t.addLI}
+                </a>
+              )}
               <button
                 onClick={copyLink}
                 style={{
@@ -281,6 +403,87 @@ export function CertificatePage({ locale }: Props) {
             </div>
           </div>
         </div>
+
+        {COURSE.features.rpg && rows && (
+          <section aria-label={t.evidenceHeading} style={{ marginTop: '3rem', maxWidth: '720px' }}>
+            <div style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--text-xs)',
+              color: 'var(--text-accent)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.15em',
+              marginBottom: '0.75rem',
+            }}>
+              {t.evidenceLabel}
+            </div>
+            <h2 style={{
+              fontFamily: 'var(--font-display), system-ui, sans-serif',
+              fontSize: 'var(--text-xl)',
+              color: 'var(--text-primary)',
+              margin: '0 0 1rem',
+            }}>
+              {t.evidenceHeading} · {evidence.length} / {SPINE_TOTAL}
+            </h2>
+            {evidence.length === 0 ? (
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{t.evidenceNone}</p>
+            ) : (
+              <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {evidence.map(m => (
+                  <li key={m.slug} style={{ borderLeft: '2px solid var(--text-accent)', paddingLeft: '0.875rem' }}>
+                    <div style={{ color: 'var(--text-primary)', lineHeight: 1.5 }}>
+                      <span style={{ color: 'var(--text-secondary)' }}>{m.from}</span>
+                      <span aria-hidden="true" style={{ color: 'var(--text-accent)' }}> → </span>
+                      {m.to}
+                    </div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
+                      {m.slug} · {m.units.done > 0 ? t.unitsDone(m.units.done, m.units.total) : t.moduleRowOnly}
+                      {' · '}{new Date(m.completedAt * 1000).toISOString().slice(0, 10)}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            )}
+            <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.6, margin: '1rem 0 0' }}>
+              {t.evidenceNote}
+            </p>
+          </section>
+        )}
+
+        {verifyUrl && (
+          <section aria-label={t.verifyLabel} style={{
+            marginTop: '2rem',
+            display: 'flex',
+            gap: '1.25rem',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            maxWidth: '720px',
+          }}>
+            {qrSvg && (
+              <div
+                aria-hidden="true"
+                style={{ width: 120, height: 120, flexShrink: 0, borderRadius: 'var(--radius)', overflow: 'hidden' }}
+                dangerouslySetInnerHTML={{ __html: qrSvg }}
+              />
+            )}
+            <div style={{ flex: '1 1 260px', minWidth: 0 }}>
+              <a href={verifyUrl} style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-sm)',
+                fontWeight: 700,
+                color: 'var(--text-accent)',
+                letterSpacing: '0.06em',
+              }}>
+                {t.verifyLabel} →
+              </a>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', wordBreak: 'break-all', margin: '0.375rem 0' }}>
+                {verifyUrl}
+              </div>
+              <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.5, margin: 0 }}>
+                {t.verifyNote}
+              </p>
+            </div>
+          </section>
+        )}
 
         {academyGranted && (
           <section aria-label={t.academyHeading} style={{
@@ -323,6 +526,8 @@ export function CertificatePage({ locale }: Props) {
             </a>
           </section>
         )}
+
+        {COURSE.features.graduateRetro && <GraduateRetroForm locale={locale} name={name} />}
       </main>
       {/* CTA «получи сертификат» на самой странице сертификата бессмысленна */}
       <Footer locale={locale} showCertificateCta={false} />

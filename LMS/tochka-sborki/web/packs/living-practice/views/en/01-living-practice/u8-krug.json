@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-living-practice",
+  "unit": "u8-krug",
+  "locale": "en",
+  "title": "The circle: where all of this leads",
+  "sourceHash": "sha256:82fe8051411fca065ea36c679e834a71f1b643257ab9f1f8e7a722b166c8abf3",
+  "outline": [
+    {
+      "heading": "Why a circle rather than another app",
+      "points": [
+        {
+          "text": "What follows honestly: the evidence supports not \"the group as such\" but a living person in the loop.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How to assemble a circle that stands a chance",
+      "points": [
+        {
+          "text": "If you have no frame of your own for a meeting, there's a ready one: the Group Insight Game (GII).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How to choose a school or a course",
+      "points": [
+        {
+          "text": "An eighth, informal one: there's no humane way out of the course.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How this course ends",
+      "points": [
+        {
+          "text": "The course succeeded at the moment it became unnecessary.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c10"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:9be31c5df31d34f39f6b05268214c5da88f954ff93cf555175866c9909d2d7f6",
+        "points": [
+          "Evidence supports having a living person in the loop rather than just focusing on the group itself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:86e6a71c3d7071345ce83a35642451655a2e51c76e6022ac13c706fd5ca0e4d9",
+        "points": [
+          "You can use the Group Insight Game (GII) as a ready frame for your meeting if you do not have one of your own."
+        ]
+      },
+      {
+        "sourceHash": "sha256:25f87af0be48dfb8b2ffc02652e1ae563f3edfa226defebdfede7f58aca3748c",
+        "points": [
+          "An eighth informal point is that there is no humane way out of the course."
+        ]
+      },
+      {
+        "sourceHash": "sha256:3368fbeafb7cce4c40b51d154b84850d4af7f9035fdf5c1e8135c1007af2ceaf",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

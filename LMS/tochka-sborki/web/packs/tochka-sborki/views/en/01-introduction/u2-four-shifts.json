@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-introduction",
+  "unit": "u2-four-shifts",
+  "locale": "en",
+  "title": "Four shifts",
+  "sourceHash": "sha256:8d61bafcc3d3648012088f7dc5ac68eea6c30fa01a1d4f56e471e1e44d5e86b6",
+  "outline": [
+    {
+      "heading": "Four shifts in working with AI agents",
+      "points": [
+        {
+          "text": "This isn't \"AI doing it instead of you\" — these are four ways of co-working.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "1️⃣ From commands → to delegation",
+          "points": [
+            {
+              "text": "The agent isn't a robot you give commands to.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "2️⃣ From results → to experiments",
+          "points": [
+            {
+              "text": "The first answer is a draft, not a verdict.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "3️⃣ From actions → to specifications",
+          "points": [
+            {
+              "text": "A good spec has: Who / What / Why / How / What not to do.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "4️⃣ From \"do it all yourself\" → to attention management",
+          "points": [
+            {
+              "text": "Delegate to the agent: routine, first drafts, search.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c4",
+    "c5",
+    "c6",
+    "c7",
+    "c8"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:6840226a610c7918eeed085ff18ab2e142df9f87087c3a5bcd1ae5cdc4fe60eb",
+        "points": [
+          "Rather than the AI doing the work instead of you, these are four ways for you to work together."
+        ]
+      },
+      {
+        "sourceHash": "sha256:7dba658811c75f61fa19d6e676188333f1660cffff39e663db26e5525d41a4e4",
+        "points": [
+          "The agent is not a robot you give commands to."
+        ]
+      },
+      {
+        "sourceHash": "sha256:abedc635bcdea4f5dab0d850706ff515a2dec79982ac22b9825bde280ff6988a",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:a44192cd5f1c8fa33319e81798afeede2ed69a50ed11a9638492e92af86fe29a",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:f64aa80f7b1f798c0a6c1f97b0e8e7f192eb98e865513bd81eeec0c95c74fae4",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

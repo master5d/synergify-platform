@@ -1,7 +1,7 @@
 import type { Locale, RelationalStyle } from './types'
 import { SKINS_META } from '@/lib/rpg/skins-meta'
 import { parseOutcome } from './parse-outcome'
-import { deriveMbti, relationalStyle } from './mbti'
+import { relationalStyle } from './relational-style'
 
 export interface CharterInput {
   locale: Locale
@@ -9,10 +9,12 @@ export interface CharterInput {
   mentorName?: string | null
   niche?: string | null
   outcome?: string | null
-  mbti?: string | null
   relational?: RelationalStyle | null
 }
 
+// MBTI в устав не пишется: агент ученика подгонял бы под «тип» подачу — это learning styles без
+// доказательной базы (Pashler 2008; Педагогика — риски, intake LMS#20). Остаётся заявленное учеником:
+// ритм, реакция на ошибку, внимание.
 export function buildCompanionCharter(i: CharterInput): string {
   const ru = i.locale !== 'en'
   const id = i.mentorName ?? (ru ? 'твой со-мыслящий напарник' : 'your co-thinking partner')
@@ -30,7 +32,6 @@ export function buildCompanionCharter(i: CharterInput): string {
     ``,
     `## Profile`,
     `- ${ru ? 'Сфера' : 'Field'}: ${i.niche ?? '—'}`,
-    i.mbti ? `- MBTI: ${i.mbti}` : `- MBTI: —`,
     `- ${ru ? 'Ритм' : 'Rhythm'}: ${i.relational?.rhythm ?? '—'}`,
     ``,
     `## Principles`,
@@ -62,7 +63,6 @@ export function profileToCharter(profile: any, locale: Locale): string {
     mentorName: meta?.mentor?.name[locale] ?? null,
     niche: profile?.niche ?? null,
     outcome: parseOutcome(profile),
-    mbti: deriveMbti(answers as any),
     relational: relationalStyle(answers as any),
   })
 }

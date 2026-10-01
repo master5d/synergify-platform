@@ -91,7 +91,7 @@ web/
 | Подсистема | Где | Что делает |
 |------------|-----|-----------|
 | **Intake** | `app/quest-intake/`, `lib/intake/` | Опросник → профиль `{ niche, cog_tier, world_skin, F3-outcome }` в D1 `intake_profiles`. `scoring.ts`, `attributes.ts`, `parse-outcome.ts` |
-| **Квест-лог** | `app/dashboard/`, `lib/rpg/` | World Map (зоны = модули), QuestFeed, CharacterStrip. `quest-log.ts`, `map-layout.ts`, `niche-map.ts` |
+| **Квест-лог** | `app/dashboard/`, `lib/rpg/` | World Map (зоны = модули), QuestFeed, CharacterStrip. `quest-log.ts`, `map-layout.ts`; подземелье — `lib/dungeon/` (модуль: русло / прогресс) |
 | **Лист персонажа** | `app/character/` | Атрибуты, выведенные из intake-ответов |
 | **Themed skins** | `lib/rpg/skins/*.json`, `skins-meta.ts`, `unit-framing.ts` | 7 миров; переформулировка юнитов под выбранный скин |
 | **Cognitive Shards** | `lib/cs/` | Единая валюта (вместо XP). Режимы commander 1.0× / copilot 1.5× / archmage 2.5×. `wallet.ts`, `award.ts`, `modes.ts`, `applied-challenge.ts` |
@@ -142,6 +142,16 @@ CLOUDFLARE_API_TOKEN=<token> npx wrangler pages deploy out --project-name=tochka
 
 Модуль = папка `content/{ru,en}/NN-slug/` с `_meta.json` (module, title, description,
 duration, level, units[]) и `uX-*.mdx` файлами. Frontmatter unit-а: `title, unit, module, duration`.
+
+**Ревизия модуля** — необязательное поле `_meta.json`:
+`"revision": { "version": 2, "date": "YYYY-MM-DD", "summary": "одна-две фразы, что изменилось" }`.
+Нет поля = версия 1. Ставит автор сознательно, при существенной переработке модуля (новая практика,
+переписанная концепция, другой инструмент) — правки опечаток и формулировок поле НЕ трогают. Следующая
+переработка — `version` +1 и новая дата. Поле ставится в `ru` и `en` одновременно: `version` и `date`
+совпадают, `summary` — на языке файла. Затем копия в `workers/src/lib/course-order.ts` (`MODULE_META.revision`,
+расхождение ловит `course-order.test.ts`) и деплой воркера: в течение 14 дней от `date` выпускники и те,
+кто закрыл модуль до этой даты, получают письмо «обновление навыка» (шаг `update`,
+`workers/email-templates/README.md`). Дата в будущем — письмо уйдёт, когда она наступит.
 
 Спец-компоненты в MDX:
 - `<OsToggle />` + `<OsBlock os="mac|windows">…</OsBlock>` — Mac/Win команды

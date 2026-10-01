@@ -15,7 +15,16 @@ export const COURSE = {
   } as Bi,
   // Single source of truth for SEO (sitemap/robots) and the PWA manifest. No trailing slash.
   domain: 'https://ai.synergify.com',
+  /** Ключ курса в платформенном прогрессе (progress.course воркера, события → Listmonk). */
+  progressKey: 'tochka-sborki',
   locales: ['ru', 'en'] as const,
+  /** Представления урока (LMS#8): что открывает вкладка «Конспект» по умолчанию, если у юнита есть пересказ.
+   *  'paraphrase' — пересказ, кнопка «Показать дословно»; 'verbatim' — дословно, кнопка «Показать пересказ». */
+  lessonViews: { summaryDefault: 'paraphrase' as 'paraphrase' | 'verbatim' },
+  /** Педагогика (intake LMS#20, решение владельца 2026-09-28). pretest — в активации 1–2 самопроверки юнита
+   *  «угадай до объяснения», ответ — в концепте (lib/pedagogy/pretest.ts); thinkFirst — «Конспект» и «Карта»
+   *  открываются после 2–3 своих мыслей ученика (или «Пропустить»), мысли потом рядом с конспектом. */
+  pedagogy: { pretest: true, thinkFirst: true },
   /** Какие слои движка включены у этого курса. Ядро гейтит поверхности по флагам,
    *  а не по имени pack'а: курс без RPG не должен носить чужой квест-обвес. */
   features: {
@@ -23,6 +32,8 @@ export const COURSE = {
     rpg: true,
     /** Страница сертификата и ссылка на неё. */
     certificate: true,
+    /** Ретро выпускника (до/после, промпт, план) на странице сертификата. */
+    graduateRetro: true,
   },
   /** Двери на уроках. auth — нужна сессия; intake — пройденный опросник профиля;
    *  admission — допуск академии (пройден курс-дверь). */

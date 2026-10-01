@@ -9,7 +9,7 @@ duration: "20 min"
 
 The goal of this unit is to pull everything you did in module 08 into **one specification document**.
 
-Don't picture this as "a form to fill out" — picture it as a **general staging a campaign on the map**: he doesn't charge into battle himself — he positions the units, sets the objectives, draws the supply lines. The fighting comes later. First — the plan on paper.
+Don't picture this as "a form to fill out" — picture it as a **general staging a campaign on the map**. He doesn't charge into battle himself — he positions the units, sets the objectives, draws the supply lines. The fighting comes later. First — the plan on paper.
 
 Run the task from unit 1 through your head. Picture yourself as that general: your agents, tools, and triggers are units on the map. Where are they positioned? Which flank is exposed?
 
@@ -159,7 +159,7 @@ The spec above is the **plumbing**: triggers, nodes, storage. The agent's hands.
 
 The difference is simple: the spec answers "how it runs," the charter answers "who it is when it talks to a human." A prompt without a charter is one-off. A charter turns it into a **stable co-thinking partner**: tomorrow, a month from now, in someone else's hands, it holds the same frame.
 
-The template is seven blocks. Filled once, it lives in the project's `CLAUDE.md` or the agent's system prompt:
+The template is seven blocks. Filled once, it lives in the project's `AGENTS.md` or the agent's system prompt:
 
 ```markdown
 # Agent Charter: [clone name]
@@ -200,7 +200,7 @@ What must not be broken:
 One sentence: what result the person gets if the agent works well.
 ```
 
-The seven blocks aren't arbitrary: **Identity + Profile + Goal** give the agent its footing ("who I am, for whom, to what end"), **Principles + Laws** are its character and brakes, **Use/Avoid + Loop** are how it acts in the moment. Drop any one and the agent starts to drift.
+The seven blocks aren't arbitrary. **Identity + Profile + Goal** give the agent its footing ("who I am, for whom, to what end"). **Principles + Laws** are its character and brakes. **Use/Avoid + Loop** are how it acts in the moment. Drop any one and the agent starts to drift.
 
 <SelfCheck id="c12"/>
 
@@ -218,6 +218,10 @@ Constraints:
 - Minimum 1 page, maximum 3
 - Show it to someone (partner, friend, ChatGPT) and ask: "is it clear what the agent does?"
 
+If there's no one to show it to yet, run a review in character. Your agent plays a thorough engineer who reads the spec for the first time and looks for where it will break.
+
+<RolePlay id="spec-review"/>
+
 **If your clone talks** (answers, co-thinks, rather than just running a pipeline) — also fill out the **charter** by the seven blocks above. One file `my-experiments/my-agent-charter.md`. A ready template lives in `my-templates/agent-charter.md` — copy it and fill it in for yourself.
 
 **Sanity check before ending the unit:**
@@ -231,11 +235,13 @@ Constraints:
 
 If all 6 boxes are ticked — you've got a spec you can start building from.
 
+<NoAiCheck id="no-ai"/>
+
 **Next step (after the module):**
 
 Take this spec and:
 1. Open n8n (free self-hosted or $20/mo cloud)
-2. Drop the spec into the project's CLAUDE.md
+2. Drop the spec into the project's AGENTS.md
 3. Tell Claude Code: "build the pipeline per the spec"
 4. Iterate until it works.
 

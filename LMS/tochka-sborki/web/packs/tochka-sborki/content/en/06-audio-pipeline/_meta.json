@@ -2,13 +2,14 @@
   "module": 6,
   "title": "Automation Pipeline",
   "description": "Build your first practical workflow",
-  "duration": "45 min",
+  "duration": "60 min",
   "level": 6,
   "units": [
     { "slug": "u1-activation", "title": "The info you process by hand" },
     { "slug": "u2-pipeline-theory", "title": "Trigger → Action model" },
     { "slug": "u3-build", "title": "Build your pipeline" },
-    { "slug": "u4-reflect", "title": "What to automate next?" }
+    { "slug": "u4-reflect", "title": "What to automate next?" },
+    { "slug": "u5-schedule", "title": "A pipeline that runs on its own" }
   ],
   "objectives": [
     {
@@ -33,9 +34,9 @@
       "id": "c1",
       "unit": "u1-activation",
       "objective": "o1",
-      "question": "In the pipeline “you give a URL → Firecrawl scrapes → Claude analyzes → the result is saved to Markdown,” what is the trigger here?",
+      "question": "In the pipeline “you give a URL → the agent reads the page → Claude analyzes → the result is saved to Markdown,” what is the trigger here?",
       "options": [
-        "Scraping the page with Firecrawl",
+        "The agent reading the page",
         "You giving the article URL",
         "The model analyzing the text",
         "Saving the result to a Markdown file"
@@ -140,6 +141,34 @@
       ],
       "answer": 1,
       "explain": "Gathering and analysis are easy to automate; meetings and emails are medium. The map marks decision-making as hard and needing a human (u4, “Automation map: what to delegate next”)."
+    },
+    {
+      "id": "c9",
+      "unit": "u5-schedule",
+      "objective": "o3",
+      "question": "The scheduled script reads the same inbox.txt every morning. Why aren't the old links processed again each day?",
+      "options": [
+        "The model itself remembers which articles it has seen",
+        "The script skips links already written to done.txt: that is the \"duplicates\" condition, i.e. idempotency",
+        "The scheduler only runs the script for new lines of the file",
+        "They are processed again, and nothing can be done about it"
+      ],
+      "answer": 1,
+      "explain": "The pipeline itself keeps the memory of what is done: done.txt. A repeat run changes nothing and spends no quota. That is idempotency, the same idea as the email label in ENERV from module 08 (u5, \"The duplicates condition is idempotency\")."
+    },
+    {
+      "id": "c10",
+      "unit": "u5-schedule",
+      "objective": "o2",
+      "question": "You want the link digest to run every day at 8:00. What will start it?",
+      "options": [
+        "A Claude Code Hook on the Stop event",
+        "The model, if you ask it in the prompt to repeat the task every morning",
+        "The operating system's scheduler (cron or Task Scheduler), which calls a script with the agent",
+        "Nothing: a scheduled pipeline is only possible in a paid cloud service"
+      ],
+      "answer": 2,
+      "explain": "Hooks fire on agent events, not by the clock. A schedule pipeline needs the OS scheduler: it starts a script, and the script calls the agent in non-interactive mode. The cloud /schedule is just one of the options (u5, \"Why not a Hook\")."
     }
   ]
 }

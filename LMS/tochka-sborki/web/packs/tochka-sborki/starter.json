@@ -1,0 +1,34 @@
+{
+  "_comment": "Стартер студента (агент-агностик). scripts/build-starter.mjs собирает из этого описания архив public/downloads/<archive> на prebuild; тест packs/tochka-sborki/starter.test.ts сверяет состав, отсутствие секретов и мусора. Каталоги с точкой в исходнике названы без неё (dot-claude/, dot-codex/, dot-gemini/, gitignore): иначе правила .gitignore репозитория (.claude/*) и хуки лаборатории ловили бы исходник стартера как настоящий конфиг.",
+  "archive": "tochka-starter.zip",
+  "root": "tochka-starter",
+  "source": "starter",
+  "rename": {
+    "gitignore": ".gitignore",
+    "dot-claude/": ".claude/",
+    "dot-codex/": ".codex/",
+    "dot-gemini/": ".gemini/"
+  },
+  "include": [
+    {
+      "from": "../../../my-templates",
+      "to": "my-templates",
+      "files": ["agent-charter.md", "automation-recipes.md", "feedback-template.md", "feedback-final-jtbd.md"]
+    }
+  ],
+  "executable": ["hooks/session-start.mjs"],
+  "editions": {
+    "en": {
+      "_comment": "Английское издание: те же файлы в starter-en/, шаблоны — EN-копии рядом с RU-оригиналами (LMS/tochka-sborki/my-templates/en/). Отдаётся со страницы /en/starter.",
+      "archive": "tochka-starter-en.zip",
+      "source": "starter-en",
+      "include": [
+        {
+          "from": "../../../my-templates/en",
+          "to": "my-templates",
+          "files": ["agent-charter.md", "automation-recipes.md", "feedback-template.md", "feedback-final-jtbd.md"]
+        }
+      ]
+    }
+  }
+}

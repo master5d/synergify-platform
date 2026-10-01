@@ -14,7 +14,8 @@ const ROOT = join(__dirname, '..')
 const KEY = process.env.LITELLM_KEY
 if (!KEY) { console.error('Set LITELLM_KEY'); process.exit(1) }
 const GATEWAY = process.env.LITELLM_URL || 'https://sovrn-mini.taile5b8dd.ts.net/v1'
-const POOL = process.env.SKINS_POOL || 'google/gemini-3-flash-preview'
+// prose-pool — алиас гейтвея для прозы (Gemini Flash); до 2026-09-28 здесь стояло сырое имя модели.
+const POOL = process.env.SKINS_POOL || 'prose-pool'
 
 // Тот же приём, что в llm-service/src/gateway.ts: модель иногда оборачивает JSON
 // в ```json-забор — снимаем его перед парсингом, а не падаем на JSON.parse.

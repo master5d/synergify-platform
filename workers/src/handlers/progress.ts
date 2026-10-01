@@ -1,5 +1,7 @@
 import type { Env } from '../lib/types'
 import { requireAuth } from '../middleware'
+import { emitProgressEvents, isValidCourse, parseOutline } from '../lib/progress-events'
+import { invitesEnabled, maybeInviteToCommunity } from '../lib/community'
 
 export async function handleView(request: Request, env: Env): Promise<Response> {
   const auth = await requireAuth(request, env)
@@ -18,11 +20,11 @@ export async function handleView(request: Request, env: Env): Promise<Response> 
   return Response.json({ ok: true })
 }
 
-export async function handleComplete(request: Request, env: Env): Promise<Response> {
+export async function handleComplete(request: Request, env: Env, ctx?: ExecutionContext): Promise<Response> {
   const auth = await requireAuth(request, env)
   if (auth instanceof Response) return auth
 
-  let body: { lesson_slug?: string; course?: string }
+  let body: { lesson_slug?: string; course?: string; outline?: unknown }
   try { body = await request.json() } catch { return Response.json({ error: 'Invalid JSON' }, { status: 400 }) }
   if (!body.lesson_slug) return Response.json({ error: 'lesson_slug required' }, { status: 400 })
 
@@ -32,6 +34,27 @@ export async function handleComplete(request: Request, env: Env): Promise<Respon
     INSERT INTO progress (user_id, lesson_slug, viewed_at, completed_at, course) VALUES (?, ?, ?, ?, ?)
     ON CONFLICT (user_id, lesson_slug) DO UPDATE SET completed_at = excluded.completed_at
   `).bind(auth.sub, body.lesson_slug, now, now, course).run()
+
+  // Событие «модуль/курс завершён» → Listmonk: best-effort, после записи прогресса и мимо ответа.
+  if (isValidCourse(course)) {
+    const events = emitProgressEvents(env, {
+      userId: auth.sub,
+      email: auth.email,
+      course,
+      lessonSlug: body.lesson_slug,
+      outline: parseOutline(body.outline),
+    })
+    if (ctx) ctx.waitUntil(events)
+    else await events
+  }
+
+  // Слой сообщества: после первого урока курса бот один раз приглашает в группу/тему курса.
+  // Выключено флагом COMMUNITY_INVITES_ENABLED; при выключенном флаге в БД не ходит вовсе.
+  if (isValidCourse(course) && invitesEnabled(env)) {
+    const invite = maybeInviteToCommunity(env, { userId: auth.sub, place: course, trigger: 'first-lesson' })
+    if (ctx) ctx.waitUntil(invite)
+    else await invite
+  }
 
   return Response.json({ ok: true })
 }

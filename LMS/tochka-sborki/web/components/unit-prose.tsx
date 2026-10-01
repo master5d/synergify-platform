@@ -4,6 +4,9 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
 import { useUnitProgress } from '@/lib/unit-progress'
+import { reportUnitCompleted, type CourseOutline } from '@/lib/progress-sync'
+import { COURSE } from '@/lib/course'
+import type { UnitReference } from '@/lib/learn-prompt-reference'
 
 // Prose-разметка юнита (Ф4 S1): вторая оболочка над тем же MDX.
 // Курс без фаз получает сплошной текст без ложной шкалы из четырёх шагов —
@@ -17,6 +20,10 @@ interface Props {
   unitIndex: number
   totalUnits: number
   locale?: Locale
+  /** Структура курса — для серверного прогресса (lib/progress-sync.ts). */
+  outline?: CourseOutline
+  /** Эталон юнита для компаньона — общий пропс оболочек; prose-разметка блока «Учиться с ИИ» не показывает. */
+  reference?: UnitReference | null
   children: React.ReactNode
 }
 
@@ -28,6 +35,7 @@ export function UnitProse({
   unitIndex,
   totalUnits,
   locale = 'ru',
+  outline,
   children,
 }: Props) {
   const t = getDictionary(locale).wizard
@@ -38,6 +46,7 @@ export function UnitProse({
 
   function handleComplete() {
     markCompleted(moduleSlug, unitSlug)
+    void reportUnitCompleted({ course: COURSE.progressKey, moduleSlug, unitSlug, outline })
     setDone(true)
   }
 

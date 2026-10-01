@@ -21,11 +21,11 @@
     },
     {
       "id": "o3",
-      "text": "Choose where to store information: the project’s CLAUDE.md, the personal ~/.claude/CLAUDE.md, TODO.md, AGENTS.md, and tell them apart from MEMORY.md, which Claude writes itself"
+      "text": "Choose where to store information: the project’s AGENTS.md (Claude Code imports it with the line @AGENTS.md in CLAUDE.md), the personal ~/.claude/CLAUDE.md, TODO.md, STATE.md, and tell them apart from MEMORY.md, which Claude writes itself"
     },
     {
       "id": "o4",
-      "text": "Explain why a memory file must be short, and trim a bloated CLAUDE.md"
+      "text": "Explain why a memory file must be short, and trim a bloated AGENTS.md"
     },
     {
       "id": "o5",
@@ -95,23 +95,23 @@
       "objective": "o3",
       "question": "The agent needs your personal preferences in every project. Where do you store them?",
       "options": [
-        "In each project’s CLAUDE.md",
+        "In each project’s AGENTS.md",
         "In TODO.md",
         "In ~/.claude/CLAUDE.md",
         "Write them at the start of every session"
       ],
       "answer": 2,
-      "explain": "A specific project’s rules and stack are stored in its CLAUDE.md, while personal things common to all projects go in ~/.claude/CLAUDE.md (u2, “Where to store stable context”)."
+      "explain": "A specific project’s rules and stack are stored in its AGENTS.md, while personal things common to all projects go in ~/.claude/CLAUDE.md (u2, “Where to store stable context”)."
     },
     {
       "id": "c6",
       "unit": "u3-memory",
       "objective": "o4",
-      "question": "CLAUDE.md has grown to a thousand lines, and the agent has started following the rules worse. What should you do according to the lesson?",
+      "question": "AGENTS.md has grown to a thousand lines, and the agent has started following the rules worse. What should you do according to the lesson?",
       "options": [
         "Add more rules to close the gaps",
         "Move everything to TODO.md",
-        "Delete CLAUDE.md and explain everything verbally each time",
+        "Delete AGENTS.md and explain everything verbally each time",
         "Trim the file down to the essentials: the longer it is, the worse the agent follows instructions"
       ],
       "answer": 3,
@@ -121,7 +121,7 @@
       "id": "c7",
       "unit": "u3-memory",
       "objective": "o3",
-      "question": "How is MEMORY.md different from CLAUDE.md, TODO.md and AGENTS.md?",
+      "question": "How is MEMORY.md different from AGENTS.md, TODO.md and STATE.md?",
       "options": [
         "Claude writes it itself, it’s stored only locally, and you can view and edit it via `/memory`",
         "It isn’t: it’s just another file you fill in yourself",
@@ -135,15 +135,15 @@
       "id": "c8",
       "unit": "u3-memory",
       "objective": "o3",
-      "question": "You’re switching from Claude Code to another agent (Aider, Cline). What from the lesson on memory still holds?",
+      "question": "You’re switching from Claude Code to another agent (Codex, Cursor, Hermes). What from the lesson on memory still holds?",
       "options": [
-        "Nothing: CLAUDE.md is specific to Claude Code",
-        "The idea itself: stable context lives in a file, and the agent reads it at session start; only the file names change",
+        "Nothing: a rules file is specific to Claude Code",
+        "All of it: AGENTS.md is a shared standard, the new agent reads the same file on its own; the line @AGENTS.md in CLAUDE.md is only for Claude Code",
         "Memory transfers between tools automatically",
         "You’ll have to paste the context into every message by hand"
       ],
       "answer": 1,
-      "explain": "CLAUDE.md is one implementation of the “persistent context file” pattern. Other agents have their own files, but the principle is the same (u3, callout “Not just Claude Code”)."
+      "explain": "AGENTS.md is the shared format of the “persistent context file” pattern: Codex, Cursor, Copilot, Antigravity and Hermes read it on their own. Claude Code imports it with the line @AGENTS.md in CLAUDE.md (u3, callout “Not just Claude Code”)."
     },
     {
       "id": "c9",
@@ -152,12 +152,12 @@
       "question": "The agent made a mistake, and you fixed it. According to the lesson’s table, where do you write a rule so the mistake doesn’t happen again?",
       "options": [
         "In TODO.md",
-        "In AGENTS.md",
+        "In the “Rules” section of AGENTS.md",
         "Nowhere: I’ll fix it again next time",
-        "In the “How to run” section of CLAUDE.md"
+        "In STATE.md, under “Done”"
       ],
       "answer": 1,
-      "explain": "Architecture and stack are updated in CLAUDE.md, completed tasks in TODO.md, and rules for the agent’s behavior after its mistake in AGENTS.md (u4, “When to update what”)."
+      "explain": "Architecture and stack are updated in the project sections of AGENTS.md, completed tasks in TODO.md, where you stopped in STATE.md, and a rule after the agent’s mistake goes into the “Rules” section of the same AGENTS.md (u4, “When to update what”)."
     },
     {
       "id": "c10",

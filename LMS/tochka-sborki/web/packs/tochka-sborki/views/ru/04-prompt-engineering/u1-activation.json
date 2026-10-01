@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-prompt-engineering",
+  "unit": "u1-activation",
+  "locale": "ru",
+  "title": "Мой худший промпт",
+  "sourceHash": "sha256:9645c5e22bb799ce6181ea0d2b92cf4806911bc86f1234e33df103fee58c880f",
+  "outline": [
+    {
+      "heading": "Почему плохие промпты дают плохие результаты",
+      "points": [
+        {
+          "text": "Формула плохого промпта:",
+          "origin": "extract"
+        },
+        {
+          "text": "Формула хорошего промпта:",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:334611d48c472f5dc730093be80c87788d6c855c09af2a26c15181e1abad279c",
+        "points": [
+          "Ты рассмотришь, как выглядит формула плохого промпта.",
+          "Ты узнаешь, из чего состоит формула хорошего промпта."
+        ]
+      }
+    ]
+  }
+}

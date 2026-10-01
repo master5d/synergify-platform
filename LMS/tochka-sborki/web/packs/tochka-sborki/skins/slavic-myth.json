@@ -40,6 +40,14 @@
     "09-ai-notebook": {
       "ru": "Изба с Письменами",
       "en": "The Hut of Writings"
+    },
+    "10-model-training": {
+      "ru": "Кузница Сварога",
+      "en": "Svarog’s Forge"
+    },
+    "11-second-brain": {
+      "ru": "Терем Памяти",
+      "en": "Tower of Memory"
     }
   },
   "questTitles": {
@@ -82,9 +90,31 @@
     "09-ai-notebook": {
       "ru": "Вытянуть правду по следу",
       "en": "Pull truth by the trail"
+    },
+    "10-model-training": {
+      "ru": "Выковать своего помощника по мерке",
+      "en": "Forge a helper to your own measure"
+    },
+    "11-second-brain": {
+      "ru": "Поставить свой терем памяти",
+      "en": "Raise your own tower of memory"
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "Прежде чем в дорогу собираться, надобно слова знать заветные. Шесть их всего — выучишь, и ни один леший не заморочит.",
+        "en": "Before setting out on the road, one must know the cherished words. There are but six — learn them, and no wood-spirit will lead you astray."
+      },
+      "mentorHint": {
+        "ru": "Кто вещь по имени зовёт, тот ею и правит.",
+        "en": "Whoever calls a thing by its name holds sway over it."
+      },
+      "outro": {
+        "ru": "Вот и азбука освоена. Теперь речи мудрецов тебе понятны — пора разглядеть свой замысел.",
+        "en": "There, the alphabet is learned. Now the sages' speech makes sense to you — time to take a look at your own design."
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "Всякая добрая изба начинается с замысла, с духа-невидимки, что вьётся под потолком. Давай же приглядимся к твоему призраку-идее, разглядим его очертания.",
@@ -477,6 +507,20 @@
         "en": "With every thought, your household becomes more magical and orderly. You are no longer just a worker, but the wise keeper of a clever home."
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Пора домовому своё время знать. С первыми петухами он сам за работу возьмётся, а что уже сделано — второй раз переделывать не станет.",
+        "en": "Time for the domovoi to know its own hours. At first cockcrow it gets to work by itself and never redoes what is already done."
+      },
+      "mentorHint": {
+        "ru": "Справный помощник зарубки на притолоке ставит: что сделано, то сделано. Без зарубок и домовой запутается.",
+        "en": "A good helper cuts notches in the lintel: what's done is done. Without the notches even a domovoi gets muddled."
+      },
+      "outro": {
+        "ru": "Проснулся ты, а дело уж сделано. Домовой всю ночь трудился и ни одной работы дважды не взял.",
+        "en": "You wake up and the work is already done. The domovoi toiled all night and never took the same job twice."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Слепили мы с тобой гомункула, хорош собой, да молчит. Давай-ка подумаем, какого слова заветного, какого толчка ему для дела не хватает.",
@@ -545,6 +589,20 @@
       "outro": {
         "ru": "Справился, ух, справился! Теперь мы знаем, что наш агент готов к работе. Великие свершения ждут нас за порогом этого модуля.",
         "en": "It did it, phew, it did it! Now we know our agent is ready for work. Great accomplishments await us beyond the threshold of this module."
+      }
+    },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Прежде чем в дальнюю дорогу, хозяин обходит двор: где плетень покосился, где в амбаре мыши хозяйничают.",
+        "en": "Before a long road, the master walks the yard: where the fence leans, where mice have taken over the barn."
+      },
+      "mentorHint": {
+        "ru": "За всё сразу не хватайся. Три дела сделай на совесть — и каждое проверь своими глазами.",
+        "en": "Don't grab everything at once. Do three jobs properly — and check each with your own eyes."
+      },
+      "outro": {
+        "ru": "Двор прибран, плетень выправлен. Остальное хозяйство подождёт — дорога зовёт.",
+        "en": "The yard is tidy, the fence set straight. The rest of the household can wait — the road is calling."
       }
     },
     "08-agent-engineering/u1-activation": {
@@ -699,6 +757,146 @@
       "outro": {
         "ru": "Готово. Из долгого просмотра вышла добыча с уликами.",
         "en": "Done. Long viewing turned into findings with evidence."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Заглянем, как устроен говорящий истукан. Нет в нём души — только привычка складывать слово к слову.",
+        "en": "Let us see how the talking idol is made. There is no soul in it — only a habit of laying word after word."
+      },
+      "mentorHint": {
+        "ru": "Складно — не значит верно. Истукан говорит, как говорили до него.",
+        "en": "Smooth does not mean true. The idol speaks the way others spoke before it."
+      },
+      "outro": {
+        "ru": "Теперь видишь, откуда у него уверенная небылица.",
+        "en": "Now you see where its confident tall tale comes from."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "Хороший кузнец больше времени тратит на руду, чем на ковку. Наша руда — примеры.",
+        "en": "A good smith spends more time on the ore than on the forging. Our ore is examples."
+      },
+      "mentorHint": {
+        "ru": "Худая руда — худой клинок, сколько ни куй.",
+        "en": "Poor ore makes a poor blade, however long you hammer."
+      },
+      "outro": {
+        "ru": "Круг ремесла понятен. Не вышло — иди к руде, а не к молоту.",
+        "en": "The circle of the craft is plain. If it failed — go to the ore, not the hammer."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Не всякое дело новой ковки требует. Иной раз хватит верного слова да грамоты под рукой.",
+        "en": "Not every task needs new forging. Sometimes the right word and a charter at hand suffice."
+      },
+      "mentorHint": {
+        "ru": "LoRA — накладка на старый клинок: сняли — и клинок цел.",
+        "en": "LoRA is an overlay on the old blade: take it off and the blade is whole."
+      },
+      "outro": {
+        "ru": "Решил по уму. Перековка — последнее дело, а не первое.",
+        "en": "You decided wisely. Reforging is the last resort, not the first."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Помощник гладко ответил на знакомое. А на незнакомое? Проверим по-честному.",
+        "en": "The helper answered the familiar smoothly. And the unfamiliar? Let us check honestly."
+      },
+      "mentorHint": {
+        "ru": "Отложи часть примеров до ковки — они и скажут правду.",
+        "en": "Set some examples aside before forging — they will tell the truth."
+      },
+      "outro": {
+        "ru": "Мерило готово. Выученное от умелого теперь отличишь.",
+        "en": "The yardstick is ready. You can now tell the rote from the skilled."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Пришла пора своей ковки: малый помощник, своя кузня, своя руда.",
+        "en": "The time has come for your own forging: a small helper, your own smithy, your own ore."
+      },
+      "mentorHint": {
+        "ru": "Смерь помощника до ковки, иначе не поймёшь, что переменилось.",
+        "en": "Measure the helper before forging, or you will not know what changed."
+      },
+      "outro": {
+        "ru": "Выковано! Знаешь теперь, когда хватит слова, а когда помощника учить.",
+        "en": "Forged! Now you know when a word suffices and when the helper must be taught."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Чужой терем хозяин может запереть. Ставим свой — из своих брёвен.",
+        "en": "Another’s tower its master can lock. We raise our own — from our own logs."
+      },
+      "mentorHint": {
+        "ru": "Сказ без указания, из какой он летописи, — небылица.",
+        "en": "A tale that names no chronicle is a tall tale."
+      },
+      "outro": {
+        "ru": "Терем поставлен. Летописи твои и отвечают тебе.",
+        "en": "The tower stands. The chronicles are yours and answer to you."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Сорока весть на хвосте несёт. Научим её лететь к тебе домой.",
+        "en": "The magpie carries news on its tail. We teach it to fly to your home."
+      },
+      "mentorHint": {
+        "ru": "Сорока слушает всех. Пусть отвечает лишь хозяину.",
+        "en": "The magpie listens to everyone. Let it answer only its master."
+      },
+      "outro": {
+        "ru": "Весточка долетела. Чужие голоса сорока не носит.",
+        "en": "The message arrived. The magpie carries no strangers’ voices."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Мастер передаёт ремесло ученику — берестой, а не колдовством.",
+        "en": "The master passes the craft to the apprentice — on birch bark, not by sorcery."
+      },
+      "mentorHint": {
+        "ru": "Потерял бересту — забыл ремесло. Сила была в грамоте.",
+        "en": "Lose the bark — forget the craft. The power was in the writing."
+      },
+      "outro": {
+        "ru": "Понял, что передаётся: грамота, а не душа истукана.",
+        "en": "Now you know what is passed on: the writing, not the idol’s soul."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "Лихие люди прячут наговор в чужих письмах и подарках.",
+        "en": "Rogues hide a spell in strangers’ letters and gifts."
+      },
+      "mentorHint": {
+        "ru": "Чужое слово — не приказ. Приказ в тереме отдаёт хозяин.",
+        "en": "A stranger’s word is not an order. In the tower, the master gives orders."
+      },
+      "outro": {
+        "ru": "Шесть оберегов на воротах. Каждый держит свою часть наговора.",
+        "en": "Six charms on the gates. Each one holds back its part of the spell."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Собираем всё вместе: терем, сороку и первую чужую грамоту.",
+        "en": "We bring it all together: the tower, the magpie and the first borrowed writing."
+      },
+      "mentorHint": {
+        "ru": "Три проверки — три замка на воротах.",
+        "en": "Three checks — three locks on the gates."
+      },
+      "outro": {
+        "ru": "Терем живёт. Второй мозг твой и служит тебе.",
+        "en": "The tower lives. The second brain is yours and serves you."
       }
     }
   }

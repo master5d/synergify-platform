@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-living-practice",
+  "unit": "u8-krug",
+  "locale": "ru",
+  "title": "Круг: куда всё это ведёт",
+  "sourceHash": "sha256:f6acc8666b4184a2b4fd76a152a42691782cd99cce56fd1f5a346df8ebb8a705",
+  "outline": [
+    {
+      "heading": "Почему круг, а не «ещё одно приложение»",
+      "points": [
+        {
+          "text": "Что из этого следует честно: доказательства поддерживают не «группу как таковую», а живого человека в контуре.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Как собрать круг, у которого есть шанс",
+      "points": [
+        {
+          "text": "Готовая рамка для встречи, если своей нет, — ИГИ, Игра в Групповой Инсайт: шесть карт, четыре шага, слово по кругу.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Как выбирать школу или курс",
+      "points": [
+        {
+          "text": "Восьмой, неформальный: из курса нельзя выйти по-человечески.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Чем этот курс заканчивается",
+      "points": [
+        {
+          "text": "Курс удался в тот момент, когда стал не нужен.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c10"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:25982fbf6d0ca3f7fd303bafa023a48a63d048840ec463d5ca4c50e2c307b046",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:324e549eb6a7cefdab6383a7403e787c38fe4646e378cd6053542a21fbe8f2bd",
+        "points": [
+          "Если у тебя нет своей рамки для встречи, используй ИГИ или Игру в Групповой Инсайт.",
+          "Там есть шесть карт и четыре шага, а слово передается по кругу."
+        ]
+      },
+      {
+        "sourceHash": "sha256:1072d703214b54572890964996d36e6ea2582ee4224a415c469aecf83648bb9c",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:08d9db40854838828ffe411b336cca7d3dd22ba67800763915d0f3fe8f89a8da",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+# Ключи и секреты — никогда в git. Шаблон без значений можно: .env.example
+.env*
+!.env.example
+
+# Личные настройки и заметки агентов (у каждого свои, в общий репозиторий не нужны)
+.claude/settings.local.json
+CLAUDE.local.md
+AGENTS.override.md
+
+# Зависимости и сборка
+node_modules/
+dist/
+build/
+.next/
+out/
+__pycache__/
+.venv/
+
+# Мусор ОС и редакторов
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.tmp

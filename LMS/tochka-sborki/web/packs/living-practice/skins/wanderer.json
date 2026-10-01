@@ -40,6 +40,14 @@
     "09-ai-notebook": {
       "ru": "Развилка 9",
       "en": "Crossroad 9"
+    },
+    "10-model-training": {
+      "ru": "Развилка 10",
+      "en": "Crossroad 10"
+    },
+    "11-second-brain": {
+      "ru": "Развилка 11",
+      "en": "Crossroad 11"
     }
   },
   "questTitles": {
@@ -82,6 +90,14 @@
     "09-ai-notebook": {
       "ru": "Идти по следам источников",
       "en": "Follow the source trail"
+    },
+    "10-model-training": {
+      "ru": "Выучить свою модель",
+      "en": "Train your own model"
+    },
+    "11-second-brain": {
+      "ru": "Собрать свой второй мозг",
+      "en": "Build your own second brain"
     }
   }
 }

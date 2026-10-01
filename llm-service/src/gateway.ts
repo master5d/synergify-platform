@@ -104,9 +104,14 @@ export function extractJsonFromText(text: string): string | null {
 
 export async function chatJson(opts: {
   pool: string; prompt: string; env: GatewayEnv; fetchImpl?: typeof fetch
+  /** Свой потолок операции; по умолчанию общий GATEWAY_TIMEOUT_MS — старые вызовы не меняются. */
+  timeoutMs?: number
+  /** По умолчанию 0.8 (проза листа); пересказ примера просит ниже, чтобы держаться исходника. */
+  temperature?: number
 }): Promise<unknown> {
   const { pool, prompt, env } = opts
   const fetchImpl = opts.fetchImpl ?? fetch
+  const timeoutMs = opts.timeoutMs ?? GATEWAY_TIMEOUT_MS
   let res: Response
   try {
     res = await fetchImpl(`${env.GATEWAY_URL}/chat/completions`, {
@@ -119,18 +124,18 @@ export async function chatJson(opts: {
         // ровно так 2026-09-19 искали виновника флуда по IP в логе гейтвея.
         'x-sovern-agent': 'lms-llm',
       },
-      signal: AbortSignal.timeout(GATEWAY_TIMEOUT_MS),
+      signal: AbortSignal.timeout(timeoutMs),
       body: JSON.stringify({
         model: pool,
         messages: [{ role: 'user', content: prompt }],
-        temperature: 0.8,
+        temperature: opts.temperature ?? 0.8,
         max_tokens: MAX_TOKENS,
       }),
     }) as Response
   } catch (e) {
     const name = e instanceof Error ? e.name : ''
     if (name === 'TimeoutError' || name === 'AbortError') {
-      throw new LlmError('timeout', `gateway timeout after ${GATEWAY_TIMEOUT_MS}ms`)
+      throw new LlmError('timeout', `gateway timeout after ${timeoutMs}ms`)
     }
     throw new LlmError('gateway_unreachable', 'gateway unreachable')
   }

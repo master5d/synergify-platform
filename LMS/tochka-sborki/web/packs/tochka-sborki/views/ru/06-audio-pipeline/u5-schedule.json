@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-audio-pipeline",
+  "unit": "u5-schedule",
+  "locale": "ru",
+  "title": "Pipeline, который запускается сам",
+  "sourceHash": "sha256:07182eae65cd0eec382e40ede23cedcaa4ce40508217dc88e14f11e03bb50f89",
+  "outline": [
+    {
+      "heading": "Схема: утренний разбор ссылок",
+      "points": [
+        {
+          "text": "Ты дописываешь ссылку в inbox.txt одной строкой.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Condition «дубли» — это идемпотентность",
+      "points": [
+        {
+          "text": "Второе правило оттуда же: ссылка попадает в done.txt только после успешного разбора.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Почему не Hook",
+      "points": [
+        {
+          "text": "Hooks из модуля 07 срабатывают на события агента: агент записал файл, закончил ответ.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c9",
+    "c10"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:17358025e4d7a518047e2ba14c06c40a5d5879fa46d36710c6dd921dd647e3ec",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:43893c3c02b8ceac04247a1671248660399c60e30cd6f8f8366b5d86d0763aef",
+        "points": [
+          "Ссылка попадает в done.txt только после того, как ее разбор прошел успешно."
+        ]
+      },
+      {
+        "sourceHash": "sha256:6117176de2836498657c42c2b11e82fe343611b8224de3b4722be6778068b8d5",
+        "points": [
+          "Hooks из модуля 07 срабатывают на события агента, когда он записывает файл или заканчивает ответ."
+        ]
+      }
+    ]
+  }
+}

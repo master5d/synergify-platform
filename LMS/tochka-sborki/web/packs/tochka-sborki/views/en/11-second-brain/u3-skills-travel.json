@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u3-skills-travel",
+  "locale": "en",
+  "title": "Skills travel from agent to agent",
+  "sourceHash": "sha256:e0ae010d40ae30e16f52bd98a5a288b13ed90fda6b3a775def8836f40c11a66a",
+  "outline": [
+    {
+      "heading": "\"My agent teaches yours\" — honestly",
+      "points": [
+        {
+          "text": "It looks like training, but the model's weights do not change.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A skill is a folder",
+      "points": [
+        {
+          "text": "So a skill built for one agent often works for another.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Three ways to hand over a skill",
+      "points": [
+        {
+          "text": "Many authors publish their skills openly.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What travels and what does not",
+      "points": [
+        {
+          "text": "Does not travel: personal memory — neither yours nor anyone else's — and keys.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How an agent picks up a skill from a conversation",
+      "points": [
+        {
+          "text": "There is a reverse path too: the agent turns a job well done into a skill.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c7",
+    "c8",
+    "c9"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:bd07f51495d8096ebcd9b51c8375f94cc7e26a1d7bf9a45ea985d6460ee4e2b0",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:34f32eaff3c90a16ac89e0b7f6c3c81b01f6bcf58a3f9caba2c62f222f959a5c",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:3da6f54e8da6157651a4a77f94c7eba52032457a6807b647e4867210b61e92d5",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:89b34a5ad845fe6e1754b83b68d00c500d286a20d4173e6bf0f22438a2720db3",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:91f4c847890c488b8f9369a2f328cc4609eaebbfef8379f989e4947f58dacf9f",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

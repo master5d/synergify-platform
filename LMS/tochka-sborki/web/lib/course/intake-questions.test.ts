@@ -22,12 +22,8 @@ describe('QUESTIONS_V2', () => {
     expect(niche.options!.every(o => NICHE.has(o.value))).toBe(true)
     expect(skin.options!.every(o => SKIN.has(o.value))).toBe(true)
   })
-  it('MBTI: self-report + 4 axis pairs gated on unknown', () => {
-    for (const axis of ['V_MBTI_EI','V_MBTI_SN','V_MBTI_TF','V_MBTI_JP']) {
-      const q = QUESTIONS_V2.find(x => x.id === axis)!
-      expect(q.showIf).toEqual({ questionId: 'V_MBTI_SR', equals: 'unknown' })
-      expect(q.options!.length).toBe(2)
-    }
+  it('вопросов MBTI в анкете нет (сняты 2026-09-29, слово владельца; не основание адаптации — Pashler 2008)', () => {
+    expect(QUESTIONS_V2.filter(q => /MBTI/i.test(q.id) || /MBTI|психотип/i.test(q.prompt.ru + q.prompt.en))).toEqual([])
   })
   it('depth battery is gated behind V_DEEPEN == yes', () => {
     const depth = QUESTIONS_V2.filter(q => q.id.startsWith('VD_'))

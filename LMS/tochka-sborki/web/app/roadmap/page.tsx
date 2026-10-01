@@ -3,7 +3,7 @@ import { MdxPage } from '@/components/pages/mdx-page'
 import { pageTitle } from '@/lib/page-title'
 
 export const metadata: Metadata = {
-  title: pageTitle('Roadmap'),
+  title: pageTitle('Дорожная карта'),
   description: 'Карта пути от нонкодера до AI-generalist\'а — 7 элективных тем',
 }
 

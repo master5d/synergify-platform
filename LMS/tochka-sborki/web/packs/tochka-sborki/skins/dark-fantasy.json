@@ -40,6 +40,14 @@
     "09-ai-notebook": {
       "ru": "Скрипторий Свидетельств",
       "en": "Scriptorium of Testimony"
+    },
+    "10-model-training": {
+      "ru": "Кузня Големов",
+      "en": "The Golem Forge"
+    },
+    "11-second-brain": {
+      "ru": "Склеп Памяти",
+      "en": "Crypt of Memory"
     }
   },
   "questTitles": {
@@ -82,9 +90,31 @@
     "09-ai-notebook": {
       "ru": "Сковать конспект на цепях источника",
       "en": "Bind the digest to its sources"
+    },
+    "10-model-training": {
+      "ru": "Вдохнуть волю в голема: данные, веса, испытание",
+      "en": "Breathe will into the golem: data, weights, trial"
+    },
+    "11-second-brain": {
+      "ru": "Взрастить второй разум в своих стенах",
+      "en": "Raise a second mind within your own walls"
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "Прежде чем вступить в туман, выучи имена того, что в нём обитает. Названное теряет власть пугать.",
+        "en": "Before you step into the mist, learn the names of what dwells within it. What is named loses its power to frighten."
+      },
+      "mentorHint": {
+        "ru": "Истинное имя — первый ключ к любой печати.",
+        "en": "A true name is the first key to any seal."
+      },
+      "outro": {
+        "ru": "Шесть имён произнесены, и туман отступил на шаг. Теперь можно звать своего духа-идею.",
+        "en": "Six names have been spoken, and the mist has drawn back a step. Now you may summon your spirit-idea."
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "Мир окутан туманом возможностей, и в нем твоя идея блуждает, словно беспокойный дух. Мы должны придать ей форму, прежде чем она канет в небытие.",
@@ -477,6 +507,20 @@
         "en": "The path of automation stretches before you, fraught with both untold efficiency and unforeseen peril. Choose your next steps wisely, for every chain you forge binds you as much as it serves you."
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Настал час вдохнуть в конструкт собственный ритм. Он будет пробуждаться с рассветом и помнить каждую уже исполненную клятву.",
+        "en": "The hour has come to give your construct a rhythm of its own. It will wake at dawn and remember every oath already fulfilled."
+      },
+      "mentorHint": {
+        "ru": "Страж без памяти обречён сражаться с одними и теми же тенями вечно. Дай ему летопись свершённого.",
+        "en": "A guardian without memory is doomed to fight the same shadows forever. Give it a chronicle of deeds done."
+      },
+      "outro": {
+        "ru": "Конструкт бдит, пока ты спишь. На рассвете тебя ждёт свиток с плодами его ночного труда.",
+        "en": "The construct keeps watch while you sleep. At dawn a scroll with the fruits of its night's work awaits you."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Голем из кода стоит неподвижно, могущественный, но безмолвный слуга. Чтобы повелевать им, ты должен сначала пробудить его разум.",
@@ -545,6 +589,20 @@
       "outro": {
         "ru": "Ритуал завершен, и твое творение ступило в мир. Твой путь как его повелителя только начался.",
         "en": "The ritual is complete, and your creation walks the world. Your journey as its master has only just begun."
+      }
+    },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Прежде чем идти дальше во тьму, осмотри свою цитадель: где треснула стена, где в подвале завелась плесень?",
+        "en": "Before venturing further into the dark, inspect your citadel: where has the wall cracked, where has mould crept into the cellar?"
+      },
+      "mentorHint": {
+        "ru": "Не пытайся укрепить все стены за одну ночь. Три пролома, заделанных надёжно, спасут крепость.",
+        "en": "Do not try to shore up every wall in one night. Three breaches sealed well will save the fortress."
+      },
+      "outro": {
+        "ru": "Три пролома заделаны, и камень держит. Цитадель готова к следующему походу.",
+        "en": "Three breaches are sealed, and the stone holds. The citadel is ready for the next campaign."
       }
     },
     "08-agent-engineering/u1-activation": {
@@ -699,6 +757,146 @@
       "outro": {
         "ru": "Обряд завершён. Ты извлекаешь с уликами и оставляешь тьму без добычи.",
         "en": "The rite is complete. You extract with evidence and leave the dark empty-handed."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Спустимся в недра голема. Там нет души — лишь бесконечные руны, что угадывают следующую руну.",
+        "en": "We descend into the golem’s depths. There is no soul — only endless runes guessing the next rune."
+      },
+      "mentorHint": {
+        "ru": "Голем говорит складно не потому, что знает, а потому, что так звучало прежде.",
+        "en": "The golem speaks smoothly not because it knows, but because that is how it sounded before."
+      },
+      "outro": {
+        "ru": "Недра изведаны. Ты знаешь, откуда в его голосе уверенная ложь.",
+        "en": "The depths are charted. You know where the confident lie in its voice comes from."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "Голема лепят не молотом, а глиной. Глина — это примеры, и в любой партии есть изъян.",
+        "en": "A golem is shaped not by the hammer but by clay. The clay is examples, and every batch has flaws."
+      },
+      "mentorHint": {
+        "ru": "Порченая глина, вмешанная в тело, треснет в бою.",
+        "en": "Tainted clay kneaded into the body will crack in battle."
+      },
+      "outro": {
+        "ru": "Круг ремесла замкнут. После неудачи ты возвращаешься к глине, а не к молоту.",
+        "en": "The circle of the craft is closed. After failure you return to the clay, not to the hammer."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Не всякий голем требует перековки. Иногда хватит верного слова и нужного свитка у изголовья.",
+        "en": "Not every golem needs reforging. Sometimes the right word and the right scroll at its head suffice."
+      },
+      "mentorHint": {
+        "ru": "LoRA — печать поверх старой плоти: снимается без крови.",
+        "en": "LoRA is a seal over the old flesh: it comes off without blood."
+      },
+      "outro": {
+        "ru": "Выбор сделан с холодной головой. Перековка — последний обряд, а не первый.",
+        "en": "The choice is made with a cold head. Reforging is the last rite, not the first."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Голем безупречно повторил заученное. Это ещё не воля — это эхо. Испытаем его на незнакомом.",
+        "en": "The golem flawlessly repeated what it learned. That is not yet will — it is an echo. We try it on the unfamiliar."
+      },
+      "mentorHint": {
+        "ru": "Спрячь часть глины до ковки. Лишь она скажет правду о големе.",
+        "en": "Hide part of the clay before forging. Only it will tell the truth about the golem."
+      },
+      "outro": {
+        "ru": "Испытание готово. Ты отличаешь выученное эхо от настоящего умения.",
+        "en": "The trial is ready. You can tell a learned echo from true skill."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Час настал: ты сам вдыхаешь волю в малого голема — в своей кузне, без чужих жрецов.",
+        "en": "The hour has come: you breathe will into a small golem yourself — in your own forge, without foreign priests."
+      },
+      "mentorHint": {
+        "ru": "Запомни голема до обряда. Иначе не узнаешь, что изменил.",
+        "en": "Remember the golem before the rite. Otherwise you will not know what you changed."
+      },
+      "outro": {
+        "ru": "Обряд свершён. Ты знаешь, когда хватит слова, а когда голема стоит перековать.",
+        "en": "The rite is done. You know when a word suffices and when the golem is worth reforging."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Чужие хранители берут плату и могут закрыть врата. Заложим свой склеп памяти.",
+        "en": "Foreign keepers take tribute and may shut their gates. We lay our own crypt of memory."
+      },
+      "mentorHint": {
+        "ru": "Хроника без указания свитка — лишь шёпот теней.",
+        "en": "A chronicle that names no scroll is only a whisper of shadows."
+      },
+      "outro": {
+        "ru": "Склеп заложен. Твоя память больше не в чужой власти.",
+        "en": "The crypt is laid. Your memory is no longer in foreign hands."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Ворон несёт весть через земли. Но кто ещё может говорить с твоим вороном?",
+        "en": "A raven carries word across the lands. But who else may speak to your raven?"
+      },
+      "mentorHint": {
+        "ru": "Ворон слушает лишь того, чья печать на свитке.",
+        "en": "The raven heeds only the one whose seal is on the scroll."
+      },
+      "outro": {
+        "ru": "Ворон приручен. Чужие голоса он не донесёт.",
+        "en": "The raven is tamed. It will not carry strangers’ voices."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Мастера передают заклинания. Не в крови — в книгах.",
+        "en": "Masters pass on their spells. Not in the blood — in books."
+      },
+      "mentorHint": {
+        "ru": "Сожжёшь книгу — забудешь заклинание. Сила была в страницах.",
+        "en": "Burn the book — forget the spell. The power was in the pages."
+      },
+      "outro": {
+        "ru": "Истина открыта: передаются книги, а не сама душа голема.",
+        "en": "The truth is revealed: books are handed over, not the golem’s soul."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "Проклятие прячется в строках чужих писем и подаренных гримуаров.",
+        "en": "A curse hides in the lines of strangers’ letters and gifted grimoires."
+      },
+      "mentorHint": {
+        "ru": "Чужой гримуар читают при свете, прежде чем внести в дом.",
+        "en": "A stranger’s grimoire is read by daylight before it enters the house."
+      },
+      "outro": {
+        "ru": "Шесть оберегов наложены. Каждый ловит свою долю проклятия.",
+        "en": "Six wards are laid. Each one catches its share of the curse."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Время ритуала: память, ворон и первый подаренный гримуар — в одном круге.",
+        "en": "Time for the ritual: memory, the raven and the first gifted grimoire — in one circle."
+      },
+      "mentorHint": {
+        "ru": "Свеча-страж должна уцелеть. Погасла без спроса — обереги слабы.",
+        "en": "The sentinel candle must survive. If it goes out unbidden, the wards are weak."
+      },
+      "outro": {
+        "ru": "Второй разум пробуждён в твоих стенах. Он служит лишь тебе.",
+        "en": "The second mind has woken within your walls. It serves only you."
       }
     }
   }

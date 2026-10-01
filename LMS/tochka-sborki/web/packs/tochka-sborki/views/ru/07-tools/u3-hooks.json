@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "07-tools",
+  "unit": "u3-hooks",
+  "locale": "ru",
+  "title": "Hooks: автоматизация событий",
+  "sourceHash": "sha256:68aa8c8e07dc5b4a0a63a9dfc2aa36027f084eb32b17b396aebc23f3252691d4",
+  "outline": [
+    {
+      "heading": "События для Hooks",
+      "points": [
+        {
+          "text": "По часам ни одно из этих событий не наступает.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Конфигурация Hook",
+      "points": [
+        {
+          "text": "Перенаправление >> здесь обязательно: без него echo пишет не в лог, а в стандартный вывод, который разбирает сам Claude Code.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Практические примеры",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Безопасность",
+      "points": [
+        {
+          "text": "Hook может запускать любую команду.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c5",
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:4d368c67cde344d001c65629c102527e83fd531dac3d9e7f9438551d92ea5f57",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:699e6d792314c74718278b5858d9a407d88aab371af5f4824cc16c4d26be71ac",
+        "points": [
+          "Тебе обязательно нужно использовать перенаправление, чтобы запись попадала в лог.",
+          "Без него текст пойдет в стандартный вывод, который разбирает сам Claude Code."
+        ]
+      },
+      {
+        "sourceHash": "sha256:b6a94f629762c98c7d073f4bf7400a5626ddb22cd941a5288e7192bc9afd1511",
+        "points": [
+          "Через Hook ты можешь запустить любую команду."
+        ]
+      }
+    ]
+  }
+}

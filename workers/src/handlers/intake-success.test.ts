@@ -36,11 +36,12 @@ function fakeDb(existingVersion = 2) {
 // Порядок бинд-параметров основного INSERT — см. intake.ts / intake-fallback.test.ts.
 const BIND = {
   worldSkin: 12,
-  legendaryTitle: 20,
-  backstory: 21,
-  firstQuest: 22,
-  finalBoss: 23,
-  proseSource: 24,
+  // mbti из INSERT убран 2026-09-29 (вопросы MBTI сняты из анкеты) — проза сдвинулась на 1.
+  legendaryTitle: 19,
+  backstory: 20,
+  firstQuest: 21,
+  finalBoss: 22,
+  proseSource: 23,
 }
 
 // Прозу отличаем от fallbackProse() намеренно — если маппинг подменит ответ
@@ -67,6 +68,7 @@ describe('успех интейка: /prose отвечает валидной п
     const insert = db.inserts.find((i: any) => i.sql.startsWith('INSERT INTO intake_profiles'))
     expect(insert).toBeTruthy()
     const binds = insert!.binds
+    expect(insert!.sql).not.toMatch(/mbti/)   // колонку не пишем (MBTI снят 2026-09-29), старые значения в D1 целы
     expect(binds[BIND.proseSource]).toBe('gemini')
     expect(binds[BIND.legendaryTitle]).toBe(SERVICE_PROSE.legendaryTitle)
     expect(binds[BIND.backstory]).toBe(SERVICE_PROSE.backstory)

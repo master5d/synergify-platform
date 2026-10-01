@@ -1,5 +1,5 @@
 // web/lib/intake/questions.v2.ts
-// v2 instrument — short sensory core (LINGVÆTICA voice) + adaptive MBTI + optional depth.
+// v2 instrument — short sensory core (LINGVÆTICA voice) + optional depth.
 // Every question is optional. Value keys for niche/skin/os reuse the canonical v1 enums
 // so the RPG layer + companion consume the same fields. New question IDs never collide
 // with v1 (A1..G12, OS). Scored by scoring-v2.ts, never by v1 scoring.ts.
@@ -47,6 +47,18 @@ export const QUESTIONS_V2: Question[] = [
       { value: 'understand', label: { ru: 'Понимать, как всё устроено', en: 'Understanding how things work' } },
     ],
   },
+  // ── Развилка «криэйтор / предприниматель» + сквозная задача (решение владельца 2026-09-14; спека
+  // docs/superpowers/specs/2026-09-28-onboarding-fork-task-routes.md). Роль сужает опции V_NICHE (showIf у опции)
+  // и каталог русел (course/task-routes.ts). Режим «есть задача» открывает шаг V_TASK_ROUTE после V_OUTCOME;
+  // «хочу научиться» — курс по порядку, русло не навязывается.
+  {
+    id: 'V_ROLE', module: 'V', format: 'single', required: false,
+    prompt: { ru: 'Кто ты в своём деле?', en: 'Who are you in your work?' },
+    options: [
+      { value: 'creator', label: { ru: 'Криэйтор — создаю контент, продукты, смыслы', en: 'Creator — I make content, products, ideas' } },
+      { value: 'entrepreneur', label: { ru: 'Предприниматель — веду бизнес, клиентов, процессы', en: 'Entrepreneur — I run a business, clients, processes' } },
+    ],
+  },
   {
     id: 'V_NICHE', module: 'V', format: 'single', required: false,
     prompt: { ru: 'Где ты себя видишь — твоя сфера?', en: 'Where do you see yourself — your field?' },
@@ -54,11 +66,19 @@ export const QUESTIONS_V2: Question[] = [
       { value: 'coach', label: { ru: 'Коучинг, психология, сопровождение', en: 'Coaching, psychology, guidance' } },
       { value: 'massage', label: { ru: 'Тело, практики, массаж', en: 'Body, practices, bodywork' } },
       { value: 'astrology', label: { ru: 'Астрология, духовное', en: 'Astrology, spiritual' } },
-      { value: 'content', label: { ru: 'Контент, блог, медиа', en: 'Content, blogging, media' } },
-      { value: 'ecommerce', label: { ru: 'Торговля, продукты', en: 'Commerce, products' } },
-      { value: 'service', label: { ru: 'Сервис, услуги (другое)', en: 'Service business (other)' } },
+      { value: 'content', label: { ru: 'Контент, блог, медиа', en: 'Content, blogging, media' }, showIf: { questionId: 'V_ROLE', equals: 'creator' } },
+      { value: 'ecommerce', label: { ru: 'Торговля, продукты', en: 'Commerce, products' }, showIf: { questionId: 'V_ROLE', equals: 'entrepreneur' } },
+      { value: 'service', label: { ru: 'Сервис, услуги (другое)', en: 'Service business (other)' }, showIf: { questionId: 'V_ROLE', equals: 'entrepreneur' } },
       { value: 'tech', label: { ru: 'Технологии, разработка', en: 'Tech, development' } },
       { value: 'other', label: { ru: 'Другое', en: 'Other' } },
+    ],
+  },
+  {
+    id: 'V_TASK_MODE', module: 'V', format: 'single', required: false,
+    prompt: { ru: 'С чем ты пришёл?', en: 'What did you come with?' },
+    options: [
+      { value: 'task', label: { ru: 'Есть готовая задача — хочу её сделать', en: 'I have a task — I want to get it done' } },
+      { value: 'learn', label: { ru: 'Хочу научиться создавать — пройду курс по порядку', en: 'I want to learn to build — I will take the course in order' } },
     ],
   },
   {
@@ -70,6 +90,75 @@ export const QUESTIONS_V2: Question[] = [
     placeholder: {
       ru: 'напр.: собрать лендинг · автоматизировать отчёты · писать посты быстрее',
       en: 'e.g.: build a landing page · automate reports · write posts faster',
+    },
+  },
+  // Русло задачи: текст V_OUTCOME → классификатор (только закрытый каталог) → уточнение / ручной выбор.
+  // Ответ — string[] [ключ, источник, снимок текста] (lib/intake/task-route.ts).
+  {
+    id: 'V_TASK_ROUTE', module: 'V', format: 'task-route', required: false,
+    showIf: { questionId: 'V_TASK_MODE', equals: 'task' },
+    prompt: { ru: 'Какой дорогой делается твоя задача?', en: 'Which road does your task take?' },
+  },
+  // ── «Стоит ли это вообще автоматизировать?» (intake LMS#10, принято владельцем 2026-09-14).
+  // Первый шаг русла задачи: прежде чем выбирать инструмент — четыре измерения + окупаемость.
+  // По мотивам automation-advisor (MIT, glebis/claude-skills) — разбор происхождения и
+  // лицензии в lib/intake/automation-check.ts. Все четыре — likert 1..5, тот же рендер, что
+  // у V_ATTN/V_RHYTHM выше, без правок <QuestionRenderer>. Вердикт-карточка — V_AUTO_VERDICT.
+  {
+    id: 'V_AUTO_FREQ', module: 'V', format: 'likert', required: false,
+    prompt: {
+      ru: 'Как часто тебе нужно делать эту задачу? 1 — разово, 5 — каждый день',
+      en: 'How often do you need to do this task? 1 — one-off, 5 — every day',
+    },
+  },
+  {
+    id: 'V_AUTO_TIME', module: 'V', format: 'likert', required: false,
+    prompt: {
+      ru: 'Сколько времени уходит за один раз? 1 — пара минут, 5 — несколько часов',
+      en: 'How long does one run take? 1 — a couple of minutes, 5 — several hours',
+    },
+  },
+  {
+    id: 'V_AUTO_ERROR', module: 'V', format: 'likert', required: false,
+    prompt: {
+      ru: 'Что будет, если тут ошибиться? 1 — мелочь, легко исправить, 5 — дорого или опасно',
+      en: 'What happens if this goes wrong? 1 — a trifle, easy to fix, 5 — costly or risky',
+    },
+  },
+  {
+    id: 'V_AUTO_LONGEVITY', module: 'V', format: 'likert', required: false,
+    prompt: {
+      ru: 'Сколько ещё это будет тебе нужно? 1 — скоро не актуально, 5 — годами',
+      en: 'How long will you still need this? 1 — soon irrelevant, 5 — for years',
+    },
+  },
+  {
+    id: 'V_AUTO_BUILD', module: 'V', format: 'single', required: false,
+    prompt: {
+      ru: 'Сколько времени, по ощущению, займёт сама автоматизация?',
+      en: 'How long do you think building the automation itself would take?',
+    },
+    options: [
+      { value: 'lt1h', label: { ru: 'Меньше часа', en: 'Under an hour' } },
+      { value: 'h1_4', label: { ru: '2–4 часа', en: '2–4 hours' } },
+      { value: 'h4_16', label: { ru: 'День-два (4–16 часов)', en: 'A day or two (4–16 hours)' } },
+      { value: 'h16plus', label: { ru: 'Больше недели (16+ часов)', en: 'More than a week (16+ hours)' } },
+      { value: 'dont_know', label: { ru: 'Пока не знаю', en: "Don't know yet" } },
+    ],
+  },
+  {
+    id: 'V_AUTO_VERDICT', module: 'V', format: 'automation-verdict', required: false,
+    prompt: { ru: 'Стоит ли это вообще автоматизировать?', en: 'Is this even worth automating?' },
+  },
+  // ── «Карта недели» (intake LMS#17, одобрено владельцем 2026-09-28). Следующий под-шаг после
+  // вердикта по одной задаче: 3–7 повторяющихся дел недели → корзины «ИИ делает / ИИ помогает /
+  // оставляю себе» → модуль курса на каждое дело. Логика — lib/intake/week-map.ts, копия и
+  // таблица «тип работы → модуль» — course/week-map.ts этого пака. Ответ — string[] под этим id.
+  {
+    id: 'V_WEEK_MAP', module: 'V', format: 'week-map', required: false,
+    prompt: {
+      ru: 'А теперь — вся неделя: что у тебя повторяется?',
+      en: 'Now the whole week: what keeps repeating for you?',
     },
   },
   {
@@ -89,7 +178,7 @@ export const QUESTIONS_V2: Question[] = [
       { value: 'calm', label: { ru: 'Спокойно, ошибка = настройка', en: 'Calmly — a mistake is just tuning' } },
       { value: 'lose_motivation', label: { ru: 'Падает мотивация', en: 'I lose motivation' } },
       { value: 'soft_feedback', label: { ru: 'Нужен мягкий фидбек', en: 'I need gentle feedback' } },
-      { value: 'fix_immediately', label: { ru: 'Люблю сразу исправлять', en: 'I like to fix it right away' } },
+      { value: 'step_hints', label: { ru: 'Хочу сразу понять, где ошибка, и исправить сам', en: 'I want to see right away where it went wrong — and fix it myself' } },
     ],
   },
   {
@@ -121,57 +210,6 @@ export const QUESTIONS_V2: Question[] = [
       { value: 'quick_wins', label: { ru: 'Быстрые победы', en: 'Quick wins' } },
       { value: 'structure', label: { ru: 'Чёткая структура', en: 'Clear structure' } },
       { value: 'freedom', label: { ru: 'Свобода выбора', en: 'Freedom of choice' } },
-    ],
-  },
-  {
-    id: 'V_MBTI_SR', module: 'V', format: 'single', required: false,
-    prompt: { ru: 'Знаешь свой психотип (MBTI)?', en: 'Do you know your MBTI type?' },
-    options: [
-      { value: 'INTJ', label: { ru: 'INTJ', en: 'INTJ' } }, { value: 'INTP', label: { ru: 'INTP', en: 'INTP' } },
-      { value: 'ENTJ', label: { ru: 'ENTJ', en: 'ENTJ' } }, { value: 'ENTP', label: { ru: 'ENTP', en: 'ENTP' } },
-      { value: 'INFJ', label: { ru: 'INFJ', en: 'INFJ' } }, { value: 'INFP', label: { ru: 'INFP', en: 'INFP' } },
-      { value: 'ENFJ', label: { ru: 'ENFJ', en: 'ENFJ' } }, { value: 'ENFP', label: { ru: 'ENFP', en: 'ENFP' } },
-      { value: 'ISTJ', label: { ru: 'ISTJ', en: 'ISTJ' } }, { value: 'ISFJ', label: { ru: 'ISFJ', en: 'ISFJ' } },
-      { value: 'ESTJ', label: { ru: 'ESTJ', en: 'ESTJ' } }, { value: 'ESFJ', label: { ru: 'ESFJ', en: 'ESFJ' } },
-      { value: 'ISTP', label: { ru: 'ISTP', en: 'ISTP' } }, { value: 'ISFP', label: { ru: 'ISFP', en: 'ISFP' } },
-      { value: 'ESTP', label: { ru: 'ESTP', en: 'ESTP' } }, { value: 'ESFP', label: { ru: 'ESFP', en: 'ESFP' } },
-      { value: 'unknown', label: { ru: 'Не знаю / не уверен — подскажите', en: "Don't know / not sure — guide me" } },
-    ],
-  },
-  {
-    id: 'V_MBTI_EI', module: 'V', format: 'single', required: false,
-    showIf: { questionId: 'V_MBTI_SR', equals: 'unknown' },
-    prompt: { ru: 'После плотного дня тебя заряжает…', en: 'After a full day, you recharge by…' },
-    options: [
-      { value: 'E', label: { ru: 'Быть среди людей', en: 'Being around people' } },
-      { value: 'I', label: { ru: 'Побыть одному', en: 'Being on your own' } },
-    ],
-  },
-  {
-    id: 'V_MBTI_SN', module: 'V', format: 'single', required: false,
-    showIf: { questionId: 'V_MBTI_SR', equals: 'unknown' },
-    prompt: { ru: 'Тебе ближе…', en: 'You lean toward…' },
-    options: [
-      { value: 'S', label: { ru: 'Конкретика и факты', en: 'Concrete facts' } },
-      { value: 'N', label: { ru: 'Идеи и возможности', en: 'Ideas and possibilities' } },
-    ],
-  },
-  {
-    id: 'V_MBTI_TF', module: 'V', format: 'single', required: false,
-    showIf: { questionId: 'V_MBTI_SR', equals: 'unknown' },
-    prompt: { ru: 'Решая, ты опираешься на…', en: 'Deciding, you rely on…' },
-    options: [
-      { value: 'T', label: { ru: 'Логику', en: 'Logic' } },
-      { value: 'F', label: { ru: 'Ценности и людей', en: 'Values and people' } },
-    ],
-  },
-  {
-    id: 'V_MBTI_JP', module: 'V', format: 'single', required: false,
-    showIf: { questionId: 'V_MBTI_SR', equals: 'unknown' },
-    prompt: { ru: 'Тебе комфортнее, когда…', en: "You're more comfortable when…" },
-    options: [
-      { value: 'J', label: { ru: 'Есть план', en: "There's a plan" } },
-      { value: 'P', label: { ru: 'Всё открыто', en: 'Things stay open' } },
     ],
   },
   {

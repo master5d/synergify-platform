@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "07-tools",
+  "unit": "u2-mcp",
+  "locale": "en",
+  "title": "MCP: superpowers through a protocol",
+  "sourceHash": "sha256:1f36cdbb91aa81e09113b00a8bb39c0eda8a2200408fcdf3da1416fa2667ecc1",
+  "outline": [
+    {
+      "heading": "MCP: three primitives",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "How to connect an MCP server",
+      "points": [
+        {
+          "text": "The simplest way is a terminal command, run from the project folder.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Popular MCP servers",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Common errors (~60% of issues)",
+      "points": [
+        {
+          "text": "Fix: check JSON syntax and tokens before digging deeper.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:a97d4c778a0feb7635df1cfc4986990a407c9c750b471e9b9c01556ed27b440b",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:a291ab4eeeff3c4fd483c74c531d3763ab9b25d7f6fcb961b11d66052be26244",
+        "points": [
+          "You should check your JSON syntax and tokens before digging deeper."
+        ]
+      }
+    ]
+  }
+}

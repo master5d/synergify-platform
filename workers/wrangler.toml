@@ -8,6 +8,19 @@ OWNER_EMAIL = "sasha@mamaev.coach"
 LISTMONK_URL = "https://listmonk.mamaev.coach"
 # listmonk CRM list «Точка Сборки CRM» (private, single opt-in) — создан на infra I4
 LISTMONK_CRM_LIST_ID = "7"
+# События прогресса «модуль/курс завершён» → Listmonk (intake LMS#3, lib/progress-events.ts).
+# ВЫКЛЮЧЕНО: письма ученикам — действие наружу, включает владелец ("1" + id списка).
+PROGRESS_EVENTS_ENABLED = "1"
+LISTMONK_PROGRESS_LIST_ID = "8"  # «Точка Сборки — прогресс», создан 2026-09-27
+# Учебные цепочки писем через Listmonk tx (handlers/email-chain-cron.ts, тот же cron, что Telegram-nudge).
+# ВЫКЛЮЧЕНО: включает владелец — миграция 0019 к prod D1 → заливка шаблонов ts-* → "1".
+EMAIL_CHAINS_ENABLED = "1"  # учебные цепочки писем — включены владельцем 2026-09-28 (миграция 0019 применена)
+# Приглашения ботом в Telegram-сообщество (intake LMS#13, lib/community.ts): после первого урока и при допуске
+# в академию, одно на место. ВЫКЛЮЧЕНО: сообщение наружу — включает владелец: миграция 0021 к prod D1 → "1".
+COMMUNITY_INVITES_ENABLED = "1"
+# Интервальный повтор самопроверок на сервере (Педагогика 1, lib/check-reviews.ts): POST /api/checks/answer
+# и доля «ответили на повтор» в /api/admin/stats. ВКЛЮЧЕНО: миграция 0022 применена 2026-09-29, слово владельца.
+SPACED_REVIEW_ENABLED = "1"
 
 # Логи воркера (SES статус отправки) — чтобы отлаживать доставку magic-link, а не вслепую
 [observability]

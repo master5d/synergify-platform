@@ -19,7 +19,7 @@ Don't picture this as a "manual step." Picture a clock's escapement: the anchor 
 
 If you do something after every agent action — that's a Hook.
 
-Don't think of this as a "script." Picture a domino chain: you push the first tile — and the whole row falls by itself, one after another, without you touching a single piece. An event in Claude Code is the first tile; the Hook is everything that follows.
+Don't think of this as a "script." Picture a domino chain. You push the first tile — and the whole row falls by itself, one after another, without you touching a single piece. An event in Claude Code is the first tile; the Hook is everything that follows.
 
 Notice in your head: how many "tiles" in your workflow still need you to push them one by one?
 
@@ -36,6 +36,8 @@ Notice in your head: how many "tiles" in your workflow still need you to push th
 | `Notification` | When the agent wants to get your attention |
 | `Stop` | When the agent finishes its response (end of turn) |
 | `SessionEnd` | When the session ends |
+
+None of these events happens by the clock. The scheduled pipeline from [module 06](/en/lessons/06-audio-pipeline/u5-schedule/) is started by the OS scheduler, not a hook. But hooks do fire in the `claude -p` run from your `run.sh`. A `Stop` hook can, for example, notify you that the morning digest is ready.
 
 ## Hook config
 

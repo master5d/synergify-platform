@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-setup-guide",
+  "unit": "u3-first-project",
+  "locale": "en",
+  "title": "Your first project",
+  "sourceHash": "sha256:4af273c583096cc2898ebb408b3933f6c251af5ea17e489023a4c4f1ff68b1be",
+  "outline": [
+    {
+      "heading": "AGENTS.md — the agent's project memory",
+      "points": [
+        {
+          "text": "AGENTS.md is a Markdown file with the project's rules and context.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Minimal template",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "Creating a project",
+          "points": [],
+          "children": []
+        },
+        {
+          "heading": "AGENTS.md tips",
+          "points": [],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c6",
+    "c7",
+    "c8",
+    "c9"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:cee1c7d30342b5ea4ef255ecf1193da2a1d6f3a7bc56087cc689224038118555",
+        "points": [
+          "This Markdown file stores the rules and context for the project."
+        ]
+      }
+    ]
+  }
+}

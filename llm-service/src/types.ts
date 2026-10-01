@@ -6,6 +6,13 @@ export const WORLD_SKINS = [
 ] as const
 export type WorldSkin = typeof WORLD_SKINS[number]
 
+/** Закрытый список интересов = V_NICHE анкеты без `other` (зеркало web lib/interest-example/interests.ts,
+ *  расхождение ловит test/types-drift.test.ts). Конечный список = конечный кэш. */
+export const INTERESTS = [
+  'coach', 'massage', 'astrology', 'content', 'ecommerce', 'service', 'tech',
+] as const
+export type Interest = typeof INTERESTS[number]
+
 export interface ProseInput {
   charClass: string; worldSkin: string; language: string
   register?: string; niche?: string | null

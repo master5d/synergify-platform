@@ -10,12 +10,48 @@ interface Lead {
   telegram_handle: string | null
 }
 
+interface FunnelRow { module: string; unit: string | null; reached: number; completed: number }
+interface DropoffRow { course: string; module: string | null; unit: string | null; stalled: number }
+interface Stats {
+  total: number
+  learners: number
+  intakeCompleted: number
+  // Поля воронки добавлены позже — старый воркер их не отдаёт, поэтому необязательные.
+  notStarted?: number
+  stallDays?: number
+  funnel?: Record<string, FunnelRow[]>
+  dropoff?: DropoffRow[]
+  /** Стоп-критерий пилота интервального повтора; приходит только при SPACED_REVIEW_ENABLED="1" в воркере. */
+  spacedReview?: { course: string; eligible: number; answered: number }[]
+}
+
+// GET /api/admin/email-chains/dry-run — «кому что ушло бы сегодня» (без email, id обрезан до 8 символов).
+interface ChainsDryRun {
+  at: number
+  enabled: boolean
+  candidates: number
+  byStep: Record<string, number>
+  skipped: Record<string, number>
+}
+const SKIP_LABEL: Record<string, string> = {
+  optout: 'отписаны',
+  throttle: 'письмо было < 20 ч назад',
+  telegram: 'напоминания идут в Telegram',
+  quiet: 'активны < 20 ч назад',
+  'out-of-window': 'вне окна цепочки',
+  'no-step': 'шаг уже ушёл / нечего слать',
+}
+
+const lessonLabel = (r: { module: string | null; unit: string | null }) =>
+  r.module == null ? 'ничего не завершили' : r.unit ? `${r.module} / ${r.unit}` : r.module
+
 export function LeadsClient() {
   const [leads, setLeads] = useState<Lead[] | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [q, setQ] = useState('')
   const [syncMsg, setSyncMsg] = useState<string | null>(null)
-  const [stats, setStats] = useState<{ total: number; learners: number; intakeCompleted: number } | null>(null)
+  const [stats, setStats] = useState<Stats | null>(null)
+  const [chains, setChains] = useState<ChainsDryRun | null>(null)
 
   useEffect(() => {
     fetch('/api/admin/leads?limit=2000', { credentials: 'include' })
@@ -31,6 +67,13 @@ export function LeadsClient() {
     fetch('/api/admin/stats', { credentials: 'include' })
       .then(r => (r.ok ? r.json() : null))
       .then(d => { if (d) setStats(d) })
+      .catch(() => {})
+  }, [])
+
+  useEffect(() => {
+    fetch('/api/admin/email-chains/dry-run', { credentials: 'include' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => { if (d) setChains(d) })
       .catch(() => {})
   }, [])
 
@@ -80,6 +123,107 @@ export function LeadsClient() {
             </div>
           ))}
         </div>
+      )}
+      {stats?.funnel && Object.keys(stats.funnel).length > 0 && (
+        <section style={{ marginBottom: '2rem' }}>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '.75rem' }}>Воронка по урокам</h2>
+          {stats.notStarted != null && (
+            <p style={{ color: 'var(--text-secondary)', fontSize: '.85rem', marginBottom: '.75rem' }}>
+              Не начали ни одного урока: <b style={{ color: 'var(--text-primary)' }}>{stats.notStarted}</b>
+            </p>
+          )}
+          {Object.entries(stats.funnel).map(([course, rows]) => {
+            const top = Math.max(1, ...rows.map(r => r.reached))
+            return (
+              <div key={course} style={{ marginBottom: '1.25rem', overflowX: 'auto' }}>
+                <h3 style={{ fontSize: '.95rem', fontWeight: 700, marginBottom: '.4rem' }}>{course}</h3>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '.85rem' }}>
+                  <thead>
+                    <tr style={{ textAlign: 'left', color: 'var(--text-secondary)' }}>
+                      <th style={{ padding: '6px 8px' }}>урок</th><th style={{ padding: '6px 8px' }}>дошли</th>
+                      <th style={{ padding: '6px 8px' }}>завершили</th><th style={{ padding: '6px 8px', width: '40%' }} />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rows.map(r => (
+                      <tr key={lessonLabel(r)} style={{ borderTop: '1px solid var(--border-color)' }}>
+                        <td style={{ padding: '6px 8px' }}>{lessonLabel(r)}</td>
+                        <td style={{ padding: '6px 8px' }}>{r.reached}</td>
+                        <td style={{ padding: '6px 8px' }}>{r.completed}</td>
+                        <td style={{ padding: '6px 8px' }}>
+                          <div style={{ height: 8, borderRadius: 4, background: 'var(--border-color)', width: `${(r.reached / top) * 100}%` }}>
+                            <div style={{ height: 8, borderRadius: 4, background: 'var(--text-accent)', width: r.reached ? `${(r.completed / r.reached) * 100}%` : 0 }} />
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )
+          })}
+          {stats.dropoff && stats.dropoff.length > 0 && (
+            <>
+              <h3 style={{ fontSize: '.95rem', fontWeight: 700, margin: '1rem 0 .4rem' }}>
+                Где остановились (нет активности {stats.stallDays ?? '?'}+ дн., последний завершённый урок)
+              </h3>
+              <ul style={{ fontSize: '.85rem', paddingLeft: '1.2rem', color: 'var(--text-secondary)' }}>
+                {stats.dropoff.slice(0, 10).map(d => (
+                  <li key={`${d.course}:${lessonLabel(d)}`}>
+                    <b style={{ color: 'var(--text-primary)' }}>{d.stalled}</b> — {d.course}: {lessonLabel(d)}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </section>
+      )}
+      {stats?.spacedReview && stats.spacedReview.length > 0 && (
+        <section style={{ marginBottom: '2rem' }}>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '.5rem' }}>Интервальный повтор (пилот)</h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '.85rem', marginBottom: '.5rem' }}>
+            Доля учеников, ответивших на повтор, из тех, у кого подошёл срок. Стоп-критерий: через месяц меньше 10% — свернуть.
+          </p>
+          <ul style={{ fontSize: '.85rem', paddingLeft: '1.2rem', color: 'var(--text-secondary)' }}>
+            {stats.spacedReview.map(r => (
+              <li key={r.course}>
+                {r.course}: <b style={{ color: 'var(--text-primary)' }}>{r.answered}</b> из {r.eligible}
+                {r.eligible > 0 && <> ({Math.round((100 * r.answered) / r.eligible)}%)</>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {chains && (
+        <section style={{ marginBottom: '2rem' }}>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '.5rem' }}>Учебные письма: что ушло бы сегодня</h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '.85rem', marginBottom: '.75rem' }}>
+            Сухой прогон цепочек, ничего не отправлено. Кандидатов: <b style={{ color: 'var(--text-primary)' }}>{chains.candidates}</b>
+            {!chains.enabled && ' · рассылка выключена (EMAIL_CHAINS_ENABLED=0)'}
+          </p>
+          <table style={{ borderCollapse: 'collapse', fontSize: '.85rem', minWidth: 320 }}>
+            <thead>
+              <tr style={{ textAlign: 'left', color: 'var(--text-secondary)' }}>
+                <th style={{ padding: '6px 8px' }}>шаг</th><th style={{ padding: '6px 8px' }}>писем</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.keys(chains.byStep).length === 0 && (
+                <tr style={{ borderTop: '1px solid var(--border-color)' }}><td style={{ padding: '6px 8px' }} colSpan={2}>сегодня ничего</td></tr>
+              )}
+              {Object.entries(chains.byStep).map(([step, n]) => (
+                <tr key={step} style={{ borderTop: '1px solid var(--border-color)' }}>
+                  <td style={{ padding: '6px 8px' }}>{step}</td><td style={{ padding: '6px 8px' }}>{n}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {Object.keys(chains.skipped).length > 0 && (
+            <p style={{ color: 'var(--text-secondary)', fontSize: '.8rem', marginTop: '.5rem' }}>
+              Пропущены: {Object.entries(chains.skipped).map(([k, n]) => `${SKIP_LABEL[k] ?? k} — ${n}`).join(' · ')}
+            </p>
+          )}
+        </section>
       )}
       <h1 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem' }}>Лиды ({leads.length})</h1>
       <div style={{ display: 'flex', gap: 12, marginBottom: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>

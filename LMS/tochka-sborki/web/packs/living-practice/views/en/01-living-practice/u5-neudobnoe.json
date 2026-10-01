@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-living-practice",
+  "unit": "u5-neudobnoe",
+  "locale": "en",
+  "title": "The uncomfortable: what to do when it surfaces",
+  "sourceHash": "sha256:72dedf5dd82def6e16e5feb3e82eaf41fda7d8ed220a9bd5193d81b135bce405",
+  "outline": [
+    {
+      "heading": "The thing that makes practice do anything at all",
+      "points": [
+        {
+          "text": "Practice removes noise.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What showed up once somebody finally asked",
+      "points": [
+        {
+          "text": "Britton, Lindahl, Cooper, Canby and Palitsky (Clinical Psychological Science, 2021) — 96 participants in an eight-week programme.",
+          "origin": "extract"
+        },
+        {
+          "text": "Goldberg, Lam, Britton and Davidson (Psychotherapy Research, 2022) — a US population sample, 434 people with meditation experience:",
+          "origin": "extract"
+        },
+        {
+          "text": "And one detail from there that is rarely retold: people who reported harm were just as glad they had practised as everyone else.",
+          "origin": "extract"
+        },
+        {
+          "text": "The review by Matko and Van Dam (Current Opinion in Psychology, 2026) summarises the spread: 25–87% of practitioners report adverse effects, 3–37% report functional impairment.",
+          "origin": "extract"
+        },
+        {
+          "text": "Unpleasant effects are common, and persistent harm is rare — on the order of a few per cent up to the mid-teens.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The window of tolerance — a second time, and not by accident",
+      "points": [
+        {
+          "text": "difficult experience inside the window is material. Difficult experience past the edge of the window is a signal to stop.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Stop signals",
+      "points": [
+        {
+          "text": "The last item is a reason to leave the learning scenario immediately and reach a living person: a professional or a crisis line.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The words you explain difficulty to yourself with are an intervention",
+      "points": [
+        {
+          "text": "The source is the paper \"The roles and impacts of worldviews in the context of meditation-related challenges\" (Transcultural Psychiatry, 2022).",
+          "origin": "extract"
+        },
+        {
+          "text": "It showed that the interpretive frame itself changes the trajectory and duration of difficulties.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Two ways back",
+      "points": [
+        {
+          "text": "When a session has rocked you but the stop signals haven't appeared, there are two working returns",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Where to go if it persists beyond the session",
+      "points": [
+        {
+          "text": "If the heaviness reaches past the session and holds for several days, ease off practice and contact a living professional.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c5",
+    "c6",
+    "c7"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:73362474f28d3559afe58d9847be52d2b518ca6dcbe0c76d8db25e7513dc6d73",
+        "points": [
+          "Practice acts to remove noise."
+        ]
+      },
+      {
+        "sourceHash": "sha256:1fedebb94a19c0838c1a6dc9e4dddc1e062a52927eebfe8aa9bd110f87bfd5fc",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:438beb5653ff7578ae22ab256dc1c046e3eedfbdaf81dbc265d8ea419bfc480d",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:06b90f0486dbbdcce4f02cc6afd85b4975a28e7f2e813c3e5ee4c4f889e6b203",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:35da4db1c1ec6add024ce860bca9e6ac75e881ebbe0bcdaec03ec6cce136b435",
+        "points": [
+          "A 2022 paper in Transcultural Psychiatry showed the roles and impacts of worldviews in the context of meditation-related challenges.",
+          "The interpretive frame you use changes the trajectory and duration of your difficulties."
+        ]
+      },
+      {
+        "sourceHash": "sha256:0a7b775bdb5b8a1dcdd11937d5d2b24edbfb5b5b959825d2a26f4d41c3019007",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:9d01aa44ea867e75fbf9ed1f67de121a77dc0e7d9a04986aa2318f7dc953c818",
+        "points": [
+          "If heaviness lasts for several days after your session, ease off your practice and contact a living professional."
+        ]
+      }
+    ]
+  }
+}

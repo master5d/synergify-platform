@@ -9,6 +9,8 @@ import { LlmError, BadRequestError } from './errors.js'
 import { generateProse } from './prose.js'
 import { classifySkin } from './skin.js'
 import { classifyDemand, draftBrief } from './demand.js'
+import { rewriteExample } from './interest.js'
+import { classifyTaskRoute, parseTaskRouteBody } from './task-route.js'
 
 export function createApp(env: ServiceEnv): Hono {
   const app = new Hono()
@@ -34,6 +36,12 @@ export function createApp(env: ServiceEnv): Hono {
   }))
   app.post('/demand/brief', run(env, async (body) =>
     draftBrief(body.topicLabel, body.quotes, body.catalog, env, env.fetchImpl)))
+  app.post('/interest-example', run(env, async (body) => rewriteExample(body, env, env.fetchImpl)))
+  // Русло задачи онбординга: только сопоставление текста с присланным закрытым каталогом.
+  app.post('/task-route/classify', run(env, async (body) => {
+    const { text, catalog } = parseTaskRouteBody(body)
+    return classifyTaskRoute(text, catalog, env, env.fetchImpl)
+  }))
 
   return app
 }

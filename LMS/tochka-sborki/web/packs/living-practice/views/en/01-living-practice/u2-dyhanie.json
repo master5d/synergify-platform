@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-living-practice",
+  "unit": "u2-dyhanie",
+  "locale": "en",
+  "title": "Breath: the anchor you always carry",
+  "sourceHash": "sha256:00b86009ae7d73b0bede05a79e1bc67eb56235ced9ec2eb1f2a5cea3107d28d5",
+  "outline": [
+    {
+      "heading": "Why the breath specifically",
+      "points": [
+        {
+          "text": "Of all anchors for attention, breath is the most studied and the least risky.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "\"More\" does not mean \"better\"",
+      "points": [
+        {
+          "text": "The only study found that compared doses directly is Fincham, Mavor and Dritschel (Mindfulness, 2023; an online dose-ranging randomised trial).",
+          "origin": "extract"
+        },
+        {
+          "text": "All four conditions improved, and there was no significant difference by dose.",
+          "origin": "extract"
+        },
+        {
+          "text": "The honest conclusion is single: the field gives no dose–response curve with a threshold of \"so many minutes\".",
+          "origin": "extract"
+        },
+        {
+          "text": "Because the list of risk factors for adverse effects includes rising intensity and retreats (review by Matko and Van Dam, Current Opinion in Psychology, 2026).",
+          "origin": "extract"
+        },
+        {
+          "text": "10–20 minutes, with a ceiling for all eight weeks of no more than 30–45 minutes per session. No home retreats, no days of silence, no \"hundred days in a row\".",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What to do with a wandering mind",
+      "points": [
+        {
+          "text": "One caveat you'll need later: the breath does not need fixing.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A missed day",
+      "points": [
+        {
+          "text": "A skipped day is not a failure.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:bf901bc2f68c03287a99a2403d5fc1226b7ea5071a0c30f6f8b2d2fbcbdc0443",
+        "points": [
+          "Breath is the most studied and least risky anchor for your attention."
+        ]
+      },
+      {
+        "sourceHash": "sha256:ccfe89610e86ed626305b47e17e0e4f8d77528eca1d46d5b6eedae8e30f680c8",
+        "points": [
+          "Fincham, Mavor and Dritschel found that all four conditions improved with no significant difference by dose.",
+          "The field gives no dose-response curve with a threshold of so many minutes.",
+          "Rising intensity and retreats are risk factors for adverse effects according to a review by Matko and Van Dam.",
+          "Practice for 10–20 minutes without exceeding 30–45 minutes per session or attempting home retreats, days of silence, or hundred days in a row."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fd7abbc2534cad9ff533efaecad61c6c80eff307ea8bfdfa12782df3c0362a24",
+        "points": [
+          "You will need to remember later that the breath does not need fixing."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fe539c54b2db8e5d54a6bc988d32ff4f681e67c79efd73a5afee747db475ec8a",
+        "points": [
+          "You have not failed if you skip a day."
+        ]
+      }
+    ]
+  }
+}

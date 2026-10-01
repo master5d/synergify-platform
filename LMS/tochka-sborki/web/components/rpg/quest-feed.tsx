@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import type { ZoneVM } from '@/lib/rpg/types'
 import type { Locale } from '@/lib/intake/types'
+import { questStepLabel } from '@/lib/intake/task-route-content'
 
 export function QuestFeed({ zones, accent, locale }: { zones: ZoneVM[]; accent: string; locale: Locale }) {
   const cont = locale === 'en' ? 'Continue →' : 'Продолжить →'
@@ -26,6 +27,11 @@ export function QuestFeed({ zones, accent, locale }: { zones: ZoneVM[]; accent: 
                 {z.questTitle}{z.isNiche && <span style={{ marginLeft: '.5rem', fontFamily: 'var(--font-mono)', fontSize: '.55rem', textTransform: 'uppercase', letterSpacing: '.1em', color: '#000', background: accent, borderRadius: 3, padding: '1px 6px' }}>{nicheLabel}</span>}
               </Link>
               <div style={{ fontSize: '.72rem', color: 'var(--text-secondary)', marginTop: '.15rem' }}>{z.moduleTitle}{z.durationLabel ? ` · ${z.durationLabel}` : ''}</div>
+              {z.routeSteps?.map(s => (
+                <div key={s.index} style={{ fontSize: '.72rem', color: 'var(--text-primary)', marginTop: '.2rem' }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', color: accent }}>{questStepLabel(s.index, locale)}</span> · {s.title}
+                </div>
+              ))}
               {cur && <Link href={z.href} style={{ display: 'inline-block', marginTop: '.6rem', background: accent, color: '#000', fontWeight: 900, fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.06em', padding: '.45rem 1rem', borderRadius: 6, textDecoration: 'none' }}>{cont}</Link>}
             </div>
           </div>

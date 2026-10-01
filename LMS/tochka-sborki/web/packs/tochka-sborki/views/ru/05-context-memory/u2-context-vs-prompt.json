@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "05-context-memory",
+  "unit": "u2-context-vs-prompt",
+  "locale": "ru",
+  "title": "Контекст vs Промпт",
+  "sourceHash": "sha256:fe5a525dbe23b669efa0107ce51b33b3d53ac90a0cd2a9f8d69da8a0bbceed37",
+  "outline": [
+    {
+      "heading": "Разделение контекста и промпта",
+      "points": [],
+      "children": [
+        {
+          "heading": "Как разделять явно",
+          "points": [
+            {
+              "text": "Или через XML-теги",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Где хранить стабильный контекст",
+          "points": [],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4",
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:759ea195d4ea09d42e47d6fef67772bd742b4966239dd66d2fa41182fbd8a59f",
+        "points": [
+          "Для явного разделения ты можешь использовать XML-теги."
+        ]
+      }
+    ]
+  }
+}

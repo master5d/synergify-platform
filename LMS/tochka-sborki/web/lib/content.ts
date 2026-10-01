@@ -58,11 +58,22 @@ export interface ModuleMeta {
   description: string
   duration: string
   level: number
+  /** Продвинутый модуль: в списках модулей показывается значок «advanced» (components/advanced-badge.tsx). */
+  advanced?: boolean
   units: { slug: string; title: string }[]
   layout?: UnitLayout
   objectives?: Objective[]
   checks?: SelfCheckItem[]
+  /** Pretest в активации (LMS#20): явный выбор автора `{ "<unit>": ["c3"] }`, до двух id; `[]` — выключен
+   *  у урока. Нет ключа урока — первый вопрос юнита, размеченный в концепте (lib/pedagogy/pretest.ts). */
+  pretest?: Record<string, string[]>
+  /** Существенная переработка модуля (ставит автор, не правка опечаток). Нет поля = версия 1.
+   *  Будит письмо «обновление навыка» выпускникам (workers/src/lib/email-chains.ts, шаг update). */
+  revision?: ModuleRevision
 }
+
+/** Ревизия модуля: version ≥ 2, date — день выхода (YYYY-MM-DD), summary — что изменилось, на языке файла. */
+export interface ModuleRevision { version: number; date: string; summary: string }
 
 /** Разметка модуля с дефолтом. Единственная точка решения — не считать по месту. */
 export function unitLayout(meta: Pick<ModuleMeta, 'layout'>): UnitLayout {
@@ -73,6 +84,7 @@ export interface NavigationItem {
   slug: string
   title: string
   level: number
+  advanced?: boolean
   type: 'lesson' | 'module'
   order: number
   units?: { slug: string; title: string }[]
@@ -170,6 +182,7 @@ export function getNavigationItems(locale = 'ru'): NavigationItem[] {
         slug: entry.name,
         title: meta.title,
         level: meta.level,
+        advanced: meta.advanced === true,
         order: meta.module,
         type: 'module',
         units: meta.units,

@@ -2,6 +2,7 @@
 // Форма эталона: те же 8 niche-ключей (движок и intake ими оперируют), но флейвор
 // у курса практики один и нейтральный — тема круга, без выдуманных «боссов» по нишам.
 import type { NicheFlavor } from '@/lib/dungeon/types'
+import type { Bi } from '@/lib/rpg/types'
 
 const CIRCLE_FLAVOR: NicheFlavor = {
   dungeonName: { ru: 'Тихая Комната', en: 'The Quiet Room' },
@@ -27,4 +28,17 @@ export const FLAVOR_BANK: Record<string, NicheFlavor> = {
   service: CIRCLE_FLAVOR,
   tech: CIRCLE_FLAVOR,
   other: CIRCLE_FLAVOR,
+}
+
+// niche (F2 value) -> readable slot word for {niche} substitution (флейвор, не маршрутизация).
+// Locative-optimized for the dominant "в {niche}" phrasing; `other`/unknown/null intentionally
+// absent -> NICHE_FALLBACK (lib/cs/applied-challenge.ts).
+export const NICHE_SLOT: Record<string, Bi> = {
+  coach:     { ru: 'коучинге',   en: 'coaching' },
+  massage:   { ru: 'массаже',    en: 'massage' },
+  astrology: { ru: 'астрологии', en: 'astrology' },
+  content:   { ru: 'контенте',   en: 'content' },
+  ecommerce: { ru: 'e-commerce', en: 'e-commerce' },
+  service:   { ru: 'услугах',    en: 'services' },
+  tech:      { ru: 'разработке', en: 'tech' },
 }

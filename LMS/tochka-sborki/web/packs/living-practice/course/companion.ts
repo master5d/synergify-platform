@@ -7,7 +7,7 @@
 interface Bi { ru: string; en: string }
 
 export interface CompanionData {
-  /** Берёт ли компаньон профиль анкеты: скин, нишу, запрос, режим, психотип, прикладное задание. */
+  /** Берёт ли компаньон профиль анкеты: скин, нишу, запрос, режим, стиль отношений, прикладное задание. */
   usesProfile: boolean
   /** Включать тёплый-но-твёрдый контракт наставника из lib/mentor-persona. */
   mentorPersona: boolean

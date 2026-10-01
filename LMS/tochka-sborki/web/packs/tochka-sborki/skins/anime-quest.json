@@ -40,6 +40,14 @@
     "09-ai-notebook": {
       "ru": "Зал Доказанных Свитков",
       "en": "Hall of Proven Scrolls"
+    },
+    "10-model-training": {
+      "ru": "Кузница Весов",
+      "en": "Forge of Weights"
+    },
+    "11-second-brain": {
+      "ru": "Хранилище Памяти",
+      "en": "Vault of Memory"
     }
   },
   "questTitles": {
@@ -82,9 +90,31 @@
     "09-ai-notebook": {
       "ru": "Извлеки Истину из Источников!",
       "en": "Extract Truth from the Sources!"
+    },
+    "10-model-training": {
+      "ru": "Выкуй Свою Модель!",
+      "en": "Forge Your Own Model!"
+    },
+    "11-second-brain": {
+      "ru": "Разбуди Свой Второй Мозг!",
+      "en": "Awaken Your Second Brain!"
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "Прежде чем выйти на арену, герой учит язык этого мира! Шесть волшебных слов — и ни один босс не собьёт тебя с толку!",
+        "en": "Before stepping into the arena, a hero learns the language of this world! Six magic words — and no boss will ever confuse you!"
+      },
+      "mentorHint": {
+        "ru": "Слово, которое ты понял, — это уже оружие в твоём инвентаре!",
+        "en": "A word you understand is already a weapon in your inventory!"
+      },
+      "outro": {
+        "ru": "Словарь героя собран! Теперь ты понимаешь, о чём шепчутся на арене. Вперёд — за своей идеей-призраком!",
+        "en": "Your hero's glossary is complete! Now you understand what the arena whispers about. Onward — to catch your Ghost-Idea!"
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "Мир AI ждёт! Твой квест начинается, герой! Первое испытание — поймать призрачную идею, что станет твоей путеводной звездой!",
@@ -477,6 +507,20 @@
         "en": "Your training here is complete! Now go and automate your destiny! New challenges are already waiting for you beyond the horizon!"
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Новая техника: призыв по расписанию! Твой pipeline будет выходить на бой сам, каждое утро, и не станет дважды бить уже поверженного врага.",
+        "en": "A new technique: the scheduled summon! Your pipeline will enter battle on its own every morning and never strike an already defeated foe twice."
+      },
+      "mentorHint": {
+        "ru": "Настоящий мастер помнит каждый выигранный бой. Без этой памяти даже сильнейшая техника тратит силы впустую.",
+        "en": "A true master remembers every battle won. Without that memory even the strongest technique wastes its power."
+      },
+      "outro": {
+        "ru": "Техника освоена! Твой pipeline сражается, пока ты спишь, и утром ждёт тебя с трофеями.",
+        "en": "Technique mastered! Your pipeline fights while you sleep and greets you in the morning with the spoils."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Твой AI-агент уже силён, но это лишь тень его истинной мощи! Пришло время пробудить его скрытый потенциал и выйти за рамки простого чата!",
@@ -545,6 +589,20 @@
       "outro": {
         "ru": "ПОБЕДА! Ты прошёл этот путь и создал не просто код, а настоящего боевого AI-агента! Твоя легенда только начинается!",
         "en": "VICTORY! You have walked the path and created not just code, but a true combat AI agent! Your legend is just beginning!"
+      }
+    },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Перед новой аркой герой всегда возвращается в додзё! Пора проверить своё снаряжение: где затупился клинок, где порвался плащ?",
+        "en": "Before a new arc, the hero always returns to the dojo! Time to check your gear: where has the blade dulled, where has the cloak torn?"
+      },
+      "mentorHint": {
+        "ru": "Не чини всё сразу! Три приёма, отточенных до блеска, сильнее двадцати недоученных.",
+        "en": "Don't fix everything at once! Three moves polished to perfection beat twenty half-learned ones."
+      },
+      "outro": {
+        "ru": "Снаряжение в порядке, три слабых места закрыты! Теперь ты готов к следующей арке — к настоящим агентам!",
+        "en": "Your gear is in order, three weak spots are sealed! Now you're ready for the next arc — real agents!"
       }
     },
     "08-agent-engineering/u1-activation": {
@@ -699,6 +757,146 @@
       "outro": {
         "ru": "Победа! Ты больше не тонешь в роликах: ты извлекаешь знание с цитатами.",
         "en": "Victory! You no longer drown in videos: you extract knowledge with quotes."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Новая арка! Заглянем внутрь противника, с которым ты сражался весь курс: токены, внимание, предсказание следующего хода.",
+        "en": "A new arc! We look inside the opponent you fought all course long: tokens, attention, predicting the next move."
+      },
+      "mentorHint": {
+        "ru": "Знай технику врага: он бьёт правдоподобно, а не правдиво.",
+        "en": "Know the enemy technique: it strikes plausibly, not truthfully."
+      },
+      "outro": {
+        "ru": "Броня снята! Теперь ты видишь, откуда берётся уверенная ошибка.",
+        "en": "Armor off! Now you see where a confident mistake comes from."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "Настоящая тренировка — не выбор меча, а тысячи отработанных приёмов. Сегодня твои приёмы — это данные.",
+        "en": "Real training is not choosing a sword but thousands of practiced moves. Today your moves are data."
+      },
+      "mentorHint": {
+        "ru": "Кривой пример, повторённый сто раз, — это кривой удар в бою.",
+        "en": "A crooked example repeated a hundred times is a crooked strike in battle."
+      },
+      "outro": {
+        "ru": "Цикл освоен! Ты знаешь, куда возвращаться после поражения: к данным.",
+        "en": "Cycle mastered! You know where to return after a defeat: to the data."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Не каждый бой требует новой техники. Сначала слово, потом контекст, потом союзники — и только потом перековка.",
+        "en": "Not every fight needs a new technique. First words, then context, then allies — and only then reforging."
+      },
+      "mentorHint": {
+        "ru": "LoRA — лёгкий доспех поверх старого: снял и надел, когда нужно.",
+        "en": "LoRA is light armor over the old one: take it off and put it on when needed."
+      },
+      "outro": {
+        "ru": "Отлично! Теперь ты выбираешь перековку осознанно, а не от отчаяния.",
+        "en": "Excellent! Now you choose reforging deliberately, not out of despair."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Победа на тренировочной арене ещё не победа. Проверим бойца на соперниках, которых он не видел.",
+        "en": "A win in the training arena is not yet a win. We test the fighter against opponents it has never seen."
+      },
+      "mentorHint": {
+        "ru": "Выученный ответ — не сила. Сила — это новый вопрос, взятый чисто.",
+        "en": "A memorized answer is not power. Power is a new question taken cleanly."
+      },
+      "outro": {
+        "ru": "Есть! У тебя есть честная арена: holdout, критерии, сравнение.",
+        "en": "Yes! You have an honest arena: holdout, criteria, comparison."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Финальная битва арки: ты сам сдвигаешь веса малой модели на бесплатной видеокарте!",
+        "en": "The arc’s final battle: you shift a small model’s weights yourself on a free GPU!"
+      },
+      "mentorHint": {
+        "ru": "Замерь «до» ещё до боя. Без него «после» — просто хвастовство.",
+        "en": "Measure \"before\" before the fight. Without it, \"after\" is just bragging."
+      },
+      "outro": {
+        "ru": "ПОБЕДА! Ты знаешь, когда агенту хватит слова, а когда модель стоит учить.",
+        "en": "VICTORY! You know when a word is enough for the agent and when a model is worth training."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Новая арка! Герой заводит хранилище, которое никто не отнимет: память в своих свитках.",
+        "en": "A new arc! The hero founds a vault no one can take away: memory in their own scrolls."
+      },
+      "mentorHint": {
+        "ru": "Спроси архив — и потребуй, из какого свитка ответ.",
+        "en": "Ask the archive — and demand which scroll the answer came from."
+      },
+      "outro": {
+        "ru": "Хранилище открыто! Теперь память работает на тебя, а не на чужой сервис.",
+        "en": "The vault is open! Now memory works for you, not for someone else’s service."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Призываем связь на расстоянии! Твой напарник отвечает, даже когда ты в пути.",
+        "en": "We summon a long-range link! Your partner answers even when you are on the road."
+      },
+      "mentorHint": {
+        "ru": "Дверь открыта — поставь стража: говорить может только хозяин.",
+        "en": "The door is open — post a guard: only the master may speak."
+      },
+      "outro": {
+        "ru": "Связь установлена! Напарник на связи, а чужие голоса остаются за дверью.",
+        "en": "Link established! Your partner is within reach, and strangers stay outside the door."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Техники передаются из рук в руки! Но это свитки, а не новая сила внутри.",
+        "en": "Techniques pass from hand to hand! But they are scrolls, not a new power inside."
+      },
+      "mentorHint": {
+        "ru": "Навык живёт, пока свиток у тебя. Сжёг свиток — техника ушла.",
+        "en": "A skill lives while the scroll is yours. Burn the scroll — the technique is gone."
+      },
+      "outro": {
+        "ru": "Свиток прочитан! Ты знаешь, что на самом деле передаёт наставник.",
+        "en": "Scroll read! You know what a mentor really hands over."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "Осторожно, ловушка! Враг прячет приказы внутри писем и чужих свитков.",
+        "en": "Careful, a trap! The enemy hides orders inside letters and borrowed scrolls."
+      },
+      "mentorHint": {
+        "ru": "Любой текст снаружи — не приказ. Приказы отдаёшь только ты.",
+        "en": "Any text from outside is not an order. Only you give orders."
+      },
+      "outro": {
+        "ru": "Ловушка раскрыта! Шесть правил защиты стоят на страже.",
+        "en": "Trap revealed! Six defence rules stand guard."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Финальная сборка! Память, связь и первый переданный навык — в одном отряде.",
+        "en": "The final assembly! Memory, a link and the first passed-on skill — in one party."
+      },
+      "mentorHint": {
+        "ru": "Три проверки — три печати. Без них отряд не выходит в поход.",
+        "en": "Three checks — three seals. Without them the party does not set out."
+      },
+      "outro": {
+        "ru": "Второй мозг пробуждён! Он твой, он на связи, и каждый новый свиток делает его сильнее.",
+        "en": "The second brain awakens! It is yours, within reach, and every new scroll makes it stronger."
       }
     }
   }

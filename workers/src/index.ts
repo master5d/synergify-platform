@@ -1,20 +1,29 @@
 import type { Env } from './lib/types'
 import { handleFeedback } from './handlers/feedback'
+import { handleCare, handleCareConfig } from './handlers/care'
 import { handleSendLink, handleVerify, handleMe, handleLogout } from './handlers/auth'
 import { handleTelegramAuth } from './handlers/telegram-auth'
 import { handleOAuthStart, handleOAuthCallback } from './handlers/oauth'
 import { handleTelegramWebhook } from './handlers/telegram-webhook'
 import { runDailyNudge } from './handlers/nudge-cron'
+import { runEmailChains } from './handlers/email-chain-cron'
+import { handleEmailChainDryRun } from './handlers/email-chain-dry-run'
+import { handleEmailUnsubscribe } from './handlers/email-unsubscribe'
 import { handleSupportCheckout, handleProductCheckout } from './handlers/checkout'
 import { handleStripeWebhook } from './handlers/stripe-webhook'
 import { handleView, handleComplete, handleList } from './handlers/progress'
+import { handleCheckAnswer } from './handlers/check-reviews'
 import { handleMe as handleIntakeMe, handleProgress as handleIntakeProgress, handleSubmit as handleIntakeSubmit } from './handlers/intake'
 import { runDemandRadar, listBriefs, listSignals, decideBrief } from './handlers/demand'
+import { handleTaskRoute } from './handlers/task-route'
 import { listLeads, syncContacts } from './handlers/leads'
 import { getStats } from './handlers/stats'
+import { spacedReviewEnabled } from './lib/check-reviews'
 import { handleLeadCapture } from './handlers/leads-capture'
 import { handleAlumniList, handleAlumniMe, handleAlumniOptin } from './handlers/alumni'
 import { handleAdmission, handleAcademyMe } from './handlers/academy'
+import { handleCertificateCode, handleCertificateVerify } from './handlers/certificate'
+import { handleInterestExample } from './handlers/interest-example'
 import { requireAuth, requireOwner } from './middleware'
 
 const ALLOWED_ORIGINS = [
@@ -54,6 +63,10 @@ export default {
 
       if (path === '/api/feedback' && method === 'POST') {
         response = await handleFeedback(request, env)
+      } else if (path === '/api/care' && method === 'POST') {
+        response = await handleCare(request, env, ctx)
+      } else if (path === '/api/care' && method === 'GET') {
+        response = handleCareConfig()
       } else if (path === '/api/leads/capture' && method === 'POST') {
         response = await handleLeadCapture(request, env, ctx)
       } else if (path === '/api/auth/send-link' && method === 'POST') {
@@ -68,6 +81,8 @@ export default {
         response = await handleOAuthCallback(request, env)
       } else if (path === '/api/telegram/webhook' && method === 'POST') {
         response = await handleTelegramWebhook(request, env)
+      } else if (path === '/api/email/unsubscribe' && (method === 'GET' || method === 'POST')) {
+        response = await handleEmailUnsubscribe(request, env)
       } else if (path === '/api/checkout/support' && method === 'POST') {
         response = await handleSupportCheckout(request, env)
       } else if (path === '/api/checkout/product' && method === 'POST') {
@@ -81,9 +96,12 @@ export default {
       } else if (path === '/api/progress/view' && method === 'POST') {
         response = await handleView(request, env)
       } else if (path === '/api/progress/complete' && method === 'POST') {
-        response = await handleComplete(request, env)
+        response = await handleComplete(request, env, ctx)
       } else if (path === '/api/progress/list' && method === 'GET') {
         response = await handleList(request, env)
+      } else if (path === '/api/checks/answer' && method === 'POST') {
+        // Интервальный повтор (Педагогика 1): за флагом SPACED_REVIEW_ENABLED (включён 2026-09-29, миграция 0022 применена).
+        response = await handleCheckAnswer(request, env)
       } else if (path === '/api/intake/me' && method === 'GET') {
         const auth = await requireAuth(request, env)
         response = auth instanceof Response ? auth : await handleIntakeMe(env.DB, auth.sub)
@@ -96,6 +114,16 @@ export default {
           try { body = await request.json() } catch { return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders } }) }
           response = await handleIntakeProgress(env.DB, auth.sub, { answers: body.answers ?? {}, currentStep: body.currentStep ?? 0, instrumentVersion: body.instrumentVersion === 2 ? 2 : 1 })
         }
+      } else if (path === '/api/intake/task-route' && method === 'POST') {
+        // Русло задачи онбординга: сопоставление текста с закрытым каталогом (llm-service), исход — всегда 200.
+        const auth = await requireAuth(request, env)
+        if (auth instanceof Response) {
+          response = auth
+        } else {
+          let body: { text?: unknown; role?: unknown }
+          try { body = await request.json() } catch { return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders } }) }
+          response = await handleTaskRoute(body, env, fetch, { cache: caches.default, userId: auth.sub })
+        }
       } else if (path === '/api/intake/submit' && method === 'POST') {
         const auth = await requireAuth(request, env)
         if (auth instanceof Response) {
@@ -107,6 +135,19 @@ export default {
           // Env структурно совместим (содержит все четыре поля LlmEnv), поэтому передаём env целиком.
           response = await handleIntakeSubmit(env.DB, auth.sub, { answers: body.answers ?? {}, locale: body.locale }, env)
           if (response.ok) ctx.waitUntil(runDemandRadar(env, auth.sub, body.answers ?? {}))
+        }
+      } else if (path === '/api/interest-example' && method === 'POST') {
+        // Пример концепт-фазы под сферу ученика (intake LMS#8): только вошедшему, интерес — из его анкеты.
+        const auth = await requireAuth(request, env)
+        if (auth instanceof Response) {
+          response = auth
+        } else {
+          let body: unknown
+          try { body = await request.json() } catch { return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders } }) }
+          response = await handleInterestExample(env.DB, auth.sub, body, env, {
+            cache: caches.default,
+            waitUntil: p => ctx.waitUntil(p),
+          })
         }
       } else if (path === '/api/alumni' && method === 'GET') {
         const auth = await requireAuth(request, env)
@@ -124,9 +165,13 @@ export default {
           response = await handleAlumniOptin(env.DB, auth.sub, body)
         }
       } else if (path === '/api/academy/admission' && method === 'POST') {
-        response = await handleAdmission(request, env)
+        response = await handleAdmission(request, env, ctx)
       } else if (path === '/api/academy/me' && method === 'GET') {
         response = await handleAcademyMe(request, env)
+      } else if (path === '/api/certificate/code' && method === 'GET') {
+        response = await handleCertificateCode(request, env)
+      } else if (path === '/api/certificate/verify' && method === 'GET') {
+        response = await handleCertificateVerify(request, env)
       } else if (path === '/api/admin/leads' && method === 'GET') {
         const auth = await requireOwner(request, env)
         response = auth instanceof Response ? auth
@@ -139,7 +184,10 @@ export default {
         response = auth instanceof Response ? auth : await syncContacts(env)
       } else if (path === '/api/admin/stats' && method === 'GET') {
         const auth = await requireOwner(request, env)
-        response = auth instanceof Response ? auth : await getStats(env.DB)
+        response = auth instanceof Response ? auth : await getStats(env.DB, undefined, { spacedReview: spacedReviewEnabled(env) })
+      } else if (path === '/api/admin/email-chains/dry-run' && method === 'GET') {
+        const auth = await requireOwner(request, env)
+        response = auth instanceof Response ? auth : await handleEmailChainDryRun(env, url)
       } else if (path === '/api/admin/content-demand/briefs' && method === 'GET') {
         const auth = await requireOwner(request, env)
         response = auth instanceof Response ? auth : await listBriefs(env.DB, url.searchParams.get('status') ?? undefined)
@@ -173,6 +221,8 @@ export default {
   },
 
   async scheduled(_event: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
-    ctx.waitUntil(runDailyNudge(env))
+    // Два независимых прогона: падение одного не роняет другой.
+    ctx.waitUntil(runDailyNudge(env).catch(e => console.error('daily nudge failed', e)))
+    ctx.waitUntil(runEmailChains(env).catch(e => console.error('email chains failed', e)))
   },
 }

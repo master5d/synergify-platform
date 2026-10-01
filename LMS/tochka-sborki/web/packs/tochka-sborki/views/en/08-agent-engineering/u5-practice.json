@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "08-agent-engineering",
+  "unit": "u5-practice",
+  "locale": "en",
+  "title": "Design Your Clone",
+  "sourceHash": "sha256:13efff2d9bf9fe96bdcc42d038ef86a9f8446a444c47d54e148fea5448c13fbc",
+  "outline": [
+    {
+      "heading": "",
+      "points": [
+        {
+          "text": "Agent specification template",
+          "origin": "extract"
+        },
+        {
+          "text": "Real example of a filled-out spec — a simplified version of ENERV ingest:",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The clone's other half: the charter",
+      "points": [
+        {
+          "text": "A charter turns it into a stable co-thinking partner: tomorrow, a month from now, in someone else's hands, it holds the same frame.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c12",
+    "c13"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:44b996bd759a3aa5b12d95c6e9158cf760e389e76e4087937b417bfce0f8b478",
+        "points": [
+          "You use an agent specification template.",
+          "There is a real example of a filled-out spec for a simplified version of ENERV ingest."
+        ]
+      },
+      {
+        "sourceHash": "sha256:3c987a50dcc5ffa35d24dc5db6dba543221fa5aae8583395a1dd0ebb37314258",
+        "points": [
+          "A charter turns it into a stable co-thinking partner that holds the same frame over time or in someone else's hands."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u1-your-own-brain",
+  "locale": "en",
+  "title": "A second brain that stays with you",
+  "sourceHash": "sha256:0ede05c7c0ccbcb6e6afd04b52dde6a90a8d5ae0b772b6373abcc4841d5a4b52",
+  "outline": [
+    {
+      "heading": "What a second brain means in this module",
+      "points": [
+        {
+          "text": "In this module, a second brain is a folder of files that your agent reads and adds to when you ask.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Three layers",
+      "points": [
+        {
+          "text": "A second brain rests on three layers: memory, an agent and a channel.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What \"stays with you\" means",
+      "points": [
+        {
+          "text": "Three \"yes\" answers — the second brain is yours.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The archive as a conversation partner",
+      "points": [
+        {
+          "text": "The main shift is not storing more but asking differently.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What goes into memory and what does not",
+      "points": [
+        {
+          "text": "Put in: decisions and their reasons, lessons after mistakes, notes, meeting outcomes, rough thoughts.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2",
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:dda325bc2f0efac47ba8bfa0c036e54cc53dcbc53f15d538b2aeb882779fc13e",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:ad36466baf9d275abf479f95472f0a39ab1b5f145ba3f3b31dbf2b9979989a9e",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:9f94f59d92f1aa54dc2fa680b97d8f6d4a31f1b24ca67ea911455dfa7e0796b1",
+        "points": [
+          "The second brain is yours if you have three yes answers."
+        ]
+      },
+      {
+        "sourceHash": "sha256:58aa4c4d5f720029854de642d26a9d0c738fc2d15bc6ebeb9ea25d160186394a",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:5dd067237037dd26ab730a6a113e72ae66da6278e6a5f253297557369d05b733",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

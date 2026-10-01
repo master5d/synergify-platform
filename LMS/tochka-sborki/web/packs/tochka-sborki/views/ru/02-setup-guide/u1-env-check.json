@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-setup-guide",
+  "unit": "u1-env-check",
+  "locale": "ru",
+  "title": "Проверка окружения",
+  "sourceHash": "sha256:a2c37a9cb1788f5f8ea5346e190b036c891d4f21f835c6b2662c080b913dae42",
+  "outline": [
+    {
+      "heading": "Что нужно для агентного кодирования",
+      "points": [
+        {
+          "text": "Думай об этом как о распаковке.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Как проверить окружение одной командой",
+          "points": [
+            {
+              "text": "Если ошибка — какой инструмент не найден, тот и нужно установить.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Что скачать если не установлено",
+          "points": [],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:94efa2ffb362463f27fb50955299416b1c46698e6e3e9789018b3c84ab91e8a2",
+        "points": [
+          "Воспринимай этот процесс как обычную распаковку."
+        ]
+      },
+      {
+        "sourceHash": "sha256:958fb53c3bc2c7e7e85f3535a6bfa8bf0aeb0050f89dbaf6d02eb6d89d7f6d11",
+        "points": [
+          "Если возникнет ошибка, тебе нужно будет установить тот инструмент, который не удалось найти."
+        ]
+      }
+    ]
+  }
+}

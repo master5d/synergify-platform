@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { ModuleMeta } from '@/lib/content'
 import type { Locale } from '@/lib/dictionaries'
 import { ObjectivesDisclosure } from './module-objectives'
+import { AdvancedBadge } from './advanced-badge'
 
 // Generic curriculum tree: module → units. Data-driven from getAllModules, so any course
 // renders its full syllabus without bespoke markup.
@@ -20,6 +21,7 @@ export function SyllabusTree({ modules, locale }: { modules: ModuleMeta[]; local
                   {String(mi).padStart(2, '0')}
                 </span>
                 {m.title}
+                {m.advanced && <AdvancedBadge />}
               </h2>
             </Link>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>

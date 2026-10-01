@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-prompt-engineering",
+  "unit": "u5-practice",
+  "locale": "ru",
+  "title": "Профессиональный промпт",
+  "sourceHash": "sha256:540b80b2efb7dabf97f5a543bd3d7d6218f1fcc566efa54be2d45a47e731a8df",
+  "outline": [
+    {
+      "heading": "Мета-промптинг: промпт, который пишет промпты",
+      "points": [
+        {
+          "text": "Если не знаешь, с чего начать — попроси Claude написать промпт за тебя",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "Шаблон переиспользуемого ассистента",
+          "points": [
+            {
+              "text": "Для задач, которые повторяются (Claude Project, Gemini Gem, Claude Code Skill)",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Чеклист перед отправкой",
+          "points": [],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c10",
+    "c11",
+    "c12"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:d91a88583bc61e7b9ca8491c25b5368f563a25c3129e91ba5039ac0f611cf91d",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:b0aaa16f0cb4fbca686c6fac55ea1dcdf9830ee76e062833a467bffcffb9fcbf",
+        "points": [
+          "Используй этот подход для задач, которые повторяются в Claude Project, Gemini Gem или Claude Code Skill."
+        ]
+      }
+    ]
+  }
+}

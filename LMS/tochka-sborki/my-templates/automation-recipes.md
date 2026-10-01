@@ -2,7 +2,7 @@
 
 > Три рецепта автоматизаций, которые дают ощутимую экономию времени (5–15 ч/нед). Все построены на паттерне **Trigger → Action** (см. Meeting 5).
 
-Инструмент по умолчанию — [Make.com](https://make.com) (бесплатные 1000 operations/мес, 10000 по промо-ссылкам). Альтернативы: Zapier, n8n, или Claude Code + hooks + MCP-серверы.
+Шаги рецептов расписаны для [Make.com](https://make.com) (бесплатные 1000 operations/мес) — это самый быстрый старт без кода. Альтернативы: Zapier; n8n на своём железе (бесплатно, self-hosted); или без облачного сервиса вовсе — планировщик ОС (cron / schtasks) запускает агента в неинтерактивном режиме, как в модуле 06, юнит u5 «Pipeline, который запускается сам».
 
 ---
 
@@ -201,7 +201,7 @@ Notes:
 
 | Компонент Make.com | Аналог в Claude Code |
 | --- | --- |
-| Trigger: Watch Sheet | Hook на schedule / MCP Google Sheets |
+| Trigger: Watch Sheet | Расписание ОС (cron / schtasks) запускает `claude -p` и проверяет таблицу через MCP Google Sheets (модуль 06/u5). Hook сюда не подходит: он срабатывает на события внутри сессии агента, а не по часам |
 | Action: ChatGPT | Claude Code сессия с промптом |
 | Action: Gmail | MCP Gmail server |
 | Action: LinkedIn | MCP LinkedIn / web-scraping |

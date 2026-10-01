@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-stack-selection",
+  "unit": "u3-behind-gfw",
+  "locale": "ru",
+  "title": "Behind Great Firewall: без VPN",
+  "sourceHash": "sha256:e871f8c2b54ccecd5bea04f4ce54047ff731953ea6accee0c39281103fa296da",
+  "outline": [
+    {
+      "heading": "⚡ Быстрая установка GFW-стека (одной строкой)",
+      "points": [
+        {
+          "text": "Одна команда ставит LiteLLM-прокси и Aider и пишет готовый конфиг (Cerebras + Gemini Flash).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Архитектура «Behind-GFW»",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Шаг 1: Cerebras (главный free-tier)",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Шаг 2: Google Gemini Flash (backup для долгих задач)",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Шаг 3: LiteLLM gateway",
+      "points": [
+        {
+          "text": "Это «один endpoint для всех провайдеров».",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Шаг 4: Local fallback (llama-server)",
+      "points": [
+        {
+          "text": "На случай если все клауды лягут одновременно (бывает)",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Шаг 5: Подключаем агента",
+      "points": [
+        {
+          "text": "Готово.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c6",
+    "c7",
+    "c8"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:28d57d7b136e5b58628c8632bed60a3b85ef02f89179dc4927cb529e9493e7b3",
+        "points": [
+          "Одной командой ты устанавливаешь LiteLLM-прокси и Aider.",
+          "При этом сразу пишется готовый конфиг для Cerebras и Gemini Flash."
+        ]
+      },
+      {
+        "sourceHash": "sha256:9dd42a57cc741469c75fb8ac03819bce05f1cfdf601f37321a63922403f39690",
+        "points": [
+          "LiteLLM gateway служит одним адресом для всех провайдеров."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2562273f00b4c97614382f68e5d23e847424fc7446f9d894e2a4a21676212a55",
+        "points": [
+          "Local fallback пригодится на случай, если все облачные сервисы перестанут работать одновременно."
+        ]
+      },
+      {
+        "sourceHash": "sha256:ff57e80224dea7edc65f0314028f026e85efbace08fb9e75e86214f7ecdbcb03",
+        "points": [
+          "Теперь все готово."
+        ]
+      }
+    ]
+  }
+}

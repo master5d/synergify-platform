@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-prompt-engineering",
+  "unit": "u3-magic-words",
+  "locale": "en",
+  "title": "Magic words",
+  "sourceHash": "sha256:82f19a4a4494d384604aabe920e1bf8efb8b989a27edcd534f361ca9672459e4",
+  "outline": [
+    {
+      "heading": "Phrases that consistently improve results",
+      "points": [],
+      "children": [
+        {
+          "heading": "Example: with and without magic",
+          "points": [
+            {
+              "text": "The percentages are notional: they show the difference, they weren't measured.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "What does NOT work",
+          "points": [],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c5",
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:bc3a108fff7479c929e6bfcc489081f4011c7388172bc4e532750baa67d46ba0",
+        "points": [
+          "The percentages are notional and show the difference rather than being measured."
+        ]
+      }
+    ]
+  }
+}

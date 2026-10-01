@@ -4,13 +4,17 @@
 // assembles; who the companion is, which course it speaks for, its method and its
 // boundaries come from the active course-pack (lib/course/companion → @pack), so a
 // course never hands its learners another course's companion (intake LMS#16).
-// Profile slots (skin/niche/F3/mode/MBTI/applied challenge) are used only when the
-// pack opts in (COMPANION.usesProfile).
+// Profile slots (skin/niche/F3/mode/applied challenge/relational style) are used only when the
+// pack opts in (COMPANION.usesProfile). MBTI сюда НЕ идёт (Педагогика — риски, intake LMS#20):
+// подгонка обучения под «тип» — meshing-гипотеза learning styles без доказательств (Pashler 2008).
+// Эталон юнита (reference) — только в полном промпте, не в `?q=`-prefill (lib/learn-prompt-reference.ts).
 import type { Mode } from './cs/types'
 import type { Locale } from './dictionaries'
 import type { RelationalStyle } from './intake/types'
+import { normalizeErrorStyle } from './intake/relational-style'
 import { mentorFirmness, mentorFirmnessCompact, mentorStateAdaptation } from './mentor-persona'
 import { COMPANION } from './course/companion'
+import { referenceLines, type UnitReference } from './learn-prompt-reference'
 
 export interface LearnPromptInput {
   locale: Locale
@@ -23,9 +27,49 @@ export interface LearnPromptInput {
   outcome?: string | null    // F3 free text
   mode?: Mode | null
   appliedChallenge?: string | null
-  mbti?: string | null
   relational?: RelationalStyle | null
+  /** Эталон юнита (checks + эталон практики pack'а). Только для buildLearnPrompt; prefill его не несёт. */
+  reference?: UnitReference | null
+  /** 'learn' (по умолчанию) — объяснять по методике курса; 'practice' — «Помоги мне практиковаться». */
+  studyMode?: StudyMode
 }
+
+export type StudyMode = 'learn' | 'practice'
+
+/**
+ * Режим «Помоги мне практиковаться» (intake LMS#18, Coursera Coach). Правила — движка, а не
+ * pack'а: они про форму помощи (не отдавать ответ), а не про предмет курса, и ложатся поверх
+ * методики и границ любого курса. «Проверь себя» / "Check yourself" — подписи SelfCheck в уроке.
+ */
+export const PRACTICE_RULES = {
+  heading: {
+    ru: 'Режим «Помоги мне практиковаться» — сейчас я тренируюсь сам, а не слушаю объяснение:',
+    en: '"Help me practice" mode — right now I am practicing myself, not listening to an explanation:',
+  },
+  rules: [
+    {
+      ru: 'Не давай готовый ответ, решение или текст целиком. Задавай сократические вопросы — по одному за ход, — чтобы я сам дошёл до ответа.',
+      en: 'Do not hand me the finished answer, solution, or text. Ask Socratic questions — one per turn — so I reach the answer myself.',
+    },
+    {
+      ru: 'Если я застрял — подсказывай по шагам: сначала самая маленькая подсказка, следующая — только если я снова застрял. Полное решение — только когда я прямо попрошу его после своей попытки.',
+      en: 'If I am stuck, hint step by step: the smallest hint first, the next one only if I am stuck again. The full solution only when I explicitly ask for it after my own attempt.',
+    },
+    {
+      ru: 'Во время самопроверки («Проверь себя») не называй правильный вариант и не отсекай неверные — только наводи вопросами. Объясняй, почему верно именно так, только после того, как я ответил сам.',
+      en: 'During a self-check ("Check yourself"), never name the correct option and do not rule out wrong ones — only guide me with questions. Explain why the answer is right only after I have answered on my own.',
+    },
+    {
+      ru: 'После моего ответа коротко скажи, что в моём рассуждении сработало и где была развилка.',
+      en: 'After I answer, say briefly what worked in my reasoning and where the fork was.',
+    },
+  ],
+  /** Компактная версия для `?q=` — те же три правила одной фразой. */
+  compact: {
+    ru: ' Режим практики: не давай готовый ответ — задавай сократические вопросы по одному, подсказки по шагам от самой маленькой; в самопроверке («Проверь себя») не называй правильный вариант, только наводи вопросами, а объясняй после того, как я ответил сам. ',
+    en: ' Practice mode: do not give the finished answer — ask Socratic questions one at a time, hints step by step from the smallest; during a self-check ("Check yourself") never name the correct option, only guide with questions, and explain after I have answered on my own. ',
+  },
+} as const
 
 const NICHE: Record<string, { ru: string; en: string }> = {
   coach: { ru: 'коучинг и психотерапия', en: 'coaching and therapy' },
@@ -58,19 +102,19 @@ const MODE_FALLBACK = {
 }
 
 function bondingLine(i: LearnPromptInput, ru: boolean): string {
-  if (!i.mbti && !i.relational) return ''
+  if (!i.relational) return ''
   const r = i.relational
   const errMap = {
-    ru: { soft_feedback: 'правь мягко', lose_motivation: 'береги мотивацию, хвали за попытку', calm: 'правь прямо, без смягчения', fix_immediately: 'давай сразу точную правку' },
-    en: { soft_feedback: 'correct gently', lose_motivation: 'protect motivation, praise the attempt', calm: 'correct directly', fix_immediately: 'give the exact fix immediately' },
+    ru: { soft_feedback: 'правь мягко', lose_motivation: 'береги мотивацию, хвали за попытку', calm: 'правь прямо, без смягчения', step_hints: 'сразу покажи, где ошибка, и подсказывай по шагам — исправляю я сам' },
+    en: { soft_feedback: 'correct gently', lose_motivation: 'protect motivation, praise the attempt', calm: 'correct directly', step_hints: 'point out right away where the mistake is and hint step by step — I make the fix myself' },
   }
   const attnMap = {
     ru: { short: 'короткими ходами по 3–5 минут', mid: 'блоками по 10–15 минут', long: 'можно длинными заходами' },
     en: { short: 'in short 3–5 minute turns', mid: 'in 10–15 minute blocks', long: 'longer stretches are fine' },
   }
   const parts: string[] = []
-  if (i.mbti) parts.push(ru ? `мой психотип — ${i.mbti} (учитывай его в тоне и подаче)` : `my MBTI is ${i.mbti} (factor it into tone and delivery)`)
-  if (r?.errorStyle) parts.push((ru ? errMap.ru : errMap.en)[r.errorStyle])
+  const err = normalizeErrorStyle(r?.errorStyle)
+  if (err) parts.push((ru ? errMap.ru : errMap.en)[err])
   if (r?.attention) parts.push((ru ? attnMap.ru : attnMap.en)[r.attention])
   if (!parts.length) return ''
   return (ru ? 'Под привязку: ' : 'For bonding: ') + parts.join('; ') + '.'
@@ -119,21 +163,23 @@ export function buildBootstrapDeepLink(i: LearnPromptInput): string {
     : B.personaDefault[L]
   const role = B.role[L].replace('{firm}', mentorFirmnessCompact(i.locale))
 
-  const text = ru
+  const head = ru
     ? `${persona}${role} ` +
       `${B.course.ru}${niche ? `, моя сфера — ${niche}` : ''}. ` +
       `Сейчас я на материале: модуль «${i.moduleTitle}», юнит ${unitNo} из ${i.totalUnits}.` +
       (outcome ? ` Мой запрос: «${outcome}».` : '') +
-      B.loop.ru +
-      B.opener.ru
+      B.loop.ru
     : `${persona}${role} ` +
       `${B.course.en}${niche ? `, my field is ${niche}` : ''}. ` +
       `I'm currently on: module "${i.moduleTitle}", unit ${unitNo} of ${i.totalUnits}.` +
       (outcome ? ` My goal: "${outcome}".` : '') +
-      B.loop.en +
-      B.opener.en
+      B.loop.en
 
-  return cap(text, MAX_BOOTSTRAP)
+  if (i.studyMode !== 'practice') return cap(head + B.opener[L], MAX_BOOTSTRAP)
+  // Практика: правило режима и opener не должны отрезаться капом — укорачивается голова.
+  const tail = cap(PRACTICE_RULES.compact[L] + B.opener[L], MAX_BOOTSTRAP)
+  // −2: пробел-склейка и «…», который cap дописывает сверх своего max.
+  return `${cap(head, MAX_BOOTSTRAP - tail.length - 2)} ${tail}`
 }
 
 /** Deep-link that opens the learner's own agent with the prompt prefilled (mirror of blog/lib/ai-prompt.ts). */
@@ -190,6 +236,10 @@ export function buildLearnPrompt(i: LearnPromptInput): string {
     '',
     ...method,
     ...guardrails,
+    ...referenceLines(i.reference, i.locale),
+    ...(i.studyMode === 'practice'
+      ? [PRACTICE_RULES.heading[L], ...PRACTICE_RULES.rules.map((r) => `- ${r[L]}`), '']
+      : []),
     applied,
     '',
     C.opener[L],

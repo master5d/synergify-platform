@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u1-your-own-brain",
+  "locale": "ru",
+  "title": "Второй мозг, который остаётся у тебя",
+  "sourceHash": "sha256:73dcb7fbe18d373b6e1fd57c7e3a2a8d660d732cfbd759875193995037c70b6d",
+  "outline": [
+    {
+      "heading": "Что такое второй мозг в этом модуле",
+      "points": [
+        {
+          "text": "Второй мозг в этом модуле — папка с файлами, которую твой агент читает и пополняет по твоей просьбе.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Три слоя",
+      "points": [
+        {
+          "text": "Второй мозг держится на трёх слоях: память, агент и канал.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что значит «остаётся у тебя»",
+      "points": [
+        {
+          "text": "Три «да» — второй мозг твой.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Архив как собеседник",
+      "points": [
+        {
+          "text": "Главная перемена — не хранить больше, а спрашивать иначе.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что класть в память, а что нет",
+      "points": [
+        {
+          "text": "Класть: решения и их причины, уроки после ошибок, заметки, итоги встреч, черновики мыслей.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2",
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:42a2db078a1618b3fb0cd92ba7a34f4904afd6828e7b8cb9d186c5435a6bd764",
+        "points": [
+          "В этом модуле вторым мозгом считается папка с файлами, которую твой агент изучает и пополняет по твоей просьбе."
+        ]
+      },
+      {
+        "sourceHash": "sha256:48fcdfbd49875117dfa0ca60ccbb6b8a403c4319355d9ee6eaeb979fac7009d3",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:fdbb26ba85372d8d3d4a0bed8fd9f9f59a7ef538e966e0ad1289ae70254b2a5c",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:dac5938dd00a03747c0659d28e492c2efffdfde745bade9d2fdd7f55c169c3f8",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:66a9c750b06b79eadaf43d1bd8de69485322f325a1c9068e8c693e4fb39a7167",
+        "points": [
+          "Тебе стоит сохранять принятые решения с их причинами, уроки после ошибок, заметки, итоги встреч и черновики мыслей."
+        ]
+      }
+    ]
+  }
+}

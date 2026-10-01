@@ -1,0 +1,155 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "00-kickstart",
+  "unit": "u0-azbuka",
+  "locale": "en",
+  "title": "ABC: six words before you start",
+  "sourceHash": "sha256:8bf6d985fc4b9ee0fc53c4b23c0eaf335ede727ebeefa30e4ceecf01c07707e4",
+  "outline": [
+    {
+      "heading": "Where we are: the nesting doll",
+      "points": [
+        {
+          "text": "\"AI\", \"neural network\", \"machine learning\" and \"LLM\" are often used as synonyms.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Six words",
+      "points": [],
+      "children": [
+        {
+          "heading": "Token",
+          "points": [
+            {
+              "text": "See it yourself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Context window",
+          "points": [
+            {
+              "text": "See it yourself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Temperature",
+          "points": [
+            {
+              "text": "See it yourself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Why there are so many models, and how they differ",
+          "points": [
+            {
+              "text": "See it yourself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Prompt and context",
+          "points": [
+            {
+              "text": "See it yourself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Agent",
+          "points": [
+            {
+              "text": "See it yourself.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "heading": "How the words connect",
+      "points": [
+        {
+          "text": "A token is the unit of measure.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c11",
+    "c12"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:2603f6668b967951846e74805eb99fc66f2bc3e5efec1f960312e1f1d7cd5768",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:8f6132c76097808488fa4951c7ca0f607747bb604ed5b43169682c4f79b4bbea",
+        "points": [
+          "You can see it yourself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e356f392e4c552bfb5283dfb78ae39317b5f12e99e7dc19feb086b5171db7528",
+        "points": [
+          "You can see it yourself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:7ec1bd511cbacffe9a45abaf44040b91272b55dfd1cf55a1658d5ce39731a29a",
+        "points": [
+          "You can see it for yourself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:de8d1eda2fc09b8b9dd70110f52c9cbf9120b7532f39aa2003f692f95add13d9",
+        "points": [
+          "You can see it for yourself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e91e578dabf89b85d0009c41c74cf23bf6716cb4bcb5b47079f2511e0b143382",
+        "points": [
+          "You can see it for yourself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:4a43f04253f5915a277f3b8cb193458be318f61ccb8a9d9fbacc4b23a02d6805",
+        "points": [
+          "You see it for yourself."
+        ]
+      },
+      {
+        "sourceHash": "sha256:bdfc3e5354375aed407d0b66633e00f479db20eafd8bdbdd498128718cec6f76",
+        "points": [
+          "A token serves as the unit of measure."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "11-second-brain",
+  "unit": "u2-channel",
+  "locale": "en",
+  "title": "A channel: your agent within reach",
+  "sourceHash": "sha256:9e12d4e8850c8a3d37361308be6b0e02d32ef9e669f3ba6694c5331833166602",
+  "outline": [
+    {
+      "heading": "How a channel works",
+      "points": [
+        {
+          "text": "A message travels from the messenger to the agent session on your computer and back",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Channels in Claude Code",
+      "points": [
+        {
+          "text": "A rehearsal with no outside services — fakechat.",
+          "origin": "extract"
+        },
+        {
+          "text": "Telegram — following the documentation:",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "If it does not work",
+      "points": [
+        {
+          "text": "A first run usually trips over the marketplace, a channel that is not running, a busy port or the requirements",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Email and other agents",
+      "points": [
+        {
+          "text": "Email usually connects differently: through an MCP server for your mail service (module 07).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "When you are away from the terminal",
+      "points": [
+        {
+          "text": "If the agent needs your permission for an action, the session waits for your answer.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4",
+    "c5",
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:5ca6532c7b4f4efe1fbc30ce271cf7829e214c0e39758125516b8b571ab268ea",
+        "points": [
+          "Messages travel from your messenger to the agent session on your computer and back."
+        ]
+      },
+      {
+        "sourceHash": "sha256:7adf7826f98e486fa9440504c24376e46ade3b28dffe38294a86d322e9a93e67",
+        "points": [
+          "Fakechat is a rehearsal with no outside services.",
+          "You follow the documentation for Telegram."
+        ]
+      },
+      {
+        "sourceHash": "sha256:459ad5ad971f4120601048495e5a587fa0568c71d885b7ccd38f39052fa2c609",
+        "points": [
+          "Your first run might fail because of the marketplace, an inactive channel, a busy port, or the requirements."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fb63be4de535dfa0613cf48155bd782847eae7604c57e03cbfe0525479ec8318",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:bd148c26d88457ace8cb25bc40b1cc27e225f1f3d0cb518b9562181e33d56034",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

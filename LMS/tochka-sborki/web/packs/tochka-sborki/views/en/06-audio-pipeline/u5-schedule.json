@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-audio-pipeline",
+  "unit": "u5-schedule",
+  "locale": "en",
+  "title": "A pipeline that runs on its own",
+  "sourceHash": "sha256:74a130b97bbc117f0042abf4f9e3fe8a3e0e86e87ea00140ca4f470e7badf8bd",
+  "outline": [
+    {
+      "heading": "The shape: a morning link digest",
+      "points": [
+        {
+          "text": "You add a link to inbox.txt as one line.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The \"duplicates\" condition is idempotency",
+      "points": [
+        {
+          "text": "A second rule comes from the same place: a link goes into done.txt only after a successful run.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Why not a Hook",
+      "points": [
+        {
+          "text": "The Hooks from module 07 fire on agent events: the agent wrote a file, finished a reply.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c9",
+    "c10"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:69bb7b6e41afe524d21f0fa91714ecbf0ca738a14a5f588962b98aa337336daa",
+        "points": [
+          "You put a link into inbox.txt as one line."
+        ]
+      },
+      {
+        "sourceHash": "sha256:f0286c1a36f1fccf23044814aa37eeba03eff8e529abfbb839f242f29ea3fa13",
+        "points": [
+          "A second rule is that a link goes into done.txt only after a successful run."
+        ]
+      },
+      {
+        "sourceHash": "sha256:7e3f7825f78365b2a525ee4d7af549968eb3356aa5da77a1268fdeb039b2ec4f",
+        "points": [
+          "Hooks from module 07 fire on agent events when the agent writes a file or finishes a reply."
+        ]
+      }
+    ]
+  }
+}

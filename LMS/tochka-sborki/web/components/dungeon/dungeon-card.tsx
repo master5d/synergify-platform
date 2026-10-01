@@ -3,6 +3,7 @@
 
 import Link from 'next/link'
 import type { Locale, WorldSkin } from '@/lib/intake/types'
+import type { TaskRoute } from '@/lib/intake/task-route'
 import { useDungeon } from '@/lib/dungeon/use-dungeon'
 import { HelpTip } from '@/components/help/help-tip'
 
@@ -20,10 +21,14 @@ interface Props {
   moduleTitle: string
   isModuleCompleted: (moduleSlug: string) => boolean
   helpId?: string
+  route?: TaskRoute | null
+  taskText?: string | null
+  /** Модули курса — спайн для выбора модуля подземелья без русла. */
+  courseModules?: readonly string[]
 }
 
-export function DungeonCard({ locale, accent, skin, niche, outcome, moduleTitle, isModuleCompleted, helpId }: Props) {
-  const { view, bossCleared, ready } = useDungeon({ locale, skin, niche, outcome, isModuleCompleted })
+export function DungeonCard({ locale, accent, skin, niche, outcome, moduleTitle, isModuleCompleted, helpId, route, taskText, courseModules }: Props) {
+  const { view, bossCleared, ready } = useDungeon({ locale, skin, niche, outcome, isModuleCompleted, route, taskText, courseModules })
   if (!ready) return null
 
   const prefix = locale === 'en' ? '/en' : ''

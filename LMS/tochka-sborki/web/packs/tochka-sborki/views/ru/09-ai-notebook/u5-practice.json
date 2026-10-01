@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "09-ai-notebook",
+  "unit": "u5-practice",
+  "locale": "ru",
+  "title": "Практика",
+  "sourceHash": "sha256:d5b5cf47e56c47e4687f5215a0683118aeaf813d95c9b49e8a7736cd35c88987",
+  "outline": [
+    {
+      "heading": "Сборка своей тетрадки — порядок",
+      "points": [
+        {
+          "text": "Тема с вопросом, не «вообще».",
+          "origin": "extract"
+        },
+        {
+          "text": "Источники — 5–15, отобранные тремя взглядами.",
+          "origin": "extract"
+        },
+        {
+          "text": "Первый вопрос — на расхождение.",
+          "origin": "extract"
+        },
+        {
+          "text": "Досмотр — по важности.",
+          "origin": "extract"
+        },
+        {
+          "text": "Формат — под сценарий.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Тетрадка живёт, пока живёт вопрос",
+      "points": [
+        {
+          "text": "Тетрадка — не архив, а рабочий стол.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c12",
+    "c13",
+    "c14"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:c7524ddf2339b3b5c4babfab282d4f88959b8b596bf0e2da704c037264834b43",
+        "points": [
+          "Выбирай тему с вопросом и отбирай 5–15 источников тремя взглядами.",
+          "Первый вопрос задавай на расхождение и проводи досмотр по важности.",
+          "Подбирай формат под свой сценарий."
+        ]
+      },
+      {
+        "sourceHash": "sha256:f4cd91ae533257713d43abf053da8ca4ca93fb8972fcbd4fb9107f48e90419a2",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

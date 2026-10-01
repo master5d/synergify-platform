@@ -20,11 +20,11 @@
     },
     {
       "id": "o3",
-      "text": "Explain what role CLAUDE.md plays for the agent in a project folder"
+      "text": "Explain what role AGENTS.md plays for the agent in a project folder and why CLAUDE.md holds the line @AGENTS.md"
     },
     {
       "id": "o4",
-      "text": "Write a CLAUDE.md the agent will follow: short, specific, with a split between “what I delegate / what I decide myself”"
+      "text": "Write an AGENTS.md the agent will follow: short, specific, with a split between “what I delegate / what I decide myself”"
     }
   ],
   "checks": [
@@ -102,7 +102,7 @@
       "id": "c6",
       "unit": "u3-first-project",
       "objective": "o3",
-      "question": "Why put CLAUDE.md in the project folder?",
+      "question": "Why put AGENTS.md in the project folder, and the line @AGENTS.md in CLAUDE.md?",
       "options": [
         "Claude Code reads it on its own every time it launches in that folder: it's the agent's memory of the project",
         "It's the file where Claude Code writes a log of its actions",
@@ -110,13 +110,13 @@
         "Git needs it to make the first commit"
       ],
       "answer": 0,
-      "explain": "CLAUDE.md gives the agent the project context: who you are, what the project is, the stack, how to run it. The file is picked up automatically, so you don't have to explain it all over again in every session (u3, “CLAUDE.md — the agent's project memory”)."
+      "explain": "AGENTS.md gives the agent the project context: who you are, what the project is, the stack, how to run it. Codex, Cursor, Antigravity and Hermes read it on their own, Claude Code through the line @AGENTS.md in CLAUDE.md. You don't have to explain it all over again in every session (u3, “AGENTS.md — the agent's project memory”)."
     },
     {
       "id": "c7",
       "unit": "u3-first-project",
       "objective": "o4",
-      "question": "Which line in CLAUDE.md will work better?",
+      "question": "Which line in AGENTS.md will work better?",
       "options": [
         "“Format the code properly”",
         "“Write neatly and cleanly”",
@@ -124,27 +124,27 @@
         "“Use 2-space indent”"
       ],
       "answer": 3,
-      "explain": "The agent follows a specific instruction you can check more precisely than a general wish (u3, “CLAUDE.md tips”)."
+      "explain": "The agent follows a specific instruction you can check more precisely than a general wish (u3, “AGENTS.md tips”)."
     },
     {
       "id": "c8",
       "unit": "u3-first-project",
       "objective": "o4",
-      "question": "For a month you kept adding everything to CLAUDE.md, and the file grew to 500 lines. What does the lesson advise?",
+      "question": "For a month you kept adding everything to AGENTS.md, and the file grew to 500 lines. What does the lesson advise?",
       "options": [
         "That's how it should be: the more the agent knows, the more precisely it works",
         "Cut it down to 200 lines: in a long file the agent follows instructions worse",
-        "Split the file into five identical CLAUDE.md files in one folder",
+        "Split the file into five identical AGENTS.md files in one folder",
         "Delete the file and explain the context all over again in every session"
       ],
       "answer": 1,
-      "explain": "The lesson sets a limit of 200 lines: in a long file the agent follows instructions worse. You update the file when the architecture or stack changes, rather than adding everything to it (u3, “CLAUDE.md tips”)."
+      "explain": "The lesson sets a limit of 200 lines: in a long file the agent follows instructions worse. You update the file when the architecture or stack changes, rather than adding everything to it (u3, “AGENTS.md tips”)."
     },
     {
       "id": "c9",
       "unit": "u3-first-project",
       "objective": "o4",
-      "question": "What does the lesson's CLAUDE.md template leave to you rather than delegate to the agent?",
+      "question": "What does the lesson's AGENTS.md template leave to you rather than delegate to the agent?",
       "options": [
         "Writing code from specs",
         "Tests",

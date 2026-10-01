@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-audio-pipeline",
+  "unit": "u2-pipeline-theory",
+  "locale": "ru",
+  "title": "Trigger → Action модель",
+  "sourceHash": "sha256:e12fb49cb04ad5e0ab55c5aa7d6fc4f688f4f8dbd9bbb4d21f51778d2f318bd3",
+  "outline": [
+    {
+      "heading": "Три типа pipeline",
+      "points": [],
+      "children": [
+        {
+          "heading": "Ручной pipeline (сегодня)",
+          "points": [
+            {
+              "text": "Ты запускаешь вручную когда нужно.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Schedule pipeline",
+          "points": [
+            {
+              "text": "Запускается по расписанию.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Event-driven pipeline",
+          "points": [
+            {
+              "text": "Запускается когда что-то происходит.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "heading": "Инструменты для pipeline",
+      "points": [],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3",
+    "c4",
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:9a373a24e069c65ba4ff80593632062eaa1319c208dc1d5d37d5a439658ca647",
+        "points": [
+          "Ты запускаешь процесс вручную в те моменты, когда тебе это нужно."
+        ]
+      },
+      {
+        "sourceHash": "sha256:18b7a118fda4336a62dc35d3431f2ebfb84391cc42e80cab5b7971a051373006",
+        "points": [
+          "Процесс начинает работу автоматически по заданному расписанию."
+        ]
+      },
+      {
+        "sourceHash": "sha256:313134f4d20d4650a42cd53ea710a5c63927e56bb178510f414ab98b6d5827f3",
+        "points": [
+          "Работа запускается автоматически в тот момент, когда что-то происходит."
+        ]
+      }
+    ]
+  }
+}

@@ -6,8 +6,8 @@ import { useRouter } from 'next/navigation'
 import { Nav } from '@/components/nav'
 import { useProgress } from '@/components/progress-provider'
 import { SKINS_META } from '@/lib/rpg/skins-meta'
-import { NICHE_MODULE } from '@/lib/course/niche-map'
-import { FLAVOR_BANK } from '@/lib/course/dungeon-flavor'
+import { dungeonModuleFor } from '@/lib/dungeon/dungeon-module'
+import { profileTaskRoute, profileTaskText, type TaskRoute } from '@/lib/intake/task-route'
 import { useDungeon } from '@/lib/dungeon/use-dungeon'
 import { DungeonView } from '@/components/dungeon/dungeon-view'
 import { parseOutcome } from '@/lib/intake/parse-outcome'
@@ -37,16 +37,20 @@ export function DungeonClient({ moduleTitles, locale }: { moduleTitles: Record<s
   const niche: string | null = profile.niche ?? null
   const outcome = parseOutcome(profile)
 
-  const resolvedNiche = niche && FLAVOR_BANK[niche] ? niche : 'other'
-  const nicheModule = NICHE_MODULE[resolvedNiche] ?? '04-prompt-engineering'
-  const moduleTitle = moduleTitles[nicheModule] ?? nicheModule
+  const route = profileTaskRoute(profile)
+  const taskText = profileTaskText(profile)
+  // Модуль подземелья: русло → модуль результата; без русла — по прогрессу (useProgress уже загружен).
+  const courseModules = Object.keys(moduleTitles)
+  const isModuleCompleted = (slug: string) => getState(slug) === 'completed'
+  const dungeonModule = dungeonModuleFor(route, courseModules, isModuleCompleted)
+  const moduleTitle = moduleTitles[dungeonModule] ?? dungeonModule
 
-  return <DungeonInner skin={skin} accent={accent} niche={niche} outcome={outcome} moduleTitle={moduleTitle} locale={locale} isModuleCompleted={(slug) => getState(slug) === 'completed'} />
+  return <DungeonInner skin={skin} accent={accent} niche={niche} outcome={outcome} moduleTitle={moduleTitle} locale={locale} isModuleCompleted={isModuleCompleted} route={route} taskText={taskText} courseModules={courseModules} />
 }
 
-function DungeonInner(props: { skin: WorldSkin; accent: string; niche: string | null; outcome: string | null; moduleTitle: string; locale: Locale; isModuleCompleted: (slug: string) => boolean }) {
-  const { skin, accent, niche, outcome, moduleTitle, locale, isModuleCompleted } = props
-  const { view, isCleared, clear, ready } = useDungeon({ locale, skin, niche, outcome, isModuleCompleted })
+function DungeonInner(props: { skin: WorldSkin; accent: string; niche: string | null; outcome: string | null; moduleTitle: string; locale: Locale; isModuleCompleted: (slug: string) => boolean; route: TaskRoute | null; taskText: string | null; courseModules: readonly string[] }) {
+  const { skin, accent, niche, outcome, moduleTitle, locale, isModuleCompleted, route, taskText, courseModules } = props
+  const { view, isCleared, clear, ready } = useDungeon({ locale, skin, niche, outcome, isModuleCompleted, route, taskText, courseModules })
   return (
     <>
       <Nav locale={locale} />

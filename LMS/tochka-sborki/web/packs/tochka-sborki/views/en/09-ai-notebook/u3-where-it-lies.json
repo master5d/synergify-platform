@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "09-ai-notebook",
+  "unit": "u3-where-it-lies",
+  "locale": "en",
+  "title": "Where it lies",
+  "sourceHash": "sha256:92695d0f98adb6210a46eac6c2f9ad0f3a1d19489f7a9534e87e28b9fdf488ae",
+  "outline": [
+    {
+      "heading": "Six places where the notebook drifts",
+      "points": [
+        {
+          "text": "A citation that does not lead to the source.",
+          "origin": "extract"
+        },
+        {
+          "text": "A confident answer with no citation at all.",
+          "origin": "extract"
+        },
+        {
+          "text": "Numbers and percentages.",
+          "origin": "extract"
+        },
+        {
+          "text": "An answer beyond the sources.",
+          "origin": "extract"
+        },
+        {
+          "text": "One source presented as consensus.",
+          "origin": "extract"
+        },
+        {
+          "text": "An empty source.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "This is not a bug report — it is literacy",
+      "points": [
+        {
+          "text": "Notice: not one item requires technical knowledge.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c6",
+    "c7",
+    "c8",
+    "c9"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:984c1774fdc66ffff7d4c3796db23869fb8c36062af33a2260d0152cff1a3a5d",
+        "points": [
+          "You may find a citation that does not lead to the source or a confident answer with no citation at all.",
+          "The notebook drifts when it uses numbers and percentages or provides an answer beyond the sources.",
+          "It might present one source as consensus or include an empty source."
+        ]
+      },
+      {
+        "sourceHash": "sha256:d8e9f71d763778d73b941aecf0734320087cc94bf48d392e8ad2d9e83193e085",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

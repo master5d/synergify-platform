@@ -2,7 +2,6 @@ import { describe, it, expect } from 'vitest'
 import { buildDungeon } from './build-dungeon'
 import type { DungeonInput } from './types'
 import { FLAVOR_BANK } from '@/lib/course/dungeon-flavor'
-import { NICHE_MODULE } from '@/lib/course/niche-map'
 import { PACK_SLUG } from '@/lib/pack'
 
 // Тесты ниже с itDefault пинуют флейвор-копию и applied-challenge-банк Точки Сборки;
@@ -21,10 +20,10 @@ function base(over: Partial<DungeonInput> = {}): DungeonInput {
 }
 
 describe('buildDungeon', () => {
-  itDefault('maps niche to its module and names from the flavor bank', () => {
+  itDefault('names from the flavor bank; module from progress, not from the niche', () => {
     const v = buildDungeon(base())
     expect(v.niche).toBe('coach')
-    expect(v.module).toBe('04-prompt-engineering')
+    expect(v.module).toBe('08-agent-engineering') // всё закрыто → самый дальний закрытый модуль спайна
     expect(v.dungeonName).toBe('Чертог Резонанса')
     expect(v.boss.name).toBe('Эхо Сомнения')
   })
@@ -32,30 +31,54 @@ describe('buildDungeon', () => {
   itDefault('produces 3 stages at escalating tiers with cs 15', () => {
     const v = buildDungeon(base())
     expect(v.stages.map(s => s.tier)).toEqual(['task', 'process', 'outcome'])
-    expect(v.stages.map(s => s.id)).toEqual(['dungeon:coach:s1', 'dungeon:coach:s2', 'dungeon:coach:s3'])
+    expect(v.stages.map(s => s.id)).toEqual(['dungeon:08-agent-engineering:s1', 'dungeon:08-agent-engineering:s2', 'dungeon:08-agent-engineering:s3'])
     expect(v.stages.every(s => s.cs === 15)).toBe(true)
     expect(v.stages.every(s => s.body.length > 0)).toBe(true)
   })
 
   it('boss has cs 50, namespaced id, and slot-filled body', () => {
     const v = buildDungeon(base({ niche: 'coach', outcome: 'more clients' }))
-    expect(v.boss.id).toBe('dungeon:coach:boss')
+    expect(v.boss.id).toBe(`dungeon:${v.module}:boss`)
     expect(v.boss.cs).toBe(50)
     expect(v.boss.body).toContain('more clients')
     expect(v.boss.body).not.toContain('{outcome}')
     expect(v.boss.body).not.toContain('{niche}')
   })
 
-  it('is locked when the niche module is not completed', () => {
+  it('is locked when no spine module is completed, unlocked once one is', () => {
     expect(buildDungeon(base({ isModuleCompleted: () => false })).locked).toBe(true)
     expect(buildDungeon(base({ isModuleCompleted: () => true })).locked).toBe(false)
+  })
+
+  itDefault('без русла модуль выбирается по прогрессу: первый модуль спайна → самый дальний закрытый', () => {
+    const none = buildDungeon(base({ isModuleCompleted: () => false }))
+    expect(none.module).toBe('00-kickstart')
+    const done = new Set(['00-kickstart', '01-introduction', '02-setup-guide', '03-stack-selection', '04-prompt-engineering'])
+    const mid = buildDungeon(base({ isModuleCompleted: (s) => done.has(s) }))
+    expect(mid.module).toBe('04-prompt-engineering')
+    expect(mid.locked).toBe(false)
+    expect(mid.boss.id).toBe('dungeon:04-prompt-engineering:boss')
+  })
+
+  it('ниша не влияет на выбор модуля — только на флейвор', () => {
+    for (const niche of Object.keys(FLAVOR_BANK)) {
+      expect(buildDungeon(base({ niche, isModuleCompleted: () => false })).module)
+        .toBe(buildDungeon(base({ niche: 'other', isModuleCompleted: () => false })).module)
+    }
+  })
+
+  it('спайн — модули активного pack-а, если они переданы', () => {
+    const v = buildDungeon(base({ courseModules: ['01-living-practice'], isModuleCompleted: () => false }))
+    expect(v.module).toBe('01-living-practice')
+    expect(v.locked).toBe(true)
+    expect(buildDungeon(base({ courseModules: ['01-living-practice'] })).locked).toBe(false)
   })
 
   itDefault('falls back to the "other" flavor for an unknown/null niche', () => {
     const v = buildDungeon(base({ niche: null }))
     expect(v.niche).toBe('other')
     expect(v.dungeonName).toBe('Безымянный Предел')
-    expect(v.boss.id).toBe('dungeon:other:boss')
+    expect(v.boss.id).toBe(`dungeon:${v.module}:boss`)
   })
 
   it('is deterministic for the same input', () => {
@@ -75,12 +98,7 @@ describe('buildDungeon', () => {
   })
 })
 
-describe('flavor-bank / niche-map consistency', () => {
-  it('every flavor-bank niche has a NICHE_MODULE mapping', () => {
-    for (const niche of Object.keys(FLAVOR_BANK)) {
-      expect(NICHE_MODULE[niche], `missing NICHE_MODULE entry for "${niche}"`).toBeTruthy()
-    }
-  })
+describe('flavor-bank', () => {
   it('covers the 8 expected niches', () => {
     expect(Object.keys(FLAVOR_BANK).sort()).toEqual(
       ['astrology', 'coach', 'content', 'ecommerce', 'massage', 'other', 'service', 'tech'],

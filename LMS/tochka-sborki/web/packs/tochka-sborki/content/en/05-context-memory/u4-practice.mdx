@@ -7,9 +7,9 @@ duration: "10 min"
 
 <Phase type="activation">
 
-You now have CLAUDE.md, TODO.md, AGENTS.md.
+You now have AGENTS.md, TODO.md, STATE.md and a CLAUDE.md with the line `@AGENTS.md`.
 
-Don't see these as "documentation" — picture them as **handing over the watch to a new lighthouse keeper**: the outgoing keeper leaves not just a manual, but everything needed to keep the light burning — the quirks of the mechanism, the rhythm of the waves in this bay, where the door creaks in a storm.
+Don't see these as "documentation" — picture them as **handing over the watch to a new lighthouse keeper**. The outgoing keeper leaves not just a manual, but everything needed to keep the light burning. The quirks of the mechanism, the rhythm of the waves in this bay, where the door creaks in a storm.
 
 Run it through your head: what in your files already passes on the "living knowledge" of the lighthouse? What are you still keeping only in your own head — knowledge that someday needs to be handed over?
 
@@ -19,7 +19,7 @@ Run it through your head: what in your files already passes on the "living knowl
 
 A good memory system isn't a one-shot setup. It's a living system.
 
-Don't think of this as rules — picture a jazz musician **passing the head arrangement to a new band**: not notes on paper, but a living feel — how to hold a pause, where to improvise, where the structure has to stand firm.
+Don't think of this as rules — picture a jazz musician **passing the head arrangement to a new band**. Not notes on paper, but a living feel — how to hold a pause, where to improvise, where the structure has to stand firm.
 
 Catch the moment: the last time Claude played something in the wrong key — that was a signal. What would you add to the score so the next "musician" feels the right groove from the first bar?
 
@@ -31,11 +31,12 @@ Catch the moment: the last time Claude played something in the wrong key — tha
 
 | Event | Where to update |
 |---------|-------------|
-| Architecture changed | CLAUDE.md |
-| New stack added | CLAUDE.md |
+| Architecture changed | AGENTS.md, the project sections |
+| New stack added | AGENTS.md, "Stack" |
 | Task completed | TODO.md |
-| Agent made a mistake you fixed | AGENTS.md |
-| Mid-session clarification the agent must keep using | A normal message in the session (or a rule in CLAUDE.md if later sessions need it too) |
+| Session ended | STATE.md: where you stopped, what's next |
+| Agent made a mistake you fixed | AGENTS.md, "Rules" |
+| Mid-session clarification the agent must keep using | A normal message in the session (or a rule in AGENTS.md if later sessions need it too) |
 
 `/btw` doesn't fit here: it's a side question about the current session, and it isn't added to the conversation history.
 
@@ -86,11 +87,13 @@ Final task for module 05:
 
 1. Launch Claude Code in your project: `claude`
 2. Give it a task from TODO.md
-3. Update CLAUDE.md if you learned something important about the project during work
-4. After the session: add one rule to AGENTS.md based on something Claude did wrong (if that happened)
+3. Update AGENTS.md if you learned something important about the project during work
+4. After the session: add one rule to the "Rules" section of AGENTS.md based on something Claude did wrong (if that happened), and update STATE.md
 
 Mid-session, give the agent a new detail as a normal message — see whether it uses it in later answers. For comparison, ask a side question via `/btw`: notice that it isn't added to the conversation history.
 
 Save observations to `my-experiments/u4-memory-system.md`
+
+<NoAiCheck id="no-ai"/>
 
 </Phase>

@@ -40,6 +40,14 @@
     "09-ai-notebook": {
       "ru": "Навигационный Архив",
       "en": "Navigation Archive"
+    },
+    "10-model-training": {
+      "ru": "Верфь Разумов",
+      "en": "Shipyard of Minds"
+    },
+    "11-second-brain": {
+      "ru": "Бортовой Архив",
+      "en": "Onboard Archive"
     }
   },
   "questTitles": {
@@ -82,9 +90,31 @@
     "09-ai-notebook": {
       "ru": "Проложить курс по источникам",
       "en": "Chart a course through sources"
+    },
+    "10-model-training": {
+      "ru": "Собрать бортовой разум своими руками",
+      "en": "Build an onboard mind with your own hands"
+    },
+    "11-second-brain": {
+      "ru": "Собрать бортовую память, которая летит с тобой",
+      "en": "Build an onboard memory that flies with you"
     }
   },
   "units": {
+    "00-kickstart/u0-azbuka": {
+      "intro": {
+        "ru": "Кадет, прежде чем выйти на мостик, выучи бортовой словарь. Шесть терминов — и ни один доклад экипажа не застанет тебя врасплох.",
+        "en": "Cadet, before you step onto the bridge, learn the ship's glossary. Six terms — and no crew report will catch you off guard."
+      },
+      "mentorHint": {
+        "ru": "На мостике путаница в словах опаснее метеоритов.",
+        "en": "On the bridge, muddled words are more dangerous than meteors."
+      },
+      "outro": {
+        "ru": "Словарь загружен в бортовой компьютер. Теперь можно ловить первый сигнал — твою идею-призрак.",
+        "en": "The glossary is loaded into the ship's computer. Now you can catch the first signal — your ghost idea."
+      }
+    },
     "00-kickstart/u1-map": {
       "intro": {
         "ru": "Добро пожаловать на борт, кадет. В безграничной пустоте космоса каждая великая миссия начинается с одного-единственного сигнала, с идеи-призрака на краю известной вселенной.",
@@ -477,6 +507,20 @@
         "en": "Your mission is expanding. With this knowledge, you are no longer just a crew member, but an architect of our future. The course is set!"
       }
     },
+    "06-audio-pipeline/u5-schedule": {
+      "intro": {
+        "ru": "Пора включить автопилот. Сегодня твой pipeline научится просыпаться по бортовым часам и не повторять уже выполненные манёвры.",
+        "en": "Time to engage the autopilot. Today your pipeline learns to wake up by the ship's clock and never repeat a manoeuvre it has already flown."
+      },
+      "mentorHint": {
+        "ru": "Автопилот, который дважды выполняет один манёвр, опаснее ручного управления. Сначала — журнал выполненного, кадет.",
+        "en": "An autopilot that runs the same manoeuvre twice is more dangerous than manual control. The log of what is done comes first, cadet."
+      },
+      "outro": {
+        "ru": "Автопилот на вахте! Пока экипаж спит, pipeline сам разбирает входящие сигналы и кладёт отчёт на мостик к утру.",
+        "en": "The autopilot is on watch! While the crew sleeps, the pipeline processes incoming signals and has a report on the bridge by morning."
+      }
+    },
     "07-tools/u1-activation": {
       "intro": {
         "ru": "Наш флагманский AI, Claude, готов к новым свершениям, но даже самые мощные системы имеют свои пределы. Наша миссия — обнаружить их и расширить горизонты возможного.",
@@ -545,6 +589,20 @@
       "outro": {
         "ru": "Системы работают в штатном режиме, экипаж! Вы успешно модернизировали ядро нашего корабля. Галактика ждёт, и мы готовы к новым открытиям!",
         "en": "Systems are nominal, crew! You have successfully upgraded our ship's core. The galaxy awaits, and we are ready for new discoveries!"
+      }
+    },
+    "07-tools/u6-pendel": {
+      "intro": {
+        "ru": "Перед прыжком в новый сектор экипаж проводит диагностику корабля: перегретые узлы, лишний груз, забытые протоколы.",
+        "en": "Before jumping to a new sector, the crew runs ship diagnostics: overheated systems, excess cargo, forgotten protocols."
+      },
+      "mentorHint": {
+        "ru": "Не перезагружай все системы разом. Три исправления с проверкой после каждого — и корабль держит курс.",
+        "en": "Don't reboot every system at once. Three fixes, each checked after it lands — and the ship holds its course."
+      },
+      "outro": {
+        "ru": "Диагностика завершена, три системы в норме. Остальные пункты — в бортовой журнал. Курс на следующий сектор.",
+        "en": "Diagnostics complete, three systems nominal. The rest goes in the ship's log. Setting course for the next sector."
       }
     },
     "08-agent-engineering/u1-activation": {
@@ -699,6 +757,146 @@
       "outro": {
         "ru": "Миссия выполнена. Часы просмотра стали навигационной выжимкой с доказательствами.",
         "en": "Mission complete. Hours of watching became a navigation extract with evidence."
+      }
+    },
+    "10-model-training/u1-inside-the-model": {
+      "intro": {
+        "ru": "Вскрываем ядро бортового разума: токены, эмбеддинги, внимание. Схема ядра опубликована в 2017-м.",
+        "en": "We open the core of the onboard mind: tokens, embeddings, attention. The core’s schematic was published in 2017."
+      },
+      "mentorHint": {
+        "ru": "Бортовой разум прокладывает правдоподобный курс, а не проверенный. Держи руку на штурвале.",
+        "en": "The onboard mind plots a plausible course, not a verified one. Keep your hand on the helm."
+      },
+      "outro": {
+        "ru": "Ядро изучено. Ясно, откуда берутся уверенные ошибки навигации.",
+        "en": "The core is studied. It is clear where confident navigation errors come from."
+      }
+    },
+    "10-model-training/u2-data-is-the-work": {
+      "intro": {
+        "ru": "Главное в навигации — не двигатель, а карты. Наши карты — данные.",
+        "en": "The key to navigation is not the engine but the charts. Our charts are data."
+      },
+      "mentorHint": {
+        "ru": "Ошибка в карте, повторённая тысячу раз, уведёт весь флот.",
+        "en": "A chart error repeated a thousand times will lead the whole fleet astray."
+      },
+      "outro": {
+        "ru": "Цикл полёта освоен. После сбоя — к картам, а не к двигателю.",
+        "en": "The flight cycle is mastered. After a failure — to the charts, not the engine."
+      }
+    },
+    "10-model-training/u3-fine-tuning": {
+      "intro": {
+        "ru": "Не каждый манёвр требует перепрошивки ядра. Сначала команды, потом бортовой архив, потом экипаж.",
+        "en": "Not every maneuver needs a core reflash. First commands, then the onboard archive, then the crew."
+      },
+      "mentorHint": {
+        "ru": "LoRA — навесной модуль: отстыковал — и корабль прежний.",
+        "en": "LoRA is a bolt-on module: undock it and the ship is as before."
+      },
+      "outro": {
+        "ru": "Решение принято по приборам. Перепрошивка — только когда кончились другие варианты.",
+        "en": "The decision is made by instruments. A reflash only when other options are exhausted."
+      }
+    },
+    "10-model-training/u4-evaluation": {
+      "intro": {
+        "ru": "Разум идеально прошёл знакомый маршрут. Проверим его в неизведанном секторе.",
+        "en": "The mind flew the familiar route perfectly. We test it in an uncharted sector."
+      },
+      "mentorHint": {
+        "ru": "Контрольный сектор закрывают до обучения — иначе он уже не контрольный.",
+        "en": "The control sector is sealed before training — otherwise it is no longer a control."
+      },
+      "outro": {
+        "ru": "Полётная проверка настроена. Память ты теперь отличаешь от умения.",
+        "en": "Flight check configured. You now tell memory from skill."
+      }
+    },
+    "10-model-training/u5-practice": {
+      "intro": {
+        "ru": "Своя верфь, свой малый разум, бесплатные мощности. Никаких арендованных доков.",
+        "en": "Your own shipyard, your own small mind, free capacity. No rented docks."
+      },
+      "mentorHint": {
+        "ru": "Сними показания до старта — иначе нечем мерить полёт.",
+        "en": "Take the readings before launch — otherwise there is nothing to measure the flight by."
+      },
+      "outro": {
+        "ru": "Разум собран и испытан. Ты знаешь, когда хватит команды, а когда разум стоит учить.",
+        "en": "The mind is built and tested. You know when a command suffices and when the mind is worth training."
+      }
+    },
+    "11-second-brain/u1-your-own-brain": {
+      "intro": {
+        "ru": "Память на чужой станции отключат вместе со станцией. Переносим её на свой борт.",
+        "en": "Memory on someone else’s station goes dark with the station. We move it aboard your ship."
+      },
+      "mentorHint": {
+        "ru": "Данные без координат файла — сигнал без источника.",
+        "en": "Data without file coordinates is a signal without a source."
+      },
+      "outro": {
+        "ru": "Бортовой архив запущен. Он отвечает, как штурман со стажем.",
+        "en": "The onboard archive is live. It answers like a seasoned navigator."
+      }
+    },
+    "11-second-brain/u2-channel": {
+      "intro": {
+        "ru": "Налаживаем дальнюю связь: ты на планете, корабль на орбите.",
+        "en": "We set up long-range comms: you on the planet, the ship in orbit."
+      },
+      "mentorHint": {
+        "ru": "Частоту может поймать любой. Отвечай только на свои позывные.",
+        "en": "Anyone can tune into the frequency. Answer only your own call sign."
+      },
+      "outro": {
+        "ru": "Канал открыт. Чужие позывные глушатся.",
+        "en": "The channel is open. Foreign call signs are jammed."
+      }
+    },
+    "11-second-brain/u3-skills-travel": {
+      "intro": {
+        "ru": "Экипажи обмениваются протоколами. Бортовой разум не перепрошивают — ему дают инструкции.",
+        "en": "Crews trade protocols. The onboard mind is not reflashed — it is given instructions."
+      },
+      "mentorHint": {
+        "ru": "Протокол живёт в бортовой базе. Удалил файл — протокол ушёл.",
+        "en": "A protocol lives in the ship’s database. Delete the file — the protocol is gone."
+      },
+      "outro": {
+        "ru": "Обмен протоколами понятен. Ядро разума не менялось.",
+        "en": "Protocol exchange is clear. The mind’s core did not change."
+      }
+    },
+    "11-second-brain/u4-untrusted-input": {
+      "intro": {
+        "ru": "В сигнале чужого корабля может прятаться вредоносная команда.",
+        "en": "A malicious command may hide in another ship’s signal."
+      },
+      "mentorHint": {
+        "ru": "Входящий сигнал — телеметрия, не приказ капитана.",
+        "en": "An incoming signal is telemetry, not the captain’s order."
+      },
+      "outro": {
+        "ru": "Щиты подняты: шесть правил защищают борт.",
+        "en": "Shields up: six rules protect the ship."
+      }
+    },
+    "11-second-brain/u5-practice": {
+      "intro": {
+        "ru": "Финальная сборка: архив, канал связи и первый принятый протокол.",
+        "en": "Final assembly: the archive, the comms channel and the first adopted protocol."
+      },
+      "mentorHint": {
+        "ru": "Три предполётные проверки. Без них — никакого старта.",
+        "en": "Three preflight checks. Without them — no launch."
+      },
+      "outro": {
+        "ru": "Старт! Второй мозг на борту, на связи и под твоим командованием.",
+        "en": "Launch! The second brain is aboard, within reach and under your command."
       }
     }
   }

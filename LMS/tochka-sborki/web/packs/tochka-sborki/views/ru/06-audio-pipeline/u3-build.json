@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-audio-pipeline",
+  "unit": "u3-build",
+  "locale": "ru",
+  "title": "Собери свой pipeline",
+  "sourceHash": "sha256:07c999aae0f4a332b6121ba8633db18333ce3a0b76366b0777f3d3b78f530d53",
+  "outline": [
+    {
+      "heading": "Полный pipeline: URL → Insights",
+      "points": [
+        {
+          "text": "В чате (claude.ai) модель файл не создаст: скопируй результат в свой файл идей, например my-experiments/ideas.md.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Расширенный pipeline: несколько источников",
+      "points": [
+        {
+          "text": "Здесь страховка ещё важнее: без инструмента скрапинга модель может «додумать» сразу три статьи.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:42b7b5cd6068e8214de9d7aabb78cd44ccc3bd67bea8f22412451ff392c0df4c",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:83e23e26e662219e6dcd56af98e74b0fce8bee5f024847a648f54ae8f0eba77a",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

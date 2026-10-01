@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-introduction",
+  "unit": "u2-four-shifts",
+  "locale": "ru",
+  "title": "Четыре сдвига",
+  "sourceHash": "sha256:fd5a44d024c4275e46e5e0d8d8d4c5cec241f8434006170f34a0f64fbbca2d1c",
+  "outline": [
+    {
+      "heading": "Четыре сдвига в работе с AI-агентами",
+      "points": [
+        {
+          "text": "Это не «AI делает вместо тебя» — это четыре способа со-работы: разные грани того, как вы с агентом думаете и делаете вместе.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
+        {
+          "heading": "1️⃣ От команд → к делегированию",
+          "points": [
+            {
+              "text": "Агент — не робот, которому даёшь команды.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "2️⃣ От результата → к эксперименту",
+          "points": [
+            {
+              "text": "Первый ответ — черновик, не приговор.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "3️⃣ От действий → к спецификациям",
+          "points": [
+            {
+              "text": "Промпт — это ТЗ, не команда.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "4️⃣ От «всё сам» → к управлению вниманием",
+          "points": [
+            {
+              "text": "Делегируй агенту: рутину, первый черновик, поиск.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "cards": [
+    "c4",
+    "c5",
+    "c6",
+    "c7",
+    "c8"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:ef154b526c54f473d0da04b90092975b9dd341df9cb0ee412c2d7f4113e5f385",
+        "points": [
+          "Это не AI делает работу вместо тебя, а четыре способа того, как ты и агент думаете и делаете вместе."
+        ]
+      },
+      {
+        "sourceHash": "sha256:39a278769ead767309d43072669b6e34c80ff93a9c03241c07a40d3c78918413",
+        "points": [
+          "Агент — это не робот, которому ты просто даешь команды."
+        ]
+      },
+      {
+        "sourceHash": "sha256:7e1a85fc225e7c72ec792fd69fcf24d9735d77af95018a04337f48bb55ecbb4f",
+        "points": [
+          "Первый ответ — это только черновик, а не окончательный приговор."
+        ]
+      },
+      {
+        "sourceHash": "sha256:816766f767f0a64a6a023a20165a953dda5f9b9716b773ff7fdb28815bfa337b",
+        "points": [
+          "Твой промпт — это ТЗ, а не просто команда."
+        ]
+      },
+      {
+        "sourceHash": "sha256:508dffdd1f5b872ed124ee76afe9e72d1d2bf025bbb0490c74a1488bce3f1497",
+        "points": [
+          "Делегируй агенту рутину, поиск и создание первого черновика."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-living-practice",
+  "unit": "u1-dogovor",
+  "locale": "en",
+  "title": "The agreement: what is here and what is not",
+  "sourceHash": "sha256:997fdb49e30e6c4410712100b5052a6505d8e899c4df25cfdab72aa423655d79",
+  "outline": [
+    {
+      "heading": "What this course is",
+      "points": [
+        {
+          "text": "Eight steps of attention practice.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the research shows — unrounded",
+      "points": [
+        {
+          "text": "The largest review assembled for medical decision-making (Goyal et al., JAMA Internal Medicine, 2014; 47 clinical trials, 3,515 people) gives mindfulness programmes a small effect: anxiety d≈0.38, depression d≈0.30, pain d≈0.33 — against active controls.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the course does not do",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Risks named before the practice, not after",
+      "points": [
+        {
+          "text": "The reason is simple: 84% of clinical trials never asked about adverse events at all (Wong et al., cited in Baer et al., 2019).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Who may need company for this format",
+      "points": [
+        {
+          "text": "Not a ban and not a filter — routing.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Stop signals",
+      "points": [
+        {
+          "text": "If the heaviness persists beyond the session, contact a living professional.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:599b82760ba9700bf3f9223db96112927217741a9b3a63c920ed52c34b00152e",
+        "points": [
+          "This course offers eight steps of attention practice."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c5b10644198f82fda76dfbb71b8bb87e3ac3171e85f021e2172ed3a28b545b1f",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:294720f9357293d9703761f6255adac2bcfa9ac289dbc9329876f31c6d7d6d62",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:64a494b53c6ab706451036963bd3a857b13c42183c698e8ab9d193d5f56b0d39",
+        "points": [
+          "This is not a ban or a filter but a method of routing."
+        ]
+      },
+      {
+        "sourceHash": "sha256:ca43683e192b38d6680ccf8ce1c23caf9ab100aadda145ef5a9ab66e5c573fe0",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

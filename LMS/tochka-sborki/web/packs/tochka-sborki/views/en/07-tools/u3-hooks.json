@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "07-tools",
+  "unit": "u3-hooks",
+  "locale": "en",
+  "title": "Hooks: event automation",
+  "sourceHash": "sha256:b14b5befa5d90dad9dc16f3af18d40b2f48b98f400e790009a959eb92f972db2",
+  "outline": [
+    {
+      "heading": "Events for Hooks",
+      "points": [
+        {
+          "text": "None of these events happens by the clock.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Hook config",
+      "points": [
+        {
+          "text": "The >> redirect is required here: without it, echo writes not to the log but to standard output, which Claude Code itself parses.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Practical examples",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Security",
+      "points": [
+        {
+          "text": "A Hook can run any command.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c5",
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:62e1a7b4f3d55ea204f2bed2a96ab6ddb4c05027fc59230b54a6e2e004d93800",
+        "points": [
+          "None of these events happen according to a clock."
+        ]
+      },
+      {
+        "sourceHash": "sha256:32ca31b9f6ebd63304c6edfad4716442506c05ad3648a6af0b45ada6c8ded17a",
+        "points": [
+          "You need the >> redirect so echo writes to the log instead of standard output.",
+          "Claude Code parses standard output if you do not use this redirect."
+        ]
+      },
+      {
+        "sourceHash": "sha256:742d055e2b019ec7de57ea31bef11c8b862948316f7a86f90bd06336b10876e5",
+        "points": [
+          "A hook is able to run any command."
+        ]
+      }
+    ]
+  }
+}

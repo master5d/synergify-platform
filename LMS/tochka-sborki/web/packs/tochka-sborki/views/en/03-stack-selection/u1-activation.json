@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-stack-selection",
+  "unit": "u1-activation",
+  "locale": "en",
+  "title": "What are your constraints?",
+  "sourceHash": "sha256:53a5d13497ad568bfd80a336cdc10bdc0b1cd6657d745be8348180efdddc561f",
+  "outline": [
+    {
+      "heading": "Why not \"just Claude Code\"",
+      "points": [
+        {
+          "text": "And you're not \"worse\" — agentic AI is no longer a single-tool field, there are open alternatives.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What \"stack\" means here",
+      "points": [
+        {
+          "text": "For example: Claude Code → LiteLLM → Cerebras gpt-oss-120b — Claude Code UI with an open model Aider → direct OpenRouter → DeepSeek-Coder — classic OSS workflow Hermes → LiteLLM with fallback array — SOVERN pattern",
+          "origin": "extract"
+        },
+        {
+          "text": "This module teaches you to think about the whole stack rather than \"knowing one tool\".",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1",
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:b64251308729d4c19f8fd7c8cb599c3d4d6d9010c2fd6b90ffc8758fd89abc65",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:dddc201a20803451c7201a62794119f311d0fd4582352ca7b2254c5cbab925c9",
+        "points": [
+          "You can use stacks like Claude Code with LiteLLM and Cerebras gpt-oss-120b or Claude Code UI with Aider, OpenRouter, and DeepSeek-Coder.",
+          "Other options include the classic Hermes workflow with LiteLLM and a fallback array or the SOVERN pattern.",
+          "This module teaches you to think about the whole stack rather than knowing one tool."
+        ]
+      }
+    ]
+  }
+}

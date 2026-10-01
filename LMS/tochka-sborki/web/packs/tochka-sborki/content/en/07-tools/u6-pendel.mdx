@@ -1,0 +1,169 @@
+---
+title: "Pendel: your agent audits your project"
+unit: 6
+module: 7
+duration: "25 min"
+---
+
+<Phase type="activation">
+
+Bring to mind your project — the one you've been working in throughout the course.
+
+Don't look at it as a "finished thing". Picture a workshop after six months of work. The tools lie where they were last dropped. The bench is covered in shavings from three different jobs, and in the corner sits a box labelled "sort out later". You can still work here. But every new job starts with hunting for the right wrench.
+
+**Which corner of your workshop do you keep walking around because it has needed tidying for a long time?**
+
+</Phase>
+
+<Phase type="reflection">
+
+Cleanup usually gets postponed not out of laziness. It's unclear where to start, and starting with everything at once is scary: what if something breaks?
+
+Don't think of it as a "spring cleaning". Picture a car inspection before a long trip. The mechanic doesn't rebuild the engine. He goes down a list — oil, brakes, tyres, lights — and fixes whatever makes the trip unsafe. The rest he notes for next time.
+
+Consider this: you already have a partner who can read your whole project in minutes. What stopped you from simply asking it to take a look?
+
+</Phase>
+
+<Phase type="concept">
+
+## What "Pendel" is
+
+**Pendel** is Russian slang for "a kick in the pants". In this practice you ask your agent to run a hygiene audit of your project. Then you fix **three** items from its report. Nothing to install: the agent you already work with is enough — Claude Code, Codex or any other that reads your project files.
+
+The idea is simple: throughout the course you kept adding things to the project — a rules file, memory, hooks, skills. Pendel is the first time you look at the project as a whole and ask: what here gets in the way of working further?
+
+## Six audit zones
+
+| Zone | What we look for | Link to the course |
+|------|------------------|--------------------|
+| 1. File size and monoliths | The longest files in the project; files that mix several responsibilities (routing, logic, markup in one place) | A long file is a long context (05/u1) |
+| 2. Inline styles and mixed layers | Styles and scripts inside HTML or templates instead of separate files | Things kept separately are easier for the agent to edit |
+| 3. Clutter in agent settings | Stale permissions, duplicates, absolute paths to other folders, keys and tokens in the config | MCP and hooks config (07/u2, 07/u3) |
+| 4. The agent's rules file | CLAUDE.md or AGENTS.md: length, contradictions, outdated instructions | Aim for about 200 lines (05/u3) |
+| 5. Memory between sessions | Is there a file with the project state: what's done, what's left, what problems exist | Context compression (05/u4) |
+| 6. Hooks | Is there at least one automatic check; is it clear what the existing ones do | Hooks and their security (07/u3) |
+
+If your agent doesn't support a zone (hooks, for example), it should say so in the report. That's a finding too.
+
+## The audit prompt
+
+Copy it whole and send it to your agent at the root of your project:
+
+```
+Run a hygiene audit of this project. Change NOTHING — only read and report.
+
+Go through six zones:
+1. File size: show the 10 longest files (path and line count) and flag the ones
+   where a single file mixes several responsibilities.
+2. Inline styles and scripts: where styles or code live inside HTML/templates.
+3. Agent settings (for example .claude/settings.json, .claude/settings.local.json,
+   .mcp.json, your agent's config): stale permissions, duplicates, absolute paths,
+   keys or tokens in plain text.
+4. Rules file (CLAUDE.md / AGENTS.md): length, contradictions, outdated instructions.
+5. Memory between sessions: is there a file that lets a new session understand
+   what's done and what's left.
+6. Hooks: which exist and what each one does; if there are none, say so.
+
+Answer format — a table: zone | finding | file | why it gets in the way | effort (small/medium/large).
+If a zone is fine, say so — don't invent problems.
+At the end, suggest THREE items that give the most benefit at the lowest risk,
+and explain your choice.
+```
+
+The first line matters: auditing and fixing are separate steps. First you see the picture, then you decide what to touch.
+
+## The rule: fix three, not everything
+
+The report may turn out long. Don't try to close all of it in one go:
+
+- **Three items** is what you can check with your own eyes. Nobody reviews twenty edits at once — they just get taken on faith.
+- **One at a time.** One fix → check → commit → the next one. If something breaks, you know which edit is to blame.
+- **The rest goes on a list.** Move unhandled findings to TODO.md (05/u2): they aren't lost, they're waiting their turn.
+
+## How to check that a fix didn't break anything
+
+Before you start, make sure the project is in git and the working tree is clean:
+
+```
+git status
+```
+
+If there are uncommitted changes, commit them separately first. If the project isn't in git — `git init` and a first commit (or at least a copy of the folder).
+
+After each fix:
+
+1. `git diff --stat` — which files changed. If the agent touched something you didn't ask about, that's a reason to stop and ask why.
+2. `git diff` — read the changes themselves. Especially in config and hooks: a hook can run any command (07/u3).
+3. **Run the project** the way you usually do: open the page, run the script, run the tests if you have them. Works as before — commit. Doesn't work — `git restore .` brings the changed files back to the last commit. New files the agent created show up separately in `git status`: remove those by hand. After the rollback you can ask the agent to try another way.
+
+## An example from a review
+
+*This is a retelling of a reader's review of a third-party starter kit for Claude Code, not our measurement. The numbers are his.*
+
+The reader never installed the starter itself, but in his words it "gave him a kick", and he got to work on his project. The result, by his own account: he set up a SNAPSHOT.md file as memory between sessions, broke up a monolithic index.php (the router shrank from 1295 to 103 lines), moved styles out of the HTML, wrote a rule into CLAUDE.md, cleaned up settings.local.json and added a hook on file size — the first hook of his life.
+
+Notice: that's more than three items, and that happens too. The "three" rule isn't a ceiling — it's a guard against edits nobody checked.
+
+<SelfCheck id="c11"/>
+
+<SelfCheck id="c12"/>
+
+<SelfCheck id="c13"/>
+
+</Phase>
+
+<Phase type="practice">
+
+1. Commit the current state of the project (`git status` should be clean).
+2. Send the audit prompt from this lesson to your agent.
+3. Read the report and pick **three** items. You can take the ones the agent suggested or your own.
+4. Fix them one at a time: the agent fixes the item → `git diff --stat` and `git diff` → run the project → commit.
+5. Move the remaining findings to TODO.md.
+
+Save the result to `my-experiments/u6-pendel.md` using the template:
+
+```markdown
+# Pendel — project audit
+
+Date:
+Agent: (Claude Code / Codex / other)
+Project:
+
+## Audit report (briefly, by zone)
+1. File size and monoliths:
+2. Inline styles and mixed layers:
+3. Agent settings:
+4. Rules file:
+5. Memory between sessions:
+6. Hooks:
+
+## Three fixes
+### 1. <what>
+- Why this item:
+- What changed (git diff --stat):
+- How I checked nothing broke:
+- Commit:
+
+### 2. <what>
+- Why this item:
+- What changed (git diff --stat):
+- How I checked nothing broke:
+- Commit:
+
+### 3. <what>
+- Why this item:
+- What changed (git diff --stat):
+- How I checked nothing broke:
+- Commit:
+
+## Deferred to TODO.md
+-
+
+## What surprised me
+-
+```
+
+Run Pendel again in a month — and compare the two reports.
+
+</Phase>

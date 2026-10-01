@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-living-practice",
+  "unit": "u3-telo",
+  "locale": "en",
+  "title": "Body: a scan with your eyes open",
+  "sourceHash": "sha256:d98e8f7f1f3b7edde60ca8b1f97e0fe52b1c3e88857fcf42c01b5d6106893d9a",
+  "outline": [
+    {
+      "heading": "Why attention to the body at all",
+      "points": [
+        {
+          "text": "The body gives what the breath cannot: scale.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The honest caveat that usually gets put at the end",
+      "points": [
+        {
+          "text": "With a history of trauma, prolonged uninterrupted concentration on bodily sensation is not a suitable format.",
+          "origin": "extract"
+        },
+        {
+          "text": "David Treleaven, Trauma-Sensitive Mindfulness (W. W. Norton, 2018) is the practical frame the field of trauma-sensitive practice stands on.",
+          "origin": "extract"
+        },
+        {
+          "text": "The second source is population data: Goldberg, Lam, Britton and Davidson (Psychotherapy Research, 2022; 434 people with meditation experience).",
+          "origin": "extract"
+        },
+        {
+          "text": "In their sample, re-experiencing traumatic material is among the most frequent adverse effects, and adverse childhood events appear as a risk factor.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The window of tolerance",
+      "points": [
+        {
+          "text": "Treleaven's central notion is the window of tolerance.",
+          "origin": "extract"
+        },
+        {
+          "text": "The task is not to \"finish the scan\" but to stay inside the window, even if that means cutting the scan off halfway.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Four modifications that make the format safer",
+      "points": [
+        {
+          "text": "A fifth, separate one: movement as a way back.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What is not done here",
+      "points": [
+        {
+          "text": "No \"working with the holding pattern\", no \"releasing trauma from the body\", no \"breathing into the pain\".",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:d4cd352ae298ac9902f54bb8e5e46c64612f7f5e16f47abd0c0180994c5279a8",
+        "points": [
+          "The body gives you scale that the breath cannot."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fc0170dff4361e25b465dc76c8f96ea39d315fa0a522526df707b486b67967eb",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:bb43480e2cb9e018870a5983df1780a6f83e8c10015a6ab21f393fab1fbaaa71",
+        "points": [
+          "Treleaven's central notion is the window of tolerance.",
+          "Your task is to stay inside the window rather than finishing the scan.",
+          "You may need to cut the scan off halfway to stay within the window."
+        ]
+      },
+      {
+        "sourceHash": "sha256:f752e6baf3e351f7eea0c2ad61898c718c390d375ff2f0918c00e499e78984c8",
+        "points": [
+          "Movement is a separate fifth way back."
+        ]
+      },
+      {
+        "sourceHash": "sha256:143b5b1e2d42d92db9f03d8e2c36d3ff2b1f94e22de87f151e28d66efb37ac52",
+        "points": [
+          "You do not work with the holding pattern, release trauma from the body, or breathe into the pain."
+        ]
+      }
+    ]
+  }
+}

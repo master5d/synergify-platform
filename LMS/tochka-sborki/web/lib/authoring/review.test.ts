@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { lintReadability, buildPolishPrompt } from './review'
-import { draftLesson, SAMPLE_NOTES } from './draft'
+import { lintReadability, lintPhaseOrder, buildPolishPrompt } from './review'
+import { draftLesson, SAMPLE_NOTES, validateDraftMdx } from './draft'
+import { existsSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { lintDehustle } from './dehustle'
 
 const clean = draftLesson({
@@ -24,6 +26,66 @@ describe('lintReadability', () => {
   it('flags a too-vague practice step', () => {
     const dirty = clean.replace('Do this: name one real task you want this module to help you finish', 'Do this: go')
     expect(lintReadability(dirty).some(e => /too vague/.test(e))).toBe(true)
+  })
+})
+
+// Хвосты волны 18: две ложные находки review-lesson на реальных уроках ТС.
+describe('ложные находки линтера (повторы багов волны 18)', () => {
+  // Файл в рабочем дереве Windows (core.autocrlf=true) приходит с CRLF — строим повтор в тесте,
+  // а не файлом-фикстурой: git нормализовал бы её в LF, и на Linux-чекауте баг бы не воспроизводился.
+  const crlf = clean.replace(/\n/g, '\r\n')
+  it('CRLF-фронтматтер не даёт «missing title» (validateDraftMdx)', () => {
+    expect(crlf).toMatch(/^---\r\ntitle: "/)
+    expect(validateDraftMdx(crlf)).toEqual(validateDraftMdx(clean))
+    expect(validateDraftMdx(crlf)).not.toContain('frontmatter: missing title')
+  })
+  it('CRLF + BOM — тот же вердикт, что у LF', () => {
+    expect(validateDraftMdx('﻿' + crlf)).toEqual(validateDraftMdx(clean))
+    expect(lintReadability('﻿' + crlf)).toEqual(lintReadability(clean))
+  })
+  it('без фронтматтера «missing title» по-прежнему ловится (исправление не глушит проверку)', () => {
+    expect(validateDraftMdx(crlf.replace(/^---\r\ntitle: "[^"]*"\r\n/, '---\r\n'))).toContain('frontmatter: missing title')
+  })
+  it('имя файла TODO.md — не заглушка (модуль 05 учит этому файлу)', () => {
+    const withFile = clean.replace('Do this:', 'Open TODO.md and do this:')
+    expect(lintReadability(withFile).some(e => /leftover TODO/.test(e))).toBe(false)
+  })
+  it('голый TODO и «TODO.» в конце фразы — по-прежнему заглушка', () => {
+    expect(lintReadability(clean.replace('Do this:', 'TODO Do this:')).some(e => /leftover TODO/.test(e))).toBe(true)
+    expect(lintReadability(clean.replace('Do this:', 'Finish later TODO. Do this:')).some(e => /leftover TODO/.test(e))).toBe(true)
+  })
+  it('реальный урок 05/u3-memory (CRLF с диска, упоминает TODO.md) — ни одной из двух ложных находок', () => {
+    for (const locale of ['ru', 'en']) {
+      const file = join(process.cwd(), 'packs', 'tochka-sborki', 'content', locale, '05-context-memory', 'u3-memory.mdx')
+      if (!existsSync(file)) continue
+      const raw = readFileSync(file, 'utf8')
+      const mdx = raw.includes('\r\n') ? raw : raw.replace(/\n/g, '\r\n')
+      const all = [...validateDraftMdx(mdx), ...lintReadability(mdx)]
+      expect(all.filter(f => /missing title|leftover TODO/.test(f))).toEqual([])
+    }
+  })
+})
+
+describe('lintPhaseOrder', () => {
+  it('passes a clean S3 draft (activation -> reflection -> concept -> practice)', () => {
+    expect(lintPhaseOrder(clean)).toEqual([])
+  })
+  it('flags reflection and concept swapped (the real 03-stack-selection/u2-stack-matrix bug)', () => {
+    const swapped = clean
+      .replace('<Phase type="reflection">', '<Phase type="TMP">')
+      .replace('<Phase type="concept">', '<Phase type="reflection">')
+      .replace('<Phase type="TMP">', '<Phase type="concept">')
+    const findings = lintPhaseOrder(swapped)
+    expect(findings).toHaveLength(1)
+    expect(findings[0]).toMatch(/expected order activation -> reflection -> concept -> practice/)
+    expect(findings[0]).toMatch(/got activation -> concept -> reflection -> practice/)
+  })
+  it('ignores prose-layout content with no Phase tags', () => {
+    expect(lintPhaseOrder('# Just a page\n\nNo phases here.')).toEqual([])
+  })
+  it('does not pile on when a phase is missing entirely (lintReadability already flags it)', () => {
+    const missingPractice = clean.replace(/<Phase type="practice">[\s\S]*<\/Phase>/, '')
+    expect(lintPhaseOrder(missingPractice)).toEqual([])
   })
 })
 

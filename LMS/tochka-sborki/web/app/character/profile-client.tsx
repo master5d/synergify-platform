@@ -12,7 +12,9 @@ import { CharterCard } from '@/components/intake/charter-card'
 import { LearningPlanCard } from '@/components/intake/learning-plan-card'
 import { CompanionSetup } from '@/components/intake/companion-setup'
 import { OfficeHoursCard } from '@/components/office-hours-card'
-import { useNicheDungeonCleared } from '@/lib/dungeon/use-dungeon'
+import { useDungeonBossCleared } from '@/lib/dungeon/use-dungeon'
+import { dungeonModuleFor } from '@/lib/dungeon/dungeon-module'
+import { profileTaskRoute } from '@/lib/intake/task-route'
 import wandererPack from '@pack/skins/wanderer.json'
 import type { SkinPack } from '@/lib/rpg/types'
 import type { Locale } from '@/lib/intake/types'
@@ -28,7 +30,11 @@ export function ProfileClient({ modules, locale }: Props) {
   const { getState, loaded } = useProgress()
   const [profile, setProfile] = useState<any>(null)
   const [pack, setPack] = useState<SkinPack | null>(null)
-  const nicheDungeonCleared = useNicheDungeonCleared(profile?.niche ?? null)
+  // Флаг на карте мира: пройден ли босс подземелья ТОГО модуля, что выбран сейчас (русло / прогресс).
+  const dungeonModule = profile && loaded
+    ? dungeonModuleFor(profileTaskRoute(profile), Object.keys(modules), (slug) => getState(slug) === 'completed')
+    : null
+  const nicheDungeonCleared = useDungeonBossCleared(dungeonModule)
 
   useEffect(() => {
     fetch('/api/intake/me', { credentials: 'include' })
@@ -62,7 +68,8 @@ export function ProfileClient({ modules, locale }: Props) {
           </div>
         </div>
       </main>
-      <LearningPlanCard profile={profile} zones={vm.zones} locale={locale} />
+      <LearningPlanCard profile={profile} zones={vm.zones} locale={locale}
+        moduleTitles={Object.fromEntries(Object.entries(modules).map(([slug, m]) => [slug, m.title]))} />
       <CharterCard profile={profile} locale={locale} />
       <CompanionSetup profile={profile} locale={locale} />
       <OfficeHoursCard locale={locale} />
