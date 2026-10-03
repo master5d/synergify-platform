@@ -582,6 +582,10 @@
 
 ## Owner-gated (ждут решения владельца)
 
+- [ ] **ТС: две ссылки в материалы модуля «Обучение моделей»** (intake LMS#21). HF «The Smol Training Playbook»
+  (`huggingface.co/spaces/HuggingFaceTB/smol-training-playbook`) и «LLM Evaluation Guidebook»
+  (`huggingface.co/spaces/OpenEvals/evaluation-guidebook`) → `packs/tochka-sborki/materials.ts`, группа «Фундамент», с пометкой
+  «англ.». Только ссылкой: лицензия у Space не указана, русские PDF-переводы из Telegram не перезаливать.
 - [ ] **CI: сборка академии падает на скачивании шрифтов Google (флейк, 2 раза за 2026-09-28).** `deploy-academy` → Turbopack
   «Can't resolve '@vercel/turbopack-next/internal/font/google/font'» / «next/font/google queries have exactly one entry»; перезапуск
   шага проходит. Лечение — шрифты локально (`next/font/local`, файлы в репо) вместо `next/font/google` в `academy/`, тогда сборка

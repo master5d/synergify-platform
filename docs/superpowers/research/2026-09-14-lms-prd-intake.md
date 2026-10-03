@@ -33,6 +33,7 @@
 | LMS#14 | «Схемы про курсы/YouTube/маркетплейсы — территория MC-Hub/logos-foundry» — пост sifuyik о awesome_ai_agents + «10 схем заработка» | Evernote 12a54ffd-9be1-81ea-3b0b-a244451ba56d | `already covered` (повтор AGORA#1) | `already covered` | паттернов нет |
 | LMS#15 | «tochka + Mamaev coach» — реклама ELVTR «AI Solution Architect» (Duc Haba) + решение владельца о роли на mamaev.coach | Evernote f542046f-2e7c-c597-2a24-0c66a1bb03e5 | `pattern-only` (ступень роли в роадмапе) | курс ELVTR — `reject` | mamaev.coach: роль правится (mc_hub) |
 | LMS#16 | «Курс онлайн випасспна» — эссе-критика онлайн-курса mindfulness; запрос владельца: аудит нашего курса по ней + есть ли он в реестре | Evernote 28703ac6-bda8-7661-0fb0-b15c333788de | — | **аудит `living-practice`**: в реестре есть (`live`); 1 HIGH + 5 находок | паттернов нет |
+| LMS#21 | «Tochka sborki» — список владельца из 5 тем + подборка @prompt_design 1807 (повтор LMS#2) | Evernote fadc380d-b5b9-b8db-ed2b-552c930962d3 | `already covered` (материалы ТС, «Азбука», модуль «Обучение моделей») | `already covered` | 2 ссылки в материалы advanced-модуля (owner-gated) |
 
 ---
 
@@ -1052,3 +1053,40 @@ worked examples в практиках (полный разбор → с проп
 персонализации.
 
 ---
+
+## LMS#21 — «Tochka sborki»: список владельца из 5 тем + подборка @prompt_design 1807 (2026-10-03)
+
+**Источник:** Evernote `fadc380d-b5b9-b8db-ed2b-552c930962d3` (share-ссылка, заметка 2026-09-30, без медиа —
+`resources` пуст, конвертировать нечего). Текст — список владельца из пяти тем: «что такое ИИ», ML для начинающих,
+LLM и их обучение, курс про ИИ-агентов, ИИ в картинках, плюс ссылка на пост `t.me/prompt_design/1807`
+(2025-12-15). **Повтор:** тот же пост разобран как LMS#2 (Evernote `dddc0fc4-aa00-4ac1-c5ec-bd7d275eb2de`);
+по GUID повтор не виден, нашёлся по номеру поста.
+
+**Реальность источника:** пост публичный, все ссылки живые (проверено 2026-10-03, HTTP 200): четыре курса
+Microsoft (`translations/ru`), HF Spaces «The Smol Training Playbook» и «LLM Evaluation Guidebook». Русские
+переводы гайдов HF («переводы от Сергея») — PDF во вложениях Telegram-постов 1747/1828/1788; переводчик не назван
+полностью, лицензия перевода не указана. «LLM в картинках» (пост 1392) — PDF-конспект в комментариях, автор не
+указан: происхождение не проверяется.
+
+**Сверка списка владельца с курсом:**
+
+| Тема владельца | Что в ТС | Статус |
+|---|---|---|
+| 1. Что такое ИИ | юнит «Азбука» до модуля 0 (LMS#1) | покрыто |
+| 2. ML для начинающих | `materials.ts` → ML-For-Beginners | покрыто |
+| 3. LLM и их обучение | модуль «Обучение моделей» (advanced, LMS#2/#4), в материалах HF LLM Course + smol-course | покрыто; Smol Training Playbook и Evaluation Guidebook в материалах нет |
+| 4. Курс про ИИ-агентов | `materials.ts` → AI Agents for Beginners + своя русская карта `ms-agents-map.md` | покрыто |
+| 5. ИИ в картинках | — | не берём: автор конспекта неизвестен, PDF во вложениях Telegram |
+
+Русские версии курсов Microsoft сознательно не используются: это машинный перевод (Co-op Translator), решение
+записано комментарием в `packs/tochka-sborki/materials.ts`. Пересматривать его этот intake не даёт оснований.
+
+**Вердикт:** `already covered` (ТС и LMS). Лабе — нет.
+
+**Паттерны:**
+- взято (owner-gated) → BACKLOG: две ссылки в материалы модуля «Обучение моделей» — HF «The Smol Training Playbook»
+  (как устроены претрейн и дообучение) и «LLM Evaluation Guidebook» (оценка моделей, свои вайб-тесты). Только
+  ссылкой на оригинал в HF Spaces: лицензия у обоих Space не указана, PDF-переводы из Telegram не перезаливать.
+- не брать: «From Code Foundation Models to Agents and Applications» (arXiv 2511.18538, 200 стр.) — обзор для
+  исследователей, новичку ТС не по уровню; awesome-ai-apps / awesome-llm-apps уже разобраны в LMS#2 (шпаргалка);
+  PDF «LLM в картинках» — происхождение не проверяется.
