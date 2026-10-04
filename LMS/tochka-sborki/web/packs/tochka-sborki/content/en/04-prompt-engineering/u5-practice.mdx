@@ -42,6 +42,18 @@ Each of its responses must:
 Include all parameters important for quality.
 ```
 
+### Second way: a prompt from a solved task
+
+Sometimes it works better from the other end. First solve the task together with the model in an ordinary chat: clarify, correct, until the result is what you need. Then ask the model to pack that path into a prompt:
+
+```
+We have just brought this task to a result I like.
+Write a prompt that gets the same result on the first try
+with similar data. Include everything I clarified and corrected along the way.
+```
+
+Test the prompt in a **new** chat on a different example. If the result is worse, add what was missing and test again. A prompt like this already knows your corrections instead of guessing them.
+
 ### Template for a reusable assistant
 
 For repeating tasks (Claude Project, Gemini Gem, Claude Code Skill):

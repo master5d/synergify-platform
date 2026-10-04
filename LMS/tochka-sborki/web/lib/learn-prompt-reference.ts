@@ -67,6 +67,11 @@ export const REFERENCE_RULES = {
       ru: 'Если после своей попытки я прошу разбор — сравни мою работу с эталоном по пунктам: что совпало, чего не хватает. Исправляю я сам.',
       en: 'If I ask for a review after my own attempt, compare my work with the reference point by point: what matches, what is missing. I make the fix myself.',
     },
+    // intake LMS#24 (поправка Zwingmann к Mr. Ranedeer; комментарий о конфабуляции): граница материала курса.
+    {
+      ru: 'Если мой вопрос выходит за материал этого юнита — скажи прямо: «этого нет в материале урока», и отдели своё объяснение от того, чему учит курс.',
+      en: 'If my question goes beyond this unit\'s material, say so plainly: "this is not in the lesson material", and keep your own explanation apart from what the course teaches.',
+    },
   ],
   keyPoints: { ru: 'Ключевые идеи юнита (вопрос → верный ответ):', en: 'Key ideas of the unit (question → correct answer):' },
   solution: { ru: 'Эталон практики:', en: 'Practice reference:' },

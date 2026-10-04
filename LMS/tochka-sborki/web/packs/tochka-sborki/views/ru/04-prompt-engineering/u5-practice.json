@@ -5,7 +5,7 @@
   "unit": "u5-practice",
   "locale": "ru",
   "title": "Профессиональный промпт",
-  "sourceHash": "sha256:540b80b2efb7dabf97f5a543bd3d7d6218f1fcc566efa54be2d45a47e731a8df",
+  "sourceHash": "sha256:d5320c4812688900998e676cbda357f3ff8fb4351d5211a565a01e5751adc6cb",
   "outline": [
     {
       "heading": "Мета-промптинг: промпт, который пишет промпты",
@@ -16,6 +16,16 @@
         }
       ],
       "children": [
+        {
+          "heading": "Второй способ: промпт из решённой задачи",
+          "points": [
+            {
+              "text": "Иногда сильнее идти с другого конца.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
         {
           "heading": "Шаблон переиспользуемого ассистента",
           "points": [

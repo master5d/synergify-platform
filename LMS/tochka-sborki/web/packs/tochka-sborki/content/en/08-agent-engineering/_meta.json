@@ -26,7 +26,7 @@
     },
     {
       "id": "o4",
-      "text": "Check an agent against the five blocks of production readiness and assign a problem to the right block"
+      "text": "Check an agent against the six blocks of production readiness and assign a problem to the right block"
     },
     {
       "id": "o5",
@@ -150,7 +150,7 @@
       "id": "c9",
       "unit": "u4-production-infra",
       "objective": "o4",
-      "question": "Three days ago step 4 went wrong, and you want to see what exactly the model replied. Which of the five blocks is responsible for this?",
+      "question": "Three days ago step 4 went wrong, and you want to see what exactly the model replied. Which of the six blocks is responsible for this?",
       "options": [
         "Execution",
         "Cost control",

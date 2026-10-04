@@ -166,6 +166,54 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
         href: 'https://github.com/huggingface/smol-course',
         external: true,
       },
+      // intake LMS#21: только ссылкой на оригинал — лицензия у Space не указана,
+      // русские PDF-переводы из Telegram не перезаливаем.
+      {
+        kind: 'link',
+        title: { ru: 'The Smol Training Playbook (англ.)', en: 'The Smol Training Playbook' },
+        description: {
+          ru: 'Hugging Face о том, как на практике обучают и дообучают LLM: данные, претрейн, пост-тренинг. Чтение к модулю «Обучение моделей»',
+          en: 'Hugging Face on how LLMs are actually trained and fine-tuned: data, pre-training, post-training. Reading for the Model Training module',
+        },
+        href: 'https://huggingface.co/spaces/HuggingFaceTB/smol-training-playbook',
+        external: true,
+      },
+      {
+        kind: 'link',
+        title: { ru: 'LLM Evaluation Guidebook (англ.)', en: 'LLM Evaluation Guidebook' },
+        description: {
+          ru: 'Hugging Face о том, как устроены бенчмарки и как оценить модель под свою задачу, включая свои «вайб-тесты»',
+          en: 'Hugging Face on how benchmarks work and how to evaluate a model for your own task, including your own "vibe tests"',
+        },
+        href: 'https://huggingface.co/spaces/OpenEvals/evaluation-guidebook',
+        external: true,
+      },
+    ],
+  },
+  {
+    // intake LMS#32: spec-driven фреймворки процесса. Оба MIT. Лаборатория курса сама работает на superpowers.
+    label: { ru: 'Процесс для проектов побольше', en: 'Process for bigger projects' },
+    items: [
+      {
+        kind: 'link',
+        title: { ru: 'Superpowers (англ.)', en: 'Superpowers' },
+        description: {
+          ru: 'Набор навыков для Claude Code: сначала план, потом тесты и код, затем ревью. Нужен, когда проект дольше одного вечера. MIT',
+          en: 'A skill set for Claude Code: plan first, then tests and code, then review. Useful once a project outgrows one evening. MIT',
+        },
+        href: 'https://github.com/obra/superpowers',
+        external: true,
+      },
+      {
+        kind: 'link',
+        title: { ru: 'Spec Kit от GitHub (англ.)', en: 'GitHub Spec Kit' },
+        description: {
+          ru: 'Разработка от спецификации: сначала описываешь, что строишь, агент строит по описанию. Работает с разными агентами. MIT',
+          en: 'Spec-driven development: describe what you are building first, the agent builds from the description. Works with several agents. MIT',
+        },
+        href: 'https://github.com/github/spec-kit',
+        external: true,
+      },
     ],
   },
   {

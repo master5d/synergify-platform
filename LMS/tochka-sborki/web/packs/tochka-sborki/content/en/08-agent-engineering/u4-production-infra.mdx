@@ -17,19 +17,20 @@ Run it in your head: what in your agent keeps the lights on when you're not arou
 
 <Phase type="reflection">
 
-Production infrastructure for agent systems has 5 building blocks:
+Production infrastructure for agent systems has 6 building blocks:
 
 1. **Execution** — where and how it runs
 2. **Observability** — how you see what's happening
 3. **Reliability** — what to do when things break
 4. **Cost control** — how not to go broke
 5. **Security** — who has access
+6. **Quality** — how you know the agent answers well
 
-The vibe coder usually thinks only about (1). The agent engineer thinks about all five.
+The vibe coder usually thinks only about (1). The agent engineer thinks about all six.
 
 Don't picture this as "a list of settings" — picture it as a **hydroelectric dam**. All you see is the wall. But the real work lives in the floodgates, the water-level sensors, the emergency spillways nobody notices until a flood comes. Those are what keep the city dry.
 
-Each of the five blocks is one such gate. While everything is calm — it's invisible. What happens when the first gate on your agent fails?
+Each of the six blocks is one such gate. While everything is calm — it's invisible. What happens when the first gate on your agent fails?
 
 </Phase>
 
@@ -133,6 +134,10 @@ For your workflow from unit 3, answer:
 **Security:**
 - Where are the API keys stored?
 - What would another person see if they got access to the laptop/server?
+
+**Quality:**
+- Do you have 10–20 example inputs with expected results that you rerun after every change to a prompt or a step?
+- What is checked by code (format, fields, length), what by a judge model against criteria, and what do you look at yourself on a sample?
 
 This is a **production readiness checklist**. Save your answers to `my-experiments/u4-readiness.md`.
 

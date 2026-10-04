@@ -5,7 +5,7 @@
   "unit": "u5-practice",
   "locale": "en",
   "title": "A professional prompt",
-  "sourceHash": "sha256:54bd97fd45c37cd6fcf8b9176c522af3c84bfea6fdac8fff009e1291d671abb7",
+  "sourceHash": "sha256:92ce18906702af2e1cc13616c30214e4b3cc1e6d0eccf82cb52e94ed3b63eaae",
   "outline": [
     {
       "heading": "Meta-prompting: a prompt that writes prompts",
@@ -16,6 +16,16 @@
         }
       ],
       "children": [
+        {
+          "heading": "Second way: a prompt from a solved task",
+          "points": [
+            {
+              "text": "Sometimes it works better from the other end.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
         {
           "heading": "Template for a reusable assistant",
           "points": [

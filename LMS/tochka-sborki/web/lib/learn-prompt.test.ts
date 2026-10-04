@@ -285,6 +285,14 @@ describe('companion guard: no ready-made fix, reference hidden, no MBTI (any pac
     expect(buildLearnPrompt({ ...base, reference: null })).toBe(buildLearnPrompt(base))
   })
 
+  it('reference carries the «not in the lesson material» rule (intake LMS#24, ru/en)', () => {
+    const pattern = { ru: /нет в материале урока/, en: /not in the lesson material/ } as const
+    for (const locale of ['ru', 'en'] as const) {
+      expect(REFERENCE_RULES.rules.some((r) => pattern[locale].test(r[locale]))).toBe(true)
+      expect(buildLearnPrompt({ ...base, locale, reference: ref })).toMatch(pattern[locale])
+    }
+  })
+
   it('reference never reaches the ?q= prefill, which stays within MAX_BOOTSTRAP', () => {
     for (const locale of ['ru', 'en'] as const) {
       for (const studyMode of ['learn', 'practice'] as const) {
