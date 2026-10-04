@@ -155,7 +155,7 @@
         "“This is completely wrong! Redo it now!”",
         "“No. Redo it.”",
         "The same original request, sent again",
-        "“That didn’t work. Try without recursion.”"
+        "“That didn’t work. Try shorter, without an introduction.”"
       ],
       "answer": 3,
       "explain": "The lesson names aggressive tone as one of the sins. A working correction is neutral and says what to change (u4, sin 5)."

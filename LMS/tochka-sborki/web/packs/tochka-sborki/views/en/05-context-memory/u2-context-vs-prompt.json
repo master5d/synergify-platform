@@ -5,7 +5,7 @@
   "unit": "u2-context-vs-prompt",
   "locale": "en",
   "title": "Context vs Prompt",
-  "sourceHash": "sha256:bdd3ba66a2a0f20c8365ed0498205193143764648b6b97c8ce7aab6b13eccce2",
+  "sourceHash": "sha256:afe89d47e843d9dc0fd41bb15ea2282a89813c9f3df04c93c2532c3b49cfdd42",
   "outline": [
     {
       "heading": "Separating context and prompt",

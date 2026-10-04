@@ -172,7 +172,21 @@ For when every cloud goes dark at the same time (it happens):
 ```bash
 # Download model (via HuggingFace mirror)
 # in China: https://hf-mirror.com replaces huggingface.co
-wget https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf
+<OsBlock os="macos linux">
+
+```bash
+curl -LO https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+Invoke-WebRequest -Uri "https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf" -OutFile "Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
+```
+
+</OsBlock>
 
 # Run llama-server (needs llama.cpp)
 llama-server -m Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf --port 8080
@@ -211,16 +225,32 @@ Minimum to complete the unit:
 2. Install LiteLLM locally and run the proxy on `localhost:4000`
 3. Make a test call:
 
+<OsBlock os="macos linux">
+
 ```bash
 curl http://localhost:4000/chat/completions \
   -H "Content-Type: application/json" \
   -d '{"model": "fast-pool", "messages": [{"role":"user","content":"Hi, who are you?"}]}'
 ```
 
+</OsBlock>
+
+<OsBlock os="windows">
+
+In PowerShell, use `curl.exe` on one line:
+
+```powershell
+curl.exe http://localhost:4000/chat/completions -H "Content-Type: application/json" -d '{"model":"fast-pool","messages":[{"role":"user","content":"Hi, who are you?"}]}'
+```
+
+</OsBlock>
+
 4. Save a screenshot of the response to `my-experiments/u3-cerebras-via-litellm.png`
 
 **Optional (for the future Sovereign hands-on):**
 - Download Qwen3-Coder GGUF via `hf-mirror.com`
 - Run llama-server, add it to LiteLLM as a fallback
+
+For llama.cpp, use `brew install llama.cpp` on macOS or `winget install ggml.llamacpp` on Windows; if the package is not found, check the current llama.cpp README.
 
 </Phase>

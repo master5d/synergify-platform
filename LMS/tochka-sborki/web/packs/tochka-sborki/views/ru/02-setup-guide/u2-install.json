@@ -5,7 +5,7 @@
   "unit": "u2-install",
   "locale": "ru",
   "title": "Установка инструментов",
-  "sourceHash": "sha256:b2622fb8a72a6f8a8d3a34680c2f0fed9575f9498cba10b1a246ba73438298b5",
+  "sourceHash": "sha256:44122a7c8bd42524c8160ce0f97a4df0a28d64743310b648472110f7ee54033f",
   "outline": [
     {
       "heading": "⚡ Быстрая установка (одной строкой)",

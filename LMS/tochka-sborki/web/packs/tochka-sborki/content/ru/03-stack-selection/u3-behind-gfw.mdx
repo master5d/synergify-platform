@@ -168,7 +168,21 @@ litellm --config $HOME\.config\litellm\config.yaml --port 4000
 ```bash
 # Качаем модель (через зеркало HuggingFace)
 # для Китая: https://hf-mirror.com заменяет huggingface.co
-wget https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf
+<OsBlock os="macos linux">
+
+```bash
+curl -LO https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+Invoke-WebRequest -Uri "https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf" -OutFile "Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf"
+```
+
+</OsBlock>
 
 # Запускаем llama-server (нужен llama.cpp)
 llama-server -m Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf --port 8080
@@ -207,16 +221,32 @@ aider --model openai/fast-pool --openai-api-base http://localhost:4000
 2. Установи LiteLLM локально и запусти proxy на `localhost:4000`
 3. Сделай тестовый запрос:
 
+<OsBlock os="macos linux">
+
 ```bash
 curl http://localhost:4000/chat/completions \
   -H "Content-Type: application/json" \
   -d '{"model": "fast-pool", "messages": [{"role":"user","content":"Привет, кто ты?"}]}'
 ```
 
+</OsBlock>
+
+<OsBlock os="windows">
+
+В PowerShell используй `curl.exe` одной строкой:
+
+```powershell
+curl.exe http://localhost:4000/chat/completions -H "Content-Type: application/json" -d '{"model":"fast-pool","messages":[{"role":"user","content":"Привет, кто ты?"}]}'
+```
+
+</OsBlock>
+
 4. Скриншот ответа сохрани в `my-experiments/u3-cerebras-via-litellm.png`
 
 **Опционально (на будущее, для практики Sovereign):**
 - Скачай Qwen3-Coder GGUF через `hf-mirror.com`
 - Запусти llama-server, добавь его в LiteLLM как fallback
+
+Для llama.cpp: на macOS используй `brew install llama.cpp`, на Windows — `winget install ggml.llamacpp`; если пакет не находится, смотри актуальный README llama.cpp.
 
 </Phase>

@@ -49,7 +49,6 @@ Claude Code has its own file, `CLAUDE.md`. So you don't keep two files, put one 
 - [other tech]
 
 ## Folder structure
-- `/src` — main code
 - `/my-experiments` — experiments
 
 ## How to run
@@ -79,7 +78,7 @@ cd ~/my-ai-project
 git init
 touch AGENTS.md
 echo '@AGENTS.md' > CLAUDE.md
-mkdir -p src my-experiments
+mkdir -p my-experiments
 ```
 
 </OsBlock>
@@ -92,7 +91,7 @@ cd $HOME\my-ai-project
 git init
 ni AGENTS.md -ItemType File
 Set-Content CLAUDE.md '@AGENTS.md'
-New-Item -ItemType Directory src, my-experiments -Force
+New-Item -ItemType Directory my-experiments -Force
 ```
 
 </OsBlock>

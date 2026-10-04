@@ -5,7 +5,7 @@
   "unit": "u1-env-check",
   "locale": "ru",
   "title": "Проверка окружения",
-  "sourceHash": "sha256:bcaf7ac278650edebc50cbd2443dd9222689fb8e9e8e12c639d38c58879278a5",
+  "sourceHash": "sha256:4bbd070b6cf1062f1fa5f4f71c213aba3ce9c76733a0f98b0ece64ef7c1ac8e1",
   "outline": [
     {
       "heading": "Что нужно для агентного кодирования",

@@ -5,13 +5,13 @@
   "unit": "u3-clones",
   "locale": "en",
   "title": "Five clones",
-  "sourceHash": "sha256:aca68fbc3682957ab100d3896b4148bc3319aeea3f2330850cbd7a64d1ed09c7",
+  "sourceHash": "sha256:442133780f8682ea2b3d94833981c6ec3b05d460770ff1ab4d9475e6a7427c01",
   "outline": [
     {
       "heading": "Five types of AI clones",
       "points": [
         {
-          "text": "Every understudy follows Capture → Build → Test → Refine: capture an example, build the clone, test it on real work, then refine it from the result.",
+          "text": "Every understudy follows Capture (collect examples) → Build (make a first version) → Test (check it) → Refine (tighten it): capture an example, build the clone, test it on real work, then refine it from the result.",
           "origin": "extract"
         }
       ],

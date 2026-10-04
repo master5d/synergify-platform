@@ -5,7 +5,7 @@
   "unit": "u2-tools",
   "locale": "ru",
   "title": "Карта инструментов",
-  "sourceHash": "sha256:a78218008230bc1d8ad699ca2fe2ff042d17a0ae94427d460d10ad8da2f25d5b",
+  "sourceHash": "sha256:cd515d7f00cf6ae235b178031c5bf952e5bd0eaae924bad11813b1b97fbaef2a",
   "outline": [
     {
       "heading": "Карта: 4 квадранта AI-инструментов",
@@ -26,7 +26,7 @@
       "heading": "Твоя новая роль: PM + QA + Дирижёр",
       "points": [
         {
-          "text": "В Software 3.0 роли сместились: Product Manager (ТЫ): решаешь, ЧТО строить.",
+          "text": "В Software 1.0 (код пишет человек) роли одни, а в Software 3.0 (человек говорит, модель пишет) — другие: Product Manager (ТЫ): решаешь, ЧТО строить.",
           "origin": "extract"
         }
       ],
@@ -47,12 +47,6 @@
         "sourceHash": "sha256:ddab6a139ca22ee0f62ecf1034ff3ece61b4f94055870986f70d039ac38ce2d5",
         "points": [
           "Claude Code представляет собой квадрант 🟪."
-        ]
-      },
-      {
-        "sourceHash": "sha256:e5c226340e26b8c0db625caf665bb6d0f9e17b89006e72abe15d0a2de5f397e9",
-        "points": [
-          "В Software 3.0 роли сместились, и теперь ты как Product Manager решаешь, что именно нужно строить."
         ]
       }
     ]

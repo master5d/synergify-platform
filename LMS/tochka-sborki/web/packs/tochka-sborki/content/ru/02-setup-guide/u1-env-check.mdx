@@ -40,9 +40,23 @@ duration: "8 мин"
 
 ### Как проверить окружение одной командой
 
+<OsBlock os="macos linux">
+
 ```bash
 node --version && git --version && echo "Базовое окружение готово ✓"
 ```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+В PowerShell 5.1 используй точку с запятой:
+
+```powershell
+node --version; git --version; Write-Output "Базовое окружение готово ✓"
+```
+
+</OsBlock>
 
 Если ошибка — какой инструмент не найден, тот и нужно установить.
 
@@ -64,9 +78,21 @@ node --version && git --version && echo "Базовое окружение го�
 
 Запусти проверку в своём терминале:
 
+<OsBlock os="macos linux">
+
 ```bash
 node --version && git --version
 ```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+node --version; git --version
+```
+
+</OsBlock>
 
 Если всё установлено — переходи к следующему unit'у.
 

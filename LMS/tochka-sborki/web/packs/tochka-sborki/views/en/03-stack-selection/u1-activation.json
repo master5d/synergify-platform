@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "en",
   "title": "What are your constraints?",
-  "sourceHash": "sha256:bbc2b7343b294b07bd77486b67e23b091edc150702074d87e5a73abfb372c489",
+  "sourceHash": "sha256:696e84e71f4035a2002aac3226dcffb7cb0bbb84c0d2ca8297da7d671428a8c4",
   "outline": [
     {
       "heading": "Matching constraints to a stack",

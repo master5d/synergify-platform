@@ -84,7 +84,7 @@
         "“Write a function”",
         "“Write a validation function, quickly”",
         "“Do it like last time”",
-        "“I need an email validation module with error logging for a production project”"
+        "“I need a short, friendly Instagram post about our new service, with a call to message us”"
       ],
       "answer": 3,
       "explain": "Delegation is explaining a task to a colleague: what is needed, what for, and in what context. “Write a function” and “quickly” remain commands without meaning (u2, shift 1)."

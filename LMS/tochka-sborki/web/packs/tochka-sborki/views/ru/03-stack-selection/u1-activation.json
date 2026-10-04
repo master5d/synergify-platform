@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "ru",
   "title": "Какие у тебя ограничения?",
-  "sourceHash": "sha256:8add94447ce8b8d38e223529572355e5a6e96584c6266100436534cb1feaa5c6",
+  "sourceHash": "sha256:8f54aa7ca100cccb1725311c36186a708535776fd29a1e90e0d1e7ce92c39ea0",
   "outline": [
     {
       "heading": "Как сопоставить ограничения и стек",

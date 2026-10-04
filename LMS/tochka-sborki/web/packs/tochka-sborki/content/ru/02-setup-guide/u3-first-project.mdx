@@ -49,14 +49,13 @@ AGENTS.md — это Markdown-файл с правилами и контекст
 - [другие технологии]
 
 ## Структура папок
-- `/src` — основной код
 - `/my-experiments` — эксперименты
 
 ## Как запустить
 [Команды для старта]
 
 ## Что делегировать агенту
-- Написание кода по ТЗ
+- Написание результата по твоему техническому заданию (ТЗ)
 - Тесты
 - Документирование
 
@@ -79,7 +78,7 @@ cd ~/my-ai-project
 git init
 touch AGENTS.md
 echo '@AGENTS.md' > CLAUDE.md
-mkdir -p src my-experiments
+mkdir -p my-experiments
 ```
 
 </OsBlock>
@@ -92,7 +91,7 @@ cd $HOME\my-ai-project
 git init
 ni AGENTS.md -ItemType File
 Set-Content CLAUDE.md '@AGENTS.md'
-New-Item -ItemType Directory src, my-experiments -Force
+New-Item -ItemType Directory my-experiments -Force
 ```
 
 </OsBlock>

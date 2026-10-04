@@ -5,7 +5,7 @@
   "unit": "u2-tools",
   "locale": "en",
   "title": "Map of tools",
-  "sourceHash": "sha256:0391881911f7a4c0e958a0de4fa022e4495ffb9f81c27c465e0ac7348d1e87c5",
+  "sourceHash": "sha256:ec327ef7e0f156ec4dd28af3fb8e3f3bed314ea4bab106a08790473bfaeec812",
   "outline": [
     {
       "heading": "The map: 4 quadrants of AI tools",
@@ -26,7 +26,7 @@
       "heading": "Your new role: PM + QA + Conductor",
       "points": [
         {
-          "text": "In Software 3.0 the roles have shifted: Product Manager (YOU): decide WHAT to build.",
+          "text": "In Software 1.0 (a person writes the code) the roles were one way; in Software 3.0 (a person speaks, the model writes) they have shifted: Product Manager (YOU): decide WHAT to build.",
           "origin": "extract"
         }
       ],
@@ -47,12 +47,6 @@
         "sourceHash": "sha256:9cf13e48c987be227c6d44169d1fcaec033540152c95f633b123a4b323d91140",
         "points": [
           "Claude Code is in the purple quadrant."
-        ]
-      },
-      {
-        "sourceHash": "sha256:07d59a8608296237c7b7eecce3db8822cff96486024af5d1fe7c9145c42a6462",
-        "points": [
-          "In Software 3.0 the roles have shifted and you are the Product Manager who decides what to build."
         ]
       }
     ]
