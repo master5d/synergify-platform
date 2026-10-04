@@ -5,8 +5,18 @@
   "unit": "u3-behind-gfw",
   "locale": "en",
   "title": "Behind Great Firewall: no VPN",
-  "sourceHash": "sha256:966a153eea40ad62a8b29d9e50e467191202a03157e99938c7b3d380ceaa0d19",
+  "sourceHash": "sha256:c0fc2003f77d9c9c2da1154345957f6474c7c10cabe4f5d5eacd0901d94dfabc",
   "outline": [
+    {
+      "heading": "Access map",
+      "points": [
+        {
+          "text": "Without a VPN in mainland China, Claude, OpenAI, most AI IDEs, AI Studio, and Hugging Face are unavailable; GitHub and npm need mirrors.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
     {
       "heading": "⚡ Quick install of the GFW stack (one line)",
       "points": [

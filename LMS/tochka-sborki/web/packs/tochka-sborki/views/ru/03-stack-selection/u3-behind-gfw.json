@@ -5,8 +5,18 @@
   "unit": "u3-behind-gfw",
   "locale": "ru",
   "title": "Behind Great Firewall: без VPN",
-  "sourceHash": "sha256:113f1b503e789276c38da799e15e4f0d20a918387992cd731f1a332be0fa37be",
+  "sourceHash": "sha256:c958ed7a3b75cad7023b6e3b4ee53ea579cf54f5194aef6db9479ceb3d205b67",
   "outline": [
+    {
+      "heading": "Карта доступов",
+      "points": [
+        {
+          "text": "Без VPN в материковом Китае не работают Claude, OpenAI, большинство AI-IDE, AI Studio и Hugging Face; GitHub и npm требуют зеркал.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
     {
       "heading": "⚡ Быстрая установка GFW-стека (одной строкой)",
       "points": [

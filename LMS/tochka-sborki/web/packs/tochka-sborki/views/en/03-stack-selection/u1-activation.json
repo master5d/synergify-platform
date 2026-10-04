@@ -5,8 +5,18 @@
   "unit": "u1-activation",
   "locale": "en",
   "title": "What are your constraints?",
-  "sourceHash": "sha256:5f0a3254019a2b055d6514c6d76fe2dd8f26a0f95078c391a210f5bbea479a13",
+  "sourceHash": "sha256:bbc2b7343b294b07bd77486b67e23b091edc150702074d87e5a73abfb372c489",
   "outline": [
+    {
+      "heading": "Matching constraints to a stack",
+      "points": [
+        {
+          "text": "Five questions guide the choice: budget, access, hardware, privacy, and setup tolerance.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
     {
       "heading": "Why not \"just Claude Code\"",
       "points": [

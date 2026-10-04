@@ -5,8 +5,18 @@
   "unit": "u4-hermes-sovereign",
   "locale": "en",
   "title": "Hermes + local stack",
-  "sourceHash": "sha256:aad795cf94a02a7afcf5b6071d5b04b61686a6bb5ec40cdd849a4dd94fac29ee",
+  "sourceHash": "sha256:9e6728fc353c4a2c3bd6570062e24a6333b08d083e93d1128945a9a1011aee88",
   "outline": [
+    {
+      "heading": "Director and worker",
+      "points": [
+        {
+          "text": "Context saturation appears when one agent tries to hold the whole implementation.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
     {
       "heading": "How the author's setup works: an owner-controlled stack on personal hardware",
       "points": [

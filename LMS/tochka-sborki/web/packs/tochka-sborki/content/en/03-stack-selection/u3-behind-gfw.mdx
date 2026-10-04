@@ -13,37 +13,23 @@ Don't picture it as a "list of blocked domains." Picture it as **a smuggler's ro
 
 Run it in your head. What's your "cargo" (the AI tool you need)? Where's the "border" (GFW, corporate firewall, no card access)? And — **which routes are actually open**?
 
-Here's the map of both sides:
-
-**Doesn't work in China without VPN:**
-- `claude.ai`, `console.anthropic.com` — Anthropic
-- `chatgpt.com`, `platform.openai.com` — OpenAI
-- `cursor.com`, `github.com/features/copilot` — most AI-IDEs
-- `aistudio.google.com` — Google Gemini: AI Studio and the Gemini API are officially unavailable in mainland China
-- `huggingface.co` — models and datasets (blocked since 2023)
-- GitHub partially, npm registry (via mirrors)
-
-**Works out of the box:**
-- `cerebras.ai` — Cerebras Cloud Inference (US-based; there's no official word on access from China — check it yourself before building a stack on it)
-- `deepseek.com`, `qianwen.aliyun.com` — Chinese providers
-- `openrouter.ai` — partially, depends on model
-- Local models (after download) — forever
+Which crossing will you check first before building the route?
 
 </Phase>
 
 <Phase type="reflection">
 
-Picture a village herbalist 🌿, miles from the nearest pharmacy. No QR-coded pills — but they know which roots in this forest break a fever and where the right bark grows. They know how to combine what's local into something a drugstore never imagined.
+Return to the **border route**: closed gates do not erase the journey; they make you check local crossings and cargo first.
 
-Notice the same paradox: **the strongest open models in 2026 are Chinese**. Qwen, DeepSeek, GLM (Zhipu AI) — all top-tier on benchmarks.
-
-If you're in China — you actually have **extended** access to OSS models via local providers (Qianwen, Volcengine, DeepSeek API). Card barriers are usually lower — `WeChat Pay` / `Alipay` integrated.
-
-This unit isn't about bypassing — it's about **building a full agentic workflow from local herbs**. No pharmacy required.
+Which available resource will become the first support for your route?
 
 </Phase>
 
 <Phase type="concept">
+
+## Access map
+
+Without a VPN in mainland China, Claude, OpenAI, most AI IDEs, AI Studio, and Hugging Face are unavailable; GitHub and npm need mirrors. Cerebras must be checked locally, while DeepSeek, Qwen, and local models are available supports. In 2026, Qwen, DeepSeek, and GLM are strong open models; local providers often accept WeChat Pay and Alipay.
 
 ## ⚡ Quick install of the GFW stack (one line)
 

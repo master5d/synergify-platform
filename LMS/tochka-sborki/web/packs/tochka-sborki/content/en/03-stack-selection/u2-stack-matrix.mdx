@@ -23,20 +23,17 @@ Catch that feeling in your head: who are you walking with right now? — then cl
 
 You've just picked a companion — but long roads are rarely walked by two. Picture an orchestra with no conductor 🎻. Each musician is brilliant — but without coordination, you get noise, not a symphony.
 
-Notice: that's exactly what happens when stacks aren't coordinated. People running their own stack often blend several instruments into one sound:
-- Claude Code as **primary** for nuanced tasks
-- Local llama-server as **floor** when offline
-- Cerebras as **fast-path** for boilerplate (free, 1000+ TPS)
+Return to the **orchestra without a conductor**: even brilliant musicians make noise when nobody holds the shared beat.
 
-LiteLLM gateway is the **conductor** — seamless to the agent, a full fallback score underneath.
-
-The order in the score depends on what matters more to you. If it's quality, the paid model goes first, as here. If it's cost, free clouds go first and paid ones go last, as in the Hermes diagram in u4.
-
-Run it in your head: in this orchestra, is your stack the soloist or the section?
+What single role should your stack's conductor take on?
 
 </Phase>
 
 <Phase type="concept">
+
+## The gateway as conductor
+
+A stack can combine a primary for nuanced work, a floor for offline work, and a fast-path for boilerplate. LiteLLM is the conductor: the agent calls one endpoint while the gateway routes requests in order and switches to fallbacks.
 
 ## Honest trade-offs
 

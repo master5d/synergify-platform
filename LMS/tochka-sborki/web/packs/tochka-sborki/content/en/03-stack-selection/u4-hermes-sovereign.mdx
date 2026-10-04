@@ -7,11 +7,9 @@ duration: "15 min"
 
 <Phase type="activation">
 
-Think of a moment when one tool tried to do everything at once — and broke down halfway through.
+Picture **a theatre director**: they hold the whole production, while actors receive only their scenes.
 
-Don't picture it as a "context window problem." Picture it as **your own vegetable garden versus the market** 🌱: the gardener planted it, watered it, harvested it — and knows every plant. The market buyer gets ready produce fast, no fuss. Hermes is the gardener who **keeps the plan at home** and sends workers out for specific results. It doesn't trust the whole harvest to a single stall.
-
-Notice in your head: which part of your AI workflow suffers most because the agent **does everything in sequence** and loses the thread mid-task?
+Which scene would you refuse to hand to one actor whole?
 
 </Phase>
 
@@ -19,21 +17,17 @@ Notice in your head: which part of your AI workflow suffers most because the age
 
 Picture a theatre director 🎭 at rehearsal. They don't play every part in turn. They hold **the whole production in their head** and give each actor exactly enough to play their scene. The actors don't need to know the ending — the director does.
 
-Catch that same logic here:
+Return to the **director**: Hermes holds plan and state, while a worker receives one atomic scene.
 
-> "I asked Claude Code to refactor the auth module. By the 5th file it started applying the backend style to the frontend, forgot my original plan, and burned 200K tokens to recover."
-
-That's **context-saturation**: the actor tried to play every role. Hermes holds **only the plan and state** — the director's role:
-1. Frames the subtask
-2. Launches a sub-agent (Aider in a worktree, or Claude Code) — "actor enters the scene"
-3. Receives the result, verifies
-4. Updates the plan, next entrance
-
-Hermes's context isn't eaten by implementation. Worker contexts are atomic and tightly scoped.
+Where in your task will you draw the boundary for the first scene?
 
 </Phase>
 
 <Phase type="concept">
+
+## Director and worker
+
+Context saturation appears when one agent tries to hold the whole implementation. The boss-worker model separates roles: Hermes as boss frames a subtask, launches a worker, receives and checks the result, then updates the plan. The worker context stays atomic and scoped.
 
 ## How the author's setup works: an owner-controlled stack on personal hardware
 

@@ -5,13 +5,13 @@
   "unit": "u3-clones",
   "locale": "ru",
   "title": "Пять клонов",
-  "sourceHash": "sha256:7bfdfdfa4d85e4acbba659823bd66376256bd95ebc52e5d64917820dc640a2cf",
+  "sourceHash": "sha256:d0d9216271bab906d980f28e61fc4f745b1af2411ab8529536fc64d58599e3ab",
   "outline": [
     {
       "heading": "Пять типов AI-клонов",
       "points": [
         {
-          "text": "Часы в колонке «Экономит» — ориентир автора, у тебя цифры будут свои.",
+          "text": "Цикл каждого дублёра: Capture → Build → Test → Refine — поймай образец, собери, проверь на реальной задаче и уточни по результату.",
           "origin": "extract"
         }
       ],
@@ -22,18 +22,5 @@
     "c9",
     "c10"
   ],
-  "audio": null,
-  "paraphrase": {
-    "source": "paraphrase",
-    "generator": "paraphrase-v1",
-    "pool": "prose-pool",
-    "sections": [
-      {
-        "sourceHash": "sha256:db386b8cbcd8c8489c0583323af1b6511667c1ed2bf4fceb29fbdfcd6905dea2",
-        "points": [
-          "Время в колонке экономии считается ориентиром автора, поэтому твои личные показатели будут другими."
-        ]
-      }
-    ]
-  }
+  "audio": null
 }

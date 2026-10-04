@@ -5,8 +5,18 @@
   "unit": "u1-activation",
   "locale": "ru",
   "title": "Какие у тебя ограничения?",
-  "sourceHash": "sha256:aeea6bfd1a2d756646515791574205a467ea14798203092ae29f4c9f4f1878fd",
+  "sourceHash": "sha256:8add94447ce8b8d38e223529572355e5a6e96584c6266100436534cb1feaa5c6",
   "outline": [
+    {
+      "heading": "Как сопоставить ограничения и стек",
+      "points": [
+        {
+          "text": "Пять вопросов помогают выбрать путь: бюджет, доступ, железо, приватность и терпимость к настройке.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
     {
       "heading": "Почему нельзя «просто Claude Code»",
       "points": [

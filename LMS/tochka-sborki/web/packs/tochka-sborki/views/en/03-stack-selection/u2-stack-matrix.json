@@ -5,8 +5,18 @@
   "unit": "u2-stack-matrix",
   "locale": "en",
   "title": "Matrix of 4 stacks",
-  "sourceHash": "sha256:de89737d8d69e32f75a48cbbf93a857ca890ccdb9aa71186b2cf3a69ea37705a",
+  "sourceHash": "sha256:f279660000ea838b450301437a99b9ca255f890e593bf4d509d53c85d441e3c0",
   "outline": [
+    {
+      "heading": "The gateway as conductor",
+      "points": [
+        {
+          "text": "A stack can combine a primary for nuanced work, a floor for offline work, and a fast-path for boilerplate.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
     {
       "heading": "Honest trade-offs",
       "points": [

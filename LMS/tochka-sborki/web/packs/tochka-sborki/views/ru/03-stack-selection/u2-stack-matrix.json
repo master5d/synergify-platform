@@ -5,8 +5,18 @@
   "unit": "u2-stack-matrix",
   "locale": "ru",
   "title": "Матрица 4 стеков",
-  "sourceHash": "sha256:f8478427e3256be2d25d6fe16ded250790b42ffa4c953e2d3610f0f3bb31406d",
+  "sourceHash": "sha256:83b881338a8171a03af17f4f945056a2c4b7336aa862d7abcea891b8606824b6",
   "outline": [
+    {
+      "heading": "Шлюз как дирижёр",
+      "points": [
+        {
+          "text": "Стек соединяет несколько инструментов: primary для тонких задач, floor для работы без сети и fast-path для простого бойлерплейта.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
     {
       "heading": "Trade-offs честно",
       "points": [
