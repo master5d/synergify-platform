@@ -39,7 +39,7 @@ Each of the six blocks is one such gate. While everything is calm — it's invis
 **My production stack for agent pipelines**
 
 Configuration:
-- **Server:** one rented Hetzner machine (currently CX33, roughly €10–12/mo). It is the only machine with Docker: containers host the mail agent, mailing service, search, delegate proxy router, and Postgres.
+- **Server:** one rented Hetzner machine (currently CX33, roughly €10–12/mo). It is the only machine with Docker: containers host the mail agent, mailing service, search, proxy for worker agents, and Postgres.
 - **Network edge:** only services that must be public are published; everything else listens on `127.0.0.1` or is reachable over a private network between my devices (Tailscale). Cloudflare is used for external access.
 - **Control desk:** an always-on Mac mini M4 runs the model gateway and the monitoring dashboard.
 - **Local inference:** a 128 GB Mac Studio is the last step in the chain when free cloud pools have refused or exhausted their quotas, and the only step for personal and medical data: by design, that data never goes to the cloud.
@@ -48,7 +48,7 @@ Configuration:
 **Rakes that cost me days of debugging** (save these, no need to step on them yourself):
 
 **Rake 1: a Docker port on `0.0.0.0` bypasses the firewall**
-> The first server self-scan on October 1, 2026 found the orchestrator's web interface exposed directly to the internet: Docker published `0.0.0.0:5678` outside the host firewall. The orchestrator was removed entirely.
+> The first server self-scan on October 1, 2026 found the no-code orchestrator's (n8n) web interface exposed directly to the internet: Docker published `0.0.0.0:5678` outside the host firewall. The orchestrator was removed entirely.
 > **Rule:** a server service listens on `127.0.0.1` or a private network; public access goes only through Cloudflare.
 
 **Rake 2: a green container is not a live pipeline**
@@ -61,7 +61,7 @@ Configuration:
 
 **Rake 4: there is no per-run limit**
 > A stuck queue turned every tick into hundreds of calls.
-> **Rule:** cap a run at 20 emails and move an item to a dead queue after 5 attempts.
+> **Rule:** 3 retries inside a pass, 5 passes before the dead-letter queue.
 
 All pipelines are code in git. OS timers run them: launchd on Macs, systemd timers on Linux, and Task Scheduler on Windows. Each pipeline records who is notified when it breaks.
 
@@ -72,7 +72,7 @@ This stack used to include a no-code orchestrator and separate tracing; both wer
 Free cloud pools go first; their quotas add up. Local inference is the last step. The concrete example is two aliases, `fast-pool` → `local-floor`:
 
 ```yaml
-fallbacks: [fast-pool, local-floor]
+fallbacks: [fast-pool, local-floor]  # scheme, not a LiteLLM config
 ```
 
 Project code contains neither provider names nor provider keys: it calls pool aliases through the single model gateway. If the free pool refuses a request or runs out of quota, the request goes to the local step.
@@ -81,7 +81,7 @@ When the first provider goes down — the next one catches the call. This is **r
 
 **Observability through the M4 dashboard:**
 
-The “Usage” tab shows spend and calls across all pools from the gateway's own log, SQLite `usage.db`. There is no separate tracer: this stack relies on aggregate calls and costs, not per-step tracing.
+The “Usage” tab shows spend and calls across all pools from the gateway's own log, SQLite `usage.db`. There is no separate tracer: this stack relies on aggregate calls and costs, not per-step tracing. What the model answered on a specific call is visible in the service's own log; for the Gmail agent, that is the draft text and the label reason on the dashboard.
 
 
 <SelfCheck id="c9"/>

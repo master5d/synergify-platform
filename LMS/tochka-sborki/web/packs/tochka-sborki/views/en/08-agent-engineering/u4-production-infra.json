@@ -5,7 +5,7 @@
   "unit": "u4-production-infra",
   "locale": "en",
   "title": "Prototype → Production",
-  "sourceHash": "sha256:095569a746a0e33619ecea08d02b88f8c528024258d5e17bbfea2af4dd698a1b",
+  "sourceHash": "sha256:41446ebdbd2fafff7614d5e9b0b5aa50f53ac23144da9442960447afb6dfded3",
   "outline": [
     {
       "heading": "",
@@ -19,7 +19,7 @@
           "origin": "extract"
         },
         {
-          "text": "Rake 1: a Docker port on 0.0.0.0 bypasses the firewall The first server self-scan on October 1, 2026 found the orchestrator's web interface exposed directly to the internet: Docker published 0.0.0.0:5678 outside the host firewall.",
+          "text": "Rake 1: a Docker port on 0.0.0.0 bypasses the firewall The first server self-scan on October 1, 2026 found the no-code orchestrator's (n8n) web interface exposed directly to the internet: Docker published 0.0.0.0:5678 outside the host firewall.",
           "origin": "extract"
         },
         {

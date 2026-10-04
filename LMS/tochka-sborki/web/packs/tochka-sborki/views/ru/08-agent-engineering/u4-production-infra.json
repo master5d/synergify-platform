@@ -5,7 +5,7 @@
   "unit": "u4-production-infra",
   "locale": "ru",
   "title": "Prototype → Production",
-  "sourceHash": "sha256:3b0f0dded2bc9ad3b0f66e98c7302bab6b018ad3913810945b0add7d11f07779",
+  "sourceHash": "sha256:9b9120fc38e40e1ff7559e43c5d73109ce44f0f082c86f39fd24b5aa522ab3cd",
   "outline": [
     {
       "heading": "",
@@ -19,7 +19,7 @@
           "origin": "extract"
         },
         {
-          "text": "Грабли 1: Docker-порт 0.0.0.0 идёт мимо firewall Первый самоскан сервера 1 октября 2026 года нашёл веб-интерфейс оркестратора открытым в интернет напрямую: Docker публиковал порт 0.0.0.0:5678 мимо firewall хоста.",
+          "text": "Грабли 1: Docker-порт 0.0.0.0 идёт мимо firewall Первый самоскан сервера 1 октября 2026 года нашёл веб-интерфейс no-code оркестратора (n8n) открытым в интернет напрямую: Docker публиковал порт 0.0.0.0:5678 мимо firewall хоста.",
           "origin": "extract"
         },
         {

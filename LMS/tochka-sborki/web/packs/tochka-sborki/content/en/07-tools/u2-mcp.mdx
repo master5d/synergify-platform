@@ -74,11 +74,9 @@ Personal servers (scope `user` or `local`) live in `~/.claude.json`. Don't put M
 
 ## Tool Search: when there are many servers
 
-If 50 tool descriptions take 10–20K tokens, context gets expensive quickly; 58 tools from 5 servers can take about 55K.
-Tool Search keeps only a search tool in context: Claude searches by request and loads 3–5 matching schemas.
-In the course example, context drops from 55K to 8.5K tokens (−85%).
+In the course example, Tool Search drops context from 55K to 8.5K tokens (−85%): only a search tool stays in context, while Claude loads 3–5 matching schemas.
 It turns on automatically when tool descriptions take more than 10% of the context window.
-Set `defer_loading: true` on a server or tool to defer loading its schema.
+At the API level this is the `defer_loading` field; in Claude Code the mode turns on automatically.
 Takeaway: connect more servers if useful, but keep only task-relevant ones enabled.
 
 ## Common errors (~60% of issues)

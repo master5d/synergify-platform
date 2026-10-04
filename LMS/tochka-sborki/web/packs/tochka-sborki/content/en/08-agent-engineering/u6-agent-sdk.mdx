@@ -1,5 +1,5 @@
 ---
-title: "Agent SDK: Put an Agent in a Program"
+title: "Agent SDK: the Agent as a Library"
 unit: 6
 module: 8
 duration: "20 min"
@@ -19,7 +19,7 @@ The Agent SDK turns the agent loop into a library call. It is the same mechanism
 
 Think of handing the workshop a schedule. You do not rewrite how to use every tool, but you decide which tools are on the bench and when the craftsperson must stop.
 
-Keep the Claude Code CLI for one-off interactive work. Use the SDK when the agent becomes part of CI/CD, an application, or an ongoing automation.
+Keep the Claude Code CLI for one-off interactive work. Use the SDK when the agent becomes part of automated build and deployment (CI/CD), an application, or an ongoing automation.
 
 </Phase>
 
@@ -58,7 +58,7 @@ for await (const message of query({
 ## Three safety controls
 
 - `allowedTools` is the allowlist. Start with the minimum: analysis usually needs only `Read`, `Glob`, and `Grep`.
-- `permissionMode` sets the approval level: `default` asks, `acceptEdits` allows file edits, and `bypassPermissions` belongs only inside an isolated container. See the cheat sheet for the full table.
+- `permissionMode` sets the approval level: `default` asks, `acceptEdits` allows file edits, and `bypassPermissions` belongs only inside an isolated container. See the [cheat sheet](/en/cheatsheet/) for the full table.
 - `maxTurns` caps the iterations so the agent cannot loop forever. Start around 10–20 for a typical task; use less while diagnosing.
 
 `cwd`, `mcpServers`, `hooks`, `agents`, `resume`, and `settingSources: ["project"]` add a working directory, external tools, specialists, session continuation, and project settings. Give one agent one job; a universal agent with dozens of tools is expensive and hard to control. A subagent should not launch its own subagents. Three subagents usually means roughly three times the calls, so use a cheaper model where it is enough.
@@ -76,9 +76,9 @@ There are four deployment shapes: an ephemeral container per task, a long-runnin
 Build a small experiment in a separate folder.
 
 1. Install the SDK for your language.
-2. Run a test with `maxTurns: 1` and the prompt: `Say “SDK works!” and nothing else.` Record how many turns actually happened.
-3. Run a project analyzer with `allowedTools: ["Read", "Glob", "Grep"]`, `permissionMode: "default"`, and `maxTurns: 5`. Ask it to describe the project structure without changing files or running commands.
-4. Save to `my-experiments/u6-agent-sdk.md`: how many turns ran, which tools were called, and what you would change in the prompt.
+2. Run a test with `maxTurns: 1` and the prompt: `Say “SDK works!” and nothing else.` Count turns from the messages with a `num_turns` field in the result.
+3. Run a project-analysis agent with `allowedTools: ["Read", "Glob", "Grep"]`, `permissionMode: "default"`, and `maxTurns: 5`. Ask it to describe the project structure without changing files or running commands.
+4. If you do not want to write code, ask your own agent to write this script from the concept example and run it; you check the output. Save to `my-experiments/u6-agent-sdk.md`: how many turns ran, which tools were called, and what you would change in the prompt.
 
 If the agent asks for an extra tool, do not add it automatically. First clarify the task and check whether smaller permissions are enough.
 

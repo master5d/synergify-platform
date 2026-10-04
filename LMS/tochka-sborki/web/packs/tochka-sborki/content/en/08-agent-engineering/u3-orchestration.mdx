@@ -37,7 +37,7 @@ Catch the image: where in your pipeline do the threads cross? And at which point
 
 **Real case: a Gmail agent**
 
-My Gmail agent runs in one Docker container on a rented server. About every two minutes it reads new personal mail through the Gmail API; LLM calls go through a model gateway — one entry point to a pool of models, meaning a set of available models. The dashboard is protected by Cloudflare Access and a PIN. The container port is available only locally and on a private network between my devices.
+My Gmail agent runs in one Docker container on a rented server. About every two minutes it reads new personal mail through the Gmail API; LLM calls go through a model gateway — one entry point to a pool of models. The dashboard is protected by Cloudflare Access and a PIN (explained in the next unit). The container port is available only locally and on a private network between my devices (explained in the next unit). The agent uses a cloud pool through the gateway: this is personal mail, not medical data; u4 covers a separate pool for medical data.
 
 **Pipeline architecture:**
 
@@ -76,7 +76,7 @@ My Gmail agent runs in one Docker container on a rented server. About every two 
 
 1. **AI only in two of seven steps** — Classify and Draft. The rest is code, Gmail API work, or a human. That's jagged intelligence applied.
 
-2. **Idempotency via SQLite** — in `inbox.db`, an email moves through `new → labeled/drafted → sent/failed`. A repeated run skips processed mail. After five failures it goes to a dead-letter queue with the reason, so the same failure is not repeated forever. If Gmail reports a stale cursor, the mailbox is read again from the beginning so mail is not lost after downtime.
+2. **Idempotency via SQLite** — in `inbox.db`, an email moves through `new → labeled/drafted → sent/failed`. A repeated run skips processed mail. After five failures it goes to a dead-letter queue with the reason, so the same failure is not repeated forever. If Gmail reports a stale cursor (the position from which the mailbox is read), the mailbox is read again from the beginning so mail is not lost after downtime.
 
 3. **Trigger and action are separate** — the timer polls independently of processing. A classification error for one email does not break polling; an access failure stops the current pass and waits 15 minutes.
 

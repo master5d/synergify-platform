@@ -43,7 +43,7 @@ Runs on a schedule. Good for regular tasks.
 Every morning at 8:00 → collect RSS → analyze → report to Slack
 ```
 
-There are three routes to a scheduled run: an operating-system timer, CI, or a no-code service. The author uses scripts in git and OS timers: `launchd` on Mac, `systemd` timers on a Linux server, and Windows Task Scheduler. That is the author's choice, not a course rule. Claude Code Hooks don't belong here: they fire on agent events, not on a clock.
+There are three routes to a scheduled run: an operating-system timer, CI, or a no-code service. The comparison is in the table below. Claude Code Hooks don't belong here: they fire on agent events, not on a clock.
 
 ### 3. Event-driven pipeline
 Runs when something happens.
@@ -59,8 +59,8 @@ New email → classify → draft reply → for approval
 |------|-------|----------|
 | Claude (chat) | Starter | One-off tasks, testing |
 | Claude Code | Intermediate | Working with files and projects |
-| Make.com / n8n | Advanced | Automation without code (the author doesn't use it — see below) |
-| Claude Code Hooks | Expert | Event-driven automation |
+| Make.com / n8n | Advanced | Automation without code (more in [u5](/en/lessons/06-audio-pipeline/u5-schedule/)) |
+| Claude Code Hooks | Expert | Event-driven, not scheduled |
 
 ### What to schedule it with
 

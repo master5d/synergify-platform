@@ -53,7 +53,7 @@ A second rule comes from the same place: a link goes into `done.txt` **only afte
 
 The Hooks from module 07 fire on agent events: the agent wrote a file, finished a reply. A hook never wakes up by the clock on its own. A schedule needs the operating system's scheduler: `cron` on macOS and Linux, Task Scheduler on Windows. It starts an ordinary script, and the script calls the agent in non-interactive mode.
 
-All the deterministic work here — the duplicate check, dates, files — is done by the script. The model is called only where meaning is needed. It is the same principle as in module 08: AI in two nodes out of nine.
+All the deterministic work here — the duplicate check, dates, files — is done by the script. The model is called only where meaning is needed. It is the same principle as in module 08: AI in two steps out of seven.
 
 <SelfCheck id="c9"/>
 
@@ -110,7 +110,7 @@ macOS / Linux: run `crontab -e` and add a line (example: every day at 8:00):
 
 The line format is: minute, hour, day of month, month, day of week. More in `man 5 crontab`.
 
-Windows (needs Git Bash — it is already installed along with Claude Code). In PowerShell, with your own user name:
+Windows (needs Git Bash — it is installed with Git for Windows; if `bash --version` does not respond in PowerShell, install it). In PowerShell, with your own user name:
 
 ```
 schtasks /Create /SC DAILY /ST 08:00 /TN "my-pipeline" /TR '"C:\Program Files\Git\bin\bash.exe" -l C:/Users/NAME/my-experiments/pipeline/run.sh'
@@ -122,18 +122,11 @@ The second command runs the task right away, as a test. In PowerShell, use singl
 **Step 5. Check it.** Open `run.log`. If it says `claude: command not found`, the scheduler cannot see your PATH. Run `command -v claude` and put the full path into `run.sh` instead of `claude`. Keep in mind: a sleeping laptop skips the run, so pick a time when the computer is on.
 
 **Other routes to the same schedule.**
-I had n8n running in Docker on a rented server, but there were no working workflows there.
-During a self-check I found its web interface exposed directly to the internet: Docker published `0.0.0.0:5678` past the host firewall.
-I removed n8n entirely.
-The rule I took from that: a service on a server should listen on `127.0.0.1` or a private network between my devices.
-Externally, use Cloudflare or expose nothing at all.
-That explains my choice of scripts in git: they are easier to read, test, and roll back like ordinary code.
-With a builder, you also have to track its port, credentials database, and version separately.
-But this is not a course rule: if you do not write code, n8n or Make.com may suit you — check which port the service opens and keep it closed.
+- No-code (n8n/Make.com): the author tried n8n, then removed it after a self-scan found a Docker port exposed to the internet. If you choose this route, check the port, credential database, and version; keep it behind Cloudflare or on a private network. It is an option if you do not write code.
 - In the cloud, if you have a paid Claude plan: `/schedule` creates a routine that runs even when your laptop is closed ([documentation](https://code.claude.com/docs/en/routines)). A routine works with a GitHub repository, not your local folder, so `inbox.txt` and `done.txt` have to live in the repo.
 
 Save to `my-experiments/u5-schedule.md`: your schedule line, your first `digest-….md`, and one sentence on what the pipeline did without you.
 
-In module 07 this pipeline grows. The prompt becomes a Skill, and a notification appears at the end.
+In module 07 this pipeline grows. The prompt becomes a Skill, and you can add a notification (07/u5, the fourth hook).
 
 </Phase>

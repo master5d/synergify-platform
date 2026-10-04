@@ -17,7 +17,7 @@ Don't see it as a wish list. Picture a surgeon before an operation. Instruments 
 
 <Phase type="reflection">
 
-You've covered the core path of the course — modules 08 and 09 are still ahead.
+You've covered the core path of the course — module 08 and optional modules 09–11 are still ahead.
 
 Modules 00–01: understood how to think about working with AI.
 Modules 02–03: set up the tools.
@@ -64,7 +64,7 @@ Hook: Stop → auto-add a comment to the PR
 ## Next steps after this module
 
 1. **Build your first clone** — the one from module 01 you described in u3-my-clone.md
-2. **Share with coworkers** — export the skill and tell them how to install
+2. **Share with coworkers** — copy the skill folder into the project
 3. **Iterate** — improve one element each week
 
 <SelfCheck id="c9"/>
@@ -84,11 +84,11 @@ Assemble a minimal clone for it:
 1. Update AGENTS.md with context for this task
 2. Connect one MCP server (if needed)
 3. Create one Skill (reusable prompt)
-4. Optional: add a Hook for notifications
+4. Optional: add one Hook from the three below — or a fourth, notification hook
 
 Test it on a real task.
 
-Save the architecture to `my-experiments/u5-my-clone-v1.md`
+Save the architecture to `my-experiments/u5-my-clone-v1.md`, including a “My hook” section.
 
 This is your first working AI clone. Congratulations.
 
@@ -191,6 +191,7 @@ Check: ask the agent to write a temporary `.env` and confirm that the operation 
 
 Why: deletion should stay reversible.
 The Bash hook checks the command and blocks `rm `, `Remove-Item`, or `del `, then suggests the trash command for your OS.
+The simple rule also blocks `git rm`/`npm rm` — that is the price of a broad rule.
 
 Script — save as `.claude/hooks/block-delete.js`:
 
@@ -236,12 +237,16 @@ Linux: `gio trash <file>`.
 
 <OsBlock os="windows">
 
-Trash command through PowerShell: `Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(..., 'OnlyErrorDialogs','SendToRecycleBin')`.
+Trash command through PowerShell: `Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile('<file>','OnlyErrorDialogs','SendToRecycleBin')`.
 
 </OsBlock>
 
 Check: ask the agent to delete a test file and confirm that the command is blocked with the trash hint.
 
-Choose one, install it, and write what worked in `my-experiments/u5-my-hook.md`.
+### 4. Stop → notification
+
+macOS: `osascript -e 'display notification "Done" with title "Claude Code"'`; Windows PowerShell: `[console]::beep(800,300)`. Put the command in an `OsBlock` for your OS. In `settings.json`, the `hooks` key appears once; add events inside it.
+
+Write the result in `my-experiments/u5-my-clone-v1.md`, in the “My hook” section.
 
 </Phase>

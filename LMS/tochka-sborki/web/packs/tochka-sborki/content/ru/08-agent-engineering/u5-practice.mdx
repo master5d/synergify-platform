@@ -67,12 +67,18 @@ duration: "20 мин"
 - Notion API (workspace: ...)
 - ...
 
+## Execution
+- Где живёт агент: Docker-контейнер на сервере
+
+## Security
+- Доступ к дашборду через Cloudflare Access с PIN
+
 ## Storage
-- Куда пишет результат
-- Идемпотентность: как избегаем повторов
+- SQLite: `inbox.db`, состояния писем и причины ошибок
+- Идемпотентность: обработанное письмо повторный проход не трогает
 
 ## Observability
-- Trace: журнал шлюза к моделям / OTel / stdout-логи (Langfuse — тоже вариант; автор его снял, потому что никто не читал)
+- Trace: журнал шлюза к моделям / OpenTelemetry (OTel) / stdout-логи (Langfuse — тоже вариант; автор его снял, потому что никто не читал)
 - Alerting: куда уходит ошибка (Telegram / email / Slack)
 
 ## Failure modes
@@ -84,8 +90,8 @@ duration: "20 мин"
 
 ## Cost
 - LLM calls в день: ~N
-- Estimated $: ~$X
-- Hard cap: $Y (через провайдер бюджеты)
+- Estimated $: бесплатные пулы; потолок — [не определён]
+- Hard cap: [?]
 
 ## Human-in-loop
 - Где: [шаг N]
@@ -126,7 +132,7 @@ duration: "20 мин"
 - SQLite: `inbox.db`, состояния писем и причины ошибок
 
 ## Storage
-- Сервис работает в одном Docker-контейнере на сервере; доступ к дашборду — через Cloudflare Access с PIN
+- SQLite: `inbox.db`, состояния писем и причины ошибок
 - Idempotency: `new → labeled/drafted → sent/failed`; после пяти ошибок — мёртвая очередь
 
 ## Observability
@@ -239,7 +245,7 @@ duration: "20 мин"
 
 <NoAiCheck id="no-ai"/>
 
-**Следующий шаг (после модуля):**
+**Следующий шаг:**
 
 Возьми эту спеку и:
 1. Выбери, чем запускать по таймеру: cron/launchd/systemd-таймер или Планировщик Windows; no-code оркестратор — тоже вариант, если понимаешь, какой порт он открывает наружу
@@ -247,6 +253,6 @@ duration: "20 мин"
 3. Скажи Claude Code: «реализуй pipeline по спецификации»
 4. Итерируй пока работает
 
-Vibe coding → agent engineering. Замкнули круг.
+Как запускать агента из своей программы — в следующем юните (Agent SDK).
 
 </Phase>

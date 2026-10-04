@@ -2,7 +2,7 @@
   "module": 8,
   "title": "Agent Engineering",
   "description": "From vibe coding to orchestrating agent systems — where the prompt stops working",
-  "duration": "90 min",
+  "duration": "110 min",
   "level": 8,
   "units": [
     { "slug": "u1-activation", "title": "When Prompts Stop Working" },
@@ -10,7 +10,7 @@
     { "slug": "u3-orchestration", "title": "Orchestration: Gmail Agent as a Case" },
     { "slug": "u4-production-infra", "title": "Prototype → Production" },
     { "slug": "u5-practice", "title": "Design Your Clone" },
-    { "slug": "u6-agent-sdk", "title": "Agent SDK: Put an Agent in a Program" }
+    { "slug": "u6-agent-sdk", "title": "Agent SDK: the Agent as a Library" }
   ],
   "objectives": [
     {
@@ -89,7 +89,7 @@
         "Hand the check to a human"
       ],
       "answer": 2,
-      "explain": "In the decomposition table, dedup is listed as Code. The lesson directly calls AI in steps where code or an API is enough the most common source of unreliability (u2, practice)."
+      "explain": "In the Gmail agent, Normalize and Apply use code: the input is standardized and the email state is updated deterministically. Classification and drafting remain AI steps, while the Gmail API is the Tool."
     },
     {
       "id": "c5",
@@ -159,7 +159,7 @@
         "Observability"
       ],
       "answer": 3,
-      "explain": "Observability is the ability to see, after the fact, the input, output, and model of every call. Without it, in the lesson's words, “you're a blind engineer” (u4)."
+      "explain": "Use two logs: the model gateway log and the service's own log — what was sent, what came back, and what it cost. For the Gmail agent this reconstructs a specific call."
     },
     {
       "id": "c10",
@@ -173,7 +173,7 @@
         "In the security block: change the API key"
       ],
       "answer": 1,
-      "explain": "A provider outage is a reliability issue, and it is solved by routing at the infrastructure level, not by the wording of a prompt (u4, “Pattern: 5-fallback LLM routing”)."
+      "explain": "A provider outage is a reliability issue, solved at the infrastructure level by an LLM fallback chain, not by prompt wording (u4)."
     },
     {
       "id": "c11",

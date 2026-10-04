@@ -361,17 +361,17 @@ export const FADED_EXAMPLES: FadedExampleData[] = [
     title: { ru: 'Разложить pipeline на узлы AI, Tool и Code', en: 'Split a pipeline into AI, Tool and Code nodes' },
     worked: {
       task: {
-        ru: 'Pipeline ENERV из Концепции: письма Gmail с тегом AI Ingest становятся заметками. Тип каждого узла и почему.',
-        en: 'The ENERV pipeline from Concept: Gmail emails tagged AI Ingest become notes. The type of each node and why.',
+        ru: 'Gmail-агент из модуля 08: письмо проходит семь шагов. Тип каждого узла и почему.',
+        en: 'The Gmail agent from module 08: an email passes through seven steps. The type of each node and why.',
       },
       steps: [
         {
-          label: { ru: 'Gmail Trigger', en: 'Gmail Trigger' },
+          label: { ru: 'Poll', en: 'Poll' },
           text: { ru: 'Tool: инструмент, не AI.', en: 'Tool: a tool, not AI.' },
           why: { ru: 'Получить письмо — вызов API, решать здесь нечего.', en: 'Getting the email is an API call; there is nothing to decide.' },
         },
         {
-          label: { ru: 'Normalize Input', en: 'Normalize Input' },
+          label: { ru: 'Normalize', en: 'Normalize' },
           text: { ru: 'Code: детерминирован.', en: 'Code: deterministic.' },
           why: {
             ru: 'Привести поля к одному виду можно правилом: один и тот же вход даёт один и тот же выход.',
@@ -379,27 +379,32 @@ export const FADED_EXAMPLES: FadedExampleData[] = [
           },
         },
         {
-          label: { ru: 'Gemini Router', en: 'Gemini Router' },
-          text: { ru: 'AI: решает, куда положить (Atlas? Calendar? Facets?).', en: 'AI: decides where to put it (Atlas? Calendar? Facets?).' },
-          why: { ru: 'Классификация — то, в чём AI силён.', en: 'Classification is where AI shines.' },
+          label: { ru: 'Classify', en: 'Classify' },
+          text: { ru: 'AI: выбирает одну из меток письма.', en: 'AI: chooses one of the email labels.' },
+          why: { ru: 'Классификация смысла — то, в чём AI силён.', en: 'Classifying meaning is where AI is strong.' },
         },
         {
-          label: { ru: 'Parse Response', en: 'Parse Response' },
-          text: { ru: 'Code: детерминирован.', en: 'Code: deterministic.' },
+          label: { ru: 'Apply', en: 'Apply' },
+          text: { ru: 'Tool + Code: Gmail API применяет метку, код обновляет состояние.', en: 'Tool + Code: the Gmail API applies the label, and code updates the state.' },
           why: {
-            ru: 'Проверить, что ответ модели — корректная структура, можно кодом: здесь нужно правило, а не суждение.',
-            en: 'Checking that the model returned a valid structure is a job for code: it needs a rule, not judgment.',
+            ru: 'Вызов Gmail API — Tool, а запись состояния и защита от повторного прохода — детерминированный код.',
+            en: 'Calling the Gmail API is a Tool; recording state and preventing a second pass is deterministic code.',
           },
         },
         {
-          label: { ru: 'ACL Transformer', en: 'ACL Transformer' },
-          text: { ru: 'AI: пишет .md в правильную папку.', en: 'AI: writes the .md into the right folder.' },
-          why: { ru: 'Текст-в-структуру — вторая сильная точка AI.', en: 'Text-to-structure is the second spot where AI shines.' },
+          label: { ru: 'Draft', en: 'Draft' },
+          text: { ru: 'AI: готовит черновик ответа.', en: 'AI: prepares a reply draft.' },
+          why: { ru: 'Сформулировать ответ по смыслу письма — задача для AI.', en: 'Writing a reply from the email meaning is an AI task.' },
         },
         {
-          label: { ru: 'Mark Ingested', en: 'Mark Ingested' },
+          label: { ru: 'Review', en: 'Review' },
+          text: { ru: 'Code: ждёт проверки человека.', en: 'Code: waits for human review.' },
+          why: { ru: 'Проверка и решение отправлять — контрольный шаг, а не генерация.', en: 'Reviewing and deciding to send is a control step, not generation.' },
+        },
+        {
+          label: { ru: 'Send', en: 'Send' },
           text: { ru: 'Tool: Gmail API.', en: 'Tool: Gmail API.' },
-          why: { ru: 'Пометить письмо обработанным — снова вызов API.', en: 'Marking the email as processed is another API call.' },
+          why: { ru: 'Отправить одобренное письмо — вызов API.', en: 'Sending an approved email is an API call.' },
         },
       ],
     },

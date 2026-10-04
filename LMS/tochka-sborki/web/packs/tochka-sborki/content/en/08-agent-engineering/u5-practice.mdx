@@ -67,12 +67,18 @@ List of nodes where an LLM is used:
 - Notion API (workspace: ...)
 - ...
 
+## Execution
+- Where the agent lives: a Docker container on a server
+
+## Security
+- Dashboard access through Cloudflare Access with a PIN
+
 ## Storage
-- Where the result is written
-- Idempotency: how we avoid duplicates
+- SQLite: `inbox.db`, email states and failure reasons
+- Idempotency: a processed email is skipped on a repeat pass
 
 ## Observability
-- Trace: the model gateway's log / OTel / stdout logs (Langfuse is an option too; the author removed it because nobody read it)
+- Trace: the model gateway's log / OpenTelemetry (OTel) / stdout logs (Langfuse is an option too; the author removed it because nobody read it)
 - Alerting: where errors go (Telegram / email / Slack)
 
 ## Failure modes
@@ -84,8 +90,8 @@ List of nodes where an LLM is used:
 
 ## Cost
 - LLM calls per day: ~N
-- Estimated $: ~$X
-- Hard cap: $Y (via provider budgets)
+- Estimated $: free pools; ceiling — [not determined]
+- Hard cap: [?]
 
 ## Human-in-loop
 - Where: [step N]
@@ -125,7 +131,7 @@ possible only after a human clicks the button.
 - SQLite: `inbox.db`, email states and failure reasons
 
 ## Storage
-- One Docker container on a server; dashboard access through Cloudflare Access with a PIN
+- SQLite: `inbox.db`, email states and failure reasons
 - Idempotency: `new → labeled/drafted → sent/failed`; after five failures, a dead-letter queue
 
 ## Observability
@@ -238,7 +244,7 @@ If all 6 boxes are ticked — you've got a spec you can start building from.
 
 <NoAiCheck id="no-ai"/>
 
-**Next step (after the module):**
+**Next step:**
 
 Take this spec and:
 1. Choose a timer: cron/launchd/systemd timer or Windows Task Scheduler; a no-code orchestrator is also an option if you understand which port it exposes
@@ -246,6 +252,6 @@ Take this spec and:
 3. Tell Claude Code: "build the pipeline per the spec"
 4. Iterate until it works.
 
-Vibe coding → agent engineering. Loop closed.
+How to launch the agent from your own program — in the next unit (Agent SDK).
 
 </Phase>

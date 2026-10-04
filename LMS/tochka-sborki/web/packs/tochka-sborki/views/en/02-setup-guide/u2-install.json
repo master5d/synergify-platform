@@ -5,7 +5,7 @@
   "unit": "u2-install",
   "locale": "en",
   "title": "Installing the tools",
-  "sourceHash": "sha256:6a761688a0e7cc1f1e701cff8ab59355adce6b9a7c2f4db5babfcd07a1117229",
+  "sourceHash": "sha256:ba7e341817f073e8d358884b65303a44a9499073e90267e3012e279f541767c2",
   "outline": [
     {
       "heading": "⚡ Quick install (one line)",
