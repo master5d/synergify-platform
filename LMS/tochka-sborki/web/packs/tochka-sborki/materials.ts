@@ -217,6 +217,31 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
     ],
   },
   {
+    label: { ru: 'Agent SDK: от CLI к своему агенту', en: 'Agent SDK: from the CLI to your own agent' },
+    items: [
+      {
+        kind: 'link',
+        title: { ru: 'Документация Agent SDK (англ.)', en: 'Agent SDK documentation' },
+        description: {
+          ru: 'Тот же агентный цикл, что в Claude Code, как библиотека для TypeScript и Python; для себя — по подписке, для продукта — API-ключ клиента',
+          en: 'The same agent loop as Claude Code, available as a TypeScript and Python library; your own subscription for yourself, the client\'s API key for a product',
+        },
+        href: 'https://code.claude.com/docs/en/agent-sdk',
+        external: true,
+      },
+      {
+        kind: 'link',
+        title: { ru: 'Демо от Anthropic (англ.)', en: 'Anthropic demos' },
+        description: {
+          ru: 'Email-агент, research-агент и простой чат; для локальной разработки, не для production',
+          en: 'An email agent, a research agent, and a simple chat; for local development, not production',
+        },
+        href: 'https://github.com/anthropics/claude-agent-sdk-demos',
+        external: true,
+      },
+    ],
+  },
+  {
     // Первоисточники опционального модуля 11-second-brain: уроки пересказывают официальные доки,
     // а первоисточник главнее (Channels — research preview, синтаксис может меняться).
     label: { ru: 'Второй мозг: первоисточники', en: 'Second brain: primary sources' },

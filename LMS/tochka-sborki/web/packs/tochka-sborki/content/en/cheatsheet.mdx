@@ -163,6 +163,7 @@ cat error.log | claude -p 'explain the error'
 /loop               # Iterative loop until a condition is met
 /voice              # Voice input (Space = push-to-talk)
 /doctor             # Diagnostics: API keys, MCP, configs
+/insights           # Report: which tasks and tools you use most
 /rc                 # Open ~/.claude/rc.ts (launch settings)
 /remote-control     # Control via API (NEW)
 /pr-comments        # Load PR comments into context
@@ -372,6 +373,8 @@ You are — [description + expertise]
 - **Let it interview you first.** Before the work starts, ask the agent to interview you: in Claude Code that is the `AskUserQuestion` tool, with any other agent say "ask me 5 questions before you begin". Answering questions is cheaper than redoing work.
 - **One sub-agent, one skill.** Not a "general QA engineer" but "checks DB migrations" or "reads Chrome logs". A narrow role with a concrete tool works; a broad one smears out.
 - **A set of your own examples.** 10–20 cases with the expected result — rerun them after every change to the prompt or the code.
+- **Backend first.** Make sure the pipeline collects the right data before building the screen on top of it: a beautiful interface over an empty database is the most expensive beginner's mistake.
+- **Ask for presets.** Anything you run more than twice should become a reusable configuration, with changeable parameters moved into settings instead of hard-coded.
 - **Project longer than one evening?** Take a ready-made process: Superpowers or Spec Kit (links in "Materials").
 
 ---
@@ -689,4 +692,3 @@ Look for structure, not snippets: where the agent's boundaries are, what got pus
 > 💡 Interactive version with 141 cards + quiz mode: `tools/cheatsheet/index.html`
 
 *Use this cheatsheet for a quick start and quick reference.*
-
