@@ -675,6 +675,20 @@
         "en": "It is done. Your echo awaits your command, a testament to your mastery over the craft of agent engineering. Use this power wisely, for the shadow you cast is now your own."
       }
     },
+    "08-agent-engineering/u6-agent-sdk": {
+      "intro": {
+        "ru": "Вызови agent'а как библиотеку из своего скрипта и начерти вокруг него три руны защиты: инструменты, права и лимит ходов.",
+        "en": "Call an agent as a library from your script and draw three wards around it: tools, permissions, and a turn limit."
+      },
+      "mentorHint": {
+        "ru": "Даже могущественное эхо должно знать границы круга. Без них заклинание станет хозяином ритуала.",
+        "en": "Even a mighty echo must know the circle's boundaries. Without them, the spell becomes master of the ritual."
+      },
+      "outro": {
+        "ru": "Agent стал частью обряда и не выходит за начертанный круг: инструменты, права и ходы под контролем.",
+        "en": "The agent is now part of the ritual and stays within the drawn circle: tools, permissions, and turns remain under control."
+      }
+    },
     "00-kickstart/u4-sources": {
       "intro": {
         "ru": "Не всякий фолиант подлинен. Библиотеки полны копий, переписанных теми, кто не понимал написанного, — и они охотно продаются.",

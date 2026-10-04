@@ -675,6 +675,20 @@
         "en": "Congratulations! You have not just created an agent; you have created a reflection of your own intellect. You are now ready to lead not only humans but entire legions of artificial minds toward new horizons."
       }
     },
+    "08-agent-engineering/u6-agent-sdk": {
+      "intro": {
+        "ru": "Кадет, вызовите agent'а как библиотеку из своего скрипта и задайте три границы полёта: инструменты, права и лимит ходов.",
+        "en": "Cadet, call an agent as a library from your script and set three flight boundaries: tools, permissions, and a turn limit."
+      },
+      "mentorHint": {
+        "ru": "Корабль держит курс не одной тягой. Проверьте доступы, бортовые инструменты и число манёвров.",
+        "en": "A ship holds course by more than thrust. Check its access, onboard tools, and number of manoeuvres."
+      },
+      "outro": {
+        "ru": "Agent встроен в бортовой скрипт и готов к рейсу: инструменты, права и ходы заданы вашим протоколом.",
+        "en": "The agent is wired into the ship's script and ready for the voyage: your protocol sets its tools, permissions, and turns."
+      }
+    },
     "00-kickstart/u4-sources": {
       "intro": {
         "ru": "Перед приёмом груза на борт — судовой журнал: происхождение, дата последней проверки, кто отправитель. Иначе трюм наполнится хламом.",

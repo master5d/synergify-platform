@@ -675,6 +675,20 @@
         "en": "Victory! You did it! You didn't just create an agent, you created a legacy! The world awaits your great deeds, Legendary Engineer!"
       }
     },
+    "08-agent-engineering/u6-agent-sdk": {
+      "intro": {
+        "ru": "Новый квест: вызови agent'а как библиотеку из своего скрипта и задай ему ясные границы — инструменты, права и лимит ходов.",
+        "en": "A new quest: call an agent as a library from your script, then set clear boundaries for tools, permissions, and turns."
+      },
+      "mentorHint": {
+        "ru": "Сильный герой знает не только заклинание вызова, но и три печати, которые держат его силу в узде.",
+        "en": "A strong hero knows not only the summoning spell, but the three seals that keep its power in check."
+      },
+      "outro": {
+        "ru": "Ты встроил agent'а в программу и оставил ему только нужное поле действий. Теперь каждый ход проходит через выбранные тобой границы.",
+        "en": "You placed the agent inside a program and gave it only the room it needs. Now every turn passes through boundaries you chose."
+      }
+    },
     "00-kickstart/u4-sources": {
       "intro": {
         "ru": "Стой! Прежде чем взять свиток у любого встречного мастера — проверь печать! Не всякий, кто громко обещает силу, ею владеет.",

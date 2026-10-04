@@ -675,6 +675,20 @@
         "en": "A magnificent achievement! Your digital double stands ready to serve the collective. You have mastered the art of agent engineering and are now a true Hero of AI Labor."
       }
     },
+    "08-agent-engineering/u6-agent-sdk": {
+      "intro": {
+        "ru": "Товарищ, подключите agent'а как библиотеку к своему скрипту и установите три норматива: инструменты, права и лимит ходов.",
+        "en": "Comrade, connect an agent as a library to your script and set three standards: tools, permissions, and a turn limit."
+      },
+      "mentorHint": {
+        "ru": "Хорошая система допускает ровно то, что нужно заданию. Остальное — нарушение режима эксплуатации.",
+        "en": "A good system permits exactly what the task requires. The rest is a breach of operating discipline."
+      },
+      "outro": {
+        "ru": "Agent принят в работу по инструкции: инструменты, права и число ходов ограничены заранее.",
+        "en": "The agent is accepted into operation by instruction: tools, permissions, and turns are limited in advance."
+      }
+    },
     "00-kickstart/u4-sources": {
       "intro": {
         "ru": "Товарищ, любое изделие принимают по паспорту: кто изготовил, когда проверено, что разрешено. Знание — тоже изделие.",

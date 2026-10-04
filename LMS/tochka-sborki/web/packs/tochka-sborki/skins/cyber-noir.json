@@ -675,6 +675,20 @@
         "en": "The agent is built. You've passed the initiation and become an architect of synthetic minds. The city is yours."
       }
     },
+    "08-agent-engineering/u6-agent-sdk": {
+      "intro": {
+        "ru": "Новый контракт: вызови agent'а как библиотеку из своего скрипта и пропиши три границы — инструменты, права, лимит ходов.",
+        "en": "New contract: call an agent as a library from your script and write down three boundaries—tools, permissions, and turns."
+      },
+      "mentorHint": {
+        "ru": "Умный оператор ограничивает доступ до первого запуска. Иначе система найдёт свой маршрут по твоему досье.",
+        "en": "A smart operator limits access before the first run. Otherwise the system will find its own route through your case file."
+      },
+      "outro": {
+        "ru": "Agent встроен в скрипт и работает по делу: только разрешённые инструменты, права и число ходов.",
+        "en": "The agent is wired into the script and works the case with only the tools, permissions, and turns you allowed."
+      }
+    },
     "00-kickstart/u4-sources": {
       "intro": {
         "ru": "Каждый пакет данных в этом городе кем-то подписан. Вопрос всегда один: кем, когда и что тебе разрешено с ним делать.",

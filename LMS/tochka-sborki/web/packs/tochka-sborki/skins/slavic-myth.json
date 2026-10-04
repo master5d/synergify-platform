@@ -675,6 +675,20 @@
         "en": "Congratulations, master! You have not just tamed a spirit; you have created a faithful assistant in your own image and likeness. The path has been walked with dignity."
       }
     },
+    "08-agent-engineering/u6-agent-sdk": {
+      "intro": {
+        "ru": "Позови agent'а как библиотеку из своего скрипта и дай ему три оберега: инструменты, права да меру ходов.",
+        "en": "Call an agent as a library from your script and give it three charms: tools, permissions, and a measure of turns."
+      },
+      "mentorHint": {
+        "ru": "Дух-помощник хорош, пока ведает свою дорожку. Не дай ему лишних ключей и бесконечного пути.",
+        "en": "A spirit-helper is good while it knows its path. Give it no extra keys and no endless road."
+      },
+      "outro": {
+        "ru": "Дух вошёл в твой скрипт и служит по уговору: инструменты, права и число ходов ему отмерены.",
+        "en": "The spirit now serves inside your script by agreement: its tools, permissions, and turns are measured."
+      }
+    },
     "00-kickstart/u4-sources": {
       "intro": {
         "ru": "На ярмарке товар щупают, а не на зазывалу глядят. Так и с наукой: смотри не на посулы, а на клеймо мастера.",

@@ -27,15 +27,11 @@
     },
     {
       "id": "o4",
-      "text": "Check an agent against the six blocks of production readiness and assign a problem to the right block"
+      "text": "Check an agent against the six blocks of production readiness, assign a problem to the right block, and name three Agent SDK settings that keep the agent within bounds: tools, permissions, and turn limit"
     },
     {
       "id": "o5",
       "text": "Write an agent specification before the code: honestly mark the gaps and tell a spec from a charter"
-    },
-    {
-      "id": "o6",
-      "text": "Wrap an agent in a script with the subscription-based Agent SDK and name three settings that protect against loops and unnecessary permissions"
     }
   ],
   "checks": [
@@ -224,7 +220,7 @@
     {
       "id": "c14",
       "unit": "u6-agent-sdk",
-      "objective": "o6",
+      "objective": "o4",
       "question": "How does the Agent SDK differ from a client SDK?",
       "options": [
         "The Agent SDK already includes the agent loop, built-in tools, and session management",
@@ -238,7 +234,7 @@
     {
       "id": "c15",
       "unit": "u6-agent-sdk",
-      "objective": "o6",
+      "objective": "o4",
       "question": "Which set of settings both limits actions and stops a runaway loop?",
       "options": [
         "allowedTools, permissionMode, and maxTurns",

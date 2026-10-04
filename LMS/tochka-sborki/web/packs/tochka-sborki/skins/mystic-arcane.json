@@ -675,6 +675,20 @@
         "en": "You have breathed life into your digital twin, the pinnacle of agent-craft. This loyal servant now walks the ethereal planes at your command."
       }
     },
+    "08-agent-engineering/u6-agent-sdk": {
+      "intro": {
+        "ru": "Призови agent'а как библиотеку из своего скрипта и сотвори три печати границ: инструменты, права и лимит ходов.",
+        "en": "Summon an agent as a library from your script and weave three boundary seals: tools, permissions, and a turn limit."
+      },
+      "mentorHint": {
+        "ru": "Любая сущность, вызванная из эфира, должна знать, к каким знаниям и действиям ей открыт путь.",
+        "en": "Any entity called from the aether must know which knowledge and actions lie open to it."
+      },
+      "outro": {
+        "ru": "Agent вплетён в программу и связан правилами. Его сила теперь направлена через инструменты, права и ограниченные ходы.",
+        "en": "The agent is woven into the program and bound by rules. Its power now flows through tools, permissions, and limited turns."
+      }
+    },
     "00-kickstart/u4-sources": {
       "intro": {
         "ru": "Прежде чем довериться манускрипту, взгляни на его след в эфире: чья рука его вывела и когда касалась в последний раз.",
