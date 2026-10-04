@@ -31,7 +31,7 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
       {
         kind: 'template',
         title: { ru: 'Устав агента', en: 'Agent Charter' },
-        description: { ru: 'Заготовка system-промпта для твоего ИИ-напарника', en: 'A system-prompt starter for your AI partner' },
+        description: { ru: 'Заготовка system-промпта для твоего агента', en: 'A system-prompt starter for your agent' },
         href: '/materials/agent-charter.md',
       },
       {
@@ -49,8 +49,8 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
         kind: 'link',
         title: { ru: 'Стартер студента', en: 'Student starter' },
         description: {
-          ru: 'Готовый проект для курса с любым агентом: AGENTS.md, память, my-experiments, шаблоны',
-          en: 'A ready course project for any agent: AGENTS.md, memory, my-experiments, templates',
+          ru: 'Готовый проект для курса с любым агентом: AGENTS.md и память',
+          en: 'A ready course project for any agent: AGENTS.md and memory',
         },
         href: '/starter/',
       },
@@ -59,6 +59,7 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
       { kind: 'link', title: { ru: 'Установка стека (macOS/Linux)', en: 'Install the stack (macOS/Linux)' }, href: '/install.sh' },
       { kind: 'link', title: { ru: 'Установка стека (Windows)', en: 'Install the stack (Windows)' }, href: '/install.ps1' },
       { kind: 'link', title: { ru: 'Установка за GFW (cloud-relay)', en: 'Install behind GFW (cloud relay)' }, href: '/install-gfw.sh' },
+      { kind: 'link', title: { ru: 'Установка за GFW (PowerShell)', en: 'Install behind GFW (PowerShell)' }, href: '/install-gfw.ps1' },
     ],
   },
   {
@@ -80,8 +81,8 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
         kind: 'link',
         title: { ru: 'AI Agents for Beginners (оригинал, англ.)', en: 'AI Agents for Beginners (original)' },
         description: {
-          ru: '18 уроков от Microsoft про паттерны агентов, MCP, память и безопасность. MIT, обновляется еженедельно',
-          en: '18 lessons from Microsoft on agent patterns, MCP, memory and security. MIT, updated weekly',
+          ru: '18 уроков от Microsoft про паттерны агентов, MCP, память и безопасность. MIT, обновляется регулярно',
+          en: '18 lessons from Microsoft on agent patterns, MCP, memory and security. MIT, updated regularly',
         },
         href: 'https://github.com/microsoft/ai-agents-for-beginners',
         external: true,
@@ -105,7 +106,7 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
           ru: 'Часовые курсы про агентов, RAG и оркестрацию. Бесплатно, но закрытая платформа: нужна регистрация, лицензии нет',
           en: 'Hour-long courses on agents, RAG and orchestration. Free, but a closed platform: sign-up required, no open licence',
         },
-        href: 'https://www.deeplearning.ai/short-courses/',
+        href: 'https://www.deeplearning.ai/courses/',
         external: true,
       },
     ],

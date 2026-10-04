@@ -7,7 +7,7 @@ level: 0
 ---
 # Claude Code Cheat Sheet
 
-A quick reference for working with Claude Code and prompt engineering.
+A quick reference for working with Claude Code and prompt engineering. Verified on Claude Code 2.1.289.
 
 <OsToggle label="Commands for:" />
 
@@ -77,7 +77,6 @@ claude update                   # Update Claude Code
 --autocompact <auto|tokens>      # Auto-compaction mode; -n = --name
 --add-dir <path>                # Add a folder to context
 --output-format json|text|stream-json
---max-turns <N>                 # For -p/SDK; absent from regular claude --help
 --max-budget-usd <N>            # Session budget in dollars
 --bare                          # Minimal mode: no hooks, LSP, plugin sync, or auto-memory
 
@@ -106,11 +105,8 @@ cat error.log | claude -p 'explain the error'
 
 | Situation | Command |
 | --- | --- |
-| Context &lt;70%, same task | `/compact` — compress, keep history |
-| Context &gt;85%, same task | `/compact` — time to compress |
-| New task, different topic | `/clear` — start fresh |
-| Claude is looping, getting confused | `/clear` — reset |
-| Context &gt;85% + new task | `/clear` — no question |
+| Context is full (&gt;80%) or the task changed | `/compact` |
+| Context &lt;70% and the task is the same | Continue |
 
 > 💡 CLAUDE.md (and the `@AGENTS.md` it imports) is **auto-reloaded** after /compact and auto-compact — instructions aren't lost.
 
@@ -122,7 +118,7 @@ cat error.log | claude -p 'explain the error'
 /config                         # Open settings.json in the editor
 /model <model>                  # Switch model in the session
 /fast                           # Switch to Haiku (fast/cheap)
-/effort low|medium|high         # Analysis depth (NEW)
+/effort low|medium|high         # Analysis depth
 /permissions                    # View and configure permissions
 /vim                            # Enable vim editing mode
 /theme                          # Change color theme
@@ -167,7 +163,7 @@ cat error.log | claude -p 'explain the error'
 /doctor             # Diagnostics: API keys, MCP, configs
 /insights           # Report: which tasks and tools you use most
 /rc                 # Open ~/.claude/rc.ts (launch settings)
-/remote-control     # Control via API (NEW)
+/remote-control     # Control via API
 /pr-comments        # Load PR comments into context
 /stickers           # 🥚
 ```
@@ -196,7 +192,7 @@ cat error.log | claude -p 'explain the error'
 description: "What the skill does"
 allowed-tools: [Bash, Read, Write, mcp__github__*]
 model: sonnet
-effort: medium          # low | medium | high (NEW)
+effort: medium          # low | medium | high
 context: fork           # isolated context
 ---
 # Skill body
@@ -222,7 +218,6 @@ maxTurns: 10                # turn limit
 | `Explore` | Understand a codebase |
 | `Plan` | Complex task → plan first |
 | `General` | Delegate a subtask |
-| `Bash` | Shell scripts and CLI |
 
 ---
 
@@ -347,6 +342,10 @@ You are — [description + expertise]
 ## Constraints
 [Constraints]
 ```
+
+---
+
+CTID is a short label that links the request, context, task, and expected result.
 
 ---
 
@@ -498,14 +497,6 @@ Optimize:
 - Structure your data
 ```
 
-### Advanced token tracking
-
-After module 02 you can set up the **advanced status line** (see 02-setup-guide.md → "Advanced setup"):
-- Multi-line display with daily and weekly budget
-- Colored progress bars
-- Tracking new sessions vs continuation
-- Promotional discount support
-
 ---
 
 ## 🌍 Prompt examples
@@ -590,7 +581,7 @@ Same on both systems — Git is identical everywhere:
 
 ```bash
 git status                          # Status
-git add .                           # Stage all files
+git add AGENTS.md CLAUDE.md TODO.md STATE.md # Stage named files
 git commit -m "Description"         # Commit
 git push origin main                # Push
 git pull origin main                # Pull
@@ -650,7 +641,7 @@ Where the commands actually diverge (everything else is identical):
 ## 🎓 Going further
 
 ```
-1. Run through all EXERCISES in EXERCISES.md
+1. Run through all exercises on the [/exercises/](/en/exercises/) page
 2. Create your own prompt template
 3. Use it in real projects
 4. Record good prompts

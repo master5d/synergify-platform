@@ -40,7 +40,7 @@
 | idea | status  | post_text | image_url | platform | posted_url |
 ```
 
-### Промпт для ChatGPT
+### Промпт для агента
 
 ```
 Role: виральный соц. копирайтер
@@ -90,7 +90,7 @@ Notes:
 - Без рисков отправить галлюцинацию клиенту
 - Exit velocity как для "отправить" — 1 клик
 
-### Промпт для ChatGPT
+### Промпт для агента
 
 ```
 Role: ассистент, пишущий ответы в моём стиле
@@ -121,7 +121,7 @@ BODY: {{email.body}}
 2. Action: **OpenAI > Chat Completion** (промпт выше)
 3. Action: **Gmail > Create Draft** (to = `{{email.from}}`, subject = `Re: {{email.subject}}`, body = output)
 
-### Vибрация для Claude Code
+### Вариация для Claude Code
 
 То же самое можно собрать локально через Claude Code + MCP-сервер для Gmail. Преимущество: не отдаёшь переписку третьему сервису.
 
@@ -154,7 +154,7 @@ BODY: {{email.body}}
 - **OpenAI API** — генерация письма
 - **Gmail / Outlook** — отправка
 
-### Промпт для ChatGPT
+### Промпт для агента
 
 ```
 Role: B2B SDR, пишущий короткие релевантные первые письма

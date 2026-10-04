@@ -7,7 +7,7 @@ level: 0
 ---
 # Claude Code Cheat Sheet (Шпаргалка)
 
-Быстрая справка для работы с Claude Code и промпт-инжинирингом.
+Быстрая справка для работы с Claude Code и промпт-инжинирингом. Проверено на Claude Code 2.1.289.
 
 <OsToggle />
 
@@ -77,7 +77,6 @@ claude update                   # Обновить Claude Code
 --autocompact <auto|tokens>      # Режим авто-сжатия контекста; -n = --name
 --add-dir <путь>                # Добавить папку в контекст
 --output-format json|text|stream-json
---max-turns <N>                 # Для -p/SDK; отсутствует в обычном claude --help
 --max-budget-usd <N>            # Бюджет сессии в долларах
 --bare                          # Минимальный режим: без hooks, LSP, синхронизации плагинов, auto-memory
 
@@ -106,11 +105,8 @@ cat error.log | claude -p 'объясни ошибку'
 
 | Ситуация | Команда |
 | --- | --- |
-| Контекст &lt;70%, та же задача | `/compact` — сжать, сохранить историю |
-| Контекст &gt;85%, та же задача | `/compact` — пора сжимать |
-| Новая задача, другая тема | `/clear` — начать с чистого листа |
-| Claude путается, повторяется | `/clear` — обнулить |
-| Контекст &gt;85% + новая задача | `/clear` — без вариантов |
+| Контекст полон (&gt;80%) или задача сменилась | `/compact` |
+| Контекст &lt;70% и задача та же | Продолжай |
 
 > 💡 CLAUDE.md (а с ним и подключённый `@AGENTS.md`) **перезагружается автоматически** после /compact и auto-compact — инструкции не теряются.
 
@@ -122,7 +118,7 @@ cat error.log | claude -p 'объясни ошибку'
 /config                         # Открыть settings.json в редакторе
 /model <модель>                 # Переключить модель в сессии
 /fast                           # Переключить на Haiku (быстро/дёшево)
-/effort low|medium|high         # Глубина анализа (NEW)
+/effort low|medium|high         # Глубина анализа
 /permissions                    # Просмотр и настройка разрешений
 /vim                            # Включить vim-режим редактирования
 /theme                          # Сменить цветовую тему
@@ -148,7 +144,7 @@ cat error.log | claude -p 'объясни ошибку'
 /init               # Создать CLAUDE.md для проекта
 /memory             # Открыть CLAUDE.md для редактирования
 /mcp                # Управление MCP-серверами
-/hooks              # Управление хуками
+/hooks              # Управление Hooks
 /skills             # Управление навыками
 /agents             # Управление агентами
 /chrome             # Инструменты браузера через MCP
@@ -167,7 +163,7 @@ cat error.log | claude -p 'объясни ошибку'
 /doctor             # Диагностика: API-ключи, MCP, конфиги
 /insights           # Отчёт: какие задачи и инструменты ты используешь чаще всего
 /rc                 # Открыть ~/.claude/rc.ts (настройки запуска)
-/remote-control     # Управление через API (NEW)
+/remote-control     # Управление через API
 /pr-comments        # Загрузить комментарии PR в контекст
 /stickers           # 🥚
 ```
@@ -196,7 +192,7 @@ cat error.log | claude -p 'объясни ошибку'
 description: "Что делает навык"
 allowed-tools: [Bash, Read, Write, mcp__github__*]
 model: sonnet
-effort: medium          # low | medium | high (NEW)
+effort: medium          # low | medium | high
 context: fork           # изолированный контекст
 ---
 # Тело навыка
@@ -222,7 +218,6 @@ maxTurns: 10                # лимит ходов
 | `Explore` | Понять кодовую базу |
 | `Plan` | Сложная задача → сначала план |
 | `General` | Делегировать подзадачу |
-| `Bash` | Shell-скрипты и CLI |
 
 ---
 
@@ -347,6 +342,10 @@ claude
 ## Constraints
 [Ограничения]
 ```
+
+---
+
+CTID — короткая метка, по которой можно связать запрос, контекст, задачу и ожидаемый результат.
 
 ---
 
@@ -498,14 +497,6 @@ claude
 - Структурируй данные
 ```
 
-### Продвинутое отслеживание токенов
-
-После модуля 02 можешь настроить **advanced status line** (см. 02-setup-guide.md → "Продвинутая настройка"):
-- Многострочный дисплей с дневным и недельным бюджетом
-- Цветные полоски прогресса
-- Отслеживание новых сессий vs продолжения
-- Поддержка promotional discount
-
 ---
 
 ## 🌍 Примеры промптов
@@ -590,7 +581,7 @@ claude
 
 ```bash
 git status                          # Статус
-git add .                           # Добавить все файлы
+git add AGENTS.md CLAUDE.md TODO.md STATE.md # Добавить перечисленные файлы
 git commit -m "Описание"            # Коммит
 git push origin main                # Пуш
 git pull origin main                # Пул
@@ -650,7 +641,7 @@ git pull origin main                # Пул
 ## 🎓 Дальнейшее обучение
 
 ```
-1. Пройди все EXERCISES в EXERCISES.md
+1. Пройди все упражнения на странице [/exercises/](/exercises/)
 2. Создай свой prompt-template
 3. Используй в реальных проектах
 4. Записывай хорошие промпты
