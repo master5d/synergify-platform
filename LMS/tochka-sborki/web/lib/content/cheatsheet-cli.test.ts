@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { CONTENT_ROOT } from '../pack'
+import { CONTENT_ROOT, PACK_SLUG } from '../pack'
 
 const FIXTURE = join(import.meta.dirname, 'fixtures', 'claude-help-2.1.289.txt')
 const CHEATSHEETS = [
@@ -17,7 +17,8 @@ function longFlags(source: string): string[] {
   return [...new Set([...source.matchAll(/(?<![\w-])--[a-z][\w-]*/g)].map((match) => match[0]))]
 }
 
-describe('cheatsheet CLI flags', () => {
+// Roadmap и шпаргалка — артефакты Точки Сборки; у другого pack'а их нет по замыслу (деплой 2026-10-04, living-practice).
+describe.runIf(PACK_SLUG === 'tochka-sborki')('cheatsheet CLI flags', () => {
   const help = readFileSync(FIXTURE, 'utf8')
   const fixtureVersion = FIXTURE.match(/claude-help-(\d+\.\d+\.\d+)\.txt$/)?.[1]
 

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { CONTENT_ROOT } from '../pack'
+import { CONTENT_ROOT, PACK_SLUG } from '../pack'
 import { MODULE_SLUGS, OPTIONAL_MODULE_SLUGS } from '../rpg/modules'
 
 type Locale = 'ru' | 'en'
@@ -27,7 +27,8 @@ function unitSlugs(locale: Locale, module: string) {
     .map((name) => name.slice(0, -4))
 }
 
-describe('roadmap stays aligned with _meta.json', () => {
+// Roadmap и шпаргалка — артефакты Точки Сборки; у другого pack'а их нет по замыслу (деплой 2026-10-04, living-practice).
+describe.runIf(PACK_SLUG === 'tochka-sborki')('roadmap stays aligned with _meta.json', () => {
   for (const locale of ['ru', 'en'] as const) {
     const text = roadmap(locale)
 
