@@ -652,4 +652,4 @@ claude-code .
 
 ---
 
-**Быстрая справка:** [CHEATSHEET.md](./CHEATSHEET.md)
+**Быстрая справка:** [шпаргалка на сайте](https://ai.synergify.com/cheatsheet/)

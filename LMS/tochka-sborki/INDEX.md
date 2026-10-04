@@ -15,7 +15,7 @@
 9. [06-audio-pipeline.md](./06-audio-pipeline.md) - Meeting 5: Pipeline
 10. [07-tools.md](./07-tools.md) - Meeting 6: MCP, Skills, Hooks
 11. [EXERCISES.md](./EXERCISES.md) - 8 практических упражнений
-12. [CHEATSHEET.md](./CHEATSHEET.md) - Шпаргалка для работы
+12. [шпаргалка на сайте](https://ai.synergify.com/cheatsheet/) - Шпаргалка для работы
 13. [course-feedback/README.md](./course-feedback/README.md) - 📊 Feedback loop курса (опционально, для автора/вдумчивых студентов)
 
 ---
@@ -148,7 +148,7 @@
 ### 📚 Справочные материалы
 
 #### Шпаргалка
-📄 [CHEATSHEET.md](./CHEATSHEET.md)
+📄 [шпаргалка на сайте](https://ai.synergify.com/cheatsheet/)
 
 - Горячие клавиши (полная таблица)
 - CLI-флаги: claude -p, --max-budget-usd, --worktree...
@@ -195,7 +195,6 @@
 ├── 📄 06-audio-pipeline.md         ← Meeting 5
 ├── 📄 07-tools.md                  ← Meeting 6
 ├── 📄 EXERCISES.md                 ← 8 упражнений
-├── 📄 CHEATSHEET.md                ← Шпаргалка
 │
 ├── 📁 my-experiments/              ← Твои экспериментальные результаты
 │   ├── 📄 README.md
@@ -340,7 +339,7 @@
 | Как установить всё? | 02-setup-guide.md |
 | Как писать промпты? | 04-prompt-engineering.md |
 | Как управлять контекстом? | 05-context-memory.md |
-| Какие команды Claude Code? | CHEATSHEET.md |
+| Какие команды Claude Code? | [шпаргалка на сайте](https://ai.synergify.com/cheatsheet/) |
 | Как подключить MCP, Skills, Hooks? | 07-tools.md |
 | Как построить автоматизацию? | my-templates/automation-recipes.md |
 | Как оставить feedback после модуля? | my-templates/feedback-template.md |
@@ -375,7 +374,7 @@ A: Да, они критичны для усвоения. Это не теори
 A: Упражнения → my-experiments/, хорошие шаблоны → my-templates/
 
 **Q: Как найти нужную информацию быстро?**
-A: Используй CHEATSHEET.md для быстрой справки.
+A: Используй [шпаргалку на сайте](https://ai.synergify.com/cheatsheet/) для быстрой справки.
 
 ---
 

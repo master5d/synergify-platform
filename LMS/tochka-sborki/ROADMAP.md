@@ -251,7 +251,7 @@
 ## 🧭 Куда дальше
 
 - **Практика:** [EXERCISES.md](./EXERCISES.md) — 8 упражнений
-- **Справка:** [CHEATSHEET.md](./CHEATSHEET.md) — шпаргалка по командам
+- **Справка:** [шпаргалка на сайте](https://ai.synergify.com/cheatsheet/) — шпаргалка по командам
 - **Навигатор:** [INDEX.md](./INDEX.md) — полный индекс курса
 - **Старт:** [README.md](./README.md) → [Знакомство](./01-introduction.md)
 
