@@ -46,6 +46,7 @@
 | LMS#31 | «tochka sborki» — пост «всё, что я построил, — бесплатно на GitHub»: второй мозг, «мой Claude учит вашего Claude» в Telegram-группе (автор не указан) | Evernote c5201ba5-1c7a-4e8b-0a49-cdaed5c9e843 | `already covered` (11-second-brain, u3 «навыки переходят от агента к агенту»; стартер студента LMS#7) | `already covered` | паттернов нет; авторство — вопрос владельцу |
 | LMS#32 | «Tochka sborki» — пост о shanraisshan/claude-code-best-practice (MIT) | Evernote 9bca74d2-f3d2-bd6d-523d-8edb12a808c0 | `pattern-only` (ревью свежим контекстом / другой моделью; ссылки на superpowers и spec-kit) | `already covered` | лаба — already covered (superpowers в стеке) |
 | LMS#33 | «Точка Сборки» — пост «Agentic AI Engineer roadmap» + PDF Lamhot Siagian «Interview Q&A» (2026-01) + задание владельца: паттерны в доктрину лабы, roadmap в шпаргалки/labwatch/telos/lab-audit/dashboard | Evernote 4df85462-ec11-08ba-61d2-b380f63fcfbc | `already covered` (роадмап ТС, ступень AI Solution Architect LMS#15) | `already covered` | доктрина лабы — 9 из 9 приёмов уже есть; roadmap-поверхности — ждёт уточнения владельца |
+| LMS#34 | «LMS + Nautilus» — чужой пост о фрактальных MAS: генератор курса как DAG из 7 LLM-узлов (10 скриншотов UI, автора/продукта нет) | Evernote bdd88888-696e-cdab-acd7-f90617adbf33 | `already covered` (authoring engine S1–S5, checks, сводка самопроверок, когорты Ф2) | `already covered` | NAUTILUS#286: already covered; память L3 — повтор отклонённого |
 
 ---
 
@@ -1496,6 +1497,35 @@ lab audit, realtime status dashboard для простой ментальной 
 NAUTILUS — после ответа.
 
 **Ответ владельца 2026-10-03:** «а + б» — и карта зрелости лаборатории по ступеням agentic-инженерии на всех поверхностях (шпаргалки, Labwatch, telos, lab-audit), и живой статус-дашборд «что сейчас происходит». Задача заведена в BACKLOG NAUTILUS со ссылкой на intake LMS#33.
+
+## LMS#34 — «LMS + Nautilus»: генератор курса как DAG из 7 LLM-узлов (2026-10-04)
+
+**Источник:** Evernote `bdd88888-696e-cdab-acd7-f90617adbf33` (создана 2026-07-15, обновлена 2026-09-30), чужой пост
+от первого лица о «фрактальных MAS» на примере курса «AI First Org» (ICP, рефы топ-10 курсов, рекурсивная декомпозиция
+идеи в граф с юнит-экономикой). 10 картинок сконвертированы (vision-пул Studio, QA глазами) —
+`NAUTILUS/data/intake-media/bdd88888-696e-cdab-acd7-f90617adbf33/`: DAG из 7 LLM-узлов генерации курса + модальные окна
+«шаги инференса, логи и I/O» по узлу; десятая картинка — схема памяти L1/L2/L3, разобрана в NAUTILUS#286.
+
+**Реальность источника:** ни автора, ни продукта, ни репо, ни URL — скриншоты безымянного UI; «ICP на несколько страниц»
+и «юнит-экономика» из текста не показаны. Брать можно только идеи.
+
+**Сверка с LMS (course-authoring engine `lib/authoring/`, S1–S5, sovereign prompt-emitter):**
+
+| Узел DAG | В LMS |
+|---|---|
+| 1 Анализ требований (интервью с заказчиком, стандарты, целевые результаты) | outline + `objective` на юнит, `validateOutline`, dehustle-линт |
+| 2 Проектирование структуры (модули, зависимости, часы) | `CourseOutline` модули × юниты, роадмап ТС |
+| 3 Генерация материалов (конспекты, задания, тесты, проверка качества) | research-prompt → draft-lesson → review-lesson (`validateDraftMdx`, `lintReadability`) |
+| 4 Система оценивания (баллы, рубрики, экзамен) | `checks` юнитов, spaced review, RPG-очки |
+| 5 Адаптация под платформу (SCORM) | не применимо — платформа своя |
+| 6 Пилот с фокус-группой, LLM-анализ обратной связи | сводка ошибок самопроверок `/api/admin/checks/summary` (LMS#30), когорты Ф2 (BACKLOG) |
+| 7 Публикация и мониторинг, автоотчёт | PostHog/GSC, та же сводка |
+
+**Вердикт:** `already covered` (ТС и LMS). Лаба — NAUTILUS#286, `already covered`.
+
+**Паттерны:** «у каждого узла — шаги инференса с логами и I/O» — наш движок prompt-emitter, прозу гоняет агент ученика/
+автора, логи — его; нового нет. Не брать: «юнит-экономика/GTM/пивоты одним прогоном» — без источника цифр таблица без
+улик. Новых строк BACKLOG lms-engine нет.
 
 ## Синтез раунда 2026-10-03 (LMS#21–#33) — закрыт
 
