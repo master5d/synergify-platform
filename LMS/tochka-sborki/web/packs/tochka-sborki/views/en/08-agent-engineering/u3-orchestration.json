@@ -4,14 +4,14 @@
   "module": "08-agent-engineering",
   "unit": "u3-orchestration",
   "locale": "en",
-  "title": "Orchestration: ENERV Case Study",
-  "sourceHash": "sha256:de715c4df11a6a81bb2b4bb331f04833d6222e4a782cb41fd719120ef4c685ca",
+  "title": "Orchestration: Gmail Agent as a Case",
+  "sourceHash": "sha256:66cb475cb6085c5126b79ec62c4499496333c6bfe2f4ace6c67d37ba0daf3997",
   "outline": [
     {
       "heading": "",
       "points": [
         {
-          "text": "Real case: ENERV n8n pipeline",
+          "text": "Real case: a Gmail agent",
           "origin": "extract"
         },
         {
@@ -31,19 +31,5 @@
     "c7",
     "c8"
   ],
-  "audio": null,
-  "paraphrase": {
-    "source": "paraphrase",
-    "generator": "paraphrase-v1",
-    "pool": "prose-pool",
-    "sections": [
-      {
-        "sourceHash": "sha256:04148c1aa9dd6b98ff14a8bee520f31eb9decc48396c11c02e1fa6dc29fc4a12",
-        "points": [
-          "You can study a real case of an ENERV n8n pipeline.",
-          "You should notice that this is a designed architecture instead of one big prompt."
-        ]
-      }
-    ]
-  }
+  "audio": null
 }

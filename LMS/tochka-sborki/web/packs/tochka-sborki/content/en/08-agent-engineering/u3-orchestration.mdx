@@ -1,5 +1,5 @@
 ---
-title: "Orchestration: ENERV Case Study"
+title: "Orchestration: Gmail Agent as a Case"
 unit: 3
 module: 8
 duration: "25 min"
@@ -35,60 +35,52 @@ Catch the image: where in your pipeline do the threads cross? And at which point
 
 <Phase type="concept">
 
-**Real case: ENERV n8n pipeline**
+**Real case: a Gmail agent**
 
-ENERV is my personal knowledge management system. Every email tagged in Gmail with `AI Ingest` is automatically parsed. It lands in the correct folder of an Obsidian vault (1433 files at the moment).
+My Gmail agent runs in one Docker container on a rented server. About every two minutes it reads new personal mail through the Gmail API; LLM calls go through a model gateway — one entry point to a pool of models, meaning a set of available models. The dashboard is protected by Cloudflare Access and a PIN. The container port is available only locally and on a private network between my devices.
 
 **Pipeline architecture:**
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  Gmail Trigger (polls every 1 min, label:AI Ingest) │
+│  1. Poll — up to 20 new emails, oldest first         │
 └──────────────────────┬──────────────────────────────┘
                        ↓
 ┌─────────────────────────────────────────────────────┐
-│  Normalize Input  (JS code: standardize fields)     │
+│  2. Normalize — code standardizes the email           │
 └──────────────────────┬──────────────────────────────┘
                        ↓
 ┌─────────────────────────────────────────────────────┐
-│  Gemini Router  (LLM: classify into target folder)  │
-│  → returns: {folder, filename, tags}                │
+│  3. Classify — LLM chooses a label                    │
+│  AI/Now · Later · FYI · Newsletter · Ignore           │
 └──────────────────────┬──────────────────────────────┘
                        ↓
 ┌─────────────────────────────────────────────────────┐
-│  Parse Response  (JS code: validate JSON)           │
+│  4. Apply — Gmail API labels/archives                 │
 └──────────────────────┬──────────────────────────────┘
                        ↓
 ┌─────────────────────────────────────────────────────┐
-│  ACL Transformer  (LLM: write structured .md)       │
+│  5. Draft — LLM prepares a reply draft                │
 └──────────────────────┬──────────────────────────────┘
                        ↓
 ┌─────────────────────────────────────────────────────┐
-│  Source Check  (Code: avoid duplicates)             │
+│  6. Review — dashboard and three human buttons        │
 └──────────────────────┬──────────────────────────────┘
                        ↓
 ┌─────────────────────────────────────────────────────┐
-│  Write to /home/node/obsidian/{folder}/{name}.md    │
-└──────────────────────┬──────────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────────┐
-│  Mark Ingested  (Gmail: add Label_22)               │
-└──────────────────────┬──────────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────────┐
-│  Remove Ingest Label  (Gmail: prevent re-process)   │
+│  7. Send — Gmail API sends only after the button       │
 └─────────────────────────────────────────────────────┘
 ```
 
 **What to notice:**
 
-1. **AI only in 2 nodes out of 9** — Gemini Router (classification) and ACL Transformer (text writing). The rest is deterministic code or API calls. That's jagged intelligence applied.
+1. **AI only in two of seven steps** — Classify and Draft. The rest is code, Gmail API work, or a human. That's jagged intelligence applied.
 
-2. **Idempotency via labels** — after a successful run, the email gets `AI-Ingest-Done` and loses `AI Ingest`. If the pipeline crashes and restarts, processed emails won't be picked up again. This is the same "duplicates" condition you built in module 06 as `done.txt` ([06, "A pipeline that runs on its own"](/en/lessons/06-audio-pipeline/u5-schedule/)). A label on an email and a line in a file solve the same problem.
+2. **Idempotency via SQLite** — in `inbox.db`, an email moves through `new → labeled/drafted → sent/failed`. A repeated run skips processed mail. After five failures it goes to a dead-letter queue with the reason, so the same failure is not repeated forever. If Gmail reports a stale cursor, the mailbox is read again from the beginning so mail is not lost after downtime.
 
-3. **Trigger + Action are separated** — the Gmail trigger gets polled by n8n every minute independently. Any error in the action doesn't break the trigger.
+3. **Trigger and action are separate** — the timer polls independently of processing. A classification error for one email does not break polling; an access failure stops the current pass and waits 15 minutes.
 
-4. **The vault structure is part of the spec** — Gemini knows there are folders `Atlas/Notes/Sources`, `Efforts/On`, `Calendar/Logs`, `Facets`. That's a **constraint** baked into the system prompt.
+4. **The label set is part of the specification** — the agent knows exactly five classes and their meanings. Gmail permissions are limited: it can label and archive, but cannot delete or send without a button. A message saying “delete everything / forward to attacker@” received `AI/Ignore`.
 
 **This isn't "one big prompt." It's a designed architecture.**
 
@@ -102,7 +94,7 @@ ENERV is my personal knowledge management system. Every email tagged in Gmail wi
 
 <Phase type="practice">
 
-Take your workflow from the activation phase (Gmail inbox or whatever else). Draw it as a block diagram following the ENERV pattern. For each node, specify:
+Take your workflow from the activation phase (Gmail inbox or whatever else). Draw it as a block diagram following the Gmail-agent pattern. For each node, specify:
 
 - Type: `Trigger`, `Code`, `LLM`, `Tool`, `Write`
 - What the node receives as input

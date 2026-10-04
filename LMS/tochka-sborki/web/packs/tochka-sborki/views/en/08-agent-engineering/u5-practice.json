@@ -5,7 +5,7 @@
   "unit": "u5-practice",
   "locale": "en",
   "title": "Design Your Clone",
-  "sourceHash": "sha256:dd9cedcf18cc053136d3ec114613682cfc8bfb5cf0c38e042bdfef7fcfef2ac4",
+  "sourceHash": "sha256:82f0af7f98e0baf061534f46167b0b7bf7c65f1a859813cdf78ce920eac6154f",
   "outline": [
     {
       "heading": "",
@@ -15,7 +15,7 @@
           "origin": "extract"
         },
         {
-          "text": "Real example of a filled-out spec — a simplified version of ENERV ingest:",
+          "text": "Real example of a filled-out spec — a Gmail agent:",
           "origin": "extract"
         }
       ],
@@ -42,13 +42,6 @@
     "generator": "paraphrase-v1",
     "pool": "prose-pool",
     "sections": [
-      {
-        "sourceHash": "sha256:44b996bd759a3aa5b12d95c6e9158cf760e389e76e4087937b417bfce0f8b478",
-        "points": [
-          "You use an agent specification template.",
-          "There is a real example of a filled-out spec for a simplified version of ENERV ingest."
-        ]
-      },
       {
         "sourceHash": "sha256:3c987a50dcc5ffa35d24dc5db6dba543221fa5aae8583395a1dd0ebb37314258",
         "points": [

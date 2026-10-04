@@ -5,7 +5,7 @@
   "unit": "u2-jagged-intelligence",
   "locale": "en",
   "title": "Jagged Intelligence: What to Delegate",
-  "sourceHash": "sha256:a739cbcaa36b0be1d9e0112d02ae269120ccdc3e508475dfdbac02152ca4495b",
+  "sourceHash": "sha256:69151a491b1028751e1ba4ea7935643c0b8571ea01a943871a1c8e4502ed271c",
   "outline": [
     {
       "heading": "",
@@ -19,7 +19,11 @@
           "origin": "extract"
         },
         {
-          "text": "Real example: the ENERV pipeline",
+          "text": "Real example: a Gmail agent",
+          "origin": "extract"
+        },
+        {
+          "text": "AI appears in exactly two of seven steps: classification and drafting.",
           "origin": "extract"
         }
       ],
@@ -31,21 +35,5 @@
     "c4",
     "c5"
   ],
-  "audio": null,
-  "paraphrase": {
-    "source": "paraphrase",
-    "generator": "paraphrase-v1",
-    "pool": "prose-pool",
-    "sections": [
-      {
-        "sourceHash": "sha256:aa6df4dbb87e4823b0b793eab2a1e8165f010581b1b90a7ae3605093d6d04098",
-        "points": [
-          "You follow the taste rule for the agent engineer.",
-          "You choose what to build while the AI writes the code.",
-          "You verify that the result matches your intent and the AI fixes what you flag as wrong.",
-          "The ENERV pipeline serves as a real example."
-        ]
-      }
-    ]
-  }
+  "audio": null
 }

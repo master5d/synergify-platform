@@ -5,7 +5,7 @@
   "unit": "u5-practice",
   "locale": "ru",
   "title": "Спроектируй своего клона",
-  "sourceHash": "sha256:e460fd71c3904f0aa3d0858f9d5b4410589565e76337cf6ac003c2cdf0de74e9",
+  "sourceHash": "sha256:46c1dbeff4b515d9c1595bd0fd95605d168ac10578a425b54f316c0eff28c0c3",
   "outline": [
     {
       "heading": "",
@@ -15,7 +15,7 @@
           "origin": "extract"
         },
         {
-          "text": "Реальный пример заполненной спеки — упрощённая версия ENERV ingest:",
+          "text": "Реальный пример заполненной спеки — Gmail-агент:",
           "origin": "extract"
         }
       ],
@@ -42,13 +42,6 @@
     "generator": "paraphrase-v1",
     "pool": "prose-pool",
     "sections": [
-      {
-        "sourceHash": "sha256:2cf55c959a4fd2fa5e2c20e3ba4abd27afc71f9adc4d6febd8a61d3c595be2b5",
-        "points": [
-          "Представлен шаблон спецификации агента.",
-          "Приведен реальный пример заполненной спецификации на основе упрощенной версии ENERV ingest."
-        ]
-      },
       {
         "sourceHash": "sha256:e9b1c610becd3d304a3bba706f80f0d186ac1fa78768e5578a7fb7758156df86",
         "points": [

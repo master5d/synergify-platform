@@ -72,7 +72,7 @@ duration: "20 мин"
 - Идемпотентность: как избегаем повторов
 
 ## Observability
-- Trace: Langfuse / OTel / stdout логи
+- Trace: журнал шлюза к моделям / OTel / stdout-логи (Langfuse — тоже вариант; автор его снял, потому что никто не читал)
 - Alerting: куда уходит ошибка (Telegram / email / Slack)
 
 ## Failure modes
@@ -93,61 +93,62 @@ duration: "20 мин"
 - Как: [Telegram сообщение / Notion task / email]
 ```
 
-**Реальный пример заполненной спеки** — упрощённая версия ENERV ingest:
+**Реальный пример заполненной спеки** — Gmail-агент:
 
 ```markdown
-# Agent: ENERV Gmail Ingest
+# Agent: Gmail inbox assistant
 
 ## Цель
-Письма с тегом `AI Ingest` автоматически попадают в правильную папку
-Obsidian-vault как .md файлы.
+Каждые примерно две минуты агент разбирает новую личную входящую почту,
+ставит одну из пяти меток и готовит черновик там, где нужен ответ. Отправка
+возможна только после нажатия человеком кнопки.
 
 ## Trigger
 - Тип: poll
-- Параметры: Gmail API каждую минуту, фильтр `label:AI Ingest`
+- Параметры: Gmail API примерно каждые две минуты, до 20 писем за проход,
+  старые первыми
 
 ## Pipeline
-1. Gmail Trigger — забрать письма — () → [emails]
-2. Normalize Input — стандартизация полей — [email] → [normalized]
-3. Gemini Router — классификация — [normalized] → [folder, filename]
-4. Parse Response — валидация JSON — [llm_out] → [structured]
-5. ACL Transformer — генерация .md — [normalized + structured] → [md]
-6. Source Check — дедуп — [md] → [md или skip]
-7. Write — запись файла — [md] → /home/node/obsidian/{folder}/{filename}.md
-8. Mark Ingested — пометка Gmail — [email_id] → ()
-9. Remove Ingest Label — снятие триггера — [email_id] → ()
+1. Poll — забрать новые письма — () → [до 20 emails]
+2. Normalize — стандартизация полей — [email] → [normalized]
+3. Classify — выбрать `AI/Now`, `AI/Later`, `AI/FYI`, `AI/Newsletter` или `AI/Ignore` — [normalized] → [label]
+4. Apply — поставить метку и при необходимости архивировать — [label] → [Gmail thread]
+5. Draft — написать черновик для письма, которое стоит ответа — [normalized] → [draft]
+6. Review — дашборд: подтвердить метку / одобрить и отправить / убрать — [draft + label] → [human decision]
+7. Send — отправить в ту же нитку через Gmail API — [approved draft] → [sent]
 
 ## AI узлы
-- Gemini Router — gemini-flash, промпт `gemini-router.md`
-- ACL Transformer — gemini-flash, промпт `acl-transformer.md`
+- Classify — LLM через шлюз к моделям, знает пять меток и их смысл
+- Draft — LLM через шлюз к моделям, пишет только черновик
 
 ## Tools
-- Gmail API (modify scope)
-- File system (volume mount /home/node/obsidian)
+- Gmail API: только поставить метку и архивировать; отправка — отдельный шаг после кнопки
+- SQLite: `inbox.db`, состояния писем и причины ошибок
 
 ## Storage
-- Obsidian vault на host volume
-- Idempotency: labels `AI Ingest` снимается, добавляется `AI-Ingest-Done`
+- Сервис работает в одном Docker-контейнере на сервере; доступ к дашборду — через Cloudflare Access с PIN
+- Idempotency: `new → labeled/drafted → sent/failed`; после пяти ошибок — мёртвая очередь
 
 ## Observability
-- n8n executions log
-- Langfuse traces для обоих LLM-узлов
+- Журнал сервиса + SQLite-состояние писем
+- Журнал шлюза (учёт вызовов по имени сервиса)
+- На панели есть показатель «часов с последнего обработанного письма»: зелёный контейнер ещё не значит живой поток
 
 ## Failure modes
 | Сценарий | Поведение |
 |---|---|
-| Gemini 500 | n8n retry 3× с exp backoff |
-| Битый JSON | Лог + письмо получает `AI-Ingest-Review`, а `AI Ingest` снимается — иначе trigger хватал бы его каждую минуту |
-| Disk full | Email alert (Resend) |
+| Шлюз 5xx | Повтор 3× с паузой, после 5 неудач — мёртвая очередь |
+| Отказ доступа Gmail | Остановить проход и ждать 15 минут |
+| Устаревшая закладка Gmail | Перечитать ящик заново, не перескакивать сразу на «сейчас» |
+| Отсутствует ключ шлюза | Не запускать сервис; не изображать пустой inbox |
 
 ## Cost
-- ~10 писем в день × 2 LLM-вызова = 20 calls/day
-- Gemini Flash: ~$0.001/call → ~$0.02/day
-- Hard cap: $5/month через Vertex AI budget
+- Два LLM-вызова максимум на письмо; потолок прохода — 20 писем
+- Каждый запрос подписан именем сервиса; учёт расходов виден в журнале шлюза
 
 ## Human-in-loop
-- Письма помеченные `AI-Ingest-Review` — раз в неделю просматриваю папку
-  Atlas/Notes/Sources вручную, чтобы поймать misclassification
+- На дашборде подтверждаю метку, одобряю и отправляю или убираю предложение
+- У агента нет права удалить письмо или отправить без подтверждения
 ```
 
 Это **на бумаге**. Кода ещё нет. Но любой человек — включая меня самого через полгода — может это прочитать и понять что делает агент.
@@ -241,7 +242,7 @@ Obsidian-vault как .md файлы.
 **Следующий шаг (после модуля):**
 
 Возьми эту спеку и:
-1. Открой n8n (есть бесплатный self-hosted или $20/мес cloud)
+1. Выбери, чем запускать по таймеру: cron/launchd/systemd-таймер или Планировщик Windows; no-code оркестратор — тоже вариант, если понимаешь, какой порт он открывает наружу
 2. Положи спеку в AGENTS.md проекта
 3. Скажи Claude Code: «реализуй pipeline по спецификации»
 4. Итерируй пока работает

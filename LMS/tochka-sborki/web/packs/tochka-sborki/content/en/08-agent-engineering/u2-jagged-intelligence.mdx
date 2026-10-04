@@ -72,25 +72,25 @@ This means:
 - You verify — **that the result matches the intent**
 - AI fixes — **what you flagged as wrong**
 
-**Real example: the ENERV pipeline**
+**Real example: a Gmail agent**
 
-In ENERV (my semantic journal system), Gmail emails tagged `AI Ingest` are processed like this (simplified; the full diagram is in u3):
+My Gmail agent checks new incoming mail about every two minutes: it assigns one of five labels and prepares a draft when a reply is needed. The full diagram is in u3.
 
 ```
-Gmail Trigger          ← tool, not AI
+Poll                   ← Gmail API, not AI
   ↓
-Normalize Input        ← code, deterministic
+Normalize              ← code, standardize the email
   ↓
-Gemini Router          ← AI decides: where to put it (Atlas? Calendar? Facets?)
+Classify               ← LLM chooses one of five labels
   ↓
-Parse Response         ← code, deterministic
+Apply                  ← code adds the label or archives
   ↓
-ACL Transformer        ← AI writes the .md into the right folder
+Draft                  ← LLM writes a reply draft when needed
   ↓
-Mark Ingested          ← tool (Gmail API)
+Review → Send          ← a human clicks a button, then Gmail API sends
 ```
 
-AI shows up in exactly **two spots** where it shines: classification + text-to-structure. Everything else is deterministic steps.
+AI appears in exactly **two of seven steps**: classification and drafting. Everything else is deterministic code, Gmail API work, or a human decision. The labels are `AI/Now`, `AI/Later`, `AI/FYI`, `AI/Newsletter`, and `AI/Ignore`; their meanings come from the specification, not a guess.
 
 That's what agent engineering is — a **designed** combination of AI nodes and non-AI nodes.
 

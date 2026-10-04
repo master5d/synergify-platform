@@ -72,7 +72,7 @@ List of nodes where an LLM is used:
 - Idempotency: how we avoid duplicates
 
 ## Observability
-- Trace: Langfuse / OTel / stdout logs
+- Trace: the model gateway's log / OTel / stdout logs (Langfuse is an option too; the author removed it because nobody read it)
 - Alerting: where errors go (Telegram / email / Slack)
 
 ## Failure modes
@@ -93,61 +93,61 @@ List of nodes where an LLM is used:
 - How: [Telegram message / Notion task / email]
 ```
 
-**Real example of a filled-out spec** — a simplified version of ENERV ingest:
+**Real example of a filled-out spec** — a Gmail agent:
 
 ```markdown
-# Agent: ENERV Gmail Ingest
+# Agent: Gmail inbox assistant
 
 ## Goal
-Emails tagged `AI Ingest` automatically land in the correct folder of an
-Obsidian vault as .md files.
+Every two minutes or so, the agent processes new personal inbox mail, assigns
+one of five labels, and prepares a draft when a reply is needed. Sending is
+possible only after a human clicks the button.
 
 ## Trigger
 - Type: poll
-- Params: Gmail API every minute, filter `label:AI Ingest`
+- Params: Gmail API about every two minutes, up to 20 emails per pass, oldest first
 
 ## Pipeline
-1. Gmail Trigger — fetch emails — () → [emails]
-2. Normalize Input — standardize fields — [email] → [normalized]
-3. Gemini Router — classification — [normalized] → [folder, filename]
-4. Parse Response — JSON validation — [llm_out] → [structured]
-5. ACL Transformer — generate .md — [normalized + structured] → [md]
-6. Source Check — dedup — [md] → [md or skip]
-7. Write — file write — [md] → /home/node/obsidian/{folder}/{filename}.md
-8. Mark Ingested — Gmail label — [email_id] → ()
-9. Remove Ingest Label — remove trigger — [email_id] → ()
+1. Poll — fetch new emails — () → [up to 20 emails]
+2. Normalize — standardize fields — [email] → [normalized]
+3. Classify — choose `AI/Now`, `AI/Later`, `AI/FYI`, `AI/Newsletter`, or `AI/Ignore` — [normalized] → [label]
+4. Apply — add the label and archive when required — [label] → [Gmail thread]
+5. Draft — write a reply draft when needed — [normalized] → [draft]
+6. Review — dashboard: confirm label / approve and send / remove — [draft + label] → [human decision]
+7. Send — send in the same thread through Gmail API — [approved draft] → [sent]
 
 ## AI nodes
-- Gemini Router — gemini-flash, prompt `gemini-router.md`
-- ACL Transformer — gemini-flash, prompt `acl-transformer.md`
+- Classify — LLM through the model gateway, with the five labels and their meanings
+- Draft — LLM through the model gateway, writes a draft only
 
 ## Tools
-- Gmail API (modify scope)
-- File system (volume mount /home/node/obsidian)
+- Gmail API: label and archive only; sending is a separate post-button step
+- SQLite: `inbox.db`, email states and failure reasons
 
 ## Storage
-- Obsidian vault on host volume
-- Idempotency: label `AI Ingest` is removed, `AI-Ingest-Done` is added
+- One Docker container on a server; dashboard access through Cloudflare Access with a PIN
+- Idempotency: `new → labeled/drafted → sent/failed`; after five failures, a dead-letter queue
 
 ## Observability
-- n8n executions log
-- Langfuse traces for both LLM nodes
+- Service log + SQLite email state
+- Model gateway log, with usage recorded by service name
+- Dashboard metric: “hours since last processed email”; a green container does not prove the flow is alive
 
 ## Failure modes
 | Scenario | Behavior |
 |---|---|
-| Gemini 500 | n8n retry 3× with exp backoff |
-| Broken JSON | Log + the email gets `AI-Ingest-Review` and loses `AI Ingest` — otherwise the trigger would grab it every minute |
-| Disk full | Email alert (Resend) |
+| Gateway 5xx | Retry 3× with a pause; after 5 failures, dead-letter queue |
+| Gmail access failure | Stop the pass and wait 15 minutes |
+| Stale Gmail cursor | Read the mailbox again instead of jumping straight to “now” |
+| Missing gateway key | Refuse to start; do not pretend the inbox is empty |
 
 ## Cost
-- ~10 emails/day × 2 LLM calls = 20 calls/day
-- Gemini Flash: ~$0.001/call → ~$0.02/day
-- Hard cap: $5/month via Vertex AI budget
+- At most two LLM calls per email; the pass is capped at 20 emails
+- Every request carries the service name; usage is visible in the gateway log
 
 ## Human-in-loop
-- Emails tagged `AI-Ingest-Review` — once a week I review the folder
-  Atlas/Notes/Sources manually to catch misclassifications
+- On the dashboard I confirm the label, approve and send, or remove the proposal
+- The agent cannot delete mail or send without confirmation
 ```
 
 This is **on paper**. There's no code yet. But anyone — including me six months from now — can read it and understand what the agent does.
@@ -241,7 +241,7 @@ If all 6 boxes are ticked — you've got a spec you can start building from.
 **Next step (after the module):**
 
 Take this spec and:
-1. Open n8n (free self-hosted or $20/mo cloud)
+1. Choose a timer: cron/launchd/systemd timer or Windows Task Scheduler; a no-code orchestrator is also an option if you understand which port it exposes
 2. Drop the spec into the project's AGENTS.md
 3. Tell Claude Code: "build the pipeline per the spec"
 4. Iterate until it works.
