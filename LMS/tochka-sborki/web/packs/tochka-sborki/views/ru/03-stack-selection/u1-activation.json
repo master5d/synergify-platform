@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "ru",
   "title": "Какие у тебя ограничения?",
-  "sourceHash": "sha256:c394cba31358fb4121052862a83c66e73a369a9a719aa3f6cbba14a002e6e351",
+  "sourceHash": "sha256:3009623d8af4852925761429ad605ece15dcfaea110ffdfc6f2e364f9e7d19e3",
   "outline": [
     {
       "heading": "Почему нельзя «просто Claude Code»",
@@ -21,7 +21,7 @@
       "heading": "Что такое «стек»",
       "points": [
         {
-          "text": "Например: Claude Code → LiteLLM → Cerebras gpt-oss-120b — Claude Code UI с открытой моделью Aider → прямой OpenRouter → DeepSeek-Coder — классический OSS workflow Hermes → LiteLLM с fallback массивом — SOVERN-pattern",
+          "text": "Например: Claude Code → LiteLLM → Cerebras gpt-oss-120b — Claude Code UI с открытой моделью Aider → прямой OpenRouter → DeepSeek-Coder — классический OSS workflow Hermes → LiteLLM с цепочкой запасных моделей — пример собственного стека",
           "origin": "extract"
         },
         {
@@ -46,14 +46,6 @@
         "sourceHash": "sha256:a69e054e9ccf54ecb93be3784d4cf465f8235b3c64aab775152478cf8b08ee39",
         "points": [
           "Ты не хуже, ведь агентный ИИ перестал быть моно-инструментом и теперь существуют открытые альтернативы."
-        ]
-      },
-      {
-        "sourceHash": "sha256:7fac095f4a5e84451ab4b5512435aca9f4e63195cf8f8ef0953f7faae501748a",
-        "points": [
-          "Ты можешь использовать связки вроде Claude Code с LiteLLM и Cerebras gpt-oss-120b или Claude Code UI с Aider, прямым OpenRouter и DeepSeek-Coder.",
-          "Также возможны классический OSS workflow Hermes или LiteLLM с fallback массивом в SOVERN-pattern.",
-          "Этот модуль научит тебя думать про стек целиком, а не просто знать одну тулзу."
         ]
       }
     ]

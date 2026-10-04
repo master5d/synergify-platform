@@ -5,66 +5,36 @@
   "unit": "u4-hermes-sovereign",
   "locale": "en",
   "title": "Hermes + local stack",
-  "sourceHash": "sha256:ea9f0d081ff9d4bf63843cc4e9efc827d3b38bc3fde41f4a48e12ede7570ea2b",
+  "sourceHash": "sha256:a65db810e9e2d1b948db33a65b1e24a31ee3d4a6c712eca28a5bf3a8ee67c592",
   "outline": [
     {
-      "heading": "SOVERN stack architecture",
-      "points": [],
+      "heading": "How the author's setup works: an owner-controlled stack on personal hardware",
+      "points": [
+        {
+          "text": "Real route example: Claude Code → LiteLLM → Cerebras gpt-oss-120b.",
+          "origin": "extract"
+        },
+        {
+          "text": "Hermes → LiteLLM with a fallback chain follows the same principle: Hermes dispatches work to executors (Claude Code, Codex), while the shared gateway selects models.",
+          "origin": "extract"
+        }
+      ],
       "children": []
     },
     {
-      "heading": "Installing Hermes (simplified)",
-      "points": [],
-      "children": [
+      "heading": "What to install in practice",
+      "points": [
         {
-          "heading": "Requirements",
-          "points": [],
-          "children": []
-        },
-        {
-          "heading": "Get Hermes",
-          "points": [],
-          "children": []
-        },
-        {
-          "heading": "Base config",
-          "points": [],
-          "children": []
-        },
-        {
-          "heading": "First run",
-          "points": [],
-          "children": []
-        },
-        {
-          "heading": "Skill system (optional)",
-          "points": [
-            {
-              "text": "This is the equivalent of .claude/skills/, but portable across agents.",
-              "origin": "extract"
-            }
-          ],
-          "children": []
+          "text": "The official Hermes repository is NousResearch/hermes-agent.",
+          "origin": "extract"
         }
-      ]
+      ],
+      "children": []
     }
   ],
   "cards": [
     "c9",
     "c10"
   ],
-  "audio": null,
-  "paraphrase": {
-    "source": "paraphrase",
-    "generator": "paraphrase-v1",
-    "pool": "prose-pool",
-    "sections": [
-      {
-        "sourceHash": "sha256:432216f5fbcdc3fc87dedfe86a3206b7354b6e01714ef53a22f7da3ce59f506b",
-        "points": [
-          "This works like .claude/skills/ but stays portable across your different agents."
-        ]
-      }
-    ]
-  }
+  "audio": null
 }

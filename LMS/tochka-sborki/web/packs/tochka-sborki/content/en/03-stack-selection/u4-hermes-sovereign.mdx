@@ -11,7 +11,7 @@ Think of a moment when one tool tried to do everything at once — and broke dow
 
 Don't picture it as a "context window problem." Picture it as **your own vegetable garden versus the market** 🌱: the gardener planted it, watered it, harvested it — and knows every plant. The market buyer gets ready produce fast, no fuss. Hermes is the gardener who **keeps the plan at home** and sends workers out for specific results. It doesn't trust the whole harvest to a single stall.
 
-Notice in your head: which part of your AI-workflow suffers most because the agent **does everything in sequence** and loses the thread mid-task?
+Notice in your head: which part of your AI workflow suffers most because the agent **does everything in sequence** and loses the thread mid-task?
 
 </Phase>
 
@@ -35,109 +35,43 @@ Hermes's context isn't eaten by implementation. Worker contexts are atomic and t
 
 <Phase type="concept">
 
-## SOVERN stack architecture
+## How the author's setup works: an owner-controlled stack on personal hardware
 
-```
-┌──────────────────────────────────────────────────────────┐
-│  Hermes Agent (WSL2 Shell + Markdown plans)              │
-│  ┌────────────────────────────────────────────────────┐  │
-│  │ - Plan in Obsidian / Daily docs                    │  │
-│  │ - Cron schedules                                   │  │
-│  │ - Skill lifecycle (starts / stops)                 │  │
-│  │ - Boss-worker dispatch                             │  │
-│  └────────────────────────────────────────────────────┘  │
-│                       │                                  │
-│                       ▼ delegate                         │
-│  ┌────────────────────────────────────────────────────┐  │
-│  │ Worker agents (atomic tasks):                      │  │
-│  │  - Aider (refactoring, edit-mode)                  │  │
-│  │  - Cline (VS Code tasks)                           │  │
-│  │  - Claude Code (if available)                      │  │
-│  │  - Custom: your skill-based function               │  │
-│  └────────────────────────────────────────────────────┘  │
-│                       │                                  │
-│                       ▼ LLM calls                        │
-│  ┌────────────────────────────────────────────────────┐  │
-│  │ LiteLLM Gateway (localhost:4000)                   │  │
-│  │   → Free clouds first (Cerebras, Groq, Gemini)     │  │
-│  │   → Local GGUF floor (Qwen3-Coder-30B)             │  │
-│  │   → Paid clouds last (Anthropic/OpenAI)            │  │
-│  └────────────────────────────────────────────────────┘  │
-└──────────────────────────────────────────────────────────┘
-```
+Here **Sovereign** means your own stack: models on your hardware, data stays away from providers, and the fallback chain remains under your control. This is not a product description; it is an honest description of the author's setup as of 2026-10-01.
 
-## Installing Hermes (simplified)
+```text
+Author's programs: Claude Code, Codex, and Hermes
+                         │
+                         ▼
+One model gateway: LiteLLM on an always-on Mac mini
+  • programs use one endpoint through pool aliases
+    (a pool = interchangeable models under one name)
+  • provider keys live only on this machine
+  • free provider tiers first; the local step comes last
+                         │
+             ┌───────────┴───────────┐
+             ▼                       ▼
+Ordinary tasks: cloud pools     Personal and medical data:
+with fallback choices           a separate pool with no cloud neighbors
+             │                       │
+             └───────────┬───────────┘
+                         ▼
+Local model on a 128 GB Mac Studio
+(an open model running locally)
 
-> 💡 The full SOVERN stack is a 1–2 week project of its own. This is the **minimal Hermes experience** to grasp the pattern.
-
-### Requirements
-- Linux/WSL2/macOS
-- Python 3.11+
-- LiteLLM gateway already running (see u3, steps 1–3)
-
-### Get Hermes
-
-> ⚠️ This is an illustration of the architecture: there is no public `sovern-stack/hermes` repository. The commands and config below show the idea, not a working install.
-
-```bash
-git clone https://github.com/sovern-stack/hermes
-cd hermes
-pip install -e .
+The Mac mini is the console: gateway and monitoring panel.
+Hermes lives on a separate Linux Mac mini (Fedora Asahi).
+As of this edit, that machine is offline until November, so its role
+is temporarily running on a server.
 ```
 
-### Base config
+Real route example: **Claude Code → LiteLLM → Cerebras gpt-oss-120b**. **Hermes → LiteLLM with a fallback chain** follows the same principle: Hermes dispatches work to executors (Claude Code, Codex), while the shared gateway selects models.
 
-`~/.config/hermes/config.yaml`:
+## What to install in practice
 
-```yaml
-boss:
-  llm: balanced              # alias from LiteLLM
-  plan_dir: ~/notes/plans/   # where plans live
-  effort: high               # boss always thinks high
+The official Hermes repository is [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent). The official LiteLLM repository is [BerriAI/litellm](https://github.com/BerriAI/litellm). Install Hermes and configure the gateway by following their READMEs; the course has no public repository of its own, so this lesson does not provide invented install commands.
 
-workers:
-  refactor:
-    type: aider
-    llm: fast-pool
-    isolation: worktree
-  research:
-    type: shell
-    command: claude -p
-    fallback: aider
-```
-
-### First run
-
-```bash
-hermes new-plan "Add authentication to project auth-demo"
-```
-
-Hermes will:
-1. Create a plan in `~/notes/plans/auth-demo-2026-05-18.md`
-2. Open it in your editor — you can adjust
-3. On `hermes execute` — start delegating to workers
-
-### Skill system (optional)
-
-Hermes skills are modular `.md` files with a YAML header, similar to `SKILL.md` in Claude Code:
-
-```yaml
----
-name: refactor-typescript
-type: stateful
-trigger: "refactor TypeScript"
-worker: refactor
-dry_run: true
----
-# Refactor TypeScript
-
-When the skill triggers:
-1. Run a dry-run of all edits
-2. Show diff, ask for confirmation
-3. After approval — apply
-```
-
-This is the equivalent of `.claude/skills/`, but **portable across agents**.
+A complete stack like this takes weeks, not an evening: several machines, a gateway, model pools, monitoring, fallback routes, and rules for sensitive data. The course gives you the minimum experience: local LiteLLM on `localhost:4000` (u3) + one local model through `llama-server` as the final step + Hermes on top, following the official instructions.
 
 <SelfCheck id="c9"/>
 
@@ -147,18 +81,18 @@ This is the equivalent of `.claude/skills/`, but **portable across agents**.
 
 <Phase type="practice">
 
-> ⚠️ This is an **optional practice** — full Hermes setup takes time. The minimum for completion is to read through the concept.
+> ⚠️ This is an **optional practice** — a complete stack takes time. The minimum for completion is to read the concept.
 
 **Minimum (15 min):**
-- Read `SOVRN-PRINCIPLES.md` (in the SOVERN project)
+- Read the official [Hermes](https://github.com/NousResearch/hermes-agent) and [LiteLLM](https://github.com/BerriAI/litellm) READMEs
 - In `my-experiments/u4-hermes-mental-model.md` write:
   - When you **don't** need Hermes (boss-worker is overkill for small tasks)
-  - When you do (long plans, multi-day work, cron tasks)
+  - When you do (long plans, multi-day work, scheduled tasks)
 
-**Full practice (2–3 hours, optional):** only possible if you have access to Hermes — there is no public repository (see above).
-1. Clone Hermes, install
-2. Create the first plan with a real task from your work
-3. Run `hermes execute` with one worker (a fake echo-worker is fine for testing)
-4. Save a screenshot of plan + worker dispatch to `my-experiments/u4-hermes-run.png`
+**Full practice (2–3 hours, optional):** follow the official instructions and only if you have access to Hermes.
+1. Install Hermes and LiteLLM
+2. Connect one executor to the local gateway
+3. Run one real task and verify the handoff
+4. Save notes about the route in `my-experiments/u4-hermes-run.md`
 
 </Phase>

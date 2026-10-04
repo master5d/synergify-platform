@@ -5,66 +5,36 @@
   "unit": "u4-hermes-sovereign",
   "locale": "ru",
   "title": "Hermes + локальный стек",
-  "sourceHash": "sha256:c0879eca178a763ad2d4e09cc9b4a28a92d19d4f88fa4d2ff86955229834996a",
+  "sourceHash": "sha256:edd474d83832ebdc72bdbd86d6e68f36aac6fcf84074597367fa723963b92ee7",
   "outline": [
     {
-      "heading": "Архитектура SOVERN stack",
-      "points": [],
+      "heading": "Как это устроено у автора: свой стек на своём железе",
+      "points": [
+        {
+          "text": "Примеры маршрута: Claude Code → LiteLLM → Cerebras gpt-oss-120b — реальный.",
+          "origin": "extract"
+        },
+        {
+          "text": "Hermes → LiteLLM с цепочкой запасных вариантов — тот же принцип: Hermes раздаёт работу исполнителям (Claude Code, Codex), а модели выбирает общий шлюз.",
+          "origin": "extract"
+        }
+      ],
       "children": []
     },
     {
-      "heading": "Установка Hermes (упрощённая версия)",
-      "points": [],
-      "children": [
+      "heading": "Что реально ставить",
+      "points": [
         {
-          "heading": "Требования",
-          "points": [],
-          "children": []
-        },
-        {
-          "heading": "Скачать Hermes",
-          "points": [],
-          "children": []
-        },
-        {
-          "heading": "Базовый конфиг",
-          "points": [],
-          "children": []
-        },
-        {
-          "heading": "Первый запуск",
-          "points": [],
-          "children": []
-        },
-        {
-          "heading": "Skill system (опционально)",
-          "points": [
-            {
-              "text": "Это аналог .claude/skills/, но переносимый между агентами.",
-              "origin": "extract"
-            }
-          ],
-          "children": []
+          "text": "Официальный репозиторий Hermes — NousResearch/hermes-agent.",
+          "origin": "extract"
         }
-      ]
+      ],
+      "children": []
     }
   ],
   "cards": [
     "c9",
     "c10"
   ],
-  "audio": null,
-  "paraphrase": {
-    "source": "paraphrase",
-    "generator": "paraphrase-v1",
-    "pool": "prose-pool",
-    "sections": [
-      {
-        "sourceHash": "sha256:bcdbb736b44c9a1dce93140c7c5126c5c14b9ebfd28df8fb998c97399906e801",
-        "points": [
-          "Эта система напоминает .claude/skills/, но ты можешь переносить её между разными агентами."
-        ]
-      }
-    ]
-  }
+  "audio": null
 }

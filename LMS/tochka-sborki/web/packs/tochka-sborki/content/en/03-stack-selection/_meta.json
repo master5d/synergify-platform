@@ -158,7 +158,7 @@
         "It runs all the workers with a shared context so each one sees everything"
       ],
       "answer": 1,
-      "explain": "This is the context-saturation pattern: one agent tries to play every role. Hermes works as a director: it frames a subtask, hands it to a worker, checks the result, and updates the plan. Implementation doesn't eat its context (u4, reflection)."
+      "explain": "This is the context-saturation pattern: one agent tries to play every role. Hermes holds the plan and state, hands a narrow subtask to an executor, checks the result, and updates the plan. Implementation does not consume its context (u4, reflection)."
     },
     {
       "id": "c10",
@@ -172,7 +172,7 @@
         "A big plan that has to be handed out to several workers"
       ],
       "answer": 0,
-      "explain": "The lesson calls boss-worker overkill for small tasks. It pays off on long plans, multi-day work, and cron tasks (u4, practice)."
+      "explain": "The lesson calls the boss-worker scheme excessive for small tasks. It is justified for long plans, multi-day work, and scheduled tasks (u4, practice)."
     },
     {
       "id": "c11",

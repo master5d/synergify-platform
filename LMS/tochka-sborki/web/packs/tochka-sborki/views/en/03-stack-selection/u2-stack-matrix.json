@@ -5,7 +5,7 @@
   "unit": "u2-stack-matrix",
   "locale": "en",
   "title": "Matrix of 4 stacks",
-  "sourceHash": "sha256:c995f48f6e4e3d51592b64672888b9d8050f9eced5edb2646136ab4975b03ab7",
+  "sourceHash": "sha256:2b4b9d81da460c94ea2f5d44521da5a7f9d6e7957c6a55bc6f6c9b5b8b2daea0",
   "outline": [
     {
       "heading": "Honest trade-offs",
