@@ -101,3 +101,21 @@ export async function loadSpacedReviewStats(db: D1Database, nowSec: number): Pro
   `).bind(nowSec).all<SpacedReviewStats>()
   return results ?? []
 }
+
+export interface ModuleCheckSummary { unit: string; check_id: string; learners: number; wrong: number }
+
+/**
+ * Сводка к живой встрече (intake LMS#30, flipped classroom): по каждому вопросу модуля — сколько учеников на него
+ * отвечали и у скольких ПОСЛЕДНИЙ ответ неверный. Только агрегат: ни user_id, ни email наружу не уходят.
+ * Истории ответов в таблице нет — «последний ответ» и есть то, что знаем. Самые трудные — сверху.
+ */
+export async function loadModuleCheckSummary(db: D1Database, course: string, module: string): Promise<ModuleCheckSummary[]> {
+  const { results } = await db.prepare(`
+    SELECT unit, check_id, COUNT(*) AS learners,
+           SUM(CASE WHEN last_correct = 0 THEN 1 ELSE 0 END) AS wrong
+    FROM check_reviews WHERE course = ? AND module = ?
+    GROUP BY unit, check_id
+    ORDER BY wrong DESC, learners DESC, unit, check_id
+  `).bind(course, module).all<ModuleCheckSummary>()
+  return results ?? []
+}

@@ -4,10 +4,10 @@ import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
 import {
   INTERVAL_DAYS, scheduleNext, dueToday, loadDue, parseAnswer, storeAnswer, loadSpacedReviewStats,
-  spacedReviewEnabled, reviewEmailData, type ReviewRow,
+  spacedReviewEnabled, reviewEmailData, loadModuleCheckSummary, type ReviewRow,
 } from './check-reviews'
 import * as web from '../../../LMS/tochka-sborki/web/lib/spaced-review'
-import { handleCheckAnswer } from '../handlers/check-reviews'
+import { handleCheckAnswer, handleCheckSummary } from '../handlers/check-reviews'
 import { getStats } from '../handlers/stats'
 import { signJWT } from './jwt'
 import type { Env } from './types'
@@ -170,5 +170,47 @@ describe('POST /api/checks/answer', () => {
     expect(await res.json()).toEqual({ enabled: true, box: 0, due_at: NOW + DAY })
     expect(db.prepare('SELECT user_id, module, check_id, reviewed_at FROM check_reviews').get())
       .toEqual({ user_id: 'u1', module: 'm1', check_id: 'c1', reviewed_at: NOW })
+  })
+})
+
+describe('сводка ошибок самопроверок по модулю — к живой встрече (intake LMS#30)', () => {
+  const a = (over: Partial<Parameters<typeof storeAnswer>[2]> = {}) =>
+    ({ course: 'tochka-sborki', module: 'm1', unit: 'u1', check_id: 'c1', correct: true, source: 'lesson' as const, ...over })
+
+  it('агрегат по вопросам модуля: учеников и неверных последних ответов, самые трудные сверху, без user_id', async () => {
+    const { d1 } = sqliteD1()
+    await storeAnswer(d1, 'u1', a({ check_id: 'c1', correct: false }), NOW)
+    await storeAnswer(d1, 'u2', a({ check_id: 'c1', correct: false }), NOW)
+    await storeAnswer(d1, 'u1', a({ check_id: 'c2', unit: 'u2', correct: true }), NOW)
+    await storeAnswer(d1, 'u2', a({ check_id: 'c2', unit: 'u2', correct: false }), NOW)
+    await storeAnswer(d1, 'u1', a({ check_id: 'c3', module: 'm2', correct: false }), NOW)
+    await storeAnswer(d1, 'u1', a({ check_id: 'c4', course: 'living-practice', correct: false }), NOW)
+    const rows = await loadModuleCheckSummary(d1, 'tochka-sborki', 'm1')
+    expect(rows).toEqual([
+      { unit: 'u1', check_id: 'c1', learners: 2, wrong: 2 },
+      { unit: 'u2', check_id: 'c2', learners: 2, wrong: 1 },
+    ])
+    expect(JSON.stringify(rows)).not.toMatch(/u1@|user_id/)
+  })
+
+  it('GET /api/admin/checks/summary: 401 без входа, 403 не владельцу, 400 без модуля, флаг выключен — enabled:false', async () => {
+    const { d1 } = sqliteD1()
+    await storeAnswer(d1, 'u1', a({ correct: false }), NOW)
+    const now = Math.floor(Date.now() / 1000)
+    const cookie = async (email: string) =>
+      `session=${await signJWT({ sub: 'u1', email, iat: now, exp: now + 3600 }, SECRET)}`
+    const get = async (qs: string, email?: string) => new Request(`https://ai.synergify.com/api/admin/checks/summary${qs}`,
+      { headers: email ? { Cookie: await cookie(email) } : {} })
+    const env = { DB: d1, WORKER_JWT_SECRET: SECRET, OWNER_EMAIL: 'owner@x.test', SPACED_REVIEW_ENABLED: '1' } as unknown as Env
+    expect((await handleCheckSummary(await get('?course=tochka-sborki&module=m1'), env)).status).toBe(401)
+    expect((await handleCheckSummary(await get('?course=tochka-sborki&module=m1', 'u1@x.test'), env)).status).toBe(403)
+    expect((await handleCheckSummary(await get('?course=tochka-sborki', 'owner@x.test'), env)).status).toBe(400)
+    const ok = await handleCheckSummary(await get('?course=tochka-sborki&module=m1', 'owner@x.test'), env)
+    expect(await ok.json()).toEqual({
+      enabled: true, course: 'tochka-sborki', module: 'm1',
+      checks: [{ unit: 'u1', check_id: 'c1', learners: 1, wrong: 1 }],
+    })
+    const off = await handleCheckSummary(await get('?course=tochka-sborki&module=m1', 'owner@x.test'), { ...env, SPACED_REVIEW_ENABLED: '0' } as Env)
+    expect(await off.json()).toEqual({ enabled: false })
   })
 })

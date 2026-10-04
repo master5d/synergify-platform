@@ -12,7 +12,7 @@ import { handleEmailUnsubscribe } from './handlers/email-unsubscribe'
 import { handleSupportCheckout, handleProductCheckout } from './handlers/checkout'
 import { handleStripeWebhook } from './handlers/stripe-webhook'
 import { handleView, handleComplete, handleList } from './handlers/progress'
-import { handleCheckAnswer } from './handlers/check-reviews'
+import { handleCheckAnswer, handleCheckSummary } from './handlers/check-reviews'
 import { handleMe as handleIntakeMe, handleProgress as handleIntakeProgress, handleSubmit as handleIntakeSubmit } from './handlers/intake'
 import { runDemandRadar, listBriefs, listSignals, decideBrief } from './handlers/demand'
 import { handleTaskRoute } from './handlers/task-route'
@@ -185,6 +185,8 @@ export default {
       } else if (path === '/api/admin/stats' && method === 'GET') {
         const auth = await requireOwner(request, env)
         response = auth instanceof Response ? auth : await getStats(env.DB, undefined, { spacedReview: spacedReviewEnabled(env) })
+      } else if (path === '/api/admin/checks/summary' && method === 'GET') {
+        response = await handleCheckSummary(request, env)
       } else if (path === '/api/admin/email-chains/dry-run' && method === 'GET') {
         const auth = await requireOwner(request, env)
         response = auth instanceof Response ? auth : await handleEmailChainDryRun(env, url)

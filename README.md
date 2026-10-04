@@ -26,7 +26,9 @@ cd LMS/tochka-sborki/web && npm install && npm run dev
   feedback, CRM, Telegram, and checkout across every course domain; since 2026-09 also the course
   email chains (daily cron → Listmonk tx templates in `workers/email-templates/`, dry run at
   `/api/admin/email-chains/dry-run`), the care desk (`/api/care`), public certificate verification,
-  community invites via the Telegram bot, and spaced review of self-checks (`/api/checks/answer`).
+  community invites via the Telegram bot, spaced review of self-checks (`/api/checks/answer`), and an
+  owner-only summary of which self-checks a module's learners get wrong, for live sessions
+  (`/api/admin/checks/summary?course=&module=`, aggregate only).
 - **Academy storefront** (`academy/`) — the school shell at academy.synergify.com.
 - **Home** (`synergify/`) — the synergify.com umbrella site.
 - **LLM service** (`llm-service/`) — a narrow Hono service that fronts the platform's LLM calls,
