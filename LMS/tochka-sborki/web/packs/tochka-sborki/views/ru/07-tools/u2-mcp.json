@@ -5,7 +5,7 @@
   "unit": "u2-mcp",
   "locale": "ru",
   "title": "MCP: суперсилы через протокол",
-  "sourceHash": "sha256:3c2bae7352e3b281bf4359854049bb5add01a921adf0a9fb7b01d44aa3fa50be",
+  "sourceHash": "sha256:793cfb2acb9ebc46551d7bcff14f5684b61f645b8ce96a08b3f5f6b65fd8f2c1",
   "outline": [
     {
       "heading": "MCP: три примитива",

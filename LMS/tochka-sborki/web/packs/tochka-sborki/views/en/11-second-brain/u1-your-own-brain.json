@@ -5,7 +5,7 @@
   "unit": "u1-your-own-brain",
   "locale": "en",
   "title": "A second brain that stays with you",
-  "sourceHash": "sha256:0ede05c7c0ccbcb6e6afd04b52dde6a90a8d5ae0b772b6373abcc4841d5a4b52",
+  "sourceHash": "sha256:c8e5078ab80848c52afeeda80fb74e140975dad6a6bcd6e1250422c8ac53c505",
   "outline": [
     {
       "heading": "What a second brain means in this module",
@@ -51,7 +51,7 @@
       "heading": "What goes into memory and what does not",
       "points": [
         {
-          "text": "Put in: decisions and their reasons, lessons after mistakes, notes, meeting outcomes, rough thoughts.",
+          "text": "Put in: decisions and their reasons, units after mistakes, notes, meeting outcomes, rough thoughts.",
           "origin": "extract"
         }
       ],
@@ -85,10 +85,6 @@
       },
       {
         "sourceHash": "sha256:58aa4c4d5f720029854de642d26a9d0c738fc2d15bc6ebeb9ea25d160186394a",
-        "verbatim": "near-identical"
-      },
-      {
-        "sourceHash": "sha256:5dd067237037dd26ab730a6a113e72ae66da6278e6a5f253297557369d05b733",
         "verbatim": "near-identical"
       }
     ]

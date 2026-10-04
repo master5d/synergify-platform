@@ -95,7 +95,7 @@
       "id": "c5",
       "unit": "u2-data-is-the-work",
       "objective": "o2",
-      "question": "How does the lesson suggest treating the phrase \"80% of an ML project's time goes to data\"?",
+      "question": "How does the unit suggest treating the phrase \"80% of an ML project's time goes to data\"?",
       "options": [
         "It's a precise measurement from a large study",
         "It's an outdated figure; today data takes 20%",
@@ -123,7 +123,7 @@
       "id": "c7",
       "unit": "u3-fine-tuning",
       "objective": "o3",
-      "question": "An agent needs fresh internal policies that change every month. What does the lesson advise first?",
+      "question": "An agent needs fresh internal policies that change every month. What does the unit advise first?",
       "options": [
         "Fine-tune the model on the policies and repeat monthly",
         "Put the current documents in the context or retrieve them by search (RAG)",
@@ -151,7 +151,7 @@
       "id": "c9",
       "unit": "u3-fine-tuning",
       "objective": "o3",
-      "question": "According to the lesson, when is fine-tuning justified?",
+      "question": "According to the unit, when is fine-tuning justified?",
       "options": [
         "The prompt was never tried, but you want the best result right away",
         "The model needs to know this week's news",

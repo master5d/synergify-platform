@@ -37,7 +37,7 @@ Catch the image: where in your pipeline do the threads cross? And at which point
 
 **Real case: a Gmail agent**
 
-My Gmail agent runs in one Docker container on a rented server. About every two minutes it reads new personal mail through the Gmail API; LLM calls go through a model gateway — one entry point to a pool of models. The dashboard is protected by Cloudflare Access and a PIN (explained in the next unit). The container port is available only locally and on a private network between my devices (explained in the next unit). The agent uses a cloud pool through the gateway: this is personal mail, not medical data; u4 covers a separate pool for medical data.
+My Gmail agent runs in one Docker container on a rented server. About every two minutes it reads new personal mail through the Gmail API; LLM calls go through a model model gateway — one entry point to a pool of models. The dashboard is protected by Cloudflare Access and a PIN (explained in the next unit). The container port is available only locally and on a private network between my devices (explained in the next unit). The agent uses a cloud pool through the model gateway: this is personal mail, not medical data; u4 covers a separate pool for medical data.
 
 **Pipeline architecture:**
 

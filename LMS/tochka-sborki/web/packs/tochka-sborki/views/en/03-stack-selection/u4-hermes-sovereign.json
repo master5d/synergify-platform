@@ -5,7 +5,7 @@
   "unit": "u4-hermes-sovereign",
   "locale": "en",
   "title": "Hermes + local stack",
-  "sourceHash": "sha256:9e6728fc353c4a2c3bd6570062e24a6333b08d083e93d1128945a9a1011aee88",
+  "sourceHash": "sha256:975f3032fd1910411c606f5d18553405b85f94a88f2583017ee064636a88ceb3",
   "outline": [
     {
       "heading": "Director and worker",
@@ -25,7 +25,7 @@
           "origin": "extract"
         },
         {
-          "text": "Hermes → LiteLLM with a fallback chain follows the same principle: Hermes dispatches work to executors (Claude Code, Codex), while the shared gateway selects models.",
+          "text": "Hermes → LiteLLM with a fallback chain follows the same principle: Hermes dispatches work to executors (Claude Code, Codex), while the shared model gateway selects models.",
           "origin": "extract"
         }
       ],

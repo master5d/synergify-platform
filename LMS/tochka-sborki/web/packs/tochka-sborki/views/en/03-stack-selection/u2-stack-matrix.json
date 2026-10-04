@@ -5,10 +5,10 @@
   "unit": "u2-stack-matrix",
   "locale": "en",
   "title": "Matrix of 4 stacks",
-  "sourceHash": "sha256:994cba7ae65d6fce49a065ee33a2f8242de1fc5d2ccd87a935d4c71e22b539ee",
+  "sourceHash": "sha256:57dfe6e534b59dfba7709c602b4964b7c302b54e16092194e378e29d360f7059",
   "outline": [
     {
-      "heading": "The gateway as conductor",
+      "heading": "The model gateway as conductor",
       "points": [
         {
           "text": "A stack can combine a primary for nuanced work, a floor for offline work, and a fast-path for boilerplate.",

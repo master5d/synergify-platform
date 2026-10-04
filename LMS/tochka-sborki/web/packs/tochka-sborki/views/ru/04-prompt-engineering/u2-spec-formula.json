@@ -5,7 +5,7 @@
   "unit": "u2-spec-formula",
   "locale": "ru",
   "title": "Формула спецификации",
-  "sourceHash": "sha256:b3e2eb5fab68d391d6edb4f3809589ced0f1edae8b8696e0addfc1d353b86b45",
+  "sourceHash": "sha256:6bbfe8249f9e4ab2af4944ef03cc96c34bbc91dab7d490243312d68d0da0bf45",
   "outline": [
     {
       "heading": "Структура профессионального промпта: CTID",

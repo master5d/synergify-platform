@@ -372,7 +372,7 @@ Mnemonic CTID — see [04/u2](/en/lessons/04-prompt-engineering/u2-spec-formula/
 - **Plan in stages, each stage with its own check.** Not "do everything" but "stage 1 → test → stage 2 → test". When something breaks, you see where.
 - **Review with fresh eyes.** Hand finished work to a **new** session or another model (Claude ↔ Codex) for review. The author misses their own mistakes; a fresh context finds them.
 - **Let it interview you first.** Before the work starts, ask the agent to interview you: in Claude Code that is the `AskUserQuestion` tool, with any other agent say "ask me 5 questions before you begin". Answering questions is cheaper than redoing work.
-- **One sub-agent, one skill.** Not a "general QA engineer" but "checks DB migrations" or "reads Chrome logs". A narrow role with a concrete tool works; a broad one smears out.
+- **One subagent, one skill.** Not a "general QA engineer" but "checks DB migrations" or "reads Chrome logs". A narrow role with a concrete tool works; a broad one smears out.
 - **A set of your own examples.** 10–20 cases with the expected result — rerun them after every change to the prompt or the code.
 - **Backend first.** Make sure the pipeline collects the right data before building the screen on top of it: a beautiful interface over an empty database is the most expensive beginner's mistake.
 - **Ask for presets.** Anything you run more than twice should become a reusable configuration, with changeable parameters moved into settings instead of hard-coded.

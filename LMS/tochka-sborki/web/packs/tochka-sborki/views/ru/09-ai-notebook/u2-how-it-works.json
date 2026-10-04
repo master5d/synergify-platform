@@ -5,7 +5,7 @@
   "unit": "u2-how-it-works",
   "locale": "ru",
   "title": "Как это устроено",
-  "sourceHash": "sha256:1e09b22c1d3efbfbdd74d6218f28cc853d5076a01ba13ef16fb310357b85b88c",
+  "sourceHash": "sha256:1f3cd65b38d989442c2d40da194f8457f22df5981c2232725a2a0c506190b1fb",
   "outline": [
     {
       "heading": "Source-grounding: ответ привязан к источнику",

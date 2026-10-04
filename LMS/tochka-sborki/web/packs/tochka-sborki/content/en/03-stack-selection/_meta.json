@@ -14,7 +14,7 @@
   "objectives": [
     {
       "id": "o1",
-      "text": "Break an agentic stack down into three layers (agent/UI, routing/gateway, model provider) and explain that each layer is swapped independently"
+      "text": "Break an agentic stack down into three layers (agent/UI, routing/model gateway, model provider) and explain that each layer is swapped independently"
     },
     {
       "id": "o2",
@@ -22,7 +22,7 @@
     },
     {
       "id": "o3",
-      "text": "Explain what the LiteLLM gateway gives you and how the fallback chain works all the way down to the local “floor”"
+      "text": "Explain what the LiteLLM model gateway gives you and how the fallback chain works all the way down to the local “floor”"
     },
     {
       "id": "o4",
@@ -38,11 +38,11 @@
       "id": "c1",
       "unit": "u1-activation",
       "objective": "o1",
-      "question": "The combination “Claude Code → LiteLLM → Cerebras gpt-oss-120b” from the lesson shows the main property of a stack. Which one?",
+      "question": "The combination “Claude Code → LiteLLM → Cerebras gpt-oss-120b” from the unit shows the main property of a stack. Which one?",
       "options": [
-        "Each layer (agent, gateway, provider) can be swapped independently of the others",
+        "Each layer (agent, model gateway, provider) can be swapped independently of the others",
         "Claude Code works only with Anthropic models",
-        "A gateway is required only for Chinese models",
+        "A model gateway is required only for Chinese models",
         "The agent and the model are the same thing; you choose them together"
       ],
       "answer": 0,
@@ -52,7 +52,7 @@
       "id": "c2",
       "unit": "u1-activation",
       "objective": "o2",
-      "question": "Your company forbids sending code to an outside vendor. Which of the Claude Code drawbacks named in the lesson settles the matter here?",
+      "question": "Your company forbids sending code to an outside vendor. Which of the Claude Code drawbacks named in the unit settles the matter here?",
       "options": [
         "A minimum of ~$20 a month",
         "It needs a discrete graphics card",
@@ -60,13 +60,13 @@
         "It only works on a Mac"
       ],
       "answer": 2,
-      "explain": "Of the four drawbacks (price, access, vendor lock-in, telemetry), telemetry is the one that bears on a ban on sharing code. The lesson doesn't name a graphics card or a Mac as Claude Code requirements (u1, “Why not ‘just Claude Code’”)."
+      "explain": "Of the four drawbacks (price, access, vendor lock-in, telemetry), telemetry is the one that bears on a ban on sharing code. The unit doesn't name a graphics card or a Mac as Claude Code requirements (u1, “Why not ‘just Claude Code’”)."
     },
     {
       "id": "c3",
       "unit": "u2-stack-matrix",
       "objective": "o2",
-      "question": "You're not in China, your budget is $0, and all you have is a laptop without a GPU. Where does the lesson's decision tree lead?",
+      "question": "You're not in China, your budget is $0, and all you have is a laptop without a GPU. Where does the unit's decision tree lead?",
       "options": [
         "Claude Code",
         "Cloud-OSS",
@@ -94,26 +94,26 @@
       "id": "c5",
       "unit": "u2-stack-matrix",
       "objective": "o3",
-      "question": "What does the LiteLLM gateway change for the agent when there are several providers underneath it?",
+      "question": "What does the LiteLLM model gateway change for the agent when there are several providers underneath it?",
       "options": [
         "The agent has to switch between provider addresses in turn",
-        "The gateway writes the code itself instead of the agent",
-        "The agent sees a single endpoint, and the gateway takes care of switching between providers on failure",
-        "The gateway is only needed to make things free"
+        "The model gateway writes the code itself instead of the agent",
+        "The agent sees a single endpoint, and the model gateway takes care of switching between providers on failure",
+        "The model gateway is only needed to make things free"
       ],
       "answer": 2,
-      "explain": "In the lesson's image, the gateway is the conductor. The agent calls a single point, and under the hood the gateway distributes requests and moves on to fallback models (u2, concept)."
+      "explain": "In the unit's image, the model gateway is the conductor. The agent calls a single point, and under the hood the model gateway distributes requests and moves on to fallback models (u2, concept)."
     },
     {
       "id": "c6",
       "unit": "u3-behind-gfw",
       "objective": "o3",
-      "question": "The lesson's config sets `fast-pool: [\"balanced\", \"local-floor\"]`. What happens if Cerebras (`fast-pool`) stops responding?",
+      "question": "The unit's config sets `fast-pool: [\"balanced\", \"local-floor\"]`. What happens if Cerebras (`fast-pool`) stops responding?",
       "options": [
         "The agent returns an error, and the request has to be repeated by hand",
-        "The gateway waits until Cerebras comes back",
+        "The model gateway waits until Cerebras comes back",
         "The request goes to paid Anthropic",
-        "The gateway sends the request to `balanced` (Gemini), and if that fails too — to the local model"
+        "The model gateway sends the request to `balanced` (Gemini), and if that fails too — to the local model"
       ],
       "answer": 3,
       "explain": "`fallbacks` records the order of the fallback options: Gemini first (in China, a Chinese provider), the local llama-server last. There's no Anthropic in this config at all (u3, step 3)."
@@ -141,10 +141,10 @@
         "The whole LiteLLM config and the provider keys",
         "Only the agent's connection: point it at the same `localhost:4000` and the model name",
         "Move to a different model provider, because Cline doesn't work with Cerebras",
-        "Set up a separate gateway for each agent"
+        "Set up a separate model gateway for each agent"
       ],
       "answer": 1,
-      "explain": "The gateway serves an OpenAI-compatible API. Any such agent connects to it the same way, so switching agents touches neither the gateway nor the providers (u3, step 5)."
+      "explain": "The model gateway serves an OpenAI-compatible API. Any such agent connects to it the same way, so switching agents touches neither the model gateway nor the providers (u3, step 5)."
     },
     {
       "id": "c9",
@@ -172,13 +172,13 @@
         "A big plan that has to be handed out to several workers"
       ],
       "answer": 0,
-      "explain": "The lesson calls the boss-worker scheme excessive for small tasks. It is justified for long plans, multi-day work, and scheduled tasks (u4, practice)."
+      "explain": "The unit calls the boss-worker scheme excessive for small tasks. It is justified for long plans, multi-day work, and scheduled tasks (u4, practice)."
     },
     {
       "id": "c11",
       "unit": "u5-migrate",
       "objective": "o5",
-      "question": "You've chosen a new stack. Which move does the lesson call the most common migration mistake?",
+      "question": "You've chosen a new stack. Which move does the unit call the most common migration mistake?",
       "options": [
         "Keeping both stacks running in parallel for a week",
         "Moving one real task over first",
@@ -186,7 +186,7 @@
         "Deleting the old tool right away and switching completely to the new one"
       ],
       "answer": 3,
-      "explain": "The lesson compares migration to shedding a skin: the new stack first grows over the old one, and for a while both work. The other options are exactly the steps of the recommended plan (u5, concept)."
+      "explain": "The unit compares migration to shedding a skin: the new stack first grows over the old one, and for a while both work. The other options are exactly the steps of the recommended plan (u5, concept)."
     },
     {
       "id": "c12",

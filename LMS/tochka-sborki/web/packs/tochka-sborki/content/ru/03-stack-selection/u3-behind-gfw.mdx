@@ -86,7 +86,7 @@ CEREBRAS_API_KEY=csk-xxxxx
 ## Шаг 2: Google Gemini Flash (backup для долгих задач)
 
 1. `aistudio.google.com` официально недоступен из материкового Китая. Если ты в Китае — поставь на эту роль китайского провайдера (DeepSeek API или Qwen API). Если нет — возьми ключ в AI Studio и допиши его в тот же `.env`: `GOOGLE_API_KEY=...`
-2. Бесплатные лимиты Gemini меняются — смотри их в своём AI Studio, а не по цифрам из урока
+2. Бесплатные лимиты Gemini меняются — смотри их в своём AI Studio, а не по цифрам из юнита
 
 ## Шаг 3: LiteLLM gateway
 
@@ -219,7 +219,7 @@ aider --model openai/fast-pool --openai-api-base http://localhost:4000
 
 1. Зарегистрируйся в Cerebras, получи API key
 2. Установи LiteLLM локально и запусти proxy на `localhost:4000`
-3. Сделай тестовый запрос:
+3. Сделай тестовый промпт:
 
 <OsBlock os="macos linux">
 

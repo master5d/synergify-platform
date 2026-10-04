@@ -53,7 +53,7 @@
       "id": "c2",
       "unit": "u1-activation",
       "objective": "o1",
-      "question": "According to the lesson, how does agent engineering differ from vibe coding?",
+      "question": "According to the unit, how does agent engineering differ from vibe coding?",
       "options": [
         "Agent engineering is vibe coding with a more powerful model",
         "Vibe coding is for people who don't write code, while agent engineering requires writing everything by hand",
@@ -81,7 +81,7 @@
       "id": "c4",
       "unit": "u2-jagged-intelligence",
       "objective": "o2",
-      "question": "The step “check that the record isn't a duplicate” is currently done by an LLM. What does the lesson advise?",
+      "question": "The step “check that the record isn't a duplicate” is currently done by an LLM. What does the unit advise?",
       "options": [
         "Keep the LLM: it understands the meaning of records better",
         "Put a second LLM after this check for verification",
@@ -159,13 +159,13 @@
         "Observability"
       ],
       "answer": 3,
-      "explain": "Use two logs: the model gateway log and the service's own log — what was sent, what came back, and what it cost. For the Gmail agent this reconstructs a specific call."
+      "explain": "Use two logs: the model model gateway log and the service's own log — what was sent, what came back, and what it cost. For the Gmail agent this reconstructs a specific call."
     },
     {
       "id": "c10",
       "unit": "u4-production-infra",
       "objective": "o4",
-      "question": "The main LLM provider went down. Where does the lesson solve this problem?",
+      "question": "The main LLM provider went down. Where does the unit solve this problem?",
       "options": [
         "In the prompt: ask the model to “answer even during outages”",
         "In the infrastructure: a chain of fallback providers where the next one catches the request",
@@ -193,7 +193,7 @@
       "id": "c12",
       "unit": "u5-practice",
       "objective": "o5",
-      "question": "You are filling out the spec and don't know what the cost ceiling will be. What does the lesson advise?",
+      "question": "You are filling out the spec and don't know what the cost ceiling will be. What does the unit advise?",
       "options": [
         "Put `[?]` and leave the question open",
         "Write a plausible estimate so the spec looks finished",

@@ -52,7 +52,7 @@
       "id": "c2",
       "unit": "u1-first-notebook",
       "objective": "o5",
-      "question": "Why does the lesson advise asking a new notebook “Where do these videos disagree?” as the first question rather than “Summarize”?",
+      "question": "Why does the unit advise asking a new notebook “Where do these videos disagree?” as the first question rather than “Summarize”?",
       "options": [
         "The notebook can't do summaries",
         "The notebook answers the question about disagreements faster",
@@ -66,7 +66,7 @@
       "id": "c3",
       "unit": "u2-how-it-works",
       "objective": "o1",
-      "question": "According to the lesson, what is trust in the notebook's answers built on?",
+      "question": "According to the unit, what is trust in the notebook's answers built on?",
       "options": [
         "On its answers being more accurate than a chat's on average",
         "On the ability to check every answer against a spot in the source",
@@ -122,7 +122,7 @@
       "id": "c7",
       "unit": "u3-where-it-lies",
       "objective": "o3",
-      "question": "The notebook writes “research shows…”. What check does the lesson suggest?",
+      "question": "The notebook writes “research shows…”. What check does the unit suggest?",
       "options": [
         "Ask directly which of the sources claims this: it may be a single article",
         "Believe it: the word “research” means scientific consensus",
@@ -178,7 +178,7 @@
       "id": "c11",
       "unit": "u4-formats",
       "objective": "o4",
-      "question": "The sources clearly disagree, and you want to see exactly where. Which format does the lesson consider more honest?",
+      "question": "The sources clearly disagree, and you want to see exactly where. Which format does the unit consider more honest?",
       "options": [
         "Slides",
         "A mind map",
@@ -186,13 +186,13 @@
         "A table with a “quote” column"
       ],
       "answer": 3,
-      "explain": "Table rows force disagreements into the open, while prose smooths them over. “Pressing all the buttons” is the trap the lesson warns about (u4)."
+      "explain": "Table rows force disagreements into the open, while prose smooths them over. “Pressing all the buttons” is the trap the unit warns about (u4)."
     },
     {
       "id": "c12",
       "unit": "u5-practice",
       "objective": "o5",
-      "question": "Which notebook topic, according to the lesson, is “dead on arrival”?",
+      "question": "Which notebook topic, according to the unit, is “dead on arrival”?",
       "options": [
         "“Which newsletter format fits my product”",
         "“What is actually known about X”",

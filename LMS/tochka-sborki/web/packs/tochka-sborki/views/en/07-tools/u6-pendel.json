@@ -5,7 +5,7 @@
   "unit": "u6-pendel",
   "locale": "en",
   "title": "Pendel: your agent audits your project",
-  "sourceHash": "sha256:ff376616d2e02f61c3c1443a34b91470aa2990b874a97d28ae227dfaa1585f93",
+  "sourceHash": "sha256:3038ecc1b0281ee86e740fd4461b6f5091dc2b7cd0547cbb1e208b0c4f1e52d5",
   "outline": [
     {
       "heading": "What \"Pendel\" is",

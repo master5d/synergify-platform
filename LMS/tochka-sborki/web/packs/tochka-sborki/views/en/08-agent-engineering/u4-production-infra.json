@@ -5,7 +5,7 @@
   "unit": "u4-production-infra",
   "locale": "en",
   "title": "Prototype → Production",
-  "sourceHash": "sha256:41446ebdbd2fafff7614d5e9b0b5aa50f53ac23144da9442960447afb6dfded3",
+  "sourceHash": "sha256:553c7284a59747a5b3e4a15488add473eb80fa60ef6d7ced25b20143328ee0b0",
   "outline": [
     {
       "heading": "",
@@ -27,7 +27,7 @@
           "origin": "extract"
         },
         {
-          "text": "Rake 3: a service without a gateway key silently found nothing The log accumulated 684,837 refusals until a missing key was made fatal at startup.",
+          "text": "Rake 3: a service without a model gateway key silently found nothing The log accumulated 684,837 refusals until a missing key was made fatal at startup.",
           "origin": "extract"
         },
         {

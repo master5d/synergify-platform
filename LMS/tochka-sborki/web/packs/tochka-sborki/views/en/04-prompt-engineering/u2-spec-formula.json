@@ -5,7 +5,7 @@
   "unit": "u2-spec-formula",
   "locale": "en",
   "title": "The spec formula",
-  "sourceHash": "sha256:085734075016aafa8f59b543aade089cc34b16c5919bdb7e1d2aa3d52b17bb94",
+  "sourceHash": "sha256:f9b770c65a732b0a0a09a3017d15cf6e4154a6893bbd9c843bb81d33461d9d05",
   "outline": [
     {
       "heading": "A professional prompt structure: CTID",

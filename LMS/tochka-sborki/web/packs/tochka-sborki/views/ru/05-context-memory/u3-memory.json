@@ -4,8 +4,8 @@
   "module": "05-context-memory",
   "unit": "u3-memory",
   "locale": "ru",
-  "title": "Система памяти",
-  "sourceHash": "sha256:d89a2d6864256618d52174c3bde59aed3e9b4899ad06c2c74e9620ea41fcc680",
+  "title": "Сисмодуль памяти",
+  "sourceHash": "sha256:1eec299623e9ae5fd0a19a1a2fe6c5e546a02f91f3d50ca7a1a0638a1834a71e",
   "outline": [
     {
       "heading": "Файлы памяти: три пишешь ты, один — Claude",

@@ -5,7 +5,7 @@
   "unit": "u2-mcp",
   "locale": "en",
   "title": "MCP: superpowers through a protocol",
-  "sourceHash": "sha256:fd35da1aa55f4f429c992ed7470b6ef2de84a2710dc8e2364dc3ec602f75a594",
+  "sourceHash": "sha256:50457a5382bb6e30bc10c3a92911149f8b53949b3ce537ee835ed0795b073e71",
   "outline": [
     {
       "heading": "MCP: three primitives",

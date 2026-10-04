@@ -41,9 +41,9 @@ Each of the six blocks is one such gate. While everything is calm — it's invis
 Configuration:
 - **Server:** one rented Hetzner machine (currently CX33, roughly €10–12/mo). It is the only machine with Docker: containers host the mail agent, mailing service, search, proxy for worker agents, and Postgres.
 - **Network edge:** only services that must be public are published; everything else listens on `127.0.0.1` or is reachable over a private network between my devices (Tailscale). Cloudflare is used for external access.
-- **Control desk:** an always-on Mac mini M4 runs the model gateway and the monitoring dashboard.
+- **Control desk:** an always-on Mac mini M4 runs the model model gateway and the monitoring dashboard.
 - **Local inference:** a 128 GB Mac Studio is the last step in the chain when free cloud pools have refused or exhausted their quotas, and the only step for personal and medical data: by design, that data never goes to the cloud.
-- **Model gateway:** every script calls models through LiteLLM, using pool aliases (a group of interchangeable models under one name). Provider keys live only on the gateway machine; they are not in project code.
+- **Model model gateway:** every script calls models through LiteLLM, using pool aliases (a group of interchangeable models under one name). Provider keys live only on the model gateway machine; they are not in project code.
 
 **Rakes that cost me days of debugging** (save these, no need to step on them yourself):
 
@@ -55,9 +55,9 @@ Configuration:
 > The mail agent lost Gmail access (`token refresh failed`). The container kept running, but messages were no longer processed.
 > **Rule:** watch the “hours since the last email,” not just the container status.
 
-**Rake 3: a service without a gateway key silently found nothing**
+**Rake 3: a service without a model gateway key silently found nothing**
 > The log accumulated 684,837 refusals until a missing key was made fatal at startup.
-> **Rule:** a missing gateway key must stop the service immediately, rather than becoming an empty result.
+> **Rule:** a missing model gateway key must stop the service immediately, rather than becoming an empty result.
 
 **Rake 4: there is no per-run limit**
 > A stuck queue turned every tick into hundreds of calls.
@@ -65,7 +65,7 @@ Configuration:
 
 All pipelines are code in git. OS timers run them: launchd on Macs, systemd timers on Linux, and Task Scheduler on Windows. Each pipeline records who is notified when it breaks.
 
-This stack used to include a no-code orchestrator and separate tracing; both were removed in late September 2026: the first because it was exposed to the internet and had no working workflows, the second because nobody read its data. The choice of tools is yours; this lesson describes what actually works for the author.
+This stack used to include a no-code orchestrator and separate tracing; both were removed in late September 2026: the first because it was exposed to the internet and had no working workflows, the second because nobody read its data. The choice of tools is yours; this unit describes what actually works for the author.
 
 **LLM fallback chain**
 
@@ -75,13 +75,13 @@ Free cloud pools go first; their quotas add up. Local inference is the last step
 fallbacks: [fast-pool, local-floor]  # scheme, not a LiteLLM config
 ```
 
-Project code contains neither provider names nor provider keys: it calls pool aliases through the single model gateway. If the free pool refuses a request or runs out of quota, the request goes to the local step.
+Project code contains neither provider names nor provider keys: it calls pool aliases through the single model model gateway. If the free pool refuses a request or runs out of quota, the request goes to the local step.
 
 When the first provider goes down — the next one catches the call. This is **reliability** at the infra layer, not the prompt layer.
 
 **Observability through the M4 dashboard:**
 
-The “Usage” tab shows spend and calls across all pools from the gateway's own log, SQLite `usage.db`. There is no separate tracer: this stack relies on aggregate calls and costs, not per-step tracing. What the model answered on a specific call is visible in the service's own log; for the Gmail agent, that is the draft text and the label reason on the dashboard.
+The “Usage” tab shows spend and calls across all pools from the model gateway's own log, SQLite `usage.db`. There is no separate tracer: this stack relies on aggregate calls and costs, not per-step tracing. What the model answered on a specific call is visible in the service's own log; for the Gmail agent, that is the draft text and the label reason on the dashboard.
 
 
 <SelfCheck id="c9"/>

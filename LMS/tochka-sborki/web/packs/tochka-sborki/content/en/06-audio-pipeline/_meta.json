@@ -70,7 +70,7 @@
         "This isn't a pipeline: it needs a human, not automation"
       ],
       "answer": 0,
-      "explain": "The process is kicked off by an event — an email arriving — not by the clock and not by your decision. The lesson walks through this exact example as event-driven. The draft goes for approval, so the decision stays with a human (u2, “Three pipeline types”)."
+      "explain": "The process is kicked off by an event — an email arriving — not by the clock and not by your decision. The unit walks through this exact example as event-driven. The draft goes for approval, so the decision stays with a human (u2, “Three pipeline types”)."
     },
     {
       "id": "c4",
@@ -90,7 +90,7 @@
       "id": "c5",
       "unit": "u2-pipeline-theory",
       "objective": "o3",
-      "question": "You've come up with a pipeline for a weekly report. Where does the lesson suggest starting?",
+      "question": "You've come up with a pipeline for a weekly report. Where does the unit suggest starting?",
       "options": [
         "Set up the schedule right away so you never have to come back to the task",
         "Pick the most advanced tool so you don't have to redo it",
@@ -104,7 +104,7 @@
       "id": "c6",
       "unit": "u3-build",
       "objective": "o3",
-      "question": "The first run of the pipeline came out uneven: one part of the result was weak. How does the lesson suggest treating this?",
+      "question": "The first run of the pipeline came out uneven: one part of the result was weak. How does the unit suggest treating this?",
       "options": [
         "As a rough cut: find the one spot that “sagged” and make it the upgrade point for the second version",
         "As a sign that the prompt is bad and has to be rewritten from scratch",
@@ -118,7 +118,7 @@
       "id": "c7",
       "unit": "u4-reflect",
       "objective": "o3",
-      "question": "The manual pipeline already works reliably. Which of these does the lesson call the natural next step?",
+      "question": "The manual pipeline already works reliably. Which of these does the unit call the natural next step?",
       "options": [
         "Rewrite everything from scratch in an automation tool",
         "Hand the pipeline the choice of which decisions to make based on the results as well",

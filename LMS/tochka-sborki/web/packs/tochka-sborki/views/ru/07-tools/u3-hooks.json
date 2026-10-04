@@ -5,7 +5,7 @@
   "unit": "u3-hooks",
   "locale": "ru",
   "title": "Hooks: автоматизация событий",
-  "sourceHash": "sha256:68aa8c8e07dc5b4a0a63a9dfc2aa36027f084eb32b17b396aebc23f3252691d4",
+  "sourceHash": "sha256:79949a263b6ba9332841d888cc88e655a47bf7e7c06b5983eb2e4298dfc30fb9",
   "outline": [
     {
       "heading": "События для Hooks",

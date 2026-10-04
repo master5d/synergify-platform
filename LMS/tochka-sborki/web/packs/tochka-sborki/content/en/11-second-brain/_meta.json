@@ -38,7 +38,7 @@
       "id": "c1",
       "unit": "u1-your-own-brain",
       "objective": "o1",
-      "question": "According to the lesson, what makes a second brain truly yours?",
+      "question": "According to the unit, what makes a second brain truly yours?",
       "options": [
         "The most expensive subscription to a notes service",
         "Memory lives with you in an open format: you can switch the agent or model and make a full copy",
@@ -69,7 +69,7 @@
       "question": "What should NOT go into your second brain's notes?",
       "options": [
         "Decisions and their reasons",
-        "Lessons after mistakes",
+        "units after mistakes",
         "Passwords, keys and tokens",
         "Rough thoughts"
       ],

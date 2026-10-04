@@ -5,7 +5,7 @@
   "unit": "u3-behind-gfw",
   "locale": "en",
   "title": "Behind Great Firewall: no VPN",
-  "sourceHash": "sha256:0c65e21a9c9399f4df35baf196eecccb15a6f4397319dfafe703a8033e3bb502",
+  "sourceHash": "sha256:c2f50b10c9001b805b02abbfc8a98c791285c97f08049e31249f31c39f37d3ed",
   "outline": [
     {
       "heading": "Access map",
@@ -43,7 +43,7 @@
       "children": []
     },
     {
-      "heading": "Step 3: LiteLLM gateway",
+      "heading": "Step 3: LiteLLM model gateway",
       "points": [
         {
           "text": "\"One endpoint for all providers\".",
@@ -84,12 +84,6 @@
     "generator": "paraphrase-v1",
     "pool": "prose-pool",
     "sections": [
-      {
-        "sourceHash": "sha256:3160b77e583608438bda8264a323a4e018aafb6c287e7ebd528c5b36ff1f9fcb",
-        "points": [
-          "You have one endpoint for all providers."
-        ]
-      },
       {
         "sourceHash": "sha256:67870fae59208c973ffbdbdf100f727b9c61baf6a70d5c68760d50f574b14442",
         "points": [

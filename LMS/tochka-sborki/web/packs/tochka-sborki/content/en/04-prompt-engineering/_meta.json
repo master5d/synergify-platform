@@ -80,7 +80,7 @@
       "id": "c4",
       "unit": "u2-spec-formula",
       "objective": "o5",
-      "question": "You can’t yet write and verify the task clearly, but you want to hand it straight to an agent in an automated loop. What does the lesson say?",
+      "question": "You can’t yet write and verify the task clearly, but you want to hand it straight to an agent in an automated loop. What does the unit say?",
       "options": [
         "That’s the way to do it: the agent will figure it out, that’s the point of automation",
         "The problem is a lack of imagination; first you need to come up with an image of the result",
@@ -94,7 +94,7 @@
       "id": "c5",
       "unit": "u3-magic-words",
       "objective": "o3",
-      "question": "The model confidently cites facts that don’t exist. Which phrase from the lesson targets this problem?",
+      "question": "The model confidently cites facts that don’t exist. Which phrase from the unit targets this problem?",
       "options": [
         "“Use the format: table”",
         "“Be specific”",
@@ -108,7 +108,7 @@
       "id": "c6",
       "unit": "u3-magic-words",
       "objective": "o3",
-      "question": "The answer didn’t work for you. Which next step does the lesson consider effective?",
+      "question": "The answer didn’t work for you. Which next step does the unit consider effective?",
       "options": [
         "Rephrase the prompt and add a phrase that fixes the specific problem in the answer",
         "Send the same prompt again: the second attempt will come out better",
@@ -122,7 +122,7 @@
       "id": "c7",
       "unit": "u4-sins",
       "objective": "o4",
-      "question": "A long prompt opens with an intro, has the main requirement in the middle and a conclusion at the end. The model ignores the requirement. Which correction does the lesson give?",
+      "question": "A long prompt opens with an intro, has the main requirement in the middle and a conclusion at the end. The model ignores the requirement. Which correction does the unit give?",
       "options": [
         "Start a new chat: this is context rot",
         "Write the requirement in capitals and more harshly",
@@ -150,7 +150,7 @@
       "id": "c9",
       "unit": "u4-sins",
       "objective": "o4",
-      "question": "The result didn’t work. Which line is closest to what the lesson advises?",
+      "question": "The result didn’t work. Which line is closest to what the unit advises?",
       "options": [
         "“This is completely wrong! Redo it now!”",
         "“No. Redo it.”",
@@ -158,13 +158,13 @@
         "“That didn’t work. Try shorter, without an introduction.”"
       ],
       "answer": 3,
-      "explain": "The lesson names aggressive tone as one of the sins. A working correction is neutral and says what to change (u4, sin 5)."
+      "explain": "The unit names aggressive tone as one of the sins. A working correction is neutral and says what to change (u4, sin 5)."
     },
     {
       "id": "c10",
       "unit": "u5-practice",
       "objective": "o5",
-      "question": "Every week you prepare the same report. What does the lesson suggest?",
+      "question": "Every week you prepare the same report. What does the unit suggest?",
       "options": [
         "Write the prompt from scratch each time to adapt to the week",
         "Set up a reusable assistant (role, objective, context, instructions, notes) — for example, a Claude Project, a Gem or a Skill",
@@ -178,7 +178,7 @@
       "id": "c11",
       "unit": "u5-practice",
       "objective": "o5",
-      "question": "You don’t know where to start with a complex prompt. Which technique does the lesson suggest?",
+      "question": "You don’t know where to start with a complex prompt. Which technique does the unit suggest?",
       "options": [
         "Send the task as a single word and refine it over several iterations",
         "Put every phrase from the “magic words” table into the prompt at once",

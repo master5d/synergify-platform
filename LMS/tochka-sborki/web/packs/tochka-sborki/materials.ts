@@ -72,7 +72,7 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
         kind: 'link',
         title: { ru: 'Курс Microsoft по агентам — карта на русском', en: 'Microsoft agents course — a Russian guide' },
         description: {
-          ru: 'Наш путеводитель по 18 урокам: что читать после какого модуля и что можно пропустить',
+          ru: 'Наш путеводитель по 18 юнитам: что читать после какого модуля и что можно пропустить',
           en: 'Our guide to the 18 lessons: what to read after which module, and what to skip',
         },
         href: '/materials/ms-agents-map.md',
@@ -81,7 +81,7 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
         kind: 'link',
         title: { ru: 'AI Agents for Beginners (оригинал, англ.)', en: 'AI Agents for Beginners (original)' },
         description: {
-          ru: '18 уроков от Microsoft про паттерны агентов, MCP, память и безопасность. MIT, обновляется регулярно',
+          ru: '18 юнитов от Microsoft про паттерны агентов, MCP, память и безопасность. MIT, обновляется регулярно',
           en: '18 lessons from Microsoft on agent patterns, MCP, memory and security. MIT, updated regularly',
         },
         href: 'https://github.com/microsoft/ai-agents-for-beginners',
@@ -199,7 +199,7 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
         kind: 'link',
         title: { ru: 'Superpowers (англ.)', en: 'Superpowers' },
         description: {
-          ru: 'Набор навыков для Claude Code: сначала план, потом тесты и код, затем ревью. Нужен, когда проект дольше одного вечера. MIT',
+          ru: 'Набор Skills для Claude Code: сначала план, потом тесты и код, затем ревью. Нужен, когда проект дольше одного вечера. MIT',
           en: 'A skill set for Claude Code: plan first, then tests and code, then review. Useful once a project outgrows one evening. MIT',
         },
         href: 'https://github.com/obra/superpowers',
@@ -243,7 +243,7 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
     ],
   },
   {
-    // Первоисточники опционального модуля 11-second-brain: уроки пересказывают официальные доки,
+    // Первоисточники опционального модуля 11-second-brain: юниты пересказывают официальные доки,
     // а первоисточник главнее (Channels — research preview, синтаксис может меняться).
     label: { ru: 'Второй мозг: первоисточники', en: 'Second brain: primary sources' },
     items: [
@@ -261,7 +261,7 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
         kind: 'link',
         title: { ru: 'Открытый формат Agent Skills (англ.)', en: 'The open Agent Skills format' },
         description: {
-          ru: 'Спецификация навыка-папки с SKILL.md и список агентов, которые её читают',
+          ru: 'Спецификация Skill-папки с SKILL.md и список агентов, которые её читают',
           en: 'The spec for a skill folder with SKILL.md and a list of agents that read it',
         },
         href: 'https://agentskills.io',

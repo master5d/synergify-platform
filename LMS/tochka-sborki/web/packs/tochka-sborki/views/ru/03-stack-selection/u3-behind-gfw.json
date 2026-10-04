@@ -5,7 +5,7 @@
   "unit": "u3-behind-gfw",
   "locale": "ru",
   "title": "Behind Great Firewall: без VPN",
-  "sourceHash": "sha256:fc17ed028f3a13124fe5bda696648b0c407b5d8df03ac4f885ce4e4962b7dc5f",
+  "sourceHash": "sha256:e9fb8bb50eaf03d9e09ffb846362c9c5baeba708687514cdf41f95fbcf4791be",
   "outline": [
     {
       "heading": "Карта доступов",

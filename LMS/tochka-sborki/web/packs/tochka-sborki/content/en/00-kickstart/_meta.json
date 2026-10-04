@@ -46,7 +46,7 @@
         "No one: if the agent wrote the code, it works"
       ],
       "answer": 1,
-      "explain": "In the lesson's roles table, “checks the result” is the tester in old development and you in vibe coding. The agent writes the code, but the checking stays with the human (u1, “Difference in approach”)."
+      "explain": "In the unit's roles table, “checks the result” is the tester in old development and you in vibe coding. The agent writes the code, but the checking stays with the human (u1, “Difference in approach”)."
     },
     {
       "id": "c2",
@@ -74,7 +74,7 @@
         "AI coding assistants inside the IDE"
       ],
       "answer": 0,
-      "explain": "Deep work with code and projects is the AI dev platforms quadrant. The lesson places Claude Code there, the tool this course is built on (u2, “Where this course sits”)."
+      "explain": "Deep work with code and projects is the AI dev platforms quadrant. The unit places Claude Code there, the tool this course is built on (u2, “Where this course sits”)."
     },
     {
       "id": "c4",
@@ -122,7 +122,7 @@
       "id": "c7",
       "unit": "u4-sources",
       "objective": "o4",
-      "question": "Which of two courses would the lesson call more alive?",
+      "question": "Which of two courses would the unit call more alive?",
       "options": [
         "The one released yesterday: it's newer",
         "Equally: only the publication date matters",
@@ -136,7 +136,7 @@
       "id": "c8",
       "unit": "u4-sources",
       "objective": "o4",
-      "question": "Which signal does the lesson advise looking at to see whether anyone checked the material before you?",
+      "question": "Which signal does the unit advise looking at to see whether anyone checked the material before you?",
       "options": [
         "The author's follower count",
         "The number of people who participate: forks, issues, discussions",
@@ -164,7 +164,7 @@
       "id": "c10",
       "unit": "u4-sources",
       "objective": "o4",
-      "question": "What does the lesson call sovereignty in learning?",
+      "question": "What does the unit call sovereignty in learning?",
       "options": [
         "Not paying anyone for learning",
         "Not being left with nothing when someone else's platform shuts down",
@@ -172,7 +172,7 @@
         "Not trusting any source without checking"
       ],
       "answer": 1,
-      "explain": "It's not about refusing to pay or distrusting everything: the lesson says outright that suspicion costs as much time as blind trust. Sovereignty is when the material stays with you (u4, “What the check won't tell you”)."
+      "explain": "It's not about refusing to pay or distrusting everything: the unit says outright that suspicion costs as much time as blind trust. Sovereignty is when the material stays with you (u4, “What the check won't tell you”)."
     },
     {
       "id": "c11",

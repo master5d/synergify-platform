@@ -5,20 +5,20 @@
   "unit": "u3-first-steps",
   "locale": "ru",
   "title": "Первые шаги",
-  "sourceHash": "sha256:059fc4baf0fee9ece37d2ecd6bb177afebcaa24a3e4efd772e7ed9c4f11fe9c6",
+  "sourceHash": "sha256:44f290cf12a2d94d1e588ff3cfda3de7f8d35dfca0ca1b66eb0e2f405bbce64f",
   "outline": [
     {
       "heading": "Путь по модулям 00–09",
       "points": [
         {
-          "text": "Каждый модуль — конкретный навык, конкретный результат.",
+          "text": "Каждый модуль — конкретный Skill, конкретный результат.",
           "origin": "extract"
         }
       ],
       "children": []
     },
     {
-      "heading": "Вайб-кодинг: что это значит на практике",
+      "heading": "vibe coding: что это значит на практике",
       "points": [
         {
           "text": "Ты перестаёшь быть исполнителем — ты становишься режиссёром.",
@@ -31,24 +31,5 @@
   "cards": [
     "c5"
   ],
-  "audio": null,
-  "paraphrase": {
-    "source": "paraphrase",
-    "generator": "paraphrase-v1",
-    "pool": "prose-pool",
-    "sections": [
-      {
-        "sourceHash": "sha256:72add0612ca2c98c2a135aee829845dca3a6cf7309914b7f25ab45e105362819",
-        "points": [
-          "Каждый модуль позволяет тебе освоить новый навык и прийти к понятному результату."
-        ]
-      },
-      {
-        "sourceHash": "sha256:e2b16484720d6945ded48ca5820dab7f5b9a293eba0c4be8f180ae957e61d16f",
-        "points": [
-          "Ты перестаешь быть просто исполнителем и берешь на себя роль режиссера."
-        ]
-      }
-    ]
-  }
+  "audio": null
 }

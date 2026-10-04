@@ -5,13 +5,13 @@
   "unit": "u4-production-infra",
   "locale": "ru",
   "title": "Prototype → Production",
-  "sourceHash": "sha256:9b9120fc38e40e1ff7559e43c5d73109ce44f0f082c86f39fd24b5aa522ab3cd",
+  "sourceHash": "sha256:64487ae5652e52860860f5a8089d56b45c7729db1b290fe2aac68e7e64022b2a",
   "outline": [
     {
       "heading": "",
       "points": [
         {
-          "text": "Мой production-стек для агентских пайплайнов",
+          "text": "Мой production-стек для агентских pipelineов",
           "origin": "extract"
         },
         {

@@ -68,7 +68,7 @@
         "Decide that Claude Code doesn't work on your system and move to another stack"
       ],
       "answer": 0,
-      "explain": "The lesson asks you to open a new terminal after installing: a window opened before the install may not know about the new command yet. If that doesn't help, there's a step-by-step manual path (u2, “Quick install (one line)”)."
+      "explain": "The unit asks you to open a new terminal after installing: a window opened before the install may not know about the new command yet. If that doesn't help, there's a step-by-step manual path (u2, “Quick install (one line)”)."
     },
     {
       "id": "c4",
@@ -82,7 +82,7 @@
         "`git --version` shows a version"
       ],
       "answer": 2,
-      "explain": "The lesson checks the install in two steps: the command responds with a version, and launching it opens an interactive session. No errors from the installer doesn't yet mean the agent launches (u2, “Check”, “First run”)."
+      "explain": "The unit checks the install in two steps: the command responds with a version, and launching it opens an interactive session. No errors from the installer doesn't yet mean the agent launches (u2, “Check”, “First run”)."
     },
     {
       "id": "c5",
@@ -144,7 +144,7 @@
       "id": "c8",
       "unit": "u3-first-project",
       "objective": "o4",
-      "question": "For a month you kept adding everything to AGENTS.md, and the file grew to 500 lines. What does the lesson advise?",
+      "question": "For a month you kept adding everything to AGENTS.md, and the file grew to 500 lines. What does the unit advise?",
       "options": [
         "That's how it should be: the more the agent knows, the more precisely it works",
         "Cut it down to 200 lines: in a long file the agent follows instructions worse",
@@ -152,13 +152,13 @@
         "Delete the file and explain the context all over again in every session"
       ],
       "answer": 1,
-      "explain": "The lesson sets a limit of 200 lines: in a long file the agent follows instructions worse. You update the file when the architecture or stack changes, rather than adding everything to it (u3, “AGENTS.md tips”)."
+      "explain": "The unit sets a limit of 200 lines: in a long file the agent follows instructions worse. You update the file when the architecture or stack changes, rather than adding everything to it (u3, “AGENTS.md tips”)."
     },
     {
       "id": "c9",
       "unit": "u3-first-project",
       "objective": "o4",
-      "question": "What does the lesson's AGENTS.md template leave to you rather than delegate to the agent?",
+      "question": "What does the unit's AGENTS.md template leave to you rather than delegate to the agent?",
       "options": [
         "Writing code from specs",
         "Tests",

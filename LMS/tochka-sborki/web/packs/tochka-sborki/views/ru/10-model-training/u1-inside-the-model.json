@@ -5,7 +5,7 @@
   "unit": "u1-inside-the-model",
   "locale": "ru",
   "title": "Что внутри модели",
-  "sourceHash": "sha256:7fb49b81a5575f8bb61163f1e1654db813ce69a15742194df4aa4c0394e9012b",
+  "sourceHash": "sha256:106d9dc5e045b151b4fa79aaf037a2289eecf426d2a440b77e6917fcfcd1674c",
   "outline": [
     {
       "heading": "Токены: как модель видит текст",

@@ -5,7 +5,7 @@
   "unit": "u2-context-vs-prompt",
   "locale": "ru",
   "title": "Контекст vs Промпт",
-  "sourceHash": "sha256:695ce78aaa96b9aa47dd17f7a48f4781452adc0bc708b18e64a08053de1c16fc",
+  "sourceHash": "sha256:480592566e6473020fd5e9b2ff0251ef53ddab1acef75a98d8ca729d15228132",
   "outline": [
     {
       "heading": "Разделение контекста и промпта",

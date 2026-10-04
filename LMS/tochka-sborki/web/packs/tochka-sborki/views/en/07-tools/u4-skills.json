@@ -5,7 +5,7 @@
   "unit": "u4-skills",
   "locale": "en",
   "title": "Skills: modular capabilities",
-  "sourceHash": "sha256:e8a38bc96160f03196fe7c7b6c9ed1680e536c1b1f7987c65eb4ed42d118c256",
+  "sourceHash": "sha256:411e1897fdca4cb069a5fb7211a91a90b640287e60d9a987ccea05d775eab879",
   "outline": [
     {
       "heading": "What is a Skill",

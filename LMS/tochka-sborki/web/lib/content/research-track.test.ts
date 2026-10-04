@@ -17,7 +17,7 @@ const ANCHORS = [
 describe.runIf(PACK_SLUG === 'tochka-sborki')('research-with-AI track', () => {
   it('ru exercises.mdx contains the track heading and all five save-anchors', () => {
     const src = read('ru')
-    expect(src).toContain('Поиск с ИИ')
+    expect(src).toContain('Поиск с AI')
     for (const a of ANCHORS) expect(src).toContain(a)
   })
   it('en exercises.mdx contains the track heading and all five save-anchors', () => {

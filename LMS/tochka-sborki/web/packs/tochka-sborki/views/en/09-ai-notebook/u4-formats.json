@@ -5,7 +5,7 @@
   "unit": "u4-formats",
   "locale": "en",
   "title": "Output formats",
-  "sourceHash": "sha256:c961d63295494975b40d983df11d7d4352de78c4e5921db3845ca20d65006da6",
+  "sourceHash": "sha256:6fb9c314f446baa18de37fe7d43c796c4d4d6078be6d413575ddeb5e2caa7841",
   "outline": [
     {
       "heading": "When each format is the honest one",

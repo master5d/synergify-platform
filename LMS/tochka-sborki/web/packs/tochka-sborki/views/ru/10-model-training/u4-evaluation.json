@@ -5,7 +5,7 @@
   "unit": "u4-evaluation",
   "locale": "ru",
   "title": "Оценка: помогло ли",
-  "sourceHash": "sha256:4c926b15a68fcee7ab4aac17f32115cea5165d076ddeea397c015a4f078e0e4a",
+  "sourceHash": "sha256:52779bc6199ea18b9ce45d6272fee2e0fcd1818f82052f1384e9d797f1729067",
   "outline": [
     {
       "heading": "Holdout: отложи до начала",

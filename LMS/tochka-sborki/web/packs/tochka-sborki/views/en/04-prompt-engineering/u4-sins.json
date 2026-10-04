@@ -5,7 +5,7 @@
   "unit": "u4-sins",
   "locale": "en",
   "title": "The sins of prompting",
-  "sourceHash": "sha256:2bc7f87c9d21fd519f3ce26db5b1357483c70f4c3f17ea32889c8963ef3cdb14",
+  "sourceHash": "sha256:d6fda2cf66358c68d4d03e7cae158166b467ca53af2267073ccea80fac1d173f",
   "outline": [
     {
       "heading": "Five sins of prompting",

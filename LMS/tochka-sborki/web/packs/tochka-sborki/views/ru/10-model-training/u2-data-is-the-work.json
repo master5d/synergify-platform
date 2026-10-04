@@ -5,7 +5,7 @@
   "unit": "u2-data-is-the-work",
   "locale": "ru",
   "title": "Данные — основная работа",
-  "sourceHash": "sha256:67afc47bc5307c9a083c271964ece6c2ec880d95d9cd7ce714fd4c4504200c3e",
+  "sourceHash": "sha256:33beefda537834e2e9dc551ccbca72a27ece625aaf89968e2fc2278dbee64324",
   "outline": [
     {
       "heading": "Цикл машинного обучения",

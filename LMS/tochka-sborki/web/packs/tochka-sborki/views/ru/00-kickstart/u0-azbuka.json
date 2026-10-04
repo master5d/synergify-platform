@@ -5,13 +5,13 @@
   "unit": "u0-azbuka",
   "locale": "ru",
   "title": "Азбука: шесть слов до старта",
-  "sourceHash": "sha256:2e574a5f1d99bc881a81a488bb80745de8cf7b3fa0f9a7bbd3a7bb487b325e9d",
+  "sourceHash": "sha256:6ba32f1dc176e1e6e40d495d7dbb84e90fe1cf95878352b9450a277700c2fee1",
   "outline": [
     {
       "heading": "Где мы находимся: матрёшка",
       "points": [
         {
-          "text": "Слова «ИИ», «нейросеть», «машинное обучение» и «LLM» часто говорят как синонимы.",
+          "text": "Слова «AI», «нейросеть», «машинное обучение» и «LLM» часто говорят как синонимы.",
           "origin": "extract"
         }
       ],
@@ -104,10 +104,6 @@
     "generator": "paraphrase-v1",
     "pool": "prose-pool",
     "sections": [
-      {
-        "sourceHash": "sha256:743353da917ff3c5d4b800657ff8c6ba7c6d81117cca79eb996b1d07cbc29d7a",
-        "verbatim": "near-identical"
-      },
       {
         "sourceHash": "sha256:f529cbe6c83531c10bffeefc8a33aee9236013def8e70ce96adb735e43d0ccab",
         "points": [

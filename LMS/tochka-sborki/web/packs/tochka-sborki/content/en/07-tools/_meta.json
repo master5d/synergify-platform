@@ -53,7 +53,7 @@
       "id": "c2",
       "unit": "u1-activation",
       "objective": "o5",
-      "question": "How does the lesson suggest understanding the “agency level”?",
+      "question": "How does the unit suggest understanding the “agency level”?",
       "options": [
         "As the share of work AI has taken away from you",
         "As a measure of how smart the model is",
@@ -89,7 +89,7 @@
         "Check the config's JSON syntax and that the token was passed correctly"
       ],
       "answer": 3,
-      "explain": "Most connection problems come down to JSON syntax, port conflicts, or a token that wasn't passed. The lesson advises checking syntax and tokens before digging deeper (u2, “Common errors (~60% of issues)”)."
+      "explain": "Most connection problems come down to JSON syntax, port conflicts, or a token that wasn't passed. The unit advises checking syntax and tokens before digging deeper (u2, “Common errors (~60% of issues)”)."
     },
     {
       "id": "c5",
@@ -103,13 +103,13 @@
         "`Stop`: when the agent has finished its work"
       ],
       "answer": 2,
-      "explain": "A check makes sense before the action: once launched, the command has already run. That's why the lesson ties validation and limits for production to `PreToolUse` (u3, “Practical examples” and “Security”)."
+      "explain": "A check makes sense before the action: once launched, the command has already run. That's why the unit ties validation and limits for production to `PreToolUse` (u3, “Practical examples” and “Security”)."
     },
     {
       "id": "c6",
       "unit": "u3-hooks",
       "objective": "o3",
-      "question": "In someone else's repository you've found a ready-made hook that “automates everything.” What should you do by the lesson's rules?",
+      "question": "In someone else's repository you've found a ready-made hook that “automates everything.” What should you do by the unit's rules?",
       "options": [
         "Add it right away: a hook is just a setting, it doesn't break anything",
         "Add it if the repository has a lot of stars",
@@ -131,7 +131,7 @@
         "Any model answer you liked"
       ],
       "answer": 0,
-      "explain": "A Skill is called via `/имя` without setting it up again, so it pays off on recurring tasks. The lesson says outright that a good reusable prompt is already almost a Skill (u4, “Activation” and “Reflection”)."
+      "explain": "A Skill is called via `/имя` without setting it up again, so it pays off on recurring tasks. The unit says outright that a good reusable prompt is already almost a Skill (u4, “Activation” and “Reflection”)."
     },
     {
       "id": "c8",
@@ -201,13 +201,13 @@
         "Decline: hooks are only for production"
       ],
       "answer": 2,
-      "explain": "A hook runs any command on your machine, no matter who wrote it. The rule from the hooks lesson applies here too: read what it does first (u6, “How to check…”; u3, “Security”)."
+      "explain": "A hook runs any command on your machine, no matter who wrote it. The rule from the hooks unit applies here too: read what it does first (u6, “How to check…”; u3, “Security”)."
     },
     {
       "id": "c13",
       "unit": "u6-pendel",
       "objective": "o5",
-      "question": "The agent fixed one item from the audit. How does the lesson suggest checking that the project didn't break?",
+      "question": "The agent fixed one item from the audit. How does the unit suggest checking that the project didn't break?",
       "options": [
         "Look at `git diff --stat` and `git diff`, run the project as usual, and only then commit",
         "Ask the agent whether everything is fine and take its word for it",

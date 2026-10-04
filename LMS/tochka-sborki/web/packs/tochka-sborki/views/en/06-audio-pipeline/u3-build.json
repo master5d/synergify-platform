@@ -5,7 +5,7 @@
   "unit": "u3-build",
   "locale": "en",
   "title": "Build your pipeline",
-  "sourceHash": "sha256:d47052a4c4da3ba0ccc64737f4b9f183c4ab92bb99138567fe6a76208aeb796a",
+  "sourceHash": "sha256:85d0e274afb25aabbb1d8d835b92655abb6531d3ba2d73735be900b0658afd74",
   "outline": [
     {
       "heading": "Full pipeline: URL → Insights",

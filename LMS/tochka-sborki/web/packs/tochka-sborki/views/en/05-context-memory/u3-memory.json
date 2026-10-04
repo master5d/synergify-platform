@@ -5,7 +5,7 @@
   "unit": "u3-memory",
   "locale": "en",
   "title": "The memory system",
-  "sourceHash": "sha256:a4405b532dad3a62ba758beaceafbef15f4975ea2c6c4c932e375cfc5c36560f",
+  "sourceHash": "sha256:e342f5a5b5c05d9c1e037cbaeb57efb43a3e0f6de61a099601d9bdf1847fb15d",
   "outline": [
     {
       "heading": "Memory files: three you write, one Claude writes",

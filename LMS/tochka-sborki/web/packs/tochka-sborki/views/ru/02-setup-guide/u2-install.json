@@ -5,7 +5,7 @@
   "unit": "u2-install",
   "locale": "ru",
   "title": "Установка инструментов",
-  "sourceHash": "sha256:44122a7c8bd42524c8160ce0f97a4df0a28d64743310b648472110f7ee54033f",
+  "sourceHash": "sha256:e2102dafb8aeeefa5e4affeef4f95fb9c496529206fe0dee5ec8c0a3bce51809",
   "outline": [
     {
       "heading": "⚡ Быстрая установка (одной строкой)",
@@ -61,7 +61,7 @@
           "heading": "Git: базовая конфигурация",
           "points": [
             {
-              "text": "Команды одинаковы на всех системах",
+              "text": "Команды одинаковы на всех сисмодулях",
               "origin": "extract"
             }
           ],
@@ -106,12 +106,6 @@
         "sourceHash": "sha256:ee86f9f5b98bc632671b1e6312b760ccbb147382763d7ea384f69e1e62704ecd",
         "points": [
           "Claude Code откроет для тебя интерактивную сессию."
-        ]
-      },
-      {
-        "sourceHash": "sha256:b934a72db36b032dfc663c69185de77c3a3ccbfc67f253c20b7668d36bcd8278",
-        "points": [
-          "Эти команды будут одинаковыми на всех системах."
         ]
       },
       {

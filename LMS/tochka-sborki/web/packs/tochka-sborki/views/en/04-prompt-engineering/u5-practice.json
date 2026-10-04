@@ -5,7 +5,7 @@
   "unit": "u5-practice",
   "locale": "en",
   "title": "A professional prompt",
-  "sourceHash": "sha256:7cfa57f4afef47b2f8a6b554a4f8bb5980cd5bae1a48551977208080de45d0ba",
+  "sourceHash": "sha256:765bfeb9475becdd2fabf5cca47755284a13098e4d8c5eda29ebc2e07cd7a1cc",
   "outline": [
     {
       "heading": "Meta-prompting: a prompt that writes prompts",

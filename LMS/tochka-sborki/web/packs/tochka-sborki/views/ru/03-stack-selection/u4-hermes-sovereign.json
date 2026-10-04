@@ -5,7 +5,7 @@
   "unit": "u4-hermes-sovereign",
   "locale": "ru",
   "title": "Hermes + локальный стек",
-  "sourceHash": "sha256:172efcbf3d142ba481213b66099c41cc4f2e5696af9c76e3504440afef4c6105",
+  "sourceHash": "sha256:a3c9972ee311d2584c644bbf1a79634c8ca783c47be54b3243594559d66e40b0",
   "outline": [
     {
       "heading": "Режиссёр и worker",

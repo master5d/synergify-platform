@@ -5,7 +5,7 @@
   "unit": "u6-pendel",
   "locale": "ru",
   "title": "Пендель: агент проверяет твой проект",
-  "sourceHash": "sha256:496d688f05af9e281cbba4d150491e6f2d4e0b441e6fa392763ff8074092ed02",
+  "sourceHash": "sha256:1a138e438316f34803298207d16c1779a67519f886c7f14d0dc1e2b361e08628",
   "outline": [
     {
       "heading": "Что такое «Пендель»",

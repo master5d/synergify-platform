@@ -59,13 +59,13 @@
         "Only launching the agent; after that it decides everything itself"
       ],
       "answer": 2,
-      "explain": "The lesson says not “AI writes instead of me” but “co-thinking and co-working”. You set the intent, you work together with the agent, and the decision stays with you (u1, the “Before / Now” table)."
+      "explain": "The unit says not “AI writes instead of me” but “co-thinking and co-working”. You set the intent, you work together with the agent, and the decision stays with you (u1, the “Before / Now” table)."
     },
     {
       "id": "c3",
       "unit": "u1-activation",
       "objective": "o2",
-      "question": "The AI returned something not quite what you meant. Where does the lesson advise looking for the cause first?",
+      "question": "The AI returned something not quite what you meant. Where does the unit advise looking for the cause first?",
       "options": [
         "In the model: it means this tool is weak",
         "In the “map” you gave it: which landmarks and context it lacked",
@@ -121,7 +121,7 @@
       "id": "c7",
       "unit": "u2-four-shifts",
       "objective": "o4",
-      "question": "Which of these does the lesson advise keeping for yourself rather than delegating to the agent?",
+      "question": "Which of these does the unit advise keeping for yourself rather than delegating to the agent?",
       "options": [
         "The final review",
         "The first draft",
@@ -129,13 +129,13 @@
         "Routine operations"
       ],
       "answer": 0,
-      "explain": "The lesson suggests handing routine, the first draft and search to the agent. Strategy, final review and ethics stay with you (u2, shift 4)."
+      "explain": "The unit suggests handing routine, the first draft and search to the agent. Strategy, final review and ethics stay with you (u2, shift 4)."
     },
     {
       "id": "c8",
       "unit": "u2-four-shifts",
       "objective": "o2",
-      "question": "Which of the four shifts does the lesson call the only right one?",
+      "question": "Which of the four shifts does the unit call the only right one?",
       "options": [
         "Delegation: the others are special cases of it",
         "None: they are different ways of co-working, and each fits a different task",
@@ -149,7 +149,7 @@
       "id": "c9",
       "unit": "u3-clones",
       "objective": "o5",
-      "question": "Which AI clone does the lesson advise starting with?",
+      "question": "Which AI clone does the unit advise starting with?",
       "options": [
         "All five at once, to see the big picture",
         "The one whose tasks cost you the most time",
