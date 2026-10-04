@@ -3,7 +3,7 @@
   "title": "Second Brain",
   "description": "A second brain that stays with you: memory in your own files, a channel to reach your agent, skills that travel from agent to agent, and security rules for everything that comes from outside",
   "duration": "50 min",
-  "level": 8,
+  "level": 10,
   "units": [
     { "slug": "u1-your-own-brain", "title": "A second brain that stays with you" },
     { "slug": "u2-channel", "title": "A channel: your agent within reach" },

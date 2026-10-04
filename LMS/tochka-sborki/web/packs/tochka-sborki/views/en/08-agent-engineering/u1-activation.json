@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "en",
   "title": "When Prompts Stop Working",
-  "sourceHash": "sha256:0690bdb020f84aa02ab61d1e4f3d18aa3282b779b8f37c158bd20e92984ddbb9",
+  "sourceHash": "sha256:12e123c41a4569e02f43e7e517fcc6a711759c407a33839aeb89b3e6a1638bbd",
   "outline": [
     {
       "heading": "",
@@ -19,7 +19,7 @@
           "origin": "extract"
         },
         {
-          "text": "A vibe coder lives in 3.0 and uses a single neural \"worker.\" An agent engineer lives in 3.0 and orchestrates a team of neural workers.",
+          "text": "A vibe coder lives in 3.0 and uses a single neural \"worker.\" An agent engineer lives in 3.0 and assembles one verifiable workflow.",
           "origin": "extract"
         }
       ],
@@ -30,20 +30,5 @@
     "c1",
     "c2"
   ],
-  "audio": null,
-  "paraphrase": {
-    "source": "paraphrase",
-    "generator": "paraphrase-v1",
-    "pool": "prose-pool",
-    "sections": [
-      {
-        "sourceHash": "sha256:3645410c79c859667278da6c2d7ce8ead41b65fe107bb73229b2b87a9d9e7a90",
-        "points": [
-          "You can recognize signs that you have reached the ceiling of vibe coding.",
-          "Programming has three eras, including Software 2.0 from a 2017 essay and Software 3.0 from a 2025 talk by Karpathy.",
-          "A vibe coder uses a single neural worker, while an agent engineer orchestrates a team of them in Software 3.0."
-        ]
-      }
-    ]
-  }
+  "audio": null
 }

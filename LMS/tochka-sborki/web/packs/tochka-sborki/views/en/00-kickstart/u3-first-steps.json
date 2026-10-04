@@ -5,10 +5,10 @@
   "unit": "u3-first-steps",
   "locale": "en",
   "title": "First steps",
-  "sourceHash": "sha256:7dde4ee1266097b4b4b6503fa32170aaef6562992988ceb20774e2e808b27efc",
+  "sourceHash": "sha256:ca86bac408a7975ad0cfca8bb90f0027785475dc1a5e00c0447bbce073a2276f",
   "outline": [
     {
-      "heading": "The path through modules 00–09",
+      "heading": "The path through modules 00–08 and optional 09–11",
       "points": [
         {
           "text": "Each module — one concrete skill, one concrete result.",
@@ -37,12 +37,6 @@
     "generator": "paraphrase-v1",
     "pool": "prose-pool",
     "sections": [
-      {
-        "sourceHash": "sha256:69c5625c3b2061f1552f6389c8cfb02c6b1d3ddf28aea44bb93199d9692b73cf",
-        "points": [
-          "Each module focuses on one concrete skill and one concrete result."
-        ]
-      },
       {
         "sourceHash": "sha256:ed040f14a950a7c7e5d8b552b30c9021d3b98a690a09ff8a7ec736c21a7bf2d7",
         "verbatim": "near-identical"

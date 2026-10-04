@@ -5,7 +5,7 @@
   "unit": "u5-practice",
   "locale": "ru",
   "title": "Подключи и протестируй",
-  "sourceHash": "sha256:b662348097d772e3d5e65645daa7a4e36defc14a3b961a2869b1f7f799302976",
+  "sourceHash": "sha256:e61a01e9bfed2b0d83c363d3218cfaf6a4d9172fdc4a493e8bd9c8de69a04f65",
   "outline": [
     {
       "heading": "Финальная архитектура: AI-клон для реальной задачи",

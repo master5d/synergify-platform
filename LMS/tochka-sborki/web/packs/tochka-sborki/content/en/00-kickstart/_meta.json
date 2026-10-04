@@ -122,7 +122,7 @@
       "id": "c7",
       "unit": "u4-sources",
       "objective": "o4",
-      "question": "Which of two courses would the unit call more alive?",
+      "question": "Which course would the unit call more alive?",
       "options": [
         "The one released yesterday: it's newer",
         "Equally: only the publication date matters",

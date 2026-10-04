@@ -5,7 +5,7 @@
   "unit": "u4-untrusted-input",
   "locale": "en",
   "title": "Security: everything that comes from outside",
-  "sourceHash": "sha256:7cde05a9cea6b8d06f405d0d772aea867e124daf4d3acbafeb4de2765d6f28e6",
+  "sourceHash": "sha256:35c8ccec38f9d6501d108d5c4d23ccac343e1ac560387048ed4f0b2ac18d14be",
   "outline": [
     {
       "heading": "Prompt injection",

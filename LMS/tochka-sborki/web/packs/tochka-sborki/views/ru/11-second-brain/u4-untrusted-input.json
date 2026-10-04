@@ -5,7 +5,7 @@
   "unit": "u4-untrusted-input",
   "locale": "ru",
   "title": "Безопасность: всё, что пришло снаружи",
-  "sourceHash": "sha256:132269dd202bc9c37cbd44a3cf99d0c9ab93aa6f52d8dbdef0286ee4be867986",
+  "sourceHash": "sha256:2f59b135f4f90a13f7b554e3ff087130d11bb100147c27c1b3afa4b20ca36012",
   "outline": [
     {
       "heading": "Prompt injection",

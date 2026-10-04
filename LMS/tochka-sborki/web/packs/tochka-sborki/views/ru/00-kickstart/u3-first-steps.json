@@ -5,10 +5,10 @@
   "unit": "u3-first-steps",
   "locale": "ru",
   "title": "Первые шаги",
-  "sourceHash": "sha256:44f290cf12a2d94d1e588ff3cfda3de7f8d35dfca0ca1b66eb0e2f405bbce64f",
+  "sourceHash": "sha256:0d301903770e3c23a0fa0527222448604bd99ff270ab791dc44720172097f46b",
   "outline": [
     {
-      "heading": "Путь по модулям 00–09",
+      "heading": "Путь по модулям 00–08 и опциональным 09–11",
       "points": [
         {
           "text": "Каждый модуль — конкретный Skill, конкретный результат.",
