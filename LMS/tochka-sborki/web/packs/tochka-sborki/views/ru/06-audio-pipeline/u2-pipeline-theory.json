@@ -5,7 +5,7 @@
   "unit": "u2-pipeline-theory",
   "locale": "ru",
   "title": "Trigger → Action модель",
-  "sourceHash": "sha256:e12fb49cb04ad5e0ab55c5aa7d6fc4f688f4f8dbd9bbb4d21f51778d2f318bd3",
+  "sourceHash": "sha256:98a4e82bf86e03d326cebde66ccf9a4345e016d8963a2895ff79c0e6df601693",
   "outline": [
     {
       "heading": "Три типа pipeline",
@@ -46,7 +46,13 @@
     {
       "heading": "Инструменты для pipeline",
       "points": [],
-      "children": []
+      "children": [
+        {
+          "heading": "Чем запускать по расписанию",
+          "points": [],
+          "children": []
+        }
+      ]
     }
   ],
   "cards": [

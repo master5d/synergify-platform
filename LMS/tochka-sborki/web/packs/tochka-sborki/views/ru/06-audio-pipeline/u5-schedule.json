@@ -5,7 +5,7 @@
   "unit": "u5-schedule",
   "locale": "ru",
   "title": "Pipeline, который запускается сам",
-  "sourceHash": "sha256:07182eae65cd0eec382e40ede23cedcaa4ce40508217dc88e14f11e03bb50f89",
+  "sourceHash": "sha256:ffd1ddd5098408cdada7b59c3a112e5b095ca9617f71c812b349cc4f51520bcc",
   "outline": [
     {
       "heading": "Схема: утренний разбор ссылок",

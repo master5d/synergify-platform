@@ -45,7 +45,7 @@ The script will run every day over the same `inbox.txt`. Without a condition it 
 
 `done.txt` is the pipeline's memory of what is already done. A repeat run changes nothing and spends no quota. This property has a name: **idempotency**.
 
-In module 08 you will see it in a real production pipeline. There an email gets a label after processing, so it is never picked up twice ([08, "Orchestration: ENERV Case Study"](/en/lessons/08-agent-engineering/u3-orchestration/)). Your idea is the same, only a line in a file replaces the label.
+In module 08 you will see it in a real production pipeline. There an email gets a label after processing, so it is never picked up twice ([08, "Orchestration: the Gmail agent as a case"](/en/lessons/08-agent-engineering/u3-orchestration/)). Your idea is the same, only a line in a file replaces the label.
 
 A second rule comes from the same place: a link goes into `done.txt` **only after a successful run**. If a run fails, the link stays in the queue and the script retries tomorrow.
 
@@ -122,7 +122,14 @@ The second command runs the task right away, as a test. The parameters are in th
 **Step 5. Check it.** Open `run.log`. If it says `claude: command not found`, the scheduler cannot see your PATH. Run `command -v claude` and put the full path into `run.sh` instead of `claude`. Keep in mind: a sleeping laptop skips the run, so pick a time when the computer is on.
 
 **Other routes to the same schedule.**
-- No code, on your own hardware: n8n in Docker ([install](https://docs.n8n.io/deploy/host-n8n/install-options/install-with-docker/)) and the [Schedule Trigger](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.scheduletrigger/) node. You will have to build the "duplicates" condition there too, for example with a table of processed links.
+I had n8n running in Docker on a rented server, but there were no working workflows there.
+During a self-check I found its web interface exposed directly to the internet: Docker published `0.0.0.0:5678` past the host firewall.
+I removed n8n entirely.
+The rule I took from that: a service on a server should listen on `127.0.0.1` or a private network between my devices.
+Externally, use Cloudflare or expose nothing at all.
+That explains my choice of scripts in git: they are easier to read, test, and roll back like ordinary code.
+With a builder, you also have to track its port, credentials database, and version separately.
+But this is not a course rule: if you do not write code, n8n or Make.com may suit you — check which port the service opens and keep it closed.
 - In the cloud, if you have a paid Claude plan: `/schedule` creates a routine that runs even when your laptop is closed ([documentation](https://code.claude.com/docs/en/routines)). A routine works with a GitHub repository, not your local folder, so `inbox.txt` and `done.txt` have to live in the repo.
 
 Save to `my-experiments/u5-schedule.md`: your schedule line, your first `digest-….md`, and one sentence on what the pipeline did without you.

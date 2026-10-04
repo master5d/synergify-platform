@@ -5,7 +5,7 @@
   "unit": "u2-pipeline-theory",
   "locale": "en",
   "title": "Trigger → Action model",
-  "sourceHash": "sha256:02a76351bdb268de773897448a8ddbf9d04d3c9e20dbd2bb54c7030e56259453",
+  "sourceHash": "sha256:b61401c1371d72c658fe6ca0dd8632e7900850c49c26d21381951ee2ec7bf148",
   "outline": [
     {
       "heading": "Three pipeline types",
@@ -46,7 +46,13 @@
     {
       "heading": "Tools for pipelines",
       "points": [],
-      "children": []
+      "children": [
+        {
+          "heading": "What to schedule it with",
+          "points": [],
+          "children": []
+        }
+      ]
     }
   ],
   "cards": [

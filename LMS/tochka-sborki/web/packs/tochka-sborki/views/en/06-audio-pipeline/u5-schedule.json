@@ -5,7 +5,7 @@
   "unit": "u5-schedule",
   "locale": "en",
   "title": "A pipeline that runs on its own",
-  "sourceHash": "sha256:74a130b97bbc117f0042abf4f9e3fe8a3e0e86e87ea00140ca4f470e7badf8bd",
+  "sourceHash": "sha256:47b2b9d940ac10e1ebc9080d12275946696b4edec4ffefea9b3cf4a0bf165317",
   "outline": [
     {
       "heading": "The shape: a morning link digest",

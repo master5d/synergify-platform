@@ -154,7 +154,7 @@
         "They are processed again, and nothing can be done about it"
       ],
       "answer": 1,
-      "explain": "The pipeline itself keeps the memory of what is done: done.txt. A repeat run changes nothing and spends no quota. That is idempotency, the same idea as the email label in ENERV from module 08 (u5, \"The duplicates condition is idempotency\")."
+      "explain": "The pipeline itself keeps the memory of what is done: done.txt. A repeat run changes nothing and spends no quota. That is idempotency, the same idea as the email label in the Gmail agent from module 08 (u5, \"The duplicates condition is idempotency\")."
     },
     {
       "id": "c10",

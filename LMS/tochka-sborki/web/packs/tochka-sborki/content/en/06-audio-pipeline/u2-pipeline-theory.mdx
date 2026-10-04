@@ -43,7 +43,7 @@ Runs on a schedule. Good for regular tasks.
 Every morning at 8:00 → collect RSS → analyze → report to Slack
 ```
 
-Tools: n8n, Make.com, GitHub Actions, cron. Claude Code Hooks don't belong here: they fire on agent events, not on a clock.
+There are three routes to a scheduled run: an operating-system timer, CI, or a no-code service. The author uses scripts in git and OS timers: `launchd` on Mac, `systemd` timers on a Linux server, and Windows Task Scheduler. That is the author's choice, not a course rule. Claude Code Hooks don't belong here: they fire on agent events, not on a clock.
 
 ### 3. Event-driven pipeline
 Runs when something happens.
@@ -56,11 +56,19 @@ New email → classify → draft reply → for approval
 ## Tools for pipelines
 
 | Tool | Level | For what |
-|------------|---------|---------|
-| Claude (chat) | Beginner | One-off tasks, testing |
-| Claude Code | Intermediate | Working with files, projects |
-| Make.com / n8n | Advanced | No-code automation |
+|------|-------|----------|
+| Claude (chat) | Starter | One-off tasks, testing |
+| Claude Code | Intermediate | Working with files and projects |
+| Make.com / n8n | Advanced | Automation without code (the author doesn't use it — see below) |
 | Claude Code Hooks | Expert | Event-driven automation |
+
+### What to schedule it with
+
+| Route | Tools | For what | What the author uses |
+|-------|-------|----------|---------------------|
+| OS timer | `cron`, `launchd`, `systemd` timer, Windows Task Scheduler | Start a script on your computer or server | Yes: scripts in git + an OS timer |
+| CI | GitHub Actions | Run a pipeline in the cloud on a schedule | Not for the author's automations |
+| No-code | n8n, Make.com | Build an automation without code | Not used; an option for the learner |
 
 > 💡 Start with a manual pipeline. Once you've confirmed the algorithm works — automate the trigger.
 
