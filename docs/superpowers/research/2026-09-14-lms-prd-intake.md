@@ -34,6 +34,7 @@
 | LMS#15 | «tochka + Mamaev coach» — реклама ELVTR «AI Solution Architect» (Duc Haba) + решение владельца о роли на mamaev.coach | Evernote f542046f-2e7c-c597-2a24-0c66a1bb03e5 | `pattern-only` (ступень роли в роадмапе) | курс ELVTR — `reject` | mamaev.coach: роль правится (mc_hub) |
 | LMS#16 | «Курс онлайн випасспна» — эссе-критика онлайн-курса mindfulness; запрос владельца: аудит нашего курса по ней + есть ли он в реестре | Evernote 28703ac6-bda8-7661-0fb0-b15c333788de | — | **аудит `living-practice`**: в реестре есть (`live`); 1 HIGH + 5 находок | паттернов нет |
 | LMS#21 | «Tochka sborki» — список владельца из 5 тем + подборка @prompt_design 1807 (повтор LMS#2) | Evernote fadc380d-b5b9-b8db-ed2b-552c930962d3 | `already covered` (материалы ТС, «Азбука», модуль «Обучение моделей») | `already covered` | 2 ссылки в материалы advanced-модуля (owner-gated) |
+| LMS#22 | «LMS» — конспект владельца по отчёту U.S. Dept. of Education OET «AI and the Future of Teaching and Learning» (май 2023) + todo: ESEA, применить к промпту «Mama-ум» | Evernote c2018cc7-42b3-948a-86c2-f2177fca863a | `already covered` (LMS#20, Педагогика 1–5) | `already covered` | метка уровня доказательности ESEA у приёмов LMS#20 (owner-gated); «Mama-ум» — не найден, вопрос владельцу |
 
 ---
 
@@ -1090,3 +1091,45 @@ Microsoft (`translations/ru`), HF Spaces «The Smol Training Playbook» и «LLM
 - не брать: «From Code Foundation Models to Agents and Applications» (arXiv 2511.18538, 200 стр.) — обзор для
   исследователей, новичку ТС не по уровню; awesome-ai-apps / awesome-llm-apps уже разобраны в LMS#2 (шпаргалка);
   PDF «LLM в картинках» — происхождение не проверяется.
+
+## LMS#22 — «LMS»: отчёт OET «Artificial Intelligence and the Future of Teaching and Learning» (2026-10-03)
+
+**Источник:** Evernote `c2018cc7-42b3-948a-86c2-f2177fca863a` (заметка 2025-04-17, без медиа). Конспект владельца на
+английском: возможности ИИ (learning / teaching / assessment), требование доказательной эффективности, четыре основания
+(Center People, Advance Equity, Ensure Safety/Ethics/Effectiveness, Promote Transparency), семь рекомендаций. Todo
+владельца: «research what ESEA is?», «Apply framework to the Mama-ум prompt».
+
+**Реальность источника:** отчёт настоящий — U.S. Department of Education, Office of Educational Technology, май 2023,
+71 стр. Живые адреса ed.gov отвечают 403 (OET закрыт в марте 2025), копия — Wayback
+`web.archive.org/web/20240918131327/https://www2.ed.gov/documents/ai-report/ai-report.pdf`
+(sha256 `f817bf8b248e1c4b…`). Все семь рекомендаций, четыре основания и место про ESEA в тексте найдены; конспект
+владельца передаёт отчёт верно. Отчёт — политический документ, не исследование: своих данных нет.
+
+**Ответ на todo «что такое ESEA»:** Elementary and Secondary Education Act (в редакции ESSA 2015) задаёт четыре уровня
+доказательности для образовательных вмешательств: **1 strong** — хотя бы одно хорошо спланированное RCT; **2 moderate** —
+квазиэксперимент; **3 promising** — корреляционное исследование с контролем смешивающих факторов; **4 demonstrates a
+rationale** — логическая модель плюс начатая оценка эффекта. Отчёт требует, чтобы edtech с ИИ доказывал эффект по этой
+шкале (рис. 2, с. 9).
+
+**Сверка с курсом:**
+
+| Рекомендация OET | У нас |
+|---|---|
+| Humans in the loop, ИИ дополняет, а не заменяет | Педагогика 5 (защита от «ИИ сделал за меня», Bastani 2025), «сначала сам» (Педагогика 3) |
+| Опора на исследования обучения, а не на возможности модели | LMS#20 целиком: приёмы отобраны по мета-анализам и RCT, мифы исключены |
+| Формативная оценка внутри обучения, обратная связь сразу | `checks.explain`, pretest (Педагогика 2), интервальный повтор (пилот) |
+| Доказательность эффекта | пилот Педагогики 1 со стоп-критерием; уровни ESEA явно не помечены |
+| Доверие: приватность, прозрачность | нет новой информации против уже записанного (PHI/PII-правила, de-hustle) |
+| Мультиязычные ученики, ученики с инвалидностью | двуязычие RU/EN, captions/transcripts, lite-mode |
+
+**Вердикт:** `already covered` (ТС и LMS) — LMS#20 сделал ровно то, чего требует отчёт. Лабе — нет.
+
+**Паттерны:**
+- взято (owner-gated) → BACKLOG: у каждого приёма Педагогики 1–5 указать уровень ESEA его первоисточника (Bastani 2025 и
+  Kestin 2025 — уровень 1; мета-анализы RCT — уровень 1; наш пилот повтора — уровень 4 до первых замеров). Дешёво,
+  делает честным утверждение «курс построен на доказательной педагогике».
+- открыто: «Apply framework to the Mama-ум prompt» — промпта с таким именем нет ни в одном репо `C:\telo\Efforts`, ни в
+  памяти (поиск 2026-10-03). Вопрос владельцу: что это и где лежит.
+- не брать: рекомендации про педагогов (Inform and Involve Educators), R&D-повестку и регуляторику США (FERPA, IDEA) —
+  у курса одного автора без школьной аудитории применимого нет; линза «люди = агенты» не меняет вывода — роль
+  «educator» у нас уже владелец.

@@ -582,6 +582,9 @@
 
 ## Owner-gated (ждут решения владельца)
 
+- [ ] **Педагогика: уровень доказательности ESEA у приёмов LMS#20** (intake LMS#22). У пунктов Педагогика 1–5 и в отчёте
+  NAUTILUS `research/2026-09-28-pedagogy-evidence-lms.md` пометить уровень ESEA первоисточника (1 strong RCT · 2 квазиэксперимент ·
+  3 корреляционное · 4 rationale). Наши пилоты — уровень 4 до замеров. Делает проверяемым тезис «доказательная педагогика».
 - [ ] **ТС: две ссылки в материалы модуля «Обучение моделей»** (intake LMS#21). HF «The Smol Training Playbook»
   (`huggingface.co/spaces/HuggingFaceTB/smol-training-playbook`) и «LLM Evaluation Guidebook»
   (`huggingface.co/spaces/OpenEvals/evaluation-guidebook`) → `packs/tochka-sborki/materials.ts`, группа «Фундамент», с пометкой
