@@ -24,7 +24,7 @@ const RAW: RawEco = {
       key: 'learn',
       title: { ru: 'Учись', en: 'Learn' },
       nodes: [
-        { label: { ru: 'Курс (9 модулей)', en: 'Course (9 modules)' }, status: 'live' },
+        { label: { ru: 'Курс (9 модулей + 3 опциональных)', en: 'Course (9 modules + 3 optional)' }, status: 'live' },
         { label: { ru: 'AI-напарник', en: 'AI companion' }, status: 'live' },
         { label: { ru: 'Учиться с ИИ', en: 'Learn with AI' }, status: 'live' },
         { label: { ru: 'Материалы и программа', en: 'Materials & syllabus' }, status: 'live' },

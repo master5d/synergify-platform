@@ -29,7 +29,7 @@
       "text": "Tell a primary source from packaging by three signs (licence, date of the last edit, author and participation) and explain which question this check answers and what sovereignty in learning means"
     },
     {
-      "id": "o6",
+      "id": "o5",
       "text": "Explain in plain words token, context window, temperature, how models differ, prompt vs context, agent — and where LLMs sit in the nesting doll AI ⊃ ML ⊃ deep learning"
     }
   ],
@@ -177,7 +177,7 @@
     {
       "id": "c11",
       "unit": "u0-azbuka",
-      "objective": "o6",
+      "objective": "o5",
       "question": "You asked a model the same question twice in new chats and got different answers. What does that mean?",
       "options": [
         "The model is broken: there is always one correct answer",
@@ -191,7 +191,7 @@
     {
       "id": "c12",
       "unit": "u0-azbuka",
-      "objective": "o6",
+      "objective": "o5",
       "question": "How is an agent different from an ordinary chat with a model?",
       "options": [
         "An agent is just a bigger, smarter model",
