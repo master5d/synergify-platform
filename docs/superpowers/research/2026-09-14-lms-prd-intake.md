@@ -34,11 +34,12 @@
 | LMS#15 | «tochka + Mamaev coach» — реклама ELVTR «AI Solution Architect» (Duc Haba) + решение владельца о роли на mamaev.coach | Evernote f542046f-2e7c-c597-2a24-0c66a1bb03e5 | `pattern-only` (ступень роли в роадмапе) | курс ELVTR — `reject` | mamaev.coach: роль правится (mc_hub) |
 | LMS#16 | «Курс онлайн випасспна» — эссе-критика онлайн-курса mindfulness; запрос владельца: аудит нашего курса по ней + есть ли он в реестре | Evernote 28703ac6-bda8-7661-0fb0-b15c333788de | — | **аудит `living-practice`**: в реестре есть (`live`); 1 HIGH + 5 находок | паттернов нет |
 | LMS#21 | «Tochka sborki» — список владельца из 5 тем + подборка @prompt_design 1807 (повтор LMS#2) | Evernote fadc380d-b5b9-b8db-ed2b-552c930962d3 | `already covered` (материалы ТС, «Азбука», модуль «Обучение моделей») | `already covered` | 2 ссылки в материалы advanced-модуля (owner-gated) |
-| LMS#22 | «LMS» — конспект владельца по отчёту U.S. Dept. of Education OET «AI and the Future of Teaching and Learning» (май 2023) + todo: ESEA, применить к промпту «Mama-ум» | Evernote c2018cc7-42b3-948a-86c2-f2177fca863a | `already covered` (LMS#20, Педагогика 1–5) | `already covered` | метка уровня доказательности ESEA у приёмов LMS#20 (owner-gated); «Mama-ум» — не найден, вопрос владельцу |
+| LMS#22 | «LMS» — конспект владельца по отчёту U.S. Dept. of Education OET «AI and the Future of Teaching and Learning» (май 2023) + todo: ESEA, применить к промпту «Mama-ум» | Evernote c2018cc7-42b3-948a-86c2-f2177fca863a | `already covered` (LMS#20, Педагогика 1–5) | `already covered` | метка уровня доказательности ESEA у приёмов LMS#20 (owner-gated); «Mama-ум» — шум заметки (владелец) |
 | LMS#23 | «Tochka sborki» — пост Алексея Колоскова (Facebook, июнь 2023) про мета-промпты и анонс его курса | Evernote aa52c0ff-29e1-0fbc-894c-f95d25534a7b | `pattern-only` (промпт из решённой задачи → 04/u5) | `already covered` | «продавать промпты бизнесу» — не брать (de-hustle) |
 | LMS#24 | «LMS» — клип LinkedIn: Tobias Zwingmann о промпте Mr. Ranedeer AI Tutor (май 2023) | Evernote 08f4b1cb-8273-c31a-54c3-bf4ece2d154a | `already covered` (режим практики LMS#18, эталон юнита LMS#20) | `already covered` | правило «чего нет в материале — скажи» (owner-gated); learning styles — не брать |
 | LMS#25 | «LMS» — клип Lifehacker «Use the SQ3R Method to Study More Effectively» (2024) | Evernote c5b193ce-25ff-4ef2-99a8-d843d934aed9 | `already covered` (pretest, «сначала сам», коробки Лейтнера; урок «Удержание смысла» в скорочтении) | `already covered` | паттернов нет |
 | LMS#26 | «LMS» — промо-пост Telegram (@salikov_i) про YouLearn (youlearn.ai), AI-репетитор по загруженным материалам | Evernote 7b50ce00-024e-4252-4489-9171524ee8d6 | `already covered` (представления урока, карточки = checks, модуль 09-ai-notebook) | продукт — `reject` | паттернов нет |
+| LMS#27 | «Tochka sborki» — клип LinkedIn: Eduardo Ordax (AWS), роадмап «AI PM» из 8 ступеней (май 2025) | Evernote 8696f48b-6647-3be9-5d30-a39ae14aa142 | `pattern-only` (6-й блок «Quality» в 08/u4: набор кейсов + судья + свой глаз) | `already covered` | A2A и «AI PM» — не брать |
 
 ---
 
@@ -1132,8 +1133,8 @@ rationale** — логическая модель плюс начатая оце
 - взято (owner-gated) → BACKLOG: у каждого приёма Педагогики 1–5 указать уровень ESEA его первоисточника (Bastani 2025 и
   Kestin 2025 — уровень 1; мета-анализы RCT — уровень 1; наш пилот повтора — уровень 4 до первых замеров). Дешёво,
   делает честным утверждение «курс построен на доказательной педагогике».
-- открыто: «Apply framework to the Mama-ум prompt» — промпта с таким именем нет ни в одном репо `C:\telo\Efforts`, ни в
-  памяти (поиск 2026-10-03). Вопрос владельцу: что это и где лежит.
+- закрыто: «Apply framework to the Mama-ум prompt» — промпта с таким именем нет ни в одном репо `C:\telo\Efforts`, ни в
+  памяти (поиск 2026-10-03); владелец 2026-10-03: «это просто шум заметки» — задачи нет.
 - не брать: рекомендации про педагогов (Inform and Involve Educators), R&D-повестку и регуляторику США (FERPA, IDEA) —
   у курса одного автора без школьной аудитории применимого нет; линза «люди = агенты» не меняет вывода — роль
   «educator» у нас уже владелец.
@@ -1262,3 +1263,42 @@ ElevenLabs (распознавание речи); на сайте — запис
 
 **Паттерны:** паттернов нет — каждая функция уже есть в курсе или в лаборатории (таблица выше). Не брать: рекомендовать
 YouLearn в материалах (подписка, данные уходят пяти провайдерам, xAI среди них).
+
+## LMS#27 — «Tochka sborki»: роадмап Eduardo Ordax «AI PM» (2026-10-03)
+
+**Источник:** Evernote `8696f48b-6647-3be9-5d30-a39ae14aa142` (клип LinkedIn от 2025-05-09, без медиа). Пост Eduardo
+Ordax (Generative AI Lead @ AWS): роадмап для AI PM / «чтобы оставаться востребованным» — 8 ступеней со сложностью. Картинка
+роадмапа (credit — Paweł Huryn) в заметку не попала, разбор по тексту поста.
+
+**Реальность источника:** авторский пост-подборка, без проверяемых утверждений; комментарии — комплименты и самопиар.
+Ступени: (1) основы ML и архитектуры GenAI; (2) промпт-инжиниринг (гайды Anthropic и OpenAI); (3) дообучение — SFT, DPO,
+loss/epochs, HF AutoTrain; (4) RAG и векторные БД; (5) агенты — LangChain, AutoGen, LangGraph, MCP, Agent2Agent; (6)
+прототипирование — no-code (Databutton, Lovable) и IDE (Replit, Cursor, v0) + бэкенд (Supabase, Docker); (7) ландшафт
+моделей; (8) оценка — unit-тесты, LLM-судья, человеческая оценка, цикл улучшения.
+
+**Сверка с курсом (`content/ru/roadmap.mdx` + модули):**
+
+| Ступень Ordax | В ТС |
+|---|---|
+| 1. Основы ML/GenAI | «Азбука», 01-introduction, материалы Microsoft |
+| 2. Промпты | 04-prompt-engineering |
+| 3. SFT/DPO, дообучение | 10-model-training (advanced; оценка моделей — u4-evaluation) |
+| 4. RAG, векторы | 08/u5, 10/u1, матрица стеков 03/u2 |
+| 5. Агенты, MCP | 07-tools (u2-mcp), 08-agent-engineering; Agent2Agent — нет |
+| 6. Прототипирование и бэкенд | 00-kickstart/u2-tools, 02-setup-guide, 08/u4-production-infra (Docker) |
+| 7. Ландшафт моделей | матрица стеков 03/u2, обход GFW 03/u3 |
+| 8. Оценка: тесты + LLM-судья + люди | **для своего агента — нет**: 08/u4 разбирает 5 блоков production-готовности (Execution, Observability, Reliability, Cost, Security), блока качества ответов среди них нет; 10/u4 оценивает модели, а не агента ученика |
+
+Роль: курс ведёт к AI Generalist (роадмап «Твоя новая роль: PM + QA + DevOps») и следующей ступени AI Solution Architect
+(LMS#15); отдельная ступень «AI PM» не нужна.
+
+**Вердикт:** `pattern-only` (ТС); LMS — `already covered`. Лабе — нет.
+
+**Паттерны:**
+- взято (owner-gated) → BACKLOG: шестой блок в 08/u4 — **Quality: как ты узнаешь, что агент отвечает хорошо**. Набор из
+  10–20 своих кейсов с ожидаемым результатом, прогон после каждой правки промпта или инструмента; механические проверки
+  там, где ответ проверяется кодом; модель-судья по критериям для остального; свой глаз — на выборке. Материал по теме —
+  «LLM Evaluation Guidebook» (LMS#21). RU+EN, строка в чек-листе u4 и в спецификации агента 08/u5.
+- не брать: Agent2Agent — протокол молодой, новичку ТС рано (вернуться, если войдёт в Claude Code / Codex как стандарт);
+  конкретные фреймворки (LangChain, AutoGen, LangGraph) и векторные БД (Pinecone, Weaviate) — курс учит работать своим
+  агентом, а не собирать стек; ступень «AI PM» и рамка «оставаться востребованным на рынке» — против de-hustle.
