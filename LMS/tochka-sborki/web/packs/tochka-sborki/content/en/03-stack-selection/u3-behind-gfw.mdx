@@ -169,10 +169,9 @@ Now every agent can point at `http://localhost:4000` as an "OpenAI-compatible AP
 
 For when every cloud goes dark at the same time (it happens):
 
-```bash
-# Download model (via HuggingFace mirror)
-# in China: https://hf-mirror.com replaces huggingface.co
-<OsBlock os="macos linux">
+Download model (via HuggingFace mirror) in China: https://hf-mirror.com replaces huggingface.co
+
+<OsBlock os="mac">
 
 ```bash
 curl -LO https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf
@@ -188,7 +187,9 @@ Invoke-WebRequest -Uri "https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-
 
 </OsBlock>
 
-# Run llama-server (needs llama.cpp)
+Run llama-server (needs llama.cpp):
+
+```bash
 llama-server -m Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf --port 8080
 ```
 
@@ -225,7 +226,7 @@ Minimum to complete the unit:
 2. Install LiteLLM locally and run the proxy on `localhost:4000`
 3. Make a test call:
 
-<OsBlock os="macos linux">
+<OsBlock os="mac">
 
 ```bash
 curl http://localhost:4000/chat/completions \

@@ -165,10 +165,9 @@ litellm --config $HOME\.config\litellm\config.yaml --port 4000
 
 На случай если все клауды лягут одновременно (бывает):
 
-```bash
-# Качаем модель (через зеркало HuggingFace)
-# для Китая: https://hf-mirror.com заменяет huggingface.co
-<OsBlock os="macos linux">
+Качаем модель (через зеркало HuggingFace) для Китая: https://hf-mirror.com заменяет huggingface.co
+
+<OsBlock os="mac">
 
 ```bash
 curl -LO https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf
@@ -184,7 +183,9 @@ Invoke-WebRequest -Uri "https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-
 
 </OsBlock>
 
-# Запускаем llama-server (нужен llama.cpp)
+Запускаем llama-server (нужен llama.cpp):
+
+```bash
 llama-server -m Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf --port 8080
 ```
 
@@ -221,7 +222,7 @@ aider --model openai/fast-pool --openai-api-base http://localhost:4000
 2. Установи LiteLLM локально и запусти proxy на `localhost:4000`
 3. Сделай тестовый промпт:
 
-<OsBlock os="macos linux">
+<OsBlock os="mac">
 
 ```bash
 curl http://localhost:4000/chat/completions \
