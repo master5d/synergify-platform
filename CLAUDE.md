@@ -143,6 +143,26 @@
   упёрся в доступ / строит и ищет равных), НЕ мотивы. Чужие проценты туда не
   переносить — гвард в `dictionaries.test.ts`.
 
+## Гварды контента после семантического аудита (2026-10-04)
+
+Отчёт — `docs/superpowers/research/2026-10-04-ts-semantic-audit.md` (7 аудиторов, 8 осей, пакеты P1–P9 на Codex).
+Что теперь стережёт регресс (все в `lib/content/`, все `describe.runIf(PACK_SLUG === 'tochka-sborki')` там, где
+артефакт есть только у Точки Сборки):
+- **`mdx-compile.test.ts`** — каждый `.mdx` pack'а компилируется `@mdx-js/mdx`; `<OsBlock os>` только `mac|windows`.
+  Повод: 3587 зелёных текстовых тестов пропустили `<OsBlock>` внутри незакрытого ```-блока — упал `next build`.
+- **`roadmap-integrity.test.ts`** — `roadmap.mdx` ↔ `_meta.json`: длительности, названия юнитов, ссылки на уроки и
+  файлы результатов, счёт модулей/уроков. Roadmap пишется руками, но дрейф от `_meta` — красный тест.
+- **`cheatsheet-cli.test.ts`** — флаги `claude …` в шпаргалке существуют в снимке `lib/content/fixtures/claude-help-<версия>.txt`;
+  шапка шпаргалки несёт «проверено на версии». Новая версия CLI = новый снимок + строка в шапке.
+- **`phase-image.test.ts`** — фазы activation/reflection без таблиц, длинных списков и кода; правило курса «один образ
+  на юнит» (решение владельца 2026-10-04): reflection возвращает образ activation, концепт живёт в concept.
+- **`glossary.test.ts`** + `packs/tochka-sborki/glossary.ts` — канон терминов (агент / AI-клон, pipeline, Hook, Skill, AI,
+  юнит, модуль, субагент, промпт, шлюз к моделям, vibe coding); запрещённые варианты и allow по контексту.
+- Правила без теста: RU и EN правятся одним коммитом (EN — построчное зеркало); контент-пакеты делегатов принимать
+  только после `gen-lesson-views` + полного vitest + `tsc` под ОБА pack'а (`COURSE_PACK=living-practice npx tsc --noEmit`);
+  при ревизии стека лаборатории (NAUTILUS `docs/history/stack.md`) — grep курса по снятым продуктам и узлам: курс
+  описывает только то, что реально работает у автора, с датой.
+
 ## Gemini-Notebook слой (2026-08-04, спек `2026-08-04-notebook-module-design`)
 - **`/notebook`** (и `/en/notebook`, открыто, без почты) — «пакет тетрадки»: `lib/course/notebook-pack.ts` (паттерн `/try`: engine+data, `Bi{ru;en}` и resolvers) — 3 пака источников, PROMPT_KIT (каждый промпт ТРЕБУЕТ цитату — под тестом), VERIFY_CHECKLIST «где тетрадка врёт». В nav НЕ добавлен (шапка ужата); входы — модуль 09 и sitemap.
 - **Модуль `09-ai-notebook`** — 5 юнитов, инверсия fast.ai (intake #102): u1 = рабочая тетрадка за 15 минут ДО теории; agent-agnostic (Gemini Notebook как референс, в каждом юните путь «если тетрадки нет»). **Опциональный**: НЕ в `workers/src/lib/course-catalog.ts` (admission-гейт академии не ужесточён) и НЕ в ядре прогрессии.
