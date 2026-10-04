@@ -5,7 +5,7 @@
   "unit": "u5-practice",
   "locale": "en",
   "title": "Practice: fine-tune a small model",
-  "sourceHash": "sha256:39e547677df31f16011959b2d58dfdc64ff35968a4ea300fa866434a628f7edf",
+  "sourceHash": "sha256:3af667fedfc5cf8be06168d1edd36eeb5112f814c407adb9c116bd9743b89fb2",
   "outline": [
     {
       "heading": "The basis of the practice — smol-course",

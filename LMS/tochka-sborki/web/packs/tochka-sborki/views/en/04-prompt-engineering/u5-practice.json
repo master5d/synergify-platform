@@ -5,7 +5,7 @@
   "unit": "u5-practice",
   "locale": "en",
   "title": "A professional prompt",
-  "sourceHash": "sha256:92ce18906702af2e1cc13616c30214e4b3cc1e6d0eccf82cb52e94ed3b63eaae",
+  "sourceHash": "sha256:7cfa57f4afef47b2f8a6b554a4f8bb5980cd5bae1a48551977208080de45d0ba",
   "outline": [
     {
       "heading": "Meta-prompting: a prompt that writes prompts",
@@ -30,7 +30,7 @@
           "heading": "Template for a reusable assistant",
           "points": [
             {
-              "text": "For repeating tasks (Claude Project, Gemini Gem, Claude Code Skill)",
+              "text": "This is the same structure, using English labels from other people's templates.",
               "origin": "extract"
             }
           ],
@@ -59,12 +59,6 @@
         "sourceHash": "sha256:dfa3dd7d643a60e1cc2d5c8ff6c49e3d30c95823446c2391835e042dea8287f1",
         "points": [
           "You can ask Claude to write the prompt for you if you do not know where to start."
-        ]
-      },
-      {
-        "sourceHash": "sha256:51fa2216ed2e70e01b6424d6fdba5561f4e8b2e7e0a45de651b37ec8da441c88",
-        "points": [
-          "Use a template for repeating tasks like a Claude Project, Gemini Gem, or Claude Code Skill."
         ]
       }
     ]

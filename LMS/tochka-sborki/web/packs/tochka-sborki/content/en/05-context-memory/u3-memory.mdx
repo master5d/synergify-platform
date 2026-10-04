@@ -72,7 +72,7 @@ npm install && npm run dev
 
 **Limit: up to ~200 lines.** More than that and instruction-following degrades.
 
-In a big project you can put a separate `AGENTS.md` into a subfolder: the agent picks it up when it works there. For a first project one file in the root is enough.
+In a big project you can put a separate `AGENTS.md` into a subfolder. In Claude Code it works with `CLAUDE.md` in the same subfolder (`@AGENTS.md`); Codex reads `AGENTS.md` on its own. For a first project one file in the root is enough.
 
 ### TODO.md — current tasks
 
@@ -111,7 +111,7 @@ Unlike the three files above, Claude **writes MEMORY.md itself**.
 
 What it saves: patterns, fixes, project quirks.
 Where it lives: `~/.claude/projects/<project>/memory/MEMORY.md` — local only.
-Management: `/memory` — view and edit.
+Management: `/memory` opens instruction files; auto-memory lives in `MEMORY.md` — see the current version's documentation.
 
 The boundary is simple: Claude decides what goes into MEMORY.md, and only Claude on your computer sees that memory. A rule that must hold for sure (say, after you fixed an agent mistake) you write yourself — in AGENTS.md.
 
@@ -153,7 +153,7 @@ Set-Content CLAUDE.md '@AGENTS.md'
 
 </OsBlock>
 
-Fill in AGENTS.md using the template above — use a real project or a task from your work.
+Fill in AGENTS.md using the template above — use a real project or a task from your work. Or ask the agent to create these files.
 
 Add at least 3 tasks to TODO.md that you actually have right now.
 

@@ -29,14 +29,7 @@ Hold that image: if your past messages were lines from other scenes — what wou
 
 ## Three context problems
 
-### 1. Lost in the Middle
-Data in the middle of the context gets ignored. The model over-weights the start and the end.
-
-### 2. Context Rot
-The longer the conversation, the worse the answer quality. Hallucinations climb.
-
-### 3. Distractors
-Extra info throws the agent off. It picks a similar but wrong answer.
+Module 04 already covered these three failures and their fixes — see [“The sins of prompting”](/en/lessons/04-prompt-engineering/u4-sins/). What is new here is not a repeat of the recipes but the agent's **field of view**.
 
 ## Fix: manage what's in "field of view"
 

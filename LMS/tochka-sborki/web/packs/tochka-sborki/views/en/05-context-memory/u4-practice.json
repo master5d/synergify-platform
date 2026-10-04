@@ -5,7 +5,7 @@
   "unit": "u4-practice",
   "locale": "en",
   "title": "Tune your memory",
-  "sourceHash": "sha256:06ce144be76c011adf5c57be8058bc67f931d5a49fef3091e735836b25671802",
+  "sourceHash": "sha256:4bdc6f72bf3e4fbf64bfa79465e2e9fdce5f7a3f8ccc2e54d728b9237d615aad",
   "outline": [
     {
       "heading": "When to update what",
@@ -25,7 +25,7 @@
           "heading": "Context compression",
           "points": [
             {
-              "text": "At the start of a new session or when context fills up",
+              "text": "/compact compresses the history into a summary; CLAUDE.md is reloaded afterwards.",
               "origin": "extract"
             }
           ],
@@ -40,7 +40,7 @@
           "heading": "Parallel agents for big tasks",
           "points": [
             {
-              "text": "For independent subtasks, run several agents",
+              "text": "For independent subtasks, run several agents: open two terminals with two sessions in different folders, or launch a subagent; module 08 covers orchestration.",
               "origin": "extract"
             }
           ],
@@ -65,14 +65,6 @@
         "points": [
           "You do not use /btw here because it is a side question about the current session and is not added to the conversation history."
         ]
-      },
-      {
-        "sourceHash": "sha256:7b0dd3191fdf942a05ca9c59725dbc9f94df7d6857c76c7cc9d4768e96b3ed56",
-        "verbatim": "near-identical"
-      },
-      {
-        "sourceHash": "sha256:8d8fc31a854490ce051a11c7873ec5d524b04a1773498adb4187165226dd8af5",
-        "verbatim": "near-identical"
       }
     ]
   }

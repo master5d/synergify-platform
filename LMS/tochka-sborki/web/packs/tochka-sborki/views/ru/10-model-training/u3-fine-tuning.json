@@ -5,7 +5,7 @@
   "unit": "u3-fine-tuning",
   "locale": "ru",
   "title": "Дообучение: когда и как",
-  "sourceHash": "sha256:d519e622217d165fedc219e5017294d3aef100380dbcbfa8cf070acf1b76b3aa",
+  "sourceHash": "sha256:b5c492c11699ec9376e59ed33b8eaec280d47db1aca653b678c9d817d5be3db6",
   "outline": [
     {
       "heading": "Когда дообучать НЕ надо",

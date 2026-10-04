@@ -5,43 +5,17 @@
   "unit": "u1-activation",
   "locale": "ru",
   "title": "Когда агент тебя не понял",
-  "sourceHash": "sha256:f54e689d1f27083951671567063b4ae78e3fe7925560cf7cba97195ff34a34ec",
+  "sourceHash": "sha256:e4e55efaf755d57b88a1242d1b377e409b88cb238c5da9ab27732861104d4de8",
   "outline": [
     {
       "heading": "Три проблемы контекста",
-      "points": [],
-      "children": [
+      "points": [
         {
-          "heading": "Lost in the Middle",
-          "points": [
-            {
-              "text": "Данные в середине контекста игнорируются.",
-              "origin": "extract"
-            }
-          ],
-          "children": []
-        },
-        {
-          "heading": "Context Rot",
-          "points": [
-            {
-              "text": "Чем длиннее разговор, тем хуже качество ответов.",
-              "origin": "extract"
-            }
-          ],
-          "children": []
-        },
-        {
-          "heading": "Дистракторы",
-          "points": [
-            {
-              "text": "Лишняя информация сбивает агента.",
-              "origin": "extract"
-            }
-          ],
-          "children": []
+          "text": "Модуль 04 уже разобрал эти три сбоя и их лечение — см. «Грехи промптинга».",
+          "origin": "extract"
         }
-      ]
+      ],
+      "children": []
     },
     {
       "heading": "Решение: Управляй тем, что в «поле зрения»",
@@ -64,24 +38,6 @@
     "generator": "paraphrase-v1",
     "pool": "prose-pool",
     "sections": [
-      {
-        "sourceHash": "sha256:a0570381c41f9f1cdd83b1c9ea7dcda5aa8b79d1a14676ac3c905de424313404",
-        "points": [
-          "Информация, которая находится в середине контекста, игнорируется."
-        ]
-      },
-      {
-        "sourceHash": "sha256:50c7c644c044f9ecc68c240440aacf10f16cb425c424922c95a76421ca809c8a",
-        "points": [
-          "Качество ответов становится хуже, когда твой разговор затягивается."
-        ]
-      },
-      {
-        "sourceHash": "sha256:4f1d0f30abf5c258eb6b89231c53ad46f86591d2fe44b4d7f2127d17b95c4ee3",
-        "points": [
-          "Лишняя информация мешает агенту и сбивает его."
-        ]
-      },
       {
         "sourceHash": "sha256:ff1b152569d46ae3bf5f0e2954d74717592dabf673530e7d9fcb64c5d77ab505",
         "points": [

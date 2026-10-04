@@ -29,7 +29,7 @@ Hold that moment — where you are now versus where you should be. A navigator d
 
 The longer the conversation, the worse the model handles early information.
 
-**Fix:** structure information by priority, put the important stuff at the start and repeat it at the end.
+**Fix:** make a summary and start a new session (`/compact` or a new chat with the summary).
 
 ### 2. Lost in the Middle
 
@@ -55,7 +55,7 @@ Context (who you are, what's going on) and instruction (what to do specifically)
 
 ```
 Context = background info (stable)
-Prompt  = the specific task (for this session)
+Prompt  = the specific task (for this request)
 ```
 
 Separate them explicitly — with Markdown headings or XML tags.
@@ -66,7 +66,7 @@ Research disagrees on how rudeness affects the answer. But shouting doesn't tell
 
 ```
 ❌ "This is completely wrong! Redo it now!"
-✅ "That didn't work. Try without recursion."
+✅ "That didn't work. Try a shorter version without an introduction."
 ```
 
 <SelfCheck id="c7"/>

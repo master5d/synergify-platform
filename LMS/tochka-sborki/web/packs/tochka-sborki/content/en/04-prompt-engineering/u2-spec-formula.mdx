@@ -40,7 +40,7 @@ Data        = examples, links, input information
 
 ### Full structure for reproducible results
 
-It unfolds the same four CTID parts into five sections: Context → Role, Task → Task, Data → Inputs, Instructions → Expected output and Constraints.
+CTID is the memory aid: Context · Task · Instructions · Data. The full structure is longer: five sections, **Role · Task · Inputs · Expected output · Constraints**. CTID's Context is expressed through Role and Inputs; Task stays Task; Instructions become Constraints; Data belongs in Inputs. Expected output is not named by CTID as a separate part.
 
 ```markdown
 ## Role
@@ -71,15 +71,13 @@ You are a research agent specializing in analyzing
 technical docs and extracting key insights.
 
 ## Task
-Analyze the API documentation and create a short reference
-with examples for intermediate Python developers.
+I have a 400-word email for subscribers who read on phones. Cut it to 150 words while keeping the call to action.
+
+## Inputs
+The original email text follows in the request.
 
 ## Expected output
-A Markdown file with this structure:
-1. API description (2–3 sentences)
-2. Main endpoints (table)
-3. Authentication
-4. 3 practical code examples
+The finished email copy and a list of what you removed.
 
 ## Constraints
 - Examples must be complete (copy-paste runnable)
@@ -120,7 +118,7 @@ Warm up on a worked example first.
 
 Pick a task from your actual work (copy, code, analysis — anything).
 
-Write a prompt using the CTID structure:
+Write a prompt using the full structure (five sections):
 
 ```markdown
 ## Role

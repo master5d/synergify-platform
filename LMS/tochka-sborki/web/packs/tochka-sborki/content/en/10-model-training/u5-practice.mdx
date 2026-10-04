@@ -50,7 +50,7 @@ Paid cloud fine-tuning isn't needed here: the goal of the practice is to go thro
 
 ## Five steps of a run
 
-**1. Data.** Collect examples into a `train.jsonl` file, one dialogue per line, in a format TRL understands:
+**1. Data.** Collect examples into a `train.jsonl` file (jsonl — one JSON object per line), in a format TRL understands:
 
 ```json
 {"messages": [{"role": "user", "content": "request"}, {"role": "assistant", "content": "desired answer"}]}
@@ -87,7 +87,7 @@ trainer.train()
 trainer.save_model()
 ```
 
-If the trainer complains about the number format (bf16) on an older GPU, take the settings from the course notebook — they're tuned for Colab.
+If the trainer complains about the number format (bf16 — a compact number format that not every card supports) on an older GPU, take the settings from the course notebook — they're tuned for Colab. `learning_rate` is the training speed; take it from the notebook.
 
 **4. Measure "after."** Load the adapter following `load_lora_adapter.ipynb` and run the same holdout with the same requests.
 

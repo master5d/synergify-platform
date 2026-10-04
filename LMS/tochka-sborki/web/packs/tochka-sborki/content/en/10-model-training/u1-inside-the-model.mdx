@@ -19,7 +19,7 @@ What do you think: is this a glitch that will soon be fixed — or is it how the
 
 Keep both options in mind. If it's a glitch, you can just wait for the next version. If it's a property of the design, you'll have to learn to live with it.
 
-In modules [04](/en/lessons/04-prompt-engineering/) and [05](/en/lessons/05-context-memory/) you already fought this in practice: you gave the model sources and demanded grounding. Consider why that trick works at all.
+In module [09](/en/lessons/09-ai-notebook/) you already worked with sources, and module [11](/en/lessons/11-second-brain/) covers memory and search. Consider why grounding an answer in a retrieved source works at all.
 
 The answer becomes clear once you see what the model actually learns.
 
@@ -35,7 +35,7 @@ Hence the everyday oddities: the model is bad at counting letters in a word and 
 
 ## Embeddings: meaning as coordinates
 
-Each token number turns into an **embedding** — a long vector of numbers. Pieces with similar meaning land close together in this space. You met the same idea in semantic search in module 05.
+Each token number turns into an **embedding** — a long vector of numbers. Pieces with similar meaning land close together in this space. The same idea powers semantic search in your AI notebook (module 09) and the second brain (module 11).
 
 ## The transformer and attention
 
@@ -57,7 +57,7 @@ To continue text well, it pays for the model to capture the regularities of the 
 
 But the training goal is a **plausible** continuation, not a **true** one. Where data is scarce or contradictory, plausible and true diverge. The model continues smoothly — and is confidently wrong.
 
-That's why the trick from modules 04–05 works. When a source sits in the context, the most plausible continuation is the one that leans on the source.
+That's why the trick from modules 09 and 11 works. When a source sits in the context, the most plausible continuation is the one that leans on the source.
 
 <SelfCheck id="c1"/>
 

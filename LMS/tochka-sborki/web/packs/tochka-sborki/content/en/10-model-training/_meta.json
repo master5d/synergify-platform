@@ -131,7 +131,7 @@
         "Nothing: the model will learn about the policies by itself"
       ],
       "answer": 1,
-      "explain": "Changing facts are more practical to keep in context: update the document and the answer updates. Weights don't update that way (u3, \"When NOT to fine-tune\"; module 05)."
+      "explain": "Changing facts are more practical to keep in context: RAG searches documents for the needed pieces and places them in the prompt; update the document and the answer updates. Weights don't update that way (u3, \"When NOT to fine-tune\")."
     },
     {
       "id": "c8",

@@ -5,7 +5,7 @@
   "unit": "u2-spec-formula",
   "locale": "en",
   "title": "The spec formula",
-  "sourceHash": "sha256:3f854809bfebe951ac573558f2380ffdcfeb4e8e9e07c8d885664f6a33264e97",
+  "sourceHash": "sha256:085734075016aafa8f59b543aade089cc34b16c5919bdb7e1d2aa3d52b17bb94",
   "outline": [
     {
       "heading": "A professional prompt structure: CTID",
@@ -20,7 +20,7 @@
           "heading": "Full structure for reproducible results",
           "points": [
             {
-              "text": "It unfolds the same four CTID parts into five sections: Context → Role, Task → Task, Data → Inputs, Instructions → Expected output and Constraints.",
+              "text": "The full structure is longer: five sections, Role · Task · Inputs · Expected output · Constraints.",
               "origin": "extract"
             }
           ],
@@ -54,12 +54,6 @@
     "generator": "paraphrase-v1",
     "pool": "prose-pool",
     "sections": [
-      {
-        "sourceHash": "sha256:9a7119893bbc1c9562a05b6e006adafeb64ca422bba491016ec0334262fec4d5",
-        "points": [
-          "You unfold the four CTID parts of Context, Task, Data, and Instructions into five sections for Role, Task, Inputs, Expected output, and Constraints."
-        ]
-      },
       {
         "sourceHash": "sha256:5fcf910d1a05d06b2f3a3307c368e3c02306060227c140bf419f2375c2a73151",
         "points": [

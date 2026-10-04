@@ -5,7 +5,7 @@
   "unit": "u3-fine-tuning",
   "locale": "en",
   "title": "Fine-tuning: when and how",
-  "sourceHash": "sha256:0fe54a3efd003d05f9af5e668dc06320654b1c38e496e31492f1b242154796a0",
+  "sourceHash": "sha256:d08af8de5e8d191eb69b70440fb10dc1acf298b65074705ef25f543df07d3a48",
   "outline": [
     {
       "heading": "When NOT to fine-tune",

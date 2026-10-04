@@ -2,7 +2,7 @@
   "module": 4,
   "title": "Prompt Engineering",
   "description": "How to write prompts like a pro",
-  "duration": "60 min",
+  "duration": "45 min",
   "level": 4,
   "units": [
     { "slug": "u1-activation", "title": "My worst prompt" },
@@ -60,7 +60,7 @@
         "Inputs, expected output and constraints"
       ],
       "answer": 3,
-      "explain": "The role and task are there, but the model doesn’t know which product to write about, what result is needed, or what it must not do. The formula from u1 requires all five parts."
+      "explain": "The role and task are there, but the model lacks inputs, the expected result and constraints. The full structure from u2 has five sections."
     },
     {
       "id": "c3",

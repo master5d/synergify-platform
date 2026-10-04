@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "ru",
   "title": "Мой худший промпт",
-  "sourceHash": "sha256:9645c5e22bb799ce6181ea0d2b92cf4806911bc86f1234e33df103fee58c880f",
+  "sourceHash": "sha256:478e1ae09cdb3dfd01e18955fe616ca821b893180b34c42b148cadeeefcff71e",
   "outline": [
     {
       "heading": "Почему плохие промпты дают плохие результаты",

@@ -46,6 +46,8 @@ Catch the moment: the last time Claude played something in the wrong key — tha
 
 At the start of a new session or when context fills up:
 
+`/compact` compresses the history into a summary; `CLAUDE.md` is reloaded afterwards. Use it when context is full or the task has changed. The universal route for any agent is to ask for a short summary manually and start a new session with it.
+
 ```
 Briefly summarize what's been done and the state of the project.
 Use format: ✅ Done / ❌ Left / ⚠️ Issues
@@ -63,7 +65,7 @@ Use format: ✅ Done / ❌ Left / ⚠️ Issues
 
 ### Parallel agents for big tasks
 
-For independent subtasks, run several agents:
+For independent subtasks, run several agents: open two terminals with two sessions in different folders, or launch a subagent; module 08 covers orchestration.
 
 ```
 Agent 1: Find all bugs in the Auth module

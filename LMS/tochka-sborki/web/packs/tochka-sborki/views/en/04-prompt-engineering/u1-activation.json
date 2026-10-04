@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "en",
   "title": "My worst prompt",
-  "sourceHash": "sha256:ec3626972028b2bd70b92ce8c4d2b507e69107751f97a418f7b1f8780ff66c6b",
+  "sourceHash": "sha256:42c890c2415520099b102c5426ee9cb89ed4d4714f1e82381a8e926bcbb3c326",
   "outline": [
     {
       "heading": "Why bad prompts give bad results",
