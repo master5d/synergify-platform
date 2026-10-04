@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 // Собирает стартер студента из pack'а в скачиваемый архив public/downloads/<archive>.
 //
 // Источник — packs/<pack>/starter.json + каталог starter/ рядом с ним; шаблоны курса
