@@ -49,7 +49,7 @@ Each topic is broken into 3–5 cognitive units following Kolb's cycle: **Activa
 | [**Context & Memory**](/en/lessons/05-context-memory/) | Agent memory | 1 h |
 | [**Automation Pipeline**](/en/lessons/06-audio-pipeline/) | Chains of actions | 60 min |
 | [**Tools & Extensions**](/en/lessons/07-tools/) | MCP, Skills, Hooks, Superpowers | 2–3 h |
-| [**Agent Engineering**](/en/lessons/08-agent-engineering/) | Orchestration, prod infra, ENERV/SOVERN | 90 min |
+| [**Agent Engineering**](/en/lessons/08-agent-engineering/) | Orchestration and production infrastructure | 90 min |
 
 Optional, after the core: [**AI Notebook**](/en/lessons/09-ai-notebook/) — learning from your own sources so every claim has an address, and checking where the notebook lies; [**Model Training**](/en/lessons/10-model-training/) — how LLMs are built and trained, when to fine-tune and when a prompt and context are enough, and your own fine-tune of a small model; [**Second Brain**](/en/lessons/11-second-brain/) — memory in your own files, a channel to reach your agent, skills that travel from agent to agent, and security rules for everything that comes from outside.
 
@@ -218,18 +218,18 @@ From Claude Code user to architect of your own system.
 
 From vibe coding to system orchestration — where prompts stop working.
 
-**Units:** When prompts stop working · Jagged Intelligence · Orchestration (ENERV case) · Prototype → Production · Design your clone
+**Units:** When prompts stop working · Jagged Intelligence · Orchestration (the Gmail agent as a case) · Prototype → Production · Design your clone
 
 **Concepts:**
 - Vibe coding vs Agent engineering — borders and transitions
 - Three eras of programming (Karpathy: Software 1.0 / 2.0 / 3.0)
 - Jagged Intelligence — what AI nails, where it fails
-- Multi-agent pipeline architecture (ENERV case)
-- Production stack: Hetzner + Cloudflare Tunnel + Docker + n8n + Langfuse (SOVERN)
+- Multi-agent pipeline architecture from a real case
+- Author's production stack: Hetzner CX33 + Cloudflare + Docker on the server, Mac mini M4 as gateway and dashboard, Mac Studio as the local final step
 - 6 production blocks: Execution / Observability / Reliability / Cost / Security / Quality
-- 5-fallback LLM routing via LiteLLM
+- LiteLLM fallback routing: free cloud pools → local inference
 
-**Tools:** n8n, Langfuse, Cloudflare Tunnel, Docker, LiteLLM, Hetzner CX22
+**Tools:** Cloudflare, Docker, LiteLLM, Hetzner CX33, Mac mini M4, Mac Studio
 
 **Projects:**
 - Decomposing a real task into AI/Tool/Code nodes

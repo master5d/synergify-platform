@@ -5,13 +5,13 @@
   "unit": "u4-production-infra",
   "locale": "ru",
   "title": "Prototype → Production",
-  "sourceHash": "sha256:fb935f65eb3c5a05df10a096ce5dff774a8c5eec20037178f9d6c65af9e24d2a",
+  "sourceHash": "sha256:3b0f0dded2bc9ad3b0f66e98c7302bab6b018ad3913810945b0add7d11f07779",
   "outline": [
     {
       "heading": "",
       "points": [
         {
-          "text": "SOVERN — production stack для агентских пайплайнов",
+          "text": "Мой production-стек для агентских пайплайнов",
           "origin": "extract"
         },
         {
@@ -19,39 +19,27 @@
           "origin": "extract"
         },
         {
-          "text": "Грабли 1: Двойной cloudflared = 502 flapping Поднял cloudflared и через systemd на хосте, и контейнером в Docker — с одним и тем же tunnel token.",
+          "text": "Грабли 1: Docker-порт 0.0.0.0 идёт мимо firewall Первый самоскан сервера 1 октября 2026 года нашёл веб-интерфейс оркестратора открытым в интернет напрямую: Docker публиковал порт 0.0.0.0:5678 мимо firewall хоста.",
           "origin": "extract"
         },
         {
-          "text": "Грабли 2: Публичный IP как origin тоннеля Маршрутизировал n8n.example.com → :5678.",
+          "text": "Грабли 2: зелёный контейнер ≠ живой поток У почтового агента отозвался доступ Gmail (token refresh failed).",
           "origin": "extract"
         },
         {
-          "text": "Грабли 3: Langfuse v3 без ClickHouse Langfuse v3 требует ClickHouse + Redis (~2GB лишних RAM).",
+          "text": "Грабли 3: сервис без ключа шлюза молча «ничего не находил» В журнале накопилось 684 837 отказов, пока отсутствие ключа не сделали фатальной ошибкой при старте.",
           "origin": "extract"
         },
         {
-          "text": "Грабли 4: n8n API не работает извне curl https://n8n.example.com/api/v1 снаружи возвращает 200, но Python urllib получает 403 (видимо, CF challenge headers).",
+          "text": "Грабли 4: нет лимита на проход Застрявшая очередь превращала каждый тик в сотни вызовов.",
           "origin": "extract"
         },
         {
-          "text": "Скрипты которые дёргают n8n API нужно запускать на самом сервере, обращаясь к http://localhost:5678/api/v1.",
+          "text": "Цепочка fallback для LLM",
           "origin": "extract"
         },
         {
-          "text": "Helper для длительных скриптов:",
-          "origin": "extract"
-        },
-        {
-          "text": "Pattern: 5-fallback LLM routing",
-          "origin": "extract"
-        },
-        {
-          "text": "Observability через Langfuse:",
-          "origin": "extract"
-        },
-        {
-          "text": "Через две недели можно зайти и посмотреть что именно AI ответил на конкретном письме в 03:47 ночи.",
+          "text": "Наблюдаемость через панель на M4:",
           "origin": "extract"
         }
       ],
@@ -63,21 +51,5 @@
     "c10",
     "c11"
   ],
-  "audio": null,
-  "paraphrase": {
-    "source": "paraphrase",
-    "generator": "paraphrase-v1",
-    "pool": "prose-pool",
-    "sections": [
-      {
-        "sourceHash": "sha256:48ba31ada13fc96b437776f78db81beb69741e3a3b4b6394ec3d2edc0599447d",
-        "points": [
-          "SOVERN служит стеком для агентских пайплайнов, и тебе не обязательно совершать ошибки, которые стоят дней отладки.",
-          "Не запускай cloudflared одновременно через systemd и в контейнере, чтобы избежать 502 flapping, и не используй публичный IP как origin.",
-          "Для Langfuse v3 потребуется ClickHouse и Redis, а обращения к n8n API лучше делать локально, чтобы не получить 403.",
-          "Используй паттерн 5-fallback LLM routing и проверяй через Langfuse, что именно ответил AI в 03:47 ночи."
-        ]
-      }
-    ]
-  }
+  "audio": null
 }

@@ -5,13 +5,13 @@
   "unit": "u4-production-infra",
   "locale": "en",
   "title": "Prototype → Production",
-  "sourceHash": "sha256:56f426ec1f79110a422a2ebc86f602fe6150953b067ee1dc6bf4b9fce0784c6a",
+  "sourceHash": "sha256:095569a746a0e33619ecea08d02b88f8c528024258d5e17bbfea2af4dd698a1b",
   "outline": [
     {
       "heading": "",
       "points": [
         {
-          "text": "SOVERN — production stack for agent pipelines",
+          "text": "My production stack for agent pipelines",
           "origin": "extract"
         },
         {
@@ -19,39 +19,27 @@
           "origin": "extract"
         },
         {
-          "text": "Rake 1: Double cloudflared = 502 flapping I ran cloudflared both via systemd on the host and as a Docker container — with the same tunnel token.",
+          "text": "Rake 1: a Docker port on 0.0.0.0 bypasses the firewall The first server self-scan on October 1, 2026 found the orchestrator's web interface exposed directly to the internet: Docker published 0.0.0.0:5678 outside the host firewall.",
           "origin": "extract"
         },
         {
-          "text": "Rake 2: Public IP as tunnel origin I routed n8n.example.com → :5678.",
+          "text": "Rake 2: a green container is not a live pipeline The mail agent lost Gmail access (token refresh failed).",
           "origin": "extract"
         },
         {
-          "text": "Rake 3: Langfuse v3 without ClickHouse Langfuse v3 requires ClickHouse + Redis (~2GB extra RAM).",
+          "text": "Rake 3: a service without a gateway key silently found nothing The log accumulated 684,837 refusals until a missing key was made fatal at startup.",
           "origin": "extract"
         },
         {
-          "text": "Rake 4: n8n API doesn't work from outside curl https://n8n.example.com/api/v1 from the outside returns 200, but Python urllib gets 403 (apparently, CF challenge headers).",
+          "text": "Rake 4: there is no per-run limit A stuck queue turned every tick into hundreds of calls.",
           "origin": "extract"
         },
         {
-          "text": "Scripts that hit the n8n API have to run on the server itself, against http://localhost:5678/api/v1.",
+          "text": "LLM fallback chain",
           "origin": "extract"
         },
         {
-          "text": "Helper for long-running scripts:",
-          "origin": "extract"
-        },
-        {
-          "text": "Pattern: 5-fallback LLM routing",
-          "origin": "extract"
-        },
-        {
-          "text": "Observability via Langfuse:",
-          "origin": "extract"
-        },
-        {
-          "text": "Two weeks later you can drop in and see what exactly AI replied for a specific email at 03:47 in the morning.",
+          "text": "Observability through the M4 dashboard:",
           "origin": "extract"
         }
       ],
@@ -63,21 +51,5 @@
     "c10",
     "c11"
   ],
-  "audio": null,
-  "paraphrase": {
-    "source": "paraphrase",
-    "generator": "paraphrase-v1",
-    "pool": "prose-pool",
-    "sections": [
-      {
-        "sourceHash": "sha256:103e5898ce9fb3fd71584bf9f04ef5571ae23b38e9fa06dd6480ef6b77fc7c20",
-        "points": [
-          "SOVERN is a production stack for agent pipelines that includes debugging lessons to help you avoid mistakes.",
-          "Running cloudflared twice with the same token or routing a public IP as a tunnel origin causes errors like 502 flapping.",
-          "Langfuse v3 requires ClickHouse and Redis, and scripts for the n8n API must run on the server itself to avoid 403 errors.",
-          "You can use a 5-fallback LLM routing pattern and Langfuse to see exactly what the AI replied at 03:47 in the morning."
-        ]
-      }
-    ]
-  }
+  "audio": null
 }

@@ -36,72 +36,53 @@ Each of the six blocks is one such gate. While everything is calm — it's invis
 
 <Phase type="concept">
 
-**SOVERN — production stack for agent pipelines**
+**My production stack for agent pipelines**
 
 Configuration:
-- **Server:** Hetzner CX22 (Ubuntu, ~4GB RAM, ~€5/mo)
-- **Network edge:** Cloudflare Tunnel — public domains with no open ports
-- **Containers:** n8n (orchestration), Langfuse v2 (traces), Postgres, cloudflared
-- **Bridge network:** `sovern-net` — internal names `enerv-n8n`, `enerv-logs`
+- **Server:** one rented Hetzner machine (currently CX33, roughly €10–12/mo). It is the only machine with Docker: containers host the mail agent, mailing service, search, delegate proxy router, and Postgres.
+- **Network edge:** only services that must be public are published; everything else listens on `127.0.0.1` or is reachable over a private network between my devices (Tailscale). Cloudflare is used for external access.
+- **Control desk:** an always-on Mac mini M4 runs the model gateway and the monitoring dashboard.
+- **Local inference:** a 128 GB Mac Studio is the last step in the chain when free cloud pools have refused or exhausted their quotas, and the only step for personal and medical data: by design, that data never goes to the cloud.
+- **Model gateway:** every script calls models through LiteLLM, using pool aliases (a group of interchangeable models under one name). Provider keys live only on the gateway machine; they are not in project code.
 
 **Rakes that cost me days of debugging** (save these, no need to step on them yourself):
 
-**Rake 1: Double cloudflared = 502 flapping**
-> I ran cloudflared both via systemd on the host and as a Docker container — with the same tunnel token. CF was load-balancing between them, the host-side one couldn't see Docker DNS (systemd-resolved doesn't know about the bridge), and I got random 502s.
-> **Rule:** one tunnel — one process. Keep cloudflared **inside** the same Docker network as the origins.
+**Rake 1: a Docker port on `0.0.0.0` bypasses the firewall**
+> The first server self-scan on October 1, 2026 found the orchestrator's web interface exposed directly to the internet: Docker published `0.0.0.0:5678` outside the host firewall. The orchestrator was removed entirely.
+> **Rule:** a server service listens on `127.0.0.1` or a private network; public access goes only through Cloudflare.
 
-**Rake 2: Public IP as tunnel origin**
-> I routed `n8n.example.com` → `<server-IP>:5678`. That's a hairpin through the public network — extra hop, extra latency, potential timeouts.
-> **Rule:** in the tunnel config, origin = Docker hostname (`http://enerv-n8n:5678`) or `host.docker.internal`.
+**Rake 2: a green container is not a live pipeline**
+> The mail agent lost Gmail access (`token refresh failed`). The container kept running, but messages were no longer processed.
+> **Rule:** watch the “hours since the last email,” not just the container status.
 
-**Rake 3: Langfuse v3 without ClickHouse**
-> Langfuse v3 requires ClickHouse + Redis (~2GB extra RAM). On a CX22 that's death. Pin the v2 tag explicitly.
-> **Rule:** read release notes for resource requirements **before** upgrading.
+**Rake 3: a service without a gateway key silently found nothing**
+> The log accumulated 684,837 refusals until a missing key was made fatal at startup.
+> **Rule:** a missing gateway key must stop the service immediately, rather than becoming an empty result.
 
-**Rake 4: n8n API doesn't work from outside**
-> `curl https://n8n.example.com/api/v1` from the outside returns 200, but Python `urllib` gets 403 (apparently, CF challenge headers). Scripts that hit the n8n API have to run **on the server itself**, against `http://localhost:5678/api/v1`.
-> **Rule:** for management — SSH + local URL. The public URL is for the UI only.
+**Rake 4: there is no per-run limit**
+> A stuck queue turned every tick into hundreds of calls.
+> **Rule:** cap a run at 20 emails and move an item to a dead queue after 5 attempts.
 
-**Helper for long-running scripts:**
+All pipelines are code in git. OS timers run them: launchd on Macs, systemd timers on Linux, and Task Scheduler on Windows. Each pipeline records who is notified when it breaks.
 
-```bash
-# /usr/local/bin/run_bg on the server
-run_bg /tmp/my-script.py
-# Runs via nohup, detaches from the SSH session
-# Logs: /root/sovern/logs/my-script_YYYYMMDD_HHMMSS.log
-# Returns the PID and log path
-```
+This stack used to include a no-code orchestrator and separate tracing; both were removed in late September 2026: the first because it was exposed to the internet and had no working workflows, the second because nobody read its data. The choice of tools is yours; this lesson describes what actually works for the author.
 
-This solves "closed SSH — script died." Any script >30 seconds — through `run_bg`.
+**LLM fallback chain**
 
-**Pattern: 5-fallback LLM routing**
-
-My stack chains five providers: Anthropic → OpenAI → Gemini → Groq → the free Hugging Face router. A minimal working LiteLLM snippet — a primary model and one fallback:
+Free cloud pools go first; their quotas add up. Local inference is the last step. The concrete example is two aliases, `fast-pool` → `local-floor`:
 
 ```yaml
-model_list:
-  - model_name: main            # the name your code calls
-    litellm_params:
-      model: anthropic/claude-sonnet-4-5
-      api_key: os.environ/ANTHROPIC_API_KEY
-  - model_name: backup
-    litellm_params:
-      model: gemini/gemini-2.5-flash
-      api_key: os.environ/GOOGLE_API_KEY
-
-router_settings:
-  fallbacks: [{"main": ["backup"]}]   # main is down — the call goes to backup
+fallbacks: [fast-pool, local-floor]
 ```
 
-More fallbacks are added the same way: their own entry in `model_list` (`model_name` + `litellm_params`) and a name in the `fallbacks` list, in order. The model ids are examples: check them against the provider's catalog.
+Project code contains neither provider names nor provider keys: it calls pool aliases through the single model gateway. If the free pool refuses a request or runs out of quota, the request goes to the local step.
 
 When the first provider goes down — the next one catches the call. This is **reliability** at the infra layer, not the prompt layer.
 
-**Observability via Langfuse:**
+**Observability through the M4 dashboard:**
 
-Every LLM call from my agents automatically lands in Langfuse: input, output, cost, latency, which model worked, which one died. Two weeks later you can drop in and see **what exactly AI replied** for a specific email at 03:47 in the morning.
+The “Usage” tab shows spend and calls across all pools from the gateway's own log, SQLite `usage.db`. There is no separate tracer: this stack relies on aggregate calls and costs, not per-step tracing.
 
-Without that — you're a blind engineer.
 
 <SelfCheck id="c9"/>
 
@@ -116,7 +97,7 @@ Without that — you're a blind engineer.
 For your workflow from unit 3, answer:
 
 **Execution:**
-- Where does it run? (your laptop? server cron? n8n trigger?)
+- Where does it run? (your laptop? an OS timer? an event trigger?)
 - What if the run lands at a moment when the machine is off?
 
 **Observability:**
