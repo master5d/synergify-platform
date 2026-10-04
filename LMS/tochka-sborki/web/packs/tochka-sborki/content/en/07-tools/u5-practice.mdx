@@ -92,4 +92,156 @@ Save the architecture to `my-experiments/u5-my-clone-v1.md`
 
 This is your first working AI clone. Congratulations.
 
+## Three hooks to choose from
+
+### 1. Back up before editing
+
+Why: an accidental edit should not be irreversible.
+The hook reads the file path from stdin and copies the original to `.backups/` with a timestamp.
+
+Script — save as `.claude/hooks/backup-edit.js`:
+
+```js
+const fs = require('node:fs');
+const path = require('node:path');
+
+try {
+  const input = JSON.parse(fs.readFileSync(0, 'utf8'));
+  const filePath = input?.tool_input?.file_path;
+  if (filePath && fs.existsSync(filePath)) {
+    fs.mkdirSync('.backups', { recursive: true });
+    const timestamp = new Date().toISOString().replace('T', '_').replace(/:/g, '').slice(0, 17);
+    fs.copyFileSync(filePath, path.join('.backups', `${path.basename(filePath)}.${timestamp}`));
+  }
+} catch {
+  // The backup must not block the edit.
+}
+```
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/backup-edit.js"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Check: ask the agent to change a small test file and look for the copy in `.backups/`.
+
+### 2. Block writes to secrets
+
+Why: `.env`, `private/`, and files with `secret` in their name should not change by an accidental Write or Edit.
+The script checks `tool_input.file_path`; on a match it exits with code 2 and writes the reason to stderr.
+
+Script — save as `.claude/hooks/protect-secrets.js`:
+
+```js
+const fs = require('node:fs');
+const path = require('node:path');
+
+try {
+  const input = JSON.parse(fs.readFileSync(0, 'utf8'));
+  const filePath = input?.tool_input?.file_path;
+  const normalized = path.normalize(String(filePath || '')).replace(/\\/g, '/');
+  const segments = normalized.split('/').filter(Boolean);
+  const basename = path.posix.basename(normalized);
+  const blocked = (basename === '.env' || basename.startsWith('.env.'))
+    || segments.includes('private')
+    || basename.toLowerCase().includes('secret');
+  if (blocked) {
+    console.error('This file is protected from changes: ' + filePath);
+    process.exitCode = 2;
+  }
+} catch {
+  // Invalid input must not block the tool.
+}
+```
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/protect-secrets.js"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Check: ask the agent to write a temporary `.env` and confirm that the operation is blocked with this reason.
+
+### 3. Send deletion to the trash
+
+Why: deletion should stay reversible.
+The Bash hook checks the command and blocks `rm `, `Remove-Item`, or `del `, then suggests the trash command for your OS.
+
+Script — save as `.claude/hooks/block-delete.js`:
+
+```js
+const fs = require('node:fs');
+
+try {
+  const input = JSON.parse(fs.readFileSync(0, 'utf8'));
+  const command = String(input?.tool_input?.command || '');
+  if (/(^|[\s;&|])(rm|del|erase|Remove-Item|rmdir|rd)\b/i.test(command)) {
+    console.error("Deletion blocked: send it to the trash. macOS: trash <file>, Linux: gio trash <file>, Windows PowerShell: Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile('<file>','OnlyErrorDialogs','SendToRecycleBin')");
+    process.exitCode = 2;
+  }
+} catch {
+  // Invalid input must not block the tool.
+}
+```
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/block-delete.js"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+<OsBlock os="mac">
+
+Trash command: `trash <file>` (install the `trash` utility separately).
+Linux: `gio trash <file>`.
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+Trash command through PowerShell: `Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(..., 'OnlyErrorDialogs','SendToRecycleBin')`.
+
+</OsBlock>
+
+Check: ask the agent to delete a test file and confirm that the command is blocked with the trash hint.
+
+Choose one, install it, and write what worked in `my-experiments/u5-my-hook.md`.
+
 </Phase>

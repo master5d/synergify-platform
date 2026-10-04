@@ -92,4 +92,156 @@ Hook: Stop → добавить комментарий к PR автоматич�
 
 Это твой первый рабочий AI-клон. Поздравляю.
 
+## Три хука на выбор
+
+### 1. Бэкап перед правкой
+
+Зачем: случайная правка не должна быть точкой невозврата.
+Hook получает путь файла через stdin и копирует оригинал в `.backups/` с меткой времени.
+
+Скрипт — сохрани в `.claude/hooks/backup-edit.js`:
+
+```js
+const fs = require('node:fs');
+const path = require('node:path');
+
+try {
+  const input = JSON.parse(fs.readFileSync(0, 'utf8'));
+  const filePath = input?.tool_input?.file_path;
+  if (filePath && fs.existsSync(filePath)) {
+    fs.mkdirSync('.backups', { recursive: true });
+    const timestamp = new Date().toISOString().replace('T', '_').replace(/:/g, '').slice(0, 17);
+    fs.copyFileSync(filePath, path.join('.backups', `${path.basename(filePath)}.${timestamp}`));
+  }
+} catch {
+  // Бэкап не должен блокировать правку.
+}
+```
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/backup-edit.js"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Проверь: попроси агента изменить небольшой тестовый файл и посмотри появившуюся копию в `.backups/`.
+
+### 2. Запрет записи в секреты
+
+Зачем: `.env`, `private/` и файлы с `secret` в имени не должны меняться случайным вызовом Write или Edit.
+Скрипт проверяет `tool_input.file_path`; при совпадении он завершается с кодом 2 и пишет причину в stderr.
+
+Скрипт — сохрани в `.claude/hooks/protect-secrets.js`:
+
+```js
+const fs = require('node:fs');
+const path = require('node:path');
+
+try {
+  const input = JSON.parse(fs.readFileSync(0, 'utf8'));
+  const filePath = input?.tool_input?.file_path;
+  const normalized = path.normalize(String(filePath || '')).replace(/\\/g, '/');
+  const segments = normalized.split('/').filter(Boolean);
+  const basename = path.posix.basename(normalized);
+  const blocked = (basename === '.env' || basename.startsWith('.env.'))
+    || segments.includes('private')
+    || basename.toLowerCase().includes('secret');
+  if (blocked) {
+    console.error('Этот файл защищён от изменений: ' + filePath);
+    process.exitCode = 2;
+  }
+} catch {
+  // Некорректный ввод не должен блокировать инструмент.
+}
+```
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/protect-secrets.js"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Проверь: попроси агента записать временный `.env` и убедись, что операция заблокирована с этой причиной.
+
+### 3. Удаление в корзину
+
+Зачем: удаление должно оставаться обратимым.
+Hook на Bash проверяет команду и блокирует `rm `, `Remove-Item` или `del `, подсказывая корзину для твоей ОС.
+
+Скрипт — сохрани в `.claude/hooks/block-delete.js`:
+
+```js
+const fs = require('node:fs');
+
+try {
+  const input = JSON.parse(fs.readFileSync(0, 'utf8'));
+  const command = String(input?.tool_input?.command || '');
+  if (/(^|[\s;&|])(rm|del|erase|Remove-Item|rmdir|rd)\b/i.test(command)) {
+    console.error("Удаление заблокировано: удаляй в корзину. macOS: trash <файл>, Linux: gio trash <файл>, Windows PowerShell: Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile('<файл>','OnlyErrorDialogs','SendToRecycleBin')");
+    process.exitCode = 2;
+  }
+} catch {
+  // Некорректный ввод не должен блокировать инструмент.
+}
+```
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/block-delete.js"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+<OsBlock os="mac">
+
+Команда для корзины: `trash <файл>` (установи утилиту `trash` отдельно).
+Linux: `gio trash <файл>`.
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+Команда для корзины через PowerShell: `Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(..., 'OnlyErrorDialogs','SendToRecycleBin')`.
+
+</OsBlock>
+
+Проверь: попроси агента удалить тестовый файл и убедись, что команда заблокирована с подсказкой про корзину.
+
+Выбери один, поставь, запиши в `my-experiments/u5-my-hook.md`, что сработало.
+
 </Phase>
