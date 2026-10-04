@@ -99,6 +99,20 @@
       "explain": "Changes to the profile take effect when you reload it or open PowerShell again. Functions are chosen here on purpose: PowerShell doesn't handle aliases with parameters well (u2, “Handy terminal settings”)."
     },
     {
+      "id": "c10",
+      "unit": "u2-install",
+      "objective": "o2",
+      "question": "You are taking the course on a Claude subscription and want to put Claude Code into a client's tool. Which option follows the rules?",
+      "options": [
+        "Keep your subscription and give the client your OAuth token",
+        "Have the client sign in with their own subscription or use their API key; use API access for automation",
+        "Put the owner's `ANTHROPIC_API_KEY` in a shared `.env` so nobody has to configure access",
+        "Use a subscription for production automation as long as its limits are sufficient"
+      ],
+      "answer": 1,
+      "explain": "A subscription is for ordinary individual use. You cannot embed or share your OAuth token, while a product or automation must use the client's credentials or API access billed to that client (u2, “Subscription or API key”)."
+    },
+    {
       "id": "c6",
       "unit": "u3-first-project",
       "objective": "o3",

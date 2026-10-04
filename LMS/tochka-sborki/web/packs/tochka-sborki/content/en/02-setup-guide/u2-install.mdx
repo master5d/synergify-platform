@@ -96,6 +96,20 @@ claude
 
 Claude Code will open an interactive session. The first time it'll ask you to log in via your browser.
 
+## Subscription or API key
+
+For this course, a Claude subscription is enough: you do not need a separate API key. A subscription covers ordinary individual use; an API key bills tokens for apps and automation.
+
+| Scenario | What you pay with | What you must not do |
+| --- | --- | --- |
+| Yourself, on a subscription | Free/Pro/Max and its usage limits | Embed your OAuth token in a product or give it to someone else |
+| A tool for a client | The client’s own subscription or API key | Pay for Claude on the client’s behalf, resell, or intermediate their usage |
+| Production automation | An API key or an enterprise provider | Run it on someone else’s subscription; Agent SDK needs API access |
+
+The code you generate is yours under the applicable terms. Claude Code itself is not MIT-licensed: Anthropic’s terms apply. For this course, make sure `ANTHROPIC_API_KEY` is not set; otherwise the CLI and Agent SDK may choose the API key instead of your subscription and charge token usage.
+
+<SelfCheck id="c10"/>
+
 ### Git: basic config
 
 Same on every system:
