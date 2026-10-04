@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "ru",
   "title": "Какие у тебя ограничения?",
-  "sourceHash": "sha256:3009623d8af4852925761429ad605ece15dcfaea110ffdfc6f2e364f9e7d19e3",
+  "sourceHash": "sha256:aeea6bfd1a2d756646515791574205a467ea14798203092ae29f4c9f4f1878fd",
   "outline": [
     {
       "heading": "Почему нельзя «просто Claude Code»",
@@ -21,7 +21,7 @@
       "heading": "Что такое «стек»",
       "points": [
         {
-          "text": "Например: Claude Code → LiteLLM → Cerebras gpt-oss-120b — Claude Code UI с открытой моделью Aider → прямой OpenRouter → DeepSeek-Coder — классический OSS workflow Hermes → LiteLLM с цепочкой запасных моделей — пример собственного стека",
+          "text": "Например: Claude Code → LiteLLM → Cerebras gpt-oss-120b — Claude Code UI с открытой моделью Aider → прямой OpenRouter → модель DeepSeek — классический OSS workflow Hermes → LiteLLM с цепочкой запасных моделей — пример собственного стека",
           "origin": "extract"
         },
         {

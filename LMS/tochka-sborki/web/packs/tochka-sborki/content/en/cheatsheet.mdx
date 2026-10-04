@@ -74,12 +74,12 @@ claude update                   # Update Claude Code
 --model <model>                 # Specify model at launch
 --permission-mode plan          # Launch in read-only mode
 --worktree / -w                 # Isolated git worktree
---no-auto-compact / -n          # Disable auto context compaction
+--autocompact <auto|tokens>      # Auto-compaction mode; -n = --name
 --add-dir <path>                # Add a folder to context
 --output-format json|text|stream-json
---max-turns <N>                 # Turn limit in auto mode
+--max-turns <N>                 # For -p/SDK; absent from regular claude --help
 --max-budget-usd <N>            # Session budget in dollars
---bare                          # Without CLAUDE.md and MCP (clean start)
+--bare                          # Minimal mode: no hooks, LSP, plugin sync, or auto-memory
 
 # Pipe mode — handy for scripts:
 cat error.log | claude -p 'explain the error'
@@ -132,8 +132,10 @@ cat error.log | claude -p 'explain the error'
 
 | Mode | Behavior |
 | --- | --- |
-| `default` | Asks for files and bash |
+| `default` | Value in settings.json; in the CLI this is `manual` |
+| `auto` | Automatically accepts safe actions |
 | `acceptEdits` | Auto-accepts file edits, asks for bash |
+| `manual` | Asks before actions |
 | `plan` | Read-only, no changes |
 | `dontAsk` | Doesn't ask for allowed tools |
 | `bypassPermissions` | ⚠️ Full access without confirmation |
@@ -193,7 +195,7 @@ cat error.log | claude -p 'explain the error'
 ---
 description: "What the skill does"
 allowed-tools: [Bash, Read, Write, mcp__github__*]
-model: claude-sonnet-4-20250514
+model: sonnet
 effort: medium          # low | medium | high (NEW)
 context: fork           # isolated context
 ---
@@ -444,7 +446,7 @@ One file of project context and rules for any agent: Codex, Cursor, Copilot, Ant
 
 **For analyzing a codebase:**
 ```
-/explore --thoroughness medium
+Ask the agent: “explore the codebase” (the Explore subagent)
 ```
 
 **For planning a big piece of work:**
@@ -459,8 +461,7 @@ One file of project context and rules for any agent: Codex, Cursor, Copilot, Ant
 
 **For exploring a specific file:**
 ```
-/explore --thoroughness quick
-"Which files are responsible for [X]?"
+Ask the agent: “explore the codebase and find the files responsible for [X]” (the Explore subagent)
 ```
 
 ---
@@ -687,8 +688,6 @@ Look for structure, not snippets: where the agent's boundaries are, what got pus
 
 ---
 
-**Last updated:** 2026-03-25
-
-> 💡 Interactive version with 141 cards + quiz mode: `tools/cheatsheet/index.html`
+**Checked against Claude Code 2.1.289, 2026-10-04**
 
 *Use this cheatsheet for a quick start and quick reference.*

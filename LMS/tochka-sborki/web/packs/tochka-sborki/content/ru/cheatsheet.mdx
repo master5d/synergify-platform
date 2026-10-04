@@ -74,12 +74,12 @@ claude update                   # Обновить Claude Code
 --model <модель>                # Указать модель при запуске
 --permission-mode plan          # Запустить только в режиме чтения
 --worktree / -w                 # Изолированный git worktree
---no-auto-compact / -n          # Отключить авто-сжатие контекста
+--autocompact <auto|tokens>      # Режим авто-сжатия контекста; -n = --name
 --add-dir <путь>                # Добавить папку в контекст
 --output-format json|text|stream-json
---max-turns <N>                 # Лимит ходов в авто-режиме
+--max-turns <N>                 # Для -p/SDK; отсутствует в обычном claude --help
 --max-budget-usd <N>            # Бюджет сессии в долларах
---bare                          # Без CLAUDE.md и MCP (чистый старт)
+--bare                          # Минимальный режим: без hooks, LSP, синхронизации плагинов, auto-memory
 
 # Pipe-режим — удобно для скриптов:
 cat error.log | claude -p 'объясни ошибку'
@@ -132,8 +132,10 @@ cat error.log | claude -p 'объясни ошибку'
 
 | Режим | Поведение |
 | --- | --- |
-| `default` | Спрашивает для файлов и bash |
+| `default` | Значение в settings.json; в CLI это `manual` |
+| `auto` | Автоматически принимает безопасные действия |
 | `acceptEdits` | Автопринимает правки файлов, спрашивает bash |
+| `manual` | Спрашивает перед действиями |
 | `plan` | Только чтение, никаких изменений |
 | `dontAsk` | Не спрашивает для разрешённых инструментов |
 | `bypassPermissions` | ⚠️ Полный доступ без подтверждений |
@@ -193,7 +195,7 @@ cat error.log | claude -p 'объясни ошибку'
 ---
 description: "Что делает навык"
 allowed-tools: [Bash, Read, Write, mcp__github__*]
-model: claude-sonnet-4-20250514
+model: sonnet
 effort: medium          # low | medium | high (NEW)
 context: fork           # изолированный контекст
 ---
@@ -444,7 +446,7 @@ claude
 
 **Для анализа кодовой базы:**
 ```
-/explore --thoroughness medium
+Попроси агента: «исследуй кодовую базу» (субагент Explore)
 ```
 
 **Для создания плана большой работы:**
@@ -459,8 +461,7 @@ claude
 
 **Для исследования конкретного файла:**
 ```
-/explore --thoroughness quick
-"Какие файлы отвечают за [X]?"
+Попроси агента: «исследуй кодовую базу и найди файлы, отвечающие за [X]» (субагент Explore)
 ```
 
 ---
@@ -687,8 +688,6 @@ awesome-ai-apps       github.com/Arindam200/awesome-ai-apps
 
 ---
 
-**Последнее обновление:** 2026-03-25
-
-> 💡 Интерактивная версия с 141 карточкой + quiz-режимом: `tools/cheatsheet/index.html`
+**Проверено на Claude Code 2.1.289, 2026-10-04**
 
 *Используй эту шпаргалку для быстрого старта и справки.*

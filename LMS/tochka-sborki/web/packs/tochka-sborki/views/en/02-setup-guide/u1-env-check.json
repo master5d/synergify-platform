@@ -5,7 +5,7 @@
   "unit": "u1-env-check",
   "locale": "en",
   "title": "Environment check",
-  "sourceHash": "sha256:d5fcbef1147247fe27c10860570fe14aae7041cee0662abb694dbe8a9aa3bde9",
+  "sourceHash": "sha256:a1ed36d06a5794930be43e1ef25c3b1ee5dc5a4b0772f90568e08d23bdcc04e6",
   "outline": [
     {
       "heading": "What you need for agentic coding",

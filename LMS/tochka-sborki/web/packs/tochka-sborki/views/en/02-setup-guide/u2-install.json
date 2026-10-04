@@ -5,7 +5,7 @@
   "unit": "u2-install",
   "locale": "en",
   "title": "Installing the tools",
-  "sourceHash": "sha256:4e4109364d573e65c574a9a14dd60cdf7ed313e5ce50706688996866f8ad4dab",
+  "sourceHash": "sha256:6a761688a0e7cc1f1e701cff8ab59355adce6b9a7c2f4db5babfcd07a1117229",
   "outline": [
     {
       "heading": "⚡ Quick install (one line)",
@@ -27,7 +27,7 @@
       ],
       "children": [
         {
-          "heading": "Install",
+          "heading": "Install (fallback via npm)",
           "points": [],
           "children": []
         },

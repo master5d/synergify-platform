@@ -35,7 +35,7 @@ Here's the map of both sides:
 
 Picture a village herbalist 🌿, miles from the nearest pharmacy. No QR-coded pills — but they know which roots in this forest break a fever and where the right bark grows. They know how to combine what's local into something a drugstore never imagined.
 
-Notice the same paradox: **the strongest open models in 2026 are Chinese**. Qwen (Alibaba), DeepSeek-Coder, Yi (01.AI), GLM (Tsinghua) — all top-tier on benchmarks.
+Notice the same paradox: **the strongest open models in 2026 are Chinese**. Qwen, DeepSeek, GLM (Zhipu AI) — all top-tier on benchmarks.
 
 If you're in China — you actually have **extended** access to OSS models via local providers (Qianwen, Volcengine, DeepSeek API). Card barriers are usually lower — `WeChat Pay` / `Alipay` integrated.
 
@@ -47,7 +47,7 @@ This unit isn't about bypassing — it's about **building a full agentic workflo
 
 ## ⚡ Quick install of the GFW stack (one line)
 
-One command installs the LiteLLM proxy and Aider and writes a ready config (Cerebras + Gemini Flash). Then you just add two keys — in China, swap the Gemini key for a Chinese provider (step 2). The step-by-step breakdown is below if you want to understand what happens.
+One command installs the LiteLLM proxy and Aider and writes a ready config (Cerebras + DeepSeek). The step-by-step breakdown is below if you want to understand what happens.
 
 <OsToggle />
 
@@ -82,8 +82,8 @@ After install: add your keys to `~/.config/litellm/.env`, run `start.sh`/`start.
 │  Router: LiteLLM (localhost:4000)                       │
 │  ┌────────────────────────────────────────────────────┐ │
 │  │ fast-path:  Cerebras gpt-oss-120b                  │ │
-│  │ balanced:   Gemini 2.5 Flash (in China: DeepSeek)  │ │
-│  │ chinese:    DeepSeek-Coder API / Qwen API          │ │
+│  │ balanced:   current Gemini Flash model (check console name) │ │
+│  │ chinese:    DeepSeek API / Qwen API                │ │
 │  │ floor:      local llama-server (Qwen3-Coder-30B)   │ │
 │  └────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────┘
@@ -192,7 +192,7 @@ wget https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/Q
 llama-server -m Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf --port 8080
 ```
 
-> 💡 On Mac M-series with 16GB RAM, Q4_K_M runs at ~30 t/s — tolerable. On 32GB+ — comfortable.
+> 💡 Qwen3-Coder-30B needs 32 GB RAM: the Q4_K_M file is about 18–19 GB. On 16 GB, choose a model up to 8B.
 
 ## Step 5: Wire up an agent
 

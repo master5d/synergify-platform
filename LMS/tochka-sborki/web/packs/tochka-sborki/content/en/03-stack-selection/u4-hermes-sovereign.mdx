@@ -37,7 +37,7 @@ Hermes's context isn't eaten by implementation. Worker contexts are atomic and t
 
 ## How the author's setup works: an owner-controlled stack on personal hardware
 
-Here **Sovereign** means your own stack: models on your hardware, data stays away from providers, and the fallback chain remains under your control. This is not a product description; it is an honest description of the author's setup as of 2026-10-01.
+Here **Sovereign** means your own stack: models on your hardware, data stays away from providers, and the fallback chain remains under your control. This is not a product description; it is the general design principle.
 
 ```text
 Author's programs: Claude Code, Codex, and Hermes
@@ -59,10 +59,8 @@ with fallback choices           a separate pool with no cloud neighbors
 Local model on a 128 GB Mac Studio
 (an open model running locally)
 
-The Mac mini is the console: gateway and monitoring panel.
-Hermes lives on a separate Linux Mac mini (Fedora Asahi).
-As of this edit, that machine is offline until November, so its role
-is temporarily running on a server.
+The separate Linux machine is the console: gateway and monitoring panel.
+Hermes lives on a separate machine running Linux.
 ```
 
 Real route example: **Claude Code → LiteLLM → Cerebras gpt-oss-120b**. **Hermes → LiteLLM with a fallback chain** follows the same principle: Hermes dispatches work to executors (Claude Code, Codex), while the shared gateway selects models.

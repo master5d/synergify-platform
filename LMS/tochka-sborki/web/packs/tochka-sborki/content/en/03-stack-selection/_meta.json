@@ -85,10 +85,10 @@
         "The highest subscription price",
         "It doesn't work in China",
         "Being tied to a single vendor",
-        "The longest setup (half a day) and slightly lower out-of-box quality"
+        "Half a day for the learning minimum (local LiteLLM + one local model); full stack — weeks, with slightly lower out-of-box quality"
       ],
       "answer": 3,
-      "explain": "In the trade-offs table, Sovereign has maximum privacy and no vendor lock-in, but setup takes half a day, and out-of-box quality is 7/10 versus 9/10 for Claude Code (u2, “Honest trade-offs”)."
+      "explain": "In the trade-offs table, Sovereign has maximum privacy and no vendor lock-in. The learning minimum takes half a day, while the full stack takes weeks; out-of-box quality is 7/10 versus 9/10 for Claude Code (u2, “Honest trade-offs”)."
     },
     {
       "id": "c5",

@@ -5,7 +5,7 @@
   "unit": "u4-hermes-sovereign",
   "locale": "ru",
   "title": "Hermes + локальный стек",
-  "sourceHash": "sha256:edd474d83832ebdc72bdbd86d6e68f36aac6fcf84074597367fa723963b92ee7",
+  "sourceHash": "sha256:4e49318adf3403ccb92df874b91afdbb8d831ddcce39ed31c72537021e6ea65c",
   "outline": [
     {
       "heading": "Как это устроено у автора: свой стек на своём железе",

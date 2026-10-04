@@ -36,7 +36,7 @@ duration: "15 мин"
 <OsBlock os="mac">
 
 ```bash
-curl -fsSL https://ai.synergify.com/install.sh | bash
+curl -fsSL https://claude.ai/install.sh | bash
 ```
 
 </OsBlock>
@@ -44,7 +44,7 @@ curl -fsSL https://ai.synergify.com/install.sh | bash
 <OsBlock os="windows">
 
 ```powershell
-irm https://ai.synergify.com/install.ps1 | iex
+irm https://claude.ai/install.ps1 | iex
 ```
 
 </OsBlock>
@@ -59,7 +59,7 @@ irm https://ai.synergify.com/install.ps1 | iex
 
 Claude Code — это CLI (command-line interface), агент который работает прямо в терминале.
 
-### Установка
+### Установка (запасной путь через npm)
 
 ```bash
 npm install -g @anthropic-ai/claude-code
@@ -102,7 +102,7 @@ Claude Code откроет интерактивную сессию. Первый
 
 | Сценарий | Чем платишь | Что нельзя |
 | --- | --- | --- |
-| Себе, по подписке | Free/Pro/Max и лимиты подписки | Встраивать свой OAuth-токен в продукт или передавать его другим |
+| Себе, по подписке | Pro/Max (на бесплатном плане Claude Code недоступен) | Встраивать свой OAuth-токен в продукт или передавать его другим |
 | Инструмент клиенту | Клиент своей подпиской или API-ключом | Платить за Claude за клиента, перепродавать или проксировать его использование |
 | Production-автоматизация | API-ключом или корпоративным провайдером | Запускать на чужой подписке; для Agent SDK нужен API-доступ |
 
@@ -172,7 +172,7 @@ function ll  { Get-ChildItem -Force }
 
 Выполни по порядку:
 
-1. Установи Claude Code: `npm install -g @anthropic-ai/claude-code`
+1. Установи Claude Code: нативным установщиком выше; npm — запасной путь: `npm install -g @anthropic-ai/claude-code`
 2. Проверь: `claude --version`
 3. Настрой Git: `git config --global user.name "Твоё имя"` и `git config --global user.email "твоя@почта.com"`
 4. Запусти Claude Code в любой папке:

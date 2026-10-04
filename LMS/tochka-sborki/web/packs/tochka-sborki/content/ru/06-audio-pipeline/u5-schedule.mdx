@@ -113,11 +113,11 @@ macOS / Linux: `crontab -e`, добавь строку (пример — каж�
 Windows (нужен Git Bash — он уже стоит вместе с Claude Code). В PowerShell, подставив своё имя пользователя:
 
 ```
-schtasks /Create /SC DAILY /ST 08:00 /TN "my-pipeline" /TR "\"C:\Program Files\Git\bin\bash.exe\" -l C:/Users/ИМЯ/my-experiments/pipeline/run.sh"
+schtasks /Create /SC DAILY /ST 08:00 /TN "my-pipeline" /TR '"C:\Program Files\Git\bin\bash.exe" -l C:/Users/ИМЯ/my-experiments/pipeline/run.sh'
 schtasks /Run /TN "my-pipeline"
 ```
 
-Вторая команда запускает задачу сразу, для проверки. Параметры — в [документации schtasks](https://learn.microsoft.com/windows-server/administration/windows-commands/schtasks-create).
+Вторая команда запускает задачу сразу, для проверки. В PowerShell используй одинарные кавычки снаружи; в cmd — двойные с экранированием. Параметры — в [документации schtasks](https://learn.microsoft.com/windows-server/administration/windows-commands/schtasks-create).
 
 **Шаг 5. Проверка.** Открой `run.log`. Если там `claude: command not found` — планировщик не видит твой PATH. Выполни `command -v claude` и впиши в `run.sh` полный путь вместо `claude`. Учти: спящий ноутбук пропускает запуск, выбирай время, когда компьютер включён.
 

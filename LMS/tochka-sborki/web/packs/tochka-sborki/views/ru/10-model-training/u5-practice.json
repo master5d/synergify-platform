@@ -5,7 +5,7 @@
   "unit": "u5-practice",
   "locale": "ru",
   "title": "Практика: дообучить малую модель",
-  "sourceHash": "sha256:ac8db6e117b97959c2677e63ee99b9bd690d4730eb578e069f5791a68f3852ef",
+  "sourceHash": "sha256:b1170f0540fdc4ebe7479d1ced00d219b6de534ab41902fec53516ef1a7f6a94",
   "outline": [
     {
       "heading": "Основа практики — smol-course",

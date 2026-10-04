@@ -5,13 +5,13 @@
   "unit": "u3-behind-gfw",
   "locale": "en",
   "title": "Behind Great Firewall: no VPN",
-  "sourceHash": "sha256:39ddad7c26de3a44e4e47bceedafe7ef696f8cde01bf957f80cea95f90b6612b",
+  "sourceHash": "sha256:966a153eea40ad62a8b29d9e50e467191202a03157e99938c7b3d380ceaa0d19",
   "outline": [
     {
       "heading": "⚡ Quick install of the GFW stack (one line)",
       "points": [
         {
-          "text": "One command installs the LiteLLM proxy and Aider and writes a ready config (Cerebras + Gemini Flash).",
+          "text": "One command installs the LiteLLM proxy and Aider and writes a ready config (Cerebras + DeepSeek).",
           "origin": "extract"
         }
       ],
@@ -74,12 +74,6 @@
     "generator": "paraphrase-v1",
     "pool": "prose-pool",
     "sections": [
-      {
-        "sourceHash": "sha256:81d79fbede71f0cee80cf8960d2aa3df0bf7a08a3e34cc4deec4ee41c5c43b44",
-        "points": [
-          "You use one command to install the LiteLLM proxy and Aider and write a ready config for Cerebras and Gemini Flash."
-        ]
-      },
       {
         "sourceHash": "sha256:3160b77e583608438bda8264a323a4e018aafb6c287e7ebd528c5b36ff1f9fcb",
         "points": [

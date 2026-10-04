@@ -5,7 +5,7 @@
   "unit": "u3-first-project",
   "locale": "en",
   "title": "Your first project",
-  "sourceHash": "sha256:4af273c583096cc2898ebb408b3933f6c251af5ea17e489023a4c4f1ff68b1be",
+  "sourceHash": "sha256:c710aecd1479b7457e592d50da2213774d47de1c53fc2ba79a6e222656f7078d",
   "outline": [
     {
       "heading": "AGENTS.md — the agent's project memory",

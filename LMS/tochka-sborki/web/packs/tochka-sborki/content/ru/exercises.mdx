@@ -204,20 +204,13 @@ git commit -m "Add agent context files"
 
 ```bash
 cd [твой-проект]
-claude-code .
+claude
 ```
 
 Внутри сессии:
 
 ```
-/explore --thoroughness quick
-# Что узнал за 30 секунд?
-
-/explore --thoroughness medium
-# Какая архитектура?
-
-/explore --thoroughness very_thorough
-# Как всё связано?
+Попроси агента: «исследуй кодовую базу» (субагент Explore).
 ```
 
 ### Вопросы для Explore:
@@ -312,7 +305,7 @@ claude-code .
 
 ### Задание:
 
-Возьми文件, в котором много информации (например, список user insights или features backlog).
+Возьми файл, в котором много информации (например, список user insights или features backlog).
 
 Запусти 3 Claude Code сессии параллельно (в разных терминалах или папках):
 
@@ -346,19 +339,19 @@ claude-code .
 # Терминал 1
 cd ~/my-Efforts/On/analysis-1
 touch insights.md
-claude-code .
+claude
 # [Дай задачу сессии 1]
 
 # Терминал 2
 cd ~/my-Efforts/On/analysis-2
 touch insights.md
-claude-code .
+claude
 # [Дай задачу сессии 2]
 
 # Терминал 3
 cd ~/my-Efforts/On/analysis-3
 touch interview.md
-claude-code .
+claude
 # [Дай задачу сессии 3]
 
 # Собери результаты в один файл

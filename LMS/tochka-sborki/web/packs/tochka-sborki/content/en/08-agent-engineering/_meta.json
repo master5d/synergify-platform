@@ -130,7 +130,7 @@
         "The email is sent without human review",
         "The access error is ignored and the label is applied locally"
       ],
-      "answer": 3,
+      "answer": 1,
       "explain": "The trigger is separate from the action: an access failure stops the current pass, while the timer stays alive and retries later (u3, “What to notice,” item 3)."
     },
     {

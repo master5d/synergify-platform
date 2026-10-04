@@ -5,7 +5,7 @@
   "unit": "u2-install",
   "locale": "ru",
   "title": "Установка инструментов",
-  "sourceHash": "sha256:90a77c34b624947d3f96716bdbfe66aa5ba697c42372e497330b9ced888ecf56",
+  "sourceHash": "sha256:66f80d88403b477ac4bc96704a0a83c6806132b342228746357015b27e6e9a32",
   "outline": [
     {
       "heading": "⚡ Быстрая установка (одной строкой)",
@@ -27,7 +27,7 @@
       ],
       "children": [
         {
-          "heading": "Установка",
+          "heading": "Установка (запасной путь через npm)",
           "points": [],
           "children": []
         },

@@ -51,10 +51,10 @@
         "Node.js is only needed for websites; it's checked just in case",
         "Node.js replaces Git if Git isn't installed",
         "Node.js is needed so the terminal supports AI hints",
-        "The Claude Code CLI itself runs on Node.js; without it the agent won't launch"
+        "The native Claude Code installer does not require Node.js; Node.js 22+ is needed only for the fallback npm install"
       ],
       "answer": 3,
-      "explain": "The minimal stack table says outright that Node.js is required for the Claude Code CLI. That's why it's part of the environment check (u1, “What you need for agentic coding”)."
+      "explain": "The native Claude Code installer installs a binary without Node.js; Node.js 22+ is checked only for the fallback npm path (u1, “What you need for agentic coding”)."
     },
     {
       "id": "c3",
@@ -118,7 +118,7 @@
       "objective": "o3",
       "question": "Why put AGENTS.md in the project folder, and the line @AGENTS.md in CLAUDE.md?",
       "options": [
-        "Claude Code reads it on its own every time it launches in that folder: it's the agent's memory of the project",
+        "Claude Code has its own file; the @AGENTS.md line pulls the same file in",
         "It's the file where Claude Code writes a log of its actions",
         "It's an instruction for people on the team; the agent doesn't read it",
         "Git needs it to make the first commit"

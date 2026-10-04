@@ -5,7 +5,7 @@
   "unit": "u4-hermes-sovereign",
   "locale": "en",
   "title": "Hermes + local stack",
-  "sourceHash": "sha256:a65db810e9e2d1b948db33a65b1e24a31ee3d4a6c712eca28a5bf3a8ee67c592",
+  "sourceHash": "sha256:aad795cf94a02a7afcf5b6071d5b04b61686a6bb5ec40cdd849a4dd94fac29ee",
   "outline": [
     {
       "heading": "How the author's setup works: an owner-controlled stack on personal hardware",

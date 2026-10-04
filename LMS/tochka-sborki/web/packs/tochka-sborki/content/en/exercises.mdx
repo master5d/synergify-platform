@@ -204,20 +204,13 @@ Run `/explore` in an existing project with different parameters:
 
 ```bash
 cd [your-project]
-claude-code .
+claude
 ```
 
 Inside the session:
 
 ```
-/explore --thoroughness quick
-# What did you learn in 30 seconds?
-
-/explore --thoroughness medium
-# What's the architecture?
-
-/explore --thoroughness very_thorough
-# How is everything connected?
+Ask the agent: “explore the codebase” (the Explore subagent).
 ```
 
 ### Questions for Explore:
@@ -346,19 +339,19 @@ The ones that reflect real pain points or important insights.
 # Terminal 1
 cd ~/my-Efforts/On/analysis-1
 touch insights.md
-claude-code .
+claude
 # [Give session 1 task]
 
 # Terminal 2
 cd ~/my-Efforts/On/analysis-2
 touch insights.md
-claude-code .
+claude
 # [Give session 2 task]
 
 # Terminal 3
 cd ~/my-Efforts/On/analysis-3
 touch interview.md
-claude-code .
+claude
 # [Give session 3 task]
 
 # Combine the results into one file

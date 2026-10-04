@@ -113,11 +113,11 @@ The line format is: minute, hour, day of month, month, day of week. More in `man
 Windows (needs Git Bash — it is already installed along with Claude Code). In PowerShell, with your own user name:
 
 ```
-schtasks /Create /SC DAILY /ST 08:00 /TN "my-pipeline" /TR "\"C:\Program Files\Git\bin\bash.exe\" -l C:/Users/NAME/my-experiments/pipeline/run.sh"
+schtasks /Create /SC DAILY /ST 08:00 /TN "my-pipeline" /TR '"C:\Program Files\Git\bin\bash.exe" -l C:/Users/NAME/my-experiments/pipeline/run.sh'
 schtasks /Run /TN "my-pipeline"
 ```
 
-The second command runs the task right away, as a test. The parameters are in the [schtasks documentation](https://learn.microsoft.com/windows-server/administration/windows-commands/schtasks-create).
+The second command runs the task right away, as a test. In PowerShell, use single quotes around the `/TR` value; in cmd, use double quotes with escaping. The parameters are in the [schtasks documentation](https://learn.microsoft.com/windows-server/administration/windows-commands/schtasks-create).
 
 **Step 5. Check it.** Open `run.log`. If it says `claude: command not found`, the scheduler cannot see your PATH. Run `command -v claude` and put the full path into `run.sh` instead of `claude`. Keep in mind: a sleeping laptop skips the run, so pick a time when the computer is on.
 

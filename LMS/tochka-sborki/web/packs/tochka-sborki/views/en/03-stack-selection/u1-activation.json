@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "en",
   "title": "What are your constraints?",
-  "sourceHash": "sha256:d474515abfa5b67cd194beb75320564c0c405be6acbcd627aa35c1eb914fd61f",
+  "sourceHash": "sha256:5f0a3254019a2b055d6514c6d76fe2dd8f26a0f95078c391a210f5bbea479a13",
   "outline": [
     {
       "heading": "Why not \"just Claude Code\"",
@@ -21,7 +21,7 @@
       "heading": "What \"stack\" means here",
       "points": [
         {
-          "text": "For example: Claude Code → LiteLLM → Cerebras gpt-oss-120b — Claude Code UI with an open model Aider → direct OpenRouter → DeepSeek-Coder — classic OSS workflow Hermes → LiteLLM with a fallback chain — an example of an owner-controlled stack",
+          "text": "For example: Claude Code → LiteLLM → Cerebras gpt-oss-120b — Claude Code UI with an open model Aider → direct OpenRouter → DeepSeek model — classic OSS workflow Hermes → LiteLLM with a fallback chain — an example of an owner-controlled stack",
           "origin": "extract"
         },
         {

@@ -36,7 +36,7 @@ Want a working lab right away? Run one command in your terminal. It installs Nod
 <OsBlock os="mac">
 
 ```bash
-curl -fsSL https://ai.synergify.com/install.sh | bash
+curl -fsSL https://claude.ai/install.sh | bash
 ```
 
 </OsBlock>
@@ -44,14 +44,14 @@ curl -fsSL https://ai.synergify.com/install.sh | bash
 <OsBlock os="windows">
 
 ```powershell
-irm https://ai.synergify.com/install.ps1 | iex
+irm https://claude.ai/install.ps1 | iex
 ```
 
 </OsBlock>
 
 > 💡 On Linux, use the same command as Mac (`curl … | bash`).
 
-> ⚠️ A command like this downloads someone else's script and runs it on your computer straight away. If you want to see what it does first, save it to a file — `curl -fsSL https://ai.synergify.com/install.sh -o install.sh` (on Windows: `irm https://ai.synergify.com/install.ps1 -OutFile install.ps1`) — read it, and only then run it (`bash install.sh` or `.\install.ps1`). If Windows execution policy blocks the downloaded script, run it like this: `powershell -ExecutionPolicy Bypass -File install.ps1`.
+> ⚠️ A command like this downloads a script and runs it on your computer straight away. If you want to see what it does first, save it to a file — `curl -fsSL https://claude.ai/install.sh -o install.sh` (on Windows: `irm https://claude.ai/install.ps1 -OutFile install.ps1`) — read it, and only then run it (`bash install.sh` or `.\install.ps1`).
 
 After it finishes, open a **new** terminal and run `claude`. Below is the manual path if you want to understand each step.
 
@@ -59,7 +59,7 @@ After it finishes, open a **new** terminal and run `claude`. Below is the manual
 
 Claude Code is a CLI (command-line interface), an agent that works right in your terminal.
 
-### Install
+### Install (fallback via npm)
 
 ```bash
 npm install -g @anthropic-ai/claude-code
@@ -102,7 +102,7 @@ For this course, a Claude subscription is enough: you do not need a separate API
 
 | Scenario | What you pay with | What you must not do |
 | --- | --- | --- |
-| Yourself, on a subscription | Free/Pro/Max and its usage limits | Embed your OAuth token in a product or give it to someone else |
+| Yourself, on a subscription | Pro/Max (Claude Code is unavailable on the free plan) | Embed your OAuth token in a product or give it to someone else |
 | A tool for a client | The client’s own subscription or API key | Pay for Claude on the client’s behalf, resell, or intermediate their usage |
 | Production automation | An API key or an enterprise provider | Run it on someone else’s subscription; Agent SDK needs API access |
 

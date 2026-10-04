@@ -5,13 +5,13 @@
   "unit": "u3-behind-gfw",
   "locale": "ru",
   "title": "Behind Great Firewall: без VPN",
-  "sourceHash": "sha256:e871f8c2b54ccecd5bea04f4ce54047ff731953ea6accee0c39281103fa296da",
+  "sourceHash": "sha256:113f1b503e789276c38da799e15e4f0d20a918387992cd731f1a332be0fa37be",
   "outline": [
     {
       "heading": "⚡ Быстрая установка GFW-стека (одной строкой)",
       "points": [
         {
-          "text": "Одна команда ставит LiteLLM-прокси и Aider и пишет готовый конфиг (Cerebras + Gemini Flash).",
+          "text": "Одна команда ставит LiteLLM-прокси и Aider и пишет готовый конфиг (Cerebras + DeepSeek).",
           "origin": "extract"
         }
       ],
@@ -74,13 +74,6 @@
     "generator": "paraphrase-v1",
     "pool": "prose-pool",
     "sections": [
-      {
-        "sourceHash": "sha256:28d57d7b136e5b58628c8632bed60a3b85ef02f89179dc4927cb529e9493e7b3",
-        "points": [
-          "Одной командой ты устанавливаешь LiteLLM-прокси и Aider.",
-          "При этом сразу пишется готовый конфиг для Cerebras и Gemini Flash."
-        ]
-      },
       {
         "sourceHash": "sha256:9dd42a57cc741469c75fb8ac03819bce05f1cfdf601f37321a63922403f39690",
         "points": [
