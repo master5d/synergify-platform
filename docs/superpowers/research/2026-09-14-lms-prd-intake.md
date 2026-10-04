@@ -1447,6 +1447,11 @@ CLAUDE.md, фоновые задачи, Chrome — уже есть. **Нет:** 
 
 Оба — owner-gated → BACKLOG (одна строка). **Слово владельца «да» 2026-10-04 — внесены в раздел «Процесс» RU+EN** (vitest 187/187, tsc чисто). Копия `LMS/tochka-sborki/CHEATSHEET.md` по-прежнему устаревшая, не правилась.
 
+**Лабный раунд по репо заметки — NAUTILUS#281–#285 (2026-10-04).** spec-kit, OpenSpec, superpowers, Ralph Wiggum, RPI —
+все `already covered` для лабы; таблица «16 пунктов: лаба ↔ академия» — в NAUTILUS
+`docs/superpowers/research/2026-10-04-claude-code-practice-repos-intake.md`. Академия: 16/16 закрыты решением, новых задач
+lms-engine нет.
+
 ## LMS#33 — «Точка Сборки»: Agentic AI Engineer roadmap + задание владельца (2026-10-03)
 
 **Источник:** Evernote `4df85462-ec11-08ba-61d2-b380f63fcfbc` (заметка 2026-04-13, без медиа). Приписка владельца:
