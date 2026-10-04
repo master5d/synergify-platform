@@ -5,7 +5,7 @@
   "unit": "u2-install",
   "locale": "en",
   "title": "Installing the tools",
-  "sourceHash": "sha256:5c8f4b19eea907a552cbcc88b2f378e1af613666a47b98571bf20c6f4fa66fc5",
+  "sourceHash": "sha256:4e4109364d573e65c574a9a14dd60cdf7ed313e5ce50706688996866f8ad4dab",
   "outline": [
     {
       "heading": "⚡ Quick install (one line)",
@@ -45,7 +45,18 @@
             }
           ],
           "children": []
-        },
+        }
+      ]
+    },
+    {
+      "heading": "Subscription or API key",
+      "points": [
+        {
+          "text": "For this course, a Claude subscription is enough: you do not need a separate API key.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
         {
           "heading": "Git: basic config",
           "points": [
@@ -72,7 +83,8 @@
   "cards": [
     "c3",
     "c4",
-    "c5"
+    "c5",
+    "c10"
   ],
   "audio": null,
   "paraphrase": {

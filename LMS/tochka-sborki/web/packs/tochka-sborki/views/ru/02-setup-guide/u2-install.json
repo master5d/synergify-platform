@@ -5,7 +5,7 @@
   "unit": "u2-install",
   "locale": "ru",
   "title": "Установка инструментов",
-  "sourceHash": "sha256:16853ccefae27a65c2d28826a37305da57a05a5f8e0c115e83eef9cfc3c88756",
+  "sourceHash": "sha256:90a77c34b624947d3f96716bdbfe66aa5ba697c42372e497330b9ced888ecf56",
   "outline": [
     {
       "heading": "⚡ Быстрая установка (одной строкой)",
@@ -45,7 +45,18 @@
             }
           ],
           "children": []
-        },
+        }
+      ]
+    },
+    {
+      "heading": "Подписка или API-ключ",
+      "points": [
+        {
+          "text": "Для курса достаточно подписки Claude: отдельный API-ключ не нужен.",
+          "origin": "extract"
+        }
+      ],
+      "children": [
         {
           "heading": "Git: базовая конфигурация",
           "points": [
@@ -72,7 +83,8 @@
   "cards": [
     "c3",
     "c4",
-    "c5"
+    "c5",
+    "c10"
   ],
   "audio": null,
   "paraphrase": {

@@ -5,7 +5,7 @@
   "unit": "u2-mcp",
   "locale": "en",
   "title": "MCP: superpowers through a protocol",
-  "sourceHash": "sha256:1f36cdbb91aa81e09113b00a8bb39c0eda8a2200408fcdf3da1416fa2667ecc1",
+  "sourceHash": "sha256:aab95eb19b9c036dccac29f27801be7c3067029400e5e7db041a3ba11e075db2",
   "outline": [
     {
       "heading": "MCP: three primitives",
@@ -25,6 +25,16 @@
     {
       "heading": "Popular MCP servers",
       "points": [],
+      "children": []
+    },
+    {
+      "heading": "Tool Search: when there are many servers",
+      "points": [
+        {
+          "text": "If 50 tool descriptions take 10–20K tokens, context gets expensive quickly; 58 tools from 5 servers can take about 55K.",
+          "origin": "extract"
+        }
+      ],
       "children": []
     },
     {
