@@ -1,0 +1,85 @@
+---
+title: "Agent SDK: Put an Agent in a Program"
+unit: 6
+module: 8
+duration: "20 min"
+---
+
+<Phase type="activation">
+
+Picture a small workshop you can call from your own program, not a chat you have to restart by hand. It has hands — tools, a memory — a session, and a stopping rule — so the work cannot run forever.
+
+If you already know a task your agent should repeat, but you still start each run manually, where is the missing “start” button?
+
+</Phase>
+
+<Phase type="reflection">
+
+The Agent SDK turns the agent loop into a library call. It is the same mechanism as Claude Code: the agent plans, calls tools, and checks its result, while your script sets the boundaries and receives the messages.
+
+Think of handing the workshop a schedule. You do not rewrite how to use every tool, but you decide which tools are on the bench and when the craftsperson must stop.
+
+Keep the Claude Code CLI for one-off interactive work. Use the SDK when the agent becomes part of CI/CD, an application, or an ongoing automation.
+
+</Phase>
+
+<Phase type="concept">
+
+## What the SDK gives you
+
+The Agent SDK exposes the Claude Code loop from Python or TypeScript: built-in `Read`, `Edit`, `Bash`, `Grep`, `Glob`, and web-search tools, plus MCP servers, hooks, skills, subagents, and sessions. With a client SDK, you would have to assemble the tool loop and file tools yourself.
+
+Install it with:
+
+```bash
+npm install @anthropic-ai/claude-agent-sdk   # Node 18+
+pip install claude-agent-sdk                 # Python 3.10+
+```
+
+Authentication has two roads, the same as in [module 02](/en/lessons/02-setup-guide/u2-install/). For yourself, the SDK uses the same sign-in as Claude Code (`claude login`, your subscription): keep `ANTHROPIC_API_KEY` unset, otherwise the SDK switches to the key and starts billing tokens. For a product, a client, or production automation the official quickstart describes `ANTHROPIC_API_KEY` — the client's key, not your subscription. Keep the key out of the repository and out of logs; plan terms change, so check the current documentation before you ship.
+
+A minimal TypeScript agent:
+
+```ts
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "Find and fix a bug in auth.py",
+  options: {
+    allowedTools: ["Read", "Edit", "Bash"],
+    permissionMode: "acceptEdits",
+    maxTurns: 10,
+  },
+})) {
+  if ("result" in message) console.log(message.result);
+}
+```
+
+## Three safety controls
+
+- `allowedTools` is the allowlist. Start with the minimum: analysis usually needs only `Read`, `Glob`, and `Grep`.
+- `permissionMode` sets the approval level: `default` asks, `acceptEdits` allows file edits, and `bypassPermissions` belongs only inside an isolated container. See the cheat sheet for the full table.
+- `maxTurns` caps the iterations so the agent cannot loop forever. Start around 10–20 for a typical task; use less while diagnosing.
+
+`cwd`, `mcpServers`, `hooks`, `agents`, `resume`, and `settingSources: ["project"]` add a working directory, external tools, specialists, session continuation, and project settings. Give one agent one job; a universal agent with dozens of tools is expensive and hard to control. A subagent should not launch its own subagents. Three subagents usually means roughly three times the calls, so use a cheaper model where it is enough.
+
+There are four deployment shapes: an ephemeral container per task, a long-running process, a hybrid that reloads history, or several processes in one container. Whichever you choose, plan for outbound HTTPS and modest resources; tokens are usually the dominant cost.
+
+<SelfCheck id="c14"/>
+
+<SelfCheck id="c15"/>
+
+</Phase>
+
+<Phase type="practice">
+
+Build a small experiment in a separate folder.
+
+1. Install the SDK for your language.
+2. Run a test with `maxTurns: 1` and the prompt: `Say “SDK works!” and nothing else.` Record how many turns actually happened.
+3. Run a project analyzer with `allowedTools: ["Read", "Glob", "Grep"]`, `permissionMode: "default"`, and `maxTurns: 5`. Ask it to describe the project structure without changing files or running commands.
+4. Save to `my-experiments/u6-agent-sdk.md`: how many turns ran, which tools were called, and what you would change in the prompt.
+
+If the agent asks for an extra tool, do not add it automatically. First clarify the task and check whether smaller permissions are enough.
+
+</Phase>

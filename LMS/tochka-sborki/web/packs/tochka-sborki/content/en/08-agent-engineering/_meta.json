@@ -9,7 +9,8 @@
     { "slug": "u2-jagged-intelligence", "title": "Jagged Intelligence: What to Delegate" },
     { "slug": "u3-orchestration", "title": "Orchestration: ENERV Case Study" },
     { "slug": "u4-production-infra", "title": "Prototype → Production" },
-    { "slug": "u5-practice", "title": "Design Your Clone" }
+    { "slug": "u5-practice", "title": "Design Your Clone" },
+    { "slug": "u6-agent-sdk", "title": "Agent SDK: Put an Agent in a Program" }
   ],
   "objectives": [
     {
@@ -31,6 +32,10 @@
     {
       "id": "o5",
       "text": "Write an agent specification before the code: honestly mark the gaps and tell a spec from a charter"
+    },
+    {
+      "id": "o6",
+      "text": "Wrap an agent in a script with the subscription-based Agent SDK and name three settings that protect against loops and unnecessary permissions"
     }
   ],
   "checks": [
@@ -215,6 +220,34 @@
       ],
       "answer": 0,
       "explain": "The spec is the “plumbing,” the agent's hands. The charter is needed by a clone that talks: it holds the frame from session to session (u5, “The clone's other half: the charter”)."
+    },
+    {
+      "id": "c14",
+      "unit": "u6-agent-sdk",
+      "objective": "o6",
+      "question": "How does the Agent SDK differ from a client SDK?",
+      "options": [
+        "The Agent SDK already includes the agent loop, built-in tools, and session management",
+        "The Agent SDK only formats responses; you always write the loop",
+        "The Agent SDK works only with Python",
+        "The Agent SDK replaces every permission check with one large prompt"
+      ],
+      "answer": 0,
+      "explain": "The SDK embeds the loop, tools, and sessions that power Claude Code; a client SDK gives direct access, but you organize the loop yourself (u6, concept)."
+    },
+    {
+      "id": "c15",
+      "unit": "u6-agent-sdk",
+      "objective": "o6",
+      "question": "Which set of settings both limits actions and stops a runaway loop?",
+      "options": [
+        "allowedTools, permissionMode, and maxTurns",
+        "cwd, resume, and settingSources",
+        "prompt, model, and console.log",
+        "mcpServers, hooks, and agents with no turn limit"
+      ],
+      "answer": 0,
+      "explain": "The tool allowlist, permission mode, and turn ceiling define the agent's boundaries and guard against unnecessary actions and an endless loop (u6, concept)."
     }
   ]
 }

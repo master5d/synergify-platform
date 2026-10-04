@@ -138,6 +138,8 @@ For your workflow from unit 3, answer:
 **Quality:**
 - Do you have 10–20 example inputs with expected results that you rerun after every change to a prompt or a step?
 - What is checked by code (format, fields, length), what by a judge model against criteria, and what do you look at yourself on a sample?
+- Do you run the same set against the old and new prompt side by side and compare the numbers? That is an A/B experiment for an agent.
+- When is a judge model the wrong tool? If regex, a schema, or a test can check the result, code is usually cheaper; high-stakes errors (medicine, law, money) need a safer check; with fewer than 50 cases, a quick human review is faster; and a judge using the same model may praise its own work.
 
 This is a **production readiness checklist**. Save your answers to `my-experiments/u4-readiness.md`.
 
