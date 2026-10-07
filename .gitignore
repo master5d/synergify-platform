@@ -35,3 +35,6 @@ academy/_notes
 # каталог, исключённый целиком, негацией обратно не вернуть.
 .claude/*
 !.claude/skills/
+
+# Кэш плагина impeccable от cwd (hook.cache.json) — артефакт сессии агента, не исходник (W2 hygiene, решение владельца 2026-09-30)
+.impeccable/
