@@ -7,7 +7,7 @@
   "units": [
     { "slug": "u1-activation", "title": "What are your constraints?" },
     { "slug": "u2-stack-matrix", "title": "Matrix of 4 stacks" },
-    { "slug": "u3-behind-gfw", "title": "Behind Great Firewall: no VPN" },
+    { "slug": "u3-behind-gfw", "title": "Behind a censorship firewall: no VPN" },
     { "slug": "u4-hermes-sovereign", "title": "Hermes + local stack" },
     { "slug": "u5-migrate", "title": "Migration plan for your workflow" }
   ],
@@ -66,7 +66,7 @@
       "id": "c3",
       "unit": "u2-stack-matrix",
       "objective": "o2",
-      "question": "You're not in China, your budget is $0, and all you have is a laptop without a GPU. Where does the unit's decision tree lead?",
+      "question": "You're not in China or Russia, your budget is $0, and all you have is a laptop without a GPU. Where does the unit's decision tree lead?",
       "options": [
         "Claude Code",
         "Cloud-OSS",
@@ -74,7 +74,7 @@
         "Behind-GFW"
       ],
       "answer": 1,
-      "explain": "The first fork — China — gives “no.” There's no $20+ budget. There's no GPU or Mac M-series either. That leaves Cloud-OSS (u2, “Decision tree (if still unsure)”)."
+      "explain": "The first fork — China or Russia — gives “no.” There's no $20+ budget. There's no GPU or Mac M-series either. That leaves Cloud-OSS (u2, “Decision tree (if still unsure)”)."
     },
     {
       "id": "c4",
@@ -116,7 +116,7 @@
         "The model gateway sends the request to `balanced` (Gemini), and if that fails too — to the local model"
       ],
       "answer": 3,
-      "explain": "`fallbacks` records the order of the fallback options: Gemini first (in China, a Chinese provider), the local llama-server last. There's no Anthropic in this config at all (u3, step 3)."
+      "explain": "`fallbacks` records the order of the fallback options: Gemini first (in China, a Chinese provider; in Russia, GigaChat), the local llama-server last. There's no Anthropic in this config at all (u3, step 3)."
     },
     {
       "id": "c7",

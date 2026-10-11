@@ -5,7 +5,7 @@
   "unit": "u2-stack-matrix",
   "locale": "en",
   "title": "Matrix of 4 stacks",
-  "sourceHash": "sha256:57dfe6e534b59dfba7709c602b4964b7c302b54e16092194e378e29d360f7059",
+  "sourceHash": "sha256:71b3221ed3a49d6339918ff542c95b8bb3c28024dbb50de32cba4e73044555d2",
   "outline": [
     {
       "heading": "The model gateway as conductor",
@@ -44,6 +44,10 @@
     "generator": "paraphrase-v1",
     "pool": "prose-pool",
     "sections": [
+      {
+        "sourceHash": "sha256:72f62f266a61c4e56a9803b78ca2bc0c0ccf6b3824ead22de9fe74c08a37611e",
+        "verbatim": "near-identical"
+      },
       {
         "sourceHash": "sha256:24d8ed43425f5ce395eeefaa1b8727a58e961dfa298e9e824585d860c37b3d7d",
         "points": [

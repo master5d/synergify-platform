@@ -4,24 +4,55 @@
   "module": "03-stack-selection",
   "unit": "u3-behind-gfw",
   "locale": "ru",
-  "title": "Behind Great Firewall: без VPN",
-  "sourceHash": "sha256:2eccdbd42f7019187882c6674b3c7a77551a594c1208a1ea756faf35a88b1859",
+  "title": "За цензурным файрволом: без VPN",
+  "sourceHash": "sha256:06580fe6e1012eaa46d6c261bf9be1c75e954adcc611ee854147f59d89346e16",
   "outline": [
     {
       "heading": "Карта доступов",
       "points": [
         {
-          "text": "Без VPN в материковом Китае не работают Claude, OpenAI, большинство AI-IDE, AI Studio и Hugging Face; GitHub и npm требуют зеркал.",
+          "text": "Стек Behind-GFW назван по китайскому «Великому файрволу», но годится везде, где AI-сервисы закрыты государственной фильтрацией или самими вендорами.",
           "origin": "extract"
         }
       ],
-      "children": []
+      "children": [
+        {
+          "heading": "Китай",
+          "points": [
+            {
+              "text": "Без VPN в материковом Китае не работают Claude, OpenAI, большинство AI-IDE, AI Studio и Hugging Face; GitHub и npm требуют зеркал.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Россия",
+          "points": [
+            {
+              "text": "Claude, OpenAI и Gemini (AI Studio) закрыты для России самими компаниями: они не обслуживают пользователей из РФ, и VPN этого не меняет — вход через VPN нарушает их условия, аккаунты блокируют.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        },
+        {
+          "heading": "Как узнать файрвол по симптомам",
+          "points": [
+            {
+              "text": "Файрвол выдаёт себя так: TCP-соединение с сервером устанавливается, а TLS-рукопожатие обрывается по таймауту, причём сразу на разных доменах одного сервиса.",
+              "origin": "extract"
+            }
+          ],
+          "children": []
+        }
+      ]
     },
     {
       "heading": "⚡ Быстрая установка GFW-стека (одной строкой)",
       "points": [
         {
-          "text": "Одна команда ставит LiteLLM-прокси и Aider и пишет готовый конфиг (Cerebras + DeepSeek).",
+          "text": "Одна команда ставит LiteLLM-прокси и Aider и пишет готовый конфиг (Cerebras + Gemini Flash).",
           "origin": "extract"
         }
       ],
@@ -43,6 +74,11 @@
       "children": []
     },
     {
+      "heading": "Шаг 2б: GigaChat вместо Gemini (Россия)",
+      "points": [],
+      "children": []
+    },
+    {
       "heading": "Шаг 3: LiteLLM gateway",
       "points": [
         {
@@ -56,7 +92,7 @@
       "heading": "Шаг 4: Local fallback (llama-server)",
       "points": [
         {
-          "text": "На случай если все клауды лягут одновременно (бывает)",
+          "text": "Качаем модель (через зеркало HuggingFace) для Китая: https://hf-mirror.com заменяет huggingface.co.",
           "origin": "extract"
         }
       ],
@@ -85,15 +121,43 @@
     "pool": "prose-pool",
     "sections": [
       {
+        "sourceHash": "sha256:951fc0dd45c49204a2dc8723353d82ac4c52cb8ff2996285ca7de829f04cd71b",
+        "points": [
+          "Стек Behind-GFW назван в честь Великого файрвола, но он пригодится тебе везде, где доступ к нейросетям ограничен государством или разработчиками."
+        ]
+      },
+      {
+        "sourceHash": "sha256:50a33bd6c8e6cd71e3b074195757de2dafce442ccc357b296ab6907b0ea9e849",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:406836cefb488dbe89079cdfd102025dcef4ffb5b1e118a043411e690eb05c6a",
+        "points": [
+          "Компании сами закрыли доступ к Claude, OpenAI и Gemini для России, поэтому VPN не поможет: это нарушает правила и твои аккаунты заблокируют."
+        ]
+      },
+      {
+        "sourceHash": "sha256:746e3c515c9387024e0d1523f4e46e7704e0ed08395c90184b7e402b7aa1c886",
+        "points": [
+          "Ты узнаешь файрвол по тому, что TCP-соединение с сервером устанавливается, а TLS-рукопожатие обрывается по таймауту сразу на разных доменах одного сервиса."
+        ]
+      },
+      {
+        "sourceHash": "sha256:28d57d7b136e5b58628c8632bed60a3b85ef02f89179dc4927cb529e9493e7b3",
+        "points": [
+          "Одна команда устанавливает LiteLLM-прокси и Aider, а также записывает готовый конфиг для Cerebras и Gemini Flash."
+        ]
+      },
+      {
         "sourceHash": "sha256:9dd42a57cc741469c75fb8ac03819bce05f1cfdf601f37321a63922403f39690",
         "points": [
           "LiteLLM gateway служит одним адресом для всех провайдеров."
         ]
       },
       {
-        "sourceHash": "sha256:2562273f00b4c97614382f68e5d23e847424fc7446f9d894e2a4a21676212a55",
+        "sourceHash": "sha256:9af81e9c473843a1dc481c112868cc1fc38b4457198dab5b638c9608948438a2",
         "points": [
-          "Local fallback пригодится на случай, если все облачные сервисы перестанут работать одновременно."
+          "Ты скачиваешь модель для Китая через зеркало HuggingFace, где hf-mirror.com заменяет huggingface.co."
         ]
       },
       {

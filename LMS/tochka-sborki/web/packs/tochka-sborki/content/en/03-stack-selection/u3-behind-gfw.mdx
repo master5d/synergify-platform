@@ -1,5 +1,5 @@
 ---
-title: "Behind Great Firewall: no VPN"
+title: "Behind a censorship firewall: no VPN"
 unit: 3
 module: 3
 duration: "20 min"
@@ -29,11 +29,27 @@ Which available resource will become the first support for your route?
 
 ## Access map
 
+The Behind-GFW stack is named after China's Great Firewall, but it fits anywhere AI services are closed by state filtering or by the vendors themselves. Below are two maps: China and Russia.
+
+### China
+
 Without a VPN in mainland China, Claude, OpenAI, most AI IDEs, AI Studio, and Hugging Face are unavailable; GitHub and npm need mirrors. Cerebras must be checked locally, while DeepSeek, Qwen, and local models are available supports. In 2026, Qwen, DeepSeek, and GLM are strong open models; local providers often accept WeChat Pay and Alipay.
+
+### Russia
+
+Claude, OpenAI, and Gemini (AI Studio) are closed to Russia by the companies themselves: they don't serve users in Russia, and a VPN doesn't change that — signing in through a VPN breaks their terms, and accounts get banned. Other foreign providers don't accept Russian cards either. DeepSeek opens from Russia, but there's no official way to top up its API balance with a Russian card. The available supports are Sber's GigaChat (there's a free tier for individuals; check the terms at sign-up), YandexGPT in Yandex Cloud (paid with a Russian card), and local models. There's no official data on Cerebras access from Russia — check it yourself.
+
+### How to recognise a firewall by its symptoms
+
+A firewall gives itself away like this: the TCP connection to the server is established, but the TLS handshake times out, and it happens on several domains of the same service at once. Switching clients or disabling IPv6 doesn't help: the problem isn't your computer but a filter on the provider's side (in Russia, the TSPU boxes).
+
+Since June 2025, Russian ISPs have also been throttling connections to sites behind Cloudflare: often only the first 16 KB get through, and the page loads halfway. This course also runs through Cloudflare — if a unit opened only partly, that's the same cause.
+
+> ⚠️ This unit doesn't teach how to fix a VPN: in Russia, promoting ways to bypass blocking has been banned since March 2024, and in China VPNs are a grey zone. The stack below doesn't need a VPN.
 
 ## ⚡ Quick install of the GFW stack (one line)
 
-One command installs the LiteLLM proxy and Aider and writes a ready config (Cerebras + DeepSeek). The step-by-step breakdown is below if you want to understand what happens.
+One command installs the LiteLLM proxy and Aider and writes a ready config (Cerebras + Gemini Flash). Gemini doesn't work in China or Russia — after install, replace it with a local provider (step 2 and step 2b). The step-by-step breakdown is below if you want to understand what happens.
 
 <OsToggle />
 
@@ -69,7 +85,7 @@ After install: add your keys to `~/.config/litellm/.env`, run `start.sh`/`start.
 │  ┌────────────────────────────────────────────────────┐ │
 │  │ fast-path:  Cerebras gpt-oss-120b                  │ │
 │  │ balanced:   current Gemini Flash model (check console name) │ │
-│  │ chinese:    DeepSeek API / Qwen API                │ │
+│  │ local:      DeepSeek/Qwen (CN), GigaChat (RU)      │ │
 │  │ floor:      local llama-server (Qwen3-Coder-30B)   │ │
 │  └────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────┘
@@ -89,8 +105,32 @@ CEREBRAS_API_KEY=csk-xxxxx
 
 ## Step 2: Google Gemini Flash (backup for longer tasks)
 
-1. `aistudio.google.com` is officially unavailable from mainland China. If you're in China, put a Chinese provider in this role (DeepSeek API or Qwen API). If not, get a key in AI Studio and add it to the same `.env`: `GOOGLE_API_KEY=...`
+1. `aistudio.google.com` is officially unavailable from mainland China and from Russia. If you're in China, put a Chinese provider in this role (DeepSeek API or Qwen API). If you're in Russia, go to step 2b. If not, get a key in AI Studio and add it to the same `.env`: `GOOGLE_API_KEY=...`
 2. Gemini's free limits change — check them in your own AI Studio, not by numbers in a unit
+
+## Step 2b: GigaChat instead of Gemini (Russia)
+
+1. Sign up for the GigaChat API at [developers.sber.ru](https://developers.sber.ru/docs/ru/gigachat/tariffs/individual-tariffs) and create a project. Check the free tier for individuals and its limits there too: the terms change
+2. Copy the project's authorization key (that's `Client ID:Client Secret` in base64) and add it to the same `.env`:
+
+```bash
+# ~/.config/litellm/.env
+GIGACHAT_CREDENTIALS=authorization-key
+```
+
+3. In the step 3 config, put GigaChat in the `balanced` role instead of Gemini:
+
+```yaml
+  - model_name: balanced
+    litellm_params:
+      model: gigachat/GigaChat-2-Lite   # check model names in your GigaChat dashboard
+      api_key: os.environ/GIGACHAT_CREDENTIALS
+      ssl_verify: false
+```
+
+> ⚠️ `ssl_verify: false` is what the LiteLLM docs advise: GigaChat's certificate is issued by a Russian certificate authority that isn't in the standard trusted set. The line turns certificate checking off — keep it only in the GigaChat block. The `gigachat/` provider exists in recent LiteLLM versions: if it's missing, update with `pip install -U 'litellm[proxy]'`.
+
+> 💡 The course author hasn't walked this path from Russia (October 2026): the config comes from the LiteLLM docs. If something doesn't match, send feedback and we'll fix it.
 
 ## Step 3: LiteLLM model gateway
 
@@ -169,7 +209,7 @@ Now every agent can point at `http://localhost:4000` as an "OpenAI-compatible AP
 
 For when every cloud goes dark at the same time (it happens):
 
-Download model (via HuggingFace mirror) in China: https://hf-mirror.com replaces huggingface.co
+Download model (via HuggingFace mirror) in China: https://hf-mirror.com replaces huggingface.co. If huggingface.co doesn't open in Russia, try the same mirror.
 
 <OsBlock os="mac">
 
@@ -222,7 +262,7 @@ Done. Full agentic workflow without Anthropic, without OpenAI, without VPN.
 
 Minimum to complete the unit:
 
-1. Sign up for Cerebras, grab an API key
+1. Sign up for Cerebras, grab an API key. If you're in Russia and Cerebras won't let you in, use GigaChat from step 2b and put `"model": "balanced"` in the test prompt below
 2. Install LiteLLM locally and run the proxy on `localhost:4000`
 3. Make a test call:
 

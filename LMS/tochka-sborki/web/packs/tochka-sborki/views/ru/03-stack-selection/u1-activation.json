@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "ru",
   "title": "Какие у тебя ограничения?",
-  "sourceHash": "sha256:a07ede70db62ebea16c761e7e0b6541360527c2e46e8c68503001c2de3766bdd",
+  "sourceHash": "sha256:df8e880634fde7faa7512e83b58e15e8dcdc54ca6bd7a7a37c8ccec2c3e75ff9",
   "outline": [
     {
       "heading": "Как сопоставить ограничения и стек",
@@ -53,9 +53,23 @@
     "pool": "prose-pool",
     "sections": [
       {
+        "sourceHash": "sha256:6426317dd253acfec52e63b3efc864f21e5d0b343487b889851fd53f00773d2e",
+        "points": [
+          "Пять вопросов о бюджете, доступе, железе, приватности и терпимости к настройке помогут тебе выбрать подходящий путь."
+        ]
+      },
+      {
         "sourceHash": "sha256:a69e054e9ccf54ecb93be3784d4cf465f8235b3c64aab775152478cf8b08ee39",
         "points": [
           "Ты не хуже, ведь агентный ИИ перестал быть моно-инструментом и теперь существуют открытые альтернативы."
+        ]
+      },
+      {
+        "sourceHash": "sha256:a06b772922ec7362bef7bf50dfcee64c6e3c7fc08c504f347913e8463221da35",
+        "points": [
+          "Примером собственного стека может быть связка Claude Code, LiteLLM и Cerebras gpt-oss-120b.",
+          "Можно сочетать Claude Code UI с открытой моделью Aider, прямым OpenRouter и моделью DeepSeek или использовать OSS workflow Hermes с LiteLLM и цепочкой запасных моделей.",
+          "Этот модуль научит тебя воспринимать стек целиком, а не просто знать один инструмент."
         ]
       }
     ]

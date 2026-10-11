@@ -5,7 +5,7 @@
   "unit": "u2-stack-matrix",
   "locale": "ru",
   "title": "Матрица 4 стеков",
-  "sourceHash": "sha256:cba4e8635e09fa859fa2507d0780babaa0c9fd71021877ca20a1bb5d13983542",
+  "sourceHash": "sha256:2521b333394bdd234bd6c41cff3a3969d9ab95ae0e0e3933fa2581aa769cac64",
   "outline": [
     {
       "heading": "Шлюз как дирижёр",
@@ -44,6 +44,10 @@
     "generator": "paraphrase-v1",
     "pool": "prose-pool",
     "sections": [
+      {
+        "sourceHash": "sha256:14a3ccdb05b10d72445ed9bc415431c3d8e868b861e5c17be9a89ac27477fb0a",
+        "verbatim": "near-identical"
+      },
       {
         "sourceHash": "sha256:3027ee96793e79e30c089f67671c42fc3d1168210fea5d70265e1c9c159d3592",
         "points": [

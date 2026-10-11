@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "en",
   "title": "What are your constraints?",
-  "sourceHash": "sha256:375f197e49cbfe0fc3c42f9abe3e87461fcd62f70fe9ed09da7de358fdf2effa",
+  "sourceHash": "sha256:ed672470c1acf24c47e9952c174406e5da16201d7cacf755130d2712440a3a51",
   "outline": [
     {
       "heading": "Matching constraints to a stack",
@@ -53,7 +53,15 @@
     "pool": "prose-pool",
     "sections": [
       {
+        "sourceHash": "sha256:4d54a46e3c4645d35db99e97569fc9d7378cf63048e03b94b91fa6b94f69db27",
+        "verbatim": "near-identical"
+      },
+      {
         "sourceHash": "sha256:b64251308729d4c19f8fd7c8cb599c3d4d6d9010c2fd6b90ffc8758fd89abc65",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:c1eacd8b1e9c806b4a0bd5661ac4573338199ffa0198dc12c026b0a21dd437e3",
         "verbatim": "near-identical"
       }
     ]

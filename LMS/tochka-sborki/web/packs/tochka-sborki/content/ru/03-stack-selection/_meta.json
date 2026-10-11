@@ -7,7 +7,7 @@
   "units": [
     { "slug": "u1-activation", "title": "Какие у тебя ограничения?" },
     { "slug": "u2-stack-matrix", "title": "Матрица 4 стеков" },
-    { "slug": "u3-behind-gfw", "title": "Behind Great Firewall: без VPN" },
+    { "slug": "u3-behind-gfw", "title": "За цензурным файрволом: без VPN" },
     { "slug": "u4-hermes-sovereign", "title": "Hermes + локальный стек" },
     { "slug": "u5-migrate", "title": "План миграции твоего workflow" }
   ],
@@ -66,7 +66,7 @@
       "id": "c3",
       "unit": "u2-stack-matrix",
       "objective": "o2",
-      "question": "Ты не в Китае, бюджет — $0, есть только ноутбук без GPU. Куда ведёт decision tree юнита?",
+      "question": "Ты не в Китае и не в России, бюджет — $0, есть только ноутбук без GPU. Куда ведёт decision tree юнита?",
       "options": [
         "Claude Code",
         "Cloud-OSS",
@@ -74,7 +74,7 @@
         "Behind-GFW"
       ],
       "answer": 1,
-      "explain": "Первая развилка — Китай — даёт «нет». Бюджета $20+ нет. Нет и GPU или Mac M-series. Остаётся Cloud-OSS (u2, «Decision tree»)."
+      "explain": "Первая развилка — Китай или Россия — даёт «нет». Бюджета $20+ нет. Нет и GPU или Mac M-series. Остаётся Cloud-OSS (u2, «Decision tree»)."
     },
     {
       "id": "c4",
@@ -116,7 +116,7 @@
         "Шлюз отправит промпт в `balanced` (Gemini), а если откажет и он — в локальную модель"
       ],
       "answer": 3,
-      "explain": "В `fallbacks` записан порядок запасных вариантов: сначала Gemini (в Китае — китайский провайдер), в конце — локальный llama-server. Anthropic в этом конфиге нет вовсе (u3, шаг 3)."
+      "explain": "В `fallbacks` записан порядок запасных вариантов: сначала Gemini (в Китае — китайский провайдер, в России — GigaChat), в конце — локальный llama-server. Anthropic в этом конфиге нет вовсе (u3, шаг 3)."
     },
     {
       "id": "c7",
