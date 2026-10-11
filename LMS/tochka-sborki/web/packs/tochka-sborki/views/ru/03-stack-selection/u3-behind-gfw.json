@@ -5,7 +5,7 @@
   "unit": "u3-behind-gfw",
   "locale": "ru",
   "title": "За цензурным файрволом: без VPN",
-  "sourceHash": "sha256:c6982f544d65114c828fe8b4b71363c7dc575c01733e5444659d42d898af8d6c",
+  "sourceHash": "sha256:019a9c6fee78622711e712b9944036be763b13ec3ced80ce694ec2847202c723",
   "outline": [
     {
       "heading": "Карта доступов",
@@ -52,7 +52,7 @@
       "heading": "⚡ Быстрая установка стека Behind-Firewall (одной строкой)",
       "points": [
         {
-          "text": "Одна команда ставит LiteLLM-прокси и Aider и пишет готовый конфиг (Cerebras + Gemini Flash).",
+          "text": "Одна команда ставит LiteLLM-прокси и агента Hermes (официальным установщиком Nous Research), пишет готовый конфиг (Cerebras + Gemini Flash) и подключает Hermes к шлюзу.",
           "origin": "extract"
         }
       ],
@@ -102,7 +102,7 @@
       "heading": "Шаг 5: Подключаем агента",
       "points": [
         {
-          "text": "Готово.",
+          "text": "Агент курса — Hermes (NousResearch/hermes-agent), им пользуется автор.",
           "origin": "extract"
         }
       ],
@@ -143,10 +143,10 @@
         ]
       },
       {
-        "sourceHash": "sha256:b22eaa7b8c689e93fe0fb200697f321140114882422e6f0ed399fa6573f32513",
+        "sourceHash": "sha256:33ec0f79e41e446be49bfdc507ff615813a9320bf7a2e3e9b60db03d915a9174",
         "points": [
-          "Ты можешь установить LiteLLM-прокси и Aider одной командой.",
-          "Она также подготовит файл конфигурации для Cerebras и Gemini Flash."
+          "Одной командой ты установишь LiteLLM-прокси и агента Hermes через официальный установщик Nous Research.",
+          "Эта команда подготовит конфигурацию для Cerebras и Gemini Flash и подключит Hermes к шлюзу."
         ]
       },
       {
@@ -162,9 +162,9 @@
         ]
       },
       {
-        "sourceHash": "sha256:ff57e80224dea7edc65f0314028f026e85efbace08fb9e75e86214f7ecdbcb03",
+        "sourceHash": "sha256:bff245c06d624af4e63a5f31a811c7f20d90c6f1b661deb6ac96e76d311b6b23",
         "points": [
-          "Теперь все готово."
+          "Агентом курса является Hermes от NousResearch/hermes-agent, и именно его использует автор."
         ]
       }
     ]

@@ -7,8 +7,8 @@
 Курс перестал быть «Claude Code only». Модуль показывает 4 жизнеспособных стека для разных контекстов:
 
 - **Claude Code** — paid, max capability ($20+/мес)
-- **Sovereign (SOVERN)** — Hermes + Aider + локальные модели ($0 + железо)
-- **Cloud-OSS** — Cline + OpenRouter / Cerebras free / Groq ($0–5/мес)
+- **Sovereign (SOVERN)** — Hermes + локальные модели ($0 + железо)
+- **Cloud-OSS** — Hermes + OpenRouter / Cerebras free ($0–5/мес)
 - **Behind-Firewall** — Cerebras + Gemini Flash + local llama-server, для Mainland China и России без VPN (в РФ вместо Gemini — GigaChat)
 
 ## Units
@@ -16,7 +16,7 @@
 1. **u1-activation** — 5 вопросов про твои реальные ограничения (бюджет, доступ, железо, приватность, готовность настраивать)
 2. **u2-stack-matrix** — Concept. Интерактивная матрица 4 стеков, decision tree, trade-offs
 3. **u3-behind-gfw** — Hands-on для Mainland China и России: Cerebras + Gemini Flash (в РФ — GigaChat) + LiteLLM gateway + local llama-server, симптомы файрвола. Без VPN.
-4. **u4-hermes-sovereign** — Hermes как boss-orchestrator. SOVERN-pattern: boss держит план, workers (Aider/Cline) делают код. LiteLLM с fallback массивом.
+4. **u4-hermes-sovereign** — Hermes как boss-orchestrator. SOVERN-pattern: boss держит план, workers (Claude Code / Codex) делают код. LiteLLM с fallback массивом.
 5. **u5-migrate** — 7-дневный план миграции с любого старого стека на выбранный.
 
 ## Связь с другими модулями

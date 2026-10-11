@@ -7,7 +7,7 @@
 > задачи — `BACKLOG.md`.
 
 ## Проект
-Точка Сборки — открытый курс по agentic AI в потоке. **Agent-agnostic**: концепции работают с Claude Code, Hermes (SOVERN), Aider, Cline, и др. 10 модулей (ядро 00-08 + опциональный 09-ai-notebook) + упражнения + шпаргалка. **Bilingual**: RU (основной) + EN (`/en/` маршруты). Refactor 2026-05-18: добавлен модуль 03-stack-selection (Behind-GFW + Sovereign), модули 03→04 ... 07→08.
+Точка Сборки — открытый курс по agentic AI в потоке. **Agent-agnostic**: концепции работают с Claude Code, Codex, Hermes и др. (агенты автора; Aider/Cline убраны 2026-10-11 — у автора их нет). 10 модулей (ядро 00-08 + опциональный 09-ai-notebook) + упражнения + шпаргалка. **Bilingual**: RU (основной) + EN (`/en/` маршруты). Refactor 2026-05-18: добавлен модуль 03-stack-selection (Behind-GFW + Sovereign), модули 03→04 ... 07→08.
 
 ## Стек
 

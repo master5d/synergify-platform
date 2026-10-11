@@ -44,7 +44,7 @@ duration: "8 мин"
 
 ```
 ┌─────────────────────────────────────────────┐
-│  Frontend / Agent UI                        │  ← Claude Code, Cline, Aider, Hermes
+│  Frontend / Agent UI                        │  ← Claude Code, Codex, Hermes
 ├─────────────────────────────────────────────┤
 │  Routing / Gateway                          │  ← LiteLLM, OpenRouter, прямой API
 ├─────────────────────────────────────────────┤
@@ -54,7 +54,7 @@ duration: "8 мин"
 
 Каждый слой можно менять независимо. Например:
 - **Claude Code → LiteLLM → Cerebras gpt-oss-120b** — Claude Code UI с открытой моделью
-- **Aider → прямой OpenRouter → модель DeepSeek** — классический OSS workflow
+- **Hermes → прямой OpenRouter → модель DeepSeek** — открытый агент обращается к провайдеру напрямую
 - **Hermes → LiteLLM с цепочкой запасных моделей** — пример собственного стека
 
 Этот модуль научит тебя **думать про стек целиком**, а не «знать одну тулзу».

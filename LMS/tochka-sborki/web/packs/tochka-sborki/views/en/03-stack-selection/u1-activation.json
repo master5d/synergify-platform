@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "en",
   "title": "What are your constraints?",
-  "sourceHash": "sha256:f709e8c0a9d364168eaebd19ef6b111da82dd6f6015f09f5bb0276df43db395a",
+  "sourceHash": "sha256:040dc85769144f3c06b3d6a0a59bfe9400bc6cc8bb2fde8f1e32e4843c6e027d",
   "outline": [
     {
       "heading": "Matching constraints to a stack",
@@ -31,7 +31,15 @@
       "heading": "What \"stack\" means here",
       "points": [
         {
-          "text": "For example: Claude Code → LiteLLM → Cerebras gpt-oss-120b — Claude Code UI with an open model Aider → direct OpenRouter → DeepSeek model — classic OSS workflow Hermes → LiteLLM with a fallback chain — an example of an owner-controlled stack",
+          "text": "Claude Code → LiteLLM → Cerebras gpt-oss-120b",
+          "origin": "extract"
+        },
+        {
+          "text": "Hermes → direct OpenRouter → DeepSeek model",
+          "origin": "extract"
+        },
+        {
+          "text": "Hermes → LiteLLM with a fallback chain",
           "origin": "extract"
         },
         {
@@ -61,8 +69,12 @@
         "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:c1eacd8b1e9c806b4a0bd5661ac4573338199ffa0198dc12c026b0a21dd437e3",
-        "verbatim": "near-identical"
+        "sourceHash": "sha256:32fc6c51dc01bbfb4ac590e24d1ec92ef5046bdcafefb8d3d4d859096046d051",
+        "points": [
+          "You think about Claude Code with LiteLLM and Cerebras gpt-oss-120b or Hermes with direct OpenRouter and DeepSeek model.",
+          "You think about Hermes with LiteLLM and a fallback chain.",
+          "This module teaches you to think about the whole stack rather than knowing one tool."
+        ]
       }
     ]
   }

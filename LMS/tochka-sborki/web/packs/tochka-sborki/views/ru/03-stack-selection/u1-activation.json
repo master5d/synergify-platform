@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "ru",
   "title": "Какие у тебя ограничения?",
-  "sourceHash": "sha256:bef3b59e6d37208fe0507fdc37e31073087cc1934803cbd85e5f5b954be1dbc0",
+  "sourceHash": "sha256:a05865b84bfe8147fe6045d2c61214e6f76064ff4fdc875dc1b0ba49fe1a9439",
   "outline": [
     {
       "heading": "Как сопоставить ограничения и стек",
@@ -31,7 +31,7 @@
       "heading": "Что такое «стек»",
       "points": [
         {
-          "text": "Например: Claude Code → LiteLLM → Cerebras gpt-oss-120b — Claude Code UI с открытой моделью Aider → прямой OpenRouter → модель DeepSeek — классический OSS workflow Hermes → LiteLLM с цепочкой запасных моделей — пример собственного стека",
+          "text": "Например: Claude Code → LiteLLM → Cerebras gpt-oss-120b — Claude Code UI с открытой моделью Hermes → прямой OpenRouter → модель DeepSeek — открытый агент обращается к провайдеру напрямую Hermes → LiteLLM с цепочкой запасных моделей — пример собственного стека",
           "origin": "extract"
         },
         {
@@ -65,11 +65,10 @@
         ]
       },
       {
-        "sourceHash": "sha256:a06b772922ec7362bef7bf50dfcee64c6e3c7fc08c504f347913e8463221da35",
+        "sourceHash": "sha256:aa846f97fc43464970b61952ca28bf2010c281197f8622c0565dccda1161e8fa",
         "points": [
-          "Примером собственного стека может быть связка Claude Code, LiteLLM и Cerebras gpt-oss-120b.",
-          "Можно сочетать Claude Code UI с открытой моделью Aider, прямым OpenRouter и моделью DeepSeek или использовать OSS workflow Hermes с LiteLLM и цепочкой запасных моделей.",
-          "Этот модуль научит тебя воспринимать стек целиком, а не просто знать один инструмент."
+          "Стек — это цепочка инструментов, например, от интерфейса до конкретной модели.",
+          "Здесь важно понимать систему целиком, а не просто знать один инструмент."
         ]
       }
     ]

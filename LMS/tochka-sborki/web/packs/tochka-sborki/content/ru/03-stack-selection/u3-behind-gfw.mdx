@@ -45,7 +45,7 @@ Claude, OpenAI и Gemini (AI Studio) закрыты для России сами
 
 ## ⚡ Быстрая установка стека Behind-Firewall (одной строкой)
 
-Одна команда ставит LiteLLM-прокси и Aider и пишет готовый конфиг (Cerebras + Gemini Flash). В Китае Gemini не работает — после установки замени его на китайского провайдера (шаг 2); для России у установщика есть свой режим (ниже). Ниже — разбор по шагам, если хочешь понять, что происходит.
+Одна команда ставит LiteLLM-прокси и агента Hermes (официальным установщиком Nous Research), пишет готовый конфиг (Cerebras + Gemini Flash) и подключает Hermes к шлюзу. В Китае Gemini не работает — после установки замени его на китайского провайдера (шаг 2); для России у установщика есть свой режим (ниже). Ниже — разбор по шагам, если хочешь понять, что происходит.
 
 <OsToggle />
 
@@ -87,13 +87,13 @@ $env:GFW_REGION = 'ru'; irm https://ai.synergify.com/install-gfw.ps1 | iex
 
 > ⚠️ Это тоже запуск чужого скрипта одной строкой. Если хочешь сначала его прочитать, сделай как в модуле 02: скачай в файл, открой, потом запусти.
 
-После установки: впиши ключи в `~/.config/litellm/.env`, запусти `start.sh`/`start.ps1`, наведи Aider на `http://localhost:4000`. При первом запуске start-скрипт сам допишет в `.env` ключ шлюза `LITELLM_MASTER_KEY`: свежий LiteLLM без него не стартует, а агент передаёт его шлюзу как API key.
+После установки: впиши ключи провайдеров в `~/.config/litellm/.env`, запусти `start.sh`/`start.ps1`, а в другом терминале — `hermes`. Установщик уже записал в `.env` ключ шлюза `LITELLM_MASTER_KEY` (свежий LiteLLM без него не стартует) и передал его Hermes. Установщику Hermes нужен доступ к `hermes-agent.nousresearch.com` и GitHub; если он не прошёл, шлюз всё равно работает — проверь его запросом из практики, а Hermes поставь по шагу 5, когда сеть позволит.
 
 ## Архитектура «Behind-Firewall»
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  Frontend: Hermes / Aider / Cline / Continue.dev        │
+│  Агент: Hermes (или любой OpenAI-совместимый)           │
 ├─────────────────────────────────────────────────────────┤
 │  Router: LiteLLM (localhost:4000)                       │
 │  ┌────────────────────────────────────────────────────┐ │
@@ -246,24 +246,46 @@ Invoke-WebRequest -Uri "https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-
 Запускаем llama-server (нужен llama.cpp):
 
 ```bash
-llama-server -m Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf --port 8080
+llama-server -m Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf --port 8080 -c 65536
 ```
 
-> 💡 Для Qwen3-Coder-30B нужно 32 ГБ RAM: файл Q4_K_M занимает примерно 18–19 ГБ. На 16 ГБ возьми модель до 8B.
+> 💡 Для Qwen3-Coder-30B нужно 32 ГБ RAM: файл Q4_K_M занимает примерно 18–19 ГБ, и ещё несколько гигабайт уходит на контекст. На 16 ГБ возьми модель до 8B. `-c 65536` — потому что Hermes требует у модели контекст от 64K токенов, а по умолчанию llama-server даёт меньше.
 
 ## Шаг 5: Подключаем агента
 
-Любой OpenAI-compatible агент (Aider, Cline, Continue.dev, Hermes) подключается одинаково:
+Агент курса — Hermes ([NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent)), им пользуется автор. Установщик из быстрой установки уже подключил его к шлюзу. Вручную — так:
+
+<OsBlock os="mac">
 
 ```bash
-# Aider (ключ — LITELLM_MASTER_KEY из .env)
-aider --model openai/fast-pool --openai-api-base http://localhost:4000 --openai-api-key "$LITELLM_MASTER_KEY"
-
-# Cline (VS Code) — в настройках:
-# OpenAI Compatible: http://localhost:4000
-# API Key: значение LITELLM_MASTER_KEY
-# Model: fast-pool
+curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash   # официальный установщик
+hermes config set model.provider custom
+hermes config set model.base_url http://127.0.0.1:4000/v1
+hermes config set model.default fast-pool
+hermes config set model.key_env LITELLM_MASTER_KEY
+grep '^LITELLM_MASTER_KEY=' ~/.config/litellm/.env >> ~/.hermes/.env
+hermes
 ```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+iex (irm https://hermes-agent.nousresearch.com/install.ps1)   # официальный установщик
+hermes config set model.provider custom
+hermes config set model.base_url http://127.0.0.1:4000/v1
+hermes config set model.default fast-pool
+hermes config set model.key_env LITELLM_MASTER_KEY
+Select-String -Path $HOME\.config\litellm\.env -Pattern '^LITELLM_MASTER_KEY=' | ForEach-Object { $_.Line } | Add-Content $env:LOCALAPPDATA\hermes\.env
+hermes
+```
+
+</OsBlock>
+
+То же интерактивно: `hermes model` → «Custom endpoint». В России вместо `fast-pool` поставь `balanced` (GigaChat). Hermes требует у модели контекст от 64K токенов — с меньшим он не стартует.
+
+Любой другой OpenAI-совместимый агент подключается теми же тремя значениями: адрес `http://127.0.0.1:4000/v1`, ключ — `LITELLM_MASTER_KEY`, модель — `fast-pool`.
 
 Готово. Полноценный agentic workflow без Anthropic, без OpenAI, без VPN.
 

@@ -49,7 +49,7 @@ Since June 2025, Russian ISPs have also been throttling connections to sites beh
 
 ## ⚡ Quick install of the Behind-Firewall stack (one line)
 
-One command installs the LiteLLM proxy and Aider and writes a ready config (Cerebras + Gemini Flash). Gemini doesn't work in China — after install, replace it with a Chinese provider (step 2); for Russia the installer has its own mode (below). The step-by-step breakdown is below if you want to understand what happens.
+One command installs the LiteLLM proxy and the Hermes agent (with the official Nous Research installer), writes a ready config (Cerebras + Gemini Flash), and connects Hermes to the model gateway. Gemini doesn't work in China — after install, replace it with a Chinese provider (step 2); for Russia the installer has its own mode (below). The step-by-step breakdown is below if you want to understand what happens.
 
 <OsToggle />
 
@@ -91,13 +91,13 @@ $env:GFW_REGION = 'ru'; irm https://ai.synergify.com/install-gfw.ps1 | iex
 
 > ⚠️ This, too, runs someone else's script in one line. If you want to read it first, do as in module 02: save it to a file, open it, then run it.
 
-After install: add your keys to `~/.config/litellm/.env`, run `start.sh`/`start.ps1`, point Aider at `http://localhost:4000`. On first run the start script adds the model gateway key `LITELLM_MASTER_KEY` to `.env` by itself: recent LiteLLM won't start without it, and the agent passes it to the model gateway as its API key.
+After install: add your provider keys to `~/.config/litellm/.env`, run `start.sh`/`start.ps1`, and in another terminal run `hermes`. The installer has already written the model gateway key `LITELLM_MASTER_KEY` to `.env` (recent LiteLLM won't start without it) and handed it to Hermes. The Hermes installer needs access to `hermes-agent.nousresearch.com` and GitHub; if it didn't get through, the model gateway still works — check it with the request from the practice, and install Hermes per step 5 when the network allows.
 
 ## "Behind-Firewall" architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  Frontend: Hermes / Aider / Cline / Continue.dev        │
+│  Agent: Hermes (or any OpenAI-compatible one)           │
 ├─────────────────────────────────────────────────────────┤
 │  Router: LiteLLM (localhost:4000)                       │
 │  ┌────────────────────────────────────────────────────┐ │
@@ -250,24 +250,46 @@ Invoke-WebRequest -Uri "https://hf-mirror.com/Qwen/Qwen3-Coder-30B-A3B-Instruct-
 Run llama-server (needs llama.cpp):
 
 ```bash
-llama-server -m Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf --port 8080
+llama-server -m Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf --port 8080 -c 65536
 ```
 
-> 💡 Qwen3-Coder-30B needs 32 GB RAM: the Q4_K_M file is about 18–19 GB. On 16 GB, choose a model up to 8B.
+> 💡 Qwen3-Coder-30B needs 32 GB RAM: the Q4_K_M file is about 18–19 GB. On 16 GB, choose a model up to 8B. `-c 65536` is there because Hermes needs a model context of at least 64K tokens, and llama-server's default is smaller; the context also takes a few more gigabytes of RAM.
 
 ## Step 5: Wire up an agent
 
-Any OpenAI-compatible agent (Aider, Cline, Continue.dev, Hermes) plugs in the same way:
+The course agent is Hermes ([NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent)) — the one the author uses. The quick-install script has already connected it to the model gateway. By hand:
+
+<OsBlock os="mac">
 
 ```bash
-# Aider (the key is LITELLM_MASTER_KEY from .env)
-aider --model openai/fast-pool --openai-api-base http://localhost:4000 --openai-api-key "$LITELLM_MASTER_KEY"
-
-# Cline (VS Code) — in settings:
-# OpenAI Compatible: http://localhost:4000
-# API Key: the LITELLM_MASTER_KEY value
-# Model: fast-pool
+curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash   # official installer
+hermes config set model.provider custom
+hermes config set model.base_url http://127.0.0.1:4000/v1
+hermes config set model.default fast-pool
+hermes config set model.key_env LITELLM_MASTER_KEY
+grep '^LITELLM_MASTER_KEY=' ~/.config/litellm/.env >> ~/.hermes/.env
+hermes
 ```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+iex (irm https://hermes-agent.nousresearch.com/install.ps1)   # official installer
+hermes config set model.provider custom
+hermes config set model.base_url http://127.0.0.1:4000/v1
+hermes config set model.default fast-pool
+hermes config set model.key_env LITELLM_MASTER_KEY
+Select-String -Path $HOME\.config\litellm\.env -Pattern '^LITELLM_MASTER_KEY=' | ForEach-Object { $_.Line } | Add-Content $env:LOCALAPPDATA\hermes\.env
+hermes
+```
+
+</OsBlock>
+
+The same, interactively: `hermes model` → "Custom endpoint". In Russia, use `balanced` (GigaChat) instead of `fast-pool`. Hermes needs a model context of at least 64K tokens and won't start with less.
+
+Any other OpenAI-compatible agent connects with the same three values: address `http://127.0.0.1:4000/v1`, key `LITELLM_MASTER_KEY`, model `fast-pool`.
 
 Done. Full agentic workflow without Anthropic, without OpenAI, without VPN.
 

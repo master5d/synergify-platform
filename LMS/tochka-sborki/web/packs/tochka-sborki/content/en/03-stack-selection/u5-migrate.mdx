@@ -17,7 +17,7 @@ What will you move first without letting go of the old horse?
 
 Picture a snake shedding its skin 🐍. It doesn't rip the old layer off in one go. The new one grows underneath, the old one peels away gradually, and for a while both exist at once. That's not weakness — it's the only way to stay covered.
 
-Catch the same idea here. Most common migration mistake: "I'll just uninstall Claude Code, install Aider, and be more efficient." Doesn't work — the new skin hasn't hardened yet.
+Catch the same idea here. Most common migration mistake: "I'll just uninstall Claude Code, install Hermes, and be more efficient." Doesn't work — the new skin hasn't hardened yet.
 
 Return to the **river crossing and two horses**: migration moves in steps until the new support survives real work.
 
@@ -37,7 +37,7 @@ The template below sets a safe sequence: setup and reproduce a familiar task fir
 # Migration to [your stack] — 7 days
 
 ## Day 1: Setup
-- [ ] Install the frontend agent (Hermes / Aider / Cline / Claude Code)
+- [ ] Install the frontend agent (Claude Code / Codex / Hermes)
 - [ ] Bring up LiteLLM gateway locally
 - [ ] Get API keys (Cerebras / Gemini / etc.)
 - [ ] Make a "hello world" call via curl
@@ -59,7 +59,7 @@ The template below sets a safe sequence: setup and reproduce a familiar task fir
 
 ## Day 6: Honest comparison
 - [ ] Write down: what's better on the new stack, what's worse
-- [ ] Where hybrid makes sense (e.g., Claude Code for design + Aider for refactoring)
+- [ ] Where hybrid makes sense (e.g., Claude Code for design + Codex for refactoring)
 
 ## Day 7: Decision
 - [ ] Verdict: full migration / hybrid / rollback
@@ -88,13 +88,13 @@ Minimum:
 
 The next module (04 — Prompt Engineering) is agent-agnostic. The concepts (spec formula, magic words, prompting sins) work the same across agents. The commands below are for Claude Code; translate them for another agent using the comparison table.
 
-| Need | Claude Code | Codex | Hermes | Cline |
-|---|---|---|---|---|
-| Install | see the official README | see the official README | see the official README | see the official README |
-| Launch | `claude` | `codex` | see the agent docs | see the agent docs |
-| Instruction file | `CLAUDE.md` / `AGENTS.md` | `AGENTS.md` | see the agent docs | see the agent docs |
-| MCP | Claude Code settings | Codex settings | see the agent docs | see the agent docs |
-| Hooks / Skills | `.claude/` | see the agent docs | see the agent docs | see the agent docs |
+| Need | Claude Code | Codex | Hermes |
+|---|---|---|---|
+| Install | see the official README | see the official README | official installer (`install.sh` / `install.ps1`, step 5 in u3) |
+| Launch | `claude` | `codex` | `hermes` |
+| Instruction file | `CLAUDE.md` / `AGENTS.md` | `AGENTS.md` | `AGENTS.md` / `.hermes.md` |
+| MCP | Claude Code settings | Codex settings | `mcp_servers` in `~/.hermes/config.yaml` |
+| Hooks / Skills | `.claude/` | see the agent docs | skills — `~/.hermes/skills/` |
 
 By the end of the course you'll have a working stack of **your** choice. Not a mono-tool, but a flexible system.
 

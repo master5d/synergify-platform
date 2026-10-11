@@ -136,11 +136,11 @@
       "id": "c8",
       "unit": "u3-behind-gfw",
       "objective": "o1",
-      "question": "LiteLLM is already running on `localhost:4000`. You want to try Cline instead of Aider. What will you have to change?",
+      "question": "LiteLLM is already running on `localhost:4000`. You want to try another OpenAI-compatible agent instead of Hermes. What will you have to change?",
       "options": [
         "The whole LiteLLM config and the provider keys",
         "Only the agent's connection: point it at the same `localhost:4000` and the model name",
-        "Move to a different model provider, because Cline doesn't work with Cerebras",
+        "Move to a different model provider, because the other agent doesn't work with Cerebras",
         "Set up a separate model gateway for each agent"
       ],
       "answer": 1,

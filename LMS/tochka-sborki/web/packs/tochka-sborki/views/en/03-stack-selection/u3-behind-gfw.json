@@ -5,7 +5,7 @@
   "unit": "u3-behind-gfw",
   "locale": "en",
   "title": "Behind a censorship firewall: no VPN",
-  "sourceHash": "sha256:c392951151d1b2564574196b383e7bd738948f667672f56fdc46ad5337c4ab25",
+  "sourceHash": "sha256:c42287f94427a2983af2982418647a9fa2d63dde2f255353e0ddc4f20f9ff593",
   "outline": [
     {
       "heading": "Access map",
@@ -52,7 +52,7 @@
       "heading": "⚡ Quick install of the Behind-Firewall stack (one line)",
       "points": [
         {
-          "text": "One command installs the LiteLLM proxy and Aider and writes a ready config (Cerebras + Gemini Flash).",
+          "text": "One command installs the LiteLLM proxy and the Hermes agent (with the official Nous Research installer), writes a ready config (Cerebras + Gemini Flash), and connects Hermes to the model gateway.",
           "origin": "extract"
         }
       ],
@@ -102,7 +102,7 @@
       "heading": "Step 5: Wire up an agent",
       "points": [
         {
-          "text": "Done.",
+          "text": "The course agent is Hermes (NousResearch/hermes-agent) — the one the author uses.",
           "origin": "extract"
         }
       ],
@@ -141,7 +141,7 @@
         ]
       },
       {
-        "sourceHash": "sha256:53d58e368dee8dfdce300208a8e729c7e5d451ec98ab61e8e4ab65689eb03cd3",
+        "sourceHash": "sha256:66207af24dbdf2de7b5e594ff5bb954a9ac3564e4e72cbf48da0fe206955645a",
         "verbatim": "near-identical"
       },
       {
@@ -157,10 +157,8 @@
         ]
       },
       {
-        "sourceHash": "sha256:a50f885f95f06256f038d667c7db7808456553be438a45357710841eb8f9a9a6",
-        "points": [
-          "You are done."
-        ]
+        "sourceHash": "sha256:57e64a9d7a177af9eda7d99758157492adaaee192120cd36688d50b075898945",
+        "verbatim": "near-identical"
       }
     ]
   }
