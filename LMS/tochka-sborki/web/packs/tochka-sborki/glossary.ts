@@ -72,6 +72,11 @@ export const GLOSSARY: GlossaryEntry[] = [
     banned: { ru: [/(?<![A-Za-zА-Яа-яЁё])гейтве(?:й|я|ю|ем|е|и|ев)(?![A-Za-zА-Яа-яЁё])/gi], en: [/(?<!model )\bgateway\b/gi] },
   },
   {
+    term: 'everything around the model',
+    canon: { ru: 'обвязка (harness)', en: 'harness' },
+    banned: { ru: [/(?<![A-Za-zА-Яа-яЁё])харнесс?(?:а|у|ом|е|ы|ов)?(?![A-Za-zА-Яа-яЁё])/gi], en: [] },
+  },
+  {
     term: 'working style',
     canon: { ru: 'vibe coding', en: 'vibe coding' },
     banned: { ru: [/vibe-coding/gi, /вайб-кодинг[а-яё]*/gi], en: [/vibe-coding/gi] },

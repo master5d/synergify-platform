@@ -117,12 +117,14 @@ cat error.log | claude -p 'explain the error'
 ```bash
 /config                         # Open settings.json in the editor
 /model <model>                  # Switch model in the session
-/fast                           # Switch to Haiku (fast/cheap)
+/fast                           # Fast mode: same model, faster output
 /effort low|medium|high         # Analysis depth
 /permissions                    # View and configure permissions
 /vim                            # Enable vim editing mode
 /theme                          # Change color theme
 ```
+
+> 💡 **Reasoning depth.** Maximum on planning and verification, one level lower on implementation. For LangChain this "sandwich" scored 66.5% on Terminal Bench 2.0, while "maximum everywhere" scored 53.9%: the agent ran out of time.
 
 **Permission modes:**
 
@@ -404,7 +406,7 @@ One file of project context and rules for any agent: Codex, Cursor, Copilot, Ant
 ## What to avoid
 ```
 
-`/init` in Claude Code generates a CLAUDE.md from an existing project. Move what's useful into AGENTS.md and leave `@AGENTS.md` in CLAUDE.md.
+`/init` in Claude Code generates a CLAUDE.md from an existing project. Move what's useful into AGENTS.md and leave `@AGENTS.md` in CLAUDE.md. Treat the generated file as a draft: an ETH Zurich study (2026) found that context files don't raise agent success on average, add more than 20% to the cost, and repository overviews don't help. Keep what the agent can't find out on its own: non-standard rules, check commands, bans.
 
 ### TODO.md
 ```markdown

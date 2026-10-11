@@ -40,6 +40,17 @@ Catch the moment: the last time Claude played something in the wrong key — tha
 
 `/btw` doesn't fit here: it's a side question about the current session, and it isn't added to the conversation history.
 
+## From mistake to check
+
+A rule in AGENTS.md is the first step, not the last: the agent can miss a rule or lose it in a long session, but it can't get around a check. The stabilization loop:
+
+1. **Mistake** — the agent did the wrong thing.
+2. **Rule** — a short ban or requirement in AGENTS.md: "NEVER…", "ALWAYS…".
+3. **Reference example** — a sample of the right result next to the rule: a file, a test, a commit.
+4. **Check** — something that catches the violation without you: a test, a linter, a Hook (module 07).
+
+A rule without a check is a wish. After a mistake, don't ask "why is the agent like this" — ask "which tool, constraint, or document was it missing".
+
 ## Techniques for long sessions
 
 ### Context compression
@@ -90,7 +101,7 @@ Final task for module 05:
 1. Launch Claude Code in your project: `claude`
 2. Give it a task from TODO.md
 3. Update AGENTS.md if you learned something important about the project during work
-4. After the session: add one rule to the "Rules" section of AGENTS.md based on something Claude did wrong (if that happened), and update STATE.md
+4. After the session: add one rule to the "Rules" section of AGENTS.md based on something Claude did wrong (if that happened), write down which check could enforce it, and update STATE.md
 
 Mid-session, give the agent a new detail as a normal message — see whether it uses it in later answers. For comparison, ask a side question via `/btw`: notice that it isn't added to the conversation history.
 

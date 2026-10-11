@@ -65,6 +65,17 @@ Every layer is swappable. For example:
 - **Hermes → direct OpenRouter → DeepSeek model** — an open agent talking to the provider directly
 - **Hermes → LiteLLM with a fallback chain** — an example of an owner-controlled stack
 
+## The harness
+
+Everything around the model is called the **harness**: instructions and AGENTS.md, tools and MCP, Hooks — checks around the agent's actions, memory, the sandbox. The short formula: **agent = model + harness**.
+
+The harness has three levers:
+- **instructions** — the prompt and AGENTS.md (modules 04 and 05);
+- **tools** — MCP, Skills, access to files and commands (module 07);
+- **checks around calls** — Hooks, tests, a step limit (modules 07 and 08).
+
+The harness matters as much as the model. In February 2026 LangChain lifted its agent on Terminal Bench 2.0 from 52.8% to 66.5% without changing the model: only the instructions, the checks, and where the agent thinks longer changed. The stack layers above are part of the harness too: they decide which model the agent gets and through which model gateway.
+
 This module teaches you to **think about the whole stack** rather than "knowing one tool".
 
 <SelfCheck id="c1"/>

@@ -5,13 +5,23 @@
   "unit": "u4-practice",
   "locale": "ru",
   "title": "Настрой свою память",
-  "sourceHash": "sha256:4b0d548d0d5d87519c342960f767304edd566ee213f96ea32cde3449d0d4e8c3",
+  "sourceHash": "sha256:064ae1664fef63d3f8a47635af488ecb5603da036d9afaf76c7df836c0108915",
   "outline": [
     {
       "heading": "Когда обновлять что",
       "points": [
         {
           "text": "/btw для этого не подходит: это побочный вопрос о текущей сессии, и в историю разговора он не попадает.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "От ошибки к проверке",
+      "points": [
+        {
+          "text": "Правило в AGENTS.md — первый шаг, но не последний: агент может не заметить правило или потерять его в длинной сессии, а проверку не обойдёт.",
           "origin": "extract"
         }
       ],
@@ -62,6 +72,18 @@
     "sections": [
       {
         "sourceHash": "sha256:9966e7be43027acef7bca63fb77c547f77356d119b85c087d1b92729eb66788f",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:ed1ed3d3574d592df4f0dd780410fb9a6ff0d123fea7ea095db5a28780fe9c61",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:61fb68a396a16ca8415289538a2a65ea2e6e4115a234536c800b7c5793670c93",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:07fa680894a07841fcbadbe29ccc4dc5cd171bcf2301b7d201b6750971d29ad5",
         "verbatim": "near-identical"
       }
     ]

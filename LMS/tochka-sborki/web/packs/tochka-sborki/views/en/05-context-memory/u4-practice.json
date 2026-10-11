@@ -5,13 +5,23 @@
   "unit": "u4-practice",
   "locale": "en",
   "title": "Tune your memory",
-  "sourceHash": "sha256:f2e2ca2130d3ee1cb5277ec286729667eea56d2780065de01f6704c6d8959678",
+  "sourceHash": "sha256:c701b50bf34c9c27bd198ce7fda505210234f43f78658e3a551a6d9717771eb0",
   "outline": [
     {
       "heading": "When to update what",
       "points": [
         {
           "text": "/btw doesn't fit here: it's a side question about the current session, and it isn't added to the conversation history.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "From mistake to check",
+      "points": [
+        {
+          "text": "A rule in AGENTS.md is the first step, not the last: the agent can miss a rule or lose it in a long session, but it can't get around a check.",
           "origin": "extract"
         }
       ],
@@ -65,6 +75,25 @@
         "points": [
           "You do not use /btw here because it is a side question about the current session and is not added to the conversation history."
         ]
+      },
+      {
+        "sourceHash": "sha256:2975081313f0a00791cea65f29e91eabd425b450848b682d347072250a79976e",
+        "points": [
+          "A rule in AGENTS.md is a starting point, not a final solution.",
+          "Agents might miss rules or lose them during long sessions.",
+          "However, agents cannot bypass a check."
+        ]
+      },
+      {
+        "sourceHash": "sha256:b4a09c75cf33055c2868e219e5711916ec625382c398d8ca1c61721f3ee94692",
+        "points": [
+          "The /compact command compresses history into a summary.",
+          "CLAUDE.md is reloaded after this compression occurs."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2422a52c52e076f9b182a3e25d19234913182932046df761381c2e482dc76e64",
+        "verbatim": "near-identical"
       }
     ]
   }

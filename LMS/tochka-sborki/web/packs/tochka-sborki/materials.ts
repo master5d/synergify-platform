@@ -218,6 +218,42 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
     ],
   },
   {
+    // intake LMS#35: первоисточники вместо PDF-компиляции без лицензии. Сверены 2026-10-11.
+    label: { ru: 'Обвязка агента (harness)', en: 'The agent harness' },
+    items: [
+      {
+        kind: 'link',
+        title: { ru: 'OpenAI: Harness engineering (англ.)', en: 'OpenAI: Harness engineering' },
+        description: {
+          ru: 'Как команда OpenAI за пять месяцев собрала продукт, где весь код пишет Codex, а люди строят обвязку: документы, проверки, линтеры',
+          en: 'How an OpenAI team built a product in five months where Codex writes all the code and humans build the harness: docs, checks, linters',
+        },
+        href: 'https://openai.com/index/harness-engineering/',
+        external: true,
+      },
+      {
+        kind: 'link',
+        title: { ru: 'LangChain: Improving Deep Agents with harness engineering (англ.)', en: 'LangChain: Improving Deep Agents with harness engineering' },
+        description: {
+          ru: 'Та же модель, другая обвязка: +13,7 пункта в Terminal Bench 2.0, детектор зацикливания, «сэндвич» глубины рассуждения',
+          en: 'Same model, different harness: +13.7 points on Terminal Bench 2.0, a loop detector, a reasoning-depth "sandwich"',
+        },
+        href: 'https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering',
+        external: true,
+      },
+      {
+        kind: 'link',
+        title: { ru: 'ETH Zurich: помогает ли AGENTS.md агентам (англ.)', en: 'ETH Zurich: are AGENTS.md files helpful for coding agents?' },
+        description: {
+          ru: 'Исследование 2026 года: файлы контекста в среднем не повышают успех и удорожают работу; полезны только нестандартные правила. CC BY 4.0',
+          en: 'A 2026 study: context files don\'t raise success on average and add cost; only non-standard rules help. CC BY 4.0',
+        },
+        href: 'https://arxiv.org/abs/2602.11988',
+        external: true,
+      },
+    ],
+  },
+  {
     label: { ru: 'Agent SDK: от CLI к своему агенту', en: 'Agent SDK: from the CLI to your own agent' },
     items: [
       {

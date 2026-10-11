@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "en",
   "title": "What are your constraints?",
-  "sourceHash": "sha256:ff94d597b3c45b0ca49bb8a5757ba2885a2c21f47f0991081f0ba80fc85aeae2",
+  "sourceHash": "sha256:5d86eafb73d2da3f65a18f5e786af1faaa4ec014c19948620fe7aca00597c306",
   "outline": [
     {
       "heading": "Matching constraints to a stack",
@@ -41,6 +41,16 @@
         {
           "text": "Hermes → LiteLLM with a fallback chain",
           "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The harness",
+      "points": [
+        {
+          "text": "The short formula: agent = model + harness.",
+          "origin": "extract"
         },
         {
           "text": "This module teaches you to think about the whole stack rather than \"knowing one tool\".",
@@ -69,12 +79,16 @@
         "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:32fc6c51dc01bbfb4ac590e24d1ec92ef5046bdcafefb8d3d4d859096046d051",
+        "sourceHash": "sha256:347227dad2a37055dd2177817217bfc114353877b429a9e21069fa8a601c2d0c",
         "points": [
-          "You think about Claude Code with LiteLLM and Cerebras gpt-oss-120b or Hermes with direct OpenRouter and DeepSeek model.",
-          "You think about Hermes with LiteLLM and a fallback chain.",
-          "This module teaches you to think about the whole stack rather than knowing one tool."
+          "Claude Code connects to LiteLLM, which then uses the Cerebras gpt-oss-120b model.",
+          "Hermes can connect directly to OpenRouter to use a DeepSeek model.",
+          "Hermes can also use LiteLLM with a fallback chain."
         ]
+      },
+      {
+        "sourceHash": "sha256:95b14517751726a9701002780ace912b4f51a0f3df5b4517b356a432b7262f8d",
+        "verbatim": "near-identical"
       }
     ]
   }
