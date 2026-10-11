@@ -174,7 +174,8 @@
   описывает только то, что реально работает у автора, с датой.
   Grep по снятым продуктам не ловит то, чего у автора не было никогда (Aider/Cline прожили в курсе
   2026-05-19 → 2026-10-11): добавляя или оставляя в курсе инструмент, сверяй его с каноном стека
-  (NAUTILUS `docs/cheatsheets/28-stack.md`), а не только с журналом снятого.
+  (NAUTILUS `docs/cheatsheets/28-stack.md`) и списком ядер коробки (`core/agentbox/kernels/KERNELS` — goose,
+  OpenCode, Pi, nanobot, CheetahClaws, dsh, Unreal Agent прошли bake-off), а не только с журналом снятого.
 
 ## Gemini-Notebook слой (2026-08-04, спек `2026-08-04-notebook-module-design`)
 - **`/notebook`** (и `/en/notebook`, открыто, без почты) — «пакет тетрадки»: `lib/course/notebook-pack.ts` (паттерн `/try`: engine+data, `Bi{ru;en}` и resolvers) — 3 пака источников, PROMPT_KIT (каждый промпт ТРЕБУЕТ цитату — под тестом), VERIFY_CHECKLIST «где тетрадка врёт». В nav НЕ добавлен (шапка ужата); входы — модуль 09 и sitemap.

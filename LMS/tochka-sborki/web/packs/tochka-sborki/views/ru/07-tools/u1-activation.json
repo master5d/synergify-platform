@@ -5,7 +5,7 @@
   "unit": "u1-activation",
   "locale": "ru",
   "title": "Чего не хватает Claude Code?",
-  "sourceHash": "sha256:8c23094ff8e8c26d72b3c3bfd1036eddf66dde50996e4e06137162726120bbd0",
+  "sourceHash": "sha256:b4c104e3eca478a9c43fdc5bac68daeee87b7f397bd75ebc7e4982892c5e056a",
   "outline": [
     {
       "heading": "Таксономия расширений Claude Code",

@@ -90,7 +90,9 @@ duration: "5 мин"
 | Запуск | `claude` | `codex` | `hermes` |
 | Файл инструкций | `CLAUDE.md` / `AGENTS.md` | `AGENTS.md` | `AGENTS.md` / `.hermes.md` |
 | MCP | настройки Claude Code | настройки Codex | `mcp_servers` в `~/.hermes/config.yaml` |
-| Hooks / Skills | `.claude/` | см. документацию агента | навыки — `~/.hermes/skills/` |
+| Hooks / Skills | `.claude/` | см. документацию агента | Skills — `~/.hermes/skills/` |
+
+В сентябре 2026 автор прогнал одни и те же задачи на одной модели в изолированной песочнице ещё на семи открытых агентах: goose, OpenCode, Pi, nanobot, CheetahClaws, dsh (DeepSeek) и Unreal Agent. Skills есть у всех, кроме Pi — он сознательно обходится без Skills и MCP; MCP-серверы подключаются у goose, OpenCode, nanobot и CheetahClaws. Файл инструкций и формат Skills у каждого свой — смотри их README.
 
 К концу курса у тебя будет работающий стек **твоего** выбора. Не моно-tool, а гибкая сисмодуль.
 
