@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { UnitWizardContext } from './unit-wizard-context'
 import { useUnitProgress } from '@/lib/unit-progress'
-import { reportUnitCompleted, type CourseOutline } from '@/lib/progress-sync'
+import { reportUnitCompleted, reportUnitViewed, type CourseOutline } from '@/lib/progress-sync'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
 import { SKINS_META } from '@/lib/rpg/skins-meta'
 import { getUnitFraming } from '@/lib/rpg/unit-framing'
@@ -73,6 +73,7 @@ export function UnitWizard({
   const { markCompleted } = useUnitProgress()
   const router = useRouter()
   const topRef = useRef<HTMLDivElement>(null)
+  const viewedUnitRef = useRef<string | null>(null)
 
   const [skin, setSkin] = useState<WorldSkin | null>(null)
   const [pack, setPack] = useState<SkinPack | null>(null)
@@ -84,6 +85,12 @@ export function UnitWizard({
   const { award, setMode, getMode, ready: shardsReady } = useShards()
   const chosenMode: Mode | undefined = getMode(unitKey)
   const { state: pacingState, logCompletion: logPacing } = usePacing()
+
+  useEffect(() => {
+    if (viewedUnitRef.current === unitKey) return
+    viewedUnitRef.current = unitKey
+    void reportUnitViewed({ course: COURSE.progressKey, moduleSlug, unitSlug })
+  }, [moduleSlug, unitKey, unitSlug])
 
   // Dopamine-break (pattern-interrupt) trigger state — session-scoped, in-memory.
   const breaks = resolveBreaks(locale)

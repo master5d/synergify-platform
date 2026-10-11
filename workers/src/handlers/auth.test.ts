@@ -71,9 +71,26 @@ describe('handleSendLink', () => {
   })
 
   it('returns 502 if SES email send fails', async () => {
+    const calls: DbCall[] = []
     sesMock.mockResolvedValue({ ok: false, status: 500, error: 'boom' })
-    const res = await handleSendLink(sendLinkReq({ email: 'test@example.com' }), makeEnv(), ctx)
+    const res = await handleSendLink(sendLinkReq({ email: 'test@example.com' }), makeEnv({ calls }), ctx)
     expect(res.status).toBe(502)
+    const update = calls.find(c => /UPDATE magic_links SET send_status/.test(c.sql))
+    expect(update?.binds).toEqual(['error', '500', null, expect.any(String)])
+    expect(calls.some(c => /INSERT INTO magic_links/.test(c.sql))).toBe(true)
+  })
+
+  it('records accepted SES status without storing message or address data', async () => {
+    const calls: DbCall[] = []
+    const res = await handleSendLink(sendLinkReq({ email: 'test@example.com' }), makeEnv({ calls }), ctx)
+    expect(res.status).toBe(200)
+    const update = calls.find(c => /UPDATE magic_links SET send_status/.test(c.sql))
+    expect(update).toBeDefined()
+    expect(update!.binds[0]).toBe('accepted')
+    expect(update!.binds[1]).toBeNull()
+    expect(update!.binds[2]).toEqual(expect.any(Number))
+    expect(update!.binds).not.toContain('test@example.com')
+    expect(update!.binds).not.toContain('boom')
   })
 })
 

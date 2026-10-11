@@ -51,6 +51,23 @@ function buildMagicLinkEmail(lang: string, verifyUrl: string, courseName: { ru: 
   }
 }
 
+async function recordMagicLinkSend(
+  env: Env,
+  token: string,
+  status: 'accepted' | 'error',
+  errorCode: string | null,
+  sentAt: number | null,
+): Promise<void> {
+  try {
+    await env.DB.prepare(
+      'UPDATE magic_links SET send_status = ?, send_error_code = ?, sent_at = ? WHERE token = ?'
+    ).bind(status, errorCode, sentAt, token).run()
+  } catch (error) {
+    // Delivery outcome is observability; it must not change the existing auth response.
+    console.error('magic-link delivery status write failed', error)
+  }
+}
+
 export async function handleSendLink(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   let body: { email?: string; telegram_handle?: string; utm_source?: string; utm_medium?: string; utm_campaign?: string; return_to?: string }
   try { body = await request.json() } catch { return Response.json({ error: 'Invalid JSON' }, { status: 400 }) }
@@ -103,9 +120,12 @@ export async function handleSendLink(request: Request, env: Env, ctx: ExecutionC
     headers: { 'X-Entity-Ref-ID': token },
   })
   if (!sendRes.ok) {
+    await recordMagicLinkSend(env, token, 'error', String(sendRes.status), null)
     console.error('magic-link SES send failed', sendRes.status, sendRes.error)
     return Response.json({ error: 'Failed to send email', status: sendRes.status, details: sendRes.error }, { status: 502 })
   }
+
+  await recordMagicLinkSend(env, token, 'accepted', null, Math.floor(Date.now() / 1000))
 
   // observability: письмо принято SES
   console.log('magic-link email accepted', JSON.stringify({ email, new_user: isNewUser }))

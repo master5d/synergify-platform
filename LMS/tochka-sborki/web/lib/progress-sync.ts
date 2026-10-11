@@ -33,6 +33,17 @@ export function completePayload({ course, moduleSlug, unitSlug, outline }: UnitC
   return { lesson_slug: `${moduleSlug}/${unitSlug}`, course, ...(outline ? { outline } : {}) }
 }
 
+export async function reportUnitViewed(c: UnitCompletion, fetchFn: typeof fetch = fetch): Promise<void> {
+  try {
+    await fetchFn('/api/progress/view', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lesson_slug: `${c.moduleSlug}/${c.unitSlug}`, course: c.course }),
+    })
+  } catch {}
+}
+
 export async function reportUnitCompleted(c: UnitCompletion, fetchFn: typeof fetch = fetch): Promise<void> {
   try {
     await fetchFn('/api/progress/complete', {

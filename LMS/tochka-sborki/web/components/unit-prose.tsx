@@ -1,10 +1,10 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
 import { useUnitProgress } from '@/lib/unit-progress'
-import { reportUnitCompleted, type CourseOutline } from '@/lib/progress-sync'
+import { reportUnitCompleted, reportUnitViewed, type CourseOutline } from '@/lib/progress-sync'
 import { COURSE } from '@/lib/course'
 import type { UnitReference } from '@/lib/learn-prompt-reference'
 
@@ -43,6 +43,14 @@ export function UnitProse({
   const router = useRouter()
   const { markCompleted } = useUnitProgress()
   const [done, setDone] = useState(false)
+  const viewedUnitRef = useRef<string | null>(null)
+
+  useEffect(() => {
+    const unitKey = `${moduleSlug}/${unitSlug}`
+    if (viewedUnitRef.current === unitKey) return
+    viewedUnitRef.current = unitKey
+    void reportUnitViewed({ course: COURSE.progressKey, moduleSlug, unitSlug })
+  }, [moduleSlug, unitSlug])
 
   function handleComplete() {
     markCompleted(moduleSlug, unitSlug)

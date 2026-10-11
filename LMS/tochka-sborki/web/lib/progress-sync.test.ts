@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { outlineFromNav, completePayload, reportUnitCompleted } from './progress-sync'
+import { outlineFromNav, completePayload, reportUnitCompleted, reportUnitViewed } from './progress-sync'
 
 describe('outlineFromNav', () => {
   it('keeps only modules with units, in order', () => {
@@ -33,5 +33,22 @@ describe('reportUnitCompleted', () => {
   it('never throws on network failure', async () => {
     const fetchFn = vi.fn().mockRejectedValue(new Error('offline'))
     await expect(reportUnitCompleted({ course: 'demo', moduleSlug: 'm', unitSlug: 'u' }, fetchFn)).resolves.toBeUndefined()
+  })
+})
+
+describe('reportUnitViewed', () => {
+  it('POSTs the unit view with the session cookie and course', async () => {
+    const fetchFn = vi.fn().mockResolvedValue(new Response('{}'))
+    await reportUnitViewed({ course: 'demo', moduleSlug: 'm', unitSlug: 'u' }, fetchFn)
+    const [url, init] = fetchFn.mock.calls[0]
+    expect(url).toBe('/api/progress/view')
+    expect(init.method).toBe('POST')
+    expect(init.credentials).toBe('include')
+    expect(JSON.parse(init.body)).toEqual({ lesson_slug: 'm/u', course: 'demo' })
+  })
+
+  it('never throws on network failure', async () => {
+    const fetchFn = vi.fn().mockRejectedValue(new Error('offline'))
+    await expect(reportUnitViewed({ course: 'demo', moduleSlug: 'm', unitSlug: 'u' }, fetchFn)).resolves.toBeUndefined()
   })
 })
