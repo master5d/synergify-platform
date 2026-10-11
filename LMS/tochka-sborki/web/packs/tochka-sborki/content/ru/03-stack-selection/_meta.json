@@ -1,7 +1,7 @@
 {
   "module": 3,
   "title": "Выбор стека",
-  "description": "Какой agentic-стек подходит твоей ситуации: Claude Code, Sovereign, Cloud-OSS или Behind-GFW",
+  "description": "Какой agentic-стек подходит твоей ситуации: Claude Code, Sovereign, Cloud-OSS или Behind-Firewall",
   "duration": "60 мин",
   "level": 3,
   "units": [
@@ -71,7 +71,7 @@
         "Claude Code",
         "Cloud-OSS",
         "Sovereign",
-        "Behind-GFW"
+        "Behind-Firewall"
       ],
       "answer": 1,
       "explain": "Первая развилка — Китай или Россия — даёт «нет». Бюджета $20+ нет. Нет и GPU или Mac M-series. Остаётся Cloud-OSS (u2, «Decision tree»)."

@@ -1,7 +1,7 @@
 {
   "module": 3,
   "title": "Stack selection",
-  "description": "Which agentic stack fits your context: Claude Code, Sovereign, Cloud-OSS or Behind-GFW",
+  "description": "Which agentic stack fits your context: Claude Code, Sovereign, Cloud-OSS or Behind-Firewall",
   "duration": "60 min",
   "level": 3,
   "units": [
@@ -71,7 +71,7 @@
         "Claude Code",
         "Cloud-OSS",
         "Sovereign",
-        "Behind-GFW"
+        "Behind-Firewall"
       ],
       "answer": 1,
       "explain": "The first fork — China or Russia — gives “no.” There's no $20+ budget. There's no GPU or Mac M-series either. That leaves Cloud-OSS (u2, “Decision tree (if still unsure)”)."

@@ -11,7 +11,7 @@ Picture a situation: between you and the tool you need — a closed border.
 
 Don't picture it as a "list of blocked domains." Picture it as **a smuggler's route**. An experienced courier doesn't weep at locked gates. They know which paths stay open, where the cache is hidden, how to move cargo legally through the neighbouring crossing.
 
-Run it in your head. What's your "cargo" (the AI tool you need)? Where's the "border" (GFW, corporate firewall, no card access)? And — **which routes are actually open**?
+Run it in your head. What's your "cargo" (the AI tool you need)? Where's the "border" (a censorship firewall, a corporate firewall, no card access)? And — **which routes are actually open**?
 
 Which crossing will you check first before building the route?
 
@@ -29,7 +29,7 @@ Which available resource will become the first support for your route?
 
 ## Access map
 
-The Behind-GFW stack is named after China's Great Firewall, but it fits anywhere AI services are closed by state filtering or by the vendors themselves. Below are two maps: China and Russia.
+The Behind-Firewall stack (earlier in the course, Behind-GFW, after China's Great Firewall) fits anywhere AI services are closed by state filtering or by the vendors themselves. Below are two maps: China and Russia.
 
 ### China
 
@@ -47,9 +47,9 @@ Since June 2025, Russian ISPs have also been throttling connections to sites beh
 
 > ⚠️ This unit doesn't teach how to fix a VPN: in Russia, promoting ways to bypass blocking has been banned since March 2024, and in China VPNs are a grey zone. The stack below doesn't need a VPN.
 
-## ⚡ Quick install of the GFW stack (one line)
+## ⚡ Quick install of the Behind-Firewall stack (one line)
 
-One command installs the LiteLLM proxy and Aider and writes a ready config (Cerebras + Gemini Flash). Gemini doesn't work in China or Russia — after install, replace it with a local provider (step 2 and step 2b). The step-by-step breakdown is below if you want to understand what happens.
+One command installs the LiteLLM proxy and Aider and writes a ready config (Cerebras + Gemini Flash). Gemini doesn't work in China — after install, replace it with a Chinese provider (step 2); for Russia the installer has its own mode (below). The step-by-step breakdown is below if you want to understand what happens.
 
 <OsToggle />
 
@@ -71,11 +71,29 @@ irm https://ai.synergify.com/install-gfw.ps1 | iex
 
 > 💡 On Linux, use the same command as Mac (`curl … | bash`).
 
+**In Russia,** run the installer in Russia mode — it writes GigaChat instead of Gemini right away (step 2b) and tells you which key to add:
+
+<OsBlock os="mac">
+
+```bash
+curl -fsSL https://ai.synergify.com/install-gfw.sh | bash -s -- --ru
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+$env:GFW_REGION = 'ru'; irm https://ai.synergify.com/install-gfw.ps1 | iex
+```
+
+</OsBlock>
+
 > ⚠️ This, too, runs someone else's script in one line. If you want to read it first, do as in module 02: save it to a file, open it, then run it.
 
-After install: add your keys to `~/.config/litellm/.env`, run `start.sh`/`start.ps1`, point Aider at `http://localhost:4000`.
+After install: add your keys to `~/.config/litellm/.env`, run `start.sh`/`start.ps1`, point Aider at `http://localhost:4000`. On first run the start script adds the model gateway key `LITELLM_MASTER_KEY` to `.env` by itself: recent LiteLLM won't start without it, and the agent passes it to the model gateway as its API key.
 
-## "Behind-GFW" architecture
+## "Behind-Firewall" architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -118,7 +136,7 @@ CEREBRAS_API_KEY=csk-xxxxx
 GIGACHAT_CREDENTIALS=authorization-key
 ```
 
-3. In the step 3 config, put GigaChat in the `balanced` role instead of Gemini:
+3. In the step 3 config, put GigaChat in the `balanced` role instead of Gemini (the installer in Russia mode has already written this block):
 
 ```yaml
   - model_name: balanced
@@ -183,13 +201,14 @@ router_settings:
     - balanced: ["local-floor"]
 ```
 
-Run it. LiteLLM reads keys from environment variables (`os.environ/...` in the config), so load the `.env` first:
+Run it. LiteLLM reads keys from environment variables (`os.environ/...` in the config), so load the `.env` first. Recent LiteLLM won't start without its own model gateway key `LITELLM_MASTER_KEY` — the first line below creates it once. `--host 127.0.0.1` closes the model gateway to the rest of the network:
 
 <OsBlock os="mac">
 
 ```bash
+echo "LITELLM_MASTER_KEY=sk-$(od -An -tx1 -N24 /dev/urandom | tr -d ' \n')" >> ~/.config/litellm/.env   # once
 set -a; source ~/.config/litellm/.env; set +a
-litellm --config ~/.config/litellm/config.yaml --port 4000
+litellm --config ~/.config/litellm/config.yaml --port 4000 --host 127.0.0.1
 ```
 
 </OsBlock>
@@ -197,8 +216,9 @@ litellm --config ~/.config/litellm/config.yaml --port 4000
 <OsBlock os="windows">
 
 ```powershell
+Add-Content $HOME\.config\litellm\.env ("LITELLM_MASTER_KEY=sk-" + [guid]::NewGuid().ToString("N") + [guid]::NewGuid().ToString("N"))   # once
 Get-Content $HOME\.config\litellm\.env | ?{ $_ -match '^\s*[^#].*=' } | % { $k,$v = $_ -split '=',2; Set-Item "env:$k" $v }
-litellm --config $HOME\.config\litellm\config.yaml --port 4000
+litellm --config $HOME\.config\litellm\config.yaml --port 4000 --host 127.0.0.1
 ```
 
 </OsBlock>
@@ -240,11 +260,12 @@ llama-server -m Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf --port 8080
 Any OpenAI-compatible agent (Aider, Cline, Continue.dev, Hermes) plugs in the same way:
 
 ```bash
-# Aider
-aider --model openai/fast-pool --openai-api-base http://localhost:4000
+# Aider (the key is LITELLM_MASTER_KEY from .env)
+aider --model openai/fast-pool --openai-api-base http://localhost:4000 --openai-api-key "$LITELLM_MASTER_KEY"
 
 # Cline (VS Code) — in settings:
 # OpenAI Compatible: http://localhost:4000
+# API Key: the LITELLM_MASTER_KEY value
 # Model: fast-pool
 ```
 
@@ -264,12 +285,13 @@ Minimum to complete the unit:
 
 1. Sign up for Cerebras, grab an API key. If you're in Russia and Cerebras won't let you in, use GigaChat from step 2b and put `"model": "balanced"` in the test prompt below
 2. Install LiteLLM locally and run the proxy on `localhost:4000`
-3. Make a test call:
+3. Make a test call — in the terminal where `.env` is loaded (step 3), otherwise the model gateway won't see the key:
 
 <OsBlock os="mac">
 
 ```bash
 curl http://localhost:4000/chat/completions \
+  -H "Authorization: Bearer $LITELLM_MASTER_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "fast-pool", "messages": [{"role":"user","content":"Hi, who are you?"}]}'
 ```
@@ -281,7 +303,7 @@ curl http://localhost:4000/chat/completions \
 In PowerShell, use `curl.exe` on one line:
 
 ```powershell
-curl.exe http://localhost:4000/chat/completions -H "Content-Type: application/json" -d '{"model":"fast-pool","messages":[{"role":"user","content":"Hi, who are you?"}]}'
+curl.exe http://localhost:4000/chat/completions -H "Authorization: Bearer $env:LITELLM_MASTER_KEY" -H "Content-Type: application/json" -d '{"model":"fast-pool","messages":[{"role":"user","content":"Hi, who are you?"}]}'
 ```
 
 </OsBlock>

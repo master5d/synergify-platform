@@ -25,7 +25,7 @@ duration: "20 мин"
 
 ## Карта доступов
 
-Стек Behind-GFW назван по китайскому «Великому файрволу», но годится везде, где AI-сервисы закрыты государственной фильтрацией или самими вендорами. Ниже две карты: Китай и Россия.
+Стек Behind-Firewall (раньше в курсе — Behind-GFW, по китайскому «Великому файрволу») годится везде, где AI-сервисы закрыты государственной фильтрацией или самими вендорами. Ниже две карты: Китай и Россия.
 
 ### Китай
 
@@ -43,9 +43,9 @@ Claude, OpenAI и Gemini (AI Studio) закрыты для России сами
 
 > ⚠️ Чинить VPN этот юнит не учит: в России с марта 2024 года запрещена популяризация способов обхода блокировок, в Китае VPN — серая зона. Стек ниже VPN не требует.
 
-## ⚡ Быстрая установка GFW-стека (одной строкой)
+## ⚡ Быстрая установка стека Behind-Firewall (одной строкой)
 
-Одна команда ставит LiteLLM-прокси и Aider и пишет готовый конфиг (Cerebras + Gemini Flash). В Китае и России Gemini не работает — после установки замени его на местного провайдера (шаг 2 и шаг 2б). Ниже — разбор по шагам, если хочешь понять, что происходит.
+Одна команда ставит LiteLLM-прокси и Aider и пишет готовый конфиг (Cerebras + Gemini Flash). В Китае Gemini не работает — после установки замени его на китайского провайдера (шаг 2); для России у установщика есть свой режим (ниже). Ниже — разбор по шагам, если хочешь понять, что происходит.
 
 <OsToggle />
 
@@ -67,11 +67,29 @@ irm https://ai.synergify.com/install-gfw.ps1 | iex
 
 > 💡 На Linux работает та же команда, что и для Mac (`curl … | bash`).
 
+**В России** запусти установщик в режиме России — он сразу запишет GigaChat вместо Gemini (шаг 2б) и подскажет, какой ключ вписать:
+
+<OsBlock os="mac">
+
+```bash
+curl -fsSL https://ai.synergify.com/install-gfw.sh | bash -s -- --ru
+```
+
+</OsBlock>
+
+<OsBlock os="windows">
+
+```powershell
+$env:GFW_REGION = 'ru'; irm https://ai.synergify.com/install-gfw.ps1 | iex
+```
+
+</OsBlock>
+
 > ⚠️ Это тоже запуск чужого скрипта одной строкой. Если хочешь сначала его прочитать, сделай как в модуле 02: скачай в файл, открой, потом запусти.
 
-После установки: впиши ключи в `~/.config/litellm/.env`, запусти `start.sh`/`start.ps1`, наведи Aider на `http://localhost:4000`.
+После установки: впиши ключи в `~/.config/litellm/.env`, запусти `start.sh`/`start.ps1`, наведи Aider на `http://localhost:4000`. При первом запуске start-скрипт сам допишет в `.env` ключ шлюза `LITELLM_MASTER_KEY`: свежий LiteLLM без него не стартует, а агент передаёт его шлюзу как API key.
 
-## Архитектура «Behind-GFW»
+## Архитектура «Behind-Firewall»
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -114,7 +132,7 @@ CEREBRAS_API_KEY=csk-xxxxx
 GIGACHAT_CREDENTIALS=ключ-авторизации
 ```
 
-3. В конфиге шага 3 поставь на роль `balanced` GigaChat вместо Gemini:
+3. В конфиге шага 3 поставь на роль `balanced` GigaChat вместо Gemini (установщик в режиме России уже записал этот блок):
 
 ```yaml
   - model_name: balanced
@@ -179,13 +197,14 @@ router_settings:
     - balanced: ["local-floor"]
 ```
 
-Запуск. LiteLLM берёт ключи из переменных окружения (`os.environ/...` в конфиге), поэтому сначала загрузи `.env`:
+Запуск. LiteLLM берёт ключи из переменных окружения (`os.environ/...` в конфиге), поэтому сначала загрузи `.env`. Свежий LiteLLM не стартует без собственного ключа шлюза `LITELLM_MASTER_KEY` — первая строка ниже создаёт его один раз. `--host 127.0.0.1` закрывает шлюз от остальной сети:
 
 <OsBlock os="mac">
 
 ```bash
+echo "LITELLM_MASTER_KEY=sk-$(od -An -tx1 -N24 /dev/urandom | tr -d ' \n')" >> ~/.config/litellm/.env   # один раз
 set -a; source ~/.config/litellm/.env; set +a
-litellm --config ~/.config/litellm/config.yaml --port 4000
+litellm --config ~/.config/litellm/config.yaml --port 4000 --host 127.0.0.1
 ```
 
 </OsBlock>
@@ -193,8 +212,9 @@ litellm --config ~/.config/litellm/config.yaml --port 4000
 <OsBlock os="windows">
 
 ```powershell
+Add-Content $HOME\.config\litellm\.env ("LITELLM_MASTER_KEY=sk-" + [guid]::NewGuid().ToString("N") + [guid]::NewGuid().ToString("N"))   # один раз
 Get-Content $HOME\.config\litellm\.env | ?{ $_ -match '^\s*[^#].*=' } | % { $k,$v = $_ -split '=',2; Set-Item "env:$k" $v }
-litellm --config $HOME\.config\litellm\config.yaml --port 4000
+litellm --config $HOME\.config\litellm\config.yaml --port 4000 --host 127.0.0.1
 ```
 
 </OsBlock>
@@ -236,11 +256,12 @@ llama-server -m Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf --port 8080
 Любой OpenAI-compatible агент (Aider, Cline, Continue.dev, Hermes) подключается одинаково:
 
 ```bash
-# Aider
-aider --model openai/fast-pool --openai-api-base http://localhost:4000
+# Aider (ключ — LITELLM_MASTER_KEY из .env)
+aider --model openai/fast-pool --openai-api-base http://localhost:4000 --openai-api-key "$LITELLM_MASTER_KEY"
 
 # Cline (VS Code) — в настройках:
 # OpenAI Compatible: http://localhost:4000
+# API Key: значение LITELLM_MASTER_KEY
 # Model: fast-pool
 ```
 
@@ -260,12 +281,13 @@ aider --model openai/fast-pool --openai-api-base http://localhost:4000
 
 1. Зарегистрируйся в Cerebras, получи API key. Если ты в России и Cerebras не пустил — возьми GigaChat из шага 2б и в тестовом промпте ниже поставь `"model": "balanced"`
 2. Установи LiteLLM локально и запусти proxy на `localhost:4000`
-3. Сделай тестовый промпт:
+3. Сделай тестовый промпт — в терминале, где загружен `.env` (шаг 3), иначе шлюз не узнает ключ:
 
 <OsBlock os="mac">
 
 ```bash
 curl http://localhost:4000/chat/completions \
+  -H "Authorization: Bearer $LITELLM_MASTER_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "fast-pool", "messages": [{"role":"user","content":"Привет, кто ты?"}]}'
 ```
@@ -277,7 +299,7 @@ curl http://localhost:4000/chat/completions \
 В PowerShell используй `curl.exe` одной строкой:
 
 ```powershell
-curl.exe http://localhost:4000/chat/completions -H "Content-Type: application/json" -d '{"model":"fast-pool","messages":[{"role":"user","content":"Привет, кто ты?"}]}'
+curl.exe http://localhost:4000/chat/completions -H "Authorization: Bearer $env:LITELLM_MASTER_KEY" -H "Content-Type: application/json" -d '{"model":"fast-pool","messages":[{"role":"user","content":"Привет, кто ты?"}]}'
 ```
 
 </OsBlock>

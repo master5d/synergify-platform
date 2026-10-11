@@ -6,7 +6,7 @@ const STACKS: { key: Stack; glyph: string; name: string; short: string }[] = [
   { key: 'claude',     glyph: '🤖', name: 'Claude Code',   short: 'CC' },
   { key: 'sovereign',  glyph: '🛡️', name: 'Sovereign',     short: 'SOVERN' },
   { key: 'cloud-oss',  glyph: '☁️', name: 'Cloud-OSS',     short: 'OSS' },
-  { key: 'behind-gfw', glyph: '🌏', name: 'Behind GFW',    short: 'GFW' },
+  { key: 'behind-gfw', glyph: '🌏', name: 'Behind Firewall', short: 'FW' },
 ]
 
 interface Props {

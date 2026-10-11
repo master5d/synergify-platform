@@ -16,7 +16,7 @@
 
 <div align="center">
 
-**Agentic-AI Course · 9 тем · agent-agnostic (Claude Code / Sovereign / Cloud-OSS / Behind-GFW) · RU + EN**
+**Agentic-AI Course · 9 тем · agent-agnostic (Claude Code / Sovereign / Cloud-OSS / Behind-Firewall) · RU + EN**
 
 [![Deploy](https://img.shields.io/badge/deploy-Cloudflare_Pages-orange?style=flat-square&logo=cloudflare)](https://ai.synergify.com)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org)

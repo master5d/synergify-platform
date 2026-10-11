@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Точка Сборки — установщик GFW/restricted-geo стека (Mac/Linux)
+# Точка Сборки — установщик стека Behind-Firewall (цензурный файрвол / закрытый регион; Mac/Linux)
 # Ставит: Python + LiteLLM proxy + Aider; пишет cloud-relay конфиг (Cerebras + Gemini Flash).
-# Использование: curl -fsSL https://ai.mamaev.coach/install-gfw.sh | bash
+# Использование: curl -fsSL https://ai.synergify.com/install-gfw.sh | bash
+# Россия (Gemini закрыт — GigaChat): curl -fsSL https://ai.synergify.com/install-gfw.sh | bash -s -- --ru
+#   (или переменная окружения GFW_REGION=ru)
 
-GUIDE_URL="https://ai.mamaev.coach/lessons/03-stack-selection"
+GUIDE_URL="https://ai.synergify.com/lessons/03-stack-selection/u3-behind-gfw/"
 CFG_DIR="$HOME/.config/litellm"
+REGION="${GFW_REGION:-}"
 
 if [ -t 1 ]; then
   C_RESET='\033[0m'; C_BLUE='\033[1;34m'; C_GREEN='\033[1;32m'; C_YELLOW='\033[1;33m'; C_RED='\033[1;31m'
@@ -72,6 +75,22 @@ write_config() {
   if [ -f "$cfg" ]; then
     cp "$cfg" "$cfg.bak"
     warn "config.yaml уже есть — бэкап в config.yaml.bak, не затираю"
+  elif [ "$REGION" = "ru" ]; then
+    cat > "$cfg" <<'YAML'
+model_list:
+  - model_name: balanced
+    litellm_params:
+      model: gigachat/GigaChat-2-Lite   # сверь имена моделей в кабинете GigaChat
+      api_key: os.environ/GIGACHAT_CREDENTIALS
+      ssl_verify: false                 # сертификат GigaChat — российский УЦ; только в этом блоке
+  # fast-pool (Cerebras) — если Cerebras пускает из твоей сети: раскомментируй и впиши CEREBRAS_API_KEY в .env
+  # - model_name: fast-pool
+  #   litellm_params:
+  #     model: cerebras/qwen-3-235b-a22b
+  #     api_key: os.environ/CEREBRAS_API_KEY
+  # local-floor (llama-server :8080) — опционально, см. гайд u3 «Шаг 4»
+YAML
+    ok "config.yaml записан (Россия: GigaChat)"
   else
     cat > "$cfg" <<'YAML'
 model_list:
@@ -91,18 +110,34 @@ router_settings:
 YAML
     ok "config.yaml записан"
   fi
-  cat > "$CFG_DIR/.env.example" <<'ENVX'
+  if [ "$REGION" = "ru" ]; then
+    cat > "$CFG_DIR/.env.example" <<'ENVX'
+# Скопируй этот файл в .env и впиши свои ключи
+# Ключ авторизации проекта GigaChat (Client ID:Client Secret в base64) — developers.sber.ru
+GIGACHAT_CREDENTIALS=ключ-авторизации
+# CEREBRAS_API_KEY=csk-xxxxx   # если раскомментировал fast-pool
+ENVX
+  else
+    cat > "$CFG_DIR/.env.example" <<'ENVX'
 # Скопируй этот файл в .env и впиши свои ключи
 CEREBRAS_API_KEY=csk-xxxxx
 GOOGLE_API_KEY=AIza-xxxxx
 ENVX
+  fi
   cat > "$CFG_DIR/start.sh" <<'START'
 #!/usr/bin/env bash
 set -euo pipefail
 CFG_DIR="$HOME/.config/litellm"
 if [ -f "$CFG_DIR/.env" ]; then set -a; . "$CFG_DIR/.env"; set +a
 else echo "Нет $CFG_DIR/.env — скопируй .env.example в .env и впиши ключи"; exit 1; fi
-exec litellm --config "$CFG_DIR/config.yaml" --port 4000
+# Свежий LiteLLM не стартует без master key: создаём его один раз и храним в .env
+if [ -z "${LITELLM_MASTER_KEY:-}" ]; then
+  LITELLM_MASTER_KEY="sk-$(od -An -tx1 -N24 /dev/urandom | tr -d ' \n')"
+  printf '\nLITELLM_MASTER_KEY=%s\n' "$LITELLM_MASTER_KEY" >> "$CFG_DIR/.env"
+  export LITELLM_MASTER_KEY
+  echo "Создал LITELLM_MASTER_KEY в $CFG_DIR/.env — его агент передаёт шлюзу как API key"
+fi
+exec litellm --config "$CFG_DIR/config.yaml" --port 4000 --host 127.0.0.1
 START
   chmod +x "$CFG_DIR/start.sh"
   ok "launcher start.sh + .env.example готовы"
@@ -114,16 +149,32 @@ doctor() {
   if have litellm; then ok "litellm установлен"; else warn "litellm не на PATH (открой новый терминал)"; fi
   if have aider;   then ok "aider установлен";   else warn "aider не на PATH (открой новый терминал)"; fi
   printf "\n${C_GREEN}Готово!${C_RESET} Следующие шаги:\n"
-  printf "  1. cp %s/.env.example %s/.env  — и впиши ключи Cerebras + Gemini\n" "$CFG_DIR" "$CFG_DIR"
+  local model="fast-pool" keys="Cerebras + Gemini"
+  if [ "$REGION" = "ru" ]; then model="balanced"; keys="GigaChat"; fi
+  printf "  1. cp %s/.env.example %s/.env  — и впиши ключ %s\n" "$CFG_DIR" "$CFG_DIR" "$keys"
   printf "  2. Запусти прокси:  %s/start.sh\n" "$CFG_DIR"
-  printf "  3. Наведи Aider:    aider --model openai/fast-pool --openai-api-base http://localhost:4000\n"
-  printf "     (Aider попросит OPENAI_API_KEY — впиши любое значение, напр. 'sk-local')\n"
+  printf "  3. Наведи Aider:    aider --model openai/%s --openai-api-base http://localhost:4000 --openai-api-key \"\$LITELLM_MASTER_KEY\"\n" "$model"
+  printf "     (ключ LITELLM_MASTER_KEY start.sh создаст в .env при первом запуске)\n"
   printf "  GUI-вариант: расширение Cline в VS Code → тот же http://localhost:4000\n"
   printf "\nПодробный гайд: %s\n" "$GUIDE_URL"
 }
 
+parse_args() {
+  for a in "$@"; do
+    case "$a" in
+      --ru) REGION="ru" ;;
+      *) err "Неизвестный аргумент: $a (есть только --ru)"; exit 1 ;;
+    esac
+  done
+  if [ -n "$REGION" ] && [ "$REGION" != "ru" ]; then
+    err "GFW_REGION=$REGION не поддерживается (есть только ru)"; exit 1
+  fi
+}
+
 main() {
-  printf "${C_BLUE}Точка Сборки — установка GFW/restricted-geo стека${C_RESET}\n\n"
+  parse_args "$@"
+  printf "${C_BLUE}Точка Сборки — установка стека Behind-Firewall${C_RESET}\n\n"
+  if [ "$REGION" = "ru" ]; then info "Режим: Россия (GigaChat вместо Gemini)"; fi
   detect_pm
   if [ "$OS" = "Linux" ] && [ -z "$PM" ]; then
     err "Не нашёл apt/dnf/pacman. Поставь Python 3 + pipx вручную: $GUIDE_URL"; exit 1

@@ -279,14 +279,14 @@
         "en": "Don't try to bend the matrix. Just pick the right sector."
       },
       "outro": {
-        "ru": "Карта разложена. Ты видишь пути сквозь цифровой шум. Дальше — реальная проблема: Great Firewall.",
-        "en": "The map is laid out. You see the paths through the digital static. Next, a real-world problem: the Great Firewall."
+        "ru": "Карта разложена. Ты видишь пути сквозь цифровой шум. Дальше — реальная проблема: цензурный файрвол.",
+        "en": "The map is laid out. You see the paths through the digital static. Next, a real-world problem: the censorship firewall."
       }
     },
     "03-stack-selection/u3-behind-gfw": {
       "intro": {
-        "ru": "Некоторые стены выше других. Работать за Great Firewall без VPN — не просто техническая задача, это заявление.",
-        "en": "Some walls are taller than others. Operating behind the Great Firewall without a VPN isn't just a technical challenge; it's a statement."
+        "ru": "Некоторые стены выше других. Работать за цензурным файрволом без VPN — не просто техническая задача, это заявление.",
+        "en": "Some walls are taller than others. Operating behind a censorship firewall without a VPN isn't just a technical challenge; it's a statement."
       },
       "mentorHint": {
         "ru": "Тень — твой лучший союзник, когда свет под запретом.",

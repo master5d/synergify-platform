@@ -9,7 +9,7 @@
 - **Claude Code** — paid, max capability ($20+/мес)
 - **Sovereign (SOVERN)** — Hermes + Aider + локальные модели ($0 + железо)
 - **Cloud-OSS** — Cline + OpenRouter / Cerebras free / Groq ($0–5/мес)
-- **Behind-GFW** — Cerebras + Gemini Flash + local llama-server, для Mainland China и России без VPN (в РФ вместо Gemini — GigaChat)
+- **Behind-Firewall** — Cerebras + Gemini Flash + local llama-server, для Mainland China и России без VPN (в РФ вместо Gemini — GigaChat)
 
 ## Units
 

@@ -47,7 +47,7 @@ const STACKS: StackCard[] = [
   {
     key: 'behind-gfw',
     glyph: '🌏',
-    name: 'Behind GFW',
+    name: 'Behind Firewall',
     tagline: 'В Китае или России, без VPN',
     when: 'Anthropic / OpenAI закрыты. Нужны провайдеры, доступные на месте',
     tools: ['Cerebras free (проверь доступ)', 'DeepSeek / Qwen (КНР), GigaChat (РФ)', 'local llama-server', 'Hermes как orchestrator'],

@@ -8,7 +8,7 @@ export const COURSE_CATALOG: CatalogEntry[] = [
   { slug: '00-kickstart', topic: { ru: 'Карта местности для нонкодеров: что такое agentic AI и зачем', en: 'Orientation map for non-coders: what agentic AI is and why' } },
   { slug: '01-introduction', topic: { ru: 'Software 3.0, четыре сдвига в работе с ИИ', en: 'Software 3.0 and the four shifts in working with AI' } },
   { slug: '02-setup-guide', topic: { ru: 'Установка инструментов: Warp, Claude Code, Git, Marp', en: 'Installing tools: Warp, Claude Code, Git, Marp' } },
-  { slug: '03-stack-selection', topic: { ru: 'Выбор стека: Claude/Sovereign/Cloud-OSS/Behind-GFW, Hermes, миграция', en: 'Choosing a stack: Claude/Sovereign/Cloud-OSS/Behind-GFW, Hermes, migration' } },
+  { slug: '03-stack-selection', topic: { ru: 'Выбор стека: Claude/Sovereign/Cloud-OSS/Behind-Firewall, Hermes, миграция', en: 'Choosing a stack: Claude/Sovereign/Cloud-OSS/Behind-Firewall, Hermes, migration' } },
   { slug: '04-prompt-engineering', topic: { ru: 'Промпт-инжиниринг, магические слова, структура запроса', en: 'Prompt engineering, magic words, request structure' } },
   { slug: '05-context-memory', topic: { ru: 'Контекст, память, файлы контекста для агентов', en: 'Context, memory, and context files for agents' } },
   { slug: '06-audio-pipeline', topic: { ru: 'Pipeline автоматизации: trigger/action/condition, путь ручной → по расписанию → по событию, карта делегирования', en: 'Automation pipelines: trigger/action/condition, manual → scheduled → event-driven, delegation map' } },

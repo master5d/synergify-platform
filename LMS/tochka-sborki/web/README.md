@@ -65,7 +65,7 @@ web/
 │   └── wellbeing/                 — wellbeing-panel (SP4 nudges)
 ├── content/
 │   ├── ru/                        — 9 модулей × units (00-kickstart … 08-agent-engineering)
-│   │   ├── 03-stack-selection/    — выбор стека, Behind-GFW, Hermes
+│   │   ├── 03-stack-selection/    — выбор стека, Behind-Firewall, Hermes
 │   │   ├── cheatsheet.mdx, roadmap.mdx, exercises.mdx
 │   └── en/                        — полное зеркало ru/
 ├── lib/

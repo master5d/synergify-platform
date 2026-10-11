@@ -58,8 +58,8 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
       { kind: 'link', title: { ru: 'Дорожная карта', en: 'Roadmap' }, href: '/roadmap/' },
       { kind: 'link', title: { ru: 'Установка стека (macOS/Linux)', en: 'Install the stack (macOS/Linux)' }, href: '/install.sh' },
       { kind: 'link', title: { ru: 'Установка стека (Windows)', en: 'Install the stack (Windows)' }, href: '/install.ps1' },
-      { kind: 'link', title: { ru: 'Установка за GFW (cloud-relay)', en: 'Install behind GFW (cloud relay)' }, href: '/install-gfw.sh' },
-      { kind: 'link', title: { ru: 'Установка за GFW (PowerShell)', en: 'Install behind GFW (PowerShell)' }, href: '/install-gfw.ps1' },
+      { kind: 'link', title: { ru: 'Установка за файрволом (cloud-relay)', en: 'Install behind a firewall (cloud relay)' }, href: '/install-gfw.sh' },
+      { kind: 'link', title: { ru: 'Установка за файрволом (PowerShell)', en: 'Install behind a firewall (PowerShell)' }, href: '/install-gfw.ps1' },
     ],
   },
   {

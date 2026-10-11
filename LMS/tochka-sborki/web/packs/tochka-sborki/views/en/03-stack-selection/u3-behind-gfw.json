@@ -5,13 +5,13 @@
   "unit": "u3-behind-gfw",
   "locale": "en",
   "title": "Behind a censorship firewall: no VPN",
-  "sourceHash": "sha256:83c3f15ea7a3052c9dc8125443de0c7816c03ba936896298a02348aa43187ca9",
+  "sourceHash": "sha256:c392951151d1b2564574196b383e7bd738948f667672f56fdc46ad5337c4ab25",
   "outline": [
     {
       "heading": "Access map",
       "points": [
         {
-          "text": "The Behind-GFW stack is named after China's Great Firewall, but it fits anywhere AI services are closed by state filtering or by the vendors themselves.",
+          "text": "The Behind-Firewall stack (earlier in the course, Behind-GFW, after China's Great Firewall) fits anywhere AI services are closed by state filtering or by the vendors themselves.",
           "origin": "extract"
         }
       ],
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "heading": "⚡ Quick install of the GFW stack (one line)",
+      "heading": "⚡ Quick install of the Behind-Firewall stack (one line)",
       "points": [
         {
           "text": "One command installs the LiteLLM proxy and Aider and writes a ready config (Cerebras + Gemini Flash).",
@@ -59,7 +59,7 @@
       "children": []
     },
     {
-      "heading": "\"Behind-GFW\" architecture",
+      "heading": "\"Behind-Firewall\" architecture",
       "points": [],
       "children": []
     },
@@ -121,7 +121,7 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:cf962bc92ced561b42c322de503e44d687bfd514e450a518ea258594152ec1ae",
+        "sourceHash": "sha256:1dde82f85b3730e523e1dc463da60beff2c182f2af1ddd46668f6963a7b30a95",
         "verbatim": "near-identical"
       },
       {
@@ -141,10 +141,8 @@
         ]
       },
       {
-        "sourceHash": "sha256:81d79fbede71f0cee80cf8960d2aa3df0bf7a08a3e34cc4deec4ee41c5c43b44",
-        "points": [
-          "You use one command to install the LiteLLM proxy and Aider and write a ready config for Cerebras and Gemini Flash."
-        ]
+        "sourceHash": "sha256:53d58e368dee8dfdce300208a8e729c7e5d451ec98ab61e8e4ab65689eb03cd3",
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:a82004eaef19097d9311ddf0daadd0cbe6cb44d565ab0eaac8d4e322f517d9d3",

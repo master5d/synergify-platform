@@ -23,7 +23,7 @@ export const CHALLENGE_TEMPLATES: Record<string, ChallengeFraming> = {
     outcomeGeneric: { ru: 'Доведи окружение до первого рабочего результата в {niche}.', en: 'Get your environment to a first working result in {niche}.' },
   },
   '03-stack-selection': {
-    task: { ru: 'Выбери стек (Claude / Sovereign / Cloud-OSS / Behind-GFW) под бюджет и {niche}.', en: 'Pick a stack (Claude / Sovereign / Cloud-OSS / Behind-GFW) for your budget and {niche}.' },
+    task: { ru: 'Выбери стек (Claude / Sovereign / Cloud-OSS / Behind-Firewall) под бюджет и {niche}.', en: 'Pick a stack (Claude / Sovereign / Cloud-OSS / Behind-Firewall) for your budget and {niche}.' },
     process: { ru: 'Сравни два стека по критериям, важным для {niche}, и обоснуй выбор.', en: 'Compare two stacks against criteria that matter for {niche} and justify the pick.' },
     outcome: { ru: 'Обоснуй, какой стек быстрее приведёт к: {outcome}.', en: 'Justify which stack reaches this fastest: {outcome}.' },
     outcomeGeneric: { ru: 'Обоснуй стек, который лучше всего подходит твоей работе в {niche}.', en: 'Justify the stack that best fits your work in {niche}.' },
