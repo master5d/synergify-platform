@@ -12,6 +12,9 @@ import { TelegramAuthBridge } from '@/components/telegram/telegram-auth-bridge'
 import Script from 'next/script'
 import { COURSE } from '@/lib/course'
 import { REGISTRY } from '@/lib/academy/registry'
+import { MirrorShell } from '@/components/mirror-shell'
+import { IS_MIRROR, MAIN_SITE, mirrorCanonicalScript } from '@/lib/mirror'
+import { BASE_PATH } from '@/lib/base-path'
 import './globals.css'
 
 const unbounded = Unbounded({
@@ -58,6 +61,7 @@ export const metadata: Metadata = {
   // (canonicalizing all routes to '/'). hreflang pairing is declared in the sitemap instead;
   // Google self-canonicalizes each URL by default.
   openGraph: { locale: 'ru_RU', alternateLocale: ['en_US'], siteName: COURSE.shortName },
+  ...(IS_MIRROR ? { robots: { index: false, follow: false } } : {}),
 }
 
 export const viewport: Viewport = {
@@ -77,17 +81,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script dangerouslySetInnerHTML={{ __html: liteScript }} />
         <script dangerouslySetInnerHTML={{ __html: langScript }} />
-        <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
+        {/* telegram.org в РФ режут — в зеркале скрипт не грузим, иначе beforeInteractive вешает страницу. */}
+        {!IS_MIRROR && <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />}
+        {IS_MIRROR && <script dangerouslySetInnerHTML={{ __html: mirrorCanonicalScript(BASE_PATH, MAIN_SITE) }} />}
       </head>
       <body>
         <ThemeProvider>
           <LiteProvider>
-            <TelegramAuthBridge />
+            {!IS_MIRROR && <TelegramAuthBridge />}
             <ProgressProvider>
               <LangSuggestBanner />
               <PwaRegister />
               <InstallPrompt />
-              {children}
+              <MirrorShell>{children}</MirrorShell>
             </ProgressProvider>
           </LiteProvider>
         </ThemeProvider>

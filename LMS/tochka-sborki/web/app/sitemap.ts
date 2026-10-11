@@ -4,6 +4,7 @@ import { buildSitemap } from '@/lib/sitemap'
 import { COURSE } from '@/lib/course'
 import { writtenSpeechSlugs } from '@/lib/speech/lessons'
 import { getStarter } from '@/lib/starter/starter'
+import { IS_MIRROR } from '@/lib/mirror'
 
 export const dynamic = 'force-static'
 
@@ -28,6 +29,7 @@ const STATIC_PATHS = [
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (IS_MIRROR) return []
   const paths = [...STATIC_PATHS]
   // Стартер студента — только у курса, который его объявил (packs/<pack>/course/starter.ts).
   if (getStarter('ru')) paths.push('/starter/')
