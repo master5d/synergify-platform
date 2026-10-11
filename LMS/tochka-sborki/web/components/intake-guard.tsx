@@ -2,8 +2,15 @@
 import { useEffect, useState } from 'react'
 import type { Locale } from '@/lib/intake/types'
 import { pagePath } from '@/lib/base-path'
+import { IS_MIRROR } from '@/lib/mirror'
 
-export function IntakeGuard({ children, locale = 'ru' }: { children: React.ReactNode; locale?: Locale }) {
+// Зеркало (GitHub Pages): входа/допуска нет, юниты открыты — см. lib/mirror.ts.
+export function IntakeGuard(props: { children: React.ReactNode; locale?: Locale }) {
+  if (IS_MIRROR) return <>{props.children}</>
+  return <IntakeGuardLive {...props} />
+}
+
+function IntakeGuardLive({ children, locale = 'ru' }: { children: React.ReactNode; locale?: Locale }) {
   const [ready, setReady] = useState(false)
   useEffect(() => {
     const base = pagePath(locale === 'en' ? '/en/quest-intake/' : '/quest-intake/')

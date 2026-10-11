@@ -4,8 +4,15 @@ import { useEffect, useState } from 'react'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
 import { pagePath } from '@/lib/base-path'
 import { checkAuth } from '@/lib/auth-check'
+import { IS_MIRROR } from '@/lib/mirror'
 
-export function AuthGuard({ children, locale = 'ru' }: { children: React.ReactNode; locale?: Locale }) {
+// Зеркало (GitHub Pages): входа/допуска нет, юниты открыты — см. lib/mirror.ts.
+export function AuthGuard(props: { children: React.ReactNode; locale?: Locale }) {
+  if (IS_MIRROR) return <>{props.children}</>
+  return <AuthGuardLive {...props} />
+}
+
+function AuthGuardLive({ children, locale = 'ru' }: { children: React.ReactNode; locale?: Locale }) {
   const [authed, setAuthed] = useState(false)
   const t = getDictionary(locale).authGuard
 

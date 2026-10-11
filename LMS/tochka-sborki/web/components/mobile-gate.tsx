@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import QRCode from 'qrcode'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
+import { IS_MIRROR } from '@/lib/mirror'
 
 const DISMISS_KEY = 'mobile-gate-dismissed-until'
 const DISMISS_DAYS = 7
@@ -33,7 +34,13 @@ function detectDismissed(): boolean {
   } catch { return false }
 }
 
-export function MobileGate({ locale = 'ru', children }: Props) {
+// Зеркало (GitHub Pages): входа/допуска нет, юниты открыты — см. lib/mirror.ts.
+export function MobileGate(props: Props) {
+  if (IS_MIRROR) return <>{props.children}</>
+  return <MobileGateLive {...props} />
+}
+
+function MobileGateLive({ locale = 'ru', children }: Props) {
   const t = getDictionary(locale).mobileGate
   // Lazy initializers — first client-render already knows mobile state.
   // SSR returns false (no window), then on hydration we may flip and re-render.

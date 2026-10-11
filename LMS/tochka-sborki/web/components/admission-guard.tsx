@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
 import { PLATFORM_API } from '@/lib/platform-api'
+import { IS_MIRROR } from '@/lib/mirror'
 
 // Гейт курса академии (Ф4 S4): уроки открываются тем, кто прошёл курс-дверь.
 // Перенесён из academy-аппа в движок, потому что курсы школы уезжают под движок:
@@ -38,7 +39,13 @@ async function check(fetchFn: typeof fetch = fetch): Promise<State> {
 
 export { check as checkAdmission }
 
-export function AdmissionGuard({ children, locale = 'ru' }: { children: React.ReactNode; locale?: Locale }) {
+// Зеркало (GitHub Pages): входа/допуска нет, юниты открыты — см. lib/mirror.ts.
+export function AdmissionGuard(props: { children: React.ReactNode; locale?: Locale }) {
+  if (IS_MIRROR) return <>{props.children}</>
+  return <AdmissionGuardLive {...props} />
+}
+
+function AdmissionGuardLive({ children, locale = 'ru' }: { children: React.ReactNode; locale?: Locale }) {
   const [state, setState] = useState<State>('checking')
   const t = getDictionary(locale).admission
 
