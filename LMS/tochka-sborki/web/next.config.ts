@@ -20,6 +20,8 @@ const config: NextConfig = {
   // Тот же префикс — клиентскому коду (lib/base-path.ts) для сырых ссылок на public/.
   env: {
     NEXT_PUBLIC_COURSE_BASE_PATH: BASE_PATH,
+    // Режим зеркала (GitHub Pages): COURSE_MIRROR=1 → lib/mirror.ts IS_MIRROR.
+    NEXT_PUBLIC_COURSE_MIRROR: process.env.COURSE_MIRROR === '1' ? '1' : '',
     // Хост platform-API: переопределяется на стенде, чтобы гейт можно было проверить локально.
     NEXT_PUBLIC_PLATFORM_API: process.env.PLATFORM_API ?? 'https://ai.synergify.com',
   },
