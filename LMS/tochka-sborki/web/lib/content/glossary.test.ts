@@ -77,4 +77,25 @@ describe.runIf(HAS_GLOSSARY)('course terminology glossary', () => {
     const line = 'Это новый пайплайн для обработки.'
     expect(entry.banned.ru.some((pattern: RegExp) => { pattern.lastIndex = 0; return pattern.test(line) })).toBe(true)
   })
+
+  // `\b` в JavaScript знает только [A-Za-z0-9_]: рядом с кириллицей граница не возникает, и правило
+  // молча не ловит ничего. Так полгода спали шесть правил (найдено 2026-10-11 на «навыках»).
+  it('RU patterns use Cyrillic-aware boundaries, not \\b', () => {
+    const offenders = GLOSSARY.flatMap((entry: GlossaryEntry) => entry.banned.ru
+      .filter((pattern: RegExp) => /\\b[А-Яа-яЁё]|[А-Яа-яЁё)?]\\b/.test(pattern.source))
+      .map((pattern: RegExp) => `${entry.term}: ${pattern.source}`))
+    expect(offenders, offenders.join('\n')).toEqual([])
+  })
+
+  it.each([
+    ['program with tools', 'Это мой ассистент для заметок.'],
+    ['program with tools', 'Возьми напарника на задачу.'],
+    ['agent capability', 'Подключи навыки к агенту.'],
+    ['subordinate agent', 'Каждый саб-агент работает отдельно.'],
+    ['model request', 'Напиши запрос к модели.'],
+    ['single model entry point', 'Через гейтвей идут все модели.'],
+  ])('RU rule for «%s» fires on a Russian sentence: %s', (term, line) => {
+    const entry = GLOSSARY.find((item: GlossaryEntry) => item.term === term)!
+    expect(entry.banned.ru.some((pattern: RegExp) => { pattern.lastIndex = 0; return pattern.test(line) })).toBe(true)
+  })
 })

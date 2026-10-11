@@ -10,7 +10,7 @@ export const GLOSSARY: GlossaryEntry[] = [
   {
     term: 'program with tools',
     canon: { ru: 'агент', en: 'agent' },
-    banned: { ru: [/\bассистент\b/gi, /\bнапарник\b/gi], en: [/\bAI assistant\b/gi] },
+    banned: { ru: [/(?<![A-Za-zА-Яа-яЁё])ассистент(?:а|у|ом|ы|ов|ам|ами|ах|е)?(?![A-Za-zА-Яа-яЁё])/gi, /(?<![A-Za-zА-Яа-яЁё])напарник(?:а|у|ом|и|ов|ам|ами|ах|е)?(?![A-Za-zА-Яа-яЁё])/gi], en: [/\bAI assistant\b/gi] },
   },
   {
     term: 'course learner project',
@@ -31,7 +31,7 @@ export const GLOSSARY: GlossaryEntry[] = [
   {
     term: 'agent capability',
     canon: { ru: 'Skill / Skills', en: 'Skill / Skills' },
-    banned: { ru: [/(?<![A-Za-zА-Яа-яЁё])скилл(ы|ов|а|ом|ами|ах)?(?![A-Za-zА-Яа-яЁё])/gi, /\bнавык(?:и|а|ов|ом|ами|ах)?\b/gi], en: [] },
+    banned: { ru: [/(?<![A-Za-zА-Яа-яЁё])скилл(ы|ов|а|ом|ами|ах)?(?![A-Za-zА-Яа-яЁё])/gi, /(?<![A-Za-zА-Яа-яЁё])навык(?:и|а|ов|ом|ами|ах|у)?(?![A-Za-zА-Яа-яЁё])/gi], en: [] },
   },
   {
     term: 'artificial intelligence',
@@ -53,12 +53,12 @@ export const GLOSSARY: GlossaryEntry[] = [
   {
     term: 'subordinate agent',
     canon: { ru: 'субагент', en: 'subagent' },
-    banned: { ru: [/\bсаб-агент\b/gi], en: [/(?<![A-Za-z])sub-agent(?![A-Za-z])/gi] },
+    banned: { ru: [/(?<![A-Za-zА-Яа-яЁё])саб-агент(?:а|у|ом|ы|ов|ам|ами|ах|е)?(?![A-Za-zА-Яа-яЁё])/gi], en: [/(?<![A-Za-z])sub-agent(?![A-Za-z])/gi] },
   },
   {
     term: 'model request',
     canon: { ru: 'промпт', en: 'prompt' },
-    banned: { ru: [/\bзапрос(?:а|ы|у|ом|ами|ах)?\b/gi], en: [] },
+    banned: { ru: [/(?<![A-Za-zА-Яа-яЁё])запрос(?:а|ы|у|ом|ами|ах|ов|е)?(?![A-Za-zА-Яа-яЁё])/gi], en: [] },
     allow: ['HTTP-запрос', 'API-запрос'],
   },
   {
@@ -69,7 +69,7 @@ export const GLOSSARY: GlossaryEntry[] = [
   {
     term: 'single model entry point',
     canon: { ru: 'шлюз к моделям', en: 'model gateway' },
-    banned: { ru: [/\bгейтвей\b/gi], en: [/(?<!model )\bgateway\b/gi] },
+    banned: { ru: [/(?<![A-Za-zА-Яа-яЁё])гейтве(?:й|я|ю|ем|е|и|ев)(?![A-Za-zА-Яа-яЁё])/gi], en: [/(?<!model )\bgateway\b/gi] },
   },
   {
     term: 'working style',
