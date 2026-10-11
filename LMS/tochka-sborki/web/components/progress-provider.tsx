@@ -1,6 +1,8 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState, useCallback } from 'react'
+import { IS_MIRROR } from '@/lib/mirror'
+import { loadLessonProgress, nextLessonState, saveLessonProgress, type LessonStateMap } from '@/lib/mirror-progress'
 
 export type ProgressState = 'none' | 'viewed' | 'completed'
 
@@ -31,7 +33,7 @@ export function useProgress(): ProgressContextValue {
   return useContext(ProgressContext)
 }
 
-export function ProgressProvider({ children }: { children: React.ReactNode }) {
+function LiveProgressProvider({ children }: { children: React.ReactNode }) {
   const [progressMap, setProgressMap] = useState<Map<string, ProgressState>>(new Map())
   const [loaded, setLoaded] = useState(false)
   const [authed, setAuthed] = useState(false)
@@ -92,4 +94,42 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       {children}
     </ProgressContext.Provider>
   )
+}
+
+function browserStorage(): Storage | null {
+  try { return typeof window === 'undefined' ? null : window.localStorage } catch { return null }
+}
+
+function MirrorProgressProvider({ children }: { children: React.ReactNode }) {
+  const [map, setMap] = useState<LessonStateMap>({})
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(() => {
+    setMap(loadLessonProgress(browserStorage()))
+    setLoaded(true)
+  }, [])
+
+  const update = useCallback((slug: string, to: 'viewed' | 'completed') => {
+    setMap(prev => {
+      const next = nextLessonState(prev, slug, to)
+      if (next !== prev) saveLessonProgress(browserStorage(), next)
+      return next
+    })
+  }, [])
+
+  const markViewed = useCallback(async (slug: string) => { update(slug, 'viewed') }, [update])
+  const markCompleted = useCallback(async (slug: string) => { update(slug, 'completed') }, [update])
+  const getState = useCallback((slug: string): ProgressState => map[slug] ?? 'none', [map])
+
+  return (
+    <ProgressContext.Provider value={{ getState, markViewed, markCompleted, loaded, authed: false }}>
+      {children}
+    </ProgressContext.Provider>
+  )
+}
+
+export function ProgressProvider({ children }: { children: React.ReactNode }) {
+  return IS_MIRROR
+    ? <MirrorProgressProvider>{children}</MirrorProgressProvider>
+    : <LiveProgressProvider>{children}</LiveProgressProvider>
 }
