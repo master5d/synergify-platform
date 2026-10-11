@@ -2,7 +2,9 @@
 
 import { createContext, useContext, useEffect, useState, useCallback } from 'react'
 import { IS_MIRROR } from '@/lib/mirror'
-import { loadLessonProgress, nextLessonState, saveLessonProgress, type LessonStateMap } from '@/lib/mirror-progress'
+import {
+  loadLessonProgress, mergeLessonProgress, nextLessonState, saveLessonProgress, type LessonStateMap,
+} from '@/lib/mirror-progress'
 
 export type ProgressState = 'none' | 'viewed' | 'completed'
 
@@ -104,17 +106,20 @@ function MirrorProgressProvider({ children }: { children: React.ReactNode }) {
   const [map, setMap] = useState<LessonStateMap>({})
   const [loaded, setLoaded] = useState(false)
 
+  // Дочерние эффекты (markViewed на странице урока) идут раньше этого — слияние, а не замена,
+  // иначе ранняя отметка перезаписала бы сохранённый прогресс.
   useEffect(() => {
-    setMap(loadLessonProgress(browserStorage()))
+    setMap(prev => mergeLessonProgress(loadLessonProgress(browserStorage()), prev))
     setLoaded(true)
   }, [])
 
+  // Пишем только после загрузки: до неё в storage лежит старая карта, и её нельзя затереть.
+  useEffect(() => {
+    if (loaded) saveLessonProgress(browserStorage(), map)
+  }, [map, loaded])
+
   const update = useCallback((slug: string, to: 'viewed' | 'completed') => {
-    setMap(prev => {
-      const next = nextLessonState(prev, slug, to)
-      if (next !== prev) saveLessonProgress(browserStorage(), next)
-      return next
-    })
+    setMap(prev => nextLessonState(prev, slug, to))
   }, [])
 
   const markViewed = useCallback(async (slug: string) => { update(slug, 'viewed') }, [update])

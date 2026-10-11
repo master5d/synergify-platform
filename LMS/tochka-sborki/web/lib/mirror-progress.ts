@@ -38,3 +38,12 @@ export function saveLessonProgress(storage: Pick<Storage, 'setItem'> | null, map
     // приватный режим / квота — прогресс просто не сохранится
   }
 }
+
+/** Объединение двух карт; для одного slug побеждает completed. Входы не меняются. */
+export function mergeLessonProgress(a: LessonStateMap, b: LessonStateMap): LessonStateMap {
+  const out: LessonStateMap = { ...a }
+  for (const [slug, state] of Object.entries(b)) {
+    if (out[slug] !== 'completed') out[slug] = state
+  }
+  return out
+}

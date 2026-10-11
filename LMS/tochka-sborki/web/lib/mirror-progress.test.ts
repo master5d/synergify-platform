@@ -1,7 +1,33 @@
 import { describe, it, expect } from 'vitest'
 import {
   MIRROR_PROGRESS_KEY, parseLessonProgress, nextLessonState, loadLessonProgress, saveLessonProgress,
+  mergeLessonProgress,
 } from './mirror-progress'
+
+describe('mergeLessonProgress', () => {
+  it('объединяет карты; completed побеждает viewed', () => {
+    expect(mergeLessonProgress({ a: 'viewed', b: 'completed' }, { a: 'completed', c: 'viewed' }))
+      .toEqual({ a: 'completed', b: 'completed', c: 'viewed' })
+  })
+  it('порядок не понижает completed', () => {
+    expect(mergeLessonProgress({ a: 'completed' }, { a: 'viewed' })).toEqual({ a: 'completed' })
+    expect(mergeLessonProgress({ a: 'viewed' }, { a: 'completed' })).toEqual({ a: 'completed' })
+  })
+  it('не мутирует входы', () => {
+    const a = { a: 'viewed' as const }
+    const b = { b: 'completed' as const }
+    const out = mergeLessonProgress(a, b)
+    expect(a).toEqual({ a: 'viewed' })
+    expect(b).toEqual({ b: 'completed' })
+    expect(out).not.toBe(a)
+    expect(out).not.toBe(b)
+  })
+  it('ранняя отметка до загрузки не стирает сохранённое (гонка hard load)', () => {
+    const stored = { x: 'completed' as const, y: 'viewed' as const }
+    const early = nextLessonState({}, 'z', 'viewed')
+    expect(mergeLessonProgress(stored, early)).toEqual({ x: 'completed', y: 'viewed', z: 'viewed' })
+  })
+})
 
 describe('mirror-progress', () => {
   it('разбирает валидное и чинит мусор', () => {
