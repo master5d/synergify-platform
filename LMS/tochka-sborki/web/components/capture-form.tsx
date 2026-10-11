@@ -1,6 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { IS_MIRROR } from '@/lib/mirror'
+import { MirrorFormNote } from './mirror-stub'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
 import type { CaptureFormConfig } from '@/lib/content/capture-forms'
 
@@ -20,7 +23,7 @@ const labelStyle: React.CSSProperties = {
   display: 'block', marginBottom: '0.5rem', color: 'var(--text-primary)', fontWeight: 600,
 }
 
-export function CaptureForm({ config, locale = 'ru' }: { config: CaptureFormConfig; locale?: Locale }) {
+function CaptureFormLive({ config, locale = 'ru' }: { config: CaptureFormConfig; locale?: Locale }) {
   const t = getDictionary(locale).capture
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -149,4 +152,10 @@ export function CaptureForm({ config, locale = 'ru' }: { config: CaptureFormConf
       </form>
     </section>
   )
+}
+
+export function CaptureForm(props: { config: CaptureFormConfig; locale?: Locale }) {
+  const pathname = usePathname() || '/'
+  if (IS_MIRROR) return <MirrorFormNote pathname={pathname} locale={props.locale === 'en' ? 'en' : 'ru'} />
+  return <CaptureFormLive {...props} />
 }

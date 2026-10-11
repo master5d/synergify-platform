@@ -1,10 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { IS_MIRROR } from '@/lib/mirror'
+import { MirrorFormNote } from './mirror-stub'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
 import { LikertScale } from './likert-scale'
 
-export function ModuleSurvey({ module, locale = 'ru' }: { module: string; locale?: Locale }) {
+function ModuleSurveyLive({ module, locale = 'ru' }: { module: string; locale?: Locale }) {
   const t = getDictionary(locale).feedback
   const key = 'module-survey:' + module
   const [mounted, setMounted] = useState(false)
@@ -85,4 +88,10 @@ export function ModuleSurvey({ module, locale = 'ru' }: { module: string; locale
       </button>
     </form>
   )
+}
+
+export function ModuleSurvey(props: { module: string; locale?: Locale }) {
+  const pathname = usePathname() || '/'
+  if (IS_MIRROR) return <MirrorFormNote pathname={pathname} locale={props.locale === 'en' ? 'en' : 'ru'} />
+  return <ModuleSurveyLive {...props} />
 }

@@ -13,6 +13,7 @@ import { SkipLink } from '@/components/skip-link'
 import { SettingsMenu } from '@/components/settings-menu'
 import { NavMobileMenu } from '@/components/nav-mobile-menu'
 import { COURSE } from '@/lib/course'
+import { IS_MIRROR } from '@/lib/mirror'
 
 interface Props { locale?: Locale }
 
@@ -34,10 +35,12 @@ export function Nav({ locale: localeProp }: Props = {}) {
 
   useEffect(() => {
     setEgg(activeEasterEgg())
-    fetch('/api/auth/me', { credentials: 'include' })
-      .then(r => r.ok ? r.json() : null)
-      .then(d => { if (d?.email) setEmail(d.email) })
-      .catch(() => {})
+    if (!IS_MIRROR) {
+      fetch('/api/auth/me', { credentials: 'include' })
+        .then(r => r.ok ? r.json() : null)
+        .then(d => { if (d?.email) setEmail(d.email) })
+        .catch(() => {})
+    }
     // Show the saved choice, or auto-detect — so the toggle appears for everyone,
     // not only after a visit to the cheatsheet has stored a value.
     setOs(readStoredOs() ?? detectOs())
@@ -231,7 +234,8 @@ export function Nav({ locale: localeProp }: Props = {}) {
           osLabel={os ? t.nav.osCurrent(os) : t.nav.osTitle}
         />
 
-        {email ? (
+        {/* Зеркало: входа нет — ни e-mail, ни кнопки «Войти». */}
+        {!IS_MIRROR && (email ? (
           <>
             {/* Полный адрес занимал в шапке 158px и выдавливал «Сертификат»
                 за край. Показываем часть до @ (этого хватает, чтобы понять,
@@ -277,7 +281,7 @@ export function Nav({ locale: localeProp }: Props = {}) {
           >
             {t.nav.login}
           </Link>
-        ) : null}
+        ) : null)}
       </div>
     </nav>
     </>
