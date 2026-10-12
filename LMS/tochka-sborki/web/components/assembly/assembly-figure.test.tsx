@@ -21,6 +21,7 @@ describe.runIf(COURSE.features.assemblyMap)('AssemblyFigure', () => {
     expect(html).toContain('data-am-figure')
     for (const n of ASSEMBLY_MAP.nodes) expect(html).toContain(`data-am-node="${n.id}"`)
     expect(html.match(/data-am-part="/g)).toHaveLength(ASSEMBLY_MAP.parts.length)
+    expect(html.match(/data-am-shell="/g), 'корпус узла — ровно один <g data-am-shell> на узел').toHaveLength(ASSEMBLY_MAP.nodes.length)
     expect(html).not.toContain('data-am-state="built"')
     expect(html).toMatch(/data-am-part="conveyor\.timer"[^>]*data-am-current="true"/)
   })

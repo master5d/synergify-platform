@@ -58,7 +58,7 @@ export function draftMachine(map: AssemblyMap): MachineDef | null {
         {placed.map((n) => (
           <g key={n.id} {...node(n.id)}>
             <title>{title(n.id)}</title>
-            <Box f={boxFaces(n.x, n.y, 0, NODE, NODE, BASE_H, S)} />
+            <g data-am-shell=""><Box f={boxFaces(n.x, n.y, 0, NODE, NODE, BASE_H, S)} /></g>
             {n.parts.map((p) => (
               <g key={p.id} {...part(p.id)}>
                 <title>{title(p.id)}</title>
