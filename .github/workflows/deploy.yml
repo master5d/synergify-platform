@@ -49,6 +49,54 @@ jobs:
             --branch=main \
             --commit-message="${{ github.sha }}"
 
+  # ── master5d.github.io/ts-gitbook (зеркало для чтения, spec 2026-10-11) ──
+  deploy-mirror:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: LMS/tochka-sborki/web/package-lock.json
+      - name: Install
+        working-directory: LMS/tochka-sborki/web
+        run: npm ci
+      - name: Test
+        working-directory: LMS/tochka-sborki/web
+        run: npm test
+      - name: Build (mirror)
+        working-directory: LMS/tochka-sborki/web
+        env:
+          COURSE_MIRROR: '1'
+          COURSE_BASE_PATH: /ts-gitbook
+        run: npm run build
+      - name: Check mirror
+        working-directory: LMS/tochka-sborki/web
+        run: npm run check:mirror
+      - name: Publish to master5d/ts-gitbook (gh-pages)
+        working-directory: LMS/tochka-sborki/web/out
+        env:
+          DEPLOY_KEY: ${{ secrets.TS_GITBOOK_DEPLOY_KEY }}
+        run: |
+          set -euo pipefail
+          touch .nojekyll
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/ts_gitbook
+          chmod 600 ~/.ssh/ts_gitbook
+          # Ключ хоста GitHub — опубликованный, не ssh-keyscan (без доверия первому ответу).
+          echo 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl' > ~/.ssh/known_hosts
+          # Свежий репо из одной сборки: все файлы — артефакт, поэтому add всего каталога здесь уместен.
+          git init -q -b gh-pages
+          git config user.name "synergify-deploy"
+          git config user.email "synergify-deploy@users.noreply.github.com"
+          git add --all
+          git commit -q -m "mirror: ${GITHUB_SHA}"
+          GIT_SSH_COMMAND="ssh -i ~/.ssh/ts_gitbook -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
+            git push --force git@github.com:master5d/ts-gitbook.git gh-pages
+
   # ── engine × course-packs: build+test matrix (no deploy) ───
   # «Движок обновился → все курсы пересобрались» как CI-факт: каждый
   # coming-soon pack собирается и прогоняет тесты под своим COURSE_PACK.
