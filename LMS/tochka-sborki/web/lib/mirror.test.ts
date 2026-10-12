@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   IS_MIRROR, MAIN_SITE, isServerOnlyRoute, mainSiteUrl, isPlatformApiUrl,
-  mirrorCanonicalScript, mirrorLocale, MIRROR_COPY,
+  mirrorCanonicalScript, mirrorLocale, MIRROR_COPY, mirrorizeCommand,
 } from './mirror'
 import { COURSE } from './course'
 
@@ -62,5 +62,33 @@ describe('lib/mirror', () => {
       expect(copy.ru, key).toBeTruthy()
       expect(copy.en, key).toBeTruthy()
     }
+  })
+})
+
+describe('mirrorizeCommand', () => {
+  const SITE = 'https://ai.synergify.com'
+  const MIRROR = 'https://master5d.github.io/ts-gitbook'
+  it.each([
+    ['curl -fsSL https://ai.synergify.com/install-gfw.sh | bash', 'curl -fsSL https://master5d.github.io/ts-gitbook/install-gfw.sh | bash'],
+    ['irm https://ai.synergify.com/install-gfw.ps1 | iex', 'irm https://master5d.github.io/ts-gitbook/install-gfw.ps1 | iex'],
+    ['curl -fsSL https://ai.synergify.com/install-gfw.sh | bash -s -- --ru', 'curl -fsSL https://master5d.github.io/ts-gitbook/install-gfw.sh | bash -s -- --ru'],
+    ["$env:GFW_REGION = 'ru'; irm https://ai.synergify.com/install-gfw.ps1 | iex", "$env:GFW_REGION = 'ru'; irm https://master5d.github.io/ts-gitbook/install-gfw.ps1 | iex"],
+    ['curl -fsSL https://ai.synergify.com/install.sh | bash', 'curl -fsSL https://master5d.github.io/ts-gitbook/install.sh | bash'],
+  ])('наш установщик → зеркало: %s', (input, expected) => {
+    expect(mirrorizeCommand(input, SITE, MIRROR)).toBe(expected)
+  })
+  it.each([
+    'curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash',
+    'curl -fsSL https://claude.ai/install.sh | bash',
+    'open https://ai.synergify.com/lessons/03-stack-selection/u3-behind-gfw/',
+    'curl http://localhost:4000/chat/completions',
+  ])('чужие и не-установочные адреса не трогаются: %s', (input) => {
+    expect(mirrorizeCommand(input, SITE, MIRROR)).toBe(input)
+  })
+  it('без зеркала — текст без изменений; слэш в конце адресов не мешает', () => {
+    expect(mirrorizeCommand('irm https://ai.synergify.com/install-gfw.ps1 | iex', SITE, null))
+      .toBe('irm https://ai.synergify.com/install-gfw.ps1 | iex')
+    expect(mirrorizeCommand('curl https://ai.synergify.com/install-gfw.sh', `${SITE}/`, `${MIRROR}/`))
+      .toBe('curl https://master5d.github.io/ts-gitbook/install-gfw.sh')
   })
 })

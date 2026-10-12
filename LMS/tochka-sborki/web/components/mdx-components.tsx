@@ -13,6 +13,8 @@ import { WillWont } from './will-wont'
 import { ModuleSurvey } from './module-survey'
 import { CaptureFormBlock } from './capture-form-block'
 import { pagePath } from '@/lib/base-path'
+import { IS_MIRROR, MAIN_SITE, mirrorizeCommand } from '@/lib/mirror'
+import { COURSE } from '@/lib/course'
 
 export const mdxComponents: MDXComponents = {
   h1: ({ children }) => (
@@ -41,7 +43,10 @@ export const mdxComponents: MDXComponents = {
       padding: '0.1em 0.4em',
       fontSize: '0.875em',
       color: 'var(--text-accent)',
-    }}>{children}</code>
+    }}>{
+      // Зеркало: команды нашего установщика ведут в зеркало, а не на режущийся основной домен.
+      IS_MIRROR && typeof children === 'string' ? mirrorizeCommand(children, MAIN_SITE, COURSE.mirrorUrl) : children
+    }</code>
   ),
   pre: ({ children }) => (
     <pre style={{

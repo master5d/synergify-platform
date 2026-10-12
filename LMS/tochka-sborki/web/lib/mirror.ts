@@ -44,6 +44,17 @@ export function isPlatformApiUrl(url: string, origin: string): boolean {
 }
 
 /** Inline-скрипт: <link rel="canonical"> на тот же путь основного сайта (у статического экспорта один layout). */
+/**
+ * Команда установки в зеркале: `<основной сайт>/install…` → `<зеркало>/install…` (зеркало отдаёт те же
+ * скрипты из public/). Ученик пришёл в зеркало, потому что основной домен режут, — команда на этот домен
+ * ему бесполезна. Чужие установщики и прочие адреса основного сайта не трогаются; нет зеркала — без изменений.
+ */
+export function mirrorizeCommand(text: string, mainSite: string, mirrorUrl: string | null): string {
+  if (!mirrorUrl) return text
+  const from = `${mainSite.replace(/\/$/, '')}/install`
+  return text.split(from).join(`${mirrorUrl.replace(/\/$/, '')}/install`)
+}
+
 export function mirrorCanonicalScript(basePath: string, mainSite: string): string {
   const bp = JSON.stringify(basePath)
   const site = JSON.stringify(mainSite)
