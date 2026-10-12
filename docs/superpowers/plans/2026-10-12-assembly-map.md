@@ -28,6 +28,8 @@
 
 ## Поправки к спеке (найдены при чтении кода, внесены в спеку тем же коммитом)
 
+0. (при исполнении задачи 3) Черновая машина живёт в `lib/assembly/draft-machine.tsx`, а не в `components/`: `lib/boundary.test.ts` запрещает pack'ам импортировать UI движка (`components/`, `app/`), а `lib/` — можно.
+
 1. URL модуля (`/lessons/<модуль>/`) не страница, а `ModuleRedirect` на первый непройденный юнит. «Большая картина на странице модуля» → **на первом юните модуля** (там, где уже стоит `ModuleObjectives`); на остальных юнитах — миниатюра.
 2. Картина живёт внутри `UnitGates` вместе со всей страницей: за дверью её не видно (в спеке было «видна до двери»).
 3. Копия библиотеки Anatomy нужна только настоящей машине: черновая обходится своим проектором `lib/assembly/iso.ts`. Копия `kit/` — в задаче 6, после гейтов, перед задачей 7.
@@ -592,7 +594,7 @@ git commit -m "feat(assembly): соответствие 58 юнитов дета
 ### Task 3: черновая машина и компонент картины
 
 **Files:**
-- Create: `lib/assembly/iso.ts`, `components/assembly/draft-machine.tsx`, `components/assembly/assembly-figure.tsx`
+- Create: `lib/assembly/iso.ts`, `lib/assembly/draft-machine.tsx`, `components/assembly/assembly-figure.tsx`
 - Create: `packs/tochka-sborki/course/assembly-machine.tsx`, `packs/living-practice/course/assembly-machine.tsx`, `lib/course/assembly-machine.ts`
 - Modify: `app/globals.css` (дописать блок в конец), `lib/content/assembly-integrity.test.ts` (дописать тест)
 - Test: `lib/assembly/iso.test.ts`, `components/assembly/assembly-figure.test.tsx`
@@ -649,7 +651,7 @@ export function boxFaces(x: number, y: number, z: number, w: number, d: number, 
 
 - [ ] **Step 4: прогнать — зелёное.** Run: `npx vitest run lib/assembly/iso.test.ts` — Expected: PASS.
 
-- [ ] **Step 5: `components/assembly/draft-machine.tsx`.**
+- [ ] **Step 5: `lib/assembly/draft-machine.tsx`.**
 ```tsx
 // Черновая машина: брусок на узел, кубики на детали, раскладка из соответствия. Нужна, чтобы механика картины
 // (состояния, подсветка, переходы, доступность) жила до настоящей машины скиллом Anatomy (спека §4, шаг 2).
@@ -739,7 +741,7 @@ export function draftMachine(map: AssemblyMap): MachineDef | null {
 ```tsx
 // Геометрия сквозной картины. Пока — черновая машина из соответствия; настоящую строит скилл Anatomy (план, задача 7)
 // с теми же id узлов и деталей (контракт MachineDef / MachineProps в lib/assembly/types.ts).
-import { draftMachine } from '@/components/assembly/draft-machine'
+import { draftMachine } from '@/lib/assembly/draft-machine'
 import type { MachineDef } from '@/lib/assembly/types'
 import { ASSEMBLY_MAP } from './assembly-map'
 
@@ -933,7 +935,7 @@ export function AssemblyFigure({ locale, current = null, interactive = false }: 
 
 - [ ] **Step 13: коммит (контроллер).**
 ```bash
-git add LMS/tochka-sborki/web/lib/assembly/iso.ts LMS/tochka-sborki/web/lib/assembly/iso.test.ts LMS/tochka-sborki/web/components/assembly/draft-machine.tsx LMS/tochka-sborki/web/components/assembly/assembly-figure.tsx LMS/tochka-sborki/web/components/assembly/assembly-figure.test.tsx LMS/tochka-sborki/web/packs/tochka-sborki/course/assembly-machine.tsx LMS/tochka-sborki/web/packs/living-practice/course/assembly-machine.tsx LMS/tochka-sborki/web/lib/course/assembly-machine.ts LMS/tochka-sborki/web/app/globals.css LMS/tochka-sborki/web/lib/content/assembly-integrity.test.ts
+git add LMS/tochka-sborki/web/lib/assembly/iso.ts LMS/tochka-sborki/web/lib/assembly/iso.test.ts LMS/tochka-sborki/web/lib/assembly/draft-machine.tsx LMS/tochka-sborki/web/components/assembly/assembly-figure.tsx LMS/tochka-sborki/web/components/assembly/assembly-figure.test.tsx LMS/tochka-sborki/web/packs/tochka-sborki/course/assembly-machine.tsx LMS/tochka-sborki/web/packs/living-practice/course/assembly-machine.tsx LMS/tochka-sborki/web/lib/course/assembly-machine.ts LMS/tochka-sborki/web/app/globals.css LMS/tochka-sborki/web/lib/content/assembly-integrity.test.ts
 git commit -m "feat(assembly): черновая машина и компонент картины (состояния, подсветка, доступность)"
 ```
 

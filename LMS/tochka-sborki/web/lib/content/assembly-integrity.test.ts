@@ -6,6 +6,7 @@ import { join } from 'path'
 import { CONTENT_ROOT } from '../pack'
 import { COURSE } from '../course'
 import { ASSEMBLY_MAP } from '../course/assembly-map'
+import { MACHINE } from '../course/assembly-machine'
 import { NODE_TARGET } from '../assembly/types'
 import { OPTIONAL_MODULE_SLUGS } from '../rpg/modules'
 
@@ -64,6 +65,12 @@ describe.runIf(COURSE.features.assemblyMap)('сквозная картина ↔
       expect(x.label.ru.trim(), `${x.id}: нет RU`).not.toBe('')
       expect(x.label.en.trim(), `${x.id}: нет EN`).not.toBe('')
     }
+  })
+
+  it('геометрия машины несёт ровно те узлы и детали, что в соответствии', () => {
+    expect(MACHINE, 'нет геометрии машины').not.toBeNull()
+    expect([...MACHINE!.nodeIds].sort()).toEqual(ASSEMBLY_MAP.nodes.map((n) => n.id).sort())
+    expect([...MACHINE!.partIds].sort()).toEqual(ASSEMBLY_MAP.parts.map((p) => p.id).sort())
   })
 })
 
