@@ -23,7 +23,7 @@ describe.runIf(COURSE.features.assemblyMap)('AssemblyFigure', () => {
     expect(html.match(/data-am-part="/g)).toHaveLength(ASSEMBLY_MAP.parts.length)
     expect(html.match(/data-am-shell="/g), 'корпус узла — ровно один <g data-am-shell> на узел').toHaveLength(ASSEMBLY_MAP.nodes.length)
     expect(html).not.toContain('data-am-state="built"')
-    expect(html).toMatch(/data-am-part="conveyor\.timer"[^>]*data-am-current="true"/)
+    expect(html).toMatch(/data-am-part="wipers\.timer"[^>]*data-am-current="true"/)
   })
 
   it('без interactive — role="img", узлы не фокусируются; с interactive — role="group" и узлы-ссылки', () => {
@@ -38,16 +38,16 @@ describe.runIf(COURSE.features.assemblyMap)('AssemblyFigure', () => {
   it('заголовок, описание и скрытый список на языке страницы', () => {
     const ru = renderToStaticMarkup(<AssemblyFigure locale="ru" current={unit} />)
     expect(ru).toContain('Машина, которую ты собираешь')
-    expect(ru).toContain('Сейчас — Конвейер: pipeline → Таймер запуска.')
+    expect(ru).toContain('Сейчас — Датчик дождя и дворники: pipeline → Таймер автозапуска.')
     expect(ru).toContain('class="am-sr"')
     const en = renderToStaticMarkup(<AssemblyFigure locale="en" current={unit} />)
     expect(en).toContain('The machine you are building')
-    expect(en).toContain('Now — Conveyor: pipeline → Start timer.')
+    expect(en).toContain('Now — Rain sensor and wipers: pipeline → Auto-start timer.')
   })
 
   it('юнит-фаза подсвечивает корпус узла', () => {
     const html = renderToStaticMarkup(<AssemblyFigure locale="ru" current={{ module: '06-audio-pipeline', unit: 'u1-activation' }} />)
-    expect(html).toMatch(/data-am-node="conveyor"[^>]*data-am-current="true"/)
+    expect(html).toMatch(/data-am-node="wipers"[^>]*data-am-current="true"/)
   })
 })
 

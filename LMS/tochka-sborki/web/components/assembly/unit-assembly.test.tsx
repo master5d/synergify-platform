@@ -13,14 +13,14 @@ describe.runIf(COURSE.features.assemblyMap)('UnitAssembly', () => {
     const html = renderToStaticMarkup(<UnitAssembly moduleSlug="06-audio-pipeline" unitSlug="u1-activation" unitIndex={0} locale="ru" />)
     expect(html).toContain('am-unit--full')
     expect(html).toContain('role="group"')
-    expect(html).toContain('Ты собираешь: Конвейер: pipeline')
+    expect(html).toContain('Ты собираешь: Датчик дождя и дворники: pipeline')
     expect(html).not.toContain('<dialog')
   })
 
   it('остальные юниты — миниатюра-кнопка с подписью; полная картина не смонтирована до открытия', () => {
     const html = renderToStaticMarkup(<UnitAssembly moduleSlug="06-audio-pipeline" unitSlug="u5-schedule" unitIndex={4} locale="en" />)
     expect(html).toContain('aria-haspopup="dialog"')
-    expect(html).toContain("You&#x27;re building: Conveyor: pipeline → Start timer")
+    expect(html).toContain("You&#x27;re building: Rain sensor and wipers: pipeline → Auto-start timer")
     expect(html).toContain('<dialog')
     expect(html.match(/data-am-figure/g)).toHaveLength(1)
     expect(html).toContain('role="img"')

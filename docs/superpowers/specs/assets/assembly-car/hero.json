@@ -1,0 +1,21 @@
+{
+  "prompt": "Isometric technical cutaway illustration, camera 30 degrees above, the car's nose pointing to the lower left (front-left quarter towards the viewer). The car is a generic unbranded two-box compact hatchback with five doors, short rounded hood, tall glasshouse, matte light grey body, dark charcoal bumpers and side sills, black five-spoke wheels, one thin cyan accent stripe along the sill, slim LED headlights, plain smooth grille without any emblem, no logos, no badges.\nIts body panels are semi-transparent glass-like so the internals are clearly visible: a fuel tank under the rear seat with a round fuel level gauge, fuel lines running to the engine under the hood, the steering column with an ignition key, a navigator screen in the centre of the dashboard showing a simple route line, an open glovebox with a small service booklet, a card tucked behind the sun visor, a rain sensor on the windscreen with wiper arms and their motor, a small onboard computer box under the dashboard wired to a short roof antenna, a gearbox with a four-position shifter, an atlas lying on the passenger seat with a bookmark.\nThe car stands on one square light-grey service platform with rounded corners. Around it, all touching the platform: on the left a fuel pump with four nozzles of different colours, its hose plugged into the car's filler flap, and a spare fuel canister next to it; beside the front right wheel a diagnostic stand with a scanner cable to the car and a small tool cart and a traffic cone; on the roof two roof boxes on rails; at the rear a tow hitch with a socket and a small connected trailer, parking sensors on the rear bumper, a rear camera; under the rear wheels a rolling dyno bench with a gauge; behind on the right two smaller copies of the same car following in a convoy, the lead car with a radio antenna.\nThin dark outlines, flat four-tone grey shading, clean technical product diagram style, warm off-white background, everything readable as separate parts, absolutely no lettering, no numbers, no people.",
+  "model": "Codex image_gen (ChatGPT subscription)",
+  "provider": "openai-codex (subscription, laptop)",
+  "seed": 42,
+  "cfg": null,
+  "commercial": false,
+  "refs": {
+    "subject": null,
+    "scene": null,
+    "style": null
+  },
+  "gateway_model": null,
+  "license": "OpenAI Terms (C2PA)",
+  "cost_usd": 0.0,
+  "watermark": "c2pa",
+  "size": "1536x1024",
+  "requested_size": "1536x1024",
+  "runner": "codex exec",
+  "sha256": "0a1cf9399fa3e48e6d44e5d6160afbdffa52c0a861d3b576e655fa855072ea88"
+}

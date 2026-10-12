@@ -1,0 +1,21 @@
+{
+  "prompt": "Vehicle turnaround reference sheet (model sheet for consistent illustration) showing the same car four times in a two by two grid: top left an isometric view from above of the front-left quarter, top right an isometric view from above of the rear-right quarter, bottom left a straight top-down plan view, bottom right a straight left side elevation. The car is a generic unbranded two-box compact hatchback with five doors, short rounded hood, tall glasshouse, matte light grey body, dark charcoal bumpers and side sills, black five-spoke wheels, one thin cyan accent stripe along the sill, plain smooth grille without any emblem, no logos, no badges. Identical proportions, details and colours in every view, thin dark outlines, flat four-tone grey shading, warm off-white background, clean technical product diagram style, absolutely no lettering, no numbers, no people.",
+  "model": "Codex image_gen (ChatGPT subscription)",
+  "provider": "openai-codex (subscription, laptop)",
+  "seed": 42,
+  "cfg": null,
+  "commercial": false,
+  "refs": {
+    "subject": null,
+    "scene": null,
+    "style": null
+  },
+  "gateway_model": null,
+  "license": "OpenAI Terms (C2PA)",
+  "cost_usd": 0.0,
+  "watermark": "c2pa",
+  "size": "1536x1024",
+  "requested_size": "1536x1024",
+  "runner": "codex exec",
+  "sha256": "fcbeebeb9a08c4da1c610d529bf0112587198b74fb8c37cccf95fd1ebaa4e157"
+}
