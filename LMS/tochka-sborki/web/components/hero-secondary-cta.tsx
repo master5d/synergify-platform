@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { IS_MIRROR } from '@/lib/mirror'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
 
 interface Props { locale: Locale }
@@ -20,6 +21,7 @@ export function HeroSecondaryCta({ locale }: Props) {
   const [authed, setAuthed] = useState(false)
 
   useEffect(() => {
+    if (IS_MIRROR) return
     fetch('/api/auth/me', { credentials: 'include' })
       .then(r => r.ok ? r.json() : null)
       .then(d => { if (d?.email) setAuthed(true) })
@@ -30,5 +32,7 @@ export function HeroSecondaryCta({ locale }: Props) {
   const href = authed ? `${base}/dashboard/` : `${base}/login/`
   const label = authed ? t.hero.ctaSecondaryAuthed : t.hero.ctaSecondary
 
+  // В зеркале /login/ — заглушка, а входа нет: ссылку гостя прячем.
+  if (IS_MIRROR && !authed) return null
   return <Link href={href} style={linkStyle}>{label}</Link>
 }

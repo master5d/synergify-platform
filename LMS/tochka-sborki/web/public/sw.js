@@ -36,7 +36,7 @@ self.addEventListener('fetch', (event) => {
         return res
       })
       .catch(() =>
-        caches.match(request).then((hit) => hit || (request.mode === 'navigate' ? caches.match('/offline/') : undefined))
+        caches.match(request).then((hit) => hit || (request.mode === 'navigate' ? caches.match(`${BASE}/offline/`) : undefined))
       )
   )
 })

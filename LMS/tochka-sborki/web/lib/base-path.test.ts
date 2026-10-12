@@ -35,6 +35,12 @@ describe('префикс проведён во все четыре места', 
     expect(m).toMatch(/scope: `\$\{BASE_PATH\}\//)
   })
 
+  it('сервис-воркер: офлайн-страница ищется по ключу с префиксом, как кешируется', () => {
+    const sw = read('public/sw.js')
+    expect(sw).toContain('caches.match(`${BASE}/offline/`)')
+    expect(sw).not.toContain("caches.match('/offline/')")
+  })
+
   it('сервис-воркер несёт плейсхолдер, а postbuild его проставляет', () => {
     expect(read('public/sw.js'), 'sw.js без плейсхолдера').toContain('__COURSE_BASE_PATH__')
     const pkg = JSON.parse(read('package.json')) as { scripts: Record<string, string> }

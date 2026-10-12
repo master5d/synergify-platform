@@ -115,7 +115,10 @@ function MirrorProgressProvider({ children }: { children: React.ReactNode }) {
 
   // Пишем только после загрузки: до неё в storage лежит старая карта, и её нельзя затереть.
   useEffect(() => {
-    if (loaded) saveLessonProgress(browserStorage(), map)
+    if (loaded) {
+      const s = browserStorage()
+      saveLessonProgress(s, mergeLessonProgress(loadLessonProgress(s), map))
+    }
   }, [map, loaded])
 
   const update = useCallback((slug: string, to: 'viewed' | 'completed') => {

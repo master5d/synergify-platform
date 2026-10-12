@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { pagePath } from '@/lib/base-path'
 import { dictionaries, type Locale } from '@/lib/dictionaries'
 
 const PREF_KEY = 'lang-preference'
@@ -26,6 +27,11 @@ function switchedPath(pathname: string, from: Locale, to: Locale): string {
   // Going EN → RU: strip the /en prefix.
   if (pathname === '/en' || pathname === '/en/') return '/'
   return pathname.replace(/^\/en(\/|$)/, '/') || '/'
+}
+
+/** Цель перехода для сырой навигации: с префиксом курса (usePathname его не содержит). */
+export function switchedHref(pathname: string, from: Locale, to: Locale): string {
+  return pagePath(switchedPath(pathname, from, to))
 }
 
 export function LangSuggestBanner() {
@@ -54,7 +60,7 @@ export function LangSuggestBanner() {
 
   function handleSwitch() {
     try { localStorage.setItem(PREF_KEY, otherLocale) } catch { /* ignore */ }
-    window.location.href = switchedPath(pathname, locale, otherLocale)
+    window.location.href = switchedHref(pathname, locale, otherLocale)
   }
 
   function handleDismiss() {

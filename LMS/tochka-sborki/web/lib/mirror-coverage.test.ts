@@ -37,7 +37,7 @@ const SURFACES: Record<string, { kind: Kind; why?: string }> = {
   'lib/auth-check.ts': { kind: 'fails-soft', why: 'зовёт только AuthGuard, а он в зеркале не проверяет' },
   'lib/mirror.ts': { kind: 'fails-soft', why: 'сам зеркало: PLATFORM_API только в блок-листе fetch, вызовов не делает' },
   'lib/platform-api.ts': { kind: 'fails-soft', why: 'объявление адреса, сам вызовов не делает' },
-  'components/hero-secondary-cta.tsx': { kind: 'fails-soft', why: '/api/auth/me → 503 → показывает CTA для гостя' },
+  'components/hero-secondary-cta.tsx': { kind: 'branch' },
   'components/role-play.tsx': { kind: 'fails-soft', why: '/api/intake/me → 503 → сценарий без персонализации' },
   'components/unit-wizard.tsx': { kind: 'fails-soft', why: '/api/intake/me → 503 → юнит без персонализации; прогресс юнитов — localStorage' },
   'components/intake/unit-route-step.tsx': { kind: 'fails-soft', why: 'маршрут задачи → 503 → шаг не показывается' },
