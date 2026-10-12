@@ -20,6 +20,7 @@ import { bindRolePlay } from '@/components/role-play-bound'
 import { bindFadedExample } from '@/components/faded-example-bound'
 import { bindNoAiCheck } from '@/components/no-ai-check-bound'
 import { ModuleObjectives } from '@/components/module-objectives'
+import { UnitAssembly } from '@/components/assembly/unit-assembly'
 import { LessonViews } from '@/components/lesson-views'
 import { SpacedReview } from '@/components/spaced-review'
 import { getLessonViews } from '@/lib/lesson-views/load'
@@ -65,6 +66,7 @@ export function UnitPage({ moduleSlug, unitSlug, locale }: Props) {
         <Sidebar navItems={navItems} currentSlug={moduleSlug} currentUnit={unitSlug} locale={locale} />
         <main id="main-content" tabIndex={-1} style={{ flex: 1, padding: '2rem 3rem', maxWidth: '860px' }}>
           {unitIndex === 0 && <ModuleObjectives objectives={moduleMeta.objectives} locale={locale === 'en' ? 'en' : 'ru'} />}
+          {COURSE.features.assemblyMap && <UnitAssembly moduleSlug={moduleSlug} unitSlug={unitSlug} unitIndex={unitIndex} locale={lc} />}
           <UnitRouteStep moduleSlug={moduleSlug} unitSlug={unitSlug} locale={locale === 'en' ? 'en' : 'ru'} />
           {/* «Вспомни» (Педагогика 1, пилот): 2–3 самопроверки пройденных юнитов, срок которых подошёл; нечего — блока нет. */}
           <SpacedReview moduleSlug={moduleSlug} unitSlug={unitSlug} locale={locale === 'en' ? 'en' : 'ru'} />

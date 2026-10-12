@@ -130,3 +130,25 @@ textarea::placeholder {
 .am-figure [data-am-node][role="link"]:focus-visible { outline: 2px solid var(--text-accent); outline-offset: 2px; }
 @keyframes am-pulse { 0%, 100% { stroke-opacity: 1; } 50% { stroke-opacity: 0.35; } }
 .am-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; padding: 0; }
+.am-unit { margin: 0 0 1.5rem; }
+.am-caption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-secondary); margin: 0.5rem 0 0; }
+.am-mini {
+  display: flex; gap: 0.75rem; align-items: center; width: 100%; padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color); border-radius: var(--radius); background: var(--bg-surface);
+  color: var(--text-primary); font: inherit; text-align: left; cursor: pointer;
+}
+.am-mini .am-figure-wrap { flex: 0 0 160px; width: 160px; }
+.am-mini-text { display: flex; flex-direction: column; gap: 0.25rem; }
+.am-mini .am-caption { margin: 0; }
+.am-open { font-size: var(--text-xs); color: var(--text-accent); }
+@media (max-width: 640px) {
+  .am-mini { flex-direction: column; align-items: stretch; }
+  .am-mini .am-figure-wrap { flex-basis: auto; width: 100%; }
+  .am-mini .am-figure { max-height: 140px; }
+}
+.am-dialog {
+  width: min(960px, 94vw); padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--radius);
+  background: var(--bg-surface); color: var(--text-primary);
+}
+.am-dialog::backdrop { background: rgb(0 0 0 / 0.55); }
+.am-close { display: block; margin: 0 0 0.75rem auto; font: inherit; cursor: pointer; }
