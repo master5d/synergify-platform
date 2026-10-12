@@ -12,6 +12,7 @@ import { PromptAnatomy } from './prompt-anatomy'
 import { WillWont } from './will-wont'
 import { ModuleSurvey } from './module-survey'
 import { CaptureFormBlock } from './capture-form-block'
+import { pagePath } from '@/lib/base-path'
 
 export const mdxComponents: MDXComponents = {
   h1: ({ children }) => (
@@ -25,6 +26,11 @@ export const mdxComponents: MDXComponents = {
   ),
   p: ({ children }) => (
     <p style={{ lineHeight: 1.75, marginBottom: '1rem', color: 'var(--text-primary)' }}>{children}</p>
+  ),
+  // Markdown-ссылки вида [..](/lessons/…) — сырой <a>: basePath их не переписывает (без префикса путь
+  // уводит на корень домена). Префикс только у корневых путей; BASE_PATH пуст ⇒ href без изменений.
+  a: ({ href, children, ...rest }) => (
+    <a {...rest} href={typeof href === 'string' && href.startsWith('/') && !href.startsWith('//') ? pagePath(href) : href}>{children}</a>
   ),
   code: ({ children }) => (
     <code style={{

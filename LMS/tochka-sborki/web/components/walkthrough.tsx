@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useLite } from '@/components/lite-provider'
+import { assetPath } from '@/lib/base-path'
 
 /**
  * Embeds a self-contained "Learn-mode walkthrough" HTML (exported from the sovern-mindmap app)
@@ -58,7 +59,7 @@ export function Walkthrough({ slug, title, minHeight = 480 }: { slug: string; ti
   return (
     <figure style={{ margin: '1.5rem 0' }}>
       <iframe
-        src={`/walkthroughs/${slug}.html`}
+        src={assetPath(`/walkthroughs/${slug}.html`)}
         title={title ?? 'walkthrough'}
         loading="lazy"
         // Self-contained file: scripts to run the step-through, but no same-origin/storage/forms.

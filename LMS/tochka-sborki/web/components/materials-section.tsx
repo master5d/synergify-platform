@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { MaterialGroup, MaterialKind } from '@/lib/materials'
 import type { Locale } from '@/lib/dictionaries'
+import { assetPath } from '@/lib/base-path'
 
 const ICON: Record<MaterialKind, string> = { template: '📄', link: '🔗', tool: '🛠' }
 
@@ -38,7 +39,7 @@ export function MaterialsSection({ groups, locale }: { groups: MaterialGroup[]; 
                   {it.external ? (
                     <a href={it.href} target="_blank" rel="noopener noreferrer" style={style}>{row}</a>
                   ) : it.kind === 'template' ? (
-                    <a href={it.href} download style={style}>{row}</a>
+                    <a href={assetPath(it.href)} download style={style}>{row}</a>
                   ) : (
                     <Link href={it.href} style={style}>{row}</Link>
                   )}
