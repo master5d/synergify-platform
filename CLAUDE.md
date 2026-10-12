@@ -170,7 +170,9 @@
   юнит, модуль, субагент, промпт, шлюз к моделям, обвязка (harness), vibe coding); запрещённые варианты и allow по контексту.
   RU-паттерны — только с границами `(?<![A-Za-zА-Яа-яЁё])…(?![…])`: `\b` рядом с кириллицей не срабатывает (тест это стережёт).
 - Правила без теста: RU и EN правятся одним коммитом (EN — построчное зеркало); контент-пакеты делегатов принимать
-  только после `gen-lesson-views` + полного vitest + `tsc` под ОБА pack'а (`COURSE_PACK=living-practice npx tsc --noEmit`);
+  только после `gen-lesson-views` + полного vitest + `tsc` под ОБА pack'а (`COURSE_PACK=living-practice npx tsc --noEmit`)
+  и vitest под living-practice (`node scripts/select-pack.mjs living-practice && COURSE_PACK=living-practice npx vitest run`):
+  CI `build-packs` гоняет тесты под каждым pack'ом — тест с литералом домена tochka-sborki покраснел в main 2026-10-11;
   при ревизии стека лаборатории (NAUTILUS `docs/history/stack.md`) — grep курса по снятым продуктам и узлам: курс
   описывает только то, что реально работает у автора, с датой.
   Grep по снятым продуктам не ловит то, чего у автора не было никогда (Aider/Cline прожили в курсе
