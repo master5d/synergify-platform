@@ -3,13 +3,19 @@ import {
   IS_MIRROR, MAIN_SITE, isServerOnlyRoute, mainSiteUrl, isPlatformApiUrl,
   mirrorCanonicalScript, mirrorLocale, MIRROR_COPY,
 } from './mirror'
+import { COURSE } from './course'
+
+// Основной сайт — домен АКТИВНОГО pack'а (у living-practice — academy.synergify.com/praktika), не литерал:
+// CI гоняет эти тесты под каждым pack'ом (build-packs).
+const MAIN = COURSE.domain.replace(/\/$/, '')
 
 describe('lib/mirror', () => {
   it('без COURSE_MIRROR зеркало выключено', () => {
     expect(IS_MIRROR).toBe(false)
   })
   it('основной сайт — из COURSE.domain, без слэша в конце', () => {
-    expect(MAIN_SITE).toBe('https://ai.synergify.com')
+    expect(MAIN_SITE).toBe(MAIN)
+    expect(MAIN_SITE.endsWith('/')).toBe(false)
   })
   it.each([
     ['/login/', true], ['/en/login/', true], ['/auth/verify/', true], ['/dashboard/', true],
@@ -22,8 +28,8 @@ describe('lib/mirror', () => {
     expect(isServerOnlyRoute(path)).toBe(expected)
   })
   it('mainSiteUrl ведёт на тот же путь основного сайта', () => {
-    expect(mainSiteUrl('/en/dashboard/')).toBe('https://ai.synergify.com/en/dashboard/')
-    expect(mainSiteUrl('login/')).toBe('https://ai.synergify.com/login/')
+    expect(mainSiteUrl('/en/dashboard/')).toBe(`${MAIN}/en/dashboard/`)
+    expect(mainSiteUrl('login/')).toBe(`${MAIN}/login/`)
   })
   it.each([
     ['/api/auth/me', true],
