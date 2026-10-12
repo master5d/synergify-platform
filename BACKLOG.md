@@ -648,10 +648,16 @@
   (`huggingface.co/spaces/HuggingFaceTB/smol-training-playbook`) и «LLM Evaluation Guidebook»
   (`huggingface.co/spaces/OpenEvals/evaluation-guidebook`) → `packs/tochka-sborki/materials.ts`, группа «Фундамент», с пометкой
   «англ.». Только ссылкой: лицензия у Space не указана, русские PDF-переводы из Telegram не перезаливать.
-- [ ] **CI: сборка академии падает на скачивании шрифтов Google (флейк, 2 раза за 2026-09-28).** `deploy-academy` → Turbopack
+- [x] **CI: сборка академии падает на скачивании шрифтов Google (флейк, 2 раза за 2026-09-28).** — СДЕЛАНО 2026-10-12. `deploy-academy` → Turbopack
   «Can't resolve '@vercel/turbopack-next/internal/font/google/font'» / «next/font/google queries have exactly one entry»; перезапуск
   шага проходит. Лечение — шрифты локально (`next/font/local`, файлы в репо) вместо `next/font/google` в `academy/`, тогда сборка
   не зависит от сети; проверить лицензию шрифтов (OFL) перед копированием.
+  2026-10-12: Comfortaa/Unbounded/Onest — `academy/app/fonts/*.woff2` (190 КБ, из `google/fonts`, OFL 1.1 рядом; Comfortaa с
+  Reserved Font Name — без урезания, только упаковка в WOFF2), происхождение и пересборка — `academy/app/fonts/README.md`,
+  гвард `academy/lib/fonts.test.ts`. Диапазоны весов те же, что грузились из Google.
+- [ ] **CI: курс тоже качает шрифт из Google на сборке** (найдено при фиксе академии 2026-10-12). `LMS/tochka-sborki/web/app/layout.tsx`
+  — `Unbounded` из `next/font/google`: та же сетевая зависимость у `deploy-web`, `deploy-mirror`, `build-packs`. Флейков пока не
+  замечено. Лечение — как у академии (`next/font/local`, файл из `academy/app/fonts` или своя сборка под веса курса).
 - [~] **Педагогика 1 (пилот): интервальный повтор самопроверок** (intake LMS#20; retrieval g≈0.5, spacing g≈0.74; ESEA: источник 1, у нас 4). 2–3 старых `checks`
   в начале юнита и в учебных письмах; карточки представлений — сначала вопрос, ответ скрыт. Нужно хранить время ответа (сейчас ответы
   не хранятся). Стоп-критерий: через месяц отвечают на повтор <10% учеников или воронка отвала не меняется — свернуть.
@@ -785,7 +791,9 @@
 - [x] **Платформа: воронка отвала по урокам** (intake LMS#3) в `/api/admin/stats`: сколько учеников
   дошло до каждого юнита и где бросили, по каждому pack'у (`progress.course`). Сейчас там три счётчика.
   2026-09-27: `/api/admin/stats` отдаёт `funnel`/`dropoff`/`notStarted` (порядок — из нумерации слагов pack'а, сверен тестом с `_meta.json`), воронка выведена на `/admin/leads`.
-- [ ] **Платформа: юнит-прогресс в D1** (след воронки отвала). Юниты отмечаются только в localStorage
+- [x] **Платформа: юнит-прогресс в D1** — СДЕЛАНО 2026-09-27 в `cd5fcce` (строка закрыта 2026-10-12): завершение юнита уходит на
+  сервер (`lib/progress-sync.ts` `completePayload` — `модуль/юнит` + `course` + структура курса; зовут `unit-wizard` и `unit-prose`).
+  Исходная запись: (след воронки отвала). Юниты отмечаются только в localStorage
   (`lib/unit-progress.ts`), в `progress` пишутся лишь слаги уровня модуля/страницы, и `progress-provider`
   не шлёт `course` (всё ложится под дефолт воркера). Слать `модуль/юнит` + `course` из pack'а — воронка
   подхватит юниты без правок (`splitSlug` в `workers/src/handlers/stats.ts`).

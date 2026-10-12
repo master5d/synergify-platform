@@ -1,24 +1,25 @@
 import type { Metadata } from 'next'
-import { Comfortaa, Onest, Unbounded } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 
 // Шрифты школы (дизайн «weave»): Comfortaa — имя школы, Unbounded — дисплей,
-// Onest — текст. Самохостинг через next/font: на проде ноль внешних запросов.
-const comfortaa = Comfortaa({
-  subsets: ['latin', 'cyrillic'],
-  weight: ['500', '600', '700'],
+// Onest — текст. Файлы в репо (app/fonts, OFL; как собраны — app/fonts/README.md):
+// сборка не ходит в сеть за шрифтами, на проде ноль внешних запросов.
+const comfortaa = localFont({
+  src: './fonts/Comfortaa-wght.woff2',
+  weight: '300 700',
   variable: '--font-wordmark',
   display: 'swap',
 })
-const unbounded = Unbounded({
-  subsets: ['latin', 'cyrillic'],
-  weight: ['200', '300', '400'],
+const unbounded = localFont({
+  src: './fonts/Unbounded-wght.woff2',
+  weight: '200 400',
   variable: '--font-display',
   display: 'swap',
 })
-const onest = Onest({
-  subsets: ['latin', 'cyrillic'],
-  weight: ['300', '400', '500'],
+const onest = localFont({
+  src: './fonts/Onest-wght.woff2',
+  weight: '300 500',
   variable: '--font-body',
   display: 'swap',
 })
