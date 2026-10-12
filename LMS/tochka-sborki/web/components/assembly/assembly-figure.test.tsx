@@ -6,9 +6,15 @@ vi.mock('next/navigation', () => ({ useRouter: () => ({ push: () => {} }) }))
 import { AssemblyFigure } from './assembly-figure'
 import { COURSE } from '@/lib/course'
 import { ASSEMBLY_MAP } from '@/lib/course/assembly-map'
+import { BUDGET_BYTES } from '../../scripts/check-assembly-weight.mjs'
 
 describe.runIf(COURSE.features.assemblyMap)('AssemblyFigure', () => {
   const unit = { module: '06-audio-pipeline', unit: 'u5-schedule' }
+
+  it('разметка полной картины укладывается в бюджет 200 КБ (меряется здесь: на сайте юниты за дверью рисуются в браузере)', () => {
+    const html = renderToStaticMarkup(<AssemblyFigure locale="ru" current={unit} interactive />)
+    expect(Buffer.byteLength(html, 'utf8')).toBeLessThanOrEqual(BUDGET_BYTES)
+  })
 
   it('рисует все узлы и детали; без прогресса всё контуром, текущая деталь подсвечена', () => {
     const html = renderToStaticMarkup(<AssemblyFigure locale="ru" current={unit} />)

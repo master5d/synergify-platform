@@ -12,7 +12,7 @@
     "pretest": "node scripts/select-pack.mjs && node scripts/build-starter.mjs",
     "select-pack": "node scripts/select-pack.mjs",
     "starter": "node scripts/build-starter.mjs",
-    "postbuild": "node scripts/stamp-sw.mjs && node scripts/prune-public.mjs && node scripts/finalize-mirror.mjs",
+    "postbuild": "node scripts/stamp-sw.mjs && node scripts/prune-public.mjs && node scripts/finalize-mirror.mjs && node scripts/check-assembly-weight.mjs out",
     "check:mirror": "node scripts/check-mirror.mjs out /ts-gitbook"
   },
   "dependencies": {
