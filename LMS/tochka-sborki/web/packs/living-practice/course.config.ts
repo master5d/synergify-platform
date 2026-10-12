@@ -36,6 +36,8 @@ export const COURSE = {
     certificate: false,
     /** Ретро выпускника (до/после, промпт, план) на странице сертификата. */
     graduateRetro: false,
+    /** Сквозная картина: машина, которую собирает ученик (components/assembly, спека 2026-10-12-assembly-map). */
+    assemblyMap: false,
   },
   /** Курс школы: нужна сессия и допуск академии; RPG-опросник профиля не нужен. */
   gates: { auth: true, intake: false, admission: true },

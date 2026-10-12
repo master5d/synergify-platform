@@ -17,4 +17,8 @@ export const COURSE = {
   mirrorUrl: null as string | null,
   locales: ['ru', 'en'] as const,
   publisher: 'TODO: Publisher',
+  features: {
+    /** Сквозная картина: машина, которую собирает ученик (components/assembly, спека 2026-10-12-assembly-map). */
+    assemblyMap: false,
+  },
 } as const

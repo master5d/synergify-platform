@@ -93,5 +93,5 @@ export function useUnitProgress() {
     })
   }, [])
 
-  return { isCompleted, markCompleted, ready }
+  return { progress, isCompleted, markCompleted, ready }
 }

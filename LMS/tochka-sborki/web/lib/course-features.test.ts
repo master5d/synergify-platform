@@ -15,6 +15,7 @@ describe('course features', () => {
     expect(typeof COURSE.features.rpg).toBe('boolean')
     expect(typeof COURSE.features.certificate).toBe('boolean')
     expect(typeof COURSE.features.graduateRetro).toBe('boolean')
+    expect(typeof COURSE.features.assemblyMap).toBe('boolean')
   })
 
   it('каждый pack объявляет features (новый курс не наследует чужую игру молча)', () => {
@@ -27,6 +28,7 @@ describe('course features', () => {
       expect(cfg, `${p.name}: нет флага rpg`).toMatch(/rpg:\s*(true|false)/)
       expect(cfg, `${p.name}: нет флага certificate`).toMatch(/certificate:\s*(true|false)/)
       expect(cfg, `${p.name}: нет флага graduateRetro`).toMatch(/graduateRetro:\s*(true|false)/)
+      expect(cfg, `${p.name}: нет флага assemblyMap`).toMatch(/assemblyMap:\s*(true|false)/)
     }
   })
 
