@@ -15,7 +15,12 @@ import { REGISTRY } from '@/lib/academy/registry'
 import { MirrorShell } from '@/components/mirror-shell'
 import { IS_MIRROR, MAIN_SITE, mirrorCanonicalScript } from '@/lib/mirror'
 import { BASE_PATH } from '@/lib/base-path'
+import { HydrationMark } from '@/components/hydration-mark'
+import { mirrorWatchdogScript, watchdogEnabled } from '@/lib/mirror-watchdog'
 import './globals.css'
+
+// Сторож зеркала: только основная сборка курса, у которого есть зеркало (COURSE.mirrorUrl).
+const WATCHDOG = watchdogEnabled(IS_MIRROR, COURSE.mirrorUrl) ? COURSE.mirrorUrl : null
 
 const unbounded = Unbounded({
   subsets: ['latin', 'cyrillic'],
@@ -78,6 +83,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${GeistSans.variable} ${GeistMono.variable} ${unbounded.variable}`}
     >
       <head>
+        {/* Раньше наших скриптов в <head> (Next ставит свои теги перед ним): в сборке он на ~3 КБ HTML,
+            внутри первых 16 КБ, которые проходят даже через режущего провайдера. */}
+        {WATCHDOG && <script dangerouslySetInnerHTML={{ __html: mirrorWatchdogScript(WATCHDOG) }} />}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script dangerouslySetInnerHTML={{ __html: liteScript }} />
         <script dangerouslySetInnerHTML={{ __html: langScript }} />
@@ -86,6 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {IS_MIRROR && <script dangerouslySetInnerHTML={{ __html: mirrorCanonicalScript(BASE_PATH, MAIN_SITE) }} />}
       </head>
       <body>
+        {WATCHDOG && <HydrationMark />}
         <ThemeProvider>
           <LiteProvider>
             {!IS_MIRROR && <TelegramAuthBridge />}

@@ -39,4 +39,6 @@ export const COURSE = {
   },
   /** Курс школы: нужна сессия и допуск академии; RPG-опросник профиля не нужен. */
   gates: { auth: true, intake: false, admission: true },
+  /** Зеркала для чтения у курса нет — «сторож» основного сайта не ставится (lib/mirror-watchdog.ts). */
+  mirrorUrl: null as string | null,
 } as const
