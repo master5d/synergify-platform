@@ -11,7 +11,7 @@ import { BUDGET_BYTES } from '../../scripts/check-assembly-weight.mjs'
 describe.runIf(COURSE.features.assemblyMap)('AssemblyFigure', () => {
   const unit = { module: '06-audio-pipeline', unit: 'u5-schedule' }
 
-  it('разметка полной картины укладывается в бюджет 200 КБ (меряется здесь: на сайте юниты за дверью рисуются в браузере)', () => {
+  it('разметка полной картины укладывается в бюджет 300 КБ (меряется здесь: на сайте юниты за дверью рисуются в браузере)', () => {
     const html = renderToStaticMarkup(<AssemblyFigure locale="ru" current={unit} interactive />)
     expect(Buffer.byteLength(html, 'utf8')).toBeLessThanOrEqual(BUDGET_BYTES)
   })

@@ -1,12 +1,12 @@
 // Бюджет веса сквозной картины (спека 2026-10-12-assembly-map, §3): разметка <svg data-am-figure> на странице урока
-// ≤ 200 КБ без сжатия. postbuild: превышение — код 1. На основном сайте юниты за дверью (AuthGuard/IntakeGuard рендерят
+// ≤ 300 КБ без сжатия (поднято с 200 решением владельца 2026-10-12). postbuild: превышение — код 1. На основном сайте юниты за дверью (AuthGuard/IntakeGuard рендерят
 // содержимое только в браузере), картины в HTML нет — тогда громкое «не измерено в HTML», код 0: бюджет при любых дверях
 // держит тест рендера картины (components/assembly/assembly-figure.test.tsx).
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-export const BUDGET_BYTES = 200 * 1024
+export const BUDGET_BYTES = 300 * 1024
 
 export function figureBytes(html) {
   let max = 0
