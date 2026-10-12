@@ -13,6 +13,7 @@ import { BASE_PATH } from '@/lib/base-path'
 import { buildEvidence, interpretVerify, verifyPageUrl, SPINE_TOTAL, type ProgressRow } from '@/lib/certificate-evidence'
 import { PLATFORM_API } from '@/lib/platform-api'
 import { certificationIdentity, linkedInAddToProfileUrl } from '@/lib/linkedin-add-to-profile'
+import { loadCertificateFontCss } from '@/lib/certificate-fonts'
 
 const COPY = {
   ru: {
@@ -86,6 +87,13 @@ export function CertificatePage({ locale, outline = NO_OUTLINE }: Props) {
   const [name, setName] = useState('')
   const [copied, setCopied] = useState(false)
   const svgRef = useRef<SVGSVGElement | null>(null)
+  // Шрифты встраиваются в SVG данными со своего сайта: страница и скачанный файл не зовут Google.
+  const [fontCss, setFontCss] = useState('')
+  useEffect(() => {
+    let alive = true
+    loadCertificateFontCss().then((css) => { if (alive) setFontCss(css) })
+    return () => { alive = false }
+  }, [])
 
   useEffect(() => {
     const stored = (() => {
@@ -276,6 +284,7 @@ export function CertificatePage({ locale, outline = NO_OUTLINE }: Props) {
               evidence={evidence}
               evidenceTotal={SPINE_TOTAL}
               verifyUrl={verifyUrl ?? undefined}
+              fontCss={fontCss}
             />
           </div>
 

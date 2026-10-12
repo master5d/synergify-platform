@@ -17,6 +17,8 @@ interface Props {
   evidenceTotal?: number
   /** Публичный адрес проверки; есть — печатается мелко в подвале вместо адреса курса. */
   verifyUrl?: string
+  /** @font-face со шрифтами, встроенными данными (lib/certificate-fonts.ts); пусто — запасные шрифты классов. */
+  fontCss?: string
 }
 
 const EVIDENCE_COPY = {
@@ -40,7 +42,7 @@ export const EVIDENCE_MAX_ROWS = 9
 export const VERIFY_FONT = 8        // ~130 знаков адреса проверки в 650px моноширинным
 
 export const CertificateSVG = forwardRef<SVGSVGElement, Props>(
-  function CertificateSVG({ name, date, locale, evidence = [], evidenceTotal, verifyUrl }, ref) {
+  function CertificateSVG({ name, date, locale, evidence = [], evidenceTotal, verifyUrl, fontCss = '' }, ref) {
     const t = resolveCertificate(locale)
     const ec = EVIDENCE_COPY[locale]
     const lines = evidence.slice(0, EVIDENCE_MAX_ROWS)
@@ -61,8 +63,7 @@ export const CertificateSVG = forwardRef<SVGSVGElement, Props>(
         style={{ display: 'block', maxWidth: '560px', margin: '0 auto' }}
       >
         <defs>
-          <style>{`
-            @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Geist+Mono:wght@400;700&display=swap');
+          <style>{`${fontCss}
             .brand   { font-family: 'Unbounded', system-ui, sans-serif; font-weight: 900; }
             .serif   { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
             .serif-i { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-style: italic; }
