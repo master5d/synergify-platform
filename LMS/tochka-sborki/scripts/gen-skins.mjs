@@ -12,7 +12,6 @@ import { dirname, join } from 'node:path'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
 const KEY = process.env.LITELLM_KEY
-if (!KEY) { console.error('Set LITELLM_KEY'); process.exit(1) }
 const GATEWAY = process.env.LITELLM_URL || 'https://sovrn-mini.taile5b8dd.ts.net/v1'
 // prose-pool — алиас гейтвея для прозы (Gemini Flash); до 2026-09-28 здесь стояло сырое имя модели.
 const POOL = process.env.SKINS_POOL || 'prose-pool'
@@ -26,10 +25,23 @@ function stripFence(text) {
   return withoutOpen.replace(/\r?\n?```$/, '').trim()
 }
 
-async function callGateway(prompt, temperature) {
+// Подпись вызывающего: без x-sovern-agent вызов ложится в usage.db гейтвея как
+// `unattributed` (перепись агентов W23, 2026-10-12). Своё имя, не lms-lesson-views/lms-llm:
+// одинаковые имена в учёте сливаются.
+export const SOVERN_AGENT = 'lms-skins'
+
+export function gatewayHeaders(key) {
+  return {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${key}`,
+    'x-sovern-agent': SOVERN_AGENT,
+  }
+}
+
+export async function callGateway(prompt, temperature, key = KEY) {
   const res = await fetch(`${GATEWAY}/chat/completions`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${KEY}` },
+    headers: gatewayHeaders(key),
     signal: AbortSignal.timeout(90_000),
     body: JSON.stringify({ model: POOL, messages: [{ role: 'user', content: prompt }],
       temperature, max_tokens: 4000 }),
@@ -138,11 +150,15 @@ async function genUnits(skin) {
   console.log(`✓ ${skin} units`)
 }
 
-const args = process.argv.slice(2)
-const unitsMode = args.includes('--units')
-const named = args.filter(a => a !== '--units')
-const targets = named.length ? named : Object.keys(SKIN_TONES)
-for (const s of targets) {
-  try { await (unitsMode ? genUnits(s) : gen(s)) }
-  catch (e) { console.error('✗', e.message) }
+// Точка входа только при прямом запуске: импорт из теста не ходит в сеть и не требует ключа.
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  if (!KEY) { console.error('Set LITELLM_KEY'); process.exit(1) }
+  const args = process.argv.slice(2)
+  const unitsMode = args.includes('--units')
+  const named = args.filter(a => a !== '--units')
+  const targets = named.length ? named : Object.keys(SKIN_TONES)
+  for (const s of targets) {
+    try { await (unitsMode ? genUnits(s) : gen(s)) }
+    catch (e) { console.error('✗', e.message) }
+  }
 }
