@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
-import { Unbounded } from 'next/font/google'
+import localFont from 'next/font/local'
 import { ProgressProvider } from '@/components/progress-provider'
 import { LangSuggestBanner } from '@/components/lang-suggest-banner'
 import { PwaRegister } from '@/components/pwa/pwa-register'
@@ -22,9 +22,11 @@ import './globals.css'
 // Сторож зеркала: только основная сборка курса, у которого есть зеркало (COURSE.mirrorUrl).
 const WATCHDOG = watchdogEnabled(IS_MIRROR, COURSE.mirrorUrl) ? COURSE.mirrorUrl : null
 
-const unbounded = Unbounded({
-  subsets: ['latin', 'cyrillic'],
-  weight: ['900'],
+// Unbounded 900 из репо (app/fonts, OFL; как собран — app/fonts/README.md): сборка не ходит
+// в сеть за шрифтом — next/font/google качал его на каждом `next build`.
+const unbounded = localFont({
+  src: './fonts/Unbounded-900.woff2',
+  weight: '900',
   variable: '--font-display',
   display: 'swap',
 })

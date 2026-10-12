@@ -655,9 +655,16 @@
   2026-10-12: Comfortaa/Unbounded/Onest — `academy/app/fonts/*.woff2` (190 КБ, из `google/fonts`, OFL 1.1 рядом; Comfortaa с
   Reserved Font Name — без урезания, только упаковка в WOFF2), происхождение и пересборка — `academy/app/fonts/README.md`,
   гвард `academy/lib/fonts.test.ts`. Диапазоны весов те же, что грузились из Google.
-- [ ] **CI: курс тоже качает шрифт из Google на сборке** (найдено при фиксе академии 2026-10-12). `LMS/tochka-sborki/web/app/layout.tsx`
+- [x] **CI: курс тоже качает шрифт из Google на сборке** — СДЕЛАНО 2026-10-12 (найдено при фиксе академии). `LMS/tochka-sborki/web/app/layout.tsx`
   — `Unbounded` из `next/font/google`: та же сетевая зависимость у `deploy-web`, `deploy-mirror`, `build-packs`. Флейков пока не
   замечено. Лечение — как у академии (`next/font/local`, файл из `academy/app/fonts` или своя сборка под веса курса).
+  2026-10-12: `web/app/fonts/Unbounded-900.woff2` (38 КБ, статический инстанс 900, latin + cyrillic; OFL рядом, пересборка —
+  `web/app/fonts/README.md`), гвард `web/lib/a11y/local-fonts.test.ts`. Файл академии не подошёл: там ось 200–400.
+- [ ] **Сертификат грузит шрифты из Google в браузере ученика** (найдено 2026-10-12). `components/certificate-svg.tsx` —
+  `@import url('https://fonts.googleapis.com/css2?family=Unbounded…Playfair+Display…Geist+Mono…')` внутри SVG: на `/certificate`
+  (и в зеркале, куда приходят те, кому режут сеть) запрос уходит в Google; без ответа сертификат рисуется системными шрифтами.
+  Сборку не ломает. Лечение — встроить нужные начертания в SVG (`@font-face` с data-URI woff2-подмножества) или ссылаться на
+  файлы своего сайта; проверить, что скачанный SVG/PNG сертификата остаётся самодостаточным.
 - [~] **Педагогика 1 (пилот): интервальный повтор самопроверок** (intake LMS#20; retrieval g≈0.5, spacing g≈0.74; ESEA: источник 1, у нас 4). 2–3 старых `checks`
   в начале юнита и в учебных письмах; карточки представлений — сначала вопрос, ответ скрыт. Нужно хранить время ответа (сейчас ответы
   не хранятся). Стоп-критерий: через месяц отвечают на повтор <10% учеников или воронка отвала не меняется — свернуть.
