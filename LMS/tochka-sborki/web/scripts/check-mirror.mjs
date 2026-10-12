@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 // Проверка готовой сборки зеркала (spec «Проверка» п. 2). Использование: node scripts/check-mirror.mjs out /ts-gitbook
 // Exit 0 — чисто, 1 — нарушения (печатаются), 2 — неверный вызов.
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
