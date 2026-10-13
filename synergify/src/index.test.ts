@@ -90,6 +90,7 @@ describe('POST /api/subscribe', () => {
 
     expect(fetchCalls.length).toBe(1)
     expect(fetchCalls[0].url).toBe(LISTMONK_URL)
+    expect(fetchCalls[0].init?.signal).toBeInstanceOf(AbortSignal)
     const forwarded = JSON.parse(String(fetchCalls[0].init?.body))
     expect(forwarded).toEqual({
       email: 'user@example.com',
@@ -150,6 +151,12 @@ describe('POST /api/subscribe', () => {
     expect(res.status).toBe(502)
     const body = (await res.json()) as { ok: boolean }
     expect(body.ok).toBe(false)
+  })
+
+  it('listmonk timeout → 502 {ok:false}', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => { throw new DOMException('timed out', 'TimeoutError') }))
+    const res = await worker.fetch(subscribeReq({ email: 'ok@example.com' }), env, ctx)
+    expect(res.status).toBe(502)
   })
 })
 

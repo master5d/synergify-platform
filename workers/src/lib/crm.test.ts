@@ -23,6 +23,7 @@ describe('addCrmContact', () => {
     expect((init as any).headers.Authorization).toBe('token user:tok')
     expect((init as any).headers['CF-Access-Client-Id']).toBe('cf-id')
     expect((init as any).headers['CF-Access-Client-Secret']).toBe('cf-secret')
+    expect((init as any).signal).toBeInstanceOf(AbortSignal)
     expect(JSON.parse((init as any).body)).toMatchObject({
       email: 'a@b.com',
       lists: [3],
@@ -55,7 +56,7 @@ describe('addCrmContact', () => {
   })
 
   it('does not throw when fetch rejects', async () => {
-    vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('network'))
+    vi.spyOn(globalThis, 'fetch').mockRejectedValue(new DOMException('timed out', 'TimeoutError'))
     await expect(addCrmContact(baseEnv, { email: 'a@b.com' })).resolves.toBe(false)
   })
 })

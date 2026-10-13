@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { pkceChallenge, buildAuthorizeUrl, safeRedirectPath } from './oauth-google'
+import { pkceChallenge, buildAuthorizeUrl, safeRedirectPath, exchangeCode, fetchUserinfo } from './oauth-google'
+import { afterEach, vi } from 'vitest'
+
+afterEach(() => vi.restoreAllMocks())
 
 describe('pkceChallenge', () => {
   it('is deterministic base64url (no + / =) and differs from the verifier', async () => {
@@ -38,5 +41,20 @@ describe('safeRedirectPath', () => {
     expect(safeRedirectPath('/a\\b')).toBe('/')
     expect(safeRedirectPath('/a/../../b')).toBe('/')
     expect(safeRedirectPath(null)).toBe('/')
+  })
+})
+
+describe('Google network calls', () => {
+  it('adds bounded signals to token and userinfo requests', async () => {
+    const spy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ access_token: 'at' }), { status: 200 }),
+    )
+    await expect(exchangeCode({ code: 'c', verifier: 'v', clientId: 'id', clientSecret: 'secret', redirectUri: 'https://x/cb' }))
+      .resolves.toEqual({ ok: true, accessToken: 'at' })
+    expect(spy.mock.calls[0][1]?.signal).toBeInstanceOf(AbortSignal)
+
+    spy.mockResolvedValue(new Response(JSON.stringify({ sub: 's', email: 'A@B.COM', email_verified: true }), { status: 200 }))
+    await expect(fetchUserinfo('at')).resolves.toEqual({ ok: true, sub: 's', email: 'a@b.com', emailVerified: true })
+    expect(spy.mock.calls[1][1]?.signal).toBeInstanceOf(AbortSignal)
   })
 })

@@ -1,4 +1,5 @@
 import type { Env } from './types'
+import { TELEGRAM_TIMEOUT_MS } from './net'
 
 export interface WebAppButton { text: string; url: string }
 
@@ -7,20 +8,24 @@ export async function sendMessage(env: Env, chatId: number, text: string, button
   const reply_markup = button
     ? { inline_keyboard: [[{ text: button.text, web_app: { url: button.url } }]] }
     : undefined
-  await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+  const res = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ chat_id: chatId, text, reply_markup }),
+    signal: AbortSignal.timeout(TELEGRAM_TIMEOUT_MS),
   })
+  if (!res.ok) console.error('telegram sendMessage non-OK', res.status, 'POST')
 }
 
 // Prompt the user to reply (Telegram shows a reply box pre-targeted at this message).
 export async function sendForceReply(env: Env, chatId: number, text: string): Promise<void> {
-  await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+  const res = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ chat_id: chatId, text, reply_markup: { force_reply: true } }),
+    signal: AbortSignal.timeout(TELEGRAM_TIMEOUT_MS),
   })
+  if (!res.ok) console.error('telegram sendForceReply non-OK', res.status, 'POST')
 }
 
 export interface UrlButton { text: string; url: string }

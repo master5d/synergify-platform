@@ -16,6 +16,7 @@ describe('sendMessage', () => {
     expect(body.chat_id).toBe(555)
     expect(body.text).toBe('hello')
     expect(body.reply_markup).toBeUndefined()
+    expect(init.signal).toBeInstanceOf(AbortSignal)
   })
 
   it('attaches a web_app inline button when provided', async () => {
@@ -33,6 +34,15 @@ describe('sendForceReply', () => {
     const body = JSON.parse((spy.mock.calls[0][1] as RequestInit).body as string)
     expect(body.chat_id).toBe(7)
     expect(body.reply_markup).toEqual({ force_reply: true })
+    expect((spy.mock.calls[0][1] as RequestInit).signal).toBeInstanceOf(AbortSignal)
     spy.mockRestore()
+  })
+
+  it('logs non-OK responses without exposing the bot token', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('bad', { status: 500 }))
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {})
+    await sendMessage(env, 7, 'hello')
+    expect(error).toHaveBeenCalledWith('telegram sendMessage non-OK', 500, 'POST')
+    expect(error.mock.calls.flat().join(' ')).not.toContain('BOTTOKEN')
   })
 })

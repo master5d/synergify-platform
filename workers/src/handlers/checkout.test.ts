@@ -21,6 +21,7 @@ describe('handleSupportCheckout', () => {
     const [url, init] = spy.mock.calls[0] as [string, RequestInit]
     expect(url).toBe('https://api.stripe.com/v1/checkout/sessions')
     expect((init.headers as Record<string, string>).Authorization).toBe('Bearer sk_test')
+    expect(init.signal).toBeInstanceOf(AbortSignal)
   })
 
   it('returns 503 when the key is not configured', async () => {

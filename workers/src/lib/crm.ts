@@ -1,4 +1,5 @@
 import type { Env } from './types'
+import { CRM_TIMEOUT_MS } from './net'
 
 const strip = (s: string | undefined) => (s ?? '').replace(/^﻿/, '').trim()
 
@@ -34,6 +35,7 @@ export async function addCrmContact(
         },
         preconfirm_subscriptions: false, // single opt-in: подписка остаётся unconfirmed
       }),
+      signal: AbortSignal.timeout(CRM_TIMEOUT_MS),
     })
     // 409 = уже существует → noop; прочие non-ok → лог, не бросаем
     if (!res.ok && res.status !== 409) {

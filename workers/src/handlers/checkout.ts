@@ -1,6 +1,7 @@
 import type { Env } from '../lib/types'
 import { validateSupportAmount, buildSupportSessionForm, buildProductSessionForm } from '../lib/checkout'
 import { findProduct } from '../lib/products'
+import { STRIPE_TIMEOUT_MS } from '../lib/net'
 
 export async function handleSupportCheckout(request: Request, env: Env): Promise<Response> {
   let body: { amount?: unknown; locale?: string }
@@ -20,6 +21,7 @@ export async function handleSupportCheckout(request: Request, env: Env): Promise
       method: 'POST',
       headers: { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}`, 'Content-Type': 'application/x-www-form-urlencoded' },
       body: form.toString(),
+      signal: AbortSignal.timeout(STRIPE_TIMEOUT_MS),
     })
   } catch (e) {
     console.error('stripe session create threw', e)
@@ -52,6 +54,7 @@ export async function handleProductCheckout(request: Request, env: Env): Promise
       method: 'POST',
       headers: { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}`, 'Content-Type': 'application/x-www-form-urlencoded' },
       body: form.toString(),
+      signal: AbortSignal.timeout(STRIPE_TIMEOUT_MS),
     })
   } catch (e) {
     console.error('stripe product session threw', e)

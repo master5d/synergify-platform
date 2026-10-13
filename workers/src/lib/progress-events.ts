@@ -1,4 +1,5 @@
 import type { Env } from './types'
+import { PROGRESS_EVENTS_TIMEOUT_MS } from './net'
 
 const strip = (s: string | undefined) => (s ?? '').replace(/^﻿/, '').trim()
 
@@ -149,7 +150,10 @@ export async function upsertProgressSubscriber(
   const addr = email.trim().toLowerCase()
   try {
     const query = `subscribers.email = '${addr.replace(/'/g, "''")}'`
-    const found = await fetch(`${url}/api/subscribers?per_page=1&query=${encodeURIComponent(query)}`, { headers })
+    const found = await fetch(`${url}/api/subscribers?per_page=1&query=${encodeURIComponent(query)}`, {
+      headers,
+      signal: AbortSignal.timeout(PROGRESS_EVENTS_TIMEOUT_MS),
+    })
     if (!found.ok) {
       console.error('listmonk progress lookup non-OK', found.status, await found.text())
       return false
@@ -168,6 +172,7 @@ export async function upsertProgressSubscriber(
           attribs: { completed_modules: add.modules, completed_course: add.courses },
           preconfirm_subscriptions: false, // single opt-in, как CRM-список
         }),
+        signal: AbortSignal.timeout(PROGRESS_EVENTS_TIMEOUT_MS),
       })
       if (!res.ok) console.error('listmonk progress create non-OK', res.status, await res.text())
       return res.ok
@@ -183,7 +188,7 @@ export async function upsertProgressSubscriber(
     const res = await fetch(`${url}/api/subscribers/${existing.id}`, {
       method: 'PUT',
       headers,
-      body: JSON.stringify({
+        body: JSON.stringify({
         email: existing.email,
         name: existing.name,
         status: existing.status,
@@ -193,8 +198,9 @@ export async function upsertProgressSubscriber(
           completed_modules: union(attribs.completed_modules, add.modules),
           completed_course: union(attribs.completed_course, add.courses),
         },
-        preconfirm_subscriptions: false,
-      }),
+          preconfirm_subscriptions: false,
+        }),
+        signal: AbortSignal.timeout(PROGRESS_EVENTS_TIMEOUT_MS),
     })
     if (!res.ok) console.error('listmonk progress update non-OK', res.status, await res.text())
     return res.ok

@@ -18,6 +18,7 @@ describe('sendEmailSES', () => {
     // aws4fetch signs input+init into a single Request and calls fetch(request) — one arg, not (url, init)
     const req = spy.mock.calls[0][0] as Request
     expect(req.url).toContain('/v2/email/outbound-emails')
+    expect(req.signal).toBeInstanceOf(AbortSignal)
     // SigV4 подпись присутствует
     const auth = req.headers.get('Authorization') || ''
     expect(auth).toContain('AWS4-HMAC-SHA256')
@@ -43,5 +44,11 @@ describe('sendEmailSES', () => {
     const sent = JSON.parse(await req.clone().text())
     expect(sent.Content.Simple.Body.Html).toBeUndefined()
     expect(sent.Content.Simple.Headers).toBeUndefined()
+  })
+
+  it('turns a timeout into the existing best-effort failure result', async () => {
+    vi.spyOn(globalThis, 'fetch').mockRejectedValue(new DOMException('timed out', 'TimeoutError'))
+    const r = await sendEmailSES(env, { from: 'a@mamaev.coach', to: 'u@x.com', subject: 's', text: 't' })
+    expect(r).toMatchObject({ ok: false, status: 0 })
   })
 })

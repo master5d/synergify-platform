@@ -47,6 +47,7 @@ describe('upsertProgressSubscriber', () => {
     const [url, init] = fetchMock.mock.calls[1]
     expect(url).toBe('https://listmonk.test/api/subscribers/42')
     expect(init!.method).toBe('PUT')
+    expect(fetchMock.mock.calls.every(call => call[1]?.signal instanceof AbortSignal)).toBe(true)
     expect(JSON.parse(init!.body as string)).toEqual({
       email: 'a@b.com', name: 'Ann', status: 'enabled',
       lists: [7, 9],
@@ -76,5 +77,11 @@ describe('upsertProgressSubscriber', () => {
     vi.spyOn(console, 'log').mockImplementation(() => {})
     expect(await upsertProgressSubscriber({ ...env, LISTMONK_API_TOKEN: '' }, 9, 'a@b.com', { modules: [], courses: [] })).toBe(false)
     expect(fetchMock).not.toHaveBeenCalled()
+  })
+
+  it('does not throw when listmonk times out', async () => {
+    vi.spyOn(globalThis, 'fetch').mockRejectedValue(new DOMException('timed out', 'TimeoutError'))
+    vi.spyOn(console, 'error').mockImplementation(() => {})
+    await expect(upsertProgressSubscriber(env, 9, 'a@b.com', { modules: ['c/m'], courses: [] })).resolves.toBe(false)
   })
 })

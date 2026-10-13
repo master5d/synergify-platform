@@ -2,6 +2,7 @@
 // Google OAuth helpers (fb_25d8fa04). Pure where possible (PKCE, authorize URL, redirect guard);
 // exchangeCode/fetchUserinfo are thin network wrappers. No OAuth libs — WebCrypto + fetch only.
 // client_secret is passed in from the handler (env) and used ONLY here in the token exchange.
+import { GOOGLE_TIMEOUT_MS } from './net'
 
 function b64url(bytes: Uint8Array): string {
   return btoa(String.fromCharCode(...bytes)).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_')
@@ -44,7 +45,8 @@ export async function exchangeCode(o: {
         client_id: o.clientId,
         client_secret: o.clientSecret,
         redirect_uri: o.redirectUri,
-      }).toString(),
+        }).toString(),
+      signal: AbortSignal.timeout(GOOGLE_TIMEOUT_MS),
     })
     if (!res.ok) return { ok: false }
     const j = (await res.json().catch(() => ({}))) as { access_token?: string }
@@ -60,6 +62,7 @@ export async function fetchUserinfo(accessToken: string):
   try {
     const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
       headers: { Authorization: `Bearer ${accessToken}` },
+      signal: AbortSignal.timeout(GOOGLE_TIMEOUT_MS),
     })
     if (!res.ok) return { ok: false }
     const j = (await res.json().catch(() => ({}))) as { sub?: string; email?: string; email_verified?: boolean }

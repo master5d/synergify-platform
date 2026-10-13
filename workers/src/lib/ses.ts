@@ -1,5 +1,6 @@
 import { AwsClient } from 'aws4fetch'
 import type { Env } from './types'
+import { SES_TIMEOUT_MS } from './net'
 
 export interface SesMessage {
   from: string
@@ -58,6 +59,7 @@ export async function sendEmailSES(env: Env, msg: SesMessage): Promise<{ ok: boo
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
+      signal: AbortSignal.timeout(SES_TIMEOUT_MS),
     })
     if (!res.ok) {
       const error = await res.text()

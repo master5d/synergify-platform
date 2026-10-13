@@ -6,6 +6,8 @@ const LISTMONK_URL = 'https://mail.mamaev.coach/api/public/subscription'
 // RU/EN маршрутизация: два публичных списка listmonk — кампании идут на языке юзера.
 const LIST_UUID_RU = 'cf27c05a-a3e2-4ba4-94b8-17a485b8ea95'
 const LIST_UUID_EN = '9c837884-ddcb-44be-8df6-db98d589b3f7'
+// Public subscribe is interactive, but upstream is best-effort for this proxy; keep it bounded.
+const LISTMONK_TIMEOUT_MS = 15_000
 
 // BIMI-логотип: SVG Tiny PS (единственный профиль, который принимает BIMI/Gmail).
 // Три восходящих штриха на индиго = синергия/рост. <title> обязателен, квадрат, без скриптов.
@@ -61,6 +63,7 @@ async function subscribeCore(body: SubscribeBody): Promise<SubscribeOutcome> {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, name: '', list_uuids: [resolveListUuid(body.lang)] }),
+      signal: AbortSignal.timeout(LISTMONK_TIMEOUT_MS),
     })
     upstreamText = await upstream.text()
   } catch {
