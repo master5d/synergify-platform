@@ -231,13 +231,13 @@ describe('«сначала сам»: вкладки «Конспект» и «К
 
 describe('настройка pack\'а: pedagogy', () => {
   const cfg = (pack: string) => readFileSync(join(process.cwd(), 'packs', pack, 'course.config.ts'), 'utf8')
-  it('каждый pack объявляет pedagogy.pretest и pedagogy.thinkFirst', () => {
+  it('каждый pack объявляет pedagogy.pretest и pedagogy.thinkFirst (fadeByChecks — по желанию, нет поля — выкл.)', () => {
     const packs = readdirSync(join(process.cwd(), 'packs'), { withFileTypes: true }).filter(e => e.isDirectory() && !e.name.startsWith('_'))
-    for (const p of packs) expect(cfg(p.name), p.name).toMatch(/pedagogy:\s*\{\s*pretest:\s*(true|false),\s*thinkFirst:\s*(true|false)\s*\}/)
+    for (const p of packs) expect(cfg(p.name), p.name).toMatch(/pedagogy:\s*\{\s*pretest:\s*(true|false),\s*thinkFirst:\s*(true|false)(,\s*fadeByChecks:\s*(true|false))?\s*\}/)
   })
-  it('ТС — оба включены; «Тишина» — оба выключены (деликатная тема)', () => {
-    expect(cfg('tochka-sborki')).toMatch(/pedagogy:\s*\{\s*pretest:\s*true,\s*thinkFirst:\s*true\s*\}/)
-    expect(cfg('living-practice')).toMatch(/pedagogy:\s*\{\s*pretest:\s*false,\s*thinkFirst:\s*false\s*\}/)
+  it('ТС — все включены; «Тишина» — все выключены (деликатная тема)', () => {
+    expect(cfg('tochka-sborki')).toMatch(/pedagogy:\s*\{\s*pretest:\s*true,\s*thinkFirst:\s*true,\s*fadeByChecks:\s*true\s*\}/)
+    expect(cfg('living-practice')).toMatch(/pedagogy:\s*\{\s*pretest:\s*false,\s*thinkFirst:\s*false,\s*fadeByChecks:\s*false\s*\}/)
   })
   it('активный pack доносит thinkFirst до данных вкладок', () => {
     expect(typeof COURSE.pedagogy.thinkFirst).toBe('boolean')

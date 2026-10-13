@@ -15,6 +15,8 @@ import { normalizeErrorStyle } from './intake/relational-style'
 import { mentorFirmness, mentorFirmnessCompact, mentorStateAdaptation } from './mentor-persona'
 import { COMPANION } from './course/companion'
 import { referenceLines, type UnitReference } from './learn-prompt-reference'
+import { fadeLine, type FadeSignal } from './learn-prompt-fading'
+import { COURSE } from './course'
 
 export interface LearnPromptInput {
   locale: Locale
@@ -32,6 +34,9 @@ export interface LearnPromptInput {
   reference?: UnitReference | null
   /** 'learn' (по умолчанию) — объяснять по методике курса; 'practice' — «Помоги мне практиковаться». */
   studyMode?: StudyMode
+  /** Сигнал самопроверок (lib/learn-prompt-fading.ts): сдвигает опоры режима анкеты. Работает, только если
+   *  pack включил `COURSE.pedagogy.fadeByChecks`; нет сигнала / 'none' / 'hold' — промпт как без него. */
+  fadeSignal?: FadeSignal | null
 }
 
 export type StudyMode = 'learn' | 'practice'
@@ -120,6 +125,11 @@ function bondingLine(i: LearnPromptInput, ru: boolean): string {
   return (ru ? 'Под привязку: ' : 'For bonding: ') + parts.join('; ') + '.'
 }
 
+/** Флаг pack'а `COURSE.pedagogy.fadeByChecks`; нет поля — выключено (как thinkFirst). */
+function fadeEnabled(): boolean {
+  return (COURSE.pedagogy as { fadeByChecks?: boolean }).fadeByChecks === true
+}
+
 /** Hard cap for the bootstrap so it survives agent URL-length limits (before encodeURIComponent). */
 export const MAX_BOOTSTRAP = 1500
 
@@ -175,9 +185,12 @@ export function buildBootstrapDeepLink(i: LearnPromptInput): string {
       (outcome ? ` My goal: "${outcome}".` : '') +
       B.loop.en
 
-  if (i.studyMode !== 'practice') return cap(head + B.opener[L], MAX_BOOTSTRAP)
-  // Практика: правило режима и opener не должны отрезаться капом — укорачивается голова.
-  const tail = cap(PRACTICE_RULES.compact[L] + B.opener[L], MAX_BOOTSTRAP)
+  const fade = fadeLine(i.fadeSignal, L, fadeEnabled())
+  if (i.studyMode !== 'practice' && !fade) return cap(head + B.opener[L], MAX_BOOTSTRAP)
+  // Практика и сигнал самопроверок: правила режима, фраза опор и opener не должны отрезаться капом —
+  // укорачивается голова.
+  const rules = i.studyMode === 'practice' ? PRACTICE_RULES.compact[L] : ' '
+  const tail = cap((fade ? ` ${fade}` : '') + rules + B.opener[L], MAX_BOOTSTRAP)
   // −2: пробел-склейка и «…», который cap дописывает сверх своего max.
   return `${cap(head, MAX_BOOTSTRAP - tail.length - 2)} ${tail}`
 }
@@ -194,7 +207,10 @@ export function buildLearnPrompt(i: LearnPromptInput): string {
   const C = COMPANION
   const p = profileOf(i)
   const niche = p.niche ? NICHE[p.niche]?.[L] : null
-  const modeLine = C.usesProfile ? (p.mode ? MODE_DIRECTIVE[p.mode][L] : MODE_FALLBACK[L]) : ''
+  const baseMode = C.usesProfile ? (p.mode ? MODE_DIRECTIVE[p.mode][L] : MODE_FALLBACK[L]) : ''
+  // Режим анкеты — база; сигнал самопроверок только сдвигает его одной фразой.
+  const fade = fadeLine(i.fadeSignal, L, fadeEnabled())
+  const modeLine = [baseMode, fade].filter(Boolean).join(' ')
   const unitNo = i.unitIndex + 1
 
   const persona = C.mentorPersona ? [mentorFirmness(i.locale), '', mentorStateAdaptation(i.locale), ''] : []

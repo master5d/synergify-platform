@@ -32,6 +32,8 @@ import { todayCount, currentStreak, recentDowngrade } from '@/lib/pacing/derive'
 import { REST_DAILY, REST_STREAK } from '@/lib/pacing/thresholds'
 import { localDate } from '@/lib/quests/daily-store'
 import { COURSE } from '@/lib/course'
+import { readStore } from '@/lib/spaced-review'
+import { fadeModules, fadeSignal, type FadeSignal } from '@/lib/learn-prompt-fading'
 
 const PHASE_COLORS = ['var(--phase-1)', 'var(--phase-2)', 'var(--phase-3)', 'var(--phase-4)']
 const TOTAL_STEPS = 4
@@ -85,6 +87,13 @@ export function UnitWizard({
   const { award, setMode, getMode, ready: shardsReady } = useShards()
   const chosenMode: Mode | undefined = getMode(unitKey)
   const { state: pacingState, logCompletion: logPacing } = usePacing()
+
+  // Опоры компаньона по самопроверкам (lib/learn-prompt-fading.ts): store повторов живёт только в браузере,
+  // поэтому до монтирования (SSR) — 'none'. Перечитываем на смене шага: ученик отвечает самопроверки по ходу юнита.
+  const [checksSignal, setChecksSignal] = useState<FadeSignal>('none')
+  useEffect(() => {
+    setChecksSignal(fadeSignal(readStore(COURSE.progressKey), fadeModules(moduleSlug, outline ? Object.keys(outline) : [])))
+  }, [moduleSlug, outline, currentStep])
 
   useEffect(() => {
     if (viewedUnitRef.current === unitKey) return
@@ -150,6 +159,7 @@ export function UnitWizard({
     appliedChallenge: appliedChallenge ?? null,
     relational,
     reference,
+    fadeSignal: checksSignal,
   }
   const learnPrompt = buildLearnPrompt(learnInput)
   const learnBootstrap = buildBootstrapDeepLink(learnInput)

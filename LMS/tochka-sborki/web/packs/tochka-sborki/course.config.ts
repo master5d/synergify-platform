@@ -23,8 +23,10 @@ export const COURSE = {
   lessonViews: { summaryDefault: 'paraphrase' as 'paraphrase' | 'verbatim' },
   /** Педагогика (intake LMS#20, решение владельца 2026-09-28). pretest — в активации 1–2 самопроверки юнита
    *  «угадай до объяснения», ответ — в концепте (lib/pedagogy/pretest.ts); thinkFirst — «Конспект» и «Карта»
-   *  открываются после 2–3 своих мыслей ученика (или «Пропустить»), мысли потом рядом с конспектом. */
-  pedagogy: { pretest: true, thinkFirst: true },
+   *  открываются после 2–3 своих мыслей ученика (или «Пропустить»), мысли потом рядом с конспектом.
+   *  fadeByChecks — опоры компаньона сдвигаются по результатам самопроверок, не только по анкете
+   *  (lib/learn-prompt-fading.ts; BACKLOG «Педагогика 4/5»). */
+  pedagogy: { pretest: true, thinkFirst: true, fadeByChecks: true },
   /** Какие слои движка включены у этого курса. Ядро гейтит поверхности по флагам,
    *  а не по имени pack'а: курс без RPG не должен носить чужой квест-обвес. */
   features: {
