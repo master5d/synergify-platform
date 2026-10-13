@@ -115,11 +115,12 @@ textarea::placeholder {
 .am-figure { --am-edge: var(--text-secondary); display: block; width: 100%; height: auto; }
 .am-figure [data-am-raster] { display: block; width: 100%; height: auto; }
 .am-figure .am-area { fill: transparent; stroke: transparent; stroke-width: 1.35; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-.am-figure .am-spotlight { fill: var(--bg-page); fill-opacity: .42; pointer-events: none; }
+.am-figure .am-spotlight { fill: var(--bg-page); fill-opacity: .26; pointer-events: none; }
+:root[data-theme="dark"] .am-figure .am-spotlight { fill-opacity: .42; }
 .am-figure .am-marker { vector-effect: non-scaling-stroke; pointer-events: none; }
-.am-figure .am-shell-marker { fill: var(--bg-page); stroke: var(--text-secondary); stroke-width: 2; }
-.am-figure .am-part-marker { fill: var(--bg-page); stroke: var(--text-secondary); stroke-width: 2; }
-.am-figure [data-am-state="built"] .am-marker { fill: var(--text-secondary); }
+.am-figure .am-shell-marker { fill: var(--bg-page); fill-opacity: .88; stroke: var(--text-primary); stroke-width: 2.5; }
+.am-figure .am-part-marker { fill: var(--bg-page); fill-opacity: .88; stroke: var(--text-primary); stroke-width: 2.5; }
+.am-figure [data-am-state="built"] .am-marker { fill: var(--text-accent); stroke: var(--bg-page); stroke-width: 3; }
 .am-figure [data-am-state="built"] .am-area { stroke: transparent; }
 .am-figure :is([data-am-node][data-am-current="true"] > [data-am-shell], [data-am-part][data-am-current="true"]) .am-area {
   stroke: var(--text-accent); stroke-width: 2.2; stroke-dasharray: none; opacity: 1; fill: transparent;
@@ -132,6 +133,10 @@ textarea::placeholder {
 .am-figure [data-am-part][data-am-current="true"] .am-part-area { stroke: var(--text-accent); }
 .am-figure [data-am-node][data-am-state="ghost"] .am-shell-marker,
 .am-figure [data-am-part][data-am-state="ghost"] .am-part-marker { fill: transparent; }
+.am-figure [data-am-node][data-am-state="ghost"] .am-marker,
+.am-figure [data-am-part][data-am-state="ghost"] .am-marker { fill: var(--bg-page); fill-opacity: .72; stroke: var(--text-accent); stroke-width: 2.5; }
+.am-figure [data-am-node][data-am-current="true"] .am-shell-marker,
+.am-figure [data-am-part][data-am-current="true"] .am-part-marker { fill: var(--text-accent); stroke: var(--bg-page); stroke-width: 3; }
 .am-mini .am-part-marker { display: none; }
 .am-mini .am-area { stroke: transparent; }
 .am-mini .am-spotlight { fill-opacity: .30; }
@@ -155,10 +160,13 @@ textarea::placeholder {
   .am-mini { flex-direction: column; align-items: stretch; }
   .am-mini .am-figure-wrap { flex-basis: auto; width: 100%; }
   .am-mini .am-figure { max-height: 140px; }
+  .am-dialog .am-figure { width: 100%; max-height: none; }
 }
 .am-dialog {
   width: min(960px, 94vw); padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--radius);
   background: var(--bg-surface); color: var(--text-primary);
 }
+.am-dialog .am-figure-wrap { display: flex; justify-content: center; }
+.am-dialog .am-figure { width: auto; max-width: 100%; max-height: 82vh; }
 .am-dialog::backdrop { background: rgb(0 0 0 / 0.55); }
 .am-close { display: block; margin: 0 0 0.75rem auto; font: inherit; cursor: pointer; }

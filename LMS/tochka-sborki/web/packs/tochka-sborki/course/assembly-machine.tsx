@@ -22,7 +22,7 @@ function areaShape(id: string, polygon: Polygon): ReactElement {
 }
 
 function diamond([x, y]: Point): string {
-  return points([[x, y - 9], [x + 9, y], [x, y + 9], [x - 9, y]])
+  return points([[x, y - 12], [x + 12, y], [x, y + 12], [x - 12, y]])
 }
 
 function useRasterAsset(): string | null {
@@ -68,7 +68,7 @@ function Art({ part, node, title }: MachineProps) {
             <g key={partId} {...part(partId)}>
               <title>{title(partId)}</title>
               <polygon className="am-area am-part-area" points={points(PARTS[partId])} />
-              <circle className="am-marker am-part-marker" data-am-marker="part" cx={PART_MARKERS[partId][0]} cy={PART_MARKERS[partId][1]} r="6" />
+              <circle className="am-marker am-part-marker" data-am-marker="part" cx={PART_MARKERS[partId][0]} cy={PART_MARKERS[partId][1]} r="11" />
             </g>
           ))}
         </g>
