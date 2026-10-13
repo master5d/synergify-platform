@@ -1,16 +1,28 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactElement } from 'react'
 import { assetPath } from '@/lib/base-path'
 import type { MachineDef, MachineProps } from '@/lib/assembly/types'
 import { ASSEMBLY_MAP } from './assembly-map'
-import { PARTS, SHELLS, type Point } from './assembly-machine.data'
+import { PART_MARKERS, PARTS, SHELL_MARKERS, SHELLS, type Point, type Polygon } from './assembly-machine.data'
 
 const NODE_IDS = ASSEMBLY_MAP.nodes.map((node) => node.id)
 const PART_IDS = ASSEMBLY_MAP.parts.map((part) => part.id)
 
 function points(value: readonly Point[]): string {
   return value.map(([x, y]) => `${x},${y}`).join(' ')
+}
+
+function polygonPath(value: readonly Point[]): string {
+  return value.length ? `M ${value.map(([x, y]) => `${x} ${y}`).join(' L ')} Z` : ''
+}
+
+function areaShape(id: string, polygon: Polygon): ReactElement {
+  return id === 'chassis' ? <path className="am-area am-shell-area" d={polygonPath(polygon)} /> : <polygon className="am-area am-shell-area" points={points(polygon)} />
+}
+
+function diamond([x, y]: Point): string {
+  return points([[x, y - 9], [x + 9, y], [x, y + 9], [x - 9, y]])
 }
 
 function useRasterAsset(): string | null {
@@ -31,19 +43,32 @@ function useRasterAsset(): string | null {
 
 function Art({ part, node, title }: MachineProps) {
   const raster = useRasterAsset()
+  const currentPart = ASSEMBLY_MAP.parts.find(({ id }) => part(id)['data-am-current'] === 'true')?.id
+  const currentNode = ASSEMBLY_MAP.nodes.find(({ id }) => node(id)['data-am-current'] === 'true')?.id
+  const spotlight = currentPart ? PARTS[currentPart] : currentNode ? SHELLS[currentNode] : undefined
   return (
     <g>
       {raster ? <image data-am-raster="" href={raster} x="0" y="0" width="1280" height="853" preserveAspectRatio="none" /> : null}
+      {spotlight ? <defs>
+        <filter id="am-spotlight-blur" x="-8%" y="-8%" width="116%" height="116%"><feGaussianBlur stdDeviation="7" /></filter>
+        <mask id="am-spotlight-mask" maskUnits="userSpaceOnUse">
+          <rect width="1280" height="853" fill="white" />
+          <path d={polygonPath(spotlight)} fill="black" filter="url(#am-spotlight-blur)" />
+        </mask>
+      </defs> : null}
+      {spotlight ? <rect className="am-spotlight" width="1280" height="853" mask="url(#am-spotlight-mask)" /> : null}
       {ASSEMBLY_MAP.nodes.map(({ id }) => (
         <g key={id} {...node(id)}>
           <title>{title(id)}</title>
           <g data-am-shell="">
-            {id === 'chassis' ? <path className="am-area am-shell-area" fillRule="evenodd" d={SHELLS[id] as string} /> : <polygon className="am-area am-shell-area" points={points(SHELLS[id] as Point[])} />}
+            {areaShape(id, SHELLS[id])}
+            <polygon className="am-marker am-shell-marker" data-am-marker="shell" points={diamond(SHELL_MARKERS[id])} />
           </g>
           {ASSEMBLY_MAP.parts.filter((partDef) => partDef.node === id).map(({ id: partId }) => (
             <g key={partId} {...part(partId)}>
               <title>{title(partId)}</title>
               <polygon className="am-area am-part-area" points={points(PARTS[partId])} />
+              <circle className="am-marker am-part-marker" data-am-marker="part" cx={PART_MARKERS[partId][0]} cy={PART_MARKERS[partId][1]} r="6" />
             </g>
           ))}
         </g>

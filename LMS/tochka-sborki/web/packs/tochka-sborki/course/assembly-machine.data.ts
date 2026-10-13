@@ -1,27 +1,41 @@
 export type Point = readonly [number, number]
 export type Polygon = readonly Point[]
+const p = (...points: Point[]): Polygon => points
 
-const box = (x: number, y: number, w: number, h: number): Polygon => [[x, y], [x + w, y], [x + w, y + h], [x, y + h]]
-
-// The chassis is one silhouette. Its even-odd cut-outs keep interior regions from being dimmed twice.
-export const SHELLS: Record<string, Polygon | string> = {
-  ignition: box(420, 180, 230, 250),
-  chassis: 'M 70 190 L 250 120 L 780 135 L 1015 285 L 1045 520 L 900 655 L 350 720 L 105 620 Z M 410 205 L 700 190 L 830 305 L 770 420 L 470 415 L 350 315 Z M 475 300 L 590 265 L 635 350 L 475 365 Z M 620 350 L 760 335 L 790 445 L 635 455 Z M 600 390 L 720 390 L 700 520 L 585 515 Z',
-  garage: box(600, 475, 390, 300), fuel: box(20, 45, 245, 380), navigator: box(425, 265, 175, 150), glovebox: box(575, 300, 205, 180), wipers: box(250, 165, 430, 190),
-  hitch: box(930, 185, 340, 410), convoy: box(925, 5, 350, 245), atlas: box(600, 365, 190, 180), dyno: box(790, 390, 350, 280), computer: box(510, 175, 330, 220),
+// Предметные зоны в координатах raster 1280 × 853. Это hit-area, не заливка.
+export const SHELLS: Record<string, Polygon> = {
+  chassis: p([66,445],[118,335],[245,248],[430,162],[670,128],[850,176],[1028,301],[1045,503],[948,628],[710,704],[342,706],[136,624]),
+  ignition: p([424,241],[491,196],[566,205],[599,287],[559,363],[476,374],[423,324]),
+  garage: p([626,600],[700,526],[819,488],[970,524],[1011,625],[977,743],[790,770],[652,718]),
+  fuel: p([25,61],[177,42],[237,82],[240,350],[208,405],[104,425],[34,387]),
+  navigator: p([430,253],[491,235],[555,260],[557,329],[521,365],[451,348]),
+  glovebox: p([576,300],[656,286],[752,315],[783,397],[744,456],[650,468],[587,418]),
+  wipers: p([259,198],[354,154],[480,154],[610,192],[681,270],[625,346],[471,353],[330,314]),
+  hitch: p([908,181],[1029,196],[1111,251],[1270,258],[1270,492],[1125,503],[1019,443],[935,371]),
+  convoy: p([954,4],[1263,5],[1275,239],[1164,236],[1040,191],[980,137]),
+  atlas: p([593,358],[694,348],[781,389],[765,484],[670,508],[604,454]),
+  dyno: p([788,397],[1008,387],[1127,433],[1123,650],[1012,691],[850,648],[795,554]),
+  computer: p([441,172],[557,142],[710,157],[835,225],[811,363],[690,398],[525,354],[449,284]),
 }
 
 export const PARTS: Record<string, Polygon> = {
-  'ignition.fob': box(445, 355, 42, 30), 'ignition.idea-lamp': box(535, 280, 30, 24), 'ignition.door-organizer': box(390, 350, 55, 48), 'ignition.key': box(475, 330, 28, 48), 'ignition.vin-plate': box(625, 220, 38, 28),
-  'chassis.gearbox': box(515, 420, 92, 70), 'chassis.trim-plate': box(280, 590, 70, 22), 'chassis.pedal': box(445, 470, 30, 55),
-  'garage.obd-scanner': box(650, 520, 110, 85), 'garage.tool-cart': box(625, 610, 135, 150), 'garage.test-cone': box(895, 645, 58, 90),
-  'fuel.pump': box(55, 80, 145, 245), 'fuel.bypass-line': box(205, 240, 55, 160), 'fuel.canister': box(32, 330, 85, 75), 'fuel.adapter': box(160, 350, 60, 50),
-  'navigator.route': box(455, 292, 90, 58), 'navigator.voice-keys': box(535, 355, 55, 35), 'navigator.warning': box(575, 275, 25, 28), 'navigator.finish-flag': box(430, 365, 32, 38),
-  'glovebox.pocket-and-screen': box(625, 315, 100, 65), 'glovebox.service-book': box(670, 395, 70, 48), 'glovebox.visor-card': box(735, 300, 35, 45),
-  'wipers.rain-sensor': box(390, 190, 45, 35), 'wipers.wiper-arms': box(275, 270, 210, 42), 'wipers.timer': box(520, 215, 48, 32),
-  'hitch.socket': box(1000, 340, 70, 55), 'hitch.park-sensors': box(955, 390, 90, 32), 'hitch.roof-boxes': box(620, 145, 220, 58), 'hitch.trailer': box(1090, 260, 170, 150), 'hitch.rear-camera': box(975, 480, 50, 40),
-  'convoy.load-sticker': box(1010, 90, 45, 22), 'convoy.radio': box(945, 185, 45, 35), 'convoy.safety-kit': box(1180, 150, 55, 55), 'convoy.formation': box(1100, 35, 80, 35), 'convoy.follower': box(1080, 75, 180, 120),
-  'atlas.book': box(635, 405, 95, 70), 'atlas.lens': box(735, 445, 35, 35), 'atlas.check-marks': box(650, 480, 70, 25), 'atlas.printouts': box(605, 475, 45, 45), 'atlas.bookmark': box(710, 390, 18, 48),
-  'dyno.engine-cutaway': box(810, 470, 120, 100), 'dyno.additive-barrel': box(945, 495, 70, 75), 'dyno.tuning-chip': box(1015, 520, 48, 35), 'dyno.gauge': box(1060, 410, 65, 80), 'dyno.small-engine': box(855, 570, 110, 75),
-  'computer.unit': box(515, 350, 90, 45), 'computer.antenna': box(795, 170, 35, 120), 'computer.cartridge': box(545, 385, 52, 35), 'computer.immobilizer': box(765, 350, 45, 38), 'computer.dashboard': box(440, 245, 190, 45),
+  'ignition.fob': p([449,357],[469,348],[491,357],[489,382],[464,389],[445,376]), 'ignition.idea-lamp': p([531,278],[547,274],[563,282],[561,300],[541,303],[530,293]), 'ignition.door-organizer': p([389,341],[429,348],[446,367],[435,397],[397,393],[382,370]), 'ignition.key': p([475,329],[489,326],[503,337],[495,351],[493,378],[477,382],[470,355]), 'ignition.vin-plate': p([625,219],[658,218],[666,231],[660,248],[629,246]),
+  'chassis.gearbox': p([508,421],[553,407],[602,420],[615,464],[588,489],[528,480]), 'chassis.trim-plate': p([281,589],[346,583],[361,597],[346,616],[288,614]), 'chassis.pedal': p([443,471],[458,464],[475,477],[473,520],[451,527]),
+  'garage.obd-scanner': p([650,519],[710,507],[759,531],[751,581],[682,599],[646,571]), 'garage.tool-cart': p([619,614],[690,596],[756,625],[765,735],[694,763],[629,728]), 'garage.test-cone': p([913,644],[932,638],[951,653],[945,719],[918,726],[901,702]),
+  'fuel.pump': p([62,82],[170,66],[206,91],[209,306],[183,333],[80,322],[59,279]), 'fuel.bypass-line': p([203,239],[224,230],[259,254],[257,373],[238,399],[216,370]), 'fuel.canister': p([31,331],[82,318],[116,337],[115,395],[82,410],[38,392]), 'fuel.adapter': p([159,351],[191,342],[220,360],[214,397],[174,402]),
+  'navigator.route': p([455,290],[515,281],[548,295],[543,342],[476,350],[451,331]), 'navigator.voice-keys': p([536,353],[567,349],[590,361],[585,386],[547,390],[531,376]), 'navigator.warning': p([575,273],[598,275],[601,298],[580,304],[570,289]), 'navigator.finish-flag': p([430,363],[454,359],[468,374],[460,399],[434,395]),
+  'glovebox.pocket-and-screen': p([622,311],[677,303],[727,321],[722,359],[635,368],[616,344]), 'glovebox.service-book': p([670,393],[716,388],[741,404],[731,442],[685,447],[665,426]), 'glovebox.visor-card': p([735,298],[765,302],[777,318],[767,348],[740,344]),
+  'wipers.rain-sensor': p([391,187],[414,181],[438,192],[433,222],[402,227],[387,211]), 'wipers.wiper-arms': p([269,269],[321,259],[428,272],[487,293],[477,312],[382,306],[286,291]), 'wipers.timer': p([520,214],[542,209],[568,219],[566,241],[526,246]),
+  'hitch.socket': p([1002,337],[1030,330],[1056,347],[1051,380],[1020,388],[998,368]), 'hitch.park-sensors': p([952,386],[979,381],[1045,395],[1040,418],[963,414]), 'hitch.roof-boxes': p([616,142],[718,129],[824,143],[849,180],[813,205],[658,194],[617,174]), 'hitch.trailer': p([1090,261],[1257,253],[1269,277],[1262,391],[1114,414],[1088,380]), 'hitch.rear-camera': p([973,474],[1000,472],[1027,487],[1020,516],[985,520],[968,500]),
+  'convoy.load-sticker': p([1010,88],[1048,87],[1057,105],[1016,112]), 'convoy.radio': p([945,180],[972,177],[991,191],[987,218],[951,216]), 'convoy.safety-kit': p([1178,148],[1211,144],[1237,160],[1231,199],[1191,207],[1173,184]), 'convoy.formation': p([1100,33],[1134,28],[1180,39],[1176,64],[1110,61]), 'convoy.follower': p([1080,77],[1160,64],[1255,96],[1265,179],[1204,207],[1110,180]),
+  'atlas.book': p([632,401],[686,387],[734,409],[724,460],[675,476],[629,447]), 'atlas.lens': p([735,443],[754,436],[773,450],[769,474],[747,481],[732,464]), 'atlas.check-marks': p([649,478],[688,468],[721,479],[714,503],[655,507]), 'atlas.printouts': p([603,473],[629,465],[652,480],[647,510],[612,507]), 'atlas.bookmark': p([709,388],[726,391],[734,415],[725,438],[711,430]),
+  'dyno.engine-cutaway': p([807,468],[855,450],[913,469],[932,527],[893,568],[832,550],[804,512]), 'dyno.additive-barrel': p([944,491],[977,481],[1014,500],[1016,550],[982,575],[946,555]), 'dyno.tuning-chip': p([1015,519],[1042,512],[1065,527],[1061,555],[1021,562]), 'dyno.gauge': p([1058,408],[1085,394],[1122,411],[1126,466],[1090,490],[1060,472]), 'dyno.small-engine': p([852,568],[900,554],[959,576],[968,626],[921,650],[867,633]),
+  'computer.unit': p([514,347],[553,335],[606,350],[605,386],[557,401],[519,382]), 'computer.antenna': p([794,167],[816,171],[829,194],[818,291],[798,282]), 'computer.cartridge': p([544,383],[574,377],[600,391],[594,419],[552,420]), 'computer.immobilizer': p([764,346],[790,341],[813,354],[806,384],[772,389]), 'computer.dashboard': p([439,242],[501,231],[584,247],[631,270],[616,295],[528,288],[451,274]),
+}
+
+export const SHELL_MARKERS: Record<string, Point> = {
+  chassis: [840,540], ignition: [500,282], garage: [850,625], fuel: [132,208], navigator: [494,303], glovebox: [686,351], wipers: [464,242], hitch: [1104,333], convoy: [1190,120], atlas: [686,420], dyno: [1028,570], computer: [660,246],
+}
+export const PART_MARKERS: Record<string, Point> = {
+  'ignition.fob':[468,368], 'ignition.idea-lamp':[546,288], 'ignition.door-organizer':[416,369], 'ignition.key':[486,350], 'ignition.vin-plate':[645,232], 'chassis.gearbox':[560,447], 'chassis.trim-plate':[321,600], 'chassis.pedal':[458,493], 'garage.obd-scanner':[705,552], 'garage.tool-cart':[691,678], 'garage.test-cone':[930,681], 'fuel.pump':[130,190], 'fuel.bypass-line':[234,303], 'fuel.canister':[72,368], 'fuel.adapter':[189,372], 'navigator.route':[497,316], 'navigator.voice-keys':[557,370], 'navigator.warning':[587,286], 'navigator.finish-flag':[447,380], 'glovebox.pocket-and-screen':[670,334], 'glovebox.service-book':[704,418], 'glovebox.visor-card':[753,324], 'wipers.rain-sensor':[414,204], 'wipers.wiper-arms':[380,285], 'wipers.timer':[543,227], 'hitch.socket':[1027,358], 'hitch.park-sensors':[996,401], 'hitch.roof-boxes':[735,168], 'hitch.trailer':[1175,327], 'hitch.rear-camera':[996,494], 'convoy.load-sticker':[1032,99], 'convoy.radio':[968,197], 'convoy.safety-kit':[1205,175], 'convoy.formation':[1140,47], 'convoy.follower':[1176,128], 'atlas.book':[680,428], 'atlas.lens':[752,458], 'atlas.check-marks':[681,489], 'atlas.printouts':[625,489], 'atlas.bookmark':[720,412], 'dyno.engine-cutaway':[862,506], 'dyno.additive-barrel':[980,529], 'dyno.tuning-chip':[1038,537], 'dyno.gauge':[1090,440], 'dyno.small-engine':[906,601], 'computer.unit':[559,367], 'computer.antenna':[808,226], 'computer.cartridge':[571,399], 'computer.immobilizer':[788,364], 'computer.dashboard':[526,263],
 }
