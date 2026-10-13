@@ -44,7 +44,8 @@ export function fadeSignal(store: ReviewStore, modules: readonly string[]): Fade
   return 'hold'
 }
 
-/** Фраза к строке режима. ЧЕРНОВИК на вычитку владельцем (BACKLOG :706). hold/none — без фразы. */
+/** Фраза к строке режима (BACKLOG :706). hold/none — без фразы. Тексты приняты контроллером по слову владельца
+ *  «реши сам» 2026-10-13: это служебная команда ученика компаньону от первого лица, не авторский текст курса. */
 export const FADE_LINE: Record<'fade' | 'add', { ru: string; en: string }> = {
   fade: {
     ru: 'По самопроверкам я уверенно отвечаю — снимай опоры быстрее.',
