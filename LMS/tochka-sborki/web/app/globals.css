@@ -134,7 +134,9 @@ textarea::placeholder {
 .am-figure [data-am-node][data-am-state="ghost"] .am-shell-marker,
 .am-figure [data-am-part][data-am-state="ghost"] .am-part-marker { fill: transparent; }
 .am-figure [data-am-node][data-am-state="ghost"] .am-marker,
-.am-figure [data-am-part][data-am-state="ghost"] .am-marker { fill: var(--bg-page); fill-opacity: .72; stroke: var(--text-accent); stroke-width: 2.5; }
+.am-figure [data-am-part][data-am-state="ghost"] .am-marker { fill: var(--text-secondary); fill-opacity: .18; stroke: var(--text-secondary); stroke-width: 2.5; }
+:root[data-theme="dark"] .am-figure [data-am-node][data-am-state="ghost"] .am-marker,
+:root[data-theme="dark"] .am-figure [data-am-part][data-am-state="ghost"] .am-marker { fill: var(--text-primary); fill-opacity: .16; stroke: var(--text-secondary); }
 .am-figure [data-am-node][data-am-current="true"] .am-shell-marker,
 .am-figure [data-am-part][data-am-current="true"] .am-part-marker { fill: var(--text-accent); stroke: var(--bg-page); stroke-width: 3; }
 .am-mini .am-part-marker { display: none; }
@@ -167,7 +169,8 @@ textarea::placeholder {
   width: min(960px, 94vw); padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--radius);
   background: var(--bg-surface); color: var(--text-primary);
 }
-.am-dialog .am-figure-wrap { display: flex; justify-content: center; }
-.am-dialog .am-figure { width: auto; max-width: 100%; max-height: 82vh; }
+.am-dialog .am-figure-wrap { display: flex; flex-direction: column; align-items: center; }
+.am-dialog .am-credit { align-self: stretch; }
+.am-dialog .am-figure { width: auto; max-width: 100%; max-height: 78vh; }
 .am-dialog::backdrop { background: rgb(0 0 0 / 0.55); }
 .am-close { display: block; margin: 0 0 0.75rem auto; font: inherit; cursor: pointer; }
