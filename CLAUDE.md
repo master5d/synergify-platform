@@ -18,23 +18,49 @@
 
 ### Web / LMS (папка `LMS/tochka-sborki/web/`)
 - Next.js 16 App Router, `output: 'export'` (статичный сайт), `trailingSlash: true`
-- MDX (`next-mdx-remote`) — контент из `content/{ru,en}/**`
-- Локализация: `lib/dictionaries.ts` (RU+EN), компоненты принимают `locale`
+- MDX (`next-mdx-remote`) — контент из `packs/<pack>/content/{ru,en}/**` (активный pack — `packs/_active`)
+- Локализация: `packs/<pack>/dictionaries.ts` (RU+EN; стаб `lib/dictionaries.ts`), компоненты принимают `locale`
 - CSS Custom Properties + Tailwind 4 — light/dark темы через `data-theme` (`light`/`dark`), дефолт = система (prefers-color-scheme), выбор в nav (`lib/theme-pref.ts` + `ThemeProvider` + 3-сегментный `ThemeToggle`); FOUC-guard inline-скрипт в `layout`
 - Cloudflare Pages хостинг + CF Worker для API (`workers/`)
 - GitHub Actions — CI/CD (`.github/workflows/deploy.yml`)
-- Vitest — тесты (`lib/content.test.ts`)
+- Vitest — тесты в каждом пакете (`*.test.ts` рядом с кодом; у web — десятки файлов под `lib/`, `app/`, `components/`).
+  Прогон (каждая строка — от корня репо; проверено 2026-10-13 на чистом клоне). CI (`deploy.yml`) гоняет
+  тесты только web (+ под каждым pack'ом в `build-packs`); workers/synergify/llm-service/academy — только локально:
+  ```bash
+  cd LMS/tochka-sborki/web && npm ci && npm test        # pretest сам зовёт select-pack.mjs
+  # workers: сначала материализовать packs/_active — без него 6 файлов падают на `@pack/*`
+  # (своего pretest у workers нет; в deploy.yml тот же шаг перед `wrangler deploy`)
+  cd LMS/tochka-sborki/web && node scripts/select-pack.mjs
+  cd workers && npm ci && npm test
+  cd synergify && npm ci && npm test
+  cd llm-service && npm ci && npm test
+  cd academy && npm ci && npm test
+  ```
 
 ### Backend (`workers/`)
-- CF Worker на `ai.synergify.com/api/*`. Эндпоинты: auth (magic-link через Resend),
-  progress (D1 SQLite), feedback, leads CRM.
+- CF Worker на `ai.synergify.com/api/*` (+ `academy.synergify.com/api/*`, `mamaev.coach/api/*`,
+  `ai.mamaev.coach/api/*` — `workers/wrangler.toml`). Маршруты — `workers/src/index.ts`. Эндпоинты: auth
+  (magic-link, Telegram, Google OAuth), progress (D1 SQLite), feedback, leads CRM и поверхности ниже.
+- **Почта = AWS SES** (`lib/ses.ts` `sendEmailSES`, SES v2 через `aws4fetch`; secrets `SES_ACCESS_KEY_ID`,
+  `SES_SECRET_ACCESS_KEY`, опц. `SES_REGION`): magic-link, welcome, покупки, owner-notify, care-ответы. Resend
+  из кода ушёл (в `Env` нет `RESEND_*`). Исход отправки magic-link пишется в `magic_links.send_status`
+  (миграция 0023). Учебные цепочки идут не через SES, а через Listmonk tx (см. ниже).
 - **CRM pipeline** (с 2026-06-15, заменил Notion+n8n): источник правды лидов — D1 `users`
   (email, created_at, language, source, telegram_handle), пишется на signup в `auth.ts`.
-  Новый юзер → `ctx.waitUntil(addResendContact())` (`lib/crm.ts`) пушит **глобальный
-  Resend-контакт** (`POST /contacts`; Audiences у Resend deprecated → Segments, контакты
-  глобальные — `RESEND_AUDIENCE_ID` НЕ нужен, активно при наличии `RESEND_API_KEY`). Витрина —
-  owner-gated `/admin/leads` (таблица + CSV + кнопка backfill `POST /api/admin/leads/sync-resend`).
+  Новый юзер → `ctx.waitUntil(addCrmContact())` (`lib/crm.ts`) кладёт подписчика в **Listmonk**-список
+  (`POST /api/subscribers`, single opt-in, 409 = уже есть; env `LISTMONK_URL`, `LISTMONK_API_USER`,
+  `LISTMONK_API_TOKEN`, `LISTMONK_CRM_LIST_ID` + `CF_ACCESS_CLIENT_*`; без них — no-op). Витрина —
+  owner-gated `/admin/leads` (таблица + CSV + кнопка backfill `POST /api/admin/leads/sync-crm`, `handlers/leads.ts syncContacts`).
   n8n `mds-crm` и Notion CRM выведены (секреты `N8N_CRM_*` удалены 2026-06-16).
+- **Поверхности с 2026-09** (кратко, подробности — в файлах и `BACKLOG.md`): учебные **email-цепочки**
+  (`handlers/email-chain-cron.ts` + политика `lib/email-chains.ts`, Listmonk tx-шаблоны `workers/email-templates/`,
+  флаг `EMAIL_CHAINS_ENABLED`, dry-run `GET /api/admin/email-chains/dry-run`, отписка `/api/email/unsubscribe`);
+  **care desk** `/api/care` (`handlers/care.ts`); **сертификат** `GET /api/certificate/{code,verify}`
+  (`handlers/certificate.ts`); **community invites** через бота (`lib/community.ts`, флаг `COMMUNITY_INVITES_ENABLED`);
+  **spaced review** `POST /api/checks/answer` + owner-сводка `GET /api/admin/checks/summary` (`handlers/check-reviews.ts`,
+  флаг `SPACED_REVIEW_ENABLED`); **progress events → Listmonk** (`lib/progress-events.ts`, флаг `PROGRESS_EVENTS_ENABLED`);
+  академия `/api/academy/{admission,me}`, alumni `/api/alumni*`, content-demand `/api/admin/content-demand/*`.
+  LLM-вызовы воркер делает только через `llm-service/` (`lib/llm-client.ts`; в `lib/gemini.ts` остался лишь шаблонный fallback).
 - **Owner learner-stats** (split от fb_fb9fc1f8): `GET /api/admin/stats` (`handlers/stats.ts`, `requireOwner`, 3 D1-COUNT)
   → `{total, learners=COUNT(DISTINCT user_id) progress, intakeCompleted=COUNT(*) intake_profiles WHERE status='completed'}`
   → stat-strip на `/admin/leads` (`leads-client.tsx`, graceful-hide). Honest reporting, НЕ публично, БЕЗ нон-профит-копи.
@@ -43,10 +69,13 @@
   `sendWelcomeEmail`, bilingual, best-effort `ctx.waitUntil`, никогда не роняет signup). Идемпотентно через
   `isNewUser`/`newLead` (existing-юзер → только magic-link), без новой колонки. Копия = course-data в билдере
   (де-хастленный Cabral; founder-нота → меню → ОДИН CTA intake → cheatsheet → anti-fluff). `List-Unsubscribe:
-  <mailto:OWNER_EMAIL>` (нативная кнопка Gmail/Apple Mail; полный suppression-роут отложен до рекуррентных кампаний).
-- D1 база `tochka-sborki-db`; секреты через `wrangler secret put` (не в коде). Миграции **0001–0011** применены
-  (0008 telegram_id, 0009 nudge cols, 0010 questions, 0011 purchases); additive-миграции прода накатываются через
-  Cloudflare-api MCP `/query` (zero-token), НЕ `wrangler migrations apply`.
+  <mailto:OWNER_EMAIL>` (нативная кнопка Gmail/Apple Mail). Уходит через SES (`sendEmailSES`). Для учебных цепочек
+  с 2026-09 есть свой роут отписки `/api/email/unsubscribe` (`users.email_optout`, one-click RFC 8058); welcome на него не переведён.
+- D1 база `tochka-sborki-db`; секреты через `wrangler secret put` (не в коде). Миграции в репо — **0001–0023**
+  (`workers/migrations/`; 0008 telegram_id, 0009 nudge cols, 0010 questions, 0011 purchases, …, 0023 magic_link send_status).
+  Что применено к prod — из репо не видно, сверять по D1; применение 0018–0022 к prod записано в `BACKLOG.md`
+  (слово владельца), про 0023 записи нет — не проверено из репо. Additive-миграции прода накатываются через
+  Cloudflare-api MCP `/query` (zero-token), НЕ `wrangler migrations apply` (CI миграций не катит).
 - **Telegram** (Mini App Phase 0 + companion bot Phase 1, оба LIVE; бот **@tochka_sborki_lms_bot**):
   - `POST /api/auth/telegram` — auth-мост: верифицирует подписанный `initData` (HMAC, `lib/telegram-initdata.ts`)
     → выдаёт тот же `session` JWT-cookie; hybrid identity (telegram_id → handle → native synthetic email). Web:
@@ -54,7 +83,7 @@
   - `POST /api/telegram/webhook` — бот (raw, без grammY; secret-token verify). Команды `/start` `/continue`
     (advisory drip — следующий незавершённый модуль из `lib/course-order.ts`) `/stop` `/ask` `/support`. `/ask` →
     лид в `questions` + owner-email (`lib/owner-notify.ts`) + handoff. Bilingual copy в `lib/bot-copy.ts`.
-  - **`scheduled()` cron `0 16 * * *`** → `runDailyNudge` (`handlers/nudge-cron.ts`): один daily nudge по
+  - **`scheduled()` cron `0 16 * * *`** → `runDailyNudge` + `runEmailChains` (оба в `index.ts scheduled`). Nudge (`handlers/nudge-cron.ts`): один daily nudge по
     guard-chain `lib/nudge-policy.ts` (optout/throttle 20h/active/lapse 14d; reuse паттерна wellbeing select-nudge).
   - Go-live скрипты: `workers/scripts/telegram-go-live.ps1` (token + menu button + `-RegisterWebhook`).
   - Secrets: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_WEBHOOK_SECRET`. Спека: `docs/superpowers/specs/2026-06-22-telegram-*`.
@@ -66,19 +95,19 @@
   - **Slice 1 (support/PWYW)**: `POST /api/checkout/support` (`handlers/checkout.ts`), amount server-side $1–$1000
     (`lib/checkout.ts`), `submit_type=donate`. Web `/support` (пресеты $3/$7/$15 + custom) + бот `/support`.
   - **Slice 2 (digital goods, SHIPPED dark 2026-06-22)**: статичный каталог `lib/products.ts` (`PRODUCTS=[]` пока →
-    фича тёмная; web-зеркало `lib/store/products.data.ts`, держать в синхроне). `POST /api/checkout/product` —
+    фича тёмная; web-зеркала `lib/store/products.data.ts` в этом репо нет — магазин уехал, см. ниже; где зеркало сейчас — не проверено из репо). `POST /api/checkout/product` —
     цена из каталога (НЕ от клиента), `submit_type=pay`, `metadata[product_id/locale]`. `POST /api/stripe/webhook`
     (`handlers/stripe-webhook.ts`) — `Stripe-Signature` HMAC-verify (`lib/stripe-webhook.ts`, WebCrypto, 300s replay),
     идемпотентность `purchases.stripe_session_id UNIQUE` + `meta.changes`, доставка asset-ссылки письмом
-    (`lib/purchase-email.ts`, Resend best-effort, `delivered_at` = retry-маркер). **Магазин переехал на `mamaev.coach` (2026-08-02)**: страницы в `hub/`, из LMS и nav убраны;
+    (`lib/purchase-email.ts`, SES best-effort, `delivered_at` = retry-маркер). **Магазин переехал на `mamaev.coach` (2026-08-02)**: страницы в `hub/`, из LMS и nav убраны;
     у product-чекаута свой `STORE_BASE`, support остался на курсе. Доставка: `delivery {kind:'url'}` реализована; `{kind:'r2'}` (presigned) отложена в свой слайс.
-    Go-live (owner): добавить товары в ОБА products-файла + зарегистрировать webhook-эндпоинт + set `STRIPE_WEBHOOK_SECRET`.
+    Go-live (owner): добавить товары в `workers/src/lib/products.ts` и в web-каталог магазина (вне этого репо) + зарегистрировать webhook-эндпоинт + set `STRIPE_WEBHOOK_SECRET`.
 
 ## RPG / геймификация (LMS/tochka-sborki/web/)
 Поверх LMS построен RPG-слой. Все статичные данные — клиентские (localStorage); сервер хранит только intake-профиль и прогресс уроков.
-- **Intake** (`/quest-intake`, `lib/intake/`): опросник → профиль `{ niche, cog_tier, world_skin, F3-outcome }` в D1 `intake_profiles`. `scoring.ts`, `attributes.ts`, `parse-outcome.ts`. V2-инструмент (`questions.v2.ts`+`scoring-v2.ts`) — короткие evocative вопросы (фидбэк по старым вопросам часто устарел); V_HOOK/V_MODE — multi-select (`num()` берёт max по массиву); на `charter-reveal` — кнопка self-profile (`self-profile-prompt.ts`). Онбординг-мост (intake→quest-log) разоружает RPG-жаргон для нонгеймеров (`onboarding-bridge`).
-- **Квест-лог** (`/dashboard`): QuestFeed, CharacterStrip, Daily, Dungeon, Vault. **Профиль** (`/character`, таб в nav): лист героя + **World Map** (зоны = модули; перенесён сюда с dashboard; **«Вы тут / You are here» локатор** = ✦-маркер на текущем узле + bilingual caption под картой, `lib/rpg/locator.ts buildLocator`) + карточка companion-charter (`profileToCharter` пересобирает устав из профиля). `lib/rpg/` — `quest-log.ts`, `map-layout.ts`, `locator.ts`, `niche-map.ts`, `unit-framing.ts`, `transformations.ts` (micro from→to per-модуль, `<title>`), `macro-phases.ts` (3 макро-фазы → `transformation-arc.tsx` над картой). Карточный стек `/character`: **Learning Plan** (`buildLearningPlan`+`LearningPlanCard`, DIY copy-out) + **Charter** + **Companion Setup** + **Office-hours AMA bridge** (`components/office-hours-card.tsx` ← engine `lib/course/office-hours.ts`: free групповой AMA — CTA тёмный пока `amaRegisterUrl` пуст; 1:1 линк-аут на `mentor.mamaev.coach`; fb_57c6302d436f). **Ecosystem-диаграмма** (`lib/course/ecosystem.ts` Learn/Connect/Prove + Connect-узлы AMA `planned`/1:1 `live`).
-- **Themed skins**: `lib/rpg/skins/*.json` (7 скинов) + `skins-meta.ts` — переосмысление формулировок юнитов под выбранный мир.
+- **Intake** (`/quest-intake`, `lib/intake/`): опросник → профиль `{ niche, cog_tier, world_skin, F3-outcome }` в D1 `intake_profiles`. `scoring.ts`, `attributes.ts`, `parse-outcome.ts`. V2-инструмент (`QUESTIONS_V2` в `packs/<pack>/course/intake-questions.ts` через стаб `lib/course/intake-questions.ts` + `lib/intake/scoring-v2.ts`) — короткие evocative вопросы (фидбэк по старым вопросам часто устарел); V_HOOK/V_MODE — multi-select (`num()` берёт max по массиву); на `charter-reveal` — кнопка self-profile (`self-profile-prompt.ts`). Онбординг-мост (intake→quest-log) разоружает RPG-жаргон для нонгеймеров (`onboarding-bridge`).
+- **Квест-лог** (`/dashboard`): QuestFeed, CharacterStrip, Daily, Dungeon, Vault. **Профиль** (`/character`, таб в nav): лист героя + **World Map** (зоны = модули; перенесён сюда с dashboard; **«Вы тут / You are here» локатор** = ✦-маркер на текущем узле + bilingual caption под картой, `lib/rpg/locator.ts buildLocator`) + карточка companion-charter (`profileToCharter` пересобирает устав из профиля). `lib/rpg/` — `quest-log.ts`, `map-layout.ts`, `locator.ts`, `unit-framing.ts`, `transformations.ts` (micro from→to per-модуль, `<title>`), `macro-phases.ts` (3 макро-фазы → `transformation-arc.tsx` над картой). Карточный стек `/character`: **Learning Plan** (`buildLearningPlan`+`LearningPlanCard`, DIY copy-out) + **Charter** + **Companion Setup** + **Office-hours AMA bridge** (`components/office-hours-card.tsx` ← engine `lib/course/office-hours.ts`: free групповой AMA — CTA тёмный пока `amaRegisterUrl` пуст; 1:1 линк-аут на `mentor.mamaev.coach`; fb_57c6302d436f). **Ecosystem-диаграмма** (`lib/course/ecosystem.ts` Learn/Connect/Prove + Connect-узлы AMA `planned`/1:1 `live`).
+- **Themed skins**: `packs/<pack>/skins/*.json` (у tochka-sborki 8 скинов, `lib/rpg/skins-meta.test.ts`) + `packs/<pack>/skins-meta.ts` (стаб `lib/rpg/skins-meta.ts`) — переосмысление формулировок юнитов под выбранный мир.
 - **Cognitive Shards (CS)** — единая валюта вместо XP. 3 режима прохождения (commander 1.0× / copilot 1.5× / archmage 2.5×). `lib/cs/`: `wallet.ts`, `award.ts`, `modes.ts`, `applied-challenge.ts` (персонализация под niche/outcome).
 - **Daily Quests** (`lib/quests/`) и **Niche Dungeons** (`/dungeon`, `lib/dungeon/`) — детерминированная генерация (FNV-1a seed + mulberry32).
 - **Help-система** (`lib/help/`, `components/help/`): `<HelpTip>` (tap-popover) + `<IntroCard>` (авто-онбординг). Маркер «💭 в уме» на reflection-фазах.
@@ -107,7 +136,7 @@
 - matching = ЯДРО SHIPPED
 - group-mentor SHIPPED
 - acceleration SHIPPED
-- Dormant far-pillar: только Web3/DAO fb_029568. Детали → [[…
+- Dormant far-pillar: только Web3/DAO fb_029568
 - Auth = провайдер-агностичный session-слой
 - Speech-курс = ОТДЕЛЬНЫЙ изолированный курс
 - Скорочтение = ОТДЕЛЬНЫЙ изолированный hybrid-эпик COMPLETE (S1-S5)
@@ -194,5 +223,5 @@
 ## Gemini-Notebook слой (2026-08-04, спек `2026-08-04-notebook-module-design`)
 - **`/notebook`** (и `/en/notebook`, открыто, без почты) — «пакет тетрадки»: `lib/course/notebook-pack.ts` (паттерн `/try`: engine+data, `Bi{ru;en}` и resolvers) — 3 пака источников, PROMPT_KIT (каждый промпт ТРЕБУЕТ цитату — под тестом), VERIFY_CHECKLIST «где тетрадка врёт». В nav НЕ добавлен (шапка ужата); входы — модуль 09 и sitemap.
 - **Модуль `09-ai-notebook`** — 5 юнитов, инверсия fast.ai (intake #102): u1 = рабочая тетрадка за 15 минут ДО теории; agent-agnostic (Gemini Notebook как референс, в каждом юните путь «если тетрадки нет»). **Опциональный**: НЕ в `workers/src/lib/course-catalog.ts` (admission-гейт академии не ужесточён) и НЕ в ядре прогрессии.
-- **`OPTIONAL_MODULE_SLUGS`** (`lib/rpg/modules.ts`) — канон опциональности: ядро `MODULE_SLUGS` (00-08) несёт quest-lines/macro-phases/quest-log/admission; опциональные модули живут в контенте/скинах/World Map/transformations через тип `CourseModuleSlug`. Новый опциональный модуль = запись в канон, content ×2 локали, framing в 7 скин-паках, transformations. Тестовые списки ВЫВОДИТЬ из канона, не копировать локально.
+- **`OPTIONAL_MODULE_SLUGS`** (`lib/rpg/modules.ts`) — канон опциональности: ядро `MODULE_SLUGS` (00-08) несёт quest-lines/macro-phases/quest-log/admission; опциональные модули живут в контенте/скинах/World Map/transformations через тип `CourseModuleSlug`. Новый опциональный модуль = запись в канон, content ×2 локали, framing во всех скин-паках (`packs/<pack>/skins/*.json`, у tochka-sborki их 8), transformations. Тестовые списки ВЫВОДИТЬ из канона, не копировать локально.
 - ⚠ Гоча: stale `npx serve` на `web/out` держит каталог — `next build` падает EBUSY на rmdir; лечение — найти и убить процесс (Get-CimInstance Win32_Process), не чистить каталог.
