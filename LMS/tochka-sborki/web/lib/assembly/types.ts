@@ -53,4 +53,6 @@ export interface MachineDef {
   nodeIds: readonly string[]
   partIds: readonly string[]
   Art: (props: MachineProps) => ReactElement
+  /** Подпись происхождения иллюстрации под картиной (сгенерированная основа — обязательно, условие владельца 2026-10-12). */
+  credit?: Bi
 }

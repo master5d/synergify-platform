@@ -145,6 +145,7 @@ textarea::placeholder {
 @keyframes am-pulse { 0%, 100% { stroke-opacity: 1; } 50% { stroke-opacity: 0.35; } }
 @keyframes am-marker-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .62; } }
 .am-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; padding: 0; }
+.am-credit { margin: 0.25rem 0 0; font-size: var(--text-xs); color: var(--text-secondary); text-align: right; }
 .am-unit { margin: 0 0 1.5rem; }
 .am-caption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-secondary); margin: 0.5rem 0 0; }
 .am-mini {

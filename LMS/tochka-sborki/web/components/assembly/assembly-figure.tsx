@@ -71,6 +71,7 @@ export function AssemblyFigure({ locale, current = null, interactive = false }: 
       <ul className="am-sr">
         {sum.items.map((item) => <li key={item}>{item}</li>)}
       </ul>
+      {MACHINE.credit && <figcaption className="am-credit">{MACHINE.credit[locale]}</figcaption>}
     </figure>
   )
 }

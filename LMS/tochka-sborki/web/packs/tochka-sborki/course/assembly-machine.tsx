@@ -82,4 +82,7 @@ export const MACHINE: MachineDef = {
   nodeIds: NODE_IDS,
   partIds: PART_IDS,
   Art,
+  // Основа сгенерирована (дорожка codex image_gen, C2PA в паспорте генерации) — исключение владельца 2026-10-12
+  // при условии честной подписи (паспорт docs/superpowers/specs/2026-10-12-assembly-car-profile.md).
+  credit: { ru: 'Иллюстрация сгенерирована ИИ', en: 'AI-generated illustration' },
 }

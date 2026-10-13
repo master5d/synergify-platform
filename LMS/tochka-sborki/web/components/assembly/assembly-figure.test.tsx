@@ -6,10 +6,17 @@ vi.mock('next/navigation', () => ({ useRouter: () => ({ push: () => {} }) }))
 import { AssemblyFigure } from './assembly-figure'
 import { COURSE } from '@/lib/course'
 import { ASSEMBLY_MAP } from '@/lib/course/assembly-map'
+import { MACHINE } from '@/lib/course/assembly-machine'
 import { BUDGET_BYTES } from '../../scripts/check-assembly-weight.mjs'
 
 describe.runIf(COURSE.features.assemblyMap)('AssemblyFigure', () => {
   const unit = { module: '06-audio-pipeline', unit: 'u5-schedule' }
+
+  it('сгенерированная иллюстрация подписана честно на языке страницы (условие исключения владельца 2026-10-12)', () => {
+    expect(MACHINE?.credit?.ru, 'у машины курса нет подписи происхождения').toBeTruthy()
+    expect(renderToStaticMarkup(<AssemblyFigure locale="ru" current={unit} />)).toContain(`class="am-credit">${MACHINE!.credit!.ru}<`)
+    expect(renderToStaticMarkup(<AssemblyFigure locale="en" current={unit} />)).toContain(`class="am-credit">${MACHINE!.credit!.en}<`)
+  })
 
   it('разметка полной картины укладывается в бюджет 300 КБ (меряется здесь: на сайте юниты за дверью рисуются в браузере)', () => {
     const html = renderToStaticMarkup(<AssemblyFigure locale="ru" current={unit} interactive />)
