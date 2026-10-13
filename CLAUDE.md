@@ -180,6 +180,17 @@
   (NAUTILUS `docs/cheatsheets/28-stack.md`) и списком ядер коробки (`core/agentbox/kernels/KERNELS` — goose,
   OpenCode, Pi, nanobot, CheetahClaws, dsh, Unreal Agent прошли bake-off), а не только с журналом снятого.
 
+## Сквозная картина — автомобиль (2026-10-12, intake LMS#36)
+- Спека `docs/superpowers/specs/2026-10-12-assembly-map-design.md`, паспорт машины `…-assembly-car-profile.md`. Флаг
+  `COURSE.features.assemblyMap` (у living-practice и шаблона — false). Первый юнит модуля — полная картина, остальные —
+  миниатюра с окном (`components/assembly/unit-assembly.tsx`); узел = модуль, деталь = юнит.
+- Соответствие `packs/tochka-sborki/course/assembly-map.ts` (id) ↔ геометрия `assembly-machine.tsx` + `.data.ts` (области и
+  метки на растре 1280×853): тест `lib/content/assembly-integrity.test.ts` — новый юнит без детали = красный тест.
+- Основа — `public/assembly/car-{light,dark}.webp` (pack-owned; тёмная — переворот светлоты LAB из светлой, разметка одна);
+  сгенерирована (codex image_gen) — подпись `MachineDef.credit` обязательна (тест). Прогресс — метки (серая — нет, акцент —
+  пройдено), текущее — прожектор. Pack-машина импортирует только `@/lib/**` (не `components/`): `boundary.test.ts`.
+- Вес: тест рендера ≤ 300 КБ + postbuild `check-assembly-weight.mjs` (на основном сайте юниты за дверью → «не измерено в HTML»).
+
 ## Gemini-Notebook слой (2026-08-04, спек `2026-08-04-notebook-module-design`)
 - **`/notebook`** (и `/en/notebook`, открыто, без почты) — «пакет тетрадки»: `lib/course/notebook-pack.ts` (паттерн `/try`: engine+data, `Bi{ru;en}` и resolvers) — 3 пака источников, PROMPT_KIT (каждый промпт ТРЕБУЕТ цитату — под тестом), VERIFY_CHECKLIST «где тетрадка врёт». В nav НЕ добавлен (шапка ужата); входы — модуль 09 и sitemap.
 - **Модуль `09-ai-notebook`** — 5 юнитов, инверсия fast.ai (intake #102): u1 = рабочая тетрадка за 15 минут ДО теории; agent-agnostic (Gemini Notebook как референс, в каждом юните путь «если тетрадки нет»). **Опциональный**: НЕ в `workers/src/lib/course-catalog.ts` (admission-гейт академии не ужесточён) и НЕ в ядре прогрессии.
