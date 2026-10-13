@@ -1,0 +1,2 @@
+# Windows autocrlf can rewrite Vitest snapshots; Vitest writes them with LF.
+*.snap text eol=lf
