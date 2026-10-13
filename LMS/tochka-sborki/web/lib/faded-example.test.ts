@@ -43,6 +43,11 @@ function render(x: FadedExampleData, locale: 'ru' | 'en', initial?: Parameters<t
   return renderToStaticMarkup(createElement(FadedExample, { example: x, locale, initial }))
 }
 
+// Обход всего контента pack'а (обе локали, чтение каждого .mdx): один прогон ~250 мс, но под полным `npm test`
+// на Windows (215 файлов параллельно) 2026-10-13 упёрся в умолчание vitest 5 с. Работы тут не лишней — это
+// конкуренция за диск, поэтому таймаут только этому тесту, а не глобальный.
+const SCAN_UNDER_LOAD_MS = 20_000
+
 describe(`faded examples registry (${PACK_SLUG})`, () => {
   it('ключи (module/unit/id) уникальны', () => {
     const keys = FADED_EXAMPLES.map(x => `${x.module}/${x.unit}/${x.id}`)
@@ -62,7 +67,7 @@ describe(`faded examples registry (${PACK_SLUG})`, () => {
         }
       }
     }
-  })
+  }, SCAN_UNDER_LOAD_MS)
 
   for (const x of FADED_EXAMPLES) {
     for (const locale of LOCALES) {

@@ -1,7 +1,7 @@
 // Boundary-гвард движок ↔ course-pack (Ф1 S1, ужесточён в S4 — эпоха @pack-alias).
 // Держит будущее расщепление дешёвым: сцепки ловятся здесь, а не при разрезе.
 import { describe, expect, it } from 'vitest'
-import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs'
+import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import { PACK_DIR } from './pack'
 
@@ -20,14 +20,24 @@ const STUBS = [
     .map((n) => `lib/course/${n}.ts`),
 ]
 
+const filesByRoot = new Map<string, string[]>()
+
 function walk(dir: string, out: string[] = []): string[] {
-  for (const name of readdirSync(dir)) {
-    if (name === 'node_modules' || name === '.next' || name === 'out') continue
-    const p = join(dir, name)
-    if (statSync(p).isDirectory()) walk(p, out)
-    else if (/\.(ts|tsx)$/.test(name)) out.push(p)
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name === 'node_modules' || entry.name === '.next' || entry.name === 'out') continue
+    const p = join(dir, entry.name)
+    if (entry.isDirectory()) walk(p, out)
+    else if (/\.(ts|tsx)$/.test(entry.name)) out.push(p)
   }
   return out
+}
+
+function filesUnder(dir: string): string[] {
+  const cached = filesByRoot.get(dir)
+  if (cached) return cached
+  const files = walk(dir)
+  filesByRoot.set(dir, files)
+  return files
 }
 
 const rel = (p: string) => relative(ROOT, p).replaceAll('\\', '/')
@@ -41,7 +51,7 @@ describe('engine ↔ pack boundary', () => {
   })
 
   it('no literal packs/ imports anywhere — only the @pack alias', () => {
-    const files = [...['lib', 'components', 'app'].flatMap((d) => walk(join(ROOT, d))), ...walk(PACK_DIR)]
+    const files = [...['lib', 'components', 'app'].flatMap((d) => filesUnder(join(ROOT, d))), ...filesUnder(PACK_DIR)]
     const offenders: string[] = []
     for (const f of files) {
       const src = readFileSync(f, 'utf8')
@@ -54,7 +64,7 @@ describe('engine ↔ pack boundary', () => {
 
   it('pack does not import engine UI (components/, app/) and does not self-alias @pack', () => {
     const offenders: string[] = []
-    for (const f of walk(PACK_DIR)) {
+    for (const f of filesUnder(PACK_DIR)) {
       const src = readFileSync(f, 'utf8')
       if (/from\s+['"][^'"]*(components|app)\//.test(src)) offenders.push(`${rel(f)} → UI`)
       if (/from\s+['"]@pack\//.test(src)) offenders.push(`${rel(f)} → @pack self`)
