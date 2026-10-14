@@ -1,0 +1,44 @@
+{
+  "model": "Codex image_gen (ChatGPT subscription)",
+  "provider": "openai-codex (subscription, laptop)",
+  "license": "OpenAI Terms (C2PA)",
+  "cost_usd": 0.0,
+  "watermark": "c2pa",
+  "runner": "codex exec -i <previous step>",
+  "base": {
+    "file": "hero.png",
+    "sha256": "1f9bb1b64c54ee4062b8f3015b70f8892c42c5314fe2c7ea4b59a5960ec59a49"
+  },
+  "instruction_suffix": "Keep EVERYTHING else pixel-identical: same framing, same camera, same scale and position of every existing object, same line style and colors, same background.",
+  "edits": [
+    {
+      "step": 1,
+      "request": "add a compact onboard computer unit: a small dark-grey box with a glowing teal status screen, mounted in the centre of the dashboard between the steering wheel and the open atlas on the passenger seat",
+      "sha256": "c1414331bf6a8f0b957fe6e29b0e10848206a9a15bf35435d537288111168b49"
+    },
+    {
+      "step": 2,
+      "request": "roof antenna; cartridge in the onboard computer; lit instrument cluster; immobilizer with red LED; key fob with six buttons; amber idea lamp; VIN plate on the door pillar",
+      "sha256": "45a48759d15bccfe722e51d63dd4ded380c54ab068ee8a53a4ed437c6eec02e1"
+    },
+    {
+      "step": 3,
+      "request": "warning triangle and chequered finish flag on the navigation screen; three voice buttons under it; timer dial by the rain sensor; magnifier, check marks and printouts on the atlas; orange cartridge on top of the onboard computer; amber lamp; accelerator pedal. MUST STAY UNCHANGED: gear lever, glovebox drawer with the blue book, steering wheel, key, cluster",
+      "sha256": "ae187379bb7039bb31416025e37f269ba4e4690e154dc5cf06a8ec8403519f96"
+    },
+    {
+      "step": 4,
+      "request": "load sticker, CB radio, fire extinguisher with first-aid kit and a column-diagram sign at the convoy; parking sensors and AWD badge on the rear of the main car; additive barrel and tuning-chip box by the tool cabinet; bypass fuel line with a red valve from the jerry can. MUST STAY UNCHANGED: cabin, pump, trailer, diagnostic cart, tool cabinet, cone",
+      "sha256": "a232bb29c5f153a4a7ef55605619690185ba69e701c2d6f1f6a68a9d5c74732a"
+    },
+    {
+      "step": 5,
+      "request": "rear-view camera above the tow bar (taken into the result); door organizer (rejected: drawn over the diagnostic cart)",
+      "sha256": "e4c4df62b5fb88a57925b2618b60a6b8b07cab80a8cca795c30079adaa1cd030"
+    }
+  ],
+  "composite": "step 4 result with the rear-camera region (1280-space box 980,283-1011,310, Gaussian edge 3 px) taken from step 5",
+  "size": "1536x1024",
+  "sha256": "88870124b1931aa7d8e3c4e2a16df31300b07c3c5e40095885f818d22e5f7595",
+  "owner_exception": "2026-10-12, codex lane for publication with the credit \"Иллюстрация сгенерирована ИИ\""
+}

@@ -89,11 +89,11 @@ describe.runIf(COURSE.features.assemblyMap && HAS_DATA)('AssemblyFigure: зон�
 
   it('прожектор: нарисованная деталь — на ней, ненарисованная — на корпусе её узла', () => {
     const path = (poly: Poly) => `M ${poly.map(([x, y]) => `${x} ${y}`).join(' L ')} Z`
-    const at = (u: string) => renderToStaticMarkup(<AssemblyFigure locale="ru" current={{ module: '10-model-training', unit: u }} />)
+    const at = (module: string, u: string) => renderToStaticMarkup(<AssemblyFigure locale="ru" current={{ module, unit: u }} />)
     expect(PARTS['dyno.engine-cutaway']).toBeDefined()
-    expect(at('u1-inside-the-model')).toContain(`d="${path(PARTS['dyno.engine-cutaway']!)}"`)
-    expect(PARTS['dyno.additive-barrel']).toBeUndefined()
-    expect(at('u2-data-is-the-work')).toContain(`d="${path(SHELLS.dyno)}"`)
+    expect(at('10-model-training', 'u1-inside-the-model')).toContain(`d="${path(PARTS['dyno.engine-cutaway']!)}"`)
+    expect(PARTS['ignition.door-organizer']).toBeUndefined()
+    expect(at('00-kickstart', 'u2-tools')).toContain(`d="${path(SHELLS.ignition)}"`)
   })
 })
 
