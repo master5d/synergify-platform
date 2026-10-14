@@ -12,7 +12,10 @@ const pack = fileURLToPath(new URL('../LMS/tochka-sborki/web/packs/_active/', im
 
 export default defineConfig({
   resolve: {
-    alias: [{ find: /^@pack\/(.*)$/, replacement: pack + '$1' }],
+    alias: [
+      { find: /^@\/(.*)$/, replacement: fileURLToPath(new URL('../LMS/tochka-sborki/web/', import.meta.url)) + '$1' },
+      { find: /^@pack\/(.*)$/, replacement: pack + '$1' },
+    ],
   },
   test: {
     environment: 'node',
