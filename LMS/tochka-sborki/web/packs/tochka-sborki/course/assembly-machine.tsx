@@ -8,6 +8,7 @@ import { PART_MARKERS, PARTS, SHELL_MARKERS, SHELLS, type Point, type Polygon } 
 
 const NODE_IDS = ASSEMBLY_MAP.nodes.map((node) => node.id)
 const PART_IDS = ASSEMBLY_MAP.parts.map((part) => part.id)
+const NODE_OF_PART = new Map(ASSEMBLY_MAP.parts.map((part) => [part.id, part.node]))
 
 function points(value: readonly Point[]): string {
   return value.map(([x, y]) => `${x},${y}`).join(' ')
@@ -45,7 +46,8 @@ function Art({ part, node, title }: MachineProps) {
   const raster = useRasterAsset()
   const currentPart = ASSEMBLY_MAP.parts.find(({ id }) => part(id)['data-am-current'] === 'true')?.id
   const currentNode = ASSEMBLY_MAP.nodes.find(({ id }) => node(id)['data-am-current'] === 'true')?.id
-  const spotlight = currentPart ? PARTS[currentPart] : currentNode ? SHELLS[currentNode] : undefined
+  // Деталь, которой нет на картинке, своей зоны не имеет — прожектор ложится на корпус её узла.
+  const spotlight = currentPart ? PARTS[currentPart] ?? SHELLS[NODE_OF_PART.get(currentPart) ?? ''] : currentNode ? SHELLS[currentNode] : undefined
   return (
     <g>
       {raster ? <image data-am-raster="" href={raster} x="0" y="0" width="1280" height="853" preserveAspectRatio="none" /> : null}
@@ -64,13 +66,19 @@ function Art({ part, node, title }: MachineProps) {
             {areaShape(id, SHELLS[id])}
             <polygon className="am-marker am-shell-marker" data-am-marker="shell" points={diamond(SHELL_MARKERS[id])} />
           </g>
-          {ASSEMBLY_MAP.parts.filter((partDef) => partDef.node === id).map(({ id: partId }) => (
-            <g key={partId} {...part(partId)}>
-              <title>{title(partId)}</title>
-              <polygon className="am-area am-part-area" points={points(PARTS[partId])} />
-              <circle className="am-marker am-part-marker" data-am-marker="part" cx={PART_MARKERS[partId][0]} cy={PART_MARKERS[partId][1]} r="11" />
-            </g>
-          ))}
+          {ASSEMBLY_MAP.parts.filter((partDef) => partDef.node === id).map(({ id: partId }) => {
+            const area = PARTS[partId]
+            const marker = PART_MARKERS[partId]
+            return (
+              <g key={partId} {...part(partId)}>
+                <title>{title(partId)}</title>
+                {area && marker ? <>
+                  <polygon className="am-area am-part-area" points={points(area)} />
+                  <circle className="am-marker am-part-marker" data-am-marker="part" cx={marker[0]} cy={marker[1]} r="11" />
+                </> : null}
+              </g>
+            )
+          })}
         </g>
       ))}
     </g>
