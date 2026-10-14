@@ -5,6 +5,11 @@
     "module": "ES2022",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["../LMS/tochka-sborki/web/*"],
+      "@pack/*": ["../LMS/tochka-sborki/web/packs/_active/*"]
+    },
     "strict": true,
     "noEmit": true,
     "types": ["@cloudflare/workers-types"]
