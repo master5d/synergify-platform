@@ -107,15 +107,23 @@ describe('безубыточность и пустые места', () => {
   it('совпадает с перебором прибыли по гостям на неудобных входах', () => {
     let seed = 7
     const rnd = (n: number) => { seed = (seed * 48271) % 2147483647; return seed % n }   // MINSTD, без потери точности
-    const N = 3000
-    for (let k = 0; k < 300; k++) {
+    const N = 20000
+    for (let k = 0; k < 400; k++) {
       const model = (['full_campus', 'per_guest', 'buyout'] as const)[k % 3]
       const rate = 50000 + rnd(300000)
-      const v: Venue = { ...VENUE, model, ratePerGuest: rate, capacity: 20 + rnd(N), minGuests: rnd(40),
-        buyoutFee: rnd(2) ? rnd(500000) : 0, payInFull: rnd(2) === 1, payInFullDiscountPct: rnd(15) + rnd(100) / 100 }
-      const i = inputs({ venue: v, pricePerGuest: Math.max(1, rate - 3000 + rnd(9000)), guests: 20,
-        salesCurve: [4, 4, 4, 4, 4], perGuestCost: rnd(3) ? 0 : rnd(5000), revenuePct: rnd(5) + rnd(100) / 100,
-        fixedCosts: [{ name: 'misc', amount: rnd(3000000), monthsBeforeStart: 1 }] })
+      const payInFull = rnd(2) === 1
+      const discount = rnd(15) + rnd(100) / 100
+      const revenuePct = rnd(5) + rnd(100) / 100
+      const perGuestCost = rnd(3) ? 0 : rnd(5000)
+      // каждый второй вход — маржа с гостя около нуля (±2 цента) и мелкие постоянные: класс, где ломался поиск
+      const nearZero = k % 2 === 1
+      const cost = (model === 'full_campus' ? 0 : rate * (payInFull ? 1 - discount / 100 : 1)) + perGuestCost
+      const price = nearZero ? Math.round(cost / (1 - revenuePct / 100)) + rnd(5) - 2 : rate - 3000 + rnd(9000)
+      const v: Venue = { ...VENUE, model, ratePerGuest: rate, capacity: 20 + rnd(9980), minGuests: rnd(40),
+        buyoutFee: rnd(2) ? rnd(nearZero ? 5000 : 500000) : 0, payInFull, payInFullDiscountPct: discount }
+      const i = inputs({ venue: v, pricePerGuest: Math.max(usd(401), price), guests: 20,
+        salesCurve: [4, 4, 4, 4, 4], perGuestCost, revenuePct,
+        fixedCosts: [{ name: 'misc', amount: rnd(nearZero ? 2000 : 3000000), monthsBeforeStart: 1 }] })
       const row = profitGrid(i, [i.pricePerGuest], Array.from({ length: N + 1 }, (_, g) => g))[0]
       const brute = row.findIndex((p) => p !== null && p >= 0)
       const got = compute(i).breakEvenGuests
