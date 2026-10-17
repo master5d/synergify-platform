@@ -34,6 +34,7 @@ import { localDate } from '@/lib/quests/daily-store'
 import { COURSE } from '@/lib/course'
 import { readStore } from '@/lib/spaced-review'
 import { fadeModules, fadeSignal, type FadeSignal } from '@/lib/learn-prompt-fading'
+import { useProgressBackfill } from '@/lib/use-progress-backfill'
 
 const PHASE_COLORS = ['var(--phase-1)', 'var(--phase-2)', 'var(--phase-3)', 'var(--phase-4)']
 const TOTAL_STEPS = 4
@@ -73,6 +74,8 @@ export function UnitWizard({
   const [currentStep, setCurrentStep] = useState(0)
   const [done, setDone] = useState(false)
   const { markCompleted } = useUnitProgress()
+  // Пройденное без входа — на сервер после логина (курсы с gates.auth: false).
+  useProgressBackfill(outline)
   const router = useRouter()
   const topRef = useRef<HTMLDivElement>(null)
   const viewedUnitRef = useRef<string | null>(null)

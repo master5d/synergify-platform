@@ -42,6 +42,7 @@ const SURFACES: Record<string, { kind: Kind; why?: string }> = {
   'components/unit-wizard.tsx': { kind: 'fails-soft', why: '/api/intake/me → 503 → юнит без персонализации; прогресс юнитов — localStorage' },
   'components/intake/unit-route-step.tsx': { kind: 'fails-soft', why: 'маршрут задачи → 503 → шаг не показывается' },
   'lib/progress-sync.ts': { kind: 'fails-soft', why: 'fire-and-forget в try/catch' },
+  'lib/progress-backfill.ts': { kind: 'fails-soft', why: 'хук-обёртка (lib/use-progress-backfill.ts) не зовёт её при IS_MIRROR; сама — try/catch, 503 → null' },
   'lib/spaced-review.ts': { kind: 'fails-soft', why: 'syncAnswer при authed=false ничего не шлёт (в зеркале authed всегда false)' },
   'lib/interest-example/client.ts': { kind: 'fails-soft', why: 'отказ → общий пример' },
   'lib/intake/task-route-content.ts': { kind: 'fails-soft', why: 'отказ → без маршрута задачи' },

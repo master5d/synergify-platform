@@ -7,6 +7,7 @@ import { useUnitProgress } from '@/lib/unit-progress'
 import { reportUnitCompleted, reportUnitViewed, type CourseOutline } from '@/lib/progress-sync'
 import { COURSE } from '@/lib/course'
 import type { UnitReference } from '@/lib/learn-prompt-reference'
+import { useProgressBackfill } from '@/lib/use-progress-backfill'
 
 // Prose-разметка юнита (Ф4 S1): вторая оболочка над тем же MDX.
 // Курс без фаз получает сплошной текст без ложной шкалы из четырёх шагов —
@@ -42,6 +43,8 @@ export function UnitProse({
   const prefix = locale === 'en' ? '/en' : ''
   const router = useRouter()
   const { markCompleted } = useUnitProgress()
+  // Пройденное без входа — на сервер после логина (курсы с gates.auth: false).
+  useProgressBackfill(outline)
   const [done, setDone] = useState(false)
   const viewedUnitRef = useRef<string | null>(null)
 
