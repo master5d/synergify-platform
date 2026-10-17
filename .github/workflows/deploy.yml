@@ -179,6 +179,16 @@ jobs:
         run: npm run build
       - name: Merge course into shell
         run: node scripts/merge-course.mjs living-practice praktika
+      # Второй курс школы — открытый «Ретрит с двух сторон». Тот же web/out пересобирается
+      # под другим pack'ом и подпутём; merge кладёт его в свой каталог и praktika/ не трогает.
+      - name: Build course (retreat @ /retrit)
+        working-directory: LMS/tochka-sborki/web
+        env:
+          COURSE_PACK: retreat
+          COURSE_BASE_PATH: /retrit
+        run: npm run build
+      - name: Merge retreat course into shell
+        run: node scripts/merge-course.mjs retreat retrit
       - name: Ensure project exists
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

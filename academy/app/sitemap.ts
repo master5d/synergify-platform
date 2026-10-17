@@ -22,8 +22,13 @@ const PATHS: string[] = [
   ...(isEideticsLive() ? writtenEideticsSlugs().map((slug) => `trenazhery/eidetika/${slug}`) : []),
 ]
 
+/** Курсы движка, вклеенные в подпуть (scripts/merge-course.mjs): у них своя маршрутизация,
+ *  EN живёт ВНУТРИ подпути (/<sub>/en/), а не в /en/<sub>/. Только открытые курсы:
+ *  «Тишина» (/praktika) — за admission-гейтом, её в sitemap нет. */
+const COURSE_SUBPATHS: string[] = ['retrit']
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return PATHS.map((path) => {
+  const pages = PATHS.map((path) => {
     const suffix = path ? `${path}/` : ''
     return {
       url: `${SITE}/${suffix}`,
@@ -36,4 +41,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     }
   })
+  const courses = COURSE_SUBPATHS.map((sub) => ({
+    url: `${SITE}/${sub}/`,
+    alternates: {
+      languages: {
+        ru: `${SITE}/${sub}/`,
+        en: `${SITE}/${sub}/en/`,
+        'x-default': `${SITE}/${sub}/`,
+      },
+    },
+  }))
+  return [...pages, ...courses]
 }

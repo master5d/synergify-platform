@@ -99,6 +99,7 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
         links: [
           { label: 'Точка Сборки', href: 'https://ai.synergify.com' },
           { label: 'Тишина, в которой слышно', href: '/praktika/' },
+          { label: 'Ретрит с двух сторон', href: '/retrit/' },
           { label: 'Тренажёры', href: '/trenazhery/' },
           { label: 'Правила дома', href: '/pravila/' },
           { label: 'Служба заботы', href: '/zabota/' },
@@ -222,6 +223,7 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
         links: [
           { label: 'Tochka Sborki', href: 'https://ai.synergify.com' },
           { label: 'The Silence Where You Can Hear', href: '/praktika/en/' },
+          { label: 'A Retreat From Both Sides', href: '/retrit/en/' },
           { label: 'Trainers', href: '/en/trenazhery/' },
           { label: 'House rules', href: '/en/pravila/' },
           { label: 'Care desk', href: '/en/zabota/' },
