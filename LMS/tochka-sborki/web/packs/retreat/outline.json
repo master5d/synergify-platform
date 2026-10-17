@@ -1,0 +1,119 @@
+{
+  "name": { "ru": "Ретрит с двух сторон", "en": "A Retreat From Both Sides" },
+  "modules": [
+    {
+      "slug": "01-sdelka",
+      "title": { "ru": "Сделка: один ретрит с двух сторон", "en": "The deal: one retreat from two sides" },
+      "description": {
+        "ru": "Ядро курса. Кто за что отвечает, модели договора, одна сделка в калькуляторе, цена от желаемой прибыли и касса во времени.",
+        "en": "The core of the course. Who is responsible for what, contract models, one deal in the calculator, a price from the profit you want, and cash over time."
+      },
+      "level": 1,
+      "units": [
+        { "slug": "u1-roli", "title": { "ru": "Кто за что отвечает", "en": "Who is responsible for what" },
+          "objective": { "ru": "Назвать, что делает ведущий, что площадка, и где их обязанности и риски пересекаются.", "en": "Name what the leader does, what the venue does, and where their duties and risks overlap." } },
+        { "slug": "u2-odna-sdelka", "title": { "ru": "Одна сделка в калькуляторе", "en": "One deal in the calculator" },
+          "objective": { "ru": "На одном примере посчитать прибыль ведущего и выручку площадки и найти точку безубыточности.", "en": "On one example, work out the leader's profit and the venue's revenue and find the break-even point." } },
+        { "slug": "u3-pribyl-i-cena", "title": { "ru": "Сначала желаемая прибыль, потом цена", "en": "First the profit you want, then the price" },
+          "objective": { "ru": "Вывести цену от целевой прибыли и часов подготовки, а не от цен соседей.", "en": "Derive the price from a target profit and the hours of preparation, not from other retreats' prices." } },
+        { "slug": "u4-kassa", "title": { "ru": "Касса: деньги во времени", "en": "Cash: money over time" },
+          "objective": { "ru": "Построить график, в котором платежи гостей приходят раньше платежей площадке.", "en": "Build a schedule in which guest payments arrive before the venue payments." } }
+      ]
+    },
+    {
+      "slug": "02-otmeny-zakon",
+      "title": { "ru": "Отмены, недобор, закон", "en": "Cancellations, a short group, the law" },
+      "description": {
+        "ru": "Ядро курса. Два календаря отмен, честные условия удержания, пакетный тур, страховка, курс валют и практики с нагрузкой.",
+        "en": "The core of the course. Two cancellation calendars, fair retention terms, package travel, insurance, the exchange rate and demanding practices."
+      },
+      "level": 1,
+      "units": [
+        { "slug": "u1-dva-kalendarya", "title": { "ru": "Два календаря отмен", "en": "Two cancellation calendars" },
+          "objective": { "ru": "Сопоставить условия отмены у площадки с правилами отмены для гостей так, чтобы между ними не осталось дыры.", "en": "Line up the venue's cancellation terms with the guests' cancellation rules so that no gap is left between them." } },
+        { "slug": "u2-nevozvratnyj", "title": { "ru": "«Невозвратный» — не значит неприкосновенный", "en": "\"Non-refundable\" does not mean untouchable" },
+          "objective": { "ru": "Объяснить, почему пометка «невозвратный» не гарантирует удержание денег, и сформулировать честное условие.", "en": "Explain why a \"non-refundable\" label does not guarantee you keep the money, and write a fair term." } },
+        { "slug": "u3-paketnyj-tur", "title": { "ru": "Когда ретрит становится пакетным туром", "en": "When a retreat becomes a package holiday" },
+          "objective": { "ru": "По признакам определить, попадает ли ретрит под правила о пакетных турах, и что тогда обязан организатор.", "en": "Tell by its features whether a retreat falls under package travel rules, and what the organiser then owes." } },
+        { "slug": "u4-strahovka-kurs-telo", "title": { "ru": "Страховка, курс, тело", "en": "Insurance, exchange rate, the body" },
+          "objective": { "ru": "Перечислить, что страхует каждая сторона, заложить валютный запас и требования к практикам с нагрузкой и касанием.", "en": "List what each side insures, set a currency reserve, and set requirements for demanding practices and touch." } }
+      ]
+    },
+    {
+      "slug": "03-vedushchiy-zamysel",
+      "title": { "ru": "Ведущий: замысел, гость, продажи", "en": "Leader: the idea, the guest, sales" },
+      "description": {
+        "ru": "Трек ведущего. Кто твой гость, своя аудитория и соведущий, продажи против кассового плана, связь с гостями до заезда.",
+        "en": "Leader track. Who your guest is, your own audience and a co-leader, sales against the cash plan, staying in touch with guests before arrival."
+      },
+      "level": 2,
+      "units": [
+        { "slug": "u1-gost", "title": { "ru": "Кто твой гость и какую перемену ищет", "en": "Who your guest is and what change they seek" },
+          "objective": { "ru": "Описать одного конкретного гостя и перемену, ради которой он едет.", "en": "Describe one concrete guest and the change they are travelling for." } },
+        { "slug": "u2-auditoriya-sovedushchij", "title": { "ru": "Своя аудитория и соведущий", "en": "Your own audience and a co-leader" },
+          "objective": { "ru": "Оценить, кто реально наполнит группу, и закрепить договорённости с соведущим письменно.", "en": "Judge who will really fill the group, and put the arrangements with a co-leader in writing." } },
+        { "slug": "u3-prodazhi-kassa", "title": { "ru": "Продажи против кассового плана", "en": "Sales against the cash plan" },
+          "objective": { "ru": "Связать темп продаж мест с графиком платежей площадке.", "en": "Tie the pace of selling places to the venue payment schedule." } },
+        { "slug": "u4-do-zaezda", "title": { "ru": "Между первым платежом и заездом", "en": "Between the first payment and arrival" },
+          "objective": { "ru": "Спланировать связь с гостями от оплаты до заезда, чтобы отказ превращался в перенос, а не в возврат.", "en": "Plan contact with guests from payment to arrival, so that a cancellation turns into a transfer rather than a refund." } }
+      ]
+    },
+    {
+      "slug": "04-vedushchiy-programma",
+      "title": { "ru": "Ведущий: программа и гости", "en": "Leader: the program and the guests" },
+      "description": {
+        "ru": "Трек ведущего. Честная карточка практики, сетка дней, анкета и меню, логистика прибытия, сам ретрит и разбор после.",
+        "en": "Leader track. An honest practice card, the grid of days, the form and the menu, arrival logistics, the retreat itself and the review after."
+      },
+      "level": 2,
+      "units": [
+        { "slug": "u1-kartochka-praktiki", "title": { "ru": "Честная карточка практики", "en": "An honest practice card" },
+          "objective": { "ru": "Описать практику без обещаний и с полной информацией для гостя и площадки.", "en": "Describe a practice with no promises and with full information for the guest and the venue." } },
+        { "slug": "u2-setka-dnej", "title": { "ru": "Сетка дней", "en": "The grid of days" },
+          "objective": { "ru": "Собрать программу по дням из карточек практик и приёмов пищи с учётом нагрузки и отдыха.", "en": "Build the program day by day from practice cards and meals, with load and rest in mind." } },
+        { "slug": "u3-anketa-menyu", "title": { "ru": "Анкета гостя и меню", "en": "The guest form and the menu" },
+          "objective": { "ru": "Собрать с гостей диеты и аллергии и превратить их в задание шефу со стоимостью на гостя.", "en": "Collect guests' diets and allergies and turn them into a brief for the chef with a cost per guest." } },
+        { "slug": "u4-logistika", "title": { "ru": "Логистика прибытия", "en": "Arrival logistics" },
+          "objective": { "ru": "Составить лист прибытия и заложить запас на ошибки гостей.", "en": "Draw up an arrivals list and set a reserve for guests' mistakes." } },
+        { "slug": "u5-retrit-i-posle", "title": { "ru": "Сам ретрит и после", "en": "The retreat itself and after" },
+          "objective": { "ru": "Сверить факт с планом и закрыть ретрит с гостями и с площадкой.", "en": "Check actuals against the plan and close the retreat with the guests and with the venue." } }
+      ]
+    },
+    {
+      "slug": "05-ploshchadka-model",
+      "title": { "ru": "Площадка: пакет, загрузка, окупаемость", "en": "Venue: package, occupancy, payback" },
+      "description": {
+        "ru": "Трек площадки. Пакет и ставка, питание в пакете, ретритные недели против посуточной сдачи, таблица окупаемости, которая врёт.",
+        "en": "Venue track. Package and rate, meals in the package, retreat weeks versus nightly letting, a payback spreadsheet that lies."
+      },
+      "level": 2,
+      "units": [
+        { "slug": "u1-paket-stavka", "title": { "ru": "Пакет и ставка", "en": "Package and rate" },
+          "objective": { "ru": "Выбрать модель ставки и состав пакета так, чтобы риск недобора был распределён осознанно.", "en": "Choose the rate model and what the package includes so that the risk of a short group is shared on purpose." } },
+        { "slug": "u2-pitanie", "title": { "ru": "Питание в пакете", "en": "Meals in the package" },
+          "objective": { "ru": "Посчитать питание за приём пищи на гостя и согласовать меню с ведущим до заезда.", "en": "Price meals per sitting per guest and agree the menu with the leader before arrival." } },
+        { "slug": "u3-zagruzka", "title": { "ru": "Загрузка: ретритные недели против посуточной сдачи", "en": "Occupancy: retreat weeks versus nightly letting" },
+          "objective": { "ru": "Сравнить доход года при разной смеси групповых недель и посуточных ночей.", "en": "Compare the year's income for different mixes of group weeks and nightly lets." } },
+        { "slug": "u4-okupaemost", "title": { "ru": "Таблица окупаемости, которая врёт", "en": "A payback spreadsheet that lies" },
+          "objective": { "ru": "Найти в модели окупаемости типовые ошибки, которые завышают отдачу.", "en": "Find the typical mistakes in a payback model that inflate the return." } }
+      ]
+    },
+    {
+      "slug": "06-ploshchadka-vedushchie",
+      "title": { "ru": "Площадка: ведущие и группы", "en": "Venue: leaders and groups" },
+      "description": {
+        "ru": "Трек площадки. Кого пускать, свои условия платежей и отмен, сопровождение группы до заезда, на месте и после.",
+        "en": "Venue track. Whom to host, your own payment and cancellation terms, supporting a group before arrival, on site and after."
+      },
+      "level": 2,
+      "units": [
+        { "slug": "u1-kogo-puskat", "title": { "ru": "Кого пускать", "en": "Whom to host" },
+          "objective": { "ru": "Оценить ведущего до договора по проверяемым признакам.", "en": "Assess a leader before the contract by checkable signs." } },
+        { "slug": "u2-usloviya-ploshchadki", "title": { "ru": "Условия со стороны площадки", "en": "Terms from the venue's side" },
+          "objective": { "ru": "Составить свой график платежей, отмен и минимальной гарантии, который переживает недобор группы.", "en": "Set your own schedule of payments, cancellations and a minimum guarantee that survives a short group." } },
+        { "slug": "u3-soprovozhdenie", "title": { "ru": "Сопровождение группы", "en": "Supporting the group" },
+          "objective": { "ru": "Распределить, кто что делает до заезда, на месте и после: трансфер, кухня, залы, связь.", "en": "Split who does what before arrival, on site and after: transfers, the kitchen, the halls, contact." } }
+      ]
+    }
+  ]
+}

@@ -2,94 +2,13 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import type { Locale } from '../../lib/dictionaries'
-import { compute, LIMITS, profitGrid, validate, type ContractModel, type Inputs } from '../../lib/retreat-calc/engine'
+import { compute, profitGrid, validate, type ContractModel } from '../../lib/retreat-calc/engine'
+import { applyLink, DEFAULT_FORM, num, toInputs, type Form, type SalesPreset } from '../../lib/retreat-calc/form'
 import { decodeLink } from '../../lib/retreat-calc/link'
 import { RC_UI } from './ui'
 
 // Текст/ссылки на бумаге — бронза (золото на светлом = 1.7:1)
 const GOLD = 'var(--accent-ink)'
-
-type SalesPreset = 'even' | 'late' | 'early' | 'manual'
-
-interface CostRow { name: string; amount: string; monthsBeforeStart: string }
-
-interface Form {
-  title: string
-  currency: string
-  price: string
-  guests: string
-  nights: string
-  monthsToStart: string
-  depositMode: 'pct' | 'amount'
-  deposit: string
-  balanceDueDays: string
-  model: ContractModel
-  rate: string
-  capacity: string
-  minGuests: string
-  buyoutFee: string
-  venueDepositPct: string
-  finalDueDays: string
-  discountPct: string
-  installments: boolean
-  payInFull: boolean
-  costs: CostRow[]
-  perGuestCost: string
-  revenuePct: string
-  sales: SalesPreset
-  salesManual: string
-}
-
-const EMPTY: Form = {
-  title: '', currency: 'USD', price: '2800', guests: '18', nights: '6', monthsToStart: '5',
-  depositMode: 'pct', deposit: '25', balanceDueDays: '45',
-  model: 'full_campus', rate: '2000', capacity: '18', minGuests: '0', buyoutFee: '0',
-  venueDepositPct: '25', finalDueDays: '45', discountPct: '5', installments: true, payInFull: false,
-  costs: [], perGuestCost: '0', revenuePct: '3', sales: 'even', salesManual: '',
-}
-
-const num = (s: string) => (s.trim() === '' ? NaN : Number(s.replace(',', '.')))
-const cents = (s: string) => Math.round(num(s) * 100)
-
-/** Кривая продаж: сколько гостей купит в каждый месяц (индекс 0 — месяц подписания). */
-export function salesCurve(preset: SalesPreset, guests: number, months: number, manual: string): number[] {
-  if (preset === 'manual') return manual.split(/[,;\s]+/).filter(Boolean).map((x) => Number(x))
-  // потолки — до циклов: миллиард гостей из ссылки или формы не должен вешать вкладку
-  if (!Number.isInteger(guests) || !Number.isInteger(months) || months < 1 || guests < 0
-      || guests > LIMITS.guests || months > LIMITS.months) return []
-  const curve = new Array(months).fill(0)
-  if (preset === 'late' || preset === 'early') {
-    const span = Math.min(2, months)
-    const first = preset === 'late' ? months - span : 0
-    for (let k = 0; k < guests; k++) curve[first + (k % span)] += 1
-    return curve
-  }
-  for (let k = 0; k < guests; k++) curve[k % months] += 1
-  return curve
-}
-
-export function toInputs(f: Form): Inputs {
-  const guests = num(f.guests)
-  const months = num(f.monthsToStart)
-  return {
-    currency: f.currency,
-    pricePerGuest: cents(f.price),
-    guests,
-    nights: num(f.nights),
-    monthsToStart: months,
-    salesCurve: salesCurve(f.sales, guests, months, f.salesManual),
-    guestDeposit: f.depositMode === 'pct' ? { kind: 'pct', value: num(f.deposit) } : { kind: 'amount', value: cents(f.deposit) },
-    guestBalanceDueDays: num(f.balanceDueDays),
-    venue: {
-      model: f.model, ratePerGuest: cents(f.rate), capacity: num(f.capacity), minGuests: num(f.minGuests),
-      buyoutFee: cents(f.buyoutFee), depositPct: num(f.venueDepositPct), finalDueDays: num(f.finalDueDays),
-      payInFullDiscountPct: num(f.discountPct), installments: f.installments, payInFull: f.payInFull,
-    },
-    fixedCosts: f.costs.map((c) => ({ name: c.name, amount: cents(c.amount), monthsBeforeStart: num(c.monthsBeforeStart) })),
-    perGuestCost: cents(f.perGuestCost),
-    revenuePct: num(f.revenuePct),
-  }
-}
 
 const field: React.CSSProperties = {
   width: '100%', padding: '0.45rem 0.6rem', borderRadius: 'var(--radius)', border: '1px solid var(--border-color)',
@@ -101,7 +20,7 @@ const h2: React.CSSProperties = { fontFamily: 'var(--font-display)', fontWeight:
 
 export function RetreatCalculator({ locale }: { locale: Locale }) {
   const t = RC_UI[locale]
-  const [f, setF] = useState<Form>(EMPTY)
+  const [f, setF] = useState<Form>(DEFAULT_FORM)
   const [notice, setNotice] = useState<string | null>(null)
   const [view, setView] = useState<'leader' | 'venue'>('leader')
 
@@ -110,29 +29,7 @@ export function RetreatCalculator({ locale }: { locale: Locale }) {
     if (!hash) return
     const decoded = decodeLink(hash, locale)
     if (!decoded.ok) { setNotice(decoded.error); return }
-    const d = decoded.data
-    const v = d.venue ?? {}
-    setF((prev) => ({
-      ...prev,
-      title: d.title ?? prev.title,
-      currency: d.currency ?? prev.currency,
-      price: d.price !== undefined ? String(d.price) : prev.price,
-      guests: d.guests !== undefined ? String(d.guests) : prev.guests,
-      nights: d.nights !== undefined ? String(d.nights) : prev.nights,
-      monthsToStart: d.monthsToStart !== undefined ? String(d.monthsToStart) : prev.monthsToStart,
-      depositMode: d.guestDeposit !== undefined ? 'amount' : d.guestDepositPct !== undefined ? 'pct' : prev.depositMode,
-      deposit: d.guestDeposit !== undefined ? String(d.guestDeposit) : d.guestDepositPct !== undefined ? String(d.guestDepositPct) : prev.deposit,
-      balanceDueDays: d.guestBalanceDueDays !== undefined ? String(d.guestBalanceDueDays) : prev.balanceDueDays,
-      model: v.model ?? prev.model,
-      rate: v.ratePerGuest !== undefined ? String(v.ratePerGuest) : prev.rate,
-      capacity: v.capacity !== undefined ? String(v.capacity) : prev.capacity,
-      minGuests: v.minGuests !== undefined ? String(v.minGuests) : prev.minGuests,
-      buyoutFee: v.buyoutFee !== undefined ? String(v.buyoutFee) : prev.buyoutFee,
-      venueDepositPct: v.depositPct !== undefined ? String(v.depositPct) : prev.venueDepositPct,
-      finalDueDays: v.finalDueDays !== undefined ? String(v.finalDueDays) : prev.finalDueDays,
-      discountPct: v.payInFullDiscountPct !== undefined ? String(v.payInFullDiscountPct) : prev.discountPct,
-      installments: v.installments ?? prev.installments,
-    }))
+    setF((prev) => applyLink(prev, decoded.data))
     setNotice(t.loaded)
   }, [t.loaded, locale])
 

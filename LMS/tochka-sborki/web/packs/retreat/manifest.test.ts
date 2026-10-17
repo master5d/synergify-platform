@@ -5,20 +5,35 @@ import { checkManifest } from '../../lib/authoring/manifest'
 import { MANIFEST } from './manifest'
 
 describe('retreat manifest — promising forms only', () => {
-  it('catches income, full-group, legal-safety and healing promises', () => {
-    const dirty = [
+  // RU и EN раздельно: в общей пачке сломанный паттерн одного языка прятался бы за совпадением другого.
+  const PROMISES: [string, RegExp][] = [
+    ['гарантированный доход', /гарантированный доход/],
+    ['наполним группу', /наполним группу/],
+    ['юридическая защита', /юридической защиты/],
+    ['исцеление', /исцеления/],
+  ]
+  const DIRTY = {
+    ru: [
       'После курса ты гарантированно заработаешь на первом ретрите.',
       'Мы наполним вашу группу за месяц.',
       'Такой договор юридически безопасен.',
       'Практика исцеляет тревогу.',
-      'Guaranteed income from day one; we will fill your retreat; legally bulletproof; the retreat heals.',
-    ].join('\n')
-    const labels = checkManifest(dirty, MANIFEST).map(f => f.label).join(' | ')
-    expect(labels).toMatch(/гарантированный доход/)
-    expect(labels).toMatch(/наполним группу/)
-    expect(labels).toMatch(/юридической защиты/)
-    expect(labels).toMatch(/исцеления/)
-  })
+    ],
+    en: [
+      'Guaranteed income from day one.',
+      'We will fill your retreat.',
+      'This contract is legally bulletproof.',
+      'The retreat heals anxiety.',
+    ],
+  }
+  for (const lang of ['ru', 'en'] as const) {
+    PROMISES.forEach(([name, label], i) => {
+      it(`${lang}: ловит обещание «${name}»`, () => {
+        const labels = checkManifest(DIRTY[lang][i], MANIFEST).map(f => f.label).join(' | ')
+        expect(labels).toMatch(label)
+      })
+    })
+  }
 
   it('честные отрицания курса НЕ матчатся', () => {
     const honest = [

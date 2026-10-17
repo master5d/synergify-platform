@@ -20,7 +20,7 @@ export const MANIFEST: ManifestRule[] = [
   },
   {
     // «это не юридическая консультация» не матчится.
-    pattern: 'юридически безопасн|защитит (вас |тебя )?от суда|защищает от суда|legally bulletproof|protects you from (any )?lawsuits?',
+    pattern: 'юридически безопас|защитит (вас |тебя )?от суда|защищает от суда|legally bulletproof|protects you from (any )?lawsuits?',
     label: 'обещание юридической защиты',
   },
   {

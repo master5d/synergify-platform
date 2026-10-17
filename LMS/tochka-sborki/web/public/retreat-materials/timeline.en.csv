@@ -1,0 +1,17 @@
+Days before start,Date,Who,What,Amount,Status,Where the deadline comes from
+,,Leader and venue,Contract signed; first payment to the venue,,,contract
+,,Leader,Sales open; first guest deposits,,,sales plan
+,,Leader,Minimum group reached for the booking,,,calculator: break-even
+monthly,,Leader,Installment payment to the venue,,,contract
+,,Leader,Last day of free cancellation at the venue,,,contract
+,,Leader,Last day of refunds for guests,,,your cancellation terms
+,,Leader,Final payment to the venue,,,contract
+,,Guests,Guests pay the balance,,,your payment terms
+30,,Leader,Guest form out: food; flights; consents,,,course
+14,,Leader and venue,Final guest count and menu to the chef,,,contract and course
+7,,Leader,Arrivals list: flights; who meets whom,,,course
+7,,Leader,Group call before arrival,,,course
+0,,Everyone,Arrival,,,
+,,Everyone,Departure,,,
+-7,,Leader and venue,Review after the group: plan versus actual,,,course
+-14,,Leader,Guest feedback and terms for next time,,,course

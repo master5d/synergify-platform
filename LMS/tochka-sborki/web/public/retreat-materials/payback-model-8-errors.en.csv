@@ -1,0 +1,16 @@
+Line,Year 1,Year 2,Year 3,How it is calculated
+A teaching payback model for a glamping site. It has eight mistakes — find them before you read the lesson on.,,,,
+Lodging units,6,6,6,input
+Price per unit-night,140,140,140,input
+Vacancy rate,70%,80%,85%,input
+Lodging revenue,214620,245280,260610,units × night price × 365 × vacancy rate
+Meal guests per year,3066,3504,3723,units × 2 × 365 × vacancy rate
+Meal revenue,21462,28032,31646,meal guests × 10 × vacancy rate
+Yoga package revenue,266880,266880,266880,16 guests × (200 × 2 + 330 × 3) × 12 months
+Expenses,160000,160000,160000,sum of expense lines × 0.8
+Glamping net profit,38041,56656,66128,(lodging + meals − expenses) ÷ 2
+Yoga NOI,266880,266880,266880,= yoga package revenue
+ROI (cumulative),304921,628457,961465,previous year + glamping net profit + yoga NOI
+Investment used,400000,400000,400000,input
+Investment estimate (sheet "Investment"),630000,,,sum of estimate lines + 10 % construction + 10 % development
+Cap rate,76%,157%,240%,ROI ÷ investment used

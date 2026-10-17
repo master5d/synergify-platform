@@ -1,0 +1,148 @@
+[
+  {
+    "id": "full-campus-20",
+    "title": {
+      "ru": "Учебная сделка: полный кампус на 20",
+      "en": "Teaching deal: a full campus for 20"
+    },
+    "data": {
+      "currency": "USD",
+      "guestBalanceDueDays": 45,
+      "guestDepositPct": 30,
+      "guests": 20,
+      "monthsToStart": 6,
+      "nights": 6,
+      "price": 3000,
+      "v": 1,
+      "venue": {
+        "capacity": 20,
+        "depositPct": 25,
+        "finalDueDays": 60,
+        "installments": true,
+        "model": "full_campus",
+        "payInFullDiscountPct": 5,
+        "ratePerGuest": 1800
+      }
+    },
+    "expect": {
+      "profit": 22200,
+      "venueStyleProfit": 24000,
+      "breakEvenGuests": 13,
+      "emptySeats": 0,
+      "cashGap": {
+        "amount": 17028,
+        "month": 3
+      }
+    }
+  },
+  {
+    "id": "full-campus-12",
+    "title": {
+      "ru": "Учебная сделка: полный кампус, приехали 12",
+      "en": "Teaching deal: a full campus, 12 came"
+    },
+    "data": {
+      "currency": "USD",
+      "guestBalanceDueDays": 45,
+      "guestDepositPct": 30,
+      "guests": 12,
+      "monthsToStart": 6,
+      "nights": 6,
+      "price": 3000,
+      "v": 1,
+      "venue": {
+        "capacity": 20,
+        "depositPct": 25,
+        "finalDueDays": 60,
+        "installments": true,
+        "model": "full_campus",
+        "payInFullDiscountPct": 5,
+        "ratePerGuest": 1800
+      }
+    },
+    "expect": {
+      "profit": -1080,
+      "venueStyleProfit": 14400,
+      "breakEvenGuests": 13,
+      "emptySeats": 8,
+      "cashGap": {
+        "amount": 22266,
+        "month": 3
+      }
+    }
+  },
+  {
+    "id": "per-guest-min",
+    "title": {
+      "ru": "Учебная сделка: оплата за гостя, минимум 14",
+      "en": "Teaching deal: per guest, minimum 14"
+    },
+    "data": {
+      "currency": "USD",
+      "guestBalanceDueDays": 45,
+      "guestDepositPct": 30,
+      "guests": 12,
+      "monthsToStart": 6,
+      "nights": 6,
+      "price": 3000,
+      "v": 1,
+      "venue": {
+        "capacity": 20,
+        "depositPct": 25,
+        "finalDueDays": 60,
+        "installments": true,
+        "minGuests": 14,
+        "model": "per_guest",
+        "payInFullDiscountPct": 5,
+        "ratePerGuest": 1800
+      }
+    },
+    "expect": {
+      "profit": 9720,
+      "venueStyleProfit": 14400,
+      "breakEvenGuests": 9,
+      "emptySeats": 0,
+      "cashGap": {
+        "amount": 13491,
+        "month": 3
+      }
+    }
+  },
+  {
+    "id": "buyout",
+    "title": {
+      "ru": "Учебная сделка: выкуп площадки, 16 гостей",
+      "en": "Teaching deal: venue buyout, 16 guests"
+    },
+    "data": {
+      "currency": "USD",
+      "guestBalanceDueDays": 45,
+      "guestDepositPct": 30,
+      "guests": 16,
+      "monthsToStart": 6,
+      "nights": 6,
+      "price": 3000,
+      "v": 1,
+      "venue": {
+        "buyoutFee": 20000,
+        "capacity": 20,
+        "depositPct": 25,
+        "finalDueDays": 60,
+        "installments": true,
+        "model": "buyout",
+        "payInFullDiscountPct": 5,
+        "ratePerGuest": 600
+      }
+    },
+    "expect": {
+      "profit": 16960,
+      "venueStyleProfit": 18400,
+      "breakEvenGuests": 9,
+      "emptySeats": 0,
+      "cashGap": {
+        "amount": 13574,
+        "month": 3
+      }
+    }
+  }
+]
