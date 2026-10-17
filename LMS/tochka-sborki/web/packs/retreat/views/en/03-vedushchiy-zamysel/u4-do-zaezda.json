@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-vedushchiy-zamysel",
+  "unit": "u4-do-zaezda",
+  "locale": "en",
+  "title": "Between the first payment and arrival",
+  "sourceHash": "sha256:440fbb224fb4dd2faadf1966f1cdef7bcf6f6a478fa3453074d4b9de2682ebce",
+  "outline": [
+    {
+      "heading": "Why guests \"cool off\"",
+      "points": [
+        {
+          "text": "Months pass between payment and arrival.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Points of contact",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "A cancellation is a conversation",
+      "points": [
+        {
+          "text": "A guest goes quiet and does not pay the balance.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Points of contact are a plan too",
+      "points": [
+        {
+          "text": "Contact with guests is not a mood, it is entries in a calendar.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:a943fae550d924b0bc1a30fc166a9f6912dd0f8b371e2367f3590d46c4976410",
+        "points": [
+          "Several months pass from the time of payment until the arrival."
+        ]
+      },
+      {
+        "sourceHash": "sha256:8b01e7f8fd8de9c656057d6f187d1701aba657fb29eb8844bc50d3ea12ff1946",
+        "points": [
+          "A guest goes quiet and fails to pay the balance."
+        ]
+      },
+      {
+        "sourceHash": "sha256:1ca82efdf67309f7f3dce39e79b383f9d9bee5e08e3e47af904012b45bf1f558",
+        "points": [
+          "Contact with guests is a matter of calendar entries rather than a mood."
+        ]
+      }
+    ]
+  }
+}

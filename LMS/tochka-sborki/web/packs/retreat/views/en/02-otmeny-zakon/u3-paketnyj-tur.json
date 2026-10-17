@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-otmeny-zakon",
+  "unit": "u3-paketnyj-tur",
+  "locale": "en",
+  "title": "When a retreat becomes a package holiday",
+  "sourceHash": "sha256:253aed66d63afd51928bf1e3abb4d23ce7052970aea58243840f03030d26865b",
+  "outline": [
+    {
+      "heading": "What a package is",
+      "points": [
+        {
+          "text": "As of 2026-10, the EU has the Package Travel Directive 2015/2302.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Who the organiser is",
+      "points": [
+        {
+          "text": "The organiser is whoever puts the package together and sells it to the guest.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the organiser must do",
+      "points": [
+        {
+          "text": "If the retreat is a package, the organiser takes on duties",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Why this matters to both sides",
+      "points": [
+        {
+          "text": "There is a known case: a retreat centre closed after a natural disaster.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:d9c67ed331b12b8d5bc5769269855cdd76123ef94102c6daba19d7aff29a8d42",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:fb341d65a5842ffc40ad1047e8d6c8302f8084643094d8fa6803ee11643c7238",
+        "points": [
+          "You are the organiser if you put the package together and sell it to the guest."
+        ]
+      },
+      {
+        "sourceHash": "sha256:bf2e7e59d70c7d343418849d58c6c1b998c4967d721b6b012b790eb085ad7f5e",
+        "points": [
+          "You take on duties if the retreat is a package."
+        ]
+      },
+      {
+        "sourceHash": "sha256:6f9e1690eea445474ac89a4f83720032f3ee95fd3fb1d98bca9d1c31b2ec6cae",
+        "points": [
+          "You can look at a specific case where a retreat centre shut down because of a natural disaster."
+        ]
+      }
+    ]
+  }
+}

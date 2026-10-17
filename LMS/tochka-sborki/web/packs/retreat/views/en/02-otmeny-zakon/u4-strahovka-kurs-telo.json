@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-otmeny-zakon",
+  "unit": "u4-strahovka-kurs-telo",
+  "locale": "en",
+  "title": "Insurance, exchange rate, the body",
+  "sourceHash": "sha256:de6ef353cc5a151a17ef969b04be10e1af2eeb68a044e373f5ed6613da96a099",
+  "outline": [
+    {
+      "heading": "Who insures what",
+      "points": [
+        {
+          "text": "As of 2026-10, the picture is this.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Waivers",
+      "points": [
+        {
+          "text": "Guests are often asked to sign a waiver before physical practices.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The exchange rate",
+      "points": [
+        {
+          "text": "If the guest price is in one currency and the venue charges in another, the exchange difference is your risk.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The body",
+      "points": [
+        {
+          "text": "Demanding practices — breathwork, intense movement, strong emotions — and practices with touch need two things.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:7106e4654518138500b3792d1853f54bac0c8c7b44780ff85c257f6e6aab9f21",
+        "points": [
+          "This is how the situation looks as of 2026-10."
+        ]
+      },
+      {
+        "sourceHash": "sha256:b3b3db17d87b6a5bcc4e8ac46570fe173dfd4944a66d385cb7d3b8b2f38225ab",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:9f7e3818a86a00ced4be7a402e3b4590a9ecdd08edea8bd304c5bf047f1203be",
+        "points": [
+          "The exchange difference is your risk if the guest price and venue charges are in different currencies."
+        ]
+      },
+      {
+        "sourceHash": "sha256:aa902157f52283ab206d47081b95312673dd2add3bbb17b6e9c4265a16bab2e9",
+        "points": [
+          "You need two things for demanding practices like breathwork, intense movement, and strong emotions, as well as for practices involving touch."
+        ]
+      }
+    ]
+  }
+}

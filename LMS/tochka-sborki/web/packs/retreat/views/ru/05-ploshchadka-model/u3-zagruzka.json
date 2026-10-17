@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "05-ploshchadka-model",
+  "unit": "u3-zagruzka",
+  "locale": "ru",
+  "title": "Загрузка: ретритные недели против посуточной сдачи",
+  "sourceHash": "sha256:26696958aaec2e3deb525b0e58ab3e0d1c2e624ba892d9b84da7777b39e9167b",
+  "outline": [
+    {
+      "heading": "Что такое загрузка",
+      "points": [
+        {
+          "text": "Загрузка — доля занятых ночей: занятые ночи, делённые на модули × дни месяца.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Две смеси одного года",
+      "points": [
+        {
+          "text": "У площадки два способа заполнять ночи.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Скрытая цена группы",
+      "points": [
+        {
+          "text": "Поэтому сравнивают не выручку, а итог месяца после расходов.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Сезонность",
+      "points": [
+        {
+          "text": "Ретритные недели обычно занимают высокий и средний сезон, посуточная сдача закрывает промежутки.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:d336166a6f239e80db02ca840693dfa5dccfb07777eeb1ff1a5d7df6648c5800",
+        "points": [
+          "Загрузка показывает долю занятых ночей.",
+          "Ты рассчитываешь ее, деля количество занятых ночей на произведение модулей и дней месяца."
+        ]
+      },
+      {
+        "sourceHash": "sha256:eada7c23e597b960800f793f37ff084ed4243d1bd8e95d1d8639a9e87fb2d14f",
+        "points": [
+          "У твоей площадки есть два способа заполнять свободные ночи."
+        ]
+      },
+      {
+        "sourceHash": "sha256:247b4e52a55d1f4a7920395167d40db94ce8ac1f23763f297b29f351e5dde277",
+        "points": [
+          "Тебе нужно сравнивать не общую выручку, а итоговый результат за месяц после вычета всех расходов."
+        ]
+      },
+      {
+        "sourceHash": "sha256:4a422ea35a7f26c3a12d01f537426ecb1ee4ebfd199bf93a15fa63f36131f42f",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-vedushchiy-programma",
+  "unit": "u3-anketa-menyu",
+  "locale": "ru",
+  "title": "Анкета гостя и меню",
+  "sourceHash": "sha256:a19fa9e5839706085da978e95129c48839179e1a8013c2f94dc021b8093a9f28",
+  "outline": [
+    {
+      "heading": "Анкета — до меню",
+      "points": [
+        {
+          "text": "О диетах и аллергиях спрашивают заранее, письменно, у каждого гостя.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Границы дней",
+      "points": [
+        {
+          "text": "Неделю считают по приёмам пищи, а не по дням.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Основа и опции",
+      "points": [
+        {
+          "text": "Частое решение — растительная основа меню и мясо как опция за доплату, одно блюдо в день.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Стоимость на гостя",
+      "points": [
+        {
+          "text": "Цена ставится за приём пищи на человека.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:bd70f5405f29463e89403719e49d45de9712eeb6cbe14a29a67be5430a067d92",
+        "points": [
+          "О диетах и аллергиях каждого гостя ты спрашиваешь заранее и в письменном виде."
+        ]
+      },
+      {
+        "sourceHash": "sha256:12aff7ac5461c7729703d421ba5e011c7a7cf2ceada33f899f80ad820ea23259",
+        "points": [
+          "Неделю ты считаешь по приёмам пищи, а не по дням."
+        ]
+      },
+      {
+        "sourceHash": "sha256:58521f813ccb7255aff8e187a92e4973288f8392b175b37f3b11c9756741429b",
+        "points": [
+          "Часто основой меню становится растительная пища, а мясо ты предлагаешь как опцию за доплату, одно блюдо в день."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c3ea31837cd2e41e61287595ea584316dfc11665f6f8c64789c0a706667ba202",
+        "points": [
+          "Ты указываешь цену за один прием пищи в расчете на одного человека."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-vedushchiy-programma",
+  "unit": "u4-logistika",
+  "locale": "ru",
+  "title": "Логистика прибытия",
+  "sourceHash": "sha256:5b61ee80ab0fa05082ae01b5074d33d2a31fe1c710821a414da7d305cbfa401b",
+  "outline": [
+    {
+      "heading": "Одна дата — одно место",
+      "points": [
+        {
+          "text": "Самая частая ошибка — даты в разных местах.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Лист прибытия",
+      "points": [
+        {
+          "text": "Шаблон: лист прибытия.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Запас на ошибки",
+      "points": [
+        {
+          "text": "Кто-то перепутает время, кто-то опоздает на пересадку.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "За неделю до заезда",
+      "points": [
+        {
+          "text": "Лист прибытия собирают из анкеты и сверяют лично: короткое сообщение каждому гостю с его временем и местом встречи.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:1fe2da031b082fae6c80abfa442313b8de0ddaedcf00f857b7e61d4676ad4872",
+        "points": [
+          "Самая частая ошибка случается, когда ты хранишь даты в разных местах."
+        ]
+      },
+      {
+        "sourceHash": "sha256:4b3e4da722f582706a44b9e04c2c89d930480e3501de17d524c455cf13bac64d",
+        "points": [
+          "Для работы тебе предлагается шаблон листа прибытия."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c01a1b1fbb49a8e720a04cbccd61ec4c484f8e60f17fbd0c5f9c05bf4306a82e",
+        "points": [
+          "Кто-то может перепутать время или опоздать на свою пересадку."
+        ]
+      },
+      {
+        "sourceHash": "sha256:d9a69786c5ae5c8a7249dbaa649b8346e133457ab17b81840fbae2d9f44b9e58",
+        "points": [
+          "Ты составляешь лист прибытия на основе анкет, лично проверяешь данные и отправляешь каждому гостю короткое сообщение с его временем и местом встречи."
+        ]
+      }
+    ]
+  }
+}

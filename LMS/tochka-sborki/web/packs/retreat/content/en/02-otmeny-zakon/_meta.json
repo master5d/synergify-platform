@@ -1,0 +1,78 @@
+{
+  "module": 2,
+  "title": "Cancellations, a short group, the law",
+  "description": "The core of the course. Two cancellation calendars, fair retention terms, package travel, insurance, the exchange rate and demanding practices.",
+  "duration": "40 min",
+  "level": 1,
+  "units": [
+    { "slug": "u1-dva-kalendarya", "title": "Two cancellation calendars" },
+    { "slug": "u2-nevozvratnyj", "title": "“Non-refundable” does not mean untouchable" },
+    { "slug": "u3-paketnyj-tur", "title": "When a retreat becomes a package holiday" },
+    { "slug": "u4-strahovka-kurs-telo", "title": "Insurance, exchange rate, the body" }
+  ],
+  "layout": "phases",
+  "objectives": [
+    { "id": "o1", "text": "Line up the venue's cancellation schedule with the guest terms and find the days where the risk falls on the leader" },
+    { "id": "o2", "text": "Explain why a \"non-refundable\" label does not guarantee keeping the money, and write a cancellation term as a scale" },
+    { "id": "o3", "text": "Go through the signs of a package holiday and name the organiser's duties" },
+    { "id": "o4", "text": "Sort a retreat's risks by each side's insurance, set a currency reserve and the terms for demanding practices and touch" }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-dva-kalendarya",
+      "objective": "o1",
+      "question": "The venue charges from 90 days before arrival, and guests can get everything back until 30 days. What does this mean for the leader?",
+      "options": [
+        "Nothing: the venue and the guests are separate contracts",
+        "For 60 days the leader pays the venue's charge while a guest can still take their money",
+        "Guests also pay the venue's charge",
+        "The venue must adjust to the leader's terms"
+      ],
+      "answer": 1,
+      "explain": "The guests' last refund date must come before the venue's point of no return. Otherwise the leader pays the difference in the overlap (u1, \"The rule of two calendars\")."
+    },
+    {
+      "id": "c2",
+      "unit": "u2-nevozvratnyj",
+      "objective": "o2",
+      "question": "Which cancellation term is the UK regulator more likely to consider fair?",
+      "options": [
+        "Any prepayment is non-refundable in all circumstances",
+        "A small deposit for the booking with clear terms, then a scale by days reflecting real losses",
+        "Keeping 100 % of the price from the moment of booking",
+        "Keeping an amount the organiser decides after the cancellation"
+      ],
+      "answer": 1,
+      "explain": "Under the CMA guidance of 22 July 2026, a genuine deposit is small and secures the booking, and a cancellation scale is a reasonable estimate of losses in a clear table (u2, \"What a fair term looks like\")."
+    },
+    {
+      "id": "c3",
+      "unit": "u3-paketnyj-tur",
+      "objective": "o3",
+      "question": "A leader sells EU guests a week with accommodation and a program at one price. What is likely?",
+      "options": [
+        "It is a package holiday, and the leader is the organiser with a duty to protect guests' money",
+        "It is never a package holiday if there is no flight",
+        "The organiser is always the venue, because it provides the accommodation",
+        "Package rules only apply to travel agencies"
+      ],
+      "answer": 0,
+      "explain": "Accommodation plus a program that is the essence of the offer is a likely package even without transfers. The organiser is whoever sells the package to the guest (u3, \"Who the organiser is\")."
+    },
+    {
+      "id": "c4",
+      "unit": "u4-strahovka-kurs-telo",
+      "objective": "o4",
+      "question": "A leader charges guests in dollars and pays the venue in euros. What does the course suggest?",
+      "options": [
+        "Nothing: exchange rates move both ways and even out",
+        "Agree in the guests' currency, build in a currency reserve, or fix the rate in advance",
+        "Recalculate the guests' price after the retreat",
+        "Shift the risk to the venue without its consent"
+      ],
+      "answer": 1,
+      "explain": "The exchange difference is the leader's risk. It is closed by the contract currency, a reserve in the price or fixing the rate (u4, \"The exchange rate\")."
+    }
+  ]
+}

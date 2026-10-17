@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-vedushchiy-zamysel",
+  "unit": "u2-auditoriya-sovedushchij",
+  "locale": "ru",
+  "title": "Своя аудитория и соведущий",
+  "sourceHash": "sha256:848fdccab71a91b5cdc14265af41cba09fe76db50d57f7301d09f158c7bdb3cc",
+  "outline": [
+    {
+      "heading": "Кто на самом деле наполнит группу",
+      "points": [
+        {
+          "text": "Ведущие часто зовут соведущего ради его аудитории: у него больше подписчиков, своя студия или книга.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Соведущий — это договор",
+      "points": [
+        {
+          "text": "Самая частая ошибка — не договориться письменно с близким человеком.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:65b61eb8d100af289abc2aff4d9480daa5b9305b66f265af6063e01b12a60f62",
+        "points": [
+          "Часто ты зовешь соведущего ради его аудитории, если у него больше подписчиков, своя студия или книга."
+        ]
+      },
+      {
+        "sourceHash": "sha256:70c4808beb9046cee3a3081d2fc02aab66de42f242c03d16683afd09577809b2",
+        "verbatim": "review"
+      }
+    ]
+  }
+}

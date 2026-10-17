@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "05-ploshchadka-model",
+  "unit": "u1-paket-stavka",
+  "locale": "en",
+  "title": "Package and rate",
+  "sourceHash": "sha256:b1f745e0aefc198e4a077b968ecea495b3f0ba774db6467cb525699a8532d4ed",
+  "outline": [
+    {
+      "heading": "Three models in one calculator",
+      "points": [
+        {
+          "text": "A full campus for 20, 12 came — open.",
+          "origin": "extract"
+        },
+        {
+          "text": "Per guest, minimum 14, 12 came — open.",
+          "origin": "extract"
+        },
+        {
+          "text": "Buyout, 16 guests — open.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the venue chooses",
+      "points": [
+        {
+          "text": "A full campus gives the venue the most predictable revenue.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the package includes",
+      "points": [
+        {
+          "text": "The venue's rate is worth spelling out: accommodation, linen and cleaning, halls, meals, transfers, equipment.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:b4cc25ad340ac0a42c5159c8ec366f2514848209887e448d73bea3de934fbe68",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:2f0e35fdf80fbb7fd2d9856651b94ce14e6dd346eaa7c340f595c92198d11860",
+        "points": [
+          "A full campus gives you the most predictable revenue."
+        ]
+      },
+      {
+        "sourceHash": "sha256:dffa12368650dae71e5531c8f470bca3857b6971ab84219f2ff9dce338843f21",
+        "points": [
+          "You find it worth spelling out the rate for accommodation, linen and cleaning, halls, meals, transfers, and equipment."
+        ]
+      }
+    ]
+  }
+}

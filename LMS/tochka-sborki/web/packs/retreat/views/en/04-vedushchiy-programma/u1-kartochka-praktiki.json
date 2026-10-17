@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-vedushchiy-programma",
+  "unit": "u1-kartochka-praktiki",
+  "locale": "en",
+  "title": "An honest practice card",
+  "sourceHash": "sha256:c87e17648658dace78b43f70f6a25c907f28e55685e5bfb5dd63ed49f03c5034",
+  "outline": [
+    {
+      "heading": "How not to write it",
+      "points": [
+        {
+          "text": "Practice catalogues often contain promises: the practice \"will heal\", \"opens abilities\", \"gives answers to any question\", \"clears all suppressed emotions\".",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Fields of an honest card",
+      "points": [
+        {
+          "text": "Template: practice card.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Example: an intense breathwork practice",
+      "points": [
+        {
+          "text": "Format — group.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Example: a pair practice with touch",
+      "points": [
+        {
+          "text": "Format — pair.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:a7fe1763e4733fa1be43fadc9583064a1a6adb710095e8cf281df586d06d2d73",
+        "points": [
+          "This is a template for a practice card."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2c824c7ced3de6fad064d21d0c524ca601ddd86c95c19bceb4c48c192049a588",
+        "points": [
+          "The format for this practice is a group."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c13377d8aab910714ba05cea34bddb63ae0cb7c07a36bc194178eabfdb791a1b",
+        "points": [
+          "This practice uses a pair format."
+        ]
+      }
+    ]
+  }
+}

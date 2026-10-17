@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-otmeny-zakon",
+  "unit": "u2-nevozvratnyj",
+  "locale": "ru",
+  "title": "«Невозвратный» — не значит неприкосновенный",
+  "sourceHash": "sha256:94141d1bc833faeb4693de4ef5e0226b68cb335a04fe5a756b973c1b24efb46c",
+  "outline": [
+    {
+      "heading": "Что говорит закон — по состоянию на 2026-10",
+      "points": [
+        {
+          "text": "Нормы разные по странам, общий смысл похож.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Права отказа за 14 дней у ретрита обычно нет",
+      "points": [
+        {
+          "text": "В ЕС и Великобритании проживание и досуговые услуги на конкретные даты исключены из права отказа от дистанционной покупки.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "«Первый платёж» и «депозит»",
+      "points": [
+        {
+          "text": "Некоторые ведущие сознательно называют первый взнос гостя не «депозитом», а «первым платежом».",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Как выглядит честное условие",
+      "points": [
+        {
+          "text": "Регулятор приводит пример условия, которое скорее справедливо.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:eda2399dde9c7f6981c36acfe19be742e9dd170ce79b8b761d859813123259bb",
+        "points": [
+          "Законодательные нормы в разных странах различаются, но их общий смысл остается похожим."
+        ]
+      },
+      {
+        "sourceHash": "sha256:cc6257c2b4fe4fd04bc8a75630c99474843992a2a271f898b57279cfb06dc33b",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:99cbb6fe519ade818ca3b778991a086b1351904ac50a300253b3da53b7a0bb78",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:843fad3abd7ac7a9326dd0ce632577128e070b3359cacb5f445eba91aaf900c6",
+        "points": [
+          "Регулятор показывает пример условия, которое можно считать скорее справедливым."
+        ]
+      }
+    ]
+  }
+}

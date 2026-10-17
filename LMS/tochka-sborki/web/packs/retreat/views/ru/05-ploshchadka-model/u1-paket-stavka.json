@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "05-ploshchadka-model",
+  "unit": "u1-paket-stavka",
+  "locale": "ru",
+  "title": "Пакет и ставка",
+  "sourceHash": "sha256:72871643a70d407f5177b95f04455e37e1dccaeeb343bfa45b8711c9b8269e68",
+  "outline": [
+    {
+      "heading": "Три модели в одном калькуляторе",
+      "points": [
+        {
+          "text": "Полный кампус на 20, приехали 12 — открыть.",
+          "origin": "extract"
+        },
+        {
+          "text": "Оплата за гостя, минимум 14, приехали 12 — открыть.",
+          "origin": "extract"
+        },
+        {
+          "text": "Выкуп, 16 гостей — открыть.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что выбирает площадка",
+      "points": [
+        {
+          "text": "Полный кампус даёт площадке самую предсказуемую выручку.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что входит в пакет",
+      "points": [
+        {
+          "text": "Ставку площадки стоит расписать: проживание, бельё и уборка, залы, питание, трансфер, оборудование.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:2fa42c0f3b7d074fb4dd7c664653489cb08e752a6e26a720950b1d15640a8056",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:fd36e027ebf0efd7cd69e7dd3eaa91076442a91f8fb99182b32118a87544b092",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:320f68a6597b385758a7c75a5c5fb6874c9031ad2f30814f03e558b2654cfbab",
+        "points": [
+          "Тебе стоит расписать ставку площадки, включив в нее проживание, белье, уборку, залы, питание, трансфер и оборудование."
+        ]
+      }
+    ]
+  }
+}

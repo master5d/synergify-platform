@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-ploshchadka-vedushchie",
+  "unit": "u2-usloviya-ploshchadki",
+  "locale": "en",
+  "title": "Terms from the venue's side",
+  "sourceHash": "sha256:478355bd6aa36434ba4e3c7e6bed4820dd0acae4b1c3cb07f2bd3512e6ad2867",
+  "outline": [
+    {
+      "heading": "The payment schedule",
+      "points": [
+        {
+          "text": "A venue builds its own schedule from its own obligations.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The minimum guarantee",
+      "points": [
+        {
+          "text": "The minimum is the number of guests or share of places the leader pays for in any case.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What happens when the group is short",
+      "points": [
+        {
+          "text": "Open the teaching deal \"a full campus, 12 came\" and switch the calculator to the venue's view.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Where the money is kept",
+      "points": [
+        {
+          "text": "There is a known case of a retreat centre that closed after a natural disaster and owed groups about 200,000 dollars in deposits.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:fec164ff1785e424cc40b7bc03c08d329ca9674e7f34d21b3e9314690122d42b",
+        "points": [
+          "The venue creates its own schedule from its own obligations."
+        ]
+      },
+      {
+        "sourceHash": "sha256:59fb3653bbff091db512c3a456cc9bc2bcb04a7f9e0055c4560d56e32d635915",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:3e513b5b4aee08587f69adecdd945eb37adcf41f1f735ccf7bf4422745e6a9e0",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:294bbc759e820389a3481562254956b9613696e465b33689adcacf4395a6488b",
+        "points": [
+          "A retreat centre closed after a natural disaster and owed groups about 200,000 dollars in deposits."
+        ]
+      }
+    ]
+  }
+}

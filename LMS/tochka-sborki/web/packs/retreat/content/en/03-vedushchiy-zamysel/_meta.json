@@ -1,0 +1,78 @@
+{
+  "module": 3,
+  "title": "Leader: the idea, the guest, sales",
+  "description": "Leader track. Who your guest is, your own audience and a co-leader, sales against the cash plan, staying in touch with guests before arrival.",
+  "duration": "40 min",
+  "level": 2,
+  "units": [
+    { "slug": "u1-gost", "title": "Who your guest is and what change they seek" },
+    { "slug": "u2-auditoriya-sovedushchij", "title": "Your own audience and a co-leader" },
+    { "slug": "u3-prodazhi-kassa", "title": "Sales against the cash plan" },
+    { "slug": "u4-do-zaezda", "title": "Between the first payment and arrival" }
+  ],
+  "layout": "phases",
+  "objectives": [
+    { "id": "o1", "text": "Describe one concrete guest and the change they are travelling for" },
+    { "id": "o2", "text": "Estimate the group by your own audience and write down the arrangements with a co-leader" },
+    { "id": "o3", "text": "Tie the pace of sales and payment options to the venue payment schedule" },
+    { "id": "o4", "text": "Place points of contact with guests from payment to arrival and turn a cancellation into a transfer" }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-gost",
+      "objective": "o1",
+      "question": "Why does the course suggest writing the retreat description for one concrete guest?",
+      "options": [
+        "So that only one type of person comes to the retreat",
+        "Because a person decides to come when they recognise themselves and their change in the description",
+        "Because advertising is cheaper that way",
+        "To keep the description shorter"
+      ],
+      "answer": 1,
+      "explain": "A week costing several thousand dollars is bought by someone who recognises themselves in the text. People do not apply a text \"for everyone\" to themselves (u1, \"One person instead of 'everyone'\")."
+    },
+    {
+      "id": "c2",
+      "unit": "u2-auditoriya-sovedushchij",
+      "objective": "o2",
+      "question": "A leader invites a co-leader with a large audience. What does the course suggest basing the group plan on?",
+      "options": [
+        "The co-leader's whole audience: it is bigger",
+        "Your own people, counting the partner's audience as a bonus and putting the arrangements in writing",
+        "Advertising: audiences do not matter",
+        "The venue: it will find guests itself"
+      ],
+      "answer": 1,
+      "explain": "People go away for a week with someone they trust. The group plan is built on your own audience, and arrangements with a co-leader are written down (u2)."
+    },
+    {
+      "id": "c3",
+      "unit": "u3-prodazhi-kassa",
+      "objective": "o3",
+      "question": "The monthly venue payment is 6,750 and a guest's first payment is 900. What follows?",
+      "options": [
+        "One place sold a month is enough",
+        "First payments cannot cover a month without seven or eight new guests, so you need full payment, a bigger first payment or early sales",
+        "The venue payment can wait until there are sales",
+        "The price needs to double"
+      ],
+      "answer": 1,
+      "explain": "One or two places a month cover the payment only if the guest pays the whole price. With first payments you need more sales or other payment options (u3)."
+    },
+    {
+      "id": "c4",
+      "unit": "u4-do-zaezda",
+      "objective": "o4",
+      "question": "A guest paid for a place, then stopped replying and is not paying the balance. What does the course suggest first?",
+      "options": [
+        "Keep the first payment straight away under the terms",
+        "Talk: find out the reason and offer a transfer, passing the place on, or a different schedule",
+        "Do nothing until arrival",
+        "Sell their place without warning"
+      ],
+      "answer": 1,
+      "explain": "The reason for a cancellation is often ordinary and comes out in conversation. A transfer keeps the guest and the money with you (u4, \"A cancellation is a conversation\")."
+    }
+  ]
+}

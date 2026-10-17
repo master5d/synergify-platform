@@ -31,7 +31,7 @@
       "units": [
         { "slug": "u1-dva-kalendarya", "title": { "ru": "Два календаря отмен", "en": "Two cancellation calendars" },
           "objective": { "ru": "Сопоставить условия отмены у площадки с правилами отмены для гостей так, чтобы между ними не осталось дыры.", "en": "Line up the venue's cancellation terms with the guests' cancellation rules so that no gap is left between them." } },
-        { "slug": "u2-nevozvratnyj", "title": { "ru": "«Невозвратный» — не значит неприкосновенный", "en": "\"Non-refundable\" does not mean untouchable" },
+        { "slug": "u2-nevozvratnyj", "title": { "ru": "«Невозвратный» — не значит неприкосновенный", "en": "“Non-refundable” does not mean untouchable" },
           "objective": { "ru": "Объяснить, почему пометка «невозвратный» не гарантирует удержание денег, и сформулировать честное условие.", "en": "Explain why a \"non-refundable\" label does not guarantee you keep the money, and write a fair term." } },
         { "slug": "u3-paketnyj-tur", "title": { "ru": "Когда ретрит становится пакетным туром", "en": "When a retreat becomes a package holiday" },
           "objective": { "ru": "По признакам определить, попадает ли ретрит под правила о пакетных турах, и что тогда обязан организатор.", "en": "Tell by its features whether a retreat falls under package travel rules, and what the organiser then owes." } },

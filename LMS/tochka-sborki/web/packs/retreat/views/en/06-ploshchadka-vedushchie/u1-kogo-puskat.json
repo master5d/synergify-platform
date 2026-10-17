@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-ploshchadka-vedushchie",
+  "unit": "u1-kogo-puskat",
+  "locale": "en",
+  "title": "Whom to host",
+  "sourceHash": "sha256:808e44a3b30ff1f0cf18c56b478b67e0bf70ea002a8de16b9c08eb0ff3d7cd3d",
+  "outline": [
+    {
+      "heading": "What can be checked before the contract",
+      "points": [
+        {
+          "text": "The leader's own audience.",
+          "origin": "extract"
+        },
+        {
+          "text": "The program and practice cards.",
+          "origin": "extract"
+        },
+        {
+          "text": "The contract with a co-leader.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A model to fit the leader",
+      "points": [
+        {
+          "text": "A new leader with a small audience suits a model with a small minimum, or a buyout of a small venue.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:294cc89cc9b38bddd4045e2fcc1105c5c59aa264e39f3234ea6d9dba6bd6c2ea",
+        "points": [
+          "You check the leader's own audience.",
+          "You look at the program and practice cards.",
+          "You review the contract with a co-leader."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fabe694e5f9b379d18845474efc16f7d296e901eee627a81dfc9bf91740e9f54",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

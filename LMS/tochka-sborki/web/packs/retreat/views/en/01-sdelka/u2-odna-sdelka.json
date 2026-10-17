@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-sdelka",
+  "unit": "u2-odna-sdelka",
+  "locale": "en",
+  "title": "One deal in the calculator",
+  "sourceHash": "sha256:7eb6b0b5b0bbacbc152656f105a8af55abd4261691535683963d0a6eaf4fdce7",
+  "outline": [
+    {
+      "heading": "A teaching deal",
+      "points": [
+        {
+          "text": "Let us take round teaching numbers.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Two profits",
+      "points": [
+        {
+          "text": "\"Profit\" as the venue counts it is 24,000 dollars.",
+          "origin": "extract"
+        },
+        {
+          "text": "The leader's honest profit is 22,200 dollars.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Break-even in guests",
+      "points": [
+        {
+          "text": "The third number is 13 guests.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What else the page shows",
+      "points": [
+        {
+          "text": "A monthly cash plan and the cash gap: in this example the leader is 17,028 dollars short in the third month.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:76e5e07cc19cf04b0b670cacccdec9f76d185043184158a2a1f2e4cdf261a769",
+        "points": [
+          "You take round teaching numbers for this deal."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fc93cbbf0a7429fd45e236700785035fd0eb306107f1d54aaf54a05de0b70235",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:08470fc66c3ba54113487584a050d3b880ad1864d11435c4c0f91dac31378c75",
+        "points": [
+          "You find that the third number is 13 guests."
+        ]
+      },
+      {
+        "sourceHash": "sha256:847b71f81d56b53f49d3bf33282a05005b1ced9737069007252a24f41737c80b",
+        "points": [
+          "You can see a monthly cash plan and the cash gap where the leader is 17,028 dollars short in the third month."
+        ]
+      }
+    ]
+  }
+}

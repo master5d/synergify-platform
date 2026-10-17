@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-ploshchadka-vedushchie",
+  "unit": "u1-kogo-puskat",
+  "locale": "ru",
+  "title": "Кого пускать",
+  "sourceHash": "sha256:585f48955878c3f234ec4583b2bf1271835bed71ac5c60aa06fb358821a9def9",
+  "outline": [
+    {
+      "heading": "Что можно проверить до договора",
+      "points": [
+        {
+          "text": "Своя аудитория ведущего.",
+          "origin": "extract"
+        },
+        {
+          "text": "Программа и карточки практик.",
+          "origin": "extract"
+        },
+        {
+          "text": "Договор с соведущим.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Модель под ведущего",
+      "points": [
+        {
+          "text": "Новому ведущему с маленькой аудиторией подходит модель с небольшим минимумом или выкуп малой площадки.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:257d86cd67b67954593e959c0e6f30773b701be9b5de52671c18ab161f4364f5",
+        "points": [
+          "Ты можешь заранее оценить наличие собственной аудитории у ведущего.",
+          "Тебе стоит изучить программу и карточки практик.",
+          "Также полезно проверить наличие договора с соведущим."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c99c1c0b7971919d8abd9727fc45a8a93847c8a1d0259d370d2e24321d82d2ed",
+        "points": [
+          "Для нового ведущего с маленькой аудиторией подходит модель с небольшим минимумом или выкуп малой площадки."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-vedushchiy-programma",
+  "unit": "u3-anketa-menyu",
+  "locale": "en",
+  "title": "The guest form and the menu",
+  "sourceHash": "sha256:d41219b021a474b6561fd80d52ce0be41074e4498ee114bdada6c23f8dccafe5",
+  "outline": [
+    {
+      "heading": "The form comes before the menu",
+      "points": [
+        {
+          "text": "Diets and allergies are asked about in advance, in writing, from each guest.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The edges of the days",
+      "points": [
+        {
+          "text": "A week is counted in meals, not days.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A base and options",
+      "points": [
+        {
+          "text": "A common choice is a plant-based menu with meat as a paid option, one dish a day.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The cost per guest",
+      "points": [
+        {
+          "text": "The price is set per meal per person.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:05b3fffef52102a812471f44297ffc0cea6330f832058aead5e69061f666111a",
+        "points": [
+          "You ask each guest about diets and allergies in writing and in advance."
+        ]
+      },
+      {
+        "sourceHash": "sha256:0663c4e9c672c58aaa4525a23029dd0184b81fd7d769c9b631c45ae192389236",
+        "points": [
+          "You count a week in meals and not days."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2260ef9b72921fac0011b4dcc9f269e0e4ddcdeb93719e0663e051f1053119a6",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:04df8572d14340e24aacfa50713918cf305b0965543a4c0d8a47ef40c587cd79",
+        "points": [
+          "The price is established for each meal and every person."
+        ]
+      }
+    ]
+  }
+}

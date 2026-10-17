@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-otmeny-zakon",
+  "unit": "u2-nevozvratnyj",
+  "locale": "en",
+  "title": "“Non-refundable” does not mean untouchable",
+  "sourceHash": "sha256:e5220a263d1beaa5c5e7c8843cfbda3e8934785b63427bc83f61ce75fb26d2fd",
+  "outline": [
+    {
+      "heading": "What the law says — as of 2026-10",
+      "points": [
+        {
+          "text": "The rules differ by country, but the general sense is similar.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "There is usually no 14-day right to withdraw from a retreat",
+      "points": [
+        {
+          "text": "In the EU and the UK, accommodation and leisure services on specific dates are excluded from the right to withdraw from a distance purchase.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "\"First payment\" and \"deposit\"",
+      "points": [
+        {
+          "text": "Some leaders deliberately call a guest's first payment not a \"deposit\" but a \"first payment\".",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What a fair term looks like",
+      "points": [
+        {
+          "text": "The regulator gives an example of a term that is more likely to be fair.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:fe7f56c1e1a87fc839105177d19eb80c51e1593a1bebe9d31ab235b07f1fd412",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:c3edad1e54e98028ab44e2d91da432ae1c0ea2e9333fd8204071b7032f3abf20",
+        "points": [
+          "In the EU and the UK, you cannot withdraw from a distance purchase for accommodation and leisure services on specific dates."
+        ]
+      },
+      {
+        "sourceHash": "sha256:641ed83d2457edbc781fbd0d36c699d7cdd715ee10db3e44224192f24499871e",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:4a54d9657ab45ec59c41a77df7a3f1b7ef4bab35d4e79b1885fc2f91f109d2c1",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

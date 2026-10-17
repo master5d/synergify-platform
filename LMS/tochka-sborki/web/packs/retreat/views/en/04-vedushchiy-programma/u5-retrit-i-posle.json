@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-vedushchiy-programma",
+  "unit": "u5-retrit-i-posle",
+  "locale": "en",
+  "title": "The retreat itself and after",
+  "sourceHash": "sha256:e79d50e44dda0400aced8a04112a2e89d8cbf3d668a9379e2578b2d3778646e1",
+  "outline": [
+    {
+      "heading": "Costs on site",
+      "points": [
+        {
+          "text": "During a retreat, spending appears that was not in the plan: phone and data, an extra transfer, replacing broken equipment, a gift for a guest.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Plan versus actual",
+      "points": [
+        {
+          "text": "A few days after the retreat, open the calculator with your original numbers.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A conversation with the venue",
+      "points": [
+        {
+          "text": "A short review with the venue after the group helps both sides.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Guests after the retreat",
+      "points": [
+        {
+          "text": "It is worth writing to guests a few days later: thanks, materials, a request for feedback.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Terms for next time",
+      "points": [
+        {
+          "text": "The result of the review is three terms you will change in the next contract or guest terms.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:04ea58c10145ab8167ccf3c474bab6fb4521fcf963993aeb8f74c7db1f7bde29",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:551dec23199e76c3309aaee5d871ce41d1e8a2ac8031ef6c13c54707a80bc640",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:2d2653da778b3153bf8996d8b9e0b5c00070926cafc5aeea92592e32547e1bd0",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:98398b3c54fa5100a85812c54913fbc22981eed001bddcaff7b5404103d5bdd5",
+        "points": [
+          "You can write to guests a few days later to send thanks, materials, and a request for feedback."
+        ]
+      },
+      {
+        "sourceHash": "sha256:33ee96f2a949df83839863e6a40d01f1012d41ebf3a62b82d243178885610521",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

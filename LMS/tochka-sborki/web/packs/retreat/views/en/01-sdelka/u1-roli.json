@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-sdelka",
+  "unit": "u1-roli",
+  "locale": "en",
+  "title": "Who is responsible for what",
+  "sourceHash": "sha256:a599090f61bc9df5e64d070326970f171d62d5f7ef0cf8ad775bb0c04baa5b88",
+  "outline": [
+    {
+      "heading": "Three parties, one week",
+      "points": [
+        {
+          "text": "A retreat is a program, a place and a group over several days in a row.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Where the duties overlap",
+      "points": [
+        {
+          "text": "There is one overlap, and it is the main one: the number of guests.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Four contract models",
+      "points": [
+        {
+          "text": "Per guest with a minimum.",
+          "origin": "extract"
+        },
+        {
+          "text": "A free place for the leader.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Why this comes before the price",
+      "points": [
+        {
+          "text": "The course does not recommend a \"best\" model.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:e55c69f62a37c9f10dad5a45a74179d1defbbb3c6ae5d415265e4cacf798fa69",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:440a90cd6caa619f31952a59940241822b63d37559af303ad98550645b35e432",
+        "points": [
+          "There is one main overlap which is the number of guests."
+        ]
+      },
+      {
+        "sourceHash": "sha256:9a145c32a94f831736ad9e7116e8caf133d22437e22f047c2afde19e91e79dd1",
+        "points": [
+          "The model is per guest with a minimum.",
+          "The leader has a free place."
+        ]
+      },
+      {
+        "sourceHash": "sha256:26683f72b1273a510dbbb40f7096b6e51594911a0677a11ee52fb7f129a548ed",
+        "points": [
+          "You will not find a recommendation for a best model in this course."
+        ]
+      }
+    ]
+  }
+}

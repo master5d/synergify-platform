@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-sdelka",
+  "unit": "u3-pribyl-i-cena",
+  "locale": "en",
+  "title": "First the profit you want, then the price",
+  "sourceHash": "sha256:7ee15b44079e5c4cc764e82d086cc72e281798936d6edacde8888b9c3288c90a",
+  "outline": [
+    {
+      "heading": "The reverse order",
+      "points": [
+        {
+          "text": "The honest order is this: first the profit you want from the retreat, then all the costs, and only then the price.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How many hours are in one retreat",
+      "points": [
+        {
+          "text": "Paying yourself is a separate line, not whatever \"is left over\".",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The lines people forget",
+      "points": [
+        {
+          "text": "Besides the venue, the leader has their own costs.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The price from the profit",
+      "points": [
+        {
+          "text": "Prices are prices.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:c1990f0282c491d66b2988488dd8ede402c11b4cedf89a1bb9f9eaedd4721e71",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:9e475c1a3f5e20e7d8280cf4af001984ede5a0e04d95d9401503938d4b1326db",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:2e231c468e7d6d821fee8da57299b657acaa4b3a6c276b3d916c6f9f0d47972b",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:61f96084a775ed636fcefab0d338391272b62c560fb625ba1377911e51e2b65e",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

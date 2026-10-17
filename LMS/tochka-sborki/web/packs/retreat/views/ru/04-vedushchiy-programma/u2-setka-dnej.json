@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-vedushchiy-programma",
+  "unit": "u2-setka-dnej",
+  "locale": "ru",
+  "title": "Сетка дней",
+  "sourceHash": "sha256:3785e811ce6dc4c15ee8aa9cc0a78e51d9aeedac63b03c6847067f0e82cba8da",
+  "outline": [
+    {
+      "heading": "Больше — не значит лучше",
+      "points": [
+        {
+          "text": "Первая программа ведущего почти всегда перегружена.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Ритм дня",
+      "points": [
+        {
+          "text": "Опоры дня задаёт кухня: завтрак, обед, ужин.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Неполные дни",
+      "points": [
+        {
+          "text": "День заезда и день выезда не полные.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Нагрузка по неделе",
+      "points": [
+        {
+          "text": "Неделю тоже стоит видеть целиком.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Сетка как инструмент",
+      "points": [
+        {
+          "text": "Сетку удобно собирать в таблице: строки — часы, столбцы — дни.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:355cc7daa13ac6f25697185c6951a772dde6c440ec26840bb1809fc85ae4ab4f",
+        "points": [
+          "Первая программа ведущего почти всегда оказывается перегруженной."
+        ]
+      },
+      {
+        "sourceHash": "sha256:6311910539806fd7ee074e8924e4284786b8c8866639db087f097e2797674988",
+        "points": [
+          "Опоры дня задает кухня через завтрак, обед и ужин."
+        ]
+      },
+      {
+        "sourceHash": "sha256:95b5e5b378de74cfc49afe162f45acbeed111d78080b67dd9392f7ee8bbdf7f8",
+        "points": [
+          "Дни заезда и выезда не являются полными."
+        ]
+      },
+      {
+        "sourceHash": "sha256:1942b84cd32e0190c74d23a5fb0da299a8d2f787771f0ee94ee266922b5f6d36",
+        "points": [
+          "Тебе стоит видеть свою неделю целиком."
+        ]
+      },
+      {
+        "sourceHash": "sha256:f56090451186eb1a8f476cb1d38ee0e3544e7ac06325f4a4811286241d287eb3",
+        "points": [
+          "Тебе будет удобно собрать сетку в таблице, используя часы для строк и дни для столбцов."
+        ]
+      }
+    ]
+  }
+}

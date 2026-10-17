@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-vedushchiy-programma",
+  "unit": "u5-retrit-i-posle",
+  "locale": "ru",
+  "title": "Сам ретрит и после",
+  "sourceHash": "sha256:8f4701db7ee142c3d70d31aea490f7920106147fa8bd713b26ef374da944e50e",
+  "outline": [
+    {
+      "heading": "Расходы на месте",
+      "points": [
+        {
+          "text": "На ретрите появляются траты, которых не было в плане: связь, лишний трансфер, замена сломанного реквизита, подарок гостю.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "План против факта",
+      "points": [
+        {
+          "text": "Через несколько дней после ретрита открой калькулятор со своими исходными цифрами и внеси фактические: сколько гостей приехало, какие расходы были, сколько ушло площадке.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Разговор с площадкой",
+      "points": [
+        {
+          "text": "Короткий разбор с площадкой после группы полезен обеим сторонам.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Гости после ретрита",
+      "points": [
+        {
+          "text": "Гостям стоит написать через несколько дней: спасибо, материалы, просьба об отзыве.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Условия на следующий раз",
+      "points": [
+        {
+          "text": "Итог разбора — три условия, которые ты изменишь в следующем договоре или правилах.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:0815ef34fd852e3be2496dd619ed3b71486ee8ef9edf8cf56cd1e50025e9c49a",
+        "points": [
+          "На ретрите у тебя могут появиться траты, которых не было в плане: связь, лишний трансфер, замена сломанного реквизита или подарок гостю."
+        ]
+      },
+      {
+        "sourceHash": "sha256:72da170306bc91375764236598d038d20c663b7a17bdddd2fa30c1077ebcf572",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:2369c916f777df1a037a998c9da3967849d4baae3ebeb8423831259c6b044a6f",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:a07556cb7dd08906ea44ab9b5eddcbf39f17c07bab9d99785004d8b324f37c48",
+        "points": [
+          "Через несколько дней тебе стоит написать гостям, чтобы поблагодарить их, отправить материалы и попросить отзыв."
+        ]
+      },
+      {
+        "sourceHash": "sha256:f3f600c70f197c081c8bb2804b3d04f45eef463708cf34b398de328614f45686",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

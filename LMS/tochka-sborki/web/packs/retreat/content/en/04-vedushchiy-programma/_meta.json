@@ -1,0 +1,89 @@
+{
+  "module": 4,
+  "title": "Leader: the program and the guests",
+  "description": "Leader track. An honest practice card, the grid of days, the form and the menu, arrival logistics, the retreat itself and the review after.",
+  "duration": "50 min",
+  "level": 2,
+  "units": [
+    { "slug": "u1-kartochka-praktiki", "title": "An honest practice card" },
+    { "slug": "u2-setka-dnej", "title": "The grid of days" },
+    { "slug": "u3-anketa-menyu", "title": "The guest form and the menu" },
+    { "slug": "u4-logistika", "title": "Arrival logistics" },
+    { "slug": "u5-retrit-i-posle", "title": "The retreat itself and after" }
+  ],
+  "layout": "phases",
+  "objectives": [
+    { "id": "o1", "text": "Describe a practice as a card: format, duration for the group, load, contraindications, touch, with no promises" },
+    { "id": "o2", "text": "Build a grid of days that alternates load and rest and treats arrival and departure days as partial" },
+    { "id": "o3", "text": "Put together the guest form and a menu by meals, and carry the cost of food into the calculator" },
+    { "id": "o4", "text": "Draw up an arrivals list from a single date and set a reserve for guests' mistakes" },
+    { "id": "o5", "text": "Compare plan with actual in the calculator and write down terms for next time" }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-kartochka-praktiki",
+      "objective": "o1",
+      "question": "A pair practice takes 10 minutes per pair, and the group has 16 people. What should the card give as the duration?",
+      "options": [
+        "10 minutes — that is how long the practice lasts",
+        "The duration for the whole group: eight pairs at once plus the explanation, about 25 minutes",
+        "160 minutes — 10 for each person",
+        "Duration does not matter if the practice is short"
+      ],
+      "answer": 1,
+      "explain": "The venue and the program need the duration for the group, not for one pair (u1, \"Fields of an honest card\")."
+    },
+    {
+      "id": "c2",
+      "unit": "u2-setka-dnej",
+      "objective": "o2",
+      "question": "Why does the course suggest not putting the main practices on the arrival day?",
+      "options": [
+        "The venue does not allow practices on arrival day",
+        "The day is partial: guests arrive tired around lunch, and the main practice would be lost",
+        "You cannot eat on arrival day",
+        "Insurance requires it"
+      ],
+      "answer": 1,
+      "explain": "Arrival and departure days are partial. Main practices go on full days (u2, \"Partial days\")."
+    },
+    {
+      "id": "c3",
+      "unit": "u3-anketa-menyu",
+      "objective": "o3",
+      "question": "Arrival at lunch, departure after breakfast, six nights. How many dinners are on the menu?",
+      "options": ["Five", "Six", "Seven", "It depends on the chef"],
+      "answer": 1,
+      "explain": "A week is counted in meals: with arrival at lunch and departure after breakfast, six nights mean six breakfasts, lunches and dinners (u3, \"The edges of the days\")."
+    },
+    {
+      "id": "c4",
+      "unit": "u4-logistika",
+      "objective": "o4",
+      "question": "Where should the arrival and departure dates live?",
+      "options": [
+        "In each letter to a guest — each with its own copy",
+        "In one place — the venue contract, with everything else referring to it",
+        "In the flights table, because it is more precise",
+        "In each guest's form"
+      ],
+      "answer": 1,
+      "explain": "The more copies of the dates, the more mismatches. The dates live in the venue contract (u4, \"One date — one place\")."
+    },
+    {
+      "id": "c5",
+      "unit": "u5-retrit-i-posle",
+      "objective": "o5",
+      "question": "What does comparing plan with actual in the calculator give you after the retreat?",
+      "options": [
+        "Nothing: the retreat is over",
+        "It shows the line where the plan was wrong — the basis for the next price and contract",
+        "It is only needed for taxes",
+        "It helps get money back from the venue"
+      ],
+      "answer": 1,
+      "explain": "The difference between plan and actual names the line that was wrong. The terms of the next contract come from it (u5, \"Plan versus actual\")."
+    }
+  ]
+}

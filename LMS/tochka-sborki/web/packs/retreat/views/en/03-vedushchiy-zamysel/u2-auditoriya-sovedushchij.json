@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-vedushchiy-zamysel",
+  "unit": "u2-auditoriya-sovedushchij",
+  "locale": "en",
+  "title": "Your own audience and a co-leader",
+  "sourceHash": "sha256:98fc2d2cffd58d1a11dd2e993da642748d455e7059b6f53021a17d416da56e5b",
+  "outline": [
+    {
+      "heading": "Who will really fill the group",
+      "points": [
+        {
+          "text": "Leaders often invite a co-leader for their audience: more followers, their own studio or a book.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A co-leader means a contract",
+      "points": [
+        {
+          "text": "The most common mistake is not agreeing in writing with someone close.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:48d8cb81e039f690e7794203f97431ae391337b8c7e9d2e810085a9cf8bdfc85",
+        "points": [
+          "You might invite a co-leader because they have an audience, such as their own followers, studio, or book."
+        ]
+      },
+      {
+        "sourceHash": "sha256:47224115c229e8013aa4e3dabf2af1f6250ab3498a5568766728db2177448338",
+        "points": [
+          "You should avoid the common mistake of failing to create a written agreement when working with someone close."
+        ]
+      }
+    ]
+  }
+}

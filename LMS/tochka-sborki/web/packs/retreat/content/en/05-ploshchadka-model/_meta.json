@@ -1,0 +1,78 @@
+{
+  "module": 5,
+  "title": "Venue: package, occupancy, payback",
+  "description": "Venue track. Package and rate, meals in the package, retreat weeks versus nightly letting, a payback spreadsheet that lies.",
+  "duration": "40 min",
+  "level": 2,
+  "units": [
+    { "slug": "u1-paket-stavka", "title": "Package and rate" },
+    { "slug": "u2-pitanie", "title": "Meals in the package" },
+    { "slug": "u3-zagruzka", "title": "Occupancy: retreat weeks versus nightly letting" },
+    { "slug": "u4-okupaemost", "title": "A payback spreadsheet that lies" }
+  ],
+  "layout": "phases",
+  "objectives": [
+    { "id": "o1", "text": "Compare rate models in the calculator and choose one that shares the risk of a short group on purpose" },
+    { "id": "o2", "text": "Price meals per guest per meal and fix the menu and deadlines in the contract" },
+    { "id": "o3", "text": "Compare a month's result with retreat weeks and nightly letting, accounting for seasonality and empty days" },
+    { "id": "o4", "text": "Find the mistakes in a payback model that inflate the return" }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-paket-stavka",
+      "objective": "o1",
+      "question": "A full campus for 20, 12 came. The venue gets 36,000 and the leader is in the red. What does this risk for the venue?",
+      "options": [
+        "Nothing: the revenue is guaranteed",
+        "A leader who lost money is unlikely to come back — the guarantee today scares leaders off tomorrow",
+        "The venue must refund the empty places",
+        "The leader gets a discount automatically"
+      ],
+      "answer": 1,
+      "explain": "A full campus shifts the whole shortfall onto the leader. A model with a minimum shares the risk and keeps the relationship (u1, \"What the venue chooses\")."
+    },
+    {
+      "id": "c2",
+      "unit": "u2-pitanie",
+      "objective": "o2",
+      "question": "Which of these is worth writing into the contract with a leader about meals?",
+      "options": [
+        "Only the total for the week",
+        "The number of meals by arrival and departure dates, the price per meal per guest, options and the final menu deadline",
+        "Nothing: the chef will sort it out on site",
+        "Only a list of forbidden foods"
+      ],
+      "answer": 1,
+      "explain": "Meals are a part of the package both sides describe the same way: the edges of the week, the price, options and the deadline (u2)."
+    },
+    {
+      "id": "c3",
+      "unit": "u3-zagruzka",
+      "objective": "o3",
+      "question": "In a model, a \"vacancy rate\" line rises from 30 % to 85 % and is multiplied into revenue. What is wrong?",
+      "options": [
+        "Everything is correct",
+        "Occupancy sits under a label meaning the share of empty nights, and one rising number hides seasonality",
+        "It should be multiplied by 100",
+        "Occupancy cannot be used in a model at all"
+      ],
+      "answer": 1,
+      "explain": "Vacancy is the share left empty, while occupancy is what multiplies into revenue. An honest model shows it by month (u3, \"What occupancy is\")."
+    },
+    {
+      "id": "c4",
+      "unit": "u4-okupaemost",
+      "objective": "o4",
+      "question": "In a model, \"ROI\" adds yoga package revenue with no teacher's costs. What kind of mistake is this?",
+      "options": [
+        "A rounding error",
+        "Revenue booked as profit — the return is inflated",
+        "An acceptable simplification",
+        "A tax error"
+      ],
+      "answer": 1,
+      "explain": "Revenue is not profit. Without the teacher's pay, the hall and marketing, \"ROI\" grows by the whole revenue (u4, mistake 2)."
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "05-ploshchadka-model",
+  "unit": "u2-pitanie",
+  "locale": "en",
+  "title": "Meals in the package",
+  "sourceHash": "sha256:53de544851d98c9f43167480d41dd7c7c38af249a8335520a94b1f0603f6f3d8",
+  "outline": [
+    {
+      "heading": "Price per meal",
+      "points": [
+        {
+          "text": "Meals are easiest to count per guest per meal: breakfast, lunch, dinner.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The edges of the week",
+      "points": [
+        {
+          "text": "How many meals are in the package depends on arrival and departure.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A base and options",
+      "points": [
+        {
+          "text": "A common choice for venues is a plant-based menu with meat as a paid option, one dish a day.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The menu is a document",
+      "points": [
+        {
+          "text": "A menu for the chef is a table: day, meal, dishes, a vegan and gluten-free option, allergens, options, price.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "When to agree it",
+      "points": [
+        {
+          "text": "The venue gets the final menu and the number of guests with diets from the leader before the shopping.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:0df8431e7e53732fdbbe20d63ad9d4183f0e9dc262ce28216205d214588f9288",
+        "points": [
+          "You can count meals most easily per guest per meal for breakfast, lunch, and dinner."
+        ]
+      },
+      {
+        "sourceHash": "sha256:6be2c7fffb31f7957eb045cafe0b13b28aa6adc455858d4dd0225a6ff3b733d7",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:06e15f8ae5c3951ec8fd63dabc2c3343c57cd75e911835bb74391f48da182f91",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:a4622e7ca7e599f406a2921ea594c210af0ef8a7a134c1a20e815e812c6b8d08",
+        "points": [
+          "You give the chef a menu table showing the day, meal, dishes, dietary options, allergens, and price."
+        ]
+      },
+      {
+        "sourceHash": "sha256:7ba239e133a7bcfbbc2bd8318d1151be7c604b988664a856e1b34f8acac5ae51",
+        "verbatim": "review"
+      }
+    ]
+  }
+}

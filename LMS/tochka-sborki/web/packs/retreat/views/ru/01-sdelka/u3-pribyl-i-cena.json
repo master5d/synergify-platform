@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-sdelka",
+  "unit": "u3-pribyl-i-cena",
+  "locale": "ru",
+  "title": "Сначала желаемая прибыль, потом цена",
+  "sourceHash": "sha256:b4ff139b67f0512ec72fde7718c93ebf161045a5f4a305f7d38ec031432b4032",
+  "outline": [
+    {
+      "heading": "Ход наоборот",
+      "points": [
+        {
+          "text": "Честный порядок такой: сначала прибыль, которую ты хочешь получить за ретрит, потом все расходы, и только потом цена.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Сколько часов в одном ретрите",
+      "points": [
+        {
+          "text": "Оплата себе — отдельная строка, а не то, что «останется».",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Строки, которые забывают",
+      "points": [
+        {
+          "text": "Кроме площадки, у ведущего есть свои расходы.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Цена из прибыли",
+      "points": [
+        {
+          "text": "Цены — это цены.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:cc5f06f13f00c85a293d35aa143f322ba3858c2725cdc0fdebbfe48f6c8f1ab4",
+        "points": [
+          "Сначала определи желаемую прибыль за ретрит, затем прибавь все расходы и только в конце формируй итоговую цену."
+        ]
+      },
+      {
+        "sourceHash": "sha256:dfeb4e5888df32ef7cfc64be5b44a601b0b14d3dfe9f8012f8ba90ab6b83d835",
+        "points": [
+          "Твоя оплата должна быть заложена в бюджет отдельной строкой, а не формироваться из остатков средств."
+        ]
+      },
+      {
+        "sourceHash": "sha256:bd061e7dc23f861d17be214b9def05b0f134807291c52be2885cb23262ad42d6",
+        "points": [
+          "Помни, что помимо аренды площадки в стоимость нужно закладывать и твои личные расходы как ведущего."
+        ]
+      },
+      {
+        "sourceHash": "sha256:edeb017259b18893e59918b585b86eb4e24d6a718d933390a767da8cc615b31d",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

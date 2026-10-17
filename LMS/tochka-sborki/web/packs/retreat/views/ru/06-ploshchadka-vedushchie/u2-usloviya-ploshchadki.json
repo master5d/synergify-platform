@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-ploshchadka-vedushchie",
+  "unit": "u2-usloviya-ploshchadki",
+  "locale": "ru",
+  "title": "Условия со стороны площадки",
+  "sourceHash": "sha256:d3802024bb8727f3c4a55ddc79b5201aaf1788fb93f151f41ceb659b994ad52f",
+  "outline": [
+    {
+      "heading": "График платежей",
+      "points": [
+        {
+          "text": "Свой график площадка строит из своих обязательств: когда закупается кухня, когда персонал отказывается от других смен, когда неделю уже не продать посуточно.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Минимальная гарантия",
+      "points": [
+        {
+          "text": "Минимум — это число гостей или доля мест, которые ведущий оплачивает в любом случае.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что происходит при недоборе",
+      "points": [
+        {
+          "text": "Открой учебную сделку «полный кампус, приехали 12» и переключи калькулятор на взгляд площадки.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Где хранятся деньги",
+      "points": [
+        {
+          "text": "Известен случай, когда ретрит-центр закрылся после стихийного бедствия и остался должен группам около 200 000 долларов депозитов.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:6cc1ca0b43f2e0ebb3d75b88de8e9dbb4d4a82f94ad12c435cc36ffa1f996508",
+        "points": [
+          "Площадка строит график платежей исходя из своих обязательств.",
+          "Она учитывает время закупки кухни, отказы персонала от других смен и сроки, когда неделю уже не продать посуточно."
+        ]
+      },
+      {
+        "sourceHash": "sha256:56dc8d511144ad705f5a2cd8109e40f8d49d1ae143d97159659a56e912c8e7e6",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:a4762b9ed1693ec9172a1bb45d63c9d8a3bbe46a2b03bbc53672de7f65c4c60f",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:bceb6b7ddd2f8d9c4c27af4f2d2835055828bc61e79b2584927f1dae343c6757",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

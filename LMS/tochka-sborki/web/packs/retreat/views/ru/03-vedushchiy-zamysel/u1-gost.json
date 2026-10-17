@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-vedushchiy-zamysel",
+  "unit": "u1-gost",
+  "locale": "ru",
+  "title": "Кто твой гость и какую перемену ищет",
+  "sourceHash": "sha256:e42c8205a971c41d84732e4b19a40ec3e3e1622b8473415cba783accd3567415",
+  "outline": [
+    {
+      "heading": "Один человек вместо «всех»",
+      "points": [
+        {
+          "text": "Ретрит на неделю за несколько тысяч долларов редко покупают с одного поста.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Перемена вместо списка активностей",
+      "points": [
+        {
+          "text": "Гость покупает не расписание практик.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Ценность уже в ведении",
+      "points": [
+        {
+          "text": "Основная ценность — пространство, которое держишь ты.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Чего здесь нет",
+      "points": [
+        {
+          "text": "Курс не учит давить на боль и не учит приёмам срочности.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:04b5e0759172d2d083e9a15477c178d077c959628c6a0f38830f57ee6f29029f",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:2dbbbbfeada54b4f2fd885da5a2e9b0f24f91f5b8cdc63ac3ac91c09226c9f8d",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:7d37317fc134177824d385f9a7c5efbb195cc13ff7b56192d8c17614ee5e4588",
+        "points": [
+          "Твоя основная ценность заключается в пространстве, которое ты держишь."
+        ]
+      },
+      {
+        "sourceHash": "sha256:4b44242c9ba6a99b23a7808a4a58238d7874c7b9e866949dc6d9bb893b48497e",
+        "points": [
+          "Тебя не будут учить давить на боль или использовать приёмы срочности."
+        ]
+      }
+    ]
+  }
+}

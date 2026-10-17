@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-otmeny-zakon",
+  "unit": "u3-paketnyj-tur",
+  "locale": "ru",
+  "title": "Когда ретрит становится пакетным туром",
+  "sourceHash": "sha256:aa8b070ee83790a8ccc725496aee5504f6965e945ab428b33ebf245d9a4d3602",
+  "outline": [
+    {
+      "heading": "Что такое пакет",
+      "points": [
+        {
+          "text": "По состоянию на 2026-10 в ЕС действует директива о пакетных турах 2015/2302.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Кто организатор",
+      "points": [
+        {
+          "text": "Организатор — тот, кто собирает и продаёт пакет гостю.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что обязан организатор",
+      "points": [
+        {
+          "text": "Если ретрит — пакет, у организатора появляются обязанности",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Почему это важно обеим сторонам",
+      "points": [
+        {
+          "text": "Известен случай: ретрит-центр закрылся после стихийного бедствия.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:85be7c801429c641c92f35b3dd0c0a1673fbaa19a37721a97eb9711f58556374",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:4b1dd9a57158d35ecec3a61d4d7f42a7ceccae802918cea869c981808c95fbda",
+        "points": [
+          "Организатором считается тот, кто собирает и продает пакет гостю."
+        ]
+      },
+      {
+        "sourceHash": "sha256:afdaff8ecb7bacc259bc0bc5ae451279db49533d714bde421956e4c103b305f8",
+        "points": [
+          "Если ретрит является пакетом, у организатора появляются обязанности."
+        ]
+      },
+      {
+        "sourceHash": "sha256:3efd2a9fae48c085b6ba23cb3b18f5dbe5273e5254327d1cf8a3da3dc1d6f4a3",
+        "points": [
+          "Был случай, когда ретрит-центр прекратил работу из-за стихийного бедствия."
+        ]
+      }
+    ]
+  }
+}

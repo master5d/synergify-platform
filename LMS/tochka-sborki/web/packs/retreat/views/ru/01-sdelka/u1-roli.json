@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-sdelka",
+  "unit": "u1-roli",
+  "locale": "ru",
+  "title": "Кто за что отвечает",
+  "sourceHash": "sha256:8bd96a9404b25247f451275ff873d56ae7fa06466bcae3fbcd59dc3aa6a9744d",
+  "outline": [
+    {
+      "heading": "Три участника, одна неделя",
+      "points": [
+        {
+          "text": "Ретрит — это программа, место и группа на несколько дней подряд.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Где обязанности пересекаются",
+      "points": [
+        {
+          "text": "Пересечение одно, и оно главное: число гостей.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Четыре модели договора",
+      "points": [
+        {
+          "text": "Оплата за гостя с минимумом.",
+          "origin": "extract"
+        },
+        {
+          "text": "Бесплатное место ведущему.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Почему это важно до цены",
+      "points": [
+        {
+          "text": "Курс не советует «лучшую» модель.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:6f0894541e789095a74cf5b8993ea16fc778915e857f0cff51ecfa91cc9a678f",
+        "points": [
+          "Ретрит объединяет программу, место и группу на несколько дней подряд."
+        ]
+      },
+      {
+        "sourceHash": "sha256:30269401562587b5be96077090a46f65ef7456130e5e4f6706f8501ae69fb742",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:43035fd1442614f6f9eb25df5b232a8350f3ab05c468149ba3178c0b848c71be",
+        "points": [
+          "Оплата за гостя идет с минимумом.",
+          "Также есть бесплатное место ведущему."
+        ]
+      },
+      {
+        "sourceHash": "sha256:03ef9be5201a97cfaafb414ac677b8c421d9365f21083c7ad826e1314b673280",
+        "points": [
+          "В этом курсе ты не найдешь советов по выбору самой лучшей модели."
+        ]
+      }
+    ]
+  }
+}

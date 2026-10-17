@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "05-ploshchadka-model",
+  "unit": "u4-okupaemost",
+  "locale": "ru",
+  "title": "Таблица окупаемости, которая врёт",
+  "sourceHash": "sha256:500e262f40e086a6f2005b34f149838b2bef3355902402bf7a526c4ebff39eff",
+  "outline": [
+    {
+      "heading": "Учебная модель",
+      "points": [
+        {
+          "text": "В ней восемь ошибок.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Восемь ошибок",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Почему это важно до вложений",
+      "points": [
+        {
+          "text": "Каждая ошибка по отдельности кажется мелочью.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:da5efc840013d18690546fa88c581235ee71c2f43df69c24fe69f801ff37bb6d",
+        "points": [
+          "В этой учебной модели допущено восемь ошибок."
+        ]
+      },
+      {
+        "sourceHash": "sha256:835ded7d0c04f83f963754fb320cdc399cdd8282308204ef57f69ac9536e505c",
+        "points": [
+          "Каждая из них по отдельности может показаться тебе незначительной мелочью."
+        ]
+      }
+    ]
+  }
+}

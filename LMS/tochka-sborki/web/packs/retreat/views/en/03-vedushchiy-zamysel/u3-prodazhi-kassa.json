@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-vedushchiy-zamysel",
+  "unit": "u3-prodazhi-kassa",
+  "locale": "en",
+  "title": "Sales against the cash plan",
+  "sourceHash": "sha256:0bd8f3aa783deeb14ddc1e83e95056070b240c6f570ccabf1dc131e93800aefc",
+  "outline": [
+    {
+      "heading": "The pace of sales against the payment schedule",
+      "points": [
+        {
+          "text": "Venues that offer installments count like this.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the calculator shows",
+      "points": [
+        {
+          "text": "The pace of sales is a plan line just like the price.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The venue is booked after the minimum",
+      "points": [
+        {
+          "text": "Experienced leaders do not sign with the venue until first payments from the minimum group are in.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Payment options for the guest",
+      "points": [
+        {
+          "text": "Different guests prefer different things.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:f0f270919d5615125d4d73f76739c686b9cd19e7ade31409920a97d0306bf76e",
+        "points": [
+          "Venues that offer installments count in this manner."
+        ]
+      },
+      {
+        "sourceHash": "sha256:5b4d5b10c752fb32935d425fd05270085cf25dd0ea35b5f97637e9a42385aabd",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:821647aa351aa373e6203aceeaa51d52843fe52f371896b2ca37cc36f60e1e3e",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:eb5e9802bebc2fe47b01fa7a41aa9dd400563a2bbce7e7c732b65fb13ec4f612",
+        "points": [
+          "Different guests have their own preferences."
+        ]
+      }
+    ]
+  }
+}

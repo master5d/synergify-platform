@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-sdelka",
+  "unit": "u4-kassa",
+  "locale": "en",
+  "title": "Cash: money over time",
+  "sourceHash": "sha256:2dedaaa19506544fbe259697dc2b849bebf448ce3193092223cd1015e64cf806",
+  "outline": [
+    {
+      "heading": "Profit and money in the account are different things",
+      "points": [
+        {
+          "text": "Honest profit counts everything at once, as if the retreat had already happened.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How venue payments work",
+      "points": [
+        {
+          "text": "The first payment is the hardest moment for a new leader.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The gap in the teaching deal",
+      "points": [
+        {
+          "text": "In the teaching deal the venue gets 25 % at signing and the balance in installments up to a final payment 60 days before.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What closes the gap",
+      "points": [
+        {
+          "text": "One rule closes almost everything: book the venue once first payments from the minimum group are in.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:0d71723901783bfccbd838454a4727d114956a1c89c7b25edb7fc1b082da7122",
+        "points": [
+          "Honest profit counts everything at once, as if the retreat has already occurred."
+        ]
+      },
+      {
+        "sourceHash": "sha256:dc145bf7ee6e6f6f95117eba3d4b4498b8e081abfee5f763923f00a021b53e0f",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:c433f75fe8221c2d334bf8185f822211b8d23730e1728eed69d5e2662951e7b8",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:c6bc2d9259e7c4bf70508c4c68555b34b481bbfa0209db5c68f7358926a4977e",
+        "points": [
+          "You can close almost every gap by booking the venue only after the first payments from the minimum group are in."
+        ]
+      }
+    ]
+  }
+}

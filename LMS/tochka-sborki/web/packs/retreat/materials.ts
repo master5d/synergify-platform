@@ -133,6 +133,14 @@ export const COURSE_MATERIALS: MaterialGroup[] = [
     ],
   },
   {
+    label: { ru: 'Из курса', en: 'From the course' },
+    items: [
+      { kind: 'link', title: { ru: 'Шпаргалка', en: 'Cheat sheet' }, href: '/cheatsheet/' },
+      { kind: 'link', title: { ru: 'Карта курса', en: 'Course map' }, href: '/roadmap/' },
+      { kind: 'link', title: { ru: 'Упражнения', en: 'Exercises' }, href: '/exercises/' },
+    ],
+  },
+  {
     label: { ru: 'Ссылки', en: 'Links' },
     items: [
       {

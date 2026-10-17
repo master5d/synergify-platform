@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-vedushchiy-programma",
+  "unit": "u2-setka-dnej",
+  "locale": "en",
+  "title": "The grid of days",
+  "sourceHash": "sha256:623f982ae9fc1a1c5c5f192383745cbbfeebb5acf7bba199204bcd4aff5a1dcb",
+  "outline": [
+    {
+      "heading": "More is not better",
+      "points": [
+        {
+          "text": "A leader's first program is almost always overloaded.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The rhythm of the day",
+      "points": [
+        {
+          "text": "The kitchen sets the anchors of the day: breakfast, lunch, dinner.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Partial days",
+      "points": [
+        {
+          "text": "The arrival day and the departure day are not full.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Load across the week",
+      "points": [
+        {
+          "text": "The week is also worth seeing as a whole.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The grid as a tool",
+      "points": [
+        {
+          "text": "The grid is easy to build in a table: rows are hours, columns are days.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:ee5bf546e73e99dbfba62253255d2aee709cde8539e18918b46935e06092705d",
+        "points": [
+          "Your first program as a leader is almost always overloaded."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c5be3e03c5f1f4ac77400f7ec0bb36f3c6b3d347b79bf18d0230a4ea2952ea01",
+        "points": [
+          "The kitchen sets the anchors of your day with breakfast, lunch, and dinner."
+        ]
+      },
+      {
+        "sourceHash": "sha256:4cf8ecac462f7c717d7242a7886af0bd23f466677360c24f04f5ff727c5a9908",
+        "points": [
+          "Your arrival day and departure day are not full."
+        ]
+      },
+      {
+        "sourceHash": "sha256:51e931184a062f7bf770cd5677053337fcbf6ae56a33d9bdf4f8ef6deaa7cbba",
+        "points": [
+          "It is useful for you to view the week as a whole."
+        ]
+      },
+      {
+        "sourceHash": "sha256:0b814a14d238e4e520d82c6298da0a3ab9318846dcd47ea473811d42aa13eb90",
+        "points": [
+          "You can easily build a grid in a table using hours for rows and days for columns."
+        ]
+      }
+    ]
+  }
+}

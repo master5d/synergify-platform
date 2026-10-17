@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-ploshchadka-vedushchie",
+  "unit": "u3-soprovozhdenie",
+  "locale": "ru",
+  "title": "Сопровождение группы",
+  "sourceHash": "sha256:8cc276415bc5ab53ee9364ea47966cb12320a3e1ca5fe4fbd7e2303ca0154837",
+  "outline": [
+    {
+      "heading": "Одна точка контакта",
+      "points": [
+        {
+          "text": "У ведущего должен быть один человек на площадке, который отвечает за его группу: до заезда, на месте и после.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "До заезда",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "На месте",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "После",
+      "points": [
+        {
+          "text": "Разбор с ведущим после группы: что сработало, что нет, какие условия поменять.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Таймлайн площадки",
+      "points": [
+        {
+          "text": "Все эти шаги — пункты в календаре от даты заезда, как у ведущего.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:0a05bd6143a42ab18647f1b1d1995b9265aa249bf3fa44d8fca63bac99c873fa",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:b631fea58b245e1069a61f803c70d4829d8fc9180bdd81f0dce699baa603926b",
+        "points": [
+          "После работы группы тебе нужно провести разбор и выяснить, что сработало, а что нет.",
+          "По результатам этой встречи ты сможешь решить, какие условия стоит изменить."
+        ]
+      },
+      {
+        "sourceHash": "sha256:68d3138559778c1e32f22b2cb4d04d8863bdf81f178401ffb636170f1a18b69a",
+        "verbatim": "review"
+      }
+    ]
+  }
+}

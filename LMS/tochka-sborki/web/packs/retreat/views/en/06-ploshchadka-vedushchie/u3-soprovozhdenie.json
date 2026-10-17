@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "06-ploshchadka-vedushchie",
+  "unit": "u3-soprovozhdenie",
+  "locale": "en",
+  "title": "Supporting the group",
+  "sourceHash": "sha256:994a974c018d0b71e999ec77ae75faed5462dfc17922d0286bc17cdf44b7471c",
+  "outline": [
+    {
+      "heading": "One point of contact",
+      "points": [
+        {
+          "text": "The leader should have one person at the venue responsible for their group: before arrival, on site and after.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Before arrival",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "On site",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "After",
+      "points": [
+        {
+          "text": "A review with the leader after the group: what worked, what did not, which terms to change.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The venue's timeline",
+      "points": [
+        {
+          "text": "All these steps are entries in a calendar from the arrival date, just as for the leader.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:e769c4f0228fd9ecec5650b2a4fe02bdedf52477d834dbfec5f2e85329bf914b",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:d13bafb7a70dcdda7aa5e2c55633acd8e199f8a4a890160840ce1258a5bb2571",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:e9bd1e5d234fe07bfda9d8f8a09fac51221e9cdd431af36ac0250d5b49c228cb",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-vedushchiy-zamysel",
+  "unit": "u1-gost",
+  "locale": "en",
+  "title": "Who your guest is and what change they seek",
+  "sourceHash": "sha256:a84528b3f0355d400c0decbd7918edad069da7d83189bb257b9e8e7560bfcfc0",
+  "outline": [
+    {
+      "heading": "One person instead of \"everyone\"",
+      "points": [
+        {
+          "text": "A week-long retreat costing several thousand dollars is rarely bought from one post.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A change instead of a list of activities",
+      "points": [
+        {
+          "text": "A guest does not buy a schedule of practices.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The value is already in the leading",
+      "points": [
+        {
+          "text": "The main value is the space you hold.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What is not here",
+      "points": [
+        {
+          "text": "The course does not teach pressing on pain and does not teach urgency tactics.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:cdc3763f72eb8e3a51efc44057b62782b7d6da0cad91d1d99467b2bb80cec1b3",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:73a2eb17146ba763d70e1764a86146ac9297c37d38e713bdb3ae69a8e3c089f8",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:a693281825ea38948e6eb1e9117aa93e011708ca56b7b7fb0657783158c15cc3",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:9974b14f46e4a1606978990bb8513dd40a589383b575edf839f19bb78287be20",
+        "points": [
+          "This course does not teach you to press on pain or use urgency tactics."
+        ]
+      }
+    ]
+  }
+}

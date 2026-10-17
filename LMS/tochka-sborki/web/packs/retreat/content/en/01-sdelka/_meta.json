@@ -1,0 +1,78 @@
+{
+  "module": 1,
+  "title": "The deal: one retreat from two sides",
+  "description": "The core of the course. Who is responsible for what, contract models, one deal in the calculator, a price from the profit you want, and cash over time.",
+  "duration": "40 min",
+  "level": 1,
+  "units": [
+    { "slug": "u1-roli", "title": "Who is responsible for what" },
+    { "slug": "u2-odna-sdelka", "title": "One deal in the calculator" },
+    { "slug": "u3-pribyl-i-cena", "title": "First the profit you want, then the price" },
+    { "slug": "u4-kassa", "title": "Cash: money over time" }
+  ],
+  "layout": "phases",
+  "objectives": [
+    { "id": "o1", "text": "For each of the four contract models, name who pays for empty places" },
+    { "id": "o2", "text": "Tell \"profit\" as the venue counts it from the leader's honest profit and find break-even in guests" },
+    { "id": "o3", "text": "Derive the price from a target profit, hours of preparation and every line of the leader's costs" },
+    { "id": "o4", "text": "Find the cash gap by month and name the levers that close it" }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-roli",
+      "objective": "o1",
+      "question": "A full campus of 16 places, 12 guests came. Who pays for the four empty places?",
+      "options": [
+        "The venue: it failed to fill the campus itself",
+        "The leader: with a full campus the contract is counted on the whole capacity",
+        "Half each: that is the custom in group contracts",
+        "Nobody: empty places are simply not paid for"
+      ],
+      "answer": 1,
+      "explain": "In the \"full campus\" model the leader pays the rate for every place on the campus, however many guests come. Empty places are their cost (u1, \"Four contract models\")."
+    },
+    {
+      "id": "c2",
+      "unit": "u2-odna-sdelka",
+      "objective": "o2",
+      "question": "Why is \"profit\" as the venue counts it bigger than the leader's honest profit?",
+      "options": [
+        "The venue inflates the numbers to sell the campus",
+        "The venue does not count the leader's costs and empty places: it only sees the markup over the rate",
+        "Honest profit includes taxes and the venue's profit does not",
+        "It is a rounding error in the calculator"
+      ],
+      "answer": 1,
+      "explain": "The venue counts (price − rate) × guests. The leader's costs — card fees, flights, gifts — and empty places are not in that formula (u2, \"Two profits\")."
+    },
+    {
+      "id": "c3",
+      "unit": "u3-pribyl-i-cena",
+      "objective": "o3",
+      "question": "In what order does the course suggest arriving at a retreat price?",
+      "options": [
+        "Look at prices of similar retreats and go a little below",
+        "Take the venue rate and add a fixed markup",
+        "Set the profit you want, gather all the costs, and only then derive the price",
+        "Set the price and count the profit after the retreat"
+      ],
+      "answer": 2,
+      "explain": "The price is derived from the profit and every cost line, including the forgotten ones: flights, phone, photographer, gifts. Someone else's price says nothing about your lines (u3, \"The reverse order\")."
+    },
+    {
+      "id": "c4",
+      "unit": "u4-kassa",
+      "objective": "o4",
+      "question": "The retreat is profitable, but in the third month the account is negative. Which of these closes the gap?",
+      "options": [
+        "Raise the price: profit grows and the gap disappears",
+        "A bigger first guest payment and booking the venue after the minimum of deposits",
+        "Nothing: a gap is a normal part of any retreat",
+        "Move the retreat a year later"
+      ],
+      "answer": 1,
+      "explain": "A gap is about the order of payments, not the size of profit. It is closed by guests' money arriving before the venue payments (u4, \"What closes the gap\")."
+    }
+  ]
+}

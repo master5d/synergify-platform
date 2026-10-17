@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-vedushchiy-programma",
+  "unit": "u1-kartochka-praktiki",
+  "locale": "ru",
+  "title": "Честная карточка практики",
+  "sourceHash": "sha256:4a4095e1de67f4421a46fd9fb66a467eb926b553ac1bf426fd57d536a2410960",
+  "outline": [
+    {
+      "heading": "Как пишут не надо",
+      "points": [
+        {
+          "text": "В каталогах практик часто встречаются обещания: практика «исцелит», «откроет способности», «даст ответы на любые вопросы», «очистит от всех подавленных эмоций».",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Поля честной карточки",
+      "points": [
+        {
+          "text": "Шаблон: карточка практики.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Пример: интенсивная дыхательная практика",
+      "points": [
+        {
+          "text": "Формат — группа.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Пример: парная практика с касанием",
+      "points": [
+        {
+          "text": "Формат — пара.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:939a7a67efa4243df9cc827aea415f630d68b8e700f9ff5be37fddfed9c66680",
+        "points": [
+          "Перед тобой шаблон карточки практики."
+        ]
+      },
+      {
+        "sourceHash": "sha256:75d8303463bcd188273dc13deec824a428b881e92bcfb48a8723724ed7476485",
+        "points": [
+          "Эта практика проводится в формате группы."
+        ]
+      },
+      {
+        "sourceHash": "sha256:400077ee438f89bf2eba9f85427676c81fc14fd0c07b7489284ce4d30bf18e42",
+        "points": [
+          "Эта практика проходит в формате пары."
+        ]
+      }
+    ]
+  }
+}

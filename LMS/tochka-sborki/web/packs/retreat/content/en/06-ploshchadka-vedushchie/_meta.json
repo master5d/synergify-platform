@@ -1,0 +1,62 @@
+{
+  "module": 6,
+  "title": "Venue: leaders and groups",
+  "description": "Venue track. Whom to host, your own payment and cancellation terms, supporting a group before arrival, on site and after.",
+  "duration": "30 min",
+  "level": 2,
+  "units": [
+    { "slug": "u1-kogo-puskat", "title": "Whom to host" },
+    { "slug": "u2-usloviya-ploshchadki", "title": "Terms from the venue's side" },
+    { "slug": "u3-soprovozhdenie", "title": "Supporting the group" }
+  ],
+  "layout": "phases",
+  "objectives": [
+    { "id": "o1", "text": "Assess a leader before the contract by their own audience, program, contract with a co-leader and past groups" },
+    { "id": "o2", "text": "Build your own payment schedule, minimum and cancellation scale from your obligations, and test them against a short group" },
+    { "id": "o3", "text": "Split the steps of supporting a group before arrival, on site and after, with one point of contact" }
+  ],
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-kogo-puskat",
+      "objective": "o1",
+      "question": "A leader promises a full group thanks to a co-leader's large audience. What does the course suggest a venue rely on?",
+      "options": [
+        "The co-leader's audience: it is bigger",
+        "The leader's own circle and past groups; the partner's audience is a bonus",
+        "The leader's advertising budget",
+        "Nothing: the minimum will protect anyway"
+      ],
+      "answer": 1,
+      "explain": "A group is gathered by the leader's own circle. A minimum is not built on a partner's audience (u1, \"What can be checked before the contract\")."
+    },
+    {
+      "id": "c2",
+      "unit": "u2-usloviya-ploshchadki",
+      "objective": "o2",
+      "question": "A venue has received leaders' prepayments for retreats six months away. How does the course suggest treating them?",
+      "options": [
+        "Spend them on running costs: the money has been received",
+        "Treat them as an obligation, do not spend them on running costs, and keep them so they can be returned",
+        "Invest them in renovation before the season",
+        "Return them to the leaders straight away"
+      ],
+      "answer": 1,
+      "explain": "A prepayment is an obligation until the service is provided. A venue spending it on running costs funds itself with someone else's money (u2, \"Where the money is kept\")."
+    },
+    {
+      "id": "c3",
+      "unit": "u3-soprovozhdenie",
+      "objective": "o3",
+      "question": "Why does the leader have one point of contact at the venue?",
+      "options": [
+        "To pay staff less",
+        "So answers do not diverge: one person is responsible for the group before, during and after",
+        "The law requires it",
+        "So the leader does not talk to the kitchen"
+      ],
+      "answer": 1,
+      "explain": "When questions go to different people, the answers diverge. One point of contact holds the whole group (u3)."
+    }
+  ]
+}

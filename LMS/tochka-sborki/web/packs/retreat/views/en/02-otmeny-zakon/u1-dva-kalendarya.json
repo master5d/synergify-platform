@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-otmeny-zakon",
+  "unit": "u1-dva-kalendarya",
+  "locale": "en",
+  "title": "Two cancellation calendars",
+  "sourceHash": "sha256:62aac741a682300372495d1ea2a0d0447e54238f3124bb9cfe6b913d5c28c065",
+  "outline": [
+    {
+      "heading": "How venues charge for cancellation",
+      "points": [
+        {
+          "text": "As of 2026-10, the typical picture in group contracts is this.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A permitted shortfall",
+      "points": [
+        {
+          "text": "Many venues have one more line: a minimum guarantee.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How guests get their money back",
+      "points": [
+        {
+          "text": "For retreats sold directly to guests, the last refund date varies a lot.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The rule of two calendars",
+      "points": [
+        {
+          "text": "The guests' last refund date must come before the venue's point of no return.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:962ad4d47efa528f53e2bd4b22c8f2114f810c2ce8079559f703b0576b0efaf7",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:c574df081f5e49c90ef098197c91c992c7c5920d0256e2a223b4428220388ff8",
+        "points": [
+          "Many venues include one more line for a minimum guarantee."
+        ]
+      },
+      {
+        "sourceHash": "sha256:3897368a52bfc1b61840912404ac81e247339503630e8ea7084bcd87fa7d03a0",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:a3bb9cd0dcd45da5051f270104d979c5b32149dd48859c3fd33876ae31b6c22e",
+        "points": [
+          "You must ensure the last date for a guest refund comes before the venue's point of no return."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-sdelka",
+  "unit": "u4-kassa",
+  "locale": "ru",
+  "title": "Касса: деньги во времени",
+  "sourceHash": "sha256:b866034079ba40f53a0b7ddef5b90bbdb922ed1a6e59cb583b48f4d68bd6d124",
+  "outline": [
+    {
+      "heading": "Прибыль и деньги на счету — разные вещи",
+      "points": [
+        {
+          "text": "Честная прибыль считает всё сразу, как будто ретрит уже прошёл.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Как устроены платежи площадке",
+      "points": [
+        {
+          "text": "Первый платёж — самый тяжёлый момент для нового ведущего.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Разрыв в учебной сделке",
+      "points": [
+        {
+          "text": "В учебной сделке площадка получает 25 % при подписании и остаток рассрочкой до финального платежа за 60 дней.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Чем закрывают разрыв",
+      "points": [
+        {
+          "text": "Правило, которое закрывает почти всё: бронируй площадку, когда собраны первые платежи от минимума группы.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:4dd9a3750dbee1470a2fb4d6b6f7fe63a791ecd48f1707736249584feb8d22cf",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:9c526a7555057864353a9d63fbb1c0dffdfe0cb9afec8f0e682b812ba50facf3",
+        "points": [
+          "Первый платёж оказывается самым тяжёлым моментом для нового ведущего."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2cbbc0e745f4b520f60e6fe7696e3e8c64427ab65ff2ec9fa112eedeecf6086e",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:08bd89e159c0b1b342fca498e11d39b0181244d668b183b42a008709d9a840a1",
+        "points": [
+          "Бронируй площадку только после того, как соберешь первые платежи от минимального состава группы."
+        ]
+      }
+    ]
+  }
+}

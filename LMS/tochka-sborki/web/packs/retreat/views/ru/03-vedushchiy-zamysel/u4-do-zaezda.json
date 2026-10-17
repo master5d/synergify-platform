@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-vedushchiy-zamysel",
+  "unit": "u4-do-zaezda",
+  "locale": "ru",
+  "title": "Между первым платежом и заездом",
+  "sourceHash": "sha256:db04eb79c0f798269ec9a2b0dd0333e6d20d36fe243fbcb43abf9d5cb1eda372",
+  "outline": [
+    {
+      "heading": "Почему гости «остывают»",
+      "points": [
+        {
+          "text": "Между оплатой и заездом проходят месяцы.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Точки связи",
+      "points": [],
+      "children": []
+    },
+    {
+      "heading": "Отказ — это разговор",
+      "points": [
+        {
+          "text": "Гость молчит и не платит остаток.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Точки связи — тоже план",
+      "points": [
+        {
+          "text": "Связь с гостями — не настроение, а пункты в календаре.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:090852cedb321cc98cb885ed336f4330051fb9eee5c97abbc47fcb377790d949",
+        "points": [
+          "Между моментом оплаты и заездом гостя проходят месяцы."
+        ]
+      },
+      {
+        "sourceHash": "sha256:aea2c02776f236487dcb8500d6adb0a8f66ca09a4e8f21dfe45e0b1285666679",
+        "points": [
+          "Случается, что гость молчит и не оплачивает остаток."
+        ]
+      },
+      {
+        "sourceHash": "sha256:385fa52869affda1f127368adbb7e8e332a6bc73cf95873dae4f3d9c67c7507c",
+        "points": [
+          "Твоя связь с гостями должна зависеть не от настроения, а от пунктов в календаре."
+        ]
+      }
+    ]
+  }
+}
