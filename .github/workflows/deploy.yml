@@ -113,7 +113,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pack: ['living-practice']
+        pack: ['living-practice', 'retreat']
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5

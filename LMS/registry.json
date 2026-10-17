@@ -44,6 +44,23 @@
         "ru",
         "en"
       ]
+    },
+    {
+      "slug": "retreat",
+      "name": {
+        "ru": "Ретрит с двух сторон",
+        "en": "A Retreat From Both Sides"
+      },
+      "tagline": {
+        "ru": "ядро и два трека — ведущий и площадка: честная экономика, договор, отмены, гости",
+        "en": "a shared core and two tracks — leader and venue: honest economics, contract, cancellations, guests"
+      },
+      "url": "https://academy.synergify.com/retrit",
+      "status": "live",
+      "locales": [
+        "ru",
+        "en"
+      ]
     }
   ]
 }
