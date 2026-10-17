@@ -5,7 +5,7 @@
   "unit": "u2-odna-sdelka",
   "locale": "ru",
   "title": "Одна сделка в калькуляторе",
-  "sourceHash": "sha256:1ca9da8b392b9d4bdd7f5235a7a13e1847ec157072fe960fa3f54912afed20bc",
+  "sourceHash": "sha256:ae49c2c61b58d283f4470cb23ecbc176c98c692cc6aa85fae71ff64db800b02d",
   "outline": [
     {
       "heading": "Учебная сделка",

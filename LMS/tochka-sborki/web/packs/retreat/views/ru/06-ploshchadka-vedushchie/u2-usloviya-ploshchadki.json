@@ -5,7 +5,7 @@
   "unit": "u2-usloviya-ploshchadki",
   "locale": "ru",
   "title": "Условия со стороны площадки",
-  "sourceHash": "sha256:943542aba9f669dfba200b4cee631795506515234e8ec0c06ff020d16f33f54c",
+  "sourceHash": "sha256:27cc33b085d0172f61d69b726cb0308f761c6b62d7ec3ac9311b477b822dda04",
   "outline": [
     {
       "heading": "График платежей",
@@ -41,7 +41,7 @@
       "heading": "Где хранятся деньги",
       "points": [
         {
-          "text": "Известен случай, когда ретрит-центр закрылся после стихийного бедствия и остался должен группам около 200 000 долларов депозитов.",
+          "text": "Известен случай: ретрит-центр закрылся после стихийного бедствия.",
           "origin": "extract"
         }
       ],
@@ -73,8 +73,8 @@
         "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:bceb6b7ddd2f8d9c4c27af4f2d2835055828bc61e79b2584927f1dae343c6757",
-        "verbatim": "near-identical"
+        "sourceHash": "sha256:010282da015d4825e4555fc3ff5784d88b26b8f0e075dae5c5d46de394bcbbdf",
+        "verbatim": "review"
       }
     ]
   }

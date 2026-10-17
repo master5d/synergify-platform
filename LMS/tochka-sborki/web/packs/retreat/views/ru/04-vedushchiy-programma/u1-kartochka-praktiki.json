@@ -5,7 +5,7 @@
   "unit": "u1-kartochka-praktiki",
   "locale": "ru",
   "title": "Честная карточка практики",
-  "sourceHash": "sha256:c875adf08cf852783a76ce31097218c03a6f3a4abde372365a137c01777c618a",
+  "sourceHash": "sha256:f948ca29f82d875469d75028d7650d0327aa22979130937ca21adf81ee3ace74",
   "outline": [
     {
       "heading": "Как пишут не надо",
@@ -57,6 +57,10 @@
     "generator": "paraphrase-v1",
     "pool": "prose-pool",
     "sections": [
+      {
+        "sourceHash": "sha256:ce1dfd54126fa054250dd250e8f65f2c9fc4bdaa07117baf21fabe6f4df2bd7e",
+        "verbatim": "review"
+      },
       {
         "sourceHash": "sha256:939a7a67efa4243df9cc827aea415f630d68b8e700f9ff5be37fddfed9c66680",
         "points": [

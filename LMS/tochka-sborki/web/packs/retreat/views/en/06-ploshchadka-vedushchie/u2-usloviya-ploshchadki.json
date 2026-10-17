@@ -5,7 +5,7 @@
   "unit": "u2-usloviya-ploshchadki",
   "locale": "en",
   "title": "Terms from the venue's side",
-  "sourceHash": "sha256:cfc33d3bc4370777db929c6b4d29a6385a72a2406d8cdacb24afb4c261fea630",
+  "sourceHash": "sha256:f22c7fb601c7197317313f6ea569afc2c0f1ee242d66a5e940b10754346278a6",
   "outline": [
     {
       "heading": "The payment schedule",
@@ -41,7 +41,7 @@
       "heading": "Where the money is kept",
       "points": [
         {
-          "text": "There is a known case of a retreat centre that closed after a natural disaster and owed groups about 200,000 dollars in deposits.",
+          "text": "There is a known case: a retreat centre closed after a natural disaster.",
           "origin": "extract"
         }
       ],
@@ -72,10 +72,8 @@
         "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:294bbc759e820389a3481562254956b9613696e465b33689adcacf4395a6488b",
-        "points": [
-          "A retreat centre closed after a natural disaster and owed groups about 200,000 dollars in deposits."
-        ]
+        "sourceHash": "sha256:5006f464489fc7eed2092c1ca44f8cff034ac94cf590afd50513087f2ad7615d",
+        "verbatim": "near-identical"
       }
     ]
   }

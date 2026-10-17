@@ -5,7 +5,7 @@
   "unit": "u4-logistika",
   "locale": "en",
   "title": "Arrival logistics",
-  "sourceHash": "sha256:72999f4bfa50a50abfb399a962e543fee53285e10e0e5a11bacffb176cfc0bb7",
+  "sourceHash": "sha256:c44dffdf0dc71bd25faceeb1735fef31a2a245e563099eb75e2fbe70271407fd",
   "outline": [
     {
       "heading": "One date — one place",
@@ -41,7 +41,7 @@
       "heading": "A week before arrival",
       "points": [
         {
-          "text": "The arrivals list is built from the form and checked personally: a short message to each guest with their time and meeting point.",
+          "text": "Build the arrivals list from the form and check it personally: a short message to each guest with their time and meeting point.",
           "origin": "extract"
         }
       ],
@@ -76,10 +76,8 @@
         ]
       },
       {
-        "sourceHash": "sha256:b634fe43a55a61236d06f9d5973c62e54759b393dbd0d8858e804a44f10d15f5",
-        "points": [
-          "You build the arrivals list from the form and check it personally, sending each guest a message with their time and meeting point."
-        ]
+        "sourceHash": "sha256:512334e3c6a481c1b6baffefa20d45fb2a114feef9bcd502b3ecf5f1b0130a24",
+        "verbatim": "near-identical"
       }
     ]
   }
