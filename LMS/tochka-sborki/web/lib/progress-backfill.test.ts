@@ -1,5 +1,19 @@
 import { describe, it, expect } from 'vitest'
-import { backfillCompletions, pendingCompletions } from './progress-backfill'
+import { backfillCompletions, backfillEnabled, pendingCompletions } from './progress-backfill'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+
+describe('backfillEnabled', () => {
+  it('только открытый курс и не зеркало', () => {
+    expect(backfillEnabled({ auth: false }, false)).toBe(true)
+    expect(backfillEnabled({ auth: true }, false)).toBe(false)
+    expect(backfillEnabled({ auth: false }, true)).toBe(false)
+  })
+  it('хук спрашивает backfillEnabled(COURSE.gates, IS_MIRROR), прежде чем звать сеть', () => {
+    const hook = readFileSync(join(__dirname, 'use-progress-backfill.ts'), 'utf8')
+    expect(hook).toMatch(/backfillEnabled\(COURSE\.gates, IS_MIRROR\)/)
+  })
+})
 
 const OUTLINE = { '01-a': ['u1', 'u2'], '02-b': ['u1'] }
 

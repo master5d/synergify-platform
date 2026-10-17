@@ -6,7 +6,7 @@
 import { useEffect, useRef } from 'react'
 import { COURSE } from '@/lib/course'
 import { IS_MIRROR } from '@/lib/mirror'
-import { backfillCompletions, backfillSessionKey } from './progress-backfill'
+import { backfillCompletions, backfillEnabled, backfillSessionKey } from './progress-backfill'
 import { STORAGE_KEY } from './unit-progress'
 import type { CourseOutline } from './progress-sync'
 
@@ -15,7 +15,7 @@ export function useProgressBackfill(outline?: CourseOutline): void {
   // и без защёлки анонимный читатель звал бы /api/progress/list на каждом шаге.
   const started = useRef(false)
   useEffect(() => {
-    if (IS_MIRROR || !outline || started.current) return
+    if (!backfillEnabled(COURSE.gates, IS_MIRROR) || !outline || started.current) return
     started.current = true
     const key = backfillSessionKey(COURSE.progressKey)
     try {

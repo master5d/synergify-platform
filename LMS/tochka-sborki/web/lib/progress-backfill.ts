@@ -7,8 +7,15 @@
 //
 // Только юниты из outline ЭТОГО курса: курсы школы живут на одном origin (/praktika, /retrit) и делят
 // ключ unit_progress — без фильтра чужие юниты ушли бы на сервер с course этого курса.
-import { parseProgress, STORAGE_KEY, type UnitProgressMap } from './unit-progress'
+import { parseProgress, type UnitProgressMap } from './unit-progress'
 import { reportUnitCompleted, type CourseOutline } from './progress-sync'
+
+/** Досылка только у открытых курсов (gates.auth: false) и не на зеркале. У курсов с входом юниты читают
+ *  только вошедшие, отчёт уходит сразу; досылка там подняла бы давний локальный прогресс (до серверного
+ *  учёта) разом — с событиями «модуль/курс завершён» и письмами за старое. */
+export function backfillEnabled(gates: { auth: boolean }, isMirror: boolean): boolean {
+  return !isMirror && !gates.auth
+}
 
 export interface PendingUnit { moduleSlug: string; unitSlug: string }
 
