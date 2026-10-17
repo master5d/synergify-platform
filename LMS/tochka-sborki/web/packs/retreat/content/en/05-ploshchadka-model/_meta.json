@@ -50,7 +50,7 @@
       "id": "c3",
       "unit": "u3-zagruzka",
       "objective": "o3",
-      "question": "In a model, a \"vacancy rate\" line rises from 30 % to 85 % and is multiplied into revenue. What is wrong?",
+      "question": "In a model, a \"vacancy rate\" line rises from 70 % to 85 % and is multiplied into revenue. What is wrong?",
       "options": [
         "Everything is correct",
         "Occupancy sits under a label meaning the share of empty nights, and one rising number hides seasonality",

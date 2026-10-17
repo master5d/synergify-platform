@@ -5,13 +5,13 @@
   "unit": "u3-prodazhi-kassa",
   "locale": "en",
   "title": "Sales against the cash plan",
-  "sourceHash": "sha256:0bd8f3aa783deeb14ddc1e83e95056070b240c6f570ccabf1dc131e93800aefc",
+  "sourceHash": "sha256:fc5cb2e01ac7038863aa60cd49fc98b320df7e5696eded26dfa6ef5fdba58efb",
   "outline": [
     {
       "heading": "The pace of sales against the payment schedule",
       "points": [
         {
-          "text": "Venues that offer installments count like this.",
+          "text": "Venues that offer installments tell leaders this calculation.",
           "origin": "extract"
         }
       ],
@@ -58,9 +58,9 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:f0f270919d5615125d4d73f76739c686b9cd19e7ade31409920a97d0306bf76e",
+        "sourceHash": "sha256:0a640b8eed40b4b9cec8812f5c7869841d34c26cfbb0fadba2078435dfb827c4",
         "points": [
-          "Venues that offer installments count in this manner."
+          "Venues that offer installments share this calculation with their leaders."
         ]
       },
       {

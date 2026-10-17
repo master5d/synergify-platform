@@ -5,7 +5,7 @@
   "unit": "u2-pitanie",
   "locale": "ru",
   "title": "Питание в пакете",
-  "sourceHash": "sha256:aeb05e66ca455352ae02c7aa52d7963c5cc18c705e0835d7ae208040c78e4d99",
+  "sourceHash": "sha256:abc2dd9919a56adac2bf1f549fc9688c10c564d8361c9cb5dabf0108814e6da5",
   "outline": [
     {
       "heading": "Цена за приём пищи",
@@ -51,7 +51,7 @@
       "heading": "Когда согласовать",
       "points": [
         {
-          "text": "Окончательное меню и число гостей с диетами площадка получает от ведущего до закупки — обычно за пару недель до заезда.",
+          "text": "Окончательное меню и число гостей с диетами площадка получает от ведущего до закупки — за срок, который нужен кухне, часто около месяца до заезда.",
           "origin": "extract"
         }
       ],
@@ -93,8 +93,8 @@
         ]
       },
       {
-        "sourceHash": "sha256:05c211cced0fb8c3d0aa790007b1ae7c6348eef0470d43ec151fe4dc699da17d",
-        "verbatim": "review"
+        "sourceHash": "sha256:b33a879b28a8caab3321bd4bf297edb9809930f305b55a1392935ffd1fb603bb",
+        "verbatim": "near-identical"
       }
     ]
   }

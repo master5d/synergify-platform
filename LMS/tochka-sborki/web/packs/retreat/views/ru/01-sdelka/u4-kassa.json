@@ -5,7 +5,7 @@
   "unit": "u4-kassa",
   "locale": "ru",
   "title": "Касса: деньги во времени",
-  "sourceHash": "sha256:b866034079ba40f53a0b7ddef5b90bbdb922ed1a6e59cb583b48f4d68bd6d124",
+  "sourceHash": "sha256:33b9a8c8873389360e38664872020bc509c31d9d2aec83b811d53be64a036abc",
   "outline": [
     {
       "heading": "Прибыль и деньги на счету — разные вещи",

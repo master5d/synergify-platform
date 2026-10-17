@@ -5,7 +5,7 @@
   "unit": "u4-kassa",
   "locale": "en",
   "title": "Cash: money over time",
-  "sourceHash": "sha256:2dedaaa19506544fbe259697dc2b849bebf448ce3193092223cd1015e64cf806",
+  "sourceHash": "sha256:c5028c7d8c3022990b347db930b9c17648b4ebc03bede994d895aa7993329553",
   "outline": [
     {
       "heading": "Profit and money in the account are different things",
