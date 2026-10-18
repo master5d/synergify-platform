@@ -35,16 +35,6 @@ const isNote = (r: string[]) => {
   return r.slice(1).every((v) => v.trim() === '') && first.split(/\s+/).length >= 5 && /[.:]$/.test(first)
 }
 
-/** Байты файла → текст: UTF-8, а если файл не в UTF-8 — cp1251 (так сохраняет «CSV (разделители — запятые)»
- *  русский Excel). Без этого кириллица молча превращалась бы в «�». */
-export function decodeCsvBytes(bytes: Uint8Array): string {
-  try {
-    return new TextDecoder('utf-8', { fatal: true }).decode(bytes)
-  } catch {
-    return new TextDecoder('windows-1251').decode(bytes)
-  }
-}
-
 /** Дата из таблицы: ISO как есть; `ДД.ММ.ГГГГ` (так выгружают Excel и Google Sheets в RU-локали) — в ISO.
  *  Американское `М/Д/ГГГГ` не угадываем: оно неотличимо от `Д/М/ГГГГ`, такую дату проверка отметит. */
 export function normalizeDate(s: string): string {

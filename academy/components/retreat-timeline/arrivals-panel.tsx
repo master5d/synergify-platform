@@ -2,9 +2,10 @@
 
 import { useRef, useState } from 'react'
 import type { Locale } from '../../lib/dictionaries'
+import { decodeCsvBytes } from '../../lib/retreat-core/csv'
 import type { RetreatPassport } from '../../lib/retreat-core/passport'
 import {
-  ARRIVAL_CSV_HEADER, ARRIVAL_FIELDS, arrivalsToCsv, checkArrivals, decodeCsvBytes, emptyArrival, parseArrivalsCsv, type ArrivalRow,
+  ARRIVAL_CSV_HEADER, ARRIVAL_FIELDS, arrivalsToCsv, checkArrivals, emptyArrival, parseArrivalsCsv, type ArrivalRow,
 } from '../../lib/retreat-timeline/arrivals'
 import { download } from './download'
 import { TL_UI } from './ui'

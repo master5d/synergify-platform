@@ -6,7 +6,7 @@ import { CALC_PATH, localePath, TIMELINE_PATH } from '../../lib/retreat-timeline
 import { localToday } from '../../lib/retreat-core/dates'
 import type { Meal, RetreatPassport } from '../../lib/retreat-core/passport'
 import { decodeToolLink, TOOL_MAX_FRAGMENT } from '../../lib/retreat-core/tool-link'
-import { decodeCsvBytes } from '../../lib/retreat-timeline/arrivals'
+import { decodeCsvBytes } from '../../lib/retreat-core/csv'
 import { ALLERGENS, allergenName } from '../../lib/retreat-menu/allergens'
 import { cellKey, computeMenu, emptyCell, validateMenu, type MenuCell, type SpecialDiet } from '../../lib/retreat-menu/engine'
 import { menuFromCsv, menuMoney, menuToCsv, parseMoney } from '../../lib/retreat-menu/export'
