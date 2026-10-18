@@ -50,7 +50,16 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
     const linkForm = loaded?.form
     const keepDraft = Boolean(linkForm && loaded?.linkHasBlocks && draftWorthKeeping(draft, linkForm, today))
     const previous = keepDraft ? draftForm : null
-    if (previous) { setPreviousDraft(previous); try { localStorage.setItem(PROGRAM_PREV_KEY, draftOf(previous)) } catch { /* best effort */ } }
+    let prevSaved: string | null = null
+    try { prevSaved = localStorage.getItem(PROGRAM_PREV_KEY) } catch { /* без хранилища отложенного нет */ }
+    if (previous) {
+      setPreviousDraft(previous)
+      try { localStorage.setItem(PROGRAM_PREV_KEY, draftOf(previous)) } catch { /* без хранилища отложить нельзя */ }
+    } else {
+      // отложенная раньше программа остаётся доступной и после перезагрузки, пока её не вернули
+      const stored = formFromDraft(prevSaved, today)
+      if (stored) setPreviousDraft(stored)
+    }
     setForm(linkForm ? withDraftBlocks(linkForm, draftForm, loaded?.linkHasBlocks ?? false) : draftForm ?? defaultForm(today))
     setLinkedCards(loaded?.cards ?? [])
     if (loaded && keepDraft) setNotice(t.linkOpened)
@@ -109,10 +118,13 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
           { href: localePath(CALC_PATH, locale) + calcHashFromPassport(form.passport), label: t.openCalc },
           { href: localePath(FORM_PATH, locale) + formHashFromPassport(form.passport), label: t.openForm },
         ]} />
-        {notice && <p role="status" style={{ ...card, color: 'var(--accent-ink)' }}>{notice}{previousDraft && <>{' '}<button style={button} onClick={() => {
-          setForm(previousDraft); setPreviousDraft(null); setNotice(t.draftBack)
-          try { localStorage.removeItem(PROGRAM_PREV_KEY) } catch { /* best effort */ }
-        }}>{t.restoreDraft}</button></>}</p>}
+        {notice && <p role="status" style={{ ...card, color: 'var(--accent-ink)' }}>{notice}</p>}
+        {previousDraft && <p>
+          <button style={button} onClick={() => {
+            setForm(previousDraft); setPreviousDraft(null); setNotice(t.draftBack)
+            try { localStorage.removeItem(PROGRAM_PREV_KEY) } catch { /* без хранилища очищать нечего */ }
+          }}>{t.restoreDraft}</button>
+        </p>}
         <h2 style={h2}>{t.retreat}</h2>
         <div className="pg-grid">
           <label style={label}>{t.titleLabel}<input style={field} value={form.passport.title ?? ''} onChange={(e) => setPassport('title', e.target.value || undefined)} /></label>

@@ -74,6 +74,9 @@ export function withDraftBlocks(fromLink: ProgramForm, draft: ProgramForm | null
 export function draftWorthKeeping(saved: string | null, fromLink: ProgramForm, today: IsoDate): boolean {
   const draft = formFromDraft(saved, today)
   if (!draft || draftOf(draft) === draftOf(fromLink)) return false
+  // черновик с тем же названием, что в ссылке, — это та же учебная неделя (урок u1, потом u2): её не откладываем,
+  // иначе она перезаписала бы уже отложенную настоящую программу ведущего
+  if (draft.passport.title && draft.passport.title === fromLink.passport.title) return false
   const defaultSignatures = new Set(defaultBlocks(draft.passport).map((b) => JSON.stringify(b)))
   return draft.blocks.some((block) => !defaultSignatures.has(JSON.stringify(block)))
 }

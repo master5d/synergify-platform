@@ -92,4 +92,11 @@ describe('program form', () => {
     expect(restored.filter((card) => card.id === starter[1].id)).toHaveLength(1)
     expect(restored.map((card) => card.id)).toEqual([...new Set(restored.map((card) => card.id))])
   })
+  it('does not set aside an edited copy of the same lesson week', () => {
+    const week = { ...defaultForm(today), passport: { ...defaultForm(today).passport, title: 'Учебная неделя' } }
+    const edited = { ...week, blocks: [...week.blocks, { day: 2, start: '10:00', minutes: 60, kind: 'free' as const }] }
+    expect(draftWorthKeeping(draftOf(edited), week, today)).toBe(false)
+    const own = { ...edited, passport: { ...edited.passport, title: 'Моя неделя' } }
+    expect(draftWorthKeeping(draftOf(own), week, today)).toBe(true)
+  })
 })
