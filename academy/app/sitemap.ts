@@ -14,8 +14,9 @@ const SITE = 'https://academy.synergify.com'
 const PATHS: string[] = [
   '', 'pravila', 'zabota',
   'trenazhery', 'trenazhery/rsvp', 'trenazhery/schulte', 'trenazhery/test',
-  // инструменты академии: калькулятор экономики ретрита (считает в браузере, данные не уходят)
+  // инструменты академии: калькулятор экономики ретрита и таймлайн сроков (считают в браузере, данные не уходят)
   'instrumenty/kalkulyator-retrita',
+  'instrumenty/tajmlajn',
   ...writtenSpeedreadingSlugs().map((slug) => `trenazhery/${slug}`),
   // «Эйдетика» — только после вычитки владельцем (status 'live'); до того страницы noindex.
   ...(isEideticsLive() ? ['trenazhery/eidetika', 'trenazhery/eidetika/ryad', 'trenazhery/eidetika/dvorec'] : []),

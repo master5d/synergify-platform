@@ -47,7 +47,8 @@ function fold(line: string): string {
 
 const compact = (d: string) => d.replace(/-/g, '')
 
-export function milestonesToIcs(ms: Milestone[], title: string, lang: Lang): string {
+/** `stamp` — момент выгрузки `YYYYMMDDTHHMMSSZ` (DTSTAMP по RFC 5545); без него — дата вехи, для детерминизма тестов. */
+export function milestonesToIcs(ms: Milestone[], title: string, lang: Lang, stamp?: string): string {
   const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', `PRODID:-//academy.synergify.com//retreat-timeline//${lang.toUpperCase()}`, 'CALSCALE:GREGORIAN']
   for (const m of ms) {
     const what = milestoneLabel(m, lang)
@@ -56,7 +57,7 @@ export function milestonesToIcs(ms: Milestone[], title: string, lang: Lang): str
     lines.push(
       'BEGIN:VEVENT',
       `UID:${m.id}${m.n !== undefined ? `-${m.n}` : ''}-${m.date}@academy.synergify.com`,
-      `DTSTAMP:${compact(m.date)}T000000Z`,
+      `DTSTAMP:${stamp ?? `${compact(m.date)}T000000Z`}`,
       `DTSTART;VALUE=DATE:${compact(m.date)}`,
       `DTEND;VALUE=DATE:${compact(addDays(m.date, 1))}`,
       `SUMMARY:${icsText(title ? `${title}: ${what}` : what)}`,

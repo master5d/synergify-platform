@@ -17,6 +17,14 @@ describe('лист прибытия — CSV', () => {
     expect(r.guest).toBe('Guest, 1')
     expect(r.flightIn).toBe('XX 1\nlate')
   })
+  it('даты из RU-таблиц (ДД.ММ.ГГГГ) приводятся к ISO, американские М/Д не угадываются', () => {
+    const text = '﻿Гость;Телефон в дороге;Рейс прибытия;Дата прибытия;Время прибытия;Аэропорт;Кто встречает;Место встречи;Рейс отъезда;Дата отъезда\r\n'
+      + 'Гость 1;;;9.5.2027;;;трансфер;;;16.05.2027\r\nГость 2;;;05/09/2027;;;трансфер;;;\r\n'
+    const [a, b] = parseArrivalsCsv(text)
+    expect([a.dateIn, a.dateOut]).toEqual(['2027-05-09', '2027-05-16'])
+    expect(b.dateIn).toBe('05/09/2027')
+    expect(checkArrivals([a, b], PASSPORT)).toEqual([{ row: 2, id: 'bad-date' }])
+  })
   it('шаблон курса читается: заголовок пропущен, пустые строки отброшены', () => {
     const tpl = readFileSync(join(__dirname, '..', '..', '..', 'LMS', 'tochka-sborki', 'web', 'public', 'retreat-materials', 'arrival-list.ru.csv'), 'utf8')
     expect(parseArrivalsCsv(tpl)).toEqual([])

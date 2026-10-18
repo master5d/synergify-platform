@@ -44,8 +44,10 @@ function stableJson(value: unknown): string {
   )
 }
 
+/** Паспорт проходит allowlist и при записи: лишние ключи из состояния формы в ссылку не уходят.
+ *  Поля инструмента вызывающий собирает сам, явным списком (см. `toolOf` у таймлайна). */
 export function encodeToolLink<T>(l: ToolLink<T>): string {
-  return `#data=${toBase64Url(stableJson(l))}`
+  return `#data=${toBase64Url(stableJson({ v: l.v, retreat: pickPassport(l.retreat), tool: l.tool }))}`
 }
 
 export function decodeToolLink<T>(hash: string, pickTool: (raw: unknown) => T, lang: Lang): DecodedTool<T> {

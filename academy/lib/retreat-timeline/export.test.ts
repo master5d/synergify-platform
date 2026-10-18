@@ -65,3 +65,9 @@ describe('тексты', () => {
     }
   })
 })
+
+describe('календарь — момент выгрузки', () => {
+  it('DTSTAMP берётся из переданного момента', () => {
+    expect(milestonesToIcs(R.milestones, '', 'en', '20261017T120000Z')).toContain('DTSTAMP:20261017T120000Z')
+  })
+})

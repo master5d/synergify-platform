@@ -1,7 +1,8 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { encodeLink, toBase64Url } from '../retreat-calc/link'
+import { encodeLink, fromBase64Url, toBase64Url } from '../retreat-calc/link'
+import type { RetreatPassport } from './passport'
 import { decodeToolLink, encodeToolLink, type ToolLink } from './tool-link'
 
 const pickX = (raw: unknown) => {
@@ -31,6 +32,12 @@ describe('ссылка инструмента', () => {
     expect(decodeToolLink('#data=@@@', pickX, 'ru').ok).toBe(false)
     expect(decodeToolLink(`#data=${toBase64Url('не json')}`, pickX, 'ru')).toEqual({ ok: false, error: 'данные в ссылке повреждены' })
     expect(decodeToolLink('', pickX, 'ru').ok).toBe(false)
+  })
+  it('лишние ключи паспорта не попадают в ссылку и при записи', () => {
+    const retreat = { start: '2027-05-10', phone: '+1 555', guests_list: ['A'] } as unknown as RetreatPassport
+    const hash = encodeToolLink({ v: 1, retreat, tool: {} })
+    const json = fromBase64Url(hash.slice('#data='.length))
+    expect(json).not.toMatch(/phone|555|guests_list/)
   })
   it('данные гостей, подложенные в ссылку, отбрасываются', () => {
     const d = decodeToolLink(hashOf({

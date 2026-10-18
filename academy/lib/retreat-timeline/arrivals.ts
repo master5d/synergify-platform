@@ -31,11 +31,23 @@ const isHeader = (r: string[]) =>
 /** Подсказка под таблицей шаблона: заполнена только первая колонка, и это фраза, а не имя. */
 const isNote = (r: string[]) => r.slice(1).every((v) => v.trim() === '') && (r[0] ?? '').trim().split(/\s+/).length >= 5
 
+/** Дата из таблицы: ISO как есть; `ДД.ММ.ГГГГ` (так выгружают Excel и Google Sheets в RU-локали) — в ISO.
+ *  Американское `М/Д/ГГГГ` не угадываем: оно неотличимо от `Д/М/ГГГГ`, такую дату проверка отметит. */
+export function normalizeDate(s: string): string {
+  const m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(s.trim())
+  if (!m) return s.trim()
+  const iso = `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}`
+  return isIsoDate(iso) ? iso : s.trim()
+}
+
 /** Строки из CSV любой таблицы; заголовок и подсказки шаблона курса (RU или EN) пропускаются, колонки — по порядку шаблона. */
 export function parseArrivalsCsv(text: string): ArrivalRow[] {
   const rows = parseCsv(text).filter((r) => !isNote(r))
   const body = rows.length && isHeader(rows[0]) ? rows.slice(1) : rows
-  return body.map((r) => Object.fromEntries(ARRIVAL_FIELDS.map((f, i) => [f, (r[i] ?? '').trim()])) as ArrivalRow)
+  return body.map((r) => {
+    const row = Object.fromEntries(ARRIVAL_FIELDS.map((f, i) => [f, (r[i] ?? '').trim()])) as ArrivalRow
+    return { ...row, dateIn: normalizeDate(row.dateIn), dateOut: normalizeDate(row.dateOut) }
+  })
 }
 
 export function arrivalsToCsv(rows: ArrivalRow[], lang: Lang): string {

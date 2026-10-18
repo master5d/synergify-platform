@@ -77,6 +77,7 @@ export const RC_UI = {
     payInFullGives: 'Скидка за оплату целиком',
     schedule: 'График платежей',
     amount: 'Сумма',
+    openTimeline: 'Открыть сроки этого ретрита в таймлайне',
     disclaimer: 'Это оценка по введённым цифрам, а не финансовый совет. Данные из ссылки не уходят на сервер и нигде не сохраняются.',
   },
   en: {
@@ -155,6 +156,7 @@ export const RC_UI = {
     payInFullGives: 'Pay-in-full discount',
     schedule: 'Payment schedule',
     amount: 'Amount',
+    openTimeline: 'Open this retreat’s deadlines in the timeline',
     disclaimer: 'This is an estimate from the numbers you entered, not financial advice. Link data never reaches a server and is not stored anywhere.',
   },
 }

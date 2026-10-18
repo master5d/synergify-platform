@@ -72,7 +72,18 @@ describe('вехи в прошлом', () => {
     expect(past).toContain('venue-final')
     expect(past).toContain('go-no-go')
     expect(past).not.toContain('sign')
+    expect(past).not.toContain('venue-deposit')
+    expect(past).not.toContain('sales-open')
     expect(past).not.toContain('guest-balance')
+  })
+})
+
+describe('депозит 0 %', () => {
+  it('нулевого платежа в вехах нет, сумма контракта та же', () => {
+    const r = buildTimeline(PASSPORT, { ...TERMS, venue: { ...VENUE, depositPct: 0 } }, '2026-10-17')
+    const pays = r.milestones.filter((m) => m.amountCents !== null)
+    expect(pays.some((m) => m.amountCents === 0)).toBe(false)
+    expect(pays.reduce((s, m) => s + (m.amountCents ?? 0), 0)).toBe(3600000)
   })
 })
 

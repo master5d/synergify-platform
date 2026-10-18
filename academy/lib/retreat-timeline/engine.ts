@@ -116,6 +116,7 @@ export function buildTimeline(p: RetreatPassport, t: TimelineTerms, today: IsoDa
   const venueFinal = addDays(start, -t.venue.finalDueDays)
   const schedule = venuePayments(t.venue, guests, Math.max(1, monthsBetween(t.signDate, start))).schedule
   schedule.forEach((pay, i) => {
+    if (pay.amount === 0) return                       // депозит 0 % — не платёж, а шум в календаре
     if (i === 0) add('venue-deposit', t.signDate, 'contract', pay.amount)
     else if (i === schedule.length - 1) add('venue-final', venueFinal, 'contract', pay.amount)
     else add('venue-installment', addMonths(t.signDate, pay.month), 'contract', pay.amount, i)
@@ -137,7 +138,8 @@ export function buildTimeline(p: RetreatPassport, t: TimelineTerms, today: IsoDa
   if (gap < 0) warnings.push({ id: 'guest-refund-after-venue-no-return' })
   else if (gap < RESALE_BUFFER_DAYS) warnings.push({ id: 'resale-buffer-short', days: gap })
   for (const ms of out) {
-    if (ms.id !== 'sign' && ms.date < today) warnings.push({ id: 'milestone-in-past', milestone: ms.id, ...(ms.n !== undefined ? { n: ms.n } : {}) })
+    // всё, что случается в день подписания (договор, депозит, старт продаж), уже позади по определению — не шумим
+    if (ms.date !== t.signDate && ms.date < today) warnings.push({ id: 'milestone-in-past', milestone: ms.id, ...(ms.n !== undefined ? { n: ms.n } : {}) })
   }
   return { milestones: out, warnings }
 }
