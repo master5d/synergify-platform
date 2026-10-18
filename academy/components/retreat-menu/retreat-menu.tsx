@@ -16,6 +16,7 @@ import {
 } from '../../lib/retreat-menu/form'
 import { dietLabel, issueText, mealLabel } from '../../lib/retreat-menu/labels'
 import { FORM_PATH, formHashFromPassport } from '../../lib/retreat-guest-form/form'
+import { PROGRAM_PATH, programHashFromPassport } from '../../lib/retreat-program/form'
 import { PassportBar } from '../retreat-core/passport-bar'
 import { download } from '../retreat-timeline/download'
 import { MN_UI } from './ui'
@@ -151,6 +152,7 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
           { href: localePath(TIMELINE_PATH, locale) + timelineHashFromPassport(f.passport), label: t.openTimeline },
           { href: localePath(CALC_PATH, locale) + calcHashFromPassport(f.passport), label: t.openCalc },
           { href: localePath(FORM_PATH, locale) + formHashFromPassport(f.passport), label: t.openForm },
+          { href: localePath(PROGRAM_PATH, locale) + programHashFromPassport(f.passport), label: t.openProgram },
         ]} />
         {notice && <p role="status" style={{ ...card, color: GOLD, margin: '0 0 1.25rem' }}>{notice}</p>}
         {canRestore && (

@@ -15,6 +15,7 @@ import {
 import { milestoneLabel, warningText, WHO_LABELS } from '../../lib/retreat-timeline/labels'
 import { MENU_PATH, menuHashFromPassport } from '../../lib/retreat-menu/form'
 import { FORM_PATH, formHashFromPassport } from '../../lib/retreat-guest-form/form'
+import { PROGRAM_PATH, programHashFromPassport } from '../../lib/retreat-program/form'
 import { PassportBar } from '../retreat-core/passport-bar'
 import { ArrivalsPanel } from './arrivals-panel'
 import { download } from './download'
@@ -121,6 +122,7 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
         { href: calcHref, label: t.openCalc },
         { href: localePath(MENU_PATH, locale) + menuHashFromPassport(f.passport), label: t.openMenu },
         { href: localePath(FORM_PATH, locale) + formHashFromPassport(f.passport), label: t.openForm },
+        { href: localePath(PROGRAM_PATH, locale) + programHashFromPassport(f.passport), label: t.openProgram },
       ]} />
       {notice && <p role="status" style={{ ...card, color: GOLD, margin: '0 0 1.25rem' }}>{notice}</p>}
 

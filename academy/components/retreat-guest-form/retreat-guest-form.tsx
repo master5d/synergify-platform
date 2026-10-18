@@ -11,6 +11,7 @@ import {
 import { answersTemplateCsv, formText, normalizeOn, QUESTIONS, SECTION_TITLE, SECTION_WHY, type QuestionId, type SectionId } from '../../lib/retreat-guest-form/questions'
 import { calcHashFromPassport, menuHashFromPassport, MENU_PATH, timelineHashFromPassport } from '../../lib/retreat-menu/form'
 import { CALC_PATH, localePath, TIMELINE_PATH } from '../../lib/retreat-timeline/form'
+import { PROGRAM_PATH, programHashFromPassport } from '../../lib/retreat-program/form'
 import { PassportBar } from '../retreat-core/passport-bar'
 import { download } from '../retreat-timeline/download'
 import { AnswersPanel } from './answers-panel'
@@ -82,6 +83,7 @@ export function RetreatGuestForm({ locale }: { locale: Locale }) {
           { href: localePath(TIMELINE_PATH, locale) + timelineHashFromPassport(f.passport), label: t.openTimeline },
           { href: localePath(MENU_PATH, locale) + menuHashFromPassport(f.passport), label: t.openMenuBar },
           { href: localePath(CALC_PATH, locale) + calcHashFromPassport(f.passport), label: t.openCalc },
+          { href: localePath(PROGRAM_PATH, locale) + programHashFromPassport(f.passport), label: t.openProgram },
         ]} />
         {notice && <p role="status" style={{ ...card, color: GOLD, margin: '0 0 1.25rem', whiteSpace: 'pre-wrap' }}>{notice}</p>}
 

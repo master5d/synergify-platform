@@ -59,6 +59,7 @@ export const MN_UI = {
     openTimeline: 'Открыть в таймлайне',
     openCalc: 'Открыть в калькуляторе',
     openForm: 'Открыть анкету гостя',
+    openProgram: 'Открыть конструктор программы',
     disclaimer: 'Цены и составы — ваши данные. Меню и диеты согласуйте с шефом и площадкой. Список аллергенов — 14 аллергенов ЕС.',
   },
   en: {
@@ -118,6 +119,7 @@ export const MN_UI = {
     openTimeline: 'Open in the timeline',
     openCalc: 'Open in the calculator',
     openForm: 'Open the guest form',
+    openProgram: 'Open the program builder',
     disclaimer: 'Prices and ingredients are your data. Agree the menu and diets with the chef and the venue. The allergen list is the 14 EU allergens.',
   },
 } as const

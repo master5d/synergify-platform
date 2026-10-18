@@ -59,6 +59,7 @@ export const GF_UI = {
     openTimeline: 'Открыть в таймлайне',
     openMenuBar: 'Открыть в генераторе меню',
     openCalc: 'Открыть в калькуляторе',
+    openProgram: 'Открыть конструктор программы',
     disclaimer: 'Академия не хранит анкеты и ответы. Где хранить ответы гостей и кому их показывать — решаете вы, по правилам своей страны.',
   },
   en: {
@@ -118,6 +119,7 @@ export const GF_UI = {
     openTimeline: 'Open in the timeline',
     openMenuBar: 'Open in the menu generator',
     openCalc: 'Open in the calculator',
+    openProgram: 'Open the program builder',
     disclaimer: 'The academy stores no forms or answers. Where you keep guest answers and who sees them is your call, under your country’s rules.',
   },
 } as const
