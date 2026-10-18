@@ -28,8 +28,22 @@ export const emptyArrival = (): ArrivalRow =>
 const isHeader = (r: string[]) =>
   [ARRIVAL_CSV_HEADER.ru, ARRIVAL_CSV_HEADER.en].some((h) => h[0] === r[0]?.trim() && h[1] === r[1]?.trim())
 
-/** Подсказка под таблицей шаблона: заполнена только первая колонка, и это фраза, а не имя. */
-const isNote = (r: string[]) => r.slice(1).every((v) => v.trim() === '') && (r[0] ?? '').trim().split(/\s+/).length >= 5
+/** Подсказка под таблицей шаблона: заполнена только первая колонка, и это фраза с точкой или двоеточием в конце,
+ *  а не длинное имя гостя. */
+const isNote = (r: string[]) => {
+  const first = (r[0] ?? '').trim()
+  return r.slice(1).every((v) => v.trim() === '') && first.split(/\s+/).length >= 5 && /[.:]$/.test(first)
+}
+
+/** Байты файла → текст: UTF-8, а если файл не в UTF-8 — cp1251 (так сохраняет «CSV (разделители — запятые)»
+ *  русский Excel). Без этого кириллица молча превращалась бы в «�». */
+export function decodeCsvBytes(bytes: Uint8Array): string {
+  try {
+    return new TextDecoder('utf-8', { fatal: true }).decode(bytes)
+  } catch {
+    return new TextDecoder('windows-1251').decode(bytes)
+  }
+}
 
 /** Дата из таблицы: ISO как есть; `ДД.ММ.ГГГГ` (так выгружают Excel и Google Sheets в RU-локали) — в ISO.
  *  Американское `М/Д/ГГГГ` не угадываем: оно неотличимо от `Д/М/ГГГГ`, такую дату проверка отметит. */

@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { arrivalsToCsv, checkArrivals, emptyArrival, parseArrivalsCsv, type ArrivalRow } from './arrivals'
+import { arrivalsToCsv, checkArrivals, decodeCsvBytes, emptyArrival, parseArrivalsCsv, type ArrivalRow } from './arrivals'
 
 const row = (over: Partial<ArrivalRow>): ArrivalRow => ({ ...emptyArrival(), meetBy: 'трансфер площадки', ...over })
 const PASSPORT = { start: '2027-05-10', nights: 6 }
@@ -28,6 +28,18 @@ describe('лист прибытия — CSV', () => {
   it('шаблон курса читается: заголовок пропущен, пустые строки отброшены', () => {
     const tpl = readFileSync(join(__dirname, '..', '..', '..', 'LMS', 'tochka-sborki', 'web', 'public', 'retreat-materials', 'arrival-list.ru.csv'), 'utf8')
     expect(parseArrivalsCsv(tpl)).toEqual([])
+  })
+})
+
+describe('лист прибытия — кодировка и подсказки', () => {
+  it('файл из русского Excel в cp1251 читается, UTF-8 — как есть', () => {
+    const cp1251 = Uint8Array.from([0xc3, 0xee, 0xf1, 0xf2, 0xfc, 0x3b, 0x31])     // «Гость;1»
+    expect(decodeCsvBytes(cp1251)).toBe('Гость;1')
+    expect(decodeCsvBytes(new TextEncoder().encode('Гость;1'))).toBe('Гость;1')
+  })
+  it('длинное имя без точки в конце — гость, а не подсказка шаблона', () => {
+    const rows = parseArrivalsCsv('María de los Ángeles García López;;;\r\nДаты заезда и выезда — из одного места: шапка договора.;;;\r\n')
+    expect(rows.map((r) => r.guest)).toEqual(['María de los Ángeles García López'])
   })
 })
 

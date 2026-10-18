@@ -71,3 +71,14 @@ describe('календарь — момент выгрузки', () => {
     expect(milestonesToIcs(R.milestones, '', 'en', '20261017T120000Z')).toContain('DTSTAMP:20261017T120000Z')
   })
 })
+
+describe('календарь — UID событий', () => {
+  const uids = (ics: string) => ics.replace(/\r\n /g, '').match(/^UID:.*$/gm) ?? []
+  it('UID не зависит от даты вехи и различает ретриты по названию', () => {
+    const a = uids(milestonesToIcs(R.milestones, 'Май', 'ru'))
+    const shifted = R.milestones.map((m) => (m.id === 'venue-final' ? { ...m, date: '2027-03-01' } : m))
+    expect(uids(milestonesToIcs(shifted, 'Май', 'ru'))).toEqual(a)
+    expect(uids(milestonesToIcs(R.milestones, 'Июнь', 'ru'))).not.toEqual(a)
+    expect(new Set(a).size).toBe(a.length)
+  })
+})

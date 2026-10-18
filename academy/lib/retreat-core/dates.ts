@@ -49,3 +49,9 @@ export function monthsBetween(a: IsoDate, b: IsoDate): number {
   const m = (yb - ya) * 12 + (mb - ma) - (db < da ? 1 : 0)
   return Math.max(0, m)
 }
+
+/** «Сегодня» по местному календарю пользователя (вечером в Аризоне по UTC уже завтра). Дальше — только UTC-арифметика. */
+export function localToday(now: Date = new Date()): IsoDate {
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`
+}

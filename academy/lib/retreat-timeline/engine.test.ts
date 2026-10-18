@@ -65,6 +65,21 @@ describe('короткий срок', () => {
   })
 })
 
+describe('поздний договор, но до финального срока', () => {
+  it('депозит в день подписания, остаток — к финальному сроку, а не всё сразу', () => {
+    const r = buildTimeline(PASSPORT, { ...TERMS, signDate: '2027-02-11', guestRefundDays: 75 }, '2026-10-17')
+    const pays = r.milestones.filter((m) => m.amountCents !== null).map((m) => [m.id, m.date, m.amountCents])
+    expect(pays).toEqual([['venue-deposit', '2027-02-11', 900000], ['venue-final', '2027-03-11', 2700000]])
+    expect(r.warnings).toEqual([])
+  })
+  it('срок 61 день, подписание за два месяца — тоже два платежа', () => {
+    const venue = { ...VENUE, finalDueDays: 61 }
+    const r = buildTimeline(PASSPORT, { ...TERMS, venue, venueNoReturnDays: 61, signDate: '2027-01-11', guestRefundDays: 75 }, '2026-10-17')
+    const pays = r.milestones.filter((m) => m.amountCents !== null).map((m) => [m.id, m.date, m.amountCents])
+    expect(pays).toEqual([['venue-deposit', '2027-01-11', 900000], ['venue-final', '2027-03-10', 2700000]])
+  })
+})
+
 describe('вехи в прошлом', () => {
   it('прошедшие отмечены, подписание — нет', () => {
     const r = buildTimeline(PASSPORT, { ...TERMS, guestRefundDays: 75 }, '2027-03-20')

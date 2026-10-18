@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { addDays, addMonths, daysBetween, isIsoDate, monthsBetween } from './dates'
+import { addDays, addMonths, daysBetween, isIsoDate, localToday, monthsBetween } from './dates'
 
 describe('даты без локального времени', () => {
   it('месяц вперёд с 31-го — последний день месяца, високосный год учтён', () => {
@@ -25,5 +25,12 @@ describe('даты без локального времени', () => {
     expect(isIsoDate('2027-5-1')).toBe(false)
     expect(isIsoDate('2028-02-29')).toBe(true)
     expect(() => addDays('завтра', 1)).toThrow()
+  })
+})
+
+describe('сегодня по местному календарю', () => {
+  it('берёт местные год, месяц и день, а не UTC', () => {
+    expect(localToday(new Date(2027, 4, 10, 23, 30))).toBe('2027-05-10')
+    expect(localToday(new Date(2027, 0, 1, 0, 5))).toBe('2027-01-01')
   })
 })

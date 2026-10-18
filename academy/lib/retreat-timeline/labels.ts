@@ -67,7 +67,7 @@ export function warningText(w: TimelineWarning, lang: Lang): string {
   switch (w.id) {
     case 'guest-refund-after-venue-no-return':
       return ru
-        ? 'Гость может отменить с возвратом позже, чем ты можешь отменить у площадки без потерь. Этот риск ложится на тебя.'
+        ? 'Гость может отменить с возвратом позже, чем вы можете отменить у площадки без потерь. Этот риск ложится на вас.'
         : 'A guest can cancel with a refund later than you can cancel with the venue at no cost. That risk is yours.'
     case 'resale-buffer-short':
       return ru

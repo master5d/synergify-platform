@@ -58,6 +58,10 @@
     "pool": "prose-pool",
     "sections": [
       {
+        "sourceHash": "sha256:5e953d3b26f3bee7ce885175835ef2b93ec6dbf5172d74f06951b3f354976416",
+        "verbatim": "review"
+      },
+      {
         "sourceHash": "sha256:a7fe1763e4733fa1be43fadc9583064a1a6adb710095e8cf281df586d06d2d73",
         "points": [
           "This is a template for a practice card."

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { Locale } from '../../lib/dictionaries'
 import type { ContractModel, Venue } from '../../lib/retreat-calc/engine'
+import { localToday } from '../../lib/retreat-core/dates'
 import type { RetreatPassport } from '../../lib/retreat-core/passport'
 import { decodeToolLink } from '../../lib/retreat-core/tool-link'
 import { buildTimeline, validateTimeline, type TimelineTerms } from '../../lib/retreat-timeline/engine'
@@ -29,7 +30,6 @@ const card: React.CSSProperties = { background: 'var(--bg-surface)', border: '1p
 const h2: React.CSSProperties = { fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 'var(--text-lg)', margin: '2.25rem 0 0.9rem', color: 'var(--text-primary)' }
 const button: React.CSSProperties = { ...field, width: 'auto', cursor: 'pointer' }
 
-const todayUtc = () => new Date().toISOString().slice(0, 10)
 const shown = (n: number | undefined) => (n !== undefined && Number.isFinite(n) ? String(n) : '')
 const parsed = (s: string) => (s.trim() === '' ? NaN : Number(s.replace(',', '.')))
 
@@ -41,7 +41,7 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
   const [tab, setTab] = useState<'milestones' | 'arrivals'>('milestones')
 
   useEffect(() => {
-    const now = todayUtc()
+    const now = localToday()
     setToday(now)
     const hash = window.location.hash
     if (hash) {
@@ -167,14 +167,15 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
 
       <div role="tablist" aria-label={t.tabsLabel} style={{ display: 'flex', gap: '0.5rem', margin: '2.25rem 0 0' }}>
         {(['milestones', 'arrivals'] as const).map((k) => (
-          <button key={k} role="tab" aria-selected={tab === k} onClick={() => setTab(k)} style={{
+          <button key={k} role="tab" id={`tl-tab-${k}`} aria-controls={`tl-panel-${k}`} aria-selected={tab === k} onClick={() => setTab(k)} style={{
             ...button, fontFamily: 'var(--font-mono)', letterSpacing: '0.08em',
             background: tab === k ? 'var(--accent-wash)' : 'var(--bg-surface)', borderColor: tab === k ? GOLD : 'var(--border-color)',
           }}>{k === 'milestones' ? t.tabMilestones : t.tabArrivals}</button>
         ))}
       </div>
 
-      {tab === 'milestones' && result && (
+      <div role="tabpanel" id="tl-panel-milestones" aria-labelledby="tl-tab-milestones" hidden={tab !== 'milestones'}>
+      {result && (
         <>
           {result.warnings.length > 0 && (
             <div style={{ ...card, marginTop: '1.25rem', borderColor: GOLD }}>
@@ -204,9 +205,12 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
           </div>
         </>
       )}
+      </div>
 
       {/* панель не размонтируется при смене вкладки: строки гостей живут только в её состоянии */}
-      <div hidden={tab !== 'arrivals'} style={{ marginTop: '1.25rem' }}><ArrivalsPanel locale={locale} passport={f.passport} /></div>
+      <div role="tabpanel" id="tl-panel-arrivals" aria-labelledby="tl-tab-arrivals" hidden={tab !== 'arrivals'} style={{ marginTop: '1.25rem' }}>
+        <ArrivalsPanel locale={locale} passport={f.passport} />
+      </div>
 
       <p style={{ ...label, marginTop: '2.5rem' }}>{t.disclaimer}</p>
     </div>

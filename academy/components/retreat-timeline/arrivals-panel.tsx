@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import type { Locale } from '../../lib/dictionaries'
 import type { RetreatPassport } from '../../lib/retreat-core/passport'
 import {
-  ARRIVAL_CSV_HEADER, ARRIVAL_FIELDS, arrivalsToCsv, checkArrivals, emptyArrival, parseArrivalsCsv, type ArrivalRow,
+  ARRIVAL_CSV_HEADER, ARRIVAL_FIELDS, arrivalsToCsv, checkArrivals, decodeCsvBytes, emptyArrival, parseArrivalsCsv, type ArrivalRow,
 } from '../../lib/retreat-timeline/arrivals'
 import { download } from './download'
 import { TL_UI } from './ui'
@@ -22,23 +22,26 @@ export function ArrivalsPanel({ locale, passport }: { locale: Locale; passport: 
   const issues = checkArrivals(rows, passport)
   const head = ARRIVAL_CSV_HEADER[locale]
 
+  const fileInput = useRef<HTMLInputElement>(null)
+
   const onFile = (file: File | undefined) => {
     if (!file) return
     const reader = new FileReader()
     reader.onload = () => {
-      const parsed = parseArrivalsCsv(String(reader.result ?? ''))
+      const parsed = parseArrivalsCsv(decodeCsvBytes(new Uint8Array(reader.result as ArrayBuffer)))
       setRows(parsed.length ? parsed : [emptyArrival()])
     }
-    reader.readAsText(file, 'utf-8')
+    reader.readAsArrayBuffer(file)
   }
 
   return (
     <div>
       <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.6 }}>{t.arrivalsLead}</p>
       <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', margin: '0 0 0.9rem' }}>
-        <label style={{ ...button, display: 'inline-block' }}>{t.uploadCsv}
-          <input type="file" accept=".csv,text/csv" style={{ display: 'none' }} onChange={(e) => onFile(e.target.files?.[0])} />
-        </label>
+        {/* кнопка, а не label: до загрузки должно быть можно добраться с клавиатуры */}
+        <button style={button} onClick={() => fileInput.current?.click()}>{t.uploadCsv}</button>
+        <input ref={fileInput} type="file" accept=".csv,text/csv" hidden aria-label={t.uploadCsv}
+          onChange={(e) => { onFile(e.target.files?.[0]); e.target.value = '' }} />
         <button style={button} onClick={() => download(`arrival-list.${locale}.csv`, arrivalsToCsv(rows, locale), 'text/csv;charset=utf-8')}>{t.downloadCsv}</button>
         <button style={button} onClick={() => setRows([...rows, emptyArrival()])}>{t.addRow}</button>
       </div>

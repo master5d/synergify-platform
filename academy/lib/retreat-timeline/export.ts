@@ -50,13 +50,19 @@ const compact = (d: string) => d.replace(/-/g, '')
 /** `stamp` — момент выгрузки `YYYYMMDDTHHMMSSZ` (DTSTAMP по RFC 5545); без него — дата вехи, для детерминизма тестов. */
 export function milestonesToIcs(ms: Milestone[], title: string, lang: Lang, stamp?: string): string {
   const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', `PRODID:-//academy.synergify.com//retreat-timeline//${lang.toUpperCase()}`, 'CALSCALE:GREGORIAN']
+  // UID события — веха + ретрит (дата заезда и название), без даты самой вехи: после правки сроков повторный
+  // импорт обновляет события, а не плодит дубли; два ретрита с одним стартом не перетирают друг друга.
+  const start = ms.find((m) => m.id === 'arrival')?.date ?? ''
+  let h = 0x811c9dc5
+  for (const ch of new TextEncoder().encode(title)) h = Math.imul(h ^ ch, 0x01000193) >>> 0
+  const retreatId = `${start}-${h.toString(16)}`
   for (const m of ms) {
     const what = milestoneLabel(m, lang)
     const details = [WHO_LABELS[lang][m.who], m.amountCents === null ? '' : money(m.amountCents, lang), SOURCE_LABELS[lang][m.source]]
       .filter(Boolean).join(' · ')
     lines.push(
       'BEGIN:VEVENT',
-      `UID:${m.id}${m.n !== undefined ? `-${m.n}` : ''}-${m.date}@academy.synergify.com`,
+      `UID:${m.id}${m.n !== undefined ? `-${m.n}` : ''}-${retreatId}@academy.synergify.com`,
       `DTSTAMP:${stamp ?? `${compact(m.date)}T000000Z`}`,
       `DTSTART;VALUE=DATE:${compact(m.date)}`,
       `DTEND;VALUE=DATE:${compact(addDays(m.date, 1))}`,

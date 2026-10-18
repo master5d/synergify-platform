@@ -1,7 +1,7 @@
 // Движок таймлайна ретрита: вехи и платежи по датам от даты старта и условий договора (spec подпроекта B, §5.3).
 // Только арифметика дат и денег, без сети. Платежи площадке — тот же график, что у калькулятора (venuePayments).
 
-import { LIMITS, venuePayments, type Lang, type Venue } from '../retreat-calc/engine'
+import { LIMITS, pct, venueCost, venuePayments, type Lang, type Venue } from '../retreat-calc/engine'
 import { addDays, addMonths, daysBetween, isIsoDate, monthsBetween, type IsoDate } from '../retreat-core/dates'
 import { validatePassport, type RetreatPassport } from '../retreat-core/passport'
 
@@ -114,7 +114,13 @@ export function buildTimeline(p: RetreatPassport, t: TimelineTerms, today: IsoDa
 
   add('sign', t.signDate, 'contract')
   const venueFinal = addDays(start, -t.venue.finalDueDays)
-  const schedule = venuePayments(t.venue, guests, Math.max(1, monthsBetween(t.signDate, start))).schedule
+  let schedule = venuePayments(t.venue, guests, Math.max(1, monthsBetween(t.signDate, start))).schedule
+  // Месячные корзины калькулятора сливают остаток с депозитом, когда до финального срока меньше корзины.
+  // По датам срок ещё впереди: депозит — в день подписания, остаток — к сроку (одним платежом только после него).
+  if (!t.venue.payInFull && schedule.length === 1 && t.signDate < venueFinal) {
+    const deposit = pct(venueCost(t.venue, guests), t.venue.depositPct)
+    schedule = [{ month: 0, amount: deposit }, { month: -1, amount: schedule[0].amount - deposit }]
+  }
   schedule.forEach((pay, i) => {
     if (pay.amount === 0) return                       // депозит 0 % — не платёж, а шум в календаре
     if (i === 0) add('venue-deposit', t.signDate, 'contract', pay.amount)
