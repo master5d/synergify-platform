@@ -2,7 +2,7 @@
 
 import type { Lang } from '../retreat-calc/engine'
 import { addDays } from '../retreat-core/dates'
-import { toCsv } from './csv'
+import { toCsv } from '../retreat-core/csv'
 import type { Milestone } from './engine'
 import { milestoneLabel, SOURCE_LABELS, WHO_LABELS } from './labels'
 

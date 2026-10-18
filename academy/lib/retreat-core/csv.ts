@@ -1,9 +1,9 @@
-// CSV для таблиц: UTF-8 с BOM (иначе Excel по двойному щелчку ломает кириллицу), разделитель — по локали,
+// CSV для таблиц инструментов ведущего: UTF-8 с BOM (иначе Excel по двойному щелчку ломает кириллицу), разделитель — по локали,
 // как у шаблонов курса: RU «;», EN «,» (Excel берёт разделитель из региональных настроек).
 
 import type { Lang } from '../retreat-calc/engine'
 
-export const BOM = '﻿'
+export const BOM = '\uFEFF'
 export const separatorFor = (lang: Lang) => (lang === 'ru' ? ';' : ',')
 
 function cell(v: string, sep: string): string {

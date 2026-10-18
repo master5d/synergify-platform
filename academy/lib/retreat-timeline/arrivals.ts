@@ -4,7 +4,7 @@
 import type { Lang } from '../retreat-calc/engine'
 import { addDays, isIsoDate } from '../retreat-core/dates'
 import type { RetreatPassport } from '../retreat-core/passport'
-import { parseCsv, toCsv } from './csv'
+import { parseCsv, toCsv } from '../retreat-core/csv'
 
 export const ARRIVAL_FIELDS = [
   'guest', 'phone', 'flightIn', 'dateIn', 'timeIn', 'airport', 'meetBy', 'meetPoint',

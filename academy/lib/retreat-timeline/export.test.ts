@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import type { Venue } from '../retreat-calc/engine'
-import { parseCsv } from './csv'
+import { parseCsv } from '../retreat-core/csv'
 import { buildTimeline, MILESTONE_ORDER, type WarningId } from './engine'
 import { milestonesToCsv, milestonesToIcs } from './export'
 import { milestoneLabel, warningText } from './labels'
@@ -23,7 +23,7 @@ describe('CSV вех', () => {
   it('BOM и заголовок — как у шаблона курса, на обоих языках', () => {
     for (const lang of ['ru', 'en'] as const) {
       const csv = milestonesToCsv(R.milestones, lang)
-      expect(csv.startsWith('﻿')).toBe(true)
+      expect(csv.startsWith('\uFEFF')).toBe(true)
       expect(csv.split('\r\n')[0]).toBe(template(`timeline.${lang}.csv`).split(/\r?\n/)[0])
     }
   })
