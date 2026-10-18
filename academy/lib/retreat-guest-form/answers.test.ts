@@ -62,6 +62,12 @@ describe('сводка диет', () => {
     expect(s.guests.map((g) => g.row)).toEqual([5, 4])
     expect(s.issues).toEqual([{ id: 'duplicate-guest', row: 3, guest: 'Анна К.' }])
   })
+  it('имя с пояснением в скобках — другой гость, не повтор', () => {
+    const t = readAnswers(formsCsv([row('Иван П. (Ваня)', 'всё'), row('Иван П.', 'веган')]))
+    const s = summarize(t, matchColumns(t.header, ON), ON)
+    expect(s.guests).toHaveLength(2)
+    expect(ids(s.issues)).not.toContain('duplicate-guest')
+  })
   it('строка без имени — «Гость из строки N» и no-name', () => {
     const t = readAnswers(formsCsv([row('', 'всё')]))
     const s = summarize(t, matchColumns(t.header, ON), ON)

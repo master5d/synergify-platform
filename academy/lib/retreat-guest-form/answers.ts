@@ -121,7 +121,8 @@ export function summarize(t: AnswersTable, map: ColumnMap, on: QuestionId[], gue
         own.push({ id: 'unknown-choice', row: g.row, question: id })
       }
     }
-    const key = normalizeHeader(g.values.name ?? '')
+    // имя — без срезания скобок: «Иван Петров (Ваня)» и «Иван Петров» — разные гости
+    const key = fold(g.values.name ?? '')
     if (!key) {
       own.push({ id: 'no-name', row: g.row })
       guests.push(g)
