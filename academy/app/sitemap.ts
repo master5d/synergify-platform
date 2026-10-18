@@ -17,6 +17,7 @@ const PATHS: string[] = [
   // инструменты академии: калькулятор экономики ретрита и таймлайн сроков (считают в браузере, данные не уходят)
   'instrumenty/kalkulyator-retrita',
   'instrumenty/tajmlajn',
+  'instrumenty/generator-menyu',
   ...writtenSpeedreadingSlugs().map((slug) => `trenazhery/${slug}`),
   // «Эйдетика» — только после вычитки владельцем (status 'live'); до того страницы noindex.
   ...(isEideticsLive() ? ['trenazhery/eidetika', 'trenazhery/eidetika/ryad', 'trenazhery/eidetika/dvorec'] : []),

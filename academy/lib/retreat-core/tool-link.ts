@@ -4,10 +4,13 @@
 // Ссылка калькулятора v1 (без ключа `retreat`) тоже понимается — её разбирает decodeLink калькулятора.
 
 import type { Lang } from '../retreat-calc/engine'
-import { decodeLink, fromBase64Url, MAX_FRAGMENT, toBase64Url, type LinkData } from '../retreat-calc/link'
+import { decodeLink, fromBase64Url, toBase64Url, type LinkData } from '../retreat-calc/link'
 import { pickPassport, type RetreatPassport } from './passport'
 
 export const TOOL_LINK_VERSION = 1
+/** Потолок ссылки инструмента. Выше, чем у калькулятора (8 000): неделя меню с кириллицей весит больше.
+ *  Браузеры держат адреса в десятки тысяч знаков; что длиннее — страница предлагает сохранить CSV. */
+export const TOOL_MAX_FRAGMENT = 64_000
 
 export interface ToolLink<T> {
   v: 1
@@ -52,7 +55,7 @@ export function encodeToolLink<T>(l: ToolLink<T>): string {
 
 export function decodeToolLink<T>(hash: string, pickTool: (raw: unknown) => T, lang: Lang): DecodedTool<T> {
   const t = MESSAGES[lang]
-  if (hash.length > MAX_FRAGMENT) return { ok: false, error: t.broken }
+  if (hash.length > TOOL_MAX_FRAGMENT) return { ok: false, error: t.broken }
   const m = /^#?data=([A-Za-z0-9_-]+)$/.exec(hash.trim())
   if (!m) return { ok: false, error: t.none }
   let raw: unknown

@@ -31,6 +31,11 @@ describe('CSV меню для шефа', () => {
   it('круг CSV без потерь на обоих языках: мясное, варианты, аллергены, опция, дробная цена', () => {
     for (const lang of ['ru', 'en'] as const) expect(menuFromCsv(menuToCsv(SLOTS, sampleGrid(), lang))).toEqual(sampleGrid())
   })
+  it('знак « | » внутри варианта не режет его', () => {
+    const g = sampleGrid()
+    g['2-lunch'] = { ...g['2-lunch'], variants: { vegan: 'Плов с нутом | без масла', 'gluten-free': 'Рис' } }
+    for (const lang of ['ru', 'en'] as const) expect(menuFromCsv(menuToCsv(SLOTS, g, lang))['2-lunch'].variants).toEqual(g['2-lunch'].variants)
+  })
   it('шаблон курса читается: строки с днём и приёмом, без блюд', () => {
     const g = menuFromCsv(template('menu-week.ru.csv'))
     expect(Object.keys(g).length).toBeGreaterThan(0)

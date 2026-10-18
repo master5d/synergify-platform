@@ -83,12 +83,20 @@ export function validateMenu(p: RetreatPassport, diets: Diets, lang: Lang): stri
   return errors
 }
 
-/** Нужен ли блюду вариант для диеты: веганам — при молоке, яйцах или мясе; без глютена — при глютене; вегетарианцам — при мясе. */
+/** Рыба и морепродукты — не вегетарианское, даже если галочку «мясное» забыли. */
+const notVegetarian = (c: MenuCell) => c.meat || c.allergens.some((a) => a === 'fish' || a === 'crustaceans' || a === 'molluscs')
+
+/** Нужен ли блюду вариант для диеты: веганам — при молоке, яйцах, мясе или рыбе; без глютена — при глютене;
+ *  вегетарианцам — при мясе или рыбе. */
 function needsVariant(cell: MenuCell, diet: SpecialDiet): boolean {
   if (diet === 'gluten-free') return cell.allergens.includes('gluten')
-  if (diet === 'vegan') return cell.meat || cell.allergens.includes('milk') || cell.allergens.includes('eggs')
-  return cell.meat
+  if (diet === 'vegan') return notVegetarian(cell) || cell.allergens.includes('milk') || cell.allergens.includes('eggs')
+  return notVegetarian(cell)
 }
+
+/** Есть ли для диеты своё блюдо: веганский вариант годится и вегетарианцам. */
+const hasVariant = (cell: MenuCell, diet: SpecialDiet) =>
+  Boolean(cell.variants[diet]?.trim()) || (diet === 'vegetarian' && Boolean(cell.variants.vegan?.trim()))
 
 export function computeMenu(p: RetreatPassport, grid: MenuGrid, diets: Diets): { slots: Slot[]; totals: MenuTotals; issues: MenuIssue[] } {
   const errors = validateMenu(p, diets, 'en')
@@ -106,8 +114,9 @@ export function computeMenu(p: RetreatPassport, grid: MenuGrid, diets: Diets): {
     const cell = grid[cellKey(s)]
     const sum = byDay.has(s.day) ? byDay.get(s.day)! : 0
     if (!cell || !cell.dish.trim()) {
+      // пустой приём — тоже «часть цен»: итог дня без него выглядел бы полным
       issues.push({ id: 'empty-slot', day: s.day, meal: s.meal })
-      byDay.set(s.day, sum)
+      byDay.set(s.day, null)
       continue
     }
     if (cell.priceCents === null) {
@@ -120,7 +129,7 @@ export function computeMenu(p: RetreatPassport, grid: MenuGrid, diets: Diets): {
       issues.push({ id: 'allergen-without-alternative', day: s.day, meal: s.meal })
     }
     for (const d of special) {
-      if ((diets[d] ?? 0) > 0 && needsVariant(cell, d) && !cell.variants[d]?.trim()) issues.push({ id: 'diet-without-variant', day: s.day, meal: s.meal, diet: d })
+      if ((diets[d] ?? 0) > 0 && needsVariant(cell, d) && !hasVariant(cell, d)) issues.push({ id: 'diet-without-variant', day: s.day, meal: s.meal, diet: d })
     }
     if (cell.option) options.push({ day: s.day, meal: s.meal, name: cell.option.name, priceCents: cell.option.priceCents })
   }

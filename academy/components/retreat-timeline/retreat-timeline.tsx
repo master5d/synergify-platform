@@ -13,6 +13,7 @@ import {
   pickTimelineTool, TIMELINE_DRAFT_KEY, TIMELINE_PATH, timelineHash, type TimelineForm,
 } from '../../lib/retreat-timeline/form'
 import { milestoneLabel, warningText, WHO_LABELS } from '../../lib/retreat-timeline/labels'
+import { MENU_PATH, menuHashFromPassport } from '../../lib/retreat-menu/form'
 import { PassportBar } from '../retreat-core/passport-bar'
 import { ArrivalsPanel } from './arrivals-panel'
 import { download } from './download'
@@ -115,7 +116,10 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
         .tl-past { color: var(--text-secondary); }
       `}</style>
 
-      <PassportBar locale={locale} passport={f.passport} links={[{ href: calcHref, label: t.openCalc }]} />
+      <PassportBar locale={locale} passport={f.passport} links={[
+        { href: calcHref, label: t.openCalc },
+        { href: localePath(MENU_PATH, locale) + menuHashFromPassport(f.passport), label: t.openMenu },
+      ]} />
       {notice && <p role="status" style={{ ...card, color: GOLD, margin: '0 0 1.25rem' }}>{notice}</p>}
 
       <h2 style={h2}>{t.retreat}</h2>

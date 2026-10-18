@@ -12,6 +12,8 @@ export const MENU_CSV_HEADER: Record<Lang, string[]> = {
   en: ['Day', 'Meal', 'Main dish', 'Side or salad', 'Drink', 'Vegan or gluten-free option', 'Allergens', 'Paid add-on', 'Price per guest'],
 }
 const SPECIAL: SpecialDiet[] = ['vegetarian', 'vegan', 'gluten-free']
+const VARIANT_SPLIT = new RegExp(
+  `\\s*\\|\\s*(?=(?:${SPECIAL.flatMap((d) => [dietLabel(d, 'ru'), dietLabel(d, 'en')]).join('|')})\\s*:)`, 'i')
 
 /** Центы → сумма; дробная часть через запятую в RU (как ждёт русский Excel). */
 export function menuMoney(cents: number, lang: Lang): string {
@@ -50,7 +52,8 @@ export function menuFromCsv(text: string): MenuGrid {
     const meatMark = [MEAT_MARK.ru, MEAT_MARK.en].find((m) => dish.endsWith(` ${m}`))
     if (meatMark) dish = dish.slice(0, -meatMark.length - 1)
     const variants: MenuCell['variants'] = {}
-    for (const part of (r[5] ?? '').split('|')) {
+    // делим только перед «<диета>:» — знак « | » внутри самого варианта остаётся частью текста
+    for (const part of (r[5] ?? '').split(VARIANT_SPLIT)) {
       const i = part.indexOf(':')
       const diet = i > 0 ? dietByLabel(part.slice(0, i)) : undefined
       if (diet && diet !== 'standard' && part.slice(i + 1).trim()) variants[diet] = part.slice(i + 1).trim()

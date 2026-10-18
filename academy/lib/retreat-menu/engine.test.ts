@@ -56,9 +56,20 @@ describe('проверки', () => {
     expect(r.totals.perGroup).toBeNull()
     expect(r.issues).toEqual([{ id: 'day-without-price', day: 3 }])
   })
-  it('пустой приём', () => {
+  it('пустой приём: замечание, и итог дня и недели не считается', () => {
     const r = computeMenu(PASSPORT, week((c, k) => (k === '2-breakfast' ? emptyCell() : c)), {})
     expect(r.issues).toContainEqual({ id: 'empty-slot', day: 2, meal: 'breakfast' })
+    expect(r.totals.perGuestByDay[1]).toEqual({ day: 2, cents: null })
+    expect(r.totals.perGuestWeek).toBeNull()
+  })
+  it('рыба без галочки «мясное» — всё равно нужен вариант для вегетарианцев', () => {
+    const r = computeMenu(PASSPORT, week((c, k) => (k === '4-lunch' ? { ...c, allergens: ['fish'], variants: { 'gluten-free': 'то же' } } : c)), { vegetarian: 1 })
+    expect(r.issues).toEqual([{ id: 'diet-without-variant', day: 4, meal: 'lunch', diet: 'vegetarian' }])
+  })
+  it('веганский вариант годится вегетарианцам; веганам мясное без варианта — замечание', () => {
+    const meat = (variants: Record<string, string>) => week((c, k) => (k === '4-lunch' ? { ...c, meat: true, variants } : c))
+    expect(computeMenu(PASSPORT, meat({ vegan: 'Плов с нутом' }), { vegetarian: 2, vegan: 1 }).issues).toEqual([])
+    expect(computeMenu(PASSPORT, meat({}), { vegan: 1 }).issues).toEqual([{ id: 'diet-without-variant', day: 4, meal: 'lunch', diet: 'vegan' }])
   })
   it('веганы в группе и блюдо с молоком: без варианта — замечание, с вариантом — нет', () => {
     const withMilk = (variant?: string) => week((c, k) => (k === '2-breakfast' ? { ...c, allergens: ['milk'], variants: variant ? { vegan: variant } : {} } : c))
