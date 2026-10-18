@@ -8,6 +8,7 @@ import { decodeToolLink, TOOL_MAX_FRAGMENT } from '../../lib/retreat-core/tool-l
 import { CALC_PATH, localePath, TIMELINE_PATH } from '../../lib/retreat-timeline/form'
 import { MENU_PATH, calcHashFromPassport, menuHashFromPassport, timelineHashFromPassport } from '../../lib/retreat-menu/form'
 import { FORM_PATH, formHashFromPassport } from '../../lib/retreat-guest-form/form'
+import { VENUE_PATH, venueHashFromPassport } from '../../lib/retreat-venue/form'
 import { blockMinutes, fromMinutes, STEP, toMinutes, pickProgramTool, type Block } from '../../lib/retreat-program/grid'
 import { mealLabel } from '../../lib/retreat-menu/labels'
 import {
@@ -117,6 +118,7 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
           { href: localePath(MENU_PATH, locale) + menuHashFromPassport(form.passport), label: t.openMenu },
           { href: localePath(CALC_PATH, locale) + calcHashFromPassport(form.passport), label: t.openCalc },
           { href: localePath(FORM_PATH, locale) + formHashFromPassport(form.passport), label: t.openForm },
+          { href: localePath(VENUE_PATH, locale) + venueHashFromPassport(form.passport), label: t.openVenue },
         ]} />
         {notice && <p role="status" style={{ ...card, color: 'var(--accent-ink)' }}>{notice}</p>}
         {previousDraft && <p>
