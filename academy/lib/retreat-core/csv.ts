@@ -29,13 +29,13 @@ export function toCsv(rows: string[][], lang: Lang): string {
   return BOM + rows.map((r) => r.map((v) => cell(v, sep)).join(sep)).join('\r\n') + '\r\n'
 }
 
-/** Байты файла → текст: UTF-8, а если файл не в UTF-8 — cp1251 (так сохраняет «CSV (разделители — запятые)»
- *  русский Excel). Без этого кириллица молча превращалась бы в «�». */
-export function decodeCsvBytes(bytes: Uint8Array): string {
+/** Байты файла → текст: UTF-8, а если файл не в UTF-8 — кодировка Excel по языку страницы: cp1251 (русский Excel)
+ *  или cp1252 (английский). Без этого кириллица молча превращалась бы в «�», а «José» — в «Josй». */
+export function decodeCsvBytes(bytes: Uint8Array, fallback: 'windows-1251' | 'windows-1252' = 'windows-1251'): string {
   try {
     return new TextDecoder('utf-8', { fatal: true }).decode(bytes)
   } catch {
-    return new TextDecoder('windows-1251').decode(bytes)
+    return new TextDecoder(fallback).decode(bytes)
   }
 }
 

@@ -83,7 +83,7 @@ export function RetreatGuestForm({ locale }: { locale: Locale }) {
           { href: localePath(MENU_PATH, locale) + menuHashFromPassport(f.passport), label: t.openMenuBar },
           { href: localePath(CALC_PATH, locale) + calcHashFromPassport(f.passport), label: t.openCalc },
         ]} />
-        {notice && <p role="status" style={{ ...card, color: GOLD, margin: '0 0 1.25rem' }}>{notice}</p>}
+        {notice && <p role="status" style={{ ...card, color: GOLD, margin: '0 0 1.25rem', whiteSpace: 'pre-wrap' }}>{notice}</p>}
 
         <h2 style={h2}>{t.retreat}</h2>
         <div className="gf-grid">

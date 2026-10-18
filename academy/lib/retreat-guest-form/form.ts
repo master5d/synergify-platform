@@ -4,7 +4,7 @@
 import type { IsoDate } from '../retreat-core/dates'
 import { passportFromCalcLink, pickPassport, type RetreatPassport } from '../retreat-core/passport'
 import { encodeToolLink, type DecodedTool } from '../retreat-core/tool-link'
-import type { Diets } from '../retreat-menu/engine'
+import { DIETS, type Diets } from '../retreat-menu/engine'
 import { pickMenuTool } from '../retreat-menu/form'
 import { defaultForm as timelineDefaultForm } from '../retreat-timeline/form'
 import { DEFAULT_ON, normalizeOn, type QuestionId } from './questions'
@@ -52,9 +52,11 @@ export function formFromDraft(text: string | null, today: IsoDate): GuestFormSta
 }
 
 /** Ссылка в генератор меню с числами по диетам из сводки — агрегаты без имён. Сетки в ней нет, поэтому черновик меню
- *  остаётся (правило `withDraftMenu`); `other` меню не знает — его отбрасывает allowlist меню. */
+ *  остаётся (правило `withDraftMenu`); `other` меню не знает — его отбрасывает allowlist меню. Особые диеты идут
+ *  явными нулями: пустые числа меню заменило бы диетами из своего черновика, то есть прошлого ретрита. */
 export function menuHashWithDiets(p: RetreatPassport, diets: Diets | Record<string, number>): string {
-  return encodeToolLink({ v: 1, retreat: pickPassport(p), tool: { diets: pickMenuTool({ diets }).diets } })
+  const zeros = Object.fromEntries(DIETS.filter((d) => d !== 'standard').map((d) => [d, 0]))
+  return encodeToolLink({ v: 1, retreat: pickPassport(p), tool: { diets: pickMenuTool({ diets: { ...zeros, ...diets } }).diets } })
 }
 
 /** Анкета с паспортом соседнего инструмента и всеми вопросами. */

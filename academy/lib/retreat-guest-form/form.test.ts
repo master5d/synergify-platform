@@ -15,7 +15,7 @@ const PASSPORT = { title: 'Неделя в горах', currency: 'USD', start: 
 const decoded = (hash: string) => fromBase64Url(hash.replace(/^#data=/, ''))
 
 // ответы с именами и телефонами: ни одно из этих значений не должно попасть в ссылку или черновик
-const SECRETS = ['Анна Кольцова', '+7 900 111-22-33', 'Мама, +7 900 444-55-66', 'астма']
+const SECRETS = ['Анна Кольцова', '+7 000 111-22-33', 'Мама, +7 000 444-55-66', 'астма']
 const ANSWERS = toCsv([
   QUESTIONS.map((q) => q.text.ru),
   QUESTIONS.map((q) => ({ name: SECRETS[0], phone: SECRETS[1], emergency: SECRETS[2], breathingLimits: SECRETS[3], diet: 'веган' } as Record<string, string>)[q.id] ?? ''),
@@ -41,7 +41,9 @@ describe('ссылка и черновик анкеты', () => {
     for (const out of [decoded(formHash(f)), draftOf(f), decoded(menu)]) {
       for (const secret of SECRETS) expect(out).not.toContain(secret)
     }
-    expect(decodeToolLink(menu, pickMenuTool, 'ru')).toMatchObject({ ok: true, link: { tool: { grid: {}, diets: { vegan: 1 } } } })
+    expect(decodeToolLink(menu, pickMenuTool, 'ru')).toMatchObject({ ok: true, link: { tool: { grid: {}, diets: { vegan: 1, vegetarian: 0, 'gluten-free': 0 } } } })
+    // посчитать нечего — особые диеты всё равно нулями: старые числа черновика меню не подставятся
+    expect(decodeToolLink(menuHashWithDiets(f.passport, {}), pickMenuTool, 'ru')).toMatchObject({ link: { tool: { diets: { vegetarian: 0, vegan: 0, 'gluten-free': 0 } } } })
   })
   it('черновик читается обратно; мусор — null', () => {
     const f: GuestFormState = { passport: PASSPORT, on: ['name', 'photo'] }

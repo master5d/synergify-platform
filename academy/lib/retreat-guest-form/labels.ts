@@ -17,9 +17,9 @@ export function summaryIssueText(i: SummaryIssue, lang: Lang): string {
   const q = questionName(i.question, lang)
   switch (i.id) {
     case 'missing-column':
-      return ru ? `«${q}»: в файле нет такой колонки. Выберите её вручную в сопоставлении.` : `“${q}”: no such column in the file. Pick it by hand in the matching table.`
+      return ru ? `«${q}»: в файле нет такой колонки. Выберите её в сопоставлении или выключите вопрос выше.` : `“${q}”: no such column in the file. Pick it in the matching table or switch the question off above.`
     case 'duplicate-guest':
-      return ru ? `${who}: ответ пришёл дважды. В сводке — последний, строка ${i.row} убрана.` : `${who}: answered twice. The summary keeps the latest; row ${i.row} is dropped.`
+      return ru ? `${who}: ответ пришёл дважды. В сводке — нижняя строка файла, строка ${i.row} убрана.` : `${who}: answered twice. The summary keeps the lower row of the file; row ${i.row} is dropped.`
     case 'unknown-choice':
       return ru ? `Строка ${i.row}, «${q}»: ответ не из вариантов анкеты. Проверьте его глазами.` : `Row ${i.row}, “${q}”: the answer is not one of the form options. Check it by eye.`
     case 'no-emergency':

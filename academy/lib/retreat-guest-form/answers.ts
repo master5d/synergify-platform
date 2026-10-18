@@ -36,9 +36,13 @@ export interface Summary {
 
 const BY_ID = new Map(QUESTIONS.map((q) => [q.id, q]))
 
-/** Заголовок колонки и текст вопроса сравниваются без регистра, номера в начале и знаков в конце. */
+/** Без регистра, «ё» = «е», пробелы схлопнуты: так ведущий набирает варианты и вопросы в своём сервисе. */
+const fold = (s: string) => s.normalize('NFC').toLowerCase().replace(/ё/g, 'е').replace(/\s+/g, ' ').trim()
+
+/** Заголовок колонки и текст вопроса сравниваются без номера в начале, без вариантов в скобках и знаков в конце:
+ *  строка из текста анкеты («13. Как вы едите (всё / …)») целиком в заголовке тоже узнаётся. */
 export function normalizeHeader(s: string): string {
-  return s.normalize('NFC').toLowerCase().replace(/\s+/g, ' ').trim().replace(/^\d+[.)]\s*/, '').replace(/[\s?:.*]+$/, '')
+  return fold(s).replace(/^\d+[.)]\s*/, '').replace(/[\s?:.*]+$/, '').replace(/\s*\([^)]*\)$/, '').replace(/[\s?:.*]+$/, '')
 }
 
 export function readAnswers(text: string): AnswersTable {
@@ -62,12 +66,21 @@ export function matchColumns(header: string[], on: QuestionId[]): ColumnMap {
 
 const OTHER_PREFIX = /^(other|другое)\s*:\s*([\s\S]*)$/i
 
+/** Прежние подписи вариантов и их формы, которые ведущий мог оставить в своей анкете (шаблон курса — «согласен(на)»). */
+const SYNONYMS: Partial<Record<QuestionId, Record<ChoiceId, string[]>>> = {
+  touch: {
+    yes: ['согласен', 'согласна', 'согласен(на)', 'согласен (на)', 'i agree'],
+    no: ['не согласен', 'не согласна', 'не согласен(на)', 'не согласен (на)', 'i do not agree'],
+  },
+}
+
 /** Вариант по подписи любого языка или по id; `Other: …` / `Другое: …` Google Forms — `other` с текстом. */
 function recognize(q: Question, raw: string): { choice?: ChoiceId; otherText?: string } {
   const m = OTHER_PREFIX.exec(raw)
   if (m && q.choices?.includes('other')) return { choice: 'other', otherText: m[2].trim() }
-  const n = raw.toLowerCase()
-  const choice = q.choices?.find((c) => c === n || q.choiceText![c].ru.toLowerCase() === n || q.choiceText![c].en.toLowerCase() === n)
+  const n = fold(raw)
+  const choice = q.choices?.find((c) => c === n || fold(q.choiceText![c].ru) === n || fold(q.choiceText![c].en) === n
+    || (SYNONYMS[q.id]?.[c] ?? []).some((s) => fold(s) === n))
   return choice ? { choice, otherText: choice === 'other' ? '' : undefined } : {}
 }
 

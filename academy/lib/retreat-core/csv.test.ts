@@ -15,6 +15,7 @@ describe('CSV ядра', () => {
     const cp1251 = Uint8Array.from([0xc3, 0xee, 0xf1, 0xf2, 0xfc, 0x3b, 0x31])     // «Гость;1»
     expect(decodeCsvBytes(cp1251)).toBe('Гость;1')
     expect(decodeCsvBytes(new TextEncoder().encode('Гость;1'))).toBe('Гость;1')
+    expect(decodeCsvBytes(Uint8Array.from([0x4a, 0x6f, 0x73, 0xe9]), 'windows-1252')).toBe('José')
   })
   it('номер записи — как строка таблицы: пустые строки отброшены, номера не сдвинуты, перевод строки в кавычках — одна запись', () => {
     expect(parseCsvNumbered('a;b\r\n;\r\n"x\ny";z\r\nc;d\r\n')).toEqual([

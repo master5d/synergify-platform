@@ -14,7 +14,7 @@ function formsCsv(rows: string[][]): string {
   return toCsv([['Отметка времени', ...COLS.map((id) => q(id).text.ru)], ...rows.map((r) => ['14.03.2028 10:00:00', ...r])], 'ru')
 }
 const row = (name: string, diet: string, extra: Partial<Record<QuestionId, string>> = {}) =>
-  COLS.map((id) => (id === 'name' ? name : id === 'diet' ? diet : extra[id] ?? (id === 'emergency' ? 'Сестра, +7 900 000-00-00' : '')))
+  COLS.map((id) => (id === 'name' ? name : id === 'diet' ? diet : extra[id] ?? (id === 'emergency' ? 'Сестра, +7 000 000-00-00' : '')))
 
 const ids = (issues: { id: SummaryIssueId }[]) => issues.map((i) => i.id)
 
@@ -67,6 +67,20 @@ describe('сводка диет', () => {
     const s = summarize(t, matchColumns(t.header, ON), ON)
     expect(s.issues).toContainEqual({ id: 'no-name', row: 2 })
     expect(arrivalsOf(s, 'ru')[0].guest).toBe('Гость из строки 2')
+  })
+})
+
+describe('ответы, набранные руками', () => {
+  it('«все» вместо «всё», «согласна» и строка анкеты с вариантами в скобках в заголовке узнаются', () => {
+    const header = ['13. Как вы едите (всё / без мяса и рыбы / веган / без глютена / другое)', 'Имя и фамилия', 'Касание в практиках (да / нет / спрашивать каждый раз)']
+    const t = readAnswers(toCsv([header, ['все', 'Анна К.', 'согласна'], ['Веган', 'Борис Л.', 'Согласен(на)']], 'ru'))
+    const on: QuestionId[] = ['name', 'diet', 'touch']
+    const map = matchColumns(t.header, on)
+    expect(map).toEqual({ name: 1, diet: 0, touch: 2 })
+    const s = summarize(t, map, on)
+    expect(s.diets).toEqual({ standard: 1, vegan: 1 })
+    expect(s.guests.map((g) => g.choice.touch)).toEqual(['yes', 'yes'])
+    expect(s.issues).toEqual([])
   })
 })
 

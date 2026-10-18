@@ -44,7 +44,7 @@ export function AnswersPanel({ locale, form }: { locale: Locale; form: GuestForm
     if (!file) return
     const reader = new FileReader()
     reader.onload = () => {
-      const tbl = readAnswers(decodeCsvBytes(new Uint8Array(reader.result as ArrayBuffer)))
+      const tbl = readAnswers(decodeCsvBytes(new Uint8Array(reader.result as ArrayBuffer), locale === 'en' ? 'windows-1252' : 'windows-1251'))
       if (!tbl.rows.length) { setNotice(t.noRows); return }
       setTable(tbl)
       setOverrides({})
@@ -100,7 +100,7 @@ export function AnswersPanel({ locale, form }: { locale: Locale; form: GuestForm
               </ul>
               {noDiet > 0 && <p style={hint}>{t.noDietAnswer(noDiet)}</p>}
               {summary.diets.other ? <p style={hint}>{t.otherNotInMenu}</p> : null}
-              <a href={localePath(MENU_PATH, locale) + menuHashWithDiets(form.passport, summary.diets)} style={{ color: GOLD, fontSize: 'var(--text-sm)' }}>{t.openMenu} →</a>
+              {map.diet !== undefined && <a href={localePath(MENU_PATH, locale) + menuHashWithDiets(form.passport, summary.diets)} style={{ color: GOLD, fontSize: 'var(--text-sm)' }}>{t.openMenu} →</a>}
             </div>
 
             {wishes.length > 0 && (

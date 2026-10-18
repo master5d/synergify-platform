@@ -41,7 +41,8 @@ describe('учебная анкета курса retreat', () => {
         expect([...new Set(s.issues.map((i) => i.id))].sort()).toEqual([...ex.expect.issues].sort())
         // в генератор меню уходят только числа; особые диеты — ровно те, что у учебного меню
         const menu = decodeToolLink(menuHashWithDiets(form.passport, s.diets), pickMenuTool, locale)
-        const { standard: _, ...special } = menu.ok && menu.kind === 'tool' ? menu.link.tool.diets : {}
+        const sent = menu.ok && menu.kind === 'tool' ? menu.link.tool.diets : {}
+        const special = Object.fromEntries(Object.entries(sent).filter(([d, n]) => d !== 'standard' && n > 0))
         expect(special).toEqual(menus.find((m) => m.id === ex.menuExample)!.data.tool.diets)
       })
     }

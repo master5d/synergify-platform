@@ -139,8 +139,8 @@ export const QUESTIONS: readonly Question[] = [
     text: { ru: 'Касание в практиках', en: 'Touch in practices' },
     short: { ru: 'Касание', en: 'Touch' },
     choiceText: {
-      yes: { ru: 'согласен', en: 'I agree' },
-      no: { ru: 'не согласен', en: 'I do not agree' },
+      yes: { ru: 'да', en: 'yes' },
+      no: { ru: 'нет', en: 'no' },
       ask: { ru: 'спрашивать каждый раз', en: 'ask me each time' },
     },
   },
