@@ -1,0 +1,258 @@
+[
+ {
+  "id": "practice-week",
+  "title": {
+   "ru": "Учебная неделя: программа",
+   "en": "Practice week: the program"
+  },
+  "data": {
+   "v": 1,
+   "retreat": {
+    "currency": "USD",
+    "guests": 20,
+    "nights": 6,
+    "start": "2028-05-10"
+   },
+   "tool": {
+    "blocks": [
+     {
+      "day": 1,
+      "start": "13:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 1,
+      "start": "19:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 2,
+      "start": "08:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 2,
+      "start": "13:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 2,
+      "start": "19:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 3,
+      "start": "08:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 3,
+      "start": "13:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 3,
+      "start": "19:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 4,
+      "start": "08:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 4,
+      "start": "13:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 4,
+      "start": "19:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 5,
+      "start": "08:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 5,
+      "start": "13:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 5,
+      "start": "19:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 6,
+      "start": "08:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 6,
+      "start": "13:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 6,
+      "start": "19:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 7,
+      "start": "08:00",
+      "minutes": 60,
+      "kind": "meal"
+     },
+     {
+      "day": 1,
+      "start": "17:00",
+      "minutes": 30,
+      "kind": "practice",
+      "practiceId": "intention-circle"
+     },
+     {
+      "day": 2,
+      "start": "07:00",
+      "minutes": 60,
+      "kind": "practice",
+      "practiceId": "qigong"
+     },
+     {
+      "day": 2,
+      "start": "15:00",
+      "minutes": 120,
+      "kind": "free"
+     },
+     {
+      "day": 2,
+      "start": "20:00",
+      "minutes": 60,
+      "kind": "practice",
+      "practiceId": "evening-satsang"
+     },
+     {
+      "day": 3,
+      "start": "09:00",
+      "minutes": 0,
+      "kind": "practice",
+      "practiceId": "dynamic-meditation"
+     },
+     {
+      "day": 3,
+      "start": "10:00",
+      "minutes": 0,
+      "kind": "practice",
+      "practiceId": "intense-breathing"
+     },
+     {
+      "day": 3,
+      "start": "15:00",
+      "minutes": 120,
+      "kind": "free"
+     },
+     {
+      "day": 4,
+      "start": "09:30",
+      "minutes": 0,
+      "kind": "practice",
+      "practiceId": "kundalini-yoga"
+     },
+     {
+      "day": 4,
+      "start": "16:00",
+      "minutes": 0,
+      "kind": "practice",
+      "practiceId": "tunnel-walk"
+     },
+     {
+      "day": 5,
+      "start": "07:00",
+      "minutes": 0,
+      "kind": "practice",
+      "practiceId": "morning-breath"
+     },
+     {
+      "day": 5,
+      "start": "14:30",
+      "minutes": 120,
+      "kind": "free"
+     },
+     {
+      "day": 5,
+      "start": "17:00",
+      "minutes": 0,
+      "kind": "practice",
+      "practiceId": "yin-yoga"
+     },
+     {
+      "day": 6,
+      "start": "10:00",
+      "minutes": 0,
+      "kind": "practice",
+      "practiceId": "eye-contact"
+     },
+     {
+      "day": 6,
+      "start": "14:30",
+      "minutes": 60,
+      "kind": "free"
+     },
+     {
+      "day": 6,
+      "start": "16:00",
+      "minutes": 0,
+      "kind": "practice",
+      "practiceId": "free-dance"
+     },
+     {
+      "day": 7,
+      "start": "10:00",
+      "minutes": 30,
+      "kind": "transfer"
+     }
+    ]
+   }
+  },
+  "expect": {
+   "issues": [
+    {
+     "id": "two-high-in-a-row",
+     "day": 3,
+     "start": "10:00"
+    },
+    {
+     "id": "no-free-time",
+     "day": 4
+    },
+    {
+     "id": "touch-check-form",
+     "card": "intense-breathing"
+    },
+    {
+     "id": "touch-check-form",
+     "card": "tunnel-walk"
+    }
+   ]
+  }
+ }
+]
