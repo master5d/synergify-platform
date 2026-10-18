@@ -1,0 +1,15 @@
+[
+  {
+    "id": "full-form",
+    "title": { "ru": "Учебная неделя: растительное меню", "en": "Practice week: a plant-based menu" },
+    "data": { "v": 1, "retreat": { "currency": "USD", "guests": 20, "nights": 6, "start": "2028-05-10" }, "tool": {} },
+    "sample": { "ru": "guest-answers-sample.ru.csv", "en": "guest-answers-sample.en.csv" },
+    "menuExample": "plant-week",
+    "expect": {
+      "rows": 21,
+      "guests": 20,
+      "diets": { "standard": 16, "vegan": 2, "gluten-free": 1, "other": 1 },
+      "issues": ["duplicate-guest", "unknown-choice", "severe-allergy", "no-emergency"]
+    }
+  }
+]
