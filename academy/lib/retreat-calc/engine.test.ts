@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { compute, profitGrid, validate, venueCost, type Inputs, type Venue } from './engine'
+import { compute, profitGrid, validate, venueCost, venuePayments, type Inputs, type Venue } from './engine'
 
 const usd = (n: number) => n * 100
 
@@ -205,5 +205,19 @@ describe('сетка «цена × гости»', () => {
     const g = profitGrid(inputs(), [usd(2600), usd(2800)], [16, 18, 20])
     expect(g[1][1]).toBe(usd(14400))
     expect(g[0][2]).toBeNull()
+  })
+})
+
+describe('venuePayments — график площадки для таймлайна', () => {
+  const venue: Venue = { ...VENUE, ratePerGuest: usd(1800), capacity: 20, depositPct: 25, finalDueDays: 60, installments: true }
+  it('депозит при подписании и четыре равных взноса до финального срока', () => {
+    expect(venuePayments(venue, 20, 6).schedule).toEqual([
+      { month: 0, amount: 900000 }, { month: 1, amount: 675000 }, { month: 2, amount: 675000 },
+      { month: 3, amount: 675000 }, { month: 4, amount: 675000 },
+    ])
+  })
+  it('калькулятор считает тот же график', () => {
+    const r = compute(inputs({ venue, guests: 20, monthsToStart: 6, salesCurve: [4, 4, 4, 4, 4] }))
+    expect(r.venueView.schedule).toEqual(venuePayments(venue, 20, 6).schedule)
   })
 })

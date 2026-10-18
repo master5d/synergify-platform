@@ -201,12 +201,12 @@ export function validate(i: Inputs, lang: Lang = 'ru'): string[] {
   return errors
 }
 
-function venueSchedule(i: Inputs): VenueView {
-  const v = i.venue
-  const contractValue = venueCost(v, i.guests)
-  const finalMonth = Math.max(0, i.monthsToStart - monthsBefore(v.finalDueDays))
+/** График платежей площадке по месяцам от подписания (месяц 0). Тот же график берёт таймлайн ретрита. */
+export function venuePayments(v: Venue, guests: number, monthsToStart: number): VenueView {
+  const contractValue = venueCost(v, guests)
+  const finalMonth = Math.max(0, monthsToStart - monthsBefore(v.finalDueDays))
   if (v.payInFull) {
-    const payable = venuePayable(v, i.guests)
+    const payable = venuePayable(v, guests)
     return { contractValue, payable, payInFullDiscount: contractValue - payable, schedule: [{ month: 0, amount: payable }] }
   }
   const deposit = pct(contractValue, v.depositPct)
@@ -225,6 +225,10 @@ function venueSchedule(i: Inputs): VenueView {
     }
   }
   return { contractValue, payable: contractValue, payInFullDiscount: 0, schedule }
+}
+
+function venueSchedule(i: Inputs): VenueView {
+  return venuePayments(i.venue, i.guests, i.monthsToStart)
 }
 
 function cashflow(i: Inputs, venue: VenueView): CashMonth[] {

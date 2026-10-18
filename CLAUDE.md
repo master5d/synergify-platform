@@ -25,7 +25,8 @@
 - GitHub Actions — CI/CD (`.github/workflows/deploy.yml`)
 - Vitest — тесты в каждом пакете (`*.test.ts` рядом с кодом; у web — десятки файлов под `lib/`, `app/`, `components/`).
   Прогон (каждая строка — от корня репо; проверено 2026-10-13 на чистом клоне). CI (`deploy.yml`) гоняет
-  тесты только web (+ под каждым pack'ом в `build-packs`); workers/synergify/llm-service/academy — только локально:
+  тесты web (+ под каждым pack'ом в `build-packs`) и academy (шаг `Test academy` в `deploy-academy`, с 2026-10-17 —
+  красный тест останавливает деплой академии); workers/synergify/llm-service — только локально:
   ```bash
   cd LMS/tochka-sborki/web && npm ci && npm test        # pretest сам зовёт select-pack.mjs
   # workers: сначала материализовать packs/_active — без него 6 файлов падают на `@pack/*`

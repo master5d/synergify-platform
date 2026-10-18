@@ -163,6 +163,9 @@ jobs:
       - name: Install (shell)
         working-directory: academy
         run: npm ci
+      - name: Test academy
+        working-directory: academy
+        run: npm test
       - name: Install (engine)
         working-directory: LMS/tochka-sborki/web
         run: npm ci

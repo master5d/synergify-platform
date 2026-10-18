@@ -7,7 +7,7 @@ import { LIMITS, type ContractModel, type Lang } from './engine'
 export const LINK_VERSION = 1
 const MODELS: ContractModel[] = ['full_campus', 'per_guest', 'buyout']
 /** Ссылка длиннее — не наша (форма v1 укладывается в пару килобайт). */
-const MAX_FRAGMENT = 8_000
+export const MAX_FRAGMENT = 8_000
 
 export interface LinkVenue {
   model?: ContractModel
@@ -76,14 +76,14 @@ const MESSAGES = {
   },
 }
 
-function toBase64Url(text: string): string {
+export function toBase64Url(text: string): string {
   const bytes = new TextEncoder().encode(text)
   let bin = ''
   bytes.forEach((b) => { bin += String.fromCharCode(b) })
   return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
 }
 
-function fromBase64Url(s: string): string {
+export function fromBase64Url(s: string): string {
   const b64 = s.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - (s.length % 4)) % 4)
   const bin = atob(b64)
   return new TextDecoder('utf-8', { fatal: true }).decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)))
