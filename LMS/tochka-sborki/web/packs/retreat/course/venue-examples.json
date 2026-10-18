@@ -1,0 +1,279 @@
+[
+ {
+  "id": "retreat-center",
+  "title": {
+   "ru": "Учебный ретритный центр",
+   "en": "Practice retreat centre"
+  },
+  "currency": "USD",
+  "venue": {
+   "type": "all-season",
+   "units": 10,
+   "groupBeds": 20,
+   "nightPriceCents": 12000,
+   "deal": "per_guest",
+   "rateCents": 70000,
+   "minGuests": 12,
+   "buyoutFeeCents": 0,
+   "varPerGuestWeekCents": 21000,
+   "varPerNightCents": 2000,
+   "fixedOpenMonthCents": 1200000,
+   "fixedClosedMonthCents": 0,
+   "insuranceCents": 800000,
+   "replacementReserveCents": 1500000,
+   "taxPct": 15,
+   "debtServiceCents": 0,
+   "seasonOpenCents": 0,
+   "seasonCloseCents": 0,
+   "investmentCents": 90000000,
+   "borrowedCents": 0,
+   "months": [
+    {
+     "open": true,
+     "retreatWeeks": 0,
+     "groupGuests": 0,
+     "rateCents": null,
+     "nightlyOccupancyPct": 35,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 0,
+     "groupGuests": 0,
+     "rateCents": null,
+     "nightlyOccupancyPct": 35,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 1,
+     "groupGuests": 14,
+     "rateCents": null,
+     "nightlyOccupancyPct": 45,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 2,
+     "groupGuests": 16,
+     "rateCents": null,
+     "nightlyOccupancyPct": 50,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 2,
+     "groupGuests": 18,
+     "rateCents": null,
+     "nightlyOccupancyPct": 60,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 2,
+     "groupGuests": 18,
+     "rateCents": null,
+     "nightlyOccupancyPct": 70,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 1,
+     "groupGuests": 12,
+     "rateCents": 45000,
+     "nightlyOccupancyPct": 95,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 1,
+     "groupGuests": 12,
+     "rateCents": 45000,
+     "nightlyOccupancyPct": 95,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 2,
+     "groupGuests": 16,
+     "rateCents": null,
+     "nightlyOccupancyPct": 60,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 2,
+     "groupGuests": 14,
+     "rateCents": null,
+     "nightlyOccupancyPct": 50,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 1,
+     "groupGuests": 12,
+     "rateCents": null,
+     "nightlyOccupancyPct": 40,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 0,
+     "groupGuests": 0,
+     "rateCents": null,
+     "nightlyOccupancyPct": 35,
+     "gapDays": 1
+    }
+   ]
+  },
+  "expect": {
+   "noiCents": 6816000,
+   "yieldPct": 7.6,
+   "paybackYears": 15.5,
+   "issues": [
+    {
+     "id": "week-loses-money",
+     "month": 7
+    },
+    {
+     "id": "week-loses-money",
+     "month": 8
+    }
+   ]
+  }
+ },
+ {
+  "id": "glamping",
+  "title": {
+   "ru": "Учебный глэмпинг",
+   "en": "Practice glamping"
+  },
+  "currency": "USD",
+  "venue": {
+   "type": "seasonal",
+   "units": 6,
+   "groupBeds": 12,
+   "nightPriceCents": 14000,
+   "deal": "per_guest",
+   "rateCents": 90000,
+   "minGuests": 10,
+   "buyoutFeeCents": 0,
+   "varPerGuestWeekCents": 21000,
+   "varPerNightCents": 2000,
+   "fixedOpenMonthCents": 900000,
+   "fixedClosedMonthCents": 200000,
+   "insuranceCents": 600000,
+   "replacementReserveCents": 1200000,
+   "taxPct": 15,
+   "debtServiceCents": 0,
+   "seasonOpenCents": 500000,
+   "seasonCloseCents": 300000,
+   "investmentCents": 63000000,
+   "borrowedCents": 0,
+   "months": [
+    {
+     "open": false,
+     "retreatWeeks": 0,
+     "groupGuests": 0,
+     "rateCents": null,
+     "nightlyOccupancyPct": 0,
+     "gapDays": 1
+    },
+    {
+     "open": false,
+     "retreatWeeks": 0,
+     "groupGuests": 0,
+     "rateCents": null,
+     "nightlyOccupancyPct": 0,
+     "gapDays": 1
+    },
+    {
+     "open": false,
+     "retreatWeeks": 0,
+     "groupGuests": 0,
+     "rateCents": null,
+     "nightlyOccupancyPct": 0,
+     "gapDays": 1
+    },
+    {
+     "open": false,
+     "retreatWeeks": 0,
+     "groupGuests": 0,
+     "rateCents": null,
+     "nightlyOccupancyPct": 0,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 0,
+     "groupGuests": 0,
+     "rateCents": null,
+     "nightlyOccupancyPct": 65,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 2,
+     "groupGuests": 12,
+     "rateCents": 90000,
+     "nightlyOccupancyPct": 80,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 2,
+     "groupGuests": 12,
+     "rateCents": 90000,
+     "nightlyOccupancyPct": 90,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 2,
+     "groupGuests": 12,
+     "rateCents": 90000,
+     "nightlyOccupancyPct": 90,
+     "gapDays": 1
+    },
+    {
+     "open": true,
+     "retreatWeeks": 1,
+     "groupGuests": 12,
+     "rateCents": 90000,
+     "nightlyOccupancyPct": 70,
+     "gapDays": 1
+    },
+    {
+     "open": false,
+     "retreatWeeks": 0,
+     "groupGuests": 0,
+     "rateCents": null,
+     "nightlyOccupancyPct": 0,
+     "gapDays": 1
+    },
+    {
+     "open": false,
+     "retreatWeeks": 0,
+     "groupGuests": 0,
+     "rateCents": null,
+     "nightlyOccupancyPct": 0,
+     "gapDays": 1
+    },
+    {
+     "open": false,
+     "retreatWeeks": 0,
+     "groupGuests": 0,
+     "rateCents": null,
+     "nightlyOccupancyPct": 0,
+     "gapDays": 1
+    }
+   ]
+  },
+  "expect": {
+   "noiCents": 2600000,
+   "yieldPct": 4.1,
+   "paybackYears": 28.5,
+   "issues": []
+  }
+ }
+]
