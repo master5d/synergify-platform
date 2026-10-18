@@ -12,7 +12,7 @@ import { cellKey, computeMenu, emptyCell, validateMenu, type MenuCell, type Spec
 import { menuFromCsv, menuMoney, menuToCsv, parseMoney } from '../../lib/retreat-menu/export'
 import {
   calcHashFromPassport, defaultForm, draftOf, formFromDecoded, formFromDraft, MENU_DRAFT_KEY, MENU_PATH, menuHash,
-  pickMenuTool, reconcileGrid, timelineHashFromPassport, withDraftMenu, type MenuForm,
+  draftWorthKeeping, MENU_LIMITS, MENU_PREV_KEY, pickMenuTool, reconcileGrid, timelineHashFromPassport, withDraftMenu, type MenuForm,
 } from '../../lib/retreat-menu/form'
 import { dietLabel, issueText, mealLabel } from '../../lib/retreat-menu/labels'
 import { PassportBar } from '../retreat-core/passport-bar'
@@ -54,6 +54,7 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
   const [f, setF] = useState<MenuForm | null>(null)
   const [notice, setNotice] = useState<string | null>(null)
   const fileInput = useRef<HTMLInputElement>(null)
+  const [canRestore, setCanRestore] = useState(false)
 
   useEffect(() => {
     const now = localToday()
@@ -65,8 +66,12 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
         let saved: string | null = null
         try { saved = localStorage.getItem(MENU_DRAFT_KEY) } catch { /* без хранилища — только ссылка */ }
         const linkHasMenu = d.ok && d.kind === 'tool' && Object.keys(d.link.tool.grid).length > 0
+        // меню из ссылки (например, учебное из урока) не стирает своё молча: своё откладывается, его можно вернуть
+        if (linkHasMenu && draftWorthKeeping(saved, fromLink, now)) {
+          try { localStorage.setItem(MENU_PREV_KEY, saved as string); setCanRestore(true) } catch { /* без хранилища отложить нельзя */ }
+        }
         setF(withDraftMenu(fromLink, formFromDraft(saved, now), linkHasMenu))
-        setNotice(t.loaded)
+        setNotice(linkHasMenu && saved ? t.loadedKeptDraft : t.loaded)
         return
       }
       if (!d.ok) setNotice(d.error)
@@ -109,6 +114,7 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
     const reader = new FileReader()
     reader.onload = () => {
       const grid = menuFromCsv(decodeCsvBytes(new Uint8Array(reader.result as ArrayBuffer)))
+      if (Object.keys(grid).length === 0) { setNotice(t.csvEmpty); return }
       setF({ ...f, grid: reconcileGrid({ ...f.grid, ...grid }, f.passport) })
     }
     reader.readAsArrayBuffer(file)
@@ -124,7 +130,7 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
     <div>
       <style>{`
         .mn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); gap: 0.9rem; }
-        .mn-days { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 1rem; }
+        .mn-days { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); gap: 1rem; }
         .mn-meal { border-top: 1px solid var(--border-soft); padding-top: 0.75rem; margin-top: 0.75rem; display: grid; gap: 0.5rem; }
         .mn-meal:first-of-type { border-top: 0; margin-top: 0.4rem; padding-top: 0; }
         .mn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
@@ -143,6 +149,17 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
           { href: localePath(CALC_PATH, locale) + calcHashFromPassport(f.passport), label: t.openCalc },
         ]} />
         {notice && <p role="status" style={{ ...card, color: GOLD, margin: '0 0 1.25rem' }}>{notice}</p>}
+        {canRestore && (
+          <p style={{ margin: '0 0 1.25rem' }}>
+            <button style={button} onClick={() => {
+              let prev: string | null = null
+              try { prev = localStorage.getItem(MENU_PREV_KEY) } catch { /* без хранилища вернуть нечего */ }
+              const back = formFromDraft(prev, localToday())
+              if (back) { setF(back); setNotice(t.restored) }
+              setCanRestore(false)
+            }}>{t.restore}</button>
+          </p>
+        )}
 
         <h2 style={h2}>{t.retreat}</h2>
         <div className="mn-grid">
@@ -195,22 +212,22 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
                     return (
                       <div key={key} className="mn-meal">
                         <strong style={{ fontSize: 'var(--text-sm)', color: GOLD }}>{mealLabel(s.meal, locale)}</strong>
-                        <label style={label}>{t.dish}<input style={field} value={c.dish} onChange={(e) => setCell(key, { dish: e.target.value })} /></label>
+                        <label style={label}>{t.dish}<input style={field} maxLength={MENU_LIMITS.text} value={c.dish} onChange={(e) => setCell(key, { dish: e.target.value })} /></label>
                         <label style={{ ...label, flexDirection: 'row', alignItems: 'center' }}>
                           <input type="checkbox" checked={c.meat} onChange={(e) => setCell(key, { meat: e.target.checked })} /> {t.meat}
                         </label>
                         <div className="mn-row">
-                          <label style={label}>{t.side}<input style={field} value={c.side} onChange={(e) => setCell(key, { side: e.target.value })} /></label>
-                          <label style={label}>{t.drink}<input style={field} value={c.drink} onChange={(e) => setCell(key, { drink: e.target.value })} /></label>
+                          <label style={label}>{t.side}<input style={field} maxLength={MENU_LIMITS.text} value={c.side} onChange={(e) => setCell(key, { side: e.target.value })} /></label>
+                          <label style={label}>{t.drink}<input style={field} maxLength={MENU_LIMITS.text} value={c.drink} onChange={(e) => setCell(key, { drink: e.target.value })} /></label>
                         </div>
                         <label style={label} htmlFor={`${id}-price`}>{t.price}</label>
                         <MoneyInput id={`${id}-price`} locale={locale} cents={c.priceCents} onChange={(v) => setCell(key, { priceCents: v })} />
                         <details>
-                          <summary style={{ ...label, cursor: 'pointer' }}>{t.more}</summary>
+                          <summary style={{ cursor: 'pointer', fontSize: 'var(--text-sm)', color: GOLD }}>{t.more}</summary>
                           <div style={{ display: 'grid', gap: '0.5rem', marginTop: '0.5rem' }}>
                             {SPECIAL.map((d) => (
                               <label key={d} style={label}>{t.variant(dietLabel(d, locale))}
-                                <input style={field} value={c.variants[d] ?? ''}
+                                <input style={field} maxLength={MENU_LIMITS.text} value={c.variants[d] ?? ''}
                                   onChange={(e) => setCell(key, { variants: { ...c.variants, [d]: e.target.value || undefined } })} />
                               </label>
                             ))}
@@ -227,7 +244,7 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
                               </div>
                             </fieldset>
                             <div className="mn-row">
-                              <label style={label}>{t.optionName}<input style={field} value={c.option?.name ?? ''}
+                              <label style={label}>{t.optionName}<input style={field} maxLength={MENU_LIMITS.optionName} value={c.option?.name ?? ''}
                                 onChange={(e) => setCell(key, { option: e.target.value ? { name: e.target.value, priceCents: c.option?.priceCents ?? 0 } : null })} /></label>
                               <div style={label}>
                                 <label htmlFor={`${id}-opt`}>{t.optionPrice}</label>
@@ -284,14 +301,14 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
         <div className="mn-print" aria-hidden="true">
           <h2>{f.passport.title || t.h1}</h2>
           <table>
-            <thead><tr><th>{t.printDay}</th><th /><th>{t.dish}</th><th>{t.side}</th><th>{t.drink}</th><th>{t.allergens}</th></tr></thead>
+            <thead><tr><th>{t.printDay}</th><th>{t.printMeal}</th><th>{t.dish}</th><th>{t.side}</th><th>{t.drink}</th><th>{t.allergens}</th></tr></thead>
             <tbody>{result.slots.map((s) => {
               const c = f.grid[cellKey(s)] ?? emptyCell()
               const variants = SPECIAL.filter((d) => c.variants[d]).map((d) => `${dietLabel(d, locale)}: ${c.variants[d]}`).join('; ')
               return (
                 <tr key={cellKey(s)}>
                   <td>{s.day}</td><td>{mealLabel(s.meal, locale)}</td>
-                  <td>{c.dish}{variants ? <><br /><small>{variants}</small></> : null}</td>
+                  <td>{c.dish}{c.meat ? ` ${t.meatMark}` : ''}{variants ? <><br /><small>{variants}</small></> : null}</td>
                   <td>{c.side}</td><td>{c.drink}</td><td>{c.allergens.map((a) => allergenName(a, locale)).join(', ')}</td>
                 </tr>
               )

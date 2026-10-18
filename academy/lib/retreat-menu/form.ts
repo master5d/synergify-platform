@@ -104,6 +104,16 @@ export function formFromDecoded(d: DecodedTool<{ grid: MenuGrid; diets: Diets }>
   return { passport, grid: reconcileGrid(d.link.tool.grid, passport), diets: d.link.tool.diets }
 }
 
+/** Куда откладывается своё меню, когда по ссылке (например, из урока) открывается чужое: его можно вернуть кнопкой. */
+export const MENU_PREV_KEY = 'retreat-menu:draft-before-link'
+
+/** Стоит ли отложить черновик перед открытием меню из ссылки: в нём есть свои блюда, и он не совпадает со ссылкой. */
+export function draftWorthKeeping(saved: string | null, fromLink: MenuForm, today: IsoDate): boolean {
+  const d = formFromDraft(saved, today)
+  if (!d || !Object.values(d.grid).some((c) => c.dish.trim())) return false
+  return draftOf(d) !== draftOf(fromLink)
+}
+
 /** Ссылка без меню (из таймлайна или калькулятора) не затирает черновик: паспорт — из ссылки, сетка и диеты — из черновика. */
 export function withDraftMenu(fromLink: MenuForm, draft: MenuForm | null, linkHasMenu: boolean): MenuForm {
   if (linkHasMenu || !draft) return fromLink

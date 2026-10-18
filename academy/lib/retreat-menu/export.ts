@@ -61,12 +61,12 @@ export function menuFromCsv(text: string): MenuGrid {
       if (diet && diet !== 'standard' && part.slice(i + 1).trim()) variants[diet] = part.slice(i + 1).trim()
     }
     const allergens = (r[6] ?? '').split(',').map(allergenByName).filter((a): a is AllergenId => a !== undefined)
-    const opt = /^(.*\S)\s+\+\s*([\d\s.,]+)$/.exec((r[7] ?? '').trim())
+    const opt = /^(.*?)\s*\+\s*([\d\s.,]+)$/.exec((r[7] ?? '').trim())
     const optPrice = opt ? parseMoney(opt[2]) : null
     grid[cellKey({ day, meal })] = {
       dish, side: (r[3] ?? '').trim(), drink: (r[4] ?? '').trim(), meat: Boolean(meatMark), variants, allergens,
       priceCents: parseMoney(r[8] ?? ''),
-      option: opt && optPrice !== null ? { name: opt[1], priceCents: optPrice } : null,
+      option: opt && optPrice !== null && (opt[1] || optPrice > 0) ? { name: opt[1], priceCents: optPrice } : null,
     }
   }
   return grid

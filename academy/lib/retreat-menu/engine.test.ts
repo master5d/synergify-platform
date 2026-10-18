@@ -64,7 +64,17 @@ describe('проверки', () => {
   })
   it('рыба без галочки «мясное» — всё равно нужен вариант для вегетарианцев', () => {
     const r = computeMenu(PASSPORT, week((c, k) => (k === '4-lunch' ? { ...c, allergens: ['fish'], variants: { 'gluten-free': 'то же' } } : c)), { vegetarian: 1 })
-    expect(r.issues).toEqual([{ id: 'diet-without-variant', day: 4, meal: 'lunch', diet: 'vegetarian' }])
+    expect(r.issues).toEqual([
+      { id: 'allergen-without-alternative', day: 4, meal: 'lunch' },
+      { id: 'diet-without-variant', day: 4, meal: 'lunch', diet: 'vegetarian' },
+    ])
+  })
+  it('вариант «без глютена» снимает только глютен: сельдерей с ним — без замены', () => {
+    const at = (allergens: ('gluten' | 'celery')[], variants: Record<string, string>) =>
+      computeMenu(PASSPORT, week((c, k) => (k === '5-lunch' ? { ...c, allergens, variants } : c)), {}).issues
+    expect(at(['gluten'], { 'gluten-free': 'рис' })).toEqual([])
+    expect(at(['celery'], { 'gluten-free': 'рис' })).toEqual([{ id: 'allergen-without-alternative', day: 5, meal: 'lunch' }])
+    expect(at(['celery'], { vegan: 'без сельдерея' })).toEqual([])
   })
   it('веганский вариант годится вегетарианцам; веганам мясное без варианта — замечание', () => {
     const meat = (variants: Record<string, string>) => week((c, k) => (k === '4-lunch' ? { ...c, meat: true, variants } : c))

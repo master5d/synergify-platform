@@ -62,3 +62,11 @@ describe('тексты проверок', () => {
     }
   })
 })
+
+describe('CSV — опция без названия', () => {
+  it('цена опции без названия переживает круг CSV', () => {
+    const g = sampleGrid()
+    g['3-dinner'] = { ...emptyCell(), dish: 'Суп', priceCents: 1000, option: { name: '', priceCents: 500 } }
+    for (const lang of ['ru', 'en'] as const) expect(menuFromCsv(menuToCsv(SLOTS, g, lang))['3-dinner'].option).toEqual({ name: '', priceCents: 500 })
+  })
+})

@@ -31,8 +31,7 @@
             "gluten-free": "Грибная похлёбка с картофелем"
           },
           "allergens": [
-            "gluten",
-            "celery"
+            "gluten"
           ],
           "priceCents": 1800,
           "option": null
@@ -72,12 +71,8 @@
           "side": "Салат из свежих овощей",
           "drink": "Компот",
           "meat": false,
-          "variants": {
-            "gluten-free": "Борщ с фасолью без хлеба"
-          },
-          "allergens": [
-            "celery"
-          ],
+          "variants": {},
+          "allergens": [],
           "priceCents": 1800,
           "option": null
         },
@@ -124,8 +119,7 @@
             "gluten-free": "Грибная похлёбка с картофелем"
           },
           "allergens": [
-            "gluten",
-            "celery"
+            "gluten"
           ],
           "priceCents": 1800,
           "option": null
@@ -170,12 +164,8 @@
           "side": "Салат из свежих овощей",
           "drink": "Компот",
           "meat": false,
-          "variants": {
-            "gluten-free": "Борщ с фасолью без хлеба"
-          },
-          "allergens": [
-            "celery"
-          ],
+          "variants": {},
+          "allergens": [],
           "priceCents": 1800,
           "option": null
         },
@@ -222,8 +212,7 @@
             "gluten-free": "Грибная похлёбка с картофелем"
           },
           "allergens": [
-            "gluten",
-            "celery"
+            "gluten"
           ],
           "priceCents": 1800,
           "option": null
@@ -266,12 +255,8 @@
           "side": "Салат из свежих овощей",
           "drink": "Компот",
           "meat": false,
-          "variants": {
-            "gluten-free": "Борщ с фасолью без хлеба"
-          },
-          "allergens": [
-            "celery"
-          ],
+          "variants": {},
+          "allergens": [],
           "priceCents": 1800,
           "option": null
         },
@@ -320,8 +305,7 @@
             "gluten-free": "Mushroom and potato soup"
           },
           "allergens": [
-            "gluten",
-            "celery"
+            "gluten"
           ],
           "priceCents": 1800,
           "option": null
@@ -361,12 +345,8 @@
           "side": "Fresh vegetable salad",
           "drink": "Fruit compote",
           "meat": false,
-          "variants": {
-            "gluten-free": "Beetroot soup with beans, no bread"
-          },
-          "allergens": [
-            "celery"
-          ],
+          "variants": {},
+          "allergens": [],
           "priceCents": 1800,
           "option": null
         },
@@ -413,8 +393,7 @@
             "gluten-free": "Mushroom and potato soup"
           },
           "allergens": [
-            "gluten",
-            "celery"
+            "gluten"
           ],
           "priceCents": 1800,
           "option": null
@@ -459,12 +438,8 @@
           "side": "Fresh vegetable salad",
           "drink": "Fruit compote",
           "meat": false,
-          "variants": {
-            "gluten-free": "Beetroot soup with beans, no bread"
-          },
-          "allergens": [
-            "celery"
-          ],
+          "variants": {},
+          "allergens": [],
           "priceCents": 1800,
           "option": null
         },
@@ -511,8 +486,7 @@
             "gluten-free": "Mushroom and potato soup"
           },
           "allergens": [
-            "gluten",
-            "celery"
+            "gluten"
           ],
           "priceCents": 1800,
           "option": null
@@ -555,12 +529,8 @@
           "side": "Fresh vegetable salad",
           "drink": "Fruit compote",
           "meat": false,
-          "variants": {
-            "gluten-free": "Beetroot soup with beans, no bread"
-          },
-          "allergens": [
-            "celery"
-          ],
+          "variants": {},
+          "allergens": [],
           "priceCents": 1800,
           "option": null
         },
@@ -605,6 +575,11 @@
       "perGroup": 540000,
       "options": 5,
       "issues": [
+        {
+          "id": "allergen-without-alternative",
+          "day": 3,
+          "meal": "dinner"
+        },
         {
           "id": "diet-without-variant",
           "day": 3,

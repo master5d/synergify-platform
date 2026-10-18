@@ -16,19 +16,20 @@ export function MenuPage({ locale }: { locale: Locale }) {
           .mn-wrap { padding: 3.5rem 1.25rem 4rem !important; }
           .mn-wrap h1 { font-size: clamp(1.8rem, 8vw, 2.6rem) !important; }
         }
+        @media print { .mn-noprint { display: none !important; } .mn-wrap { padding: 0 !important; } }
       `}</style>
       <section className="mn-wrap" style={{ maxWidth: '58rem', margin: '0 auto', padding: '6rem 2rem 5rem' }}>
-        <p style={{ fontFamily: 'var(--font-mono)', color: GOLD, textTransform: 'lowercase', letterSpacing: '0.25em', fontSize: 'var(--text-xs)', margin: 0 }}>
+        <p className="mn-noprint" style={{ fontFamily: 'var(--font-mono)', color: GOLD, textTransform: 'lowercase', letterSpacing: '0.25em', fontSize: 'var(--text-xs)', margin: 0 }}>
           {t.eyebrow}
         </p>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 'clamp(2.2rem, 5vw, 3.4rem)', letterSpacing: '-0.02em', margin: '1rem 0 0.75rem', color: 'var(--text-primary)' }}>
+        <h1 className="mn-noprint" style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 'clamp(2.2rem, 5vw, 3.4rem)', letterSpacing: '-0.02em', margin: '1rem 0 0.75rem', color: 'var(--text-primary)' }}>
           {t.h1}
         </h1>
-        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: 'var(--text-base)', margin: '0 0 2rem' }}>
+        <p className="mn-noprint" style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: 'var(--text-base)', margin: '0 0 2rem' }}>
           {t.lead}
         </p>
         <RetreatMenu locale={locale} />
-        <p style={{ marginTop: '3rem' }}>
+        <p className="mn-noprint" style={{ marginTop: '3rem' }}>
           <a href={home} style={{ color: GOLD, fontSize: 'var(--text-sm)' }}>{t.backLabel}</a>
         </p>
       </section>

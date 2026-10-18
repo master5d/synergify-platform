@@ -4,7 +4,7 @@ import { decodeToolLink, encodeToolLink, TOOL_MAX_FRAGMENT } from '../retreat-co
 import { timelineHash, defaultForm as timelineDefault } from '../retreat-timeline/form'
 import { emptyCell } from './engine'
 import {
-  calcHashFromPassport, defaultForm, draftOf, formFromDecoded, formFromDraft, menuHash, menuHashFromPassport, pickMenuTool, reconcileGrid, withDraftMenu,
+  calcHashFromPassport, defaultForm, draftOf, formFromDecoded, formFromDraft, menuHash, menuHashFromPassport, pickMenuTool, reconcileGrid, withDraftMenu, draftWorthKeeping,
   timelineHashFromPassport, type MenuForm,
 } from './form'
 
@@ -93,5 +93,17 @@ describe('доделки по приёмке', () => {
   it('мусорные ключи не вытесняют настоящие', () => {
     const junk = Object.fromEntries(Array.from({ length: 500 }, (_, i) => [`junk${i}`, {}]))
     expect(Object.keys(pickMenuTool({ grid: { ...junk, '2-lunch': { dish: 'Суп' } } }).grid)).toEqual(['2-lunch'])
+  })
+})
+
+describe('меню из ссылки урока не стирает своё молча', () => {
+  it('черновик со своими блюдами, отличный от ссылки, стоит отложить; пустой или такой же — нет', () => {
+    const lesson = filledForm()
+    const mine = defaultForm(TODAY)
+    mine.grid['3-dinner'] = { ...emptyCell(), dish: 'Моё рагу', priceCents: 1500 }
+    expect(draftWorthKeeping(draftOf(mine), lesson, TODAY)).toBe(true)
+    expect(draftWorthKeeping(draftOf(lesson), lesson, TODAY)).toBe(false)
+    expect(draftWorthKeeping(draftOf(defaultForm(TODAY)), lesson, TODAY)).toBe(false)
+    expect(draftWorthKeeping(null, lesson, TODAY)).toBe(false)
   })
 })

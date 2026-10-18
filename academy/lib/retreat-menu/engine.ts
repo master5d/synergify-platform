@@ -125,7 +125,12 @@ export function computeMenu(p: RetreatPassport, grid: MenuGrid, diets: Diets): {
     } else {
       byDay.set(s.day, sum === null ? null : sum + cell.priceCents)
     }
-    if (cell.allergens.length > 0 && Object.values(cell.variants).every((v) => !v?.trim())) {
+    // замена от аллергена — вариант «без глютена» снимает только глютен; другие аллергены требуют любого варианта,
+    // кроме «без глютена» (он про другое и сам может их содержать)
+    const otherVariant = (['vegetarian', 'vegan'] as const).some((d) => cell.variants[d]?.trim())
+    const glutenCovered = Boolean(cell.variants['gluten-free']?.trim()) || otherVariant
+    const uncovered = cell.allergens.some((a) => (a === 'gluten' ? !glutenCovered : !otherVariant))
+    if (uncovered) {
       issues.push({ id: 'allergen-without-alternative', day: s.day, meal: s.meal })
     }
     for (const d of special) {
@@ -136,6 +141,7 @@ export function computeMenu(p: RetreatPassport, grid: MenuGrid, diets: Diets): {
 
   const perGuestByDay = [...byDay.entries()].sort((a, b) => a[0] - b[0]).map(([day, cents]) => ({ day, cents }))
   const perGuestWeek = perGuestByDay.some((d) => d.cents === null) ? null : perGuestByDay.reduce((s, d) => s + (d.cents as number), 0)
+  // «на группу» = на гостя × гостей: у вариантов для диет своей цены нет, поэтому разбивка по диетам дала бы ту же сумму
   return {
     slots,
     totals: { perGuestByDay, perGuestWeek, perGroup: perGuestWeek === null ? null : perGuestWeek * guests, options },

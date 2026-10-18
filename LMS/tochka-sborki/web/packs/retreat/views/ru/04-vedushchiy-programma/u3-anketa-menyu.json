@@ -5,7 +5,7 @@
   "unit": "u3-anketa-menyu",
   "locale": "ru",
   "title": "Анкета гостя и меню",
-  "sourceHash": "sha256:2d761f25400c1f3e31f58f74586e2cee6ac446a37d2cea878240919c8ac7c1cf",
+  "sourceHash": "sha256:f6cb6272ffff50071a7197b8b821717d5b512c9c8e106601c0681402972be2a1",
   "outline": [
     {
       "heading": "Анкета — до меню",

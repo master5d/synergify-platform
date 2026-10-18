@@ -6,7 +6,13 @@ import type { Lang } from '../retreat-calc/engine'
 export const BOM = '\uFEFF'
 export const separatorFor = (lang: Lang) => (lang === 'ru' ? ';' : ',')
 
-function cell(v: string, sep: string): string {
+/** Текст, который Excel принял бы за формулу (`=`, `+`, `-`, `@` в начале), получает апостроф; числа вроде «-6» — нет. */
+function safe(v: string): string {
+  return /^[=+\-@]/.test(v) && !/^[-+]?\d+([.,]\d+)?$/.test(v) ? `'${v}` : v
+}
+
+function cell(raw: string, sep: string): string {
+  const v = safe(raw)
   return v.includes(sep) || v.includes('"') || v.includes('\n') || v.includes('\r') ? `"${v.replace(/"/g, '""')}"` : v
 }
 
