@@ -6,10 +6,18 @@ import type { Lang } from '../retreat-calc/engine'
 export const BOM = '\uFEFF'
 export const separatorFor = (lang: Lang) => (lang === 'ru' ? ';' : ',')
 
-/** Текст, который Excel принял бы за формулу (`=`, `+`, `-`, `@` в начале), получает апостроф; числа вроде «-6» — нет. */
+const FORMULA_START = /^[=+\-@\t\r]/
+const NUMBER = /^[-+]?\d+([.,]\d+)?$/
+const PHONE = /^\+[\d\s()\-]+$/
+
+/** Текст, который Excel принял бы за формулу (`=`, `+`, `-`, `@`, табуляция в начале), получает апостроф.
+ *  Числа вроде «-6» и телефоны вроде «+7 900 123-45-67» — нет: их видят водители и встречающие. */
 function safe(v: string): string {
-  return /^[=+\-@]/.test(v) && !/^[-+]?\d+([.,]\d+)?$/.test(v) ? `'${v}` : v
+  return FORMULA_START.test(v) && !NUMBER.test(v) && !PHONE.test(v) ? `'${v}` : v
 }
+
+/** Обратно: апостроф, поставленный `safe`, снимается — круг «выгрузил — загрузил» без потерь. */
+const unsafe = (v: string) => (v.startsWith("'") && FORMULA_START.test(v.slice(1)) ? v.slice(1) : v)
 
 function cell(raw: string, sep: string): string {
   const v = safe(raw)
@@ -44,5 +52,5 @@ export function parseCsv(text: string): string[][] {
     } else field += c
   }
   if (field !== '' || row.length) { row.push(field); rows.push(row) }
-  return rows.filter((r) => r.some((v) => v.trim() !== ''))
+  return rows.filter((r) => r.some((v) => v.trim() !== '')).map((r) => r.map(unsafe))
 }

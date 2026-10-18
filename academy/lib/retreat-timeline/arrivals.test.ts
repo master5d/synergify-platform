@@ -8,7 +8,7 @@ const PASSPORT = { start: '2027-05-10', nights: 6 }
 
 describe('лист прибытия — CSV', () => {
   it('круг arrivalsToCsv → parseArrivalsCsv на обоих языках', () => {
-    const rows = [row({ guest: 'Гость 1', flightIn: 'XX 101', dateIn: '2027-05-10', meetPoint: 'Терминал 2; выход B' })]
+    const rows = [row({ guest: 'Гость 1', phone: '+7 900 123-45-67', flightIn: 'XX 101', dateIn: '2027-05-10', meetPoint: 'Терминал 2; выход B' })]
     for (const lang of ['ru', 'en'] as const) expect(parseArrivalsCsv(arrivalsToCsv(rows, lang))).toEqual(rows)
   })
   it('CSV из таблицы: BOM, запятая, кавычки с разделителем и переводом строки', () => {

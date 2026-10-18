@@ -67,11 +67,13 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
         try { saved = localStorage.getItem(MENU_DRAFT_KEY) } catch { /* без хранилища — только ссылка */ }
         const linkHasMenu = d.ok && d.kind === 'tool' && Object.keys(d.link.tool.grid).length > 0
         // меню из ссылки (например, учебное из урока) не стирает своё молча: своё откладывается, его можно вернуть
+        let kept = false
         if (linkHasMenu && draftWorthKeeping(saved, fromLink, now)) {
-          try { localStorage.setItem(MENU_PREV_KEY, saved as string); setCanRestore(true) } catch { /* без хранилища отложить нельзя */ }
+          try { localStorage.setItem(MENU_PREV_KEY, saved as string); kept = true } catch { /* без хранилища отложить нельзя */ }
         }
+        setCanRestore(kept)
         setF(withDraftMenu(fromLink, formFromDraft(saved, now), linkHasMenu))
-        setNotice(linkHasMenu && saved ? t.loadedKeptDraft : t.loaded)
+        setNotice(kept ? t.loadedKeptDraft : t.loaded)
         return
       }
       if (!d.ok) setNotice(d.error)

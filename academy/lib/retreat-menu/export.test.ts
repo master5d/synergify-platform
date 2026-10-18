@@ -70,3 +70,11 @@ describe('CSV — опция без названия', () => {
     for (const lang of ['ru', 'en'] as const) expect(menuFromCsv(menuToCsv(SLOTS, g, lang))['3-dinner'].option).toEqual({ name: '', priceCents: 500 })
   })
 })
+
+describe('CSV — текст, похожий на формулу', () => {
+  it('блюдо «-салат» после круга CSV остаётся «-салат»', () => {
+    const g = sampleGrid()
+    g['3-dinner'] = { ...emptyCell(), dish: '-салат', priceCents: 1000 }
+    for (const lang of ['ru', 'en'] as const) expect(menuFromCsv(menuToCsv(SLOTS, g, lang))['3-dinner'].dish).toBe('-салат')
+  })
+})
