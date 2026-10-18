@@ -1,0 +1,56 @@
+[
+  {
+    "id": "leader-plan",
+    "title": { "ru": "Учебный план: кампус на 20 мест", "en": "Practice plan: a 20-place campus" },
+    "data": {
+      "v": 1,
+      "retreat": { "currency": "USD", "guests": 20, "nights": 6, "start": "2028-05-10" },
+      "tool": {
+        "signDate": "2027-11-10",
+        "guestDepositPct": 30,
+        "guestBalanceDueDays": 45,
+        "guestRefundDays": 45,
+        "venueNoReturnDays": 60,
+        "venue": {
+          "model": "full_campus", "ratePerGuest": 1800, "capacity": 20, "minGuests": 0, "buyoutFee": 0,
+          "depositPct": 25, "finalDueDays": 60, "payInFullDiscountPct": 5, "installments": true, "payInFull": false
+        }
+      }
+    },
+    "expect": {
+      "venue-final": "2028-03-11",
+      "go-no-go": "2028-03-11",
+      "guest-refund-deadline": "2028-03-26",
+      "arrival": "2028-05-10",
+      "departure": "2028-05-16",
+      "warnings": ["guest-refund-after-venue-no-return"]
+    }
+  },
+  {
+    "id": "fixed-plan",
+    "title": { "ru": "Учебный план после правки сроков отмены", "en": "Practice plan with fixed cancellation terms" },
+    "data": {
+      "v": 1,
+      "retreat": { "currency": "USD", "guests": 20, "nights": 6, "start": "2028-05-10" },
+      "tool": {
+        "signDate": "2027-11-10",
+        "guestDepositPct": 30,
+        "guestBalanceDueDays": 75,
+        "guestRefundDays": 75,
+        "venueNoReturnDays": 60,
+        "venue": {
+          "model": "full_campus", "ratePerGuest": 1800, "capacity": 20, "minGuests": 0, "buyoutFee": 0,
+          "depositPct": 25, "finalDueDays": 60, "payInFullDiscountPct": 5, "installments": true, "payInFull": false
+        }
+      }
+    },
+    "expect": {
+      "venue-final": "2028-03-11",
+      "go-no-go": "2028-03-11",
+      "guest-refund-deadline": "2028-02-25",
+      "arrival": "2028-05-10",
+      "departure": "2028-05-16",
+      "warnings": []
+    }
+  }
+]

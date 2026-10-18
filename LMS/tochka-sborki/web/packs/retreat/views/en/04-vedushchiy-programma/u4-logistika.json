@@ -5,7 +5,7 @@
   "unit": "u4-logistika",
   "locale": "en",
   "title": "Arrival logistics",
-  "sourceHash": "sha256:c44dffdf0dc71bd25faceeb1735fef31a2a245e563099eb75e2fbe70271407fd",
+  "sourceHash": "sha256:ee81a35251393100faeecb4d6f1365f569efe24b4ceb05f206203e0805173588",
   "outline": [
     {
       "heading": "One date — one place",
@@ -21,7 +21,7 @@
       "heading": "The arrivals list",
       "points": [
         {
-          "text": "Template: arrivals list.",
+          "text": "Keep the arrivals list in the “arrival list” tab of the retreat timeline.",
           "origin": "extract"
         }
       ],
@@ -64,9 +64,9 @@
         ]
       },
       {
-        "sourceHash": "sha256:cc98013d1ed894a97dbffb00ed0c2abc341c78b96f54f7342f858afaf9b10296",
+        "sourceHash": "sha256:ab8108af858b81d753bca62c61149f5e6a77e3d7171478650b148a8a3cc8cd8d",
         "points": [
-          "You have a template for the arrivals list."
+          "You should maintain the arrivals list within the arrival list tab of the retreat timeline."
         ]
       },
       {

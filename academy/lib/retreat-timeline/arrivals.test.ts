@@ -32,13 +32,16 @@ describe('лист прибытия — CSV', () => {
 })
 
 describe('лист прибытия — проверки', () => {
+  it('дата, набранная руками как ДД.ММ.ГГГГ, проверяется как ISO', () => {
+    expect(checkArrivals([row({ dateIn: '11.05.2027' })], PASSPORT)).toEqual([{ row: 1, id: 'arrival-after-start' }])
+  })
   it('каждая проблема — в своей строке', () => {
     const rows = [
       row({ dateIn: '2027-05-11' }),                         // 1: после старта
       row({ dateIn: '2027-05-07' }),                         // 2: слишком рано
       row({ dateIn: '2027-05-10', dateOut: '2027-05-15' }),  // 3: уезжает до конца
       row({ dateIn: '2027-05-09', meetBy: '' }),             // 4: никто не встречает
-      row({ dateIn: '10.05.2027' }),                         // 5: дата не в формате
+      row({ dateIn: '05/10/2027' }),                         // 5: американский М/Д — не угадываем
       row({ dateIn: '2027-05-08', dateOut: '2027-05-16' }),  // 6: всё в порядке
     ]
     expect(checkArrivals(rows, PASSPORT)).toEqual([

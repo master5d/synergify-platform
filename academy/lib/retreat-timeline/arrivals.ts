@@ -59,8 +59,10 @@ export function checkArrivals(rows: ArrivalRow[], p: RetreatPassport): ArrivalIs
   const issues: ArrivalIssue[] = []
   if (!p.start || !isIsoDate(p.start)) return issues
   const end = addDays(p.start, p.nights ?? 0)
-  rows.forEach((r, i) => {
+  rows.forEach((raw, i) => {
     const row = i + 1
+    // дата, набранная руками как ДД.ММ.ГГГГ, проверяется так же, как пришедшая из CSV
+    const r = { ...raw, dateIn: normalizeDate(raw.dateIn), dateOut: normalizeDate(raw.dateOut) }
     if ((r.dateIn && !isIsoDate(r.dateIn)) || (r.dateOut && !isIsoDate(r.dateOut))) issues.push({ row, id: 'bad-date' })
     if (isIsoDate(r.dateIn)) {
       if (r.dateIn > p.start!) issues.push({ row, id: 'arrival-after-start' })
