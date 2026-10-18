@@ -18,6 +18,7 @@ const PATHS: string[] = [
   'instrumenty/kalkulyator-retrita',
   'instrumenty/tajmlajn',
   'instrumenty/generator-menyu',
+  'instrumenty/anketa-gostya',
   ...writtenSpeedreadingSlugs().map((slug) => `trenazhery/${slug}`),
   // «Эйдетика» — только после вычитки владельцем (status 'live'); до того страницы noindex.
   ...(isEideticsLive() ? ['trenazhery/eidetika', 'trenazhery/eidetika/ryad', 'trenazhery/eidetika/dvorec'] : []),

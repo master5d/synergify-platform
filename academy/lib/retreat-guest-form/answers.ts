@@ -3,13 +3,14 @@
 // Из сводки наружу без файла уходят только числа по диетам (агрегаты без имён).
 
 import type { Lang } from '../retreat-calc/engine'
-import { parseCsv, toCsv } from '../retreat-core/csv'
+import { parseCsvNumbered, toCsv } from '../retreat-core/csv'
 import type { DietId } from '../retreat-menu/engine'
 import { emptyArrival, normalizeDate, type ArrivalRow } from '../retreat-timeline/arrivals'
 import { guestLabel, PICKUP_NOTE } from './labels'
 import { normalizeOn, QUESTIONS, type ChoiceId, type Question, type QuestionId } from './questions'
 
-export interface AnswersTable { header: string[]; rows: string[][] }
+/** `lines[i]` — номер строки `rows[i]` в файле: пустые строки выброшены, номера не сдвигаются. */
+export interface AnswersTable { header: string[]; rows: string[][]; lines: number[] }
 export type ColumnMap = Partial<Record<QuestionId, number>>
 
 export interface GuestAnswer {
@@ -41,8 +42,8 @@ export function normalizeHeader(s: string): string {
 }
 
 export function readAnswers(text: string): AnswersTable {
-  const rows = parseCsv(text)
-  return { header: (rows[0] ?? []).map((h) => h.trim()), rows: rows.slice(1) }
+  const recs = parseCsvNumbered(text)
+  return { header: (recs[0]?.cells ?? []).map((h) => h.trim()), rows: recs.slice(1).map((r) => r.cells), lines: recs.slice(1).map((r) => r.row) }
 }
 
 /** Колонка совпадает с текстом вопроса или его короткой подписью на любом языке; первое совпадение выигрывает. */
@@ -84,9 +85,13 @@ export function summarize(t: AnswersTable, map: ColumnMap, on: QuestionId[], gue
 
   const guests: GuestAnswer[] = []
   const otherText = new Map<GuestAnswer, string>()
+  // проблемы строки копятся при ней: строка, вытесненная повтором, уносит свои проблемы с собой
+  const rowIssues = new Map<GuestAnswer, SummaryIssue[]>()
   const byName = new Map<string, number>()
   t.rows.forEach((cells, idx) => {
-    const g: GuestAnswer = { row: idx + 2, values: {}, choice: {} }
+    const g: GuestAnswer = { row: t.lines[idx], values: {}, choice: {} }
+    const own: SummaryIssue[] = []
+    rowIssues.set(g, own)
     for (const id of enabled) {
       const i = col(id)
       if (i === undefined) continue
@@ -100,12 +105,12 @@ export function summarize(t: AnswersTable, map: ColumnMap, on: QuestionId[], gue
       if (r.otherText !== undefined) otherText.set(g, r.otherText)
       if (!r.choice) {
         if (id === 'diet') otherText.set(g, raw)
-        issues.push({ id: 'unknown-choice', row: g.row, question: id })
+        own.push({ id: 'unknown-choice', row: g.row, question: id })
       }
     }
     const key = normalizeHeader(g.values.name ?? '')
     if (!key) {
-      issues.push({ id: 'no-name', row: g.row })
+      own.push({ id: 'no-name', row: g.row })
       guests.push(g)
       return
     }
@@ -123,6 +128,7 @@ export function summarize(t: AnswersTable, map: ColumnMap, on: QuestionId[], gue
   const diets: Summary['diets'] = {}
   const otherDiets: Summary['otherDiets'] = []
   for (const g of guests) {
+    issues.push(...rowIssues.get(g)!)
     const d = g.choice.diet as DietId | 'other' | undefined
     if (d) diets[d] = (diets[d] ?? 0) + 1
     if (d === 'other') otherDiets.push({ guest: g.values.name ?? '', text: otherText.get(g) ?? '' })

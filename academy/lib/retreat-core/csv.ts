@@ -39,8 +39,9 @@ export function decodeCsvBytes(bytes: Uint8Array): string {
   }
 }
 
-/** Разбор CSV (RFC 4180): BOM, разделитель `;` или `,` — по первой строке, кавычки с `;`, `,` и переводом строки внутри. */
-export function parseCsv(text: string): string[][] {
+/** Разбор CSV (RFC 4180): BOM, разделитель `;` или `,` — по первой строке, кавычки с `;`, `,` и переводом строки внутри.
+ *  У записи — её номер в файле (с 1, как строка таблицы): пустые строки отброшены, номера остальных не сдвинуты. */
+export function parseCsvNumbered(text: string): { row: number; cells: string[] }[] {
   const s = text.startsWith(BOM) ? text.slice(1) : text
   const firstLine = s.split(/\r?\n/, 1)[0] ?? ''
   const sep = (firstLine.match(/;/g)?.length ?? 0) >= (firstLine.match(/,/g)?.length ?? 0) ? ';' : ','
@@ -62,5 +63,10 @@ export function parseCsv(text: string): string[][] {
     } else field += c
   }
   if (field !== '' || row.length) { row.push(field); rows.push(row) }
-  return rows.filter((r) => r.some((v) => v.trim() !== '')).map((r) => r.map(unsafe))
+  return rows.map((r, i) => ({ row: i + 1, cells: r.map(unsafe) })).filter((r) => r.cells.some((v) => v.trim() !== ''))
+}
+
+/** Записи без номеров. */
+export function parseCsv(text: string): string[][] {
+  return parseCsvNumbered(text).map((r) => r.cells)
 }

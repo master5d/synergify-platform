@@ -55,6 +55,13 @@ describe('сводка диет', () => {
     expect(s.diets).toEqual({ standard: 2 })
     expect(s.issues).toContainEqual({ id: 'duplicate-guest', row: 2, guest: 'анна к.' })
   })
+  it('вытесненная повтором строка уносит свои проблемы; номер строки не сдвигается после пустой строки', () => {
+    const text = formsCsv([row('Анна К.', 'пескетарианец'), row('Борис Л.', 'всё'), row('Анна К.', 'всё')]).replace('\r\n', '\r\n;;;;;;;;\r\n')
+    const t = readAnswers(text)
+    const s = summarize(t, matchColumns(t.header, ON), ON)
+    expect(s.guests.map((g) => g.row)).toEqual([5, 4])
+    expect(s.issues).toEqual([{ id: 'duplicate-guest', row: 3, guest: 'Анна К.' }])
+  })
   it('строка без имени — «Гость из строки N» и no-name', () => {
     const t = readAnswers(formsCsv([row('', 'всё')]))
     const s = summarize(t, matchColumns(t.header, ON), ON)
