@@ -62,7 +62,7 @@ export function issueText(i: VenueIssue, lang: Lang): string {
     case 'retreat-in-closed-month':
       return ru ? `${m}: месяц закрыт, а в нём стоят гости. Выручка закрытого месяца не считается.` : `${m}: the month is closed but has guests. A closed month earns nothing.`
     case 'closed-months-free':
-      return ru ? 'Закрытые месяцы ничего не стоят? Охрана, кредит, налоги на землю и консервация обычно остаются.' : 'Do closed months cost nothing? Security, loans, land taxes and winterising usually remain.'
+      return ru ? 'Закрытые месяцы ничего не стоят? Охрана, налоги на землю и консервация обычно остаются.' : 'Do closed months cost nothing? Security, land taxes and winterising usually remain.'
     case 'season-too-short':
       return ru ? 'Открытые месяцы не покрывают расходы закрытых и годовые. Сезон короче, чем нужно.' : 'The open months do not cover the closed months and annual costs. The season is too short.'
     case 'week-loses-money':

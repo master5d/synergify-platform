@@ -39,6 +39,8 @@ export function RetreatVenue({ locale }: { locale: Locale }) {
   const [form, setForm] = useState<VenueForm | null>(null)
   const [notice, setNotice] = useState('')
   const [previous, setPrevious] = useState<VenueForm | null>(null)
+  // набираемый код валюты: неполный («EU») живёт только в поле, в модель и ссылку уходит код из трёх букв
+  const [currencyText, setCurrencyText] = useState<string | null>(null)
   // последняя площадка без ошибок ввода: расчёт бросает на неверных данных, а страница падать не должна
   const lastValid = useRef<VenueYear>(defaultVenue())
   useEffect(() => {
@@ -177,14 +179,17 @@ export function RetreatVenue({ locale }: { locale: Locale }) {
             style={field}
             maxLength={3}
             pattern="[A-Za-z]{3}"
-            value={form.currency}
+            value={currencyText ?? form.currency}
             onChange={(e) => {
               const next = e.target.value.toUpperCase()
-              if (/^[A-Z]{0,3}$/.test(next)) setForm({ ...form, currency: next.length === 3 ? next : form.currency })
+              if (!/^[A-Z]{0,3}$/.test(next)) return
+              setCurrencyText(next)
+              if (next.length === 3) setForm({ ...form, currency: next })
             }}
+            onBlur={() => setCurrencyText(null)}
           />
         </label>
-        {intField('units', t.units)}
+        {intField('units', `${t.units} (${t.unitsHint})`)}
         {intField('groupBeds', t.groupBeds)}
         {moneyField('nightPriceCents', t.nightPrice)}
         <label style={label}>
@@ -255,10 +260,14 @@ export function RetreatVenue({ locale }: { locale: Locale }) {
         <p>{t.noIssues}</p>
       )}
       <div className="vy-actions">
-        <button style={button} onClick={() => download(`venue-year.${locale}.csv`, venueToCsv(counted, locale), 'text/csv;charset=utf-8')}>
+        <button
+          style={button}
+          disabled={errors.length > 0}
+          onClick={() => download(`venue-year.${locale}.csv`, venueToCsv(counted, locale), 'text/csv;charset=utf-8')}
+        >
           {t.downloadCsv}
         </button>
-        <button style={button} onClick={() => window.print()}>
+        <button style={button} disabled={errors.length > 0} onClick={() => window.print()}>
           {t.print}
         </button>
         <button style={button} onClick={copyLink}>

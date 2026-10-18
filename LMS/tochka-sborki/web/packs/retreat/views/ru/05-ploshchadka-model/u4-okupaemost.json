@@ -5,7 +5,7 @@
   "unit": "u4-okupaemost",
   "locale": "ru",
   "title": "Таблица окупаемости, которая врёт",
-  "sourceHash": "sha256:555b3563f8e37e48e41f660934405670093638586ab86f0ef1907a341a160572",
+  "sourceHash": "sha256:fd21fa2e7c7f00365aeba79352d35e6a5aaaba13eb17bd3ecb058da036290e9a",
   "outline": [
     {
       "heading": "Учебная модель",

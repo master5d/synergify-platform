@@ -102,7 +102,7 @@ export function formFromDraft(text: string | null): VenueForm | null {
 export function draftWorthKeeping(saved: string | null, fromLink: VenueForm): boolean {
   const draft = formFromDraft(saved)
   return Boolean(
-    draft && draftOf(draft) !== draftOf(fromLink) && draftOf(draft) !== draftOf(defaultVenueForm()) && draft.title !== fromLink.title,
+    draft && draftOf(draft) !== draftOf(fromLink) && draftOf(draft) !== draftOf(defaultVenueForm()) && !(draft.title && draft.title === fromLink.title),
   )
 }
 

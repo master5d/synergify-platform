@@ -66,6 +66,13 @@ describe('retreat venue form', () => {
     expect(draftWorthKeeping(null, base)).toBe(false)
   })
 
+  it('keeps an untitled draft when the link is untitled too', () => {
+    const base = defaultVenueForm()
+    const own = { ...base, venue: { ...base.venue, units: 8 } }
+    const linked = { ...base, venue: { ...base.venue, units: 4 } }
+    expect(draftWorthKeeping(draftOf(own), linked)).toBe(true)
+  })
+
   it('serializes drafts and rejects rubbish', () => {
     const f = { ...defaultVenueForm(), title: 'Draft' }
     expect(formFromDraft(draftOf(f))).toEqual(f)
