@@ -1,0 +1,617 @@
+[
+  {
+    "id": "plant-week",
+    "title": {
+      "ru": "Учебная неделя: растительное меню",
+      "en": "Practice week: a plant-based menu"
+    },
+    "data": {
+      "v": 1,
+      "retreat": {
+        "currency": "USD",
+        "guests": 20,
+        "nights": 6,
+        "start": "2028-05-10"
+      },
+      "tool": {
+        "diets": {
+          "vegan": 2,
+          "gluten-free": 1
+        }
+      }
+    },
+    "grid": {
+      "ru": {
+        "1-lunch": {
+          "dish": "Грибная похлёбка с перловкой",
+          "side": "Квашеная капуста",
+          "drink": "Компот",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Грибная похлёбка с картофелем"
+          },
+          "allergens": [
+            "gluten",
+            "celery"
+          ],
+          "priceCents": 1800,
+          "option": null
+        },
+        "1-dinner": {
+          "dish": "Запечённые овощи с брынзой",
+          "side": "Кукурузная каша",
+          "drink": "Травяной чай",
+          "meat": false,
+          "variants": {
+            "vegan": "Запечённые овощи с тофу"
+          },
+          "allergens": [
+            "milk"
+          ],
+          "priceCents": 1500,
+          "option": null
+        },
+        "2-breakfast": {
+          "dish": "Овсяная каша с ягодами",
+          "side": "Хлеб и масло",
+          "drink": "Травяной чай",
+          "meat": false,
+          "variants": {
+            "vegan": "Овсяная каша на овсяном молоке",
+            "gluten-free": "Гречневая каша на овсяном молоке"
+          },
+          "allergens": [
+            "gluten",
+            "milk"
+          ],
+          "priceCents": 1200,
+          "option": null
+        },
+        "2-lunch": {
+          "dish": "Борщ с фасолью",
+          "side": "Салат из свежих овощей",
+          "drink": "Компот",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Борщ с фасолью без хлеба"
+          },
+          "allergens": [
+            "celery"
+          ],
+          "priceCents": 1800,
+          "option": null
+        },
+        "2-dinner": {
+          "dish": "Запечённые овощи с брынзой",
+          "side": "Кукурузная каша",
+          "drink": "Травяной чай",
+          "meat": false,
+          "variants": {
+            "vegan": "Запечённые овощи с тофу"
+          },
+          "allergens": [
+            "milk"
+          ],
+          "priceCents": 1500,
+          "option": {
+            "name": "курица к ужину",
+            "priceCents": 800
+          }
+        },
+        "3-breakfast": {
+          "dish": "Сырники со сметаной",
+          "side": "Свежие фрукты",
+          "drink": "Узвар",
+          "meat": false,
+          "variants": {
+            "vegan": "Тосты с авокадо и фасолью",
+            "gluten-free": "Гречневые блины с фруктами"
+          },
+          "allergens": [
+            "gluten",
+            "milk",
+            "eggs"
+          ],
+          "priceCents": 1200,
+          "option": null
+        },
+        "3-lunch": {
+          "dish": "Грибная похлёбка с перловкой",
+          "side": "Квашеная капуста",
+          "drink": "Компот",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Грибная похлёбка с картофелем"
+          },
+          "allergens": [
+            "gluten",
+            "celery"
+          ],
+          "priceCents": 1800,
+          "option": null
+        },
+        "3-dinner": {
+          "dish": "Вареники с творогом",
+          "side": "Салат из свёклы",
+          "drink": "Травяной чай",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Картофельные драники со сметаной"
+          },
+          "allergens": [
+            "gluten",
+            "milk",
+            "eggs"
+          ],
+          "priceCents": 1500,
+          "option": {
+            "name": "курица к ужину",
+            "priceCents": 800
+          }
+        },
+        "4-breakfast": {
+          "dish": "Овсяная каша с ягодами",
+          "side": "Хлеб и масло",
+          "drink": "Травяной чай",
+          "meat": false,
+          "variants": {
+            "vegan": "Овсяная каша на овсяном молоке",
+            "gluten-free": "Гречневая каша на овсяном молоке"
+          },
+          "allergens": [
+            "gluten",
+            "milk"
+          ],
+          "priceCents": 1200,
+          "option": null
+        },
+        "4-lunch": {
+          "dish": "Борщ с фасолью",
+          "side": "Салат из свежих овощей",
+          "drink": "Компот",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Борщ с фасолью без хлеба"
+          },
+          "allergens": [
+            "celery"
+          ],
+          "priceCents": 1800,
+          "option": null
+        },
+        "4-dinner": {
+          "dish": "Запечённые овощи с брынзой",
+          "side": "Кукурузная каша",
+          "drink": "Травяной чай",
+          "meat": false,
+          "variants": {
+            "vegan": "Запечённые овощи с тофу"
+          },
+          "allergens": [
+            "milk"
+          ],
+          "priceCents": 1500,
+          "option": {
+            "name": "курица к ужину",
+            "priceCents": 800
+          }
+        },
+        "5-breakfast": {
+          "dish": "Сырники со сметаной",
+          "side": "Свежие фрукты",
+          "drink": "Узвар",
+          "meat": false,
+          "variants": {
+            "vegan": "Тосты с авокадо и фасолью",
+            "gluten-free": "Гречневые блины с фруктами"
+          },
+          "allergens": [
+            "gluten",
+            "milk",
+            "eggs"
+          ],
+          "priceCents": 1200,
+          "option": null
+        },
+        "5-lunch": {
+          "dish": "Грибная похлёбка с перловкой",
+          "side": "Квашеная капуста",
+          "drink": "Компот",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Грибная похлёбка с картофелем"
+          },
+          "allergens": [
+            "gluten",
+            "celery"
+          ],
+          "priceCents": 1800,
+          "option": null
+        },
+        "5-dinner": {
+          "dish": "Запечённые овощи с брынзой",
+          "side": "Кукурузная каша",
+          "drink": "Травяной чай",
+          "meat": false,
+          "variants": {
+            "vegan": "Запечённые овощи с тофу"
+          },
+          "allergens": [
+            "milk"
+          ],
+          "priceCents": 1500,
+          "option": {
+            "name": "курица к ужину",
+            "priceCents": 800
+          }
+        },
+        "6-breakfast": {
+          "dish": "Овсяная каша с ягодами",
+          "side": "Хлеб и масло",
+          "drink": "Травяной чай",
+          "meat": false,
+          "variants": {
+            "vegan": "Овсяная каша на овсяном молоке",
+            "gluten-free": "Гречневая каша на овсяном молоке"
+          },
+          "allergens": [
+            "gluten",
+            "milk"
+          ],
+          "priceCents": 1200,
+          "option": null
+        },
+        "6-lunch": {
+          "dish": "Борщ с фасолью",
+          "side": "Салат из свежих овощей",
+          "drink": "Компот",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Борщ с фасолью без хлеба"
+          },
+          "allergens": [
+            "celery"
+          ],
+          "priceCents": 1800,
+          "option": null
+        },
+        "6-dinner": {
+          "dish": "Запечённые овощи с брынзой",
+          "side": "Кукурузная каша",
+          "drink": "Травяной чай",
+          "meat": false,
+          "variants": {
+            "vegan": "Запечённые овощи с тофу"
+          },
+          "allergens": [
+            "milk"
+          ],
+          "priceCents": 1500,
+          "option": {
+            "name": "курица к ужину",
+            "priceCents": 800
+          }
+        },
+        "7-breakfast": {
+          "dish": "Сырники со сметаной",
+          "side": "Свежие фрукты",
+          "drink": "Узвар",
+          "meat": false,
+          "variants": {
+            "vegan": "Тосты с авокадо и фасолью",
+            "gluten-free": "Гречневые блины с фруктами"
+          },
+          "allergens": [
+            "gluten",
+            "milk",
+            "eggs"
+          ],
+          "priceCents": 1200,
+          "option": null
+        }
+      },
+      "en": {
+        "1-lunch": {
+          "dish": "Mushroom and barley soup",
+          "side": "Sauerkraut",
+          "drink": "Fruit compote",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Mushroom and potato soup"
+          },
+          "allergens": [
+            "gluten",
+            "celery"
+          ],
+          "priceCents": 1800,
+          "option": null
+        },
+        "1-dinner": {
+          "dish": "Roast vegetables with feta",
+          "side": "Cornmeal porridge",
+          "drink": "Herbal tea",
+          "meat": false,
+          "variants": {
+            "vegan": "Roast vegetables with tofu"
+          },
+          "allergens": [
+            "milk"
+          ],
+          "priceCents": 1500,
+          "option": null
+        },
+        "2-breakfast": {
+          "dish": "Porridge with berries",
+          "side": "Bread and butter",
+          "drink": "Herbal tea",
+          "meat": false,
+          "variants": {
+            "vegan": "Porridge with oat milk",
+            "gluten-free": "Buckwheat porridge with oat milk"
+          },
+          "allergens": [
+            "gluten",
+            "milk"
+          ],
+          "priceCents": 1200,
+          "option": null
+        },
+        "2-lunch": {
+          "dish": "Beetroot soup with beans",
+          "side": "Fresh vegetable salad",
+          "drink": "Fruit compote",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Beetroot soup with beans, no bread"
+          },
+          "allergens": [
+            "celery"
+          ],
+          "priceCents": 1800,
+          "option": null
+        },
+        "2-dinner": {
+          "dish": "Roast vegetables with feta",
+          "side": "Cornmeal porridge",
+          "drink": "Herbal tea",
+          "meat": false,
+          "variants": {
+            "vegan": "Roast vegetables with tofu"
+          },
+          "allergens": [
+            "milk"
+          ],
+          "priceCents": 1500,
+          "option": {
+            "name": "chicken with dinner",
+            "priceCents": 800
+          }
+        },
+        "3-breakfast": {
+          "dish": "Cottage cheese pancakes with sour cream",
+          "side": "Fresh fruit",
+          "drink": "Dried fruit compote",
+          "meat": false,
+          "variants": {
+            "vegan": "Toast with avocado and beans",
+            "gluten-free": "Buckwheat pancakes with fruit"
+          },
+          "allergens": [
+            "gluten",
+            "milk",
+            "eggs"
+          ],
+          "priceCents": 1200,
+          "option": null
+        },
+        "3-lunch": {
+          "dish": "Mushroom and barley soup",
+          "side": "Sauerkraut",
+          "drink": "Fruit compote",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Mushroom and potato soup"
+          },
+          "allergens": [
+            "gluten",
+            "celery"
+          ],
+          "priceCents": 1800,
+          "option": null
+        },
+        "3-dinner": {
+          "dish": "Dumplings with cottage cheese",
+          "side": "Beetroot salad",
+          "drink": "Herbal tea",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Potato pancakes with sour cream"
+          },
+          "allergens": [
+            "gluten",
+            "milk",
+            "eggs"
+          ],
+          "priceCents": 1500,
+          "option": {
+            "name": "chicken with dinner",
+            "priceCents": 800
+          }
+        },
+        "4-breakfast": {
+          "dish": "Porridge with berries",
+          "side": "Bread and butter",
+          "drink": "Herbal tea",
+          "meat": false,
+          "variants": {
+            "vegan": "Porridge with oat milk",
+            "gluten-free": "Buckwheat porridge with oat milk"
+          },
+          "allergens": [
+            "gluten",
+            "milk"
+          ],
+          "priceCents": 1200,
+          "option": null
+        },
+        "4-lunch": {
+          "dish": "Beetroot soup with beans",
+          "side": "Fresh vegetable salad",
+          "drink": "Fruit compote",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Beetroot soup with beans, no bread"
+          },
+          "allergens": [
+            "celery"
+          ],
+          "priceCents": 1800,
+          "option": null
+        },
+        "4-dinner": {
+          "dish": "Roast vegetables with feta",
+          "side": "Cornmeal porridge",
+          "drink": "Herbal tea",
+          "meat": false,
+          "variants": {
+            "vegan": "Roast vegetables with tofu"
+          },
+          "allergens": [
+            "milk"
+          ],
+          "priceCents": 1500,
+          "option": {
+            "name": "chicken with dinner",
+            "priceCents": 800
+          }
+        },
+        "5-breakfast": {
+          "dish": "Cottage cheese pancakes with sour cream",
+          "side": "Fresh fruit",
+          "drink": "Dried fruit compote",
+          "meat": false,
+          "variants": {
+            "vegan": "Toast with avocado and beans",
+            "gluten-free": "Buckwheat pancakes with fruit"
+          },
+          "allergens": [
+            "gluten",
+            "milk",
+            "eggs"
+          ],
+          "priceCents": 1200,
+          "option": null
+        },
+        "5-lunch": {
+          "dish": "Mushroom and barley soup",
+          "side": "Sauerkraut",
+          "drink": "Fruit compote",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Mushroom and potato soup"
+          },
+          "allergens": [
+            "gluten",
+            "celery"
+          ],
+          "priceCents": 1800,
+          "option": null
+        },
+        "5-dinner": {
+          "dish": "Roast vegetables with feta",
+          "side": "Cornmeal porridge",
+          "drink": "Herbal tea",
+          "meat": false,
+          "variants": {
+            "vegan": "Roast vegetables with tofu"
+          },
+          "allergens": [
+            "milk"
+          ],
+          "priceCents": 1500,
+          "option": {
+            "name": "chicken with dinner",
+            "priceCents": 800
+          }
+        },
+        "6-breakfast": {
+          "dish": "Porridge with berries",
+          "side": "Bread and butter",
+          "drink": "Herbal tea",
+          "meat": false,
+          "variants": {
+            "vegan": "Porridge with oat milk",
+            "gluten-free": "Buckwheat porridge with oat milk"
+          },
+          "allergens": [
+            "gluten",
+            "milk"
+          ],
+          "priceCents": 1200,
+          "option": null
+        },
+        "6-lunch": {
+          "dish": "Beetroot soup with beans",
+          "side": "Fresh vegetable salad",
+          "drink": "Fruit compote",
+          "meat": false,
+          "variants": {
+            "gluten-free": "Beetroot soup with beans, no bread"
+          },
+          "allergens": [
+            "celery"
+          ],
+          "priceCents": 1800,
+          "option": null
+        },
+        "6-dinner": {
+          "dish": "Roast vegetables with feta",
+          "side": "Cornmeal porridge",
+          "drink": "Herbal tea",
+          "meat": false,
+          "variants": {
+            "vegan": "Roast vegetables with tofu"
+          },
+          "allergens": [
+            "milk"
+          ],
+          "priceCents": 1500,
+          "option": {
+            "name": "chicken with dinner",
+            "priceCents": 800
+          }
+        },
+        "7-breakfast": {
+          "dish": "Cottage cheese pancakes with sour cream",
+          "side": "Fresh fruit",
+          "drink": "Dried fruit compote",
+          "meat": false,
+          "variants": {
+            "vegan": "Toast with avocado and beans",
+            "gluten-free": "Buckwheat pancakes with fruit"
+          },
+          "allergens": [
+            "gluten",
+            "milk",
+            "eggs"
+          ],
+          "priceCents": 1200,
+          "option": null
+        }
+      }
+    },
+    "expect": {
+      "perGuestWeek": 27000,
+      "perGroup": 540000,
+      "options": 5,
+      "issues": [
+        {
+          "id": "diet-without-variant",
+          "day": 3,
+          "meal": "dinner",
+          "diet": "vegan"
+        }
+      ]
+    }
+  }
+]
