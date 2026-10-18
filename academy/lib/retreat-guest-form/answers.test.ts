@@ -45,7 +45,7 @@ describe('сводка диет', () => {
     ]))
     const s = summarize(t, matchColumns(t.header, ON), ON)
     expect(s.diets).toEqual({ standard: 3, vegan: 2, 'gluten-free': 1, other: 2 })
-    expect(s.otherDiets).toEqual([{ guest: 'Жанна Р.', text: 'пескетарианец' }, { guest: 'Захар С.', text: 'без лактозы' }])
+    expect(s.otherDiets).toEqual([{ guest: 'Жанна Р.', row: 8, text: 'пескетарианец' }, { guest: 'Захар С.', row: 9, text: 'без лактозы' }])
     expect(s.issues.filter((i) => i.id === 'unknown-choice')).toEqual([{ id: 'unknown-choice', row: 8, question: 'diet' }])
   })
   it('повторная отправка: остаётся последняя строка, гость один', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { decodeCsvBytes, parseCsv, toCsv } from './csv'
+import { decodeCsvBytes, parseCsv, parseCsvNumbered, toCsv } from './csv'
 
 describe('CSV ядра', () => {
   it('в файле текст, похожий на формулу, — с апострофом; числа со знаком и телефоны — без', () => {
@@ -15,5 +15,10 @@ describe('CSV ядра', () => {
     const cp1251 = Uint8Array.from([0xc3, 0xee, 0xf1, 0xf2, 0xfc, 0x3b, 0x31])     // «Гость;1»
     expect(decodeCsvBytes(cp1251)).toBe('Гость;1')
     expect(decodeCsvBytes(new TextEncoder().encode('Гость;1'))).toBe('Гость;1')
+  })
+  it('номер записи — как строка таблицы: пустые строки отброшены, номера не сдвинуты, перевод строки в кавычках — одна запись', () => {
+    expect(parseCsvNumbered('a;b\r\n;\r\n"x\ny";z\r\nc;d\r\n')).toEqual([
+      { row: 1, cells: ['a', 'b'] }, { row: 3, cells: ['x\ny', 'z'] }, { row: 4, cells: ['c', 'd'] },
+    ])
   })
 })

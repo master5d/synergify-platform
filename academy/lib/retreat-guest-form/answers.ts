@@ -30,7 +30,7 @@ export interface Summary {
   on: QuestionId[]
   guests: GuestAnswer[]
   diets: Partial<Record<DietId | 'other', number>>
-  otherDiets: { guest: string; text: string }[]
+  otherDiets: { guest: string; row: number; text: string }[]
   issues: SummaryIssue[]
 }
 
@@ -131,7 +131,7 @@ export function summarize(t: AnswersTable, map: ColumnMap, on: QuestionId[], gue
     issues.push(...rowIssues.get(g)!)
     const d = g.choice.diet as DietId | 'other' | undefined
     if (d) diets[d] = (diets[d] ?? 0) + 1
-    if (d === 'other') otherDiets.push({ guest: g.values.name ?? '', text: otherText.get(g) ?? '' })
+    if (d === 'other') otherDiets.push({ guest: g.values.name ?? '', row: g.row, text: otherText.get(g) ?? '' })
     if (col('emergency') !== undefined && !g.values.emergency) issues.push({ id: 'no-emergency', row: g.row, guest: g.values.name })
     if (g.choice.allergySeverity === 'severe') issues.push({ id: 'severe-allergy', row: g.row, guest: g.values.name })
   }

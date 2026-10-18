@@ -96,7 +96,7 @@ export function AnswersPanel({ locale, form }: { locale: Locale; form: GuestForm
               <ul style={{ paddingLeft: '1.2rem', fontSize: 'var(--text-sm)', margin: '0 0 0.75rem' }}>
                 {DIETS.filter((d) => summary.diets[d]).map((d) => <li key={d}>{dietLabel(d, locale)}: {summary.diets[d]}</li>)}
                 {summary.diets.other ? <li>{t.otherDiets}: {summary.diets.other}
-                  <ul>{summary.otherDiets.map((o, k) => <li key={k}>{o.guest}{o.text ? ` — ${o.text}` : ''}</li>)}</ul></li> : null}
+                  <ul>{summary.otherDiets.map((o, k) => <li key={k}>{name(o.guest, o.row)}{o.text ? ` — ${o.text}` : ''}</li>)}</ul></li> : null}
               </ul>
               {noDiet > 0 && <p style={hint}>{t.noDietAnswer(noDiet)}</p>}
               {summary.diets.other ? <p style={hint}>{t.otherNotInMenu}</p> : null}
