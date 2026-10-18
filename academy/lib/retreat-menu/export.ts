@@ -2,6 +2,7 @@
 // Пометка «мясное» и варианты для диет живут в колонках шаблона: шефу они нужны так же, как странице.
 
 import type { Lang } from '../retreat-calc/engine'
+import { LIMITS } from '../retreat-calc/engine'
 import { parseCsv, toCsv } from '../retreat-core/csv'
 import { allergenByName, allergenName, type AllergenId } from './allergens'
 import { cellKey, emptyCell, type MenuCell, type MenuGrid, type Slot, type SpecialDiet } from './engine'
@@ -24,7 +25,8 @@ export function menuMoney(cents: number, lang: Lang): string {
 export function parseMoney(s: string): number | null {
   const t = s.trim().replace(/\s/g, '').replace(',', '.')
   if (!/^\d+(\.\d{1,2})?$/.test(t)) return null
-  return Math.round(Number(t) * 100)
+  const cents = Math.round(Number(t) * 100)
+  return cents <= LIMITS.moneyCents ? cents : null
 }
 
 function cellRow(s: Slot, c: MenuCell, lang: Lang): string[] {

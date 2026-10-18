@@ -16,7 +16,7 @@ export interface MenuLinkTool { grid?: MenuGrid; diets?: Diets }
 
 export const MENU_DRAFT_KEY = 'retreat-menu:draft'
 export const MENU_PATH = '/instrumenty/generator-menyu/'
-/** Обрезка текста при записи: ссылка из 18 приёмов с длинными названиями остаётся короче MAX_FRAGMENT. */
+/** Обрезка текста при записи: неделя со всеми полями по максимуму остаётся короче TOOL_MAX_FRAGMENT. */
 export const MENU_LIMITS = { text: 80, optionName: 40, cells: 400 } as const
 
 const KEY = /^(\d{1,3})-(breakfast|lunch|dinner)$/
@@ -40,7 +40,8 @@ function pickCell(raw: unknown): MenuCell {
     const op = o.option as Record<string, unknown>
     const name = str(op.name, MENU_LIMITS.optionName)
     const price = cents(op.priceCents)
-    if (name && price !== null) option = { name, priceCents: price }
+    // опция живёт, если есть название или цена больше нуля: цена, введённая раньше названия, не теряется
+    if (name || (price !== null && price > 0)) option = { name, priceCents: price ?? 0 }
   }
   return {
     dish: str(o.dish, MENU_LIMITS.text), side: str(o.side, MENU_LIMITS.text), drink: str(o.drink, MENU_LIMITS.text),
@@ -55,7 +56,7 @@ export function pickMenuTool(raw: unknown): { grid: MenuGrid; diets: Diets } {
   if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) return { grid, diets }
   const o = raw as Record<string, unknown>
   if (typeof o.grid === 'object' && o.grid !== null && !Array.isArray(o.grid)) {
-    for (const [k, v] of Object.entries(o.grid).slice(0, MENU_LIMITS.cells)) if (KEY.test(k)) grid[k] = pickCell(v)
+    for (const [k, v] of Object.entries(o.grid).filter(([k]) => KEY.test(k)).slice(0, MENU_LIMITS.cells)) grid[k] = pickCell(v)
   }
   if (typeof o.diets === 'object' && o.diets !== null) {
     for (const d of DIETS) {
@@ -101,6 +102,12 @@ export function formFromDecoded(d: DecodedTool<{ grid: MenuGrid; diets: Diets }>
   }
   const passport = { ...base.passport, ...d.link.retreat }
   return { passport, grid: reconcileGrid(d.link.tool.grid, passport), diets: d.link.tool.diets }
+}
+
+/** Ссылка без меню (из таймлайна или калькулятора) не затирает черновик: паспорт — из ссылки, сетка и диеты — из черновика. */
+export function withDraftMenu(fromLink: MenuForm, draft: MenuForm | null, linkHasMenu: boolean): MenuForm {
+  if (linkHasMenu || !draft) return fromLink
+  return { ...fromLink, grid: reconcileGrid(draft.grid, fromLink.passport), diets: Object.keys(fromLink.diets).length ? fromLink.diets : draft.diets }
 }
 
 export function formFromDraft(text: string | null, today: IsoDate): MenuForm | null {

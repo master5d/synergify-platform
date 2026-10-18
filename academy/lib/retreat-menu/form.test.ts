@@ -4,7 +4,7 @@ import { decodeToolLink, encodeToolLink, TOOL_MAX_FRAGMENT } from '../retreat-co
 import { timelineHash, defaultForm as timelineDefault } from '../retreat-timeline/form'
 import { emptyCell } from './engine'
 import {
-  calcHashFromPassport, defaultForm, draftOf, formFromDecoded, formFromDraft, menuHash, menuHashFromPassport, pickMenuTool, reconcileGrid,
+  calcHashFromPassport, defaultForm, draftOf, formFromDecoded, formFromDraft, menuHash, menuHashFromPassport, pickMenuTool, reconcileGrid, withDraftMenu,
   timelineHashFromPassport, type MenuForm,
 } from './form'
 
@@ -70,5 +70,28 @@ describe('ссылка из таймлайна в меню', () => {
     const f = decode(menuHashFromPassport({ nights: 2, guests: 8, title: 'Выходные' }))!
     expect(f.passport).toMatchObject({ nights: 2, guests: 8, title: 'Выходные' })
     expect(Object.keys(f.grid)).toHaveLength(6)
+  })
+})
+
+describe('доделки по приёмке', () => {
+  it('ссылка без меню не затирает черновик: паспорт из ссылки, сетка из черновика', () => {
+    const draft = filledForm()
+    const fromLink = decode(menuHashFromPassport({ ...draft.passport, title: 'Из таймлайна' }))!
+    const f = withDraftMenu(fromLink, draft, false)
+    expect(f.passport.title).toBe('Из таймлайна')
+    expect(f.grid['2-lunch'].dish).toBe('Плов с нутом')
+    expect(f.diets).toEqual(draft.diets)
+    expect(withDraftMenu(fromLink, draft, true)).toBe(fromLink)
+  })
+  it('цена опции без названия переживает ссылку; дробные, отрицательные и строковые цены отбрасываются', () => {
+    const f = defaultForm(TODAY)
+    f.grid['2-lunch'] = { ...emptyCell(), dish: 'Суп', priceCents: 1000, option: { name: '', priceCents: 500 } }
+    expect(decode(menuHash(f))?.grid['2-lunch'].option).toEqual({ name: '', priceCents: 500 })
+    const bad = pickMenuTool({ grid: { '2-lunch': { dish: 'x', priceCents: 12.5 }, '3-lunch': { dish: 'y', priceCents: -1 }, '4-lunch': { dish: 'z', priceCents: '100' } } })
+    expect(Object.values(bad.grid).map((c) => c.priceCents)).toEqual([null, null, null])
+  })
+  it('мусорные ключи не вытесняют настоящие', () => {
+    const junk = Object.fromEntries(Array.from({ length: 500 }, (_, i) => [`junk${i}`, {}]))
+    expect(Object.keys(pickMenuTool({ grid: { ...junk, '2-lunch': { dish: 'Суп' } } }).grid)).toEqual(['2-lunch'])
   })
 })

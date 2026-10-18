@@ -46,6 +46,7 @@ describe('CSV меню для шефа', () => {
     expect(menuMoney(1250, 'en')).toBe('12.50')
     expect(menuMoney(1200, 'ru')).toBe('12')
     expect([parseMoney('12,50'), parseMoney('12.5'), parseMoney(' 1 200 '), parseMoney('abc'), parseMoney('')]).toEqual([1250, 1250, 120000, null, null])
+    expect(parseMoney('99999999999')).toBeNull()   // выше потолка — не сумма: ссылка и черновик её бы тихо выбросили
   })
 })
 

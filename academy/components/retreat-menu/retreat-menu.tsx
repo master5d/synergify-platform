@@ -12,7 +12,7 @@ import { cellKey, computeMenu, emptyCell, validateMenu, type MenuCell, type Spec
 import { menuFromCsv, menuMoney, menuToCsv, parseMoney } from '../../lib/retreat-menu/export'
 import {
   calcHashFromPassport, defaultForm, draftOf, formFromDecoded, formFromDraft, MENU_DRAFT_KEY, MENU_PATH, menuHash,
-  pickMenuTool, reconcileGrid, timelineHashFromPassport, type MenuForm,
+  pickMenuTool, reconcileGrid, timelineHashFromPassport, withDraftMenu, type MenuForm,
 } from '../../lib/retreat-menu/form'
 import { dietLabel, issueText, mealLabel } from '../../lib/retreat-menu/labels'
 import { PassportBar } from '../retreat-core/passport-bar'
@@ -61,7 +61,14 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
     if (hash) {
       const d = decodeToolLink(hash, pickMenuTool, locale)
       const fromLink = formFromDecoded(d, now)
-      if (fromLink) { setF(fromLink); setNotice(t.loaded); return }
+      if (fromLink) {
+        let saved: string | null = null
+        try { saved = localStorage.getItem(MENU_DRAFT_KEY) } catch { /* без хранилища — только ссылка */ }
+        const linkHasMenu = d.ok && d.kind === 'tool' && Object.keys(d.link.tool.grid).length > 0
+        setF(withDraftMenu(fromLink, formFromDraft(saved, now), linkHasMenu))
+        setNotice(t.loaded)
+        return
+      }
       if (!d.ok) setNotice(d.error)
     }
     let draft: string | null = null
@@ -225,7 +232,7 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
                               <div style={label}>
                                 <label htmlFor={`${id}-opt`}>{t.optionPrice}</label>
                                 <MoneyInput id={`${id}-opt`} locale={locale} cents={c.option ? c.option.priceCents : null}
-                                  onChange={(v) => setCell(key, { option: { name: c.option?.name ?? '', priceCents: v ?? 0 } })} />
+                                  onChange={(v) => setCell(key, { option: v === null && !c.option?.name ? null : { name: c.option?.name ?? '', priceCents: v ?? 0 } })} />
                               </div>
                             </div>
                           </div>
@@ -246,7 +253,7 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
               <div style={card}><div style={label}>{t.options}</div>
                 {result.totals.options.length === 0 ? <div>{t.noOptions}</div> : (
                   <ul style={{ margin: '0.35rem 0 0', paddingLeft: '1.1rem', fontSize: 'var(--text-sm)' }}>
-                    {result.totals.options.map((o, k) => <li key={k}>{t.day(o.day, lastDay)}, {mealLabel(o.meal, locale).toLowerCase()}: {o.name} +{money(o.priceCents)}</li>)}
+                    {result.totals.options.map((o, k) => <li key={k}>{t.day(o.day, lastDay)}, {mealLabel(o.meal, locale).toLowerCase()}: {o.name || t.optionUnnamed} +{money(o.priceCents)}</li>)}
                   </ul>
                 )}</div>
             </div>
