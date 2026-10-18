@@ -26,7 +26,9 @@ export function loadEnv(src: NodeJS.ProcessEnv): ServiceEnv {
     GATEWAY_URL: String(src.GATEWAY_URL).replace(/\/$/, ''),
     GATEWAY_API_KEY: String(src.GATEWAY_API_KEY),
     API_TOKEN: String(src.API_TOKEN),
-    POOL_PROSE: src.POOL_PROSE || 'prose-pool',
+    // Лист персонажа — вымысел без фактов: быстрый дешёвый пул (замер NAUTILUS 2026-10-17, решение владельца
+    // 2026-10-18). Брифы (POOL_DEMAND_BRIEF) остаются на prose-pool — там факты.
+    POOL_PROSE: src.POOL_PROSE || 'prose-fast',
     POOL_SKIN: src.POOL_SKIN || 'reasoning',
     POOL_DEMAND_CLASSIFY: src.POOL_DEMAND_CLASSIFY || 'reasoning',
     POOL_DEMAND_BRIEF: src.POOL_DEMAND_BRIEF || 'prose-pool',

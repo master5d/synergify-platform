@@ -30,9 +30,9 @@ describe('дефолты POOL_* — алиасы пулов, не сырые и�
     expect(raw).toEqual([])
   })
 
-  it('проза и брифы по умолчанию идут в prose-pool', () => {
+  it('лист персонажа — в prose-fast, брифы — в prose-pool', () => {
     const pools = poolDefaults()
-    expect(pools.POOL_PROSE).toBe('prose-pool')
+    expect(pools.POOL_PROSE).toBe('prose-fast')
     expect(pools.POOL_DEMAND_BRIEF).toBe('prose-pool')
   })
 
