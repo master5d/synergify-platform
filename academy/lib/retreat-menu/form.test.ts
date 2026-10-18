@@ -106,4 +106,19 @@ describe('меню из ссылки урока не стирает своё м�
     expect(draftWorthKeeping(draftOf(defaultForm(TODAY)), lesson, TODAY)).toBe(false)
     expect(draftWorthKeeping(null, lesson, TODAY)).toBe(false)
   })
+  it('поправленное учебное меню с тем же названием не откладывается поверх своего', () => {
+    const lesson = filledForm()
+    lesson.passport.title = 'Учебная неделя'
+    const edited = filledForm()
+    edited.passport.title = 'Учебная неделя'
+    edited.grid['3-dinner'] = { ...emptyCell(), dish: 'Правка в учебном', priceCents: 900 }
+    expect(draftWorthKeeping(draftOf(edited), lesson, TODAY)).toBe(false)
+  })
+  it('своё меню без названия откладывается и перед учебным без названия', () => {
+    const lesson = filledForm()
+    const mine = defaultForm(TODAY)
+    mine.grid['3-dinner'] = { ...emptyCell(), dish: 'Моё рагу', priceCents: 1500 }
+    expect(lesson.passport.title).toBeFalsy()
+    expect(draftWorthKeeping(draftOf(mine), lesson, TODAY)).toBe(true)
+  })
 })

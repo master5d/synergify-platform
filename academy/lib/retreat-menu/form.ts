@@ -111,6 +111,9 @@ export const MENU_PREV_KEY = 'retreat-menu:draft-before-link'
 export function draftWorthKeeping(saved: string | null, fromLink: MenuForm, today: IsoDate): boolean {
   const d = formFromDraft(saved, today)
   if (!d || !Object.values(d.grid).some((c) => c.dish.trim())) return false
+  // черновик с тем же названием, что в ссылке, — то же учебное меню (открыли урок снова, поправили): его не откладываем,
+  // иначе оно перезаписало бы уже отложенное настоящее меню ведущего
+  if (d.passport.title && d.passport.title === fromLink.passport.title) return false
   return draftOf(d) !== draftOf(fromLink)
 }
 

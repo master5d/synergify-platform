@@ -61,6 +61,10 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
   useEffect(() => {
     const now = localToday()
     const hash = window.location.hash
+    // отложенное раньше меню остаётся доступным и после перезагрузки, пока его не вернули
+    let stored: string | null = null
+    try { stored = localStorage.getItem(MENU_PREV_KEY) } catch { /* без хранилища отложенного нет */ }
+    const hasStored = formFromDraft(stored, now) !== null
     if (hash) {
       const d = decodeToolLink(hash, pickMenuTool, locale)
       const fromLink = formFromDecoded(d, now)
@@ -73,7 +77,7 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
         if (linkHasMenu && draftWorthKeeping(saved, fromLink, now)) {
           try { localStorage.setItem(MENU_PREV_KEY, saved as string); kept = true } catch { /* без хранилища отложить нельзя */ }
         }
-        setCanRestore(kept)
+        setCanRestore(kept || hasStored)
         setF(withDraftMenu(fromLink, formFromDraft(saved, now), linkHasMenu))
         setNotice(kept ? t.loadedKeptDraft : t.loaded)
         return
@@ -84,6 +88,7 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
     try { draft = localStorage.getItem(MENU_DRAFT_KEY) } catch { /* хранилище недоступно — начинаем с чистой формы */ }
     const fromDraft = formFromDraft(draft, now)
     if (fromDraft && !hash) setNotice(t.draftRestored)
+    setCanRestore(hasStored)
     setF(fromDraft ?? defaultForm(now))
   }, [locale, t.loaded, t.draftRestored])
 
@@ -163,6 +168,7 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
               const back = formFromDraft(prev, localToday())
               if (back) { setF(back); setNotice(t.restored) }
               setCanRestore(false)
+              try { localStorage.removeItem(MENU_PREV_KEY) } catch { /* без хранилища очищать нечего */ }
             }}>{t.restore}</button>
           </p>
         )}
