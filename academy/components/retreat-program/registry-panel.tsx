@@ -15,6 +15,7 @@ interface Props {
   locale: Locale
   cards: PracticeCard[]
   linkedCards: PracticeCard[]
+  disclaimer: string
   onChange: (cards: PracticeCard[]) => void
   onNotice: (notice: string) => void
   onReset: () => void
@@ -27,7 +28,7 @@ const editable = [
 ] as const
 type Editable = (typeof editable)[number]
 
-export function RegistryPanel({ locale, cards, linkedCards, onChange, onNotice, onReset, onPrintCards }: Props) {
+export function RegistryPanel({ locale, cards, linkedCards, disclaimer, onChange, onNotice, onReset, onPrintCards }: Props) {
   const t = PG_UI[locale]
   const input = useRef<HTMLInputElement>(null)
   const [open, setOpen] = useState<string | null>(null)
@@ -131,6 +132,7 @@ export function RegistryPanel({ locale, cards, linkedCards, onChange, onNotice, 
           <p key={key}><strong>{t.fields[key]}:</strong> {printValue(item, key)}</p>
         ))}
       </article>)}
+      <p>{disclaimer}</p>
     </div>
     </>
   )

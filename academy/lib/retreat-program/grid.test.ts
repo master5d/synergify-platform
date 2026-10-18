@@ -20,7 +20,11 @@ describe('program grid', () => {
     expect(issues([block('10:00', 60), block('11:00')]).some((i) => i.id === 'overlap')).toBe(false)
   })
   it('T3 distinguishes outside-day and off-step blocks', () => {
-    expect(issues([block('23:30')]).some((i) => i.id === 'outside-day')).toBe(true); expect(issues([block('06:30')]).some((i) => i.id === 'outside-day')).toBe(true); expect(issues([block('10:15')]).some((i) => i.id === 'off-step')).toBe(true)
+    expect(issues([block('23:30')]).some((i) => i.id === 'outside-day')).toBe(true); expect(issues([block('04:30')]).some((i) => i.id === 'outside-day')).toBe(true); expect(issues([block('10:15')]).some((i) => i.id === 'off-step')).toBe(true)
+  })
+  it('allows morning practice from 05:00', () => {
+    expect(issues([block('05:30', 150)]).some((i) => i.id === 'outside-day')).toBe(false)
+    expect(issues([block('04:30', 30)]).some((i) => i.id === 'outside-day')).toBe(true)
   })
   it('T4 uses rendered block duration for free minutes', () => { expect(freeMinutes(2, [{ day: 2, start: '12:00', minutes: 0, kind: 'free' }])).toBe(30) })
   it('T5 resets a high-load chain on free, meal, low, and missing practices but not transfer or other', () => {

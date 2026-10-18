@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { decodeToolLink, TOOL_MAX_FRAGMENT } from '../retreat-core/tool-link'
+import { decodeToolLink, encodeToolLink, TOOL_MAX_FRAGMENT } from '../retreat-core/tool-link'
 import { defaultForm as timelineDefaultForm, timelineHash } from '../retreat-timeline/form'
 import { PRACTICE_LIMITS, starterCards } from './practices'
 import { defaultBlocks, pickProgramTool } from './grid'
-import { defaultForm, draftOf, formFromDecoded, formFromDraft, programHash, registryFromStorage } from './form'
+import { defaultForm, draftOf, draftWorthKeeping, formFromDecoded, formFromDraft, programHash, reconcileMeals, registryFromStorage, restoreStarter, withDraftBlocks } from './form'
 
 const today = '2026-10-18' as const
 
@@ -56,5 +56,40 @@ describe('program form', () => {
     expect(formFromDraft(text, today)).toEqual(f)
     expect(text).not.toContain('description')
     expect(text).not.toContain('touchConsent')
+  })
+
+  it('keeps a valuable draft blocks when a passport-only link is opened', () => {
+    const draft = defaultForm(today); draft.blocks = [{ day: 2, start: '09:00', minutes: 30, kind: 'practice', practiceId: 'x' }]
+    const link = encodeToolLink({ v: 1, retreat: { title: 'From link' }, tool: {} })
+    const decoded = formFromDecoded(decodeToolLink(link, pickProgramTool, 'ru'), today)!
+    expect(withDraftBlocks(decoded.form, draft, decoded.linkHasBlocks)).toEqual({ passport: expect.objectContaining({ title: 'From link' }), blocks: draft.blocks })
+  })
+
+  it('prefers blocks carried by a program link and detects valuable drafts', () => {
+    const draft = defaultForm(today); draft.blocks = [{ day: 2, start: '09:00', minutes: 30, kind: 'practice', practiceId: 'x' }]
+    const linked = { ...defaultForm(today), blocks: [{ day: 3, start: '10:00', minutes: 30, kind: 'free' as const }] }
+    expect(withDraftBlocks(linked, draft, true)).toEqual(linked)
+    expect(draftWorthKeeping(draftOf(defaultForm(today)), linked, today)).toBe(false)
+    expect(draftWorthKeeping(draftOf(draft), linked, today)).toBe(true)
+  })
+
+  it('reconciles new days and only untouched default meals', () => {
+    const before = { nights: 6, arrivalMeal: 'lunch' as const, departureMeal: 'breakfast' as const }
+    const after = { ...before, nights: 7 }
+    const extended = reconcileMeals(defaultBlocks(before), before, after)
+    expect(extended.filter((b) => b.day === 7).map((b) => b.start).sort()).toEqual(['08:00', '13:00', '19:00'])
+    expect(extended.filter((b) => b.day === 8).map((b) => b.start)).toEqual(['08:00'])
+    const changed = reconcileMeals(defaultBlocks(before), before, { ...before, arrivalMeal: 'dinner' })
+    expect(changed.filter((b) => b.day === 1).map((b) => b.start)).toEqual(['19:00'])
+    const custom = defaultBlocks(before).map((b) => b.day === 1 && b.start === '13:00' ? { ...b, title: 'мой обед' } : b)
+    expect(reconcileMeals(custom, before, { ...before, arrivalMeal: 'dinner' }).filter((b) => b.day === 1).map((b) => b.title)).toContain('мой обед')
+  })
+
+  it('restores missing starter ids without renaming own or edited cards', () => {
+    const starter = starterCards('en'); const edited = { ...starter[0], name: 'Edited' }
+    const restored = restoreStarter([edited], 'en')
+    expect(restored.filter((card) => card.id === starter[0].id)).toEqual([edited])
+    expect(restored.filter((card) => card.id === starter[1].id)).toHaveLength(1)
+    expect(restored.map((card) => card.id)).toEqual([...new Set(restored.map((card) => card.id))])
   })
 })

@@ -8,7 +8,7 @@ export type BlockKind = 'practice' | 'meal' | 'free' | 'transfer' | 'other'
 export interface Block { day: number; start: string; minutes: number; kind: BlockKind; practiceId?: string; title?: string }
 export const MEAL_TIMES: Record<Meal, string> = { breakfast: '08:00', lunch: '13:00', dinner: '19:00' }
 export const MEAL_MINUTES = 60
-export const DAY_START = '07:00'; export const DAY_END = '22:00'; export const STEP = 30
+export const EARLIEST = '05:00'; export const DAY_START = '07:00'; export const DAY_END = '22:00'; export const STEP = 30
 export const PROGRAM_LIMITS = { blocks: 300, title: 80 } as const
 const KINDS: BlockKind[] = ['practice', 'meal', 'free', 'transfer', 'other']
 const START = /^\d{2}:\d{2}$/; const ID = /^[a-z0-9-]{1,40}$/
@@ -27,7 +27,7 @@ export function checkGrid(p: RetreatPassport, blocks: Block[], cards: PracticeCa
   for (const b of list) {
     const start = toMinutes(b.start); const card = b.practiceId ? byId.get(b.practiceId) : undefined
     if (!Number.isFinite(start) || start % STEP !== 0) dayIssues.push({ id: 'off-step', day: b.day, start: b.start })
-    if (start < toMinutes(DAY_START) || start + blockMinutes(b, card) > 1440) dayIssues.push({ id: 'outside-day', day: b.day, start: b.start })
+    if (start < toMinutes(EARLIEST) || start + blockMinutes(b, card) > 1440) dayIssues.push({ id: 'outside-day', day: b.day, start: b.start })
     if (b.day < 1 || b.day > (p.nights ?? 0) + 1) dayIssues.push({ id: 'block-outside-retreat', day: b.day, start: b.start })
     if (b.kind === 'practice' && (!b.practiceId || !byId.has(b.practiceId))) dayIssues.push({ id: 'practice-missing', day: b.day, start: b.start })
   }

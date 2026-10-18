@@ -24,4 +24,11 @@ describe('program grid CSV', () => {
       expect(rows).toEqual(expected)
     }
   })
+  it('starts CSV at an early practice time', () => {
+    const early = [{ day: 2, start: '05:30', minutes: 150, kind: 'practice' as const, practiceId: 'a' }]
+    const card = { ...emptyCard('a'), name: 'Ранняя практика', groupMinutes: 150 }
+    const rows = parseCsv(gridToCsv({ nights: 6 }, early, [card], 'ru'))
+    expect(rows[1][0]).toBe('05:30')
+    expect(rows[1][2]).toBe('Ранняя практика')
+  })
 })

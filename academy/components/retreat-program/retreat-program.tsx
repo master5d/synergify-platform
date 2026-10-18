@@ -8,14 +8,14 @@ import { decodeToolLink, TOOL_MAX_FRAGMENT } from '../../lib/retreat-core/tool-l
 import { CALC_PATH, localePath, TIMELINE_PATH } from '../../lib/retreat-timeline/form'
 import { MENU_PATH, calcHashFromPassport, menuHashFromPassport, timelineHashFromPassport } from '../../lib/retreat-menu/form'
 import { FORM_PATH, formHashFromPassport } from '../../lib/retreat-guest-form/form'
-import { defaultBlocks, blockMinutes, fromMinutes, STEP, DAY_END, toMinutes, pickProgramTool, type Block } from '../../lib/retreat-program/grid'
+import { blockMinutes, fromMinutes, STEP, toMinutes, pickProgramTool, type Block } from '../../lib/retreat-program/grid'
 import { mealLabel } from '../../lib/retreat-menu/labels'
 import {
-  defaultForm, draftOf, formFromDecoded, formFromDraft, programHash, PROGRAM_DRAFT_KEY,
-  PROGRAM_PATH, REGISTRY_KEY, registryFromStorage, type ProgramForm,
+  defaultForm, draftOf, draftWorthKeeping, formFromDecoded, formFromDraft, programHash, PROGRAM_DRAFT_KEY, PROGRAM_PREV_KEY,
+  PROGRAM_PATH, registryKey, registryFromStorage, reconcileMeals, restoreStarter, withDraftBlocks, type ProgramForm,
 } from '../../lib/retreat-program/form'
 import { gridRows, gridToCsv } from '../../lib/retreat-program/export'
-import { type PracticeCard, mergeRegistry, starterCards } from '../../lib/retreat-program/practices'
+import { type PracticeCard } from '../../lib/retreat-program/practices'
 import { PassportBar } from '../retreat-core/passport-bar'
 import { download } from '../retreat-timeline/download'
 import { GridPanel } from './grid-panel'
@@ -33,6 +33,7 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
   const [registry, setRegistry] = useState<PracticeCard[]>([])
   const [linkedCards, setLinkedCards] = useState<PracticeCard[]>([])
   const [notice, setNotice] = useState('')
+  const [previousDraft, setPreviousDraft] = useState<ProgramForm | null>(null)
 
   useEffect(() => {
     const today = localToday()
@@ -43,12 +44,17 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
     let saved: string | null = null
     try {
       draft = localStorage.getItem(PROGRAM_DRAFT_KEY)
-      saved = localStorage.getItem(REGISTRY_KEY)
+      saved = localStorage.getItem(registryKey(locale))
     } catch { /* черновик и реестр в браузере — удобство, без них всё работает */ }
     const draftForm = formFromDraft(draft, today)
-    setForm(loaded?.form ?? draftForm ?? defaultForm(today))
+    const linkForm = loaded?.form
+    const keepDraft = Boolean(linkForm && loaded?.linkHasBlocks && draftWorthKeeping(draft, linkForm, today))
+    const previous = keepDraft ? draftForm : null
+    if (previous) { setPreviousDraft(previous); try { localStorage.setItem(PROGRAM_PREV_KEY, draftOf(previous)) } catch { /* best effort */ } }
+    setForm(linkForm ? withDraftBlocks(linkForm, draftForm, loaded?.linkHasBlocks ?? false) : draftForm ?? defaultForm(today))
     setLinkedCards(loaded?.cards ?? [])
-    if (loaded) setNotice(t.loaded)
+    if (loaded && keepDraft) setNotice(t.linkOpened)
+    else if (loaded) setNotice(t.loaded)
     else if (hash) setNotice(t.linkBroken)
     else if (draftForm) setNotice(t.draftRestored)
     setRegistry(registryFromStorage(saved, locale))
@@ -58,14 +64,17 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
     if (!form) return
     try {
       localStorage.setItem(PROGRAM_DRAFT_KEY, draftOf(form))
-      localStorage.setItem(REGISTRY_KEY, JSON.stringify({ v: 1, cards: registry }))
+      localStorage.setItem(registryKey(locale), JSON.stringify({ v: 1, cards: registry }))
     } catch { /* черновик и реестр в браузере — удобство, без них всё работает */ }
   }, [form, registry])
 
   const allCards = useMemo(() => [...registry, ...linkedCards.filter((item) => !registry.some((cardItem) => cardItem.id === item.id))], [registry, linkedCards])
   if (!form) return null
   const errors = validatePassport(form.passport, locale)
-  const setPassport = <K extends keyof RetreatPassport>(key: K, value: RetreatPassport[K]) => setForm({ ...form, passport: { ...form.passport, [key]: value } })
+  const setPassport = <K extends keyof RetreatPassport>(key: K, value: RetreatPassport[K]) => {
+    const passport = { ...form.passport, [key]: value }
+    setForm({ ...form, passport, blocks: reconcileMeals(form.blocks, form.passport, passport) })
+  }
   const updateBlock = (index: number, patch: Partial<Block>) => setForm({ ...form, blocks: form.blocks.map((block, n) => n === index ? { ...block, ...patch } : block) })
   const removeBlock = (index: number) => setForm({ ...form, blocks: form.blocks.filter((_, n) => n !== index) })
   const addBlock = (day: number) => {
@@ -100,7 +109,10 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
           { href: localePath(CALC_PATH, locale) + calcHashFromPassport(form.passport), label: t.openCalc },
           { href: localePath(FORM_PATH, locale) + formHashFromPassport(form.passport), label: t.openForm },
         ]} />
-        {notice && <p role="status" style={{ ...card, color: 'var(--accent-ink)' }}>{notice}</p>}
+        {notice && <p role="status" style={{ ...card, color: 'var(--accent-ink)' }}>{notice}{previousDraft && <>{' '}<button style={button} onClick={() => {
+          setForm(previousDraft); setPreviousDraft(null); setNotice(t.draftBack)
+          try { localStorage.removeItem(PROGRAM_PREV_KEY) } catch { /* best effort */ }
+        }}>{t.restoreDraft}</button></>}</p>}
         <h2 style={h2}>{t.retreat}</h2>
         <div className="pg-grid">
           <label style={label}>{t.titleLabel}<input style={field} value={form.passport.title ?? ''} onChange={(e) => setPassport('title', e.target.value || undefined)} /></label>
@@ -127,8 +139,8 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
         </div>
       </div>
       {/* реестр — вне pg-screen: его печатная часть должна оставаться видимой при печати карточек */}
-      <RegistryPanel locale={locale} cards={registry} linkedCards={linkedCards} onChange={setRegistry}
-        onNotice={setNotice} onReset={() => setRegistry(mergeRegistry(registry, starterCards(locale)).cards)}
+      <RegistryPanel locale={locale} cards={registry} linkedCards={linkedCards} disclaimer={t.disclaimer} onChange={setRegistry}
+        onNotice={setNotice} onReset={() => setRegistry(restoreStarter(registry, locale))}
         onPrintCards={() => printPart('cards')} />
       <div className="pg-print-grid" aria-hidden="true">
         <table><thead><tr>{printRows[0].map((cell, index) => <th key={index}>{cell}</th>)}</tr></thead>
@@ -137,6 +149,7 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
           </tr>)}</tbody>
         </table>
       </div>
+      <p className="pg-screen" style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-xs)', marginTop: '2rem' }}>{t.disclaimer}</p>
     </div>
   )
 }
