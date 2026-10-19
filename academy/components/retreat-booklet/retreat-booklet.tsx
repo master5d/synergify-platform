@@ -19,6 +19,7 @@ import { CALC_PATH, localePath, TIMELINE_PATH } from '../../lib/retreat-timeline
 import { MENU_PATH, calcHashFromPassport, menuHashFromPassport, timelineHashFromPassport } from '../../lib/retreat-menu/form'
 import { PROGRAM_PATH, programHashFromPassport } from '../../lib/retreat-program/form'
 import { FORM_PATH, formHashFromPassport } from '../../lib/retreat-guest-form/form'
+import { LANDING_PATH } from '../../lib/retreat-booklet/landing'
 import { PassportBar } from '../retreat-core/passport-bar'
 import { download } from '../retreat-timeline/download'
 import { SectionForm } from './section-form'
@@ -106,6 +107,7 @@ export function RetreatBooklet({ locale }: { locale: Locale }) {
           { href: localePath(MENU_PATH, locale) + menuHashFromPassport(p), label: t.openMenu },
           { href: localePath(PROGRAM_PATH, locale) + programHashFromPassport(p), label: t.openProgram },
           { href: localePath(FORM_PATH, locale) + formHashFromPassport(p), label: t.openForm },
+          { href: localePath(LANDING_PATH, locale) + bookletHash(form), label: t.openLanding },
         ]} />
         {notice && <p role={notice.alert ? 'alert' : 'status'} style={{ ...card, color: notice.alert ? 'var(--crit)' : GOLD, margin: '0 0 1.25rem' }}>{notice.text}</p>}
         <div style={{ ...card, marginBottom: '1.5rem' }}>

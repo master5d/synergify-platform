@@ -43,6 +43,14 @@ export function issueText(issue: { id: string; section?: SectionId; detail?: str
     case 'booking-without-form':
       return ru ? 'В программе есть практики с противопоказаниями, а в шагах записи нет анкеты.'
         : 'The programme has practices with contraindications, but the booking steps have no guest form.'
+    case 'cta-missing':
+      return ru ? 'У кнопки записи не указан адрес.' : 'The booking button has no address.'
+    case 'cta-invalid':
+      return ru ? 'Адрес кнопки записи должен быть безопасной ссылкой https или mailto.' : 'The booking address must be a safe https or mailto link.'
+    case 'video-not-allowed':
+      return ru ? 'Видео можно встраивать только с YouTube или Vimeo.' : 'Only YouTube or Vimeo videos can be embedded.'
+    case 'file-heavy':
+      return ru ? 'HTML лендинга получился слишком тяжёлым.' : 'The landing HTML file is too large.'
     default:
       return issue.detail ? `${issue.id}: ${issue.detail}` : issue.id
   }
