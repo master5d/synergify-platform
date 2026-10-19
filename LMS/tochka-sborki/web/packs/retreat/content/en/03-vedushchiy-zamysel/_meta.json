@@ -1,21 +1,24 @@
 {
   "module": 3,
   "title": "Leader: the idea, the guest, sales",
-  "description": "Leader track. Who your guest is, your own audience and a co-leader, sales against the cash plan, staying in touch with guests before arrival.",
-  "duration": "40 min",
+  "description": "Leader track. Who your guest is, your own audience and a co-leader, sales against the cash plan, staying in touch with guests before arrival, the booklet and your audience before the retreat.",
+  "duration": "60 min",
   "level": 2,
   "units": [
     { "slug": "u1-gost", "title": "Who your guest is and what change they seek" },
     { "slug": "u2-auditoriya-sovedushchij", "title": "Your own audience and a co-leader" },
     { "slug": "u3-prodazhi-kassa", "title": "Sales against the cash plan" },
-    { "slug": "u4-do-zaezda", "title": "Between the first payment and arrival" }
+    { "slug": "u4-do-zaezda", "title": "Between the first payment and arrival" },
+    { "slug": "u5-buklet", "title": "The booklet: it sells and it promises" },
+    { "slug": "u6-auditoriya-do-retrita", "title": "Your audience before the retreat" }
   ],
   "layout": "phases",
   "objectives": [
     { "id": "o1", "text": "Describe one concrete guest and the change they are travelling for" },
     { "id": "o2", "text": "Estimate the group by your own audience and write down the arrangements with a co-leader" },
     { "id": "o3", "text": "Tie the pace of sales and payment options to the venue payment schedule" },
-    { "id": "o4", "text": "Place points of contact with guests from payment to arrival and turn a cancellation into a transfer" }
+    { "id": "o4", "text": "Place points of contact with guests from payment to arrival and turn a cancellation into a transfer" },
+    { "id": "o5", "text": "Build a booklet that sells the week and honestly fixes what it includes" }
   ],
   "checks": [
     {
@@ -73,6 +76,34 @@
       ],
       "answer": 1,
       "explain": "The reason for a cancellation is often ordinary and comes out in conversation. A transfer keeps the guest and the money with you (u4, \"A cancellation is a conversation\")."
+    },
+    {
+      "id": "c5",
+      "unit": "u5-buklet",
+      "objective": "o5",
+      "question": "A guest writes after the retreat: \"I thought the trip from the airport was in the price\". What does the course advise to prevent this?",
+      "options": [
+        "Reply that it is obvious",
+        "Write both lists in the booklet — what is included and what is not",
+        "Remove the price from the booklet",
+        "Refund the guest for the week"
+      ],
+      "answer": 1,
+      "explain": "What the booklet does not say, the guest fills in on their own. Both lists are part of the promise (u5, \"Included and not included is a promise\")."
+    },
+    {
+      "id": "c6",
+      "unit": "u6-auditoriya-do-retrita",
+      "objective": "o2",
+      "question": "Sales open in three months and you have few people of your own. What does the course call the honest choice?",
+      "options": [
+        "Fill the cash gap with ads to strangers",
+        "Move the dates, make the group smaller or invite a co-leader",
+        "Announce that two places are left",
+        "Halve the price"
+      ],
+      "answer": 1,
+      "explain": "People buy a week from someone they trust, and trust grows over months. It is more honest to move the plan than to push (u6, \"When to start\")."
     }
   ]
 }

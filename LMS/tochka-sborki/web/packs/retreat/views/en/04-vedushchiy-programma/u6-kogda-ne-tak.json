@@ -1,0 +1,131 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-vedushchiy-programma",
+  "unit": "u6-kogda-ne-tak",
+  "locale": "en",
+  "title": "When something goes wrong on the retreat",
+  "sourceHash": "sha256:c1448051d110a169829c59d80785bb9ef78159ebfc9b287bedbcfb0646a1d265",
+  "outline": [
+    {
+      "heading": "Who decides",
+      "points": [
+        {
+          "text": "First of all, agree who makes decisions on the retreat if something goes wrong.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A guest who feels unwell",
+      "points": [
+        {
+          "text": "The guest form already knows about their health and a close contact.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A difficult guest",
+      "points": [
+        {
+          "text": "Someone disrupts sessions, argues with the group, breaks the rules.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A booking or the journey falls through",
+      "points": [
+        {
+          "text": "The venue mixed up the dates, the transfer did not come, a flight was cancelled.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Weather and natural events",
+      "points": [
+        {
+          "text": "Heavy rain cancels a walk, heat cancels a practice in the sun.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What to tell the group",
+      "points": [
+        {
+          "text": "Briefly, truthfully and at once: what happened, what is already being done, what changes in the programme.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Afterwards",
+      "points": [
+        {
+          "text": "Write down what happened and how it was solved — the same day.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:8134028bd9a0b3a60bc6555390888e4027e742def05f62601a253651ba17ae8a",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:7fd8e663ddd531afd613e2369c146d4aa2f8f7a05ad44625e71b8b80ae073561",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:11d54337a02cb12a3ef5a003d93d6d68d05253e910bc0d7a8e7d273004a983b2",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:9571d17ff12c4b9fef4f75433c1fbc6a9f730f6c994257aef7e7b6a888c2cd65",
+        "points": [
+          "The venue might mix up the dates or a transfer might not come.",
+          "A flight could also be cancelled."
+        ]
+      },
+      {
+        "sourceHash": "sha256:95ae72511f9e2abd7126e6927bb771462f0ba614e6204bceea1c438083fd60a4",
+        "points": [
+          "Heavy rain can cancel a walk.",
+          "Heat might cancel a practice in the sun."
+        ]
+      },
+      {
+        "sourceHash": "sha256:efd70f7748b0c967a65d858cd99a98614aab3a1a6733cb687abcddad0d6b61b5",
+        "points": [
+          "Tell the group briefly and truthfully what happened as soon as it occurs.",
+          "Explain what is already being done and how the programme will change."
+        ]
+      },
+      {
+        "sourceHash": "sha256:8c957704a346898a1e9cbadc5cf29891572d4ac4305365fa9d126a9db98369f0",
+        "points": [
+          "Record what happened and how you solved it on the same day."
+        ]
+      }
+    ]
+  }
+}

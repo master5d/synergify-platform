@@ -5,13 +5,23 @@
   "unit": "u1-kartochka-praktiki",
   "locale": "en",
   "title": "An honest practice card",
-  "sourceHash": "sha256:74a745e6e47bd8b6501c5617bdb1a9732c0b30c3e2221c96a224db5e8cd4d636",
+  "sourceHash": "sha256:f8a857d02552812bf5f5a702a6bcef814eef1a7ffb7616702f9b6439e4be7e06",
   "outline": [
     {
       "heading": "How not to write it",
       "points": [
         {
           "text": "Practice catalogues often contain promises: the practice \"will heal\", \"opens abilities\", \"gives answers to any question\", \"clears all suppressed emotions\".",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the practice serves",
+      "points": [
+        {
+          "text": "Sessions in the morning, an outing in the afternoon that has nothing to do with them.",
           "origin": "extract"
         }
       ],
@@ -60,6 +70,10 @@
       {
         "sourceHash": "sha256:5e953d3b26f3bee7ce885175835ef2b93ec6dbf5172d74f06951b3f354976416",
         "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:4010ab56c64df903bfa4aa6813d55ea96c70201fc7f108b02e91dcd18aa82ce5",
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:a7fe1763e4733fa1be43fadc9583064a1a6adb710095e8cf281df586d06d2d73",

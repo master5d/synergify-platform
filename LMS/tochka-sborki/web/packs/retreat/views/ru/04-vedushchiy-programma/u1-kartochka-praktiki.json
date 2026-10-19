@@ -5,13 +5,23 @@
   "unit": "u1-kartochka-praktiki",
   "locale": "ru",
   "title": "Честная карточка практики",
-  "sourceHash": "sha256:5d08a86c182628aec6529cdfa299f31b3091a51322471edd9612e252b51a10db",
+  "sourceHash": "sha256:3534678489bc112804aebe4ad9ad71018c67341ae2e58183106313a5def976a0",
   "outline": [
     {
       "heading": "Как пишут не надо",
       "points": [
         {
           "text": "В каталогах практик часто встречаются обещания: практика «исцелит», «откроет способности», «даст ответы на любые вопросы», «очистит от всех подавленных эмоций».",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Чему служит практика",
+      "points": [
+        {
+          "text": "Утром — занятия, днём — экскурсия, никак с ними не связанная.",
           "origin": "extract"
         }
       ],
@@ -60,6 +70,12 @@
       {
         "sourceHash": "sha256:ce1dfd54126fa054250dd250e8f65f2c9fc4bdaa07117baf21fabe6f4df2bd7e",
         "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:86a0d8715e22e1627761ddca22b69813786ed20a6049f7c23ad8e6ec033e0adc",
+        "points": [
+          "Утром у тебя проходят занятия, а днем — никак не связанная с ними экскурсия."
+        ]
       },
       {
         "sourceHash": "sha256:939a7a67efa4243df9cc827aea415f630d68b8e700f9ff5be37fddfed9c66680",
