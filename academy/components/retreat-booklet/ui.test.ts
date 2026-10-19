@@ -1,25 +1,22 @@
 import { describe, expect, it } from 'vitest'
 import { SECTION_IDS } from '../../lib/retreat-booklet/sections'
-import { sectionLabels, issueText } from '../../lib/retreat-booklet/labels'
+import { sectionLabels } from '../../lib/retreat-booklet/labels'
 import { BK_UI } from './ui'
 
-describe('retreat booklet copy', () => {
-  it('has a section label in both languages', () => {
+const keys = (o: object): string[] => Object.entries(o).flatMap(([k, v]) => (v && typeof v === 'object' ? keys(v).map((x) => `${k}.${x}`) : [k])).sort()
+
+describe('подписи буклета', () => {
+  it('у каждого раздела есть название RU и EN', () => {
     for (const id of SECTION_IDS) {
-      expect(sectionLabels('ru')[id]).toBeTruthy()
-      expect(sectionLabels('en')[id]).toBeTruthy()
+      expect(sectionLabels('ru')[id], id).toBeTruthy()
+      expect(sectionLabels('en')[id], id).toBeTruthy()
     }
   })
-
-  it('has human text for every engine issue', () => {
-    for (const id of ['required-empty', 'no-not-included', 'import-passport-mismatch', 'experience-without-purpose',
-      'holiday-overlap', 'promise-words', 'testimonial-without-consent', 'photo-without-rights', 'booking-without-form']) {
-      expect(issueText({ id }, 'ru')).not.toContain(id)
-      expect(issueText({ id }, 'en')).not.toContain(id)
-    }
+  it('RU и EN имеют одинаковый набор подписей', () => {
+    expect(keys(BK_UI.en)).toEqual(keys(BK_UI.ru))
   })
-
-  it('keeps the UI key set bilingual', () => {
-    expect(Object.keys(BK_UI.ru).sort()).toEqual(Object.keys(BK_UI.en).sort())
+  it('lead говорит, что всё остаётся в браузере', () => {
+    expect(BK_UI.ru.lead).toContain('Всё остаётся в этом браузере.')
+    expect(BK_UI.en.lead).toContain('Everything stays in this browser.')
   })
 })

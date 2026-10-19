@@ -1,5 +1,6 @@
 import type { Lang } from '../retreat-calc/engine'
 import { gridRows } from '../retreat-program/export'
+import { starterCards } from '../retreat-program/practices'
 import { computeMenu } from '../retreat-menu/engine'
 import { buildTimeline, type Milestone } from '../retreat-timeline/engine'
 import { addDays, type IsoDate } from '../retreat-core/dates'
@@ -47,7 +48,11 @@ export function bookletModel(form: BookletForm, lang: Lang, today: IsoDate): Boo
       add({ id, title: labels[id], data: { title: form.passport.title ?? '', place: c.place, start: form.passport.start,
         end: form.passport.start ? addDays(form.passport.start, nights) : undefined,
         dateText: dateLabel(form.passport.start, nights, lang), nights } })
-    } else if (id === 'schedule') { const p = form.imports.program; add({ id, title: labels[id], data: { gridRows: p ? gridRows(p.retreat, p.blocks, p.cards, lang) : [] } })
+    } else if (id === 'schedule') {
+      // в ссылке конструктора карточек нет, если это стартовые практики: названия берём из стартового набора языка
+      const p = form.imports.program
+      const cards = p ? [...p.cards, ...starterCards(lang).filter((s) => !p.cards.some((c) => c.id === s.id))] : []
+      add({ id, title: labels[id], data: { gridRows: p ? gridRows(p.retreat, p.blocks, cards, lang) : [] } })
     } else if (id === 'food') {
       const m = form.imports.menu; let diets: Record<string, number> | null = null
       let firstFullDay: { breakfast: string; lunch: string; dinner: string } | null = null

@@ -280,7 +280,7 @@ export function RetreatCalculator({ locale }: { locale: Locale }) {
 
       <p style={{ marginTop: '2rem' }}>
         <a style={{ color: GOLD }} href={localePath(TIMELINE_PATH, locale) + timelineHashFromCalcForm(f, localToday())}>{t.openTimeline} →</a>
-        {' · '}<a style={{ color: GOLD }} href={localePath(BOOKLET_PATH, locale) + bookletHashWithImport(calcPassport(f, localToday()), 'calc', calcHash(f), localToday(), locale)}>{t.buildBooklet} →</a>
+        {' · '}<a style={{ color: GOLD }} href={localePath(BOOKLET_PATH, locale) + bookletHashWithImport(calcPassport(f, localToday()), 'calc', calcHash(f, localToday()), localToday(), locale)}>{t.buildBooklet} →</a>
       </p>
 
       <p style={{ ...label, marginTop: '2.5rem' }}>{t.disclaimer}</p>
