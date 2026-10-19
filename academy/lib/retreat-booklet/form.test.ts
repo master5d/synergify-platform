@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { decodeToolLink } from '../retreat-core/tool-link'
+import { decodeToolLink, encodeToolLink } from '../retreat-core/tool-link'
+import { TIMELINE_PATH } from '../retreat-timeline/form'
+import { importLink } from './imports'
 import { bookletModel } from './pages'
 import { bookletHash, defaultForm, enabledSections, exportJson, formFromDecoded, importJson, pickBookletTool } from './form'
 import { REQUIRED_SECTIONS, SECTION_IDS } from './sections'
@@ -14,6 +16,19 @@ const seeded = () => {
 }
 
 describe('booklet form', () => {
+  it('B44 импорт таймлайна переживает два круга ссылки без роста денег', () => {
+    const plan = { signDate: '2027-11-10', guestDepositPct: 30, guestBalanceDueDays: 75, guestRefundDays: 75, venueNoReturnDays: 60,
+      venue: { model: 'full_campus', ratePerGuest: 1800.5, capacity: 20, minGuests: 0, buyoutFee: 0, depositPct: 25, finalDueDays: 60,
+        payInFullDiscountPct: 5, installments: true, payInFull: false } }
+    const retreat = { start: '2028-05-10' as const, nights: 6, guests: 20, currency: 'USD' }
+    const r = importLink(defaultForm('2027-11-10', 'ru'), `https://host${TIMELINE_PATH}${encodeToolLink({ v: 1, retreat, tool: plan })}`, 'ru', '2027-11-10')
+    expect(r.ok).toBe(true)
+    if (!r.ok) return
+    expect(r.form.imports.timeline?.terms.venue.ratePerGuest).toBe(180050)
+    const once = formFromDecoded(decodeToolLink(bookletHash(r.form), pickBookletTool, 'ru'), '2027-11-10', 'ru')!
+    const twice = formFromDecoded(decodeToolLink(bookletHash(once), pickBookletTool, 'ru'), '2027-11-10', 'ru')!
+    expect(twice.imports.timeline).toEqual(r.form.imports.timeline)
+  })
   it('B32 обязательный раздел нельзя выключить', () => {
     const f = defaultForm('2027-01-01', 'ru'); f.enabled = []
     expect(enabledSections(f)).toEqual([...REQUIRED_SECTIONS])

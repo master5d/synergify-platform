@@ -59,7 +59,13 @@ function pickedImports(raw: unknown): BookletImports {
       if (data) { const checked = decodeLink(encodeLink(data as LinkData), 'ru'); if (checked.ok) out.calc = { at: o.at, data: checked.data } }
     }
     if (key === 'timeline') {
-      const decoded = { ok: true as const, kind: 'tool' as const, link: { v: 1 as const, retreat, tool: pickTimelineTool(o.terms) } }
+      // в черновике условия таймлайна лежат в центах, а pickTimelineTool разбирает ссылку в целых единицах валюты:
+      // деньги площадки переводим обратно, иначе каждое чтение черновика умножало бы их на 100
+      const terms = o.terms && typeof o.terms === 'object' ? o.terms as Record<string, unknown> : {}
+      const venue = terms.venue && typeof terms.venue === 'object' ? terms.venue as Record<string, unknown> : {}
+      const units = (x: unknown) => (typeof x === 'number' ? x / 100 : x)
+      const tool = pickTimelineTool({ ...terms, venue: { ...venue, ratePerGuest: units(venue.ratePerGuest), buyoutFee: units(venue.buyoutFee) } })
+      const decoded = { ok: true as const, kind: 'tool' as const, link: { v: 1 as const, retreat, tool } }
       const timeline = timelineForm(decoded, o.at)
       if (timeline) out.timeline = { at: o.at, retreat, terms: timeline.terms }
     }
