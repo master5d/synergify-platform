@@ -20,7 +20,7 @@ export const MENU_PATH = '/instrumenty/generator-menyu/'
 export const MENU_LIMITS = { text: 80, optionName: 40, cells: 400 } as const
 
 const KEY = /^(\d{1,3})-(breakfast|lunch|dinner)$/
-const SPECIAL: SpecialDiet[] = ['vegetarian', 'vegan', 'gluten-free']
+const SPECIAL: SpecialDiet[] = ['vegetarian', 'vegan', 'gluten-free', 'vegan-gluten-free']
 const str = (v: unknown, max: number) => (typeof v === 'string' ? v.slice(0, max) : '')
 const cents = (v: unknown): number | null => (Number.isInteger(v) && (v as number) >= 0 && (v as number) <= LIMITS.moneyCents ? (v as number) : null)
 
@@ -30,8 +30,17 @@ function pickCell(raw: unknown): MenuCell {
   const variants: MenuCell['variants'] = {}
   if (typeof o.variants === 'object' && o.variants !== null) {
     for (const d of SPECIAL) {
-      const v = str((o.variants as Record<string, unknown>)[d], MENU_LIMITS.text)
+      const raw = (o.variants as Record<string, unknown>)[d]
+      const v = str(raw, MENU_LIMITS.text)
       if (v) variants[d] = v
+      else if (typeof raw === 'object' && raw !== null && !Array.isArray(raw)) {
+        const variant = raw as Record<string, unknown>
+        const name = str(variant.name, MENU_LIMITS.text)
+        const allergens = Array.isArray(variant.allergens)
+          ? [...new Set(variant.allergens.filter((a): a is AllergenId => ALLERGENS.includes(a as AllergenId)))]
+          : []
+        if (name) variants[d] = { name, allergens }
+      }
     }
   }
   const allergens = Array.isArray(o.allergens) ? [...new Set(o.allergens.filter((a): a is AllergenId => ALLERGENS.includes(a as AllergenId)))] : []
@@ -110,7 +119,7 @@ export const MENU_PREV_KEY = 'retreat-menu:draft-before-link'
 /** Стоит ли отложить черновик перед открытием меню из ссылки: в нём есть свои блюда, и он не совпадает со ссылкой. */
 export function draftWorthKeeping(saved: string | null, fromLink: MenuForm, today: IsoDate): boolean {
   const d = formFromDraft(saved, today)
-  if (!d || !Object.values(d.grid).some((c) => c.dish.trim())) return false
+  if (!d || !Object.values(d.grid).some((c) => c.dish.trim() || c.priceCents !== null || c.option)) return false
   // черновик с тем же названием, что в ссылке, — то же учебное меню (открыли урок снова, поправили): его не откладываем,
   // иначе оно перезаписало бы уже отложенное настоящее меню ведущего
   if (d.passport.title && d.passport.title === fromLink.passport.title) return false

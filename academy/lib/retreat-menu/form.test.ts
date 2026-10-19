@@ -13,7 +13,10 @@ const decode = (hash: string) => formFromDecoded(decodeToolLink(hash, pickMenuTo
 
 function filledForm(): MenuForm {
   const f = defaultForm(TODAY)
-  f.grid['2-lunch'] = { ...emptyCell(), dish: 'Плов с нутом', allergens: ['celery'], variants: { 'gluten-free': 'Плов без соуса' }, priceCents: 1800, option: { name: 'мясо', priceCents: 800 } }
+  f.grid['2-lunch'] = {
+    ...emptyCell(), dish: 'Плов с нутом', allergens: ['celery'], variants: { 'gluten-free': 'Плов без соуса' },
+    priceCents: 1800, option: { name: 'мясо', priceCents: 800 },
+  }
   f.diets = { vegan: 2, 'gluten-free': 1 }
   return f
 }
@@ -46,7 +49,9 @@ describe('форма меню', () => {
     expect(formFromDraft(draft, TODAY)).toEqual(filledForm())
   })
   it('чужие ключи в ссылке отбрасываются', () => {
-    const hash = encodeToolLink({ v: 1, retreat: { nights: 6, guests: 16 }, tool: { grid: { '2-lunch': { dish: 'x', phone: '555' }, 'evil': {} }, diets: { vegan: 2, robots: 3 } } })
+    const hash = encodeToolLink({ v: 1, retreat: { nights: 6, guests: 16 }, tool: {
+      grid: { '2-lunch': { dish: 'x', phone: '555' }, 'evil': {} }, diets: { vegan: 2, robots: 3 },
+    } })
     const f = decode(hash)!
     expect(Object.keys(f.grid)).not.toContain('evil')
     expect(JSON.stringify(f)).not.toMatch(/phone|555|robots/)
@@ -82,6 +87,11 @@ describe('доделки по приёмке', () => {
     expect(f.grid['2-lunch'].dish).toBe('Плов с нутом')
     expect(f.diets).toEqual(draft.diets)
     expect(withDraftMenu(fromLink, draft, true)).toBe(fromLink)
+  })
+  it('ссылка принимает число гостей на комбинированной диете', () => {
+    const f = defaultForm(TODAY)
+    f.diets = { 'vegan-gluten-free': 2 }
+    expect(decode(menuHash(f))?.diets).toEqual({ 'vegan-gluten-free': 2 })
   })
   it('цена опции без названия переживает ссылку; дробные, отрицательные и строковые цены отбрасываются', () => {
     const f = defaultForm(TODAY)
@@ -119,6 +129,18 @@ describe('меню из ссылки урока не стирает своё м�
     const mine = defaultForm(TODAY)
     mine.grid['3-dinner'] = { ...emptyCell(), dish: 'Моё рагу', priceCents: 1500 }
     expect(lesson.passport.title).toBeFalsy()
+    expect(draftWorthKeeping(draftOf(mine), lesson, TODAY)).toBe(true)
+  })
+  it('черновик только с опцией без блюда стоит сохранить', () => {
+    const lesson = filledForm()
+    const mine = defaultForm(TODAY)
+    mine.grid['3-dinner'] = { ...emptyCell(), option: { name: 'соус', priceCents: 100 } }
+    expect(draftWorthKeeping(draftOf(mine), lesson, TODAY)).toBe(true)
+  })
+  it('черновик только с ценой без блюда и опции стоит сохранить', () => {
+    const lesson = filledForm()
+    const mine = defaultForm(TODAY)
+    mine.grid['3-dinner'] = { ...emptyCell(), priceCents: 100 }
     expect(draftWorthKeeping(draftOf(mine), lesson, TODAY)).toBe(true)
   })
 })

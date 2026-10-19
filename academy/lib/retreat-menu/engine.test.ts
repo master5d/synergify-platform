@@ -96,6 +96,32 @@ describe('проверки', () => {
   it('особых диет больше, чем гостей', () => {
     expect(computeMenu(PASSPORT, week(), { vegan: 10, 'gluten-free': 8 }).issues).toContainEqual({ id: 'diets-over-guests' })
   })
+  it('комбинированная диета требует свой вариант, если блюдо содержит глютен и молоко', () => {
+    const grid = week((c, k) => k === '2-breakfast' ? { ...c, allergens: ['gluten', 'milk'] } : c)
+    expect(computeMenu(PASSPORT, grid, { 'vegan-gluten-free': 1 }).issues).toContainEqual({ id: 'diet-without-variant', day: 2, meal: 'breakfast', diet: 'vegan-gluten-free' })
+  })
+  it('свой вариант комбинированной диеты закрывает глютен и молоко', () => {
+    const grid = week((c, k) => k === '2-breakfast' ? { ...c, allergens: ['gluten', 'milk'], variants: { 'vegan-gluten-free': 'каша' } } : c)
+    expect(computeMenu(PASSPORT, grid, { 'vegan-gluten-free': 1 }).issues).toEqual([])
+  })
+  it('отдельные веганский и безглютеновый варианты не заменяют комбинированный', () => {
+    const grid = week((c, k) => k === '2-breakfast' ? { ...c, allergens: ['gluten', 'milk'], variants: { vegan: 'каша', 'gluten-free': 'рис' } } : c)
+    expect(computeMenu(PASSPORT, grid, { 'vegan-gluten-free': 1 }).issues).toContainEqual({ id: 'diet-without-variant', day: 2, meal: 'breakfast', diet: 'vegan-gluten-free' })
+  })
+  it('гость с комбинированной диетой считается один раз', () => {
+    expect(computeMenu({ ...PASSPORT, guests: 1 }, week(), { 'vegan-gluten-free': 1 }).issues).not.toContainEqual({ id: 'diets-over-guests' })
+  })
+  it('аллерген варианта делает замену небезопасной, строковый вариант остаётся совместимым', () => {
+    const withObject = week((c, k) => k === '2-breakfast' ? { ...c, allergens: ['milk'], variants: { vegan: { name: 'каша', allergens: ['milk'] } } } : c)
+    expect(computeMenu(PASSPORT, withObject, {}).issues).toContainEqual({ id: 'allergen-without-alternative', day: 2, meal: 'breakfast' })
+    const withString = week((c, k) => k === '2-breakfast' ? { ...c, allergens: ['milk'], variants: { vegan: 'каша' } } : c)
+    expect(computeMenu(PASSPORT, withString, {}).issues).not.toContainEqual({ id: 'allergen-without-alternative', day: 2, meal: 'breakfast' })
+  })
+  it('опция без блюда попадает в итоги и даёт отдельное замечание', () => {
+    const r = computeMenu(PASSPORT, week((c, k) => k === '2-breakfast' ? { ...emptyCell(), option: { name: 'соус', priceCents: 100 } } : c), {})
+    expect(r.totals.options).toContainEqual({ day: 2, meal: 'breakfast', name: 'соус', priceCents: 100 })
+    expect(r.issues).toContainEqual({ id: 'option-without-dish', day: 2, meal: 'breakfast' })
+  })
   it('невалидный вход — исключение', () => {
     expect(() => computeMenu({ ...PASSPORT, guests: undefined }, {}, {})).toThrow(/guests/)
     expect(() => computeMenu(PASSPORT, {}, { vegan: -1 })).toThrow(/diets\.vegan/)

@@ -36,6 +36,40 @@ describe('CSV меню для шефа', () => {
     g['2-lunch'] = { ...g['2-lunch'], variants: { vegan: 'Плов с нутом | без масла', 'gluten-free': 'Рис' } }
     for (const lang of ['ru', 'en'] as const) expect(menuFromCsv(menuToCsv(SLOTS, g, lang))['2-lunch'].variants).toEqual(g['2-lunch'].variants)
   })
+  it('аллергены объектного варианта переживают круг CSV на RU и EN', () => {
+    const g = sampleGrid()
+    g['2-lunch'] = { ...g['2-lunch'], variants: { vegan: { name: 'Плов без соуса', allergens: ['soy'] } } }
+    for (const lang of ['ru', 'en'] as const) expect(menuFromCsv(menuToCsv(SLOTS, g, lang))['2-lunch'].variants).toEqual(g['2-lunch'].variants)
+  })
+  it('старый CSV без скобок читается как строковый вариант', () => {
+    const g = menuFromCsv('\uFEFFДень,Приём пищи,Основное блюдо,Гарнир или салат,Напиток,Вариант для вегана или без глютена,Аллергены,Опция за доплату,Цена на гостя\n'
+      + '2,Обед,Суп,,,веган: Рагу,, ,10')
+    expect(g['2-lunch'].variants).toEqual({ vegan: 'Рагу' })
+  })
+  it('неизвестная подпись в скобках остаётся частью строкового варианта', () => {
+    const g = menuFromCsv('День,Приём пищи,Основное блюдо,Гарнир или салат,Напиток,Вариант для вегана или без глютена,Аллергены,Опция за доплату,Цена на гостя\n'
+      + '2,Обед,Суп,,,веган: Плов [острый],,,')
+    expect(g['2-lunch'].variants).toEqual({ vegan: 'Плов [острый]' })
+  })
+  it('известная подпись в скобках становится аллергеном варианта', () => {
+    const g = menuFromCsv('День,Приём пищи,Основное блюдо,Гарнир или салат,Напиток,Вариант для вегана или без глютена,Аллергены,Опция за доплату,Цена на гостя\n'
+      + '2,Обед,Суп,,,веган: Рагу [соя],,,')
+    expect(g['2-lunch'].variants).toEqual({ vegan: { name: 'Рагу', allergens: ['soy'] } })
+  })
+  it('круг CSV для новой диеты сохраняет текст и меню на RU', () => {
+    const g = sampleGrid()
+    g['2-lunch'] = { ...g['2-lunch'], variants: { 'vegan-gluten-free': { name: 'Рис', allergens: ['soy'] } } }
+    const csv = menuToCsv(SLOTS, g, 'ru')
+    expect(menuToCsv(SLOTS, menuFromCsv(csv), 'ru')).toBe(csv)
+    expect(menuFromCsv(csv)['2-lunch']).toEqual(g['2-lunch'])
+  })
+  it('круг CSV для новой диеты сохраняет текст и меню на EN', () => {
+    const g = sampleGrid()
+    g['2-lunch'] = { ...g['2-lunch'], variants: { 'vegan-gluten-free': { name: 'Rice', allergens: ['soy'] } } }
+    const csv = menuToCsv(SLOTS, g, 'en')
+    expect(menuToCsv(SLOTS, menuFromCsv(csv), 'en')).toBe(csv)
+    expect(menuFromCsv(csv)['2-lunch']).toEqual(g['2-lunch'])
+  })
   it('шаблон курса читается: строки с днём и приёмом, без блюд', () => {
     const g = menuFromCsv(template('menu-week.ru.csv'))
     expect(Object.keys(g).length).toBeGreaterThan(0)
@@ -51,7 +85,7 @@ describe('CSV меню для шефа', () => {
 })
 
 describe('тексты проверок', () => {
-  const IDS: MenuIssueId[] = ['day-without-price', 'empty-slot', 'allergen-without-alternative', 'diet-without-variant', 'diets-over-guests']
+  const IDS: MenuIssueId[] = ['day-without-price', 'empty-slot', 'allergen-without-alternative', 'diet-without-variant', 'diets-over-guests', 'option-without-dish']
   it('у каждой проверки есть текст на обоих языках, фразы не длиннее 25 слов', () => {
     for (const lang of ['ru', 'en'] as const) {
       for (const id of IDS) {
