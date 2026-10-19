@@ -86,7 +86,6 @@
       "experiences",
       "schedule",
       "leaders",
-      "food",
       "pricing",
       "inclusions",
       "booking",
@@ -100,6 +99,7 @@
         "v": 1,
         "title": "Учебная неделя: буклет",
         "currency": "USD",
+        "price": 3000,
         "guests": 20,
         "nights": 6,
         "monthsToStart": 6,
@@ -462,7 +462,6 @@
       "experiences",
       "schedule",
       "leaders",
-      "food",
       "pricing",
       "inclusions",
       "booking",
@@ -476,6 +475,7 @@
         "v": 1,
         "title": "Practice week: booklet",
         "currency": "USD",
+        "price": 3000,
         "guests": 20,
         "nights": 6,
         "monthsToStart": 6,
@@ -778,7 +778,7 @@
       "detail": "Майские праздники"
      }
     ],
-    "hashLength": 6772
+    "hashLength": 6780
    },
    "en": {
     "today": "2027-11-10",
@@ -798,7 +798,7 @@
       "detail": "May holidays"
      }
     ],
-    "hashLength": 6137
+    "hashLength": 6145
    }
   }
  }
