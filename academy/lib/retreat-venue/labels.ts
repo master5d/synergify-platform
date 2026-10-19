@@ -76,7 +76,9 @@ export function issueText(i: VenueIssue, lang: Lang): string {
     case 'week-loses-money':
       return ru ? `${m}: ретритная неделя даёт меньше, чем посуточная сдача тех же ночей.` : `${m}: a retreat week brings less than renting the same nights by the night.`
     case 'guests-over-beds':
-      return ru ? `${m}: гостей в группе больше, чем мест для гостей ретрита.` : `${m}: the group has more guests than the venue has retreat beds.`
+      return ru ? `${m}: гостей с проживанием больше, чем мест. Отметьте, кто живёт вне площадки.` : `${m}: more staying guests than beds. Mark who stays off-site.`
+    case 'group-over-hall':
+      return ru ? `${m}: группа не помещается в зал для практик, даже если часть живёт вне площадки.` : `${m}: the group does not fit the practice hall, even with some staying off-site.`
     case 'no-annual-costs':
       return ru ? 'Нет страховки, резерва на замену и налога. Без них окупаемость выходит слишком быстрой.' : 'No insurance, replacement reserve or tax. Without them payback looks far too quick.'
   }

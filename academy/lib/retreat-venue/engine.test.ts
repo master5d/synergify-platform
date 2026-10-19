@@ -6,7 +6,7 @@ function venue(over: Partial<VenueYear> = {}): VenueYear {
 }
 
 function month(over: Partial<VenueYear['months'][number]> = {}) {
-  return { open: true, retreatWeeks: 0, groupGuests: 0, rateCents: null, nightlyOccupancyPct: 0, gapDays: 1, ...over }
+  return { open: true, retreatWeeks: 0, groupGuests: 0, offsiteGuests: 0, rateCents: null, nightlyOccupancyPct: 0, gapDays: 1, ...over }
 }
 
 describe('годовая модель площадки', () => {
@@ -137,6 +137,39 @@ describe('годовая модель площадки', () => {
     expect(checkVenue(over)).not.toContainEqual({ id: 'guests-over-beds', month: 2 })
     const exact = venue({ months: [month({ retreatWeeks: 1, groupGuests: 12 }), ...venue().months.slice(1)] })
     expect(checkVenue(exact).some((i) => i.id === 'guests-over-beds')).toBe(false)
+  })
+
+  it('гости вне площадки платят дневную ставку при любой модели сделки, модель считается по живущим', () => {
+    const base = { rateCents: 100_000, dayRateCents: 40_000, buyoutFeeCents: 500_000, minGuests: 0 }
+    expect(retreatRevenue(venue({ ...base, deal: 'per_guest' }), 14, 100_000, 4)).toBe(100_000 * 10 + 40_000 * 4)
+    expect(retreatRevenue(venue({ ...base, deal: 'full_campus' }), 14, 100_000, 4)).toBe(100_000 * 12 + 40_000 * 4)
+    expect(retreatRevenue(venue({ ...base, deal: 'buyout' }), 14, 100_000, 4)).toBe(500_000 + 100_000 * 10 + 40_000 * 4)
+    // минимум гостей — по живущим: 6 живущих при минимуме 8 оплачиваются как 8
+    expect(retreatRevenue(venue({ ...base, deal: 'per_guest', minGuests: 8 }), 10, 100_000, 4)).toBe(100_000 * 8 + 40_000 * 4)
+  })
+
+  it('живущим снаружи — только кухня, и это видно в итоге месяца и вкладе недели', () => {
+    const v = venue({ dayRateCents: 40_000, varPerGuestWeekCents: 20_000, varPerOffsiteGuestWeekCents: 8_000,
+      months: [month({ retreatWeeks: 1, groupGuests: 14, offsiteGuests: 4 }), ...venue().months.slice(1)] })
+    const r = computeYear(v).months[0]
+    expect(r.retreatRevenueCents).toBe(100_000 * 10 + 40_000 * 4)
+    expect(r.variableCents).toBe(20_000 * 10 + 8_000 * 4)
+    expect(r.weekContributionCents).toBe(100_000 * 10 + 40_000 * 4 - (20_000 * 10 + 8_000 * 4))
+  })
+
+  it('лишние гости, отмеченные как живущие снаружи, не дают замечания о местах, но не больше вместимости зала', () => {
+    const fits = venue({ hallCapacity: 16, months: [month({ retreatWeeks: 1, groupGuests: 15, offsiteGuests: 3 }), ...venue().months.slice(1)] })
+    expect(checkVenue(fits).some((i) => i.id === 'guests-over-beds' || i.id === 'group-over-hall')).toBe(false)
+    const unmarked = venue({ hallCapacity: 16, months: [month({ retreatWeeks: 1, groupGuests: 15, offsiteGuests: 2 }), ...venue().months.slice(1)] })
+    expect(checkVenue(unmarked)).toContainEqual({ id: 'guests-over-beds', month: 1 })
+    const crowded = venue({ hallCapacity: 16, months: [month({ retreatWeeks: 1, groupGuests: 17, offsiteGuests: 5 }), ...venue().months.slice(1)] })
+    expect(checkVenue(crowded)).toContainEqual({ id: 'group-over-hall', month: 1 })
+    expect(checkVenue(crowded)).not.toContainEqual({ id: 'guests-over-beds', month: 1 })
+  })
+
+  it('живущих снаружи не может быть больше, чем гостей в группе', () => {
+    const v = venue({ months: [month({ groupGuests: 3, offsiteGuests: 4 }), ...venue().months.slice(1)] })
+    expect(validateVenue(v, 'ru')).toContain('months[0].offsiteGuests: не может быть больше, чем «months[0].groupGuests»')
   })
 
   it('пишет в ошибке подпись поля, когда страница её передала', () => {

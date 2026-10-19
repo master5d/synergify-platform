@@ -15,6 +15,16 @@ import {
 } from './form'
 
 describe('retreat venue form', () => {
+  it('reads an older link without off-site fields: hall equals beds, nobody off-site, no day rate', () => {
+    const { hallCapacity, dayRateCents, varPerOffsiteGuestWeekCents, ...old } = { ...defaultVenue(), groupBeds: 18 }
+    void hallCapacity; void dayRateCents; void varPerOffsiteGuestWeekCents
+    const picked = pickVenueTool({ ...old, months: old.months.map(({ offsiteGuests, ...m }) => (void offsiteGuests, m)) })!
+    expect(picked.hallCapacity).toBe(18)
+    expect(picked.dayRateCents).toBe(0)
+    expect(picked.varPerOffsiteGuestWeekCents).toBe(0)
+    expect(picked.months.every((m) => m.offsiteGuests === 0)).toBe(true)
+  })
+
   it('round-trips a venue link', () => {
     const f = { venue: defaultVenue(), currency: 'EUR', title: 'Lake' }
     expect(venueFromDecoded(decodeToolLink(venueHash(f), pickVenueTool, 'ru'))).toEqual({ form: f, linkHasVenue: true })

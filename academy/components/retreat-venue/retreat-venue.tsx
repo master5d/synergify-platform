@@ -191,6 +191,7 @@ export function RetreatVenue({ locale }: { locale: Locale }) {
         </label>
         {intField('units', `${t.units} (${t.unitsHint})`)}
         {intField('groupBeds', t.groupBeds)}
+        {intField('hallCapacity', `${t.hallCapacity} (${t.hallCapacityHint})`)}
         {moneyField('nightPriceCents', t.nightPrice)}
         <label style={label}>
           {t.deal}
@@ -205,10 +206,12 @@ export function RetreatVenue({ locale }: { locale: Locale }) {
         {moneyField('rateCents', t.rate)}
         {venue.deal === 'per_guest' && intField('minGuests', t.minGuests)}
         {venue.deal === 'buyout' && moneyField('buyoutFeeCents', t.buyoutFee)}
+        {moneyField('dayRateCents', `${t.dayRate} (${t.dayRateHint})`)}
       </div>
       <h2 style={h2}>{t.costs}</h2>
       <div className="vy-fields">
         {moneyField('varPerGuestWeekCents', t.varPerGuestWeek)}
+        {moneyField('varPerOffsiteGuestWeekCents', t.varPerOffsiteGuestWeek)}
         {moneyField('varPerNightCents', t.varPerNight)}
         {moneyField('fixedOpenMonthCents', t.fixedOpen)}
         {venue.type === 'seasonal' && moneyField('fixedClosedMonthCents', t.fixedClosed)}

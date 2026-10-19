@@ -30,6 +30,7 @@ const pickMonth = (raw: unknown): MonthInput => {
     open: typeof o.open === 'boolean' ? o.open : d.open,
     retreatWeeks: int(o.retreatWeeks, VENUE_LIMITS.weeks) ? (o.retreatWeeks as number) : d.retreatWeeks,
     groupGuests: int(o.groupGuests, VENUE_LIMITS.units) ? (o.groupGuests as number) : d.groupGuests,
+    offsiteGuests: int(o.offsiteGuests, VENUE_LIMITS.units) ? (o.offsiteGuests as number) : d.offsiteGuests,
     rateCents: o.rateCents === null ? null : money(o.rateCents) ? (o.rateCents as number) : d.rateCents,
     nightlyOccupancyPct: pct(o.nightlyOccupancyPct) ? (o.nightlyOccupancyPct as number) : d.nightlyOccupancyPct,
     gapDays: int(o.gapDays, 31) ? (o.gapDays as number) : d.gapDays,
@@ -42,16 +43,21 @@ export function pickVenueTool(raw: unknown): VenueYear | null {
   const o = raw as Record<string, unknown>
   if (!Array.isArray(o.months) || o.months.length !== 12) return null
   const field = <T>(key: string, valid: (v: unknown) => v is T, fallback: T): T => (valid(o[key]) ? (o[key] as T) : fallback)
+  const groupBeds = field('groupBeds', (v): v is number => int(v, VENUE_LIMITS.units), d.groupBeds)
   const venue: VenueYear = {
     type: field<VenueType>('type', (v): v is VenueType => v === 'all-season' || v === 'seasonal', d.type),
     units: field('units', (v): v is number => int(v, VENUE_LIMITS.units), d.units),
-    groupBeds: field('groupBeds', (v): v is number => int(v, VENUE_LIMITS.units), d.groupBeds),
+    groupBeds,
+    // ссылка без зала (учебные площадки курса, ранние ссылки): зал вмещает столько же, сколько мест
+    hallCapacity: field('hallCapacity', (v): v is number => int(v, VENUE_LIMITS.units), groupBeds),
     nightPriceCents: field('nightPriceCents', money, d.nightPriceCents),
     deal: field<DealModel>('deal', (v): v is DealModel => v === 'full_campus' || v === 'per_guest' || v === 'buyout', d.deal),
     rateCents: field('rateCents', money, d.rateCents),
     minGuests: field('minGuests', (v): v is number => int(v, VENUE_LIMITS.units), d.minGuests),
     buyoutFeeCents: field('buyoutFeeCents', money, d.buyoutFeeCents),
+    dayRateCents: field('dayRateCents', money, d.dayRateCents),
     varPerGuestWeekCents: field('varPerGuestWeekCents', money, d.varPerGuestWeekCents),
+    varPerOffsiteGuestWeekCents: field('varPerOffsiteGuestWeekCents', money, d.varPerOffsiteGuestWeekCents),
     varPerNightCents: field('varPerNightCents', money, d.varPerNightCents),
     fixedOpenMonthCents: field('fixedOpenMonthCents', money, d.fixedOpenMonthCents),
     fixedClosedMonthCents: field('fixedClosedMonthCents', money, d.fixedClosedMonthCents),

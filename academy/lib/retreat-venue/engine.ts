@@ -7,6 +7,8 @@ export interface MonthInput {
   open: boolean
   retreatWeeks: number
   groupGuests: number
+  /** Из гостей группы — живут вне площадки (местные, своё жильё за свой счёт): платят дневную ставку, места не занимают. */
+  offsiteGuests: number
   rateCents: number | null
   nightlyOccupancyPct: number
   gapDays: number
@@ -16,12 +18,17 @@ export interface VenueYear {
   type: VenueType
   units: number
   groupBeds: number
+  /** Вместимость зала для практик: предел всей группы вместе с живущими вне площадки. */
+  hallCapacity: number
   nightPriceCents: number
   deal: DealModel
   rateCents: number
   minGuests: number
   buyoutFeeCents: number
+  /** Ставка за гостя без проживания за ретритную неделю (зал, питание, территория) — сверх любой модели сделки. */
+  dayRateCents: number
   varPerGuestWeekCents: number
+  varPerOffsiteGuestWeekCents: number
   varPerNightCents: number
   fixedOpenMonthCents: number
   fixedClosedMonthCents: number
@@ -68,7 +75,7 @@ export interface YearResult {
 
 export type Scenario = 'as-set' | 'nightly-only' | 'retreats-only'
 export type VenueIssueId = 'weeks-overflow' | 'retreat-in-closed-month' | 'closed-months-free'
-  | 'season-too-short' | 'week-loses-money' | 'no-annual-costs' | 'guests-over-beds'
+  | 'season-too-short' | 'week-loses-money' | 'no-annual-costs' | 'guests-over-beds' | 'group-over-hall'
 export interface VenueIssue { id: VenueIssueId; month?: number }
 
 const MESSAGES = {
@@ -78,7 +85,7 @@ const MESSAGES = {
     pct: (field: string) => `${field}: ожидался процент 0–100`,
     limit: (field: string, max: number) => `${field}: больше допустимого (${max})`,
     months: 'months: ожидалось ровно 12 месяцев',
-    borrowed: (borrowed: string, investment: string) => `${borrowed}: не может быть больше, чем «${investment}»`,
+    notMore: (field: string, other: string) => `${field}: не может быть больше, чем «${other}»`,
     type: 'type: ожидалось all-season или seasonal',
     deal: 'deal: ожидалось full_campus, per_guest или buyout',
   },
@@ -88,7 +95,7 @@ const MESSAGES = {
     pct: (field: string) => `${field}: expected a percentage 0–100`,
     limit: (field: string, max: number) => `${field}: above the allowed maximum (${max})`,
     months: 'months: expected exactly 12 months',
-    borrowed: (borrowed: string, investment: string) => `${borrowed}: cannot be greater than “${investment}”`,
+    notMore: (field: string, other: string) => `${field}: cannot be greater than “${other}”`,
     type: 'type: expected all-season or seasonal',
     deal: 'deal: expected full_campus, per_guest or buyout',
   },
@@ -96,13 +103,13 @@ const MESSAGES = {
 
 export function defaultVenue(): VenueYear {
   const month = (): MonthInput => ({
-    open: true, retreatWeeks: 0, groupGuests: 0, rateCents: null,
+    open: true, retreatWeeks: 0, groupGuests: 0, offsiteGuests: 0, rateCents: null,
     nightlyOccupancyPct: 0, gapDays: 1,
   })
   return {
-    type: 'all-season', units: 6, groupBeds: 12, nightPriceCents: 0,
-    deal: 'per_guest', rateCents: 0, minGuests: 0, buyoutFeeCents: 0,
-    varPerGuestWeekCents: 0, varPerNightCents: 0, fixedOpenMonthCents: 0,
+    type: 'all-season', units: 6, groupBeds: 12, hallCapacity: 12, nightPriceCents: 0,
+    deal: 'per_guest', rateCents: 0, minGuests: 0, buyoutFeeCents: 0, dayRateCents: 0,
+    varPerGuestWeekCents: 0, varPerOffsiteGuestWeekCents: 0, varPerNightCents: 0, fixedOpenMonthCents: 0,
     fixedClosedMonthCents: 0, insuranceCents: 0, replacementReserveCents: 0,
     taxPct: 0, debtServiceCents: 0, seasonOpenCents: 0, seasonCloseCents: 0,
     investmentCents: 0, borrowedCents: 0, months: Array.from({ length: 12 }, month),
@@ -130,11 +137,14 @@ export function validateVenue(v: VenueYear, lang: Lang, name: (field: string) =>
   if (!['full_campus', 'per_guest', 'buyout'].includes(v.deal)) errors.push(t.deal)
   integer('units', v.units, VENUE_LIMITS.units)
   integer('groupBeds', v.groupBeds, VENUE_LIMITS.units)
+  integer('hallCapacity', v.hallCapacity, VENUE_LIMITS.units)
   amount('nightPriceCents', v.nightPriceCents)
   amount('rateCents', v.rateCents)
   integer('minGuests', v.minGuests, VENUE_LIMITS.units)
   amount('buyoutFeeCents', v.buyoutFeeCents)
+  amount('dayRateCents', v.dayRateCents)
   amount('varPerGuestWeekCents', v.varPerGuestWeekCents)
+  amount('varPerOffsiteGuestWeekCents', v.varPerOffsiteGuestWeekCents)
   amount('varPerNightCents', v.varPerNightCents)
   amount('fixedOpenMonthCents', v.fixedOpenMonthCents)
   amount('fixedClosedMonthCents', v.fixedClosedMonthCents)
@@ -146,11 +156,13 @@ export function validateVenue(v: VenueYear, lang: Lang, name: (field: string) =>
   amount('seasonCloseCents', v.seasonCloseCents)
   amount('investmentCents', v.investmentCents)
   amount('borrowedCents', v.borrowedCents)
-  if (v.borrowedCents > v.investmentCents) errors.push(t.borrowed(name('borrowedCents'), name('investmentCents')))
+  if (v.borrowedCents > v.investmentCents) errors.push(t.notMore(name('borrowedCents'), name('investmentCents')))
   if (v.months.length !== 12) errors.push(t.months)
   v.months.forEach((m, i) => {
     integer(`months[${i}].retreatWeeks`, m.retreatWeeks, VENUE_LIMITS.weeks)
     integer(`months[${i}].groupGuests`, m.groupGuests, VENUE_LIMITS.units)
+    integer(`months[${i}].offsiteGuests`, m.offsiteGuests, VENUE_LIMITS.units)
+    if (m.offsiteGuests > m.groupGuests) errors.push(t.notMore(name(`months[${i}].offsiteGuests`), name(`months[${i}].groupGuests`)))
     if (m.rateCents !== null) amount(`months[${i}].rateCents`, m.rateCents)
     percent(`months[${i}].nightlyOccupancyPct`, m.nightlyOccupancyPct)
     integer(`months[${i}].gapDays`, m.gapDays, DAYS_IN_MONTH[i])
@@ -158,10 +170,19 @@ export function validateVenue(v: VenueYear, lang: Lang, name: (field: string) =>
   return errors
 }
 
-export function retreatRevenue(v: VenueYear, guests: number, rateCents: number): number {
-  if (v.deal === 'full_campus') return rateCents * v.groupBeds
-  if (v.deal === 'per_guest') return rateCents * Math.max(guests, v.minGuests)
-  return v.buyoutFeeCents + rateCents * guests
+/** Выручка одной ретритной недели. `guests` — вся группа, `offsite` — из неё живут вне площадки: модель сделки
+ * считается по живущим (минимум гостей — тоже по ним), живущие снаружи платят дневную ставку сверху. */
+export function retreatRevenue(v: VenueYear, guests: number, rateCents: number, offsite = 0): number {
+  const residents = Math.max(0, guests - offsite)
+  const day = v.dayRateCents * offsite
+  if (v.deal === 'full_campus') return rateCents * v.groupBeds + day
+  if (v.deal === 'per_guest') return rateCents * Math.max(residents, v.minGuests) + day
+  return v.buyoutFeeCents + rateCents * residents + day
+}
+
+/** Переменные расходы одной ретритной недели: живущим — кухня, бельё, уборка; живущим снаружи — только кухня. */
+function weekVariableCents(v: VenueYear, guests: number, offsite: number): number {
+  return v.varPerGuestWeekCents * Math.max(0, guests - offsite) + v.varPerOffsiteGuestWeekCents * offsite
 }
 
 function monthResult(v: VenueYear, source: MonthInput, month: number, scenario: Scenario): MonthResult {
@@ -175,10 +196,10 @@ function monthResult(v: VenueYear, source: MonthInput, month: number, scenario: 
   const freeDays = days - (7 + source.gapDays) * weeks
   const nightlyNights = freeDays > 0 ? Math.round(freeDays * v.units * occupancy / 100) : 0
   const rate = source.rateCents ?? v.rateCents
-  const retreatRevenueCents = open ? Math.round(retreatRevenue(v, source.groupGuests, rate) * weeks) : 0
+  const retreatRevenueCents = open ? Math.round(retreatRevenue(v, source.groupGuests, rate, source.offsiteGuests) * weeks) : 0
   const nightlyRevenueCents = open ? Math.round(nightlyNights * v.nightPriceCents) : 0
   const variableCents = open
-    ? Math.round(v.varPerGuestWeekCents * source.groupGuests * weeks + v.varPerNightCents * nightlyNights)
+    ? Math.round(weekVariableCents(v, source.groupGuests, source.offsiteGuests) * weeks + v.varPerNightCents * nightlyNights)
     : 0
   const fixedCents = open ? v.fixedOpenMonthCents : v.fixedClosedMonthCents
   const resultCents = Math.round(retreatRevenueCents + nightlyRevenueCents - variableCents - fixedCents)
@@ -187,8 +208,8 @@ function monthResult(v: VenueYear, source: MonthInput, month: number, scenario: 
   const occupancyPct = nights ? Math.min(100, Math.round(occupiedNights / nights * 1000) / 10) : 0
   let weekContributionCents: number | null = null
   if (open && weeks > 0) {
-    const weekRevenue = retreatRevenue(v, source.groupGuests, rate)
-    const weekVariable = v.varPerGuestWeekCents * source.groupGuests
+    const weekRevenue = retreatRevenue(v, source.groupGuests, rate, source.offsiteGuests)
+    const weekVariable = weekVariableCents(v, source.groupGuests, source.offsiteGuests)
     const displacedMargin = (7 + source.gapDays) * v.units * occupancy / 100
       * (v.nightPriceCents - v.varPerNightCents)
     weekContributionCents = Math.round(weekRevenue - weekVariable - displacedMargin)
@@ -226,7 +247,8 @@ export function checkVenue(v: VenueYear): VenueIssue[] {
     if (v.type === 'seasonal' && !m.open && (m.retreatWeeks > 0 || m.nightlyOccupancyPct > 0)) {
       issues.push({ id: 'retreat-in-closed-month', month: i + 1 })
     }
-    if (open && m.retreatWeeks > 0 && m.groupGuests > v.groupBeds) issues.push({ id: 'guests-over-beds', month: i + 1 })
+    if (open && m.retreatWeeks > 0 && m.groupGuests - m.offsiteGuests > v.groupBeds) issues.push({ id: 'guests-over-beds', month: i + 1 })
+    if (open && m.retreatWeeks > 0 && m.groupGuests > v.hallCapacity) issues.push({ id: 'group-over-hall', month: i + 1 })
     if (open && m.retreatWeeks > 0) {
       const result = monthResult(v, m, i + 1, 'as-set')
       if (result.weekContributionCents !== null && result.weekContributionCents <= 0) {

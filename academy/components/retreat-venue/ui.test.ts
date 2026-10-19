@@ -15,14 +15,14 @@ describe('подписи полей в ошибках года площадки'
     Object.assign(v, {
       units: -1, groupBeds: -1, nightPriceCents: -1, rateCents: -1, minGuests: -1, buyoutFeeCents: -1, varPerGuestWeekCents: -1,
       varPerNightCents: -1, fixedOpenMonthCents: -1, fixedClosedMonthCents: -1, insuranceCents: -1, replacementReserveCents: -1,
-      taxPct: -1, debtServiceCents: -1, seasonOpenCents: -1, seasonCloseCents: -1, investmentCents: 10, borrowedCents: 11,
+      hallCapacity: -1, dayRateCents: -1, varPerOffsiteGuestWeekCents: -1, taxPct: -1, debtServiceCents: -1, seasonOpenCents: -1, seasonCloseCents: -1, investmentCents: 10, borrowedCents: 11,
     })
-    v.months = v.months.map(() => ({ open: true, retreatWeeks: -1, groupGuests: -1, rateCents: -1, nightlyOccupancyPct: -1, gapDays: -1 }))
+    v.months = v.months.map(() => ({ open: true, retreatWeeks: -1, groupGuests: -1, offsiteGuests: -1, rateCents: -1, nightlyOccupancyPct: -1, gapDays: -1 }))
     for (const locale of ['ru', 'en'] as const) {
       const errors = validateVenue(v, locale, (field) => venueFieldName(field, locale))
-      // 16 полей площадки + «заёмные больше вложений» + 12 месяцев × 5 полей
-      expect(errors).toHaveLength(77)
-      expect(errors.join('\n')).not.toMatch(/Cents|Pct|months\[|retreatWeeks|groupGuests|gapDays|(^|\n)units:|groupBeds|minGuests/)
+      // 19 полей площадки + «заёмные больше вложений» + 12 месяцев × 6 полей
+      expect(errors).toHaveLength(92)
+      expect(errors.join('\n')).not.toMatch(/Cents|Pct|months\[|retreatWeeks|groupGuests|offsiteGuests|hallCapacity|dayRate|gapDays|(^|\n)units:|groupBeds|minGuests/)
     }
   })
 })

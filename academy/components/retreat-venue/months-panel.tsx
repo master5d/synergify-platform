@@ -37,7 +37,7 @@ export function MonthsPanel({
     index: number,
     text: string,
     value: number,
-    key: 'retreatWeeks' | 'groupGuests' | 'nightlyOccupancyPct' | 'gapDays',
+    key: 'retreatWeeks' | 'groupGuests' | 'offsiteGuests' | 'nightlyOccupancyPct' | 'gapDays',
     disabled = false,
   ) => (
     <input
@@ -76,6 +76,10 @@ export function MonthsPanel({
       <label style={label}>
         {t.guests}
         {integerInput(index, t.guests, month.groupGuests, 'groupGuests', disabled)}
+      </label>
+      <label style={label}>
+        {t.offsite}
+        {integerInput(index, t.offsite, month.offsiteGuests, 'offsiteGuests', disabled)}
       </label>
       <label style={label}>
         {t.monthRate}
@@ -119,6 +123,7 @@ export function MonthsPanel({
         </td>
         <td>{integerInput(index, t.weeks, month.retreatWeeks, 'retreatWeeks', off)}</td>
         <td>{integerInput(index, t.guests, month.groupGuests, 'groupGuests', off)}</td>
+        <td>{integerInput(index, t.offsite, month.offsiteGuests, 'offsiteGuests', off)}</td>
         <td>{rateInput(index, month, off)}</td>
         <td>{integerInput(index, t.occupancy, month.nightlyOccupancyPct, 'nightlyOccupancyPct', off)}</td>
         <td>{integerInput(index, t.gapDays, month.gapDays, 'gapDays', off)}</td>
@@ -144,6 +149,7 @@ export function MonthsPanel({
               <th>{t.open}</th>
               <th>{t.weeks}</th>
               <th>{t.guests}</th>
+              <th>{t.offsite}</th>
               <th>{t.monthRate}</th>
               <th>{t.occupancy}</th>
               <th>{t.gapDays}</th>

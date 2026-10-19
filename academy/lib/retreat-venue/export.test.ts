@@ -26,7 +26,7 @@ function sample(): VenueYear {
   v.taxPct = 10
   v.debtServiceCents = 5_000
   v.investmentCents = 1_000_000
-  v.months[0] = { open: true, retreatWeeks: 1, groupGuests: 10, rateCents: null, nightlyOccupancyPct: 50, gapDays: 1 }
+  v.months[0] = { open: true, retreatWeeks: 1, groupGuests: 10, offsiteGuests: 0, rateCents: null, nightlyOccupancyPct: 50, gapDays: 1 }
   return v
 }
 
@@ -64,7 +64,7 @@ describe('venue CSV export', () => {
     const v = sample()
     v.type = 'seasonal'
     v.fixedClosedMonthCents = 7_000
-    v.months[0] = { open: false, retreatWeeks: 0, groupGuests: 0, rateCents: null, nightlyOccupancyPct: 0, gapDays: 1 }
+    v.months[0] = { open: false, retreatWeeks: 0, groupGuests: 0, offsiteGuests: 0, rateCents: null, nightlyOccupancyPct: 0, gapDays: 1 }
     const row = venueRows(v, 'en')[1]
     expect(row[1]).toBe('0')
     expect(row[2]).toBe('0')
@@ -88,7 +88,7 @@ describe('venue CSV export', () => {
   it('says «no investment» instead of 0.0 years when nothing is invested or all of it is borrowed', () => {
     const v = defaultVenue()
     v.rateCents = 100_000
-    v.months[0] = { open: true, retreatWeeks: 1, groupGuests: 10, rateCents: null, nightlyOccupancyPct: 0, gapDays: 1 }
+    v.months[0] = { open: true, retreatWeeks: 1, groupGuests: 10, offsiteGuests: 0, rateCents: null, nightlyOccupancyPct: 0, gapDays: 1 }
     const ru = venueRows(v, 'ru')
     expect(ru.find((row) => row[0] === 'Окупаемость проекта, лет')?.[1]).toBe('нет вложений')
     expect(ru.find((row) => row[0] === 'Окупаемость своих денег, лет')?.[1]).toBe('нет вложений')
@@ -103,7 +103,7 @@ describe('venue CSV export', () => {
     const v = defaultVenue()
     v.rateCents = 100_000
     v.investmentCents = 3_500_000
-    v.months[0] = { open: true, retreatWeeks: 1, groupGuests: 10, rateCents: null, nightlyOccupancyPct: 0, gapDays: 1 }
+    v.months[0] = { open: true, retreatWeeks: 1, groupGuests: 10, offsiteGuests: 0, rateCents: null, nightlyOccupancyPct: 0, gapDays: 1 }
     // выручка 10 × 1 000 = 10 000, расходов нет: окупаемость 35 000 ÷ 10 000 = 3,5 года
     expect(venueRows(v, 'ru').find((row) => row[0] === 'Окупаемость проекта, лет')?.[1]).toBe('3,5')
     expect(venueRows(v, 'en').find((row) => row[0] === 'Project payback, years')?.[1]).toBe('3.5')
