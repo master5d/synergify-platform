@@ -5,7 +5,7 @@
   "unit": "u3-pribyl-i-cena",
   "locale": "ru",
   "title": "Сначала желаемая прибыль, потом цена",
-  "sourceHash": "sha256:4af21350a83788fba422dc4ff627ceaaf4d2564583768dbd57322316f1170f7b",
+  "sourceHash": "sha256:e0600febed28f24afd7f6bf0430d950266c1a722ccf1ef8dbc9e5d094fd9036b",
   "outline": [
     {
       "heading": "Ход наоборот",
@@ -46,6 +46,16 @@
         }
       ],
       "children": []
+    },
+    {
+      "heading": "Лестница цен",
+      "points": [
+        {
+          "text": "Одна цена для всех — не единственный путь.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
     }
   ],
   "cards": [
@@ -78,6 +88,12 @@
       {
         "sourceHash": "sha256:edeb017259b18893e59918b585b86eb4e24d6a718d933390a767da8cc615b31d",
         "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:6609f136fd3b07dcdce7dcc0a563339401ab4a4bc57caae413cd4ad0be8fa61d",
+        "points": [
+          "Тебе не обязательно предлагать только одну цену для всех покупателей."
+        ]
       }
     ]
   }

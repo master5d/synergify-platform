@@ -5,7 +5,7 @@
   "unit": "u5-buklet",
   "locale": "en",
   "title": "The booklet: it sells and it promises",
-  "sourceHash": "sha256:5e6b86afc55d3455742e81d4afe4ce249d9de8c1bc9f42f2a03cedca5f6b32d6",
+  "sourceHash": "sha256:6214690405a187434a25e2a47884b8dc1d57e0786c91985a0475a14c9b0d59cd",
   "outline": [
     {
       "heading": "One page, two jobs",
@@ -68,10 +68,30 @@
       "children": []
     },
     {
+      "heading": "Questions a guest will not dare to ask",
+      "points": [
+        {
+          "text": "The questions-and-answers section answers fears, not what is already written above.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
       "heading": "A booklet from your own numbers",
       "points": [
         {
           "text": "Dates, price, deposit, payment and cancellation dates are already in the calculator and the timeline.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The same page online",
+      "points": [
+        {
+          "text": "A booklet is sent to a person; a sign-up page is where newsletters and social posts lead.",
           "origin": "extract"
         }
       ],
@@ -122,10 +142,20 @@
         "verbatim": "near-identical"
       },
       {
+        "sourceHash": "sha256:3678b38e86e1aafca5a7c1e0c1c90c9c196a4a8aab54e43e1aae0306cc18465e",
+        "points": [
+          "The questions and answers section addresses fears instead of repeating what is already written above."
+        ]
+      },
+      {
         "sourceHash": "sha256:484f086f5fc6de773919b14c7dd94998d48f06dfe59480248b088fe3a31b24f6",
         "points": [
           "The calculator and the timeline already contain your dates, price, deposit, and dates for payment and cancellation."
         ]
+      },
+      {
+        "sourceHash": "sha256:6a06b048f0b29b734b54c2e8679500ce6a9452035a8a6262632f9d6cf3c20f56",
+        "verbatim": "near-identical"
       }
     ]
   }

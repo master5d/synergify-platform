@@ -5,7 +5,7 @@
   "unit": "u3-prodazhi-kassa",
   "locale": "en",
   "title": "Sales against the cash plan",
-  "sourceHash": "sha256:fc5cb2e01ac7038863aa60cd49fc98b320df7e5696eded26dfa6ef5fdba58efb",
+  "sourceHash": "sha256:bc0eefa3afc32875afd1799083f85aa2369ab6614c9ac932b21f2c0cea0e866e",
   "outline": [
     {
       "heading": "The pace of sales against the payment schedule",
@@ -46,6 +46,16 @@
         }
       ],
       "children": []
+    },
+    {
+      "heading": "One programme, several dates",
+      "points": [
+        {
+          "text": "A programme that has run once can be sold several times a year: a list of dates on one page.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
     }
   ],
   "cards": [
@@ -75,6 +85,12 @@
         "sourceHash": "sha256:eb5e9802bebc2fe47b01fa7a41aa9dd400563a2bbce7e7c732b65fb13ec4f612",
         "points": [
           "Different guests have their own preferences."
+        ]
+      },
+      {
+        "sourceHash": "sha256:bd34ce78ffc0ce61de3a652981bb99d89a180ff984369254848b6181439ee7c6",
+        "points": [
+          "You can sell a program several times a year after it has run once by listing the dates on one page."
         ]
       }
     ]
