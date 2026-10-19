@@ -12,7 +12,7 @@ export const MEALS: Meal[] = ['breakfast', 'lunch', 'dinner']
 export interface Slot { day: number; meal: Meal }
 export const cellKey = (s: Slot) => `${s.day}-${s.meal}`
 
-export const DIETS = ['standard', 'vegetarian', 'vegan', 'gluten-free'] as const
+export const DIETS = ['standard', 'vegetarian', 'vegan', 'gluten-free', 'vegan-gluten-free'] as const
 export type DietId = (typeof DIETS)[number]
 export type SpecialDiet = Exclude<DietId, 'standard'>
 export type Diets = Partial<Record<DietId, number>>
@@ -24,7 +24,7 @@ export interface MenuCell {
   /** Основное блюдо мясное или рыбное — для вегетарианцев нужен вариант. */
   meat: boolean
   /** Блюдо для диеты; нет записи — основное подходит, если аллергены и `meat` не мешают. */
-  variants: Partial<Record<SpecialDiet, string>>
+  variants: Partial<Record<SpecialDiet, string | { name: string; allergens: AllergenId[] }>>
   allergens: AllergenId[]
   /** Цена порции на гостя в центах; null — не указана. */
   priceCents: number | null
@@ -43,7 +43,7 @@ export interface MenuTotals {
   options: { day: number; meal: Meal; name: string; priceCents: number }[]
 }
 
-export type MenuIssueId = 'day-without-price' | 'empty-slot' | 'allergen-without-alternative' | 'diet-without-variant' | 'diets-over-guests'
+export type MenuIssueId = 'day-without-price' | 'empty-slot' | 'allergen-without-alternative' | 'diet-without-variant' | 'diets-over-guests' | 'option-without-dish'
 export interface MenuIssue { id: MenuIssueId; day?: number; meal?: Meal; diet?: SpecialDiet }
 
 /** Приёмы пищи ретрита: день 1 — от приёма заезда до ужина, дни 2..nights — все три, последний — от завтрака до приёма выезда. */
@@ -91,12 +91,18 @@ const notVegetarian = (c: MenuCell) => c.meat || c.allergens.some((a) => a === '
 function needsVariant(cell: MenuCell, diet: SpecialDiet): boolean {
   if (diet === 'gluten-free') return cell.allergens.includes('gluten')
   if (diet === 'vegan') return notVegetarian(cell) || cell.allergens.includes('milk') || cell.allergens.includes('eggs')
+  if (diet === 'vegan-gluten-free') return needsVariant(cell, 'vegan') || needsVariant(cell, 'gluten-free')
   return notVegetarian(cell)
+}
+
+const variantText = (cell: MenuCell, diet: SpecialDiet) => {
+  const variant = cell.variants[diet]
+  return typeof variant === 'string' ? variant : variant?.name
 }
 
 /** Есть ли для диеты своё блюдо: веганский вариант годится и вегетарианцам. */
 const hasVariant = (cell: MenuCell, diet: SpecialDiet) =>
-  Boolean(cell.variants[diet]?.trim()) || (diet === 'vegetarian' && Boolean(cell.variants.vegan?.trim()))
+  Boolean(variantText(cell, diet)?.trim()) || (diet === 'vegetarian' && Boolean(variantText(cell, 'vegan')?.trim()))
 
 export function computeMenu(p: RetreatPassport, grid: MenuGrid, diets: Diets): { slots: Slot[]; totals: MenuTotals; issues: MenuIssue[] } {
   const errors = validateMenu(p, diets, 'en')
@@ -114,6 +120,10 @@ export function computeMenu(p: RetreatPassport, grid: MenuGrid, diets: Diets): {
     const cell = grid[cellKey(s)]
     const sum = byDay.has(s.day) ? byDay.get(s.day)! : 0
     if (!cell || !cell.dish.trim()) {
+      if (cell?.option) {
+        options.push({ day: s.day, meal: s.meal, name: cell.option.name, priceCents: cell.option.priceCents })
+        issues.push({ id: 'option-without-dish', day: s.day, meal: s.meal })
+      }
       // пустой приём — тоже «часть цен»: итог дня без него выглядел бы полным
       issues.push({ id: 'empty-slot', day: s.day, meal: s.meal })
       byDay.set(s.day, null)
@@ -127,9 +137,13 @@ export function computeMenu(p: RetreatPassport, grid: MenuGrid, diets: Diets): {
     }
     // замена от аллергена — вариант «без глютена» снимает только глютен; другие аллергены требуют любого варианта,
     // кроме «без глютена» (он про другое и сам может их содержать)
-    const otherVariant = (['vegetarian', 'vegan'] as const).some((d) => cell.variants[d]?.trim())
-    const glutenCovered = Boolean(cell.variants['gluten-free']?.trim()) || otherVariant
-    const uncovered = cell.allergens.some((a) => (a === 'gluten' ? !glutenCovered : !otherVariant))
+    const safeVariant = (d: SpecialDiet, allergen: AllergenId) => {
+      const variant = cell.variants[d]
+      return typeof variant === 'object' && variant.allergens.includes(allergen) ? false : Boolean(variantText(cell, d)?.trim())
+    }
+    const uncovered = cell.allergens.some((a) => a === 'gluten'
+      ? !safeVariant('gluten-free', a) && !safeVariant('vegan-gluten-free', a) && !safeVariant('vegetarian', a) && !safeVariant('vegan', a)
+      : !safeVariant('vegan-gluten-free', a) && !safeVariant('vegetarian', a) && !safeVariant('vegan', a))
     if (uncovered) {
       issues.push({ id: 'allergen-without-alternative', day: s.day, meal: s.meal })
     }

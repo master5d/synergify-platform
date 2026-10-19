@@ -8,8 +8,8 @@ const MEAL: Record<Lang, Record<Meal, string>> = {
   en: { breakfast: 'Breakfast', lunch: 'Lunch', dinner: 'Dinner' },
 }
 const DIET: Record<Lang, Record<DietId, string>> = {
-  ru: { 'standard': 'обычное', 'vegetarian': 'вегетарианское', 'vegan': 'веган', 'gluten-free': 'без глютена' },
-  en: { 'standard': 'standard', 'vegetarian': 'vegetarian', 'vegan': 'vegan', 'gluten-free': 'gluten-free' },
+  ru: { 'standard': 'обычное', 'vegetarian': 'вегетарианское', 'vegan': 'веган', 'gluten-free': 'без глютена', 'vegan-gluten-free': 'веган без глютена' },
+  en: { 'standard': 'standard', 'vegetarian': 'vegetarian', 'vegan': 'vegan', 'gluten-free': 'gluten-free', 'vegan-gluten-free': 'vegan, gluten-free' },
 }
 export const MEAT_MARK: Record<Lang, string> = { ru: '(мясное)', en: '(meat)' }
 
@@ -43,5 +43,7 @@ export function issueText(i: MenuIssue, lang: Lang): string {
         : `${at}: the group has ${dietLabel(i.diet ?? 'vegan', lang)} guests, and there is no dish for them.`
     case 'diets-over-guests':
       return ru ? 'Гостей на особых диетах больше, чем гостей всего.' : 'There are more guests on special diets than guests in total.'
+    case 'option-without-dish':
+      return ru ? `${at}: есть опция, но нет блюда.` : `${at}: there is an option but no dish.`
   }
 }

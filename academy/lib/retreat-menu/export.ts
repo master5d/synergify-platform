@@ -12,9 +12,10 @@ export const MENU_CSV_HEADER: Record<Lang, string[]> = {
   ru: ['День', 'Приём пищи', 'Основное блюдо', 'Гарнир или салат', 'Напиток', 'Вариант для вегана или без глютена', 'Аллергены', 'Опция за доплату', 'Цена на гостя'],
   en: ['Day', 'Meal', 'Main dish', 'Side or salad', 'Drink', 'Vegan or gluten-free option', 'Allergens', 'Paid add-on', 'Price per guest'],
 }
-const SPECIAL: SpecialDiet[] = ['vegetarian', 'vegan', 'gluten-free']
+const SPECIAL: SpecialDiet[] = ['vegetarian', 'vegan', 'gluten-free', 'vegan-gluten-free']
+const csvEscape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 const VARIANT_SPLIT = new RegExp(
-  `\\s*\\|\\s*(?=(?:${SPECIAL.flatMap((d) => [dietLabel(d, 'ru'), dietLabel(d, 'en')]).join('|')})\\s*:)`, 'i')
+  `\\s*\\|\\s*(?=(?:${SPECIAL.flatMap((d) => [csvEscape(dietLabel(d, 'ru')), csvEscape(dietLabel(d, 'en'))]).join('|')})\\s*:)`, 'i')
 
 /** Центы → сумма; дробная часть через запятую в RU (как ждёт русский Excel). */
 export function menuMoney(cents: number, lang: Lang): string {
@@ -30,7 +31,12 @@ export function parseMoney(s: string): number | null {
 }
 
 function cellRow(s: Slot, c: MenuCell, lang: Lang): string[] {
-  const variants = SPECIAL.filter((d) => c.variants[d]?.trim()).map((d) => `${dietLabel(d, lang)}: ${c.variants[d]}`).join(' | ')
+  const variants = SPECIAL.filter((d) => c.variants[d]).map((d) => {
+    const variant = c.variants[d]!
+    const name = typeof variant === 'string' ? variant : variant.name
+    const allergens = typeof variant === 'string' || variant.allergens.length === 0 ? '' : ` [${variant.allergens.map((a) => allergenName(a, lang)).join(', ')}]`
+    return `${dietLabel(d, lang)}: ${name}${allergens}`
+  }).join(' | ')
   return [
     String(s.day), mealLabel(s.meal, lang), c.meat ? `${c.dish} ${MEAT_MARK[lang]}` : c.dish, c.side, c.drink, variants,
     c.allergens.map((a) => allergenName(a, lang)).join(', '),
@@ -58,7 +64,15 @@ export function menuFromCsv(text: string): MenuGrid {
     for (const part of (r[5] ?? '').split(VARIANT_SPLIT)) {
       const i = part.indexOf(':')
       const diet = i > 0 ? dietByLabel(part.slice(0, i)) : undefined
-      if (diet && diet !== 'standard' && part.slice(i + 1).trim()) variants[diet] = part.slice(i + 1).trim()
+      if (diet && diet !== 'standard' && part.slice(i + 1).trim()) {
+        const value = part.slice(i + 1).trim()
+        const match = /^(.*?)\s*\[([^\]]*)\]$/.exec(value)
+        const parsedAllergens = match ? match[2].split(',').map(allergenByName) : []
+        const hasOnlyKnownAllergens = match && parsedAllergens.every((a): a is AllergenId => a !== undefined)
+        const name = (match && hasOnlyKnownAllergens ? match[1] : value).trim()
+        const allergens = hasOnlyKnownAllergens ? parsedAllergens : []
+        variants[diet] = match && hasOnlyKnownAllergens ? { name, allergens } : name
+      }
     }
     const allergens = (r[6] ?? '').split(',').map(allergenByName).filter((a): a is AllergenId => a !== undefined)
     const opt = /^(.*?)\s*\+\s*([\d\s.,]+)$/.exec((r[7] ?? '').trim())
