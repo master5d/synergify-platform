@@ -27,14 +27,16 @@ export type Paper = 'a4' | 'letter'
 export type Accent = 'sand' | 'sage' | 'clay' | 'ink'
 export interface BookletImports { program?: { at: IsoDate; retreat: RetreatPassport; blocks: Block[]; cards: PracticeCard[] }; menu?: { at: IsoDate;
   retreat: RetreatPassport; grid: MenuGrid; diets: Diets }; calc?: { at: IsoDate; data: LinkData }; timeline?: { at: IsoDate; retreat: RetreatPassport; terms: TimelineTerms } }
-export interface BookletForm { passport: RetreatPassport; content: BookletContent; enabled: SectionId[]; imports: BookletImports; paper: Paper; accent: Accent }
+export interface LandingExtras { subtitle: string; cta: { label: string; url: string }; numbers: { value: string; label: string }[]; videoUrl: string; priceNote: string; footer: boolean }
+export interface BookletForm { passport: RetreatPassport; content: BookletContent; landing: LandingExtras; enabled: SectionId[]; imports: BookletImports; paper: Paper; accent: Accent }
 export const BOOKLET_LIMITS = { text: 2000, short: 120, list: 30, people: 8, testimonials: 8, questions: 20, days: LIMITS.nights + 1 } as const
 const blankTravel = (): Travel => ({ startTime: '', endTime: '', airport: '', travelTime: '', notes: '' })
 const blankContent = (lang: Lang): BookletContent => ({ place: '', language: lang, invitation: '', fitFor: [], notFor: [], experiences: [], days: [], leaders: [],
   team: [], placeText: '', placePhotoIds: [], foodText: '', included: [], notIncluded: [], bookingSteps: lang === 'ru' ? ['Заявка', 'Короткий созвон', 'Анкета гостя',
   'Депозит', 'Подтверждение места'] : ['Application', 'Short call', 'Guest form', 'Deposit', 'Place confirmed'], preparation: '', packing: [], travel: blankTravel(),
   rules: [], paymentsText: '', testimonials: [], faq: [], contact: '' })
-export function defaultForm(_today: IsoDate, lang: Lang): BookletForm { return { passport: {}, content: blankContent(lang), enabled: [...REQUIRED_SECTIONS],
+export function defaultLanding(lang: Lang): LandingExtras { return { subtitle: '', cta: { label: lang === 'ru' ? 'Записаться' : 'Apply', url: '' }, numbers: [], videoUrl: '', priceNote: '', footer: true } }
+export function defaultForm(_today: IsoDate, lang: Lang): BookletForm { return { passport: {}, content: blankContent(lang), landing: defaultLanding(lang), enabled: [...REQUIRED_SECTIONS],
   imports: {}, paper: lang === 'ru' ? 'a4' : 'letter', accent: 'sand' } }
 export const bookletDraftKey = (lang: Lang) => `retreat-booklet:draft:${lang}`
 export function enabledSections(form: Pick<BookletForm, 'enabled'>): SectionId[] { return SECTION_IDS.filter((id) => form.enabled.includes(id) || REQUIRED_SECTIONS.includes(id)) }
@@ -74,6 +76,16 @@ function pickedImports(raw: unknown): BookletImports {
   }
   return out
 }
+const landing = (v: unknown, lang: Lang): LandingExtras => {
+  const base = defaultLanding(lang); const o = v && typeof v === 'object' && !Array.isArray(v) ? v as Record<string, unknown> : {}
+  const cta = o.cta && typeof o.cta === 'object' && !Array.isArray(o.cta) ? o.cta as Record<string, unknown> : {}
+  const numbers = Array.isArray(o.numbers) ? o.numbers.slice(0, 4).map((x) => {
+    const n = x && typeof x === 'object' && !Array.isArray(x) ? x as Record<string, unknown> : {}
+    return { value: str(n.value, 20), label: str(n.label, 60) }
+  }) : []
+  return { subtitle: str(o.subtitle, 200), cta: { label: typeof cta.label === 'string' ? str(cta.label, 40) : base.cta.label, url: str(cta.url, 500) }, numbers,
+    videoUrl: str(o.videoUrl, 500), priceNote: str(o.priceNote, 200), footer: o.footer !== false }
+}
 export function pickBookletTool(raw: unknown): BookletForm {
   const base = defaultForm('2000-01-01', 'ru')
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return base
@@ -95,28 +107,28 @@ export function pickBookletTool(raw: unknown): BookletForm {
   const tr = c.travel && typeof c.travel === 'object' ? c.travel as Record<string, unknown> : {};
   b.travel = { startTime: str(tr.startTime, 120), endTime: str(tr.endTime, 120), airport: str(tr.airport, 120), travelTime: str(tr.travelTime, 120), notes: str(tr.notes, 2000) }
   const enabled = Array.isArray(o.enabled) ? o.enabled.filter((x): x is SectionId => typeof x === 'string' && (SECTION_IDS as readonly string[]).includes(x)) : []
-  return { passport: pickPassport(o.passport), content: b, enabled: enabledSections({ enabled }),
+  return { passport: pickPassport(o.passport), content: b, landing: landing(o.landing, b.language === 'en' ? 'en' : 'ru'), enabled: enabledSections({ enabled }),
   imports: pickedImports(o.imports), paper: o.paper === 'letter' ? 'letter' : 'a4', accent: ['sand', 'sage', 'clay',
   'ink'].includes(o.accent as string) ? o.accent as Accent : 'sand' }
 }
 export function draftOf(form: BookletForm): string { return JSON.stringify({ passport: pickPassport(form.passport), content: form.content, enabled: enabledSections(form),
-  imports: form.imports, paper: form.paper, accent: form.accent }) }
+  landing: form.landing, imports: form.imports, paper: form.paper, accent: form.accent }) }
 export function formFromDraft(text: string | null, today: IsoDate, lang: Lang): BookletForm | null { if (!text) return null;
   try { const picked = pickBookletTool(JSON.parse(text)); const base = defaultForm(today, lang);
   return { ...picked, passport: { ...base.passport, ...picked.passport }, content: { ...base.content, ...picked.content } } } catch { return null } }
 export function bookletHash(form: BookletForm): string { return encodeToolLink({ v: 1, retreat: pickPassport(form.passport), tool: { content: form.content,
-  enabled: enabledSections(form), imports: form.imports, paper: form.paper, accent: form.accent } }) }
+  landing: form.landing, enabled: enabledSections(form), imports: form.imports, paper: form.paper, accent: form.accent } }) }
 export function formFromDecoded(d: DecodedTool<{ content?: BookletContent; enabled?: SectionId[]; imports?: BookletImports; paper?: Paper;
-  accent?: Accent }>, today: IsoDate, lang: Lang): BookletForm | null {
+  accent?: Accent; landing?: LandingExtras }>, today: IsoDate, lang: Lang): BookletForm | null {
   if (!d.ok) return null
   const base = defaultForm(today, lang)
   if (d.kind === 'calc') return { ...base, passport: { ...base.passport, ...d.calc } }
   const t = d.link.tool
-  return { passport: { ...base.passport, ...d.link.retreat }, content: { ...base.content, ...t.content }, enabled: enabledSections({ enabled: t.enabled ?? [] }),
+  return { passport: { ...base.passport, ...d.link.retreat }, content: { ...base.content, ...t.content }, landing: landing(t.landing, lang), enabled: enabledSections({ enabled: t.enabled ?? [] }),
   imports: t.imports ?? {}, paper: t.paper ?? base.paper, accent: t.accent ?? base.accent }
 }
 export function exportJson(form: BookletForm): string { return JSON.stringify({ v: 1, booklet: { passport: pickPassport(form.passport), content: form.content,
-  enabled: enabledSections(form), imports: form.imports, paper: form.paper, accent: form.accent } }, null, 2) }
+  landing: form.landing, enabled: enabledSections(form), imports: form.imports, paper: form.paper, accent: form.accent } }, null, 2) }
 export function importJson(text: string, today: IsoDate, lang: Lang): BookletForm | null { try { const o = JSON.parse(text) as Record<string, unknown>;
   if (o.v !== 1 || !o.booklet) return null; const b = o.booklet as Record<string, unknown>;
   return formFromDecoded({ ok: true, kind: 'tool', link: { v: 1, retreat: pickPassport(b.passport), tool: pickBookletTool(b) } }, today, lang) } catch { return null } }
