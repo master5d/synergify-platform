@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-vedushchiy-zamysel",
+  "unit": "u6-auditoriya-do-retrita",
+  "locale": "en",
+  "title": "Your audience before the retreat",
+  "sourceHash": "sha256:fb6ce89e811fe626232f061b19258a37a4e2cffeb012498a1c44efd2f874b8a3",
+  "outline": [
+    {
+      "heading": "You sell to your own people",
+      "points": [
+        {
+          "text": "From unit u2: people buy a week from someone they trust.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Teach rather than advertise",
+      "points": [
+        {
+          "text": "The calmest path to trust is to give something useful in advance.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "One or two channels",
+      "points": [
+        {
+          "text": "Five channels a little at a time give less than one channel kept regular.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Rhythm matters more than volume",
+      "points": [
+        {
+          "text": "One idea a week is already a plan.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "When to start",
+      "points": [
+        {
+          "text": "A new leader needs six to twelve months from the first posts to arrival.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What is not here",
+      "points": [
+        {
+          "text": "The course does not teach funnels or pressure tactics.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:909a9fde468353e2fa26b2808b6dbad630f970425de9b8880fa7aa58ba678cff",
+        "points": [
+          "People buy a week from you because they trust you as mentioned in unit u2."
+        ]
+      },
+      {
+        "sourceHash": "sha256:851c29bb2147f9aa73421b93f2b4cc534cc08f3b33f4dd1ffc5b4a6591204392",
+        "points": [
+          "Giving something useful in advance is the calmest path for you to build trust."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2fa921a0d41bc311edab0261ffd4c1b5b565c1d8bc2025d13e40a371e5a406ba",
+        "points": [
+          "Keeping one channel regular gives you more than using five channels a little at a time."
+        ]
+      },
+      {
+        "sourceHash": "sha256:6594a8633e0fa2d73e8552381a9fb466f67f4b5e329107acac42bba06e586850",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:da1e5c1aba88de4de6e30a45f05ad317ffd0122f8ba041497052c1ca17c45ae5",
+        "points": [
+          "As a new leader, you need six to twelve months from your first posts to arrival."
+        ]
+      },
+      {
+        "sourceHash": "sha256:97c24c09ac24f047734b3321abd1a74ac23ed944a0650e8b2f0046dd0fbf742a",
+        "points": [
+          "This course does not teach you about funnels or pressure tactics."
+        ]
+      }
+    ]
+  }
+}

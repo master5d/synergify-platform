@@ -5,7 +5,7 @@
   "unit": "u1-gost",
   "locale": "en",
   "title": "Who your guest is and what change they seek",
-  "sourceHash": "sha256:a84528b3f0355d400c0decbd7918edad069da7d83189bb257b9e8e7560bfcfc0",
+  "sourceHash": "sha256:470a8882033f84a54da657bf234e84ea378bd08db2e5efcc4fcd336d18169955",
   "outline": [
     {
       "heading": "One person instead of \"everyone\"",
@@ -32,6 +32,16 @@
       "points": [
         {
           "text": "The main value is the space you hold.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "When is part of the offer too",
+      "points": [
+        {
+          "text": "Dates decide for the guest before the text does.",
           "origin": "extract"
         }
       ],
@@ -68,6 +78,12 @@
       {
         "sourceHash": "sha256:a693281825ea38948e6eb1e9117aa93e011708ca56b7b7fb0657783158c15cc3",
         "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:33bd795a5048322004a257c7c2bad05c99e780a90910e3bbca34bea38c8fa371",
+        "points": [
+          "Dates make the decision for your guest before they read your text."
+        ]
       },
       {
         "sourceHash": "sha256:9974b14f46e4a1606978990bb8513dd40a589383b575edf839f19bb78287be20",

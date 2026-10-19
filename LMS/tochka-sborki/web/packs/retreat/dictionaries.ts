@@ -377,7 +377,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       items: [
         { q: 'Это курс о продажах ретритов?', a: 'Нет. Курс разбирает экономику, договор, отмены, программу и гостей. Как найти своего гостя — один юнит, без приёмов давления и без обещаний.' },
         { q: 'Это юридическая консультация?', a: 'Нет. Нормы об отменах и пакетных турах даны с источником и датой «по состоянию на 2026-10». Для своей страны их проверяют у юриста.' },
-        { q: 'Сколько времени занимает курс?', a: 'Урок — около десяти минут. Путь ведущего — 17 уроков, путь площадки — 15. Без дедлайнов и без проверяющих.' },
+        { q: 'Сколько времени занимает курс?', a: 'Урок — около десяти минут. Путь ведущего — 20 уроков, путь площадки — 15. Без дедлайнов и без проверяющих.' },
         { q: 'Нужно ли входить, чтобы читать?', a: 'Нет. Курс открыт без входа. Вход нужен только чтобы прогресс сохранился на другом устройстве.' },
         { q: 'Нужна ли финансовая подготовка?', a: 'Нет. Вся арифметика идёт в калькуляторе ретрита академии, а уроки объясняют, что значит каждая строка.' },
         { q: 'Почему бесплатно? Где подвох?', a: 'Подвоха нет: курс бесплатный целиком, без «следующих уровней» и ступеней доступа.' },
@@ -680,7 +680,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       items: [
         { q: 'Is this a course on selling retreats?', a: 'No. The course works through economics, the contract, cancellations, the program and the guests. Finding your guest is one lesson, with no pressure tactics and no promises.' },
         { q: 'Is this legal advice?', a: 'No. The rules on cancellations and package holidays come with a source and the date "as of 2026-10". For your country you check them with a lawyer.' },
-        { q: 'How much time does it take?', a: 'A lesson takes about ten minutes. The leader path is 17 lessons, the venue path 15. No deadlines and no reviewers.' },
+        { q: 'How much time does it take?', a: 'A lesson takes about ten minutes. The leader path is 20 lessons, the venue path 15. No deadlines and no reviewers.' },
         { q: 'Do I need to sign in to read?', a: 'No. The course is open with no sign-in. Signing in only keeps your progress on another device.' },
         { q: 'Do I need a finance background?', a: 'No. All the arithmetic runs in the academy retreat calculator, and the lessons explain what each line means.' },
         { q: 'Why free? What’s the catch?', a: 'No catch: the course is fully free, with no "next levels" and no tiers of access.' },

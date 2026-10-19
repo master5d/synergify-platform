@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-vedushchiy-zamysel",
+  "unit": "u5-buklet",
+  "locale": "en",
+  "title": "The booklet: it sells and it promises",
+  "sourceHash": "sha256:5e6b86afc55d3455742e81d4afe4ce249d9de8c1bc9f42f2a03cedca5f6b32d6",
+  "outline": [
+    {
+      "heading": "One page, two jobs",
+      "points": [
+        {
+          "text": "The booklet invites: it tells about the place, the people, the change.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Pick your guest right away",
+      "points": [
+        {
+          "text": "The first page answers the question \"is this for me?\".",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What you will go through, and why",
+      "points": [
+        {
+          "text": "A list of \"yoga, meditation, walks\" describes a timetable, not a week.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Included and not included is a promise",
+      "points": [
+        {
+          "text": "Booklets that sell well write both lists.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How to book: the form before the money",
+      "points": [
+        {
+          "text": "A good order: application, a short call, the guest form, the deposit, a confirmed place.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Honest words",
+      "points": [
+        {
+          "text": "No promises of healing or results — as with the practice card.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A booklet from your own numbers",
+      "points": [
+        {
+          "text": "Dates, price, deposit, payment and cancellation dates are already in the calculator and the timeline.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c5"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:6f8c5000ba998d3d5909c827bb57eec414ac8e563bf6a4e632f62d5eb450530a",
+        "points": [
+          "The booklet invites you by telling about the place, the people, and the change."
+        ]
+      },
+      {
+        "sourceHash": "sha256:32cda4fa0ea680ae07b76b3ba3e2f523c7fe37603d9f6e76275341dfb9ff6619",
+        "points": [
+          "The first page answers the question of whether this is for you."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e8aece2e12e90c94c9407aca30a89dff10d183e53e16aed3dd51f069e701e06f",
+        "points": [
+          "A list of yoga, meditation, and walks describes a timetable rather than a week."
+        ]
+      },
+      {
+        "sourceHash": "sha256:652fb7cecb881e1ebcfde02f7afdec2414b6a90e05ae5c0c597af9094117e81f",
+        "points": [
+          "You write lists for both what is included and what is not to create booklets that sell well."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c62107493d5b6ec2ffb200f64c0acedd6995d88904bf8c15645040a6a6f22619",
+        "points": [
+          "You use a good order for booking that includes application, a short call, the guest form, the deposit, and a confirmed place."
+        ]
+      },
+      {
+        "sourceHash": "sha256:c193491eedeb8527f34dd2b2c1c3f01432d75d2c6dbe51b90db7694bdf8be4b8",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:484f086f5fc6de773919b14c7dd94998d48f06dfe59480248b088fe3a31b24f6",
+        "points": [
+          "The calculator and the timeline already contain your dates, price, deposit, and dates for payment and cancellation."
+        ]
+      }
+    ]
+  }
+}

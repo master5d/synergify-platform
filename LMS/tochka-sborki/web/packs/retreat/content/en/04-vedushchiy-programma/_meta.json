@@ -1,15 +1,16 @@
 {
   "module": 4,
   "title": "Leader: the program and the guests",
-  "description": "Leader track. An honest practice card, the grid of days, the form and the menu, arrival logistics, the retreat itself and the review after.",
-  "duration": "50 min",
+  "description": "Leader track. An honest practice card, the grid of days, the form and the menu, arrival logistics, the retreat itself and the review after, a plan for a bad day.",
+  "duration": "60 min",
   "level": 2,
   "units": [
     { "slug": "u1-kartochka-praktiki", "title": "An honest practice card" },
     { "slug": "u2-setka-dnej", "title": "The grid of days" },
     { "slug": "u3-anketa-menyu", "title": "The guest form and the menu" },
     { "slug": "u4-logistika", "title": "Arrival logistics" },
-    { "slug": "u5-retrit-i-posle", "title": "The retreat itself and after" }
+    { "slug": "u5-retrit-i-posle", "title": "The retreat itself and after" },
+    { "slug": "u6-kogda-ne-tak", "title": "When something goes wrong on the retreat" }
   ],
   "layout": "phases",
   "objectives": [
@@ -17,7 +18,7 @@
     { "id": "o2", "text": "Build a grid of days that alternates load and rest and treats arrival and departure days as partial" },
     { "id": "o3", "text": "Put together the guest form and a menu by meals, and carry the cost of food into the calculator" },
     { "id": "o4", "text": "Draw up an arrivals list from a single date and set a reserve for guests' mistakes" },
-    { "id": "o5", "text": "Compare plan with actual in the calculator and write down terms for next time" }
+    { "id": "o5", "text": "Run the retreat with a bad-day plan, compare plan with actual and write down terms for next time" }
   ],
   "checks": [
     {
@@ -84,6 +85,20 @@
       ],
       "answer": 1,
       "explain": "The difference between plan and actual names the line that was wrong. The terms of the next contract come from it (u5, \"Plan versus actual\")."
+    },
+    {
+      "id": "c6",
+      "unit": "u6-kogda-ne-tak",
+      "objective": "o5",
+      "question": "A guest feels unwell on a walk. Which of these is the leader's job?",
+      "options": [
+        "Diagnose and give medicine",
+        "Call for help, tell the close contact from the form and write down what happened",
+        "Say nothing to the group",
+        "Carry on with the programme as if nothing happened"
+      ],
+      "answer": 1,
+      "explain": "The leader does not treat. They call for help, tell the close contact and record what happened (u6, \"A guest who feels unwell\")."
     }
   ]
 }

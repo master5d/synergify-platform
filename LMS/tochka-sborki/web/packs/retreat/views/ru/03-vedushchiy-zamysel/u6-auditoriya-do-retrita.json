@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-vedushchiy-zamysel",
+  "unit": "u6-auditoriya-do-retrita",
+  "locale": "ru",
+  "title": "Аудитория до ретрита",
+  "sourceHash": "sha256:2e2427568e0113f5bc5b7565d03bd2e83fb1baeca63c7e210c6a5a3e6135029c",
+  "outline": [
+    {
+      "heading": "Продают своим",
+      "points": [
+        {
+          "text": "Из урока u2: неделю покупают у человека, которому доверяют.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Учить, а не рекламировать",
+      "points": [
+        {
+          "text": "Самый спокойный путь к доверию — давать пользу заранее.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Один-два канала",
+      "points": [
+        {
+          "text": "Пять каналов понемногу дают меньше, чем один, но регулярно.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Ритм важнее объёма",
+      "points": [
+        {
+          "text": "Одна мысль в неделю — уже план.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Когда начинать",
+      "points": [
+        {
+          "text": "Новому ведущему нужно от шести до двенадцати месяцев от первых публикаций до заезда.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Чего здесь нет",
+      "points": [
+        {
+          "text": "Курс не учит воронкам и приёмам давления.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c6"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:b90ffaf828fd9b39409d30cdc6424e91244d01ad48b1a49d0e448333e75c55bb",
+        "points": [
+          "В уроке u2 говорится, что неделю покупают именно у того человека, которому доверяют."
+        ]
+      },
+      {
+        "sourceHash": "sha256:ab0c517980a2b6011235981ae16803bd2914f3a7681a3d33a1d0c9443670b505",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:958819f5baacd490c8805b19f62d1d75661493eb40a99fd2cc8cf7bff172eaaa",
+        "points": [
+          "Пять каналов понемногу дают меньше, чем один регулярный."
+        ]
+      },
+      {
+        "sourceHash": "sha256:057dcb0e51041800b18b716e86b0dbddeff428a6bd02502ef6ea07ac6572693e",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:94ae4fa631592ebb5c1ef5778e90d3d61063a32812f412cde94c077d7441db16",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:ca7f94cca4cfa6efacd477e795fcc5adec0e2727b9dae2035d633676cf560dc1",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

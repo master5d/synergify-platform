@@ -1,0 +1,805 @@
+[
+ {
+  "id": "practice-booklet",
+  "title": {
+   "ru": "Учебная неделя: буклет",
+   "en": "Practice week: booklet"
+  },
+  "data": {
+   "ru": {
+    "v": 1,
+    "retreat": {
+     "title": "Учебная неделя: буклет",
+     "currency": "USD",
+     "start": "2028-05-10",
+     "nights": 6,
+     "guests": 20
+    },
+    "tool": {
+     "passport": {},
+     "content": {
+      "place": "Горная долина, кампус на 20 мест",
+      "language": "русский",
+      "invitation": "Неделя для тех, кто устал жить на бегу и хочет вернуть себе ритм.",
+      "fitFor": [
+       "Вы много работаете и давно не отдыхали по-настоящему",
+       "Вам важно тихое время и природа"
+      ],
+      "notFor": [
+       "Вы ищете вечеринки и насыщенную экскурсионную программу"
+      ],
+      "experiences": [
+       {
+        "text": "Утренний цигун",
+        "serves": "мягкое начало дня и внимание к телу"
+       },
+       {
+        "text": "Прогулка к водопаду",
+        "serves": ""
+       }
+      ],
+      "days": [],
+      "leaders": [
+       {
+        "name": "Ведущая А.",
+        "role": "ведущая",
+        "bio": "Десять лет ведёт телесные практики."
+       }
+      ],
+      "team": [],
+      "placeText": "",
+      "placePhotoIds": [],
+      "foodText": "",
+      "included": [
+       "Проживание 6 ночей",
+       "Трёхразовое питание",
+       "Все практики программы",
+       "Трансфер из аэропорта в день заезда"
+      ],
+      "notIncluded": [],
+      "bookingSteps": [
+       "Заявка",
+       "Короткий созвон",
+       "Анкета гостя",
+       "Депозит",
+       "Подтверждение места"
+      ],
+      "preparation": "",
+      "packing": [],
+      "travel": {
+       "startTime": "",
+       "endTime": "",
+       "airport": "",
+       "travelTime": "",
+       "notes": ""
+      },
+      "rules": [],
+      "paymentsText": "",
+      "testimonials": [],
+      "faq": [],
+      "contact": "Почта ведущей — в письме после заявки"
+     },
+     "enabled": [
+      "cover",
+      "invitation",
+      "fit",
+      "experiences",
+      "schedule",
+      "leaders",
+      "pricing",
+      "inclusions",
+      "booking",
+      "payments",
+      "contact"
+     ],
+     "imports": {
+      "calc": {
+       "at": "2027-11-10",
+       "data": {
+        "v": 1,
+        "title": "Учебная неделя: буклет",
+        "currency": "USD",
+        "price": 3000,
+        "guests": 20,
+        "nights": 6,
+        "monthsToStart": 6,
+        "guestDepositPct": 30,
+        "guestBalanceDueDays": 75,
+        "daysToStart": 182,
+        "venue": {
+         "model": "full_campus",
+         "ratePerGuest": 1800,
+         "capacity": 20,
+         "minGuests": 0,
+         "buyoutFee": 0,
+         "depositPct": 25,
+         "finalDueDays": 60,
+         "payInFullDiscountPct": 5,
+         "installments": true,
+         "payInFull": false
+        }
+       }
+      },
+      "program": {
+       "at": "2027-11-10",
+       "retreat": {
+        "title": "Учебная неделя: буклет",
+        "currency": "USD",
+        "start": "2028-05-10",
+        "nights": 6,
+        "guests": 20
+       },
+       "blocks": [
+        {
+         "day": 1,
+         "start": "13:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 1,
+         "start": "19:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 2,
+         "start": "08:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 2,
+         "start": "13:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 2,
+         "start": "19:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 3,
+         "start": "08:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 3,
+         "start": "13:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 3,
+         "start": "19:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 4,
+         "start": "08:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 4,
+         "start": "13:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 4,
+         "start": "19:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 5,
+         "start": "08:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 5,
+         "start": "13:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 5,
+         "start": "19:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 6,
+         "start": "08:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 6,
+         "start": "13:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 6,
+         "start": "19:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 7,
+         "start": "08:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 1,
+         "start": "17:00",
+         "minutes": 30,
+         "kind": "practice",
+         "practiceId": "intention-circle"
+        },
+        {
+         "day": 2,
+         "start": "07:00",
+         "minutes": 60,
+         "kind": "practice",
+         "practiceId": "qigong"
+        },
+        {
+         "day": 2,
+         "start": "15:00",
+         "minutes": 120,
+         "kind": "free"
+        },
+        {
+         "day": 2,
+         "start": "20:00",
+         "minutes": 60,
+         "kind": "practice",
+         "practiceId": "evening-satsang"
+        },
+        {
+         "day": 3,
+         "start": "09:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "dynamic-meditation"
+        },
+        {
+         "day": 3,
+         "start": "10:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "intense-breathing"
+        },
+        {
+         "day": 3,
+         "start": "15:00",
+         "minutes": 120,
+         "kind": "free"
+        },
+        {
+         "day": 4,
+         "start": "09:30",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "kundalini-yoga"
+        },
+        {
+         "day": 4,
+         "start": "16:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "tunnel-walk"
+        },
+        {
+         "day": 5,
+         "start": "07:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "morning-breath"
+        },
+        {
+         "day": 5,
+         "start": "14:30",
+         "minutes": 120,
+         "kind": "free"
+        },
+        {
+         "day": 5,
+         "start": "17:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "yin-yoga"
+        },
+        {
+         "day": 6,
+         "start": "10:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "eye-contact"
+        },
+        {
+         "day": 6,
+         "start": "14:30",
+         "minutes": 60,
+         "kind": "free"
+        },
+        {
+         "day": 6,
+         "start": "16:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "free-dance"
+        },
+        {
+         "day": 7,
+         "start": "10:00",
+         "minutes": 30,
+         "kind": "transfer"
+        }
+       ],
+       "cards": []
+      },
+      "timeline": {
+       "at": "2027-11-10",
+       "retreat": {
+        "title": "Учебная неделя: буклет",
+        "currency": "USD",
+        "start": "2028-05-10",
+        "nights": 6,
+        "guests": 20
+       },
+       "terms": {
+        "signDate": "2027-11-10",
+        "venue": {
+         "model": "full_campus",
+         "ratePerGuest": 180000,
+         "capacity": 20,
+         "minGuests": 0,
+         "buyoutFee": 0,
+         "depositPct": 25,
+         "finalDueDays": 60,
+         "payInFullDiscountPct": 5,
+         "installments": true,
+         "payInFull": false
+        },
+        "guestDepositPct": 30,
+        "guestBalanceDueDays": 75,
+        "guestRefundDays": 75,
+        "venueNoReturnDays": 60
+       }
+      }
+     },
+     "paper": "a4",
+     "accent": "sand"
+    }
+   },
+   "en": {
+    "v": 1,
+    "retreat": {
+     "title": "Practice week: booklet",
+     "currency": "USD",
+     "start": "2028-05-10",
+     "nights": 6,
+     "guests": 20
+    },
+    "tool": {
+     "passport": {},
+     "content": {
+      "place": "A mountain valley, a campus for 20",
+      "language": "English",
+      "invitation": "A week for those who are tired of living on the run and want their rhythm back.",
+      "fitFor": [
+       "You work a lot and have not really rested for a long time",
+       "Quiet time and nature matter to you"
+      ],
+      "notFor": [
+       "You are looking for parties and a packed sightseeing programme"
+      ],
+      "experiences": [
+       {
+        "text": "Morning qigong",
+        "serves": "a gentle start to the day and attention to the body"
+       },
+       {
+        "text": "Walk to the waterfall",
+        "serves": ""
+       }
+      ],
+      "days": [],
+      "leaders": [
+       {
+        "name": "Leader A.",
+        "role": "leader",
+        "bio": "Has led body practices for ten years."
+       }
+      ],
+      "team": [],
+      "placeText": "",
+      "placePhotoIds": [],
+      "foodText": "",
+      "included": [
+       "6 nights of accommodation",
+       "Three meals a day",
+       "All practices of the programme",
+       "Airport transfer on arrival day"
+      ],
+      "notIncluded": [],
+      "bookingSteps": [
+       "Application",
+       "Short call",
+       "Guest form",
+       "Deposit",
+       "Place confirmed"
+      ],
+      "preparation": "",
+      "packing": [],
+      "travel": {
+       "startTime": "",
+       "endTime": "",
+       "airport": "",
+       "travelTime": "",
+       "notes": ""
+      },
+      "rules": [],
+      "paymentsText": "",
+      "testimonials": [],
+      "faq": [],
+      "contact": "The leader’s email comes in the letter after you apply"
+     },
+     "enabled": [
+      "cover",
+      "invitation",
+      "fit",
+      "experiences",
+      "schedule",
+      "leaders",
+      "pricing",
+      "inclusions",
+      "booking",
+      "payments",
+      "contact"
+     ],
+     "imports": {
+      "calc": {
+       "at": "2027-11-10",
+       "data": {
+        "v": 1,
+        "title": "Practice week: booklet",
+        "currency": "USD",
+        "price": 3000,
+        "guests": 20,
+        "nights": 6,
+        "monthsToStart": 6,
+        "guestDepositPct": 30,
+        "guestBalanceDueDays": 75,
+        "daysToStart": 182,
+        "venue": {
+         "model": "full_campus",
+         "ratePerGuest": 1800,
+         "capacity": 20,
+         "minGuests": 0,
+         "buyoutFee": 0,
+         "depositPct": 25,
+         "finalDueDays": 60,
+         "payInFullDiscountPct": 5,
+         "installments": true,
+         "payInFull": false
+        }
+       }
+      },
+      "program": {
+       "at": "2027-11-10",
+       "retreat": {
+        "title": "Practice week: booklet",
+        "currency": "USD",
+        "start": "2028-05-10",
+        "nights": 6,
+        "guests": 20
+       },
+       "blocks": [
+        {
+         "day": 1,
+         "start": "13:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 1,
+         "start": "19:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 2,
+         "start": "08:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 2,
+         "start": "13:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 2,
+         "start": "19:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 3,
+         "start": "08:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 3,
+         "start": "13:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 3,
+         "start": "19:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 4,
+         "start": "08:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 4,
+         "start": "13:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 4,
+         "start": "19:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 5,
+         "start": "08:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 5,
+         "start": "13:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 5,
+         "start": "19:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 6,
+         "start": "08:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 6,
+         "start": "13:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 6,
+         "start": "19:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 7,
+         "start": "08:00",
+         "minutes": 60,
+         "kind": "meal"
+        },
+        {
+         "day": 1,
+         "start": "17:00",
+         "minutes": 30,
+         "kind": "practice",
+         "practiceId": "intention-circle"
+        },
+        {
+         "day": 2,
+         "start": "07:00",
+         "minutes": 60,
+         "kind": "practice",
+         "practiceId": "qigong"
+        },
+        {
+         "day": 2,
+         "start": "15:00",
+         "minutes": 120,
+         "kind": "free"
+        },
+        {
+         "day": 2,
+         "start": "20:00",
+         "minutes": 60,
+         "kind": "practice",
+         "practiceId": "evening-satsang"
+        },
+        {
+         "day": 3,
+         "start": "09:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "dynamic-meditation"
+        },
+        {
+         "day": 3,
+         "start": "10:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "intense-breathing"
+        },
+        {
+         "day": 3,
+         "start": "15:00",
+         "minutes": 120,
+         "kind": "free"
+        },
+        {
+         "day": 4,
+         "start": "09:30",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "kundalini-yoga"
+        },
+        {
+         "day": 4,
+         "start": "16:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "tunnel-walk"
+        },
+        {
+         "day": 5,
+         "start": "07:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "morning-breath"
+        },
+        {
+         "day": 5,
+         "start": "14:30",
+         "minutes": 120,
+         "kind": "free"
+        },
+        {
+         "day": 5,
+         "start": "17:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "yin-yoga"
+        },
+        {
+         "day": 6,
+         "start": "10:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "eye-contact"
+        },
+        {
+         "day": 6,
+         "start": "14:30",
+         "minutes": 60,
+         "kind": "free"
+        },
+        {
+         "day": 6,
+         "start": "16:00",
+         "minutes": 0,
+         "kind": "practice",
+         "practiceId": "free-dance"
+        },
+        {
+         "day": 7,
+         "start": "10:00",
+         "minutes": 30,
+         "kind": "transfer"
+        }
+       ],
+       "cards": []
+      },
+      "timeline": {
+       "at": "2027-11-10",
+       "retreat": {
+        "title": "Practice week: booklet",
+        "currency": "USD",
+        "start": "2028-05-10",
+        "nights": 6,
+        "guests": 20
+       },
+       "terms": {
+        "signDate": "2027-11-10",
+        "venue": {
+         "model": "full_campus",
+         "ratePerGuest": 180000,
+         "capacity": 20,
+         "minGuests": 0,
+         "buyoutFee": 0,
+         "depositPct": 25,
+         "finalDueDays": 60,
+         "payInFullDiscountPct": 5,
+         "installments": true,
+         "payInFull": false
+        },
+        "guestDepositPct": 30,
+        "guestBalanceDueDays": 75,
+        "guestRefundDays": 75,
+        "venueNoReturnDays": 60
+       }
+      }
+     },
+     "paper": "letter",
+     "accent": "sand"
+    }
+   }
+  },
+  "expect": {
+   "ru": {
+    "today": "2027-11-10",
+    "errors": [
+     {
+      "id": "no-not-included",
+      "section": "inclusions"
+     }
+    ],
+    "warnings": [
+     {
+      "id": "experience-without-purpose",
+      "section": "experiences"
+     },
+     {
+      "id": "holiday-overlap",
+      "detail": "Майские праздники"
+     }
+    ],
+    "hashLength": 6780
+   },
+   "en": {
+    "today": "2027-11-10",
+    "errors": [
+     {
+      "id": "no-not-included",
+      "section": "inclusions"
+     }
+    ],
+    "warnings": [
+     {
+      "id": "experience-without-purpose",
+      "section": "experiences"
+     },
+     {
+      "id": "holiday-overlap",
+      "detail": "May holidays"
+     }
+    ],
+    "hashLength": 6145
+   }
+  }
+ }
+]
