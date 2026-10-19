@@ -47,6 +47,8 @@ export interface Inputs {
   nights: number
   /** Месяцев от подписания контракта до старта (≥ 1). */
   monthsToStart: number
+  /** Точные дни от подписания до старта, если пришли из ссылки таймлайна. */
+  daysToStart?: number
   /** Сколько гостей покупает в каждый месяц: индекс 0 — месяц подписания; длина ≤ monthsToStart; сумма = guests. */
   salesCurve: number[]
   /** Депозит гостя: процент цены или сумма (центы). */
@@ -202,7 +204,7 @@ export function validate(i: Inputs, lang: Lang = 'ru'): string[] {
 }
 
 /** График платежей площадке по месяцам от подписания (месяц 0). Тот же график берёт таймлайн ретрита. */
-export function venuePayments(v: Venue, guests: number, monthsToStart: number): VenueView {
+export function venuePayments(v: Venue, guests: number, monthsToStart: number, daysToStart?: number): VenueView {
   const contractValue = venueCost(v, guests)
   const finalMonth = Math.max(0, monthsToStart - monthsBefore(v.finalDueDays))
   if (v.payInFull) {
@@ -218,8 +220,10 @@ export function venuePayments(v: Venue, guests: number, monthsToStart: number): 
       for (let m = 1; m <= finalMonth; m++) {
         schedule.push({ month: m, amount: m === finalMonth ? rest - share * (finalMonth - 1) : share })
       }
-    } else if (finalMonth === 0) {
+    } else if (finalMonth === 0 && (daysToStart === undefined || daysToStart <= v.finalDueDays)) {
       schedule[0].amount += rest                          // финальный срок уже наступил — всё при подписании
+    } else if (finalMonth === 0) {
+      schedule.push({ month: 0, amount: rest })
     } else {
       schedule.push({ month: finalMonth, amount: rest })
     }
@@ -228,7 +232,7 @@ export function venuePayments(v: Venue, guests: number, monthsToStart: number): 
 }
 
 function venueSchedule(i: Inputs): VenueView {
-  return venuePayments(i.venue, i.guests, i.monthsToStart)
+  return venuePayments(i.venue, i.guests, i.monthsToStart, i.daysToStart)
 }
 
 function cashflow(i: Inputs, venue: VenueView): CashMonth[] {

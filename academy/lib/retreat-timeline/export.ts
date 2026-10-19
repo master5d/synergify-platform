@@ -4,7 +4,7 @@ import type { Lang } from '../retreat-calc/engine'
 import { addDays } from '../retreat-core/dates'
 import { toCsv } from '../retreat-core/csv'
 import type { Milestone } from './engine'
-import { milestoneLabel, SOURCE_LABELS, WHO_LABELS } from './labels'
+import { milestoneLabel, SOURCE_LABELS, STATUS_LABELS, WHO_LABELS } from './labels'
 
 export const TIMELINE_CSV_HEADER: Record<Lang, string[]> = {
   ru: ['Дней до старта', 'Дата', 'Кто', 'Что', 'Сумма', 'Статус', 'Откуда срок'],
@@ -20,7 +20,7 @@ export function money(cents: number, lang: Lang): string {
 export function milestonesToCsv(ms: Milestone[], lang: Lang): string {
   const rows = ms.map((m) => [
     String(m.daysBefore), m.date, WHO_LABELS[lang][m.who], milestoneLabel(m, lang),
-    m.amountCents === null ? '' : money(m.amountCents, lang), '', SOURCE_LABELS[lang][m.source],
+    m.amountCents === null ? '' : money(m.amountCents, lang), m.status ? STATUS_LABELS[lang][m.status] : '', SOURCE_LABELS[lang][m.source],
   ])
   return toCsv([TIMELINE_CSV_HEADER[lang], ...rows], lang)
 }
@@ -48,14 +48,14 @@ function fold(line: string): string {
 const compact = (d: string) => d.replace(/-/g, '')
 
 /** `stamp` — момент выгрузки `YYYYMMDDTHHMMSSZ` (DTSTAMP по RFC 5545); без него — дата вехи, для детерминизма тестов. */
-export function milestonesToIcs(ms: Milestone[], title: string, lang: Lang, stamp?: string): string {
+export function milestonesToIcs(ms: Milestone[], title: string, lang: Lang, stamp?: string, passportId?: string): string {
   const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', `PRODID:-//academy.synergify.com//retreat-timeline//${lang.toUpperCase()}`, 'CALSCALE:GREGORIAN']
   // UID события — веха + ретрит (дата заезда и название), без даты самой вехи: после правки сроков повторный
   // импорт обновляет события, а не плодит дубли; два ретрита с одним стартом не перетирают друг друга.
   const start = ms.find((m) => m.id === 'arrival')?.date ?? ''
   let h = 0x811c9dc5
   for (const ch of new TextEncoder().encode(title)) h = Math.imul(h ^ ch, 0x01000193) >>> 0
-  const retreatId = `${start}-${h.toString(16)}`
+  const retreatId = passportId && /^[a-z0-9-]{8,40}$/.test(passportId) ? passportId : `${start}-${h.toString(16)}`
   for (const m of ms) {
     const what = milestoneLabel(m, lang)
     const details = [WHO_LABELS[lang][m.who], m.amountCents === null ? '' : money(m.amountCents, lang), SOURCE_LABELS[lang][m.source]]

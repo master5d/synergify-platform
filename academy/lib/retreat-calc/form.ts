@@ -15,6 +15,7 @@ export interface Form {
   guests: string
   nights: string
   monthsToStart: string
+  daysToStart?: number
   depositMode: 'pct' | 'amount'
   deposit: string
   balanceDueDays: string
@@ -72,6 +73,7 @@ export function toInputs(f: Form): Inputs {
     guests,
     nights: num(f.nights),
     monthsToStart: months,
+    daysToStart: f.daysToStart,
     salesCurve: salesCurve(f.sales, guests, months, f.salesManual),
     guestDeposit: f.depositMode === 'pct' ? { kind: 'pct', value: num(f.deposit) } : { kind: 'amount', value: cents(f.deposit) },
     guestBalanceDueDays: num(f.balanceDueDays),
@@ -97,6 +99,7 @@ export function applyLink(prev: Form, d: LinkData): Form {
     guests: d.guests !== undefined ? String(d.guests) : prev.guests,
     nights: d.nights !== undefined ? String(d.nights) : prev.nights,
     monthsToStart: d.monthsToStart !== undefined ? String(d.monthsToStart) : prev.monthsToStart,
+    daysToStart: d.daysToStart,
     depositMode: d.guestDeposit !== undefined ? 'amount' : d.guestDepositPct !== undefined ? 'pct' : prev.depositMode,
     deposit: d.guestDeposit !== undefined ? String(d.guestDeposit) : d.guestDepositPct !== undefined ? String(d.guestDepositPct) : prev.deposit,
     balanceDueDays: d.guestBalanceDueDays !== undefined ? String(d.guestBalanceDueDays) : prev.balanceDueDays,
@@ -109,5 +112,6 @@ export function applyLink(prev: Form, d: LinkData): Form {
     finalDueDays: v.finalDueDays !== undefined ? String(v.finalDueDays) : prev.finalDueDays,
     discountPct: v.payInFullDiscountPct !== undefined ? String(v.payInFullDiscountPct) : prev.discountPct,
     installments: v.installments ?? prev.installments,
+    payInFull: v.payInFull ?? prev.payInFull,
   }
 }

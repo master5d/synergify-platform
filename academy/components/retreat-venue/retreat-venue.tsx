@@ -27,7 +27,7 @@ import { MonthsPanel } from './months-panel'
 import { ResultsPanel } from './results-panel'
 import { venueFieldName, VY_UI } from './ui'
 import { button, card, field, h2, label } from './styles'
-import { MoneyInput } from './money-input'
+import { MoneyInput } from '../retreat-core/money-input'
 
 const numberValue = (text: string) => {
   const value = Number(text)

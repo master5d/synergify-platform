@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { Venue } from '../retreat-calc/engine'
 import type { RetreatPassport } from '../retreat-core/passport'
 import { buildTimeline, validateTimeline, type TimelineTerms } from './engine'
+import { milestoneLabel } from './labels'
 
 const usd = (n: number) => n * 100
 
@@ -90,6 +91,36 @@ describe('вехи в прошлом', () => {
     expect(past).not.toContain('venue-deposit')
     expect(past).not.toContain('sales-open')
     expect(past).not.toContain('guest-balance')
+  })
+})
+
+describe('статусы по границам', () => {
+  it('вчера — past, сегодня и через 14 дней — soon, через 15 дней — без статуса', () => {
+    const status = (signDate: '2026-11-30' | '2026-12-01' | '2026-12-15' | '2026-12-16') =>
+      buildTimeline({ ...PASSPORT, start: '2027-05-10' }, { ...TERMS, signDate }, '2026-12-01')
+        .milestones.find((m) => m.id === 'sign')?.status
+    expect(status('2026-11-30')).toBe('past')
+    expect(status('2026-12-01')).toBe('soon')
+    expect(status('2026-12-15')).toBe('soon')
+    expect(status('2026-12-16')).toBeNull()
+  })
+})
+
+describe('минимум группы', () => {
+  it('ставит минимум на дату подписания перед подписанием и показывает текст', () => {
+    const r = buildTimeline(PASSPORT, { ...TERMS, venue: { ...VENUE, model: 'per_guest', minGuests: 8 } }, '2026-10-17')
+    const minimum = r.milestones.find((m) => m.id === 'group-minimum')
+    const sign = r.milestones.find((m) => m.id === 'sign')
+    expect(minimum?.date).toBe(TERMS.signDate)
+    expect(r.milestones.indexOf(minimum!)).toBeLessThan(r.milestones.indexOf(sign!))
+    expect(minimum?.minimumGuests).toBe(8)
+    expect(minimum && milestoneLabel(minimum, 'ru')).toContain('8 гостей')
+  })
+  it('не пишет минимум в текст, если он не задан', () => {
+    const r = buildTimeline(PASSPORT, TERMS, '2026-10-17')
+    const minimum = r.milestones.find((m) => m.id === 'group-minimum')
+    expect(minimum?.minimumGuests).toBeUndefined()
+    expect(minimum && milestoneLabel(minimum, 'ru')).not.toContain('по договору')
   })
 })
 

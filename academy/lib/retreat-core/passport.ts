@@ -3,12 +3,13 @@
 
 import { LIMITS, type Lang } from '../retreat-calc/engine'
 import type { LinkData } from '../retreat-calc/link'
-import { addMonths, isIsoDate, type IsoDate } from './dates'
+import { addDays, addMonths, isIsoDate, type IsoDate } from './dates'
 
 export type Meal = 'breakfast' | 'lunch' | 'dinner'
 const MEALS: Meal[] = ['breakfast', 'lunch', 'dinner']
 
 export interface RetreatPassport {
+  id?: string
   title?: string
   currency?: string
   start?: IsoDate
@@ -31,6 +32,7 @@ const MESSAGES = {
     start: 'start: ожидалась дата ГГГГ-ММ-ДД',
     count: (f: string, max: number) => `${f}: ожидалось целое от 1 до ${max}`,
     meal: (f: string) => `${f}: ожидалось breakfast, lunch или dinner`,
+    id: 'id: ожидалась строка из 8–40 строчных букв, цифр или дефисов',
   },
   en: {
     title: 'title: expected a string up to 200 characters',
@@ -38,6 +40,7 @@ const MESSAGES = {
     start: 'start: expected a date YYYY-MM-DD',
     count: (f: string, max: number) => `${f}: expected an integer from 1 to ${max}`,
     meal: (f: string) => `${f}: expected breakfast, lunch or dinner`,
+    id: 'id: expected 8–40 lowercase letters, digits or hyphens',
   },
 }
 
@@ -47,6 +50,7 @@ const isCount = (v: unknown, max: number) => Number.isInteger(v) && (v as number
 export function validatePassport(p: RetreatPassport, lang: Lang): string[] {
   const t = MESSAGES[lang]
   const errors: string[] = []
+  if (p.id !== undefined && (typeof p.id !== 'string' || !/^[a-z0-9-]{8,40}$/.test(p.id))) errors.push(t.id)
   if (p.title !== undefined && (typeof p.title !== 'string' || p.title.length > 200)) errors.push(t.title)
   if (p.currency !== undefined && !/^[A-Z]{3}$/.test(String(p.currency))) errors.push(t.currency)
   if (p.start !== undefined && !isIsoDate(p.start)) errors.push(t.start)
@@ -62,6 +66,7 @@ export function pickPassport(raw: unknown): RetreatPassport {
   if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) return {}
   const o = raw as Record<string, unknown>
   const p: RetreatPassport = {}
+  if (typeof o.id === 'string' && /^[a-z0-9-]{8,40}$/.test(o.id)) p.id = o.id
   if (typeof o.title === 'string') p.title = o.title.slice(0, 200)
   if (typeof o.currency === 'string' && /^[A-Z]{3}$/.test(o.currency)) p.currency = o.currency
   if (isIsoDate(o.start)) p.start = o.start
@@ -75,10 +80,12 @@ export function pickPassport(raw: unknown): RetreatPassport {
 /** Паспорт из ссылки калькулятора v1: срок до старта в месяцах становится датой старта от сегодняшнего дня. */
 export function passportFromCalcLink(d: LinkData, today: IsoDate): RetreatPassport {
   const p: RetreatPassport = {}
+  if (d.id !== undefined && /^[a-z0-9-]{8,40}$/.test(d.id)) p.id = d.id
   if (d.title !== undefined) p.title = d.title
   if (d.currency !== undefined) p.currency = d.currency
   if (d.guests !== undefined) p.guests = d.guests
   if (d.nights !== undefined) p.nights = d.nights
-  if (d.monthsToStart !== undefined) p.start = addMonths(today, d.monthsToStart)
+  if (d.daysToStart !== undefined) p.start = addDays(today, d.daysToStart)
+  else if (d.monthsToStart !== undefined) p.start = addMonths(today, d.monthsToStart)
   return p
 }

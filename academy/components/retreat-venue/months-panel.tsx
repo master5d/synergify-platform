@@ -2,7 +2,7 @@ import type { Locale } from '../../lib/dictionaries'
 import { MONTHS } from '../../lib/retreat-venue/labels'
 import { calcHrefForMonth, type VenueForm } from '../../lib/retreat-venue/form'
 import { DAYS_IN_MONTH, type MonthInput, type MonthResult } from '../../lib/retreat-venue/engine'
-import { MoneyInput } from './money-input'
+import { MoneyInput } from '../retreat-core/money-input'
 import { card, field, h2, label } from './styles'
 import { VY_UI } from './ui'
 

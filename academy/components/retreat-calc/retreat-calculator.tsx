@@ -35,7 +35,9 @@ export function RetreatCalculator({ locale }: { locale: Locale }) {
     setNotice(t.loaded)
   }, [t.loaded, locale])
 
-  const set = <K extends keyof Form>(k: K) => (value: Form[K]) => setF((prev) => ({ ...prev, [k]: value }))
+  // дни до старта приходят из таймлайна вместе с месяцами; поменяли месяцы руками — дни устарели и больше не действуют
+  const set = <K extends keyof Form>(k: K) => (value: Form[K]) =>
+    setF((prev) => ({ ...prev, [k]: value, ...(k === 'monthsToStart' ? { daysToStart: undefined } : {}) }))
   const inputs = useMemo(() => toInputs(f), [f])
   const errors = useMemo(() => validate(inputs, locale), [inputs, locale])
   const result = useMemo(() => (errors.length ? null : compute(inputs, locale)), [inputs, errors, locale])
@@ -192,7 +194,8 @@ export function RetreatCalculator({ locale }: { locale: Locale }) {
         <>
           <h2 style={h2}>{t.results}</h2>
           <div className="rc-grid">
-            <div style={card}><div style={label}>{t.honestProfit}</div><div className={result.profit < 0 ? 'rc-neg' : ''} style={{ fontSize: 'var(--text-xl)' }}>{money(result.profit)}</div></div>
+            <div style={card}><div style={label}>{t.honestProfit}</div><div className={result.profit < 0 ? 'rc-neg' : ''}
+              style={{ fontSize: 'var(--text-xl)' }}>{money(result.profit)}</div></div>
             <div style={card}><div style={label}>{t.venueStyleProfit}</div><div style={{ fontSize: 'var(--text-xl)' }}>{money(result.venueStyleProfit)}</div>
               <div style={{ ...label, marginTop: '0.35rem' }}>{t.hiddenCosts(money(result.hiddenCosts))}</div></div>
             <div style={card}><div style={label}>{t.breakEven}</div><div style={{ fontSize: 'var(--text-xl)' }}>
@@ -250,10 +253,7 @@ export function RetreatCalculator({ locale }: { locale: Locale }) {
       )}
 
       <p style={{ marginTop: '2rem' }}>
-        <a style={{ color: GOLD }} href="#" onClick={(e) => {
-          e.preventDefault()
-          window.location.href = localePath(TIMELINE_PATH, locale) + timelineHashFromCalcForm(f, localToday())
-        }}>{t.openTimeline} →</a>
+        <a style={{ color: GOLD }} href={localePath(TIMELINE_PATH, locale) + timelineHashFromCalcForm(f, localToday())}>{t.openTimeline} →</a>
       </p>
 
       <p style={{ ...label, marginTop: '2.5rem' }}>{t.disclaimer}</p>

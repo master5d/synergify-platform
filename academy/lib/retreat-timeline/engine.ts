@@ -1,7 +1,7 @@
 // Движок таймлайна ретрита: вехи и платежи по датам от даты старта и условий договора (spec подпроекта B, §5.3).
 // Только арифметика дат и денег, без сети. Платежи площадке — тот же график, что у калькулятора (venuePayments).
 
-import { LIMITS, pct, venueCost, venuePayments, type Lang, type Venue } from '../retreat-calc/engine'
+import { LIMITS, venuePayments, type Lang, type Venue } from '../retreat-calc/engine'
 import { addDays, addMonths, daysBetween, isIsoDate, monthsBetween, type IsoDate } from '../retreat-core/dates'
 import { validatePassport, type RetreatPassport } from '../retreat-core/passport'
 
@@ -20,13 +20,13 @@ export interface TimelineTerms {
 }
 
 export const MILESTONE_ORDER = [
-  'sign', 'venue-deposit', 'venue-installment', 'venue-final', 'sales-open', 'go-no-go',
+  'group-minimum', 'sign', 'venue-deposit', 'venue-installment', 'venue-final', 'sales-open', 'go-no-go',
   'guest-balance', 'guest-refund-deadline', 'form-send', 'form-answers', 'menu-to-chef',
   'arrivals-final', 'arrival', 'departure',
 ] as const
 export type MilestoneId = (typeof MILESTONE_ORDER)[number]
 export type Who = 'leader' | 'venue' | 'both' | 'guests'
-export type Source = 'contract' | 'sales' | 'course-default' | 'passport'
+export type Source = 'contract' | 'sales' | 'course-default' | 'passport' | 'calculator'
 
 export interface Milestone {
   id: MilestoneId
@@ -38,6 +38,8 @@ export interface Milestone {
   who: Who
   amountCents: number | null
   source: Source
+  status: 'past' | 'soon' | null
+  minimumGuests?: number
 }
 
 export type WarningId = 'guest-refund-after-venue-no-return' | 'resale-buffer-short' | 'sign-after-venue-final' | 'milestone-in-past'
@@ -96,7 +98,7 @@ export function validateTimeline(p: RetreatPassport, t: TimelineTerms, lang: Lan
 }
 
 const WHO: Record<MilestoneId, Who> = {
-  'sign': 'both', 'venue-deposit': 'leader', 'venue-installment': 'leader', 'venue-final': 'leader',
+  'group-minimum': 'leader', 'sign': 'both', 'venue-deposit': 'leader', 'venue-installment': 'leader', 'venue-final': 'leader',
   'sales-open': 'leader', 'go-no-go': 'both', 'guest-balance': 'guests', 'guest-refund-deadline': 'guests',
   'form-send': 'leader', 'form-answers': 'guests', 'menu-to-chef': 'leader', 'arrivals-final': 'leader',
   'arrival': 'both', 'departure': 'both',
@@ -109,18 +111,17 @@ export function buildTimeline(p: RetreatPassport, t: TimelineTerms, today: IsoDa
   const guests = p.guests as number
   const nights = p.nights as number
   const out: Milestone[] = []
-  const add = (id: MilestoneId, date: IsoDate, source: Source, amountCents: number | null = null, n?: number) =>
-    out.push({ id, ...(n !== undefined ? { n } : {}), date, daysBefore: daysBetween(date, start), who: WHO[id], amountCents, source })
+  const add = (id: MilestoneId, date: IsoDate, source: Source, amountCents: number | null = null, n?: number, minimumGuests?: number) =>
+    out.push({
+      id, ...(n !== undefined ? { n } : {}), date, daysBefore: daysBetween(date, start), who: WHO[id], amountCents, source,
+      status: date < today ? 'past' : daysBetween(today, date) <= 14 ? 'soon' : null,
+      ...(minimumGuests !== undefined ? { minimumGuests } : {}),
+    })
 
+  add('group-minimum', t.signDate, 'calculator', null, undefined, t.venue.minGuests > 0 ? t.venue.minGuests : undefined)
   add('sign', t.signDate, 'contract')
   const venueFinal = addDays(start, -t.venue.finalDueDays)
-  let schedule = venuePayments(t.venue, guests, Math.max(1, monthsBetween(t.signDate, start))).schedule
-  // Месячные корзины калькулятора сливают остаток с депозитом, когда до финального срока меньше корзины.
-  // По датам срок ещё впереди: депозит — в день подписания, остаток — к сроку (одним платежом только после него).
-  if (!t.venue.payInFull && schedule.length === 1 && t.signDate < venueFinal) {
-    const deposit = pct(venueCost(t.venue, guests), t.venue.depositPct)
-    schedule = [{ month: 0, amount: deposit }, { month: -1, amount: schedule[0].amount - deposit }]
-  }
+  const schedule = venuePayments(t.venue, guests, Math.max(1, monthsBetween(t.signDate, start)), daysBetween(t.signDate, start)).schedule
   schedule.forEach((pay, i) => {
     if (pay.amount === 0) return                       // депозит 0 % — не платёж, а шум в календаре
     if (i === 0) add('venue-deposit', t.signDate, 'contract', pay.amount)
