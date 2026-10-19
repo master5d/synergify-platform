@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 import type { Locale } from '../../lib/dictionaries'
 import { cardIssueText, FORMAT, LOAD } from '../../lib/retreat-program/labels'
 import {
-  checkCard, emptyCard, mergeRegistry, pickCard, PRACTICE_LIMITS, registryFromJson, registryToJson,
+  checkCard, emptyCard, mergeRegistry, ownCardId, pickCard, PRACTICE_LIMITS, registryFromJson, registryToJson, restoreCardAt,
   type PracticeCard,
 } from '../../lib/retreat-program/practices'
 import { download } from '../retreat-timeline/download'
@@ -32,6 +32,7 @@ export function RegistryPanel({ locale, cards, linkedCards, disclaimer, onChange
   const t = PG_UI[locale]
   const input = useRef<HTMLInputElement>(null)
   const [open, setOpen] = useState<string | null>(null)
+  const [deleted, setDeleted] = useState<{ card: PracticeCard; index: number } | null>(null)
   const missing = linkedCards.filter((item) => !cards.some((cardItem) => cardItem.id === item.id))
   // Проверка — через pickCard (типы, лимиты), а текст хранится как набран: pickCard обрезает пробелы, и на каждое
   // нажатие пробел в конце съедался бы. При следующей загрузке registryFromStorage нормализует карточку сам.
@@ -43,9 +44,7 @@ export function RegistryPanel({ locale, cards, linkedCards, disclaimer, onChange
     onChange(cards.map((cardItem) => cardItem.id === item.id ? { ...next, name, ...typed } : cardItem))
   }
   const addOwn = () => {
-    let n = 1
-    while (cards.some((item) => item.id === `my-${n}`)) n += 1
-    const item = emptyCard(`my-${n}`)
+    const item = emptyCard(ownCardId(cards, crypto.randomUUID()))
     onChange([...cards, item])
     setOpen(item.id)
   }
@@ -103,6 +102,10 @@ export function RegistryPanel({ locale, cards, linkedCards, disclaimer, onChange
         <h3>{t.fromLink}</h3>
         {missing.map((item) => <p key={item.id}>{item.name} <button style={button} onClick={() => onChange(mergeRegistry(cards, [item]).cards)}>{t.addToRegistry}</button></p>)}
       </div>}
+      {deleted && <p role="status">{t.cardDeleted(deleted.card.name)} <button style={button} onClick={() => {
+        onChange(restoreCardAt(cards, deleted.card, deleted.index))
+        setDeleted(null)
+      }}>{t.restoreCard}</button></p>}
       <div className="pg-days">
         {cards.map((item) => {
           const issues = checkCard(item)
@@ -121,7 +124,11 @@ export function RegistryPanel({ locale, cards, linkedCards, disclaimer, onChange
                 {renderField(item, key)}
               </label>
             ))}
-              <button style={button} onClick={() => onChange(cards.filter((cardItem) => cardItem.id !== item.id))}>{t.deleteCard}</button></div>}
+              <button style={button} onClick={() => {
+                const index = cards.findIndex((cardItem) => cardItem.id === item.id)
+                onChange(cards.filter((cardItem) => cardItem.id !== item.id))
+                setDeleted({ card: item, index })
+              }}>{t.deleteCard}</button></div>}
           </article>
         })}
       </div>

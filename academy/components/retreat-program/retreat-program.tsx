@@ -12,7 +12,8 @@ import { VENUE_PATH, venueHashFromPassport } from '../../lib/retreat-venue/form'
 import { blockMinutes, fromMinutes, STEP, toMinutes, pickProgramTool, type Block } from '../../lib/retreat-program/grid'
 import { mealLabel } from '../../lib/retreat-menu/labels'
 import {
-  defaultForm, draftOf, draftWorthKeeping, formFromDecoded, formFromDraft, programHash, PROGRAM_DRAFT_KEY, PROGRAM_PREV_KEY,
+  defaultForm, draftCardsOf, draftOf, draftWorthKeeping, formAndCardsFromDraft, formFromDecoded, programDraftKey, programPrevKey,
+  migrateLegacy, programHash,
   PROGRAM_PATH, registryKey, registryFromStorage, reconcileMeals, restoreStarter, withDraftBlocks, type ProgramForm,
 } from '../../lib/retreat-program/form'
 import { gridRows, gridToCsv } from '../../lib/retreat-program/export'
@@ -35,6 +36,7 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
   const [linkedCards, setLinkedCards] = useState<PracticeCard[]>([])
   const [notice, setNotice] = useState('')
   const [previousDraft, setPreviousDraft] = useState<ProgramForm | null>(null)
+  const [previousDraftCards, setPreviousDraftCards] = useState<PracticeCard[]>([])
 
   useEffect(() => {
     const today = localToday()
@@ -44,25 +46,32 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
     let draft: string | null = null
     let saved: string | null = null
     try {
-      draft = localStorage.getItem(PROGRAM_DRAFT_KEY)
+      draft = migrateLegacy(localStorage, locale, 'draft')
       saved = localStorage.getItem(registryKey(locale))
     } catch { /* черновик и реестр в браузере — удобство, без них всё работает */ }
-    const draftForm = formFromDraft(draft, today)
+    const draftResult = formAndCardsFromDraft(draft, today)
+    const draftForm = draftResult?.form ?? null
     const linkForm = loaded?.form
     const keepDraft = Boolean(linkForm && loaded?.linkHasBlocks && draftWorthKeeping(draft, linkForm, today))
     const previous = keepDraft ? draftForm : null
+    let delayedCards: PracticeCard[] = []
     let prevSaved: string | null = null
-    try { prevSaved = localStorage.getItem(PROGRAM_PREV_KEY) } catch { /* без хранилища отложенного нет */ }
+    try { prevSaved = migrateLegacy(localStorage, locale, 'previous') } catch { /* без хранилища отложенного нет */ }
     if (previous) {
       setPreviousDraft(previous)
-      try { localStorage.setItem(PROGRAM_PREV_KEY, draftOf(previous)) } catch { /* без хранилища отложить нельзя */ }
+      setPreviousDraftCards(draftResult?.cards ?? [])
+      try { localStorage.setItem(programPrevKey(locale), draftOf(previous, draftResult?.cards ?? [])) } catch { /* без хранилища отложить нельзя */ }
     } else {
       // отложенная раньше программа остаётся доступной и после перезагрузки, пока её не вернули
-      const stored = formFromDraft(prevSaved, today)
-      if (stored) setPreviousDraft(stored)
+      const stored = formAndCardsFromDraft(prevSaved, today)
+      if (stored) {
+        setPreviousDraft(stored.form)
+        setPreviousDraftCards(stored.cards)
+        delayedCards = stored.cards
+      }
     }
     setForm(linkForm ? withDraftBlocks(linkForm, draftForm, loaded?.linkHasBlocks ?? false) : draftForm ?? defaultForm(today))
-    setLinkedCards(loaded?.cards ?? [])
+    setLinkedCards(loaded?.cards ?? draftResult?.cards ?? delayedCards)
     if (loaded && keepDraft) setNotice(t.linkOpened)
     else if (loaded) setNotice(t.loaded)
     else if (hash) setNotice(t.linkBroken)
@@ -73,12 +82,12 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
   useEffect(() => {
     if (!form) return
     try {
-      localStorage.setItem(PROGRAM_DRAFT_KEY, draftOf(form))
+      localStorage.setItem(programDraftKey(locale), draftOf(form, draftCardsOf(linkedCards, registry)))
       localStorage.setItem(registryKey(locale), JSON.stringify({ v: 1, cards: registry }))
     } catch { /* черновик и реестр в браузере — удобство, без них всё работает */ }
-  }, [form, registry])
+  }, [form, registry, linkedCards, locale])
 
-  const allCards = useMemo(() => [...registry, ...linkedCards.filter((item) => !registry.some((cardItem) => cardItem.id === item.id))], [registry, linkedCards])
+  const allCards = useMemo(() => registry.concat(linkedCards.filter((item) => !registry.some((cardItem) => cardItem.id === item.id))), [registry, linkedCards])
   if (!form) return null
   const errors = validatePassport(form.passport, locale)
   const setPassport = <K extends keyof RetreatPassport>(key: K, value: RetreatPassport[K]) => {
@@ -123,8 +132,12 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
         {notice && <p role="status" style={{ ...card, color: 'var(--accent-ink)' }}>{notice}</p>}
         {previousDraft && <p>
           <button style={button} onClick={() => {
-            setForm(previousDraft); setPreviousDraft(null); setNotice(t.draftBack)
-            try { localStorage.removeItem(PROGRAM_PREV_KEY) } catch { /* без хранилища очищать нечего */ }
+            setForm(previousDraft)
+            setLinkedCards((current) => [...current, ...previousDraftCards.filter((item) => !current.some((card) => card.id === item.id))])
+            setPreviousDraft(null)
+            setPreviousDraftCards([])
+            setNotice(t.draftBack)
+            try { localStorage.removeItem(programPrevKey(locale)) } catch { /* без хранилища очищать нечего */ }
           }}>{t.restoreDraft}</button>
         </p>}
         <h2 style={h2}>{t.retreat}</h2>

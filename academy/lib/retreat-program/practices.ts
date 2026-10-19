@@ -31,6 +31,23 @@ export function emptyCard(id: string): PracticeCard {
   return { id, name: '', format: 'group', groupMinutes: null, pairMinutes: null, groupSize: '', touch: false, touchConsent: '', load: 'low', contraindications: '', guestDoes: '', description: '', needs: '', notPromise: '', source: '', added: [] }
 }
 
+export function ownCardId(existing: PracticeCard[], uuid: string): string {
+  const seed = uuid.replace(/-/g, '')
+  let base = seed.slice(0, 8)
+  let attempt = 0
+  while (existing.some((card) => card.id === `my-${base}`)) {
+    attempt += 1
+    base = `${seed.slice(0, 7)}${attempt.toString(36)}`.slice(0, 8)
+  }
+  return `my-${base}`
+}
+
+export function restoreCardAt(registry: PracticeCard[], card: PracticeCard, index: number): PracticeCard[] {
+  const next = registry.filter((item) => item.id !== card.id)
+  next.splice(Math.min(Math.max(index, 0), next.length), 0, card)
+  return next
+}
+
 /** Очищает внешнюю карточку по allowlist и лимитам реестра. */
 export function pickCard(raw: unknown): PracticeCard | null {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null

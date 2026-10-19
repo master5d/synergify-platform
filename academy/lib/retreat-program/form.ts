@@ -7,11 +7,19 @@ import { PRACTICE_LIMITS, registryFromJson, registryToJson, starterCards, type P
 import { defaultForm as timelineDefaultForm } from '../retreat-timeline/form'
 
 export interface ProgramForm { passport: RetreatPassport; blocks: Block[] }
-export const PROGRAM_DRAFT_KEY = 'retreat-program:draft'
-export const PROGRAM_PREV_KEY = 'retreat-program:draft-before-link'
+export const programDraftKey = (lang: Lang) => `retreat-program:draft:${lang}`
+export const programPrevKey = (lang: Lang) => `retreat-program:draft-before-link:${lang}`
+export const LEGACY_PROGRAM_DRAFT_KEY = 'retreat-program:draft'
+export const LEGACY_PROGRAM_PREV_KEY = 'retreat-program:draft-before-link'
 export const REGISTRY_KEY = 'retreat-program:registry'
 export const registryKey = (lang: Lang) => `${REGISTRY_KEY}:${lang}`
 export const PROGRAM_PATH = '/instrumenty/konstruktor-programmy/'
+
+export interface DraftStorage {
+  getItem: (key: string) => string | null
+  setItem: (key: string, value: string) => void
+  removeItem: (key: string) => void
+}
 
 export function defaultForm(today: IsoDate): ProgramForm {
   const passport = timelineDefaultForm(today).passport
@@ -27,8 +35,14 @@ export function programHash(f: ProgramForm, registry: PracticeCard[]): string {
   return encodeToolLink({ v: 1, retreat: pickPassport(f.passport), tool: pickProgramTool({ blocks: f.blocks, cards: usedCards(f.blocks, registry) }) })
 }
 
-export function draftOf(f: ProgramForm): string {
-  return JSON.stringify({ passport: pickPassport(f.passport), tool: pickProgramTool({ blocks: f.blocks, cards: [] }) })
+/** Карточки для черновика: только пришедшие по ссылке и отсутствующие в реестре языка. Карточку реестра черновик не хранит,
+ * иначе удалённая из реестра карточка возвращалась бы после перезагрузки как «из ссылки». */
+export function draftCardsOf(linkedCards: PracticeCard[], registry: PracticeCard[]): PracticeCard[] {
+  return linkedCards.filter((item) => !registry.some((card) => card.id === item.id))
+}
+
+export function draftOf(f: ProgramForm, cards: PracticeCard[] = []): string {
+  return JSON.stringify({ passport: pickPassport(f.passport), tool: pickProgramTool({ blocks: f.blocks, cards: usedCards(f.blocks, cards) }) })
 }
 
 export function formFromDecoded(
@@ -47,12 +61,29 @@ export function formFromDecoded(
 }
 
 export function formFromDraft(text: string | null, today: IsoDate): ProgramForm | null {
+  return formAndCardsFromDraft(text, today)?.form ?? null
+}
+
+export function formAndCardsFromDraft(text: string | null, today: IsoDate): { form: ProgramForm; cards: PracticeCard[] } | null {
   if (!text) return null
   try {
     const o = JSON.parse(text) as Record<string, unknown>
-    const result = formFromDecoded({ ok: true, kind: 'tool', link: { v: 1, retreat: pickPassport(o.passport), tool: pickProgramTool(o.tool) } }, today)
-    return result?.form ?? null
+    const tool = pickProgramTool(o.tool)
+    const result = formFromDecoded({ ok: true, kind: 'tool', link: { v: 1, retreat: pickPassport(o.passport), tool } }, today)
+    return result ? { form: result.form, cards: result.cards } : null
   } catch { return null }
+}
+
+export function migrateLegacy(storage: DraftStorage, lang: Lang, kind: 'draft' | 'previous'): string | null {
+  const languageKey = kind === 'draft' ? programDraftKey(lang) : programPrevKey(lang)
+  const legacyKey = kind === 'draft' ? LEGACY_PROGRAM_DRAFT_KEY : LEGACY_PROGRAM_PREV_KEY
+  const languageValue = storage.getItem(languageKey)
+  if (languageValue !== null) return languageValue
+  const legacyValue = storage.getItem(legacyKey)
+  if (legacyValue === null) return null
+  storage.setItem(languageKey, legacyValue)
+  storage.removeItem(legacyKey)
+  return legacyValue
 }
 
 export function registryFromStorage(text: string | null, lang: Lang): PracticeCard[] {
