@@ -37,6 +37,7 @@ export interface LinkData {
   guestBalanceDueDays?: number
   daysToStart?: number
   venue?: LinkVenue
+  accommodation?: { name: string; guests: number; surcharge: number; cost: number }[]
 }
 
 export type Decoded = { ok: true; data: LinkData } | { ok: false; error: string }
@@ -65,6 +66,9 @@ const MESSAGES = {
     model: (m: string) => `venue.model: «${m}» не из ${MODELS.join(', ')}`,
     installments: 'venue.installments: ожидалось true/false',
     payInFull: 'venue.payInFull: ожидалось true/false',
+    accommodation: 'accommodation: ожидался массив вариантов',
+    accommodationLength: 'accommodation: не больше 8 вариантов',
+    accommodationName: (f: string) => `${f}: ожидалась строка до 60 знаков`,
   },
   en: {
     none: 'the link carries no calculator data',
@@ -78,6 +82,9 @@ const MESSAGES = {
     model: (m: string) => `venue.model: “${m}” is not one of ${MODELS.join(', ')}`,
     installments: 'venue.installments: expected true/false',
     payInFull: 'venue.payInFull: expected true/false',
+    accommodation: 'accommodation: expected an array of options',
+    accommodationLength: 'accommodation: no more than 8 options',
+    accommodationName: (f: string) => `${f}: expected a string of at most 60 characters`,
   },
 }
 
@@ -155,6 +162,21 @@ export function decodeLink(hash: string, lang: Lang = 'ru'): Decoded {
       venue.payInFull = v.payInFull
     }
     data.venue = venue
+  }
+  if (o.accommodation !== undefined && o.accommodation !== null) {
+    if (!Array.isArray(o.accommodation)) return { ok: false, error: t.accommodation }
+    if (o.accommodation.length > 8) return { ok: false, error: t.accommodationLength }
+    const accommodation: LinkData['accommodation'] = []
+    for (const [k, rawOption] of o.accommodation.entries()) {
+      if (typeof rawOption !== 'object' || rawOption === null || Array.isArray(rawOption)) return { ok: false, error: t.accommodation }
+      const option = rawOption as Record<string, unknown>
+      if (typeof option.name !== 'string' || option.name.length > 60) return { ok: false, error: t.accommodationName(`accommodation[${k}].name`) }
+      if (!Number.isInteger(option.guests) || !inRange(option.guests, LIMITS.guests)) return { ok: false, error: t.number(`accommodation[${k}].guests`, LIMITS.guests) }
+      if (!Number.isInteger(option.surcharge) || !inRange(option.surcharge, MONEY_MAX)) return { ok: false, error: t.number(`accommodation[${k}].surcharge`, MONEY_MAX) }
+      if (!Number.isInteger(option.cost) || !inRange(option.cost, MONEY_MAX)) return { ok: false, error: t.number(`accommodation[${k}].cost`, MONEY_MAX) }
+      accommodation.push({ name: option.name, guests: option.guests, surcharge: option.surcharge, cost: option.cost })
+    }
+    data.accommodation = accommodation
   }
   return { ok: true, data }
 }

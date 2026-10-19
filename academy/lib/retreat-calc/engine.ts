@@ -38,6 +38,16 @@ export interface CostLine {
   monthsBeforeStart: number
 }
 
+export interface AccommodationOption {
+  name: string
+  /** Сколько платящих гостей выбрали эту опцию. */
+  guests: number
+  /** Доплата гостя за опцию (центы, за весь ретрит). */
+  surcharge: number
+  /** Что ведущий платит за эту опцию на гостя (центы, за весь ретрит). */
+  cost: number
+}
+
 export interface Inputs {
   currency: string
   /** Цена за гостя (центы). */
@@ -59,6 +69,8 @@ export interface Inputs {
   fixedCosts: CostLine[]
   /** Расходы ведущего на каждого гостя (центы): подарки, включённые экскурсии. */
   perGuestCost: number
+  /** Проживание на выбор поверх цены участия. Гости вне опций платят только цену участия. */
+  accommodation?: AccommodationOption[]
   /** Процент с выручки: эквайринг и резерв на возвраты. */
   revenuePct: number
 }
@@ -118,13 +130,25 @@ function venuePayable(venue: Venue, guests: number): number {
   return venue.payInFull ? cost - pct(cost, venue.payInFullDiscountPct) : cost
 }
 
-function leaderCosts(i: Inputs, guests: number): number {
+function accommodationTotals(i: Inputs): { surcharge: number; cost: number } {
+  return (i.accommodation ?? []).reduce((totals, option) => ({
+    surcharge: totals.surcharge + option.guests * option.surcharge,
+    cost: totals.cost + option.guests * option.cost,
+  }), { surcharge: 0, cost: 0 })
+}
+
+function leaderCosts(i: Inputs, guests: number, accommodationCost = 0, revenue = i.pricePerGuest * guests): number {
   const fixed = i.fixedCosts.reduce((s, c) => s + c.amount, 0)
-  return fixed + i.perGuestCost * guests + pct(i.pricePerGuest * guests, i.revenuePct)
+  return fixed + i.perGuestCost * guests + accommodationCost + pct(revenue, i.revenuePct)
 }
 
 function profitAt(i: Inputs, guests: number): number {
-  return i.pricePerGuest * guests - venuePayable(i.venue, guests) - leaderCosts(i, guests)
+  const totals = accommodationTotals(i)
+  const ratio = i.guests > 0 ? guests / i.guests : 0
+  const surcharge = Math.round(totals.surcharge * ratio)
+  const accommodationCost = Math.round(totals.cost * ratio)
+  const revenue = i.pricePerGuest * guests + surcharge
+  return revenue - venuePayable(i.venue, guests) - leaderCosts(i, guests, accommodationCost, revenue)
 }
 
 const MESSAGES = {
@@ -136,6 +160,9 @@ const MESSAGES = {
     months: 'monthsToStart: ожидалось целое ≥ 1',
     curveLong: 'salesCurve: месяцев продаж больше, чем месяцев до старта',
     sold: (sold: number, guests: number) => `salesCurve: продано ${sold}, а гостей ${guests}`,
+    accommodationName: (f: string) => `${f}: ожидалась строка до 60 знаков`,
+    accommodationOptions: 'accommodation: не больше 8 вариантов',
+    accommodationGuests: (sold: number, guests: number) => `accommodation.guests: выбрано ${sold}, а гостей ${guests}`,
     depositOverPrice: 'guestDeposit: депозит больше цены',
     capacity: 'venue.capacity: ожидалось целое ≥ 1',
     overCapacity: (g: number, c: number) => `guests: ${g} больше вместимости ${c}`,
@@ -148,6 +175,9 @@ const MESSAGES = {
     months: 'monthsToStart: expected an integer ≥ 1',
     curveLong: 'salesCurve: more sales months than months to start',
     sold: (sold: number, guests: number) => `salesCurve: ${sold} sold, but ${guests} guests`,
+    accommodationName: (f: string) => `${f}: expected a string of at most 60 characters`,
+    accommodationOptions: 'accommodation: no more than 8 options',
+    accommodationGuests: (sold: number, guests: number) => `accommodation.guests: ${sold} selected, but ${guests} guests`,
     depositOverPrice: 'guestDeposit: deposit is above the price',
     capacity: 'venue.capacity: expected an integer ≥ 1',
     overCapacity: (g: number, c: number) => `guests: ${g} is above capacity ${c}`,
@@ -200,6 +230,15 @@ export function validate(i: Inputs, lang: Lang = 'ru'): string[] {
   })
   money('perGuestCost', i.perGuestCost)
   percent('revenuePct', i.revenuePct)
+  if ((i.accommodation ?? []).length > 8) errors.push(t.accommodationOptions)
+  const accommodationGuests = (i.accommodation ?? []).reduce((sum, option) => sum + option.guests, 0)
+  if (accommodationGuests > i.guests) errors.push(t.accommodationGuests(accommodationGuests, i.guests))
+  i.accommodation?.forEach((option, k) => {
+    if (typeof option.name !== 'string' || option.name.length > 60) errors.push(t.accommodationName(`accommodation[${k}].name`))
+    count(`accommodation[${k}].guests`, option.guests, LIMITS.guests)
+    money(`accommodation[${k}].surcharge`, option.surcharge)
+    money(`accommodation[${k}].cost`, option.cost)
+  })
   return errors
 }
 
@@ -239,20 +278,32 @@ function cashflow(i: Inputs, venue: VenueView): CashMonth[] {
   const months = i.monthsToStart
   const inflow = new Array(months + 1).fill(0)
   const outflow = new Array(months + 1).fill(0)
-  const deposit = i.guestDeposit.kind === 'pct' ? pct(i.pricePerGuest, i.guestDeposit.value) : i.guestDeposit.value
   const balanceMonth = Math.max(0, months - monthsBefore(i.guestBalanceDueDays))
+  const totals = accommodationTotals(i)
+  let allocatedSurcharge = 0
+  let soldGuests = 0
   i.salesCurve.forEach((sold, m) => {
+    soldGuests += sold
+    const surcharge = m === i.salesCurve.length - 1
+      ? totals.surcharge - allocatedSurcharge
+      : Math.floor((totals.surcharge * soldGuests) / Math.max(1, i.guests)) - allocatedSurcharge
+    allocatedSurcharge += surcharge
+    const fullPrice = i.pricePerGuest * sold + surcharge
+    // депозит-процент: с цены участия — по каждому гостю (как до опций проживания, те же центы), с доплат — от суммы месяца
+    const deposit = i.guestDeposit.kind === 'pct'
+      ? pct(i.pricePerGuest, i.guestDeposit.value) * sold + pct(surcharge, i.guestDeposit.value)
+      : i.guestDeposit.value * sold
     // гость, купивший после срока доплаты, платит целиком сразу
     if (m >= balanceMonth) {
-      inflow[m] += i.pricePerGuest * sold
+      inflow[m] += fullPrice
     } else {
-      inflow[m] += deposit * sold
-      inflow[balanceMonth] += (i.pricePerGuest - deposit) * sold
+      inflow[m] += deposit
+      inflow[balanceMonth] += fullPrice - deposit
     }
   })
   // эквайринг и резерв на возвраты: итог считается от всей выручки (как в прибыли), по месяцам — пропорционально
   // поступлениям, остаток округления — в последний месяц с поступлением; касса сходится с прибылью до цента
-  const revenue = i.pricePerGuest * i.guests
+  const revenue = i.pricePerGuest * i.guests + totals.surcharge
   const fee = pct(revenue, i.revenuePct)
   let allocated = 0
   let last = -1
@@ -267,7 +318,7 @@ function cashflow(i: Inputs, venue: VenueView): CashMonth[] {
   if (last >= 0) outflow[last] += fee - allocated
   venue.schedule.forEach((p) => { outflow[p.month] += p.amount })
   i.fixedCosts.forEach((c) => { outflow[Math.max(0, months - c.monthsBeforeStart)] += c.amount })
-  outflow[months] += i.perGuestCost * i.guests
+  outflow[months] += i.perGuestCost * i.guests + totals.cost
   let balance = 0
   return inflow.map((inc, m) => {
     balance += inc - outflow[m]
@@ -288,7 +339,9 @@ function breakEven(i: Inputs): number | null {
   const keep = v.payInFull ? 1 - v.payInFullDiscountPct / 100 : 1
   const fixed = i.fixedCosts.reduce((s, c) => s + c.amount, 0)
     + (v.model === 'full_campus' ? v.ratePerGuest * v.capacity * keep : v.model === 'buyout' ? v.buyoutFee * keep : 0)
-  const margin = i.pricePerGuest * (1 - i.revenuePct / 100) - i.perGuestCost
+  const totals = accommodationTotals(i)
+  const accommodationPerGuest = i.guests > 0 ? (totals.surcharge - pct(totals.surcharge, i.revenuePct)) / i.guests - totals.cost / i.guests : 0
+  const margin = i.pricePerGuest * (1 - i.revenuePct / 100) - i.perGuestCost + accommodationPerGuest
     - (v.model === 'full_campus' ? 0 : v.ratePerGuest * keep)
   const SLACK = 1.5                                   // ≥ суммы двух округлений к центу (по ½) с запасом на float
   let from = floor
@@ -308,9 +361,10 @@ function breakEven(i: Inputs): number | null {
 export function compute(i: Inputs, lang: Lang = 'ru'): Result {
   const errors = validate(i, lang)
   if (errors.length) throw new Error(errors.join('; '))
-  const revenue = i.pricePerGuest * i.guests
+  const totals = accommodationTotals(i)
+  const revenue = i.pricePerGuest * i.guests + totals.surcharge
   const vPaid = venuePayable(i.venue, i.guests)
-  const lCosts = leaderCosts(i, i.guests)
+  const lCosts = leaderCosts(i, i.guests, totals.cost, revenue)
   const profit = revenue - vPaid - lCosts
   // как считает площадка: наценка над ставкой на каждого гостя; пустые места и расходы ведущего не видны
   const venueStyleProfit = i.venue.model === 'buyout'

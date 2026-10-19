@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { compute, profitGrid, validate, venueCost, venuePayments, type Inputs, type Venue } from './engine'
+import { compute, pct, profitGrid, validate, venueCost, venuePayments, type Inputs, type Venue } from './engine'
 
 const usd = (n: number) => n * 100
 
@@ -33,6 +33,53 @@ describe('модели контракта', () => {
 })
 
 describe('честная прибыль против «как считает площадка»', () => {
+  it('без опций сохраняет полный прежний результат', () => {
+    expect(compute(inputs())).toEqual(compute(inputs({ accommodation: [] })))
+  })
+
+  it('без опций депозит-процент округляется по каждому гостю, как до опций проживания', () => {
+    const i = inputs({ pricePerGuest: 33333, guestDeposit: { kind: 'pct', value: 25 } })
+    expect(i.salesCurve[0]).toBeGreaterThan(1)
+    expect(compute(i).cashflow[0].inflow).toBe(pct(33333, 25) * i.salesCurve[0])
+  })
+
+  it('депозит-процент берётся и с доплаты за проживание, депозит-сумма — только с цены участия', () => {
+    const option = { name: 'Свой номер', guests: 0, surcharge: 40000, cost: 0 }
+    const base = inputs({ guestDeposit: { kind: 'pct', value: 50 } })
+    const withOption = { ...base, accommodation: [{ ...option, guests: base.guests }] }
+    const extra = Math.floor((40000 * base.guests * base.salesCurve[0]) / base.guests)
+    expect(compute(withOption).cashflow[0].inflow - compute(base).cashflow[0].inflow).toBe(pct(extra, 50))
+    const fixed = inputs({ guestDeposit: { kind: 'amount', value: 50000 } })
+    const fixedWith = { ...fixed, accommodation: [{ ...option, guests: fixed.guests }] }
+    expect(compute(fixedWith).cashflow[0].inflow).toBe(compute(fixed).cashflow[0].inflow)
+  })
+
+  it('две опции добавляют доплаты в выручку и расходы в точных суммах', () => {
+    const r = compute(inputs({
+      pricePerGuest: 1000, guests: 10, salesCurve: [5, 5],
+      guestDeposit: { kind: 'amount', value: 0 },
+      venue: { ...VENUE, model: 'per_guest', ratePerGuest: 100, minGuests: 0 },
+      accommodation: [
+        { name: 'общая комната', guests: 4, surcharge: 200, cost: 50 },
+        { name: 'свой номер', guests: 3, surcharge: 500, cost: 300 },
+      ],
+    }))
+    expect(r.revenue).toBe(12300)
+    expect(r.leaderCosts).toBe(1100)
+    expect(r.profit).toBe(10200)
+  })
+
+  it('безубыточность использует ту же долю опций проживания', () => {
+    const r = compute(inputs({
+      pricePerGuest: 200, guests: 10, salesCurve: [5, 5],
+      guestDeposit: { kind: 'amount', value: 0 },
+      venue: { ...VENUE, model: 'per_guest', ratePerGuest: 100, minGuests: 0 },
+      fixedCosts: [{ name: 'организация', amount: 1000, monthsBeforeStart: 1 }],
+      accommodation: [{ name: 'палатка', guests: 5, surcharge: 100, cost: 20 }],
+    }))
+    expect(r.breakEvenGuests).toBe(8)
+  })
+
   it('наценка $800 × 18 гостей = $14 400; без расходов ведущего — то же', () => {
     const r = compute(inputs())
     expect(r.venueStyleProfit).toBe(usd(14400))
@@ -161,6 +208,10 @@ describe('кассовый план', () => {
       expect(r.cashflow[r.cashflow.length - 1].balance).toBe(r.profit)
     }
   })
+  it('сумма поступлений с опциями равна полной выручке', () => {
+    const r = compute(inputs({ accommodation: [{ name: 'палатка', guests: 6, surcharge: 125, cost: 40 }] }))
+    expect(r.cashflow.reduce((sum, month) => sum + month.inflow, 0)).toBe(r.revenue)
+  })
 })
 
 describe('взгляд площадки', () => {
@@ -185,6 +236,10 @@ describe('проверка входов', () => {
     expect(validate(inputs({ revenuePct: 120 }))).toContain('revenuePct: ожидался процент 0–100')
     expect(validate(inputs({ pricePerGuest: 10.5 }))).toContain('pricePerGuest: ожидалась неотрицательная сумма')
     expect(() => compute(inputs({ monthsToStart: 0 }))).toThrow('monthsToStart')
+  })
+  it('опции не могут выбрать больше гостей', () => {
+    expect(validate(inputs({ accommodation: [{ name: 'номер', guests: 19, surcharge: 1, cost: 1 }] })))
+      .toContain('accommodation.guests: выбрано 19, а гостей 18')
   })
   it('потолки: огромные числа — ошибка поля, а не зависание', () => {
     const v: Venue = { ...VENUE, model: 'per_guest' }
