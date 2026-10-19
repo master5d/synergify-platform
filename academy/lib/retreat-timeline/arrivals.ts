@@ -59,9 +59,12 @@ export function parseArrivalsCsv(text: string, lang?: Lang): ArrivalRow[] {
   const rows = parseCsv(text).filter((r) => !isNote(r))
   const header = rows[0]
   const body = rows.length && isHeader(rows[0]) ? rows.slice(1) : rows
-  const hasBooking = !!header && isHeader(header) && (header.includes(ARRIVAL_CSV_HEADER.ru[12]) || header.includes(ARRIVAL_CSV_HEADER.en[12]))
-  const sourceFields = hasBooking ? ARRIVAL_FIELDS : ARRIVAL_FIELDS.filter((f) => f !== 'booking')
+  const oldFields = ARRIVAL_FIELDS.filter((f) => f !== 'booking')
+  // с заголовком формат читается по нему; без заголовка — по ширине строки: 14 колонок — новый, меньше — старый без брони
+  const withHeader = !!header && isHeader(header)
+  const hasBooking = withHeader && (header.includes(ARRIVAL_CSV_HEADER.ru[12]) || header.includes(ARRIVAL_CSV_HEADER.en[12]))
   return body.map((r) => {
+    const sourceFields = (withHeader ? hasBooking : r.length >= ARRIVAL_FIELDS.length) ? ARRIVAL_FIELDS : oldFields
     const row = emptyArrival()
     sourceFields.forEach((f, i) => { row[f] = (r[i] ?? '').trim() })
     return { ...row, dateIn: normalizeDate(row.dateIn, lang), dateOut: normalizeDate(row.dateOut, lang) }

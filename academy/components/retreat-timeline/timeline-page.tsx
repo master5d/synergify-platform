@@ -12,8 +12,10 @@ export function TimelinePage({ locale }: { locale: Locale }) {
   return (
     <main className="tl-page" style={{ background: 'var(--bg-primary)', color: 'var(--text-body)', minHeight: '100vh' }}>
       <style>{`
+        .tl-printonly { display: none; }
         @media print {
           .tl-page-noprint, .tl-page .tl-noprint { display: none !important; }
+          .tl-page .tl-printonly { display: block; }
           .tl-wrap { max-width: none !important; padding: 0 !important; }
           .tl-table { font-size: 10pt; }
         }

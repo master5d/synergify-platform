@@ -37,16 +37,17 @@ export function ArrivalsPanel({ locale, passport }: { locale: Locale; passport: 
 
   return (
     <div>
-      <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.6 }}>{t.arrivalsLead}</p>
-      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', margin: '0 0 0.9rem' }}>
+      <p className="tl-noprint" style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.6 }}>{t.arrivalsLead}</p>
+      <div className="tl-noprint" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', margin: '0 0 0.9rem' }}>
         {/* кнопка, а не label: до загрузки должно быть можно добраться с клавиатуры */}
         <button style={button} onClick={() => fileInput.current?.click()}>{t.uploadCsv}</button>
         <input ref={fileInput} type="file" accept=".csv,text/csv" hidden aria-label={t.uploadCsv}
           onChange={(e) => { onFile(e.target.files?.[0]); e.target.value = '' }} />
         <button style={button} onClick={() => download(`arrival-list.${locale}.csv`, arrivalsToCsv(rows, locale), 'text/csv;charset=utf-8')}>{t.downloadCsv}</button>
         <button style={button} onClick={() => setRows([...rows, emptyArrival()])}>{t.addRow}</button>
+        <button style={button} onClick={() => window.print()}>{t.print}</button>
       </div>
-      <div style={{ overflowX: 'auto' }}>
+      <div className="tl-noprint" style={{ overflowX: 'auto' }}>
         <table className="tl-table">
           <thead><tr>{head.map((h) => <th key={h}>{h}</th>)}<th /></tr></thead>
           <tbody>{rows.map((r, i) => (
@@ -61,6 +62,13 @@ export function ArrivalsPanel({ locale, passport }: { locale: Locale; passport: 
               <td><button style={button} onClick={() => setRows(rows.filter((_, j) => j !== i))}>{t.remove}</button></td>
             </tr>
           ))}</tbody>
+        </table>
+      </div>
+      {/* на бумагу — значения, а не поля ввода: поля обрезают текст по ширине колонки */}
+      <div className="tl-printonly">
+        <table className="tl-table">
+          <thead><tr>{head.map((h) => <th key={h}>{h}</th>)}</tr></thead>
+          <tbody>{rows.map((r, i) => <tr key={i}>{ARRIVAL_FIELDS.map((f) => <td key={f}>{r[f]}</td>)}</tr>)}</tbody>
         </table>
       </div>
       <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 400, margin: '1.25rem 0 0.5rem' }}>{t.arrivalIssues}</h3>

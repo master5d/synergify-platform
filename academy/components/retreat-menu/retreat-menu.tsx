@@ -38,8 +38,7 @@ const shown = (n: number | undefined) => (n !== undefined && Number.isFinite(n) 
 const parsedInt = (s: string) => (s.trim() === '' ? NaN : Number(s))
 
 /** Поле суммы со своим текстом: «12,» и «12.» не съедаются при наборе, центы уходят наверх, когда число готово. */
-function MoneyInput({ cents, onChange, locale, ...rest }: { cents: number | null; onChange: (c: number | null) => void; locale: Locale } &
-  Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'>) {
+function MoneyInput({ cents, onChange, locale, ...rest }: { cents: number | null; onChange: (c: number | null) => void; locale: Locale } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'>) {
   const [text, setText] = useState(cents === null ? '' : menuMoney(cents, locale))
   useEffect(() => {
     if (parseMoney(text) !== cents) setText(cents === null ? '' : menuMoney(cents, locale))
@@ -123,9 +122,7 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
   const currency = f.passport.currency ?? 'USD'
   const money = (c: number) => {
     try {
-      return new Intl.NumberFormat(locale === 'en' ? 'en-US' : 'ru-RU', {
-        style: 'currency', currency, minimumFractionDigits: c % 100 === 0 ? 0 : 2, maximumFractionDigits: 2,
-      }).format(c / 100)
+      return new Intl.NumberFormat(locale === 'en' ? 'en-US' : 'ru-RU', { style: 'currency', currency, minimumFractionDigits: c % 100 === 0 ? 0 : 2, maximumFractionDigits: 2 }).format(c / 100)
     } catch {
       return `${menuMoney(c, locale)} ${currency}`
     }
@@ -191,13 +188,10 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
         <h2 style={h2}>{t.retreat}</h2>
         <div className="mn-grid">
           <label style={label}>{t.titleLabel}<input style={field} value={f.passport.title ?? ''} onChange={(e) => setP('title', e.target.value || undefined)} /></label>
-          <label style={label}>{t.currency}<input style={field} value={f.passport.currency ?? ''} maxLength={3}
-            onChange={(e) => setP('currency', e.target.value.toUpperCase() || undefined)} /></label>
+          <label style={label}>{t.currency}<input style={field} value={f.passport.currency ?? ''} maxLength={3} onChange={(e) => setP('currency', e.target.value.toUpperCase() || undefined)} /></label>
           <label style={label}>{t.start}<input type="date" style={field} value={f.passport.start ?? ''} onChange={(e) => setP('start', e.target.value || undefined)} /></label>
-          <label style={label}>{t.nights}<input style={field} inputMode="numeric" value={shown(f.passport.nights)}
-            onChange={(e) => setP('nights', parsedInt(e.target.value))} /></label>
-          <label style={label}>{t.guests}<input style={field} inputMode="numeric" value={shown(f.passport.guests)}
-            onChange={(e) => setP('guests', parsedInt(e.target.value))} /></label>
+          <label style={label}>{t.nights}<input style={field} inputMode="numeric" value={shown(f.passport.nights)} onChange={(e) => setP('nights', parsedInt(e.target.value))} /></label>
+          <label style={label}>{t.guests}<input style={field} inputMode="numeric" value={shown(f.passport.guests)} onChange={(e) => setP('guests', parsedInt(e.target.value))} /></label>
           <label style={label}>{t.arrivalMeal}
             <select style={field} value={f.passport.arrivalMeal ?? 'lunch'} onChange={(e) => setP('arrivalMeal', e.target.value as Meal)}>
               {MEALS.map((m) => <option key={m} value={m}>{mealLabel(m, locale)}</option>)}
@@ -243,16 +237,13 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
                     return (
                       <div key={key} className="mn-meal">
                         <strong style={{ fontSize: 'var(--text-sm)', color: GOLD }}>{mealLabel(s.meal, locale)}</strong>
-                        <label style={label}>{t.dish}<input style={field} maxLength={MENU_LIMITS.text} value={c.dish}
-                          onChange={(e) => setCell(key, { dish: e.target.value })} /></label>
+                        <label style={label}>{t.dish}<input style={field} maxLength={MENU_LIMITS.text} value={c.dish} onChange={(e) => setCell(key, { dish: e.target.value })} /></label>
                         <label style={{ ...label, flexDirection: 'row', alignItems: 'center' }}>
                           <input type="checkbox" checked={c.meat} onChange={(e) => setCell(key, { meat: e.target.checked })} /> {t.meat}
                         </label>
                         <div className="mn-row">
-                          <label style={label}>{t.side}<input style={field} maxLength={MENU_LIMITS.text} value={c.side}
-                            onChange={(e) => setCell(key, { side: e.target.value })} /></label>
-                          <label style={label}>{t.drink}<input style={field} maxLength={MENU_LIMITS.text} value={c.drink}
-                            onChange={(e) => setCell(key, { drink: e.target.value })} /></label>
+                          <label style={label}>{t.side}<input style={field} maxLength={MENU_LIMITS.text} value={c.side} onChange={(e) => setCell(key, { side: e.target.value })} /></label>
+                          <label style={label}>{t.drink}<input style={field} maxLength={MENU_LIMITS.text} value={c.drink} onChange={(e) => setCell(key, { drink: e.target.value })} /></label>
                         </div>
                         <label style={label} htmlFor={`${id}-price`}>{t.price}</label>
                         <MoneyInput id={`${id}-price`} locale={locale} cents={c.priceCents} onChange={(v) => setCell(key, { priceCents: v })} />
@@ -318,10 +309,7 @@ export function RetreatMenu({ locale }: { locale: Locale }) {
               <div style={card}><div style={label}>{t.options}</div>
                 {result.totals.options.length === 0 ? <div>{t.noOptions}</div> : (
                   <ul style={{ margin: '0.35rem 0 0', paddingLeft: '1.1rem', fontSize: 'var(--text-sm)' }}>
-                    {result.totals.options.map((o, k) => (
-                      <li key={k}>{t.day(o.day, lastDay)}, {mealLabel(o.meal, locale).toLowerCase()}:
-                        {' '}{o.name || t.optionUnnamed} +{money(o.priceCents)}</li>
-                    ))}
+                    {result.totals.options.map((o, k) => <li key={k}>{t.day(o.day, lastDay)}, {mealLabel(o.meal, locale).toLowerCase()}: {o.name || t.optionUnnamed} +{money(o.priceCents)}</li>)}
                   </ul>
                 )}</div>
             </div>

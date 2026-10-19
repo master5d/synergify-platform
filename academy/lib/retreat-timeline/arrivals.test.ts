@@ -55,6 +55,14 @@ describe('лист прибытия — CSV', () => {
     expect(parseArrivalsCsv(old, 'ru')[0]).toMatchObject({ guest: 'Гость 1', booking: '', note: 'заметка' })
     expect(arrivalsToCsv([row({ guest: 'Гость 1' })], 'ru').split('\r\n')[0]).toContain('Статус брони')
   })
+  it('CSV без строки заголовка в 14 колонок читает статус брони на своём месте', () => {
+    const noHeader = 'Гость 1;;;;;;;;;;;;оплачено;заметка'
+    expect(parseArrivalsCsv(noHeader, 'ru')[0]).toEqual({ ...emptyArrival(), guest: 'Гость 1', booking: 'оплачено', note: 'заметка' })
+  })
+  it('CSV без строки заголовка в 13 колонок читается как старый формат', () => {
+    const noHeader = 'Гость 1;;;;;;;;;;;;заметка'
+    expect(parseArrivalsCsv(noHeader, 'ru')[0]).toEqual({ ...emptyArrival(), guest: 'Гость 1', booking: '', note: 'заметка' })
+  })
 })
 
 describe('лист прибытия — подсказки шаблона', () => {

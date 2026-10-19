@@ -222,7 +222,8 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
       </div>
 
       {/* панель не размонтируется при смене вкладки: строки гостей живут только в её состоянии */}
-      <div className="tl-noprint" role="tabpanel" id="tl-panel-arrivals" aria-labelledby="tl-tab-arrivals" hidden={tab !== 'arrivals'} style={{ marginTop: '1.25rem' }}>
+      {/* печатается только открытая вкладка: скрытая hidden на бумагу не попадает */}
+      <div role="tabpanel" id="tl-panel-arrivals" aria-labelledby="tl-tab-arrivals" hidden={tab !== 'arrivals'} style={{ marginTop: '1.25rem' }}>
         <ArrivalsPanel locale={locale} passport={f.passport} />
       </div>
 

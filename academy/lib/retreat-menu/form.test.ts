@@ -13,10 +13,7 @@ const decode = (hash: string) => formFromDecoded(decodeToolLink(hash, pickMenuTo
 
 function filledForm(): MenuForm {
   const f = defaultForm(TODAY)
-  f.grid['2-lunch'] = {
-    ...emptyCell(), dish: 'Плов с нутом', allergens: ['celery'], variants: { 'gluten-free': 'Плов без соуса' },
-    priceCents: 1800, option: { name: 'мясо', priceCents: 800 },
-  }
+  f.grid['2-lunch'] = { ...emptyCell(), dish: 'Плов с нутом', allergens: ['celery'], variants: { 'gluten-free': 'Плов без соуса' }, priceCents: 1800, option: { name: 'мясо', priceCents: 800 } }
   f.diets = { vegan: 2, 'gluten-free': 1 }
   return f
 }
@@ -49,9 +46,7 @@ describe('форма меню', () => {
     expect(formFromDraft(draft, TODAY)).toEqual(filledForm())
   })
   it('чужие ключи в ссылке отбрасываются', () => {
-    const hash = encodeToolLink({ v: 1, retreat: { nights: 6, guests: 16 }, tool: {
-      grid: { '2-lunch': { dish: 'x', phone: '555' }, 'evil': {} }, diets: { vegan: 2, robots: 3 },
-    } })
+    const hash = encodeToolLink({ v: 1, retreat: { nights: 6, guests: 16 }, tool: { grid: { '2-lunch': { dish: 'x', phone: '555' }, 'evil': {} }, diets: { vegan: 2, robots: 3 } } })
     const f = decode(hash)!
     expect(Object.keys(f.grid)).not.toContain('evil')
     expect(JSON.stringify(f)).not.toMatch(/phone|555|robots/)
