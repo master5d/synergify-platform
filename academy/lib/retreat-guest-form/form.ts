@@ -56,7 +56,10 @@ export function formFromDraft(text: string | null, today: IsoDate): GuestFormSta
  *  явными нулями: пустые числа меню заменило бы диетами из своего черновика, то есть прошлого ретрита. */
 export function menuHashWithDiets(p: RetreatPassport, diets: Diets | Record<string, number>): string {
   const zeros = Object.fromEntries(DIETS.filter((d) => d !== 'standard').map((d) => [d, 0]))
-  return encodeToolLink({ v: 1, retreat: pickPassport(p), tool: { diets: pickMenuTool({ diets: { ...zeros, ...diets } }).diets } })
+  const selected = { ...zeros, 'vegan-gluten-free': 0, ...diets }
+  const menu = pickMenuTool({ diets: selected }).diets as Record<string, number>
+  if (Object.prototype.hasOwnProperty.call(selected, 'vegan-gluten-free')) menu['vegan-gluten-free'] = selected['vegan-gluten-free']
+  return encodeToolLink({ v: 1, retreat: pickPassport(p), tool: { diets: menu } })
 }
 
 /** Анкета с паспортом соседнего инструмента и всеми вопросами. */

@@ -2,9 +2,9 @@
 
 import { useMemo, useRef, useState } from 'react'
 import type { Locale } from '../../lib/dictionaries'
-import { decodeCsvBytes } from '../../lib/retreat-core/csv'
+import { decodeCsvBytes, isSpreadsheetBytes } from '../../lib/retreat-core/csv'
 import {
-  answerText, arrivalsOf, chefToCsv, matchColumns, readAnswers, safetyToCsv, SAFETY_COLUMNS, summarize, type AnswersTable, type ColumnMap,
+  answerText, arrivalsOf, chefToCsv, matchColumns, readAnswers, safetyToCsv, wishesToCsv, SAFETY_COLUMNS, summarize, type AnswersTable, type ColumnMap,
 } from '../../lib/retreat-guest-form/answers'
 import { menuHashWithDiets, type GuestFormState } from '../../lib/retreat-guest-form/form'
 import { guestLabel, summaryIssueText } from '../../lib/retreat-guest-form/labels'
@@ -44,7 +44,9 @@ export function AnswersPanel({ locale, form }: { locale: Locale; form: GuestForm
     if (!file) return
     const reader = new FileReader()
     reader.onload = () => {
-      const tbl = readAnswers(decodeCsvBytes(new Uint8Array(reader.result as ArrayBuffer), locale === 'en' ? 'windows-1252' : 'windows-1251'))
+      const bytes = new Uint8Array(reader.result as ArrayBuffer)
+      if (isSpreadsheetBytes(bytes)) { setNotice(t.notCsv); return }
+      const tbl = readAnswers(decodeCsvBytes(bytes, locale === 'en' ? 'windows-1252' : 'windows-1251'))
       if (!tbl.rows.length) { setNotice(t.noRows); return }
       setTable(tbl)
       setOverrides({})
@@ -100,7 +102,11 @@ export function AnswersPanel({ locale, form }: { locale: Locale; form: GuestForm
               </ul>
               {noDiet > 0 && <p style={hint}>{t.noDietAnswer(noDiet)}</p>}
               {summary.diets.other ? <p style={hint}>{t.otherNotInMenu}</p> : null}
-              {map.diet !== undefined && <a href={localePath(MENU_PATH, locale) + menuHashWithDiets(form.passport, summary.diets)} style={{ color: GOLD, fontSize: 'var(--text-sm)' }}>{t.openMenu} →</a>}
+              {map.diet !== undefined && (
+                <a href={localePath(MENU_PATH, locale) + menuHashWithDiets(form.passport, summary.diets)} style={{ color: GOLD, fontSize: 'var(--text-sm)' }}>
+                  {t.openMenu} →
+                </a>
+              )}
             </div>
 
             {wishes.length > 0 && (
@@ -109,6 +115,10 @@ export function AnswersPanel({ locale, form }: { locale: Locale; form: GuestForm
                 <ul style={{ paddingLeft: '1.2rem', fontSize: 'var(--text-sm)', lineHeight: 1.6, margin: 0 }}>
                   {wishes.map((g) => <li key={g.row}>{name(g.values.name, g.row)} — {g.values.expectations}</li>)}
                 </ul>
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.75rem' }}>
+                  <button style={button} onClick={() => download(`guest-wishes.${locale}.csv`, wishesToCsv(summary, locale), csv)}>{t.downloadWishes}</button>
+                  <button style={button} onClick={() => printPart('wishes')}>{t.printWishes}</button>
+                </div>
               </div>
             )}
 
@@ -137,7 +147,9 @@ export function AnswersPanel({ locale, form }: { locale: Locale; form: GuestForm
               <h3 style={h3}>{t.issues}</h3>
               {summary.issues.length === 0
                 ? <p style={hint}>{t.noIssues}</p>
-                : <ul style={{ paddingLeft: '1.2rem', fontSize: 'var(--text-sm)', lineHeight: 1.6 }}>{summary.issues.map((x, k) => <li key={k}>{summaryIssueText(x, locale)}</li>)}</ul>}
+                : <ul style={{ paddingLeft: '1.2rem', fontSize: 'var(--text-sm)', lineHeight: 1.6 }}>
+                  {summary.issues.map((x, k) => <li key={k}>{summaryIssueText(x, locale)}</li>)}
+                </ul>}
             </div>
           </div>
 
@@ -150,6 +162,13 @@ export function AnswersPanel({ locale, form }: { locale: Locale; form: GuestForm
                   <td key={id}>{id === 'name' ? name(g.values.name, g.row) : answerText(g, id, locale)}</td>
                 ))}</tr>
               ))}</tbody>
+            </table>
+          </div>
+          <div className="gf-print-wishes" aria-hidden="true">
+            <h2 style={{ fontSize: '14pt', fontWeight: 400 }}>{form.passport.title ? `${form.passport.title} · ` : ''}{t.wishes}</h2>
+            <table>
+              <thead><tr><th>{locale === 'ru' ? 'Имя' : 'Name'}</th><th>expectations</th></tr></thead>
+              <tbody>{wishes.map((g) => <tr key={g.row}><td>{name(g.values.name, g.row)}</td><td>{g.values.expectations}</td></tr>)}</tbody>
             </table>
           </div>
         </>

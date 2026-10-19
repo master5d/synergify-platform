@@ -21,6 +21,14 @@ const ANSWERS = toCsv([
   QUESTIONS.map((q) => ({ name: SECRETS[0], phone: SECRETS[1], emergency: SECRETS[2], breathingLimits: SECRETS[3], diet: 'веган' } as Record<string, string>)[q.id] ?? ''),
 ], 'ru')
 
+describe('ссылка анкеты в меню', () => {
+  it('диета «веган без глютена» уходит в меню своим ключом', () => {
+    const text = decoded(menuHashWithDiets(PASSPORT, { 'vegan-gluten-free': 2 }))
+    const raw = (typeof text === 'string' ? JSON.parse(text) : text) as { tool: { diets: Record<string, number> } }
+    expect(raw.tool.diets['vegan-gluten-free']).toBe(2)
+  })
+})
+
 describe('ссылка и черновик анкеты', () => {
   it('круг ссылки: паспорт и набор вопросов', () => {
     const f: GuestFormState = { passport: PASSPORT, on: ['name', 'diet', 'touch'] }

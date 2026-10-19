@@ -93,7 +93,7 @@ export const QUESTIONS: readonly Question[] = [
   },
   {
     id: 'diet', section: 'food', routes: ['chef'], kind: 'choice',
-    choices: ['standard', 'vegetarian', 'vegan', 'gluten-free', 'other'], required: false,
+    choices: ['standard', 'vegetarian', 'vegan', 'gluten-free', 'vegan-gluten-free', 'other'], required: false,
     text: { ru: 'Как вы едите', en: 'How do you eat' },
     short: { ru: 'Питание', en: 'Diet' },
     choiceText: {
@@ -101,6 +101,7 @@ export const QUESTIONS: readonly Question[] = [
       'vegetarian': { ru: 'без мяса и рыбы', en: 'no meat or fish' },
       'vegan': { ru: 'веган', en: 'vegan' },
       'gluten-free': { ru: 'без глютена', en: 'gluten-free' },
+      'vegan-gluten-free': { ru: 'веган без глютена', en: 'vegan, gluten-free' },
       'other': { ru: 'другое', en: 'other' },
     },
   },
@@ -178,8 +179,12 @@ export const SECTION_TITLE: Record<SectionId, Bi> = {
 /** Зачем вопрос и кто увидит ответ — стоит рядом с разделом и в тексте анкеты для гостя. */
 export const SECTION_WHY: Partial<Record<SectionId, Bi>> = {
   health: {
-    ru: 'Ответы видят только ведущий и тот, кто отвечает за безопасность на месте. Они нужны, чтобы подобрать практику под вас. Отвечать можно не на всё. Решение, подходит ли вам практика, остаётся за вами и вашим врачом.',
-    en: 'Only the leader and the person in charge of safety on site see these answers. They help us fit practices to you. You may skip any of them. Whether a practice suits you is up to you and your doctor.',
+    ru: 'Ответы видят только ведущий и тот, кто отвечает за безопасность на месте. '
+      + 'Они нужны, чтобы подобрать практику под вас. Отвечать можно не на всё. '
+      + 'Решение, подходит ли вам практика, остаётся за вами и вашим врачом.',
+    en: 'Only the leader and the person in charge of safety on site see these answers. '
+      + 'They help us fit practices to you. You may skip any of them. '
+      + 'Whether a practice suits you is up to you and your doctor.',
   },
 }
 

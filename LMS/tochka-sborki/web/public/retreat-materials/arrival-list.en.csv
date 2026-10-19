@@ -1,6 +1,6 @@
-﻿Guest,Phone on the way,Arrival flight,Arrival date,Arrival time,Airport,Who meets them,Meeting point,Departure flight,Departure date,Departure time,Return transfer,Note
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-Arrival and departure dates come from one place: the contract header.,,,,,,,,,,,,
-Transfer reserve for someone who mixed up the time:,,,,,,,,,,,,
+﻿Guest,Phone on the way,Arrival flight,Arrival date,Arrival time,Airport,Who meets them,Meeting point,Departure flight,Departure date,Departure time,Return transfer,Booking status,Note
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+Arrival and departure dates come from one place: the contract header.,,,,,,,,,,,,,
+Transfer reserve for someone who mixed up the time:,,,,,,,,,,,,,
