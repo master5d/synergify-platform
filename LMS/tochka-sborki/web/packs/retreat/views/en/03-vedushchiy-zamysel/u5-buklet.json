@@ -5,7 +5,7 @@
   "unit": "u5-buklet",
   "locale": "en",
   "title": "The booklet: it sells and it promises",
-  "sourceHash": "sha256:3bb10044e51365289cb4ae969381b95e18f57322f4b7a896137e16e2a07e6b7c",
+  "sourceHash": "sha256:6214690405a187434a25e2a47884b8dc1d57e0786c91985a0475a14c9b0d59cd",
   "outline": [
     {
       "heading": "One page, two jobs",
@@ -62,6 +62,16 @@
       "points": [
         {
           "text": "No promises of healing or results — as with the practice card.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Questions a guest will not dare to ask",
+      "points": [
+        {
+          "text": "The questions-and-answers section answers fears, not what is already written above.",
           "origin": "extract"
         }
       ],
@@ -130,6 +140,12 @@
       {
         "sourceHash": "sha256:c193491eedeb8527f34dd2b2c1c3f01432d75d2c6dbe51b90db7694bdf8be4b8",
         "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:3678b38e86e1aafca5a7c1e0c1c90c9c196a4a8aab54e43e1aae0306cc18465e",
+        "points": [
+          "The questions and answers section addresses fears instead of repeating what is already written above."
+        ]
       },
       {
         "sourceHash": "sha256:484f086f5fc6de773919b14c7dd94998d48f06dfe59480248b088fe3a31b24f6",
