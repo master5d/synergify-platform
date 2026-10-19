@@ -1,6 +1,9 @@
 // Подписи страницы года площадки (RU — основной, EN — построчное зеркало). Месяцы, типы, модели сделки, сценарии,
 // итоги года и тексты проверок — в lib/retreat-venue/labels.ts: их же берёт CSV.
 
+import type { Locale } from '../../lib/dictionaries'
+import { MONTHS } from '../../lib/retreat-venue/labels'
+
 export const VY_UI = {
   ru: {
     eyebrow: 'инструменты',
@@ -145,3 +148,28 @@ export const VY_UI = {
     openProgram: 'Open the program builder',
   },
 } as const
+
+type UiKey = keyof (typeof VY_UI)['ru']
+const FIELD: Record<string, UiKey> = {
+  units: 'units', groupBeds: 'groupBeds', nightPriceCents: 'nightPrice', rateCents: 'rate', minGuests: 'minGuests',
+  buyoutFeeCents: 'buyoutFee', varPerGuestWeekCents: 'varPerGuestWeek', varPerNightCents: 'varPerNight',
+  fixedOpenMonthCents: 'fixedOpen', fixedClosedMonthCents: 'fixedClosed', insuranceCents: 'insurance',
+  replacementReserveCents: 'reserve', taxPct: 'taxPct', debtServiceCents: 'debt', seasonOpenCents: 'seasonOpen',
+  seasonCloseCents: 'seasonClose', investmentCents: 'investment', borrowedCents: 'borrowed',
+}
+const MONTH_FIELD: Record<string, UiKey> = {
+  retreatWeeks: 'weeks', groupGuests: 'guests', rateCents: 'monthRate', nightlyOccupancyPct: 'occupancy', gapDays: 'gapDays',
+}
+
+/** Ключ поля из проверки движка (`borrowedCents`, `months[1].gapDays`) → подпись страницы («Февраль · Пустых дней на группу»). */
+export function venueFieldName(field: string, locale: Locale): string {
+  const t = VY_UI[locale]
+  const month = /^months\[(\d+)\]\.(\w+)$/.exec(field)
+  if (month) {
+    const key = MONTH_FIELD[month[2]]
+    const name = MONTHS[locale][Number(month[1])]
+    return key && name ? `${name} · ${t[key]}` : field
+  }
+  const key = FIELD[field]
+  return key ? t[key] : field
+}

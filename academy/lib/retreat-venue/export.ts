@@ -1,6 +1,6 @@
 import type { Lang } from '../retreat-calc/engine'
 import { computeYear, type VenueYear } from './engine'
-import { MONTHS, TOTALS, YEAR } from './labels'
+import { MONTHS, paybackText, TOTALS, YEAR } from './labels'
 import { toCsv } from '../retreat-core/csv'
 import { menuMoney } from '../retreat-menu/export'
 
@@ -58,18 +58,18 @@ function yearRow(v: VenueYear, lang: Lang, results: ReturnType<typeof computeYea
   ]
 }
 
-function totalRows(lang: Lang, results: ReturnType<typeof computeYear>): string[][] {
+function totalRows(v: VenueYear, lang: Lang, results: ReturnType<typeof computeYear>): string[][] {
   const t = TOTALS[lang]
   // число без единицы: «лет» уже в подписи строки, и ячейку можно посчитать в таблице
-  const payback = (years: number | null) => years === null ? t.noPayback : decimal(years, lang)
+  const payback = (years: number | null, invested: number) => paybackText(years, invested, lang, (y) => decimal(y, lang))
   return [
     [t.revenue, money(results.revenueCents, lang)],
     [t.noi, money(results.noiCents, lang)],
     [t.tax, money(results.taxCents, lang)],
     [t.ownerCash, money(results.ownerCashCents, lang)],
     [t.yieldPct, results.yieldPct === null ? '' : decimal(results.yieldPct, lang)],
-    [t.payback, payback(results.paybackYears)],
-    [t.ownPayback, payback(results.ownPaybackYears)],
+    [t.payback, payback(results.paybackYears, v.investmentCents)],
+    [t.ownPayback, payback(results.ownPaybackYears, v.investmentCents - v.borrowedCents)],
   ]
 }
 
@@ -80,7 +80,7 @@ export function venueRows(v: VenueYear, lang: Lang): string[][] {
     ...results.months.map((result, i) => monthRow(v, i + 1, lang, result)),
     yearRow(v, lang, results),
     ['', ''],
-    ...totalRows(lang, results),
+    ...totalRows(v, lang, results),
   ]
 }
 

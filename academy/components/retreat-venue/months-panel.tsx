@@ -1,7 +1,7 @@
 import type { Locale } from '../../lib/dictionaries'
 import { MONTHS } from '../../lib/retreat-venue/labels'
 import { calcHrefForMonth, type VenueForm } from '../../lib/retreat-venue/form'
-import { type MonthInput, type MonthResult } from '../../lib/retreat-venue/engine'
+import { DAYS_IN_MONTH, type MonthInput, type MonthResult } from '../../lib/retreat-venue/engine'
 import { MoneyInput } from './money-input'
 import { card, field, h2, label } from './styles'
 import { VY_UI } from './ui'
@@ -92,8 +92,13 @@ export function MonthsPanel({
       </label>
     </>
   )
+  // поля закрытого месяца заперты, пока в них нечего править; гости или неверные дни (например, из ссылки) — открыты,
+  // иначе замечание «месяц закрыт, а в нём стоят гости» не убрать, не открыв месяц
+  const locked = (month: MonthInput, index: number, closed: boolean) =>
+    closed && month.retreatWeeks === 0 && month.nightlyOccupancyPct === 0 && month.gapDays <= DAYS_IN_MONTH[index]
   const row = (month: MonthInput, result: MonthResult, index: number) => {
     const closed = form.venue.type === 'seasonal' && !month.open
+    const off = locked(month, index, closed)
     return (
       <tr className={closed ? 'closed' : undefined} key={index}>
         <th>
@@ -112,11 +117,11 @@ export function MonthsPanel({
             '✓'
           )}
         </td>
-        <td>{integerInput(index, t.weeks, month.retreatWeeks, 'retreatWeeks', closed)}</td>
-        <td>{integerInput(index, t.guests, month.groupGuests, 'groupGuests', closed)}</td>
-        <td>{rateInput(index, month, closed)}</td>
-        <td>{integerInput(index, t.occupancy, month.nightlyOccupancyPct, 'nightlyOccupancyPct', closed)}</td>
-        <td>{integerInput(index, t.gapDays, month.gapDays, 'gapDays', closed)}</td>
+        <td>{integerInput(index, t.weeks, month.retreatWeeks, 'retreatWeeks', off)}</td>
+        <td>{integerInput(index, t.guests, month.groupGuests, 'groupGuests', off)}</td>
+        <td>{rateInput(index, month, off)}</td>
+        <td>{integerInput(index, t.occupancy, month.nightlyOccupancyPct, 'nightlyOccupancyPct', off)}</td>
+        <td>{integerInput(index, t.gapDays, month.gapDays, 'gapDays', off)}</td>
         <td>
           {money(result.resultCents, form.currency, locale)}
           <br />
@@ -172,7 +177,7 @@ export function MonthsPanel({
                   />
                 </label>
               )}
-              <div className="vy-fields">{fields(month, index, closed)}</div>
+              <div className="vy-fields">{fields(month, index, locked(month, index, closed))}</div>
               <p>
                 {t.monthResult}: {money(result.resultCents, form.currency, locale)}
                 <br />

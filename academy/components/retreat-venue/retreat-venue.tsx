@@ -25,7 +25,7 @@ import { PassportBar } from '../retreat-core/passport-bar'
 import { download } from '../retreat-timeline/download'
 import { MonthsPanel } from './months-panel'
 import { ResultsPanel } from './results-panel'
-import { VY_UI } from './ui'
+import { venueFieldName, VY_UI } from './ui'
 import { button, card, field, h2, label } from './styles'
 import { MoneyInput } from './money-input'
 
@@ -85,7 +85,7 @@ export function RetreatVenue({ locale }: { locale: Locale }) {
   }, [form])
   if (!form) return null
   const venue = form.venue
-  const errors = validateVenue(venue, locale)
+  const errors = validateVenue(venue, locale, (field) => venueFieldName(field, locale))
   if (errors.length === 0) lastValid.current = venue
   const counted = lastValid.current
   const year = computeYear(counted)

@@ -68,7 +68,7 @@ export interface YearResult {
 
 export type Scenario = 'as-set' | 'nightly-only' | 'retreats-only'
 export type VenueIssueId = 'weeks-overflow' | 'retreat-in-closed-month' | 'closed-months-free'
-  | 'season-too-short' | 'week-loses-money' | 'no-annual-costs'
+  | 'season-too-short' | 'week-loses-money' | 'no-annual-costs' | 'guests-over-beds'
 export interface VenueIssue { id: VenueIssueId; month?: number }
 
 const MESSAGES = {
@@ -78,7 +78,7 @@ const MESSAGES = {
     pct: (field: string) => `${field}: ожидался процент 0–100`,
     limit: (field: string, max: number) => `${field}: больше допустимого (${max})`,
     months: 'months: ожидалось ровно 12 месяцев',
-    borrowed: 'borrowedCents: не может быть больше investmentCents',
+    borrowed: (borrowed: string, investment: string) => `${borrowed}: не может быть больше, чем «${investment}»`,
     type: 'type: ожидалось all-season или seasonal',
     deal: 'deal: ожидалось full_campus, per_guest или buyout',
   },
@@ -88,7 +88,7 @@ const MESSAGES = {
     pct: (field: string) => `${field}: expected a percentage 0–100`,
     limit: (field: string, max: number) => `${field}: above the allowed maximum (${max})`,
     months: 'months: expected exactly 12 months',
-    borrowed: 'borrowedCents: cannot be greater than investmentCents',
+    borrowed: (borrowed: string, investment: string) => `${borrowed}: cannot be greater than “${investment}”`,
     type: 'type: expected all-season or seasonal',
     deal: 'deal: expected full_campus, per_guest or buyout',
   },
@@ -112,18 +112,19 @@ export function defaultVenue(): VenueYear {
 function nonNegativeInteger(v: number): boolean { return Number.isInteger(v) && v >= 0 }
 function money(v: number): boolean { return nonNegativeInteger(v) && v <= VENUE_LIMITS.moneyCents }
 
-export function validateVenue(v: VenueYear, lang: Lang): string[] {
+/** `name` переводит ключ поля (`borrowedCents`, `months[1].gapDays`) в подпись страницы; без него в тексте — ключ. */
+export function validateVenue(v: VenueYear, lang: Lang, name: (field: string) => string = (field) => field): string[] {
   const t = MESSAGES[lang]
   const errors: string[] = []
   const integer = (field: string, value: number, max?: number) => {
-    if (!nonNegativeInteger(value)) errors.push(t.integer(field))
-    else if (max !== undefined && value > max) errors.push(t.limit(field, max))
+    if (!nonNegativeInteger(value)) errors.push(t.integer(name(field)))
+    else if (max !== undefined && value > max) errors.push(t.limit(name(field), max))
   }
   const amount = (field: string, value: number) => {
-    if (!money(value)) errors.push(t.money(field))
+    if (!money(value)) errors.push(t.money(name(field)))
   }
   const percent = (field: string, value: number) => {
-    if (!Number.isFinite(value) || value < 0 || value > VENUE_LIMITS.pct) errors.push(t.pct(field))
+    if (!Number.isFinite(value) || value < 0 || value > VENUE_LIMITS.pct) errors.push(t.pct(name(field)))
   }
   if (v.type !== 'all-season' && v.type !== 'seasonal') errors.push(t.type)
   if (!['full_campus', 'per_guest', 'buyout'].includes(v.deal)) errors.push(t.deal)
@@ -145,7 +146,7 @@ export function validateVenue(v: VenueYear, lang: Lang): string[] {
   amount('seasonCloseCents', v.seasonCloseCents)
   amount('investmentCents', v.investmentCents)
   amount('borrowedCents', v.borrowedCents)
-  if (v.borrowedCents > v.investmentCents) errors.push(t.borrowed)
+  if (v.borrowedCents > v.investmentCents) errors.push(t.borrowed(name('borrowedCents'), name('investmentCents')))
   if (v.months.length !== 12) errors.push(t.months)
   v.months.forEach((m, i) => {
     integer(`months[${i}].retreatWeeks`, m.retreatWeeks, VENUE_LIMITS.weeks)
@@ -182,7 +183,8 @@ function monthResult(v: VenueYear, source: MonthInput, month: number, scenario: 
   const fixedCents = open ? v.fixedOpenMonthCents : v.fixedClosedMonthCents
   const resultCents = Math.round(retreatRevenueCents + nightlyRevenueCents - variableCents - fixedCents)
   const occupiedNights = open ? retreatNights + nightlyNights : 0
-  const occupancyPct = nights ? Math.round(occupiedNights / nights * 1000) / 10 : 0
+  // недели, что не влезают в месяц, ночей не добавляют: загрузка не выше 100 %, о переполнении говорит проверка
+  const occupancyPct = nights ? Math.min(100, Math.round(occupiedNights / nights * 1000) / 10) : 0
   let weekContributionCents: number | null = null
   if (open && weeks > 0) {
     const weekRevenue = retreatRevenue(v, source.groupGuests, rate)
@@ -224,6 +226,7 @@ export function checkVenue(v: VenueYear): VenueIssue[] {
     if (v.type === 'seasonal' && !m.open && (m.retreatWeeks > 0 || m.nightlyOccupancyPct > 0)) {
       issues.push({ id: 'retreat-in-closed-month', month: i + 1 })
     }
+    if (open && m.retreatWeeks > 0 && m.groupGuests > v.groupBeds) issues.push({ id: 'guests-over-beds', month: i + 1 })
     if (open && m.retreatWeeks > 0) {
       const result = monthResult(v, m, i + 1, 'as-set')
       if (result.weekContributionCents !== null && result.weekContributionCents <= 0) {

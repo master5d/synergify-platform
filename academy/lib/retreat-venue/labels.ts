@@ -27,7 +27,7 @@ export const SCENARIO: Record<Lang, Record<Scenario, string>> = {
 /** Строки итогов года под таблицей месяцев в CSV и на странице. */
 export const TOTALS: Record<Lang, {
   revenue: string; noi: string; tax: string; ownerCash: string; yieldPct: string; payback: string; ownPayback: string
-  noPayback: string; years: (y: string) => string
+  noPayback: string; noInvestment: string; years: (y: string) => string
 }> = {
   ru: {
     revenue: 'Выручка года',
@@ -38,6 +38,7 @@ export const TOTALS: Record<Lang, {
     payback: 'Окупаемость проекта, лет',
     ownPayback: 'Окупаемость своих денег, лет',
     noPayback: 'не окупается',
+    noInvestment: 'нет вложений',
     years: (y) => `${y} лет`,
   },
   en: {
@@ -49,8 +50,15 @@ export const TOTALS: Record<Lang, {
     payback: 'Project payback, years',
     ownPayback: 'Payback of own money, years',
     noPayback: 'does not pay back',
+    noInvestment: 'no investment',
     years: (y) => `${y} years`,
   },
+}
+
+/** Окупаемость словами там, где числа нет: без вложений окупать нечего («0,0 лет» читалось бы как мгновенная). */
+export function paybackText(years: number | null, investedCents: number, lang: Lang, format: (years: number) => string): string {
+  if (investedCents === 0) return TOTALS[lang].noInvestment
+  return years === null ? TOTALS[lang].noPayback : format(years)
 }
 
 export function issueText(i: VenueIssue, lang: Lang): string {
@@ -67,6 +75,8 @@ export function issueText(i: VenueIssue, lang: Lang): string {
       return ru ? 'Открытые месяцы не покрывают расходы закрытых и годовые. Сезон короче, чем нужно.' : 'The open months do not cover the closed months and annual costs. The season is too short.'
     case 'week-loses-money':
       return ru ? `${m}: ретритная неделя даёт меньше, чем посуточная сдача тех же ночей.` : `${m}: a retreat week brings less than renting the same nights by the night.`
+    case 'guests-over-beds':
+      return ru ? `${m}: гостей в группе больше, чем мест для гостей ретрита.` : `${m}: the group has more guests than the venue has retreat beds.`
     case 'no-annual-costs':
       return ru ? 'Нет страховки, резерва на замену и налога. Без них окупаемость выходит слишком быстрой.' : 'No insurance, replacement reserve or tax. Without them payback looks far too quick.'
   }

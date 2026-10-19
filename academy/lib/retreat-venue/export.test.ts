@@ -85,6 +85,20 @@ describe('venue CSV export', () => {
     expect(en.find((row) => row[0] === 'Payback of own money, years')?.[1]).toBe('does not pay back')
   })
 
+  it('says «no investment» instead of 0.0 years when nothing is invested or all of it is borrowed', () => {
+    const v = defaultVenue()
+    v.rateCents = 100_000
+    v.months[0] = { open: true, retreatWeeks: 1, groupGuests: 10, rateCents: null, nightlyOccupancyPct: 0, gapDays: 1 }
+    const ru = venueRows(v, 'ru')
+    expect(ru.find((row) => row[0] === 'Окупаемость проекта, лет')?.[1]).toBe('нет вложений')
+    expect(ru.find((row) => row[0] === 'Окупаемость своих денег, лет')?.[1]).toBe('нет вложений')
+    v.investmentCents = 3_500_000
+    v.borrowedCents = 3_500_000
+    const en = venueRows(v, 'en')
+    expect(en.find((row) => row[0] === 'Project payback, years')?.[1]).toBe('3.5')
+    expect(en.find((row) => row[0] === 'Payback of own money, years')?.[1]).toBe('no investment')
+  })
+
   it('writes a positive payback as a bare number with one decimal', () => {
     const v = defaultVenue()
     v.rateCents = 100_000

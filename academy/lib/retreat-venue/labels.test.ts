@@ -2,7 +2,10 @@ import { describe, expect, it } from 'vitest'
 import type { VenueIssueId } from './engine'
 import { issueText } from './labels'
 
-const IDS: VenueIssueId[] = ['weeks-overflow', 'retreat-in-closed-month', 'closed-months-free', 'season-too-short', 'week-loses-money', 'no-annual-costs']
+const IDS: VenueIssueId[] = [
+  'weeks-overflow', 'retreat-in-closed-month', 'closed-months-free', 'season-too-short', 'week-loses-money', 'no-annual-costs',
+  'guests-over-beds',
+]
 
 describe('тексты проверок года площадки', () => {
   it('у каждой проверки есть текст RU и EN, фразы короче 25 слов', () => {

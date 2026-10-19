@@ -1,5 +1,5 @@
 import type { Locale } from '../../lib/dictionaries'
-import { SCENARIO, TOTALS } from '../../lib/retreat-venue/labels'
+import { paybackText, SCENARIO, TOTALS } from '../../lib/retreat-venue/labels'
 import { computeYear, type VenueYear } from '../../lib/retreat-venue/engine'
 import { card, h2 } from './styles'
 import { VY_UI } from './ui'
@@ -11,8 +11,8 @@ const money = (value: number, currency: string, locale: Locale) => {
     return `${(value / 100).toFixed(2)} ${currency}`
   }
 }
-const years = (value: number | null, locale: Locale, noPayback: string) =>
-  value === null ? noPayback : TOTALS[locale].years(value.toFixed(1).replace('.', locale === 'ru' ? ',' : '.'))
+const years = (value: number | null, invested: number, locale: Locale) =>
+  paybackText(value, invested, locale, (y) => TOTALS[locale].years(y.toFixed(1).replace('.', locale === 'ru' ? ',' : '.')))
 const percent = (value: number | null, locale: Locale) =>
   value === null ? '—' : locale === 'ru' ? `${value.toFixed(1).replace('.', ',')} %` : `${value.toFixed(1)}%`
 
@@ -26,8 +26,8 @@ export function ResultsPanel({ locale, venue, currency }: { locale: Locale; venu
     [totals.tax, money(result.taxCents, currency, locale)],
     [totals.ownerCash, money(result.ownerCashCents, currency, locale)],
     [totals.yieldPct, percent(result.yieldPct, locale)],
-    [totals.payback, years(result.paybackYears, locale, totals.noPayback)],
-    [totals.ownPayback, years(result.ownPaybackYears, locale, totals.noPayback)],
+    [totals.payback, years(result.paybackYears, venue.investmentCents, locale)],
+    [totals.ownPayback, years(result.ownPaybackYears, venue.investmentCents - venue.borrowedCents, locale)],
   ]
   return (
     <section className="vy-print-results">
@@ -55,7 +55,7 @@ export function ResultsPanel({ locale, venue, currency }: { locale: Locale; venu
                 {t.scenarioNoi}: {money(item.noiCents, currency, locale)}
               </span>
               <span>
-                {t.scenarioPayback}: {years(item.paybackYears, locale, totals.noPayback)}
+                {t.scenarioPayback}: {years(item.paybackYears, venue.investmentCents, locale)}
               </span>
             </article>
           )

@@ -77,7 +77,7 @@ describe('годовая модель площадки', () => {
   })
 
   it('проверяет заёмные деньги и ровно двенадцать месяцев', () => {
-    expect(validateVenue(venue({ investmentCents: 10, borrowedCents: 11 }), 'ru')).toContain('borrowedCents: не может быть больше investmentCents')
+    expect(validateVenue(venue({ investmentCents: 10, borrowedCents: 11 }), 'ru')).toContain('borrowedCents: не может быть больше, чем «investmentCents»')
     expect(validateVenue({ ...venue(), months: [] }, 'ru')).toContain('months: ожидалось ровно 12 месяцев')
   })
 
@@ -123,6 +123,31 @@ describe('годовая модель площадки', () => {
   it('сценарий retreats-only убирает посуточную выручку', () => {
     const v = venue({ months: [month({ retreatWeeks: 1, groupGuests: 12, nightlyOccupancyPct: 100 }), ...venue().months.slice(1)] })
     expect(computeYear(v, 'retreats-only').months.every((m) => m.nightlyRevenueCents === 0)).toBe(true)
+  })
+
+  it('загрузка переполненного месяца не выше 100 %, о переполнении говорит проверка', () => {
+    const v = venue({ months: [month(), month({ retreatWeeks: 5, groupGuests: 12 }), ...venue().months.slice(2)] })
+    expect(computeYear(v).months[1].occupancyPct).toBe(100)
+    expect(checkVenue(v)).toContainEqual({ id: 'weeks-overflow', month: 2 })
+  })
+
+  it('помечает месяц, где гостей в группе больше мест, только если в нём есть ретритные недели', () => {
+    const over = venue({ months: [month({ retreatWeeks: 1, groupGuests: 13 }), month({ retreatWeeks: 0, groupGuests: 13 }), ...venue().months.slice(2)] })
+    expect(checkVenue(over)).toContainEqual({ id: 'guests-over-beds', month: 1 })
+    expect(checkVenue(over)).not.toContainEqual({ id: 'guests-over-beds', month: 2 })
+    const exact = venue({ months: [month({ retreatWeeks: 1, groupGuests: 12 }), ...venue().months.slice(1)] })
+    expect(checkVenue(exact).some((i) => i.id === 'guests-over-beds')).toBe(false)
+  })
+
+  it('пишет в ошибке подпись поля, когда страница её передала', () => {
+    const names: Record<string, string> = { borrowedCents: 'Из них заёмные', investmentCents: 'Вложения всего', 'months[1].gapDays': 'Февраль · дни' }
+    const name = (field: string) => names[field] ?? field
+    const v = venue({ investmentCents: 10, borrowedCents: 11 })
+    v.months[1] = month({ gapDays: 29 })
+    const errors = validateVenue(v, 'ru', name)
+    expect(errors).toContain('Из них заёмные: не может быть больше, чем «Вложения всего»')
+    expect(errors).toContain('Февраль · дни: больше допустимого (28)')
+    expect(errors.join(' ')).not.toMatch(/Cents|months\[/)
   })
 
   it('показывает no-annual-costs только при нулевых страховании резерве и налоге', () => {
