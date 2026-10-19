@@ -8,6 +8,7 @@ import type { BookletContent } from '../../lib/retreat-booklet/form'
 import {
   checkPhotoFile, memoryPhotoStore, openPhotoStore, photoRightsMap, preparePhoto, type PhotoMeta, type PhotoStore,
 } from '../../lib/retreat-booklet/photos'
+import { blobToDataUri } from '../../lib/retreat-booklet/landing-media'
 import { bk } from './ui'
 import { button, h2, smallButton } from './styles'
 
@@ -19,6 +20,15 @@ export interface PhotosState {
   add: (files: FileList | null) => Promise<void>
   remove: (id: string) => Promise<void>
   setRights: (id: string, value: boolean) => Promise<void>
+  dataUri: (id: string) => Promise<string | null>
+}
+
+export async function photoDataUris(store: PhotoStore, ids: string[], rights: Record<string, boolean>): Promise<Record<string, string>> {
+  const entries = await Promise.all(ids.filter((id) => rights[id] === true).map(async (id) => {
+    const record = await store.get(id)
+    return record ? [id, await blobToDataUri(record.blob)] as const : null
+  }))
+  return Object.fromEntries(entries.filter((entry): entry is readonly [string, string] => entry !== null))
 }
 
 export function usePhotos(locale: Locale): PhotosState {
@@ -70,7 +80,12 @@ export function usePhotos(locale: Locale): PhotosState {
     setPhotos((list) => list.map((p) => (p.id === id ? { ...p, rights: value } : p)))
     try { await store.setRights(id, value) } catch { setNotice(t.photoSaveFailed); setPhotos(await store.list()) }
   }, [store, t.photoSaveFailed])
-  return { photos, urls, rights: photoRightsMap(photos), notice, add, remove, setRights }
+  const dataUri = useCallback(async (id: string) => {
+    if (!store || !photoRightsMap(photos)[id]) return null
+    const result = await photoDataUris(store, [id], photoRightsMap(photos))
+    return result[id] ?? null
+  }, [photos, store])
+  return { photos, urls, rights: photoRightsMap(photos), notice, add, remove, setRights, dataUri }
 }
 
 /** Убирает id фото из всех полей буклета: обложка, место, люди. */

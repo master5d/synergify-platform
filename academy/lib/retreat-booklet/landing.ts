@@ -11,6 +11,8 @@ import { ctaUrlOk, LANDING_LIMITS, videoEmbedUrl } from './landing-media'
 import type { BookletForm } from './form'
 import type { SectionId } from './sections'
 
+export const LANDING_PATH = '/instrumenty/lending/'
+
 export { ctaUrlOk, LANDING_LIMITS, videoEmbedUrl }
 
 export interface LandingMedia { photoUris: Record<string, string>; rights: Record<string, boolean> }
@@ -77,21 +79,28 @@ export function renderLandingHtml(form: BookletForm, lang: Lang, today: IsoDate,
   const coverUri = photoUri(c.coverPhotoId)
   const pricing = block('pricing')
   const payments = block('payments')
+  // без фото карточка занимает всю ширину, а не держит пустую колонку под снимок
+  const person = (p: BookletForm['content']['leaders'][number]) => `<article class="person${photoUri(p.photoId) ? '' : ' solo'}">${img(p.photoId, p.name)}`
+    + `<div><h3>${esc(p.name)}</h3>${p.role ? `<p class="role">${esc(p.role)}</p>` : ''}${para(p.bio)}</div></article>`
+  // половина пары с пустым списком не печатается: заголовок без пунктов читается как ошибка вёрстки
+  const half = (title: string, items: string[]) => (items.some((x) => x.trim()) ? `<div><h3>${esc(title)}</h3>${list(items)}</div>` : '')
   const scheduleRows = (block('schedule')?.data.gridRows ?? []) as string[][]
   const days = blocks.filter((b): b is Extract<BookletBlock, { id: 'days' }> => b.id === 'days' && b.data.text.trim() !== '')
   const video = videoEmbedUrl(l.videoUrl)
 
   const body: Partial<Record<SectionId, string>> = {
-    fit: `<div class="two"><div><h3>${esc(t.fitFor)}</h3>${list(c.fitFor)}</div><div><h3>${esc(t.notFor)}</h3>${list(c.notFor)}</div></div>`,
+    fit: `<div class="two">${half(t.fitFor, c.fitFor)}${half(t.notFor, c.notFor)}</div>`,
     experiences: `<ul>${c.experiences.filter((x) => x.text.trim()).map((x) => `<li><strong>${esc(x.text)}</strong>${x.serves ? ` — ${esc(x.serves)}` : ''}</li>`).join('')}</ul>`,
     days: days.map((d) => `<h3>${esc(t.day)} ${d.data.day}</h3>${para(d.data.text)}`).join(''),
     schedule: scheduleRows.length > 1
       ? `<div class="scroll"><table><thead><tr>${scheduleRows[0].map((h) => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${
-        scheduleRows.slice(1).filter((r) => r.slice(1).some((cell) => cell && cell !== '↓'))
+        scheduleRows.slice(1)
+          // строки нагрузки и свободного времени — служебные для ведущего, гостю не нужны (как в буклете)
+          .filter((r) => !/нагрузка|load|свободное время|free time/i.test(r[0] ?? '') && r.slice(1).some((cell) => cell && cell !== '↓'))
           .map((r) => `<tr>${r.map((cell) => `<td>${esc(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`
       : '',
-    leaders: c.leaders.map((p) => `<article class="person">${img(p.photoId, p.name)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p class="role">${esc(p.role)}</p>` : ''}${para(p.bio)}</div></article>`).join(''),
-    team: c.team.map((p) => `<article class="person">${img(p.photoId, p.name)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p class="role">${esc(p.role)}</p>` : ''}${para(p.bio)}</div></article>`).join(''),
+    leaders: c.leaders.map(person).join(''),
+    team: c.team.map(person).join(''),
     place: `${para(c.placeText)}<div class="photos">${c.placePhotoIds.map((id) => img(id)).join('')}</div>`,
     food: para(c.foodText),
     pricing: (() => {
@@ -102,7 +111,7 @@ export function renderLandingHtml(form: BookletForm, lang: Lang, today: IsoDate,
           esc(money(o.surcharge, cur, lang))}</p>${button()}</article>`)]
       return `<div class="cards">${cards.join('')}</div>${para(l.priceNote)}`
     })(),
-    inclusions: `<div class="two"><div><h3>${esc(t.included)}</h3>${list(c.included)}</div><div><h3>${esc(t.notIncluded)}</h3>${list(c.notIncluded)}</div></div>`,
+    inclusions: `<div class="two">${half(t.included, c.included)}${half(t.notIncluded, c.notIncluded)}</div>`,
     booking: `<ol>${c.bookingSteps.filter((x) => x.trim()).map((x) => `<li>${esc(x)}</li>`).join('')}</ol>${button()}`,
     payments: `${(payments?.data.milestones ?? []).map((m) => `<p><strong>${esc(dateText(m.date, lang))}</strong> — ${esc(milestoneLabel(m, lang))}</p>`).join('')}${para(c.paymentsText)}`,
     preparation: para(c.preparation),
@@ -141,7 +150,8 @@ export function renderLandingHtml(form: BookletForm, lang: Lang, today: IsoDate,
     + '.button{display:inline-block;background:var(--accent);color:#fff;padding:.7rem 1.2rem;border-radius:.4rem;text-decoration:none;font-weight:600;margin:.6rem 0}'
     + 'header .button{margin:0;padding:.45rem .9rem}.numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));gap:1rem}'
     + '.numbers strong{display:block;font-size:2rem;color:var(--accent)}.two{display:grid;gap:1rem}.cards{display:grid;gap:1rem}.card{background:#f5efe4;border-radius:.5rem;padding:1rem}'
-    + '.price{font-size:1.3rem;font-weight:600}.person{display:grid;grid-template-columns:96px 1fr;gap:1rem;margin-bottom:1.2rem}.person img{width:96px;height:96px;border-radius:50%;object-fit:cover}'
+    + '.price{font-size:1.3rem;font-weight:600}.person{display:grid;grid-template-columns:96px 1fr;gap:1rem;margin-bottom:1.2rem}'
+    + '.person.solo{grid-template-columns:1fr}.person img{width:96px;height:96px;border-radius:50%;object-fit:cover}'
     + '.role{color:var(--accent);margin:0}.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.5rem}.photos img{width:100%;height:120px;object-fit:cover;border-radius:.3rem}'
     + '.scroll{overflow-x:auto}table{border-collapse:collapse;font-size:.8rem;min-width:36rem}th,td{border:1px solid #e0d8c8;padding:.3rem .4rem;text-align:left;vertical-align:top}th{background:#f3eee4}'
     + '.video iframe{width:100%;aspect-ratio:16/9;border:0}blockquote{border-left:3px solid var(--accent);margin:0 0 1rem;padding:.2rem 0 .2rem 1rem}cite{display:block;font-size:.9rem}'

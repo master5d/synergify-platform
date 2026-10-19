@@ -183,4 +183,26 @@ describe('landing', () => {
     const f = filled(); f.landing.footer = false
     expect(render(f)).not.toContain('<footer>')
   })
+  it('L23 в расписании нет служебных строк нагрузки и свободного времени', () => {
+    const f = filled()
+    f.imports.program = { at: today, retreat: f.passport, cards: [],
+      blocks: [{ day: 1, start: '09:00', minutes: 60, kind: 'other', title: 'Утренний круг' }] }
+    const table = render(f).split('<section id="schedule">')[1].split('</section>')[0]
+    expect(table).toContain('<td>09:00</td><td>Утренний круг</td>')
+    expect(table).not.toMatch(/Нагрузка|Свободное время/)
+  })
+  it('L24 карточка без фото не держит колонку под фото', () => {
+    const f = filled(); f.content.leaders[0].photoId = PH
+    const html = render(f)
+    expect(html).toContain('<article class="person"><img')
+    expect(html).toContain('<article class="person solo">')
+    expect(html).toContain('.person.solo{grid-template-columns:1fr}')
+  })
+  it('L25 пустой список «не включено» не оставляет голый заголовок', () => {
+    const f = filled(); f.content.notIncluded = []
+    const html = render(f)
+    expect(html).toContain('<h3>Включено</h3>')
+    expect(html).not.toContain('<h3>Не включено</h3>')
+    expect(render()).toContain('<h3>Не включено</h3>')
+  })
 })

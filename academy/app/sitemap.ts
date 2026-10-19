@@ -22,6 +22,7 @@ const PATHS: string[] = [
   'instrumenty/konstruktor-programmy',
   'instrumenty/god-ploshchadki',
   'instrumenty/buklet',
+  'instrumenty/lending',
   ...writtenSpeedreadingSlugs().map((slug) => `trenazhery/${slug}`),
   // «Эйдетика» — только после вычитки владельцем (status 'live'); до того страницы noindex.
   ...(isEideticsLive() ? ['trenazhery/eidetika', 'trenazhery/eidetika/ryad', 'trenazhery/eidetika/dvorec'] : []),
