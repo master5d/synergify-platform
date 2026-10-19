@@ -36,7 +36,8 @@ export function usePhotos(locale: Locale): PhotosState {
     return () => { alive = false }
   }, [t.photoStoreFailed])
 
-  // адреса превью: создаются под текущий список и освобождаются при его смене и при уходе со страницы
+  const ids = photos.map((p) => p.id).join(',')
+  // адреса превью: создаются под текущий набор фото и освобождаются при его смене и при уходе со страницы
   useEffect(() => {
     if (!store) return
     let alive = true
@@ -48,7 +49,9 @@ export function usePhotos(locale: Locale): PhotosState {
       return [p.id, url] as const
     })).then((pairs) => { if (alive) setUrls(Object.fromEntries(pairs.filter((x): x is readonly [string, string] => x !== null))) })
     return () => { alive = false; made.forEach((u) => URL.revokeObjectURL(u)) }
-  }, [photos, store])
+    // превью зависят только от набора фото: смена отметки права их не пересоздаёт
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ids, store])
 
   const add = useCallback(async (files: FileList | null) => {
     if (!store || !files) return
@@ -61,9 +64,12 @@ export function usePhotos(locale: Locale): PhotosState {
     setPhotos(await store.list())
   }, [store, photos.length, locale, t.photoSaveFailed])
   const remove = useCallback(async (id: string) => { if (!store) return; await store.remove(id); setPhotos(await store.list()) }, [store])
+  // флажок права меняется сразу; запись в хранилище идёт следом, при сбое — откат к тому, что в хранилище
   const setRights = useCallback(async (id: string, value: boolean) => {
-    if (!store) return; await store.setRights(id, value); setPhotos(await store.list())
-  }, [store])
+    if (!store) return
+    setPhotos((list) => list.map((p) => (p.id === id ? { ...p, rights: value } : p)))
+    try { await store.setRights(id, value) } catch { setNotice(t.photoSaveFailed); setPhotos(await store.list()) }
+  }, [store, t.photoSaveFailed])
   return { photos, urls, rights: photoRightsMap(photos), notice, add, remove, setRights }
 }
 
