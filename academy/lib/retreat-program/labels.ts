@@ -57,6 +57,8 @@ export function gridIssueText(i: GridIssue, name: string, lang: Lang): string {
       return ru ? `${at}: две практики с высокой нагрузкой подряд. Поставьте между ними отдых или еду.` : `${at}: two high-load practices in a row. Put rest or a meal between them.`
     case 'no-free-time':
       return ru ? `${at}: нет свободного времени.` : `${at}: no free time.`
+    case 'no-buffer':
+      return ru ? `${at}: занятие начинается сразу после предыдущего. Оставьте 15–30 минут на переход и сборы.` : `${at}: a session starts right after the previous one. Leave 15–30 minutes to move and get ready.`
     case 'pair-duration':
       return ru ? `«${name}»: длительность на пару, а в сетке нужна на группу.` : `“${name}”: the duration is per pair; the grid needs it per group.`
     case 'high-load-without-contraindications':

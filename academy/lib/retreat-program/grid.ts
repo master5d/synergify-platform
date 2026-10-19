@@ -18,7 +18,7 @@ export const fromMinutes = (m: number): string => `${String(Math.floor(m / 60)).
 export function defaultBlocks(p: RetreatPassport): Block[] { return menuSlots(p).map((slot: Slot) => ({ day: slot.day, start: MEAL_TIMES[slot.meal], minutes: MEAL_MINUTES, kind: 'meal', title: '' })) }
 export function blockMinutes(b: Block, card?: PracticeCard): number { return b.minutes > 0 ? b.minutes : card?.groupMinutes ?? card?.pairMinutes ?? 30 }
 
-export type GridIssueId = 'overlap' | 'outside-day' | 'block-outside-retreat' | 'two-high-in-a-row' | 'no-free-time' | 'pair-duration' | 'touch-check-form' | 'high-load-without-contraindications' | 'practice-missing' | 'off-step'
+export type GridIssueId = 'overlap' | 'outside-day' | 'block-outside-retreat' | 'two-high-in-a-row' | 'no-free-time' | 'no-buffer' | 'pair-duration' | 'touch-check-form' | 'high-load-without-contraindications' | 'practice-missing' | 'off-step'
 export interface GridIssue { id: GridIssueId; day?: number; start?: string; card?: string }
 const ordered = (blocks: Block[]) => [...blocks].sort((a, b) => a.day - b.day || toMinutes(a.start) - toMinutes(b.start))
 
@@ -45,6 +45,13 @@ export function checkGrid(p: RetreatPassport, blocks: Block[], cards: PracticeCa
     for (const b of dayBlocks) {
       if (b.kind === 'free' || b.kind === 'meal' || (b.kind === 'practice' && byId.get(b.practiceId ?? '')?.load !== 'high')) high = false
       else if (b.kind === 'practice' && b.practiceId && byId.get(b.practiceId)?.load === 'high') { if (high) dayIssues.push({ id: 'two-high-in-a-row', day, start: b.start }); high = true }
+    }
+    for (let i = 1; i < dayBlocks.length; i++) {
+      const a = dayBlocks[i - 1]; const b = dayBlocks[i]
+      const endA = toMinutes(a.start) + blockMinutes(a, a.practiceId ? byId.get(a.practiceId) : undefined)
+      if (toMinutes(b.start) === endA && (a.kind === 'practice' || b.kind === 'practice') && a.kind !== 'free' && a.kind !== 'transfer' && b.kind !== 'free' && b.kind !== 'transfer') {
+        dayIssues.push({ id: 'no-buffer', day, start: b.start }); break
+      }
     }
   }
   for (let day = 2; day <= (p.nights ?? 0); day++) if (!days.get(day)?.some((b) => b.kind === 'free')) dayIssues.push({ id: 'no-free-time', day })
