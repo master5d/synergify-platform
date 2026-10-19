@@ -154,7 +154,7 @@ export function renderLandingHtml(form: BookletForm, lang: Lang, today: IsoDate,
     + '.person.solo{grid-template-columns:1fr}.person img{width:96px;height:96px;border-radius:50%;object-fit:cover}'
     + '.role{color:var(--accent);margin:0}.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.5rem}.photos img{width:100%;height:120px;object-fit:cover;border-radius:.3rem}'
     + '.scroll{overflow-x:auto}table{border-collapse:collapse;font-size:.8rem;min-width:36rem}th,td{border:1px solid #e0d8c8;padding:.3rem .4rem;text-align:left;vertical-align:top}th{background:#f3eee4}'
-    + '.video iframe{width:100%;aspect-ratio:16/9;border:0}blockquote{border-left:3px solid var(--accent);margin:0 0 1rem;padding:.2rem 0 .2rem 1rem}cite{display:block;font-size:.9rem}'
+    + '.video iframe{width:100%;aspect-ratio:16/9;border:0}blockquote{margin:0 0 1.2rem;padding:.8rem 0 0;border-top:1px solid #eee6d8;font-style:italic}cite{display:block;font-size:.9rem}'
     + 'details{border-bottom:1px solid #eee6d8;padding:.5rem 0}summary{cursor:pointer;font-weight:600}footer{text-align:center;font-size:.8rem;color:#7a7266;padding:2rem 1rem}'
     + '@media (min-width:900px){nav{display:flex}.two{grid-template-columns:1fr 1fr}.cards{grid-template-columns:repeat(auto-fit,minmax(12rem,1fr))}.hero{margin:0}}</style>'
   const footer = l.footer ? `<footer>${esc(t.footer)}</footer>` : ''
