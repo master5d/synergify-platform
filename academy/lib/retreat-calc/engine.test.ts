@@ -220,4 +220,25 @@ describe('venuePayments — график площадки для таймлай�
     const r = compute(inputs({ venue, guests: 20, monthsToStart: 6, salesCurve: [4, 4, 4, 4, 4] }))
     expect(r.venueView.schedule).toEqual(venuePayments(venue, 20, 6).schedule)
   })
+  it('поздний договор после финального срока оставляет депозит и остаток двумя платежами месяца 0', () => {
+    expect(venuePayments({ ...venue, installments: false, finalDueDays: 60 }, 20, 1, 61).schedule)
+      .toEqual([{ month: 0, amount: 900000 }, { month: 0, amount: 2700000 }])
+  })
+  it('если до старта меньше финального срока, остаток объединяется с депозитом', () => {
+    expect(venuePayments({ ...venue, installments: false, finalDueDays: 60 }, 20, 1, 59).schedule)
+      .toEqual([{ month: 0, amount: 3600000 }])
+  })
+  it('без точного числа дней сохраняется прежний месячный результат', () => {
+    expect(venuePayments(venue, 20, 6).schedule).toEqual([
+      { month: 0, amount: 900000 }, { month: 1, amount: 675000 }, { month: 2, amount: 675000 },
+      { month: 3, amount: 675000 }, { month: 4, amount: 675000 },
+    ])
+  })
+})
+
+describe('поздний договор без срока в днях', () => {
+  it('без daysToStart остаток в месяце подписания сливается с задатком в один платёж, как до правки', () => {
+    const r = venuePayments(VENUE, 18, 1)
+    expect(r.schedule).toEqual([{ month: 0, amount: usd(36000) }])
+  })
 })

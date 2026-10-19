@@ -19,11 +19,13 @@ export interface LinkVenue {
   finalDueDays?: number
   payInFullDiscountPct?: number
   installments?: boolean
+  payInFull?: boolean
 }
 
 /** Всё, кроме `v`, необязательно: чего нет в каноне, человек вводит на странице. */
 export interface LinkData {
   v: number
+  id?: string
   title?: string
   currency?: string
   price?: number
@@ -33,6 +35,7 @@ export interface LinkData {
   guestDepositPct?: number
   guestDeposit?: number
   guestBalanceDueDays?: number
+  daysToStart?: number
   venue?: LinkVenue
 }
 
@@ -42,7 +45,7 @@ const MONEY_MAX = LIMITS.moneyCents / 100
 // потолок каждого числа: ссылка не должна ронять или вешать страницу (1e10 месяцев, миллиард гостей)
 const NUMBER_FIELDS = {
   price: MONEY_MAX, guests: LIMITS.guests, nights: LIMITS.nights, monthsToStart: LIMITS.months,
-  guestDepositPct: 100, guestDeposit: MONEY_MAX, guestBalanceDueDays: LIMITS.days,
+  guestDepositPct: 100, guestDeposit: MONEY_MAX, guestBalanceDueDays: LIMITS.days, daysToStart: LIMITS.days,
 } as const
 const VENUE_NUMBERS = {
   ratePerGuest: MONEY_MAX, capacity: LIMITS.guests, minGuests: LIMITS.guests, buyoutFee: MONEY_MAX,
@@ -61,6 +64,7 @@ const MESSAGES = {
     venue: 'venue: ожидался объект',
     model: (m: string) => `venue.model: «${m}» не из ${MODELS.join(', ')}`,
     installments: 'venue.installments: ожидалось true/false',
+    payInFull: 'venue.payInFull: ожидалось true/false',
   },
   en: {
     none: 'the link carries no calculator data',
@@ -73,6 +77,7 @@ const MESSAGES = {
     venue: 'venue: expected an object',
     model: (m: string) => `venue.model: “${m}” is not one of ${MODELS.join(', ')}`,
     installments: 'venue.installments: expected true/false',
+    payInFull: 'venue.payInFull: expected true/false',
   },
 }
 
@@ -117,6 +122,8 @@ export function decodeLink(hash: string, lang: Lang = 'ru'): Decoded {
     if (typeof o.title !== 'string') return { ok: false, error: t.title }
     data.title = o.title.slice(0, 200)
   }
+  // id ретрита — служебный (стабильный UID в календаре): неверный отбрасывается, ссылка остаётся рабочей
+  if (typeof o.id === 'string' && /^[a-z0-9-]{8,40}$/.test(o.id)) data.id = o.id
   if (o.currency !== undefined) {
     if (typeof o.currency !== 'string' || !/^[A-Z]{3}$/.test(o.currency)) return { ok: false, error: t.currency }
     data.currency = o.currency
@@ -142,6 +149,10 @@ export function decodeLink(hash: string, lang: Lang = 'ru'): Decoded {
     if (v.installments !== undefined && v.installments !== null) {
       if (typeof v.installments !== 'boolean') return { ok: false, error: t.installments }
       venue.installments = v.installments
+    }
+    if (v.payInFull !== undefined && v.payInFull !== null) {
+      if (typeof v.payInFull !== 'boolean') return { ok: false, error: t.payInFull }
+      venue.payInFull = v.payInFull
     }
     data.venue = venue
   }

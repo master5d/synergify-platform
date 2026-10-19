@@ -10,13 +10,14 @@ import { buildTimeline, validateTimeline, type TimelineTerms } from '../../lib/r
 import { milestonesToCsv, milestonesToIcs } from '../../lib/retreat-timeline/export'
 import {
   CALC_PATH, calcHashFromTimeline, defaultForm, draftOf, formFromDecoded, formFromDraft, localePath,
-  pickTimelineTool, TIMELINE_DRAFT_KEY, TIMELINE_PATH, timelineHash, type TimelineForm,
+  pickTimelineTool, TIMELINE_DRAFT_KEY, TIMELINE_PATH, timelineHash, type TimelineForm, withPassportId,
 } from '../../lib/retreat-timeline/form'
-import { milestoneLabel, warningText, WHO_LABELS } from '../../lib/retreat-timeline/labels'
+import { milestoneLabel, warningText, SOURCE_LABELS, STATUS_LABELS, WHO_LABELS } from '../../lib/retreat-timeline/labels'
 import { MENU_PATH, menuHashFromPassport } from '../../lib/retreat-menu/form'
 import { FORM_PATH, formHashFromPassport } from '../../lib/retreat-guest-form/form'
 import { PROGRAM_PATH, programHashFromPassport } from '../../lib/retreat-program/form'
 import { PassportBar } from '../retreat-core/passport-bar'
+import { MoneyInput } from '../retreat-core/money-input'
 import { ArrivalsPanel } from './arrivals-panel'
 import { download } from './download'
 import { TL_UI } from './ui'
@@ -51,7 +52,7 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
       const d = decodeToolLink(hash, pickTimelineTool, locale)
       const fromLink = formFromDecoded(d, now)
       if (fromLink) {
-        setF(fromLink)
+        setF(withPassportId(fromLink))
         setNotice(d.ok && d.kind === 'calc' ? t.loadedCalc : t.loaded)
         return
       }
@@ -61,7 +62,7 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
     try { draft = localStorage.getItem(TIMELINE_DRAFT_KEY) } catch { /* хранилище недоступно — начинаем с чистой формы */ }
     const fromDraft = formFromDraft(draft, now)
     if (fromDraft && !hash) setNotice(t.draftRestored)
-    setF(fromDraft ?? defaultForm(now))
+    setF(withPassportId(fromDraft ?? defaultForm(now)))
   }, [locale, t.loaded, t.loadedCalc, t.draftRestored])
 
   useEffect(() => {
@@ -97,9 +98,7 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
     </label>
   )
   const moneyInput = (text: string, cents: number, onChange: (c: number) => void) => (
-    <label style={label}>{text}
-      <input style={field} inputMode="decimal" value={shown(cents / 100)} onChange={(e) => onChange(Math.round(parsed(e.target.value) * 100))} />
-    </label>
+    <label style={label}>{text}<MoneyInput locale={locale} value={cents} onChange={(value) => onChange(value ?? 0)} /></label>
   )
 
   const calcHref = localePath(CALC_PATH, locale) + calcHashFromTimeline(f)
@@ -118,24 +117,25 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
         .tl-past { color: var(--text-secondary); }
       `}</style>
 
-      <PassportBar locale={locale} passport={f.passport} links={[
+      <div className="tl-noprint"><PassportBar locale={locale} passport={f.passport} links={[
         { href: calcHref, label: t.openCalc },
         { href: localePath(MENU_PATH, locale) + menuHashFromPassport(f.passport), label: t.openMenu },
         { href: localePath(FORM_PATH, locale) + formHashFromPassport(f.passport), label: t.openForm },
         { href: localePath(PROGRAM_PATH, locale) + programHashFromPassport(f.passport), label: t.openProgram },
-      ]} />
-      {notice && <p role="status" style={{ ...card, color: GOLD, margin: '0 0 1.25rem' }}>{notice}</p>}
+      ]} /></div>
+      {notice && <p className="tl-noprint" role="status" style={{ ...card, color: GOLD, margin: '0 0 1.25rem' }}>{notice}</p>}
 
-      <h2 style={h2}>{t.retreat}</h2>
+      <div className="tl-noprint"><h2 style={h2}>{t.retreat}</h2>
       <div className="tl-grid">
         <label style={label}>{t.titleLabel}<input style={field} value={f.passport.title ?? ''} onChange={(e) => setP('title', e.target.value || undefined)} /></label>
-        <label style={label}>{t.currency}<input style={field} value={f.passport.currency ?? ''} maxLength={3} onChange={(e) => setP('currency', e.target.value.toUpperCase() || undefined)} /></label>
+        <label style={label}>{t.currency}<input style={field} value={f.passport.currency ?? ''} maxLength={3}
+          onChange={(e) => setP('currency', e.target.value.toUpperCase() || undefined)} /></label>
         <label style={label}>{t.start}<input type="date" style={field} value={f.passport.start ?? ''} onChange={(e) => setP('start', e.target.value || undefined)} /></label>
         {numberInput(t.nights, f.passport.nights, (n) => setP('nights', n))}
         {numberInput(t.guests, f.passport.guests, (n) => setP('guests', n))}
-      </div>
+      </div></div>
 
-      <h2 style={h2}>{t.contract}</h2>
+      <div className="tl-noprint"><h2 style={h2}>{t.contract}</h2>
       <div className="tl-grid">
         <label style={label}>{t.signDate}<input type="date" style={field} value={f.terms.signDate} onChange={(e) => setT('signDate', e.target.value)} /></label>
         <label style={label}>{t.model}
@@ -158,22 +158,22 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
         <label style={{ ...label, flexDirection: 'row', alignItems: 'center' }}>
           <input type="checkbox" checked={v.payInFull} onChange={(e) => setV('payInFull', e.target.checked)} /> {t.payInFull}
         </label>
-      </div>
+      </div></div>
 
-      <h2 style={h2}>{t.guestTerms}</h2>
+      <div className="tl-noprint"><h2 style={h2}>{t.guestTerms}</h2>
       <div className="tl-grid">
         {numberInput(t.guestBalanceDueDays, f.terms.guestBalanceDueDays, (n) => setT('guestBalanceDueDays', n))}
         {numberInput(t.guestRefundDays, f.terms.guestRefundDays, (n) => setT('guestRefundDays', n))}
-      </div>
+      </div></div>
 
       {errors.length > 0 && (
-        <div role="alert" style={{ ...card, marginTop: '1.5rem', borderColor: 'var(--crit)' }}>
+        <div className="tl-noprint" role="alert" style={{ ...card, marginTop: '1.5rem', borderColor: 'var(--crit)' }}>
           <strong>{t.fix}</strong>
           <ul style={{ margin: '0.5rem 0 0', paddingLeft: '1.2rem' }}>{errors.map((e) => <li key={e}>{e}</li>)}</ul>
         </div>
       )}
 
-      <div role="tablist" aria-label={t.tabsLabel} style={{ display: 'flex', gap: '0.5rem', margin: '2.25rem 0 0' }}>
+      <div className="tl-noprint" role="tablist" aria-label={t.tabsLabel} style={{ display: 'flex', gap: '0.5rem', margin: '2.25rem 0 0' }}>
         {(['milestones', 'arrivals'] as const).map((k) => (
           <button key={k} role="tab" id={`tl-tab-${k}`} aria-controls={`tl-panel-${k}`} aria-selected={tab === k} onClick={() => setTab(k)} style={{
             ...button, fontFamily: 'var(--font-mono)', letterSpacing: '0.08em',
@@ -186,7 +186,7 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
       {result && (
         <>
           {result.warnings.length > 0 && (
-            <div style={{ ...card, marginTop: '1.25rem', borderColor: GOLD }}>
+            <div className="tl-noprint" style={{ ...card, marginTop: '1.25rem', borderColor: GOLD }}>
               <strong>{t.warnings}</strong>
               <ul style={{ margin: '0.5rem 0 0', paddingLeft: '1.2rem' }}>{result.warnings.map((w, k) => <li key={k}>{warningText(w, locale)}</li>)}</ul>
             </div>
@@ -194,21 +194,27 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
           <h2 style={h2}>{t.milestones}</h2>
           <div style={{ overflowX: 'auto' }}>
             <table className="tl-table">
-              <thead><tr><th>{t.colDate}</th><th className="tl-num">{t.colDays}</th><th>{t.colWho}</th><th>{t.colWhat}</th><th className="tl-num">{t.colAmount}</th></tr></thead>
+               <thead><tr><th>{t.colDate}</th><th className="tl-num">{t.colDays}</th><th>{t.colWho}</th><th>{t.colWhat}</th>
+                 <th className="tl-num">{t.colAmount}</th><th>{t.colStatus}</th><th>{t.colSource}</th></tr></thead>
               <tbody>{result.milestones.map((m, k) => (
                 <tr key={k} className={today && m.date < today ? 'tl-past' : ''}>
                   <td style={{ whiteSpace: 'nowrap' }}>{date(m.date)}</td>
                   <td className="tl-num">{m.daysBefore}</td>
                   <td>{WHO_LABELS[locale][m.who]}</td>
                   <td>{milestoneLabel(m, locale)}</td>
-                  <td className="tl-num">{m.amountCents === null ? '' : money(m.amountCents)}</td>
+                   <td className="tl-num">{m.amountCents === null ? '' : money(m.amountCents)}</td>
+                   <td>{m.status ? STATUS_LABELS[locale][m.status] : ''}</td><td>{SOURCE_LABELS[locale][m.source]}</td>
                 </tr>
               ))}</tbody>
             </table>
           </div>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '1rem' }}>
+          <div className="tl-noprint" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '1rem' }}>
             <button style={button} onClick={() => download(`timeline.${locale}.csv`, milestonesToCsv(result.milestones, locale), 'text/csv;charset=utf-8')}>{t.downloadCsv}</button>
-            <button style={button} onClick={() => download('retreat.ics', milestonesToIcs(result.milestones, f.passport.title ?? '', locale, new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z'), 'text/calendar;charset=utf-8')}>{t.downloadIcs}</button>
+            <button style={button} onClick={() => download('retreat.ics', milestonesToIcs(
+              result.milestones, f.passport.title ?? '', locale,
+              new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z', f.passport.id,
+            ), 'text/calendar;charset=utf-8')}>{t.downloadIcs}</button>
+            <button style={button} onClick={() => window.print()}>{t.print}</button>
             <button style={button} onClick={copyLink}>{t.copyLink}</button>
           </div>
         </>
@@ -216,7 +222,7 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
       </div>
 
       {/* панель не размонтируется при смене вкладки: строки гостей живут только в её состоянии */}
-      <div role="tabpanel" id="tl-panel-arrivals" aria-labelledby="tl-tab-arrivals" hidden={tab !== 'arrivals'} style={{ marginTop: '1.25rem' }}>
+      <div className="tl-noprint" role="tabpanel" id="tl-panel-arrivals" aria-labelledby="tl-tab-arrivals" hidden={tab !== 'arrivals'} style={{ marginTop: '1.25rem' }}>
         <ArrivalsPanel locale={locale} passport={f.passport} />
       </div>
 

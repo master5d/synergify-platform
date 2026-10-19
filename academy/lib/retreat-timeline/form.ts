@@ -4,7 +4,7 @@
 import { LIMITS, type ContractModel, type Venue } from '../retreat-calc/engine'
 import { DEFAULT_FORM, toInputs, type Form } from '../retreat-calc/form'
 import { encodeLink, type LinkVenue } from '../retreat-calc/link'
-import { addMonths, isIsoDate, monthsBetween, type IsoDate } from '../retreat-core/dates'
+import { addMonths, daysBetween, isIsoDate, monthsBetween, type IsoDate } from '../retreat-core/dates'
 import { pickPassport, passportFromCalcLink, type RetreatPassport } from '../retreat-core/passport'
 import { encodeToolLink, type DecodedTool } from '../retreat-core/tool-link'
 import type { TimelineTerms } from './engine'
@@ -40,6 +40,14 @@ export function defaultForm(today: IsoDate): TimelineForm {
       guestRefundDays: calc.guestBalanceDueDays, venueNoReturnDays: calc.venue.finalDueDays,
     },
   }
+}
+
+export function withPassportId(
+  form: TimelineForm,
+  makeId: () => string = () => globalThis.crypto?.randomUUID?.() ?? `retreat-${Math.random().toString(36).slice(2, 14)}`,
+): TimelineForm {
+  if (form.passport.id) return form
+  return { ...form, passport: { ...form.passport, id: makeId() } }
 }
 
 /** Allowlist полей таймлайна из ссылки: лишнее и не те типы отбрасываются. */
@@ -155,9 +163,10 @@ export function calcHashFromTimeline(f: TimelineForm): string {
   const t = toolOf(f)
   const months = p.start && isIsoDate(p.start) ? Math.max(1, monthsBetween(f.terms.signDate, p.start)) : undefined
   return encodeLink({
-    v: 1, title: p.title, currency: p.currency, guests: p.guests, nights: p.nights, monthsToStart: months,
+    v: 1, id: p.id, title: p.title, currency: p.currency, guests: p.guests, nights: p.nights, monthsToStart: months,
     guestDepositPct: f.terms.guestDepositPct, guestBalanceDueDays: f.terms.guestBalanceDueDays,
-    venue: { ...t.venue, payInFull: undefined } as LinkVenue,
+    daysToStart: p.start && isIsoDate(p.start) ? Math.max(0, daysBetween(f.terms.signDate, p.start)) : undefined,
+    venue: { ...t.venue } as LinkVenue,
   })
 }
 

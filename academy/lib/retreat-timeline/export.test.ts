@@ -34,6 +34,15 @@ describe('CSV вех', () => {
     expect(deposit?.[4]).toBe('9000')
     expect(rows).toHaveLength(R.milestones.length + 1)
   })
+  it('CSV пишет подпись статуса в колонку «Статус»', () => {
+    const statusRows = parseCsv(milestonesToCsv(buildTimeline(
+      { start: '2027-05-10', nights: 6, guests: 20, currency: 'USD' },
+      { signDate: '2026-11-10', venue: VENUE, guestDepositPct: 30, guestBalanceDueDays: 45, guestRefundDays: 45, venueNoReturnDays: 60 },
+      '2026-11-01',
+    ).milestones, 'ru'))
+    const sign = statusRows.find((r) => r[3] === 'Подписан договор с площадкой')
+    expect(sign?.[5]).toBe('скоро')
+  })
 })
 
 describe('календарь', () => {
@@ -80,5 +89,10 @@ describe('календарь — UID событий', () => {
     expect(uids(milestonesToIcs(shifted, 'Май', 'ru'))).toEqual(a)
     expect(uids(milestonesToIcs(R.milestones, 'Июнь', 'ru'))).not.toEqual(a)
     expect(new Set(a).size).toBe(a.length)
+  })
+  it('с паспортным id UID не меняется при смене названия и даты старта', () => {
+    const a = uids(milestonesToIcs(R.milestones, 'Май', 'ru', undefined, 'retreat-1234'))
+    const shifted = R.milestones.map((m) => ({ ...m, date: m.date === '2027-05-10' ? '2027-06-10' : m.date }))
+    expect(uids(milestonesToIcs(shifted, 'Июнь', 'ru', undefined, 'retreat-1234'))).toEqual(a)
   })
 })

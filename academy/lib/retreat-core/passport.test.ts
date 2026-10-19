@@ -12,8 +12,12 @@ describe('паспорт ретрита', () => {
       .toEqual({ start: '2027-05-10', guests: 20, nights: 6, currency: 'USD' })
   })
   it('allowlist: чужие ключи и не те типы отброшены', () => {
-    expect(pickPassport({ start: '2027-05-10', phone: '+1 555', guests_list: ['a'], nights: '6', guests: 12 }))
-      .toEqual({ start: '2027-05-10', guests: 12 })
+    expect(pickPassport({ id: 'retreat-1234', start: '2027-05-10', phone: '+1 555', guests_list: ['a'], nights: '6', guests: 12 }))
+      .toEqual({ id: 'retreat-1234', start: '2027-05-10', guests: 12 })
+    expect(pickPassport({ id: 'BAD_ID' })).toEqual({})
     expect(pickPassport(null)).toEqual({})
+  })
+  it('плохой id паспорта даёт ошибку валидации', () => {
+    expect(validatePassport({ id: 'BAD_ID' }, 'ru').some((e) => e.startsWith('id'))).toBe(true)
   })
 })

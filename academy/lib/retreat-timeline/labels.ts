@@ -7,6 +7,7 @@ type Text = (n?: number) => string
 
 const MILESTONES: Record<Lang, Record<MilestoneId, Text>> = {
   ru: {
+    'group-minimum': (n) => `Набран минимум группы для брони${n ? ` (по договору — ${n} гостей)` : ''}`,
     'sign': () => 'Подписан договор с площадкой',
     'venue-deposit': () => 'Первый платёж площадке',
     'venue-installment': (n) => `Взнос площадке № ${n}`,
@@ -23,6 +24,7 @@ const MILESTONES: Record<Lang, Record<MilestoneId, Text>> = {
     'departure': () => 'Выезд',
   },
   en: {
+    'group-minimum': (n) => `Minimum group reached for the booking${n ? ` (contract minimum: ${n} guests)` : ''}`,
     'sign': () => 'Contract with the venue signed',
     'venue-deposit': () => 'First payment to the venue',
     'venue-installment': (n) => `Venue installment no. ${n}`,
@@ -46,12 +48,17 @@ export const WHO_LABELS: Record<Lang, Record<Who, string>> = {
 }
 
 export const SOURCE_LABELS: Record<Lang, Record<Source, string>> = {
-  ru: { 'contract': 'договор', 'sales': 'план продаж', 'course-default': 'курс', 'passport': 'паспорт ретрита' },
-  en: { 'contract': 'contract', 'sales': 'sales plan', 'course-default': 'course', 'passport': 'retreat passport' },
+  ru: { 'contract': 'договор', 'sales': 'план продаж', 'course-default': 'курс', 'passport': 'паспорт ретрита', 'calculator': 'калькулятор: безубыточность' },
+  en: { 'contract': 'contract', 'sales': 'sales plan', 'course-default': 'course', 'passport': 'retreat passport', 'calculator': 'calculator: break-even' },
 }
 
-export function milestoneLabel(m: Pick<Milestone, 'id' | 'n'>, lang: Lang): string {
-  return MILESTONES[lang][m.id](m.n)
+export const STATUS_LABELS: Record<Lang, { past: string; soon: string }> = {
+  ru: { past: 'срок прошёл', soon: 'скоро' },
+  en: { past: 'overdue', soon: 'soon' },
+}
+
+export function milestoneLabel(m: Pick<Milestone, 'id' | 'n' | 'minimumGuests'>, lang: Lang): string {
+  return MILESTONES[lang][m.id](m.id === 'group-minimum' ? m.minimumGuests : m.n)
 }
 
 function ruDays(n: number): string {

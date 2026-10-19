@@ -40,4 +40,20 @@ describe('ссылка #data=…', () => {
   it('сообщения на английском для EN-страницы', () => {
     expect(decodeLink('', 'en')).toEqual({ ok: false, error: 'the link carries no calculator data' })
   })
+  it('переносит payInFull и точный срок до старта', () => {
+    const data: LinkData = { v: 1, daysToStart: 61, venue: { payInFull: true } }
+    expect(decodeLink(encodeLink(data))).toEqual({ ok: true, data })
+  })
+  it('отбрасывает неверные типы payInFull и daysToStart', () => {
+    expect(decodeLink(encodeLink({ v: 1, daysToStart: '61' } as unknown as LinkData)).ok).toBe(false)
+    expect(decodeLink(encodeLink({ v: 1, venue: { payInFull: 'yes' } } as unknown as LinkData)).ok).toBe(false)
+  })
+})
+
+describe('id ретрита в ссылке калькулятора', () => {
+  it('неверный id отбрасывается, ссылка остаётся рабочей', () => {
+    const d = decodeLink(encodeLink({ v: 1, title: 'Ретрит', id: 'BAD ID!' } as never), 'ru')
+    expect(d.ok).toBe(true)
+    if (d.ok) expect(d.data.id).toBeUndefined()
+  })
 })
