@@ -5,7 +5,7 @@
   "unit": "u2-setka-dnej",
   "locale": "en",
   "title": "The grid of days",
-  "sourceHash": "sha256:10cb0bc06051ccda1efe0cb3642d4b1f5f0825d16a67802a1dd44c361835c257",
+  "sourceHash": "sha256:d21dd806875f28b4257e184c07be1f29cc43587af464769431fe89a189a394a8",
   "outline": [
     {
       "heading": "More is not better",
@@ -51,7 +51,7 @@
       "heading": "The grid as a tool",
       "points": [
         {
-          "text": "The grid is easy to build in a table: rows are hours, columns are days.",
+          "text": "The grid is easy to build in a table: rows are half-hours, as in the builder, columns are days.",
           "origin": "extract"
         }
       ],
@@ -92,9 +92,9 @@
         ]
       },
       {
-        "sourceHash": "sha256:0b814a14d238e4e520d82c6298da0a3ab9318846dcd47ea473811d42aa13eb90",
+        "sourceHash": "sha256:b34eb1c180371a241f1e9e003965d025e6db5091309abf3cac63c8e7a1846689",
         "points": [
-          "You can easily build a grid in a table using hours for rows and days for columns."
+          "You can build the grid using a table with half-hours for rows and days for columns."
         ]
       }
     ]
