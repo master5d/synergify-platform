@@ -7,6 +7,7 @@ import type { LinkData } from './link'
 export type SalesPreset = 'even' | 'late' | 'early' | 'manual'
 
 export interface CostRow { name: string; amount: string; monthsBeforeStart: string }
+export interface AccommodationRow { name: string; guests: string; surcharge: string; cost: string }
 
 export interface Form {
   title: string
@@ -30,6 +31,7 @@ export interface Form {
   installments: boolean
   payInFull: boolean
   costs: CostRow[]
+  accommodation: AccommodationRow[]
   perGuestCost: string
   revenuePct: string
   sales: SalesPreset
@@ -41,7 +43,7 @@ export const DEFAULT_FORM: Form = {
   depositMode: 'pct', deposit: '25', balanceDueDays: '45',
   model: 'full_campus', rate: '2000', capacity: '18', minGuests: '0', buyoutFee: '0',
   venueDepositPct: '25', finalDueDays: '45', discountPct: '5', installments: true, payInFull: false,
-  costs: [], perGuestCost: '0', revenuePct: '3', sales: 'even', salesManual: '',
+  costs: [], accommodation: [], perGuestCost: '0', revenuePct: '3', sales: 'even', salesManual: '',
 }
 
 export const num = (s: string) => (s.trim() === '' ? NaN : Number(s.replace(',', '.')))
@@ -83,6 +85,9 @@ export function toInputs(f: Form): Inputs {
       payInFullDiscountPct: num(f.discountPct), installments: f.installments, payInFull: f.payInFull,
     },
     fixedCosts: f.costs.map((c) => ({ name: c.name, amount: cents(c.amount), monthsBeforeStart: num(c.monthsBeforeStart) })),
+    accommodation: f.accommodation.filter((a) => a.name.trim() !== '').map((a) => ({
+      name: a.name, guests: num(a.guests), surcharge: cents(a.surcharge), cost: cents(a.cost),
+    })),
     perGuestCost: cents(f.perGuestCost),
     revenuePct: num(f.revenuePct),
   }
@@ -113,5 +118,8 @@ export function applyLink(prev: Form, d: LinkData): Form {
     discountPct: v.payInFullDiscountPct !== undefined ? String(v.payInFullDiscountPct) : prev.discountPct,
     installments: v.installments ?? prev.installments,
     payInFull: v.payInFull ?? prev.payInFull,
+    accommodation: d.accommodation
+      ? d.accommodation.map((a) => ({ name: a.name, guests: String(a.guests), surcharge: String(a.surcharge), cost: String(a.cost) }))
+      : prev.accommodation,
   }
 }

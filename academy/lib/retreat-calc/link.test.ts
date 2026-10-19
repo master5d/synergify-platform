@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { decodeLink, encodeLink, type LinkData } from './link'
+import { applyLink, DEFAULT_FORM, toInputs } from './form'
 
 // Общая фикстура формы JSON: генератор ссылок держит тот же файл с тем же sha256 —
 // меняешь форму здесь, обнови фикстуру и хэш и там (README инструмента).
@@ -43,6 +44,28 @@ describe('ссылка #data=…', () => {
   it('переносит payInFull и точный срок до старта', () => {
     const data: LinkData = { v: 1, daysToStart: 61, venue: { payInFull: true } }
     expect(decodeLink(encodeLink(data))).toEqual({ ok: true, data })
+  })
+  it('переносит опции через encode, decode, applyLink и toInputs', () => {
+    const accommodation = [{ name: 'палатка', guests: 3, surcharge: 125, cost: 40 }]
+    const decoded = decodeLink(encodeLink({ v: 1, accommodation }))
+    expect(decoded.ok).toBe(true)
+    if (decoded.ok) {
+      const form = applyLink(DEFAULT_FORM, decoded.data)
+      expect(toInputs(form).accommodation).toEqual([
+        { name: 'палатка', guests: 3, surcharge: 12500, cost: 4000 },
+      ])
+    }
+  })
+  it('ссылка без accommodation читается как раньше', () => {
+    expect(decodeLink(encodeLink({ v: 1, guests: 4 }))).toEqual({ ok: true, data: { v: 1, guests: 4 } })
+  })
+  it('неверная опция в ссылке отклоняется', () => {
+    expect(decodeLink(encodeLink({ v: 1, accommodation: [{ name: 'палатка', guests: 1, surcharge: -1, cost: 0 }] }))).toEqual({
+      ok: false, error: 'accommodation[0].surcharge: ожидалось число от 0 до 10000000',
+    })
+    expect(decodeLink(encodeLink({ v: 1, accommodation: Array.from({ length: 9 }, () => ({ name: 'x', guests: 0, surcharge: 0, cost: 0 })) }))).toEqual({
+      ok: false, error: 'accommodation: не больше 8 вариантов',
+    })
   })
   it('отбрасывает неверные типы payInFull и daysToStart', () => {
     expect(decodeLink(encodeLink({ v: 1, daysToStart: '61' } as unknown as LinkData)).ok).toBe(false)

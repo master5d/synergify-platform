@@ -6,6 +6,7 @@ import { compute, profitGrid, validate, type ContractModel } from '../../lib/ret
 import { applyLink, DEFAULT_FORM, num, toInputs, type Form, type SalesPreset } from '../../lib/retreat-calc/form'
 import { decodeLink } from '../../lib/retreat-calc/link'
 import { calcHash, calcPassport } from './booklet-link'
+import { MoneyInput } from '../retreat-core/money-input'
 import { localToday } from '../../lib/retreat-core/dates'
 import { localePath, TIMELINE_PATH, timelineHashFromCalcForm } from '../../lib/retreat-timeline/form'
 import { BOOKLET_PATH, bookletHashWithImport } from '../../lib/retreat-booklet/form'
@@ -123,6 +124,26 @@ export function RetreatCalculator({ locale }: { locale: Locale }) {
         </label>
       </div>
 
+      <h2 style={h2}>{t.accommodation}</h2>
+      <p style={label}>{t.accommodationHint}</p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        {f.accommodation.map((a, k) => (
+          <div key={k} className="rc-grid" style={{ alignItems: 'end' }}>
+            <label style={label}>{t.accommodationName}<input style={field} value={a.name}
+              onChange={(e) => set('accommodation')(f.accommodation.map((x, j) => (j === k ? { ...x, name: e.target.value } : x)))} /></label>
+            <label style={label}>{t.accommodationGuests}<input style={field} inputMode="numeric" value={a.guests}
+              onChange={(e) => set('accommodation')(f.accommodation.map((x, j) => (j === k ? { ...x, guests: e.target.value } : x)))} /></label>
+            <label style={label}>{t.accommodationSurcharge}<MoneyInput locale={locale} value={Number.isFinite(num(a.surcharge)) ? Math.round(num(a.surcharge) * 100) : null}
+              onChange={(value) => set('accommodation')(f.accommodation.map((x, j) => (j === k ? { ...x, surcharge: value === null ? '' : String(value / 100) } : x)))} /></label>
+            <label style={label}>{t.accommodationCost}<MoneyInput locale={locale} value={Number.isFinite(num(a.cost)) ? Math.round(num(a.cost) * 100) : null}
+              onChange={(value) => set('accommodation')(f.accommodation.map((x, j) => (j === k ? { ...x, cost: value === null ? '' : String(value / 100) } : x)))} /></label>
+            <button style={{ ...field, width: 'auto', cursor: 'pointer' }} onClick={() => set('accommodation')(f.accommodation.filter((_, j) => j !== k))}>{t.remove}</button>
+          </div>
+        ))}
+        <button style={{ ...field, width: 'auto', cursor: 'pointer', alignSelf: 'start' }}
+          onClick={() => set('accommodation')([...f.accommodation, { name: '', guests: '0', surcharge: '0', cost: '0' }])}>{t.addAccommodation}</button>
+      </div>
+
       <h2 style={h2}>{t.venue}</h2>
       <div className="rc-grid">
         <label style={label}>{t.model}
@@ -207,6 +228,9 @@ export function RetreatCalculator({ locale }: { locale: Locale }) {
               {result.cashGap ? `${money(result.cashGap.amount)} · ${monthLabel(result.cashGap.month)}` : t.noGap}</div></div>
           </div>
           <p style={{ ...label, marginTop: '0.75rem' }}>{t.breakdown(money(result.revenue), money(result.venueCost), money(result.leaderCosts))}</p>
+          {inputs.accommodation && inputs.accommodation.length > 0 && (
+            <p style={label}>{t.accommodationBreakdown}: {money(inputs.accommodation.reduce((sum, a) => sum + a.guests * a.surcharge, 0))}</p>
+          )}
 
           {grid.length > 0 && (
             <>
