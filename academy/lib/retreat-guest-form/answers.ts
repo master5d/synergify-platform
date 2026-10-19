@@ -72,6 +72,9 @@ const SYNONYMS: Partial<Record<QuestionId, Record<ChoiceId, string[]>>> = {
     yes: ['согласен', 'согласна', 'согласен(на)', 'согласен (на)', 'i agree'],
     no: ['не согласен', 'не согласна', 'не согласен(на)', 'не согласен (на)', 'i do not agree'],
   },
+  diet: {
+    'vegan-gluten-free': ['веган, без глютена', 'веган и без глютена', 'vegan and gluten-free', 'vegan + gluten-free'],
+  },
 }
 
 /** Вариант по подписи любого языка или по id; `Other: …` / `Другое: …` Google Forms — `other` с текстом. */
@@ -173,11 +176,11 @@ export function arrivalsOf(s: Summary, lang: Lang): ArrivalRow[] {
     guest: g.values.name || guestLabel(g.row, lang),
     phone: g.values.phone ?? '',
     flightIn: g.values.flightIn ?? '',
-    dateIn: normalizeDate(g.values.dateIn ?? ''),
+    dateIn: normalizeDate(g.values.dateIn ?? '', lang),
     timeIn: g.values.timeIn ?? '',
     airport: g.values.airport ?? '',
     flightOut: g.values.flightOut ?? '',
-    dateOut: normalizeDate(g.values.dateOut ?? ''),
+    dateOut: normalizeDate(g.values.dateOut ?? '', lang),
     timeOut: g.values.timeOut ?? '',
     note: g.choice.pickup === 'yes' ? PICKUP_NOTE[lang] : '',
   }))
@@ -197,3 +200,11 @@ export const SAFETY_COLUMNS: QuestionId[] = ['name', 'phone', 'emergency', 'alle
 export const chefToCsv = (s: Summary, lang: Lang) => routedCsv(s, CHEF_COLUMNS, lang)
 /** «Важно знать на месте»: связь, экстренный контакт, аллергии, ограничения, касание, страховка, фото. */
 export const safetyToCsv = (s: Summary, lang: Lang) => routedCsv(s, SAFETY_COLUMNS, lang)
+
+export const wishesToCsv = (s: Summary, lang: Lang): string => {
+  const guests = s.guests.filter((g) => (g.values.expectations ?? '').trim())
+  return toCsv([
+    [lang === 'ru' ? 'Имя' : 'Name', 'expectations'],
+    ...guests.map((g) => [g.values.name || guestLabel(g.row, lang), g.values.expectations!.trim()]),
+  ], lang)
+}

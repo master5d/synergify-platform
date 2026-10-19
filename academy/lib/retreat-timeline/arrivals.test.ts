@@ -1,12 +1,30 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { arrivalsToCsv, checkArrivals, emptyArrival, parseArrivalsCsv, type ArrivalRow } from './arrivals'
+import { arrivalsToCsv, checkArrivals, emptyArrival, normalizeDate, parseArrivalsCsv, type ArrivalRow } from './arrivals'
 
 const row = (over: Partial<ArrivalRow>): ArrivalRow => ({ ...emptyArrival(), meetBy: 'трансфер площадки', ...over })
 const PASSPORT = { start: '2027-05-10', nights: 6 }
 
 describe('лист прибытия — CSV', () => {
+  it('3/1/2028 в EN — март 1', () => {
+    expect(normalizeDate('3/1/2028', 'en')).toBe('2028-03-01')
+  })
+  it('3/1/2028 в RU — 3 января', () => {
+    expect(normalizeDate('3/1/2028', 'ru')).toBe('2028-01-03')
+  })
+  it('YYYY/M/D дополняется нулями', () => {
+    expect(normalizeDate('2028/5/10')).toBe('2028-05-10')
+  })
+  it('YYYY-M-D дополняется нулями', () => {
+    expect(normalizeDate('2028-5-1')).toBe('2028-05-01')
+  })
+  it('несуществующая дата остаётся как есть', () => {
+    expect(normalizeDate('31/02/2028', 'en')).toBe('31/02/2028')
+  })
+  it('без языка слеш-формат с годом в конце не угадывается', () => {
+    expect(normalizeDate('3/1/2028')).toBe('3/1/2028')
+  })
   it('круг arrivalsToCsv → parseArrivalsCsv на обоих языках', () => {
     const rows = [row({ guest: 'Гость 1', phone: '+7 900 123-45-67', flightIn: 'XX 101', dateIn: '2027-05-10', meetPoint: 'Терминал 2; выход B' })]
     for (const lang of ['ru', 'en'] as const) expect(parseArrivalsCsv(arrivalsToCsv(rows, lang))).toEqual(rows)
@@ -28,6 +46,14 @@ describe('лист прибытия — CSV', () => {
   it('шаблон курса читается: заголовок пропущен, пустые строки отброшены', () => {
     const tpl = readFileSync(join(__dirname, '..', '..', '..', 'LMS', 'tochka-sborki', 'web', 'public', 'retreat-materials', 'arrival-list.ru.csv'), 'utf8')
     expect(parseArrivalsCsv(tpl)).toEqual([])
+  })
+  it('старый CSV без статуса брони читается, новая шапка его экспортирует', () => {
+    const old = [
+      'Гость;Телефон в дороге;Рейс прибытия;Дата прибытия;Время прибытия;Аэропорт;Кто встречает;Место встречи;Рейс отъезда;Дата отъезда;Время отъезда;Трансфер обратно;Примечание',
+      'Гость 1;;;;;;;;;;;;заметка',
+    ].join('\r\n')
+    expect(parseArrivalsCsv(old, 'ru')[0]).toMatchObject({ guest: 'Гость 1', booking: '', note: 'заметка' })
+    expect(arrivalsToCsv([row({ guest: 'Гость 1' })], 'ru').split('\r\n')[0]).toContain('Статус брони')
   })
 })
 

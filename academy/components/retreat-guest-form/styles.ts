@@ -12,7 +12,7 @@ export const h2: React.CSSProperties = { fontFamily: 'var(--font-display)', font
 export const button: React.CSSProperties = { ...field, width: 'auto', cursor: 'pointer' }
 
 /** Печать одной части страницы: анкеты или списка «важно знать на месте» (атрибут на body на время печати). */
-export function printPart(part: 'form' | 'safety') {
+export function printPart(part: 'form' | 'safety' | 'wishes') {
   document.body.dataset.gfPrint = part
   const done = () => { delete document.body.dataset.gfPrint; window.removeEventListener('afterprint', done) }
   window.addEventListener('afterprint', done)

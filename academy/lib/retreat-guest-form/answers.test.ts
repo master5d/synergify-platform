@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { toCsv } from '../retreat-core/csv'
 import { arrivalsToCsv, ARRIVAL_CSV_HEADER } from '../retreat-timeline/arrivals'
-import { arrivalsOf, chefToCsv, matchColumns, readAnswers, safetyToCsv, summarize, type SummaryIssueId } from './answers'
+import { arrivalsOf, chefToCsv, matchColumns, readAnswers, safetyToCsv, summarize, wishesToCsv, type SummaryIssueId } from './answers'
 import { summaryIssueText } from './labels'
 import { DEFAULT_ON, QUESTIONS, type QuestionId } from './questions'
 
@@ -37,6 +37,14 @@ describe('сопоставление колонок', () => {
 })
 
 describe('сводка диет', () => {
+  it('веган без глютена и синонимы получают один ключ', () => {
+    const t = readAnswers(formsCsv([
+      row('Анна К.', 'веган без глютена'), row('Борис Л.', 'веган, без глютена'),
+      row('Вера М.', 'веган и без глютена'), row('Глеб Н.', 'vegan and gluten-free'), row('Дина О.', 'vegan + gluten-free'),
+    ]))
+    const s = summarize(t, matchColumns(t.header, ON), ON)
+    expect(s.diets).toEqual({ 'vegan-gluten-free': 5 })
+  })
   it('варианты на любом языке, «другое» с текстом и ответ вне вариантов', () => {
     const t = readAnswers(formsCsv([
       row('Анна К.', 'всё'), row('Борис Л.', 'everything'), row('Вера М.', 'Всё'),
@@ -118,6 +126,16 @@ describe('лист прибытия и проверки', () => {
     expect(safety[0]).toBe('\uFEFFГость;Телефон в дороге;Экстренный контакт;Аллергии;Насколько серьёзно;Нагрузка;Дыхательные практики;Касание;Страховка;Фото и видео')
     expect(safety[0]).not.toContain('Питание')
     expect(safety.filter(Boolean)).toHaveLength(2)
+  })
+  it('пожелания выгружаются только для гостей с непустым текстом', () => {
+    const on: QuestionId[] = [...ON, 'expectations']
+    const t = readAnswers(toCsv([
+      ['Отметка времени', ...on.map((id) => q(id).text.ru)],
+      ['14.03.2028 10:00:00', ...row('Анна К.', 'всё', { expectations: 'Тихая комната' }), 'Тихая комната'],
+      ['14.03.2028 10:00:00', ...row('Борис Л.', 'всё'), ''],
+    ], 'ru'))
+    const s = summarize(t, matchColumns(t.header, on), on)
+    expect(wishesToCsv(s, 'ru').split('\r\n')).toEqual(['\uFEFFИмя;expectations', 'Анна К.;Тихая комната', ''])
   })
 })
 

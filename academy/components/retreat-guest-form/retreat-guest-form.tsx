@@ -68,13 +68,14 @@ export function RetreatGuestForm({ locale }: { locale: Locale }) {
         .gf-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); gap: 1rem; }
         .gf-q { display: flex; gap: 0.55rem; align-items: flex-start; font-size: var(--text-sm); padding: 0.35rem 0; }
         .gf-route { color: var(--text-secondary); font-size: var(--text-xs); }
-        .gf-print-form, .gf-print-safety { display: none; }
-        .gf-print-safety table { width: 100%; border-collapse: collapse; font-size: 10pt; }
-        .gf-print-safety th, .gf-print-safety td { border: 1px solid #999; padding: 4px 6px; text-align: left; vertical-align: top; }
+        .gf-print-form, .gf-print-safety, .gf-print-wishes { display: none; }
+        .gf-print-safety table, .gf-print-wishes table { width: 100%; border-collapse: collapse; font-size: 10pt; }
+        .gf-print-safety th, .gf-print-safety td, .gf-print-wishes th, .gf-print-wishes td { border: 1px solid #999; padding: 4px 6px; text-align: left; vertical-align: top; }
         @media print {
           .gf-screen { display: none !important; }
-          body[data-gf-print="form"] .gf-print-form { display: block; }
+          body:not([data-gf-print]) .gf-print-form, body[data-gf-print="form"] .gf-print-form { display: block; }
           body[data-gf-print="safety"] .gf-print-safety { display: block; }
+          body[data-gf-print="wishes"] .gf-print-wishes { display: block; }
         }
       `}</style>
 
@@ -90,10 +91,19 @@ export function RetreatGuestForm({ locale }: { locale: Locale }) {
         <h2 style={h2}>{t.retreat}</h2>
         <div className="gf-grid">
           <label style={label}>{t.titleLabel}<input style={field} value={f.passport.title ?? ''} onChange={(e) => setP('title', e.target.value || undefined)} /></label>
-          <label style={label}>{t.currency}<input style={field} value={f.passport.currency ?? ''} maxLength={3} onChange={(e) => setP('currency', e.target.value.toUpperCase() || undefined)} /></label>
+          <label style={label}>{t.currency}
+            <input style={field} value={f.passport.currency ?? ''} maxLength={3}
+              onChange={(e) => setP('currency', e.target.value.toUpperCase() || undefined)} />
+          </label>
           <label style={label}>{t.start}<input type="date" style={field} value={f.passport.start ?? ''} onChange={(e) => setP('start', e.target.value || undefined)} /></label>
-          <label style={label}>{t.nights}<input style={field} inputMode="numeric" value={shown(f.passport.nights)} onChange={(e) => setP('nights', parsedInt(e.target.value))} /></label>
-          <label style={label}>{t.guests}<input style={field} inputMode="numeric" value={shown(f.passport.guests)} onChange={(e) => setP('guests', parsedInt(e.target.value))} /></label>
+          <label style={label}>{t.nights}
+            <input style={field} inputMode="numeric" value={shown(f.passport.nights)}
+              onChange={(e) => setP('nights', parsedInt(e.target.value))} />
+          </label>
+          <label style={label}>{t.guests}
+            <input style={field} inputMode="numeric" value={shown(f.passport.guests)}
+              onChange={(e) => setP('guests', parsedInt(e.target.value))} />
+          </label>
         </div>
         {errors.length > 0 && (
           <div role="alert" style={{ ...card, marginTop: '1rem', borderColor: 'var(--accent-ink)' }}>
@@ -122,7 +132,9 @@ export function RetreatGuestForm({ locale }: { locale: Locale }) {
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', margin: '1.25rem 0' }}>
           <button style={button} onClick={() => copy(text, t.textCopied, () => setNotice(text))}>{t.copyText}</button>
           <button style={button} onClick={() => printPart('form')}>{t.printForm}</button>
-          <button style={button} onClick={() => download(`guest-answers-template.${locale}.csv`, answersTemplateCsv(f.on, locale), 'text/csv;charset=utf-8')}>{t.downloadTemplate}</button>
+          <button style={button} onClick={() => download(
+            `guest-answers-template.${locale}.csv`, answersTemplateCsv(f.on, locale), 'text/csv;charset=utf-8',
+          )}>{t.downloadTemplate}</button>
           <button style={button} onClick={() => {
             const url = `${window.location.origin}${localePath(FORM_PATH, locale)}${formHash(f)}`
             copy(url, t.copied, () => { window.location.hash = formHash(f) })

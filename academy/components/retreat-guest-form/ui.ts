@@ -5,7 +5,9 @@ export const GF_UI = {
   ru: {
     eyebrow: 'инструменты',
     h1: 'Анкета гостя',
-    lead: 'Соберите анкету из готовых вопросов и перенесите её в свой сервис: Google Forms, Typeform или письмо. Ответы загрузите сюда файлом CSV — сводка покажет диеты для шефа, лист прибытия и то, что важно знать на месте. Файл с ответами не покидает ваше устройство.',
+    lead: 'Соберите анкету из готовых вопросов и перенесите её в свой сервис: Google Forms, Typeform или письмо. '
+      + 'Ответы загрузите сюда файлом CSV — сводка покажет диеты для шефа, лист прибытия и то, что важно знать на месте. '
+      + 'Файл с ответами не покидает ваше устройство.',
     backLabel: '← к академии',
     loaded: 'Данные подставлены из ссылки.',
     draftRestored: 'Восстановлен черновик из этого браузера.',
@@ -29,8 +31,10 @@ export const GF_UI = {
     copied: 'Ссылка скопирована. В ней только данные ретрита и набор вопросов.',
     preview: 'Текст анкеты',
     answers: 'Сводка ответов',
-    answersLead: 'Выгрузите ответы из своего сервиса в CSV и загрузите сюда. Разбор идёт в браузере: файл никуда не отправляется и не сохраняется. После перезагрузки страницы ответы пропадут.',
+    answersLead: 'Выгрузите ответы из своего сервиса в CSV и загрузите сюда. Разбор идёт в браузере: '
+      + 'файл никуда не отправляется и не сохраняется. После перезагрузки страницы ответы пропадут.',
     uploadAnswers: 'Загрузить CSV ответов',
+    notCsv: 'Это файл Excel. Сохраните его как CSV (Файл → Сохранить как → CSV UTF-8) и загрузите снова.',
     clearAnswers: 'Очистить ответы',
     noRows: 'В файле нет строк с ответами: нужна строка заголовков и хотя бы один ответ.',
     loadedRows: (n: number) => `Загружено ответов: ${n}.`,
@@ -44,6 +48,8 @@ export const GF_UI = {
     noDietAnswer: (n: number) => `Без ответа о питании: ${n}. В меню они посчитаются как обычное питание.`,
     otherNotInMenu: '«Другое» в генератор меню не переносится: обсудите эти случаи с шефом отдельно.',
     wishes: 'Пожелания гостей',
+    downloadWishes: 'Скачать пожелания (CSV)',
+    printWishes: 'Распечатать пожелания',
     arrivals: 'Лист прибытия',
     arrivalsHint: 'Скачайте файл и загрузите его в таймлайне, в листе прибытия. Кто встречает и трансфер обратно впишите там.',
     downloadArrivals: 'Скачать лист прибытия',
@@ -65,7 +71,9 @@ export const GF_UI = {
   en: {
     eyebrow: 'tools',
     h1: 'Guest form',
-    lead: 'Build a form from ready-made questions and move it to your own service: Google Forms, Typeform or an email. Load the answers here as CSV. The summary shows diets for the chef, the arrival list and what matters on site. The answers file never leaves your device.',
+    lead: 'Build a form from ready-made questions and move it to your own service: Google Forms, Typeform or an email. '
+      + 'Load the answers here as CSV. The summary shows diets for the chef, the arrival list and what matters on site. '
+      + 'The answers file never leaves your device.',
     backLabel: '← back to the academy',
     loaded: 'Data loaded from the link.',
     draftRestored: 'Restored a draft from this browser.',
@@ -89,8 +97,10 @@ export const GF_UI = {
     copied: 'Link copied. It carries only the retreat data and the set of questions.',
     preview: 'Form text',
     answers: 'Answers summary',
-    answersLead: 'Export the answers from your service as CSV and load them here. Everything runs in your browser: the file is not sent or saved anywhere. The answers are gone after a page reload.',
+    answersLead: 'Export the answers from your service as CSV and load them here. Everything runs in your browser: '
+      + 'the file is not sent or saved anywhere. The answers are gone after a page reload.',
     uploadAnswers: 'Load answers CSV',
+    notCsv: 'This is an Excel file. Save it as CSV (File → Save as → CSV UTF-8) and upload it again.',
     clearAnswers: 'Clear answers',
     noRows: 'No answer rows in the file: it needs a header row and at least one answer.',
     loadedRows: (n: number) => `Answers loaded: ${n}.`,
@@ -104,6 +114,8 @@ export const GF_UI = {
     noDietAnswer: (n: number) => `No food answer: ${n}. The menu counts them as standard.`,
     otherNotInMenu: '“Other” does not carry over to the menu generator: discuss these cases with the chef.',
     wishes: 'Guest wishes',
+    downloadWishes: 'Download wishes (CSV)',
+    printWishes: 'Print wishes',
     arrivals: 'Arrival list',
     arrivalsHint: 'Download the file and load it into the timeline, in the arrival list. Fill in who meets them and the return transfer there.',
     downloadArrivals: 'Download the arrival list',

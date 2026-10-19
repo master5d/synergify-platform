@@ -10,14 +10,14 @@ Fill it in before arrival. Only the leader sees the answers, and the venue kitch
 
 ## Food
 
-4. How you eat: everything / no meat / vegan / gluten-free / other (describe).
+4. How you eat: everything / no meat or fish / vegan / gluten-free / vegan, gluten-free / other (describe).
 5. Food allergies. How serious: discomfort or life-threatening.
 6. What you do not eat for other reasons.
 
 ## Practices
 
 7. Are there limits on physical load the leader should know about for your safety in practices? Optional. Whether a practice suits you stays your decision, with your doctor.
-8. Touch in practices: I agree / I do not agree / ask me each time.
+8. Touch in practices: yes / no / ask me each time.
 
 ## Travel
 

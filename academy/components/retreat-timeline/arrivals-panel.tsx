@@ -20,7 +20,7 @@ const button: React.CSSProperties = { ...field, width: 'auto', minWidth: 0, curs
 export function ArrivalsPanel({ locale, passport }: { locale: Locale; passport: RetreatPassport }) {
   const t = TL_UI[locale]
   const [rows, setRows] = useState<ArrivalRow[]>([emptyArrival()])
-  const issues = checkArrivals(rows, passport)
+  const issues = checkArrivals(rows, passport, locale)
   const head = ARRIVAL_CSV_HEADER[locale]
 
   const fileInput = useRef<HTMLInputElement>(null)
@@ -29,7 +29,7 @@ export function ArrivalsPanel({ locale, passport }: { locale: Locale; passport: 
     if (!file) return
     const reader = new FileReader()
     reader.onload = () => {
-      const parsed = parseArrivalsCsv(decodeCsvBytes(new Uint8Array(reader.result as ArrayBuffer)))
+      const parsed = parseArrivalsCsv(decodeCsvBytes(new Uint8Array(reader.result as ArrayBuffer)), locale)
       setRows(parsed.length ? parsed : [emptyArrival()])
     }
     reader.readAsArrayBuffer(file)

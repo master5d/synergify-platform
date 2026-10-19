@@ -8,15 +8,15 @@ import { parseCsv, toCsv } from '../retreat-core/csv'
 
 export const ARRIVAL_FIELDS = [
   'guest', 'phone', 'flightIn', 'dateIn', 'timeIn', 'airport', 'meetBy', 'meetPoint',
-  'flightOut', 'dateOut', 'timeOut', 'transferBack', 'note',
+  'flightOut', 'dateOut', 'timeOut', 'transferBack', 'booking', 'note',
 ] as const
 export type ArrivalRow = Record<(typeof ARRIVAL_FIELDS)[number], string>
 
 export const ARRIVAL_CSV_HEADER: Record<Lang, string[]> = {
   ru: ['Гость', 'Телефон в дороге', 'Рейс прибытия', 'Дата прибытия', 'Время прибытия', 'Аэропорт', 'Кто встречает',
-    'Место встречи', 'Рейс отъезда', 'Дата отъезда', 'Время отъезда', 'Трансфер обратно', 'Примечание'],
+    'Место встречи', 'Рейс отъезда', 'Дата отъезда', 'Время отъезда', 'Трансфер обратно', 'Статус брони', 'Примечание'],
   en: ['Guest', 'Phone on the way', 'Arrival flight', 'Arrival date', 'Arrival time', 'Airport', 'Who meets them',
-    'Meeting point', 'Departure flight', 'Departure date', 'Departure time', 'Return transfer', 'Note'],
+    'Meeting point', 'Departure flight', 'Departure date', 'Departure time', 'Return transfer', 'Booking status', 'Note'],
 }
 
 export type ArrivalIssueId = 'arrival-after-start' | 'arrival-too-early' | 'departure-before-end' | 'no-meeter' | 'bad-date'
@@ -37,20 +37,34 @@ const isNote = (r: string[]) => {
 
 /** Дата из таблицы: ISO как есть; `ДД.ММ.ГГГГ` (так выгружают Excel и Google Sheets в RU-локали) — в ISO.
  *  Американское `М/Д/ГГГГ` не угадываем: оно неотличимо от `Д/М/ГГГГ`, такую дату проверка отметит. */
-export function normalizeDate(s: string): string {
-  const m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(s.trim())
-  if (!m) return s.trim()
-  const iso = `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}`
-  return isIsoDate(iso) ? iso : s.trim()
+export function normalizeDate(s: string, lang?: Lang): string {
+  const value = s.trim()
+  const isoParts = /^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})$/.exec(value)
+  const dotParts = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value)
+  const slashParts = lang ? /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(value) : null
+  const m = isoParts
+    ? [isoParts[1], isoParts[2], isoParts[3]]
+    : dotParts
+      ? [dotParts[3], dotParts[2], dotParts[1]]
+      : slashParts
+        ? lang === 'en' ? [slashParts[3], slashParts[1], slashParts[2]] : [slashParts[3], slashParts[2], slashParts[1]]
+        : null
+  if (!m) return value
+  const iso = `${m[0]}-${m[1].padStart(2, '0')}-${m[2].padStart(2, '0')}`
+  return isIsoDate(iso) ? iso : value
 }
 
 /** Строки из CSV любой таблицы; заголовок и подсказки шаблона курса (RU или EN) пропускаются, колонки — по порядку шаблона. */
-export function parseArrivalsCsv(text: string): ArrivalRow[] {
+export function parseArrivalsCsv(text: string, lang?: Lang): ArrivalRow[] {
   const rows = parseCsv(text).filter((r) => !isNote(r))
+  const header = rows[0]
   const body = rows.length && isHeader(rows[0]) ? rows.slice(1) : rows
+  const hasBooking = !!header && isHeader(header) && (header.includes(ARRIVAL_CSV_HEADER.ru[12]) || header.includes(ARRIVAL_CSV_HEADER.en[12]))
+  const sourceFields = hasBooking ? ARRIVAL_FIELDS : ARRIVAL_FIELDS.filter((f) => f !== 'booking')
   return body.map((r) => {
-    const row = Object.fromEntries(ARRIVAL_FIELDS.map((f, i) => [f, (r[i] ?? '').trim()])) as ArrivalRow
-    return { ...row, dateIn: normalizeDate(row.dateIn), dateOut: normalizeDate(row.dateOut) }
+    const row = emptyArrival()
+    sourceFields.forEach((f, i) => { row[f] = (r[i] ?? '').trim() })
+    return { ...row, dateIn: normalizeDate(row.dateIn, lang), dateOut: normalizeDate(row.dateOut, lang) }
   })
 }
 
@@ -59,14 +73,14 @@ export function arrivalsToCsv(rows: ArrivalRow[], lang: Lang): string {
 }
 
 /** Проверки дат относительно паспорта. Номер строки — с 1, как видит ведущий. */
-export function checkArrivals(rows: ArrivalRow[], p: RetreatPassport): ArrivalIssue[] {
+export function checkArrivals(rows: ArrivalRow[], p: RetreatPassport, lang?: Lang): ArrivalIssue[] {
   const issues: ArrivalIssue[] = []
   if (!p.start || !isIsoDate(p.start)) return issues
   const end = addDays(p.start, p.nights ?? 0)
   rows.forEach((raw, i) => {
     const row = i + 1
     // дата, набранная руками как ДД.ММ.ГГГГ, проверяется так же, как пришедшая из CSV
-    const r = { ...raw, dateIn: normalizeDate(raw.dateIn), dateOut: normalizeDate(raw.dateOut) }
+    const r = { ...raw, dateIn: normalizeDate(raw.dateIn, lang), dateOut: normalizeDate(raw.dateOut, lang) }
     if ((r.dateIn && !isIsoDate(r.dateIn)) || (r.dateOut && !isIsoDate(r.dateOut))) issues.push({ row, id: 'bad-date' })
     if (isIsoDate(r.dateIn)) {
       if (r.dateIn > p.start!) issues.push({ row, id: 'arrival-after-start' })

@@ -1,7 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { decodeCsvBytes, parseCsv, parseCsvNumbered, toCsv } from './csv'
+import { decodeCsvBytes, isSpreadsheetBytes, parseCsv, parseCsvNumbered, toCsv } from './csv'
 
 describe('CSV ядра', () => {
+  it('распознаёт xlsx, старый xls и обычный CSV по сигнатуре', () => {
+    expect(isSpreadsheetBytes(Uint8Array.from([0x50, 0x4b, 0x03, 0x04]))).toBe(true)
+    expect(isSpreadsheetBytes(Uint8Array.from([0xd0, 0xcf, 0x11, 0xe0]))).toBe(true)
+    expect(isSpreadsheetBytes(new TextEncoder().encode('a,b'))).toBe(false)
+  })
   it('в файле текст, похожий на формулу, — с апострофом; числа со знаком и телефоны — без', () => {
     const csv = toCsv([['=HYPERLINK("x")', '+7 900 123-45-67', '-6', '@sum', '-12,5', '-салат', '+'], ['обычный', '', '', '', '', '', '']], 'en')
     const firstLine = csv.split('\r\n')[0]
