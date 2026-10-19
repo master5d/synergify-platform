@@ -19,6 +19,7 @@ import {
 import { gridRows, gridToCsv } from '../../lib/retreat-program/export'
 import { type PracticeCard } from '../../lib/retreat-program/practices'
 import { PassportBar } from '../retreat-core/passport-bar'
+import { BOOKLET_PATH, bookletHashWithImport } from '../../lib/retreat-booklet/form'
 import { download } from '../retreat-timeline/download'
 import { GridPanel } from './grid-panel'
 import { RegistryPanel } from './registry-panel'
@@ -128,6 +129,7 @@ export function RetreatProgram({ locale }: { locale: Locale }) {
           { href: localePath(CALC_PATH, locale) + calcHashFromPassport(form.passport), label: t.openCalc },
           { href: localePath(FORM_PATH, locale) + formHashFromPassport(form.passport), label: t.openForm },
           { href: localePath(VENUE_PATH, locale) + venueHashFromPassport(form.passport), label: t.openVenue },
+          { href: localePath(BOOKLET_PATH, locale) + bookletHashWithImport(form.passport, 'program', programHash(form, allCards), localToday(), locale), label: t.buildBooklet },
         ]} />
         {notice && <p role="status" style={{ ...card, color: 'var(--accent-ink)' }}>{notice}</p>}
         {previousDraft && <p>

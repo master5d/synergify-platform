@@ -5,8 +5,10 @@ import type { Locale } from '../../lib/dictionaries'
 import { compute, profitGrid, validate, type ContractModel } from '../../lib/retreat-calc/engine'
 import { applyLink, DEFAULT_FORM, num, toInputs, type Form, type SalesPreset } from '../../lib/retreat-calc/form'
 import { decodeLink } from '../../lib/retreat-calc/link'
+import { calcHash, calcPassport } from './booklet-link'
 import { localToday } from '../../lib/retreat-core/dates'
 import { localePath, TIMELINE_PATH, timelineHashFromCalcForm } from '../../lib/retreat-timeline/form'
+import { BOOKLET_PATH, bookletHashWithImport } from '../../lib/retreat-booklet/form'
 import { RC_UI } from './ui'
 
 // Текст/ссылки на бумаге — бронза (золото на светлом = 1.7:1)
@@ -254,6 +256,7 @@ export function RetreatCalculator({ locale }: { locale: Locale }) {
 
       <p style={{ marginTop: '2rem' }}>
         <a style={{ color: GOLD }} href={localePath(TIMELINE_PATH, locale) + timelineHashFromCalcForm(f, localToday())}>{t.openTimeline} →</a>
+        {' · '}<a style={{ color: GOLD }} href={localePath(BOOKLET_PATH, locale) + bookletHashWithImport(calcPassport(f, localToday()), 'calc', calcHash(f), localToday(), locale)}>{t.buildBooklet} →</a>
       </p>
 
       <p style={{ ...label, marginTop: '2.5rem' }}>{t.disclaimer}</p>

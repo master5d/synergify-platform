@@ -3,7 +3,9 @@ import { decodeToolLink, encodeToolLink } from '../retreat-core/tool-link'
 import { TIMELINE_PATH } from '../retreat-timeline/form'
 import { importLink } from './imports'
 import { bookletModel } from './pages'
-import { bookletHash, defaultForm, enabledSections, exportJson, formFromDecoded, importJson, pickBookletTool } from './form'
+import { bookletHash, bookletHashWithImport, defaultForm, enabledSections, exportJson, formFromDecoded, importJson, pickBookletTool } from './form'
+import { pickProgramTool } from '../retreat-program/grid'
+import { encodeLink } from '../retreat-calc/link'
 import { REQUIRED_SECTIONS, SECTION_IDS } from './sections'
 
 const photo = 'ph-abcdefghijkl'
@@ -16,6 +18,22 @@ const seeded = () => {
 }
 
 describe('booklet form', () => {
+  it('builds a booklet link with program import and the supplied passport', () => {
+    const passport = { title: 'Program retreat', start: '2027-09-13' as const, nights: 7, currency: 'USD' }
+    const hash = encodeToolLink({ v: 1, retreat: passport, tool: pickProgramTool({}) })
+    const booklet = formFromDecoded(decodeToolLink(bookletHashWithImport(passport, 'program', hash, '2027-01-01'), pickBookletTool, 'ru'), '2027-01-01', 'ru')!
+    expect(booklet.passport).toEqual(passport)
+    expect(booklet.imports.program).toBeTruthy()
+  })
+
+  it('builds a booklet link with calculator import and the supplied passport', () => {
+    const passport = { title: 'Calc retreat', start: '2027-09-13' as const, nights: 7, currency: 'USD' }
+    const hash = encodeLink({ v: 1, title: passport.title, currency: passport.currency, nights: passport.nights, daysToStart: 255, price: 1200, guests: 10 })
+    const booklet = formFromDecoded(decodeToolLink(bookletHashWithImport(passport, 'calc', hash, '2027-01-01'), pickBookletTool, 'ru'), '2027-01-01', 'ru')!
+    expect(booklet.passport).toEqual({ ...passport, guests: 10 })
+    expect(booklet.imports.calc).toBeTruthy()
+  })
+
   it('B44 импорт таймлайна переживает два круга ссылки без роста денег', () => {
     const plan = { signDate: '2027-11-10', guestDepositPct: 30, guestBalanceDueDays: 75, guestRefundDays: 75, venueNoReturnDays: 60,
       venue: { model: 'full_campus', ratePerGuest: 1800.5, capacity: 20, minGuests: 0, buyoutFee: 0, depositPct: 25, finalDueDays: 60,

@@ -11,6 +11,8 @@ import { pickMenuTool } from '../retreat-menu/form'
 import { decodeLink, encodeLink, type LinkData } from '../retreat-calc/link'
 import type { TimelineTerms } from '../retreat-timeline/engine'
 import { formFromDecoded as timelineForm, pickTimelineTool } from '../retreat-timeline/form'
+import { decodeToolLink, TOOL_MAX_FRAGMENT } from '../retreat-core/tool-link'
+import { importLink } from './imports'
 
 export interface Person { name: string; role: string; bio: string; photoId?: string }
 export interface Experience { text: string; serves: string }
@@ -118,3 +120,21 @@ export function exportJson(form: BookletForm): string { return JSON.stringify({ 
 export function importJson(text: string, today: IsoDate, lang: Lang): BookletForm | null { try { const o = JSON.parse(text) as Record<string, unknown>;
   if (o.v !== 1 || !o.booklet) return null; const b = o.booklet as Record<string, unknown>;
   return formFromDecoded({ ok: true, kind: 'tool', link: { v: 1, retreat: pickPassport(b.passport), tool: pickBookletTool(b) } }, today, lang) } catch { return null } }
+
+export const BOOKLET_PATH = '/instrumenty/buklet/'
+
+/** Ссылка на буклет с уже встроенными данными инструмента-соседа. */
+export function bookletHashWithImport(passport: RetreatPassport, kind: 'program' | 'menu' | 'calc' | 'timeline', toolHash: string,
+  today: IsoDate, lang: Lang = 'ru'): string {
+  const form = defaultForm(today, lang)
+  const paths = { program: '/instrumenty/konstruktor-programmy/', menu: '/instrumenty/generator-menyu/',
+    calc: '/instrumenty/kalkulyator-retrita/', timeline: '/instrumenty/tajmlajn/' }
+  const imported = toolHash.length <= TOOL_MAX_FRAGMENT
+    ? importLink(form, `${paths[kind]}${toolHash}`, lang, today) : { ok: false as const, error: 'too long' }
+  if (imported.ok) {
+    imported.form.passport = { ...imported.form.passport, ...pickPassport(passport) }
+    return bookletHash(imported.form)
+  }
+  form.passport = pickPassport(passport)
+  return bookletHash(form)
+}

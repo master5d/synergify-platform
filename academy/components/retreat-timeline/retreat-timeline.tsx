@@ -17,6 +17,7 @@ import { MENU_PATH, menuHashFromPassport } from '../../lib/retreat-menu/form'
 import { FORM_PATH, formHashFromPassport } from '../../lib/retreat-guest-form/form'
 import { PROGRAM_PATH, programHashFromPassport } from '../../lib/retreat-program/form'
 import { PassportBar } from '../retreat-core/passport-bar'
+import { BOOKLET_PATH, bookletHashWithImport } from '../../lib/retreat-booklet/form'
 import { MoneyInput } from '../retreat-core/money-input'
 import { ArrivalsPanel } from './arrivals-panel'
 import { download } from './download'
@@ -122,6 +123,7 @@ export function RetreatTimeline({ locale }: { locale: Locale }) {
         { href: localePath(MENU_PATH, locale) + menuHashFromPassport(f.passport), label: t.openMenu },
         { href: localePath(FORM_PATH, locale) + formHashFromPassport(f.passport), label: t.openForm },
         { href: localePath(PROGRAM_PATH, locale) + programHashFromPassport(f.passport), label: t.openProgram },
+        { href: localePath(BOOKLET_PATH, locale) + bookletHashWithImport(f.passport, 'timeline', timelineHash(f), localToday(), locale), label: t.buildBooklet },
       ]} /></div>
       {notice && <p className="tl-noprint" role="status" style={{ ...card, color: GOLD, margin: '0 0 1.25rem' }}>{notice}</p>}
 

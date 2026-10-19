@@ -7,6 +7,7 @@ export const TL_UI = {
     h1: 'Таймлайн ретрита',
     lead: 'Все сроки ретрита по датам: платежи площадке, точка невозврата, доплаты и отмены гостей, анкета, меню, лист прибытия. Считается в браузере, данные никуда не уходят.',
     backLabel: '← к академии',
+    buildBooklet: 'Собрать буклет',
     loaded: 'Данные подставлены из ссылки.',
     loadedCalc: 'Данные подставлены из калькулятора. Дата подписания — сегодня, проверьте её.',
     draftRestored: 'Восстановлен черновик из этого браузера.',
@@ -76,6 +77,7 @@ export const TL_UI = {
     lead: 'Every retreat deadline by date: venue payments, the point of no return, guest balances and cancellations, the guest form, the menu, the arrival list. '
       + 'Runs in your browser; nothing is sent anywhere.',
     backLabel: '← back to the academy',
+    buildBooklet: 'Build a booklet',
     loaded: 'Data loaded from the link.',
     loadedCalc: 'Data loaded from the calculator. Signing date is today; check it.',
     draftRestored: 'Restored a draft from this browser.',
