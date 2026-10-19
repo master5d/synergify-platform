@@ -1,9 +1,29 @@
 import { describe, expect, it } from 'vitest'
 import { STARTER } from './starter'
-import { checkCard, emptyCard, mergeRegistry, pickCard, registryFromJson, registryToJson, starterCards, type PracticeCard } from './practices'
+import { pickProgramTool } from './grid'
+import { checkCard, emptyCard, mergeRegistry, ownCardId, pickCard, registryFromJson, registryToJson, restoreCardAt, starterCards, type PracticeCard } from './practices'
 
 const card = (id = 'x', patch: Partial<PracticeCard> = {}): PracticeCard => ({ ...emptyCard(id), name: 'X', groupMinutes: 10, ...patch })
 describe('practice registry', () => {
+  it('creates a unique own-card id accepted by links and the registry', () => {
+    const existing = [card('my-12345678')]
+    const id = ownCardId(existing, '12345678-aaaa-bbbb-cccc-dddddddddddd')
+    expect(id).toMatch(/^my-[a-z0-9]{8}$/)
+    expect(id).not.toBe('my-12345678')
+    expect(pickCard({ ...emptyCard(id), name: 'New' })?.id).toBe(id)
+    expect(pickProgramTool({ blocks: [{ day: 1, start: '09:00', minutes: 30, kind: 'practice', practiceId: id }], cards: [] }).blocks[0].practiceId).toBe(id)
+  })
+
+  it('restores a card at its previous index', () => {
+    const cards = [card('a'), card('b'), card('c')]
+    expect(restoreCardAt([cards[0], cards[2]], cards[1], 1).map((item) => item.id)).toEqual(['a', 'b', 'c'])
+  })
+
+  it('puts a restored card at the end when its index is out of bounds', () => {
+    const cards = [card('a'), card('b')]
+    expect(restoreCardAt([cards[0]], cards[1], 99).map((item) => item.id)).toEqual(['a', 'b'])
+  })
+
   it('builds clean bilingual starter sets with stable structure', () => {
     const ru = starterCards('ru'); const en = starterCards('en')
     expect(ru).toHaveLength(STARTER.length); expect(en).toHaveLength(STARTER.length)
