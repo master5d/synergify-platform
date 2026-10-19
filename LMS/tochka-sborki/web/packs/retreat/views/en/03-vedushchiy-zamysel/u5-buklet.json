@@ -5,7 +5,7 @@
   "unit": "u5-buklet",
   "locale": "en",
   "title": "The booklet: it sells and it promises",
-  "sourceHash": "sha256:5e6b86afc55d3455742e81d4afe4ce249d9de8c1bc9f42f2a03cedca5f6b32d6",
+  "sourceHash": "sha256:3bb10044e51365289cb4ae969381b95e18f57322f4b7a896137e16e2a07e6b7c",
   "outline": [
     {
       "heading": "One page, two jobs",
@@ -76,6 +76,16 @@
         }
       ],
       "children": []
+    },
+    {
+      "heading": "The same page online",
+      "points": [
+        {
+          "text": "A booklet is sent to a person; a sign-up page is where newsletters and social posts lead.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
     }
   ],
   "cards": [
@@ -126,6 +136,10 @@
         "points": [
           "The calculator and the timeline already contain your dates, price, deposit, and dates for payment and cancellation."
         ]
+      },
+      {
+        "sourceHash": "sha256:6a06b048f0b29b734b54c2e8679500ce6a9452035a8a6262632f9d6cf3c20f56",
+        "verbatim": "near-identical"
       }
     ]
   }

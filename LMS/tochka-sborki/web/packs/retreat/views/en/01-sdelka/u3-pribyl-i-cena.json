@@ -5,7 +5,7 @@
   "unit": "u3-pribyl-i-cena",
   "locale": "en",
   "title": "First the profit you want, then the price",
-  "sourceHash": "sha256:46f0d37f552da5f7ad15d01e67c857f10eeb894848de5bdf3528327a06158a6e",
+  "sourceHash": "sha256:7a1fe591de302451be37df5dca5a709e913468dcaaed5e503de5f9ea3d10b3ee",
   "outline": [
     {
       "heading": "The reverse order",
@@ -46,6 +46,16 @@
         }
       ],
       "children": []
+    },
+    {
+      "heading": "A ladder of prices",
+      "points": [
+        {
+          "text": "One price for everyone is not the only way.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
     }
   ],
   "cards": [
@@ -72,6 +82,12 @@
       {
         "sourceHash": "sha256:61f96084a775ed636fcefab0d338391272b62c560fb625ba1377911e51e2b65e",
         "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:43c35c11d78cffb4b96a2917baa527ce85341ab0e58f32f56298d36ed4b701f7",
+        "points": [
+          "You do not have to set a single price for every person."
+        ]
       }
     ]
   }

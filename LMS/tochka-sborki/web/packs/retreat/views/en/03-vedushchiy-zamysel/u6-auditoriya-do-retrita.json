@@ -5,7 +5,7 @@
   "unit": "u6-auditoriya-do-retrita",
   "locale": "en",
   "title": "Your audience before the retreat",
-  "sourceHash": "sha256:fb6ce89e811fe626232f061b19258a37a4e2cffeb012498a1c44efd2f874b8a3",
+  "sourceHash": "sha256:c1edc5cf38cbf423822d960f910abda097a1f13ce2647e56bd1cb41e20aa34da",
   "outline": [
     {
       "heading": "You sell to your own people",
@@ -31,7 +31,7 @@
       "heading": "One or two channels",
       "points": [
         {
-          "text": "Five channels a little at a time give less than one channel kept regular.",
+          "text": "A separate path is partners: a colleague, a studio or a venue tells their own people about the retreat.",
           "origin": "extract"
         }
       ],
@@ -90,9 +90,9 @@
         ]
       },
       {
-        "sourceHash": "sha256:2fa921a0d41bc311edab0261ffd4c1b5b565c1d8bc2025d13e40a371e5a406ba",
+        "sourceHash": "sha256:2e1e497f5354de3defb8b64a7418f7b2b24194f5715dd86b26281ded62062a5d",
         "points": [
-          "Keeping one channel regular gives you more than using five channels a little at a time."
+          "You can take a separate path by having partners like a colleague, studio, or venue share the retreat with their own people."
         ]
       },
       {
