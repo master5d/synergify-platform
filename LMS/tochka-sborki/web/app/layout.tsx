@@ -59,7 +59,7 @@ const langScript =
 export const metadata: Metadata = {
   metadataBase: new URL(COURSE.domain),
   title: COURSE.fullName.ru,
-  description: `Открытый курс по AI-разработке и агентному программированию. Presented by ${REGISTRY.academy.org.name}.`,
+  description: `${COURSE.description.ru} Presented by ${REGISTRY.academy.org.name}.`,
   publisher: REGISTRY.academy.org.name,
   authors: [{ name: 'Alexander Mamaev' }],
   manifest: '/manifest.webmanifest',

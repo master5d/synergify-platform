@@ -11,7 +11,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: COURSE.fullName.ru,
     short_name: COURSE.shortName,
-    description: 'Открытый курс по AI-разработке и агентному программированию.',
+    description: COURSE.description.ru,
     start_url: `${BASE_PATH}/`,
     scope: `${BASE_PATH}/`,
     display: 'standalone',
