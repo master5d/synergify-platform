@@ -181,4 +181,12 @@ describe('retreat-regions', () => {
     expect(REGION_LESSON_URL.ru).toContain('https://academy.synergify.com')
     expect(REGION_LESSON_URL.en).toContain('https://academy.synergify.com')
   })
+
+  it('R11 настоящие гайды проходят checkGuide без замечаний', () => {
+    for (const g of GUIDES) {
+      expect(checkGuide(g), g.slug).toEqual([])
+      expect(g.venues.length, g.slug).toBeGreaterThanOrEqual(4)
+      for (const v of g.venues) expect(venueStale(v.checked, '2026-10-19'), v.name).toBe(false)
+    }
+  })
 })

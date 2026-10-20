@@ -1,208 +1,192 @@
-import type { RegionGuide } from '../types'
+import type { Fit, Mark, RegionGuide } from '../types'
 
-// Образцовый гайд для региона Маунт-Шаста
+const fit = (mark: Mark, ru: string, en: string): Fit => ({ mark, why: { ru, en } })
+
+// Гайд-вайбчек Маунт-Шасты. Факты — по источникам ниже (обращение 2026-10-19); нарратив помечен как нарратив;
+// сакральные истории народов не пересказываются. Площадки — сайт открыт и принимает внешние группы на дату проверки.
 export const SHASTA: RegionGuide = {
   slug: 'shasta',
-  name: {
-    ru: 'Маунт-Шаста',
-    en: 'Mount Shasta',
-  },
+  name: { ru: 'Маунт-Шаста', en: 'Mount Shasta' },
   placeType: 'sacred-mountains',
   character: {
-    ru: 'Потухший стратовулкан в северной Калифорнии с чистыми горными источниками и вековыми лесами.',
-    en: 'A dormant stratovolcano in Northern California with pure mountain springs and ancient forests.',
+    ru: 'Одинокий стратовулкан на южном конце Каскадных гор в северной Калифорнии: 4 322 метра, ледники, гора поднимается почти '
+      + 'на три километра над округой и видна отовсюду. У подножия — маленький городок у истоков реки Сакраменто и старые мельничные '
+      + 'посёлки среди хвойного леса. Ритм медленный: лес, озёра, водопады, горный воздух.',
+    en: 'A solitary stratovolcano at the southern end of the Cascades in Northern California: 14,179 feet, glaciers, the mountain rises '
+      + 'almost three kilometres above the land around it and is seen from everywhere. At its foot is a small town at the headwaters of '
+      + 'the Sacramento River and old mill villages in the pine forest. The rhythm is slow: forest, lakes, waterfalls, mountain air.',
   },
   whoGoes: {
-    ru: 'Практикующие глубокую медитацию, искатели уединения и ведущие ретритов тишины.',
-    en: 'Deep meditation practitioners, seekers of solitude, and silence retreat leaders.',
+    ru: 'Лесная служба описывает публику горы так: одни едут ради восхождения, другие — духовные искатели, третьи — ради лугов и видов. '
+      + 'Рядом — альпинисты и лыжники, семьи и пенсионеры на природе, а в городке — метафизические книжные, центры йоги и звука '
+      + 'и буддийский монастырь с ретритами для мирян.',
+    en: 'The Forest Service describes the mountain\'s visitors this way: some come to climb, some are spiritual seekers, some come for the '
+      + 'meadows and the views. Around them are climbers and skiers, families and retirees in the outdoors, and in town there are metaphysical '
+      + 'bookshops, yoga and sound centres and a Buddhist monastery with retreats for lay people.',
   },
   narrative: [
     {
-      ru: 'Маунт-Шаста притягивает практиков медитации и уединения уже более века.',
-      en: 'Mount Shasta has attracted meditation and solitude practitioners for over a century.',
+      ru: 'Рассказывают, что внутри горы скрыт город лемурийцев — потомков затонувшего континента. История идёт от романа конца XIX века '
+        + 'и книг 1930-х годов.',
+      en: 'People say a city of Lemurians — descendants of a sunken continent — is hidden inside the mountain. The story goes back to a novel '
+        + 'from the end of the 19th century and books from the 1930s.',
     },
     {
-      ru: 'Высокогорные тропы и хвойные массивы создают пространство естественной сосредоточенности.',
-      en: 'High-altitude trails and pine groves create a space for natural focus.',
+      ru: 'С 1930-х годов гору связывают с «Вознесёнными Владыками»: у её подножия до сих пор проходит ежегодное представление одного '
+        + 'из духовных движений.',
+      en: 'Since the 1930s the mountain has been linked with the "Ascended Masters": one spiritual movement still holds a yearly pageant '
+        + 'at its foot.',
+    },
+    {
+      ru: 'Линзовидные облака над вершиной называют маскировкой кораблей, гору — «одной из самых духовных в мире», кристаллы — '
+        + '«программированными» на исцеление.',
+      en: 'The lens-shaped clouds over the summit are called a disguise for ships, the mountain "one of the most spiritual in the world", '
+        + 'crystals "programmed" for healing.',
     },
   ],
   culture: {
     lands: {
-      ru: 'Традиционные земли коренных народов шаста, винту, пит-ривер и модок.',
-      en: 'Traditional lands of the Shasta, Wintu, Pit River, and Modoc peoples.',
+      ru: 'Гору считают священной народы пит-ривер, карук, шаста, винту и соседние народы, в том числе кламат и модок; они и сейчас '
+        + 'проводят здесь обряды, и эти практики остаются закрытыми. Луг Пантер-Медоус и склоны выше 2 400 метров признаны культурным '
+        + 'районом коренных народов. Истории о лемурийцах и владыках — не их истории.',
+      en: 'The Pit River, Karuk, Shasta, Wintu and neighbouring peoples, including the Klamath and Modoc, hold the mountain sacred; they '
+        + 'still hold ceremonies here, and those practices stay private. Panther Meadow and the slopes above 8,000 feet are recognised as a '
+        + 'Native American cultural district. The stories of Lemurians and masters are not their stories.',
     },
     asks: {
-      ru: 'Бережно относитесь к источникам воды и соблюдайте правила пребывания на дикой природе.',
-      en: 'Respect natural water springs and follow wilderness leave-no-trace principles.',
+      ru: 'Представитель народа пит-ривер говорит: на гору ничего не приносят и ничего с неё не уносят, приходят только с целью; кристаллам '
+        + 'и подношениям в камнях и в источнике там не место. Священный источник на лугу Пантер-Медоус страдает от купаний и праха — '
+        + 'луг восстанавливали народы вместе с лесной службой, к нему просят относиться бережно.',
+      en: 'A representative of the Pit River people says: nothing is brought onto the mountain and nothing is taken from it, people come '
+        + 'only with a purpose; crystals and offerings in the rocks and the spring do not belong there. The sacred spring at Panther Meadow '
+        + 'is harmed by bathing and ashes — the tribes restored the meadow together with the Forest Service and ask for great care.',
     },
     links: [
+      { title: 'Karuk Tribe', url: 'https://www.karuk.us/', accessed: '2026-10-19' },
+      { title: 'Redding Rancheria', url: 'https://www.reddingrancheria-nsn.gov/', accessed: '2026-10-19' },
+      { title: 'Shasta Indian Nation', url: 'https://shastaindiannation.org/', accessed: '2026-10-19' },
+      { title: 'The Klamath Tribes', url: 'https://klamathtribes.org/', accessed: '2026-10-19' },
       {
-        title: 'USDA Forest Service — Shasta-Trinity National Forest',
-        url: 'https://www.fs.usda.gov/stnf',
+        title: 'News from Native California — the Rainbow Tribe and Mount Shasta (2015)',
+        url: 'https://newsfromnativecalifornia.com/out-of-the-woodwork-the-rainbow-tribe-and-mount-shasta/',
         accessed: '2026-10-19',
       },
     ],
   },
   themes: {
-    silence: {
-      mark: 'match',
-      why: {
-        ru: 'Природная изоляция и разреженный горный воздух располагают к молчанию.',
-        en: 'Natural seclusion and crisp mountain air encourage silent contemplation.',
-      },
-    },
-    body: {
-      mark: 'neutral',
-      why: {
-        ru: 'Телесные практики возможны в помещениях и на лесных полянах в тёплые месяцы.',
-        en: 'Body practices work well indoors and in forest clearings during warm months.',
-      },
-    },
-    breath: {
-      mark: 'match',
-      why: {
-        ru: 'Чистый горный воздух и хвойные фитонциды усиливают дыхательные циклы.',
-        en: 'Clean mountain air and pine phytoncides enhance breathwork sessions.',
-      },
-    },
-    creative: {
-      mark: 'neutral',
-      why: {
-        ru: 'Спокойная обстановка подходит для письма и размышлений в узком кругу.',
-        en: 'A peaceful environment suitable for writing and small-group reflection.',
-      },
-    },
-    nature: {
-      mark: 'match',
-      why: {
-        ru: 'Разветвлённая сеть горных троп и панорамные виды на сотни километров.',
-        en: 'Extensive mountain trail network with panoramic vistas for miles around.',
-      },
-    },
-    ritual: {
-      mark: 'match',
-      why: {
-        ru: 'Многолетнее место притяжения для медитативных и символических церемоний.',
-        en: 'A longstanding destination for meditative and symbolic ceremonies.',
-      },
-    },
-    burnout: {
-      mark: 'match',
-      why: {
-        ru: 'Удалённость от крупных городов помогает снять сенсорную перегрузку.',
-        en: 'Distance from major cities helps dissolve chronic sensory overload.',
-      },
-    },
-    couples: {
-      mark: 'neutral',
-      why: {
-        ru: 'Подходит для камерных ретритов пар при наличии обособленного комфортного жилья.',
-        en: 'Works for intimate couples retreats when comfortable private housing is secured.',
-      },
-    },
-    leadership: {
-      mark: 'clash',
-      why: {
-        ru: 'Специфика места не подходит для интенсивных деловых сессий и переговоров.',
-        en: 'The contemplative character is ill-suited for fast-paced business sessions.',
-      },
-    },
-    transition: {
-      mark: 'match',
-      why: {
-        ru: 'Мощный природный ландшафт поддерживает переосмысление жизненных этапов.',
-        en: 'A striking mountain landscape that supports re-evaluating life milestones.',
-      },
-    },
+    silence: fit('match', 'Гора, лес и маленький городок держат тишину сами.', 'The mountain, the forest and the small town hold silence by themselves.'),
+    body: fit('neutral', 'Йогу можно вести, но место её не усиливает и не мешает.', 'You can lead yoga here; the place neither amplifies it nor gets in the way.'),
+    breath: fit('neutral', 'Для дыхания и работы с телом место ничего особого не добавляет.', 'For breath and bodywork the place adds nothing in particular.'),
+    creative: fit('neutral', 'Виды вдохновляют, но творческой среды, как в городах искусства, здесь нет.', 'The views inspire, but there is no arts scene as in art towns.'),
+    nature: fit('match', 'Озёра, водопады, луга и тропы вокруг горы.', 'Lakes, waterfalls, meadows and trails around the mountain.'),
+    ritual: fit('clash', 'Гора священна для местных народов; чужие обряды на ней их задевают.', 'The mountain is sacred to local peoples; outside ceremonies on it hurt them.'),
+    burnout: fit('match', 'Медленный ритм, лес и горный воздух снимают городскую спешку.', 'The slow rhythm, forest and mountain air take away city haste.'),
+    couples: fit('neutral', 'Для пар место спокойное, но ничем особым не помогает.', 'A calm place for couples, but it does not help in any special way.'),
+    leadership: fit(
+      'neutral',
+      'Корпоративным программам подходят курорт и отели, но смысл места не про это.',
+      'A resort and hotels suit corporate programmes, but that is not what the place is about.',
+    ),
+    transition: fit(
+      'match',
+      'Гора видна отовсюду и служит образом перехода, ради которого едут.',
+      'The mountain is visible from everywhere and serves as an image of the transition people come for.',
+    ),
   },
   audiences: {
-    beginners: {
-      mark: 'neutral',
-      why: {
-        ru: 'Необходима предварительная адаптация к климату и перепадам высот.',
-        en: 'Requires basic adaptation to mountain climate and elevation changes.',
-      },
-    },
-    practitioners: {
-      mark: 'match',
-      why: {
-        ru: 'Оптимальная среда для углубления регулярной личной практики.',
-        en: 'An optimal environment for deepening consistent personal practice.',
-      },
-    },
-    burnedOut: {
-      mark: 'match',
-      why: {
-        ru: 'Тишина и неспешный ритм природы возвращают контакт с собой.',
-        en: 'Silence and nature gentle rhythm help restore contact with oneself.',
-      },
-    },
-    founders: {
-      mark: 'neutral',
-      why: {
-        ru: 'Эффективно для одиночного восстановления, но не для командной рутины.',
-        en: 'Effective for solo restorative pauses rather than standard team work.',
-      },
-    },
-    teams: {
-      mark: 'clash',
-      why: {
-        ru: 'Ограниченная инфраструктура для крупных групп и корпоративной логистики.',
-        en: 'Limited infrastructure for large corporate groups and event logistics.',
-      },
-    },
-    couples: {
-      mark: 'neutral',
-      why: {
-        ru: 'Возможно при тщательном отборе уединённой и тёплой площадки.',
-        en: 'Feasible with careful selection of a secluded and warm venue.',
-      },
-    },
-    womensCircle: {
-      mark: 'match',
-      why: {
-        ru: 'Безопасное природное пространство для доверительных кругов.',
-        en: 'A safe natural sanctuary for honest and supportive circle work.',
-      },
-    },
-    mensCircle: {
-      mark: 'match',
-      why: {
-        ru: 'Горные вызовы и уединённые стоянки для практик преодоления.',
-        en: 'Mountain terrain and quiet basecamps well suited for men gatherings.',
-      },
-    },
-    creatives: {
-      mark: 'neutral',
-      why: {
-        ru: 'Вдохновляющая панорама, но скромная среда для активного продакшна.',
-        en: 'Inspiring scenery, though modest facilities for active production.',
-      },
-    },
-    seekers: {
-      mark: 'match',
-      why: {
-        ru: 'Всемирно признанная точка притяжения исследователей сознания.',
-        en: 'A globally acknowledged beacon for seekers exploring consciousness.',
-      },
-    },
+    beginners: fit(
+      'neutral',
+      'Тихо и понятно, но эзотерический фон городка новичка может смутить.',
+      'Quiet and clear, but the esoteric backdrop of the town may confuse a newcomer.',
+    ),
+    practitioners: fit(
+      'match',
+      'Здесь давно живут практики: монастырь, центры, тишина для долгих сидений.',
+      'Practice has long lived here: a monastery, centres, silence for long sittings.',
+    ),
+    burnedOut: fit('match', 'Мало людей, много леса и неба.', 'Few people, plenty of forest and sky.'),
+    founders: fit('neutral', 'Есть курорт и залы, но публика места — не деловая.', 'There is a resort and halls, but the crowd here is not a business one.'),
+    teams: fit('neutral', 'Отели принимают группы, но смысл места команде ничего не добавляет.', 'Hotels take groups, but the meaning of the place adds nothing for a team.'),
+    couples: fit('neutral', 'Спокойно, но без особой романтики.', 'Calm, but without special romance.'),
+    womensCircle: fit('neutral', 'Место не помогает и не мешает такому кругу.', 'The place neither helps nor gets in the way of such a circle.'),
+    mensCircle: fit('match', 'Горы, тропы и простор подходят мужским программам на природе.', 'Mountains, trails and space suit men\'s programmes in nature.'),
+    creatives: fit('neutral', 'Виды есть, творческой среды нет.', 'There are views, there is no creative scene.'),
+    seekers: fit('match', 'Одна из самых известных духовных гор мира — этих людей сюда и тянет.', 'One of the best-known spiritual mountains in the world — this is who it draws.'),
   },
   verdict: {
     yes: {
-      ru: 'Место раскрывается наилучшим образом для глубокой тишины и уединённой перезагрузки.',
-      en: 'The place reveals itself best for deep silence and solitary reset.',
+      ru: 'Ретритам тишины, медитации и личной перемены для опытных практикующих и выгоревших горожан: место само держит тишину.',
+      en: 'Retreats of silence, meditation and personal change for experienced practitioners and burned-out city dwellers: the place holds '
+        + 'silence by itself.',
     },
     no: {
-      ru: 'Не рекомендуется для шумных корпоративных интенсивов и развлекательных форматов.',
-      en: 'Not recommended for noisy corporate intensives or entertainment-focused formats.',
+      ru: 'Программам с обрядами «на священной горе», шумным форматам и тем, кому нужен город и сцена.',
+      en: 'Programmes with ceremonies "on the sacred mountain", loud formats and those who need a city and a scene.',
     },
   },
-  venues: [],
-  sources: [
+  venues: [
     {
-      title: 'USGS Volcano Hazards Program — Mount Shasta',
-      url: 'https://www.usgs.gov/volcanoes/mount-shasta',
+      name: 'McCloud Hotel',
+      kind: 'lodge',
+      about: {
+        ru: 'Отреставрированный отель 1916 года в старом мельничном посёлке; принимает ретриты и встречи, можно занять весь отель.',
+        en: 'A restored 1916 hotel in an old mill village; hosts retreats and gatherings, the whole hotel can be booked.',
+      },
+      themes: ['silence', 'creative', 'burnout'],
+      audiences: ['burnedOut', 'teams', 'creatives'],
+      url: 'https://mccloudhotel.com/gatherings/',
+      checked: '2026-10-19',
+    },
+    {
+      name: 'McCloud Mercantile Hotel',
+      kind: 'lodge',
+      about: {
+        ru: 'Небольшой отель в здании 1897 года на двенадцать номеров; для ретритов есть общий зал.',
+        en: 'A small twelve-room hotel in an 1897 building; there is a great room for retreats.',
+      },
+      themes: ['creative', 'burnout'],
+      audiences: ['burnedOut', 'creatives', 'couples'],
+      url: 'https://www.mccloudmercantile.com/groups-events',
+      checked: '2026-10-19',
+    },
+    {
+      name: 'Mount Shasta Resort',
+      kind: 'lodge',
+      about: {
+        ru: 'Курорт у подножия горы с залами; принимает ретриты и корпоративные события.',
+        en: 'A resort at the foot of the mountain with event halls; hosts retreats and corporate events.',
+      },
+      themes: ['leadership', 'burnout'],
+      audiences: ['founders', 'teams'],
+      url: 'https://www.mountshastaresort.com/events-at-mount-shasta-resort/',
+      checked: '2026-10-19',
+    },
+    {
+      name: 'Shasta View Lodge',
+      kind: 'lodge',
+      about: {
+        ru: 'Девять хижин с видом на гору; лодж сдают целиком под ретриты и встречи.',
+        en: 'Nine cabins with a view of the mountain; the lodge is rented out whole for retreats and meetings.',
+      },
+      themes: ['silence', 'nature', 'burnout'],
+      audiences: ['practitioners', 'burnedOut', 'mensCircle'],
+      url: 'https://www.shastaviewlodge.com/retreats',
+      checked: '2026-10-19',
+    },
+  ],
+  sources: [
+    { title: 'Wikipedia — Mount Shasta', url: 'https://en.wikipedia.org/wiki/Mount_Shasta', accessed: '2026-10-19' },
+    { title: 'Wikipedia — Legends of Mount Shasta', url: 'https://en.wikipedia.org/wiki/Legends_of_Mount_Shasta', accessed: '2026-10-19' },
+    {
+      title: 'USDA Forest Service — Mt. Shasta Wilderness',
+      url: 'https://www.fs.usda.gov/r05/shasta-trinity/recreation/mt-shasta-wilderness',
       accessed: '2026-10-19',
     },
+    {
+      title: 'Advisory Council on Historic Preservation — Mount Shasta case',
+      url: 'https://www.achp.gov/sites/default/files/2018-07/Mount%20Shasta.pdf',
+      accessed: '2026-10-19',
+    },
+    { title: 'Visit Mt. Shasta', url: 'https://www.visitmtshasta.com/', accessed: '2026-10-19' },
   ],
 }
