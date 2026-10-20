@@ -11,7 +11,7 @@ function sample(): AcademyRegistry {
       name: 'Synergema Authentica Starseed Holon Academy',
       fullName: { ru: 'Академия', en: 'Academy' },
       url: null,
-      org: { name: 'Synergify Institute for AI' },
+      org: { name: 'Synergify n-Labs' },
     },
     courses: [
       {
@@ -119,7 +119,7 @@ describe('REGISTRY (committed LMS/registry.json)', () => {
 describe('academy.org sacred shape', () => {
   it('carries a name only — no nonprofit/legal-status keys', () => {
     expect(Object.keys(REGISTRY.academy.org)).toEqual(['name'])
-    expect(REGISTRY.academy.org.name).toBe('Synergify Institute for AI')
+    expect(REGISTRY.academy.org.name).toBe('Synergify n-Labs')
   })
 })
 

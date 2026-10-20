@@ -36,7 +36,7 @@ describe('resolveCertificate', () => {
 
   it('derives the publisher from the academy org registry in both locales', () => {
     const org = REGISTRY.academy.org.name
-    expect(org).toBe('Synergify Institute for AI')
+    expect(org).toBe('Synergify n-Labs')
     expect(resolveCertificate('en').publisher).toContain(org)
     expect(resolveCertificate('ru').publisher).toContain(org)
   })

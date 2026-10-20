@@ -11,10 +11,11 @@ const SOURCES = [
 ]
 
 describe('publisher rename drift-guard', () => {
-  it('no consumer source still hardcodes the old institute name', () => {
+  it('no consumer source still hardcodes an old institute name', () => {
     for (const rel of SOURCES) {
       const src = readFileSync(join(process.cwd(), rel), 'utf8')
       expect(src, rel).not.toContain('Mamaev Institute for AI')
+      expect(src, rel).not.toContain('Synergify Institute for AI')
     }
   })
 })

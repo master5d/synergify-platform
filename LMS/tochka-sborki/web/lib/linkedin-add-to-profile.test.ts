@@ -4,7 +4,7 @@ import { REGISTRY } from './academy/registry'
 
 const full = {
   name: 'Точка Сборки',
-  organizationName: 'Synergify Institute for AI',
+  organizationName: 'Synergify n-Labs',
   issuedAt: '2026-09-28T10:00:00.000Z',
   certId: 'abc123.XyZ_-9',
   certUrl: 'https://ai.synergify.com/certificate/verify/?c=abc123.XyZ_-9',
@@ -18,7 +18,7 @@ describe('linkedInAddToProfileUrl', () => {
     expect(u.startsWith(`${LINKEDIN_ADD_TO_PROFILE}?startTask=CERTIFICATION_NAME&`)).toBe(true)
     const p = params(u)
     expect(p.get('name')).toBe('Точка Сборки')
-    expect(p.get('organizationName')).toBe('Synergify Institute for AI')
+    expect(p.get('organizationName')).toBe('Synergify n-Labs')
     expect(p.get('issueYear')).toBe('2026')
     expect(p.get('issueMonth')).toBe('9')
     expect(p.get('certId')).toBe('abc123.XyZ_-9')
@@ -29,7 +29,7 @@ describe('linkedInAddToProfileUrl', () => {
 
   it('encodes spaces as %20 and fully escapes the nested verify URL', () => {
     const u = linkedInAddToProfileUrl(full)!
-    expect(u).toContain('organizationName=Synergify%20Institute%20for%20AI')
+    expect(u).toContain('organizationName=Synergify%20n-Labs')
     expect(u).not.toContain('+')
     expect(u).toContain('certUrl=https%3A%2F%2Fai.synergify.com%2Fcertificate%2Fverify%2F%3Fc%3Dabc123.XyZ_-9')
     // вложенные & и = не рвут внешнюю строку запроса
