@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-vedushchiy-zamysel",
+  "unit": "u7-region",
+  "locale": "en",
+  "title": "Where: a region for the idea",
+  "sourceHash": "sha256:5236acbd9ab79b9a1997f4f3072721cf1b268172ff74dbda4759d9534f9c2da1",
+  "outline": [
+    {
+      "heading": "The world is wider than the usual spots",
+      "points": [
+        {
+          "text": "A leader often picks a place by habit: where they have been, or where everyone goes.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Five kinds of places",
+      "points": [
+        {
+          "text": "This is not a ranking.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Narrative and fact",
+      "points": [
+        {
+          "text": "Many places come with stories: \"energy\", \"vortexes\", \"ancient cities under the mountain\".",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Whose land it is",
+      "points": [
+        {
+          "text": "Many retreat places have Indigenous peoples and local residents for whom the place is sacred or simply home.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The technical side is the next step",
+      "points": [
+        {
+          "text": "Permits, season, roads, the venue and prices are retreat preparation, not the choice of a region.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c7"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:4db5b5d9c391d2c50d3f30160a418365fe30b19b242f870143faa0a7d43c978c",
+        "points": [
+          "You might choose a place by habit, going where you have been before or where everyone else goes."
+        ]
+      },
+      {
+        "sourceHash": "sha256:9b5a1091c0338f759e5b8d0df315666de06b5bee2d070f61f9e930ee442c4ff4",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:dd0e83358fe92f08b4adeee1ec182ea9706c48368ea93eb921570b91972b5155",
+        "points": [
+          "Many places are linked to stories about energy, vortexes, or ancient cities under the mountain."
+        ]
+      },
+      {
+        "sourceHash": "sha256:ec05c0ba1b42273cb8a31195d5647a33d831c2439087709e3ec652ed78e5291c",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:e246e7d6afea1b295587f3f226235b1ea99e34813a85fb710ac7392aea5997ec",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

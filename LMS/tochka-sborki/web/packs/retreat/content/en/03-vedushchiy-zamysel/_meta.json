@@ -1,24 +1,61 @@
 {
   "module": 3,
   "title": "Leader: the idea, the guest, sales",
-  "description": "Leader track. Who your guest is, your own audience and a co-leader, sales against the cash plan, staying in touch with guests before arrival, the booklet and your audience before the retreat.",
-  "duration": "60 min",
+  "description": "Leader track. Who your guest is, your own audience and a co-leader, sales against the cash plan, staying in touch with guests before arrival, the booklet, your audience before the retreat and the choice of a region.",
+  "duration": "70 min",
   "level": 2,
   "units": [
-    { "slug": "u1-gost", "title": "Who your guest is and what change they seek" },
-    { "slug": "u2-auditoriya-sovedushchij", "title": "Your own audience and a co-leader" },
-    { "slug": "u3-prodazhi-kassa", "title": "Sales against the cash plan" },
-    { "slug": "u4-do-zaezda", "title": "Between the first payment and arrival" },
-    { "slug": "u5-buklet", "title": "The booklet: it sells and it promises" },
-    { "slug": "u6-auditoriya-do-retrita", "title": "Your audience before the retreat" }
+    {
+      "slug": "u1-gost",
+      "title": "Who your guest is and what change they seek"
+    },
+    {
+      "slug": "u2-auditoriya-sovedushchij",
+      "title": "Your own audience and a co-leader"
+    },
+    {
+      "slug": "u3-prodazhi-kassa",
+      "title": "Sales against the cash plan"
+    },
+    {
+      "slug": "u4-do-zaezda",
+      "title": "Between the first payment and arrival"
+    },
+    {
+      "slug": "u5-buklet",
+      "title": "The booklet: it sells and it promises"
+    },
+    {
+      "slug": "u6-auditoriya-do-retrita",
+      "title": "Your audience before the retreat"
+    },
+    {
+      "slug": "u7-region",
+      "title": "Where: a region for the idea"
+    }
   ],
   "layout": "phases",
   "objectives": [
-    { "id": "o1", "text": "Describe one concrete guest and the change they are travelling for" },
-    { "id": "o2", "text": "Estimate the group by your own audience and write down the arrangements with a co-leader" },
-    { "id": "o3", "text": "Tie the pace of sales and payment options to the venue payment schedule" },
-    { "id": "o4", "text": "Place points of contact with guests from payment to arrival and turn a cancellation into a transfer" },
-    { "id": "o5", "text": "Build a booklet that sells the week and honestly fixes what it includes" }
+    {
+      "id": "o1",
+      "text": "Describe one specific guest, the change they travel for and the region where that change will happen"
+    },
+    {
+      "id": "o2",
+      "text": "Estimate the group by your own audience and write down the arrangements with a co-leader"
+    },
+    {
+      "id": "o3",
+      "text": "Tie the pace of sales and payment options to the venue payment schedule"
+    },
+    {
+      "id": "o4",
+      "text": "Place points of contact with guests from payment to arrival and turn a cancellation into a transfer"
+    },
+    {
+      "id": "o5",
+      "text": "Build a booklet that sells the week and honestly fixes what it includes"
+    }
   ],
   "checks": [
     {
@@ -104,6 +141,20 @@
       ],
       "answer": 1,
       "explain": "People buy a week from someone they trust, and trust grows over months. It is more honest to move the plan than to push (u6, \"When to start\")."
+    },
+    {
+      "id": "c7",
+      "unit": "u7-region",
+      "objective": "o1",
+      "question": "A leader is choosing a region for a week of silence. Where does the course suggest starting?",
+      "options": [
+        "With the cheapest flight",
+        "With whether the character of the place fits the theme of the retreat and its audience",
+        "With the place that has the most reviews about its \"energy\"",
+        "With permits and the season"
+      ],
+      "answer": 1,
+      "explain": "The place is a co-author of the programme: first decide whether it fits the idea, then check the technical side (u7, \"The technical side is the next step\")."
     }
   ]
 }

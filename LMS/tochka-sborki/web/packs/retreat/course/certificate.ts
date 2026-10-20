@@ -58,7 +58,7 @@ export const CERTIFICATE: CertificateData = {
     ru: 'Одна сделка — две стороны.\nДаты, деньги и отмены сверены.',
     en: 'One deal — two sides.\nDates, money and cancellations line up.',
   },
-  footerMeta: { ru: '27 уроков · 6 модулей', en: '27 lessons · 6 modules' },
+  footerMeta: { ru: '28 уроков · 6 модулей', en: '28 lessons · 6 modules' },
   founderName: { ru: 'Саша Мамаев', en: 'Sasha Mamaev' },
   founderTitle: { ru: 'основатель · академия S.A.S.H.A', en: 'Founder · S.A.S.H.A academy' },
   publisher: {
