@@ -2,43 +2,77 @@
   "module": 4,
   "title": "The first step up",
   "description": "Which meeting for 2–7 people to hold first, whom to invite, how to tell your current clients, who stays one to one, and the plan of the step in “My map”.",
-  "duration": "TODO",
+  "duration": "40 min",
   "level": 2,
   "units": [
-    {
-      "slug": "u1-kakaya-vstrecha",
-      "title": "Which meeting for 2 to 7"
-    },
-    {
-      "slug": "u2-kogo-pozvat",
-      "title": "Whom to invite"
-    },
-    {
-      "slug": "u3-kak-skazat",
-      "title": "Through the client's eyes: telling your current clients"
-    },
-    {
-      "slug": "u4-plan",
-      "title": "The plan and “My map”"
-    }
+    { "slug": "u1-kakaya-vstrecha", "title": "Which meeting for 2 to 7" },
+    { "slug": "u2-kogo-pozvat", "title": "Whom to invite" },
+    { "slug": "u3-kak-skazat", "title": "Through the client's eyes: telling your current clients" },
+    { "slug": "u4-plan", "title": "The plan and “My map”" }
   ],
+  "layout": "phases",
   "objectives": [
-    {
-      "id": "o1",
-      "text": "Choose one of three forms of a meeting for 2–7 people that suits your method."
-    },
-    {
-      "id": "o2",
-      "text": "Draw up a list of 3–7 people and the criteria by which you choose them."
-    },
-    {
-      "id": "o3",
-      "text": "Tell your clients about the step so that no one feels abandoned, and decide who stays one to one."
-    },
-    {
-      "id": "o4",
-      "text": "Put together the plan of the step with a date and record it in “My map” on the ladder."
-    }
+    { "id": "o1", "text": "Choose one of three forms of a meeting for 2–7 people that suits your method" },
+    { "id": "o2", "text": "Draw up a list of 3–7 people and the criteria by which you choose them" },
+    { "id": "o3", "text": "Tell your clients about the step so that no one feels abandoned, and decide who stays one to one" },
+    { "id": "o4", "text": "Put together the plan of the step with a date and record it in “My map” on the ladder" }
   ],
-  "checks": []
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-kakaya-vstrecha",
+      "objective": "o1",
+      "question": "A meta-analysis of psychotherapy: with the same protocol, group and individual formats gave the same result. What follows from this?",
+      "options": [
+        "It is time to move all clients into a group",
+        "A group is no worse in result, but it is not for everyone — the choice remains",
+        "One-to-one work is no longer needed",
+        "The finding can be carried over to coaching without caveats"
+      ],
+      "answer": 1,
+      "explain": "An equal result does not mean everyone needs a group. Reviews say plainly that the group format is not for everyone, and there is no systematic review for coaching (u1, “What research says”)."
+    },
+    {
+      "id": "c2",
+      "unit": "u2-kogo-pozvat",
+      "objective": "o2",
+      "question": "Whom is it better not to invite to a first small group?",
+      "options": [
+        "A client with a similar request",
+        "A person from the waiting list",
+        "A client who shows the signs from the lesson on the edge of competence",
+        "A client's friend who asked about a group"
+      ],
+      "answer": 2,
+      "explain": "A client with such signs needs a specialist, not a group. This is the third selection criterion (u2, “Three criteria”)."
+    },
+    {
+      "id": "c3",
+      "unit": "u3-kak-skazat",
+      "objective": "o3",
+      "question": "How is it better to tell current clients about a first small group?",
+      "options": [
+        "In one mailing to everyone at once",
+        "Each in their own conversation: what changes for them and what stays as it was",
+        "Say nothing until the group is full",
+        "Move everyone into the group from next week"
+      ],
+      "answer": 1,
+      "explain": "A mailing sounds like “I am being handed over”. Their own conversation lets a client hear “I am being offered more” and learn whether their sessions stay (u3, “Each their own conversation”)."
+    },
+    {
+      "id": "c4",
+      "unit": "u4-plan",
+      "objective": "o4",
+      "question": "The meeting you have in mind is not in the ladder's list of formats. How do you record the step in “My map”?",
+      "options": [
+        "You cannot: only a format from the list can be chosen",
+        "Through “my own format” with the name of the meeting, a date and a sign",
+        "Choose any similar format from the list",
+        "Write the meeting in the “Where I am now” field"
+      ],
+      "answer": 1,
+      "explain": "“My map” has “my own format”: you write in the name of a meeting that is not in the list, with a date and a sign next to it (u4, ““My map” on the ladder”)."
+    }
+  ]
 }

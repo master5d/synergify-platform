@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-shag",
+  "unit": "u3-kak-skazat",
+  "locale": "ru",
+  "title": "Глазами клиента: как сказать нынешним",
+  "sourceHash": "sha256:cdf1a47aca7dfc2b70e9dda2bde3bc1f5b08675d57cdea8cca261cfe98e435f2",
+  "outline": [
+    {
+      "heading": "Что клиент теряет и что получает",
+      "points": [
+        {
+          "text": "Теряет — всё внимание ему одному.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Кто остаётся один на один",
+      "points": [
+        {
+          "text": "Верхняя ступень не лучше нижней.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Независимость — цель, а не угроза",
+      "points": [
+        {
+          "text": "Глобальный кодекс этики просит поддерживать независимость клиента.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Каждому — свой разговор",
+      "points": [
+        {
+          "text": "Рассылка «у нас теперь группа» звучит как «меня отдают».",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Учебный пример",
+      "points": [
+        {
+          "text": "Ведущая говорит с тремя клиентками по-разному.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:00fc83c35479e3dcd9c02a6497119ee29b87544304d33d65a3d3e7470b67d4b1",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:b0fcd08e7acf845192f016ff718bd423e7fe82b8d8dcba9db1121cab05ae090c",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:24167ae40133f74dc68546426c7bdf87ae942e59733d5d6cbc5a5274b2a886c5",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:dfbafebbdfd8e27c041e4fd444b6287c74e009185ee10d7077e9160121a31f31",
+        "points": [
+          "Сообщение о появлении группы может звучать для клиента так, будто его отдают."
+        ]
+      },
+      {
+        "sourceHash": "sha256:57bb604186cee837a11f6fa01fa33d24f56fdb495a4c24cd746df775010f3872",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

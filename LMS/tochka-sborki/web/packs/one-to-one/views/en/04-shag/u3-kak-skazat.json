@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-shag",
+  "unit": "u3-kak-skazat",
+  "locale": "en",
+  "title": "Through the client's eyes: telling your current clients",
+  "sourceHash": "sha256:d4ac399ff1aea6ba02fbc590ee851dcfff2c9651d290519ce33dc4477b7f799c",
+  "outline": [
+    {
+      "heading": "What the client loses and what they gain",
+      "points": [
+        {
+          "text": "They lose all the attention on them alone.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Who stays one to one",
+      "points": [
+        {
+          "text": "A higher step is not better than a lower one.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Independence is a goal, not a threat",
+      "points": [
+        {
+          "text": "The Global Code of Ethics asks you to support the client's independence.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Each their own conversation",
+      "points": [
+        {
+          "text": "A mailing saying “we now have a group” sounds like “I am being handed over”.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A worked example",
+      "points": [
+        {
+          "text": "The leader talks to three clients in different ways.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:013b9e90ba4fce1bc1c84baed1dad8cd2a7bc223feb4e89040f710d73fdf0715",
+        "points": [
+          "Your clients lose all the attention on them alone."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e3c0cd8b86a17a6d39d700cfe74ea9688a052b39944d4cfbf7e59b3e6f4b500b",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:efdbac391b81bb9213e7a27af29d7c48bf6b8ead9d3267e828947558c3e3ad98",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:5a0b07029f31f4cdcae566cff99f78c5ad4bbd1d98167782c9e1daf63347f6d1",
+        "points": [
+          "A mailing saying you now have a group can make your clients feel like they are being handed over."
+        ]
+      },
+      {
+        "sourceHash": "sha256:0eba34147777d2e0890f5fab7429b6f87a96881b1bed94a3e6ad261ce7878fe6",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

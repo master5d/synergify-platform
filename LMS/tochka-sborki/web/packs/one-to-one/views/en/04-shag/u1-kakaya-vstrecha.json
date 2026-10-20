@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-shag",
+  "unit": "u1-kakaya-vstrecha",
+  "locale": "en",
+  "title": "Which meeting for 2 to 7",
+  "sourceHash": "sha256:fa62dc2a07ba63c549ac403c36238fe01930e9d931d378635525631be997ebc2",
+  "outline": [
+    {
+      "heading": "The “one to a few” step",
+      "points": [
+        {
+          "text": "The next step of the ladder is two to seven people.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Three forms",
+      "points": [
+        {
+          "text": "A small group of your clients.",
+          "origin": "extract"
+        },
+        {
+          "text": "A couple or a family.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What research says",
+      "points": [
+        {
+          "text": "A group is no worse in result, but it is not for everyone.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A worked example",
+      "points": [
+        {
+          "text": "In module 02, four of the leader's six steps got “yes” or “with a change”.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:f8803c0d7981f31087c8af8641b36e03ac595565d4c1bc06ed334a188eb9c4c8",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:62bd6e00dd558c898c430393fac800d75009f66cc8643fcbd1a37560e8035d7c",
+        "points": [
+          "You may work with a small group of your clients.",
+          "This could also be a couple or a family."
+        ]
+      },
+      {
+        "sourceHash": "sha256:04fd5bdbd9c08faf01a8b11bdafd214b7d10f511fa5cbf799b2dc319b4fa6c44",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:66126b05dbea14ffa69a8f7159c390f844b527ee3be73a5cb1efad79e28d1d95",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

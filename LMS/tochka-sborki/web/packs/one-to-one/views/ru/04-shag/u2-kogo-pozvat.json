@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "04-shag",
+  "unit": "u2-kogo-pozvat",
+  "locale": "ru",
+  "title": "Кого позвать",
+  "sourceHash": "sha256:8d44b3beef5df3a7e91f630e603d9b6487123297663f2a81896051f2ff4439e4",
+  "outline": [
+    {
+      "heading": "Откуда берутся участники",
+      "points": [
+        {
+          "text": "Обычно у ведущего есть три источника: нынешние клиенты с похожим запросом; их знакомые, которые о тебе спрашивали; лист ожидания.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Отбор",
+      "points": [
+        {
+          "text": "Обзоры группового коучинга говорят прямо: групповой формат подходит не всем, участников отбирают заранее.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Три критерия",
+      "points": [
+        {
+          "text": "Для первой встречи хватает трёх критериев.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Открытая или закрытая",
+      "points": [
+        {
+          "text": "В открытой группе новички оказываются в неравном положении.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Учебный пример",
+      "points": [
+        {
+          "text": "У ведущей пять человек в листе ожидания и двое клиентов, которые спрашивали о группе.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Не всех сразу",
+      "points": [
+        {
+          "text": "Чем точнее список, тем больше шансов, что встреча станет началом, а не разовым опытом.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:dc73ef706efbd2d09030d09a7a4a888a653ebf4c71b5023b387650bd9ce023f6",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:9322401b021fe05f466a49820682aa523e169b4b2b17cb08eddfdc1cc02ca03d",
+        "points": [
+          "Обзоры группового коучинга говорят прямо: этот формат подходит не всем, поэтому тебе нужно отбирать участников заранее."
+        ]
+      },
+      {
+        "sourceHash": "sha256:8b746df184bf8545f938d043d79fb5568ab413ccc047a89ef89bd77a9a95dbad",
+        "points": [
+          "Для первой встречи тебе вполне хватит трёх критериев."
+        ]
+      },
+      {
+        "sourceHash": "sha256:3532e6b65dfd2a80dc166fc13f98155d274b978e685d0366e89af87b120007bc",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:6fa6ebed360f0787d6be6ec61fcfbc72ff606263b5d42abf781c4bdec015657e",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:cfb8338b6c13818302a1f6142023fa4f1cad280f6d09f992d7a3300287b3b97a",
+        "verbatim": "review"
+      }
+    ]
+  }
+}
