@@ -17,16 +17,17 @@ Fill it in before arrival. Only the leader sees the answers, and the venue kitch
 ## Practices
 
 7. Are there limits on physical load the leader should know about for your safety in practices? Optional. Whether a practice suits you stays your decision, with your doctor.
-8. Touch in practices: yes / no / ask me each time.
+8. Sensitivity to scents, smoke and loud sounds: essential oils, incense, a gong. Optional.
+9. Touch in practices: yes / no / ask me each time.
 
 ## Travel
 
-9. Arrival flight: number, date, time, airport.
-10. Departure flight: number, date, time, airport.
-11. Do you need to be met at the airport.
+10. Arrival flight: number, date, time, airport.
+11. Departure flight: number, date, time, airport.
+12. Do you need to be met at the airport.
 
 ## Other
 
-12. Do you have travel insurance for the retreat dates.
-13. Consent to photos and video: yes / only without my face / no.
-14. Anything else we should know so you feel well.
+13. Do you have travel insurance for the retreat dates.
+14. Consent to photos and video: yes / only without my face / no.
+15. Anything else we should know so you feel well.

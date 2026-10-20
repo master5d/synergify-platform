@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { answersCsvHeader, answersTemplateCsv, DEFAULT_ON, formText, normalizeOn, QUESTIONS, SECTION_TITLE, SECTION_WHY } from './questions'
+import { SAFETY_COLUMNS } from './answers'
 
 const LANGS = ['ru', 'en'] as const
 const sentences = (t: string) => t.split(/(?<=[.!?])\s+/).filter(Boolean)
@@ -33,7 +34,7 @@ describe('каталог вопросов анкеты', () => {
 
 describe('текст анкеты для чужого сервиса', () => {
   it('без раздела здоровья нет ни его заголовка, ни пояснения', () => {
-    const on = DEFAULT_ON.filter((id) => !['loadLimits', 'breathingLimits', 'touch'].includes(id))
+    const on = DEFAULT_ON.filter((id) => !['loadLimits', 'breathingLimits', 'senses', 'touch'].includes(id))
     for (const lang of LANGS) {
       const t = formText(on, lang)
       expect(t).not.toContain(SECTION_TITLE.health[lang])
@@ -58,5 +59,15 @@ describe('шаблон CSV ответов', () => {
     expect(answersCsvHeader(DEFAULT_ON, 'ru')).toEqual(QUESTIONS.map((q) => q.short.ru))
     expect(answersCsvHeader(['diet'], 'en')).toEqual(['Guest', 'Diet'])
     expect(answersTemplateCsv(DEFAULT_ON, 'ru').startsWith('\uFEFF')).toBe(true)
+  })
+  it('\u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C \u043A \u0437\u0430\u043F\u0430\u0445\u0430\u043C, \u0434\u044B\u043C\u0443 \u0438 \u0437\u0432\u0443\u043A\u0443 \u2014 \u0432 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435, \u043F\u043E\u0441\u043B\u0435 \u0434\u044B\u0445\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043F\u0440\u0430\u043A\u0442\u0438\u043A, \u0442\u043E\u043B\u044C\u043A\u043E \u0434\u043B\u044F \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438', () => {
+    const ids = QUESTIONS.map((q) => q.id)
+    const q = QUESTIONS.find((x) => x.id === 'senses')
+    expect(q?.section).toBe('health')
+    expect(q?.routes).toEqual(['safety'])
+    expect(q?.required).toBe(false)
+    expect(ids.indexOf('senses')).toBe(ids.indexOf('breathingLimits') + 1)
+    expect(SAFETY_COLUMNS).toContain('senses')
+    expect(formText(DEFAULT_ON, 'ru')).toContain('\u0427\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C \u043A \u0437\u0430\u043F\u0430\u0445\u0430\u043C, \u0434\u044B\u043C\u0443 \u0438 \u0433\u0440\u043E\u043C\u043A\u0438\u043C \u0437\u0432\u0443\u043A\u0430\u043C')
   })
 })

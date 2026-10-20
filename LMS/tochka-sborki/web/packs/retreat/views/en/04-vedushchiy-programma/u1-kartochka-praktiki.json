@@ -5,7 +5,7 @@
   "unit": "u1-kartochka-praktiki",
   "locale": "en",
   "title": "An honest practice card",
-  "sourceHash": "sha256:f8a857d02552812bf5f5a702a6bcef814eef1a7ffb7616702f9b6439e4be7e06",
+  "sourceHash": "sha256:e454e4c2fbfbf8726a59add760cdc68421f53ab9a66485de8ed41be94c53737f",
   "outline": [
     {
       "heading": "How not to write it",
@@ -32,6 +32,36 @@
       "points": [
         {
           "text": "Template: practice card.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Who brings what",
+      "points": [
+        {
+          "text": "It helps to split the \"what it needs\" list into three parts: what the venue provides (the hall, mats, sometimes blankets), what the leader brings (a gong, a speaker, oils, candles) and what the guest packs (a water bottle, warm clothes, their own mat if the venue does not provide them).",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Scent, smoke and sound",
+      "points": [
+        {
+          "text": "Essential oils, incense, sage and palo santo, a loud gong do not suit everyone.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Care next to the mat",
+      "points": [
+        {
+          "text": "Next to the group — water, tissues and a couple of spare blankets.",
           "origin": "extract"
         }
       ],
@@ -80,6 +110,23 @@
         "points": [
           "This is a template for a practice card."
         ]
+      },
+      {
+        "sourceHash": "sha256:792f30e2807216664456f393073bbde3955f9f30aac55807a3e4a65d7c8231b8",
+        "points": [
+          "You can split the list of needs into three parts: what the venue provides, what the leader brings, and what the guest packs.",
+          "The venue provides the hall, mats, and sometimes blankets.",
+          "The leader brings a gong, a speaker, oils, and candles.",
+          "The guest packs a water bottle, warm clothes, and their own mat if the venue does not provide them."
+        ]
+      },
+      {
+        "sourceHash": "sha256:9fd2af0ac675d467f4d201369d4c32147470fa252cef81544205c0cf0698ee2c",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:8931649b3b78458ed24ae4f0e2773fbf4aca6555f17d149dea393cf4a2966f37",
+        "verbatim": "near-identical"
       },
       {
         "sourceHash": "sha256:2c824c7ced3de6fad064d21d0c524ca601ddd86c95c19bceb4c48c192049a588",

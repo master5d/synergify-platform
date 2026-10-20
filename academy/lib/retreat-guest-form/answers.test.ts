@@ -123,7 +123,7 @@ describe('лист прибытия и проверки', () => {
     expect(chef[0]).toBe('\uFEFFGuest,Diet,Allergies,How serious,Does not eat')
     expect(chef[1]).toBe('Анна К.,other: без лактозы,,life-threatening,')
     const safety = safetyToCsv(s, 'ru').split('\r\n')
-    expect(safety[0]).toBe('\uFEFFГость;Телефон в дороге;Экстренный контакт;Аллергии;Насколько серьёзно;Нагрузка;Дыхательные практики;Касание;Страховка;Фото и видео')
+    expect(safety[0]).toBe('\uFEFFГость;Телефон в дороге;Экстренный контакт;Аллергии;Насколько серьёзно;Нагрузка;Дыхательные практики;Запахи, дым, звук;Касание;Страховка;Фото и видео')
     expect(safety[0]).not.toContain('Питание')
     expect(safety.filter(Boolean)).toHaveLength(2)
   })

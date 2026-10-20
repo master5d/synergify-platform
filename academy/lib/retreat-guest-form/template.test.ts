@@ -32,8 +32,8 @@ describe('шаблон анкеты курса и сводка инструме�
       for (const o of options) expect(unknown(lang, 'diet', o), o).toBe(false)
     })
 
-    it(`${lang}: каждый вариант касания из пункта 8 узнаётся`, () => {
-      const options = optionsOf(lang, '8')
+    it(`${lang}: каждый вариант касания из пункта 9 узнаётся`, () => {
+      const options = optionsOf(lang, '9')
       expect(options).toHaveLength(3)
       for (const o of options) expect(unknown(lang, 'touch', o), o).toBe(false)
     })

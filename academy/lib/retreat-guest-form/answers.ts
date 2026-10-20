@@ -194,7 +194,7 @@ function routedCsv(s: Summary, ids: QuestionId[], lang: Lang): string {
 }
 
 export const CHEF_COLUMNS: QuestionId[] = ['name', 'diet', 'allergies', 'allergySeverity', 'nonEat']
-export const SAFETY_COLUMNS: QuestionId[] = ['name', 'phone', 'emergency', 'allergies', 'allergySeverity', 'loadLimits', 'breathingLimits', 'touch', 'insurance', 'photo']
+export const SAFETY_COLUMNS: QuestionId[] = ['name', 'phone', 'emergency', 'allergies', 'allergySeverity', 'loadLimits', 'breathingLimits', 'senses', 'touch', 'insurance', 'photo']
 
 /** Для шефа: питание и аллергии, без рейсов и здоровья. */
 export const chefToCsv = (s: Summary, lang: Lang) => routedCsv(s, CHEF_COLUMNS, lang)

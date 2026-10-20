@@ -12,7 +12,7 @@ export type QuestionId =
   | 'name' | 'phone' | 'emergency'
   | 'flightIn' | 'dateIn' | 'timeIn' | 'airport' | 'flightOut' | 'dateOut' | 'timeOut' | 'pickup'
   | 'diet' | 'allergies' | 'allergySeverity' | 'nonEat'
-  | 'loadLimits' | 'breathingLimits' | 'touch'
+  | 'loadLimits' | 'breathingLimits' | 'senses' | 'touch'
   | 'insurance' | 'photo' | 'expectations'
 export type ChoiceId = string
 
@@ -134,6 +134,11 @@ export const QUESTIONS: readonly Question[] = [
     id: 'breathingLimits', section: 'health', routes: ['safety'], kind: 'text', required: false,
     text: { ru: 'Ограничения для дыхательных практик', en: 'Limits for breathing practices' },
     short: { ru: 'Дыхательные практики', en: 'Breathing practices' },
+  },
+  {
+    id: 'senses', section: 'health', routes: ['safety'], kind: 'text', required: false,
+    text: { ru: 'Чувствительность к запахам, дыму и громким звукам', en: 'Sensitivity to scents, smoke and loud sounds' },
+    short: { ru: 'Запахи, дым, звук', en: 'Scents, smoke, sound' },
   },
   {
     id: 'touch', section: 'health', routes: ['safety'], kind: 'choice', choices: ['yes', 'no', 'ask'], required: false,
