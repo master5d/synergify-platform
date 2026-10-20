@@ -1,0 +1,36 @@
+{
+  "module": 2,
+  "title": "A method on one page",
+  "description": "What in your session repeats and what rests only on you; the session in steps; testing the method on two people.",
+  "duration": "TODO",
+  "level": 1,
+  "units": [
+    {
+      "slug": "u1-povtoryaemoe",
+      "title": "What repeats and what rests on you"
+    },
+    {
+      "slug": "u2-struktura",
+      "title": "The session in steps"
+    },
+    {
+      "slug": "u3-na-dvoih",
+      "title": "The test: a method for two"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Split your last three sessions into elements that repeat and elements that are personal."
+    },
+    {
+      "id": "o2",
+      "text": "Describe a session in 4–7 steps, with the purpose and the time of each step."
+    },
+    {
+      "id": "o3",
+      "text": "For each step, decide whether it holds two people at once and what to change in it."
+    }
+  ],
+  "checks": []
+}

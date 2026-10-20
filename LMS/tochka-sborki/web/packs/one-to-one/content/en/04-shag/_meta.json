@@ -1,0 +1,44 @@
+{
+  "module": 4,
+  "title": "The first step up",
+  "description": "Which meeting for 2–7 people to hold first, whom to invite, how to tell your current clients, who stays one to one, and the plan of the step in “My map”.",
+  "duration": "TODO",
+  "level": 2,
+  "units": [
+    {
+      "slug": "u1-kakaya-vstrecha",
+      "title": "Which meeting for 2 to 7"
+    },
+    {
+      "slug": "u2-kogo-pozvat",
+      "title": "Whom to invite"
+    },
+    {
+      "slug": "u3-kak-skazat",
+      "title": "Through the client's eyes: telling your current clients"
+    },
+    {
+      "slug": "u4-plan",
+      "title": "The plan and “My map”"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Choose one of three forms of a meeting for 2–7 people that suits your method."
+    },
+    {
+      "id": "o2",
+      "text": "Draw up a list of 3–7 people and the criteria by which you choose them."
+    },
+    {
+      "id": "o3",
+      "text": "Tell your clients about the step so that no one feels abandoned, and decide who stays one to one."
+    },
+    {
+      "id": "o4",
+      "text": "Put together the plan of the step with a date and record it in “My map” on the ladder."
+    }
+  ],
+  "checks": []
+}

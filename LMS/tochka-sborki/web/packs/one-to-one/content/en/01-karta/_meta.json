@@ -1,0 +1,44 @@
+{
+  "module": 1,
+  "title": "A map of your practice",
+  "description": "Where your practice stands on the ladder, which signs show that one-to-one work has become a ceiling, what the client really gets, and where your competence ends.",
+  "duration": "TODO",
+  "level": 1,
+  "units": [
+    {
+      "slug": "u1-gde-ya",
+      "title": "Where I stand on the ladder"
+    },
+    {
+      "slug": "u2-priznaki-potolka",
+      "title": "Signs of a ceiling"
+    },
+    {
+      "slug": "u3-glazami-klienta",
+      "title": "Through the client's eyes: what they get"
+    },
+    {
+      "slug": "u4-granica",
+      "title": "The edge of your competence"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Describe your practice by the three axes of the ladder: step, channel and event class."
+    },
+    {
+      "id": "o2",
+      "text": "Tell apart, in your own practice, the signs of “time to step up” from the signs of “too early”."
+    },
+    {
+      "id": "o3",
+      "text": "For each client, separate what they get from the method and what they get from their relationship with you."
+    },
+    {
+      "id": "o4",
+      "text": "Name the signs at which a practitioner stops and refers the client on, and draw up your own referral list."
+    }
+  ],
+  "checks": []
+}

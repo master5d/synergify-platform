@@ -1,0 +1,10 @@
+﻿Line,My value,Worked example,How to work it out
+Client hours per week,,20,how many sessions you run in an ordinary week
+Price of a session,,60,how much a client pays for one session
+Hours outside sessions per week,,8,booking and messages + bookkeeping + preparation + promotion + taxes
+Unpaid cancellations per week,,1,how many sessions fall through without payment on average
+Revenue of the week,,,(client hours − cancellations) × price of a session
+Price of a working hour,,,revenue of the week ÷ (client hours + hours outside sessions)
+Limit of client hours,,22,how many hours a week you can hold without losing attention and strength
+Ceiling of the week,,,limit of client hours × price of a session
+What follows,,,growth within the step is only price or hours; above the ceiling only the format

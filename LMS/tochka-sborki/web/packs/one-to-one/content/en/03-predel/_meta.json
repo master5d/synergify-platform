@@ -1,0 +1,36 @@
+{
+  "module": 3,
+  "title": "Hours, price, limit",
+  "description": "How many client hours you really have, what an hour is worth once you count the work outside sessions, how your cycle works, and where one-to-one work ends in money and strength.",
+  "duration": "TODO",
+  "level": 2,
+  "units": [
+    {
+      "slug": "u1-chasy-i-cena",
+      "title": "Hours and the price of an hour"
+    },
+    {
+      "slug": "u2-cikl",
+      "title": "The cycle and regularity"
+    },
+    {
+      "slug": "u3-predel",
+      "title": "Where the limit is"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "o1",
+      "text": "Work out the price of every working hour, not only of a session."
+    },
+    {
+      "id": "o2",
+      "text": "Describe your cycle: its length, frequency, and the rules for rescheduling and cancelling."
+    },
+    {
+      "id": "o3",
+      "text": "Find your limit of hours per week and the ceiling of income at your current price."
+    }
+  ],
+  "checks": []
+}

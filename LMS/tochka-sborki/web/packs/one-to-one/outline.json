@@ -1,0 +1,77 @@
+{
+  "name": { "ru": "Один на один и дальше", "en": "One to One and Beyond" },
+  "modules": [
+    {
+      "slug": "01-karta",
+      "title": { "ru": "Карта практики", "en": "A map of your practice" },
+      "description": {
+        "ru": "Где твоя практика стоит на лесенке, по каким признакам работа один на один становится потолком, что на самом деле получает клиент и где кончается твоя компетенция.",
+        "en": "Where your practice stands on the ladder, which signs show that one-to-one work has become a ceiling, what the client really gets, and where your competence ends."
+      },
+      "level": 1,
+      "units": [
+        { "slug": "u1-gde-ya", "title": { "ru": "Где я на лесенке", "en": "Where I stand on the ladder" },
+          "objective": { "ru": "Описать свою практику тремя осями лесенки: ступень, канал и класс события.", "en": "Describe your practice by the three axes of the ladder: step, channel and event class." } },
+        { "slug": "u2-priznaki-potolka", "title": { "ru": "Признаки потолка", "en": "Signs of a ceiling" },
+          "objective": { "ru": "Отличить у себя признаки «пора выше» от признаков «рано».", "en": "Tell apart, in your own practice, the signs of “time to step up” from the signs of “too early”." } },
+        { "slug": "u3-glazami-klienta", "title": { "ru": "Глазами клиента: что он получает", "en": "Through the client's eyes: what they get" },
+          "objective": { "ru": "Для каждого клиента разделить, что он получает от метода, а что от отношений с тобой.", "en": "For each client, separate what they get from the method and what they get from their relationship with you." } },
+        { "slug": "u4-granica", "title": { "ru": "Граница компетенции", "en": "The edge of your competence" },
+          "objective": { "ru": "Назвать признаки, при которых практик останавливается и передаёт клиента, и составить свой список «куда передавать».", "en": "Name the signs at which a practitioner stops and refers the client on, and draw up your own referral list." } }
+      ]
+    },
+    {
+      "slug": "02-metod",
+      "title": { "ru": "Метод на одной странице", "en": "A method on one page" },
+      "description": {
+        "ru": "Что в твоей сессии повторяется, а что держится только на тебе; структура сессии по шагам; проверка метода на двоих.",
+        "en": "What in your session repeats and what rests only on you; the session in steps; testing the method on two people."
+      },
+      "level": 1,
+      "units": [
+        { "slug": "u1-povtoryaemoe", "title": { "ru": "Что повторяется, а что держится на тебе", "en": "What repeats and what rests on you" },
+          "objective": { "ru": "Разложить последние три сессии на повторяемые элементы и личные.", "en": "Split your last three sessions into elements that repeat and elements that are personal." } },
+        { "slug": "u2-struktura", "title": { "ru": "Структура сессии по шагам", "en": "The session in steps" },
+          "objective": { "ru": "Описать сессию в 4–7 шагах с целью и временем каждого шага.", "en": "Describe a session in 4–7 steps, with the purpose and the time of each step." } },
+        { "slug": "u3-na-dvoih", "title": { "ru": "Проверка: метод на двоих", "en": "The test: a method for two" },
+          "objective": { "ru": "Для каждого шага решить, выдержит ли он двух человек сразу, и что в нём поменять.", "en": "For each step, decide whether it holds two people at once and what to change in it." } }
+      ]
+    },
+    {
+      "slug": "03-predel",
+      "title": { "ru": "Часы, цена, предел", "en": "Hours, price, limit" },
+      "description": {
+        "ru": "Сколько клиентских часов у тебя на самом деле, сколько стоит час с учётом работы вне сессий, как устроен цикл и где работа один на один кончается по деньгам и силам.",
+        "en": "How many client hours you really have, what an hour is worth once you count the work outside sessions, how your cycle works, and where one-to-one work ends in money and strength."
+      },
+      "level": 2,
+      "units": [
+        { "slug": "u1-chasy-i-cena", "title": { "ru": "Часы и цена часа", "en": "Hours and the price of an hour" },
+          "objective": { "ru": "Посчитать цену всего рабочего часа, а не только сессии.", "en": "Work out the price of every working hour, not only of a session." } },
+        { "slug": "u2-cikl", "title": { "ru": "Цикл и регулярность", "en": "The cycle and regularity" },
+          "objective": { "ru": "Описать свой цикл: длину, частоту, правила переноса и отмены.", "en": "Describe your cycle: its length, frequency, and the rules for rescheduling and cancelling." } },
+        { "slug": "u3-predel", "title": { "ru": "Где предел", "en": "Where the limit is" },
+          "objective": { "ru": "Найти свой предел часов в неделю и потолок дохода при нынешней цене.", "en": "Find your limit of hours per week and the ceiling of income at your current price." } }
+      ]
+    },
+    {
+      "slug": "04-shag",
+      "title": { "ru": "Первый шаг вверх", "en": "The first step up" },
+      "description": {
+        "ru": "Какую встречу на 2–7 человек провести первой, кого позвать, как сказать нынешним клиентам, кто остаётся один на один, и план шага в «Моей карте».",
+        "en": "Which meeting for 2–7 people to hold first, whom to invite, how to tell your current clients, who stays one to one, and the plan of the step in “My map”."
+      },
+      "level": 2,
+      "units": [
+        { "slug": "u1-kakaya-vstrecha", "title": { "ru": "Какая встреча на 2–7", "en": "Which meeting for 2 to 7" },
+          "objective": { "ru": "Выбрать одну из трёх форм встречи на 2–7 человек под свой метод.", "en": "Choose one of three forms of a meeting for 2–7 people that suits your method." } },
+        { "slug": "u2-kogo-pozvat", "title": { "ru": "Кого позвать", "en": "Whom to invite" },
+          "objective": { "ru": "Составить список из 3–7 человек и критерии, по которым ты их выбираешь.", "en": "Draw up a list of 3–7 people and the criteria by which you choose them." } },
+        { "slug": "u3-kak-skazat", "title": { "ru": "Глазами клиента: как сказать нынешним", "en": "Through the client's eyes: telling your current clients" },
+          "objective": { "ru": "Сказать клиентам о шаге так, чтобы никто не почувствовал себя брошенным, и решить, кто остаётся один на один.", "en": "Tell your clients about the step so that no one feels abandoned, and decide who stays one to one." } },
+        { "slug": "u4-plan", "title": { "ru": "План и «Моя карта»", "en": "The plan and “My map”" },
+          "objective": { "ru": "Собрать план шага с датой и записать его в «Мою карту» лесенки.", "en": "Put together the plan of the step with a date and record it in “My map” on the ladder." } }
+      ]
+    }
+  ]
+}
