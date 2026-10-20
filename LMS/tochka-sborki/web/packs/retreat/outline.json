@@ -59,7 +59,9 @@
         { "slug": "u5-buklet", "title": { "ru": "Буклет: продаёт и обещает", "en": "The booklet: it sells and it promises" },
           "objective": { "ru": "Собрать буклет, который продаёт неделю и честно фиксирует условия: что включено, что нет, как записаться и когда возможен возврат.", "en": "Build a booklet that sells the week and honestly fixes the terms: what is included, what is not, how to book and when a refund is possible." } },
         { "slug": "u6-auditoriya-do-retrita", "title": { "ru": "Аудитория до ретрита", "en": "Your audience before the retreat" },
-          "objective": { "ru": "Выбрать один-два канала и составить промо-календарь так, чтобы публикации начались задолго до продаж.", "en": "Pick one or two channels and make a promotion calendar so that posting starts well before sales." } }
+          "objective": { "ru": "Выбрать один-два канала и составить промо-календарь так, чтобы публикации начались задолго до продаж.", "en": "Pick one or two channels and make a promotion calendar so that posting starts well before sales." } },
+        { "slug": "u7-region", "title": { "ru": "Где: регион под замысел", "en": "Where: a region for the idea" },
+          "objective": { "ru": "Подобрать к теме ретрита и своей аудитории три непохожих региона и объяснить выбор, отделяя нарратив места от фактов.", "en": "Pick three different regions for the theme of the retreat and your audience and explain the choice, separating the narrative of a place from facts." } }
       ]
     },
     {

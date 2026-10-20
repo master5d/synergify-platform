@@ -24,7 +24,7 @@ const RAW: RawEco = {
       key: 'learn',
       title: { ru: 'Читай', en: 'Read' },
       nodes: [
-        { label: { ru: 'Курс (27 уроков, два пути)', en: 'Course (27 lessons, two paths)' }, status: 'live' },
+        { label: { ru: 'Курс (28 уроков, два пути)', en: 'Course (28 lessons, two paths)' }, status: 'live' },
         { label: { ru: 'Шпаргалка и карта путей', en: 'Cheat sheet & map of paths' }, status: 'live' },
         { label: { ru: 'Шаблоны для практики', en: 'Templates for practice' }, status: 'live' },
       ],
