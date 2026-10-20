@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-predel",
+  "unit": "u2-cikl",
+  "locale": "ru",
+  "title": "Цикл и регулярность",
+  "sourceHash": "sha256:911ec159f114ff9053dd9fe9e691521064f6552c6980ce86de412514c026126f",
+  "outline": [
+    {
+      "heading": "Регулярное и цикл",
+      "points": [
+        {
+          "text": "На лесенке у класса события три значения: разовое, регулярное, цикл.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Длительность и привязка",
+      "points": [
+        {
+          "text": "Бесконечные встречи без цели кормят привязку из модуля 01.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Переносы и отмены",
+      "points": [
+        {
+          "text": "Открытых данных о доле отмен у коучей и телесных практиков нет.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Учебный пример",
+      "points": [
+        {
+          "text": "У ведущей в среднем одна неоплаченная отмена в неделю.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "«У меня не отменяют»",
+      "points": [
+        {
+          "text": "Невидимая отмена — тоже потерянный час.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:7e834c1ede197cc6a31f03877f6a6f48e85216694853e0ca2b250b478542dc89",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:06b60a87518b8599636eb20a017ceb94e5d5a8584e812bb4c92a0c3a356c99ad",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:e02bc2329f292219afd7ea1aaf2b515e77f3d5264b4d1ae2515019a2148e1985",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:b021acbac7e1af6a370c1038ddaef4041ed8d0ccbc2498d13c11f769a93b2acc",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:c6eecc190cbf95319e62bf4f524a046beb5b86c0f02f9fe11cc61341f7fd0107",
+        "points": [
+          "Невидимая отмена тоже считается потерянным часом."
+        ]
+      }
+    ]
+  }
+}

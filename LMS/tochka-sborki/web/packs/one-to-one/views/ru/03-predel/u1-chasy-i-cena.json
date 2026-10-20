@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-predel",
+  "unit": "u1-chasy-i-cena",
+  "locale": "ru",
+  "title": "Часы и цена часа",
+  "sourceHash": "sha256:a3fc9965d6aa70a3ff0f58b1bebcd970944e785e7199852bda69f1111af30dfa",
+  "outline": [
+    {
+      "heading": "Два вида часов",
+      "points": [
+        {
+          "text": "Часы вне сессий — всё, без чего сессий не было бы: запись и переписка, учёт, подготовка, продвижение, налоги.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что видно по данным",
+      "points": [
+        {
+          "text": "Открытых данных о часах вне сессий у коучей и телесных практиков нет.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Учебный пример",
+      "points": [
+        {
+          "text": "Не 60, а 43.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Половина правды",
+      "points": [
+        {
+          "text": "Фраза «у меня час стоит 60» верна только для часа сессии.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:383e1e40fdfaf9ac6e5283614515c6e4eed63da4601b4affc27a77847d456f00",
+        "points": [
+          "Часы вне сессий включают в себя всё, без чего твои встречи не состоялись бы.",
+          "Это время уходит на запись, переписку, учёт, подготовку, продвижение и налоги."
+        ]
+      },
+      {
+        "sourceHash": "sha256:3ad19eb0619fceedc5d94b73747bbb5b38f1e1555dae2963dc449827506831b6",
+        "points": [
+          "Открытых данных о том, сколько времени коучи и телесные практики тратят вне сессий, просто нет."
+        ]
+      },
+      {
+        "sourceHash": "sha256:81814bf08d0c15915d20585864e3150201cb8951d284f29226803ff4ccbbcd83",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:987c7416afc59d79da36356153a90caf942789bbf05dad2e27a3ad0f8741d7f7",
+        "points": [
+          "Когда ты говоришь, что твой час стоит 60, это утверждение касается только времени самой сессии."
+        ]
+      }
+    ]
+  }
+}

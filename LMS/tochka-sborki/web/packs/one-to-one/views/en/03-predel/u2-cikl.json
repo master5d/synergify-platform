@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-predel",
+  "unit": "u2-cikl",
+  "locale": "en",
+  "title": "The cycle and regularity",
+  "sourceHash": "sha256:158a5625b0055ff8b4994a60bb89539e93e5b999c9b08958fa237cac4df85d29",
+  "outline": [
+    {
+      "heading": "Regular and a cycle",
+      "points": [
+        {
+          "text": "On the ladder, the event class has three values: one-off, regular, cycle.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Length and the bond",
+      "points": [
+        {
+          "text": "Endless meetings with no goal feed the bond from module 01.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Rescheduling and cancellations",
+      "points": [
+        {
+          "text": "There is no open data on the share of cancellations among coaches and bodywork practitioners.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A worked example",
+      "points": [
+        {
+          "text": "On average, the leader has one unpaid cancellation a week.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "“My clients don't cancel”",
+      "points": [
+        {
+          "text": "An invisible cancellation is a lost hour too.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:c141aefdce1f157ffda9f7c330b6b28b0342965dd0ba12753623a2ef1de2442b",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:406452f77a3df79f9fd82ae8e1d8b30bd42f3928bcf68b83bb997f243cd0f087",
+        "points": [
+          "Meetings that are endless and have no goal feed the bond from module 01."
+        ]
+      },
+      {
+        "sourceHash": "sha256:5d907712a82c951bb0a42fef9a30a2023bb1e6466e6b656557c98b69ff26470a",
+        "points": [
+          "No open data exists regarding the share of cancellations among coaches and bodywork practitioners."
+        ]
+      },
+      {
+        "sourceHash": "sha256:1892ba50d1ee4712ef6d9b54ccbd5f9438b443e7225fd681138d1d3012ac984e",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:f2b1df3303e4cc1cb8ff54d531f485e0b6a44d14d8a239f2580ff2f5ab235ec9",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

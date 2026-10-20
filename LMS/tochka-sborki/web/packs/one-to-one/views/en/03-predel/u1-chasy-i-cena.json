@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-predel",
+  "unit": "u1-chasy-i-cena",
+  "locale": "en",
+  "title": "Hours and the price of an hour",
+  "sourceHash": "sha256:69af18873faf4204c64e635af007d8c1fab8f5e4c770f5f9b31ef6b4beb80ff3",
+  "outline": [
+    {
+      "heading": "Two kinds of hours",
+      "points": [
+        {
+          "text": "Hours outside sessions — everything without which there would be no sessions: booking and messages, bookkeeping, preparation, promotion, taxes.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the data shows",
+      "points": [
+        {
+          "text": "There is no open data on hours outside sessions for coaches and bodywork practitioners.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A worked example",
+      "points": [
+        {
+          "text": "Not 60, but 43.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Half the truth",
+      "points": [
+        {
+          "text": "The phrase “my hour costs 60” is true only of a session hour.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:63265ac1e3abb877e6283716719249b43854703dba25ec8ac51b6a3b901e8999",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:aaed2d21541afdad4bc3224130a08baf92f5e9df64ce7b575c2c2f8c55d9972d",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:dad6301a95d5131d8741efbd0ced5eb0d0dc39338f8174cd64afba88575b536b",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:7edc3eee5b8dbe30c1d39b816f3900dcae97302e29510f696790bf483340d54b",
+        "points": [
+          "When you say your hour costs 60, this statement is only true for a session hour."
+        ]
+      }
+    ]
+  }
+}

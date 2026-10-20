@@ -2,35 +2,61 @@
   "module": 3,
   "title": "Hours, price, limit",
   "description": "How many client hours you really have, what an hour is worth once you count the work outside sessions, how your cycle works, and where one-to-one work ends in money and strength.",
-  "duration": "TODO",
+  "duration": "30 min",
   "level": 2,
   "units": [
-    {
-      "slug": "u1-chasy-i-cena",
-      "title": "Hours and the price of an hour"
-    },
-    {
-      "slug": "u2-cikl",
-      "title": "The cycle and regularity"
-    },
-    {
-      "slug": "u3-predel",
-      "title": "Where the limit is"
-    }
+    { "slug": "u1-chasy-i-cena", "title": "Hours and the price of an hour" },
+    { "slug": "u2-cikl", "title": "The cycle and regularity" },
+    { "slug": "u3-predel", "title": "Where the limit is" }
   ],
+  "layout": "phases",
   "objectives": [
-    {
-      "id": "o1",
-      "text": "Work out the price of every working hour, not only of a session."
-    },
-    {
-      "id": "o2",
-      "text": "Describe your cycle: its length, frequency, and the rules for rescheduling and cancelling."
-    },
-    {
-      "id": "o3",
-      "text": "Find your limit of hours per week and the ceiling of income at your current price."
-    }
+    { "id": "o1", "text": "Work out the price of every working hour, not only of a session" },
+    { "id": "o2", "text": "Describe your cycle: its length, frequency, and the rules for rescheduling and cancelling" },
+    { "id": "o3", "text": "Find your limit of hours per week and the ceiling of income at your current price" }
   ],
-  "checks": []
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-chasy-i-cena",
+      "objective": "o1",
+      "question": "20 sessions a week at 60 each, plus 8 more hours of work outside sessions. What is the price of a working hour?",
+      "options": [
+        "60",
+        "About 43",
+        "About 75",
+        "30"
+      ],
+      "answer": 1,
+      "explain": "The revenue of the week is 20 × 60 = 1200. Working hours: 20 + 8 = 28. 1200 ÷ 28 ≈ 43 (u1, worked example)."
+    },
+    {
+      "id": "c2",
+      "unit": "u2-cikl",
+      "objective": "o2",
+      "question": "Of 20 sessions at 60, two were cancelled without payment. How much was lost in the week?",
+      "options": [
+        "Nothing: the sessions will be moved",
+        "60, minus 5 percent",
+        "120, minus 10 percent",
+        "240, minus 20 percent"
+      ],
+      "answer": 2,
+      "explain": "Two sessions at 60 are 120 of 1200, minus 10 percent. Until a cancellation rule is named, such losses are invisible (u2, “Rescheduling and cancellations”)."
+    },
+    {
+      "id": "c3",
+      "unit": "u3-predel",
+      "objective": "o3",
+      "question": "The limit is 22 client hours a week, the price of a session is 60. What is the ceiling of the week?",
+      "options": [
+        "1200",
+        "1320",
+        "1800",
+        "There is no ceiling: you can raise the price"
+      ],
+      "answer": 1,
+      "explain": "The ceiling of the week = limit × price: 22 × 60 = 1320. You can raise the price, but it has a limit too: some clients start coming less often (u3, “The ceiling of the week”)."
+    }
+  ]
 }

@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-predel",
+  "unit": "u3-predel",
+  "locale": "en",
+  "title": "Where the limit is",
+  "sourceHash": "sha256:f8d57dd038db46f1853aed8f51e3532a7ef097c973d3b908b0e28eaca422c77a",
+  "outline": [
+    {
+      "heading": "What the limit is",
+      "points": [
+        {
+          "text": "The limit is the smaller of two numbers.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the data shows",
+      "points": [
+        {
+          "text": "In a 2026 study, burnout among independent practitioners in mental health rose to 42 percent.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The ceiling of the week",
+      "points": [
+        {
+          "text": "The ceiling of the week = the limit of client hours × the price of a session.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How you grow within the step",
+      "points": [
+        {
+          "text": "Above the ceiling you grow not by price and not by hours, but by format.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:1ae0b013d0b964e8f703d034b3b79c4ab65eaecd50ccd5ee7f4ee0f52ffbcba8",
+        "points": [
+          "You define the limit as the smaller of two numbers."
+        ]
+      },
+      {
+        "sourceHash": "sha256:539d72645ccde9aefeea64312530e29fba63fa27337e7bcc8fa6713d8e1c30f9",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:0b6d45d53d2c39ff80ae60156f4488880c04907a145956ae3eee6b7d3fed8813",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:a64da8b6ddccdb69ea2566de8fdb3239c1bb70971a9bdd31106129fcda110409",
+        "points": [
+          "You grow above the ceiling by changing your format instead of your price or your hours."
+        ]
+      }
+    ]
+  }
+}
