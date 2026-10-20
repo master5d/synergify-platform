@@ -34,6 +34,16 @@ describe('format ladder render contract', () => {
     expect(en).toContain('href="https://academy.synergify.com/retrit/en/"')
   })
 
+  it('P02b индивидуальные сессии в обеих клетках ведут в курс «Один на один и дальше» на своём языке', () => {
+    const cards = (html: string) => html.split('data-format="individual"').slice(1).map((s) => s.split('</article>')[0])
+    const ru = cards(renderToStaticMarkup(<LadderGrid locale="ru" />))
+    const en = cards(renderToStaticMarkup(<LadderGrid locale="en" />))
+    expect(ru).toHaveLength(2)
+    expect(en).toHaveLength(2)
+    for (const c of ru) expect(c).toContain('href="https://academy.synergify.com/odin-na-odin/"')
+    for (const c of en) expect(c).toContain('href="https://academy.synergify.com/odin-na-odin/en/"')
+  })
+
   it('P03 формат с двумя клетками показан в обеих, id в DOM уникальны', () => {
     const html = renderToStaticMarkup(<LadderGrid locale="ru" />)
     expect(html.match(/data-format="groups"/g)).toHaveLength(2)

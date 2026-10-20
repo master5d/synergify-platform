@@ -61,23 +61,26 @@ describe('format-ladder', () => {
     }
   })
 
-  it('L02 семейства: девять, эпики 1–9 по разу, курс только у retreat и он из KNOWN_COURSES', () => {
+  it('L02 семейства: девять, эпики 1–9 по разу, курс только у retreat и one-to-one, оба из KNOWN_COURSES', () => {
     expect(FAMILIES).toHaveLength(9)
 
     const epics = FAMILIES.map((family) => family.epic)
     expect(epics).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
-    const retreat = FAMILIES.find((family) => family.id === 'retreat')
-    expect(retreat?.course).not.toBeNull()
-    expect(KNOWN_COURSES).toContainEqual(retreat?.course)
-
+    expect(FAMILIES.filter((family) => family.course).map((family) => family.id)).toEqual(['retreat', 'one-to-one'])
+    expect(KNOWN_COURSES).toHaveLength(2)
     for (const family of FAMILIES) {
       expect(family.label.ru.trim().length).toBeGreaterThan(0)
       expect(family.label.en.trim().length).toBeGreaterThan(0)
-      if (family.id !== 'retreat') {
-        expect(family.course).toBeNull()
-      }
+      if (family.course) expect(KNOWN_COURSES).toContainEqual(family.course)
     }
+
+    const oneToOne = FAMILIES.find((family) => family.id === 'one-to-one')
+    expect(oneToOne?.course).toEqual({
+      ru: 'https://academy.synergify.com/odin-na-odin/',
+      en: 'https://academy.synergify.com/odin-na-odin/en/',
+    })
+    expect(courseOf(FORMATS.find((f) => f.id === 'individual')!)).toEqual(KNOWN_COURSES[1])
   })
 
   it('L03 раскладка совпадает со spec', () => {
@@ -214,6 +217,14 @@ describe('format-ladder', () => {
     expect(checkFormats(FORMATS, foreignCourseFamilies)).toContainEqual({
       id: 'course',
       where: 'family.retreat.course',
+    })
+
+    const foreignOneToOne = FAMILIES.map((family) =>
+      family.id === 'one-to-one' ? { ...family, course: { ru: 'https://x.example/', en: 'https://x.example/en/' } } : family
+    )
+    expect(checkFormats(FORMATS, foreignOneToOne)).toContainEqual({
+      id: 'course',
+      where: 'family.one-to-one.course',
     })
   })
 

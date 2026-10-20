@@ -113,7 +113,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pack: ['living-practice', 'retreat']
+        pack: ['living-practice', 'retreat', 'one-to-one']
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -192,6 +192,16 @@ jobs:
         run: npm run build
       - name: Merge retreat course into shell
         run: node scripts/merge-course.mjs retreat retrit
+      # Третий курс школы — открытый «Один на один и дальше», нижняя ступень лесенки форматов.
+      # Та же схема: пересборка web/out под своим pack'ом и подпутём, merge в свой каталог.
+      - name: Build course (one-to-one @ /odin-na-odin)
+        working-directory: LMS/tochka-sborki/web
+        env:
+          COURSE_PACK: one-to-one
+          COURSE_BASE_PATH: /odin-na-odin
+        run: npm run build
+      - name: Merge one-to-one course into shell
+        run: node scripts/merge-course.mjs one-to-one odin-na-odin
       - name: Ensure project exists
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

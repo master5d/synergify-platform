@@ -36,7 +36,7 @@ const PATHS: string[] = [
 /** Курсы движка, вклеенные в подпуть (scripts/merge-course.mjs): у них своя маршрутизация,
  *  EN живёт ВНУТРИ подпути (/<sub>/en/), а не в /en/<sub>/. Только открытые курсы:
  *  «Тишина» (/praktika) — за admission-гейтом, её в sitemap нет. */
-const COURSE_SUBPATHS: string[] = ['retrit']
+const COURSE_SUBPATHS: string[] = ['retrit', 'odin-na-odin']
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = PATHS.map((path) => {

@@ -6,6 +6,10 @@ export const KNOWN_COURSES: Bi[] = [
     ru: 'https://academy.synergify.com/retrit/',
     en: 'https://academy.synergify.com/retrit/en/',
   },
+  {
+    ru: 'https://academy.synergify.com/odin-na-odin/',
+    en: 'https://academy.synergify.com/odin-na-odin/en/',
+  },
 ]
 
 // Семейства форматов в порядке эпиков
@@ -20,7 +24,7 @@ export const FAMILIES: Family[] = [
     id: 'one-to-one',
     epic: 2,
     label: { ru: 'Один на один', en: 'One to one' },
-    course: null,
+    course: KNOWN_COURSES[1],
   },
   {
     id: 'table',

@@ -24,5 +24,7 @@ describe('registry bridge', () => {
     expect(localizedCourseUrl(`${A}/retrit`, 'en', null)).toBe(`${A}/retrit`)
     const en = getCourses('en').find((c) => c.slug === 'retreat')
     expect(en?.url).toBe(`${A}/retrit/en/`)
+    expect(getCourses('en').find((c) => c.slug === 'one-to-one')?.url).toBe(`${A}/odin-na-odin/en/`)
+    expect(getCourses('ru').find((c) => c.slug === 'one-to-one')?.url).toBe(`${A}/odin-na-odin`)
   })
 })
