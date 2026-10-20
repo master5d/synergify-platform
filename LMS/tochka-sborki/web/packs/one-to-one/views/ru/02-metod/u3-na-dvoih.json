@@ -5,7 +5,7 @@
   "unit": "u3-na-dvoih",
   "locale": "ru",
   "title": "Проверка: метод на двоих",
-  "sourceHash": "sha256:71284cc4ba0b15d45b004f0368929de4fc537306e5535a0beb9a1a8f250c2aa2",
+  "sourceHash": "sha256:d6888b3b1cdc04c23760395a92bd66f94926609bda634e486d304fb936690797",
   "outline": [
     {
       "heading": "Что ломается при двоих",

@@ -5,7 +5,7 @@
   "unit": "u1-kakaya-vstrecha",
   "locale": "ru",
   "title": "Какая встреча на 2–7",
-  "sourceHash": "sha256:377ed1d5a6d5eaa9a28861f16aa49919c92a16ec803e0339737e2402a6e003ae",
+  "sourceHash": "sha256:5b9914cb5d47276c5695f1b54f2ef3838ea55e6bbd312d3d7fd57d07fa128a4e",
   "outline": [
     {
       "heading": "Ступень «один на нескольких»",
@@ -35,7 +35,7 @@
       "heading": "Что говорят исследования",
       "points": [
         {
-          "text": "Группа по результату не хуже, но подходит не всем.",
+          "text": "В психотерапии группа по результату не уступает. В коучинге данных мало, и группа подходит не всем.",
           "origin": "extract"
         }
       ],
@@ -45,7 +45,7 @@
       "heading": "Учебный пример",
       "points": [
         {
-          "text": "У ведущей в модуле 02 четыре шага из шести получили «да» или «с изменением».",
+          "text": "У ведущей в модуле 02 все шесть шагов получили «да» или «с изменением».",
           "origin": "extract"
         }
       ],
@@ -75,11 +75,11 @@
         ]
       },
       {
-        "sourceHash": "sha256:ce076b15ccd8c591aabe7a635486e369a8d4f89927844c89fc2cf0313b87ebd4",
+        "sourceHash": "sha256:5dc38ae429bfb276851f58dc796e0bc31e2fd3292c868b6d6ab10eb40d822288",
         "verbatim": "review"
       },
       {
-        "sourceHash": "sha256:b6b9e568c5dba6e50e03723adce754ae34e5bef92891dd22b605ff523733105f",
+        "sourceHash": "sha256:26ebe7f25a6f56aacd6b81a16e6f0ecf289f100bfbb98bcafc314191b29c2fcc",
         "verbatim": "review"
       }
     ]

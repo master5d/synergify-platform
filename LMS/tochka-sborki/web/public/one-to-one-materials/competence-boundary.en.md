@@ -4,10 +4,10 @@ This is not medical or legal advice. It draws on the codes of professional assoc
 
 ## Signs to stop and refer
 
-- The problem has been getting in the way of the client's daily life for weeks: sleep, work, home, relationships.
+- The problem has been getting in the way of the client's daily life for weeks: self-care, work, home, leisure.
 - The work is not moving: the client comes back to the same thing and only wants to talk it out.
 - You see several signs of distress at once, not one: sharp mood swings, withdrawing from relationships, broken sleep, neglected daily life.
-- Signals in yourself: "this is more than I can handle", anxiety before a session, a feeling that the client depends on you too much.
+- Signals in yourself: "this is more than I can handle", anxiety when the client gets in touch, a feeling that the client depends on you too much.
 
 Do not diagnose. Your job is to notice and refer.
 

@@ -65,7 +65,7 @@ export const CERTIFICATE: CertificateData = {
     ru: `представлено · ${ORG}`,
     en: `presented by · ${ORG}`,
   },
-  url: 'academy.synergify.com/retrit/certificate',
+  url: 'academy.synergify.com/odin-na-odin/certificate',
 }
 
 export function resolveCertificate(

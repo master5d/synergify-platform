@@ -25,12 +25,12 @@
       "question": "A meta-analysis of psychotherapy: with the same protocol, group and individual formats gave the same result. What follows from this?",
       "options": [
         "It is time to move all clients into a group",
-        "A group is no worse in result, but it is not for everyone — the choice remains",
+        "In psychotherapy a group is no worse, but that does not mean it suits everyone — the choice remains",
         "One-to-one work is no longer needed",
         "The finding can be carried over to coaching without caveats"
       ],
       "answer": 1,
-      "explain": "An equal result does not mean everyone needs a group. Reviews say plainly that the group format is not for everyone, and there is no systematic review for coaching (u1, “What research says”)."
+      "explain": "An equal result in psychotherapy does not mean everyone needs a group. Reviews say the group format is not for everyone, and in coaching the data disagree (u1, “What research says”)."
     },
     {
       "id": "c2",
@@ -72,7 +72,7 @@
         "Write the meeting in the “Where I am now” field"
       ],
       "answer": 1,
-      "explain": "“My map” has “my own format”: you write in the name of a meeting that is not in the list, with a date and a sign next to it (u4, ““My map” on the ladder”)."
+      "explain": "“My map” has “my own format”: you write in the name of a meeting that is not in the list, with a date and a sign next to it (u4, the section on “My map”)."
     }
   ]
 }

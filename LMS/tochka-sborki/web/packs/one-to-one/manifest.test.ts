@@ -20,6 +20,15 @@ describe('one-to-one manifest — promising forms only', () => {
       })
     })
   }
+
+  it('ловит обещания без подлежащего и в других формах', () => {
+    const forms = [
+      'Йога исцеляет тревогу.', 'Курс вылечит выгорание.', 'This cures anxiety.', 'Our method will cure you.',
+      'Гарантированную прибыль ты получишь.', 'Доход гарантирован.', 'Income is guaranteed.',
+    ]
+    for (const f of forms) expect(checkManifest(f, MANIFEST).length, f).toBeGreaterThan(0)
+  })
+
   it('честные формулировки не матчатся', () => {
     const honest = [
       'Курс не обещает дохода и потока клиентов.',
@@ -27,7 +36,9 @@ describe('one-to-one manifest — promising forms only', () => {
       'Work out how much you will earn with 15 hours instead of 25.',
       'The course does not promise clients or income.',
       'Сессия не лечит и не заменяет врача.',
-    ].join('\\n')
+      'Практика не исцеляет и не заменяет терапию.',
+      'The practice does not heal and never cures.',
+    ].join(' ')
     expect(checkManifest(honest, MANIFEST)).toEqual([])
   })
 })

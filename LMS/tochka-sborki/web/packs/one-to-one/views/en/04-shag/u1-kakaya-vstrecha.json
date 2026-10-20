@@ -5,7 +5,7 @@
   "unit": "u1-kakaya-vstrecha",
   "locale": "en",
   "title": "Which meeting for 2 to 7",
-  "sourceHash": "sha256:fa62dc2a07ba63c549ac403c36238fe01930e9d931d378635525631be997ebc2",
+  "sourceHash": "sha256:936bc7b34a9e68f7d1cdcf006855eca10d83acaacfb0ce7b41c9a1a6567a9a38",
   "outline": [
     {
       "heading": "The “one to a few” step",
@@ -35,7 +35,7 @@
       "heading": "What research says",
       "points": [
         {
-          "text": "A group is no worse in result, but it is not for everyone.",
+          "text": "In psychotherapy a group is no worse in result. In coaching there is little data, and a group is not for everyone.",
           "origin": "extract"
         }
       ],
@@ -45,7 +45,7 @@
       "heading": "A worked example",
       "points": [
         {
-          "text": "In module 02, four of the leader's six steps got “yes” or “with a change”.",
+          "text": "In module 02, all six of the leader's steps got “yes” or “with a change”.",
           "origin": "extract"
         }
       ],
@@ -73,11 +73,11 @@
         ]
       },
       {
-        "sourceHash": "sha256:04fd5bdbd9c08faf01a8b11bdafd214b7d10f511fa5cbf799b2dc319b4fa6c44",
+        "sourceHash": "sha256:573533936f62c3a6db2f69e92bb40854a7b7a92b5fa40e32d249e21afdf3eaab",
         "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:66126b05dbea14ffa69a8f7159c390f844b527ee3be73a5cb1efad79e28d1d95",
+        "sourceHash": "sha256:ba2602545f46556ab76bbe070c0e6cfb0b53ed20d108ef5c923ffade5dded0e1",
         "verbatim": "near-identical"
       }
     ]
