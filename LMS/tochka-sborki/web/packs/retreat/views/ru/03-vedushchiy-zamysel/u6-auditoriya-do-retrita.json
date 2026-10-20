@@ -5,7 +5,7 @@
   "unit": "u6-auditoriya-do-retrita",
   "locale": "ru",
   "title": "Аудитория до ретрита",
-  "sourceHash": "sha256:8af1c9b15715064a0e945c18d9499a18cc9b720ea50436fc184e59068a2fe9ae",
+  "sourceHash": "sha256:1e09725cb12f29d710f55115ed1926d0bca21192be564febea1a1dfbb7cd1848",
   "outline": [
     {
       "heading": "Продают своим",
@@ -22,6 +22,16 @@
       "points": [
         {
           "text": "Самый спокойный путь к доверию — давать пользу заранее.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Ступени до ретрита",
+      "points": [
+        {
+          "text": "Ретрит — средняя группа, очно, разово: неделя, ради которой человек отдаёт и деньги, и отпуск.",
           "origin": "extract"
         }
       ],
@@ -86,6 +96,13 @@
       {
         "sourceHash": "sha256:ab0c517980a2b6011235981ae16803bd2914f3a7681a3d33a1d0c9443670b505",
         "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:2082f3869ed5eea7426c4707204aedac86fb8a05ed49056454c93a06401623dd",
+        "points": [
+          "Ретрит проводится очно для средней группы как разовое событие.",
+          "Это целая неделя, ради которой человек отдает свои деньги и отпуск."
+        ]
       },
       {
         "sourceHash": "sha256:a49760a43d18cd5d99ba1eca8ad64b516ecf5552747c73b23b6b6183b3fd2813",

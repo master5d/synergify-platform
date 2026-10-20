@@ -105,7 +105,7 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
           { label: 'Служба заботы', href: '/zabota/' },
           { label: 'mamaev.coach', href: 'https://mamaev.coach' },
         ],
-        rights: '© 2026 · Synergify Institute for AI',
+        rights: '© 2026 · Synergify n-Labs',
       },
       forWhoLabel: 'для кого',
       forWho: [
@@ -229,7 +229,7 @@ export const dictionaries: Record<Locale, AcademyDictionary> = {
           { label: 'Care desk', href: '/en/zabota/' },
           { label: 'mamaev.coach', href: 'https://mamaev.coach' },
         ],
-        rights: '© 2026 · Synergify Institute for AI',
+        rights: '© 2026 · Synergify n-Labs',
       },
       forWhoLabel: 'for whom',
       forWho: [

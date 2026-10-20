@@ -13,6 +13,11 @@ export const COURSE = {
     ru: 'Тишина, в которой слышно — курс школы синергемы',
     en: 'The Silence Where You Can Hear — a Synergema School course',
   } as Bi,
+  /** Описание для превью ссылок (meta description, Open Graph) и PWA-манифеста. */
+  description: {
+    ru: 'Восемь шагов практики внимания: польза и риск названы до первой сессии, собеседник между занятиями, живой круг в конце.',
+    en: 'Eight steps of attention practice: benefit and risk named before the first session, an interlocutor between sessions, a living circle at the end.',
+  } as Bi,
   // Single source of truth for SEO (sitemap/robots) and the PWA manifest. No trailing slash.
   domain: 'https://academy.synergify.com/praktika',
   /** Ключ курса в платформенном прогрессе (progress.course воркера, события → Listmonk). */

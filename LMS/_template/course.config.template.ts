@@ -10,6 +10,11 @@ export const COURSE = {
     ru: 'TODO: Полное название — подзаголовок',
     en: 'TODO: Full Name — subtitle',
   } as Bi,
+  // One sentence for link previews (meta description, Open Graph) and the PWA manifest.
+  description: {
+    ru: 'TODO: Одна фраза о курсе',
+    en: 'TODO: One sentence about the course',
+  } as Bi,
   // Production domain. https, NO trailing slash. Used by sitemap/robots/manifest.
   domain: 'https://TODO.example.com',
   // Read-only mirror URL (GitHub Pages build with COURSE_MIRROR=1), no trailing slash; null = no mirror.

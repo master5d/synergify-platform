@@ -13,6 +13,11 @@ export const COURSE = {
     ru: 'Ретрит с двух сторон — курс школы синергемы',
     en: 'A Retreat From Both Sides — a Synergema School course',
   } as Bi,
+  /** Описание для превью ссылок (meta description, Open Graph) и PWA-манифеста. */
+  description: {
+    ru: 'Ретрит как сделка ведущего и площадки: касса, договор, отмены, программа, гости.',
+    en: 'A retreat as a deal between the leader and the venue: cash flow, contract, cancellations, programme, guests.',
+  } as Bi,
   // Single source of truth for SEO (sitemap/robots) and the PWA manifest. No trailing slash.
   domain: 'https://academy.synergify.com/retrit',
   /** Ключ курса в платформенном прогрессе (progress.course воркера, события → Listmonk). */
