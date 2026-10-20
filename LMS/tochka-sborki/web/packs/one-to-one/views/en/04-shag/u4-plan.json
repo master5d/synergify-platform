@@ -5,13 +5,13 @@
   "unit": "u4-plan",
   "locale": "en",
   "title": "The plan and “My map”",
-  "sourceHash": "sha256:071032897ffad60f19d4fbfd37bde54932ef3e5eb200eaa017cd1d6834f0cea1",
+  "sourceHash": "sha256:5dd496a0336cd1d3770f4f9d111483a98779994532acb3aad79c7301237fae73",
   "outline": [
     {
       "heading": "What a plan is made of",
       "points": [
         {
-          "text": "The plan of the first step gathers everything you did in the course: the form of the meeting (lesson 04/u1); the date and how many people; whom to invite and why (04/u2); which steps of the method go into the meeting (02/u3); how to tell current clients and who stays one to one (04/u3); the sign that the step worked.",
+          "text": "The plan of the first step gathers everything you did in the course: the form of the meeting (module 04); the date and how many people; whom to invite and why (module 04); which steps of the method go into the meeting (module 02); how to tell current clients and who stays one to one (module 04); the sign that the step worked.",
           "origin": "extract"
         }
       ],
@@ -41,7 +41,7 @@
       "heading": "A worked example",
       "points": [
         {
-          "text": "The leader's plan: “Small group: breath and back”.",
+          "text": "The practitioner's plan: “Mini-group: breath and back”.",
           "origin": "extract"
         }
       ],
@@ -51,7 +51,7 @@
       "heading": "“When I have the time”",
       "points": [
         {
-          "text": "The first step is put into the week, not left waiting for room to appear.",
+          "text": "The first step is put into the week, even if one session has to move for it, not left waiting for room to appear.",
           "origin": "extract"
         }
       ],
@@ -68,8 +68,13 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:ade648290666fb71478c29772f30519020dca792d45faa3111e837ef9a1074a9",
-        "verbatim": "near-identical"
+        "sourceHash": "sha256:119d252d9bc4620da4519990f91707bde93314c0a67c0f383d983e76193ec45d",
+        "points": [
+          "Your plan for the first step gathers everything you did in the course.",
+          "It includes the meeting form, date, how many people, and whom to invite and why from module 04.",
+          "The plan also includes method steps from module 02 and how to tell current clients and who stays one to one from module 04.",
+          "It also shows the sign that the step worked."
+        ]
       },
       {
         "sourceHash": "sha256:5d59b2e4729167412522da080bae76939eb4b3bfc965dc90743f3bfc55a6295f",
@@ -82,15 +87,14 @@
         "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:ce8321dff50b02f3c6ee4f959e48aa22a021ab136a294748853eff12ad2627f3",
-        "points": [
-          "The leader has a plan for a small group focused on breath and back."
-        ]
+        "sourceHash": "sha256:fffaa7161ec0dbfa998a89a287f9b3c04ea3df53657747d1bcebd3ef0325bd64",
+        "verbatim": "review"
       },
       {
-        "sourceHash": "sha256:8d28d88a5344ed33f9e763931b228b8b9539a6b21ac75046d0c335fd67f72aa9",
+        "sourceHash": "sha256:312e0797cfdbd83ea5807cc44e1ffee4387e36d6aed564a65a673f9e4c8d7484",
         "points": [
-          "You put the first step into your week instead of waiting for room to appear."
+          "You put the first step into your week instead of waiting for room to appear.",
+          "This happens even if you have to move one session for it."
         ]
       }
     ]

@@ -66,7 +66,7 @@
         { "slug": "u1-kakaya-vstrecha", "title": { "ru": "Какая встреча на 2–7", "en": "Which meeting for 2 to 7" },
           "objective": { "ru": "Выбрать одну из трёх форм встречи на 2–7 человек под свой метод.", "en": "Choose one of three forms of a meeting for 2–7 people that suits your method." } },
         { "slug": "u2-kogo-pozvat", "title": { "ru": "Кого позвать", "en": "Whom to invite" },
-          "objective": { "ru": "Составить список из 3–7 человек и критерии, по которым ты их выбираешь.", "en": "Draw up a list of 3–7 people and the criteria by which you choose them." } },
+          "objective": { "ru": "Составить список из 2–7 человек и критерии, по которым ты их выбираешь.", "en": "Draw up a list of 2–7 people and the criteria by which you choose them." } },
         { "slug": "u3-kak-skazat", "title": { "ru": "Глазами клиента: как сказать нынешним", "en": "Through the client's eyes: telling your current clients" },
           "objective": { "ru": "Сказать клиентам о шаге так, чтобы никто не почувствовал себя брошенным, и решить, кто остаётся один на один.", "en": "Tell your clients about the step so that no one feels abandoned, and decide who stays one to one." } },
         { "slug": "u4-plan", "title": { "ru": "План и «Моя карта»", "en": "The plan and “My map”" },

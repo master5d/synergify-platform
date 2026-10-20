@@ -89,7 +89,7 @@ export const QUESTIONS_V2: Question[] = [
       { value: 'calm', label: { ru: 'Спокойно, ошибка = настройка', en: 'Calmly — a mistake is just tuning' } },
       { value: 'lose_motivation', label: { ru: 'Падает мотивация', en: 'I lose motivation' } },
       { value: 'soft_feedback', label: { ru: 'Нужен мягкий фидбек', en: 'I need gentle feedback' } },
-      { value: 'step_hints', label: { ru: 'Хочу сразу понять, где ошибка, и исправить сам', en: 'I want to see right away where it went wrong — and fix it myself' } },
+      { value: 'step_hints', label: { ru: 'Хочу сразу понять, где ошибка, и исправить самостоятельно', en: 'I want to see right away where it went wrong — and fix it myself' } },
     ],
   },
   {
@@ -200,9 +200,9 @@ export const QUESTIONS_V2: Question[] = [
   {
     id: 'VD_STR', module: 'VD', format: 'single', required: false,
     showIf: { questionId: 'V_DEEPEN', equals: 'yes' },
-    prompt: { ru: 'Ты работаешь один или с командой?', en: 'Solo or with a team?' },
+    prompt: { ru: 'Ты работаешь в одиночку или с командой?', en: 'Solo or with a team?' },
     options: [
-      { value: 'solo', label: { ru: 'Полностью один', en: 'Fully solo' } },
+      { value: 'solo', label: { ru: 'Полностью в одиночку', en: 'Fully solo' } },
       { value: 'helpers', label: { ru: '1–2 помощника', en: '1–2 helpers' } },
       { value: 'small', label: { ru: 'Команда 3–10', en: 'Team of 3–10' } },
       { value: 'large', label: { ru: 'Крупная организация', en: 'Larger org' } },

@@ -25,7 +25,7 @@
         "The order of the session's steps",
         "The intuition of which exercise to choose today",
         "The history with a particular client",
-        "The tone of the leader's voice"
+        "The tone of the practitioner's voice"
       ],
       "answer": 0,
       "explain": "The order of steps repeats in the same form even without you — an apprentice can repeat it. Intuition, history and tone are the personal part (u1, “Two parts of a session”)."
@@ -34,7 +34,7 @@
       "id": "c2",
       "unit": "u2-struktura",
       "objective": "o2",
-      "question": "A leader described her session on three pages, with notes for each client. What is wrong?",
+      "question": "A practitioner described her session on three pages, with notes for each client. What is wrong?",
       "options": [
         "Nothing: the more detail, the better",
         "It is an instruction for one person; a method should fit on one page in 4–7 steps",
@@ -56,7 +56,7 @@
         "A short exercise to take home"
       ],
       "answer": 2,
-      "explain": "Hands-on work needs all the attention on one body — it cannot be split between two. The leader kept it for one-to-one sessions and carried over the breath, the shared question and the home exercise (u3, worked example)."
+      "explain": "Hands-on work needs all the attention on one body — it cannot be split between two. The practitioner kept it for one-to-one sessions and carried over the breath, the shared question and the home exercise (u3, worked example)."
     }
   ]
 }

@@ -1,6 +1,6 @@
 # The plan of the first step
 
-Form of the meeting (a small group of your clients / a couple or a family / apprenticeship / your own): ______
+Form of the meeting (a mini-group of your clients / a couple or a family / apprenticeship / your own): ______
 
 Date: ______
 
@@ -36,4 +36,4 @@ ______
 
 ## Record in "My map"
 
-On the format ladder (https://academy.synergify.com/en/instrumenty/lesenka/): "Where I am now" — one to one; "My next step" — your own format with the name of the meeting; the date; the sign.
+On the format ladder (https://academy.synergify.com/en/instrumenty/lesenka/): "Where I am now" — one to one; "My next step" — your own format with the name of the meeting; the date; in the "Sign" field, the sign that the step worked.

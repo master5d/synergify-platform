@@ -5,13 +5,13 @@
   "unit": "u1-gde-ya",
   "locale": "en",
   "title": "Where I stand on the ladder",
-  "sourceHash": "sha256:1653dcc2fe955286f45b1c04122ae6afe0d96b39e12b35d4dda1fd221267e2c6",
+  "sourceHash": "sha256:40b0b52812261b6121d49a83a3d528e77df0b6473654ee31fecdf81d628344b9",
   "outline": [
     {
       "heading": "Three axes of the ladder",
       "points": [
         {
-          "text": "The academy's format ladder describes any leader's work by three axes.",
+          "text": "The academy's format ladder describes any practitioner's work by three axes.",
           "origin": "extract"
         }
       ],
@@ -48,9 +48,9 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:ee75c6d6218caa6cf972a62dabab3eeec3719cd2ac009d236a222707252bf426",
+        "sourceHash": "sha256:f55097ee6ee9d0af16d06d6369bfc091dfe8aeb47f16389a94e455e2f2cae3a9",
         "points": [
-          "The academy's format ladder uses three axes to describe the work of any leader."
+          "The format ladder from the academy uses three axes to describe your work as a practitioner."
         ]
       },
       {

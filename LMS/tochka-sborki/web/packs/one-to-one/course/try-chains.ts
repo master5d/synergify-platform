@@ -111,7 +111,7 @@ const HONEST: { heading: Bi; intro: Bi; items: Bi[] } = {
     },
     {
       ru: 'Он не учит самой практике. Мастерство ведущего растят другие модули академии; здесь — только формат.',
-      en: 'It does not teach the practice itself. Other academy modules grow the leader’s craft; here it is only the format.',
+      en: 'It does not teach the practice itself. Other academy modules grow the practitioner’s craft; here it is only the format.',
     },
     {
       ru: 'Он не заменит врача, терапевта или юриста. Урок о границе компетенции учит видеть признаки и передавать клиента, а не ставить диагноз.',

@@ -5,7 +5,7 @@
   "unit": "u1-povtoryaemoe",
   "locale": "en",
   "title": "What repeats and what rests on you",
-  "sourceHash": "sha256:c7783e592de0d4834162e75848d03c098f8f3b050f28384a81de4389b4f4c622",
+  "sourceHash": "sha256:fd03b077b287b08389bdfe931e23e16876618cf1013d8e7e3ad1027428c532f4",
   "outline": [
     {
       "heading": "Two parts of a session",
@@ -31,7 +31,7 @@
       "heading": "A worked example",
       "points": [
         {
-          "text": "A leader laid out her last three sessions.",
+          "text": "A practitioner laid out her last three sessions.",
           "origin": "extract"
         }
       ],
@@ -70,8 +70,10 @@
         ]
       },
       {
-        "sourceHash": "sha256:af929fb181042debe7f363cacbbfe00f6c36cc962201c47b65c6127453dff9a3",
-        "verbatim": "near-identical"
+        "sourceHash": "sha256:54005a06a7546e2099dcba150ee46ef4ebe03bb80f3d3860b7d0320313051b77",
+        "points": [
+          "A practitioner reviewed her last three sessions."
+        ]
       },
       {
         "sourceHash": "sha256:52e9be95fe041a03d41b0e1feaf7d21937581a5174dce4a3bd027abed7abd258",

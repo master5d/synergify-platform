@@ -5,6 +5,6 @@ Hours outside sessions per week,,8,booking and messages + bookkeeping + preparat
 Unpaid cancellations per week,,1,how many sessions fall through without payment on average
 Revenue of the week,,,(client hours − cancellations) × price of a session
 Price of a working hour,,,revenue of the week ÷ (client hours + hours outside sessions)
-Limit of client hours,,22,how many hours a week you can hold without losing attention and strength
+Limit of client hours,,22,"the smaller of two: what your body and attention can hold, and how many hours are left after life and the work outside sessions"
 Ceiling of the week,,,limit of client hours × price of a session
 What follows,,,growth within the step is only price or hours; above the ceiling only the format

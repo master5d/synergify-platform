@@ -5,7 +5,7 @@
   "unit": "u2-cikl",
   "locale": "en",
   "title": "The cycle and regularity",
-  "sourceHash": "sha256:158a5625b0055ff8b4994a60bb89539e93e5b999c9b08958fa237cac4df85d29",
+  "sourceHash": "sha256:08608726e8c083e5b41fc8158701f5d2de3c0da9c6ab316ab18f051682622462",
   "outline": [
     {
       "heading": "Regular and a cycle",
@@ -41,7 +41,7 @@
       "heading": "A worked example",
       "points": [
         {
-          "text": "On average, the leader has one unpaid cancellation a week.",
+          "text": "On average, the practitioner has one unpaid cancellation a week.",
           "origin": "extract"
         }
       ],
@@ -84,8 +84,8 @@
         ]
       },
       {
-        "sourceHash": "sha256:1892ba50d1ee4712ef6d9b54ccbd5f9438b443e7225fd681138d1d3012ac984e",
-        "verbatim": "near-identical"
+        "sourceHash": "sha256:87715efa702b173d1b5c55adeed400fd655e2bb97ac34c2357d3d50cbe91f3e8",
+        "verbatim": "review"
       },
       {
         "sourceHash": "sha256:f2b1df3303e4cc1cb8ff54d531f485e0b6a44d14d8a239f2580ff2f5ab235ec9",

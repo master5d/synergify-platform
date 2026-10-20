@@ -10,8 +10,8 @@ export const COURSE = {
     en: 'One to One and Beyond — a Synergema School course',
   } as Bi,
   description: {
-    ru: 'Как работа один на один перестаёт быть потолком: карта практики, метод на одной странице, предел часов и цены, первый шаг к малой группе.',
-    en: 'How one-to-one work stops being a ceiling: a map of your practice, a one-page method, the limit of hours and price, the first step to a small group.',
+    ru: 'Как работа один на один перестаёт быть потолком: карта практики, метод на одной странице, предел часов и цены, первый шаг к мини-группе.',
+    en: 'How one-to-one work stops being a ceiling: a map of your practice, a one-page method, the limit of hours and price, the first step to a mini-group.',
   } as Bi,
   domain: 'https://academy.synergify.com/odin-na-odin',
   progressKey: 'one-to-one',

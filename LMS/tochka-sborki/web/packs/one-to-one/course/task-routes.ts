@@ -52,7 +52,7 @@ export const TASK_ROUTE_COPY: TaskRouteCopy = {
   },
   yourTask: { ru: 'Твоя задача:', en: 'Your task:' },
   noText: {
-    ru: 'Сначала опиши задачу на прошлом шаге — одной-двумя фразами. Или выбери русло сам.',
+    ru: 'Сначала опиши задачу на прошлом шаге — одной-двумя фразами. Или выбери русло самостоятельно.',
     en: 'Describe your task on the previous step first — in a sentence or two. Or pick a route yourself.',
   },
   matchButton: { ru: 'Подобрать русло', en: 'Find my route' },

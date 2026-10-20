@@ -5,7 +5,7 @@
   "unit": "u3-na-dvoih",
   "locale": "en",
   "title": "The test: a method for two",
-  "sourceHash": "sha256:5565ca1679620fde08f9e9e81dd779c85dcec0f352275da440a42b6fc85ff92a",
+  "sourceHash": "sha256:162cfae10ab8570e9a21e5041cce4966a275fffe07ea87928f1cbb204541c9d5",
   "outline": [
     {
       "heading": "What breaks with two",
@@ -31,7 +31,7 @@
       "heading": "A worked example",
       "points": [
         {
-          "text": "The leader tested her six steps on two people.",
+          "text": "The practitioner tested her six steps on two people.",
           "origin": "extract"
         }
       ],
@@ -41,7 +41,7 @@
       "heading": "Not the same, only cheaper",
       "points": [
         {
-          "text": "A meeting for two is a different format with its own laws.",
+          "text": "A meeting for two is already a different format with its own laws.",
           "origin": "extract"
         }
       ],
@@ -70,12 +70,16 @@
         ]
       },
       {
-        "sourceHash": "sha256:f386ac5d5f61000f4b0c8548e866a46c148ca75cfdb7540b036e03e7fb6e57fb",
-        "verbatim": "near-identical"
+        "sourceHash": "sha256:385ed693f96aa863d41b9d80afd1888fb59c7bd57e1ab9508763396df609d3ac",
+        "points": [
+          "The practitioner tried out her six steps with two people."
+        ]
       },
       {
-        "sourceHash": "sha256:e170279e4b4fcde45de273d805aaa206aa1357ad1ed1939a2b569b4d0d26cf98",
-        "verbatim": "near-identical"
+        "sourceHash": "sha256:0a784e2c1d1c7257117f288630bf71031e4449831cd0a099d3f3da093646827f",
+        "points": [
+          "A meeting for two is a different format that follows its own laws."
+        ]
       }
     ]
   }

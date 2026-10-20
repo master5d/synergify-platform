@@ -25,8 +25,8 @@ export const INTAKE_GATE: IntakeGateData = {
     en: 'Before you start — what is here and what is not',
   },
   lead: {
-    ru: '«Один на один и дальше» — работа один на один как первая ступень лесенки: карта практики, метод на одной странице, предел часов и цены, первый шаг к малой группе. Курс не обещает дохода, не учит самой практике и не заменяет врача, терапевта или юриста.',
-    en: '"One to One and Beyond" — one-to-one work as the first step of the ladder: a map of your practice, a method on one page, the limit of hours and price, a first step to a small group. The course promises no income, does not teach the practice itself and does not replace a doctor, a therapist or a lawyer.',
+    ru: '«Один на один и дальше» — работа один на один как первая ступень лесенки: карта практики, метод на одной странице, предел часов и цены, первый шаг к мини-группе. Курс не обещает дохода, не учит самой практике и не заменяет врача, терапевта или юриста.',
+    en: '"One to One and Beyond" — one-to-one work as the first step of the ladder: a map of your practice, a method on one page, the limit of hours and price, a first step to a mini-group. The course promises no income, does not teach the practice itself and does not replace a doctor, a therapist or a lawyer.',
   },
   beforeLabel: { ru: 'Как часто бывает', en: 'How it often goes' },
   afterLabel: { ru: 'Здесь', en: 'Here' },

@@ -5,7 +5,7 @@
   "unit": "u2-struktura",
   "locale": "en",
   "title": "The session in steps",
-  "sourceHash": "sha256:0ec5fad0ad34d2d8065246f3b0713df4cf59cc8860ac5c73746d6930b27e7f5a",
+  "sourceHash": "sha256:bd29f252863f97d9816818abdc06bee3366a31ea10eaef8be50a8e158af06bbf",
   "outline": [
     {
       "heading": "A session step",
@@ -31,7 +31,7 @@
       "heading": "A worked example",
       "points": [
         {
-          "text": "The leader described her 50-minute session in six steps.",
+          "text": "The practitioner described her 50-minute session in six steps.",
           "origin": "extract"
         }
       ],
@@ -68,7 +68,7 @@
         "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:c81e62dc6bbda18f1f1f202c6607e6294555861a184aa855c70d4bbe2b53e10d",
+        "sourceHash": "sha256:6b3785aabf7c561261674f7e088a04029b558ac774b2d0c6094444c7a526be8e",
         "verbatim": "near-identical"
       },
       {

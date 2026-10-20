@@ -5,7 +5,7 @@
   "unit": "u2-priznaki-potolka",
   "locale": "ru",
   "title": "Признаки потолка",
-  "sourceHash": "sha256:7477471f9f27d3360706e82a7d07f33faf42313b4c56bb1ee14551488538afd5",
+  "sourceHash": "sha256:feb08849a4f334c94ce7b6e99822116fcc5cf9ae7648879fe6023defd1a33ef8",
   "outline": [
     {
       "heading": "Два списка признаков",
@@ -31,7 +31,7 @@
       "heading": "Учебный пример",
       "points": [
         {
-          "text": "Больше клиентов не значит рост.",
+          "text": "Больше клиентов — ещё не рост.",
           "origin": "extract"
         }
       ],
@@ -58,7 +58,7 @@
         ]
       },
       {
-        "sourceHash": "sha256:635dd0ee9c5d978ba405aafcad869667d3107752a9ae879afd042d3c596d4a14",
+        "sourceHash": "sha256:b8d5e92f516da36e85310516254522f31b60c0050bab9613049cf1d43af4ae48",
         "verbatim": "review"
       }
     ]

@@ -298,10 +298,10 @@ export const dictionaries: Record<Locale, Dictionary> = {
     forWhoLabel: 'Для кого',
     forWhoHeading: 'Этот курс для тебя, если...',
     forWho: [
-      { title: 'Ты только начинаешь работать один на один', body: 'Ты прошёл модуль академии и берёшь первых клиентов. Курс помогает с первой встречи строить ступень, а не потолок.' },
+      { title: 'Ты только начинаешь работать один на один', body: 'Модуль академии позади, и ты берёшь первых клиентов. Курс помогает с первой встречи строить ступень, а не потолок.' },
       { title: 'Свободных часов почти не осталось', body: 'Неделя заполнена сессиями, а рост остановился. Модуль 03 считает, где кончается работа один на один по деньгам и силам.' },
       { title: 'Клиенты ходят «к тебе лично»', body: 'Сессии хорошие, но без тебя ничего не происходит. Модули 01 и 02 отделяют метод от личной привязки.' },
-      { title: 'Ты думаешь о первой малой группе', body: 'Хочется собрать несколько человек, но страшно потерять тех, кому нужен разговор один на один. Модуль 04 — про первый шаг и про тех, кто остаётся.' },
+      { title: 'Ты думаешь о первой мини-группе', body: 'Хочется собрать несколько человек, но страшно потерять тех, кому нужен разговор один на один. Модуль 04 — про первый шаг и про тех, кто остаётся.' },
     ],
     forWhoTagline: 'Курс не обещает дохода и потока клиентов. Он показывает, где практика упирается в потолок, — решение остаётся твоим.',
     chatVsSystem: {
@@ -333,7 +333,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       label: '// какой бывает следующий шаг',
       heading: 'Встречи на 2–7 человек',
       items: [
-        { niche: 'Малая группа своих клиентов', build: 'Несколько клиентов с похожим запросом на одной встрече по твоему методу.' },
+        { niche: 'Мини-группа своих клиентов', build: 'Несколько клиентов с похожим запросом на одной встрече по твоему методу.' },
         { niche: 'Пара или семья', build: 'Двое или трое близких людей на одной сессии: общий запрос, у каждого свой голос.' },
         { niche: 'Ученичество', build: 'Небольшой цикл для тех, кто хочет освоить метод сам; на лесенке — ступень «несколько».' },
         { niche: 'Остаться один на один', build: 'Тем, кому нужна приватность и своя скорость, — работа один на один без перемен.' },
@@ -417,7 +417,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       likertAgree: 'Согласен',
       recommendLabel: 'Я бы посоветовал(а) этот курс человеку, который работает с клиентами один на один',
       impactLabel: 'Этот текст изменил то, как я смотрю на свою практику',
-      applyLabel: 'Я понимаю, какой первый шаг сделать к малой группе',
+      applyLabel: 'Я понимаю, какой первый шаг сделать к мини-группе',
       unclearLabel: 'Что было непонятно или хотелось бы разобрать подробнее? (опционально)',
       otherLabel: 'Что ещё хочешь сказать? (опционально)',
       submitting: 'Отправляем...',
@@ -477,7 +477,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ],
       cta: 'Пройти Точку Сборки →',
       ctaHref: 'https://ai.synergify.com',
-      returnHint: 'Уже прошёл? Войди на ai.synergify.com под своим входом и вернись — дверь узнает тебя.',
+      returnHint: 'Курс уже пройден? Войди на ai.synergify.com под своим входом и вернись — дверь узнает тебя.',
     },
     wizard: {
       unit: (i: number, total: number) => `Урок ${i} из ${total}`,
@@ -496,7 +496,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       comingSoon: 'скоро',
     },
     footer: {
-      tagline: 'Работа один на один как первая ступень: карта практики, метод, предел часов и цены, первый шаг к малой группе. Без обещаний дохода; не терапия и не консультация.',
+      tagline: 'Работа один на один как первая ступень: карта практики, метод, предел часов и цены, первый шаг к мини-группе. Без обещаний дохода; не терапия и не консультация.',
       topicsLabel: '// модули',
       resourcesLabel: '// материалы',
       authorLabel: '// автор',
@@ -608,7 +608,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     chatVsSystem: {
       label: '// bond vs method',
       heading: 'A bond keeps a client.\nA method keeps a practice.',
-      hook: 'A client comes for the leader’s attention — that is the strength of this step. The ceiling begins when there is nothing else to name.',
+      hook: 'A client comes for the practitioner’s attention — that is the strength of this step. The ceiling begins when there is nothing else to name.',
       chatColLabel: 'The practice rests on you',
       systemColLabel: 'The practice rests on the method',
       rows: [
@@ -634,7 +634,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       label: '// what the next step can be',
       heading: 'Meetings for 2–7 people',
       items: [
-        { niche: 'A small group of your clients', build: 'A few clients with a similar request at one meeting run by your method.' },
+        { niche: 'A mini-group of your clients', build: 'A few clients with a similar request at one meeting run by your method.' },
         { niche: 'A couple or a family', build: 'Two or three close people in one session: a shared request, a voice for each.' },
         { niche: 'Apprenticeship', build: 'A small cycle for those who want to learn the method themselves; on the ladder, the “few” step.' },
         { niche: 'Staying one to one', build: 'For those who need privacy and their own pace — one-to-one work without changes.' },
@@ -674,7 +674,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     faq: {
       label: 'Questions',
       items: [
-        { q: 'Does the course teach how to run sessions?', a: 'No. Other academy modules grow the leader’s craft. This course is about the one-to-one format itself and the way out of it.' },
+        { q: 'Does the course teach how to run sessions?', a: 'No. Other academy modules grow the practitioner’s craft. This course is about the one-to-one format itself and the way out of it.' },
         { q: 'So is working one to one worse than working with a group?', a: 'No. A higher step is not better than a lower one, and some clients stay one to one. The course helps you choose, not leave.' },
         { q: 'How much time does it take?', a: 'A lesson takes about ten minutes, 14 lessons in all. No deadlines and no reviewers.' },
         { q: 'Do I need to sign in to read?', a: 'No. The course is open without signing in. Sign in only so that your progress is saved on another device.' },
@@ -718,7 +718,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       likertAgree: 'Agree',
       recommendLabel: 'I would suggest this course to someone who works with clients one to one',
       impactLabel: 'This text changed how I look at my practice',
-      applyLabel: 'I know what first step to take toward a small group',
+      applyLabel: 'I know what first step to take toward a mini-group',
       unclearLabel: 'What was unclear or what would you like covered in more depth? (optional)',
       otherLabel: 'Anything else you want to say? (optional)',
       submitting: 'Sending...',
@@ -797,7 +797,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       comingSoon: 'coming soon',
     },
     footer: {
-      tagline: 'One-to-one work as the first step: a map of your practice, a method, the limit of hours and price, a first step to a small group. No income promises; not therapy or advice.',
+      tagline: 'One-to-one work as the first step: a map of your practice, a method, the limit of hours and price, a first step to a mini-group. No income promises; not therapy or advice.',
       topicsLabel: '// modules',
       resourcesLabel: '// resources',
       authorLabel: '// author',

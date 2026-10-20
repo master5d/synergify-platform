@@ -13,7 +13,7 @@
   "layout": "phases",
   "objectives": [
     { "id": "o1", "text": "Choose one of three forms of a meeting for 2–7 people that suits your method" },
-    { "id": "o2", "text": "Draw up a list of 3–7 people and the criteria by which you choose them" },
+    { "id": "o2", "text": "Draw up a list of 2–7 people and the criteria by which you choose them" },
     { "id": "o3", "text": "Tell your clients about the step so that no one feels abandoned, and decide who stays one to one" },
     { "id": "o4", "text": "Put together the plan of the step with a date and record it in “My map” on the ladder" }
   ],
@@ -36,7 +36,7 @@
       "id": "c2",
       "unit": "u2-kogo-pozvat",
       "objective": "o2",
-      "question": "Whom is it better not to invite to a first small group?",
+      "question": "Whom is it better not to invite to a first mini-group?",
       "options": [
         "A client with a similar request",
         "A person from the waiting list",
@@ -50,7 +50,7 @@
       "id": "c3",
       "unit": "u3-kak-skazat",
       "objective": "o3",
-      "question": "How is it better to tell current clients about a first small group?",
+      "question": "How is it better to tell current clients about a first mini-group?",
       "options": [
         "In one mailing to everyone at once",
         "Each in their own conversation: what changes for them and what stays as it was",
@@ -58,7 +58,7 @@
         "Move everyone into the group from next week"
       ],
       "answer": 1,
-      "explain": "A mailing sounds like “I am being handed over”. Their own conversation lets a client hear “I am being offered more” and learn whether their sessions stay (u3, “Each their own conversation”)."
+      "explain": "A mailing sounds like “I am being handed over”. Their own conversation lets a client hear “I am being offered more” and learn whether their sessions stay (u3, “A conversation for each”)."
     },
     {
       "id": "c4",
@@ -72,7 +72,7 @@
         "Write the meeting in the “Where I am now” field"
       ],
       "answer": 1,
-      "explain": "“My map” has “my own format”: you write in the name of a meeting that is not in the list, with a date and a sign next to it (u4, the section on “My map”)."
+      "explain": "“My map” has “my own format”: you write in the name of a meeting that is not in the list, with a date, and the sign goes in the “Sign” field (u4, the section on “My map”)."
     }
   ]
 }

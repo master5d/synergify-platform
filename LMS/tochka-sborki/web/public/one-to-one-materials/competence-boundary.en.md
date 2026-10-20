@@ -17,7 +17,7 @@ Do not diagnose. Your job is to notice and refer.
 2. Start from your care for the client.
 3. Name what you see, concretely.
 4. Ask how they feel about turning to a specialist.
-5. The decision is the client's. The door to the conversation stays open.
+5. The decision is the client's, except when there is a risk of harm to themselves or others. The door to the conversation stays open.
 
 ## If there is danger right now
 

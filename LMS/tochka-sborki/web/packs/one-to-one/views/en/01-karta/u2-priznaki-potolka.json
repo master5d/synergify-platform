@@ -5,7 +5,7 @@
   "unit": "u2-priznaki-potolka",
   "locale": "en",
   "title": "Signs of a ceiling",
-  "sourceHash": "sha256:d8c7afe0d240997c086abb6932c83135cbb5d2db1a7ca81b8ec1eb02cb2e3ac3",
+  "sourceHash": "sha256:2e6c651f5d99ba1069ce85eb77bf75f2b4266430cabd9d0d35a34cdf12933a7e",
   "outline": [
     {
       "heading": "Two lists of signs",
@@ -35,7 +35,7 @@
       "heading": "A worked example",
       "points": [
         {
-          "text": "More clients does not mean growth.",
+          "text": "More clients is not yet growth.",
           "origin": "extract"
         }
       ],
@@ -65,9 +65,9 @@
         ]
       },
       {
-        "sourceHash": "sha256:c27663cee767f4cd9692aebed51ceb833fc4bfc175aadb4b762b5df256809a7c",
+        "sourceHash": "sha256:fa5a03b86c3a47e7e3c298bacdede15b8f06f71906a5046bea5fc594912a34d7",
         "points": [
-          "Having more clients does not mean you are experiencing growth."
+          "Having more clients does not mean you have achieved growth yet."
         ]
       }
     ]

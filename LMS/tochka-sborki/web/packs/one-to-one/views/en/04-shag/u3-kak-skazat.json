@@ -5,7 +5,7 @@
   "unit": "u3-kak-skazat",
   "locale": "en",
   "title": "Through the client's eyes: telling your current clients",
-  "sourceHash": "sha256:a466c4b1e828eb93342891a4359201fab1956a339ae86e805a5898d0d799406c",
+  "sourceHash": "sha256:e5fd22bce294044e08a4e45f0777a3b49e3187b1d5708ee4b4fecd92b550762f",
   "outline": [
     {
       "heading": "What the client loses and what they gain",
@@ -38,7 +38,7 @@
       "children": []
     },
     {
-      "heading": "Each their own conversation",
+      "heading": "A conversation for each",
       "points": [
         {
           "text": "A mailing saying “we now have a group” sounds like “I am being handed over”.",
@@ -51,7 +51,7 @@
       "heading": "A worked example",
       "points": [
         {
-          "text": "The leader talks to three clients in different ways.",
+          "text": "The practitioner talks to three clients in different ways.",
           "origin": "extract"
         }
       ],
@@ -82,13 +82,13 @@
         "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:5a0b07029f31f4cdcae566cff99f78c5ad4bbd1d98167782c9e1daf63347f6d1",
+        "sourceHash": "sha256:f7223a29d10f4efc390d83727ee306d1a63c1b33ba0e4e1b4a5ea6854e86c199",
         "points": [
-          "A mailing saying you now have a group can make your clients feel like they are being handed over."
+          "A mailing about starting a group can sound like a client is being handed over."
         ]
       },
       {
-        "sourceHash": "sha256:0eba34147777d2e0890f5fab7429b6f87a96881b1bed94a3e6ad261ce7878fe6",
+        "sourceHash": "sha256:09983520d031bc53bce4597898c9e11b28f3c0d28c4cae0e3e59c666991377ca",
         "verbatim": "near-identical"
       }
     ]

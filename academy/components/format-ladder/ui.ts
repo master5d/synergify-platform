@@ -12,7 +12,7 @@ export const UI: Record<'ru' | 'en', {
     eventClass: 'Класс события', all: 'все', channel: 'Канал', step: 'Ступень', attention: 'Внимание каждому', pricePerHead: 'Цена на человека', team: 'Команда',
     voice: 'Голос ведущего', gives: 'Что даёт ступень', timeToStepUp: 'Пора выше, если', tooEarly: 'Рано, если', soon: 'скоро', course: 'Курс', empty: 'здесь пока пусто',
     myMap: 'Моя карта', whereNow: 'Где я сейчас', nextStep: 'Мой следующий шаг', ownFormat: 'свой формат', date: 'Дата',
-    sign: 'Признак, что пора выше', copy: 'Скопировать', print: 'Распечатать',
+    sign: 'Признак', copy: 'Скопировать', print: 'Распечатать',
     localOnly: 'Хранится только в этом браузере.', choose: '— не выбрано —', copied: 'Скопировано',
   },
   en: {
@@ -23,7 +23,7 @@ export const UI: Record<'ru' | 'en', {
     voice: "The leader's voice", gives: 'What the step gives', timeToStepUp: 'Time to step up if', tooEarly: 'Too early if',
     soon: 'soon', course: 'Course', empty: 'nothing here yet',
     myMap: 'My map', whereNow: 'Where I am now', nextStep: 'My next step', ownFormat: 'my own format', date: 'Date',
-    sign: 'The sign that it is time to step up', copy: 'Copy', print: 'Print',
+    sign: 'Sign', copy: 'Copy', print: 'Print',
     localOnly: 'Kept only in this browser.', choose: '— not chosen —', copied: 'Copied',
   },
 }

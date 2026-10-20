@@ -5,13 +5,13 @@
   "unit": "u2-kogo-pozvat",
   "locale": "en",
   "title": "Whom to invite",
-  "sourceHash": "sha256:82c8dbeef97c67e65b49d14e8768b7d00fe1314e62383e97fe00bf3e1e7910a0",
+  "sourceHash": "sha256:50c4a538213c0e697e7236b6067bc6ac79dd0b4250963d7a5d7dd78f718ef7d7",
   "outline": [
     {
       "heading": "Where participants come from",
       "points": [
         {
-          "text": "A leader usually has three sources: current clients with a similar request; their friends who have asked about you; the waiting list.",
+          "text": "A practitioner usually has three sources: current clients with a similar request; their friends who have asked about you; the waiting list.",
           "origin": "extract"
         }
       ],
@@ -51,7 +51,7 @@
       "heading": "A worked example",
       "points": [
         {
-          "text": "The leader has five people on her waiting list and two clients who asked about a group.",
+          "text": "The practitioner has five people on her waiting list and two clients who asked about a group.",
           "origin": "extract"
         }
       ],
@@ -78,8 +78,12 @@
     "pool": "prose-pool",
     "sections": [
       {
-        "sourceHash": "sha256:b09ee82bd86dd2d016c17f618f1a0128a19386aed5027e352f3a56dc86f364df",
-        "verbatim": "near-identical"
+        "sourceHash": "sha256:5f8e2397f07640262b7d77a6adc89c0d65169991940fb3813199c8e9a5e51be7",
+        "points": [
+          "You usually have three sources for participants.",
+          "These are current clients with a similar request and friends who asked about you.",
+          "The waiting list is another source."
+        ]
       },
       {
         "sourceHash": "sha256:f17c2b88c1c19c1540fd495d31b80704ca1d64a97229639ec989ae0b8a034b06",
@@ -96,7 +100,7 @@
         "verbatim": "near-identical"
       },
       {
-        "sourceHash": "sha256:72d42c6c8711c4b8058c3d6d2361a90572dd495510c42ba1498af4d45bc8769f",
+        "sourceHash": "sha256:17e43d103033b70654e62ef871b62a00969d0d866c0166777aabeb1e75fe1277",
         "verbatim": "near-identical"
       },
       {
