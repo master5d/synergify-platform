@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-metod",
+  "unit": "u3-na-dvoih",
+  "locale": "ru",
+  "title": "Проверка: метод на двоих",
+  "sourceHash": "sha256:71284cc4ba0b15d45b004f0368929de4fc537306e5535a0beb9a1a8f250c2aa2",
+  "outline": [
+    {
+      "heading": "Что ломается при двоих",
+      "points": [
+        {
+          "text": "Ответов три: да, с изменением, нет.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что говорят исследования",
+      "points": [
+        {
+          "text": "О групповом коучинге исследований мало, систематического обзора нет.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Учебный пример",
+      "points": [
+        {
+          "text": "Ведущая проверила свои шесть шагов на двоих.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Не то же самое, только дешевле",
+      "points": [
+        {
+          "text": "Встреча на двоих — другой формат со своими законами.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:88f04463d16f4f470648412ff35d30e0857436836d31db7ba9f82f99db72181b",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:c7a87f62d4b4074c73805327d53ee41cba57025d3f5477a17d3cadd33b7ffdab",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:7c5bb519d6573b7450b94b0d21f1218c80f0661f0328f5c8ec28bb1004816f3f",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:efc4fdc79e73c713d5ffdcbb56c42efdfa562d0819cca9da209cac97a09bacd7",
+        "points": [
+          "Встреча на двоих представляет собой отдельный формат, который работает по своим правилам."
+        ]
+      }
+    ]
+  }
+}

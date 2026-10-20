@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-metod",
+  "unit": "u2-struktura",
+  "locale": "ru",
+  "title": "Структура сессии по шагам",
+  "sourceHash": "sha256:a78d3079c4f4a94d306039ba5c1f93d3b84e11017f4767ac8355b6f02c52c7ba",
+  "outline": [
+    {
+      "heading": "Шаг сессии",
+      "points": [
+        {
+          "text": "Один шаг — три вещи: действие, зачем оно и сколько минут.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Одна страница — предел",
+      "points": [
+        {
+          "text": "В модуле 01 был признак «рано»: ты не можешь объяснить свой подход за пять минут.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Учебный пример",
+      "points": [
+        {
+          "text": "Ведущая описала свою сессию на 50 минут в шесть шагов.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Подробнее — не значит лучше",
+      "points": [
+        {
+          "text": "Метод короче практики, и в этом его сила.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:54b042cd2296a854de280619defa0276d10cb657422741f83c893b27fa85aed3",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:bd6e55a015085ed68111942cee2b492127c57647ee43c21f2b666e065e642004",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:3eb4a3d099739540c85281555b004c4e6826ebac89e0ed433a53966f90748b40",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:38ef41c71136dba35b5f510c3bdd3f183a3638e2c92f4e579063745d239b94c1",
+        "points": [
+          "Сила метода заключается в том, что он короче самой практики."
+        ]
+      }
+    ]
+  }
+}

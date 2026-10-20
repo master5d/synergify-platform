@@ -2,35 +2,61 @@
   "module": 2,
   "title": "A method on one page",
   "description": "What in your session repeats and what rests only on you; the session in steps; testing the method on two people.",
-  "duration": "TODO",
+  "duration": "30 min",
   "level": 1,
   "units": [
-    {
-      "slug": "u1-povtoryaemoe",
-      "title": "What repeats and what rests on you"
-    },
-    {
-      "slug": "u2-struktura",
-      "title": "The session in steps"
-    },
-    {
-      "slug": "u3-na-dvoih",
-      "title": "The test: a method for two"
-    }
+    { "slug": "u1-povtoryaemoe", "title": "What repeats and what rests on you" },
+    { "slug": "u2-struktura", "title": "The session in steps" },
+    { "slug": "u3-na-dvoih", "title": "The test: a method for two" }
   ],
+  "layout": "phases",
   "objectives": [
-    {
-      "id": "o1",
-      "text": "Split your last three sessions into elements that repeat and elements that are personal."
-    },
-    {
-      "id": "o2",
-      "text": "Describe a session in 4–7 steps, with the purpose and the time of each step."
-    },
-    {
-      "id": "o3",
-      "text": "For each step, decide whether it holds two people at once and what to change in it."
-    }
+    { "id": "o1", "text": "Split your last three sessions into elements that repeat and elements that are personal" },
+    { "id": "o2", "text": "Describe a session in 4–7 steps, with the purpose and the time of each step" },
+    { "id": "o3", "text": "For each step, decide whether it holds two people at once and what to change in it" }
   ],
-  "checks": []
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-povtoryaemoe",
+      "objective": "o1",
+      "question": "Which of these is a repeatable part of the method?",
+      "options": [
+        "The order of the session's steps",
+        "The intuition of which exercise to choose today",
+        "The history with a particular client",
+        "The tone of the leader's voice"
+      ],
+      "answer": 0,
+      "explain": "The order of steps repeats in the same form even without you — an apprentice can repeat it. Intuition, history and tone are the personal part (u1, “Two parts of a session”)."
+    },
+    {
+      "id": "c2",
+      "unit": "u2-struktura",
+      "objective": "o2",
+      "question": "A leader described her session on three pages, with notes for each client. What is wrong?",
+      "options": [
+        "Nothing: the more detail, the better",
+        "It is an instruction for one person; a method should fit on one page in 4–7 steps",
+        "A page about prices is missing",
+        "A method does not need to be described at all"
+      ],
+      "answer": 1,
+      "explain": "Notes for each client are the personal part. A method is shorter than the practice: 4–7 steps on one page, each with an action, a purpose and minutes (u2, “One page is the limit”)."
+    },
+    {
+      "id": "c3",
+      "unit": "u3-na-dvoih",
+      "objective": "o3",
+      "question": "Which session step most often does not hold two people without a change?",
+      "options": [
+        "Starting with the breath",
+        "The question “what did you notice” at the end",
+        "Hands-on work fitted to one client's body",
+        "A short exercise to take home"
+      ],
+      "answer": 2,
+      "explain": "Hands-on work needs all the attention on one body — it cannot be split between two. The breath, the shared question and the home exercise carry over (u3, worked example)."
+    }
+  ]
 }

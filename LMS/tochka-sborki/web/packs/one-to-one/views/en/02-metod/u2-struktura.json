@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-metod",
+  "unit": "u2-struktura",
+  "locale": "en",
+  "title": "The session in steps",
+  "sourceHash": "sha256:0ec5fad0ad34d2d8065246f3b0713df4cf59cc8860ac5c73746d6930b27e7f5a",
+  "outline": [
+    {
+      "heading": "A session step",
+      "points": [
+        {
+          "text": "One step is three things: an action, why it is there, and how many minutes.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "One page is the limit",
+      "points": [
+        {
+          "text": "Module 01 had a sign of “too early”: you cannot explain your approach in five minutes.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A worked example",
+      "points": [
+        {
+          "text": "The leader described her 50-minute session in six steps.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "More detail is not better",
+      "points": [
+        {
+          "text": "A method is shorter than the practice, and that is its strength.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:e82cab56c5b08d855d892d09004fc81a5927b6a75cb4e0af8ef17d277829b672",
+        "points": [
+          "One step consists of three things: an action, the reason for it, and how many minutes."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2327c834eec536598dadc63433251e468569782812048a693c63ae8089568f37",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:c81e62dc6bbda18f1f1f202c6607e6294555861a184aa855c70d4bbe2b53e10d",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:98592a6887af8aaac4a83327373c8696ed18ee27863b8e6d98a46ce1c3fc870f",
+        "points": [
+          "The strength of a method lies in it being shorter than the practice itself."
+        ]
+      }
+    ]
+  }
+}

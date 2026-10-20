@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-metod",
+  "unit": "u1-povtoryaemoe",
+  "locale": "en",
+  "title": "What repeats and what rests on you",
+  "sourceHash": "sha256:c7783e592de0d4834162e75848d03c098f8f3b050f28384a81de4389b4f4c622",
+  "outline": [
+    {
+      "heading": "Two parts of a session",
+      "points": [
+        {
+          "text": "The personal part — what rests on you.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The apprentice test",
+      "points": [
+        {
+          "text": "A simple question helps to separate the parts.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A worked example",
+      "points": [
+        {
+          "text": "A leader laid out her last three sessions.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The living part and the skeleton",
+      "points": [
+        {
+          "text": "The living part is exactly the personal one. The method is the skeleton the living part rests on.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:8791ad74df6ddb1752cc95431f8d616bf73eba432ca5d42d79147a11597f23ad",
+        "points": [
+          "The personal part of a session is what rests on you."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e03722689c0deb657d5cc3abb64a2d3c05ba3d95b550c08b9f877b4a08b0adaa",
+        "points": [
+          "You can use a simple question to help separate the parts."
+        ]
+      },
+      {
+        "sourceHash": "sha256:af929fb181042debe7f363cacbbfe00f6c36cc962201c47b65c6127453dff9a3",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:52e9be95fe041a03d41b0e1feaf7d21937581a5174dce4a3bd027abed7abd258",
+        "verbatim": "near-identical"
+      }
+    ]
+  }
+}

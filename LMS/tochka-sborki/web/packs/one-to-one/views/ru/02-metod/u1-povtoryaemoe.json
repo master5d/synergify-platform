@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "02-metod",
+  "unit": "u1-povtoryaemoe",
+  "locale": "ru",
+  "title": "Что повторяется, а что держится на тебе",
+  "sourceHash": "sha256:216768fba59d356a43dc8a7d2a4b994bdcc38b9ad6ae9720b9e7eac162056e4f",
+  "outline": [
+    {
+      "heading": "Две части сессии",
+      "points": [
+        {
+          "text": "Метод — то, что повторяется в той же форме и без тебя.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Проверка учеником",
+      "points": [
+        {
+          "text": "Простой вопрос помогает разделить части.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Учебный пример",
+      "points": [
+        {
+          "text": "Ведущая разложила три последние сессии.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Живое и скелет",
+      "points": [
+        {
+          "text": "Живое как раз в личной части. Метод — скелет, на котором живое держится.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:f6d2d1caa646fb8fbd0313a1ab630b0f9c071eda48fc11c581d1ba09e13298cd",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:307dd28380a636f93954a707e82e3604f06896c01fedf84e4352507b6d85d994",
+        "points": [
+          "Разделить эти части тебе поможет один простой вопрос."
+        ]
+      },
+      {
+        "sourceHash": "sha256:b4fc7698f2796e1be878c50a0387edb0e36946687622e3b199a42138f2531965",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:0f3a3629a13bf7ab15e78af2aeb891238846861d65225836adf6afecbd2045ba",
+        "verbatim": "review"
+      }
+    ]
+  }
+}
