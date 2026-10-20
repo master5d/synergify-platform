@@ -5,7 +5,7 @@
   "unit": "u6-auditoriya-do-retrita",
   "locale": "en",
   "title": "Your audience before the retreat",
-  "sourceHash": "sha256:c1edc5cf38cbf423822d960f910abda097a1f13ce2647e56bd1cb41e20aa34da",
+  "sourceHash": "sha256:ec248dbb06b7f6394f101dec2a195a7f9ff05b57ed3a1e94e6c53daeceb2bf26",
   "outline": [
     {
       "heading": "You sell to your own people",
@@ -22,6 +22,16 @@
       "points": [
         {
           "text": "The calmest path to trust is to give something useful in advance.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Steps before the retreat",
+      "points": [
+        {
+          "text": "A retreat is a medium group, in person, one-off: a week for which a person gives both money and holiday time.",
           "origin": "extract"
         }
       ],
@@ -87,6 +97,12 @@
         "sourceHash": "sha256:851c29bb2147f9aa73421b93f2b4cc534cc08f3b33f4dd1ffc5b4a6591204392",
         "points": [
           "Giving something useful in advance is the calmest path for you to build trust."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e7464ca22ebeefdb662ac70bbb73dc6332ad16515cd9139df0fcd9e22066ecad",
+        "points": [
+          "A retreat is a one-off medium group event held in person for one week where you give both money and holiday time."
         ]
       },
       {
