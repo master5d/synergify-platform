@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-karta",
+  "unit": "u1-gde-ya",
+  "locale": "ru",
+  "title": "Где я на лесенке",
+  "sourceHash": "sha256:a15b2a1e8020dfe8b44eca1e2cacee2a012d157f1de1f6aa09d151a2dfc88a74",
+  "outline": [
+    {
+      "heading": "Три оси лесенки",
+      "points": [
+        {
+          "text": "Лесенка форматов академии описывает любую работу ведущего тремя осями.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Законы ступени «один на один»",
+      "points": [
+        {
+          "text": "У каждой ступени свои законы.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Ступень, а не прихожая",
+      "points": [
+        {
+          "text": "Лесенка говорит иначе: верхняя ступень не лучше нижней, на любой можно работать годами.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:305486387bdc1bb104c5f67ec8905c336a29a1abb5ad97e6b58a8e6f63bd45e4",
+        "points": [
+          "Лесенка форматов академии использует три оси, чтобы описать любую работу ведущего."
+        ]
+      },
+      {
+        "sourceHash": "sha256:28d1d84c38312c34ebefeb66a067bbeb199ac1be743b537b5c8313a56070b632",
+        "points": [
+          "Каждая ступень лесенки подчиняется своим собственным законам."
+        ]
+      },
+      {
+        "sourceHash": "sha256:fb37e1b228247a4db1d2daf72873a082f6a5c44bf23b6a15309468b76b5e142b",
+        "points": [
+          "Верхняя ступень не считается лучше нижней, поэтому на любой из них ты можешь работать годами."
+        ]
+      }
+    ]
+  }
+}

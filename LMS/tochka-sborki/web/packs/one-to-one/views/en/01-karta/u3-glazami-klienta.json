@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-karta",
+  "unit": "u3-glazami-klienta",
+  "locale": "en",
+  "title": "Through the client's eyes: what they get",
+  "sourceHash": "sha256:593665b4ce1e24ee0eabb85099cad973b9ee4788185f9959b909ff49d2cc257b",
+  "outline": [
+    {
+      "heading": "Two columns",
+      "points": [
+        {
+          "text": "From the method — what repeats and what they can name themselves.",
+          "origin": "extract"
+        },
+        {
+          "text": "From the relationship — attention, trust, the feeling of being listened to.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "When a bond becomes a ceiling",
+      "points": [
+        {
+          "text": "A bond is not a problem.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the codes say",
+      "points": [
+        {
+          "text": "The Global Code of Ethics for coaches and mentors (December 2025 edition) asks practitioners to actively support the client's independence and self-reliance.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Through the client's eyes",
+      "points": [
+        {
+          "text": "A client being attached does not prove you are a good practitioner.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:555fa8cf333ef8cb690f4a948a1d2da95d42460a86c47384a7b4a588358b33bc",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:61a6bfd16ce4736f10dad89b16835ac8b7e33b1c2c4446130e410439ed78344b",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:36a6534fc4ff8c9c53404250e70d8d130e3ef3157339f47438d488e77b1445aa",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:a0da44b0a1fab2f13865ce053de5b858bd9bcb39adeaf924b32cb114e55c3c53",
+        "points": [
+          "The fact that a client is attached to you does not prove you are a good practitioner."
+        ]
+      }
+    ]
+  }
+}

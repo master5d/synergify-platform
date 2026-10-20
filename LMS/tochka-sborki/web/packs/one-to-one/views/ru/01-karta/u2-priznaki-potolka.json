@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-karta",
+  "unit": "u2-priznaki-potolka",
+  "locale": "ru",
+  "title": "Признаки потолка",
+  "sourceHash": "sha256:7477471f9f27d3360706e82a7d07f33faf42313b4c56bb1ee14551488538afd5",
+  "outline": [
+    {
+      "heading": "Два списка признаков",
+      "points": [
+        {
+          "text": "Пора выше, если: к тебе возвращаются и приводят знакомых; одни и те же вопросы повторяются от человека к человеку; свободных часов в неделе почти не осталось.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что такое потолок",
+      "points": [
+        {
+          "text": "Потолок — это не «мало клиентов».",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Учебный пример",
+      "points": [
+        {
+          "text": "Больше клиентов не значит рост.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c2"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:8ffc2ec8f47ab6d2ee68c01077836145694b9233fcfef3feee688291cf32221d",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:93bdcd61d9be4c58735419c1b93a6502851a3871f0303217d463f6755a77a24e",
+        "points": [
+          "Потолок не значит, что у тебя стало мало клиентов."
+        ]
+      },
+      {
+        "sourceHash": "sha256:635dd0ee9c5d978ba405aafcad869667d3107752a9ae879afd042d3c596d4a14",
+        "verbatim": "review"
+      }
+    ]
+  }
+}

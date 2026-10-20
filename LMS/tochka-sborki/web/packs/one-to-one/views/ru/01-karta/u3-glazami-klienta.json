@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-karta",
+  "unit": "u3-glazami-klienta",
+  "locale": "ru",
+  "title": "Глазами клиента: что он получает",
+  "sourceHash": "sha256:1609b9e94301ae9030a6bbdbc86c692307a1bac01e09bf11f08b52897fc1adcf",
+  "outline": [
+    {
+      "heading": "Две колонки",
+      "points": [
+        {
+          "text": "Клиент получает от сессии две разные вещи.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Когда привязка становится потолком",
+      "points": [
+        {
+          "text": "Привязка — не беда.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что говорят кодексы",
+      "points": [
+        {
+          "text": "Глобальный кодекс этики коучей и наставников (Global Code of Ethics, редакция декабря 2025) просит практиков активно поддерживать независимость и самостоятельность клиента.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Глазами клиента",
+      "points": [
+        {
+          "text": "Если клиент привязан, это не доказывает, что ты хороший практик.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c3"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:36de94dffb3ca25cf880e2d3ff24063582c3460447e77bee75b1cf903cfeb9a8",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:4e5ff659e59e3ccafff9b6ae94b7d96ebd90f2b22e3f68e404d56c3c80152485",
+        "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:bbff184908838a4df3012c2e92d9fac155ceddef1fa765f03396afef412c5157",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:170c4e159bce7b07def66a7846ae7e918e0b98f897dac4a3ab85d43b2349df39",
+        "verbatim": "review"
+      }
+    ]
+  }
+}

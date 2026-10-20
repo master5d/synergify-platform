@@ -2,43 +2,77 @@
   "module": 1,
   "title": "A map of your practice",
   "description": "Where your practice stands on the ladder, which signs show that one-to-one work has become a ceiling, what the client really gets, and where your competence ends.",
-  "duration": "TODO",
+  "duration": "40 min",
   "level": 1,
   "units": [
-    {
-      "slug": "u1-gde-ya",
-      "title": "Where I stand on the ladder"
-    },
-    {
-      "slug": "u2-priznaki-potolka",
-      "title": "Signs of a ceiling"
-    },
-    {
-      "slug": "u3-glazami-klienta",
-      "title": "Through the client's eyes: what they get"
-    },
-    {
-      "slug": "u4-granica",
-      "title": "The edge of your competence"
-    }
+    { "slug": "u1-gde-ya", "title": "Where I stand on the ladder" },
+    { "slug": "u2-priznaki-potolka", "title": "Signs of a ceiling" },
+    { "slug": "u3-glazami-klienta", "title": "Through the client's eyes: what they get" },
+    { "slug": "u4-granica", "title": "The edge of your competence" }
   ],
+  "layout": "phases",
   "objectives": [
-    {
-      "id": "o1",
-      "text": "Describe your practice by the three axes of the ladder: step, channel and event class."
-    },
-    {
-      "id": "o2",
-      "text": "Tell apart, in your own practice, the signs of “time to step up” from the signs of “too early”."
-    },
-    {
-      "id": "o3",
-      "text": "For each client, separate what they get from the method and what they get from their relationship with you."
-    },
-    {
-      "id": "o4",
-      "text": "Name the signs at which a practitioner stops and refers the client on, and draw up your own referral list."
-    }
+    { "id": "o1", "text": "Describe your practice by the three axes of the ladder: step, channel and event class" },
+    { "id": "o2", "text": "Tell apart, in your own practice, the signs of “time to step up” from the signs of “too early”" },
+    { "id": "o3", "text": "For each client, separate what they get from the method and what they get from their relationship with you" },
+    { "id": "o4", "text": "Name the signs at which a practitioner stops and refers the client on, and draw up your own referral list" }
   ],
-  "checks": []
+  "checks": [
+    {
+      "id": "c1",
+      "unit": "u1-gde-ya",
+      "objective": "o1",
+      "question": "One-to-one sessions once a week, in person and by video. How do you describe this by the axes of the ladder?",
+      "options": [
+        "Small group · online · cycle",
+        "One to one · in person and online · regular",
+        "One to one · hybrid · one-off",
+        "One to a few · in person · regular"
+      ],
+      "answer": 1,
+      "explain": "There is one person in front of you — the “one to one” step. Meetings happen both in the room and by video — two channels. They repeat every week with no end of a cycle — the “regular” class (u1, “Three axes of the ladder”)."
+    },
+    {
+      "id": "c2",
+      "unit": "u2-priznaki-potolka",
+      "objective": "o2",
+      "question": "Which of these signs says “too early” rather than “time to step up”?",
+      "options": [
+        "Clients come back and bring friends",
+        "The same questions repeat from person to person",
+        "You cannot explain your approach in five minutes",
+        "There are almost no free hours left in your week"
+      ],
+      "answer": 2,
+      "explain": "If the approach cannot be explained in five minutes, the method is not yet separated from you. It is too early to step up: first the method, then the step (u2, “Two lists of signs”)."
+    },
+    {
+      "id": "c3",
+      "unit": "u3-glazami-klienta",
+      "objective": "o3",
+      "question": "A client says: “It just feels good with you.” Which column of the map does this belong to?",
+      "options": [
+        "The method",
+        "The relationship",
+        "The signs of “too early”",
+        "None: it is just a compliment"
+      ],
+      "answer": 1,
+      "explain": "This is the value of the relationship — the strength of the step. It becomes a ceiling when there is nothing to name in the “from the method” column (u3, “Two columns”)."
+    },
+    {
+      "id": "c4",
+      "unit": "u4-granica",
+      "objective": "o4",
+      "question": "What does the ICF guide call the main sign that it is time to refer a client to a therapist?",
+      "options": [
+        "The client cried in a session",
+        "For weeks the problem has been getting in the way of the client's daily life",
+        "The client missed two sessions in a row",
+        "The practitioner feels awkward talking to the client about their life"
+      ],
+      "answer": 1,
+      "explain": "The main indicator in the ICF guide is daily functioning: sleep, work, home, relationships — and that it lasts for weeks. One episode of tears is not a sign (u4, “Signs to stop”)."
+    }
+  ]
 }

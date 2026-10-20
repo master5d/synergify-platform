@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-karta",
+  "unit": "u4-granica",
+  "locale": "ru",
+  "title": "Граница компетенции",
+  "sourceHash": "sha256:2b1db0a738d79d37a5deaa9cdaeba0a2a21c8a522df96ae88b8265003ac4a572",
+  "outline": [
+    {
+      "heading": "",
+      "points": [
+        {
+          "text": "Это не медицинская и не юридическая консультация.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Что требуют кодексы",
+      "points": [
+        {
+          "text": "Кодексы профессиональных ассоциаций говорят одно и то же разными словами.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Признаки остановиться",
+      "points": [
+        {
+          "text": "Твоя задача — заметить и передать, а не поставить диагноз.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Как сказать",
+      "points": [
+        {
+          "text": "Наедине и без спешки.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Глазами клиента",
+      "points": [
+        {
+          "text": "Передать клиента — не признать слабость.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:00b280d5b2ac3595a4fc7dacc127fd22bb3930d1521f56b18e4103f9d9d5e958",
+        "points": [
+          "Это не является медицинской или юридической консультацией."
+        ]
+      },
+      {
+        "sourceHash": "sha256:532275ae2a677c14ab687f40284633985cbe8ac9e1efb9fd15cf89de47fe28be",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:e5793303ee104c71d18a1e56f81535bea3ed0c492302086c879b7ac1f935c210",
+        "points": [
+          "Твоя задача заключается в том, чтобы заметить и передать, а не поставить диагноз."
+        ]
+      },
+      {
+        "sourceHash": "sha256:8b24279ba657dfee70e69d950266bb957a41b99714e5ddcc8b7f26fc1780981c",
+        "points": [
+          "Обсуждай это наедине и без лишней спешки."
+        ]
+      },
+      {
+        "sourceHash": "sha256:2c167e313f258e7b5283cc35b85339cb169a33780c1b091f4f6ff29497219143",
+        "verbatim": "review"
+      }
+    ]
+  }
+}

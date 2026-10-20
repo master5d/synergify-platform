@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-karta",
+  "unit": "u1-gde-ya",
+  "locale": "en",
+  "title": "Where I stand on the ladder",
+  "sourceHash": "sha256:1653dcc2fe955286f45b1c04122ae6afe0d96b39e12b35d4dda1fd221267e2c6",
+  "outline": [
+    {
+      "heading": "Three axes of the ladder",
+      "points": [
+        {
+          "text": "The academy's format ladder describes any leader's work by three axes.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "The laws of the “one to one” step",
+      "points": [
+        {
+          "text": "Every step has its own laws.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "A step, not a waiting room",
+      "points": [
+        {
+          "text": "The ladder says otherwise: a higher step is not better than a lower one; you can work on any of them for years.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c1"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:ee75c6d6218caa6cf972a62dabab3eeec3719cd2ac009d236a222707252bf426",
+        "points": [
+          "The academy's format ladder uses three axes to describe the work of any leader."
+        ]
+      },
+      {
+        "sourceHash": "sha256:958393bcee131444b0d759d21461a90d8af0472b6b9d077b3be367493b3f1a7d",
+        "points": [
+          "Each step on the ladder has its own laws."
+        ]
+      },
+      {
+        "sourceHash": "sha256:d62039485bfcd5e1f9e4d394d933d4577d91d2afdfbb5e5436834ea08df84770",
+        "points": [
+          "The ladder shows that a higher step is not better than a lower one and you can work on any step for years."
+        ]
+      }
+    ]
+  }
+}

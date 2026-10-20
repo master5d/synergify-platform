@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "01-karta",
+  "unit": "u4-granica",
+  "locale": "en",
+  "title": "The edge of your competence",
+  "sourceHash": "sha256:518124d6349ea507b3964670c7fb66c9ac12d2b6a8a51d95c345412b646f04cc",
+  "outline": [
+    {
+      "heading": "",
+      "points": [
+        {
+          "text": "This is not medical or legal advice.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "What the codes require",
+      "points": [
+        {
+          "text": "The codes of professional associations say the same thing in different words.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Signs to stop",
+      "points": [
+        {
+          "text": "Your job is to notice and refer, not to diagnose.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "How to say it",
+      "points": [
+        {
+          "text": "In private and without hurry.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Through the client's eyes",
+      "points": [
+        {
+          "text": "Referring a client is not admitting weakness.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c4"
+  ],
+  "audio": null,
+  "paraphrase": {
+    "source": "paraphrase",
+    "generator": "paraphrase-v1",
+    "pool": "prose-pool",
+    "sections": [
+      {
+        "sourceHash": "sha256:347a669120fdf26f48562e0ae7c982d350f8352dff3ce5565270bceb590f52b7",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:7a3a879cbc792109c838289855c4c1a3f5f55098e39526fdc37bd66433afda2b",
+        "points": [
+          "Professional association codes use different words to say the same thing."
+        ]
+      },
+      {
+        "sourceHash": "sha256:50a666c7825a058a560b1e52b171505f283f99b9e6366011c3918aaabb56c4a7",
+        "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:b3391766d91814f70b367ade611d0e1b3b4e62fcc4c2e35d4d7d186041965ad9",
+        "points": [
+          "You speak in private and without hurry."
+        ]
+      },
+      {
+        "sourceHash": "sha256:e19b264e23ba68a72d069ec9611f11d567ed88045541290b1729b14f104465f6",
+        "points": [
+          "You are not admitting weakness when you refer a client."
+        ]
+      }
+    ]
+  }
+}
