@@ -7,16 +7,28 @@ import { PACK_SLUG } from '../pack'
 import { checkContent } from './check'
 import { createNotionClient, NotionError } from './client'
 import { decodeManifest, encodeManifest, MANIFEST_TITLE } from './manifest'
-import { inlineMd, notionUrl, pageTag, toggle } from './md'
+import type { Manifest } from './manifest'
+import { callout, inlineMd, notionUrl, pageTag, parseMarkdown, TABLE_OF_CONTENTS, toggle, toNotionMarkdown } from './md'
 import { KEY } from './keys'
-import { buildSite } from './site'
+import { buildSite, fakeResolver } from './site'
 import { syncSite } from './sync'
 import type { ExtraPage, Locale, NotionApi, SiteInput } from './types'
 
 type Io = { out(line: string): void; err(line: string): void }
 type Deps = { api?: NotionApi; input?: SiteInput; sha?: string; date?: string }
+type Args = { command: string; out?: string; only?: string }
+
+const USAGE = 'usage: node scripts/notion-kb.ts check [--out <dir>] | sync [--only <модуль>] | status | smoke --out <dir>'
+const SMOKE_TITLE = 'notion-kb · smoke'
+const SMOKE_CHILD_1 = 'smoke child 1'
+const SMOKE_CHILD_2 = 'smoke child 2'
+const SMOKE_MANIFEST = 'manifest probe'
+const CHILD_GUARD_BROKEN = 'smoke: Notion принял запись без тега живого ребёнка — защита ручных подстраниц не работает'
 const defaultIo: Io = { out: (line) => console.log(line), err: (line) => console.error(line) }
-const textOf = (error: unknown) => error instanceof Error ? error.message : String(error)
+
+function textOf(error: unknown): string {
+  return error instanceof Error ? error.message : String(error)
+}
 
 export async function loadSiteInput(packDir: string): Promise<SiteInput> {
   const pack = basename(packDir)
@@ -28,13 +40,29 @@ export async function loadSiteInput(packDir: string): Promise<SiteInput> {
   const locales = ['ru', 'en'] as const
   const modules = Object.fromEntries(locales.map((locale) => [locale, getAllModules(locale)])) as Record<Locale, ReturnType<typeof getAllModules>>
   const unitMdx = (locale: Locale, module: string, unit: string) => getUnitContent(module, unit, locale).content.replace(/\r\n/g, '\n')
-  const pageMdx = (locale: Locale, name: ExtraPage) => { const page = getPageContent(name, locale); return { title: page.meta.title, content: page.content.replace(/\r\n/g, '\n') } }
+  const pageMdx = (locale: Locale, name: ExtraPage) => {
+    const page = getPageContent(name, locale)
+    return { title: page.meta.title, content: page.content.replace(/\r\n/g, '\n') }
+  }
   return { domain: course.domain, description: course.description, config: kb, modules, unitMdx, pageMdx, concepts }
 }
 
-function argValue(argv: string[], flag: string): string | undefined {
+// Флаг без значения — ошибка вызова, а не «флага нет»: `sync --only` без модуля иначе стал бы полной синхронизацией.
+function flagValue(argv: string[], flag: string): string | null | undefined {
   const index = argv.indexOf(flag)
-  return index >= 0 ? argv[index + 1] : undefined
+  if (index < 0) return undefined
+  const value = argv[index + 1]
+  return value && !value.startsWith('--') ? value : null
+}
+
+function parseArgs(argv: string[]): Args | null {
+  const command = argv[0]
+  if (!['check', 'sync', 'status', 'smoke'].includes(command)) return null
+  const out = flagValue(argv, '--out')
+  const only = flagValue(argv, '--only')
+  if (out === null || only === null) return null
+  if (command === 'smoke' && !out) return null
+  return { command, out, only }
 }
 
 function stampedSha(deps: Deps, env: Record<string, string | undefined>): string {
@@ -48,16 +76,22 @@ function stampedDate(deps: Deps, sha: string): string {
   return execFileSync('git', ['show', '-s', '--format=%cs', sha], { encoding: 'utf8', timeout: 10000 }).trim()
 }
 
+// Формы — те, что шлёт генератор: помощники md.ts и сериализатор toNotionMarkdown. Task 11 сверяет их с прочитанным.
 function smokeMarkdown(pageUrl: string, child1: string, child2: string): string {
   return [
-    toggle('Обычная раскрывашка', `Вложенная: ${toggle('Вложенная', 'Текст')}`),
-    '<callout icon="🧪">Smoke callout</callout>',
-    pageTag(notionUrl(child2), 'child 2'), pageTag(notionUrl(child1), 'child 1'),
-    '| a | b |\n|---|---|\n| x \\| y | z |',
-    '```\nвнутри ``` кода\n```',
-    'Абзац ' + 'x'.repeat(2500), '```\n' + 'y'.repeat(2500) + '\n```',
-    '\\<b>', '[текстовая ссылка](https://example.com#anchor)', `[сама страница](${pageUrl}#anchor)`,
-    '<table-of-contents />', '#### Четвёртый уровень',
+    toggle('Обычная раскрывашка', `Текст снаружи вложенной.\n\n${toggle('Вложенная раскрывашка', 'Текст внутри вложенной.')}`),
+    callout('🧪', 'Smoke callout.\n\nВторой абзац callout.'),
+    pageTag(notionUrl(child2), SMOKE_CHILD_2),
+    pageTag(notionUrl(child1), SMOKE_CHILD_1),
+    toNotionMarkdown(parseMarkdown('| a | b |\n|---|---|\n| x \\| y | z |')),
+    toNotionMarkdown(parseMarkdown('````\nвнутри ``` кода\n````')),
+    `Абзац ${'x'.repeat(2500)}`,
+    toNotionMarkdown(parseMarkdown(`\`\`\`\n${'y'.repeat(2500)}\n\`\`\``)),
+    '\\<b>',
+    '[текстовая ссылка](https://example.com#anchor)',
+    `[сама страница](${pageUrl}#anchor)`,
+    TABLE_OF_CONTENTS,
+    '#### Четвёртый уровень',
     inlineMd('Цена ~$20, сноска [1], адрес https://example.com, Q&A'),
     toggle('Абзац последним — без пустой строки', 'Текст абзаца.'),
     toggle('Абзац последним — с пустой строкой', 'Текст абзаца.\n'),
@@ -70,102 +104,187 @@ async function siteInput(deps: Deps): Promise<SiteInput> {
   return deps.input ?? loadSiteInput(join(process.cwd(), 'packs', PACK_SLUG))
 }
 
-async function runCheck(input: SiteInput, outDir: string | undefined, io: Io): Promise<number> {
+function runCheck(input: SiteInput, outDir: string | undefined, io: Io): number {
   const errors = checkContent(input)
-  if (!errors.length && outDir) {
-    mkdirSync(outDir, { recursive: true })
-    for (const page of buildSite(input)) {
-      const pages = buildSite(input)
-      const links = { page: (key: string) => pages.some((item) => item.key === key) ? `https://www.notion.so/${key}` : null, anchor: () => null }
-      writeFileSync(join(outDir, `${page.key.replaceAll('/', '__')}.md`), page.markdown(links), 'utf8')
-    }
+  if (errors.length) {
+    for (const error of errors) io.err(error)
+    return 1
   }
-  if (errors.length) { for (const error of errors) io.err(error); return 1 }
-  io.out(`check: ошибок 0, страниц ${buildSite(input).length}`)
+  const pages = buildSite(input)
+  if (outDir) {
+    mkdirSync(outDir, { recursive: true })
+    const links = fakeResolver(pages)
+    for (const page of pages) writeFileSync(join(outDir, `${page.key.replaceAll('/', '__')}.md`), page.markdown(links), 'utf8')
+  }
+  io.out(`check: ошибок 0, страниц ${pages.length}`)
   return 0
 }
 
 async function runStatus(input: SiteInput, api: NotionApi, io: Io): Promise<number> {
-  if (!input.config.servicePageId) { for (const page of await api.searchPages()) io.out(`${page.title} · ${page.id}`); return 0 }
-  const children = await api.listChildren(input.config.servicePageId)
-  const manifestChild = children.find((child) => child.type === 'child_page' && child.text === MANIFEST_TITLE)
-  if (!manifestChild) { io.err('ОШИБКА: манифест не найден'); return 1 }
-  const manifestResult = await api.getMarkdown(manifestChild.id)
-  if (manifestResult.truncated) { io.err('ОШИБКА: манифест обрезан'); return 1 }
-  const manifest = decodeManifest(manifestResult.markdown)
+  const serviceId = input.config.servicePageId
+  if (!serviceId) {
+    for (const page of await api.searchPages()) io.out(`${page.title} · ${page.id}`)
+    return 0
+  }
+  const manifestChild = (await api.listChildren(serviceId)).find((child) => child.type === 'child_page' && child.text === MANIFEST_TITLE)
+  if (!manifestChild) {
+    io.err('ОШИБКА: манифест не найден')
+    return 1
+  }
+  const stored = await api.getMarkdown(manifestChild.id)
+  if (stored.truncated) {
+    io.err('ОШИБКА: манифест обрезан')
+    return 1
+  }
+  const manifest = decodeManifest(stored.markdown)
   const root = manifest.pages[KEY.root]
-  if (!root) { io.err('ОШИБКА: корень не найден'); return 1 }
+  if (!root) {
+    io.err('ОШИБКА: корень не найден')
+    return 1
+  }
   const page = await api.getPage(root.id)
-  const markdown = await api.getMarkdown(root.id)
-  const lines = markdown.markdown.split('\n').map((line) => line.trim()).filter(Boolean)
+  const lines = (await api.getMarkdown(root.id)).markdown.split('\n').map((line) => line.trim()).filter(Boolean)
   io.out(`корень: ${page.publicUrl ?? 'не опубликован'}`)
   io.out(`штамп: ${lines.at(-1) ?? ''}`)
   io.out(`страниц в манифесте: ${Object.keys(manifest.pages).length}`)
   return 0
 }
 
-async function runSmoke(input: SiteInput, api: NotionApi, outDir: string, io: Io): Promise<number> {
-  let smokeId: string | undefined
+// Проба 1: запись без тега живого ребёнка Notion обязан отклонить (4xx), а ребёнок — остаться живым.
+// На этом отказе держится защита ручных подстраниц владельца: syncSite не ищет чужих детей перед записью.
+async function probeChildGuard(api: NotionApi, smokeId: string, child1: string, child2: string, io: Io): Promise<boolean> {
+  let refused: NotionError | null = null
   try {
-    if (!input.config.servicePageId) throw new Error('servicePageId не задан')
-    smokeId = (await api.createPage(input.config.servicePageId, 'notion-kb · smoke')).id
-    const child1 = (await api.createPage(smokeId, 'smoke child 1')).id
-    const child2 = (await api.createPage(smokeId, 'smoke child 2')).id
-    const pageUrl = notionUrl(smokeId)
-    const sent = smokeMarkdown(pageUrl, child1, child2)
-    await api.replaceMarkdown(smokeId, sent)
+    await api.replaceMarkdown(smokeId, `${pageTag(notionUrl(child1), SMOKE_CHILD_1)}\n\nprobe`)
+  } catch (error) {
+    if (!(error instanceof NotionError) || error.status < 400 || error.status > 499) throw error
+    refused = error
+  }
+  if (!refused) {
+    io.err(`ОШИБКА: ${CHILD_GUARD_BROKEN}`)
+    return false
+  }
+  if ((await api.getPage(child2)).inTrash) {
+    io.err(`ОШИБКА: ${CHILD_GUARD_BROKEN} (ответ ${refused.status}, но «${SMOKE_CHILD_2}» в корзине)`)
+    return false
+  }
+  io.out(`smoke: запись без тега живого ребёнка отклонена (${refused.status}), ребёнок жив`)
+  return true
+}
+
+function syntheticManifest(entries: number): Manifest {
+  const pages: Manifest['pages'] = {}
+  for (let i = 0; i < entries; i += 1) {
+    pages[`ru/u/m${i}/u${i}`] = { id: i.toString(16).padStart(32, '0'), p: 'ru/book', th: i.toString(16).padStart(16, '0'), ch: i.toString(16).padStart(16, '0') }
+  }
+  return { v: 1, pages, anchors: {} }
+}
+
+// Проба 2: манифест на 600 страниц (≈ 70 КБ) в отдельном ребёнке читается обратно целиком.
+async function probeManifest(api: NotionApi, smokeId: string, io: Io): Promise<boolean> {
+  const probeId = (await api.createPage(smokeId, SMOKE_MANIFEST)).id
+  const manifest = syntheticManifest(600)
+  const encoded = encodeManifest(manifest)
+  const size = `${(Buffer.byteLength(encoded, 'utf8') / 1024).toFixed(1)} КБ`
+  io.out(`smoke: синтетический манифест — ${size}`)
+  await api.replaceMarkdown(probeId, encoded)
+  const got = await api.getMarkdown(probeId)
+  let whole = false
+  let why = got.truncated ? 'ответ обрезан' : ''
+  if (!got.truncated) {
+    try {
+      whole = JSON.stringify(decodeManifest(got.markdown)) === JSON.stringify(manifest)
+      if (!whole) why = 'прочитанное не равно отправленному'
+    } catch (error) {
+      why = textOf(error)
+    }
+  }
+  if (!whole) {
+    io.err(`ОШИБКА: smoke: манифест ${size} прочитан не целиком (${why})`)
+    return false
+  }
+  io.out(`smoke: манифест ${size} прочитан целиком`)
+  return true
+}
+
+async function runSmoke(input: SiteInput, api: NotionApi, outDir: string, io: Io): Promise<number> {
+  const serviceId = input.config.servicePageId
+  if (!serviceId) throw new Error(`servicePageId не задан в packs/${PACK_SLUG}/notion-kb.config.ts`)
+  let smokeId: string | undefined
+  let code = 1
+  try {
+    smokeId = (await api.createPage(serviceId, SMOKE_TITLE)).id
+    const child1 = (await api.createPage(smokeId, SMOKE_CHILD_1)).id
+    const child2 = (await api.createPage(smokeId, SMOKE_CHILD_2)).id
+    const sent = smokeMarkdown(notionUrl(smokeId), child1, child2)
     mkdirSync(outDir, { recursive: true })
     writeFileSync(join(outDir, 'smoke.sent.md'), sent, 'utf8')
+    await api.replaceMarkdown(smokeId, sent)
     const read = await api.getMarkdown(smokeId)
     writeFileSync(join(outDir, 'smoke.read.md'), read.markdown, 'utf8')
-    try {
-      await api.replaceMarkdown(smokeId, `${pageTag(notionUrl(child1), 'child 1')}\n\nprobe`)
-      if (!(await api.getPage(child2)).inTrash) throw new Error('Notion принял запись без тега живого ребёнка — защита ручных подстраниц не работает')
-    } catch (error) {
-      if (!(error instanceof NotionError) || error.status < 400 || error.status > 499) throw error
+    const guard = await probeChildGuard(api, smokeId, child1, child2, io)
+    const manifest = await probeManifest(api, smokeId, io)
+    if (guard && manifest) {
+      io.out('smoke: пробы пройдены')
+      code = 0
     }
-    const probe = { v: 1 as const, pages: Object.fromEntries(Array.from({ length: 600 }, (_, i) => [`ru/u/m${i}/u${i}`, { id: i.toString(16).padStart(32, '0'), p: 'ru/book', th: i.toString(16).padStart(16, '0'), ch: i.toString(16).padStart(16, '0') }])), anchors: {} }
-    const encoded = encodeManifest(probe)
-    await api.replaceMarkdown(child1, encoded)
-    const got = await api.getMarkdown(child1)
-    if (got.truncated || JSON.stringify(decodeManifest(got.markdown)) !== JSON.stringify(probe)) throw new Error(`smoke: манифест ${(encoded.length / 1024).toFixed(1)} КБ прочитан не целиком`)
-    io.out('smoke: пробы пройдены')
-    return 0
-  } catch (error) {
-    io.err(`ОШИБКА: ${textOf(error)}`)
-    return 1
   } finally {
-    if (smokeId) { try { await api.trashPage(smokeId) } catch (error) { io.err(`ОШИБКА: ${textOf(error)}`) } }
+    if (smokeId) {
+      try {
+        await api.trashPage(smokeId)
+      } catch (error) {
+        io.err(`ОШИБКА: smoke: страница не ушла в корзину: ${textOf(error)}`)
+        code = 1
+      }
+    }
   }
+  return code
 }
 
 export async function main(argv: string[], env: Record<string, string | undefined>, io: Io = defaultIo, deps: Deps = {}): Promise<number> {
-  const command = argv[0]
-  if (!['check', 'sync', 'status', 'smoke'].includes(command)) { io.err('usage: node scripts/notion-kb.ts <check|sync|status|smoke>'); return 2 }
+  const token = env.NOTION_KB_TOKEN?.trim()
+  const mask = (line: string) => (token ? line.split(token).join('***') : line)
+  // Каждая строка вывода идёт через маску токена, включая ошибки проб smoke и текст пойманных исключений.
+  const safe: Io = { out: (line) => io.out(mask(line)), err: (line) => io.err(mask(line)) }
+  const args = parseArgs(argv)
+  if (!args) {
+    safe.err(USAGE)
+    return 2
+  }
   try {
     const input = await siteInput(deps)
-    if (command === 'check') return runCheck(input, argValue(argv, '--out'), io)
-    const token = env.NOTION_KB_TOKEN?.trim()
-    if (!token) { io.err('ОШИБКА: NOTION_KB_TOKEN не задан'); return 1 }
+    if (args.command === 'check') return runCheck(input, args.out, safe)
+    if (!token) {
+      safe.err('ОШИБКА: NOTION_KB_TOKEN не задан')
+      return 1
+    }
     const api = deps.api ?? createNotionClient({ token })
-    if (command === 'status') return runStatus(input, api, io)
-    if (!input.config.servicePageId) { io.err(`ОШИБКА: servicePageId не задан в packs/${PACK_SLUG}/notion-kb.config.ts`); return 1 }
-    const only = argValue(argv, '--only')
-    if (only && !input.modules.ru.some((module) => module.slug === only)) { io.err(`ОШИБКА: --only: модуль «${only}» не найден (есть: ${input.modules.ru.map((module) => module.slug).join(', ')})`); return 2 }
-    if (command === 'smoke') { const out = argValue(argv, '--out'); if (!out) throw new Error('smoke требует --out <dir>'); return runSmoke(input, api, out, io) }
+    if (args.command === 'status') return await runStatus(input, api, safe)
+    const serviceId = input.config.servicePageId
+    if (!serviceId) {
+      safe.err(`ОШИБКА: servicePageId не задан в packs/${PACK_SLUG}/notion-kb.config.ts`)
+      return 1
+    }
+    if (args.command === 'smoke') return await runSmoke(input, api, args.out ?? '', safe)
+    const only = args.only
+    if (only && !input.modules.ru.some((module) => module.slug === only)) {
+      safe.err(`ОШИБКА: --only: модуль «${only}» не найден (есть: ${input.modules.ru.map((module) => module.slug).join(', ')})`)
+      return 2
+    }
     const checked = checkContent({ ...input, only })
-    if (checked.length) { checked.forEach((error) => io.err(error)); return 1 }
+    if (checked.length) {
+      for (const error of checked) safe.err(error)
+      return 1
+    }
     const sha = stampedSha(deps, env)
     const date = stampedDate(deps, sha)
     const pages = buildSite({ ...input, only })
-    const report = await syncSite(api, pages, input.concepts, input.config.servicePageId, { sha, date, only, log: (line) => io.out(line) })
-    report.anchorMisses.forEach((miss) => io.err(`ВНИМАНИЕ: якорь не найден: ${miss}`))
-    io.out(`создано ${report.created} · принято ${report.adopted} · обновлено ${report.updated} · переименовано ${report.retitled} · в корзину ${report.trashed} · без изменений ${report.unchanged}`)
+    const report = await syncSite(api, pages, input.concepts, serviceId, { sha, date, only, log: (line) => safe.out(line) })
+    for (const miss of report.anchorMisses) safe.err(`ВНИМАНИЕ: якорь не найден: ${miss}`)
+    safe.out(`создано ${report.created} · принято ${report.adopted} · обновлено ${report.updated} · переименовано ${report.retitled} · в корзину ${report.trashed} · без изменений ${report.unchanged}`)
     return 0
   } catch (error) {
-    const token = env.NOTION_KB_TOKEN?.trim()
-    const raw = textOf(error)
-    io.err(`ОШИБКА: ${token ? raw.split(token).join('***') : raw}`)
+    safe.err(`ОШИБКА: ${textOf(error)}`)
     return 1
   }
 }
