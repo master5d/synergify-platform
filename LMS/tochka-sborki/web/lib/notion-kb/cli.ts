@@ -19,6 +19,12 @@ type Deps = { api?: NotionApi; input?: SiteInput; sha?: string; date?: string }
 type Args = { command: string; out?: string; only?: string }
 
 const USAGE = 'usage: node scripts/notion-kb.ts check [--out <dir>] | sync [--only <модуль>] | status | smoke --out <dir>'
+const FLAGS = new Map<string, readonly string[]>([
+  ['check', ['--out']],
+  ['sync', ['--only']],
+  ['status', []],
+  ['smoke', ['--out']],
+])
 const SMOKE_TITLE = 'notion-kb · smoke'
 const SMOKE_CHILD_1 = 'smoke child 1'
 const SMOKE_CHILD_2 = 'smoke child 2'
@@ -47,22 +53,23 @@ export async function loadSiteInput(packDir: string): Promise<SiteInput> {
   return { domain: course.domain, description: course.description, config: kb, modules, unitMdx, pageMdx, concepts }
 }
 
-// Флаг без значения — ошибка вызова, а не «флага нет»: `sync --only` без модуля иначе стал бы полной синхронизацией.
-function flagValue(argv: string[], flag: string): string | null | undefined {
-  const index = argv.indexOf(flag)
-  if (index < 0) return undefined
-  const value = argv[index + 1]
-  return value && !value.startsWith('--') ? value : null
-}
-
+// Вызов разбирается строго: флаг чужой команды, `--only=…`, лишнее слово, флаг без значения или его повтор —
+// ошибка вызова (usage и 2), а не «флага нет»: иначе опечатка молча превратила бы `sync --only` в синхронизацию всего курса.
 function parseArgs(argv: string[]): Args | null {
-  const command = argv[0]
-  if (!['check', 'sync', 'status', 'smoke'].includes(command)) return null
-  const out = flagValue(argv, '--out')
-  const only = flagValue(argv, '--only')
-  if (out === null || only === null) return null
-  if (command === 'smoke' && !out) return null
-  return { command, out, only }
+  const [command, ...rest] = argv
+  const allowed = FLAGS.get(command)
+  if (!allowed) return null
+  const args: Args = { command }
+  for (let i = 0; i < rest.length; i += 2) {
+    const flag = rest[i]
+    const value = rest[i + 1]
+    if (!allowed.includes(flag) || !value || value.startsWith('--')) return null
+    const key = flag === '--out' ? 'out' : 'only'
+    if (args[key] !== undefined) return null
+    args[key] = value
+  }
+  if (command === 'smoke' && !args.out) return null
+  return args
 }
 
 function stampedSha(deps: Deps, env: Record<string, string | undefined>): string {
@@ -150,14 +157,25 @@ async function runStatus(input: SiteInput, api: NotionApi, io: Io): Promise<numb
   return 0
 }
 
-// Проба 1: запись без тега живого ребёнка Notion обязан отклонить (4xx), а ребёнок — остаться живым.
+// Отказ защиты — ответ 400 validation_error: так план моделирует запись без тега живого ребёнка (FakeNotion).
+// Лимит блоков отказом защиты не бывает ни в какой форме: у клиента он 403 restricted_resource с признаком blockLimit.
+function isChildGuardRefusal(error: unknown): error is NotionError {
+  return error instanceof NotionError && !error.blockLimit && error.status === 400 && error.code === 'validation_error'
+}
+
+// Проба 1: запись без тега живого ребёнка Notion обязан отклонить отказом защиты, а ребёнок — остаться живым.
 // На этом отказе держится защита ручных подстраниц владельца: syncSite не ищет чужих детей перед записью.
+// Иной ответ (409, 429, лимит блоков, 5xx) пробу не подтверждает: smoke останавливается и называет, что пришло.
 async function probeChildGuard(api: NotionApi, smokeId: string, child1: string, child2: string, io: Io): Promise<boolean> {
   let refused: NotionError | null = null
   try {
     await api.replaceMarkdown(smokeId, `${pageTag(notionUrl(child1), SMOKE_CHILD_1)}\n\nprobe`)
   } catch (error) {
-    if (!(error instanceof NotionError) || error.status < 400 || error.status > 499) throw error
+    if (!isChildGuardRefusal(error)) {
+      const answer = error instanceof NotionError ? `Notion ответил ${error.status} ${error.code}` : 'сбой до ответа Notion'
+      io.err(`ОШИБКА: smoke: проба 1 не состоялась — ${answer}, а отказ защиты — 400 validation_error`)
+      throw error
+    }
     refused = error
   }
   if (!refused) {
@@ -168,7 +186,7 @@ async function probeChildGuard(api: NotionApi, smokeId: string, child1: string, 
     io.err(`ОШИБКА: ${CHILD_GUARD_BROKEN} (ответ ${refused.status}, но «${SMOKE_CHILD_2}» в корзине)`)
     return false
   }
-  io.out(`smoke: запись без тега живого ребёнка отклонена (${refused.status}), ребёнок жив`)
+  io.out(`smoke: запись без тега живого ребёнка отклонена (${refused.status} ${refused.code}: ${refused.message}), ребёнок жив`)
   return true
 }
 
@@ -207,9 +225,9 @@ async function probeManifest(api: NotionApi, smokeId: string, io: Io): Promise<b
   return true
 }
 
-async function runSmoke(input: SiteInput, api: NotionApi, outDir: string, io: Io): Promise<number> {
-  const serviceId = input.config.servicePageId
-  if (!serviceId) throw new Error(`servicePageId не задан в packs/${PACK_SLUG}/notion-kb.config.ts`)
+async function runSmoke(api: NotionApi, serviceId: string, outDir: string, io: Io): Promise<number> {
+  // Каталог — до первой записи в Notion: `--out` в путь, занятый файлом, падает, не создав ни одной страницы.
+  mkdirSync(outDir, { recursive: true })
   let smokeId: string | undefined
   let code = 1
   try {
@@ -217,7 +235,6 @@ async function runSmoke(input: SiteInput, api: NotionApi, outDir: string, io: Io
     const child1 = (await api.createPage(smokeId, SMOKE_CHILD_1)).id
     const child2 = (await api.createPage(smokeId, SMOKE_CHILD_2)).id
     const sent = smokeMarkdown(notionUrl(smokeId), child1, child2)
-    mkdirSync(outDir, { recursive: true })
     writeFileSync(join(outDir, 'smoke.sent.md'), sent, 'utf8')
     await api.replaceMarkdown(smokeId, sent)
     const read = await api.getMarkdown(smokeId)
@@ -265,7 +282,7 @@ export async function main(argv: string[], env: Record<string, string | undefine
       safe.err(`ОШИБКА: servicePageId не задан в packs/${PACK_SLUG}/notion-kb.config.ts`)
       return 1
     }
-    if (args.command === 'smoke') return await runSmoke(input, api, args.out ?? '', safe)
+    if (args.command === 'smoke') return await runSmoke(api, serviceId, args.out ?? '', safe)
     const only = args.only
     if (only && !input.modules.ru.some((module) => module.slug === only)) {
       safe.err(`ОШИБКА: --only: модуль «${only}» не найден (есть: ${input.modules.ru.map((module) => module.slug).join(', ')})`)
