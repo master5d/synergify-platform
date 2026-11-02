@@ -14,6 +14,9 @@
     "starter": "node scripts/build-starter.mjs",
     "postbuild": "node scripts/stamp-sw.mjs && node scripts/prune-public.mjs && node scripts/finalize-mirror.mjs && node scripts/check-assembly-weight.mjs out",
     "check:mirror": "node scripts/check-mirror.mjs out /ts-gitbook"
+    ,"check:notion": "node scripts/notion-kb.ts check"
+    ,"notion:sync": "node scripts/notion-kb.ts sync"
+    ,"notion:status": "node scripts/notion-kb.ts status"
   },
   "dependencies": {
     "@chenglou/pretext": "^0.0.7",
