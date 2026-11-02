@@ -15,7 +15,7 @@ export function stampLine(locale: Locale, sha: string, date: string): string {
   return `*${STRINGS[locale].stamp}: ${date} · ${sha.slice(0, 7)}*`
 }
 
-export type SyncOptions = { sha: string; date: string; only?: string; log(line: string): void }
+export type SyncOptions = { sha: string; date: string; only?: string; log(line: string): void; sleep?: (ms: number) => Promise<void> }
 export type SyncReport = { created: number; adopted: number; updated: number; retitled: number; trashed: number; unchanged: number; anchorMisses: string[] }
 
 function sameTitle(a: string, b: string): boolean {
@@ -57,6 +57,8 @@ export async function syncSite(api: NotionApi, pages: SitePage[], concepts: Conc
     opts.log(`replace ${MANIFEST_TITLE}`)
     dirty = false
   }
+  const sleep = opts.sleep ?? ((ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms)))
+  const pending = new Set(Object.keys(manifest.pages).filter((key) => manifest.pages[key].ch === null))
 
   const childrenCache = new Map<string, Awaited<ReturnType<NotionApi['listChildren']>>>()
   const children = async (parent: string, fresh = false) => {
@@ -79,31 +81,39 @@ export async function syncSite(api: NotionApi, pages: SitePage[], concepts: Conc
       return { id: created.id, adopted: false }
     } catch (error) {
       if (!(error instanceof NotionError) || error.code !== 'uncertain') throw error
-      const after = orphan(await children(parentId, true), page.title)
-      if (after) {
-        opts.log(`adopt ${page.key}`)
-        return { id: after.id, adopted: true }
+      for (const delay of [0, 2000, 4000, 8000]) {
+        if (delay) await sleep(delay)
+        const after = orphan(await children(parentId, true), page.title)
+        if (after) {
+          opts.log(`adopt ${page.key}`)
+          return { id: after.id, adopted: true }
+        }
       }
-      try {
-        const created = await api.createPage(parentId, page.title)
-        opts.log(`create ${page.key}`)
-        return { id: created.id, adopted: false }
-      } catch (second) {
-        if (second instanceof NotionError && second.code === 'uncertain') throw new Error(`создание ${page.key} не подтверждено: ${second.message}`)
-        throw second
-      }
+      try { await saveManifest() } catch { /* исходная ошибка важнее */ }
+      throw new Error(`создание ${page.key} не подтверждено: страница могла быть создана, следующий прогон примет её`)
     }
   }
 
-  for (const page of pages) {
-    if (manifest.pages[page.key]) continue
-    const parentId = page.parentKey ? manifest.pages[page.parentKey]?.id : servicePageId
-    if (!parentId) throw new Error(`родитель страницы ${page.key} не найден`)
-    const result = await findOrCreate(page, parentId)
-    manifest.pages[page.key] = { id: result.id, p: page.parentKey, th: contentHash(page.title, ''), ch: null }
-    dirty = true
-    if (result.adopted) report.adopted += 1
-    else report.created += 1
+  try {
+    for (const page of pages) {
+      if (manifest.pages[page.key]) {
+        if (pending.has(page.key)) {
+          opts.log(`adopt ${page.key}`)
+          report.adopted += 1
+        }
+        continue
+      }
+      const parentId = page.parentKey ? manifest.pages[page.parentKey]?.id : servicePageId
+      if (!parentId) throw new Error(`родитель страницы ${page.key} не найден`)
+      const result = await findOrCreate(page, parentId)
+      manifest.pages[page.key] = { id: result.id, p: page.parentKey, th: contentHash(page.title, ''), ch: null }
+      dirty = true
+      if (result.adopted) report.adopted += 1
+      else report.created += 1
+    }
+  } catch (error) {
+    try { await saveManifest() } catch { /* исходная ошибка важнее */ }
+    throw error
   }
   await saveManifest()
 
@@ -111,6 +121,11 @@ export async function syncSite(api: NotionApi, pages: SitePage[], concepts: Conc
     const current = new Set(pages.map((page) => page.key))
     const removed = Object.keys(manifest.pages).filter((key) => !current.has(key))
     const removedSet = new Set(removed)
+    for (const key of removed) {
+      const entry = manifest.pages[key]
+      const manual = (await api.listChildren(entry.id)).find((child) => child.type === 'child_page' && !known(child.id))
+      if (manual) throw new Error(`ручная подстраница «${manual.text}» под убираемой страницей ${key} — перенеси или удали её вручную; прогон остановлен до записи в корзину`)
+    }
     for (const key of removed) {
       const entry = manifest.pages[key]
       if (entry.p && removedSet.has(entry.p)) continue

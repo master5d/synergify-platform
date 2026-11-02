@@ -55,6 +55,14 @@ describe('syncSite', () => {
     await run(fake)
     expect(fake.live().filter((p) => p.title === 'Глубже')).toHaveLength(1)
   })
+  it('uncertain с задержанной видимостью: дубль не создаётся, следующий прогон принимает', async () => {
+    const fake = new FakeNotion({ root: 'svc', uncertainCreates: new Set(['Глубже']), hiddenLists: 4 })
+    await expect(run(fake, MINI_COURSE, { sleep: async () => {} })).rejects.toThrow(/не подтверждено/)
+    expect(fake.live().filter((p) => p.title === 'Глубже')).toHaveLength(1)
+    const rep = await run(fake, MINI_COURSE, { sleep: async () => {} })
+    expect(fake.live().filter((p) => p.title === 'Глубже')).toHaveLength(1)
+    expect(rep.adopted).toBeGreaterThanOrEqual(1)
+  })
   it('якорь «Подробно» — id заголовка; новая запись юнита → новый якорь у понятия', async () => {
     const fake = new FakeNotion({ root: 'svc' }); await run(fake)
     const concept = () => fake.get(fake.idByTitle('STATE.md')).markdown
@@ -75,6 +83,17 @@ describe('syncSite', () => {
     fake.addManualChild(fake.idByTitle(rootTitle), 'Моя заметка')
     await expect(run(fake, MINI_COURSE, { sha: 'f00ba12' + SHA.slice(7) })).rejects.toThrow(/root/)
     expect(fake.live().some((p) => p.title === 'Моя заметка')).toBe(true)
+  })
+  it('ручная подстраница под убираемой страницей останавливает прогон до корзины', async () => {
+    const fake = new FakeNotion({ root: 'svc' }); await run(fake)
+    const removed = fake.idByTitle('Глубже')
+    fake.addManualChild(removed, 'Моя заметка')
+    fake.log.length = 0
+    const m = MINI_COURSE.modules.ru[0]
+    const input = { ...MINI_COURSE, concepts: MINI_COURSE.concepts.filter((concept) => concept.source.unit !== '01-alpha/u2-deep'), modules: { ...MINI_COURSE.modules, ru: [{ ...m, units: m.units.slice(0, -1) }, ...MINI_COURSE.modules.ru.slice(1)] } }
+    await expect(run(fake, input)).rejects.toThrow(/Моя заметка.*ru\/u\/01-alpha\/u2-deep/)
+    expect(fake.log.some((line) => line.startsWith('trash '))).toBe(false)
+    expect(fake.get(fake.idByTitle('Моя заметка')).inTrash).toBe(false)
   })
   it('битый манифест — ошибка до любой записи', async () => {
     const fake = new FakeNotion({ root: 'svc' }); await run(fake)
@@ -107,6 +126,17 @@ describe('syncSite', () => {
       expect(seen.has(k)).toBe(false)
       seen.add(k)
     }
+  })
+  it('обрыв в шаге создания, затем страница убрана из курса: следующий прогон не падает, сирот нет', async () => {
+    const fake = new FakeNotion({ root: 'svc', failAfterCreates: 6 })
+    await expect(run(fake)).rejects.toThrow(/обрыв/)
+    const removed = fake.idByTitle('Глубже')
+    const alpha = fake.idByTitle('01 · Альфа')
+    const m = MINI_COURSE.modules.ru[0]
+    const input = { ...MINI_COURSE, concepts: MINI_COURSE.concepts.filter((concept) => concept.source.unit !== '01-alpha/u2-deep'), modules: { ...MINI_COURSE.modules, ru: [{ ...m, units: m.units.slice(0, -1) }, ...MINI_COURSE.modules.ru.slice(1)] } }
+    await expect(run(fake, input)).resolves.toBeDefined()
+    expect(fake.get(removed).inTrash).toBe(true)
+    expect(fake.live().filter((p) => p.parent === alpha && p.title === 'Глубже')).toHaveLength(0)
   })
   it('only после полного прогона: модуль переименован, теги чужих модулей в книге целы, корзины нет', async () => {
     const fake = new FakeNotion({ root: 'svc' }); await run(fake)

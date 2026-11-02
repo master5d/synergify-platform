@@ -3,12 +3,14 @@ import { notionUrl } from '../md'
 import type { ChildBlock, NotionApi } from '../types'
 
 type FakePage = { id: string; parent: string; title: string; markdown: string; inTrash: boolean; headingIds: string[] }
-type FakeOptions = { root: string; uncertainCreates?: Set<string>; failAfterCreates?: number }
+type FakeOptions = { root: string; uncertainCreates?: Set<string>; failAfterCreates?: number; hiddenLists?: number }
 
 export class FakeNotion implements NotionApi {
   private readonly pages = new Map<string, FakePage>()
   private readonly uncertain: Set<string>
   private readonly failAfter: number | undefined
+  private hiddenLists: number
+  private hiddenParent: string | undefined
   private readonly rootId: string
   private next = 0
   private creates = 0
@@ -18,6 +20,7 @@ export class FakeNotion implements NotionApi {
     this.rootId = options.root
     this.uncertain = new Set(options.uncertainCreates ?? [])
     this.failAfter = options.failAfterCreates
+    this.hiddenLists = options.hiddenLists ?? 0
     this.pages.set(options.root, { id: options.root, parent: '', title: options.root, markdown: '', inTrash: false, headingIds: [] })
   }
 
@@ -90,6 +93,7 @@ export class FakeNotion implements NotionApi {
     this.log.push(`create ${title}`)
     if (this.uncertain.has(title)) {
       this.uncertain.delete(title)
+      this.hiddenParent = parentId
       throw new NotionError(504, 'uncertain', `fake: uncertain ${title}`)
     }
     return { id }
@@ -120,6 +124,10 @@ export class FakeNotion implements NotionApi {
   }
 
   async listChildren(id: string): Promise<ChildBlock[]> {
+    if (id === this.hiddenParent && this.hiddenLists > 0) {
+      this.hiddenLists -= 1
+      return []
+    }
     const children = [...this.pages.values()].filter((page) => this.isLiveChild(page, id)).map((page) => ({ id: page.id, type: 'child_page', text: page.title }))
     const page = this.page(id)
     const headings = [...page.markdown.matchAll(/^(#{1,4}) (.*)$/gm)].map((match, index) => ({ id: page.headingIds[index], type: `heading_${match[1].length}`, text: match[2] }))
