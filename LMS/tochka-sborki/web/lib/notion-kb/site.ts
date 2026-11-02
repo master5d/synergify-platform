@@ -36,7 +36,7 @@ function childrenTag(input: SiteInput, links: LinkResolver, key: string, title: 
 
 function footer(input: SiteInput, locale: Locale, links: LinkResolver): string {
   const authors = input.config.authorLinks.map((author) => `[${author.label}](${author.url})`).join(' · ')
-  return `${STRINGS[locale].invite.replace('{url}', withUtm(sitePath(input, KEY.root)))}\n\n${STRINGS[locale].writeAuthor}: ${authors}`
+  return `${STRINGS[locale].invite.replace('{url}', withUtm(sitePath(input, KEY.home(locale))))}\n\n${STRINGS[locale].writeAuthor}: ${authors}`
 }
 
 function localeModule(input: SiteInput, locale: Locale, slug: string): ModuleMeta {
@@ -61,7 +61,7 @@ function renderContext(input: SiteInput, locale: Locale, links: LinkResolver, un
   }
 }
 
-function pageMarkdown(input: SiteInput, locale: Locale, key: string, links: LinkResolver): string {
+function pageMarkdown(input: SiteInput, locale: Locale, key: string, links: LinkResolver, occurrencesOf: (locale: Locale) => Map<string, string[]>): string {
   const s = STRINGS[locale]
   const homeKey = KEY.home(locale)
   if (key === homeKey) {
@@ -70,7 +70,7 @@ function pageMarkdown(input: SiteInput, locale: Locale, key: string, links: Link
       `### ${s.onCourse}\n${childrenTag(input, links, KEY.book(locale), s.book)}\n${childrenTag(input, links, KEY.dict(locale), s.dict)}`,
       `### ${s.more}\n${(['cheatsheet', 'exercises', 'roadmap'] as ExtraPage[]).map((name) => childrenTag(input, links, KEY.page(locale, name), input.pageMdx(locale, name).title)).join('\n')}`,
       `### ${s.otherLanguage}\n${locale === 'ru' ? childrenTag(input, links, KEY.home('en'), input.config.title.en) : `[${input.config.title.ru}](${href(input, links, KEY.root)})`}`,
-      `${input.config.title[locale]}\n\n${footerWithoutInvite(input, locale)}`,
+      footerWithoutInvite(input, locale),
     ]
     return blocks.join('\n\n')
   }
@@ -78,7 +78,7 @@ function pageMarkdown(input: SiteInput, locale: Locale, key: string, links: Link
   const book = key === KEY.book(locale)
   if (book) {
     const tags = input.modules[locale].slice().sort((a, b) => a.module - b.module).filter((module) => links.page(KEY.module(locale, module.slug)) !== null).map((module) => childrenTag(input, links, KEY.module(locale, module.slug), moduleLabel(module.module, module.title)))
-    return `${s.book}\n\n${tags.join('\n')}\n\n${footer(input, locale, links)}`
+    return `${tags.join('\n')}\n\n${footer(input, locale, links)}`
   }
   if (key === KEY.dict(locale)) return dictionaryMarkdown(input, locale, links)
 
@@ -87,7 +87,7 @@ function pageMarkdown(input: SiteInput, locale: Locale, key: string, links: Link
   const unitMatch = key.match(/^(ru|en)\/u\/([^/]+)\/([^/]+)$/)
   if (unitMatch) return unitMarkdown(input, locale, unitMatch[2], unitMatch[3], links)
   const conceptMatch = key.match(/^(ru|en)\/c\/(.+)$/)
-  if (conceptMatch) return conceptMarkdown(input, locale, conceptMatch[2], links)
+  if (conceptMatch) return conceptMarkdown(input, locale, conceptMatch[2], links, occurrencesOf)
   const pageMatch = key.match(/^(ru|en)\/p\/(.+)$/)
   if (pageMatch) {
     const name = pageMatch[2] as ExtraPage
@@ -130,27 +130,30 @@ function unitMarkdown(input: SiteInput, locale: Locale, moduleSlug: string, unit
 }
 
 function dictionaryMarkdown(input: SiteInput, locale: Locale, links: LinkResolver): string {
-  const groups = new Map<string, Concept[]>()
-  for (const concept of input.concepts) {
+  const tag = (concept: Concept) => childrenTag(input, links, KEY.concept(locale, concept.id), concept.term[locale])
+  const byTerm = (a: Concept, b: Concept) => a.term[locale].localeCompare(b.term[locale], locale)
+  const groupOf = (concept: Concept) => {
     const first = concept.term[locale][0] ?? ''
-    const group = /[А-ЯЁ]/i.test(first) ? 'cyr' : /[A-Z]/i.test(first) ? 'lat' : 'other'
-    groups.set(group, [...(groups.get(group) ?? []), concept])
+    return /[А-ЯЁ]/i.test(first) ? 'cyr' : /[A-Z]/i.test(first) ? 'lat' : 'other'
   }
-  const order = locale === 'ru' ? ['cyr', 'lat', 'other'] : ['lat', 'cyr', 'other']
   const blocks: string[] = []
-  for (const group of order) {
-    const concepts = (groups.get(group) ?? []).sort((a, b) => a.term[locale].localeCompare(b.term[locale], locale))
+  for (const group of locale === 'ru' ? ['cyr', 'lat', 'other'] : ['lat', 'cyr', 'other']) {
+    const concepts = input.concepts.filter((concept) => groupOf(concept) === group).sort(byTerm)
+    if (group === 'other') {
+      if (concepts.length) blocks.push(`### ${STRINGS[locale].otherSymbols}\n${concepts.map(tag).join('\n')}`)
+      continue
+    }
     const letters = new Map<string, Concept[]>()
     for (const concept of concepts) {
       const letter = concept.term[locale][0].toLocaleUpperCase(locale)
       letters.set(letter, [...(letters.get(letter) ?? []), concept])
     }
-    for (const [letter, items] of [...letters.entries()].sort(([a], [b]) => a.localeCompare(b, locale))) blocks.push(`### ${letter}\n${items.sort((a, b) => a.term[locale].localeCompare(b.term[locale], locale)).map((concept) => childrenTag(input, links, KEY.concept(locale, concept.id), concept.term[locale])).join('\n')}`)
+    for (const [letter, items] of [...letters].sort(([a], [b]) => a.localeCompare(b, locale))) blocks.push(`### ${letter}\n${items.map(tag).join('\n')}`)
   }
   return `${blocks.join('\n\n')}\n\n${footer(input, locale, links)}`
 }
 
-function conceptMarkdown(input: SiteInput, locale: Locale, id: string, links: LinkResolver): string {
+function conceptMarkdown(input: SiteInput, locale: Locale, id: string, links: LinkResolver, occurrencesOf: (locale: Locale) => Map<string, string[]>): string {
   const concept = input.concepts.find((item) => item.id === id)
   if (!concept) throw new Error(`понятие ${id} не найдено`)
   const [sourceModule, sourceUnit] = concept.source.unit.split('/')
@@ -165,8 +168,7 @@ function conceptMarkdown(input: SiteInput, locale: Locale, id: string, links: Li
     const related = input.concepts.find((item) => item.id === relatedId)
     return related ? `[${related.term[locale]}](${href(input, links, KEY.concept(locale, related.id))})` : null
   }).filter((item): item is string => item !== null)
-  const units = allUnits(input, locale).map((item) => ({ key: item.key, text: plainText(input.unitMdx(locale, item.module.slug, item.unit.slug)) }))
-  const occurrences = (findOccurrences(input.concepts, locale, units).get(id) ?? []).filter((key) => key !== concept.source.unit)
+  const occurrences = (occurrencesOf(locale).get(id) ?? []).filter((key) => key !== concept.source.unit)
   const appears = input.modules[locale].slice().sort((a, b) => a.module - b.module).map((module) => {
     const found = module.units.filter((unit) => occurrences.includes(`${module.slug}/${unit.slug}`))
     return found.length ? `- **${moduleLabel(module.module, module.title)}:** ${found.map((unit) => `[${unit.title}](${href(input, links, KEY.unit(locale, module.slug, unit.slug))})`).join(' · ')}` : null
@@ -180,6 +182,15 @@ function conceptMarkdown(input: SiteInput, locale: Locale, id: string, links: Li
 
 export function buildSite(input: SiteInput): SitePage[] {
   const pages: SitePage[] = []
+  const occurrenceCache = new Map<Locale, Map<string, string[]>>()
+  const occurrencesOf = (locale: Locale): Map<string, string[]> => {
+    const cached = occurrenceCache.get(locale)
+    if (cached) return cached
+    const units = allUnits(input, locale).map((item) => ({ key: item.key, text: plainText(input.unitMdx(locale, item.module.slug, item.unit.slug)) }))
+    const found = findOccurrences(input.concepts, locale, units)
+    occurrenceCache.set(locale, found)
+    return found
+  }
   const enabled = (locale: Locale, module: ModuleMeta) => !input.only || module.slug === input.only
   for (const locale of ['ru', 'en'] as const) {
     const modules = input.modules[locale].slice().sort((a, b) => a.module - b.module)
@@ -188,7 +199,7 @@ export function buildSite(input: SiteInput): SitePage[] {
       const module = modules.find((item) => item.slug === moduleSlug)
       if (!module || !module.units.some((unit) => unit.slug === unitSlug)) throw new Error(`понятие ${concept.id}: юнит-источник ${concept.source.unit} не найден (${locale})`)
     }
-    const add = (key: string, parentKey: string | null, title: string, stage: SitePage['stage']) => pages.push({ key, parentKey, title, stage, markdown: (links) => pageMarkdown(input, locale, key, links) })
+    const add = (key: string, parentKey: string | null, title: string, stage: SitePage['stage']) => pages.push({ key, parentKey, title, stage, markdown: (links) => pageMarkdown(input, locale, key, links, occurrencesOf) })
     if (locale === 'ru') add(KEY.root, null, input.config.title.ru, 'content')
     else add(KEY.home(locale), KEY.root, input.config.title.en, 'content')
     add(KEY.book(locale), KEY.home(locale), STRINGS[locale].book, 'content')

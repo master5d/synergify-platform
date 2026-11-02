@@ -93,4 +93,34 @@ describe('buildSite', () => {
     expect(md('ru/c/state-md')).not.toContain('- **01 · Альфа:**')
     expect(md('ru/c/agent')).toContain(`- **01 · Альфа:** [Глубже](${url('ru/u/01-alpha/u2-deep')})`)
   })
+  it('приглашение страницы ведёт на стартовую её языка: EN — /en/, RU — корень', () => {
+    expect(md('en/u/02-beta/u1-next')).toContain(`The course is free — [start on the site →](${H}/en/?utm_source=notion-kb)`)
+    expect(md('en/book')).toContain(`The course is free — [start on the site →](${H}/en/?utm_source=notion-kb)`)
+    expect(md('en/c/agent')).not.toContain(`(${H}/?utm_source=notion-kb)`)
+    expect(md('ru/book')).toContain(`Курс бесплатный — [начать на сайте →](${H}/?utm_source=notion-kb)`)
+  })
+  it('в теле стартовых и книг нет отдельной строки с заголовком страницы', () => {
+    for (const key of ['root', 'en/home', 'ru/book', 'en/book']) expect(md(key).split('\n')).not.toContain(byKey.get(key)!.title)
+  })
+  it('словарь: цифры и символы — одна группа otherSymbols после букв, в RU и EN', () => {
+    const extra = (id: string, ru: string, en: string) => ({ ...MINI_COURSE.concepts[0], id, term: { ru, en } })
+    const sub = buildSite({ ...MINI_COURSE, concepts: [...MINI_COURSE.concepts, extra('clear', '/clear', '/clear'), extra('d3', '3D', '3D')] })
+    const resolver = fakeResolver(sub)
+    for (const [key, title] of [['ru/dict', '0–9 и символы'], ['en/dict', '0–9 & symbols']]) {
+      const d = sub.find((p) => p.key === key)!.markdown(resolver)
+      const headings = d.split('\n').filter((l) => l.startsWith('### '))
+      expect(headings[headings.length - 1]).toBe(`### ${title}`)
+      expect(headings).toHaveLength(3)
+      expect(d.indexOf('>/clear</page>')).toBeGreaterThan(d.indexOf(`### ${title}`))
+      expect(d.indexOf('>3D</page>')).toBeGreaterThan(d.indexOf(`### ${title}`))
+    }
+  })
+  it('«Встречается» читает юниты один раз на язык, а не на каждую страницу понятия', () => {
+    let reads = 0
+    const counted = { ...MINI_COURSE, unitMdx: (...args: Parameters<typeof MINI_COURSE.unitMdx>) => { reads++; return MINI_COURSE.unitMdx(...args) } }
+    const sub = buildSite(counted)
+    const resolver = fakeResolver(sub)
+    for (let pass = 0; pass < 2; pass++) for (const p of sub.filter((x) => x.stage === 'concept')) p.markdown(resolver)
+    expect(reads).toBe(8)
+  })
 })
