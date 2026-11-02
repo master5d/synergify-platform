@@ -1,0 +1,96 @@
+import { describe, it, expect } from 'vitest'
+import { buildSite, fakeResolver } from './site'
+import { MINI_COURSE } from './__fixtures__/mini-course'
+
+const pages = buildSite(MINI_COURSE)
+const byKey = new Map(pages.map((p) => [p.key, p]))
+const links = fakeResolver(pages)
+const url = (k: string) => links.page(k)!
+const md = (k: string, l = links) => byKey.get(k)!.markdown(l)
+const H = 'https://ai.synergify.com'
+
+describe('buildSite', () => {
+  it('дерево: родители, родитель раньше ребёнка, стадии', () => {
+    expect(byKey.get('root')!.parentKey).toBeNull()
+    expect(byKey.get('en/home')!.parentKey).toBe('root')
+    expect(byKey.get('ru/book')!.parentKey).toBe('root')
+    expect(byKey.get('en/book')!.parentKey).toBe('en/home')
+    expect(byKey.get('ru/u/01-alpha/u2-deep')!.parentKey).toBe('ru/m/01-alpha')
+    expect(byKey.get('ru/c/state-md')!.parentKey).toBe('ru/dict')
+    expect(byKey.get('en/p/roadmap')!.parentKey).toBe('en/home')
+    const seen = new Set<string>()
+    for (const p of pages) { if (p.parentKey) expect(seen.has(p.parentKey)).toBe(true); seen.add(p.key) }
+    expect(pages.filter((p) => p.stage === 'concept').map((p) => p.key).sort()).toEqual(['en/c/agent', 'en/c/state-md', 'ru/c/agent', 'ru/c/state-md'])
+  })
+  it('у каждой страницы тег каждого ребёнка — ровно один раз', () => {
+    for (const p of pages) for (const c of pages.filter((x) => x.parentKey === p.key)) expect(md(p.key).split(`<page url="${url(c.key)}"`).length - 1).toBe(1)
+  })
+  it('стартовая: вход для новых, вход для участников, язык, автор, без тихого приглашения', () => {
+    const r = md('root')
+    expect(r).toContain('<callout icon="👋">\n**Впервые здесь?**')
+    expect(r).toContain(`(${H}/?utm_source=notion-kb)`)
+    expect(r).toContain(`<page url="${url('ru/book')}">Модули</page>`)
+    expect(r).toContain(`<page url="${url('ru/dict')}">Словарь А–Я</page>`)
+    expect(r).toContain(`<page url="${url('en/home')}">Tochka Sborki — knowledge base</page>`)
+    expect(r).toContain('Написать автору: [Telegram](https://t.me/ku_shaman) · [LinkedIn](https://www.linkedin.com/in/sashamamaev/)')
+    expect(r).not.toContain('Курс бесплатный —')
+  })
+  it('модуль: длительность, цели, юниты в порядке _meta', () => {
+    const m = md('ru/m/01-alpha')
+    expect(m).toContain('Длительность: 30 мин')
+    expect(m).toContain('- Понять память')
+    expect(m.indexOf('>Старт</page>')).toBeLessThan(m.indexOf('>Глубже</page>'))
+  })
+  it('юнит: оглавление, «←» через границу модуля, юнит на сайте, тихое приглашение', () => {
+    const u = md('ru/u/02-beta/u1-next')
+    expect(u.startsWith('<table-of-contents />')).toBe(true)
+    expect(u).toContain(`← [01 · Глубже](${url('ru/u/01-alpha/u2-deep')})`)
+    expect(u).toContain(`[Этот юнит на сайте →](${H}/lessons/02-beta/u1-next/?utm_source=notion-kb)`)
+    expect(u).toContain(`Курс бесплатный — [начать на сайте →](${H}/?utm_source=notion-kb)`)
+  })
+  it('словарь: в RU кириллица раньше латиницы', () => {
+    const d = md('ru/dict')
+    expect(d.indexOf('### А')).toBeLessThan(d.indexOf('### S'))
+  })
+  it('понятие: цитата, «Подробно» с якорем и без, «Рядом», «Встречается» по модулям', () => {
+    const anchored = { ...links, anchor: (l: string, id: string) => (l === 'ru' && id === 'state-md' ? 'b10c-k1d' : null) }
+    const c = md('ru/c/state-md', anchored)
+    expect(c).toContain('> ' + MINI_COURSE.concepts.find((x) => x.id === 'state-md')!.short.ru)
+    expect(c).toContain(`**Подробно:** [01 · Глубже → «STATE.md — где остановились»](${url('ru/u/01-alpha/u2-deep')}#b10ck1d)`)
+    expect(c).toContain(`**Рядом:** [агент](${url('ru/c/agent')})`)
+    expect(c).toContain(`- **02 · Бета:** [Дальше](${url('ru/u/02-beta/u1-next')})`)
+    expect(md('ru/c/state-md')).toContain(`→ «STATE.md — где остановились»](${url('ru/u/01-alpha/u2-deep')})`)
+  })
+  it('only: чужой модуль не строится, ссылки на него — на сайт с utm, словарь целиком', () => {
+    const sub = buildSite({ ...MINI_COURSE, only: '01-alpha' })
+    expect(sub.map((p) => p.key)).not.toContain('ru/m/02-beta')
+    expect(sub.map((p) => p.key)).toContain('ru/c/state-md')
+    const u = sub.find((p) => p.key === 'ru/u/01-alpha/u1-start')!.markdown(fakeResolver(sub))
+    expect(u).toContain(`(${H}/lessons/02-beta/u1-next/?utm_source=notion-kb)`)
+  })
+  it('EN-страницы не ссылаются на RU-дерево', () => {
+    const ruUrls = pages.filter((p) => p.key.startsWith('ru/')).map((p) => url(p.key))
+    for (const p of pages.filter((q) => q.key.startsWith('en/'))) for (const u of ruUrls) expect(md(p.key)).not.toContain(u)
+  })
+  it('одинаковые заголовки у соседей — ошибка (страницу не найти по заголовку)', () => {
+    const m = MINI_COURSE.modules.ru[0]
+    const dup = { ...MINI_COURSE, modules: { ...MINI_COURSE.modules, ru: [{ ...m, units: [m.units[0], { ...m.units[1], title: m.units[0].title }] }, ...MINI_COURSE.modules.ru.slice(1)] } }
+    expect(() => buildSite(dup)).toThrow(/Старт/)
+  })
+  it('ссылки курса в теле юнита и в дорожной карте ведут на страницы базы (RU и EN)', () => {
+    expect(md('ru/u/01-alpha/u1-start')).toContain(`(${url('ru/u/02-beta/u1-next')})`)
+    expect(md('en/u/01-alpha/u1-start')).toContain(`(${url('en/u/02-beta/u1-next')})`)
+    expect(md('ru/u/02-beta/u1-next')).toContain(`[модуль 01](${url('ru/u/01-alpha/u2-deep')})`)
+    expect(md('en/u/02-beta/u1-next')).toContain(`[module 01](${url('en/u/01-alpha/u2-deep')})`)
+    expect(md('ru/p/roadmap')).toContain(`(${url('ru/m/01-alpha')})`)
+    expect(md('en/p/roadmap')).toContain(`(${url('en/m/01-alpha')})`)
+  })
+  it('юнита-источника нет — ошибка с id понятия и юнитом', () => {
+    const concepts = MINI_COURSE.concepts.map((c) => (c.id === 'state-md' ? { ...c, source: { ...c.source, unit: '01-alpha/u9-none' } } : c))
+    expect(() => buildSite({ ...MINI_COURSE, concepts })).toThrow(/state-md.*u9-none/)
+  })
+  it('«Встречается» — без юнита-источника', () => {
+    expect(md('ru/c/state-md')).not.toContain('- **01 · Альфа:**')
+    expect(md('ru/c/agent')).toContain(`- **01 · Альфа:** [Глубже](${url('ru/u/01-alpha/u2-deep')})`)
+  })
+})
