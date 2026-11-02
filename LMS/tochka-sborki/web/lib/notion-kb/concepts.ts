@@ -67,10 +67,17 @@ function regexMatches(form: RegExp, text: string, concept: Concept, order: numbe
 
 function selectMatches(matches: Match[], linked: Set<string>): Match[] {
   const selected: Match[] = []
-  for (const match of matches.sort((a, b) => a.start - b.start || (b.end - b.start) - (a.end - a.start) || a.order - b.order)) {
-    if (linked.has(match.concept.id) || selected.some((item) => match.start < item.end && item.start < match.end)) continue
-    selected.push(match)
-    linked.add(match.concept.id)
+  const free = matches.filter((match) => !linked.has(match.concept.id)).sort((a, b) => a.start - b.start)
+  for (;;) {
+    const firsts = new Map<string, Match>()
+    for (const match of free) {
+      if (linked.has(match.concept.id) || selected.some((item) => match.start < item.end && item.start < match.end)) continue
+      if (!firsts.has(match.concept.id)) firsts.set(match.concept.id, match)
+    }
+    const best = [...firsts.values()].sort((a, b) => (b.end - b.start) - (a.end - a.start) || a.order - b.order || a.start - b.start)[0]
+    if (!best) break
+    selected.push(best)
+    linked.add(best.concept.id)
   }
   return selected.sort((a, b) => a.start - b.start)
 }
@@ -109,8 +116,9 @@ export function linkFirstMentions(tree: Root, opts: { concepts: Concept[]; local
     const matches = selectMatches(candidates.flatMap((concept, order) => regexMatches(concept.forms[opts.locale], textNode.value, concept, order)), linked)
     if (!matches.length) return
     const children = (parent as ParentNode).children
-    children.splice(index, 1, ...linkedTextNode(textNode, matches, opts.href))
-    return [SKIP, index + matches.length + 1]
+    const replacement = linkedTextNode(textNode, matches, opts.href)
+    children.splice(index, 1, ...replacement)
+    return [SKIP, index + replacement.length]
   })
 }
 
