@@ -5,7 +5,7 @@
   "unit": "u1-inside-the-model",
   "locale": "en",
   "title": "What's inside a model",
-  "sourceHash": "sha256:a5686376bb6b03c3950c25c83de98f269054effabbdfdcd8fc3200d48e3878d8",
+  "sourceHash": "sha256:44534d5a69839211eff39ba0207914600fa06daf395654792df0241ed7f6edfa",
   "outline": [
     {
       "heading": "Tokens: how the model sees text",

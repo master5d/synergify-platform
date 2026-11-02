@@ -5,7 +5,7 @@
   "unit": "u1-your-own-brain",
   "locale": "en",
   "title": "A second brain that stays with you",
-  "sourceHash": "sha256:c8e5078ab80848c52afeeda80fb74e140975dad6a6bcd6e1250422c8ac53c505",
+  "sourceHash": "sha256:e7dfe2a7f85895261cb923f1db76194a327203456ede4f7a04ccc75f54981682",
   "outline": [
     {
       "heading": "What a second brain means in this module",
@@ -86,6 +86,12 @@
       {
         "sourceHash": "sha256:58aa4c4d5f720029854de642d26a9d0c738fc2d15bc6ebeb9ea25d160186394a",
         "verbatim": "near-identical"
+      },
+      {
+        "sourceHash": "sha256:80ecf7d281a9dec057d14f17b15ed849b029e9ac1916e633d53434e206ecee54",
+        "points": [
+          "You record your decisions and their reasons, units after mistakes, notes, meeting outcomes, and rough thoughts."
+        ]
       }
     ]
   }

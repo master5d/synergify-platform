@@ -5,7 +5,7 @@
   "unit": "u2-channel",
   "locale": "ru",
   "title": "Канал связи: агент на связи",
-  "sourceHash": "sha256:a2d0e0c3962fc73c23223bb40628b1d6e93ab887da5e791842ebb633ee487aeb",
+  "sourceHash": "sha256:b86b171d2ac31bea6fab83abbe3144781b2359d755ac41e9e5cb2512b39f8b1e",
   "outline": [
     {
       "heading": "Как устроен канал",

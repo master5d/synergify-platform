@@ -5,7 +5,7 @@
   "unit": "u1-your-own-brain",
   "locale": "ru",
   "title": "Второй мозг, который остаётся у тебя",
-  "sourceHash": "sha256:c04feb190f09238e4a1c6cf9eb5946a81ed2cbf444fbb6117caad5db4adf43d8",
+  "sourceHash": "sha256:c7b2b28f3a2110992baf2f3dc20dc0ad8ae38594bc86b915e5600852d62393ac",
   "outline": [
     {
       "heading": "Что такое второй мозг в этом модуле",
@@ -86,6 +86,12 @@
       {
         "sourceHash": "sha256:dac5938dd00a03747c0659d28e492c2efffdfde745bade9d2fdd7f55c169c3f8",
         "verbatim": "review"
+      },
+      {
+        "sourceHash": "sha256:99770ede5928d16ad38bbe58169cd0a80eba1e8adaeed61b223dc29c4ca1c7c7",
+        "points": [
+          "Тебе стоит сохранять решения и их причины, юниты после ошибок, заметки, итоги встреч и черновики мыслей."
+        ]
       }
     ]
   }
