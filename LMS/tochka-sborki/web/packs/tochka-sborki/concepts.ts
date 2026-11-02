@@ -77,14 +77,6 @@ export const CONCEPTS: Concept[] = [
     related: ['ai', 'model', 'token'],
   },
   {
-    id: 'ai-clone',
-    term: { ru: 'клон', en: 'clone' },
-    forms: { ru: form('клон(?:а|у|ом|е|ы|ов|ам|ами|ах)?'), en: form('(?:AI[- ]?)clone(?:s)?') },
-    short: { ru: 'Ты можешь собрать полноценного специализированного агента из:', en: 'You can assemble a full specialized agent from:' },
-    source: { unit: '07-tools/u5-practice', heading: { ru: 'Финальная архитектура: AI-клон для реальной задачи', en: 'Final architecture: an AI clone for a real task' } },
-    related: ['agent', 'prompt'],
-  },
-  {
     id: 'specification',
     term: { ru: 'ТЗ / спецификация', en: 'specification' },
     forms: { ru: form('ТЗ|спецификаци(?:я|и|ей|ю|ям|ями|ях)'), en: form('spec(?:ification)?s?(?![-.\\w])') },
@@ -125,20 +117,12 @@ export const CONCEPTS: Concept[] = [
     related: ['memory', 'agents-md'],
   },
   {
-    id: 'pipeline',
-    term: { ru: 'pipeline', en: 'pipeline' },
-    forms: { ru: form('pipeline'), en: form('pipeline') },
-    short: { ru: 'Ты запускаешь вручную когда нужно. Идеально для нерегулярных задач.', en: 'You run it manually when needed. Ideal for irregular tasks.' },
-    source: { unit: '06-audio-pipeline/u2-pipeline-theory', heading: { ru: 'Три типа pipeline', en: 'Three pipeline types' } },
-    related: ['trigger', 'action', 'idempotency'],
-  },
-  {
     id: 'trigger',
     term: { ru: 'Trigger', en: 'Trigger' },
     forms: { ru: form('Trigger'), en: form('Triggers?') },
     short: { ru: 'Trigger: что запускает процесс? (ты вручную, schedule, новый файл, webhook)', en: 'Trigger: what kicks off the process? (you manually, a schedule, a new file, a webhook)' },
     source: { unit: '06-audio-pipeline/u1-activation', heading: { ru: 'Три вопроса перед построением pipeline', en: 'Three questions before building a pipeline' } },
-    related: ['action', 'pipeline'],
+    related: ['action'],
   },
   {
     id: 'action',
@@ -146,7 +130,7 @@ export const CONCEPTS: Concept[] = [
     forms: { ru: form('Trigger → Action(?:s)?|Action:', ''), en: form('Trigger → Action(?:s)?|Action:', '') },
     short: { ru: 'Action: что должно произойти? (scrape → analyze → save → notify)', en: 'Action: what should happen? (scrape → analyze → save → notify)' },
     source: { unit: '06-audio-pipeline/u1-activation', heading: { ru: 'Три вопроса перед построением pipeline', en: 'Three questions before building a pipeline' } },
-    related: ['trigger', 'pipeline'],
+    related: ['trigger'],
   },
   {
     id: 'idempotency',
@@ -154,7 +138,7 @@ export const CONCEPTS: Concept[] = [
     forms: { ru: form('идемпотентност(?:ь|и|ью|ям|ями|ях)'), en: form('idempotenc(?:y|ies)') },
     short: { ru: 'Повторный запуск не меняет результат и не тратит лимиты. У такого свойства есть имя: идемпотентность.', en: 'A repeat run changes nothing and spends no quota. This property has a name: idempotency.' },
     source: { unit: '06-audio-pipeline/u5-schedule', heading: { ru: 'Condition «дубли» — это идемпотентность', en: 'The "duplicates" condition is idempotency' } },
-    related: ['pipeline', 'action'],
+    related: ['action'],
   },
   {
     id: 'hook',
@@ -227,6 +211,22 @@ export const CONCEPTS: Concept[] = [
     short: { ru: 'Есть и промежуточный вариант: тетрадку можно прикрепить к обычному чату с агентом (в Gemini — прямо как источник в разговоре).', en: 'There is also a middle option. A notebook can be attached to a regular assistant chat (in Gemini — directly as a source in the conversation).' },
     source: { unit: '09-ai-notebook/u2-how-it-works', heading: { ru: 'Третий режим: гибрид', en: 'The third mode: hybrid' } },
     related: ['citation', 'agent'],
+  },
+  {
+    id: 'sft',
+    term: { ru: 'SFT', en: 'SFT' },
+    forms: { ru: form('SFT'), en: form('SFT') },
+    short: { ru: 'SFT (supervised fine-tuning) — дообучение на парах «промпт → желаемый ответ».', en: 'SFT (supervised fine-tuning) is training on "request → desired answer" pairs.' },
+    source: { unit: '10-model-training/u3-fine-tuning', heading: { ru: 'SFT: учить на примерах', en: 'SFT: learning from examples' } },
+    related: ['lora', 'model'],
+  },
+  {
+    id: 'lora',
+    term: { ru: 'LoRA', en: 'LoRA' },
+    forms: { ru: form('LoRA'), en: form('LoRA') },
+    short: { ru: 'Исходные веса замораживаются, рядом обучаются маленькие матрицы-адаптеры.', en: 'The original weights are frozen, and small adapter matrices are trained alongside them.' },
+    source: { unit: '10-model-training/u3-fine-tuning', heading: { ru: 'LoRA и PEFT: учить не всё', en: 'LoRA and PEFT: training only a part' } },
+    related: ['sft', 'model'],
   },
   {
     id: 'second-brain',
