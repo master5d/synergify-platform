@@ -20,6 +20,7 @@ export const COURSE = {
   // Read-only mirror URL (GitHub Pages build with COURSE_MIRROR=1), no trailing slash; null = no mirror.
   // When set, the main site injects a watchdog that links to the mirror if the page fails to load.
   mirrorUrl: null as string | null,
+  notionKbUrl: null as string | null,
   locales: ['ru', 'en'] as const,
   publisher: 'TODO: Publisher',
   features: {

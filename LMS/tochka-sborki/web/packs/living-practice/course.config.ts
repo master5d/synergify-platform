@@ -50,4 +50,5 @@ export const COURSE = {
   gates: { auth: true, intake: false, admission: true },
   /** Зеркала для чтения у курса нет — «сторож» основного сайта не ставится (lib/mirror-watchdog.ts). */
   mirrorUrl: null as string | null,
+  notionKbUrl: null as string | null,
 } as const

@@ -50,4 +50,5 @@ export const COURSE = {
   /** Зеркало для чтения (GitHub Pages, сборка COURSE_MIRROR=1). Задано — основной сайт ставит «сторожа»
    *  (lib/mirror-watchdog.ts): страница не догрузилась за 10 с → ссылка на тот же путь в зеркале. */
   mirrorUrl: 'https://master5d.github.io/ts-gitbook' as string | null,
+  notionKbUrl: null as string | null,
 } as const

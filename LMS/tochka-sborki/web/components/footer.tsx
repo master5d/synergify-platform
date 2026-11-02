@@ -1,5 +1,8 @@
 import Link from 'next/link'
 import { getDictionary, type Locale } from '@/lib/dictionaries'
+import { COURSE } from '@/lib/course'
+import { IS_MIRROR } from '@/lib/mirror'
+import { notionKbFooterLink } from '@/lib/notion-kb/footer-link'
 import { CourseSwitcher } from '@/components/academy/course-switcher'
 import { careCopy } from '@/lib/care'
 
@@ -39,6 +42,7 @@ export function Footer({ locale = 'ru', topics = [], showCertificateCta = true }
   const t = getDictionary(locale).footer
   const prefix = locale === 'en' ? '/en' : ''
   const year = new Date().getFullYear()
+  const kb = notionKbFooterLink(COURSE.notionKbUrl, IS_MIRROR, locale)
 
   return (
     <footer style={{
@@ -201,6 +205,16 @@ export function Footer({ locale = 'ru', topics = [], showCertificateCta = true }
             >
               mamaev.coach ↗
             </a>
+            {kb && (
+              <a
+                href={kb.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={linkStyle}
+              >
+                {kb.label} ↗
+              </a>
+            )}
           </div>
 
           <CourseSwitcher locale={locale} />

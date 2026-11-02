@@ -21,4 +21,5 @@ export const COURSE = {
   features: { rpg: false, certificate: false, graduateRetro: false, assemblyMap: false },
   gates: { auth: false, intake: false, admission: false },
   mirrorUrl: null as string | null,
+  notionKbUrl: null as string | null,
 } as const
