@@ -42,7 +42,7 @@ export function resolveHref(href: string, ctx: Pick<RenderCtx, 'links' | 'domain
   const locale: Locale = match?.[1] || page?.[1] ? 'en' : 'ru'
   const key = match ? (match[3] ? KEY.unit(locale, match[2], match[3]) : KEY.module(locale, match[2])) : page ? KEY.page(locale, page[2]) : null
   const notion = key ? ctx.links.page(key) : null
-  if (notion) return notion + suffix
+  if (notion) return notion
   return withUtm(`${ctx.domain}${path}`) + suffix
 }
 
@@ -67,8 +67,8 @@ function replaceEarly(nodes: Node[], ctx: RenderCtx): Node[] {
         else result.push(siteNode(ctx))
         continue
       }
-      if (node.children) node.children = replaceEarly(node.children, ctx)
     }
+    if (node.children) node.children = replaceEarly(node.children, ctx)
     result.push(node)
   }
   return result
@@ -82,8 +82,8 @@ function processNodes(nodes: Node[], ctx: RenderCtx): Node[] {
       const name = node.name ?? ''
       const rule = COMPONENT_RULES[name]
       if (!rule) throw new RenderError(`Неизвестный компонент ${name}`, lineOf(node))
-      if (rule === 'omit') continue
-      if (rule === 'site-link') { result.push(node.type === 'mdxJsxTextElement' ? { type: 'link', url: ctx.siteUrl, children: [{ type: 'text', value: STRINGS[ctx.locale].open }] } : siteNode(ctx)); continue }
+      if (rule === 'omit' || rule === 'site-link') throw new RenderError(`Компонент ${name} должен был замениться до привязки понятий`, lineOf(node))
+      if (node.type === 'mdxJsxTextElement') throw new RenderError(`Компонент ${name} внутри текста не поддержан`, lineOf(node))
       const children = processNodes(node.children ?? [], ctx)
       if (rule === 'phase') {
         const type = attr(node, 'type') as keyof typeof PHASE_META
@@ -104,7 +104,7 @@ function processNodes(nodes: Node[], ctx: RenderCtx): Node[] {
         const title = os === 'mac' ? '🍎 Mac' : os === 'windows' ? '🪟 Windows' : null
         if (!title) throw new RenderError(`Неизвестный os ${os}`, lineOf(node))
         const content = toNotionMarkdown({ type: 'root', children } as never).trim()
-        result.push({ type: 'html', value: toggle(title, children.some((child) => child.type === 'paragraph') ? `${content}\n` : content) })
+        result.push({ type: 'html', value: toggle(title, content) })
       }
       continue
     }

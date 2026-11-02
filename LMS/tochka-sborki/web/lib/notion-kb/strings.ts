@@ -47,7 +47,7 @@ export const STRINGS: Record<Locale, Record<string, string>> = {
     units: 'Units',
     detail: 'In depth',
     related: 'Related',
-    appears: 'Appears',
+    appears: 'Appears in',
     qOpen: '“',
     qClose: '”',
     unitOnSite: 'This unit on the site →',

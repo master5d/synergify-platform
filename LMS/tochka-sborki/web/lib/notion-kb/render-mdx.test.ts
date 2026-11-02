@@ -11,6 +11,8 @@ const ctx = (over: Partial<RenderCtx> = {}): RenderCtx => ({
   checks: [{ id: 'c1', unit: 'u1-start', objective: 'o1', question: 'Что хранит `STATE.md`?', options: ['Задачи', 'Где остановились'], answer: 1, explain: 'Это журнал остановки.' }],
   ...over,
 })
+const AGENT = { id: 'agent', term: { ru: 'агент', en: 'agent' }, forms: { ru: /(?<![A-Za-zА-Яа-яЁё])(?:агент)(?![A-Za-zА-Яа-яЁё])/i, en: /(?<![A-Za-zА-Яа-яЁё])(?:agent)(?![A-Za-zА-Яа-яЁё])/i }, short: { ru: 'Агент — это.', en: 'An agent is.' }, source: { unit: '02-beta/u1-next', heading: { ru: 'Агент', en: 'Agent' } }, related: [] }
+const CONCEPT_LINKS = { page: (k: string) => (k === 'ru/c/agent' ? 'https://www.notion.so/ru_c_agent' : null), anchor: () => null }
 
 describe('renderMdx', () => {
   it('Phase → заголовок фазы, заголовки внутри — на уровень ниже', () => {
@@ -26,7 +28,7 @@ describe('renderMdx', () => {
   it('SelfCheck с неизвестным id — RenderError, а не пустота', () => expect(() => renderMdx('<SelfCheck id="c9"/>', ctx())).toThrow(/c9/))
   it('OsBlock → раскрывашки Mac и Windows, OsToggle исчезает по правилу', () => {
     expect(renderMdx('<OsToggle />\n\n<OsBlock os="mac">\n\n```bash\nbrew install x\n```\n\n</OsBlock>\n\n<OsBlock os="windows">\n\nwinget\n\n</OsBlock>', ctx()))
-      .toBe('<toggle>\n🍎 Mac\n\n```bash\nbrew install x\n```\n</toggle>\n\n<toggle>\n🪟 Windows\n\nwinget\n\n</toggle>')
+      .toBe('<toggle>\n🍎 Mac\n\n```bash\nbrew install x\n```\n</toggle>\n\n<toggle>\n🪟 Windows\n\nwinget\n</toggle>')
   })
   it('site-link → callout со ссылкой на эту страницу сайта', () => {
     expect(renderMdx('<RolePlay id="x"/>', ctx())).toBe(`<callout icon="🧭">\nИнтерактивный блок — на сайте: [открыть →](${SITE})\n</callout>`)
@@ -46,6 +48,12 @@ describe('renderMdx', () => {
   it('ссылка на модуль → страница модуля', () => {
     expect(renderMdx('[m](/lessons/01-alpha/)', ctx())).toBe('[m](https://www.notion.so/ru_m_01-alpha)')
   })
+  it('ссылка с якорем на страницу Notion — якорь отброшен', () => {
+    expect(renderMdx('[a](/lessons/01-alpha/u2-deep/#x)', ctx())).toBe('[a](https://www.notion.so/ru_u_01-alpha_u2-deep)')
+  })
+  it('ссылка с якорем на сайт — якорь после utm', () => {
+    expect(renderMdx('[b](/lessons/02-beta/u1-next/#x)', ctx())).toBe('[b](https://ai.synergify.com/lessons/02-beta/u1-next/?utm_source=notion-kb#x)')
+  })
   it('figure со схемой svg → site-link; svg, rect и text внутри правил не требуют', () => {
     const src = '<figure>\n<svg viewBox="0 0 10 10" role="img" aria-label="схема">\n  <rect x="0" y="0" width="5" height="5" />\n  <text x="1" y="2" fontSize="14">AI</text>\n</svg>\n</figure>'
     expect(renderMdx(src, ctx())).toBe(`<callout icon="🧭">\nИнтерактивный блок — на сайте: [открыть →](${SITE})\n</callout>`)
@@ -54,13 +62,23 @@ describe('renderMdx', () => {
     expect(renderMdx('<Walkthrough minHeight={520} />', ctx())).toBe(`<callout icon="🧭">\nИнтерактивный блок — на сайте: [открыть →](${SITE})\n</callout>`)
   })
   it('Phase с неизвестным type — RenderError', () => expect(() => renderMdx('<Phase type="nope">\n\nx\n\n</Phase>', ctx())).toThrow(/nope/))
+  it('Phase, SelfCheck и OsBlock внутри текста — RenderError', () => {
+    expect(() => renderMdx('Текст <Phase type="concept">x</Phase> дальше', ctx())).toThrow(/Phase.*внутри текста/)
+    expect(() => renderMdx('Текст <SelfCheck id="c1"/> дальше', ctx())).toThrow(/SelfCheck.*внутри текста/)
+    expect(() => renderMdx('Текст <OsBlock os="mac">x</OsBlock> дальше', ctx())).toThrow(/OsBlock.*внутри текста/)
+  })
   it('figure не забирает первое упоминание: ссылка встаёт на видимое упоминание после схемы', () => {
-    const agent = { id: 'agent', term: { ru: 'агент', en: 'agent' }, forms: { ru: /(?<![A-Za-zА-Яа-яЁё])(?:агент)(?![A-Za-zА-Яа-яЁё])/i, en: /(?<![A-Za-zА-Яа-яЁё])(?:agent)(?![A-Za-zА-Яа-яЁё])/i }, short: { ru: 'Агент — это.', en: 'An agent is.' }, source: { unit: '02-beta/u1-next', heading: { ru: 'Агент', en: 'Agent' } }, related: [] }
-    const conceptLinks = { page: (k: string) => (k === 'ru/c/agent' ? 'https://www.notion.so/ru_c_agent' : null), anchor: () => null }
     const src = '<figure>\n<svg viewBox="0 0 10 10" role="img" aria-label="схема">\n  <text x="1" y="2" fontSize="14">агент</text>\n</svg>\n</figure>\n\nПотом агент ответил.'
-    const md = renderMdx(src, ctx({ concepts: [agent], links: conceptLinks }))
+    const md = renderMdx(src, ctx({ concepts: [AGENT], links: CONCEPT_LINKS }))
     expect(md.match(/ru_c_agent/g)).toHaveLength(1)
     expect(md).toContain('Потом [агент](https://www.notion.so/ru_c_agent) ответил.')
+  })
+  it('figure внутри списка или цитаты тоже не забирает первое упоминание', () => {
+    for (const src of ['- <figure><svg><text>агент</text></svg></figure>\n\nПотом агент ответил.', '> <figure>\n> <svg><text>агент</text></svg>\n> </figure>\n\nПотом агент ответил.']) {
+      const md = renderMdx(src, ctx({ concepts: [AGENT], links: CONCEPT_LINKS }))
+      expect(md.match(/ru_c_agent/g)).toHaveLength(1)
+      expect(md).toContain('Потом [агент](https://www.notion.so/ru_c_agent) ответил.')
+    }
   })
   it.each(Object.entries(COMPONENT_RULES).filter(([, r]) => r === 'site-link').map(([n]) => n))('%s → callout со ссылкой на сайт', (name) => {
     expect(renderMdx(`<${name} />`, ctx())).toBe(`<callout icon="🧭">\nИнтерактивный блок — на сайте: [открыть →](${SITE})\n</callout>`)
