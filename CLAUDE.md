@@ -235,3 +235,15 @@
 - **Модуль `09-ai-notebook`** — 5 юнитов, инверсия fast.ai (intake #102): u1 = рабочая тетрадка за 15 минут ДО теории; agent-agnostic (Gemini Notebook как референс, в каждом юните путь «если тетрадки нет»). **Опциональный**: НЕ в `workers/src/lib/course-catalog.ts` (admission-гейт академии не ужесточён) и НЕ в ядре прогрессии.
 - **`OPTIONAL_MODULE_SLUGS`** (`lib/rpg/modules.ts`) — канон опциональности: ядро `MODULE_SLUGS` (00-08) несёт quest-lines/macro-phases/quest-log/admission; опциональные модули живут в контенте/скинах/World Map/transformations через тип `CourseModuleSlug`. Новый опциональный модуль = запись в канон, content ×2 локали, framing во всех скин-паках (`packs/<pack>/skins/*.json`, у tochka-sborki их 8), transformations. Тестовые списки ВЫВОДИТЬ из канона, не копировать локально.
 - ⚠ Гоча: stale `npx serve` на `web/out` держит каталог — `next build` падает EBUSY на rmdir; лечение — найти и убить процесс (Get-CimInstance Win32_Process), не чистить каталог.
+
+## База знаний в Notion (2026-11, `lib/notion-kb/`)
+- Витрина «Точки Сборки» в Notion: книга (модуль → юнит) + словарь понятий. Текст живёт только в репо; sync односторонний
+  (`node scripts/notion-kb.ts check|sync|status|smoke`, `npm run check:notion`). Устройство, CI, поведение корзины и лимит блоков —
+  `docs/README-internal.md`, раздел «База знаний в Notion».
+- Секрет `NOTION_KB_TOKEN` — только в BWS и секрете Actions; задача `deploy-notion` в `deploy.yml`. Пространство «RAM»: не
+  приглашать участников (лимит блоков), только гостей.
+- Словарь `packs/tochka-sborki/concepts.ts`: «Коротко» — дословная цитата из юнита (RU из RU, EN из EN), форма находит ≥ 2 юнита
+  прозы в каждой локали; `term`/`short` подчиняются `glossary.ts`. Правишь юнит — `check` скажет, если цитата или заголовок разошлись.
+- Код `lib/notion-kb/` грузится нативным Node (`registerHooks`): относительные импорты, `import type` целым оператором, без
+  `enum`/`namespace`/parameter properties, без алиасов `@/`.
+- Ссылка на базу в подвале сайта: `notionKbUrl` в `course.config.ts` pack'а (`null` — нет ссылки); в зеркале её нет.
