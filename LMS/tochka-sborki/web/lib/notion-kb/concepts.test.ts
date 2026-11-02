@@ -88,6 +88,16 @@ describe('linkFirstMentions', () => {
   it('частичное пересечение: побеждает более длинное совпадение, даже если оно начинается позже', () => {
     expect(renderWith([AB, BGD], 'alpha beta gamma delta')).toBe('alpha [beta gamma delta](https://www.notion.so/bgd)')
   })
+  it('выбранные совпадения склеиваются в порядке текста, даже если выбирались по длине', () => {
+    expect(renderWith([AL, BGD], 'alpha beta gamma delta')).toBe('[alpha](https://www.notion.so/al) [beta gamma delta](https://www.notion.so/bgd)')
+    expect(renderWith([AGENT, STATE], 'агент и STATE.md')).toBe('[агент](https://www.notion.so/agent) и [STATE.md](https://www.notion.so/state-md)')
+  })
+  it('проигравшее понятие берёт своё следующее вхождение, не пересекающееся с выбранным', () => {
+    expect(renderWith([AB, BGD], 'alpha beta gamma delta и alpha beta')).toBe('alpha [beta gamma delta](https://www.notion.so/bgd) и [alpha beta](https://www.notion.so/ab)')
+  })
+  it('проигравшее понятие остаётся доступным в следующих абзацах', () => {
+    expect(renderWith([AB, BGD], 'alpha beta gamma delta\n\nпотом alpha beta')).toBe('alpha [beta gamma delta](https://www.notion.so/bgd)\n\nпотом [alpha beta](https://www.notion.so/ab)')
+  })
   it('пересечение равной длины: побеждает понятие раньше в списке', () => {
     expect(renderWith([AB, BG], 'alpha beta gamma')).toBe('[alpha beta](https://www.notion.so/ab) gamma')
     expect(renderWith([BG, AB], 'alpha beta gamma')).toBe('alpha [beta gamma](https://www.notion.so/bg)')
@@ -124,9 +134,9 @@ describe('plainText и findOccurrences', () => {
 describe('glossaryViolations', () => {
   it('ловит запрещённый вариант и пропускает строку с разрешённым контекстом (allow)', () => {
     const glossary = [{ banned: { ru: [/пайплайн/i], en: [/pipeline/i] }, allow: ['контент-конвейер'] }]
-    const bad = { ...STATE, id: 'x', short: { ru: 'Пайплайн — цепочка шагов.', en: 'A pipeline is a chain.' } }
+    const bad = { ...STATE, id: 'x', term: { ru: 'Пайплайн', en: 'pipeline' }, short: { ru: 'Пайплайн — цепочка шагов.', en: 'A pipeline is a chain.' } }
     const ok = { ...STATE, id: 'y', short: { ru: 'Контент-конвейер, а не пайплайн.', en: 'A chain.' } }
-    expect(glossaryViolations([bad], glossary)).toEqual(['x.short.ru: Пайплайн', 'x.short.en: pipeline'])
+    expect(glossaryViolations([bad], glossary)).toEqual(['x.term.ru: Пайплайн', 'x.short.ru: Пайплайн', 'x.term.en: pipeline', 'x.short.en: pipeline'])
     expect(glossaryViolations([ok], glossary)).toEqual([])
   })
 })
@@ -134,10 +144,12 @@ describe('glossaryViolations', () => {
 describe.runIf(PACK_SLUG === 'tochka-sborki')('словарь pack’а', () => {
   it('схема без ошибок', async () => {
     const { CONCEPTS } = await import(pathToFileURL(join(PACK_DIR, 'concepts.ts')).href)
+    expect(CONCEPTS.length).toBeGreaterThan(0)
     expect(validateConcepts(CONCEPTS)).toEqual([])
   })
   it('термины и короткие описания не нарушают канон словаря', async () => {
     const { CONCEPTS } = await import(pathToFileURL(join(PACK_DIR, 'concepts.ts')).href)
+    expect(CONCEPTS.length).toBeGreaterThan(0)
     const { GLOSSARY } = await import(pathToFileURL(join(PACK_DIR, 'glossary.ts')).href)
     expect(GLOSSARY.length).toBeGreaterThan(0)
     expect(glossaryViolations(CONCEPTS, GLOSSARY)).toEqual([])
