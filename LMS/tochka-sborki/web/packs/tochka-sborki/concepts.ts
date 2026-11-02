@@ -122,15 +122,7 @@ export const CONCEPTS: Concept[] = [
     forms: { ru: form('Trigger'), en: form('Triggers?') },
     short: { ru: 'Trigger: что запускает процесс? (ты вручную, schedule, новый файл, webhook)', en: 'Trigger: what kicks off the process? (you manually, a schedule, a new file, a webhook)' },
     source: { unit: '06-audio-pipeline/u1-activation', heading: { ru: 'Три вопроса перед построением pipeline', en: 'Three questions before building a pipeline' } },
-    related: ['action'],
-  },
-  {
-    id: 'action',
-    term: { ru: 'Action', en: 'Action' },
-    forms: { ru: form('Trigger → Action(?:s)?|Action:', ''), en: form('Trigger → Action(?:s)?|Action:', '') },
-    short: { ru: 'Action: что должно произойти? (scrape → analyze → save → notify)', en: 'Action: what should happen? (scrape → analyze → save → notify)' },
-    source: { unit: '06-audio-pipeline/u1-activation', heading: { ru: 'Три вопроса перед построением pipeline', en: 'Three questions before building a pipeline' } },
-    related: ['trigger'],
+    related: ['idempotency'],
   },
   {
     id: 'idempotency',
@@ -138,7 +130,7 @@ export const CONCEPTS: Concept[] = [
     forms: { ru: form('идемпотентност(?:ь|и|ью|ям|ями|ях)'), en: form('idempotenc(?:y|ies)') },
     short: { ru: 'Повторный запуск не меняет результат и не тратит лимиты. У такого свойства есть имя: идемпотентность.', en: 'A repeat run changes nothing and spends no quota. This property has a name: idempotency.' },
     source: { unit: '06-audio-pipeline/u5-schedule', heading: { ru: 'Condition «дубли» — это идемпотентность', en: 'The "duplicates" condition is idempotency' } },
-    related: ['action'],
+    related: ['trigger'],
   },
   {
     id: 'hook',
@@ -202,15 +194,7 @@ export const CONCEPTS: Concept[] = [
     forms: { ru: form('цитат(?:а|ы|у|ой|ою|ами|ах|е)'), en: form('citations?') },
     short: { ru: 'Цитата — это не украшение, а шов. Номер-сноска в ответе тетрадки ведёт в точное место источника.', en: 'A citation is not a decoration — it is a seam. The footnote number in a notebook answer leads to an exact spot in the source.' },
     source: { unit: '09-ai-notebook/u2-how-it-works', heading: { ru: 'Source-grounding: ответ привязан к источнику', en: 'Source-grounding: the answer is tied to a source' } },
-    related: ['hybrid', 'context'],
-  },
-  {
-    id: 'hybrid',
-    term: { ru: 'гибрид', en: 'hybrid' },
-    forms: { ru: form('гибрид(?:а|ы|у|ом|е|ами|ах)?'), en: form('hybrid') },
-    short: { ru: 'Есть и промежуточный вариант: тетрадку можно прикрепить к обычному чату с агентом (в Gemini — прямо как источник в разговоре).', en: 'There is also a middle option. A notebook can be attached to a regular assistant chat (in Gemini — directly as a source in the conversation).' },
-    source: { unit: '09-ai-notebook/u2-how-it-works', heading: { ru: 'Третий режим: гибрид', en: 'The third mode: hybrid' } },
-    related: ['citation', 'agent'],
+    related: ['context'],
   },
   {
     id: 'sft',
