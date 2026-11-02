@@ -3,7 +3,8 @@ import { NotionError } from './client'
 import { notionUrl } from './md'
 import { KEY } from './keys'
 import { STRINGS } from './strings'
-import { decodeManifest, encodeManifest, EMPTY_MANIFEST, MANIFEST_TITLE, type Manifest } from './manifest'
+import { decodeManifest, encodeManifest, EMPTY_MANIFEST, MANIFEST_TITLE } from './manifest'
+import type { Manifest } from './manifest'
 import type { Concept, Locale, LinkResolver, NotionApi, SitePage } from './types'
 
 export function contentHash(title: string, md: string): string {
@@ -29,11 +30,15 @@ function cloneManifest(manifest: Manifest): Manifest {
   return { v: 1, pages: { ...manifest.pages }, anchors: { ...manifest.anchors } }
 }
 
+function messageOf(error: unknown): string {
+  return error instanceof Error ? error.message : String(error)
+}
+
 export async function syncSite(api: NotionApi, pages: SitePage[], concepts: Concept[], servicePageId: string, opts: SyncOptions): Promise<SyncReport> {
   const report: SyncReport = { created: 0, adopted: 0, updated: 0, retitled: 0, trashed: 0, unchanged: 0, anchorMisses: [] }
   let manifestId: string
   let manifest = cloneManifest(EMPTY_MANIFEST)
-  let manifestChanged = false
+  let dirty = false
   const serviceChildren = await api.listChildren(servicePageId)
   const manifestChild = serviceChildren.find((child) => child.type === 'child_page' && child.text === MANIFEST_TITLE)
   if (manifestChild) {
@@ -45,10 +50,14 @@ export async function syncSite(api: NotionApi, pages: SitePage[], concepts: Conc
     const created = await api.createPage(servicePageId, MANIFEST_TITLE)
     manifestId = created.id
     opts.log(`create ${MANIFEST_TITLE}`)
-    manifestChanged = true
+  }
+  const saveManifest = async () => {
+    if (!dirty) return
+    await api.replaceMarkdown(manifestId, encodeManifest(manifest))
+    opts.log(`replace ${MANIFEST_TITLE}`)
+    dirty = false
   }
 
-  const pageByKey = new Map(pages.map((page) => [page.key, page]))
   const childrenCache = new Map<string, Awaited<ReturnType<NotionApi['listChildren']>>>()
   const children = async (parent: string, fresh = false) => {
     if (!fresh && childrenCache.has(parent)) return childrenCache.get(parent)!
@@ -56,23 +65,28 @@ export async function syncSite(api: NotionApi, pages: SitePage[], concepts: Conc
     if (!fresh) childrenCache.set(parent, result)
     return result
   }
+  const known = (id: string) => Object.values(manifest.pages).some((entry) => entry.id === id)
+  const orphan = (list: Awaited<ReturnType<NotionApi['listChildren']>>, title: string) => list.find((child) => child.type === 'child_page' && child.text === title && !known(child.id))
   const findOrCreate = async (page: SitePage, parentId: string): Promise<{ id: string; adopted: boolean }> => {
-    const candidates = (await children(parentId)).filter((child) => child.type === 'child_page' && child.text === page.title && !Object.values(manifest.pages).some((entry) => entry.id === child.id))
-    if (candidates[0]) return { id: candidates[0].id, adopted: true }
+    const cached = orphan(await children(parentId), page.title)
+    if (cached) {
+      opts.log(`adopt ${page.key}`)
+      return { id: cached.id, adopted: true }
+    }
     try {
       const created = await api.createPage(parentId, page.title)
-      opts.log(`create ${page.title}`)
+      opts.log(`create ${page.key}`)
       return { id: created.id, adopted: false }
     } catch (error) {
       if (!(error instanceof NotionError) || error.code !== 'uncertain') throw error
-      const after = (await children(parentId, true)).find((child) => child.type === 'child_page' && child.text === page.title && !Object.values(manifest.pages).some((entry) => entry.id === child.id))
+      const after = orphan(await children(parentId, true), page.title)
       if (after) {
         opts.log(`adopt ${page.key}`)
         return { id: after.id, adopted: true }
       }
       try {
         const created = await api.createPage(parentId, page.title)
-        opts.log(`create ${page.title}`)
+        opts.log(`create ${page.key}`)
         return { id: created.id, adopted: false }
       } catch (second) {
         if (second instanceof NotionError && second.code === 'uncertain') throw new Error(`создание ${page.key} не подтверждено: ${second.message}`)
@@ -87,10 +101,11 @@ export async function syncSite(api: NotionApi, pages: SitePage[], concepts: Conc
     if (!parentId) throw new Error(`родитель страницы ${page.key} не найден`)
     const result = await findOrCreate(page, parentId)
     manifest.pages[page.key] = { id: result.id, p: page.parentKey, th: contentHash(page.title, ''), ch: null }
-    manifestChanged = true
+    dirty = true
     if (result.adopted) report.adopted += 1
     else report.created += 1
   }
+  await saveManifest()
 
   if (!opts.only) {
     const current = new Set(pages.map((page) => page.key))
@@ -109,7 +124,8 @@ export async function syncSite(api: NotionApi, pages: SitePage[], concepts: Conc
         const [locale, concept] = anchor.split('/')
         if (removedSet.has(KEY.concept(locale as Locale, concept))) delete manifest.anchors[anchor]
       }
-      manifestChanged = true
+      dirty = true
+      await saveManifest()
     }
   }
 
@@ -118,71 +134,63 @@ export async function syncSite(api: NotionApi, pages: SitePage[], concepts: Conc
     anchor: (locale, conceptId) => manifest.anchors[`${locale}/${conceptId}`] ?? null,
   })
   const written = new Set<string>()
-  const writePage = async (page: SitePage, includeStamp = true) => {
+  const writePage = async (page: SitePage) => {
     const entry = manifest.pages[page.key]
-    if (!entry) return
-    const titleChanged = entry.th !== contentHash(page.title, '')
-    if (titleChanged) {
-      try { await api.updateTitle(entry.id, page.title) } catch (error) { throw new Error(`запись ${page.key} не удалась: ${error instanceof Error ? error.message : String(error)}`) }
-      opts.log(`title ${page.key}`)
-      entry.th = contentHash(page.title, '')
-      report.retitled += 1
-      manifestChanged = true
-    }
-    const locale = localeOf(page.key)
     const body = page.markdown(resolver())
-    const markdown = includeStamp ? `${body}\n\n${stampLine(locale, opts.sha, opts.date)}` : body
-    const currentMarkdown = (await api.getMarkdown(entry.id)).markdown
-    const currentBody = currentMarkdown.replace(/\n\n\*[^\n]+\*\s*$/, '')
-    if (contentHash(page.title, currentBody) === contentHash(page.title, body)) {
-      report.unchanged += 1
-      return
+    const stamped = `${body}\n\n${stampLine(localeOf(page.key), opts.sha, opts.date)}`
+    const hash = page.key === KEY.root ? contentHash(page.title, stamped) : contentHash(page.title, body)
+    let wrote = false
+    try {
+      if (entry.th !== contentHash(page.title, '')) {
+        await api.updateTitle(entry.id, page.title)
+        opts.log(`title ${page.key}`)
+        entry.th = contentHash(page.title, '')
+        report.retitled += 1
+        dirty = true
+        wrote = true
+      }
+      if (entry.ch !== hash) {
+        await api.replaceMarkdown(entry.id, stamped)
+        opts.log(`replace ${page.key}`)
+        entry.ch = hash
+        report.updated += 1
+        dirty = true
+        wrote = true
+        written.add(page.key)
+      }
+    } catch (error) {
+      throw new Error(`запись ${page.key} не удалась: ${messageOf(error)}`)
     }
-    const hash = contentHash(page.title, markdown)
-    if (entry.ch === hash) { report.unchanged += 1; return }
-    try { await api.replaceMarkdown(entry.id, markdown) } catch (error) { throw new Error(`запись ${page.key} не удалась: ${error instanceof Error ? error.message : String(error)}`) }
-    opts.log(`replace ${page.key}`)
-    entry.ch = hash
-    report.updated += 1
-    manifestChanged = true
-    written.add(page.key)
+    if (!wrote) report.unchanged += 1
   }
 
   for (const page of pages.filter((item) => item.stage === 'content' && item.key !== KEY.root)) await writePage(page)
 
   for (const concept of concepts) for (const locale of ['ru', 'en'] as const) {
     const unitKey = KEY.unit(locale, ...concept.source.unit.split('/') as [string, string])
-    if (!manifest.pages[unitKey] || (!written.has(unitKey) && manifest.anchors[`${locale}/${concept.id}`])) continue
+    const anchorKey = `${locale}/${concept.id}`
+    if (!manifest.pages[unitKey] || (!written.has(unitKey) && manifest.anchors[anchorKey])) continue
     const blocks = await api.listChildren(manifest.pages[unitKey].id)
     const heading = blocks.find((block) => block.type.startsWith('heading_') && sameTitle(block.text, concept.source.heading[locale]))
-    if (heading) manifest.anchors[`${locale}/${concept.id}`] = heading.id
-    else {
-      delete manifest.anchors[`${locale}/${concept.id}`]
-      report.anchorMisses.push(`${locale}/${concept.id}`)
+    if (heading) {
+      if (manifest.anchors[anchorKey] !== heading.id) {
+        manifest.anchors[anchorKey] = heading.id
+        dirty = true
+      }
+    } else {
+      if (anchorKey in manifest.anchors) {
+        delete manifest.anchors[anchorKey]
+        dirty = true
+      }
+      report.anchorMisses.push(anchorKey)
     }
-    manifestChanged = true
   }
   for (const page of pages.filter((item) => item.stage === 'concept')) await writePage(page)
 
   const root = pages.find((page) => page.key === KEY.root)
-  if (root) {
-    const entry = manifest.pages[root.key]
-    const markdown = `${root.markdown(resolver())}\n\n${stampLine('ru', opts.sha, opts.date)}`
-    const hash = contentHash(root.title, markdown)
-    if (entry.ch !== hash) {
-      try { await api.replaceMarkdown(entry.id, markdown) } catch (error) { throw new Error(`запись ${root.key} не удалась: ${error instanceof Error ? error.message : String(error)}`) }
-      opts.log(`replace ${root.key}`)
-      entry.ch = hash
-      report.updated += 1
-      manifestChanged = true
-    } else report.unchanged += 1
-  }
+  if (root) await writePage(root)
 
-  if (manifestChanged) {
-    const md = encodeManifest(manifest)
-    await api.replaceMarkdown(manifestId, md)
-    opts.log(`replace ${MANIFEST_TITLE}`)
-  }
+  await saveManifest()
   const rootId = manifest.pages[KEY.root]?.id
   if (rootId && !(await verifyRootStamp(api, rootId, opts.sha.slice(0, 7)))) throw new Error(`штамп корня не совпал с ${opts.sha.slice(0, 7)}`)
   return report

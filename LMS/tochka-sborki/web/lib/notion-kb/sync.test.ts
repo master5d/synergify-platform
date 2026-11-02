@@ -5,6 +5,7 @@ import { buildSite } from './site'
 import { MINI_COURSE } from './__fixtures__/mini-course'
 import { FakeNotion } from './__fixtures__/fake-notion'
 import { pageTag, notionUrl } from './md'
+import { NotionError } from './client'
 import type { SiteInput } from './types'
 
 const SHA = 'abcdef1234567890abcdef1234567890abcdef12', DATE = '2026-11-02'
@@ -125,5 +126,76 @@ describe('syncSite', () => {
     const e = await fake.replaceMarkdown(a.id, pageTag(notionUrl(c.id), 'C')).catch((x) => x)
     expect(e).toMatchObject({ status: 400, code: 'validation_error' })
     expect(String(e.message)).toContain('B')
+  })
+  it('новый коммит, Notion отдаёт текст не байт в байт — переписаны только корень и манифест', async () => {
+    const fake = new FakeNotion({ root: 'svc' }); await run(fake); fake.log.length = 0
+    const read = fake.getMarkdown.bind(fake), manifest = fake.idByTitle(MANIFEST_TITLE)
+    fake.getMarkdown = async (id) => {
+      const r = await read(id)
+      return id === manifest ? r : { ...r, markdown: r.markdown.replace(/\n\n/g, '\n\n\n') }
+    }
+    await run(fake, MINI_COURSE, { sha: '1234567' + SHA.slice(7) })
+    expect(fake.log).toEqual([`replace ${fake.idByTitle(rootTitle)}`, `replace ${manifest}`])
+  })
+  it('прогон упал на записи страницы — скелет уже в манифесте, переименование не плодит сироту', async () => {
+    const fake = new FakeNotion({ root: 'svc' })
+    const write = fake.replaceMarkdown.bind(fake)
+    let broken = true
+    fake.replaceMarkdown = async (id, md) => {
+      if (broken && fake.get(id).title === 'Дальше') throw new NotionError(400, 'validation_error', 'boom')
+      return write(id, md)
+    }
+    await expect(run(fake)).rejects.toThrow(/не удалась/)
+    broken = false
+    await expect(run(fake, withUnit('02-beta', 'u2-spare', (s) => s, 'Запас 2'))).resolves.toBeDefined()
+    expect(fake.live().filter((p) => p.title.startsWith('Запас'))).toHaveLength(1)
+  })
+  it('корзина сохранена в манифесте до записи страниц — повтор её не повторяет', async () => {
+    const fake = new FakeNotion({ root: 'svc' }); await run(fake); const unit = fake.idByTitle('Запас')
+    const m = MINI_COURSE.modules.ru[1]
+    const input = { ...MINI_COURSE, modules: { ...MINI_COURSE.modules, ru: [MINI_COURSE.modules.ru[0], { ...m, units: m.units.slice(0, 1) }] } }
+    const write = fake.replaceMarkdown.bind(fake), manifest = fake.idByTitle(MANIFEST_TITLE)
+    let broken = true
+    fake.replaceMarkdown = async (id, md) => {
+      if (broken && id !== manifest) throw new NotionError(503, 'service_unavailable', 'down')
+      return write(id, md)
+    }
+    await expect(run(fake, input)).rejects.toThrow(/не удалась/)
+    broken = false; fake.log.length = 0
+    await run(fake, input)
+    expect(fake.log).not.toContain(`trash ${unit}`)
+  })
+  it('новое название базы доходит до корня', async () => {
+    const fake = new FakeNotion({ root: 'svc' }); await run(fake); const root = fake.idByTitle(rootTitle)
+    await run(fake, { ...MINI_COURSE, config: { ...MINI_COURSE.config, title: { ...MINI_COURSE.config.title, ru: 'База 2' } } })
+    expect(fake.get(root).title).toBe('База 2')
+  })
+  it('unchanged — только страницы без единой записи', async () => {
+    const fake = new FakeNotion({ root: 'svc' }); await run(fake); fake.log.length = 0
+    const rep = await run(fake, withUnit('01-alpha', 'u2-deep', (s) => s, 'Ещё глубже'))
+    const manifest = fake.idByTitle(MANIFEST_TITLE)
+    const touched = new Set(fake.log.map((l) => l.split(' ')[1]).filter((id) => id !== manifest))
+    expect(rep.unchanged).toBe(N - touched.size)
+  })
+  it('log: строки действий несут ключ страницы, принятие сироты тоже видно', async () => {
+    const fake = new FakeNotion({ root: 'svc', failAfterCreates: 5 })
+    await expect(run(fake)).rejects.toThrow(/обрыв/)
+    const lines: string[] = []
+    const rep = await run(fake, MINI_COURSE, { log: (l) => lines.push(l) })
+    const keys = new Set(buildSite(MINI_COURSE).map((p) => p.key))
+    const adopted = lines.filter((l) => l.startsWith('adopt ')).map((l) => l.slice('adopt '.length))
+    const created = lines.filter((l) => l.startsWith('create ')).map((l) => l.slice('create '.length))
+    expect(adopted).toHaveLength(rep.adopted)
+    expect(created).toHaveLength(rep.created)
+    for (const k of [...adopted, ...created]) expect(keys.has(k)).toBe(true)
+  })
+  it('якорь не найден — повторный прогон того же коммита ничего не пишет', async () => {
+    const fake = new FakeNotion({ root: 'svc' })
+    const list = fake.listChildren.bind(fake)
+    fake.listChildren = async (id) => (await list(id)).filter((b) => b.type === 'child_page')
+    await run(fake); fake.log.length = 0
+    const rep = await run(fake)
+    expect(rep.anchorMisses.length).toBeGreaterThan(0)
+    expect(fake.log).toEqual([])
   })
 })
