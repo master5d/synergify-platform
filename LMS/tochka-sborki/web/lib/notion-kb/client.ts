@@ -4,6 +4,7 @@ export const NOTION_VERSION = '2026-03-11'
 const BASE_URL = 'https://api.notion.com/v1'
 const MAX_ATTEMPTS = 5
 const RETRY_DELAYS = [1000, 2000, 4000, 8000]
+const SERVER_ERRORS = [500, 502, 503, 504]
 const BLOCK_LIMIT_MESSAGE = 'Notion: лимит блоков Free (restricted_resource). В «RAM» появился второй участник? Запись остановлена'
 
 export class NotionError extends Error {
@@ -42,10 +43,10 @@ export function createNotionClient(opts: ClientOptions): NotionApi {
   const timeoutMs = opts.timeoutMs ?? 30_000
   let lastStart: number | null = null
 
-  const redact = (message: string) => message.split(opts.token).join('***')
+  const redact = (text: string) => (opts.token ? text.split(opts.token).join('***') : text)
 
   const makeError = (status: number, code: string, message: string, blockLimit = false) =>
-    new NotionError(status, code, redact(message), blockLimit)
+    new NotionError(status, redact(code), redact(message), blockLimit)
 
   const throttle = async () => {
     if (lastStart !== null) {
@@ -79,21 +80,30 @@ export function createNotionClient(opts: ClientOptions): NotionApi {
     if (status === 403 && code === 'restricted_resource' && errorBody.additional_data?.block_limit === 'block_creation') {
       return makeError(status, code, BLOCK_LIMIT_MESSAGE, true)
     }
-    if (code === 'http_error' || typeof errorBody.message !== 'string') {
-      return makeError(status, 'http_error', `Notion ${status} http_error`)
+    if (typeof errorBody.message !== 'string') {
+      return makeError(status, code, `Notion ${status} ${code}`)
     }
     return makeError(status, code, `Notion ${status} ${code}: ${errorBody.message}`)
   }
 
-  const request = async (path: string, method: string, body: unknown, idempotent: boolean): Promise<unknown> => {
-    let lastNetworkError: unknown
-    for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt += 1) {
-      await throttle()
+  const buildHeaders = (withBody: boolean) => {
+    try {
       const headers = new Headers({
         Authorization: `Bearer ${opts.token}`,
         'Notion-Version': NOTION_VERSION,
       })
-      if (body !== undefined) headers.set('Content-Type', 'application/json')
+      if (withBody) headers.set('Content-Type', 'application/json')
+      return headers
+    } catch {
+      // Headers.append печатает значение заголовка (то есть токен) в тексте TypeError — наружу его не пускаем
+      throw new NotionError(0, 'invalid_token', 'Notion: токен содержит недопустимые символы')
+    }
+  }
+
+  const request = async (path: string, method: string, body: unknown, idempotent: boolean): Promise<unknown> => {
+    for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt += 1) {
+      await throttle()
+      const headers = buildHeaders(body !== undefined)
       try {
         const response = await fetchImpl(`${BASE_URL}${path}`, {
           method,
@@ -104,19 +114,19 @@ export function createNotionClient(opts: ClientOptions): NotionApi {
         const parsed = await parseBody(response)
         if (response.ok) return parsed
 
-        const retryable = response.status === 429 || response.status === 529 || (idempotent && [500, 502, 503, 504].includes(response.status))
+        const retryable = response.status === 429 || response.status === 529 || (idempotent && SERVER_ERRORS.includes(response.status))
         if (retryable && attempt < MAX_ATTEMPTS - 1) {
           const wait = response.status === 429 ? retryAfter(response) ?? RETRY_DELAYS[attempt] : RETRY_DELAYS[attempt]
           await sleep(wait)
           continue
         }
-        if (!idempotent && method === 'POST' && response.status !== 429 && response.status !== 529) {
-          throw makeError(response.status, response.status === 500 || response.status === 502 || response.status === 503 || response.status === 504 ? 'uncertain' : errorFromResponse(response.status, parsed).code, `Notion ${response.status} uncertain`)
+        // createPage: 5xx — страница могла создаться; остальные ответы (4xx, 429/529 после пятой попытки) — обычная ошибка с кодом и текстом Notion
+        if (!idempotent && SERVER_ERRORS.includes(response.status)) {
+          throw makeError(response.status, 'uncertain', `Notion ${response.status} uncertain`)
         }
         throw errorFromResponse(response.status, parsed)
       } catch (error) {
         if (error instanceof NotionError) throw error
-        lastNetworkError = error
         if (!idempotent) throw makeError(0, 'uncertain', 'Notion 0 uncertain')
         if (attempt < MAX_ATTEMPTS - 1) {
           await sleep(RETRY_DELAYS[attempt])
@@ -124,8 +134,8 @@ export function createNotionClient(opts: ClientOptions): NotionApi {
         }
       }
     }
-    if (idempotent) throw makeError(0, 'network', 'Notion 0 network')
-    throw lastNetworkError instanceof NotionError ? lastNetworkError : makeError(0, 'uncertain', 'Notion 0 uncertain')
+    // сюда доходит только идемпотентный вызов после пяти сетевых сбоев
+    throw makeError(0, 'network', 'Notion 0 network')
   }
 
   const titleBody = (title: string) => ({ title: { title: [{ type: 'text', text: { content: title } }] } })
