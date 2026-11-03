@@ -183,7 +183,7 @@ describe('notion-kb CLI', () => {
     const sent = readFileSync(join(dir, 'smoke.sent.md'), 'utf8')
     expect(sent).toMatch(/<toggle>\n[^\n]+\n\n[^\n]+\n\n<toggle>\n[^\n]+\n\n[^\n]+\n<\/toggle>\n<\/toggle>/)
     expect(sent).toMatch(/<callout icon="🧪">\n[^\n]+\n\n[^\n]+\n<\/callout>/)
-    expect(sent).toContain('````\nвнутри ``` кода\n````')
+    expect(sent).toContain('````text\nвнутри ``` кода\n````')
     expect(sent).toContain(TABLE_OF_CONTENTS)
     expect(sent).toContain(`${pageTag(notionUrl(ids.get('smoke child 2')!), 'smoke child 2')}\n\n${pageTag(notionUrl(ids.get('smoke child 1')!), 'smoke child 1')}`)
   })

@@ -3,7 +3,7 @@ import remarkGfm from 'remark-gfm'
 import remarkMdx from 'remark-mdx'
 import remarkParse from 'remark-parse'
 import { gfmToMarkdown } from 'mdast-util-gfm'
-import { toMarkdown } from 'mdast-util-to-markdown'
+import { defaultHandlers, toMarkdown } from 'mdast-util-to-markdown'
 import type { Root } from 'mdast'
 
 const markdownParser = unified().use(remarkParse).use(remarkGfm)
@@ -25,7 +25,11 @@ export function toNotionMarkdown(tree: Root): string {
     strong: '*',
     fences: true,
     listItemIndent: 'one',
-    extensions: [gfmToMarkdown()]
+    extensions: [gfmToMarkdown()],
+    // Notion читает забор без языка как javascript (проба Task 11, 2026-11-02); `text` он хранит как простой текст.
+    handlers: {
+      code: (node, parent, state, info) => defaultHandlers.code({ ...node, lang: node.lang ?? 'text' }, parent, state, info)
+    }
   }).replace(/\n$/, '')
 }
 

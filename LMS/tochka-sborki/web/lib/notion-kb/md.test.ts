@@ -19,6 +19,12 @@ describe('notion-kb/md', () => {
   it('код с ``` внутри получает забор из четырёх обратных кавычек', () => {
     expect(toNotionMarkdown(parseMarkdown('````md\n```js\nx\n```\n````')).startsWith('````md\n')).toBe(true)
   })
+  it('забор без языка получает язык text: Notion иначе читает его как javascript', () => {
+    expect(toNotionMarkdown(parseMarkdown('```\nx\n```'))).toBe('```text\nx\n```')
+  })
+  it('забор с языком не меняется', () => {
+    expect(toNotionMarkdown(parseMarkdown('```bash\nls\n```'))).toBe('```bash\nls\n```')
+  })
   it('inlineMd сохраняет inline-код', () => {
     expect(inlineMd('Что хранит `STATE.md`?')).toBe('Что хранит `STATE.md`?')
   })
