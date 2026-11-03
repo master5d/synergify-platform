@@ -49,4 +49,12 @@ describe('checkMirror', () => {
     expect(issues).toMatch(/sitemap\.xml/)
     expect(issues).toMatch(/dashboard\/index\.html: серверная страница без заглушки/)
   })
+  it('ссылка на базу знаний в Notion (notion.site / notion.so) в зеркале — нарушение, упоминание в тексте — нет', () => {
+    const bad = fixture({ 'index.html': page('<a href="https://synergify.notion.site/40d96060a52d81f3b3fedd4be382f733">kb</a><a href="https://www.notion.so/x">x</a>') })
+    const issues = checkMirror(bad, '/ts-gitbook').join('\n')
+    expect(issues).toMatch(/index\.html: ссылка на Notion \(notion\.site\)/)
+    expect(issues).toMatch(/index\.html: ссылка на Notion \(notion\.so\)/)
+    const ok = fixture({ 'index.html': page('<p>Ведём заметки в Notion (notion.so) и Obsidian.</p>') })
+    expect(checkMirror(ok, '/ts-gitbook')).toEqual([])
+  })
 })

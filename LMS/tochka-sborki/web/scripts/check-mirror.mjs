@@ -23,6 +23,10 @@ export function checkMirror(outDir, basePath) {
     const html = readFileSync(file, 'utf8')
     if (!/<meta name="robots" content="noindex/.test(html)) issues.push(`${rel}: нет noindex`)
     if (/telegram\.org/.test(html)) issues.push(`${rel}: telegram.org (в РФ режут, вешает загрузку)`)
+    // База знаний в Notion — только на основном сайте (spec notion-kb): ссылка-атрибут, не упоминание в прозе.
+    for (const host of ['notion.site', 'notion.so']) {
+      if (new RegExp(`href="https?://[^"]*${host.replace('.', '\\.')}`).test(html)) issues.push(`${rel}: ссылка на Notion (${host}) — в зеркале базы знаний нет`)
+    }
     // 404 и iframe-встройки из public/ (walkthroughs/) — не страницы курса: плашки там нет, noindex проверяется выше.
     const noBanner = rel === '404.html' || rel.startsWith('_not-found') || rel.startsWith('walkthroughs/')
     if (!noBanner && !html.includes('data-mirror-banner')) issues.push(`${rel}: нет плашки зеркала`)
