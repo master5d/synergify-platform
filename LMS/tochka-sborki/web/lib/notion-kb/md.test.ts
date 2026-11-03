@@ -25,6 +25,14 @@ describe('notion-kb/md', () => {
   it('забор с языком не меняется', () => {
     expect(toNotionMarkdown(parseMarkdown('```bash\nls\n```'))).toBe('```bash\nls\n```')
   })
+  it('имя файла с расширением-TLD вне кода идёт inline-кодом: Notion иначе делает ссылку http://AGENTS.md', () => {
+    expect(toNotionMarkdown(parseMarkdown('Файл AGENTS.md и ~/.claude/CLAUDE.md, затем run.sh.'))).toBe('Файл `AGENTS.md` и `~/.claude/CLAUDE.md`, затем `run.sh`.')
+    expect(toNotionMarkdown(parseMarkdown('## STATE.md — где остановились'))).toBe('## `STATE.md` — где остановились')
+  })
+  it('имя файла уже в коде, адрес сайта и ссылка не меняются', () => {
+    expect(toNotionMarkdown(parseMarkdown('`AGENTS.md` и claude.ai'))).toBe('`AGENTS.md` и claude.ai')
+    expect(toNotionMarkdown(parseMarkdown('[AGENTS.md](https://example.com/AGENTS.md)'))).toBe('[AGENTS.md](https://example.com/AGENTS.md)')
+  })
   it('inlineMd сохраняет inline-код', () => {
     expect(inlineMd('Что хранит `STATE.md`?')).toBe('Что хранит `STATE.md`?')
   })

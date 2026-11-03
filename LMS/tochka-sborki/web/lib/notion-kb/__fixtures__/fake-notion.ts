@@ -130,7 +130,7 @@ export class FakeNotion implements NotionApi {
     }
     const children = [...this.pages.values()].filter((page) => this.isLiveChild(page, id)).map((page) => ({ id: page.id, type: 'child_page', text: page.title }))
     const page = this.page(id)
-    const headings = [...page.markdown.matchAll(/^(#{1,4}) (.*)$/gm)].map((match, index) => ({ id: page.headingIds[index], type: `heading_${match[1].length}`, text: match[2] }))
+    const headings = [...page.markdown.matchAll(/^(#{1,4}) (.*)$/gm)].map((match, index) => ({ id: page.headingIds[index], type: `heading_${match[1].length}`, text: match[2].replace(/`([^`]+)`/g, '$1') }))
     return [...children, ...headings]
   }
 

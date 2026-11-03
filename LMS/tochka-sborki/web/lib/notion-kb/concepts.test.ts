@@ -65,13 +65,13 @@ describe('validateConcepts', () => {
 
 describe('linkFirstMentions', () => {
   it('первое упоминание — ссылка, второе — текст', () => {
-    expect(render('Открой STATE.md. Потом снова STATE.md.')).toBe('Открой [STATE.md](https://www.notion.so/state-md). Потом снова STATE.md.')
+    expect(render('Открой STATE.md. Потом снова STATE.md.')).toBe('Открой [STATE.md](https://www.notion.so/state-md). Потом снова `STATE.md`.')
   })
   it('код, ссылки и заголовки не трогает; inline-код, равный форме целиком, — упоминание', () => {
     const out = render('## STATE.md\n\n`STATE.md` и [STATE.md](https://x.y)\n\n```\nSTATE.md\n```\n\nпотом STATE.md')
     expect(out.match(/\(https:\/\/www\.notion\.so\/state-md\)/g)).toHaveLength(1)
     expect(out).toContain('[`STATE.md`](https://www.notion.so/state-md) и [STATE.md](https://x.y)')
-    expect(out).toContain('потом STATE.md')
+    expect(out).toContain('потом `STATE.md`')
     expect(out).not.toContain('потом [STATE.md]')
   })
   it('фраза 11/u1: ссылкой становится только inline-код, равный форме', () => {
@@ -81,7 +81,7 @@ describe('linkFirstMentions', () => {
     expect(render('Запусти `rm STATE.md`, потом открой STATE.md.')).toBe('Запусти `rm STATE.md`, потом открой [STATE.md](https://www.notion.so/state-md).')
   })
   it('длинная форма побеждает короткую', () => expect(render('Наш AI-агент работает')).toContain('[AI-агент](https://www.notion.so/ai-agent)'))
-  it('в юните-источнике понятие не ссылается само на себя', () => expect(render('Открой STATE.md', '01-alpha/u2-deep')).toBe('Открой STATE.md'))
+  it('в юните-источнике понятие не ссылается само на себя', () => expect(render('Открой STATE.md', '01-alpha/u2-deep')).toBe('Открой `STATE.md`'))
   it('заглавная в начале фразы — тоже упоминание', () => expect(render('Агент ответил')).toContain('[Агент](https://www.notion.so/agent)'))
   it('слово внутри другого слова — не упоминание', () => expect(render('субагент ответил')).toBe('субагент ответил'))
   it('EN-страница ищет EN-формы', () => expect(render('Two agents talk', null, 'en')).toContain('[agents](https://www.notion.so/agent)'))
