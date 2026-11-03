@@ -824,3 +824,8 @@
   (`lib/unit-progress.ts`), в `progress` пишутся лишь слаги уровня модуля/страницы, и `progress-provider`
   не шлёт `course` (всё ложится под дефолт воркера). Слать `модуль/юнит` + `course` из pack'а — воронка
   подхватит юниты без правок (`splitSlug` в `workers/src/handlers/stats.ts`).
+
+## Ретро среды после notion-kb (wrap 2026-11-02)
+
+- [ ] **Сборка зеркала: `COURSE_BASE_PATH=/ts-gitbook` в Git Bash превращается в путь Windows** (`C:/Program Files/Git/ts-gitbook`), `next build` падает с «basePath has to start with a /». В CI (Linux) всё верно, ломается только локальная сборка зеркала на Windows. Нужен скрипт `build:mirror` в `LMS/tochka-sborki/web/package.json`, который задаёт `COURSE_MIRROR=1` и `COURSE_BASE_PATH` из node (не из оболочки), и строка про него в `docs/README-internal.md`. Категория: автопроверка (рецидив известного правила: в памяти оно есть, но срабатывает только после ошибки).
+- [ ] **`LMS/tochka-sborki/web/.impeccable/hook.cache.json` лежит под git и меняется в каждой сессии** — шумит в `git status` и блокирует `git worktree remove` без `--force` (7 раз за план notion-kb пришлось обходить). Это кэш плагина, не исходник: убрать из индекса (`git rm --cached`) и добавить `.impeccable/` в `.gitignore` пакета web. Категория: автопроверка / гигиена.
