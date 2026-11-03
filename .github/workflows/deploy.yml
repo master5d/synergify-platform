@@ -101,6 +101,38 @@ jobs:
           GIT_SSH_COMMAND="ssh -i ~/.ssh/ts_gitbook -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
             git push --force git@github.com:master5d/ts-gitbook.git gh-pages
 
+  # ── база знаний в Notion (spec 2026-11-01) — отдельная задача: падение не трогает сайт и зеркало ──
+  deploy-notion:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: notion-kb
+      cancel-in-progress: false
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: LMS/tochka-sborki/web/package-lock.json
+      - name: Install
+        working-directory: LMS/tochka-sborki/web
+        run: npm ci
+      - name: Test
+        working-directory: LMS/tochka-sborki/web
+        run: npm test
+      - name: Check (текст курса ↔ словарь)
+        working-directory: LMS/tochka-sborki/web
+        run: npm run check:notion
+      - name: Sync to Notion
+        working-directory: LMS/tochka-sborki/web
+        env:
+          NOTION_KB_TOKEN: ${{ secrets.NOTION_KB_TOKEN }}
+        run: npm run notion:sync
+
   # ── engine × course-packs: build+test matrix (no deploy) ───
   # «Движок обновился → все курсы пересобрались» как CI-факт: каждый
   # coming-soon pack собирается и прогоняет тесты под своим COURSE_PACK.
