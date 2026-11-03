@@ -173,7 +173,7 @@ function conceptMarkdown(input: SiteInput, locale: Locale, id: string, links: Li
     const found = module.units.filter((unit) => occurrences.includes(`${module.slug}/${unit.slug}`))
     return found.length ? `- **${moduleLabel(module.module, module.title)}:** ${found.map((unit) => `[${unit.title}](${href(input, links, KEY.unit(locale, module.slug, unit.slug))})`).join(' · ')}` : null
   }).filter((item): item is string => item !== null)
-  const blocks = [`> ${concept.short[locale]}`, detail]
+  const blocks = [`> ${inlineMd(concept.short[locale])}`, detail]
   if (related.length) blocks.push(`**${STRINGS[locale].related}:** ${related.join(' · ')}`)
   if (appears.length) blocks.push(`**${STRINGS[locale].appears}**\n${appears.join('\n')}`)
   blocks.push(footer(input, locale, links))

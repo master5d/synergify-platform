@@ -63,7 +63,7 @@ describe('buildSite', () => {
   it('понятие: цитата, «Подробно» с якорем и без, «Рядом», «Встречается» по модулям', () => {
     const anchored = { ...links, anchor: (l: string, id: string) => (l === 'ru' && id === 'state-md' ? 'b10c-k1d' : null) }
     const c = md('ru/c/state-md', anchored)
-    expect(c).toContain('> ' + MINI_COURSE.concepts.find((x) => x.id === 'state-md')!.short.ru)
+    expect(c).toContain('> `STATE.md` — файл, где агент записывает, где остановился.')
     expect(c).toContain(`**Подробно:** [01 · Глубже → «STATE.md — где остановились»](${url('ru/u/01-alpha/u2-deep')}#b10ck1d)`)
     expect(c).toContain(`**Рядом:** [агент](${url('ru/c/agent')})`)
     expect(c).toContain(`- **02 · Бета:** [Дальше](${url('ru/u/02-beta/u1-next')})`)
