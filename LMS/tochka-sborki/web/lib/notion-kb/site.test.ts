@@ -41,6 +41,14 @@ describe('buildSite', () => {
     expect(m).toContain('- Понять память')
     expect(m.indexOf('>Старт</page>')).toBeLessThan(m.indexOf('>Глубже</page>'))
   })
+  it('модуль: имена файлов в описании и целях идут inline-кодом, иначе Notion линкует их как адреса', () => {
+    const [first, ...rest] = MINI_COURSE.modules.ru
+    const course = { ...MINI_COURSE, modules: { ...MINI_COURSE.modules, ru: [{ ...first, description: 'Первый модуль: STATE.md', objectives: [{ id: 'o1', text: 'Храни память в AGENTS.md и ~/.claude/CLAUDE.md' }] }, ...rest] } }
+    const built = buildSite(course)
+    const page = built.find((p) => p.key === 'ru/m/01-alpha')!.markdown(fakeResolver(built))
+    expect(page).toContain('Первый модуль: `STATE.md`')
+    expect(page).toContain('- Храни память в `AGENTS.md` и `~/.claude/CLAUDE.md`')
+  })
   it('юнит: оглавление, «←» через границу модуля, юнит на сайте, тихое приглашение', () => {
     const u = md('ru/u/02-beta/u1-next')
     expect(u.startsWith('<table-of-contents />')).toBe(true)

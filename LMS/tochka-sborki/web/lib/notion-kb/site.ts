@@ -102,8 +102,8 @@ function footerWithoutInvite(input: SiteInput, locale: Locale): string {
 
 function moduleMarkdown(input: SiteInput, locale: Locale, module: ModuleMeta, links: LinkResolver): string {
   const s = STRINGS[locale]
-  const blocks = [`${module.description}`, `${s.duration}: ${module.duration}`]
-  if (module.objectives?.length) blocks.push(`### ${s.objectives}\n${module.objectives.map((objective) => `- ${objective.text}`).join('\n')}`)
+  const blocks = [inlineMd(module.description), `${s.duration}: ${module.duration}`]
+  if (module.objectives?.length) blocks.push(`### ${s.objectives}\n${module.objectives.map((objective) => `- ${inlineMd(objective.text)}`).join('\n')}`)
   blocks.push(`### ${s.units}\n${module.units.map((unit) => childrenTag(input, links, KEY.unit(locale, module.slug, unit.slug), unit.title)).join('\n')}`)
   blocks.push(footer(input, locale, links))
   return blocks.join('\n\n')
