@@ -158,8 +158,6 @@
 - Ultrathink + паттерн Plan → Normal → Auto
 - Промпты, токены, типичные ошибки
 
-🌐 **Интерактивная версия** (141 карточка + quiz): [index.html](./tools/cheatsheet/index.html)
-
 **Когда использовать:** Прямо перед сессией с Claude Code
 
 ---
