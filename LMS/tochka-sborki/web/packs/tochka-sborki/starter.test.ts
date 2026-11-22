@@ -45,7 +45,7 @@ describe.each(ALL)('стартер %s: состав архива', (loc, { entri
 
   it('содержит обязательные файлы', () => {
     const required = [
-      'README.md', 'AGENTS.md', 'CLAUDE.md', 'TODO.md', 'STATE.md', 'HYGIENE.md', '.gitignore',
+      'README.md', 'AGENTS.md', 'TODO.md', 'STATE.md', 'HYGIENE.md', '.gitignore',
       'my-experiments/README.md', 'my-templates/README.md',
       'my-templates/agent-charter.md', 'my-templates/automation-recipes.md',
       'my-templates/feedback-template.md', 'my-templates/feedback-final-jtbd.md',
@@ -161,8 +161,11 @@ describe.each(ALL)('стартер %s: нет секретов и мусора',
 })
 
 describe.each(ALL)('стартер %s: один файл правил для всех агентов', (_loc, { files, text }) => {
-  it('CLAUDE.md подключает AGENTS.md импортом (работает в любой версии Claude Code)', () => {
-    expect(text('CLAUDE.md').split('\n')[0]).toBe('@AGENTS.md')
+  const legacyImport = '@' + 'AGENTS.md'
+
+  it('не содержит CLAUDE.md и legacy-импорта AGENTS.md', () => {
+    expect(files.has('CLAUDE.md')).toBe(false)
+    expect([...files.values()].map((entry) => entry.data.toString('utf8')).join('\n')).not.toContain(legacyImport)
   })
 
   it('AGENTS.md короткий: до ~200 строк (05/u3) и в пределах лимита Codex 32 KiB', () => {
@@ -310,24 +313,20 @@ describe('страница «Стартер»', () => {
   })
 })
 
-// Одна схема файлов правил для стартера и уроков (рисерч docs/superpowers/research/
-// 2026-09-28-agent-rules-files-best-practice.md): AGENTS.md — контекст и правила,
-// CLAUDE.md — строка @AGENTS.md. Уроки не должны снова учить делить их на «контекст/инструкции».
+// Одна схема файлов правил для стартера и уроков: AGENTS.md — контекст и правила.
 describe('уроки учат той же схеме, что стартер', () => {
   const read = (loc: string, p: string) => readFileSync(join(PACK, 'content', loc, p), 'utf8')
   const UNITS = ['02-setup-guide/u3-first-project.mdx', '05-context-memory/u3-memory.mdx']
 
-  it.each(['ru', 'en'])('%s: 02/u3 и 05/u3 создают CLAUDE.md строкой @AGENTS.md', (loc) => {
+  it.each(['ru', 'en'])('%s: 02/u3 и 05/u3 создают только AGENTS.md, а Claude Code проверяют через /memory', (loc) => {
     for (const p of UNITS) {
       const s = read(loc, p)
-      expect(s, p).toContain("echo '@AGENTS.md' > CLAUDE.md")
-      expect(s, p).toContain("Set-Content CLAUDE.md '@AGENTS.md'")
-      // Пустой CLAUDE.md рядом с AGENTS.md выключил бы чтение AGENTS.md в Claude Code.
-      expect(s, p).not.toMatch(/touch CLAUDE\.md|ni CLAUDE\.md/)
+      expect(s, p).not.toContain('@' + 'AGENTS.md')
+      expect(s, p).toContain('/memory')
     }
   })
 
-  it.each(['ru', 'en'])('%s: 05/u3 знает STATE.md и не делит «CLAUDE.md — контекст / AGENTS.md — инструкции»', (loc) => {
+  it.each(['ru', 'en'])('%s: 05/u3 знает STATE.md и не делит контекст и инструкции по разным файлам', (loc) => {
     const s = read(loc, '05-context-memory/u3-memory.mdx')
     expect(s).toMatch(/### STATE\.md/)
     expect(s).not.toMatch(/### CLAUDE\.md/)

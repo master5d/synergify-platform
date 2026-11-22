@@ -80,7 +80,7 @@ prompt-research.md             # Промпт для research работ
 ### Шаблоны конфигурации
 
 ```
-template-claude-md.md          # Шаблон CLAUDE.md
+template-agents-md.md          # Шаблон AGENTS.md
 template-todo-md.md            # Шаблон TODO.md
 template-agents-md.md          # Шаблон AGENTS.md
 ```
@@ -206,10 +206,10 @@ prompt-backend.md        # Символическая ссылка на v2
 Агент отлично понимает требования с этим стилем промпта.
 ```
 
-### Пример 2: Шаблон CLAUDE.md
+### Пример 2: Шаблон AGENTS.md
 
 ```markdown
-# CLAUDE.md Template
+# AGENTS.md Template
 
 ## Структура
 

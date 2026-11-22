@@ -5,7 +5,7 @@
 //
 // Колонка «что прочитает агент» — ТОЛЬКО то, что написано в официальной документации
 // агента (ссылки в `sources`). Проверено 2026-09-28. Живым запуском в распакованном
-// стартере: Claude Code — правила через @AGENTS.md и hook; Codex — правила (hook Codex
+// стартере: Claude Code — правила из AGENTS.md и hook; Codex — правила (hook Codex
 // до одобрения через /hooks не запускается, одобрение — интерактивное). Непроверенное не обещаем.
 import type { StarterData } from '@/lib/starter/types'
 
@@ -60,8 +60,8 @@ export const STARTER: StarterData | null = {
       command: 'claude',
       open: { ru: 'В терминале перейди в папку и запусти claude. При первом запуске он спросит, доверяешь ли ты папке.', en: 'In the terminal, go to the folder and run claude. On first launch it asks whether you trust the folder.' },
       reads: {
-        ru: 'CLAUDE.md. В нём одна строка @AGENTS.md — она подключает общий файл правил целиком. Новые версии читают AGENTS.md и сами, но только когда рядом нет CLAUDE.md; импорт работает в любой версии.',
-        en: 'CLAUDE.md. Its single line @AGENTS.md imports the shared rules file in full. Newer versions read AGENTS.md on their own, but only when there is no CLAUDE.md next to it; the import works in any version.',
+        ru: 'AGENTS.md — Claude Code читает его сам с версии 2.1.277; для всех режимов курса нужна версия не ниже 2.1.281. Проверь через /memory, что путь к AGENTS.md есть в списке. CLAUDE.md или CLAUDE.local.md в папке проекта либо выше отключают это чтение.',
+        en: 'AGENTS.md — Claude Code reads it itself from version 2.1.277; for every course mode, use version 2.1.281 or later. Use /memory to check that the path to AGENTS.md is in its list. A CLAUDE.md or CLAUDE.local.md in the project folder or above disables this reading.',
       },
       hook: {
         ru: 'Есть: .claude/settings.json запускает hook начала сессии, и агент сразу видит STATE.md и TODO.md.',
@@ -129,8 +129,8 @@ export const STARTER: StarterData | null = {
       command: 'hermes',
       open: { ru: 'В терминале перейди в папку и запусти hermes.', en: 'In the terminal, go to the folder and run hermes.' },
       reads: {
-        ru: 'AGENTS.md. Из .hermes.md, AGENTS.md и CLAUDE.md Hermes берёт первый найденный, и в стартере это AGENTS.md.',
-        en: 'AGENTS.md. Hermes loads the first of .hermes.md, AGENTS.md and CLAUDE.md it finds; in the starter that is AGENTS.md.',
+        ru: 'AGENTS.md. В стартере это единственный файл правил проекта.',
+        en: 'AGENTS.md. In the starter, it is the only project rules file.',
       },
       hook: {
         ru: 'Нет: hooks Hermes настраиваются в ~/.hermes/, а не в проекте. Память подхватывается правилом в AGENTS.md.',
@@ -141,7 +141,6 @@ export const STARTER: StarterData | null = {
   ],
   files: [
     { path: 'AGENTS.md', what: { ru: 'Единый файл правил: кто ты, что за проект, как работать', en: 'The single rules file: who you are, the project, how to work' }, lesson: '/lessons/02-setup-guide/u3-first-project/' },
-    { path: 'CLAUDE.md', what: { ru: 'Одна строка @AGENTS.md для Claude Code', en: 'One line, @AGENTS.md, for Claude Code' } },
     { path: 'TODO.md', what: { ru: 'Текущие задачи', en: 'Current tasks' }, lesson: '/lessons/05-context-memory/u3-memory/' },
     { path: 'STATE.md', what: { ru: 'Память между сессиями: где остановились', en: 'Memory between sessions: where you stopped' }, lesson: '/lessons/05-context-memory/u4-practice/' },
     { path: 'HYGIENE.md', what: { ru: 'Чек-лист гигиены перед «Пенделем»', en: 'Hygiene checklist before the “Pendel” practice' }, lesson: '/lessons/07-tools/u6-pendel/' },
@@ -160,8 +159,8 @@ export const STARTER: StarterData | null = {
         en: 'A hook is a command that runs on your computer. Before approving it, open hooks/session-start.mjs: it only reads two files and prints them. It needs Node.js.',
       },
       {
-        ru: 'Схема та же, что в уроках курса: контекст и правила живут в AGENTS.md, CLAUDE.md только подключает его. Так советует документация Claude Code, и так правило увидит любой агент. Личное для всех проектов клади в глобальный файл своего агента (~/.claude/CLAUDE.md), а не сюда.',
-        en: 'The same scheme as in the course lessons: context and rules live in AGENTS.md, CLAUDE.md only imports it. This is what the Claude Code docs recommend, and every agent sees the rule. Personal preferences for all projects go into your agent’s global file (~/.claude/CLAUDE.md), not here.',
+        ru: 'Схема та же, что в уроках курса: контекст и правила живут в AGENTS.md, Claude Code читает его сам. Проверь это через /memory. Личное для всех проектов клади в глобальный файл своего агента (~/.claude/CLAUDE.md), а не сюда.',
+        en: 'The same scheme as in the course lessons: context and rules live in AGENTS.md, and Claude Code reads it itself. Check it with /memory. Personal preferences for all projects go into your agent’s global file (~/.claude/CLAUDE.md), not here.',
       },
       {
         ru: 'Что агент читает при старте, мы взяли из его официальной документации. Агенты обновляются: если твой ведёт себя иначе, первая команда всё равно просит его прочитать файлы явно.',

@@ -31,7 +31,7 @@ duration: "12 мин"
 
 AGENTS.md — это Markdown-файл с правилами и контекстом проекта. Это общий стандарт: Codex, Cursor, GitHub Copilot, Antigravity, Hermes и другие агенты читают его сами при запуске в папке.
 
-У Claude Code свой файл — `CLAUDE.md`. Чтобы не вести два файла, положи в `CLAUDE.md` одну строку `@AGENTS.md`: она подключает `AGENTS.md` целиком. Так советует документация Claude Code. Правила пишешь в одном месте, и видит их любой агент.
+Claude Code читает `AGENTS.md` сам — без импорта и настроек — начиная с версии 2.1.277; для всех его режимов курс требует версию не ниже 2.1.281. Проверь её командой `claude --version`. Правила пишешь в одном месте, и видит их любой агент.
 
 ### Минимальный шаблон
 
@@ -64,7 +64,7 @@ AGENTS.md — это Markdown-файл с правилами и контекст
 - Финальная проверка качества
 ```
 
-> 💡 **Готовый вариант.** [Стартер студента](/starter/) — это такой проект, уже собранный: `AGENTS.md` + `CLAUDE.md` со строкой `@AGENTS.md`, `TODO.md`, память между сессиями, `my-experiments/`, шаблоны. Работает с Claude Code, Codex, Antigravity и Hermes. Собрать папку руками по шагам ниже — тоже хороший путь: так видно, из чего она состоит.
+> 💡 **Готовый вариант.** [Стартер студента](/starter/) — это такой проект, уже собранный: `AGENTS.md`, `TODO.md`, память между сессиями, `my-experiments/`, шаблоны. Работает с Claude Code, Codex, Antigravity и Hermes. Собрать папку руками по шагам ниже — тоже хороший путь: так видно, из чего она состоит.
 
 ### Создание проекта
 
@@ -77,7 +77,6 @@ mkdir -p ~/my-ai-project
 cd ~/my-ai-project
 git init
 touch AGENTS.md
-echo '@AGENTS.md' > CLAUDE.md
 mkdir -p my-experiments
 ```
 
@@ -90,7 +89,6 @@ New-Item -ItemType Directory $HOME\my-ai-project -Force
 cd $HOME\my-ai-project
 git init
 ni AGENTS.md -ItemType File
-Set-Content CLAUDE.md '@AGENTS.md'
 New-Item -ItemType Directory my-experiments -Force
 ```
 
@@ -101,7 +99,7 @@ New-Item -ItemType Directory my-experiments -Force
 - Держи до **200 строк** — длиннее снижает качество следования инструкциям
 - Будь конкретным: `«Используй 2-пробельный отступ»` лучше чем `«форматируй правильно»`
 - Обновляй когда меняется архитектура или стек
-- `CLAUDE.md` не заполняй: в нём только строка `@AGENTS.md`. Что нужно одному Claude Code, пиши ниже этой строки
+- Для Claude Code используй версию не ниже 2.1.281. Выполни `/memory`: в списке должен быть путь к `AGENTS.md`. Если в папке проекта или выше есть `CLAUDE.md` либо `CLAUDE.local.md`, Claude Code молча пропустит `AGENTS.md`; убери такой файл из этой цепочки.
 
 <SelfCheck id="c6"/>
 
@@ -124,7 +122,6 @@ mkdir -p ~/my-ai-project
 cd ~/my-ai-project
 git init
 touch AGENTS.md
-echo '@AGENTS.md' > CLAUDE.md
 mkdir -p my-experiments
 ```
 
@@ -137,7 +134,6 @@ New-Item -ItemType Directory $HOME\my-ai-project -Force
 cd $HOME\my-ai-project
 git init
 ni AGENTS.md -ItemType File
-Set-Content CLAUDE.md '@AGENTS.md'
 New-Item -ItemType Directory my-experiments -Force
 ```
 
@@ -151,7 +147,7 @@ New-Item -ItemType Directory my-experiments -Force
 claude
 ```
 
-Задай агенту: `«Прочитай правила проекта и скажи, что ты теперь знаешь о проекте»`
+Выполни `/memory`: в списке должен быть путь к `AGENTS.md`. Затем задай агенту: `«Прочитай правила проекта и скажи, что ты теперь знаешь о проекте»`
 
 Сохрани результат в `my-experiments/u3-claude-reads-context.md`
 

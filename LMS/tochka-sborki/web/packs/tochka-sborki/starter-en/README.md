@@ -30,7 +30,6 @@ and never writes to your home folder or global settings: everything lives in thi
 | File | Why | Where in the course |
 |------|-----|---------------------|
 | `AGENTS.md` | **The single rules file.** Who you are, what the project is, how to work, what not to do | 02/u3, 05/u3 |
-| `CLAUDE.md` | One line, `@AGENTS.md`: Claude Code imports the shared rules file | 02/u3 |
 | `TODO.md` | Current tasks: now, next, done | 05/u3 |
 | `STATE.md` | Memory between sessions: what's done, where you stopped, what's blocking | 05/u3, 05/u4 |
 | `HYGIENE.md` | Project hygiene checklist, before the "Pendel" practice | 07/u6 |
@@ -42,8 +41,8 @@ and never writes to your home folder or global settings: everything lives in thi
 | `.gemini/settings.json` | Tells Gemini CLI to read `AGENTS.md` (on its own it looks only for `GEMINI.md`) | 02/u3 |
 | `.gitignore` | Keeps keys (`.env`), personal agent settings and junk out of git | 07/u6 |
 
-The course lessons (02/u3, 05/u3) build the project the same way: context and rules live in `AGENTS.md`,
-and `CLAUDE.md` only imports it. A rule written into `AGENTS.md` is seen by every agent.
+The course lessons (02/u3, 05/u3) build the project the same way: context and rules live in `AGENTS.md`.
+A rule written into `AGENTS.md` is seen by every agent.
 
 ## What your agent reads at start
 
@@ -51,11 +50,11 @@ Checked against the official documentation (links below). The starter promises n
 
 | Agent | Rules file | Session-start hook |
 |-------|------------|--------------------|
-| **Claude Code** | `CLAUDE.md`, and through the line `@AGENTS.md` also `AGENTS.md`. Newer versions read `AGENTS.md` on their own, but only when there is no `CLAUDE.md` next to it; the import works in any version | Yes: `.claude/settings.json` → `SessionStart`. On first launch Claude Code asks whether you trust this folder |
+| **Claude Code** | `AGENTS.md`: reads it itself from version 2.1.277; this course requires 2.1.281 or later. Check `/memory`: the path to `AGENTS.md` must be in its list. A `CLAUDE.md` or `CLAUDE.local.md` in the project folder or above disables this reading | Yes: `.claude/settings.json` → `SessionStart`. On first launch Claude Code asks whether you trust this folder |
 | **Codex** | `AGENTS.md` (searched from the git repository root down to the current folder) | Yes: `.codex/hooks.json` → `SessionStart`. Codex runs the hook only after you trust the project and approve the hook with `/hooks` |
 | **Gemini CLI** | `AGENTS.md`: on its own Gemini CLI looks only for `GEMINI.md`, so `.gemini/settings.json` sets `context.fileName` to `AGENTS.md`, `GEMINI.md`. `GEMINI.md` stays in the list because the setting replaces the default name: without it, Gemini CLI would miss a `GEMINI.md` of your own if you add one | No: the starter wires no hook for Gemini CLI. Memory is picked up by the rule in `AGENTS.md` |
 | **Antigravity** | `AGENTS.md` (read as workspace rules) | The starter does not rely on Antigravity hooks |
-| **Hermes** | `AGENTS.md` (of `.hermes.md`, `AGENTS.md`, `CLAUDE.md` it loads the first one it finds) | No: Hermes hooks are configured in `~/.hermes/`, not in the project |
+| **Hermes** | `AGENTS.md` — the only project rules file | No: Hermes hooks are configured in `~/.hermes/`, not in the project |
 
 **Gemini CLI and folder trust.** In a folder Gemini CLI does not trust, it does not load the
 project settings `.gemini/settings.json`, so it will not know about `AGENTS.md`. According to the

@@ -68,7 +68,7 @@
 - Nerd Font для красивого терминала
 
 **Что настроишь:**
-- CLAUDE.md, TODO.md, AGENTS.md
+- AGENTS.md, TODO.md
 - Status line (видеть использование токенов)
 - Структуру папок проектов
 
@@ -101,7 +101,7 @@
 - Как агенты удерживают информацию
 - Проблемы контекста (Context Rot, Lost in the Middle)
 - Техники управления контекстом
-- CLAUDE.md, TODO.md, AGENTS.md
+- AGENTS.md, TODO.md
 - Встроенные агенты Claude Code
 - Параллельные агенты
 
@@ -210,7 +210,7 @@
     ├── 📄 feedback-final-jtbd.md   ← Deep JTBD interview после курса
     ├── 📄 prompt-backend.md
     ├── 📄 prompt-frontend.md
-    ├── 📄 template-claude-md.md
+    ├── 📄 template-agents-md.md
     └── ...
 │
 ├── 📁 course-feedback/             ← Авторский слой feedback-петли
@@ -267,7 +267,7 @@
 ### ✅ После Meeting 2
 - [ ] Всё установлено и работает
 - [ ] Запустил claude-code первый раз
-- [ ] Создал CLAUDE.md, TODO.md, AGENTS.md
+- [ ] Создал AGENTS.md, TODO.md
 
 ### ✅ После Meeting 3
 - [ ] Понимаешь структуру хорошего промпта
@@ -308,7 +308,7 @@
 4. От "всё сам" → к управлению вниманием
 
 ### Три файла памяти
-- **CLAUDE.md** - контекст проекта
+- **AGENTS.md** - контекст проекта
 - **TODO.md** - текущие задачи
 - **AGENTS.md** - инструкции для агента
 
@@ -382,7 +382,7 @@ A: Используй [шпаргалку на сайте](https://ai.synergify.
 
 - **6 встреч** с подробным материалом
 - **8 практических упражнений**
-- **3 обязательных файла** (CLAUDE.md, TODO.md, AGENTS.md)
+- **2 обязательных файла** (AGENTS.md, TODO.md)
 - **40+ примеров** кода и промптов
 - **3 варианта шаблонов** для ideas и research-topics
 - **Примерно 16-22 часа** активного обучения

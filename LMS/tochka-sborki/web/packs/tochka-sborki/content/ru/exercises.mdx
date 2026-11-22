@@ -147,7 +147,7 @@ level: 0
 
 Возьми существующий проект (любой, который есть на диске). Создай для него:
 
-1. **AGENTS.md** - полный контекст и правила проекта (+ `CLAUDE.md` со строкой `@AGENTS.md` для Claude Code)
+1. **AGENTS.md** - полный контекст и правила проекта (Claude Code версии не ниже 2.1.281 читает его сам)
 2. **TODO.md** - текущие задачи
 3. **STATE.md** - где остановились
 
@@ -183,11 +183,10 @@ level: 0
 ```bash
 cd [твой-проект]
 touch AGENTS.md TODO.md STATE.md
-echo '@AGENTS.md' > CLAUDE.md
 
 # Заполни каждый файл
 # Сохрани результаты в git
-git add AGENTS.md CLAUDE.md TODO.md STATE.md
+git add AGENTS.md TODO.md STATE.md
 git commit -m "Add agent context files"
 ```
 

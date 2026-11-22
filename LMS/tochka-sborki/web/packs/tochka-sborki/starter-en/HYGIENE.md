@@ -21,7 +21,7 @@ Before you start: `git status` must be clean.
 ## 4. Rules file
 - [ ] `AGENTS.md` is shorter than ~200 lines
 - [ ] It has no contradictions or outdated instructions
-- [ ] `CLAUDE.md` still only imports `AGENTS.md`
+- [ ] The project has no `CLAUDE.md` or `CLAUDE.local.md` that disables AGENTS.md reading in Claude Code
 
 ## 5. Memory between sessions
 - [ ] `STATE.md` was updated after the last working session

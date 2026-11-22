@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-stack-selection",
+  "unit": "u5-migrate",
+  "locale": "ru",
+  "title": "План миграции твоего workflow",
+  "sourceHash": "sha256:4ea793a406643ac29261dedeac75503535ff224bab6d85f89ebede25cb3b0314",
+  "outline": [
+    {
+      "heading": "План на семь дней",
+      "points": [
+        {
+          "text": "Шаблон ниже задаёт безопасную последовательность: сначала setup и воспроизведение знакомой задачи, затем реальная работа, настройка, честное сравнение и решение.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Шаблон плана миграции",
+      "points": [],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c11",
+    "c12"
+  ],
+  "audio": null
+}

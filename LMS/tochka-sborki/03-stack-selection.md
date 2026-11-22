@@ -22,7 +22,7 @@
 ## Связь с другими модулями
 
 - В 01-introduction добавлен callout «курс agent-agnostic»
-- В 05-context-memory упоминается что CLAUDE.md — паттерн, реализованный по-разному в разных стеках
+- В 05-context-memory упоминается, что AGENTS.md — паттерн, реализованный по-разному в разных стеках
 - В 06-audio-pipeline и 07-tools — callouts «case-study на Claude Code, паттерн агностичный»
 - AgentToggle / AgentBlock компоненты позволяют фильтровать команды в любом уроке по выбранному стеку (`localStorage.stack`)
 

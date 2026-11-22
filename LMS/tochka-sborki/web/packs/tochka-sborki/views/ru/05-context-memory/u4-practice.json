@@ -5,7 +5,7 @@
   "unit": "u4-practice",
   "locale": "ru",
   "title": "Настрой свою память",
-  "sourceHash": "sha256:064ae1664fef63d3f8a47635af488ecb5603da036d9afaf76c7df836c0108915",
+  "sourceHash": "sha256:2ce872cdd82426253804bee48578204a278218cbd85439453d9f7d2060548063",
   "outline": [
     {
       "heading": "Когда обновлять что",
@@ -35,7 +35,7 @@
           "heading": "Сжатие контекста",
           "points": [
             {
-              "text": "/compact сжимает историю в резюме; после него CLAUDE.md перезагружается.",
+              "text": "/compact сжимает историю в резюме.",
               "origin": "extract"
             }
           ],
@@ -76,10 +76,6 @@
       },
       {
         "sourceHash": "sha256:ed1ed3d3574d592df4f0dd780410fb9a6ff0d123fea7ea095db5a28780fe9c61",
-        "verbatim": "near-identical"
-      },
-      {
-        "sourceHash": "sha256:61fb68a396a16ca8415289538a2a65ea2e6e4115a234536c800b7c5793670c93",
         "verbatim": "near-identical"
       },
       {

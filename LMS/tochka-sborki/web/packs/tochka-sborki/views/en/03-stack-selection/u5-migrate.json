@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "03-stack-selection",
+  "unit": "u5-migrate",
+  "locale": "en",
+  "title": "Migration plan for your workflow",
+  "sourceHash": "sha256:5cf8902551a901a42b0e2bbc40d2ef88e765feac0df9bc047aeaf000de1a047d",
+  "outline": [
+    {
+      "heading": "The seven-day plan",
+      "points": [
+        {
+          "text": "The template below sets a safe sequence: setup and reproduce a familiar task first, then real work, customization, honest comparison, and a decision.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Migration template",
+      "points": [],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c11",
+    "c12"
+  ],
+  "audio": null
+}

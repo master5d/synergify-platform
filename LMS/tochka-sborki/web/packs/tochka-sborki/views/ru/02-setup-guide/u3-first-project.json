@@ -5,7 +5,7 @@
   "unit": "u3-first-project",
   "locale": "ru",
   "title": "Первый проект",
-  "sourceHash": "sha256:34676430bf79e6f794e1cd692eea72e0e19a445250f6686d8de9ea6816f58ee8",
+  "sourceHash": "sha256:d5f2aef46bce060afc746ac68defd987916b485de0edc6a721afc23e87d0a531",
   "outline": [
     {
       "heading": "AGENTS.md — память агента о проекте",

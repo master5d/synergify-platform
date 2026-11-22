@@ -108,7 +108,7 @@ cat error.log | claude -p 'объясни ошибку'
 | Контекст полон (&gt;80%) или задача сменилась | `/compact` |
 | Контекст &lt;70% и задача та же | Продолжай |
 
-> 💡 CLAUDE.md (а с ним и подключённый `@AGENTS.md`) **перезагружается автоматически** после /compact и auto-compact — инструкции не теряются.
+> 💡 `AGENTS.md` остаётся файлом правил проекта; проверяй его подключение в Claude Code через `/memory`.
 
 ---
 
@@ -143,8 +143,8 @@ cat error.log | claude -p 'объясни ошибку'
 ## 🔧 Инструменты и расширения
 
 ```bash
-/init               # Создать CLAUDE.md для проекта
-/memory             # Открыть CLAUDE.md для редактирования
+/init               # Создать черновик файла памяти проекта
+/memory             # Показать подключённые файлы памяти и инструкций
 /mcp                # Управление MCP-серверами
 /hooks              # Управление Hooks
 /skills             # Управление навыками
@@ -273,7 +273,6 @@ mkdir my-project && cd my-project
 
 # 2. Создай файлы памяти
 touch AGENTS.md TODO.md STATE.md
-echo '@AGENTS.md' > CLAUDE.md
 
 # 3. Заполни AGENTS.md вместе с агентом
 claude
@@ -295,7 +294,6 @@ mkdir my-project; cd my-project
 
 # 2. Создай файлы памяти (PowerShell)
 ni AGENTS.md, TODO.md, STATE.md -ItemType File
-Set-Content CLAUDE.md '@AGENTS.md'
 
 # 3. Заполни AGENTS.md вместе с агентом
 claude
@@ -307,7 +305,7 @@ claude
 # 5. Дай первую задачу
 ```
 
-> 💡 Альтернатива через WSL/Git Bash: `mkdir my-project && cd my-project && touch AGENTS.md TODO.md STATE.md && echo '@AGENTS.md' > CLAUDE.md`
+> 💡 Альтернатива через WSL/Git Bash: `mkdir my-project && cd my-project && touch AGENTS.md TODO.md STATE.md`
 
 </OsBlock>
 
@@ -390,7 +388,7 @@ claude
 
 **Где разместить:**
 - `./AGENTS.md` — проект (коммитится в git)
-- `./CLAUDE.md` — одна строка `@AGENTS.md`: так его читает Claude Code
+- `AGENTS.md` в папке проекта — Claude Code версии не ниже 2.1.281 читает его сам; `/memory` показывает путь к файлу
 - `~/.claude/CLAUDE.md` — личный (все проекты, только Claude Code)
 
 **Лимит:** ~200 строк (важно для контекста)
@@ -406,7 +404,7 @@ claude
 ## Чего избегать
 ```
 
-`/init` в Claude Code генерирует CLAUDE.md из существующего проекта. Перенеси полезное в AGENTS.md, а в CLAUDE.md оставь `@AGENTS.md`. Сгенерированный файл — черновик: исследование ETH Zurich (2026) показало, что файлы контекста в среднем не повышают успех агента, удорожают работу больше чем на 20 %, а обзор репозитория не помогает. Оставь то, чего агент не узнает сам: нестандартные правила, команды проверки, запреты.
+`/init` в Claude Code генерирует черновик памяти из существующего проекта. Перенеси полезное в AGENTS.md. Сгенерированный файл — черновик: исследование ETH Zurich (2026) показало, что файлы контекста в среднем не повышают успех агента, удорожают работу больше чем на 20 %, а обзор репозитория не помогает. Оставь то, чего агент не узнает сам: нестандартные правила, команды проверки, запреты.
 
 ### TODO.md
 ```markdown
@@ -583,7 +581,7 @@ claude
 
 ```bash
 git status                          # Статус
-git add AGENTS.md CLAUDE.md TODO.md STATE.md # Добавить перечисленные файлы
+git add AGENTS.md TODO.md STATE.md # Добавить перечисленные файлы
 git commit -m "Описание"            # Коммит
 git push origin main                # Пуш
 git pull origin main                # Пул

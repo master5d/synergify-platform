@@ -1,8 +1,8 @@
 # AGENTS.md: project rules
 
 > One rules file for any agent. Codex, Antigravity and Hermes read it on their own,
-> Gemini CLI through the setting in `.gemini/settings.json`, Claude Code through `CLAUDE.md`
-> (a single line there: `@AGENTS.md`). Edit only this file.
+> Gemini CLI through the setting in `.gemini/settings.json`, and Claude Code reads this file itself.
+> This course requires Claude Code version 2.1.281 or later; check it is loaded with `/memory`. Edit only this file.
 > Keep it short: under ~200 lines (lesson 05/u3). Replace the `[...]` brackets with your own words.
 
 ## Who I am

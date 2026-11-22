@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "generator": "extract-v2",
+  "module": "08-agent-engineering",
+  "unit": "u6-agent-sdk",
+  "locale": "en",
+  "title": "Agent SDK: the Agent as a Library",
+  "sourceHash": "sha256:e422a75bc1ed4d23bbaeea2f44bcbab082ff48af9771d89cffae221237e5f607",
+  "outline": [
+    {
+      "heading": "What the SDK gives you",
+      "points": [
+        {
+          "text": "The Agent SDK exposes the Claude Code loop from Python or TypeScript: built-in Read, Edit, Bash, Grep, Glob, and web-search tools, plus MCP servers, hooks, skills, subagents, and sessions.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    },
+    {
+      "heading": "Three safety controls",
+      "points": [
+        {
+          "text": "cwd, mcpServers, hooks, agents, resume, and settingSources: [\"project\"] add a working directory, external tools, specialists, session continuation, and project settings.",
+          "origin": "extract"
+        }
+      ],
+      "children": []
+    }
+  ],
+  "cards": [
+    "c14",
+    "c15"
+  ],
+  "audio": null
+}

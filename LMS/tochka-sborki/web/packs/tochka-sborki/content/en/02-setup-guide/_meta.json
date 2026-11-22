@@ -20,7 +20,7 @@
     },
     {
       "id": "o3",
-      "text": "Explain what role AGENTS.md plays for the agent in a project folder and why CLAUDE.md holds the line @AGENTS.md"
+      "text": "Explain what role AGENTS.md plays for the agent in a project folder and how Claude Code reads it itself in version 2.1.281 or later"
     },
     {
       "id": "o4",
@@ -77,7 +77,7 @@
       "question": "How do you know Claude Code is installed and ready to work?",
       "options": [
         "The installer didn't print a single error; that's enough",
-        "A CLAUDE.md appeared in the Documents folder",
+        "An AGENTS.md appeared in the project folder",
         "`claude --version` responds, and `claude` in a folder opens a session (the first time, with a browser login)",
         "`git --version` shows a version"
       ],
@@ -116,15 +116,15 @@
       "id": "c6",
       "unit": "u3-first-project",
       "objective": "o3",
-      "question": "Why put AGENTS.md in the project folder, and the line @AGENTS.md in CLAUDE.md?",
+      "question": "How does Claude Code version 2.1.281 or later read AGENTS.md in a project folder?",
       "options": [
-        "Claude Code has its own file; the @AGENTS.md line pulls the same file in",
+        "It reads it itself without an import or configuration; /memory shows the path to the loaded AGENTS.md",
         "It's the file where Claude Code writes a log of its actions",
         "It's an instruction for people on the team; the agent doesn't read it",
         "Git needs it to make the first commit"
       ],
       "answer": 0,
-      "explain": "AGENTS.md gives the agent the project context: who you are, what the project is, the stack, how to run it. Codex, Cursor, Antigravity and Hermes read it on their own, Claude Code through the line @AGENTS.md in CLAUDE.md. You don't have to explain it all over again in every session (u3, “AGENTS.md — the agent's project memory”)."
+      "explain": "AGENTS.md gives the agent the project context: who you are, what the project is, the stack, how to run it. Claude Code reads it itself in version 2.1.281 or later; check this through /memory. You don't have to explain it all over again in every session (u3, “AGENTS.md — the agent's project memory”)."
     },
     {
       "id": "c7",

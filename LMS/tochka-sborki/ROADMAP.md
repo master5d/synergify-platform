@@ -89,14 +89,14 @@
 - Терминал как основной интерфейс (Warp, Wave)
 - Claude Code CLI и его permission modes
 - Git basics для агентных workflow
-- Структура проекта: CLAUDE.md, TODO.md, AGENTS.md, `my-experiments/`, `my-templates/`
+- Структура проекта: AGENTS.md, TODO.md, `my-experiments/`, `my-templates/`
 - Nerd Font, статус-бар, Chrome Extension
 
 **Инструменты:** Warp, Claude Code CLI, GitHub, Node.js, Marp
 
 **Проекты:**
 - Настроенная рабочая среда с Claude Code, Git, Marp
-- Первый проект со структурой CLAUDE.md + my-experiments/
+- Первый проект со структурой AGENTS.md + my-experiments/
 - Работающий status line с трекингом токенов
 
 ---
@@ -131,7 +131,7 @@
 
 **Концепции:**
 - Проблемы контекста: Context Rot, Lost in the Middle
-- CLAUDE.md, TODO.md, AGENTS.md — три файла памяти
+- AGENTS.md, TODO.md — два файла памяти
 - Иерархия памяти: session / project / global
 - Компакция контекста, `/compact`, `/context`
 - Встроенные агенты Claude Code
@@ -140,7 +140,7 @@
 **Инструменты:** Claude Code memory system, `.claude/` folder, hooks для автопамяти
 
 **Проекты:**
-- Система памяти для реального проекта (CLAUDE.md + TODO.md)
+- Система памяти для реального проекта (AGENTS.md + TODO.md)
 - Заполненный `PERSONAL-CONTEXT.md`
 - Упражнение с параллельными агентами
 

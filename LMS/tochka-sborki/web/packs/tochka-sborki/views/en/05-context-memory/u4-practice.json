@@ -5,7 +5,7 @@
   "unit": "u4-practice",
   "locale": "en",
   "title": "Tune your memory",
-  "sourceHash": "sha256:c701b50bf34c9c27bd198ce7fda505210234f43f78658e3a551a6d9717771eb0",
+  "sourceHash": "sha256:f03c4dd40fb43cf98eee23349e780ddbd23359bc42211025ce395e36e3b746d6",
   "outline": [
     {
       "heading": "When to update what",
@@ -35,7 +35,7 @@
           "heading": "Context compression",
           "points": [
             {
-              "text": "/compact compresses the history into a summary; CLAUDE.md is reloaded afterwards.",
+              "text": "/compact compresses the history into a summary.",
               "origin": "extract"
             }
           ],
@@ -82,13 +82,6 @@
           "A rule in AGENTS.md is a starting point, not a final solution.",
           "Agents might miss rules or lose them during long sessions.",
           "However, agents cannot bypass a check."
-        ]
-      },
-      {
-        "sourceHash": "sha256:b4a09c75cf33055c2868e219e5711916ec625382c398d8ca1c61721f3ee94692",
-        "points": [
-          "The /compact command compresses history into a summary.",
-          "CLAUDE.md is reloaded after this compression occurs."
         ]
       },
       {

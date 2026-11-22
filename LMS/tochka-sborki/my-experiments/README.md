@@ -9,7 +9,7 @@
 ```
 exercise-1-delegation.md         # Meeting 3: Упр 1 - переписать команды
 exercise-2-iterations.md          # Meeting 3: Упр 2 - 3 итерации промпта
-exercise-3-context-files.md       # Meeting 4: Упр 3 - CLAUDE.md, TODO.md, AGENTS.md
+exercise-3-context-files.md       # Meeting 4: Упр 3 - AGENTS.md, TODO.md
 exercise-4-explore.md             # Meeting 4: Упр 4 - результаты /explore
 exercise-5-meta-prompt.md         # Meeting 3: Упр 5 - мета-промптинг
 exercise-6-parallel-agents.md     # Meeting 4: Упр 6 - параллельные агенты
@@ -81,7 +81,7 @@ experiment-delegation-matrix.md   # Своя матрица делегирова
 # Experiment: Минимальный контекст
 
 ## Цель
-Пробую работать с минимальным контекстом - только CLAUDE.md, без дополнительных файлов
+Пробую работать с минимальным контекстом — только AGENTS.md, без дополнительных файлов
 
 ## Результат
 Качество упало, агент спрашивает слишком много...

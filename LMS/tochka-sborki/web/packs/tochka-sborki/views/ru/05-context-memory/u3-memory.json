@@ -5,7 +5,7 @@
   "unit": "u3-memory",
   "locale": "ru",
   "title": "Сисмодуль памяти",
-  "sourceHash": "sha256:1eec299623e9ae5fd0a19a1a2fe6c5e546a02f91f3d50ca7a1a0638a1834a71e",
+  "sourceHash": "sha256:56a1decaf144c5fdae2f25f3589e0d9add2f81779c0210e549747773dc58de8d",
   "outline": [
     {
       "heading": "Файлы памяти: три пишешь ты, один — Claude",

@@ -42,7 +42,7 @@ Kickstart                — карта AI-мира для нонкодеров 
 Базовый сетап            — рабочая среда, Claude Code CLI
 Выбор стека              — какой agentic-стек под твои ограничения, обход блокировок
 Промпт-инжиниринг        — формулировка ТЗ, магические слова
-Контекст и память        — память агента, CLAUDE.md, sub-agents
+Контекст и память        — память агента, AGENTS.md, sub-agents
 Pipeline автоматизации   — URL → scrape → analyze → insights
 Инструменты расширения   — MCP, Hooks, Skills, Superpowers
 Агентский инжиниринг     — оркестрация, prod-инфра (ENERV/SOVERN)

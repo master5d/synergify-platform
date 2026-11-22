@@ -21,7 +21,7 @@
     },
     {
       "id": "o3",
-      "text": "Выбрать, где хранить информацию: AGENTS.md проекта (Claude Code подключает его строкой @AGENTS.md в CLAUDE.md), личный ~/.claude/CLAUDE.md, TODO.md, STATE.md, и отличить их от MEMORY.md, который пишет сам Claude"
+      "text": "Выбрать, где хранить информацию: AGENTS.md проекта (Claude Code читает его сам в версии не ниже 2.1.281), личный ~/.claude/CLAUDE.md, TODO.md, STATE.md, и отличить их от MEMORY.md, который пишет сам Claude"
     },
     {
       "id": "o4",
@@ -138,12 +138,12 @@
       "question": "Ты переходишь с Claude Code на другой агент (Codex, Cursor, Hermes). Что из юнита о памяти остаётся в силе?",
       "options": [
         "Ничего: файл правил — особенность только Claude Code",
-        "Всё: AGENTS.md — общий стандарт, новый агент прочитает тот же файл сам; строка @AGENTS.md в CLAUDE.md нужна только Claude Code",
+        "Всё: AGENTS.md — общий стандарт, новый агент прочитает тот же файл сам; Claude Code версии не ниже 2.1.281 тоже читает его сам",
         "Память переносится между инструментами автоматически",
         "Контекст придётся вставлять в каждое сообщение вручную"
       ],
       "answer": 1,
-      "explain": "AGENTS.md — общий формат паттерна «persistent context file»: его сами читают Codex, Cursor, Copilot, Antigravity, Hermes. Claude Code подключает его строкой @AGENTS.md в CLAUDE.md (u3, врезка «Не только Claude Code»)."
+      "explain": "AGENTS.md — общий формат паттерна «persistent context file»: его сами читают Codex, Cursor, Copilot, Antigravity, Hermes и Claude Code версии не ниже 2.1.281 (u3, врезка «Не только Claude Code»)."
     },
     {
       "id": "c9",

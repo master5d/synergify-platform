@@ -40,7 +40,7 @@ The idea is simple: throughout the course you kept adding things to the project 
 | 1. File size and monoliths | The longest files in the project; files that mix several responsibilities (routing, logic, markup in one place) | A long file is a long context (05/u1) |
 | 2. Inline styles and mixed layers | Styles and scripts inside HTML or templates instead of separate files | Things kept separately are easier for the agent to edit |
 | 3. Clutter in agent settings | Stale permissions, duplicates, absolute paths to other folders, keys and tokens in the config | MCP and hooks config (07/u2, 07/u3) |
-| 4. The agent's rules file | CLAUDE.md or AGENTS.md: length, contradictions, outdated instructions | Aim for about 200 lines (05/u3) |
+| 4. The agent's rules file | AGENTS.md: length, contradictions, outdated instructions | Aim for about 200 lines (05/u3) |
 | 5. Memory between sessions | Is there a file with the project state: what's done, what's left, what problems exist | Context compression (05/u4) |
 | 6. Hooks | Is there at least one automatic check; is it clear what the existing ones do | Hooks and their security (07/u3) |
 
@@ -60,7 +60,7 @@ Go through six zones:
 3. Agent settings (for example .claude/settings.json, .claude/settings.local.json,
    .mcp.json, your agent's config): stale permissions, duplicates, absolute paths,
    keys or tokens in plain text.
-4. Rules file (CLAUDE.md / AGENTS.md): length, contradictions, outdated instructions.
+4. Rules file (AGENTS.md): length, contradictions, outdated instructions.
 5. Memory between sessions: is there a file that lets a new session understand
    what's done and what's left.
 6. Hooks: which exist and what each one does; if there are none, say so.
@@ -101,7 +101,7 @@ After each fix:
 
 *This is a retelling of a reader's review of a third-party starter kit for Claude Code, not our measurement. The numbers are his.*
 
-The reader never installed the starter itself, but in his words it "gave him a kick", and he got to work on his project. The result, by his own account: he set up a SNAPSHOT.md file as memory between sessions, broke up a monolithic index.php (the router shrank from 1295 to 103 lines), moved styles out of the HTML, wrote a rule into CLAUDE.md, cleaned up settings.local.json and added a hook on file size — the first hook of his life.
+The reader never installed the starter itself, but in his words it "gave him a kick", and he got to work on his project. The result, by his own account: he set up a SNAPSHOT.md file as memory between sessions, broke up a monolithic index.php (the router shrank from 1295 to 103 lines), moved styles out of the HTML, wrote a rule into AGENTS.md, cleaned up settings.local.json and added a hook on file size — the first hook of his life.
 
 Notice: that's more than three items, and that happens too. The "three" rule isn't a ceiling — it's a guard against edits nobody checked.
 

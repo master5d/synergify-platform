@@ -21,7 +21,7 @@
     },
     {
       "id": "o3",
-      "text": "Choose where to store information: the project’s AGENTS.md (Claude Code imports it with the line @AGENTS.md in CLAUDE.md), the personal ~/.claude/CLAUDE.md, TODO.md, STATE.md, and tell them apart from MEMORY.md, which Claude writes itself"
+      "text": "Choose where to store information: the project’s AGENTS.md (Claude Code reads it itself in version 2.1.281 or later), the personal ~/.claude/CLAUDE.md, TODO.md, STATE.md, and tell them apart from MEMORY.md, which Claude writes itself"
     },
     {
       "id": "o4",
@@ -138,12 +138,12 @@
       "question": "You’re switching from Claude Code to another agent (Codex, Cursor, Hermes). What from the unit on memory still holds?",
       "options": [
         "Nothing: a rules file is specific to Claude Code",
-        "All of it: AGENTS.md is a shared standard, the new agent reads the same file on its own; the line @AGENTS.md in CLAUDE.md is only for Claude Code",
+        "All of it: AGENTS.md is a shared standard, the new agent reads the same file on its own; Claude Code version 2.1.281 or later reads it itself too",
         "Memory transfers between tools automatically",
         "You’ll have to paste the context into every message by hand"
       ],
       "answer": 1,
-      "explain": "AGENTS.md is the shared format of the “persistent context file” pattern: Codex, Cursor, Copilot, Antigravity and Hermes read it on their own. Claude Code imports it with the line @AGENTS.md in CLAUDE.md (u3, callout “Not just Claude Code”)."
+      "explain": "AGENTS.md is the shared format of the “persistent context file” pattern: Codex, Cursor, Copilot, Antigravity, Hermes and Claude Code version 2.1.281 or later read it on their own (u3, callout “Not just Claude Code”)."
     },
     {
       "id": "c9",

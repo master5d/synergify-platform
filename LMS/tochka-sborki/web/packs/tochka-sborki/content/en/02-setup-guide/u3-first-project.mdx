@@ -31,7 +31,7 @@ Run it in your head: what are you naming right now? **What name are you giving y
 
 AGENTS.md is a Markdown file with the project's rules and context. It is a shared standard: Codex, Cursor, GitHub Copilot, Antigravity, Hermes and other agents read it on their own when they launch in a folder.
 
-Claude Code has its own file, `CLAUDE.md`. So you don't keep two files, put one line in `CLAUDE.md`: `@AGENTS.md`. It imports `AGENTS.md` in full, which is what the Claude Code docs recommend. You write the rules in one place, and every agent sees them.
+Claude Code reads `AGENTS.md` itself — without an import or configuration — from version 2.1.277; for every mode, this course requires version 2.1.281 or later. Check it with `claude --version`. You write the rules in one place, and every agent sees them.
 
 ### Minimal template
 
@@ -64,7 +64,7 @@ Claude Code has its own file, `CLAUDE.md`. So you don't keep two files, put one 
 - Final quality review
 ```
 
-> 💡 **Ready-made option.** The [student starter](/en/starter/) is this project already assembled: `AGENTS.md` + `CLAUDE.md` with the line `@AGENTS.md`, `TODO.md`, memory between sessions, `my-experiments/`, templates. Works with Claude Code, Codex, Antigravity and Hermes. Building the folder by hand with the steps below is a good path too: you see what it is made of.
+> 💡 **Ready-made option.** The [student starter](/en/starter/) is this project already assembled: `AGENTS.md`, `TODO.md`, memory between sessions, `my-experiments/`, templates. Works with Claude Code, Codex, Antigravity and Hermes. Building the folder by hand with the steps below is a good path too: you see what it is made of.
 
 ### Creating a project
 
@@ -77,7 +77,6 @@ mkdir -p ~/my-ai-project
 cd ~/my-ai-project
 git init
 touch AGENTS.md
-echo '@AGENTS.md' > CLAUDE.md
 mkdir -p my-experiments
 ```
 
@@ -90,7 +89,6 @@ New-Item -ItemType Directory $HOME\my-ai-project -Force
 cd $HOME\my-ai-project
 git init
 ni AGENTS.md -ItemType File
-Set-Content CLAUDE.md '@AGENTS.md'
 New-Item -ItemType Directory my-experiments -Force
 ```
 
@@ -101,7 +99,7 @@ New-Item -ItemType Directory my-experiments -Force
 - Keep it under **200 lines** — longer drops the quality of instruction-following
 - Be specific: `"Use 2-space indent"` beats `"format properly"`
 - Update it when architecture or stack changes
-- Don't fill in `CLAUDE.md`: it holds only the line `@AGENTS.md`. Anything only Claude Code needs goes below that line
+- For Claude Code, use version 2.1.281 or later. Run `/memory`: its list must include the path to `AGENTS.md`. If `CLAUDE.md` or `CLAUDE.local.md` is in the project folder or above it, Claude Code silently skips `AGENTS.md`; remove that file from the chain.
 
 <SelfCheck id="c6"/>
 
@@ -124,7 +122,6 @@ mkdir -p ~/my-ai-project
 cd ~/my-ai-project
 git init
 touch AGENTS.md
-echo '@AGENTS.md' > CLAUDE.md
 mkdir -p my-experiments
 ```
 
@@ -137,7 +134,6 @@ New-Item -ItemType Directory $HOME\my-ai-project -Force
 cd $HOME\my-ai-project
 git init
 ni AGENTS.md -ItemType File
-Set-Content CLAUDE.md '@AGENTS.md'
 New-Item -ItemType Directory my-experiments -Force
 ```
 
@@ -151,7 +147,7 @@ Then launch Claude Code in that folder:
 claude
 ```
 
-Ask the agent: `"Read the project rules and tell me what you now know about the project"`
+Run `/memory`: its list must include the path to `AGENTS.md`. Then ask the agent: `"Read the project rules and tell me what you now know about the project"`
 
 Save the result to `my-experiments/u3-claude-reads-context.md`
 

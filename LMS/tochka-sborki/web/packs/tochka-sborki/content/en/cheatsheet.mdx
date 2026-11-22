@@ -108,7 +108,7 @@ cat error.log | claude -p 'explain the error'
 | Context is full (&gt;80%) or the task changed | `/compact` |
 | Context &lt;70% and the task is the same | Continue |
 
-> 💡 CLAUDE.md (and the `@AGENTS.md` it imports) is **auto-reloaded** after /compact and auto-compact — instructions aren't lost.
+> 💡 `AGENTS.md` remains the project rules file; check that Claude Code loaded it through `/memory`.
 
 ---
 
@@ -143,8 +143,8 @@ cat error.log | claude -p 'explain the error'
 ## 🔧 Tools and extensions
 
 ```bash
-/init               # Create CLAUDE.md for the project
-/memory             # Open CLAUDE.md for editing
+/init               # Create a project-memory draft
+/memory             # Show loaded memory and instruction files
 /mcp                # Manage MCP servers
 /hooks              # Manage hooks
 /skills             # Manage skills
@@ -273,7 +273,6 @@ mkdir my-project && cd my-project
 
 # 2. Create memory files
 touch AGENTS.md TODO.md STATE.md
-echo '@AGENTS.md' > CLAUDE.md
 
 # 3. Fill in AGENTS.md with the agent
 claude
@@ -295,7 +294,6 @@ mkdir my-project; cd my-project
 
 # 2. Create memory files (PowerShell)
 ni AGENTS.md, TODO.md, STATE.md -ItemType File
-Set-Content CLAUDE.md '@AGENTS.md'
 
 # 3. Fill in AGENTS.md with the agent
 claude
@@ -307,7 +305,7 @@ claude
 # 5. Give it the first task
 ```
 
-> 💡 Alternative via WSL/Git Bash: `mkdir my-project && cd my-project && touch AGENTS.md TODO.md STATE.md && echo '@AGENTS.md' > CLAUDE.md`
+> 💡 Alternative via WSL/Git Bash: `mkdir my-project && cd my-project && touch AGENTS.md TODO.md STATE.md`
 
 </OsBlock>
 
@@ -390,7 +388,7 @@ One file of project context and rules for any agent: Codex, Cursor, Copilot, Ant
 
 **Where to put it:**
 - `./AGENTS.md` — project (committed to git)
-- `./CLAUDE.md` — one line, `@AGENTS.md`: that is how Claude Code reads it
+- `AGENTS.md` in the project folder — Claude Code version 2.1.281 or later reads it itself; `/memory` shows the path to the file
 - `~/.claude/CLAUDE.md` — personal (all projects, Claude Code only)
 
 **Limit:** ~200 lines (important for context)
@@ -406,7 +404,7 @@ One file of project context and rules for any agent: Codex, Cursor, Copilot, Ant
 ## What to avoid
 ```
 
-`/init` in Claude Code generates a CLAUDE.md from an existing project. Move what's useful into AGENTS.md and leave `@AGENTS.md` in CLAUDE.md. Treat the generated file as a draft: an ETH Zurich study (2026) found that context files don't raise agent success on average, add more than 20% to the cost, and repository overviews don't help. Keep what the agent can't find out on its own: non-standard rules, check commands, bans.
+`/init` in Claude Code generates a memory draft from an existing project. Move what is useful into AGENTS.md. Treat the generated file as a draft: an ETH Zurich study (2026) found that context files don't raise agent success on average, add more than 20% to the cost, and repository overviews don't help. Keep what the agent can't find out on its own: non-standard rules, check commands, bans.
 
 ### TODO.md
 ```markdown
@@ -583,7 +581,7 @@ Same on both systems — Git is identical everywhere:
 
 ```bash
 git status                          # Status
-git add AGENTS.md CLAUDE.md TODO.md STATE.md # Stage named files
+git add AGENTS.md TODO.md STATE.md # Stage named files
 git commit -m "Description"         # Commit
 git push origin main                # Push
 git pull origin main                # Pull
