@@ -664,6 +664,25 @@
 - [ ] **Один каталог товаров.** Сейчас две копии: `workers/src/lib/products.ts` и `mc_hub/hub/lib/store/products.data.ts` (оба массива пусты,
   комментарий в mc_hub ссылается на старое место файла). Один источник здесь, сайт читает его на сборке или через `/api/products`. (S–M)
 
+## Приёмы интерфейса и контрактов данных (intake NAUTILUS#500, Sanity Studio и SDK, pattern-only; слово владельца 2026-11-24: «1 да 2 да 3 только задачи 4 ок 5 да 6 да»)
+
+Sanity не ставится; взяты приёмы интерфейса и контрактов данных. Дефекты найдены чтением кода, живьём не воспроизводились — первым шагом задачи идёт тест, который их показывает.
+
+- [ ] **Из предпросмотра урока к строке MDX (первым).** remark-плагин только в dev или при `AUTHOR_PREVIEW=1` ставит
+  `data-src="<pack>/content/<loc>/<mod>/<unit>.mdx:<line>"` на `<Phase>`, заголовки и абзацы; Alt+клик открывает `vscode://file/…:line`.
+  В прод-сборке и зеркале атрибута нет (репо публичный). Файлы: `components/pages/unit-page.tsx:98`, `module-page.tsx:47`,
+  `lesson-prose.tsx:47`. Тест плагина и постбилд-проверка `out/` без `data-src`. (M)
+- [ ] **Находки автора с уровнем и местом.** `Finding {level, file, line, rule, msg}` вместо `string[]` в `lib/authoring/review.ts`,
+  `draft.ts`, `outline.ts`, `orchestrate.ts`; `scripts/review-lesson.ts` печатает `файл:строка уровень правило`, rc≠0 только при error.
+  «Длинная фраза» — warning; девять известных исключений — info с причиной в файле, а не прозой в этом BACKLOG. (S–M)
+- [ ] **Проверка `_meta.json` и frontmatter юнита при чтении.** `validateModuleMeta` / `validateUnitFrontmatter` отдают все ошибки разом;
+  зовут их `getModuleMeta` и `getUnitContent` (`lib/content.ts:103-161`, сейчас приведение через `as`); убрать копию типа в
+  `lib/content/registry-integrity.test.ts:12`. (S–M)
+- [ ] **Повторное решение по брифу (дефект).** `workers/src/handlers/demand.ts:38` — `UPDATE … WHERE id=?` без проверки статуса, всегда `ok`.
+  Добавить `AND status='open'`, при `changes=0` — 409. Тест: повторное решение → 409. (S)
+- [ ] **«Непонятно» с местом.** Отзыв несёт фазу или якорь (из `data-src` первого пункта), админка спроса ведёт к месту в MDX; нужна
+  миграция D1. После первого пункта. (M)
+
 ## Owner-gated (ждут решения владельца)
 
 - [ ] **Юниты «контент-конвейер как агентная система» в модули 06 и 08 (intake LMS#38).** Решение владельца
